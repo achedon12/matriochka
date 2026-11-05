@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "matriochka:block/unstable_alloy_ore"
+    }
+  }
+}
