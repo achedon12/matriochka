@@ -73,6 +73,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	private final long[] lastUse = new long[3];
 	private Vec3 aim = Vec3.ZERO;
 	private int nodes;
+	private int calmUntil;
 
 	public MatrioBoss(EntityType<? extends Monster> type, Level level, Defs.BossDef def) {
 		super(type, level);
@@ -111,9 +112,12 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		Entity e = ModContent.entity(id).create(level, EntitySpawnReason.EVENT);
 		if (!(e instanceof MatrioBoss boss)) return null;
 		int players = Math.max(1, level.getEntitiesOfClass(Player.class, new net.minecraft.world.phys.AABB(at).inflate(48)).size());
-		float hp = boss.def.hp() * Defs.bossHealthPlayers(players) * fr.achedon12.matriochka.world.Config.healthMult();
+		int cycle = fr.achedon12.matriochka.world.Cycles.at(level, at);
+		float hp = boss.def.hp() * Defs.bossHealthPlayers(players) * fr.achedon12.matriochka.world.Config.healthMult()
+			* fr.achedon12.matriochka.world.Cycles.healthFactor(cycle);
 		boss.getAttribute(Attributes.MAX_HEALTH).setBaseValue(hp);
-		boss.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(boss.def.damage() * fr.achedon12.matriochka.world.Config.damageMult());
+		boss.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(boss.def.damage() * fr.achedon12.matriochka.world.Config.damageMult()
+			* fr.achedon12.matriochka.world.Cycles.damageFactor(cycle));
 		boss.setHealth(hp);
 		boss.setPos(Vec3.atBottomCenterOf(at));
 		boss.setTarget(by);
@@ -145,7 +149,14 @@ public class MatrioBoss extends Monster implements GeoEntity {
 
 	private int world() {
 		if (def.world() == 10) return Math.max(1, Math.min(9, phase + 1));
+		// the Artisan's Shadow borrows the law of a prison, a new one every fifteen seconds
+		if (def.world() == Worlds.ZERO) return 1 + (tickCount / 300) % 9;
 		return def.world();
+	}
+
+	/** Holds the boss still, without attacking, for a number of ticks (the Shadow before a kneeling player). */
+	public void calm(int ticks) {
+		calmUntil = Math.max(calmUntil, tickCount + ticks);
 	}
 
 	// ---------------------------------------------------------------- the attack state machine
@@ -156,6 +167,12 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		if (tickCount % 10 == 0) feats.watch(this, level);
 		LivingEntity target = getTarget();
 		stateTicks++;
+		if (tickCount < calmUntil) {
+			getNavigation().stop();
+			state = State.CHASE;
+			stateTicks = 0;
+			return;
+		}
 		if (nodes > 0) {
 			long alive = level.getEntitiesOfClass(MatrioMob.class, getBoundingBox().inflate(32), m -> m.entityTags().contains("boss_node")).size();
 			if (alive == 0) {
@@ -483,6 +500,15 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		}
 		float mult = state == State.OPENING ? 1.5f : 0.75f;
 		if (def.id().equals("ash_titan") && phase >= 2) mult += 0.3f;
+		if (def.world() == Worlds.ZERO && getHealth() - amount * mult <= getMaxHealth() * 0.1f) {
+			// the Artisan's Shadow cannot be finished: brought near death, it stitches itself back together
+			setHealth(getMaxHealth());
+			state = State.PHASE;
+			stateTicks = 0;
+			triggerAnim("action", "phase");
+			fr.achedon12.matriochka.world.WorldZero.onStitch(level, this);
+			return false;
+		}
 		boolean r = super.hurtServer(level, source, amount * mult);
 		if (r && source.getEntity() instanceof ServerPlayer sp) feats.hit(this, level, sp);
 		checkPhase(level);
@@ -521,6 +547,8 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		super.die(source);
 		bar.removeAllPlayers();
 		if (!(level() instanceof ServerLevel level)) return;
+		// the Shadow of World 0 grants nothing by dying (only by being set down, see WorldZero)
+		if (def.world() == Worlds.ZERO) return;
 		MatrioData data = MatrioData.get(level.getServer());
 		int w = def.world();
 		List<ServerPlayer> present = level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(64));
@@ -543,6 +571,8 @@ public class MatrioBoss extends Monster implements GeoEntity {
 				}
 			}
 			ps.sync();
+			// the Unfinished has fallen: karma decides between sealing it and absorbing it
+			if (w == 10) fr.achedon12.matriochka.world.Endings.afterUnfinished(p);
 		}
 		spawnAtLocation(level, new ItemStack(ModContent.item(def.core())));
 		if (w == 0) {

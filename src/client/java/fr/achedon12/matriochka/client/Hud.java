@@ -60,10 +60,12 @@ public class Hud implements HudElement {
 		Ui.sprite(g, "hud_plaque", x, y, w, h);
 		int rowY = y + 5;
 		if (here > 0) {
-			String rule = Content.WORLDS.get(here - 1).rule();
+			// World 0 (internal number 11) has its own rule, Obsession
+			boolean zero = here == fr.achedon12.matriochka.world.Worlds.ZERO;
+			String rule = zero ? "stillness" : Content.WORLDS.get(here - 1).rule();
 			String gauge = switch (rule) {
 				case "toxin", "synthesis" -> "toxin"; case "heat" -> "heat"; case "darkness" -> "noise"; case "pressure" -> "oxygen";
-				case "time" -> "season"; case "ground" -> "tremor"; default -> "";
+				case "time" -> "season"; case "ground" -> "tremor"; case "stillness" -> "obsession"; default -> "";
 			};
 			int mxp = x + 5, myp = y + 4;
 			// the medallion turns in when the world changes; wind keeps swaying, gravity keeps bobbing
@@ -88,7 +90,7 @@ public class Hud implements HudElement {
 			Ui.wanderingGlint(g, new int[][]{{mxp + 4, myp + 4}, {mxp + 18, myp + 18}, {x + w - 4, y + 4}}, 2300, 5);
 
 			int tx = x + 31;
-			Ui.embossed(g, font, Component.translatable("hud.matriochka.world", here), tx, y + 6, Ui.GOLD);
+			Ui.embossed(g, font, Component.translatable("hud.matriochka.world", zero ? 0 : here), tx, y + 6, Ui.GOLD);
 			Component label = Component.translatable("rule.matriochka." + rule);
 			if (!gauge.isEmpty()) {
 				g.text(font, label, x + w - 7 - font.width(label), y + 6, Ui.MUTED, false);

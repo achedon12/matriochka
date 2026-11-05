@@ -86,6 +86,10 @@ public final class MatrioCommand {
 					Travel.enter(p, IntegerArgumentType.getInteger(c, "world"), p.blockPosition());
 					return 1;
 				})))
+				.then(Commands.literal("zero").executes(c -> {
+					fr.achedon12.matriochka.world.WorldZero.enter(c.getSource().getPlayerOrException());
+					return 1;
+				}))
 				.then(Commands.literal("leave").executes(c -> Travel.leave(c.getSource().getPlayerOrException()) ? 1 : 0)))
 			.then(Commands.literal("boss").requires(op)
 				.then(Commands.argument("id", StringArgumentType.word()).executes(c -> {
@@ -134,6 +138,20 @@ public final class MatrioCommand {
 				state.useWithoutItem(p.level(), p, new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(pos), net.minecraft.core.Direction.UP, pos, false));
 				return 1;
 			})))
+			.then(Commands.literal("ending").requires(op).then(Commands.argument("kind", StringArgumentType.word())
+				.suggests((c, b) -> net.minecraft.commands.SharedSuggestionProvider.suggest(new String[]{"seal", "absorb", "tools"}, b)).executes(c -> {
+					String kind = StringArgumentType.getString(c, "kind");
+					if (!kind.equals("seal") && !kind.equals("absorb") && !kind.equals("tools")) return 0;
+					fr.achedon12.matriochka.world.Endings.play(c.getSource().getPlayerOrException(), kind);
+					return msg(c.getSource(), "command.matriochka.ending.done", kind);
+				})))
+			.then(Commands.literal("cycle")
+				.then(Commands.literal("show").executes(c -> msg(c.getSource(), "command.matriochka.cycle.show",
+					fr.achedon12.matriochka.world.Cycles.of(c.getSource().getPlayerOrException()) + 1)))
+				.then(Commands.literal("begin").requires(op).executes(c -> {
+					fr.achedon12.matriochka.world.Cycles.begin(c.getSource().getPlayerOrException());
+					return 1;
+				})))
 			.then(Commands.literal("debug").requires(op).executes(c -> {
 				ServerPlayer p = c.getSource().getPlayerOrException();
 				PlayerState ps = PlayerState.of(p);
