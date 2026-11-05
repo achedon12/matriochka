@@ -3,7 +3,8 @@ name: release
 # Every push to main publishes the version declared in gradle.properties (mod_version),
 # unless a tag for it already exists:
 #   1. build the jar
-#   2. create the tag and the GitHub release, with the notes from CHANGELOG.md ("## <version>" section)
+#   2. create the tag and the GitHub release, with the notes from CHANGELOG.md ("## <version>" section), the jar
+#      and the optional Matriochka HD resource pack (tools/hdpack.py)
 #   3. upload the jar to CurseForge (needs the CURSEFORGE_TOKEN secret and the CURSEFORGE_PROJECT_ID variable)
 #   4. upload the jar to Modrinth (needs the MODRINTH_TOKEN secret and the MODRINTH_PROJECT_ID variable)
 #   5. announce it in the Discord changelog channel (needs the DISCORD_RELEASES_WEBHOOK secret)
@@ -88,13 +89,28 @@ jobs:
           ./gradlew build --no-daemon
           echo "JAR=$(ls build/libs/matriochka-*.jar | grep -v sources | head -1)" >> "$GITHUB_ENV"
 
+      - uses: actions/setup-python@v7
+        if: steps.v.outputs.exists == 'false'
+        with:
+          python-version: "3.12"
+
+      # the optional Matriochka HD resource pack (32 x 32 textures), painted by tools/hdpack.py
+      - name: HD resource pack
+        if: steps.v.outputs.exists == 'false'
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
+        run: |
+          python -m pip install --quiet pillow
+          python tools/hdpack.py "build/matriochka-hd-$VERSION.zip"
+          echo "HD=build/matriochka-hd-$VERSION.zip" >> "$GITHUB_ENV"
+
       - name: GitHub release
         if: steps.v.outputs.exists == 'false'
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.v.outputs.tag }}
           VERSION: ${{ steps.v.outputs.version }}
-        run: gh release create "$TAG" "$JAR" --title "Matriochka $VERSION" --notes-file release-notes.md --target "$GITHUB_SHA"
+        run: gh release create "$TAG" "$JAR" "$HD" --title "Matriochka $VERSION" --notes-file release-notes.md --target "$GITHUB_SHA"
 
       - name: CurseForge
         if: steps.v.outputs.publish == 'true'
