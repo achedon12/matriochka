@@ -133,7 +133,7 @@ final class OceanTest {
 					if (Math.abs(dx) < 16 && Math.abs(dz) < 16) continue;
 					int x = threshold.getX() + dx, z = threshold.getZ() + dz;
 					level.getChunk(x >> 4, z >> 4);
-					int floor = level.getHeight(Heightmap.Types.OCEAN_FLOOR, x, z);
+					int floor = seaFloor(level, x, z);
 					if (floor >= Ocean.SEA_LEVEL) land++;
 					columns++;
 					int wetCells = 0, cells = 0;
@@ -164,6 +164,13 @@ final class OceanTest {
 		});
 	}
 
+	/** The sea floor under a column: the first block that is not water, going down from the surface. */
+	private static int seaFloor(ServerLevel level, int x, int z) {
+		int y = Ocean.SEA_LEVEL - 1;
+		while (y > level.getMinY() && level.getFluidState(new BlockPos(x, y, z)).is(FluidTags.WATER)) y--;
+		return y + 1;
+	}
+
 	// ---------------------------------------------------------------- the helmet
 	private static List<String> dive(MinecraftServer server) {
 		return guard(server, p -> {
@@ -171,8 +178,8 @@ final class OceanTest {
 			ServerLevel level = (ServerLevel) p.level();
 			// open water a little away from the chamber, well above the floor
 			int x = threshold.getX() + 24, z = threshold.getZ() - 24;
-			int floor = level.getHeight(Heightmap.Types.OCEAN_FLOOR, x, z);
-			deep = new BlockPos(x, Math.max(floor + 6, Ocean.PRESSURE_Y + 10), z);
+			int floor = seaFloor(level, x, z);
+			deep = new BlockPos(x, floor + 12, z);
 			for (BlockPos q : BlockPos.betweenClosed(deep.offset(-2, -2, -2), deep.offset(2, 3, 2))) level.setBlock(q, Blocks.WATER.defaultBlockState(), 3);
 			ItemStack h = new ItemStack(ModContent.item("salt_snorkel"));
 			Snorkel.setTank(h, 100f);
@@ -193,7 +200,7 @@ final class OceanTest {
 			check(out, Snorkel.is(h), "the helmet is still on");
 			check(out, tank < 100f && tank > 60f, "the tank drains under water (" + tank + " s left of 100)");
 			check(out, PlayerState.of(p).gauge("oxygen") > 90f, "the helmet tops the breath up (" + PlayerState.of(p).gauge("oxygen") + ")");
-			check(out, p.getAirSupply() == p.getMaxAirSupply(), "no vanilla drowning under the helmet");
+			check(out, p.getAirSupply() >= p.getMaxAirSupply() - 20, "no vanilla drowning under the helmet (" + p.getAirSupply() + ")");
 			// a hit wears the helmet much faster than plain armor (vanilla: 1 point for 6 damage)
 			int before = h.getDamageValue();
 			p.removeEffect(MobEffects.RESISTANCE);

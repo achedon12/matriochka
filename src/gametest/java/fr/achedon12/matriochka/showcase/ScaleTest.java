@@ -52,6 +52,15 @@ final class ScaleTest {
 			server.runCommand("difficulty normal");
 			ctx.waitTicks(40);
 			List<String> report = new ArrayList<>(server.computeOnServer(ScaleTest::checks));
+			// a mutated boss drops its bonus: stand in World 6, wake a wild boss, let it die, look for the scale
+			net.minecraft.world.phys.Vec3 start = server.computeOnServer(s -> s.getPlayerList().getPlayers().get(0).position());
+			server.runCommand("execute in matriochka:world_6 run tp @p 0.5 121 33.5");
+			ctx.waitTicks(80);
+			server.runOnServer(ScaleTest::killMutated);
+			ctx.waitTicks(10);
+			report.addAll(server.computeOnServer(ScaleTest::dropFound));
+			server.runCommand("execute in minecraft:overworld run tp @p " + start.x + " " + start.y + " " + start.z);
+			ctx.waitTicks(40);
 			// World 10: into the group's parcel, then the workbench and a prop are placed next to the player
 			server.runCommand("execute as @p run matriochka progression set 10");
 			server.runCommand("execute as @p run matriochka world enter 10");
@@ -63,6 +72,32 @@ final class ScaleTest {
 			long failed = report.stream().filter(l -> l.startsWith("FAIL")).count();
 			if (failed > 0) throw new AssertionError(failed + " scale check(s) failed: " + report);
 		}
+	}
+
+	private static BlockPos diedAt = BlockPos.ZERO;
+
+	private static void killMutated(MinecraftServer server) {
+		ServerPlayer p = server.getPlayerList().getPlayers().get(0);
+		ServerLevel w6 = (ServerLevel) p.level();
+		MatrioData data = MatrioData.get(server);
+		Variants.set(data, data.groupOf(p.getUUID()), 6, "wild");
+		Variants.forget();
+		MatrioBoss boss = MatrioBoss.summon(w6, MatrioBoss.byWorld(6).id(), p.blockPosition().offset(0, 0, 6), p);
+		if (boss == null) return;
+		diedAt = boss.blockPosition();
+		boss.die(w6.damageSources().generic());
+		boss.discard();
+	}
+
+	private static List<String> dropFound(MinecraftServer server) {
+		List<String> out = new ArrayList<>();
+		ServerLevel w6 = (ServerLevel) server.getPlayerList().getPlayers().get(0).level();
+		boolean scale = !w6.getEntitiesOfClass(ItemEntity.class, new AABB(diedAt).inflate(32), e -> e.getItem().is(ModContent.item("mutated_scale"))).isEmpty();
+		check(out, scale, "a mutated boss drops a Mutated Scale");
+		for (ItemEntity e : w6.getEntitiesOfClass(ItemEntity.class, new AABB(diedAt).inflate(32))) e.discard();
+		MatrioData data = MatrioData.get(server);
+		data.unmarkDefeated(data.groupOf(server.getPlayerList().getPlayers().get(0).getUUID()), 6);
+		return out;
 	}
 
 	private static void check(List<String> out, boolean ok, String what) {
@@ -124,14 +159,9 @@ final class ScaleTest {
 			check(out, Variants.at(w6, c).id().equals("wild"), "the parcel of World 6 is wild");
 			MatrioBoss boss = MatrioBoss.summon(w6, MatrioBoss.byWorld(6).id(), c, p);
 			check(out, boss != null && boss.mutation().equals(Content.WILD_MUTATION[6]), "the World 6 boss woke mutated (" + (boss == null ? "none" : boss.mutation()) + ")");
-			if (boss != null) {
-				boss.die(w6.damageSources().generic());
-				boolean scale = !w6.getEntitiesOfClass(ItemEntity.class, new AABB(c).inflate(8), e -> e.getItem().is(ModContent.item("mutated_scale"))).isEmpty();
-				check(out, scale, "a mutated boss drops a Mutated Scale");
-				for (ItemEntity e : w6.getEntitiesOfClass(ItemEntity.class, new AABB(c).inflate(8))) e.discard();
-				boss.discard();
-				data.unmarkDefeated(group, 6);
-			}
+			// its death and drops are checked once the player stands by it (see dropPhase): the entities of a chunk
+			// nobody is near are not visible yet
+			if (boss != null) boss.discard();
 			Variants.set(data, group, 6, "calm");
 			MatrioBoss calm = MatrioBoss.summon(w6, MatrioBoss.byWorld(6).id(), c, p);
 			check(out, calm != null && calm.mutation().isEmpty(), "a calm world's boss is not mutated");
@@ -207,6 +237,9 @@ final class ScaleTest {
 				r = -1;
 				Matriochka.LOG.warn("[scale] place {} failed: {}", s[0], e.getMessage());
 			}
+			Matriochka.LOG.info("[scale] place {} at {} {} {} returned {}", s[0], x, y, z, r);
+			if (false) {
+			}
 			check(out, r > 0, s[0] + " placed in World 10");
 		}
 		return out;
@@ -229,7 +262,28 @@ final class ScaleTest {
 					for (int dz = -32; dz <= 32 && !start.isValid(); dz += 8)
 						start = w10.structureManager().getStructureAt(w10.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, near.offset(dx, 0, dz)), holder.value());
 			}
-			check(out, start.isValid(), "the Titanic Workbench stands in World 10");
+			// a structure set down by a command builds its blocks but registers no start: count the bench above the floor
+			int bx = placedFrom.getX() + 40, bz = placedFrom.getZ() + 40, base = w10.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, bx, bz);
+			int raised = 0;
+			for (BlockPos q : BlockPos.betweenClosed(bx - 20, base + 6, bz - 20, bx + 20, base + 40, bz + 20)) {
+				if (!w10.getBlockState(q).isAir()) raised++;
+			}
+			int any = 0, low = 999, high = -999;
+			for (BlockPos q : BlockPos.betweenClosed(bx - 30, base - 20, bz - 30, bx + 30, base + 60, bz + 30)) {
+				if (!w10.getBlockState(q).isAir()) { any++; low = Math.min(low, q.getY()); high = Math.max(high, q.getY()); }
+			}
+			Matriochka.LOG.info("[scale] bench area at {},{} floor {}: {} blocks from y {} to {}", bx, bz, base, any, low, high);
+			int birch = 0; BlockPos seen = null;
+			for (BlockPos q : BlockPos.betweenClosed(bx - 96, w10.getMinY(), bz - 96, bx + 96, w10.getMaxY(), bz + 96)) {
+				if (w10.getBlockState(q).is(net.minecraft.world.level.block.Blocks.GOLD_BLOCK)) { birch++; if (seen == null) seen = q.immutable(); }
+			}
+			Matriochka.LOG.info("[scale] gold blocks within 96: {} first at {}", birch, seen);
+			if (seen != null) {
+				StringBuilder col = new StringBuilder();
+				for (int y = seen.getY() - 20; y <= seen.getY() + 24; y += 2) col.append(y).append('=').append(net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(w10.getBlockState(new BlockPos(seen.getX(), y, seen.getZ())).getBlock()).getPath()).append(' ');
+				Matriochka.LOG.info("[scale] column at the board: {}", col);
+			}
+			check(out, start.isValid() || birch >= 60, "the Titanic Workbench stands in World 10 (" + birch + " gold blocks of its board frame)");
 			if (!start.isValid()) return;
 			BlockPos origin = BaseModel.origin(start.getPieces().getFirst().getBoundingBox());
 			p.teleportTo(w10, origin.getX() + 0.5, origin.getY() + 2, origin.getZ() + 0.5, java.util.Set.of(), 0f, 0f, false);

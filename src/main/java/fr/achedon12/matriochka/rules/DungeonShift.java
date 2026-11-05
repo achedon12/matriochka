@@ -306,7 +306,7 @@ public final class DungeonShift {
 			}
 			if (!near) continue;
 			if (!level.noCollision(p)) {
-				BlockPos safe = Travel.findSafe(level, p.blockPosition());
+				BlockPos safe = freeSpot(level, p);
 				p.teleportTo(safe.getX() + 0.5, safe.getY(), safe.getZ() + 0.5);
 			}
 			p.sendOverlayMessage(Component.translatable("message.matriochka.rule.halls_moved").withStyle(ChatFormatting.AQUA));
@@ -316,6 +316,26 @@ public final class DungeonShift {
 			Vec3 c = Vec3.atCenterOf(m.a.offset(SIZE / 2, HEIGHT / 2, SIZE / 2));
 			level.sendParticles(ParticleTypes.POOF, c.x, c.y, c.z, 10, SIZE / 3.0, HEIGHT / 3.0, SIZE / 3.0, 0.02);
 		}
+	}
+
+	/**
+	 * The nearest place where the player's whole body fits, standing on something: a moved section is 8 blocks wide,
+	 * so the search reaches past its walls.
+	 */
+	static BlockPos freeSpot(ServerLevel level, ServerPlayer p) {
+		BlockPos at = p.blockPosition();
+		for (int r = 0; r <= 12; r++) {
+			for (int dx = -r; dx <= r; dx++) for (int dz = -r; dz <= r; dz++) {
+				if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
+				for (int dy : new int[]{0, 1, -1, 2, -2, 3, -3, 4, -4, 5, 6}) {
+					BlockPos q = at.offset(dx, dy, dz);
+					if (level.getBlockState(q.below()).isAir()) continue;
+					var box = p.getDimensions(p.getPose()).makeBoundingBox(q.getX() + 0.5, q.getY(), q.getZ() + 0.5);
+					if (level.noCollision(p, box) && !level.containsAnyLiquid(box)) return q;
+				}
+			}
+		}
+		return Travel.findSafe(level, at);
 	}
 
 	public static void clearAll() {
