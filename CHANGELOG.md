@@ -8,6 +8,9 @@
 - Eighteen new particles (spores, embers, cold dust, chain glints, lightning sparks, shadow wisps, deep motes, mirror shards, bubbles, petals, pollen, leaves, snowflakes, grit, rust, thread scraps, fluff, gold dust). Boss attacks spray their world's particles where they land and around their warning ring, and many creature attacks use them.
 - Matriochka HD: an optional resource pack with the same textures at 32 x 32, attached to each release.
 - Works with Iris shader packs through vanilla light only (emissive faces, full-bright particles); see the Visuals page of the wiki.
+- Every boss attack has its own hand-made animation: the boss shows what is coming during the warning (the Guardian heaves a torn block overhead, the Queen's egg sac swells, the Titan lifts its hammer, the Jailer spreads its arms like walls, the Light Eater sinks low to stalk...), strikes, then stays open and spent for exactly as long as it takes extra damage. Each boss also has its own phase change (the Guardian rebuilds itself, the Queen folds into her cocoon, the Jailer turns its key, the Unfinished paints a new face) and its own fall, which now plays out for two seconds instead of the vanilla tip-over.
+- The Unfinished and the Artisan's Shadow keep their animations in step with the world whose timing they borrow.
+- `tools/anim_preview.py` renders contact sheets of the boss animations (`docs-wiki-drafts/boss-anims/`).
 
 ## 0.3.0 (alpha)
 

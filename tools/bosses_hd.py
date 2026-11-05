@@ -12,6 +12,9 @@ import random
 import sys
 from PIL import Image
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import boss_moves  # noqa: E402
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 A = os.path.join(ROOT, "src/main/resources/assets/matriochka")
 
@@ -811,7 +814,10 @@ def build_all():
             anims = standard_anims(rig, heavy=HEAVY.get(rig.name, 1.0))
         else:
             rig, anims = f()
+        # each boss's own attacks, phase change and fall (tools/boss_moves.py) on top of the generic set
+        anims.update(boss_moves.build(rig))
         dims[rig.name] = write(rig, anims, 9000 + i)
+    boss_moves.write_java()
     return dims
 
 
