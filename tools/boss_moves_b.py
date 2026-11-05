@@ -559,9 +559,9 @@ def the_unfinished(k, wind, rel):
 
     # ---- Death: a tiny final form; the two halves of the last shell fall away and only a small doll is left
     d = death_clip(k)
-    d.pos("shell_top", (0, 0, 0, 0), (0.3, 4, 20, 2, "cout"), (0.75, 26, -12, 6, "bounce"), (1, 26, -12, 6))
+    d.pos("shell_top", (0, 0, 0, 0), (0.3, 4, 20, 2, "cout"), (0.75, 26, -8, 6, "bounce"), (1, 26, -8, 6))
     d.rot("shell_top", (0, 0, 0, 0), (0.3, 0, 30, -30, "cout"), (0.75, 0, 40, -90, "bounce"), (1, 0, 40, -90))
-    d.pos("shell_bottom", (0, 0, 0, 0), (0.45, 0, 0, 0), (0.8, -10, 0, 2, "bounce"), (1, -10, 0, 2))
+    d.pos("shell_bottom", (0, 0, 0, 0), (0.45, 0, 0, 0), (0.8, -10, 7, 2, "bounce"), (1, -10, 7, 2))
     d.rot("shell_bottom", (0, 0, 0, 0), (0.45, 0, 0, 0), (0.8, 0, 0, 34, "bounce"), (1, 0, 0, 34))
     d.scl("inner", (0, 1), (0.3, 1.0), (0.7, 0.28, "cio"), (1, 0.25))
     d.rot("inner", (0, 0, 0, 0), (0.7, 0, 0, 0), (0.85, 0, 0, 10, "sine"), (1, 0, 0, 0, "sine"))
