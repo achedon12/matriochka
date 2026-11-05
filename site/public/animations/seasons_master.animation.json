@@ -199,7 +199,7 @@
       }
      }
     },
-    "antler_l": {
+    "cape0": {
      "rotation": {
       "0.00": {
        "post": [
@@ -275,7 +275,7 @@
       }
      }
     },
-    "antler_r": {
+    "cape1": {
      "rotation": {
       "0.00": {
        "post": [
@@ -351,7 +351,83 @@
       }
      }
     },
-    "orb0": {
+    "cape2": {
+     "rotation": {
+      "0.00": {
+       "post": [
+        7.456,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.50": {
+       "post": [
+        7.322,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "1.00": {
+       "post": [
+        2.899,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "1.50": {
+       "post": [
+        -3.223,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "2.00": {
+       "post": [
+        -7.456,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "2.50": {
+       "post": [
+        -7.322,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "3.00": {
+       "post": [
+        -2.899,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "3.50": {
+       "post": [
+        3.223,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "4.00": {
+       "post": [
+        7.456,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      }
+     }
+    },
+    "halo": {
      "rotation": {
       "0.00": {
        "post": [
@@ -445,7 +521,7 @@
       }
      }
     },
-    "orb1": {
+    "year": {
      "rotation": {
       "0.00": {
        "post": [
@@ -539,7 +615,7 @@
       }
      }
     },
-    "orb2": {
+    "cogs": {
      "rotation": {
       "0.00": {
        "post": [
@@ -633,95 +709,53 @@
       }
      }
     },
-    "orb3": {
-     "rotation": {
+    "clock": {
+     "scale": {
       "0.00": {
        "post": [
-        0,
-        0,
-        0
-       ],
-       "lerp_mode": "linear"
-      },
-      "4.00": {
-       "post": [
-        0,
-        -360,
-        0
-       ],
-       "lerp_mode": "linear"
-      }
-     },
-     "position": {
-      "0.00": {
-       "post": [
-        0,
-        0.169,
-        0
+        1,
+        1,
+        1
        ],
        "lerp_mode": "catmullrom"
       },
       "0.25": {
        "post": [
-        0,
-        -0.72,
-        0
+        1.08,
+        1.08,
+        1.08
        ],
        "lerp_mode": "catmullrom"
       },
       "0.50": {
        "post": [
-        0,
-        -1.188,
-        0
+        1,
+        1,
+        1
        ],
        "lerp_mode": "catmullrom"
       },
       "0.75": {
        "post": [
-        0,
-        -0.96,
-        0
+        1.05,
+        1.05,
+        1.05
        ],
        "lerp_mode": "catmullrom"
       },
-      "1.00": {
+      "1.20": {
        "post": [
-        0,
-        -0.169,
-        0
+        1,
+        1,
+        1
        ],
        "lerp_mode": "catmullrom"
       },
-      "1.25": {
+      "4.00": {
        "post": [
-        0,
-        0.72,
-        0
-       ],
-       "lerp_mode": "catmullrom"
-      },
-      "1.50": {
-       "post": [
-        0,
-        1.188,
-        0
-       ],
-       "lerp_mode": "catmullrom"
-      },
-      "1.75": {
-       "post": [
-        0,
-        0.96,
-        0
-       ],
-       "lerp_mode": "catmullrom"
-      },
-      "2.00": {
-       "post": [
-        0,
-        0.169,
-        0
+        1,
+        1,
+        1
        ],
        "lerp_mode": "catmullrom"
       }
@@ -1059,7 +1093,7 @@
       }
      }
     },
-    "antler_l": {
+    "cape0": {
      "rotation": {
       "0.00": {
        "post": [
@@ -1135,7 +1169,7 @@
       }
      }
     },
-    "antler_r": {
+    "cape1": {
      "rotation": {
       "0.00": {
        "post": [
@@ -1204,6 +1238,82 @@
       "1.40": {
        "post": [
         9.975,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      }
+     }
+    },
+    "cape2": {
+     "rotation": {
+      "0.00": {
+       "post": [
+        9.093,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.17": {
+       "post": [
+        3.487,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.35": {
+       "post": [
+        -4.161,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.52": {
+       "post": [
+        -9.372,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.70": {
+       "post": [
+        -9.093,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.88": {
+       "post": [
+        -3.487,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "1.05": {
+       "post": [
+        4.161,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "1.22": {
+       "post": [
+        9.372,
+        0,
+        0
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "1.40": {
+       "post": [
+        9.093,
         0,
         0
        ],
@@ -1501,7 +1611,7 @@
       }
      }
     },
-    "orb0": {
+    "halo": {
      "rotation": {
       "0.00": {
        "post": [
@@ -1521,7 +1631,7 @@
       }
      }
     },
-    "orb1": {
+    "year": {
      "rotation": {
       "0.00": {
        "post": [
@@ -1541,7 +1651,7 @@
       }
      }
     },
-    "orb2": {
+    "cogs": {
      "rotation": {
       "0.00": {
        "post": [
@@ -1561,23 +1671,23 @@
       }
      }
     },
-    "orb3": {
-     "rotation": {
+    "clock": {
+     "scale": {
       "0.00": {
        "post": [
-        0,
-        0,
-        0
+        1,
+        1,
+        1
        ],
-       "lerp_mode": "linear"
+       "lerp_mode": "catmullrom"
       },
       "1.00": {
        "post": [
-        0,
-        540,
-        0
+        1.15,
+        1.15,
+        1.15
        ],
-       "lerp_mode": "linear"
+       "lerp_mode": "catmullrom"
       }
      }
     }
@@ -1770,6 +1880,42 @@
        "lerp_mode": "catmullrom"
       }
      }
+    },
+    "clock": {
+     "scale": {
+      "0.00": {
+       "post": [
+        1.15,
+        1.15,
+        1.15
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.15": {
+       "post": [
+        0.9,
+        0.9,
+        0.9
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.40": {
+       "post": [
+        1,
+        1,
+        1
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.80": {
+       "post": [
+        1,
+        1,
+        1
+       ],
+       "lerp_mode": "catmullrom"
+      }
+     }
     }
    }
   },
@@ -1921,7 +2067,7 @@
       }
      }
     },
-    "orb0": {
+    "halo": {
      "rotation": {
       "0.00": {
        "post": [
@@ -1967,7 +2113,7 @@
       }
      }
     },
-    "orb1": {
+    "year": {
      "rotation": {
       "0.00": {
        "post": [
@@ -2013,53 +2159,7 @@
       }
      }
     },
-    "orb2": {
-     "rotation": {
-      "0.00": {
-       "post": [
-        0,
-        0,
-        0
-       ],
-       "lerp_mode": "linear"
-      },
-      "1.40": {
-       "post": [
-        0,
-        720,
-        0
-       ],
-       "lerp_mode": "linear"
-      }
-     },
-     "scale": {
-      "0.00": {
-       "post": [
-        1,
-        1,
-        1
-       ],
-       "lerp_mode": "catmullrom"
-      },
-      "0.60": {
-       "post": [
-        1.4,
-        1.4,
-        1.4
-       ],
-       "lerp_mode": "catmullrom"
-      },
-      "1.40": {
-       "post": [
-        1,
-        1,
-        1
-       ],
-       "lerp_mode": "catmullrom"
-      }
-     }
-    },
-    "orb3": {
+    "cogs": {
      "rotation": {
       "0.00": {
        "post": [
@@ -2308,6 +2408,42 @@
         0,
         0,
         0
+       ],
+       "lerp_mode": "catmullrom"
+      }
+     }
+    },
+    "clock": {
+     "scale": {
+      "0.00": {
+       "post": [
+        1,
+        1,
+        1
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "0.80": {
+       "post": [
+        1.3,
+        1.3,
+        1.3
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "1.80": {
+       "post": [
+        1.3,
+        1.3,
+        1.3
+       ],
+       "lerp_mode": "catmullrom"
+      },
+      "2.20": {
+       "post": [
+        1,
+        1,
+        1
        ],
        "lerp_mode": "catmullrom"
       }
