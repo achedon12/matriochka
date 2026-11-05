@@ -5,7 +5,7 @@ builder (leg_l, leg_r, arm_l, arm_r, head, body, tail, wing_l, wing_r, seg, orbi
 jaw, extra). The output files open in Blockbench as regular GeckoLib entity models.
 """
 import json
-from moves import move_anims
+from moves import attack_anims
 import math
 from PIL import Image
 from paint import hx, shade, mix, rng
@@ -381,7 +381,7 @@ def build(body, pal, seed, out_geo, out_anim, out_tex, ident, boss=False, moves=
         roles = {}
         for b in bones:
             roles.setdefault(b.role, []).append(b.name)
-        an["animations"].update(move_anims(roles, moves))
+        an["animations"].update(attack_anims(roles, moves))
     json.dump(an, open(out_anim, "w"), indent=1)
     xs = [abs(c["o"][0]) for b in bones for c in b.cubes] + [abs(c["o"][0] + c["s"][0]) for b in bones for c in b.cubes]
     zs = [abs(c["o"][2]) for b in bones for c in b.cubes] + [abs(c["o"][2] + c["s"][2]) for b in bones for c in b.cubes]

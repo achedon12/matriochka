@@ -12,7 +12,12 @@ public final class Defs {
 
 	public record MobDef(String id, int world, float hp, float damage, String behavior, float scale, float width, float height,
 						 String drop, String rareDrop, boolean elite, boolean nesting, boolean flying, boolean aquatic,
-						 java.util.List<String> moves) {}
+						 java.util.List<AttackDef> attacks) {}
+
+	/** A creature's signature attack, generated from tools/attacks.py. Effects are "id:ticks:level" lists, gauges "name:delta". */
+	public record AttackDef(String id, String kind, float mult, float radius, int hits, int interval, float knock, float lift,
+							int hit, int end, int cooldown, float min, float max, int hold, int duration, int fire, float heal,
+							int count, String summon, String effects, String gauges, String self, String particle, String sound) {}
 
 	public record BossDef(String id, int world, float hp, float damage, float scale, float width, float height, String core,
 						  float[] phases, boolean flying, boolean aquatic) {}
