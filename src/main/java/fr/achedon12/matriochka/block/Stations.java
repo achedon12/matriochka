@@ -121,6 +121,7 @@ public final class Stations {
 			be.setChanged();
 		}
 		if (station.equals("jailer_table") && !be.data().contains("code0")) newCode(level, be);
+		if (t % StationAutomation.PERIOD == 0) StationAutomation.tick(level, pos, station, be);
 	}
 
 	public static void newCode(ServerLevel level, DataBlockEntity be) {
@@ -165,16 +166,36 @@ public final class Stations {
 			if (count(inv, resolve(ing.id())) < ing.count() && !player.isCreative()) return "message.matriochka.station.missing";
 		}
 		if (!player.isCreative()) for (Recipes.Ing ing : r.inputs()) take(inv, resolve(ing.id()), ing.count());
-		int made = r.count();
-		if (station.equals("spore_vat")) {
-			made = vatYield(r, fermentStage(be.data().getIntOr("ferment", 0)));
-			if (made > r.count()) player.sendOverlayMessage(Component.translatable("message.matriochka.station.vat_bonus", made - r.count()));
-		}
+		int stage = fermentStage(be.data().getIntOr("ferment", 0));
+		ItemStack out = output(level, station, r, be);
+		int made = out.getCount();
+		if (station.equals("spore_vat") && made > r.count()) player.sendOverlayMessage(Component.translatable("message.matriochka.station.vat_bonus", made - r.count()));
+		if (!inv.add(out)) net.minecraft.world.level.block.Block.popResource(player.level(), player.blockPosition(), out);
+		if (afterCraft(level, pos, station, be)) Achievements.grant(player, "foundry_boom");
+		// the last recipe crafted by hand is the one the station keeps making from its hoppers
+		StationAutomation.select(be, station, index, player);
+		PlayerState ps = PlayerState.of(player);
+		ps.progress("craft", r.output(), made);
+		ps.progress("station", station, 1);
+		if (station.equals("spore_vat") && stage >= 1) ps.progress("brew", station, 1);
+		return null;
+	}
+
+	/** The stack a recipe makes at this station: the Spore Vat's fermentation yield, the class roll, the Inverter's flaw. */
+	public static ItemStack output(ServerLevel level, String station, Recipes.Recipe r, DataBlockEntity be) {
+		int made = station.equals("spore_vat") ? vatYield(r, fermentStage(be.data().getIntOr("ferment", 0))) : r.count();
 		ItemStack out = new ItemStack(resolve(r.output()), made);
 		GearClasses.roll(out, level.getRandom());
 		if (station.equals("inverter") && out.isDamageableItem()) out.setDamageValue(out.getMaxDamage() / 4);
-		if (!inv.add(out)) net.minecraft.world.level.block.Block.popResource(player.level(), player.blockPosition(), out);
-		// station side effects
+		return out;
+	}
+
+	/**
+	 * What a craft does to the station, by hand or from its hoppers: the forge spends a charge, the lock pattern changes,
+	 * the vat starts fermenting again, and an overheated foundry may blow up (returns true then).
+	 */
+	public static boolean afterCraft(ServerLevel level, BlockPos pos, String station, DataBlockEntity be) {
+		boolean boom = false;
 		switch (station) {
 			case "lightning_forge" -> { be.data().putInt("charge", Math.max(0, be.data().getIntOr("charge", 0) - 1)); level.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.BLOCKS, 0.5f, 1.6f); }
 			case "jailer_table" -> newCode(level, be);
@@ -183,15 +204,14 @@ public final class Stations {
 				if (heat(level, pos) >= 3 && level.getRandom().nextInt(4) == 0) {
 					level.removeBlock(pos, false);
 					level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 2.5f, net.minecraft.world.level.Level.ExplosionInteraction.BLOCK);
-					Achievements.grant(player, "foundry_boom");
+					boom = true;
 				}
 			}
 			default -> {}
 		}
 		be.setChanged();
 		level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.station(station), SoundSource.BLOCKS, 1f, 0.95f + level.getRandom().nextFloat() * 0.1f);
-		PlayerState.of(player).progress("craft", r.output(), made);
-		return null;
+		return boom;
 	}
 
 	/**

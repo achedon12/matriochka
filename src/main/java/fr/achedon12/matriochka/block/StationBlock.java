@@ -24,8 +24,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.Nullable;
 
-/** One block class for the 13 stations; the station id drives recipes, conditions and the screen. */
-public class StationBlock extends Block implements EntityBlock {
+/**
+ * One block class for the 13 stations; the station id drives recipes, conditions and the screen. Stations with recipes
+ * also take hoppers and comparators (see {@link StationAutomation}).
+ */
+public class StationBlock extends Block implements EntityBlock, net.minecraft.world.WorldlyContainerHolder {
 	public final String station;
 
 	public StationBlock(String station, BlockBehaviour.Properties p) {
@@ -42,6 +45,25 @@ public class StationBlock extends Block implements EntityBlock {
 	public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
 		if (level.isClientSide()) return null;
 		return (l, p, s, be) -> Stations.tick((ServerLevel) l, p, station, (DataBlockEntity) be);
+	}
+
+	/** Hoppers and droppers see the station's buffer; the Soul Altar and the Class Table have none. */
+	@Override
+	public net.minecraft.world.@Nullable WorldlyContainer getContainer(BlockState state, net.minecraft.world.level.LevelAccessor level, BlockPos pos) {
+		if (!StationAutomation.automatable(station) || !(level.getBlockEntity(pos) instanceof DataBlockEntity be)) return null;
+		return new StationInventory(be, station);
+	}
+
+	@Override
+	protected boolean hasAnalogOutputSignal(BlockState state) {
+		return StationAutomation.automatable(station);
+	}
+
+	/** A comparator reads how full the buffer is, output included. */
+	@Override
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, net.minecraft.core.Direction direction) {
+		if (!(level.getBlockEntity(pos) instanceof DataBlockEntity be) || !be.hasItems()) return 0;
+		return AbstractContainerMenu.getRedstoneSignalFromContainer(new StationInventory(be, station));
 	}
 
 	@Override

@@ -227,13 +227,61 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 			Ui.spritePart(g, "drawer_fill", 124, 2, 0, 0, x + 38, y + 18, fw, 1, 0xFFFFFFFF);
 			if (can) Ui.sheen(g, x + 38, y + 16, 124, 4, 2600, i * 431L, 0.9f);
 			if (can && hover) Ui.sheen(g, x + 3, y + 3, 30, 15, 1400, i * 211L, 0.6f);
+			funnel(g, x + PIN_X, y + PIN_Y, i == menu.sync.get(7) - 1, overPin(mx, my, x, y) && hover, i);
 		}
 		g.disableScissor();
+		pinTooltip(g, l, t, mx, my);
 		if (recipes.size() > ROWS) {
 			int track = 108, th = Math.max(12, track * ROWS / recipes.size());
 			int ty = t + 22 + Math.round((track - th) * scrollShown / Math.max(1, recipes.size() - ROWS));
 			Ui.sprite(g, "thumb", l + 189, ty, 4, th);
 		}
+	}
+
+	/** Where the automation funnel sits on a drawer, and its size. */
+	private static final int PIN_X = 161, PIN_Y = 4, PIN_W = 11, PIN_H = 12;
+
+	private boolean overPin(int mx, int my, int x, int y) {
+		return mx >= x + PIN_X - 1 && mx < x + PIN_X + PIN_W + 1 && my >= y + PIN_Y - 1 && my < y + PIN_Y + PIN_H + 1;
+	}
+
+	/**
+	 * The little gilded funnel on a drawer: lit, the station keeps making that recipe from its hoppers. Painted with the
+	 * cabinet's gold leaf, a glow behind it when chosen.
+	 */
+	private void funnel(GuiGraphicsExtractor g, int x, int y, boolean on, boolean hover, int i) {
+		if (on) Ui.sprite(g, "glow", x - 6, y - 5, PIN_W + 12, PIN_H + 10, Ui.white(0.45f + 0.15f * (float) Math.sin(Ui.now() / 450.0 + i)));
+		int gold = on ? 0xFFF4D27A : hover ? 0xFFD8A850 : 0xC896682A;
+		int dark = on ? 0xFF8A5A1A : 0xC85A3A16;
+		// rim, bowl narrowing in four steps, spout
+		g.fill(x, y, x + PIN_W, y + 2, gold);
+		g.fill(x, y + 2, x + PIN_W, y + 3, dark);
+		for (int k = 0; k < 4; k++) g.fill(x + 1 + k, y + 3 + k, x + PIN_W - 1 - k, y + 4 + k, k % 2 == 0 ? gold : Ui.alpha(gold, 0.85f));
+		g.fill(x + 4, y + 7, x + PIN_W - 4, y + PIN_H, gold);
+		g.fill(x + 5, y + 8, x + PIN_W - 5, y + PIN_H, dark);
+		if (on) Ui.glint(g, x + 3, y + 1, Math.floorMod(Ui.now() + i * 300L, 2400L) / 1000f, 5);
+	}
+
+	/** The recipe row under the cursor whose funnel is hovered, or -1. */
+	private int pinAt(double mx, double my) {
+		int l = leftPos, t = topPos;
+		if (mx < l + CAB_X || mx >= l + CAB_X + 174 || my < t + CAB_Y || my >= t + CAB_Y + ROW_H * ROWS) return -1;
+		int idx = scroll + (int) ((my - t - CAB_Y) / ROW_H);
+		if (idx >= recipes.size()) return -1;
+		int x = l + CAB_X + Math.round(pull[idx] * 4), y = t + CAB_Y + (idx - scroll) * ROW_H;
+		return overPin((int) mx, (int) my, x, y) ? idx : -1;
+	}
+
+	private void pinTooltip(GuiGraphicsExtractor g, int l, int t, int mx, int my) {
+		int idx = pinAt(mx, my);
+		if (idx < 0 || motion.closing()) return;
+		boolean on = idx == menu.sync.get(7) - 1;
+		List<Component> tip = new java.util.ArrayList<>();
+		tip.add(Component.translatable(on ? "station.matriochka.auto.on" : "station.matriochka.auto.pick").withStyle(net.minecraft.ChatFormatting.GOLD));
+		tip.add(Component.translatable("station.matriochka.auto.how").withStyle(net.minecraft.ChatFormatting.GRAY));
+		String cond = "station.matriochka.auto.cond." + menu.data.station();
+		if (net.minecraft.locale.Language.getInstance().has(cond)) tip.add(Component.translatable(cond).withStyle(net.minecraft.ChatFormatting.DARK_AQUA));
+		g.setComponentTooltipForNextFrame(font, tip, mx, my);
 	}
 
 	/** The Inverter's niche: two sockets facing each other, the swap mark between them, the warning below. */
@@ -345,6 +393,12 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		if (motion.closing()) return true;
 		if (buttons.click(event.x(), event.y())) return true;
 		if (!hasSlot()) {
+			int pin = pinAt(event.x(), event.y());
+			if (pin >= 0) {
+				Ui.sound(SoundEvents.CHAIN_PLACE, 1.4f, 0.5f);
+				click(pin == menu.sync.get(7) - 1 ? 299 : 300 + pin);
+				return true;
+			}
 			int l = leftPos, t = topPos;
 			double mx = event.x(), my = event.y();
 			if (mx >= l + CAB_X && mx < l + CAB_X + 174 && my >= t + CAB_Y && my < t + CAB_Y + ROW_H * ROWS) {
