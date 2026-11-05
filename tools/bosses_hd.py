@@ -749,8 +749,39 @@ def the_unfinished():
     return r, standard_anims(r, heavy=1.3)
 
 
+def artisan_shadow():
+    """World 0: the Artisan's own shadow, in a black lacquer smock with gold seams, a hammer and a chisel, and the
+    two halves of an unfinished doll circling it."""
+    r = Rig("artisan_shadow")
+    neck = humanoid(r, 1.05, "lacquer_black", "lacquer_black", "robe", "robe", "gold")
+    # the smock's skirt and apron, the gold seams of a thing stitched back together
+    r.cube("body", (-6.8, 12, -4.2), (13.6, 7, 8.4), "lacquer_black")
+    r.cube("body", (-4, 12.5, -4.6), (8, 16, 0.6), "lacquer")
+    r.cube("body", (-0.4, 19, -4.9), (0.8, 14, 0.4), "gold")
+    r.cube("head", (-4.8, neck + 8.6, -4.8), (9.6, 1.6, 9.6), "lacquer")
+    r.cube("head", (-3, neck + 4, -4.75), (2, 1.5, 0.5), "void_eye")
+    r.cube("head", (1, neck + 4, -4.75), (2, 1.5, 0.5), "void_eye")
+    hammer = r.bone("hammer", "arm_r1", (-8.5, 4, 0))
+    r.cube(hammer, (-9.3, -6, -0.7), (1.4, 12, 1.4), "bark")
+    r.cube(hammer, (-11.5, -8, -2), (6, 3, 4), "iron")
+    chisel = r.bone("chisel", "arm_l1", (8.5, 4, 0))
+    r.cube(chisel, (7.9, -5, -0.5), (1, 9, 1), "gold")
+    r.cube(chisel, (7.6, 3, -0.8), (1.6, 3, 1.6), "bark")
+    for i, (mat, dy) in enumerate((("lacquer", 0), ("lacquer", 7))):
+        o = r.bone(f"half{i}", "body", (0, 26, 0), role="orbit")
+        a = i * math.pi
+        cx, cz = math.cos(a) * 15, math.sin(a) * 15
+        r.cube(o, (cx - 3, 22 + dy, cz - 3), (6, 6, 6), mat)
+        r.cube(o, (cx - 2, 25 + dy, cz - 3.4), (4, 3, 0.5), "face")
+    for i in range(6):
+        o = r.bone(f"seam{i}", "body", (0, 20, 0), role="orbit")
+        a = i * math.tau / 6 + 0.4
+        r.cube(o, (math.cos(a) * 10 - 0.5, 14 + (i % 3) * 6, math.sin(a) * 10 - 0.5), (1, 4, 1), "gold")
+    return r, standard_anims(r, heavy=0.9)
+
+
 BUILDERS = [block_guardian, spore_queen, ash_titan, grand_jailer, storm_king, light_eater, your_double,
-            pressure_leviathan, seasons_master, terrain_heart_boss, the_unfinished]
+            pressure_leviathan, seasons_master, terrain_heart_boss, the_unfinished, artisan_shadow]
 
 
 HEAVY = {"block_guardian": 1.25, "spore_queen": 1.1, "ash_titan": 1.5, "grand_jailer": 1.2, "storm_king": 1.0, "light_eater": 1.1,
