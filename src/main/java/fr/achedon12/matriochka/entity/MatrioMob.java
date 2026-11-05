@@ -140,8 +140,9 @@ public class MatrioMob extends Monster implements GeoEntity {
 			hm *= fr.achedon12.matriochka.world.Cycles.healthFactor(cycle);
 			dm *= fr.achedon12.matriochka.world.Cycles.damageFactor(cycle);
 			if (fr.achedon12.matriochka.world.Worlds.number(level) == fr.achedon12.matriochka.world.Worlds.ZERO) {
-				hm *= 1.5f;
-				dm *= 1.3f;
+				// the guards of every prison come back at least as strong as the colossi of the Giant Workshop
+				hm *= Math.max(1.5f, 900f / def().hp());
+				dm *= Math.max(1.3f, 45f / def().damage());
 			}
 			if (hm != 1f) {
 				float frac = getHealth() / getMaxHealth();

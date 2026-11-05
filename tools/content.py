@@ -1075,7 +1075,7 @@ WORLD_ZERO_BOSS = dict(id="artisan_shadow", meet="world_zero", offering="",
                        en="The Artisan's Shadow", fr="L'Ombre de l'Artisan", world=11, hp=9000, dmg=55, body="artisan", size=1.25,
                        core="", phases=(0.66, 0.33),
                        atk=[("Unfinished Stroke", "Trait inachevé"), ("Borrowed Law", "Loi empruntée"),
-                            ("Ten Prisons at Once", "Dix prisons à la fois"), ("It stitches itself back", "Elle se recoud")])
+                            ("Ten Prisons at Once", "Dix prisons à la fois"), ("Every seam gives way", "Toutes ses coutures cèdent")])
 
 # ---------------------------------------------------------------- endings
 # seal: positive karma (or zero) after the Unfinished; absorb: negative karma; tools: finishing World 0.

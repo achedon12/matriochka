@@ -433,7 +433,7 @@ public class JournalScreen extends Screen {
 		if (!title.isEmpty()) g.text(font, Component.translatable("title.matriochka." + title), x, yy + 24, Ui.RED_INK, false);
 		yy += 36;
 		int cycle = s.getIntOr("cycle", 0);
-		if (cycle > 0) {
+		if (cycle > 0 || JournalPages.endingsSeen() > 0) {
 			g.text(font, Component.translatable("journal.matriochka.cycle", cycle + 1), x, yy, Ui.RED_INK, false);
 			yy += 12;
 		}
