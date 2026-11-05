@@ -389,7 +389,10 @@ def _views(img, key, dst):
 def process_frames(dst):
     """Each picked frame becomes a 21:9 banner, a 4:3 card and a tall doll-window crop; structure photos become cards."""
     st_dir = os.path.join(ROOT, "media/structures")
-    # world views are rebuilt from scratch each run: no stale or doubled capture survives
+    # world views are rebuilt from scratch each run: no stale or doubled capture survives.
+    # Only where the sources are present (media/ is not in the repo: CI keeps the committed views)
+    if Image is None or not (os.path.isdir(st_dir) and os.path.isdir(FRAMES)):
+        return
     for f in os.listdir(dst):
         if re.match(r"(w\d\d_view|00_surface)", f):
             os.remove(os.path.join(dst, f))
