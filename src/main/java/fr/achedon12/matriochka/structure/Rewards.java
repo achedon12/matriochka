@@ -323,6 +323,8 @@ public final class Rewards {
 				if (w >= 7 && r.nextFloat() < 0.08f) add(c, r, new ItemStack(Items.ENCHANTED_GOLDEN_APPLE));
 			}
 		}
+		// the souls the design budgets for structure chests, about 100 per world (see SoulVessels)
+		for (ItemStack souls : fr.achedon12.matriochka.item.SoulVessels.loot(w, tier, r)) add(c, r, souls);
 	}
 
 	private static Item food(int w) {

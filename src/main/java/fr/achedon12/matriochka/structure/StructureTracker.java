@@ -37,6 +37,7 @@ public final class StructureTracker {
 					if (start.isValid()) {
 						ps.set(key, true);
 						player.sendOverlayMessage(Component.translatable("structure.matriochka." + s.id()));
+						fr.achedon12.matriochka.world.QuestHooks.visited(player, s.id());
 						Achievements.grantStructure(player, s.id());
 					}
 				}
@@ -44,6 +45,7 @@ public final class StructureTracker {
 			if (ps.has(key)) visited++;
 		}
 		if (visited >= 10) Achievements.grantStructures(player, world);
+		fr.achedon12.matriochka.world.QuestHooks.placesTick(player, level, world);
 	}
 
 	/** Labyrinth map: names the nearest unvisited structure and its direction. */
@@ -69,6 +71,7 @@ public final class StructureTracker {
 			player.sendSystemMessage(Component.translatable("message.matriochka.map.none"));
 			return;
 		}
+		fr.achedon12.matriochka.world.QuestHooks.mapTarget(player, bestId);
 		int dx = best.getX() - player.getBlockX(), dz = best.getZ() - player.getBlockZ();
 		String dir = Math.abs(dx) > Math.abs(dz) ? (dx > 0 ? "east" : "west") : (dz > 0 ? "south" : "north");
 		player.sendSystemMessage(Component.translatable("message.matriochka.map.found", Component.translatable("structure.matriochka." + bestId),

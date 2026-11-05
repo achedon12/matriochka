@@ -21,7 +21,8 @@ import net.minecraft.world.item.ItemStack;
 
 /**
  * Menu shared by all stations. Recipes are crafted from the player's inventory (button ids 0..99); the soul altar and
- * the class table use the single item slot. Synced data: condition, charge/heat, lock code (3), pins entered, ferment.
+ * the class table use the single item slot. Synced data: condition, charge/heat, lock code (3), pins entered, ferment,
+ * and the recipe kept for automation (index + 1, 0 for none). Buttons 300 + index pick that recipe, 299 clears it.
  */
 public class StationMenu extends AbstractContainerMenu {
 	public record Data(BlockPos pos, String station) {
@@ -71,6 +72,7 @@ public class StationMenu extends AbstractContainerMenu {
 			for (int i = 0; i < 3; i++) sync.set(2 + i, be.data().getIntOr("code" + i, 0));
 			sync.set(5, be.data().getIntOr("entered", 0));
 			sync.set(6, be.data().getIntOr("ferment", 0));
+			sync.set(7, fr.achedon12.matriochka.block.StationAutomation.selectedIndex(be, data.station()) + 1);
 		}
 		super.broadcastChanges();
 	}
@@ -100,8 +102,15 @@ public class StationMenu extends AbstractContainerMenu {
 			err = Stations.addLayer(sp, slot.getItem(0));
 		} else if (id == 220) {
 			err = Stations.invert(sp, slot.getItem(0), slot.getItem(1));
+		} else if (id == 299) {
+			fr.achedon12.matriochka.block.StationAutomation.clear(be);
+			sp.sendOverlayMessage(Component.translatable("message.matriochka.station.auto_off"));
+		} else if (id >= 300 && id < 400 && fr.achedon12.matriochka.block.StationAutomation.automatable(data.station())) {
+			err = fr.achedon12.matriochka.block.StationAutomation.select(be, data.station(), id - 300, sp);
+			if (err == null) sp.sendOverlayMessage(Component.translatable("message.matriochka.station.auto_on",
+				new ItemStack(Stations.resolve(fr.achedon12.matriochka.content.Recipes.of(data.station()).get(id - 300).output())).getHoverName()));
 		}
-		if (err != null) sp.sendSystemMessage(Component.translatable(err));
+		if (err != null && !err.isEmpty()) sp.sendSystemMessage(Component.translatable(err));
 		broadcastChanges();
 		return true;
 	}

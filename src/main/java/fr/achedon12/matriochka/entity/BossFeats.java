@@ -75,6 +75,7 @@ public final class BossFeats {
 		String id = boss.def.id();
 		for (ServerPlayer p : players) {
 			Set<String> f = flags.getOrDefault(p.getUUID(), Set.of());
+			fr.achedon12.matriochka.world.QuestHooks.killed(p, boss, id, f);
 			switch (id) {
 				case "spore_queen" -> { if (!f.contains("mask")) Achievements.grant(p, "queen_no_mask"); }
 				case "ash_titan" -> { if (!f.contains("lava")) Achievements.grant(p, "titan_no_lava"); }

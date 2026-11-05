@@ -97,6 +97,18 @@ item("shell_shard", "Shell Shard", "Éclat d'enveloppe", 0, "resource", "epic", 
      "Left by a fallen boss. Every class upgrade needs some.", "Laissé par un boss vaincu. Chaque amélioration de classe en demande.")
 item("mutated_scale", "Mutated Scale", "Écaille mutée", 0, "gem", "epic", "gem",
      "Shed by a mutated boss. Rich in soul.", "Perdue par un boss muté. Riche en âme.", pal=("6a2a8a", "c84ad8", "f0c050", "1a0a24"))
+item("doll_mallet", "Doll Mallet", "Maillet de poupée", 0, "tool", "rare", "hammer",
+     "Strike a World Block of your group with it: the world inside quakes and loose blocks fall on those in it. Sneak and use the block with empty hands to help them instead.",
+     "Frappe un bloc-monde de ton groupe avec : le monde à l'intérieur tremble et des blocs se détachent sur ceux qui s'y trouvent. Accroupis-toi et utilise le bloc à mains nues pour plutôt les aider.",
+     pal=("8a5a3a", "c8342a", "e8c050", "3a2416"))
+# Souls kept in structure chests (the design budgets about 100 souls per world from them): use one to free its
+# souls, sneak to free the whole stack. Neutral souls: they do not move karma. Values in item/SoulVessels.java.
+item("soul_shard", "Soul Shard", "Éclat d'âme", 0, "soul", "common", "shard",
+     "Holds 5 souls. Use it to free them (sneak: the whole stack).", "Contient 5 âmes. Utilise-le pour les libérer (accroupi : toute la pile).",
+     pal=("4a8ad8", "9ad0ff", "e8f6ff", "142a4a"))
+item("soul_vessel", "Soul Vessel", "Fiole d'âme", 0, "soul", "rare", "potion",
+     "Holds 20 souls. Use it to free them (sneak: the whole stack).", "Contient 20 âmes. Utilise-la pour les libérer (accroupi : toute la pile).",
+     pal=("4a8ad8", "9ad0ff", "7ac8ff", "142a4a"))
 
 # World 1
 item("spores", "Spores", "Spores", 1, "resource", "common", "dust", "Base of antidotes.", "Base des antidotes.")
@@ -324,7 +336,8 @@ block("spent_glow", "Spent Glow", "Lueur éteinte", 5, "deco", "stone",
 STATIONS = [
     ("matrix_workbench", "Matrix Workbench", "Établi matriciel", 0, "Crafts Seeds; recipes unlock with cores.", "Fabrique les Graines ; recettes débloquées par les noyaux."),
     ("class_table", "Class Table", "Table de classe", 0, "Upgrades an item's class.", "Améliore la classe d'un objet."),
-    ("soul_altar", "Soul Altar", "Autel des âmes", 0, "Purify or devour an item.", "Purifie ou dévore un objet."),
+    ("soul_altar", "Soul Altar", "Autel des âmes", 0, "Purify or devour an item. Rebuilds a Doll of Life layer for 50 souls and 4 rare resources of the current world.",
+     "Purifie ou dévore un objet. Refait une couche de Poupée de vie pour 50 âmes et 4 ressources rares du monde en cours."),
     ("spore_vat", "Spore Vat", "Cuve de spores", 1, "Ripe brews (1 min) give more, aged ones (5 min) twice as much.", "Une cuvée mûre (1 min) donne plus, vieillie (5 min) deux fois plus."),
     ("ash_foundry", "Ash Foundry", "Fonderie de cendre", 2, "Keep the temperature in the green.", "Garde la température dans le vert."),
     ("jailer_table", "Jailer's Table", "Table du Geôlier", 3, "Reproduce the lock pattern.", "Reproduis le motif de la serrure."),
@@ -769,76 +782,79 @@ MUTATIONS = [
 # The mutation of a wild world's boss; the hallowed variant gives "radiant", the cursed one "hollow".
 WILD_MUTATION = {6: "echoing", 7: "frenzied", 8: "searing", 9: "echoing", 10: "frenzied"}
 
-# ---------------------------------------------------------------- quests (64, plus the karma paths)
+# ---------------------------------------------------------------- quests (64, plus the 6 of the karma paths)
 # type: guide | npc | karma | challenge | help | pact ; obj: (kind, target, count)
+# kinds: read craft brew station deliver mine mapped courier glide use use_in use_each spot meet summit bottom
+# visit_each visit seasons search find tools kill trade contraband purify devour enter choice obtain (see QuestHooks.java);
+# "a+b" needs every part, "x@cond" asks for a condition (kill: no_mask, no_armor, near_people, no_layer; deliver: day)
 QUESTS = [
     # Surface
     ("read_between_lines", 0, "guide", ("read", "artisan_scroll", 5), "Read Between the Lines", "Lire entre les lignes", "Read the 5 pages of the Scroll.", "Lire les 5 pages du Parchemin.", ("item", "return_thread", 5)),
     ("first_guardian", 0, "guide", ("kill", "block_guardian", 1), "The First Guardian", "Le premier Gardien", "Defeat the Block Guardian.", "Vaincre le Gardien du bloc.", ("souls", "", 10)),
-    ("fingers_in_the_doll", 0, "guide", ("craft", "seed_1", 1), "Fingers in the Doll", "Les doigts dans la poupée", "Craft the Matrix Workbench and a Seed.", "Fabriquer l'Établi matriciel et une Graine.", ("item", "soul_cradle", 1)),
+    ("fingers_in_the_doll", 0, "guide", ("craft", "matrix_workbench+seed_1", 2), "Fingers in the Doll", "Les doigts dans la poupée", "Craft the Matrix Workbench and a Seed.", "Fabriquer l'Établi matriciel et une Graine.", ("item", "soul_cradle", 1)),
     ("the_peddler", 0, "npc", ("trade", "doll_peddler", 1), "The Peddler", "Le Colporteur", "Find the Peddler and trade with him.", "Trouver le Colporteur et commercer avec lui.", ("title", "painted_cape", 1)),
 ]
 _Q = {
     1: [("breathe_to_begin", "guide", ("craft", "filter_mask", 1), "Breathe to Begin", "Respirer pour commencer", "Craft a Filter Mask.", "Fabriquer un masque filtrant.", ("item", "antidote", 3)),
-        ("the_vat", "guide", ("craft", "antidote", 1), "The Vat", "La Cuve", "Ferment a first recipe.", "Fermenter une première recette.", ("souls", "", 10)),
-        ("hard_harvest", "npc", ("deliver", "spores", 16), "Hard Harvest", "Récolte difficile", "Bring 16 spores to the herbalist.", "Rapporter 16 spores à l'herboriste.", ("item", "antidote", 5)),
+        ("the_vat", "guide", ("brew", "spore_vat", 1), "The Vat", "La Cuve", "Ferment a first recipe: brew at the Spore Vat once it is ripe.", "Fermenter une première recette : brasser à la Cuve de spores une fois la cuvée mûre.", ("souls", "", 10)),
+        ("hard_harvest", "npc", ("deliver", "spores", 16), "Hard Harvest", "Récolte difficile", "Bring 16 spores to the herbalist (any Gatherer).", "Rapporter 16 spores à l'herboriste (un Cueilleur).", ("item", "antidote", 5)),
         ("lost_scouts", "npc", ("kill", "sporeling", 10), "The Lost Scouts", "Les éclaireurs perdus", "Clear the jungle of 10 Sporelings.", "Débarrasser la jungle de 10 Sporelins.", ("item", "labyrinth_map", 1)),
         ("the_clearing", "karma", ("choice", "", 5), "The Clearing", "La clairière", "Purify the clearing (+5) or burn it for loot (-5).", "Purifier la clairière (+5) ou la brûler pour son butin (-5).", ("souls", "", 20)),
-        ("no_filter", "challenge", ("kill", "chitin_guard", 1), "No Filter", "Sans filtre", "Kill a Chitin Guard without a mask.", "Tuer un Gardien de chitine sans masque.", ("title", "iron_lungs", 1))],
-    2: [("under_control", "guide", ("craft", "ash_ingot", 1), "Under Control", "Sous contrôle", "Keep the Foundry at the right temperature.", "Maintenir la Fonderie à la bonne température.", ("item", "blazing_rock", 16)),
-        ("first_vein", "guide", ("obtain", "giant_ore", 1), "The First Vein", "Le premier filon", "Extract a whole giant ore.", "Extraire un minerai géant entier.", ("item", "cooling_water", 4)),
-        ("miners_pay", "npc", ("deliver", "ash_ingot", 8), "The Miners' Pay", "La paie des mineurs", "Bring 8 ash ingots to the foreman.", "Rapporter 8 lingots de cendre au contremaître.", ("souls", "", 20)),
+        ("no_filter", "challenge", ("kill", "chitin_guard@no_mask", 1), "No Filter", "Sans filtre", "Kill a Chitin Guard without a mask.", "Tuer un Gardien de chitine sans masque.", ("title", "iron_lungs", 1))],
+    2: [("under_control", "guide", ("station", "ash_foundry", 3), "Under Control", "Sous contrôle", "Keep the Foundry at the right temperature for 3 smelts.", "Maintenir la Fonderie à la bonne température le temps de 3 fontes.", ("item", "blazing_rock", 16)),
+        ("first_vein", "guide", ("mine", "giant_ore_block", 1), "The First Vein", "Le premier filon", "Extract a whole giant ore: mine a Giant Vein.", "Extraire un minerai géant entier : miner un Filon géant.", ("item", "cooling_water", 4)),
+        ("miners_pay", "npc", ("deliver", "ash_ingot", 8), "The Miners' Pay", "La paie des mineurs", "Bring 8 ash ingots to the foreman (any Free Miner).", "Rapporter 8 lingots de cendre au contremaître (un Mineur libre).", ("souls", "", 20)),
         ("flooded_shaft", "npc", ("kill", "rock_salamander", 8), "Flooded Shaft", "Puits inondé de lave", "Rescue a stuck team (8 salamanders).", "Secourir une équipe bloquée (8 salamandres).", ("item", "cooling_water", 8)),
         ("the_strike", "karma", ("choice", "", 5), "The Strike", "La grève", "Support the miners (+5) or sell their plans (-5).", "Soutenir les mineurs (+5) ou vendre leurs plans (-5).", ("souls", "", 30)),
-        ("bare_hands", "challenge", ("kill", "slag_golem", 1), "Bare Hands", "Mains nues", "Kill a Slag Golem without armor.", "Tuer un Golem de scories sans armure.", ("title", "ash_skin", 1))],
+        ("bare_hands", "challenge", ("kill", "slag_golem@no_armor", 1), "Bare Hands", "Mains nues", "Kill a Slag Golem without armor.", "Tuer un Golem de scories sans armure.", ("title", "ash_skin", 1))],
     3: [("turn_the_key", "guide", ("use", "dungeon_key", 3), "Turn the Key", "Tourner la clé", "Open 3 doors with keys.", "Ouvrir 3 zones avec des clés.", ("item", "lockpick_kit", 5)),
-        ("read_the_plan", "guide", ("craft", "labyrinth_map", 1), "Read the Plan", "Lire le plan", "Complete a labyrinth map.", "Compléter une carte du labyrinthe.", ("souls", "", 20)),
+        ("read_the_plan", "guide", ("mapped", "labyrinth_map", 1), "Read the Plan", "Lire le plan", "Complete a labyrinth map: reach the place it points to.", "Compléter une carte du labyrinthe : atteindre le lieu qu'elle indique.", ("souls", "", 20)),
         ("the_locksmith", "npc", ("kill", "living_lock", 5), "The Locksmith", "Le serrurier", "Defeat 5 living locks.", "Rapporter 5 serrures vivantes vaincues.", ("souls", "", 20)),
-        ("last_message", "npc", ("deliver", "journal_page", 1), "Last Message", "Dernier message", "Carry a letter from cell to cell.", "Porter une lettre de cellule en cellule.", ("item", "journal_page", 1)),
+        ("last_message", "npc", ("courier", "journal_page", 3), "Last Message", "Dernier message", "Carry a letter (a Journal Page) from cell to cell: into 3 different places of the dungeon.", "Porter une lettre (une page du Journal) de cellule en cellule : dans 3 lieux différents du donjon.", ("item", "journal_page", 1)),
         ("the_escape", "karma", ("choice", "", 10), "The Escape", "L'évasion", "Free the prisoners (+10) or claim the bounty (-10).", "Libérer les prisonniers (+10) ou réclamer la prime (-10).", ("souls", "", 40)),
         ("keyless", "challenge", ("kill", "executioner", 1), "Keyless", "Sans clé", "Defeat an Executioner.", "Vaincre un Bourreau.", ("title", "wall_walker", 1))],
-    4: [("first_flight", "guide", ("craft", "glider", 1), "First Flight", "Le premier vol", "Craft a glider and cross three islands.", "Fabriquer un planeur et traverser trois îles.", ("item", "ray_membrane", 16)),
-        ("catch_lightning", "guide", ("craft", "lightning_lance", 1), "Catch the Lightning", "Attraper la foudre", "Charge an item at the Forge.", "Charger un objet à la Forge.", ("souls", "", 30)),
-        ("light_the_lighthouse", "npc", ("deliver", "storm_essence", 3), "Light the Lighthouse", "Allumer le phare", "Rekindle 3 lighthouses.", "Rallumer 3 phares.", ("item", "grappling_hook", 1)),
+    4: [("first_flight", "guide", ("glide", "glider", 3), "First Flight", "Le premier vol", "Craft a glider and cross three islands (glides of 24 blocks).", "Fabriquer un planeur et traverser trois îles (vols planés de 24 blocs).", ("item", "ray_membrane", 16)),
+        ("catch_lightning", "guide", ("station", "lightning_forge", 1), "Catch the Lightning", "Attraper la foudre", "Charge an item at the Forge.", "Charger un objet à la Forge.", ("souls", "", 30)),
+        ("light_the_lighthouse", "npc", ("use_each", "storm_lighthouse/storm_essence", 3), "Light the Lighthouse", "Allumer le phare", "Rekindle 3 lighthouses: use a Storm Essence inside 3 Storm Lighthouses.", "Rallumer 3 phares : utiliser une Essence de tempête dans 3 Phares des tempêtes.", ("item", "grappling_hook", 1)),
         ("cartographer_road", "npc", ("kill", "wind_ray", 6), "The Cartographer's Road", "La route du cartographe", "Clear the routes of 6 wind rays.", "Dégager les routes de 6 raies du vent.", ("souls", "", 30)),
         ("the_wreck", "karma", ("choice", "", 5), "The Wreck", "L'épave", "Return the cargo (+5) or keep it (-5).", "Rendre la cargaison (+5) ou la garder (-5).", ("souls", "", 30)),
         ("perfect_storm", "challenge", ("kill", "sky_harpooner", 1), "Perfect Storm", "Tempête parfaite", "Defeat a Sky Harpooner.", "Vaincre un Harponneur céleste.", ("title", "wind_child", 1))],
     5: [("lasting_light", "guide", ("craft", "solar_lantern", 1), "A Lasting Light", "Une lumière qui dure", "Craft a Solar Lantern.", "Fabriquer une lanterne solaire.", ("item", "silence_balm", 16)),
-        ("hear_the_danger", "guide", ("use", "sonar", 3), "Hear the Danger", "Entendre le danger", "Spot 3 mobs with the sonar.", "Repérer 3 mobs avec le sonar.", ("souls", "", 30)),
-        ("the_signs", "npc", ("deliver", "shadow_shard", 5), "The Signs", "Les signes", "Learn 5 signs of the Silent Ones.", "Apprendre 5 signes des Silencieux.", ("souls", "", 30)),
-        ("the_night_light", "npc", ("kill", "glow_devourer", 6), "The Night Light", "La veilleuse", "Escort the keeper (6 Glow Devourers).", "Accompagner la veilleuse (6 Dévoreurs de lueur).", ("title", "glow", 1)),
+        ("hear_the_danger", "guide", ("spot", "sonar", 3), "Hear the Danger", "Entendre le danger", "Spot 3 mobs with the sonar.", "Repérer 3 mobs avec le sonar.", ("souls", "", 30)),
+        ("the_signs", "npc", ("meet", "silent_one", 5), "The Signs", "Les signes", "Learn the signs of 5 different Silent Ones (talk to them).", "Apprendre les signes de 5 Silencieux différents (leur parler).", ("souls", "", 30)),
+        ("the_night_light", "npc", ("kill", "glow_devourer@near_people", 6), "The Night Light", "La veilleuse", "Escort the keeper: defeat 6 Glow Devourers close to the Silent Ones.", "Accompagner la veilleuse : vaincre 6 Dévoreurs de lueur près des Silencieux.", ("title", "glow", 1)),
         ("last_fire", "karma", ("choice", "", 5), "The Last Fire", "Le dernier feu", "Relight the village (+5) or steal its flame (-5).", "Rallumer le village (+5) ou voler sa flamme (-5).", ("souls", "", 50)),
         ("pitch_black", "challenge", ("kill", "shadow_mother", 1), "Pitch Black", "Noir complet", "Defeat a Shadow Mother.", "Vaincre une Mère des ombres.", ("title", "closed_eyes", 1))],
     6: [("fall_upward", "guide", ("craft", "gravity_boots", 1), "Fall Upward", "Tomber vers le haut", "Craft gravity boots.", "Fabriquer les bottes de gravité.", ("item", "stabilizer", 8)),
-        ("double_meaning", "guide", ("craft", "mirror_blade", 1), "Double Meaning", "Le double sens", "Use the Inverter.", "Utiliser l'Inverseur.", ("souls", "", 30)),
-        ("lost_reflection", "npc", ("kill", "reflection", 5), "Lost Reflection", "Reflet perdu", "Bring back an NPC's double.", "Ramener le double d'un PNJ.", ("souls", "", 30)),
-        ("impossible_stair", "npc", ("deliver", "inverted_crystal", 2), "The Impossible Stair", "L'escalier impossible", "Reach the top of the stair.", "Atteindre le sommet de l'escalier.", ("item", "journal_page", 1)),
+        ("double_meaning", "guide", ("use", "inverter", 1), "Double Meaning", "Le double sens", "Use the Inverter: swap two pieces of gear.", "Utiliser l'Inverseur : échanger deux pièces d'équipement.", ("souls", "", 30)),
+        ("lost_reflection", "npc", ("kill", "reflection@near_people", 1), "Lost Reflection", "Reflet perdu", "Bring back an NPC's double: defeat a Reflection next to a Free Reflection.", "Ramener le double d'un PNJ : vaincre un Reflet près d'un Reflet libre.", ("souls", "", 30)),
+        ("impossible_stair", "npc", ("summit", "impossible_stair", 1), "The Impossible Stair", "L'escalier impossible", "Reach the top of the Impossible Stair.", "Atteindre le sommet de l'Escalier impossible.", ("item", "journal_page", 1)),
         ("who_is_real", "karma", ("choice", "", 5), "Who Is Real?", "Qui est le vrai ?", "Free the Reflection (+5) or take its place (-5).", "Libérer le Reflet (+5) ou prendre sa place (-5).", ("souls", "", 50)),
         ("upside_down", "challenge", ("kill", "broken_mirror", 1), "Upside Down", "Sens dessus dessous", "Defeat a Broken Mirror.", "Vaincre un Miroir brisé.", ("title", "head_down", 1))],
     7: [("under_pressure", "guide", ("craft", "salt_snorkel", 1), "Under Pressure", "Sous pression", "Craft a Salt Snorkel Helmet at the Abyssal Press.", "Fabriquer un casque-tuba de sel à la Presse abyssale.", ("item", "oxygen_capsule", 8)),
-        ("compress", "guide", ("craft", "pressure_pearl", 1), "Compress", "Comprimer", "Press something at the Abyssal Press.", "Comprimer à la Presse abyssale.", ("souls", "", 40)),
-        ("silent_station", "npc", ("deliver", "abyssal_salt", 6), "The Silent Station", "La station se tait", "Repair 3 station cables.", "Réparer 3 câbles de la station.", ("item", "thruster", 1)),
-        ("wreck_crew", "npc", ("kill", "blade_school", 10), "The Wreck's Crew", "L'équipage de l'épave", "Recover 3 crew plates.", "Remonter 3 plaques d'équipage.", ("souls", "", 40)),
+        ("compress", "guide", ("station", "abyssal_press", 1), "Compress", "Comprimer", "Press something at the Abyssal Press.", "Comprimer à la Presse abyssale.", ("souls", "", 40)),
+        ("silent_station", "npc", ("use_in", "pressure_station/abyssal_cobalt", 3), "The Silent Station", "La station se tait", "Repair 3 station cables: use Abyssal Cobalt inside a Pressure Station.", "Réparer 3 câbles de la station : utiliser du Cobalt abyssal dans une Station de pression.", ("item", "thruster", 1)),
+        ("wreck_crew", "npc", ("visit_each", "wreck", 3), "The Wreck's Crew", "L'équipage de l'épave", "Recover 3 crew plates, one in each of 3 wrecks.", "Remonter 3 plaques d'équipage, une dans chacune de 3 épaves.", ("souls", "", 40)),
         ("the_signal", "karma", ("choice", "", 10), "The Signal", "Le signal", "Rescue the castaways (+10) or divert their oxygen (-10).", "Secourir les naufragés (+10) ou détourner leur oxygène (-10).", ("souls", "", 60)),
         ("one_breath", "challenge", ("kill", "trench_eel", 1), "One Breath", "Un souffle", "Defeat a Trench Eel.", "Vaincre une Murène des fosses.", ("title", "cold_blood", 1))],
-    8: [("four_seasons", "guide", ("obtain", "season_fragment", 4), "Four Seasons", "Quatre saisons", "Live through a full cycle.", "Traverser un cycle complet.", ("item", "season_preserve", 8)),
+    8: [("four_seasons", "guide", ("seasons", "world_8", 4), "Four Seasons", "Quatre saisons", "Live through a full cycle: see the four seasons here.", "Traverser un cycle complet : voir passer les quatre saisons ici.", ("item", "season_preserve", 8)),
         ("stop_the_instant", "guide", ("use", "hourglass", 1), "Stop the Instant", "Arrêter l'instant", "Use an hourglass.", "Utiliser un sablier.", ("souls", "", 40)),
-        ("life_in_a_day", "npc", ("deliver", "temporal_sand", 8), "A Life in a Day", "Une vie en un jour", "Help an Ephemeral before nightfall.", "Aider un Éphémère avant la nuit.", ("item", "season_fragment", 1)),
-        ("the_archives", "npc", ("deliver", "journal_page", 1), "The Archives", "Les archives", "Find 5 books of the library.", "Retrouver 5 livres de la bibliothèque.", ("item", "journal_page", 1)),
+        ("life_in_a_day", "npc", ("deliver", "temporal_sand@day", 8), "A Life in a Day", "Une vie en un jour", "Help an Ephemeral before nightfall: bring one 8 Temporal Sand by day.", "Aider un Éphémère avant la nuit : lui apporter 8 sables temporels de jour.", ("item", "season_fragment", 1)),
+        ("the_archives", "npc", ("search", "library_of_ages", 5), "The Archives", "Les archives", "Find 5 books of the library: search 5 shelves or lecterns of the Library of Ages.", "Retrouver 5 livres de la bibliothèque : fouiller 5 étagères ou lutrins de la Bibliothèque des siècles.", ("item", "journal_page", 1)),
         ("hour_seller", "karma", ("choice", "", 5), "The Hour Seller", "Le vendeur d'heures", "Give an Ephemeral its time back (+5) or buy it (-5).", "Rendre son temps à un Éphémère (+5) ou le lui acheter (-5).", ("souls", "", 50)),
         ("out_of_season", "challenge", ("kill", "hour_keeper", 1), "Out of Season", "Hors saison", "Defeat an Hour Keeper.", "Battre un Gardien de l'heure.", ("title", "out_of_time", 1))],
     9: [("keep_footing", "guide", ("craft", "terrain_anchor", 1), "Keep Your Footing", "Garder pied", "Craft a Terrain Anchor.", "Fabriquer une Ancre de terrain.", ("item", "anchor", 16)),
-        ("ground_plan", "guide", ("obtain", "terrain_fragment", 16), "The Ground Plan", "Le plan du sol", "Discover 5 zones.", "Découvrir 5 zones.", ("souls", "", 50)),
-        ("drifting_fort", "npc", ("deliver", "anchor", 3), "The Drifting Fort", "Le fort dérive", "Stabilize 3 walls of the fort.", "Stabiliser 3 murs du fort.", ("item", "grip_boots", 1)),
-        ("the_surveyor", "npc", ("kill", "foundation_eater", 5), "The Surveyor", "Le géomètre", "Measure a living chasm.", "Mesurer un gouffre vivant.", ("souls", "", 50)),
+        ("ground_plan", "guide", ("visit", "world_9", 5), "The Ground Plan", "Le plan du sol", "Discover 5 zones: 5 different places of the Restless Ground.", "Découvrir 5 zones : 5 lieux différents de la Terre agitée.", ("souls", "", 50)),
+        ("drifting_fort", "npc", ("use_in", "anchored_fort/anchor", 3), "The Drifting Fort", "Le fort dérive", "Stabilize 3 walls of the fort: set 3 Anchors inside the Anchored Fort.", "Stabiliser 3 murs du fort : poser 3 ancres dans le Fort ancré.", ("item", "grip_boots", 1)),
+        ("the_surveyor", "npc", ("bottom", "living_chasm", 1), "The Surveyor", "Le géomètre", "Measure a living chasm: reach the bottom of a Living Chasm.", "Mesurer un gouffre vivant : atteindre le fond d'un Gouffre vivant.", ("souls", "", 50)),
         ("the_vein", "karma", ("choice", "", 10), "The Vein", "La veine", "Heal the beating vein (+10) or drain it (-10).", "Soigner la veine battante (+10) ou la vider (-10).", ("souls", "", 80)),
         ("unanchored", "challenge", ("kill", "walking_column", 1), "Unanchored", "Sans ancre", "Defeat a Walking Column.", "Vaincre une Colonne marcheuse.", ("title", "untethered", 1))],
-    10: [("looking_down", "guide", ("enter", "world_10", 1), "Looking Down", "Le regard d'en bas", "Find your base, now a mere object.", "Trouver sa base, devenue un simple objet.", ("souls", "", 50)),
-         ("the_workshop", "guide", ("craft", "artisan_blade", 1), "The Workshop", "L'atelier", "Craft at the Final Loom.", "Fabriquer au Métier final.", ("item", "artisan_shard", 1)),
-         ("the_apprentices", "npc", ("deliver", "artisan_thread", 16), "The Apprentices", "Les apprentis", "Find 5 old apprentices.", "Retrouver 5 anciens apprentis.", ("title", "apprentice", 1)),
-         ("every_tool", "npc", ("kill", "colossus_prowler", 1), "Every Tool", "Tous les outils", "Use a tool from every world.", "Utiliser un outil de chaque monde.", ("item", "journal_page", 1)),
+    10: [("looking_down", "guide", ("find", "base_model", 1), "Looking Down", "Le regard d'en bas", "Find your base, now a mere object, on the Titanic Workbench.", "Trouver sa base, devenue un simple objet, sur l'Établi titanesque.", ("souls", "", 50)),
+         ("the_workshop", "guide", ("station", "final_loom", 1), "The Workshop", "L'atelier", "Craft at the Final Loom.", "Fabriquer au Métier final.", ("item", "artisan_shard", 1)),
+         ("the_apprentices", "npc", ("meet", "old_apprentice", 5), "The Apprentices", "Les apprentis", "Find 5 old apprentices (talk to 5 different ones).", "Retrouver 5 anciens apprentis (parler à 5 d'entre eux).", ("title", "apprentice", 1)),
+         ("every_tool", "npc", ("tools", "worlds", 10), "Every Tool", "Tous les outils", "Use a tool from every world: strike, mine or use with gear of each of the ten worlds.", "Utiliser un outil de chaque monde : frapper, miner ou se servir d'un équipement de chacun des dix mondes.", ("item", "journal_page", 1)),
          ("last_pardon", "karma", ("choice", "", 10), "The Last Pardon", "Le dernier pardon", "Spare an apprentice (+10) or take their core (-10).", "Épargner un apprenti (+10) ou prendre son noyau (-10).", ("souls", "", 100)),
-         ("all_at_once", "challenge", ("kill", "the_unfinished", 1), "All at Once", "Tout d'un coup", "Defeat the Unfinished without losing a layer.", "Vaincre l'Inachevée sans perdre de couche.", ("title", "seamless", 1))],
+         ("all_at_once", "challenge", ("kill", "the_unfinished@no_layer", 1), "All at Once", "Tout d'un coup", "Defeat the Unfinished without losing a layer.", "Vaincre l'Inachevée sans perdre de couche.", ("title", "seamless", 1))],
 }
 for w, lst in _Q.items():
     for (qid, t, obj, en, fr, den, dfr, rew) in lst:
@@ -850,7 +866,7 @@ KARMA_CHAPTER = 11
 _KARMA_PATHS = [
     ("light_for_others", "help", ("purify", "souls", 100), "A Light for Others", "Une lumière pour les autres", "Free 100 souls at the Soul Altar.", "Libérer 100 âmes à l'Autel des âmes.", ("item", "chance_doll", 1)),
     ("many_hands", "help", ("trade", "any", 10), "Many Hands", "Mille mains", "Trade 10 times with the peoples of the worlds.", "Commercer 10 fois avec les peuples des mondes.", ("souls", "", 40)),
-    ("warm_hearth", "help", ("deliver", "wool_thread", 16), "A Warm Hearth", "Un foyer chaud", "Gather 16 wool threads for the cradles of the lost.", "Réunir 16 fils de laine pour les berceaux des égarés.", ("item", "soul_cradle", 1)),
+    ("warm_hearth", "help", ("deliver", "wool_thread", 16), "A Warm Hearth", "Un foyer chaud", "Bring 16 wool threads to the peoples of the worlds, for the cradles of the lost.", "Apporter 16 fils de laine aux peuples des mondes, pour les berceaux des égarés.", ("item", "soul_cradle", 1)),
     ("hunger", "pact", ("devour", "souls", 100), "Hunger", "La faim", "Absorb 100 souls at the Soul Altar.", "Absorber 100 âmes à l'Autel des âmes.", ("souls", "", 60)),
     ("price_of_silence", "pact", ("contraband", "any", 3), "The Price of Silence", "Le prix du silence", "Buy 3 goods on a black market.", "Acheter 3 marchandises au marché clandestin.", ("item", "shell_shard", 2)),
     ("no_witnesses", "pact", ("kill", "innocent", 3), "No Witnesses", "Pas de témoins", "Silence 3 innocents, on the Surface or in the worlds.", "Faire taire 3 innocents, sur la Surface ou dans les mondes.", ("item", "diamond_fragment", 2)),

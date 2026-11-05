@@ -30,7 +30,6 @@ public final class BossAnims {
 	/** Bosses whose timing follows a borrowed world: one cut of each attack per timing tier, named with the
 	 * suffix .w<world> of the first world of that tier (same Defs.telegraphTicks and Defs.openingTicks). */
 	public static final Map<String, List<Integer>> TIERS = Map.ofEntries(
-		Map.entry("artisan_shadow", List.of(1, 4, 7)),
-		Map.entry("the_unfinished", List.of(1, 4, 7))
+		Map.entry("artisan_shadow", List.of(1, 4, 7))
 	);
 }

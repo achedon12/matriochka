@@ -58,7 +58,9 @@ public class MatrioItem extends Item {
 			default -> ChatFormatting.WHITE;
 		};
 		Component rarity = Component.translatable("rarity.matriochka." + def.rarity()).withStyle(color);
-		if (soul > 0 && !"core".equals(def.kind())) {
+		if ("soul".equals(def.kind())) {
+			out.accept(Component.translatable("tooltip.matriochka.holds_souls", rarity, SoulVessels.souls(stack)).withStyle(ChatFormatting.DARK_GRAY));
+		} else if (soul > 0 && !"core".equals(def.kind())) {
 			out.accept(Component.translatable("tooltip.matriochka.soul", rarity, soul).withStyle(ChatFormatting.DARK_GRAY));
 		} else {
 			out.accept(rarity);
@@ -105,6 +107,7 @@ public class MatrioItem extends Item {
 		ServerLevel sl = (ServerLevel) level;
 		PlayerState ps = PlayerState.of(sp);
 		boolean consume = false;
+		fr.achedon12.matriochka.world.QuestHooks.toolUsed(sp, stack);
 		switch (def.id()) {
 			case "antidote" -> { ps.addGauge("toxin", -50); consume = true; }
 			case "cooling_water" -> { ps.addGauge("heat", -50); consume = true; }
@@ -118,7 +121,11 @@ public class MatrioItem extends Item {
 			}
 			case "stabilizer" -> { ps.setFlagTime("stable", sl.getGameTime() + 20 * 30); consume = true; }
 			case "season_preserve" -> { ps.setFlagTime("preserve", sl.getGameTime() + 20 * 120); consume = true; }
-			case "silence", "anchor" -> { ps.setFlagTime("anchor", sl.getGameTime() + 20 * 600); consume = true; }
+			case "silence", "anchor" -> {
+				ps.setFlagTime("anchor", sl.getGameTime() + 20 * 600);
+				consume = true;
+				fr.achedon12.matriochka.world.QuestHooks.useIn(sp, stack, def.id(), false);
+			}
 			case "return_thread" -> { if (Travel.returnToWorldBlock(sp)) consume = true; }
 			case "refuge_doll" -> {
 				if (fr.achedon12.matriochka.world.Refuge.use(sp)) sp.getCooldowns().addCooldown(stack, 40);
@@ -129,9 +136,12 @@ public class MatrioItem extends Item {
 				sp.getCooldowns().addCooldown(stack, 20 * 60);
 			}
 			case "sonar" -> {
+				int hostile = 0;
 				for (LivingEntity e : sl.getEntitiesOfClass(LivingEntity.class, sp.getBoundingBox().inflate(32), e -> e != sp)) {
 					e.addEffect(new MobEffectInstance(MobEffects.GLOWING, 20 * 8, 0, false, false));
+					if (e instanceof net.minecraft.world.entity.monster.Enemy) hostile++;
 				}
+				fr.achedon12.matriochka.world.QuestHooks.spot(sp, hostile);
 				sl.playSound(null, sp.blockPosition(), SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.PLAYERS, 0.6f, 1.6f);
 				sp.getCooldowns().addCooldown(stack, 20 * 10);
 				ps.progress("use", "sonar", 1);
@@ -186,12 +196,17 @@ public class MatrioItem extends Item {
 				Nesting.use(sp, hand);
 				return InteractionResult.SUCCESS;
 			}
+			case "soul_shard", "soul_vessel" -> {
+				SoulVessels.release(sp, stack);
+				return InteractionResult.SUCCESS;
+			}
 			case "blank_scroll" -> {
 				sp.sendOverlayMessage(Component.translatable("message.matriochka.blank_scroll").withStyle(ChatFormatting.GOLD));
 				sl.playSound(null, sp.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS, 0.8f, 0.7f);
 				return InteractionResult.SUCCESS;
 			}
 			default -> {
+				if (fr.achedon12.matriochka.world.QuestHooks.useIn(sp, stack, def.id(), true)) return InteractionResult.SUCCESS;
 				if (def.id().startsWith("hidden_doll_")) {
 					Nesting.use(sp, hand);
 					return InteractionResult.SUCCESS;
@@ -211,7 +226,7 @@ public class MatrioItem extends Item {
 		return switch (id) {
 			case "antidote", "cooling_water", "silence_balm", "oxygen_capsule", "stabilizer", "season_preserve", "anchor", "return_thread", "refuge_doll",
 				 "solar_lantern", "sonar", "hourglass", "grappling_hook", "thruster", "labyrinth_map", "artisan_scroll", "artisan_journal",
-				 "nested_dolls", "whole_matryoshka", "blank_scroll" -> true;
+				 "nested_dolls", "whole_matryoshka", "blank_scroll", "soul_shard", "soul_vessel" -> true;
 			default -> id.startsWith("hidden_doll_");
 		};
 	}
@@ -231,8 +246,10 @@ public class MatrioItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack stack, ServerLevel level, Entity owner, EquipmentSlot slot) {
 		if (!(owner instanceof ServerPlayer sp)) return;
-		if (def.id().equals("glider") && (sp.getMainHandItem() == stack || sp.getOffhandItem() == stack)
-			&& !sp.onGround() && sp.getDeltaMovement().y < -0.15 && !sp.isInWater()) {
+		boolean gliding = def.id().equals("glider") && (sp.getMainHandItem() == stack || sp.getOffhandItem() == stack)
+			&& !sp.onGround() && sp.getDeltaMovement().y < -0.15 && !sp.isInWater();
+		if (def.id().equals("glider")) fr.achedon12.matriochka.world.QuestHooks.glide(sp, gliding);
+		if (gliding) {
 			Vec3 v = sp.getDeltaMovement();
 			Vec3 look = sp.getLookAngle();
 			sp.setDeltaMovement(look.x * 0.6, Math.max(v.y, -0.12), look.z * 0.6);

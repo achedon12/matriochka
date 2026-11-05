@@ -133,7 +133,7 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 		super.notifyTrade(offer);
 		if (getTradingPlayer() instanceof ServerPlayer sp) {
 			PlayerState ps = PlayerState.of(sp);
-			ps.progress("trade", "any", 1);
+			if (def.world() > 0) ps.progress("trade", "any", 1);
 			if (contraband != null && contraband.stream().anyMatch(c -> c == offer)) ps.progress("contraband", "any", 1);
 		}
 	}
@@ -167,7 +167,9 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		if (!isAlive() || isTrading()) return super.mobInteract(player, hand);
 		if (player instanceof ServerPlayer sp) {
+			fr.achedon12.matriochka.world.QuestHooks.meet(sp, this);
 			if (speakOfDolls(sp)) return InteractionResult.SUCCESS;
+			if (fr.achedon12.matriochka.world.QuestHooks.deliver(sp, this)) return InteractionResult.SUCCESS;
 			if (getOffers().isEmpty()) return InteractionResult.CONSUME;
 			int karma = PlayerState.of(sp).karma();
 			for (MerchantOffer o : getOffers()) {

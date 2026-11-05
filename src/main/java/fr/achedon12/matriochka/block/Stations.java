@@ -121,6 +121,7 @@ public final class Stations {
 			be.setChanged();
 		}
 		if (station.equals("jailer_table") && !be.data().contains("code0")) newCode(level, be);
+		if (t % StationAutomation.PERIOD == 0) StationAutomation.tick(level, pos, station, be);
 	}
 
 	public static void newCode(ServerLevel level, DataBlockEntity be) {
@@ -149,7 +150,7 @@ public final class Stations {
 		return false;
 	}
 
-	/** Attempts to craft recipe #index. Returns a message key on failure, null on success. */
+	/** Attempts to craft recipe #index. Returns a message key on failure (empty when the message was already sent), null on success. */
 	public static String craft(ServerPlayer player, ServerLevel level, BlockPos pos, String station, DataBlockEntity be, int index) {
 		var list = Recipes.of(station);
 		if (index < 0 || index >= list.size()) return "message.matriochka.station.unknown";
@@ -165,16 +166,36 @@ public final class Stations {
 			if (count(inv, resolve(ing.id())) < ing.count() && !player.isCreative()) return "message.matriochka.station.missing";
 		}
 		if (!player.isCreative()) for (Recipes.Ing ing : r.inputs()) take(inv, resolve(ing.id()), ing.count());
-		int made = r.count();
-		if (station.equals("spore_vat")) {
-			made = vatYield(r, fermentStage(be.data().getIntOr("ferment", 0)));
-			if (made > r.count()) player.sendOverlayMessage(Component.translatable("message.matriochka.station.vat_bonus", made - r.count()));
-		}
+		int stage = fermentStage(be.data().getIntOr("ferment", 0));
+		ItemStack out = output(level, station, r, be);
+		int made = out.getCount();
+		if (station.equals("spore_vat") && made > r.count()) player.sendOverlayMessage(Component.translatable("message.matriochka.station.vat_bonus", made - r.count()));
+		if (!inv.add(out)) net.minecraft.world.level.block.Block.popResource(player.level(), player.blockPosition(), out);
+		if (afterCraft(level, pos, station, be)) Achievements.grant(player, "foundry_boom");
+		// the last recipe crafted by hand is the one the station keeps making from its hoppers
+		StationAutomation.select(be, station, index, player);
+		PlayerState ps = PlayerState.of(player);
+		ps.progress("craft", r.output(), made);
+		ps.progress("station", station, 1);
+		if (station.equals("spore_vat") && stage >= 1) ps.progress("brew", station, 1);
+		return null;
+	}
+
+	/** The stack a recipe makes at this station: the Spore Vat's fermentation yield, the class roll, the Inverter's flaw. */
+	public static ItemStack output(ServerLevel level, String station, Recipes.Recipe r, DataBlockEntity be) {
+		int made = station.equals("spore_vat") ? vatYield(r, fermentStage(be.data().getIntOr("ferment", 0))) : r.count();
 		ItemStack out = new ItemStack(resolve(r.output()), made);
 		GearClasses.roll(out, level.getRandom());
 		if (station.equals("inverter") && out.isDamageableItem()) out.setDamageValue(out.getMaxDamage() / 4);
-		if (!inv.add(out)) net.minecraft.world.level.block.Block.popResource(player.level(), player.blockPosition(), out);
-		// station side effects
+		return out;
+	}
+
+	/**
+	 * What a craft does to the station, by hand or from its hoppers: the forge spends a charge, the lock pattern changes,
+	 * the vat starts fermenting again, and an overheated foundry may blow up (returns true then).
+	 */
+	public static boolean afterCraft(ServerLevel level, BlockPos pos, String station, DataBlockEntity be) {
+		boolean boom = false;
 		switch (station) {
 			case "lightning_forge" -> { be.data().putInt("charge", Math.max(0, be.data().getIntOr("charge", 0) - 1)); level.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.BLOCKS, 0.5f, 1.6f); }
 			case "jailer_table" -> newCode(level, be);
@@ -183,15 +204,14 @@ public final class Stations {
 				if (heat(level, pos) >= 3 && level.getRandom().nextInt(4) == 0) {
 					level.removeBlock(pos, false);
 					level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 2.5f, net.minecraft.world.level.Level.ExplosionInteraction.BLOCK);
-					Achievements.grant(player, "foundry_boom");
+					boom = true;
 				}
 			}
 			default -> {}
 		}
 		be.setChanged();
 		level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.station(station), SoundSource.BLOCKS, 1f, 0.95f + level.getRandom().nextFloat() * 0.1f);
-		PlayerState.of(player).progress("craft", r.output(), made);
-		return null;
+		return boom;
 	}
 
 	/**
@@ -278,6 +298,8 @@ public final class Stations {
 		int value;
 		if (def != null) {
 			if (def.kind().equals("core") || def.kind().equals("secret")) return "message.matriochka.altar.refuse";
+			// chest souls are freed by using them, not at the altar: they would move karma the design keeps them out of
+			if (def.kind().equals("soul")) return "message.matriochka.altar.soul_item";
 			value = Defs.soulValue(def.rarity());
 		} else {
 			value = switch (stack.getRarity()) {
@@ -303,12 +325,66 @@ public final class Stations {
 		return null;
 	}
 
-	/** Soul altar: recharge one life-doll layer for 50 souls. */
+	/** What rebuilding one Doll of Life layer at the Soul Altar costs: souls and rare resources of the current world. */
+	public static final int RECHARGE_SOULS = 50, RECHARGE_RARES = 4;
+	private static final java.util.Set<String> RARE_KINDS = java.util.Set.of("resource", "gem", "ingot", "dust", "thread");
+
+	/**
+	 * The world whose rare resources a layer costs: the world the player stands in, or on the Surface the newest world
+	 * the group has opened (the one after its highest boss beaten). Shared with the client, which knows the same two values.
+	 */
+	public static int rechargeWorld(int here, int doneBits) {
+		if (here >= 1 && here <= 10) return here;
+		int best = -1;
+		for (int i = 0; i <= 10; i++) if ((doneBits & (1 << i)) != 0) best = i;
+		return Math.max(1, Math.min(10, best + 1));
+	}
+
+	public static int rechargeWorld(ServerPlayer player) {
+		MatrioData data = MatrioData.get(player.level().getServer());
+		return rechargeWorld(fr.achedon12.matriochka.world.Worlds.number(player.level()), data.group(data.groupOf(player.getUUID())).getIntOr("done", 0));
+	}
+
+	/** The rare resources of a world (resources, gems, ingots, dusts and threads of rare rarity), in table order. */
+	public static java.util.List<Item> rareResources(int world) {
+		java.util.List<Item> out = new java.util.ArrayList<>();
+		for (Defs.ItemDef d : fr.achedon12.matriochka.content.Content.ITEMS) {
+			if (d.world() == world && "rare".equals(d.rarity()) && RARE_KINDS.contains(d.kind())) out.add(ModContent.item(d.id()));
+		}
+		return out;
+	}
+
+	/** How many rare resources of that world the inventory holds, all kinds together. */
+	public static int countRares(Inventory inv, int world) {
+		int n = 0;
+		for (Item i : rareResources(world)) n += count(inv, i);
+		return n;
+	}
+
+	/** Soul altar: rebuild one life-doll layer for 50 souls and 4 rare resources of the current world (the most plentiful first). */
 	public static String rechargeDoll(ServerPlayer player) {
 		PlayerState ps = PlayerState.of(player);
 		if (ps.dollMax() == 0) return "message.matriochka.altar.no_doll";
 		if (ps.dollLayers() >= ps.dollMax()) return "message.matriochka.altar.doll_full";
-		if (!ps.spendSouls(50)) return "message.matriochka.altar.no_souls";
+		int world = rechargeWorld(player);
+		Inventory inv = player.getInventory();
+		if (!player.isCreative()) {
+			if (ps.souls() < RECHARGE_SOULS) return "message.matriochka.altar.no_souls";
+			if (countRares(inv, world) < RECHARGE_RARES) {
+				player.sendSystemMessage(Component.translatable("message.matriochka.altar.no_rares", RECHARGE_RARES, Component.translatable("world.matriochka." + world)));
+				return "";
+			}
+			ps.spendSouls(RECHARGE_SOULS);
+			int left = RECHARGE_RARES;
+			java.util.List<Item> rares = new java.util.ArrayList<>(rareResources(world));
+			rares.sort((a, b) -> Integer.compare(count(inv, b), count(inv, a)));
+			for (Item i : rares) {
+				int k = Math.min(left, count(inv, i));
+				take(inv, i, k);
+				left -= k;
+				if (left <= 0) break;
+			}
+		}
 		ps.setDoll(ps.dollLayers() + 1, ps.dollMax());
 		player.level().playSound(null, player.blockPosition(), fr.achedon12.matriochka.content.Sounds.DOLL_CLOSE, SoundSource.PLAYERS, 1f, 1.1f);
 		return null;

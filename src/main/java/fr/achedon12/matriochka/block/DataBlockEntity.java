@@ -11,6 +11,8 @@ import net.minecraft.world.level.storage.ValueOutput;
 /** Block entity that keeps its whole state in one compound tag. Simple and robust across versions. */
 public class DataBlockEntity extends BlockEntity {
 	protected CompoundTag data = new CompoundTag();
+	/** The automation buffer of a station (inputs and output, see StationInventory); null until something goes in. */
+	private net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> items;
 
 	public DataBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -18,6 +20,25 @@ public class DataBlockEntity extends BlockEntity {
 
 	public CompoundTag data() {
 		return data;
+	}
+
+	/** The station buffer, created on first use. */
+	public net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> items() {
+		if (items == null) items = net.minecraft.core.NonNullList.withSize(StationInventory.SIZE, net.minecraft.world.item.ItemStack.EMPTY);
+		return items;
+	}
+
+	public boolean hasItems() {
+		if (items == null) return false;
+		for (var s : items) if (!s.isEmpty()) return true;
+		return false;
+	}
+
+	/** A broken station spills its buffer. */
+	@Override
+	public void preRemoveSideEffects(BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
+		super.preRemoveSideEffects(pos, state);
+		if (level != null && hasItems()) net.minecraft.world.Containers.dropContents(level, pos, items);
 	}
 
 	public void changed() {
@@ -29,12 +50,20 @@ public class DataBlockEntity extends BlockEntity {
 	protected void loadAdditional(ValueInput input) {
 		super.loadAdditional(input);
 		data = input.read("mdata", CompoundTag.CODEC).orElseGet(CompoundTag::new);
+		items = null;
+		for (var it : input.listOrEmpty("station_items", net.minecraft.world.ItemStackWithSlot.CODEC)) {
+			if (it.isValidInContainer(StationInventory.SIZE)) items().set(it.slot(), it.stack());
+		}
 	}
 
 	@Override
 	protected void saveAdditional(ValueOutput output) {
 		super.saveAdditional(output);
 		output.store("mdata", CompoundTag.CODEC, data);
+		if (hasItems()) {
+			var list = output.list("station_items", net.minecraft.world.ItemStackWithSlot.CODEC);
+			for (int i = 0; i < items.size(); i++) if (!items.get(i).isEmpty()) list.add(new net.minecraft.world.ItemStackWithSlot(i, items.get(i)));
+		}
 	}
 
 	/** World Blocks tell the client which world they hold and its variant, for the miniature preview. Nothing else leaves the server. */

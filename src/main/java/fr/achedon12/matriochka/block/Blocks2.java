@@ -6,6 +6,7 @@ import fr.achedon12.matriochka.world.Achievements;
 import fr.achedon12.matriochka.world.MatrioData;
 import fr.achedon12.matriochka.world.Travel;
 import fr.achedon12.matriochka.world.Worlds;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -236,8 +237,33 @@ public final class Blocks2 {
 			return new DataBlockEntity(ModContent.BE_DATA, pos, state);
 		}
 
+		/** Striking the block with a Doll Mallet shakes the world inside to hinder those in it. */
+		@Override
+		protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+			if (stack.is(ModContent.item("doll_mallet"))) {
+				if (player instanceof ServerPlayer sp && level instanceof ServerLevel sl) shakeBy(sp, sl, pos, true);
+				return InteractionResult.SUCCESS;
+			}
+			return InteractionResult.TRY_WITH_EMPTY_HAND;
+		}
+
+		static void shakeBy(ServerPlayer sp, ServerLevel level, BlockPos pos, boolean hinder) {
+			var result = fr.achedon12.matriochka.world.ScaleLinks.shake(sp, level, pos, hinder);
+			ChatFormatting color = switch (result) {
+				case HELPED -> ChatFormatting.AQUA;
+				case HINDERED -> ChatFormatting.RED;
+				default -> ChatFormatting.GRAY;
+			};
+			sp.sendOverlayMessage(Component.translatable("message.matriochka.shake." + result.name().toLowerCase(java.util.Locale.ROOT)).withStyle(color));
+		}
+
 		@Override
 		protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+			// sneaking with empty hands: shake the world inside to help those in it, rather than entering
+			if (player instanceof ServerPlayer sp && sp.isSecondaryUseActive() && level instanceof ServerLevel sl) {
+				shakeBy(sp, sl, pos, false);
+				return InteractionResult.SUCCESS;
+			}
 			if (player instanceof ServerPlayer sp && level.getBlockEntity(pos) instanceof DataBlockEntity be) {
 				int world = be.data().getIntOr("world", 1);
 				MatrioData data = MatrioData.get(sp.level().getServer());

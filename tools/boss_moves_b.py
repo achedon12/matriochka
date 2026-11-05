@@ -474,8 +474,9 @@ def wobble(c, bone, u0, u1, amp, n=4, axis=(1, 0, 1)):
 
 
 # =============================================================== World 10: The Unfinished
-# its three attacks borrow the world of its current shell, and so the timing of that world: one cut per tier
-@boss("the_unfinished", world=10, tiers=list(range(1, 10)))
+# its three attacks borrow the world of its current shell, but every shell keeps the final, shortest timing tier
+# (MatrioBoss.timingWorld): one cut, timed for World 10
+@boss("the_unfinished", world=10)
 def the_unfinished(k, wind, rel):
     C = {}
     B = "the_unfinished"

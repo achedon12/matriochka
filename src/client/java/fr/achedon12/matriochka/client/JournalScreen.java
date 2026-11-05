@@ -63,7 +63,10 @@ public class JournalScreen extends Screen {
 	@Override
 	protected void init() {
 		if (!motion.closing() && Ui.now() - motion.openedAt() < 100) {
-			if (scroll) Ui.sound(SoundEvents.BOOK_PAGE_TURN, 0.7f, 1f);
+			if (scroll) {
+				Ui.sound(SoundEvents.BOOK_PAGE_TURN, 0.7f, 1f);
+				ClientPlayNetworking.send(new Net.ReadPayload(page));
+			}
 			else Ui.pageTurn();
 		}
 		rebuild();
@@ -117,8 +120,10 @@ public class JournalScreen extends Screen {
 		prevPage = page;
 		page = next;
 		turnDir = dir;
-		if (scroll) pageAt = Ui.now();
-		else turnAt = Ui.now();
+		if (scroll) {
+			pageAt = Ui.now();
+			ClientPlayNetworking.send(new Net.ReadPayload(page));
+		} else turnAt = Ui.now();
 		Ui.pageTurn();
 	}
 
@@ -483,8 +488,7 @@ public class JournalScreen extends Screen {
 			}
 			int col = done ? Ui.GREEN : open ? Ui.INK : 0xFF9A8A6E;
 			Ui.sprite(g, done ? "pip_done" : open ? "pip_open" : "pip_locked", x - 1, yy, 7, 7);
-			String kind = q.objKind().equals("deliver") ? "obtain" : q.objKind();
-			int prog = Math.min(q.objCount(), MatrioClient.state.getIntOr("c_" + kind + ":" + q.objTarget(), 0));
+			int prog = Math.min(q.objCount(), MatrioClient.state.getIntOr("c_" + q.objKind() + ":" + q.objTarget(), 0));
 			Component p = Component.literal(prog + "/" + q.objCount());
 			boolean showProg = !q.objKind().equals("choice") && open && !done;
 			int titleW = w - 9 - (showProg ? font.width(p) + 4 : 0);
