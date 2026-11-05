@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731700,
+    "separation": 8,
+    "spacing": 26
+  },
+  "structures": [
+    {
+      "structure": "matriochka:hunter_trench",
+      "weight": 1
+    }
+  ]
+}

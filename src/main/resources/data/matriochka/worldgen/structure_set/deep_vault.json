@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731709,
+    "separation": 21,
+    "spacing": 64
+  },
+  "structures": [
+    {
+      "structure": "matriochka:deep_vault",
+      "weight": 1
+    }
+  ]
+}

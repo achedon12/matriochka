@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_7",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 7,
+  "archetype": "bell",
+  "role": "exploration",
+  "size": "small",
+  "structure_id": "diving_bell"
+}
