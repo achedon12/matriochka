@@ -481,11 +481,11 @@ RULE_SHORT = {
     2: ("Lava and depth cook you slowly.", "La lave et la profondeur te cuisent lentement."),
     3: ("No sky, only halls. And the halls move.", "Pas de ciel, que des salles. Et elles bougent."),
     4: ("Gusts throw you off the islands.", "Les rafales te jettent hors des îles."),
-    5: ("Total darkness. Every step makes noise.", "Le noir complet. Chaque pas fait du bruit."),
-    6: ("Every 90 seconds, up becomes down.", "Toutes les 90 secondes, le haut devient le bas."),
-    7: ("Your oxygen runs out. The pressure crushes.", "L'oxygène s'épuise. La pression écrase."),
+    5: ("Total darkness. Every step makes noise, every light you bring dies.", "Le noir complet. Chaque pas fait du bruit, chaque lumière apportée s'éteint."),
+    6: ("Up becomes down, one column at a time.", "Le haut devient le bas, une colonne à la fois."),
+    7: ("A world under water. Breathe through your helmet.", "Un monde sous l'eau. Respire par ton casque."),
     8: ("A day lasts eight minutes. A season, two.", "Une journée dure huit minutes. Une saison, deux."),
-    9: ("The ground heaves every minute.", "Le sol se soulève toutes les minutes."),
+    9: ("Every minute, the ground moves under you.", "Toutes les minutes, le sol bouge sous tes pieds."),
     10: ("Every old rule, in a workshop built for giants.", "Toutes les anciennes règles, dans un atelier de géants."),
 }
 
@@ -511,11 +511,14 @@ RULE_LONG = {
         "brûles. Chaque pièce de l'ensemble thermique réduit la montée de 12,5 %, l'Eau de refroidissement retire 50, "
         "le Pain de glace la freine pendant cinq minutes."),
     3: ("There is no surface and no sky, only dungeon. Sealed doors give way to Dungeon Keys, made at the Jailer's "
-        "Table once you have reproduced the lock pattern. Every five minutes the halls rearrange themselves, with a "
-        "ten-second warning. Light is scarce, so bring your own.",
+        "Table once you have reproduced the lock pattern. Every five minutes the halls rearrange themselves: 8 x 8 "
+        "sections 16 to 40 blocks from you swap places or turn, and dust falls on them ten seconds before. Rooms, locks, "
+        "chests and anything you built never move. Light is scarce, so bring your own.",
         "Ici, ni surface ni ciel : rien que le donjon. Les portes scellées cèdent aux Clés de donjon, fabriquées à la "
         "Table du Geôlier une fois le motif de la serrure reproduit. Toutes les cinq minutes, les salles se "
-        "réorganisent, avec dix secondes de préavis. La lumière est rare : apporte la tienne."),
+        "réorganisent : des sections de 8 x 8 situées entre 16 et 40 blocs de toi échangent leur place ou pivotent, et "
+        "de la poussière tombe sur elles dix secondes avant. Les salles fermées, les serrures, les coffres et tout ce "
+        "que tu as construit ne bougent jamais. La lumière est rare : apporte la tienne."),
     4: ("Floating islands under a permanent storm. Every 30 seconds a gust hits anyone under the open sky unless they "
         "crouch or take shelter, and you hear it two seconds early. Every 45 seconds lightning marks a spot near exposed "
         "players with sparks, then strikes three seconds later. Elytra stay grounded here until the Master of Seasons "
@@ -525,26 +528,39 @@ RULE_LONG = {
         "foudre marque un point près des joueurs exposés par des étincelles, puis tombe trois secondes plus tard. Les "
         "élytres restent clouées au sol tant que le Maître des saisons n'est pas tombé : on traverse en Planeur et au "
         "Grappin."),
-    5: ("No light, and a noise gauge. Sprinting adds 4 per second, walking 0.6; standing still removes 1.5, sneaking "
-        "3. Above 50, every creature within 28 blocks comes for you. Darkness washes over your sight every ten seconds "
-        "unless you carry a lit Solar Lantern (20 minutes of light) or night vision. Silence Balm wipes your noise.",
-        "Aucune lumière, et une jauge de bruit. Courir ajoute 4 par seconde, marcher 0,6 ; rester immobile retire 1,5, "
-        "s'accroupir 3. Au-dessus de 50, toutes les créatures à moins de 28 blocs viennent te chercher. L'obscurité "
-        "envahit ta vue toutes les dix secondes, sauf si tu portes une Lanterne solaire allumée (20 minutes) ou une "
-        "vision nocturne. Le Baume de silence efface ton bruit."),
-    6: ("Every 90 seconds gravity flips: you float upward for six seconds, then drift back down for twelve. A warning "
-        "comes five seconds before. Gravity Boots ignore the flip entirely; a Stabilizer or a Flipped Apple keeps you "
-        "steady for 30 seconds.",
-        "Toutes les 90 secondes, la gravité s'inverse : tu montes pendant six secondes, puis tu redescends lentement "
-        "pendant douze. Un avertissement tombe cinq secondes avant. Les Bottes de gravité ignorent l'inversion ; un "
-        "Stabilisateur ou une Pomme retournée te gardent stable 30 secondes."),
-    7: ("Under water you breathe from your own oxygen gauge: about 50 seconds without a suit, five minutes in the full "
-        "Diving set. Surfacing refills 10 per second. Below y 110 the pressure starts to crush you; the full Diving set "
-        "pushes that limit down to y 40. Oxygen Capsules and Apnea Kelp buy time, the Thruster brings you back up fast.",
-        "Sous l'eau, tu respires sur ta propre jauge d'oxygène : environ 50 secondes sans équipement, cinq minutes avec "
-        "le scaphandre complet. Remonter à la surface la recharge de 10 par seconde. Sous y 110, la pression commence à "
-        "t'écraser ; le scaphandre complet repousse cette limite à y 40. Capsules d'oxygène et Algue d'apnée font gagner "
-        "du temps, le Propulseur te ramène vite en haut."),
+    5: ("No light, and a noise gauge. Every light you place burns out after a minute: torches crumble to sticks, "
+        "campfires and candles are snuffed, glowing blocks turn to Spent Glow. Only the Deep's own Faint Glow lasts, and "
+        "a lit Solar Lantern carries twenty minutes of light with you. Sprinting adds 4 noise per second, walking 0.6; "
+        "standing still removes 1.5, sneaking 3. Above 50, every creature within 28 blocks comes for you. Silence Balm "
+        "wipes your noise.",
+        "Aucune lumière, et une jauge de bruit. Chaque lumière que tu poses s'éteint au bout d'une minute : les torches "
+        "tombent en bâtons, les feux de camp et les bougies s'étouffent, les blocs lumineux deviennent de la Lueur "
+        "éteinte. Seule la Lueur faible des profondeurs dure, et une Lanterne solaire allumée emporte vingt minutes de "
+        "lumière avec toi. Courir ajoute 4 de bruit par seconde, marcher 0,6 ; rester immobile retire 1,5, s'accroupir "
+        "3. Au-dessus de 50, toutes les créatures à moins de 28 blocs viennent te chercher. Le Baume de silence efface "
+        "ton bruit."),
+    6: ("The realm is cut into 32 x 32 columns, and about a third of them are upside down. Inside one, gravity points "
+        "up: you, the creatures and the items fall toward the sky and walk on ceilings, up to 16 blocks above the "
+        "ground. Purple sparks trace the borders. Every 90 seconds the pattern changes, five seconds after a warning; if "
+        "your column turns back you drift down slowly. Gravity Boots ignore the flips entirely; a Stabilizer or a "
+        "Flipped Apple keeps you steady for 30 seconds.",
+        "Le royaume est découpé en colonnes de 32 x 32, et environ un tiers d'entre elles sont à l'envers. À "
+        "l'intérieur, la gravité pointe vers le haut : toi, les créatures et les objets tombez vers le ciel et marchez "
+        "au plafond, jusqu'à 16 blocs au-dessus du sol. Des étincelles violettes dessinent les frontières. Toutes les 90 "
+        "secondes, la carte change, cinq secondes après un avertissement ; si ta colonne se retourne, tu redescends "
+        "lentement. Les Bottes de gravité ignorent les inversions ; un Stabilisateur ou une Pomme retournée te gardent "
+        "stable 30 secondes."),
+    7: ("The whole world is sea, up to y 240, with no dry land. You arrive in a diving chamber on the sea floor. "
+        "Without a helmet your breath lasts about half a minute under water; a snorkel helmet, one for each ore of the "
+        "world, breathes for you from a tank of 3 to 12 minutes that refills in air pockets, bubble columns, over Air "
+        "Vents, with an Oxygen Capsule or at the Abyssal Press. The helmets are fragile: hits wear them fast. Below "
+        "y 110 the pressure crushes you; each Diving piece and a better helmet let you dive deeper.",
+        "Le monde entier est une mer, jusqu'à y 240, sans terre ferme. Tu arrives dans une chambre de plongée sur le "
+        "fond. Sans casque, ton souffle tient environ une demi-minute sous l'eau ; un casque-tuba, un par minerai du "
+        "monde, respire pour toi grâce à une réserve de 3 à 12 minutes qui se remplit dans les poches d'air, les "
+        "colonnes de bulles, au-dessus des Évents d'air, avec une Capsule d'oxygène ou à la Presse abyssale. Les casques sont "
+        "fragiles : les coups les usent vite. Sous y 110, la pression t'écrase ; chaque pièce de scaphandre et un "
+        "meilleur casque te laissent descendre plus bas."),
     8: ("Time runs two and a half times faster: a full day and night take eight minutes, each season two. Summer leaves you "
         "hungry, winter slows you down, spring and autumn are your windows. A Season Preserve shields you for two "
         "minutes, the Hourglass holds the clock for 90 seconds, and the Time Workshop only accepts recipes at dawn and "
@@ -553,19 +569,23 @@ RULE_LONG = {
         "L'été te creuse l'estomac, l'hiver te ralentit, le printemps et l'automne sont tes fenêtres. Une Conserve de "
         "saison te protège deux minutes, le Sablier retient l'horloge 90 secondes, et l'Atelier du temps n'accepte de "
         "recettes qu'à l'aube et au crépuscule."),
-    9: ("Every 60 seconds the ground heaves: you are thrown and nauseous, and up to four loose blocks around you "
-        "collapse. You get three seconds of warning. Within 16 blocks of a Terrain Anchor nothing moves; an Anchor in "
-        "hand steadies you for ten minutes, and Grip Boots keep you on your feet.",
-        "Toutes les 60 secondes, le sol se soulève : tu es projeté, pris de nausée, et jusqu'à quatre blocs mal "
-        "accrochés autour de toi s'effondrent. Tu as trois secondes de préavis. À moins de 16 blocs d'une Ancre de "
-        "terrain, rien ne bouge ; une Ancre utilisée te stabilise dix minutes, et les Bottes d'accroche te gardent "
-        "debout."),
-    10: ("You step out of the last block into a workshop built for giants, where your own base sits on a workbench "
-         "like an object. The world is cut into nine zones of 256 blocks, each running the rule of one earlier world, "
-         "from toxin to tremors. Every piece of old gear earns its place again.",
-         "Tu sors du dernier bloc dans un atelier bâti pour des géants, où ta propre base trône sur un établi comme un "
-         "simple objet. Le monde est découpé en neuf zones de 256 blocs, chacune rejouant la règle d'un monde "
-         "précédent, de la toxine aux secousses. Chaque ancien équipement retrouve sa place."),
+    9: ("Every 60 seconds the ground heaves: around you, up to three 16 x 16 zones rise, sink, slide sideways or close "
+        "their chasms, and everything on them rides along, you and your builds included. You get three seconds of "
+        "warning and are never buried. Within 16 blocks of a Terrain Anchor nothing moves; an Anchor holds the ground "
+        "within 4 blocks of you for ten minutes, and Grip Boots hold the zone under your feet.",
+        "Toutes les 60 secondes, le sol se soulève : autour de toi, jusqu'à trois zones de 16 x 16 montent, "
+        "s'enfoncent, glissent de côté ou referment leurs gouffres, et tout ce qui s'y trouve suit le mouvement, toi et "
+        "tes constructions compris. Tu as trois secondes de préavis et tu n'es jamais enseveli. À moins de 16 blocs "
+        "d'une Ancre de terrain, rien ne bouge ; une Ancre retient le sol à moins de 4 blocs de toi pendant dix "
+        "minutes, et les Bottes d'accroche retiennent la zone sous tes pieds."),
+    10: ("You step out of the last block into the Artisan's workshop, seen by a doll: spools, nails, pins and thimbles "
+         "many times your height lie on the felt, and on the Titanic Workbench stands the Maquette, a quarter-scale model "
+         "of your own base. The world is cut into nine zones of 256 blocks, each running the rule of one earlier world, "
+         "from toxin to moving ground. Every piece of old gear earns its place again.",
+         "Tu sors du dernier bloc dans l'atelier de l'artisan, vu par une poupée : bobines, clous, épingles et dés à "
+         "coudre bien plus hauts que toi jonchent le feutre, et sur l'Établi titanesque trône la Maquette, ta propre "
+         "base au quart de sa taille. Le monde est découpé en neuf zones de 256 blocs, chacune rejouant la règle d'un "
+         "monde précédent, de la toxine au sol mouvant. Chaque ancien équipement retrouve sa place."),
 }
 
 TIER = {"learning": ("Learning", "Apprentissage"), "mastery": ("Mastery", "Maîtrise"),
@@ -635,25 +655,26 @@ RULE_NUMS = {
         ("+0.5/s", "+0,5/s", "heat below y 40", "de chaleur sous y 40"),
         ("−12.5%", "−12,5 %", "heat gain per Thermal piece", "de montée par pièce thermique")],
     3: [("5 min", "5 min", "between two rearrangements of the halls", "entre deux réorganisations des salles"),
-        ("10 s", "10 s", "of warning before they move", "de préavis avant qu'elles bougent")],
+        ("10 s", "10 s", "of warning, dust on the moving halls", "de préavis, la poussière sur les salles qui bougent"),
+        ("16-40", "16-40", "blocks from you: where the halls move", "blocs de toi : là où les salles bougent")],
     4: [("30 s", "30 s", "between two gusts", "entre deux rafales"),
         ("45 s", "45 s", "between two lightning strikes", "entre deux éclairs"),
         ("3 s", "3 s", "from the sparks to the strike", "entre les étincelles et l'impact")],
-    5: [("+4/s", "+4/s", "noise while sprinting", "de bruit en courant"),
+    5: [("60 s", "60 s", "before a brought light burns out", "avant qu'une lumière apportée s'éteigne"),
         ("50", "50", "noise, and everything comes for you", "de bruit, et tout vient te chercher"),
-        ("28", "28", "blocks: how far they come from", "blocs : la distance d'où elles viennent")],
-    6: [("90 s", "90 s", "between two gravity flips", "entre deux inversions de gravité"),
-        ("6 s", "6 s", "floating upward", "à monter"),
-        ("12 s", "12 s", "drifting back down", "à redescendre")],
-    7: [("50 s", "50 s", "of oxygen without a suit", "d'oxygène sans équipement"),
-        ("5 min", "5 min", "in the full Diving set", "avec le scaphandre complet"),
+        ("20 min", "20 min", "of light carried by the Solar Lantern", "de lumière portée par la Lanterne solaire")],
+    6: [("90 s", "90 s", "between two changes of the gravity columns", "entre deux changements des colonnes de gravité"),
+        ("32", "32", "blocks per column", "blocs par colonne"),
+        ("16", "16", "blocks: how high a flipped column pulls", "blocs : la hauteur où tire une colonne inversée")],
+    7: [("33 s", "33 s", "of breath without a helmet", "de souffle sans casque"),
+        ("12 min", "12 min", "of air in a Pearl Snorkel Helmet", "d'air dans un Casque-tuba de perle"),
         ("y 110", "y 110", "where the pressure starts", "où commence la pression")],
     8: [("×3", "×3", "the speed of time", "la vitesse du temps"),
         ("8 min", "8 min", "a day and a night", "un jour et une nuit"),
         ("2 min", "2 min", "a season", "une saison")],
     9: [("60 s", "60 s", "between two heaves", "entre deux secousses"),
-        ("3 s", "3 s", "of warning", "de préavis"),
-        ("16", "16", "blocks of calm around a Terrain Anchor", "blocs de calme autour d'une Ancre de terrain")],
+        ("16", "16", "blocks of calm around a Terrain Anchor", "blocs de calme autour d'une Ancre de terrain"),
+        ("16 × 16", "16 × 16", "blocks per moving zone", "blocs par zone qui bouge")],
     10: [("9", "9", "zones, each with an earlier rule", "zones, chacune avec une ancienne règle"),
          ("256", "256", "blocks per zone", "blocs par zone")],
 }
@@ -705,14 +726,14 @@ BEHAVIOUR = {
               "Toutes les 6 secondes, à moins de 24 blocs, il pousse le cri d'un joueur blessé. Le suivre à moins de 4 blocs rapporte C'était toi."),
     "statue": ("Does not walk. While you stand still or sneak it freezes; when you move within 2 blocks of it, it strikes once a second.",
                "Ne marche pas. Tant que tu restes immobile ou accroupi, il se fige ; si tu bouges à moins de 2 blocs, il frappe une fois par seconde."),
-    "pressure_aura": ("Its pressure reaches 7 blocks: every second there it gives Slowness II and Mining Fatigue II and takes 2 of your oxygen.",
-                      "Sa pression porte à 7 blocs : chaque seconde passée là donne Lenteur II et Fatigue de minage II, et retire 2 d'oxygène."),
+    "pressure_aura": ("Its pressure reaches 7 blocks: every second there it gives Slowness II and Mining Fatigue II and takes 2 of your breath.",
+                      "Sa pression porte à 7 blocs : chaque seconde passée là donne Lenteur II et Fatigue de minage II, et retire 2 de souffle."),
     "slowing_aura": ("Its aura reaches 7 blocks: every second there gives Slowness II and Mining Fatigue II.",
                      "Son aura porte à 7 blocs : chaque seconde passée là donne Lenteur II et Fatigue de minage II."),
     "swimmer": ("In water it homes in on you and keeps facing you as it swims.",
                 "Dans l'eau, il fond sur toi et nage sans te quitter des yeux."),
-    "swimmer_oxygen": ("A quick swimmer that homes in on you, and within 3 blocks it drains 3 of your oxygen every second.",
-                       "Un nageur rapide qui fond sur toi et, à moins de 3 blocs, te retire 3 d'oxygène par seconde."),
+    "swimmer_oxygen": ("A quick swimmer that homes in on you, and within 3 blocks it drains 3 of your breath every second.",
+                       "Un nageur rapide qui fond sur toi et, à moins de 3 blocs, te retire 3 de souffle par seconde."),
     "grabber": ("Every 3.5 seconds, if you are within about 2.4 blocks, it grabs you: Slowness VII for 2.5 seconds and Wither for 2 seconds.",
                 "Toutes les 3,5 secondes, si tu es à environ 2,4 blocs, il t'agrippe : Lenteur VII pendant 2,5 secondes et Flétrissement pendant 2 secondes."),
     "grower": ("Grows while it fights: every 5 seconds it gains a tenth of its size, up to 1.8 times, and 8% damage each time. Letting it reach full size earns Grandpa.",
@@ -845,9 +866,12 @@ def build_worlds():
         armor_d = None
         if armor:
             gw = C.GEAR[n]
-            armor_d = dict(pieces=[dict(tex=tex(f'{armor["id"]}_{p}'), name=name(f'{armor["id"]}_{p}')) for p in ("helmet", "chestplate", "leggings", "boots")],
-                           text=t(f"{gw[1]} armour, {gw[2]} toughness, a {gw[0]}-damage weapon at this tier.",
-                                  f"{gw[1]} d’armure, {gw[2]} de robustesse, une arme à {gw[0]} de dégâts à ce palier.")
+            armor_d = dict(pieces=[dict(tex=tex(f'{armor["id"]}_{p}'), name=name(f'{armor["id"]}_{p}')) for p in armor.get("pieces", PIECES)],
+                           text=(t(f"{gw[1]} armour, {gw[2]} toughness, a {gw[0]}-damage weapon at this tier.",
+                                   f"{gw[1]} d’armure, {gw[2]} de robustesse, une arme à {gw[0]} de dégâts à ce palier.")
+                                 if "helmet" in armor.get("pieces", PIECES) else
+                                 t(f"Three pieces and no helmet: the head slot belongs to the snorkel helmets. A {gw[0]}-damage weapon at this tier.",
+                                   f"Trois pièces et pas de casque : la tête revient aux casques-tubas. Une arme à {gw[0]} de dégâts à ce palier."))
                            + ((" " + armor["effect_" + LANG]) if armor.get("effect_" + LANG) else ""))
         structs = {}
         for (sid, en, fr, role, size, rarity, arch) in C.STRUCTURES[n]:
@@ -887,6 +911,10 @@ def _sources_of(item_id):
     return out
 
 
+# The four armour pieces of a set; a set may have fewer (the Diving suit leaves the head to the snorkel helmets).
+PIECES = ("helmet", "chestplate", "leggings", "boots")
+
+
 def codex(n):
     """Everything a world holds: every item and block, how you get it, its quests and its achievements."""
     items = []
@@ -899,7 +927,7 @@ def codex(n):
                           count=r["count"] if r else 1, drops=_sources_of(it["id"])))
     armor = next((it for it in C.ITEMS if it["world"] == n and it["kind"] == "armorset"), None)
     if armor:
-        for p in ("helmet", "chestplate", "leggings", "boots"):
+        for p in armor.get("pieces", PIECES):
             pid = f'{armor["id"]}_{p}'
             st, r = recipe_for(pid)
             items.append(dict(id=pid, tex=tex(pid), name=name(pid), kind="armor", rarity=t(*RARITY.get(armor["rarity"], ("", ""))),
@@ -1086,6 +1114,9 @@ def build_mobs():
                                "Gigogne : à sa mort, elle s'ouvre et libère deux copies plus petites avec 40 % de sa vie, 60 % de sa taille et 30 % de vitesse en plus. Les copies ne laissent rien."))
             if m["flying"]:
                 facts.append(t("It flies, ignores gravity and never takes fall damage.", "Il vole, ignore la gravité et ne subit jamais de dégâts de chute."))
+            if w == 7:
+                facts.append(t("Like every World 7 creature, it swims, never drowns and spawns in open water.",
+                               "Comme toutes les créatures du monde 7, il nage, ne se noie jamais et apparaît en eau libre."))
             if w == 2 and beh != "lava_heat":
                 facts.append(t("Like every World 2 creature, it is immune to fire.", "Comme toutes les créatures du monde 2, il est insensible au feu."))
             facts.append(t(f"{6 if m['elite'] else 2} armour, {pct(60 if m['elite'] else 10)} knockback resistance, {20 if m['elite'] else 6} experience. It notices players up to 32 blocks away.",
@@ -1276,8 +1307,8 @@ def build_copy():
              t("At the Matrix Workbench: the last boss's core plus resources from its world. The World 1 Seed asks for the Guardian Core, 16 iron ingots and 16 oak logs.",
                "À l'Établi matriciel : le noyau du dernier boss et des ressources de son monde. La Graine du monde 1 demande le Noyau du Gardien, 16 lingots de fer et 16 bûches de chêne.")),
             ("world_soil_0_tilled", t("Plant it on World Soil", "Plante-la sur une Terre de monde"),
-             t("Till World Soil with a hoe and plant the Seed. Each Seed wants the soil of the world before it, and one condition: water, heat, redstone, open sky, darkness, height.",
-               "Bêche une Terre de monde à la houe et plantes-y la Graine. Chaque Graine veut la terre du monde précédent, et une condition : eau, chaleur, redstone, ciel ouvert, obscurité, hauteur.")),
+             t("Till World Soil with a hoe and plant the Seed. Each Seed wants the soil of the world before it, and one condition: water, heat, redstone, open sky, darkness, height. What you feed it decides whether its world hatches calm or wild.",
+               "Bêche une Terre de monde à la houe et plantes-y la Graine. Chaque Graine veut la terre du monde précédent, et une condition : eau, chaleur, redstone, ciel ouvert, obscurité, hauteur. Ce que tu lui donnes décide si son monde éclot apaisé ou sauvage.")),
             ("world_block", t("Enter the block", "Entre dans le bloc"),
              t("The Seed hatches into a World Block. Use it and you shrink inside, onto a Threshold that brings you back out.",
                "La Graine éclot en Bloc-monde. Utilise-le et tu rétrécis à l'intérieur, sur un Seuil qui te ramène dehors.")),
@@ -1424,8 +1455,8 @@ def build_copy():
         tierCols=[t("Tier", "Palier"), t("Warning", "Annonce"), t("Signature warning", "Annonce signature"), t("Opening", "Ouverture")],
         tierNote=t("Bosses never take damage while changing phase. The Spore Queen's cocoon holds until its nodes are broken.", "Un boss ne prend aucun dégât pendant un changement de phase. Le cocon de la Reine des spores tient tant que ses nœuds ne sont pas brisés."),
         mp=[dict(p=p, mult="×" + fmt(round(1 + 0.6 * (p - 1), 1))) for p in (1, 2, 4, 8)],
-        mpNote=t("Counted within 48 blocks when the boss wakes. Everyone within 64 blocks at its death shares the victory.", "Compté dans un rayon de 48 blocs au réveil du boss. Tous ceux à moins de 64 blocs à sa mort partagent la victoire."),
-        rewardNote=t("plus 100 souls for every player in the fight", "et 100 âmes pour chaque joueur présent au combat"),
+        mpNote=t("Counted within 48 blocks when the boss wakes. Its attacks also come 5% faster per extra player, recounted during the fight. Everyone within 64 blocks at its death shares the victory.", "Compté dans un rayon de 48 blocs au réveil du boss. Ses attaques viennent aussi 5 % plus vite par joueur en plus, recompté pendant le combat. Tous ceux à moins de 64 blocs à sa mort partagent la victoire."),
+        rewardNote=t("plus 100 souls and 2 Shell Shards for every player in the fight", "et 100 âmes et 2 Éclats d'enveloppe pour chaque joueur présent au combat"),
         desc=t("The eleven bosses of Matriochka: health, attacks, phases, timings and rewards.", "Les onze boss de Matriochka : vie, attaques, phases, timings et récompenses."),
     )
     return dict(ui=ui, nav=nav, home=home, worlds=worlds, bestiary=bestiary, bosses=bosses, systems=build_systems(d), download=build_download())
@@ -1450,7 +1481,7 @@ def build_systems(d):
                dict(id="classes", icon="swords", stat=t("6 classes, level 5", "6 classes, niveau 5"), line=t("Every crafted weapon and armour is born with a class.", "Chaque arme et armure fabriquée naît avec une classe.")),
                dict(id="nesting", icon="layers", stat=t("Inside everything", "Partout dedans"), line=t("Chests in chests, creatures in creatures, worlds in worlds.", "Des coffres dans des coffres, des créatures dans des créatures, des mondes dans des mondes.")),
                dict(id="groups", icon="users", stat=t("Up to 8 players", "Jusqu'à 8 joueurs"), line=t("Share worlds and bosses with your friends.", "Partage mondes et boss avec tes amis.")),
-               dict(id="journal", icon="book-open", stat=t("64 quests", "64 quêtes"), line=t("Objectives, quests, achievements and titles.", "Objectifs, quêtes, succès et titres."))],
+               dict(id="journal", icon="book-open", stat=t(f"{nq} quests", f"{nq} quêtes"), line=t("Objectives, quests, achievements and titles.", "Objectifs, quêtes, succès et titres."))],
         h=t("Systems", "Systèmes"), headImg=shot("head_systems_banner"),
         lead=t("What keeps you alive, what you trade for power, and how your gear grows. Everything here works the same in solo and on a server.",
                "Ce qui te garde en vie, ce que tu échanges contre de la puissance, et comment ton équipement grandit. Tout fonctionne pareil en solo et sur serveur."),
@@ -1490,13 +1521,14 @@ def build_systems(d):
         karmaEnd=t("At ±100, karma also tilts the variants of the worlds you open, and it decides between two of the three endings: seal the creature away, or absorb its power.",
                    "À ±100, le karma oriente aussi les variantes des mondes que tu ouvres, et il départage deux des trois fins : sceller de nouveau la créature, ou absorber son pouvoir."),
         classesH=t("Gear classes", "Classes d'équipement"),
-        classesLead=t("Every weapon, tool and armour piece gets a random class when it is crafted. The Class Table raises its level with souls; your progression caps how far you can go.",
-                      "Chaque arme, outil ou pièce d'armure reçoit une classe au hasard à sa fabrication. La Table de classe monte son niveau avec des âmes ; ta progression limite jusqu'où tu peux aller."),
+        classesLead=t("Every weapon, tool and armour piece gets a random class when it is crafted. The Class Table raises its level with souls and Shell Shards; your progression caps how far you can go.",
+                      "Chaque arme, outil ou pièce d'armure reçoit une classe au hasard à sa fabrication. La Table de classe monte son niveau avec des âmes et des Éclats d'enveloppe ; ta progression limite jusqu'où tu peux aller."),
         clsCols=[t("Class", "Classe"), t("Bonuses", "Bonus"), t("Found on", "Sur")],
         classes=[dict(name=en if LANG == "en" else fr, bonus=den if LANG == "en" else dfr, slot=slot_label(slot)) for (cid, en, fr, slot, den, dfr) in C.CLASSES],
         upH=t("Upgrading", "Améliorer"), upCols=[t("Level", "Niveau"), t("Total bonus", "Bonus total"), t("Souls", "Âmes")],
         up=[dict(lv=str(lv), bonus="+" + pct(b), souls=str(c)) for lv, b, c in ((2, 10, 10), (3, 20, 30), (4, 35, 90), (5, 50, 270))],
-        upNote=t("Level 1 to 5 costs 400 souls per piece.", "Du niveau 1 au niveau 5 : 400 âmes par pièce."),
+        upNote=t("Level 1 to 5 costs 400 souls and 6 Shell Shards per piece (1, 1, 2, 2). Every boss leaves 2 Shell Shards to each player who fought it.",
+                 "Du niveau 1 au niveau 5 : 400 âmes et 6 Éclats d'enveloppe par pièce (1, 1, 2, 2). Chaque boss laisse 2 Éclats d'enveloppe à chaque joueur qui l'a combattu."),
         capH=t("Level cap", "Niveau maximal"), capCols=[t("Progression", "Progression"), t("Max level", "Niveau max")],
         cap=[dict(k=t(f"World {w} done", f"Monde {w} terminé"), v=str(lv)) for w, lv in ((2, 2), (4, 3), (6, 4), (8, 5))],
         chance=dict(tex=tex("chance_doll"), h=name("chance_doll"), p=t("Rerolls an item into a different class it can hold, and keeps its level. The first reroll costs 20 souls, and the price doubles each time on the same item: 20, 40, 80, 160.",
@@ -1508,14 +1540,15 @@ def build_systems(d):
         nestCols=[t("System", "Système"), t("Effect", "Effet"), t("Unlocked", "Déblocage")],
         nest=[dict(a=a, b=b, c=c) for a, b, c in [
             (t("Doll of Life", "Poupée de vie"), t("Each layer survives one death", "Chaque couche survit à une mort"), t("Worlds 1, 5, 8", "Mondes 1, 5, 8")),
-            (t("Nesting chests", "Coffres gigognes"), t("A chest that holds a smaller one", "Un coffre qui en contient un plus petit"), t("World 2", "Monde 2")),
+            (t("Nesting chests", "Coffres gigognes"), t("Three sizes: a chest holds the smaller ones and sorts items into them", "Trois tailles : un coffre contient les plus petits et y range les objets"), t("World 2", "Monde 2")),
             (t("Nesting creatures", "Créatures gigognes"), t("A defeated mob releases a smaller one", "Un mob vaincu en libère un plus petit"), t("World 2", "Monde 2")),
-            (t("Refuge doll", "Poupée-refuge"), t("A pocket base you carry", "Une base de poche que tu transportes"), t("World 3", "Monde 3")),
-            (t("Layered armour", "Armures à couches"), t("One layer protects the next", "Une couche protège la suivante"), t("World 4", "Monde 4")),
-            (t("The final boss", "Le boss final"), t("Ten shells, one per world", "Dix enveloppes, une par monde"), t("World 10", "Monde 10"))]],
+            (t("Refuge doll", "Poupée-refuge"), t("A pocket base for your group, that grows after Worlds 5, 7 and 9", "Une base de poche pour ton groupe, qui s'agrandit après les mondes 5, 7 et 9"), t("World 3", "Monde 3")),
+            (t("Layered armour", "Armures à couches"), t("Lacquer Layers laid on armour: when the outer one breaks, the next takes over", "Des Couches laquées posées sur l'armure : quand celle du dessus casse, la suivante prend le relais"), t("World 4", "Monde 4")),
+            (t("The final boss", "Le boss final"), t("Ten shells, one per world", "Dix enveloppes, une par monde"), t("World 10", "Monde 10")),
+            (t("Hidden dolls", "Poupées cachées"), t("Nested in order, the ten open World 0, the smallest doll", "Emboîtées dans l'ordre, les dix ouvrent le monde 0, la plus petite poupée"), t("After World 10", "Après le monde 10"))]],
         gatesH=t("Gates", "Verrous"),
         gates=[t("Enchanting, anvils and the Nether open after World 2.", "Enchantements, enclumes et Nether s'ouvrent après le monde 2."),
-               t("Diamonds come back in World 5: four Diamond Fragments make one at the Dark Altar.", "Le diamant revient dans le monde 5 : quatre Fragments de diamant en donnent un à l'Autel obscur."),
+               t("Diamonds come back in World 5: four Diamond Fragments make one at the Dark Altar. Until then villagers keep their diamond trades aside.", "Le diamant revient dans le monde 5 : quatre Fragments de diamant en donnent un à l'Autel obscur. D'ici là, les villageois gardent de côté leurs échanges de diamant."),
                t("Elytra stay grounded in Worlds 4, 6 and 9 until World 8 is done.", "Les élytres restent clouées au sol dans les mondes 4, 6 et 9 tant que le monde 8 n'est pas terminé."),
                t("The End opens after World 8.", "L'End s'ouvre après le monde 8.")],
         groupsH=t("Groups and servers", "Groupes et serveurs"),
@@ -1523,15 +1556,18 @@ def build_systems(d):
                      "Un joueur seul forme un groupe d'une personne. Les mondes, la progression et les permissions appartiennent au groupe : jusqu'à huit joueurs par défaut. Chaque groupe reçoit sa propre parcelle de 3 000 sur 3 000 blocs dans chaque monde, séparée des autres, et un Bloc-monde ne sert qu'à son groupe."),
         cmds=[dict(c=c, d=x) for c, x in [
             ("/matriochka group info", t("Your group, its members and defeated bosses", "Ton groupe, ses membres et ses boss vaincus")),
-            ("/matriochka group invite <player>", t("Invite a player into your group", "Inviter un joueur dans ton groupe")),
+            ("/matriochka group invite <player>", t("Leader: invite a player into your group", "Chef : inviter un joueur dans ton groupe")),
             ("/matriochka group join", t("Accept the pending invitation", "Accepter l'invitation en attente")),
             ("/matriochka group leave", t("Leave your group", "Quitter ton groupe")),
+            ("/matriochka group kick <player>", t("Leader: send a member out", "Chef : renvoyer un membre")),
+            ("/matriochka group transfer <player>", t("Leader: hand over the lead", "Chef : passer la main")),
+            ("/matriochka group disband", t("Leader: dissolve the group", "Chef : dissoudre le groupe")),
             ("/matriochka karma show", t("Your karma and souls", "Ton karma et tes âmes"))]],
         serverNote=t("The mod runs on the server and on every client. All rules, damage and rewards are decided by the server; nothing needs an online account or service.",
                      "Le mod s'installe sur le serveur et sur chaque client. Règles, dégâts et récompenses sont décidés par le serveur ; aucun compte ni service en ligne n'est nécessaire."),
         journalH=t("The Journal, quests and achievements", "Le Journal, les quêtes et les succès"),
-        journalLead=t(f"The Artisan's Scroll arrives on your first login and turns into the Journal when the Guardian falls. Its tabs track your objective, quests, karma and worlds. There are {nq} optional quests (4 on the Surface, 6 per world) and {nach} achievements, 10 per world, two of them hidden. Fifty Journal pages and ten hidden dolls are scattered through the worlds; nest the dolls in order and something smaller opens.",
-                      f"Le Parchemin de l'artisan arrive à ta première connexion et devient le Journal quand le Gardien tombe. Ses onglets suivent ton objectif, tes quêtes, ton karma et tes mondes. Il y a {nq} quêtes facultatives (4 sur la Surface, 6 par monde) et {nach} succès, 10 par monde dont deux cachés. Cinquante pages du Journal et dix poupées cachées sont dispersées dans les mondes ; emboîte les poupées dans l'ordre et quelque chose de plus petit s'ouvre."),
+        journalLead=t(f"The Artisan's Scroll arrives on your first login and turns into the Journal when the Guardian falls. Its tabs track your objective, quests, karma and worlds. There are {nq} optional quests (4 on the Surface, 6 per world and 6 on the paths of karma) and {nach} achievements, 10 per world, two of them hidden. Fifty Journal pages, read in the Pages tab, and ten hidden dolls are scattered through the worlds; nest the dolls in order and something smaller opens. After the last boss, your karma chooses your ending, and a New Cycle starts the worlds over, stronger.",
+                      f"Le Parchemin de l'artisan arrive à ta première connexion et devient le Journal quand le Gardien tombe. Ses onglets suivent ton objectif, tes quêtes, ton karma et tes mondes. Il y a {nq} quêtes facultatives (4 sur la Surface, 6 par monde et 6 sur les chemins du karma) et {nach} succès, 10 par monde dont deux cachés. Cinquante pages du Journal, à lire dans l'onglet Pages, et dix poupées cachées sont dispersées dans les mondes ; emboîte les poupées dans l'ordre et quelque chose de plus petit s'ouvre. Après le dernier boss, ton karma choisit ta fin, et un Nouveau Cycle rouvre les mondes, plus forts."),
         journalShots=[dict(src=shot(k), caption=c) for k, c in (("gui_journal_0", t("The Journal's objective tab", "L'onglet objectif du Journal")), ("gui_journal_1", t("Quests", "Les quêtes"))) if shot(k)],
         titlesH=t("Titles you can earn", "Titres à gagner"),
         titles=[v for k, v in d.items() if k.startswith("title.matriochka.")],
@@ -1554,7 +1590,8 @@ def build_download():
             ("Fabric Loader", "0.20+", t("Install it for 26.3 with the Fabric installer", "À installer pour la 26.3 avec l'installeur Fabric")),
             ("Fabric API", "0.165.2+", t("Built for 26.3, goes in the mods folder", "Pour la 26.3, dans le dossier mods")),
             ("GeckoLib", "5.5.7", t("Animated models of bosses and creatures", "Modèles animés des boss et créatures")),
-            ("Java", "25", t("Bundled with the official launcher", "Fourni avec le launcher officiel"))]],
+            ("Java", "25", t("Bundled with the official launcher", "Fourni avec le launcher officiel")),
+            ("Just Enough Items", t("optional", "facultatif"), t("Recipe pages for every station", "Pages de recettes pour chaque station"))]],
         installH=t("Installing", "Installation"),
         steps=[t("Install Fabric Loader for Minecraft 26.3.", "Installe Fabric Loader pour Minecraft 26.3."),
                t(f"Download matriochka-{VERSION}+26.3.jar from the GitHub releases.", f"Télécharge matriochka-{VERSION}+26.3.jar depuis les versions GitHub."),
@@ -1575,8 +1612,8 @@ def build_download():
             ("mobHealthMultiplier", "1.0", t("Scales the health of every creature and boss", "Ajuste la vie de toutes les créatures et des boss")),
             ("mobDamageMultiplier", "1.0", t("Scales the damage of every creature and boss", "Ajuste les dégâts de toutes les créatures et des boss")),
             ("maxGroupSize", "8", t("Players per group", "Joueurs par groupe")),
-            ("difficulty", '"normal"', t("story (70% damage), normal, nightmare (130% damage, one charge per Soul Cradle) or hardcore (as nightmare, and the Doll of Life never saves you)",
-                                         "story (70 % des dégâts), normal, nightmare (130 % des dégâts, une charge par Berceau d'âme) ou hardcore (comme nightmare, et la Poupée de vie ne te sauve plus)"))]],
+            ("difficulty", '"normal"', t("story (70% damage, nothing lost on death), normal, nightmare (130% damage, one charge per Soul Cradle) or hardcore (as nightmare, death is permanent, the Doll of Life never saves you and a broken World Block deletes its world)",
+                                         "story (70 % des dégâts, rien n'est perdu à la mort), normal, nightmare (130 % des dégâts, une charge par Berceau d'âme) ou hardcore (comme nightmare, la mort est définitive, la Poupée de vie ne te sauve plus et un Bloc-monde cassé efface son monde)"))]],
     )
 
 

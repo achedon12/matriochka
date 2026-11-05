@@ -128,7 +128,7 @@
     {
      "tex": "blocks/world_soil_0_tilled.png",
      "h": "Plante-la sur une Terre de monde",
-     "p": "Bêche une Terre de monde à la houe et plantes-y la Graine. Chaque Graine veut la terre du monde précédent, et une condition : eau, chaleur, redstone, ciel ouvert, obscurité, hauteur."
+     "p": "Bêche une Terre de monde à la houe et plantes-y la Graine. Chaque Graine veut la terre du monde précédent, et une condition : eau, chaleur, redstone, ciel ouvert, obscurité, hauteur. Ce que tu lui donnes décide si son monde éclot apaisé ou sauvage."
     },
     {
      "tex": "blocks/world_block.png",
@@ -449,8 +449,8 @@
      "mult": "×5,2"
     }
    ],
-   "mpNote": "Compté dans un rayon de 48 blocs au réveil du boss. Tous ceux à moins de 64 blocs à sa mort partagent la victoire.",
-   "rewardNote": "et 100 âmes pour chaque joueur présent au combat",
+   "mpNote": "Compté dans un rayon de 48 blocs au réveil du boss. Ses attaques viennent aussi 5 % plus vite par joueur en plus, recompté pendant le combat. Tous ceux à moins de 64 blocs à sa mort partagent la victoire.",
+   "rewardNote": "et 100 âmes et 2 Éclats d'enveloppe pour chaque joueur présent au combat",
    "desc": "Les onze boss de Matriochka : vie, attaques, phases, timings et récompenses."
   },
   "systems": {
@@ -488,7 +488,7 @@
     {
      "id": "journal",
      "icon": "book-open",
-     "stat": "64 quêtes",
+     "stat": "70 quêtes",
      "line": "Objectifs, quêtes, succès et titres."
     }
    ],
@@ -646,7 +646,7 @@
    ],
    "karmaEnd": "À ±100, le karma oriente aussi les variantes des mondes que tu ouvres, et il départage deux des trois fins : sceller de nouveau la créature, ou absorber son pouvoir.",
    "classesH": "Classes d'équipement",
-   "classesLead": "Chaque arme, outil ou pièce d'armure reçoit une classe au hasard à sa fabrication. La Table de classe monte son niveau avec des âmes ; ta progression limite jusqu'où tu peux aller.",
+   "classesLead": "Chaque arme, outil ou pièce d'armure reçoit une classe au hasard à sa fabrication. La Table de classe monte son niveau avec des âmes et des Éclats d'enveloppe ; ta progression limite jusqu'où tu peux aller.",
    "clsCols": [
     "Classe",
     "Bonus",
@@ -712,7 +712,7 @@
      "souls": "270"
     }
    ],
-   "upNote": "Du niveau 1 au niveau 5 : 400 âmes par pièce.",
+   "upNote": "Du niveau 1 au niveau 5 : 400 âmes et 6 Éclats d'enveloppe par pièce (1, 1, 2, 2). Chaque boss laisse 2 Éclats d'enveloppe à chaque joueur qui l'a combattu.",
    "capH": "Niveau maximal",
    "capCols": [
     "Progression",
@@ -780,7 +780,7 @@
     },
     {
      "a": "Coffres gigognes",
-     "b": "Un coffre qui en contient un plus petit",
+     "b": "Trois tailles : un coffre contient les plus petits et y range les objets",
      "c": "Monde 2"
     },
     {
@@ -790,24 +790,29 @@
     },
     {
      "a": "Poupée-refuge",
-     "b": "Une base de poche que tu transportes",
+     "b": "Une base de poche pour ton groupe, qui s'agrandit après les mondes 5, 7 et 9",
      "c": "Monde 3"
     },
     {
      "a": "Armures à couches",
-     "b": "Une couche protège la suivante",
+     "b": "Des Couches laquées posées sur l'armure : quand celle du dessus casse, la suivante prend le relais",
      "c": "Monde 4"
     },
     {
      "a": "Le boss final",
      "b": "Dix enveloppes, une par monde",
      "c": "Monde 10"
+    },
+    {
+     "a": "Poupées cachées",
+     "b": "Emboîtées dans l'ordre, les dix ouvrent le monde 0, la plus petite poupée",
+     "c": "Après le monde 10"
     }
    ],
    "gatesH": "Verrous",
    "gates": [
     "Enchantements, enclumes et Nether s'ouvrent après le monde 2.",
-    "Le diamant revient dans le monde 5 : quatre Fragments de diamant en donnent un à l'Autel obscur.",
+    "Le diamant revient dans le monde 5 : quatre Fragments de diamant en donnent un à l'Autel obscur. D'ici là, les villageois gardent de côté leurs échanges de diamant.",
     "Les élytres restent clouées au sol dans les mondes 4, 6 et 9 tant que le monde 8 n'est pas terminé.",
     "L'End s'ouvre après le monde 8."
    ],
@@ -820,7 +825,7 @@
     },
     {
      "c": "/matriochka group invite <player>",
-     "d": "Inviter un joueur dans ton groupe"
+     "d": "Chef : inviter un joueur dans ton groupe"
     },
     {
      "c": "/matriochka group join",
@@ -831,13 +836,25 @@
      "d": "Quitter ton groupe"
     },
     {
+     "c": "/matriochka group kick <player>",
+     "d": "Chef : renvoyer un membre"
+    },
+    {
+     "c": "/matriochka group transfer <player>",
+     "d": "Chef : passer la main"
+    },
+    {
+     "c": "/matriochka group disband",
+     "d": "Chef : dissoudre le groupe"
+    },
+    {
      "c": "/matriochka karma show",
      "d": "Ton karma et tes âmes"
     }
    ],
    "serverNote": "Le mod s'installe sur le serveur et sur chaque client. Règles, dégâts et récompenses sont décidés par le serveur ; aucun compte ni service en ligne n'est nécessaire.",
    "journalH": "Le Journal, les quêtes et les succès",
-   "journalLead": "Le Parchemin de l'artisan arrive à ta première connexion et devient le Journal quand le Gardien tombe. Ses onglets suivent ton objectif, tes quêtes, ton karma et tes mondes. Il y a 64 quêtes facultatives (4 sur la Surface, 6 par monde) et 100 succès, 10 par monde dont deux cachés. Cinquante pages du Journal et dix poupées cachées sont dispersées dans les mondes ; emboîte les poupées dans l'ordre et quelque chose de plus petit s'ouvre.",
+   "journalLead": "Le Parchemin de l'artisan arrive à ta première connexion et devient le Journal quand le Gardien tombe. Ses onglets suivent ton objectif, tes quêtes, ton karma et tes mondes. Il y a 70 quêtes facultatives (4 sur la Surface, 6 par monde et 6 sur les chemins du karma) et 100 succès, 10 par monde dont deux cachés. Cinquante pages du Journal, à lire dans l'onglet Pages, et dix poupées cachées sont dispersées dans les mondes ; emboîte les poupées dans l'ordre et quelque chose de plus petit s'ouvre. Après le dernier boss, ton karma choisit ta fin, et un Nouveau Cycle rouvre les mondes, plus forts.",
    "journalShots": [
     {
      "src": "shots/gui_journal_0.png",
@@ -913,6 +930,11 @@
      "n": "Java",
      "v": "25",
      "s": "Fourni avec le launcher officiel"
+    },
+    {
+     "n": "Just Enough Items",
+     "v": "facultatif",
+     "s": "Pages de recettes pour chaque station"
     }
    ],
    "installH": "Installation",
@@ -960,7 +982,7 @@
     {
      "k": "difficulty",
      "v": "\"normal\"",
-     "d": "story (70 % des dégâts), normal, nightmare (130 % des dégâts, une charge par Berceau d'âme) ou hardcore (comme nightmare, et la Poupée de vie ne te sauve plus)"
+     "d": "story (70 % des dégâts, rien n'est perdu à la mort), normal, nightmare (130 % des dégâts, une charge par Berceau d'âme) ou hardcore (comme nightmare, la mort est définitive, la Poupée de vie ne te sauve plus et un Bloc-monde cassé efface son monde)"
     }
    ]
   }
@@ -1300,6 +1322,66 @@
        }
       ],
       "count": 4,
+      "drops": []
+     },
+     {
+      "id": "shell_shard",
+      "tex": "items/shell_shard.png",
+      "name": "Éclat d'enveloppe",
+      "kind": "resource",
+      "rarity": "Épique",
+      "effect": "Laissé par un boss vaincu. Chaque amélioration de classe en demande.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mutated_scale",
+      "tex": "items/mutated_scale.png",
+      "name": "Écaille mutée",
+      "kind": "gem",
+      "rarity": "Épique",
+      "effect": "Perdue par un boss muté. Riche en âme.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nested_dolls",
+      "tex": "items/nested_dolls.png",
+      "name": "Poupées emboîtées",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Tiens-la en main principale et la poupée cachée suivante dans l'autre main, puis utilise-la.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "whole_matryoshka",
+      "tex": "items/whole_matryoshka.png",
+      "name": "La Matriochka entière",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "Dix poupées, l'une dans l'autre. Ouvre-la une fois l'Inachevée tombée : le monde 0 dort dedans.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "blank_scroll",
+      "tex": "items/blank_scroll.png",
+      "name": "Parchemin blanc",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Rien n'y est écrit. Il ne reste rien à finir.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
       "drops": []
      }
     ],
@@ -1669,7 +1751,7 @@
     "id": "spore_vat",
     "tex": "blocks/spore_vat.png",
     "name": "Cuve de spores",
-    "note": "Le résultat dépend du temps de fermentation.",
+    "note": "Une cuvée mûre (1 min) donne plus, vieillie (5 min) deux fois plus.",
     "shot": "shots/gui_station_spore_vat.png",
     "make": [
      {
@@ -2132,7 +2214,7 @@
       "name": "Poupée cachée 1",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Quatre encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -2258,7 +2340,7 @@
       "tex": "blocks/spore_vat.png",
       "name": "Cuve de spores",
       "kind": "station",
-      "effect": "Le résultat dépend du temps de fermentation.",
+      "effect": "Une cuvée mûre (1 min) donne plus, vieillie (5 min) deux fois plus.",
       "station": "Établi matriciel",
       "inputs": [
        {
@@ -3241,7 +3323,7 @@
       "name": "Poupée cachée 2",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Sept encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -3367,7 +3449,7 @@
       "tex": "blocks/nesting_chest.png",
       "name": "Coffre gigogne",
       "kind": "nesting_chest",
-      "effect": "",
+      "effect": "Contient les coffres gigognes plus petits. Accroupis-toi et utilise-le pour choisir ce qu'il trie.",
       "station": "Établi matriciel",
       "inputs": [
        {
@@ -3384,6 +3466,56 @@
        }
       ],
       "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "nesting_chest_medium",
+      "tex": "blocks/nesting_chest_medium.png",
+      "name": "Coffre gigogne moyen",
+      "kind": "nesting_chest",
+      "effect": "Deux rangées. Tient dans un Coffre gigogne, contient un petit.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:chest",
+        "tex": null,
+        "n": 1,
+        "name": "Coffre"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 1,
+        "name": "Lingot de cendre"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "nesting_chest_little",
+      "tex": "blocks/nesting_chest_little.png",
+      "name": "Petit coffre gigogne",
+      "kind": "nesting_chest",
+      "effect": "Une rangée. Tient dans les coffres gigognes plus grands.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:chest",
+        "tex": null,
+        "n": 1,
+        "name": "Coffre"
+       },
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 2,
+        "name": "Fil de laine"
+       }
+      ],
+      "count": 2,
       "drops": [],
       "yields": null
      },
@@ -3798,7 +3930,7 @@
    "n": 3,
    "name": "Donjon sans fin",
    "short": "Pas de ciel, que des salles. Et elles bougent.",
-   "long": "Ici, ni surface ni ciel : rien que le donjon. Les portes scellées cèdent aux Clés de donjon, fabriquées à la Table du Geôlier une fois le motif de la serrure reproduit. Toutes les cinq minutes, les salles se réorganisent, avec dix secondes de préavis. La lumière est rare : apporte la tienne.",
+   "long": "Ici, ni surface ni ciel : rien que le donjon. Les portes scellées cèdent aux Clés de donjon, fabriquées à la Table du Geôlier une fois le motif de la serrure reproduit. Toutes les cinq minutes, les salles se réorganisent : des sections de 8 x 8 situées entre 16 et 40 blocs de toi échangent leur place ou pivotent, et de la poussière tombe sur elles dix secondes avant. Les salles fermées, les serrures, les coffres et tout ce que tu as construit ne bougent jamais. La lumière est rare : apporte la tienne.",
    "nums": [
     {
      "v": "5 min",
@@ -3806,7 +3938,11 @@
     },
     {
      "v": "10 s",
-     "l": "de préavis avant qu'elles bougent"
+     "l": "de préavis, la poussière sur les salles qui bougent"
+    },
+    {
+     "v": "16-40",
+     "l": "blocs de toi : là où les salles bougent"
     }
    ],
    "doll": {
@@ -4153,6 +4289,12 @@
      "effect": ""
     },
     {
+     "id": "refuge_doll",
+     "tex": "items/refuge_doll.png",
+     "name": "Poupée-refuge",
+     "effect": "Une base de poche pour ton groupe. Utilise-la pour entrer, puis de nouveau pour sortir."
+    },
+    {
      "id": "sealed_shackle",
      "tex": "items/sealed_shackle.png",
      "name": "Entrave scellée",
@@ -4372,6 +4514,37 @@
       "drops": []
      },
      {
+      "id": "refuge_doll",
+      "tex": "items/refuge_doll.png",
+      "name": "Poupée-refuge",
+      "kind": "doll",
+      "rarity": "Légendaire",
+      "effect": "Une base de poche pour ton groupe. Utilise-la pour entrer, puis de nouveau pour sortir.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "painted_wood",
+        "tex": "blocks/painted_wood.png",
+        "n": 8,
+        "name": "Bois peint"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 4,
+        "name": "Fragment scellé"
+       },
+       {
+        "id": "minecraft:gold_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Lingot d'or"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "jailer_core",
       "tex": "items/jailer_core.png",
       "name": "Noyau du Geôlier",
@@ -4422,7 +4595,7 @@
       "name": "Poupée cachée 3",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Deux encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -5172,6 +5345,32 @@
       ]
      },
      {
+      "out": "armor_layer",
+      "tex": "items/armor_layer.png",
+      "name": "Couche laquée",
+      "count": 2,
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 1,
+        "name": "Cristal céleste"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 1,
+        "name": "Essence de tempête"
+       },
+       {
+        "id": "minecraft:honeycomb",
+        "tex": null,
+        "n": 2,
+        "name": "Rayon de miel"
+       }
+      ]
+     },
+     {
       "out": "storm_censer",
       "tex": "items/storm_censer.png",
       "name": "Encensoir d'orage",
@@ -5311,6 +5510,12 @@
      "tex": "items/lightning_lance.png",
      "name": "Lance de foudre",
      "effect": ""
+    },
+    {
+     "id": "armor_layer",
+     "tex": "items/armor_layer.png",
+     "name": "Couche laquée",
+     "effect": "Se pose sur une armure à la Table de classe. Quand la couche extérieure casse, la suivante prend le relais."
     },
     {
      "id": "storm_censer",
@@ -5519,6 +5724,37 @@
       "drops": []
      },
      {
+      "id": "armor_layer",
+      "tex": "items/armor_layer.png",
+      "name": "Couche laquée",
+      "kind": "layer",
+      "rarity": "Rare",
+      "effect": "Se pose sur une armure à la Table de classe. Quand la couche extérieure casse, la suivante prend le relais.",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 1,
+        "name": "Cristal céleste"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 1,
+        "name": "Essence de tempête"
+       },
+       {
+        "id": "minecraft:honeycomb",
+        "tex": null,
+        "n": 2,
+        "name": "Rayon de miel"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
       "id": "storm_king_core",
       "tex": "items/storm_king_core.png",
       "name": "Noyau du Roi",
@@ -5569,7 +5805,7 @@
       "name": "Poupée cachée 4",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Neuf encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -6131,20 +6367,20 @@
   {
    "n": 5,
    "name": "Profondeur sans lumière",
-   "short": "Le noir complet. Chaque pas fait du bruit.",
-   "long": "Aucune lumière, et une jauge de bruit. Courir ajoute 4 par seconde, marcher 0,6 ; rester immobile retire 1,5, s'accroupir 3. Au-dessus de 50, toutes les créatures à moins de 28 blocs viennent te chercher. L'obscurité envahit ta vue toutes les dix secondes, sauf si tu portes une Lanterne solaire allumée (20 minutes) ou une vision nocturne. Le Baume de silence efface ton bruit.",
+   "short": "Le noir complet. Chaque pas fait du bruit, chaque lumière apportée s'éteint.",
+   "long": "Aucune lumière, et une jauge de bruit. Chaque lumière que tu poses s'éteint au bout d'une minute : les torches tombent en bâtons, les feux de camp et les bougies s'étouffent, les blocs lumineux deviennent de la Lueur éteinte. Seule la Lueur faible des profondeurs dure, et une Lanterne solaire allumée emporte vingt minutes de lumière avec toi. Courir ajoute 4 de bruit par seconde, marcher 0,6 ; rester immobile retire 1,5, s'accroupir 3. Au-dessus de 50, toutes les créatures à moins de 28 blocs viennent te chercher. Le Baume de silence efface ton bruit.",
    "nums": [
     {
-     "v": "+4/s",
-     "l": "de bruit en courant"
+     "v": "60 s",
+     "l": "avant qu'une lumière apportée s'éteigne"
     },
     {
      "v": "50",
      "l": "de bruit, et tout vient te chercher"
     },
     {
-     "v": "28",
-     "l": "blocs : la distance d'où elles viennent"
+     "v": "20 min",
+     "l": "de lumière portée par la Lanterne solaire"
     }
    ],
    "doll": {
@@ -6713,7 +6949,7 @@
       "name": "Poupée cachée 5",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Cinq encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -6828,6 +7064,18 @@
       "name": "Terre de monde 5",
       "kind": "soil",
       "effect": "Se bêche pour planter la Graine du monde 6.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "spent_glow",
+      "tex": "blocks/spent_glow.png",
+      "name": "Lueur éteinte",
+      "kind": "deco",
+      "effect": "Ce que devient un bloc lumineux une fois que la Profondeur sans lumière a bu sa lumière.",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -7244,20 +7492,20 @@
   {
    "n": 6,
    "name": "Royaume inversé",
-   "short": "Toutes les 90 secondes, le haut devient le bas.",
-   "long": "Toutes les 90 secondes, la gravité s'inverse : tu montes pendant six secondes, puis tu redescends lentement pendant douze. Un avertissement tombe cinq secondes avant. Les Bottes de gravité ignorent l'inversion ; un Stabilisateur ou une Pomme retournée te gardent stable 30 secondes.",
+   "short": "Le haut devient le bas, une colonne à la fois.",
+   "long": "Le royaume est découpé en colonnes de 32 x 32, et environ un tiers d'entre elles sont à l'envers. À l'intérieur, la gravité pointe vers le haut : toi, les créatures et les objets tombez vers le ciel et marchez au plafond, jusqu'à 16 blocs au-dessus du sol. Des étincelles violettes dessinent les frontières. Toutes les 90 secondes, la carte change, cinq secondes après un avertissement ; si ta colonne se retourne, tu redescends lentement. Les Bottes de gravité ignorent les inversions ; un Stabilisateur ou une Pomme retournée te gardent stable 30 secondes.",
    "nums": [
     {
      "v": "90 s",
-     "l": "entre deux inversions de gravité"
+     "l": "entre deux changements des colonnes de gravité"
     },
     {
-     "v": "6 s",
-     "l": "à monter"
+     "v": "32",
+     "l": "blocs par colonne"
     },
     {
-     "v": "12 s",
-     "l": "à redescendre"
+     "v": "16",
+     "l": "blocs : la hauteur où tire une colonne inversée"
     }
    ],
    "doll": {
@@ -7345,7 +7593,7 @@
     "id": "inverter",
     "tex": "blocks/inverter.png",
     "name": "Inverseur",
-    "note": "Chaque gain s'accompagne d'un défaut.",
+    "note": "Échange les propriétés de deux objets. Chaque gain s'accompagne d'un défaut.",
     "shot": "shots/gui_station_inverter.png",
     "make": [
      {
@@ -7757,7 +8005,7 @@
       "name": "Poupée cachée 6",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Une encoche est gravée sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -7883,7 +8131,7 @@
       "tex": "blocks/inverter.png",
       "name": "Inverseur",
       "kind": "station",
-      "effect": "Chaque gain s'accompagne d'un défaut.",
+      "effect": "Échange les propriétés de deux objets. Chaque gain s'accompagne d'un défaut.",
       "station": "Établi matriciel",
       "inputs": [
        {
@@ -8277,16 +8525,16 @@
   {
    "n": 7,
    "name": "Océan sous pression",
-   "short": "L'oxygène s'épuise. La pression écrase.",
-   "long": "Sous l'eau, tu respires sur ta propre jauge d'oxygène : environ 50 secondes sans équipement, cinq minutes avec le scaphandre complet. Remonter à la surface la recharge de 10 par seconde. Sous y 110, la pression commence à t'écraser ; le scaphandre complet repousse cette limite à y 40. Capsules d'oxygène et Algue d'apnée font gagner du temps, le Propulseur te ramène vite en haut.",
+   "short": "Un monde sous l'eau. Respire par ton casque.",
+   "long": "Le monde entier est une mer, jusqu'à y 240, sans terre ferme. Tu arrives dans une chambre de plongée sur le fond. Sans casque, ton souffle tient environ une demi-minute sous l'eau ; un casque-tuba, un par minerai du monde, respire pour toi grâce à une réserve de 3 à 12 minutes qui se remplit dans les poches d'air, les colonnes de bulles, au-dessus des Évents d'air, avec une Capsule d'oxygène ou à la Presse abyssale. Les casques sont fragiles : les coups les usent vite. Sous y 110, la pression t'écrase ; chaque pièce de scaphandre et un meilleur casque te laissent descendre plus bas.",
    "nums": [
     {
-     "v": "50 s",
-     "l": "d'oxygène sans équipement"
+     "v": "33 s",
+     "l": "de souffle sans casque"
     },
     {
-     "v": "5 min",
-     "l": "avec le scaphandre complet"
+     "v": "12 min",
+     "l": "d'air dans un Casque-tuba de perle"
     },
     {
      "v": "y 110",
@@ -8378,7 +8626,7 @@
     "id": "abyssal_press",
     "tex": "blocks/abyssal_press.png",
     "name": "Presse abyssale",
-    "note": "Doit être sous l'eau profonde.",
+    "note": "Doit être sous l'eau profonde. Remplit aussi un casque-tuba.",
     "shot": "shots/gui_station_abyssal_press.png",
     "make": [
      {
@@ -8502,30 +8750,16 @@
       ]
      },
      {
-      "out": "diving_helmet",
-      "tex": "items/diving_helmet.png",
-      "name": "Casque de plongée",
-      "count": 1,
-      "inputs": [
-       {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
-        "n": 5,
-        "name": "Sel des profondeurs"
-       }
-      ]
-     },
-     {
       "out": "diving_chestplate",
       "tex": "items/diving_chestplate.png",
       "name": "Plastron de plongée",
       "count": 1,
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 8,
-        "name": "Sel des profondeurs"
+        "name": "Cobalt abyssal"
        }
       ]
      },
@@ -8536,10 +8770,10 @@
       "count": 1,
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 7,
-        "name": "Sel des profondeurs"
+        "name": "Cobalt abyssal"
        }
       ]
      },
@@ -8550,10 +8784,10 @@
       "count": 1,
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 4,
-        "name": "Sel des profondeurs"
+        "name": "Cobalt abyssal"
        }
       ]
      }
@@ -8564,19 +8798,31 @@
      "id": "abyssal_salt",
      "tex": "items/abyssal_salt.png",
      "name": "Sel des profondeurs",
-     "effect": "Protège de la pression."
+     "effect": "Casque-tuba de sel et Graine du monde 8."
+    },
+    {
+     "id": "nacre",
+     "tex": "items/nacre.png",
+     "name": "Nacre",
+     "effect": "Extraite des filons des récifs. Casque-tuba de nacre."
+    },
+    {
+     "id": "abyssal_cobalt",
+     "tex": "items/abyssal_cobalt.png",
+     "name": "Cobalt abyssal",
+     "effect": "Casque-tuba de cobalt et scaphandre."
     },
     {
      "id": "pressure_pearl",
      "tex": "items/pressure_pearl.png",
      "name": "Perle de pression",
-     "effect": "Scaphandre et Graine du monde 8."
+     "effect": "Casque-tuba de perle et Graine du monde 8."
     },
     {
      "id": "oxygen_capsule",
      "tex": "items/oxygen_capsule.png",
      "name": "Capsule d'oxygène",
-     "effect": "Rend de l'oxygène."
+     "effect": "Remplit à moitié la réserve d'un casque-tuba, ou ton souffle."
     },
     {
      "id": "thruster",
@@ -8591,6 +8837,30 @@
      "effect": ""
     },
     {
+     "id": "salt_snorkel",
+     "tex": "items/salt_snorkel.png",
+     "name": "Casque-tuba de sel",
+     "effect": "Permet de respirer sous l'eau tant que sa réserve tient (3 min). Fragile : les coups l'usent vite."
+    },
+    {
+     "id": "nacre_snorkel",
+     "tex": "items/nacre_snorkel.png",
+     "name": "Casque-tuba de nacre",
+     "effect": "Permet de respirer sous l'eau tant que sa réserve tient (5 min). Fragile : les coups l'usent vite."
+    },
+    {
+     "id": "cobalt_snorkel",
+     "tex": "items/cobalt_snorkel.png",
+     "name": "Casque-tuba de cobalt",
+     "effect": "Permet de respirer sous l'eau tant que sa réserve tient (8 min). Fragile : les coups l'usent vite."
+    },
+    {
+     "id": "pearl_snorkel",
+     "tex": "items/pearl_snorkel.png",
+     "name": "Casque-tuba de perle",
+     "effect": "Permet de respirer sous l'eau tant que sa réserve tient (12 min). Fragile : les coups l'usent vite."
+    },
+    {
      "id": "apnea_kelp",
      "tex": "items/apnea_kelp.png",
      "name": "Algue d'apnée",
@@ -8599,10 +8869,6 @@
    ],
    "armor": {
     "pieces": [
-     {
-      "tex": "items/diving_helmet.png",
-      "name": "Casque de plongée"
-     },
      {
       "tex": "items/diving_chestplate.png",
       "name": "Plastron de plongée"
@@ -8616,7 +8882,7 @@
       "name": "Bottes de plongée"
      }
     ],
-    "text": "24 d’armure, 10 de robustesse, une arme à 23 de dégâts à ce palier. Résiste à la pression."
+    "text": "Trois pièces et pas de casque : la tête revient aux casques-tubas. Une arme à 23 de dégâts à ce palier. Résiste à la pression. Se porte avec un casque-tuba."
    },
    "structures": [
     {
@@ -8664,7 +8930,7 @@
       "name": "Sel des profondeurs",
       "kind": "dust",
       "rarity": "Rare",
-      "effect": "Protège de la pression.",
+      "effect": "Casque-tuba de sel et Graine du monde 8.",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -8675,12 +8941,40 @@
       ]
      },
      {
+      "id": "nacre",
+      "tex": "items/nacre.png",
+      "name": "Nacre",
+      "kind": "gem",
+      "rarity": "Rare",
+      "effect": "Extraite des filons des récifs. Casque-tuba de nacre.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Filon de nacre"
+      ]
+     },
+     {
+      "id": "abyssal_cobalt",
+      "tex": "items/abyssal_cobalt.png",
+      "name": "Cobalt abyssal",
+      "kind": "ingot",
+      "rarity": "Rare",
+      "effect": "Casque-tuba de cobalt et scaphandre.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Minerai de cobalt abyssal"
+      ]
+     },
+     {
       "id": "pressure_pearl",
       "tex": "items/pressure_pearl.png",
       "name": "Perle de pression",
       "kind": "gem",
       "rarity": "Épique",
-      "effect": "Scaphandre et Graine du monde 8.",
+      "effect": "Casque-tuba de perle et Graine du monde 8.",
       "station": "Presse abyssale",
       "inputs": [
        {
@@ -8700,7 +8994,8 @@
       "drops": [
        "Méduse de pression",
        "Crabe-cloche",
-       "Murène des fosses"
+       "Murène des fosses",
+       "Banc de perles"
       ]
      },
      {
@@ -8709,7 +9004,7 @@
       "name": "Capsule d'oxygène",
       "kind": "consumable",
       "rarity": "Commun",
-      "effect": "Rend de l'oxygène.",
+      "effect": "Remplit à moitié la réserve d'un casque-tuba, ou ton souffle.",
       "station": "Presse abyssale",
       "inputs": [
        {
@@ -8829,7 +9124,7 @@
       "name": "Poupée cachée 7",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Dix encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -8861,21 +9156,50 @@
       "drops": []
      },
      {
-      "id": "diving_helmet",
-      "tex": "items/diving_helmet.png",
-      "name": "Casque de plongée",
-      "kind": "armor",
+      "id": "salt_snorkel",
+      "tex": "items/salt_snorkel.png",
+      "name": "Casque-tuba de sel",
+      "kind": "snorkel",
+      "rarity": "Rare",
+      "effect": "Permet de respirer sous l'eau tant que sa réserve tient (3 min). Fragile : les coups l'usent vite.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nacre_snorkel",
+      "tex": "items/nacre_snorkel.png",
+      "name": "Casque-tuba de nacre",
+      "kind": "snorkel",
+      "rarity": "Rare",
+      "effect": "Permet de respirer sous l'eau tant que sa réserve tient (5 min). Fragile : les coups l'usent vite.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cobalt_snorkel",
+      "tex": "items/cobalt_snorkel.png",
+      "name": "Casque-tuba de cobalt",
+      "kind": "snorkel",
       "rarity": "Épique",
-      "effect": "Résiste à la pression.",
-      "station": "Presse abyssale",
-      "inputs": [
-       {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
-        "n": 5,
-        "name": "Sel des profondeurs"
-       }
-      ],
+      "effect": "Permet de respirer sous l'eau tant que sa réserve tient (8 min). Fragile : les coups l'usent vite.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "pearl_snorkel",
+      "tex": "items/pearl_snorkel.png",
+      "name": "Casque-tuba de perle",
+      "kind": "snorkel",
+      "rarity": "Épique",
+      "effect": "Permet de respirer sous l'eau tant que sa réserve tient (12 min). Fragile : les coups l'usent vite.",
+      "station": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -8885,14 +9209,14 @@
       "name": "Plastron de plongée",
       "kind": "armor",
       "rarity": "Épique",
-      "effect": "Résiste à la pression.",
+      "effect": "Résiste à la pression. Se porte avec un casque-tuba.",
       "station": "Presse abyssale",
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 8,
-        "name": "Sel des profondeurs"
+        "name": "Cobalt abyssal"
        }
       ],
       "count": 1,
@@ -8904,14 +9228,14 @@
       "name": "Jambières de plongée",
       "kind": "armor",
       "rarity": "Épique",
-      "effect": "Résiste à la pression.",
+      "effect": "Résiste à la pression. Se porte avec un casque-tuba.",
       "station": "Presse abyssale",
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 7,
-        "name": "Sel des profondeurs"
+        "name": "Cobalt abyssal"
        }
       ],
       "count": 1,
@@ -8923,14 +9247,14 @@
       "name": "Bottes de plongée",
       "kind": "armor",
       "rarity": "Épique",
-      "effect": "Résiste à la pression.",
+      "effect": "Résiste à la pression. Se porte avec un casque-tuba.",
       "station": "Presse abyssale",
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 4,
-        "name": "Sel des profondeurs"
+        "name": "Cobalt abyssal"
        }
       ],
       "count": 1,
@@ -8955,7 +9279,7 @@
       "tex": "blocks/abyssal_press.png",
       "name": "Presse abyssale",
       "kind": "station",
-      "effect": "Doit être sous l'eau profonde.",
+      "effect": "Doit être sous l'eau profonde. Remplit aussi un casque-tuba.",
       "station": "Établi matriciel",
       "inputs": [
        {
@@ -9028,12 +9352,60 @@
       "count": 1,
       "drops": [],
       "yields": "Sel des profondeurs"
+     },
+     {
+      "id": "nacre_ore",
+      "tex": "blocks/nacre_ore.png",
+      "name": "Filon de nacre",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Nacre"
+     },
+     {
+      "id": "abyssal_cobalt_ore",
+      "tex": "blocks/abyssal_cobalt_ore.png",
+      "name": "Minerai de cobalt abyssal",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Cobalt abyssal"
+     },
+     {
+      "id": "pearl_bed",
+      "tex": "blocks/pearl_bed.png",
+      "name": "Banc de perles",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Perle de pression"
+     },
+     {
+      "id": "air_vent",
+      "tex": "blocks/air_vent.png",
+      "name": "Évent d'air",
+      "kind": "vent",
+      "effect": "Souffle de l'air. Nage au-dessus pour remplir un casque-tuba.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
      {
       "name": "Sous pression",
-      "desc": "Fabriquer un scaphandre."
+      "desc": "Fabriquer un casque-tuba de sel à la Presse abyssale."
      },
      {
       "name": "Comprimer",
@@ -9067,7 +9439,7 @@
       "cat": "Progression",
       "hidden": false,
       "name": "Sous pression",
-      "desc": "Fabriquer un scaphandre."
+      "desc": "Respirer par un casque-tuba."
      },
      {
       "cat": "Progression",
@@ -9103,7 +9475,7 @@
       "cat": "Combat",
       "hidden": false,
       "name": "Dernier souffle",
-      "desc": "Battre le Léviathan avec moins de 5 % d'oxygène."
+      "desc": "Battre le Léviathan avec moins de 5 % d'oxygène dans ton casque ou tes poumons."
      },
      {
       "cat": "Caché",
@@ -9281,6 +9653,16 @@
        "id": "abyssal_salt",
        "tex": "items/abyssal_salt.png",
        "name": "Sel des profondeurs"
+      },
+      {
+       "id": "nacre",
+       "tex": "items/nacre.png",
+       "name": "Nacre"
+      },
+      {
+       "id": "abyssal_cobalt",
+       "tex": "items/abyssal_cobalt.png",
+       "name": "Cobalt abyssal"
       },
       {
        "id": "pressure_pearl",
@@ -9918,7 +10300,7 @@
       "name": "Poupée cachée 8",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Six encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -10475,20 +10857,20 @@
   {
    "n": 9,
    "name": "Terre agitée",
-   "short": "Le sol se soulève toutes les minutes.",
-   "long": "Toutes les 60 secondes, le sol se soulève : tu es projeté, pris de nausée, et jusqu'à quatre blocs mal accrochés autour de toi s'effondrent. Tu as trois secondes de préavis. À moins de 16 blocs d'une Ancre de terrain, rien ne bouge ; une Ancre utilisée te stabilise dix minutes, et les Bottes d'accroche te gardent debout.",
+   "short": "Toutes les minutes, le sol bouge sous tes pieds.",
+   "long": "Toutes les 60 secondes, le sol se soulève : autour de toi, jusqu'à trois zones de 16 x 16 montent, s'enfoncent, glissent de côté ou referment leurs gouffres, et tout ce qui s'y trouve suit le mouvement, toi et tes constructions compris. Tu as trois secondes de préavis et tu n'es jamais enseveli. À moins de 16 blocs d'une Ancre de terrain, rien ne bouge ; une Ancre retient le sol à moins de 4 blocs de toi pendant dix minutes, et les Bottes d'accroche retiennent la zone sous tes pieds.",
    "nums": [
     {
      "v": "60 s",
      "l": "entre deux secousses"
     },
     {
-     "v": "3 s",
-     "l": "de préavis"
-    },
-    {
      "v": "16",
      "l": "blocs de calme autour d'une Ancre de terrain"
+    },
+    {
+     "v": "16 × 16",
+     "l": "blocs par zone qui bouge"
     }
    ],
    "doll": {
@@ -11013,7 +11395,7 @@
       "name": "Poupée cachée 9",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Trois encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -11535,7 +11917,7 @@
    "n": 10,
    "name": "L'Atelier géant",
    "short": "Toutes les anciennes règles, dans un atelier de géants.",
-   "long": "Tu sors du dernier bloc dans un atelier bâti pour des géants, où ta propre base trône sur un établi comme un simple objet. Le monde est découpé en neuf zones de 256 blocs, chacune rejouant la règle d'un monde précédent, de la toxine aux secousses. Chaque ancien équipement retrouve sa place.",
+   "long": "Tu sors du dernier bloc dans l'atelier de l'artisan, vu par une poupée : bobines, clous, épingles et dés à coudre bien plus hauts que toi jonchent le feutre, et sur l'Établi titanesque trône la Maquette, ta propre base au quart de sa taille. Le monde est découpé en neuf zones de 256 blocs, chacune rejouant la règle d'un monde précédent, de la toxine au sol mouvant. Chaque ancien équipement retrouve sa place.",
    "nums": [
     {
      "v": "9",
@@ -12027,7 +12409,7 @@
       "name": "Poupée cachée 10",
       "kind": "secret",
       "rarity": "",
-      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "effect": "Huit encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -12368,7 +12750,7 @@
       "cat": "Caché",
       "hidden": true,
       "name": "Poser les outils",
-      "desc": "Vaincre l'Inachevée avec les 10 poupées cachées sur soi."
+      "desc": "Laisser l'œuvre inachevée dans le monde 0."
      }
     ]
    },
@@ -15986,6 +16368,7 @@
    "moveSpeed": "0,26",
    "behaviour": "Dans l'eau, il fond sur toi et nage sans te quitter des yeux.",
    "facts": [
+    "Comme toutes les créatures du monde 7, il nage, ne se noie jamais et apparaît en eau libre.",
     "2 d'armure, 10 % de résistance au recul, 6 points d'expérience. Il repère les joueurs jusqu'à 32 blocs.",
     "Il disparaît quand aucun joueur n'est à moins de 128 blocs."
    ],
@@ -16087,8 +16470,9 @@
    "attackEvery": "0,7 s",
    "attackTicks": 14,
    "moveSpeed": "0,33",
-   "behaviour": "Un nageur rapide qui fond sur toi et, à moins de 3 blocs, te retire 3 d'oxygène par seconde.",
+   "behaviour": "Un nageur rapide qui fond sur toi et, à moins de 3 blocs, te retire 3 de souffle par seconde.",
    "facts": [
+    "Comme toutes les créatures du monde 7, il nage, ne se noie jamais et apparaît en eau libre.",
     "2 d'armure, 10 % de résistance au recul, 6 points d'expérience. Il repère les joueurs jusqu'à 32 blocs.",
     "Il disparaît quand aucun joueur n'est à moins de 128 blocs."
    ],
@@ -16205,8 +16589,9 @@
    "attackEvery": "0,7 s",
    "attackTicks": 14,
    "moveSpeed": "0,26",
-   "behaviour": "Sa pression porte à 7 blocs : chaque seconde passée là donne Lenteur II et Fatigue de minage II, et retire 2 d'oxygène.",
+   "behaviour": "Sa pression porte à 7 blocs : chaque seconde passée là donne Lenteur II et Fatigue de minage II, et retire 2 de souffle.",
    "facts": [
+    "Comme toutes les créatures du monde 7, il nage, ne se noie jamais et apparaît en eau libre.",
     "2 d'armure, 10 % de résistance au recul, 6 points d'expérience. Il repère les joueurs jusqu'à 32 blocs.",
     "Il disparaît quand aucun joueur n'est à moins de 128 blocs."
    ],
@@ -16297,7 +16682,8 @@
    },
    "desc": "Gigogne, abrite des crabes plus petits.",
    "tags": [
-    "Gigogne"
+    "Gigogne",
+    "Aquatique"
    ],
    "elite": false,
    "hp": "242",
@@ -16311,6 +16697,7 @@
    "behaviour": "Un combattant au corps à corps : il s'approche et frappe.",
    "facts": [
     "Gigogne : à sa mort, elle s'ouvre et libère deux copies plus petites avec 40 % de sa vie, 60 % de sa taille et 30 % de vitesse en plus. Les copies ne laissent rien.",
+    "Comme toutes les créatures du monde 7, il nage, ne se noie jamais et apparaît en eau libre.",
     "2 d'armure, 10 % de résistance au recul, 6 points d'expérience. Il repère les joueurs jusqu'à 32 blocs.",
     "Il disparaît quand aucun joueur n'est à moins de 128 blocs."
    ],
@@ -16416,6 +16803,7 @@
    "behaviour": "Toutes les 3,5 secondes, si tu es à environ 2,4 blocs, il t'agrippe : Lenteur VII pendant 2,5 secondes et Flétrissement pendant 2 secondes.",
    "facts": [
     "Les élites laissent toujours leur butin courant et donnent 5 âmes au joueur qui porte le coup fatal.",
+    "Comme toutes les créatures du monde 7, il nage, ne se noie jamais et apparaît en eau libre.",
     "6 d'armure, 60 % de résistance au recul, 20 points d'expérience. Il repère les joueurs jusqu'à 32 blocs.",
     "Les élites ne disparaissent jamais."
    ],
@@ -19656,7 +20044,7 @@
      "cat": "Combat",
      "hidden": false,
      "name": "Dernier souffle",
-     "desc": "Battre le Léviathan avec moins de 5 % d'oxygène."
+     "desc": "Battre le Léviathan avec moins de 5 % d'oxygène dans ton casque ou tes poumons."
     }
    ],
    "prev": "your_double",

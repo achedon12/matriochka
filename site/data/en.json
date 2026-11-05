@@ -128,7 +128,7 @@
     {
      "tex": "blocks/world_soil_0_tilled.png",
      "h": "Plant it on World Soil",
-     "p": "Till World Soil with a hoe and plant the Seed. Each Seed wants the soil of the world before it, and one condition: water, heat, redstone, open sky, darkness, height."
+     "p": "Till World Soil with a hoe and plant the Seed. Each Seed wants the soil of the world before it, and one condition: water, heat, redstone, open sky, darkness, height. What you feed it decides whether its world hatches calm or wild."
     },
     {
      "tex": "blocks/world_block.png",
@@ -449,8 +449,8 @@
      "mult": "×5.2"
     }
    ],
-   "mpNote": "Counted within 48 blocks when the boss wakes. Everyone within 64 blocks at its death shares the victory.",
-   "rewardNote": "plus 100 souls for every player in the fight",
+   "mpNote": "Counted within 48 blocks when the boss wakes. Its attacks also come 5% faster per extra player, recounted during the fight. Everyone within 64 blocks at its death shares the victory.",
+   "rewardNote": "plus 100 souls and 2 Shell Shards for every player in the fight",
    "desc": "The eleven bosses of Matriochka: health, attacks, phases, timings and rewards."
   },
   "systems": {
@@ -488,7 +488,7 @@
     {
      "id": "journal",
      "icon": "book-open",
-     "stat": "64 quests",
+     "stat": "70 quests",
      "line": "Objectives, quests, achievements and titles."
     }
    ],
@@ -646,7 +646,7 @@
    ],
    "karmaEnd": "At ±100, karma also tilts the variants of the worlds you open, and it decides between two of the three endings: seal the creature away, or absorb its power.",
    "classesH": "Gear classes",
-   "classesLead": "Every weapon, tool and armour piece gets a random class when it is crafted. The Class Table raises its level with souls; your progression caps how far you can go.",
+   "classesLead": "Every weapon, tool and armour piece gets a random class when it is crafted. The Class Table raises its level with souls and Shell Shards; your progression caps how far you can go.",
    "clsCols": [
     "Class",
     "Bonuses",
@@ -712,7 +712,7 @@
      "souls": "270"
     }
    ],
-   "upNote": "Level 1 to 5 costs 400 souls per piece.",
+   "upNote": "Level 1 to 5 costs 400 souls and 6 Shell Shards per piece (1, 1, 2, 2). Every boss leaves 2 Shell Shards to each player who fought it.",
    "capH": "Level cap",
    "capCols": [
     "Progression",
@@ -780,7 +780,7 @@
     },
     {
      "a": "Nesting chests",
-     "b": "A chest that holds a smaller one",
+     "b": "Three sizes: a chest holds the smaller ones and sorts items into them",
      "c": "World 2"
     },
     {
@@ -790,24 +790,29 @@
     },
     {
      "a": "Refuge doll",
-     "b": "A pocket base you carry",
+     "b": "A pocket base for your group, that grows after Worlds 5, 7 and 9",
      "c": "World 3"
     },
     {
      "a": "Layered armour",
-     "b": "One layer protects the next",
+     "b": "Lacquer Layers laid on armour: when the outer one breaks, the next takes over",
      "c": "World 4"
     },
     {
      "a": "The final boss",
      "b": "Ten shells, one per world",
      "c": "World 10"
+    },
+    {
+     "a": "Hidden dolls",
+     "b": "Nested in order, the ten open World 0, the smallest doll",
+     "c": "After World 10"
     }
    ],
    "gatesH": "Gates",
    "gates": [
     "Enchanting, anvils and the Nether open after World 2.",
-    "Diamonds come back in World 5: four Diamond Fragments make one at the Dark Altar.",
+    "Diamonds come back in World 5: four Diamond Fragments make one at the Dark Altar. Until then villagers keep their diamond trades aside.",
     "Elytra stay grounded in Worlds 4, 6 and 9 until World 8 is done.",
     "The End opens after World 8."
    ],
@@ -820,7 +825,7 @@
     },
     {
      "c": "/matriochka group invite <player>",
-     "d": "Invite a player into your group"
+     "d": "Leader: invite a player into your group"
     },
     {
      "c": "/matriochka group join",
@@ -831,13 +836,25 @@
      "d": "Leave your group"
     },
     {
+     "c": "/matriochka group kick <player>",
+     "d": "Leader: send a member out"
+    },
+    {
+     "c": "/matriochka group transfer <player>",
+     "d": "Leader: hand over the lead"
+    },
+    {
+     "c": "/matriochka group disband",
+     "d": "Leader: dissolve the group"
+    },
+    {
      "c": "/matriochka karma show",
      "d": "Your karma and souls"
     }
    ],
    "serverNote": "The mod runs on the server and on every client. All rules, damage and rewards are decided by the server; nothing needs an online account or service.",
    "journalH": "The Journal, quests and achievements",
-   "journalLead": "The Artisan's Scroll arrives on your first login and turns into the Journal when the Guardian falls. Its tabs track your objective, quests, karma and worlds. There are 64 optional quests (4 on the Surface, 6 per world) and 100 achievements, 10 per world, two of them hidden. Fifty Journal pages and ten hidden dolls are scattered through the worlds; nest the dolls in order and something smaller opens.",
+   "journalLead": "The Artisan's Scroll arrives on your first login and turns into the Journal when the Guardian falls. Its tabs track your objective, quests, karma and worlds. There are 70 optional quests (4 on the Surface, 6 per world and 6 on the paths of karma) and 100 achievements, 10 per world, two of them hidden. Fifty Journal pages, read in the Pages tab, and ten hidden dolls are scattered through the worlds; nest the dolls in order and something smaller opens. After the last boss, your karma chooses your ending, and a New Cycle starts the worlds over, stronger.",
    "journalShots": [
     {
      "src": "shots/gui_journal_0.png",
@@ -913,6 +930,11 @@
      "n": "Java",
      "v": "25",
      "s": "Bundled with the official launcher"
+    },
+    {
+     "n": "Just Enough Items",
+     "v": "optional",
+     "s": "Recipe pages for every station"
     }
    ],
    "installH": "Installing",
@@ -960,7 +982,7 @@
     {
      "k": "difficulty",
      "v": "\"normal\"",
-     "d": "story (70% damage), normal, nightmare (130% damage, one charge per Soul Cradle) or hardcore (as nightmare, and the Doll of Life never saves you)"
+     "d": "story (70% damage, nothing lost on death), normal, nightmare (130% damage, one charge per Soul Cradle) or hardcore (as nightmare, death is permanent, the Doll of Life never saves you and a broken World Block deletes its world)"
     }
    ]
   }
@@ -1300,6 +1322,66 @@
        }
       ],
       "count": 4,
+      "drops": []
+     },
+     {
+      "id": "shell_shard",
+      "tex": "items/shell_shard.png",
+      "name": "Shell Shard",
+      "kind": "resource",
+      "rarity": "Epic",
+      "effect": "Left by a fallen boss. Every class upgrade needs some.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mutated_scale",
+      "tex": "items/mutated_scale.png",
+      "name": "Mutated Scale",
+      "kind": "gem",
+      "rarity": "Epic",
+      "effect": "Shed by a mutated boss. Rich in soul.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nested_dolls",
+      "tex": "items/nested_dolls.png",
+      "name": "Nested Dolls",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Hold it in your main hand and the next hidden doll in the other, then use it.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "whole_matryoshka",
+      "tex": "items/whole_matryoshka.png",
+      "name": "The Whole Matryoshka",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "Ten dolls, one inside the other. Open it once the Unfinished has fallen: World 0 sleeps inside.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "blank_scroll",
+      "tex": "items/blank_scroll.png",
+      "name": "Blank Scroll",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nothing is written on it. Nothing is left to finish.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
       "drops": []
      }
     ],
@@ -1669,7 +1751,7 @@
     "id": "spore_vat",
     "tex": "blocks/spore_vat.png",
     "name": "Spore Vat",
-    "note": "Result depends on fermentation time.",
+    "note": "Ripe brews (1 min) give more, aged ones (5 min) twice as much.",
     "shot": "shots/gui_station_spore_vat.png",
     "make": [
      {
@@ -2132,7 +2214,7 @@
       "name": "Hidden Doll 1",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "Four notches are carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -2258,7 +2340,7 @@
       "tex": "blocks/spore_vat.png",
       "name": "Spore Vat",
       "kind": "station",
-      "effect": "Result depends on fermentation time.",
+      "effect": "Ripe brews (1 min) give more, aged ones (5 min) twice as much.",
       "station": "Matrix Workbench",
       "inputs": [
        {
@@ -3241,7 +3323,7 @@
       "name": "Hidden Doll 2",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "Seven notches are carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -3367,7 +3449,7 @@
       "tex": "blocks/nesting_chest.png",
       "name": "Nesting Chest",
       "kind": "nesting_chest",
-      "effect": "",
+      "effect": "Holds the smaller nesting chests. Sneak and use it to set what it sorts.",
       "station": "Matrix Workbench",
       "inputs": [
        {
@@ -3384,6 +3466,56 @@
        }
       ],
       "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "nesting_chest_medium",
+      "tex": "blocks/nesting_chest_medium.png",
+      "name": "Middle Nesting Chest",
+      "kind": "nesting_chest",
+      "effect": "Two rows. Fits in a Nesting Chest, holds a Little one.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:chest",
+        "tex": null,
+        "n": 1,
+        "name": "Chest"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 1,
+        "name": "Ash Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "nesting_chest_little",
+      "tex": "blocks/nesting_chest_little.png",
+      "name": "Little Nesting Chest",
+      "kind": "nesting_chest",
+      "effect": "One row. Fits in the larger nesting chests.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:chest",
+        "tex": null,
+        "n": 1,
+        "name": "Chest"
+       },
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 2,
+        "name": "Wool Thread"
+       }
+      ],
+      "count": 2,
       "drops": [],
       "yields": null
      },
@@ -3798,7 +3930,7 @@
    "n": 3,
    "name": "Endless Dungeon",
    "short": "No sky, only halls. And the halls move.",
-   "long": "There is no surface and no sky, only dungeon. Sealed doors give way to Dungeon Keys, made at the Jailer's Table once you have reproduced the lock pattern. Every five minutes the halls rearrange themselves, with a ten-second warning. Light is scarce, so bring your own.",
+   "long": "There is no surface and no sky, only dungeon. Sealed doors give way to Dungeon Keys, made at the Jailer's Table once you have reproduced the lock pattern. Every five minutes the halls rearrange themselves: 8 x 8 sections 16 to 40 blocks from you swap places or turn, and dust falls on them ten seconds before. Rooms, locks, chests and anything you built never move. Light is scarce, so bring your own.",
    "nums": [
     {
      "v": "5 min",
@@ -3806,7 +3938,11 @@
     },
     {
      "v": "10 s",
-     "l": "of warning before they move"
+     "l": "of warning, dust on the moving halls"
+    },
+    {
+     "v": "16-40",
+     "l": "blocks from you: where the halls move"
     }
    ],
    "doll": {
@@ -4153,6 +4289,12 @@
      "effect": ""
     },
     {
+     "id": "refuge_doll",
+     "tex": "items/refuge_doll.png",
+     "name": "Refuge Doll",
+     "effect": "A pocket base for your group. Use it to enter, use it again to leave."
+    },
+    {
      "id": "sealed_shackle",
      "tex": "items/sealed_shackle.png",
      "name": "Sealed Shackle",
@@ -4372,6 +4514,37 @@
       "drops": []
      },
      {
+      "id": "refuge_doll",
+      "tex": "items/refuge_doll.png",
+      "name": "Refuge Doll",
+      "kind": "doll",
+      "rarity": "Legendary",
+      "effect": "A pocket base for your group. Use it to enter, use it again to leave.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "painted_wood",
+        "tex": "blocks/painted_wood.png",
+        "n": 8,
+        "name": "Painted Wood"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 4,
+        "name": "Sealed Fragment"
+       },
+       {
+        "id": "minecraft:gold_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Gold Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "jailer_core",
       "tex": "items/jailer_core.png",
       "name": "Jailer Core",
@@ -4422,7 +4595,7 @@
       "name": "Hidden Doll 3",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "Two notches are carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -5172,6 +5345,32 @@
       ]
      },
      {
+      "out": "armor_layer",
+      "tex": "items/armor_layer.png",
+      "name": "Lacquer Layer",
+      "count": 2,
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 1,
+        "name": "Celestial Crystal"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 1,
+        "name": "Storm Essence"
+       },
+       {
+        "id": "minecraft:honeycomb",
+        "tex": null,
+        "n": 2,
+        "name": "Honeycomb"
+       }
+      ]
+     },
+     {
       "out": "storm_censer",
       "tex": "items/storm_censer.png",
       "name": "Storm Censer",
@@ -5311,6 +5510,12 @@
      "tex": "items/lightning_lance.png",
      "name": "Lightning Lance",
      "effect": ""
+    },
+    {
+     "id": "armor_layer",
+     "tex": "items/armor_layer.png",
+     "name": "Lacquer Layer",
+     "effect": "Laid on armor at the Class Table. When the outer layer breaks, the next takes over."
     },
     {
      "id": "storm_censer",
@@ -5519,6 +5724,37 @@
       "drops": []
      },
      {
+      "id": "armor_layer",
+      "tex": "items/armor_layer.png",
+      "name": "Lacquer Layer",
+      "kind": "layer",
+      "rarity": "Rare",
+      "effect": "Laid on armor at the Class Table. When the outer layer breaks, the next takes over.",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 1,
+        "name": "Celestial Crystal"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 1,
+        "name": "Storm Essence"
+       },
+       {
+        "id": "minecraft:honeycomb",
+        "tex": null,
+        "n": 2,
+        "name": "Honeycomb"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
       "id": "storm_king_core",
       "tex": "items/storm_king_core.png",
       "name": "Storm King Core",
@@ -5569,7 +5805,7 @@
       "name": "Hidden Doll 4",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "Nine notches are carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -6131,20 +6367,20 @@
   {
    "n": 5,
    "name": "Lightless Deep",
-   "short": "Total darkness. Every step makes noise.",
-   "long": "No light, and a noise gauge. Sprinting adds 4 per second, walking 0.6; standing still removes 1.5, sneaking 3. Above 50, every creature within 28 blocks comes for you. Darkness washes over your sight every ten seconds unless you carry a lit Solar Lantern (20 minutes of light) or night vision. Silence Balm wipes your noise.",
+   "short": "Total darkness. Every step makes noise, every light you bring dies.",
+   "long": "No light, and a noise gauge. Every light you place burns out after a minute: torches crumble to sticks, campfires and candles are snuffed, glowing blocks turn to Spent Glow. Only the Deep's own Faint Glow lasts, and a lit Solar Lantern carries twenty minutes of light with you. Sprinting adds 4 noise per second, walking 0.6; standing still removes 1.5, sneaking 3. Above 50, every creature within 28 blocks comes for you. Silence Balm wipes your noise.",
    "nums": [
     {
-     "v": "+4/s",
-     "l": "noise while sprinting"
+     "v": "60 s",
+     "l": "before a brought light burns out"
     },
     {
      "v": "50",
      "l": "noise, and everything comes for you"
     },
     {
-     "v": "28",
-     "l": "blocks: how far they come from"
+     "v": "20 min",
+     "l": "of light carried by the Solar Lantern"
     }
    ],
    "doll": {
@@ -6713,7 +6949,7 @@
       "name": "Hidden Doll 5",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "Five notches are carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -6828,6 +7064,18 @@
       "name": "World Soil 5",
       "kind": "soil",
       "effect": "Till it to plant the World 6 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "spent_glow",
+      "tex": "blocks/spent_glow.png",
+      "name": "Spent Glow",
+      "kind": "deco",
+      "effect": "What a glowing block becomes once the Lightless Deep has drunk its light.",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -7244,20 +7492,20 @@
   {
    "n": 6,
    "name": "Upside Realm",
-   "short": "Every 90 seconds, up becomes down.",
-   "long": "Every 90 seconds gravity flips: you float upward for six seconds, then drift back down for twelve. A warning comes five seconds before. Gravity Boots ignore the flip entirely; a Stabilizer or a Flipped Apple keeps you steady for 30 seconds.",
+   "short": "Up becomes down, one column at a time.",
+   "long": "The realm is cut into 32 x 32 columns, and about a third of them are upside down. Inside one, gravity points up: you, the creatures and the items fall toward the sky and walk on ceilings, up to 16 blocks above the ground. Purple sparks trace the borders. Every 90 seconds the pattern changes, five seconds after a warning; if your column turns back you drift down slowly. Gravity Boots ignore the flips entirely; a Stabilizer or a Flipped Apple keeps you steady for 30 seconds.",
    "nums": [
     {
      "v": "90 s",
-     "l": "between two gravity flips"
+     "l": "between two changes of the gravity columns"
     },
     {
-     "v": "6 s",
-     "l": "floating upward"
+     "v": "32",
+     "l": "blocks per column"
     },
     {
-     "v": "12 s",
-     "l": "drifting back down"
+     "v": "16",
+     "l": "blocks: how high a flipped column pulls"
     }
    ],
    "doll": {
@@ -7345,7 +7593,7 @@
     "id": "inverter",
     "tex": "blocks/inverter.png",
     "name": "Inverter",
-    "note": "Every gain comes with a flaw.",
+    "note": "Swaps the properties of two items. Every gain comes with a flaw.",
     "shot": "shots/gui_station_inverter.png",
     "make": [
      {
@@ -7757,7 +8005,7 @@
       "name": "Hidden Doll 6",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "One notch is carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -7883,7 +8131,7 @@
       "tex": "blocks/inverter.png",
       "name": "Inverter",
       "kind": "station",
-      "effect": "Every gain comes with a flaw.",
+      "effect": "Swaps the properties of two items. Every gain comes with a flaw.",
       "station": "Matrix Workbench",
       "inputs": [
        {
@@ -8277,16 +8525,16 @@
   {
    "n": 7,
    "name": "Pressure Ocean",
-   "short": "Your oxygen runs out. The pressure crushes.",
-   "long": "Under water you breathe from your own oxygen gauge: about 50 seconds without a suit, five minutes in the full Diving set. Surfacing refills 10 per second. Below y 110 the pressure starts to crush you; the full Diving set pushes that limit down to y 40. Oxygen Capsules and Apnea Kelp buy time, the Thruster brings you back up fast.",
+   "short": "A world under water. Breathe through your helmet.",
+   "long": "The whole world is sea, up to y 240, with no dry land. You arrive in a diving chamber on the sea floor. Without a helmet your breath lasts about half a minute under water; a snorkel helmet, one for each ore of the world, breathes for you from a tank of 3 to 12 minutes that refills in air pockets, bubble columns, over Air Vents, with an Oxygen Capsule or at the Abyssal Press. The helmets are fragile: hits wear them fast. Below y 110 the pressure crushes you; each Diving piece and a better helmet let you dive deeper.",
    "nums": [
     {
-     "v": "50 s",
-     "l": "of oxygen without a suit"
+     "v": "33 s",
+     "l": "of breath without a helmet"
     },
     {
-     "v": "5 min",
-     "l": "in the full Diving set"
+     "v": "12 min",
+     "l": "of air in a Pearl Snorkel Helmet"
     },
     {
      "v": "y 110",
@@ -8378,7 +8626,7 @@
     "id": "abyssal_press",
     "tex": "blocks/abyssal_press.png",
     "name": "Abyssal Press",
-    "note": "Must be deep underwater.",
+    "note": "Must be deep underwater. Also refills a snorkel helmet.",
     "shot": "shots/gui_station_abyssal_press.png",
     "make": [
      {
@@ -8502,30 +8750,16 @@
       ]
      },
      {
-      "out": "diving_helmet",
-      "tex": "items/diving_helmet.png",
-      "name": "Diving Helmet",
-      "count": 1,
-      "inputs": [
-       {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
-        "n": 5,
-        "name": "Abyssal Salt"
-       }
-      ]
-     },
-     {
       "out": "diving_chestplate",
       "tex": "items/diving_chestplate.png",
       "name": "Diving Chestplate",
       "count": 1,
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 8,
-        "name": "Abyssal Salt"
+        "name": "Abyssal Cobalt"
        }
       ]
      },
@@ -8536,10 +8770,10 @@
       "count": 1,
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 7,
-        "name": "Abyssal Salt"
+        "name": "Abyssal Cobalt"
        }
       ]
      },
@@ -8550,10 +8784,10 @@
       "count": 1,
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 4,
-        "name": "Abyssal Salt"
+        "name": "Abyssal Cobalt"
        }
       ]
      }
@@ -8564,19 +8798,31 @@
      "id": "abyssal_salt",
      "tex": "items/abyssal_salt.png",
      "name": "Abyssal Salt",
-     "effect": "Protects gear from pressure."
+     "effect": "Salt Snorkel Helmet and World 8 Seed."
+    },
+    {
+     "id": "nacre",
+     "tex": "items/nacre.png",
+     "name": "Nacre",
+     "effect": "Mined from reef veins. Nacre Snorkel Helmet."
+    },
+    {
+     "id": "abyssal_cobalt",
+     "tex": "items/abyssal_cobalt.png",
+     "name": "Abyssal Cobalt",
+     "effect": "Cobalt Snorkel Helmet and the diving suit."
     },
     {
      "id": "pressure_pearl",
      "tex": "items/pressure_pearl.png",
      "name": "Pressure Pearl",
-     "effect": "Diving suit and World 8 Seed."
+     "effect": "Pearl Snorkel Helmet and World 8 Seed."
     },
     {
      "id": "oxygen_capsule",
      "tex": "items/oxygen_capsule.png",
      "name": "Oxygen Capsule",
-     "effect": "Refills oxygen."
+     "effect": "Refills half of a snorkel helmet's tank, or your breath."
     },
     {
      "id": "thruster",
@@ -8591,6 +8837,30 @@
      "effect": ""
     },
     {
+     "id": "salt_snorkel",
+     "tex": "items/salt_snorkel.png",
+     "name": "Salt Snorkel Helmet",
+     "effect": "Breathe under water while its tank holds air (3 min). Fragile: hits wear it fast."
+    },
+    {
+     "id": "nacre_snorkel",
+     "tex": "items/nacre_snorkel.png",
+     "name": "Nacre Snorkel Helmet",
+     "effect": "Breathe under water while its tank holds air (5 min). Fragile: hits wear it fast."
+    },
+    {
+     "id": "cobalt_snorkel",
+     "tex": "items/cobalt_snorkel.png",
+     "name": "Cobalt Snorkel Helmet",
+     "effect": "Breathe under water while its tank holds air (8 min). Fragile: hits wear it fast."
+    },
+    {
+     "id": "pearl_snorkel",
+     "tex": "items/pearl_snorkel.png",
+     "name": "Pearl Snorkel Helmet",
+     "effect": "Breathe under water while its tank holds air (12 min). Fragile: hits wear it fast."
+    },
+    {
      "id": "apnea_kelp",
      "tex": "items/apnea_kelp.png",
      "name": "Apnea Kelp",
@@ -8599,10 +8869,6 @@
    ],
    "armor": {
     "pieces": [
-     {
-      "tex": "items/diving_helmet.png",
-      "name": "Diving Helmet"
-     },
      {
       "tex": "items/diving_chestplate.png",
       "name": "Diving Chestplate"
@@ -8616,7 +8882,7 @@
       "name": "Diving Boots"
      }
     ],
-    "text": "24 armour, 10 toughness, a 23-damage weapon at this tier. Resists pressure."
+    "text": "Three pieces and no helmet: the head slot belongs to the snorkel helmets. A 23-damage weapon at this tier. Resists pressure. Wear it with a snorkel helmet."
    },
    "structures": [
     {
@@ -8664,7 +8930,7 @@
       "name": "Abyssal Salt",
       "kind": "dust",
       "rarity": "Rare",
-      "effect": "Protects gear from pressure.",
+      "effect": "Salt Snorkel Helmet and World 8 Seed.",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -8675,12 +8941,40 @@
       ]
      },
      {
+      "id": "nacre",
+      "tex": "items/nacre.png",
+      "name": "Nacre",
+      "kind": "gem",
+      "rarity": "Rare",
+      "effect": "Mined from reef veins. Nacre Snorkel Helmet.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Nacre Vein"
+      ]
+     },
+     {
+      "id": "abyssal_cobalt",
+      "tex": "items/abyssal_cobalt.png",
+      "name": "Abyssal Cobalt",
+      "kind": "ingot",
+      "rarity": "Rare",
+      "effect": "Cobalt Snorkel Helmet and the diving suit.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Abyssal Cobalt Ore"
+      ]
+     },
+     {
       "id": "pressure_pearl",
       "tex": "items/pressure_pearl.png",
       "name": "Pressure Pearl",
       "kind": "gem",
       "rarity": "Epic",
-      "effect": "Diving suit and World 8 Seed.",
+      "effect": "Pearl Snorkel Helmet and World 8 Seed.",
       "station": "Abyssal Press",
       "inputs": [
        {
@@ -8700,7 +8994,8 @@
       "drops": [
        "Pressure Jelly",
        "Bell Crab",
-       "Trench Eel"
+       "Trench Eel",
+       "Pearl Bed"
       ]
      },
      {
@@ -8709,7 +9004,7 @@
       "name": "Oxygen Capsule",
       "kind": "consumable",
       "rarity": "Common",
-      "effect": "Refills oxygen.",
+      "effect": "Refills half of a snorkel helmet's tank, or your breath.",
       "station": "Abyssal Press",
       "inputs": [
        {
@@ -8829,7 +9124,7 @@
       "name": "Hidden Doll 7",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "Ten notches are carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -8861,21 +9156,50 @@
       "drops": []
      },
      {
-      "id": "diving_helmet",
-      "tex": "items/diving_helmet.png",
-      "name": "Diving Helmet",
-      "kind": "armor",
+      "id": "salt_snorkel",
+      "tex": "items/salt_snorkel.png",
+      "name": "Salt Snorkel Helmet",
+      "kind": "snorkel",
+      "rarity": "Rare",
+      "effect": "Breathe under water while its tank holds air (3 min). Fragile: hits wear it fast.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nacre_snorkel",
+      "tex": "items/nacre_snorkel.png",
+      "name": "Nacre Snorkel Helmet",
+      "kind": "snorkel",
+      "rarity": "Rare",
+      "effect": "Breathe under water while its tank holds air (5 min). Fragile: hits wear it fast.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cobalt_snorkel",
+      "tex": "items/cobalt_snorkel.png",
+      "name": "Cobalt Snorkel Helmet",
+      "kind": "snorkel",
       "rarity": "Epic",
-      "effect": "Resists pressure.",
-      "station": "Abyssal Press",
-      "inputs": [
-       {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
-        "n": 5,
-        "name": "Abyssal Salt"
-       }
-      ],
+      "effect": "Breathe under water while its tank holds air (8 min). Fragile: hits wear it fast.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "pearl_snorkel",
+      "tex": "items/pearl_snorkel.png",
+      "name": "Pearl Snorkel Helmet",
+      "kind": "snorkel",
+      "rarity": "Epic",
+      "effect": "Breathe under water while its tank holds air (12 min). Fragile: hits wear it fast.",
+      "station": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -8885,14 +9209,14 @@
       "name": "Diving Chestplate",
       "kind": "armor",
       "rarity": "Epic",
-      "effect": "Resists pressure.",
+      "effect": "Resists pressure. Wear it with a snorkel helmet.",
       "station": "Abyssal Press",
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 8,
-        "name": "Abyssal Salt"
+        "name": "Abyssal Cobalt"
        }
       ],
       "count": 1,
@@ -8904,14 +9228,14 @@
       "name": "Diving Leggings",
       "kind": "armor",
       "rarity": "Epic",
-      "effect": "Resists pressure.",
+      "effect": "Resists pressure. Wear it with a snorkel helmet.",
       "station": "Abyssal Press",
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 7,
-        "name": "Abyssal Salt"
+        "name": "Abyssal Cobalt"
        }
       ],
       "count": 1,
@@ -8923,14 +9247,14 @@
       "name": "Diving Boots",
       "kind": "armor",
       "rarity": "Epic",
-      "effect": "Resists pressure.",
+      "effect": "Resists pressure. Wear it with a snorkel helmet.",
       "station": "Abyssal Press",
       "inputs": [
        {
-        "id": "abyssal_salt",
-        "tex": "items/abyssal_salt.png",
+        "id": "abyssal_cobalt",
+        "tex": "items/abyssal_cobalt.png",
         "n": 4,
-        "name": "Abyssal Salt"
+        "name": "Abyssal Cobalt"
        }
       ],
       "count": 1,
@@ -8955,7 +9279,7 @@
       "tex": "blocks/abyssal_press.png",
       "name": "Abyssal Press",
       "kind": "station",
-      "effect": "Must be deep underwater.",
+      "effect": "Must be deep underwater. Also refills a snorkel helmet.",
       "station": "Matrix Workbench",
       "inputs": [
        {
@@ -9028,12 +9352,60 @@
       "count": 1,
       "drops": [],
       "yields": "Abyssal Salt"
+     },
+     {
+      "id": "nacre_ore",
+      "tex": "blocks/nacre_ore.png",
+      "name": "Nacre Vein",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Nacre"
+     },
+     {
+      "id": "abyssal_cobalt_ore",
+      "tex": "blocks/abyssal_cobalt_ore.png",
+      "name": "Abyssal Cobalt Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Abyssal Cobalt"
+     },
+     {
+      "id": "pearl_bed",
+      "tex": "blocks/pearl_bed.png",
+      "name": "Pearl Bed",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Pressure Pearl"
+     },
+     {
+      "id": "air_vent",
+      "tex": "blocks/air_vent.png",
+      "name": "Air Vent",
+      "kind": "vent",
+      "effect": "Breathes out air. Swim over it to refill a snorkel helmet.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
      {
       "name": "Under Pressure",
-      "desc": "Craft a diving suit."
+      "desc": "Craft a Salt Snorkel Helmet at the Abyssal Press."
      },
      {
       "name": "Compress",
@@ -9067,7 +9439,7 @@
       "cat": "Progress",
       "hidden": false,
       "name": "Pressurized",
-      "desc": "Craft a diving helmet."
+      "desc": "Breathe through a snorkel helmet."
      },
      {
       "cat": "Progress",
@@ -9103,7 +9475,7 @@
       "cat": "Combat",
       "hidden": false,
       "name": "Last Breath",
-      "desc": "Beat the Leviathan with under 5% oxygen."
+      "desc": "Beat the Leviathan with under 5% oxygen left in your helmet or your lungs."
      },
      {
       "cat": "Hidden",
@@ -9281,6 +9653,16 @@
        "id": "abyssal_salt",
        "tex": "items/abyssal_salt.png",
        "name": "Abyssal Salt"
+      },
+      {
+       "id": "nacre",
+       "tex": "items/nacre.png",
+       "name": "Nacre"
+      },
+      {
+       "id": "abyssal_cobalt",
+       "tex": "items/abyssal_cobalt.png",
+       "name": "Abyssal Cobalt"
       },
       {
        "id": "pressure_pearl",
@@ -9918,7 +10300,7 @@
       "name": "Hidden Doll 8",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "Six notches are carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -10475,20 +10857,20 @@
   {
    "n": 9,
    "name": "Restless Ground",
-   "short": "The ground heaves every minute.",
-   "long": "Every 60 seconds the ground heaves: you are thrown and nauseous, and up to four loose blocks around you collapse. You get three seconds of warning. Within 16 blocks of a Terrain Anchor nothing moves; an Anchor in hand steadies you for ten minutes, and Grip Boots keep you on your feet.",
+   "short": "Every minute, the ground moves under you.",
+   "long": "Every 60 seconds the ground heaves: around you, up to three 16 x 16 zones rise, sink, slide sideways or close their chasms, and everything on them rides along, you and your builds included. You get three seconds of warning and are never buried. Within 16 blocks of a Terrain Anchor nothing moves; an Anchor holds the ground within 4 blocks of you for ten minutes, and Grip Boots hold the zone under your feet.",
    "nums": [
     {
      "v": "60 s",
      "l": "between two heaves"
     },
     {
-     "v": "3 s",
-     "l": "of warning"
-    },
-    {
      "v": "16",
      "l": "blocks of calm around a Terrain Anchor"
+    },
+    {
+     "v": "16 × 16",
+     "l": "blocks per moving zone"
     }
    ],
    "doll": {
@@ -11013,7 +11395,7 @@
       "name": "Hidden Doll 9",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "Three notches are carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -11535,7 +11917,7 @@
    "n": 10,
    "name": "The Giant Workshop",
    "short": "Every old rule, in a workshop built for giants.",
-   "long": "You step out of the last block into a workshop built for giants, where your own base sits on a workbench like an object. The world is cut into nine zones of 256 blocks, each running the rule of one earlier world, from toxin to tremors. Every piece of old gear earns its place again.",
+   "long": "You step out of the last block into the Artisan's workshop, seen by a doll: spools, nails, pins and thimbles many times your height lie on the felt, and on the Titanic Workbench stands the Maquette, a quarter-scale model of your own base. The world is cut into nine zones of 256 blocks, each running the rule of one earlier world, from toxin to moving ground. Every piece of old gear earns its place again.",
    "nums": [
     {
      "v": "9",
@@ -12027,7 +12409,7 @@
       "name": "Hidden Doll 10",
       "kind": "secret",
       "rarity": "",
-      "effect": "Nest the ten dolls in order...",
+      "effect": "Eight notches are carved under its base. Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -12368,7 +12750,7 @@
       "cat": "Hidden",
       "hidden": true,
       "name": "Set Down the Tools",
-      "desc": "Defeat the Unfinished with the 10 hidden dolls on you."
+      "desc": "Leave the work unfinished in World 0."
      }
     ]
    },
@@ -15986,6 +16368,7 @@
    "moveSpeed": "0.26",
    "behaviour": "In water it homes in on you and keeps facing you as it swims.",
    "facts": [
+    "Like every World 7 creature, it swims, never drowns and spawns in open water.",
     "2 armour, 10% knockback resistance, 6 experience. It notices players up to 32 blocks away.",
     "It despawns when no player is within 128 blocks."
    ],
@@ -16087,8 +16470,9 @@
    "attackEvery": "0.7 s",
    "attackTicks": 14,
    "moveSpeed": "0.33",
-   "behaviour": "A quick swimmer that homes in on you, and within 3 blocks it drains 3 of your oxygen every second.",
+   "behaviour": "A quick swimmer that homes in on you, and within 3 blocks it drains 3 of your breath every second.",
    "facts": [
+    "Like every World 7 creature, it swims, never drowns and spawns in open water.",
     "2 armour, 10% knockback resistance, 6 experience. It notices players up to 32 blocks away.",
     "It despawns when no player is within 128 blocks."
    ],
@@ -16205,8 +16589,9 @@
    "attackEvery": "0.7 s",
    "attackTicks": 14,
    "moveSpeed": "0.26",
-   "behaviour": "Its pressure reaches 7 blocks: every second there it gives Slowness II and Mining Fatigue II and takes 2 of your oxygen.",
+   "behaviour": "Its pressure reaches 7 blocks: every second there it gives Slowness II and Mining Fatigue II and takes 2 of your breath.",
    "facts": [
+    "Like every World 7 creature, it swims, never drowns and spawns in open water.",
     "2 armour, 10% knockback resistance, 6 experience. It notices players up to 32 blocks away.",
     "It despawns when no player is within 128 blocks."
    ],
@@ -16297,7 +16682,8 @@
    },
    "desc": "Nesting: shelters smaller crabs.",
    "tags": [
-    "Nesting"
+    "Nesting",
+    "Aquatic"
    ],
    "elite": false,
    "hp": "242",
@@ -16311,6 +16697,7 @@
    "behaviour": "A plain melee fighter: it walks up to you and strikes.",
    "facts": [
     "Nesting: when it dies it opens and releases two smaller copies with 40% of its health, 60% of its size and 30% more speed. The copies drop nothing.",
+    "Like every World 7 creature, it swims, never drowns and spawns in open water.",
     "2 armour, 10% knockback resistance, 6 experience. It notices players up to 32 blocks away.",
     "It despawns when no player is within 128 blocks."
    ],
@@ -16416,6 +16803,7 @@
    "behaviour": "Every 3.5 seconds, if you are within about 2.4 blocks, it grabs you: Slowness VII for 2.5 seconds and Wither for 2 seconds.",
    "facts": [
     "Elites drop their common loot every time and give 5 souls to the player who lands the killing blow.",
+    "Like every World 7 creature, it swims, never drowns and spawns in open water.",
     "6 armour, 60% knockback resistance, 20 experience. It notices players up to 32 blocks away.",
     "Elites never despawn."
    ],
@@ -19656,7 +20044,7 @@
      "cat": "Combat",
      "hidden": false,
      "name": "Last Breath",
-     "desc": "Beat the Leviathan with under 5% oxygen."
+     "desc": "Beat the Leviathan with under 5% oxygen left in your helmet or your lungs."
     }
    ],
    "prev": "your_double",
