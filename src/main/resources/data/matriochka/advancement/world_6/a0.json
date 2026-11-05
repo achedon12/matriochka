@@ -1,0 +1,27 @@
+{
+  "parent": "matriochka:world_6/root",
+  "display": {
+    "icon": {
+      "id": "matriochka:seed_6"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w6.a0.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w6.a0.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "matriochka:world_6"
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}

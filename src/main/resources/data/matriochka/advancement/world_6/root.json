@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "matriochka:seed_6"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w6.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w6.desc"
+    },
+    "background": "matriochka:block/prism_moss",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "seed": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:seed_6"
+          }
+        ]
+      }
+    },
+    "enter": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "matriochka:world_6"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "seed",
+      "enter"
+    ]
+  ]
+}

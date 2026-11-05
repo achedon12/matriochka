@@ -1,0 +1,31 @@
+{
+  "parent": "matriochka:world_6/a0",
+  "display": {
+    "icon": {
+      "id": "matriochka:gravity_boots"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w6.a1.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w6.a1.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:gravity_boots"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}
