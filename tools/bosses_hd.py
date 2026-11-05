@@ -9,6 +9,7 @@ import json
 import math
 import os
 import random
+import sys
 from PIL import Image
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -752,10 +753,33 @@ BUILDERS = [block_guardian, spore_queen, ash_titan, grand_jailer, storm_king, li
             pressure_leviathan, seasons_master, terrain_heart_boss, the_unfinished]
 
 
+HEAVY = {"block_guardian": 1.25, "spore_queen": 1.1, "ash_titan": 1.5, "grand_jailer": 1.2, "storm_king": 1.0, "light_eater": 1.1,
+         "your_double": 0.85, "pressure_leviathan": 1.3, "seasons_master": 1.4, "terrain_heart_boss": 1.4, "the_unfinished": 1.3}
+
+
+def _v2(name):
+    """The second, hand-detailed edition of a boss (tools/bosses_v2), when it exists."""
+    import importlib
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    for part in ("part_a", "part_b"):
+        try:
+            mod = importlib.import_module(f"bosses_v2.{part}")
+        except ModuleNotFoundError:
+            continue
+        if hasattr(mod, name):
+            return getattr(mod, name)
+    return None
+
+
 def build_all():
     dims = {}
     for i, f in enumerate(BUILDERS):
-        rig, anims = f()
+        v2 = _v2(f.__name__)
+        if v2:
+            rig = v2()
+            anims = standard_anims(rig, heavy=HEAVY.get(rig.name, 1.0))
+        else:
+            rig, anims = f()
         dims[rig.name] = write(rig, anims, 9000 + i)
     return dims
 

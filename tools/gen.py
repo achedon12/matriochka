@@ -195,7 +195,7 @@ def gen_entities():
         for i, (en, fr) in enumerate(b["atk"]):
             lang(f"boss.{NS}.{bid}.attack{i}", en, fr)
         wd, ht = HD_BOSSES[bid]
-        ENTITY_DIMS[bid] = (max(0.6, min(wd, 3.0)), max(0.8, ht))
+        ENTITY_DIMS[bid] = (max(0.6, min(wd, 2.2)), max(0.8, ht))
     for (pid, en, fr, wd) in PEOPLES:
         lang(f"entity.{NS}.{pid}", en, fr)
         p = pal(wd) if wd else ("6a4a8a", "e8c050", "f0d0b0", "2a1a3a")
