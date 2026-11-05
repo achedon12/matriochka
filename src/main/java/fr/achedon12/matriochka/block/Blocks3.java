@@ -176,6 +176,7 @@ public final class Blocks3 {
 			String group = data.groupOf(sp.getUUID());
 			if (world == 0 && data.defeated(group, 0) && !sp.isCreative() && !sp.isShiftKeyDown()) {
 				sp.sendSystemMessage(Component.translatable("message.matriochka.guardian_done"));
+				return InteractionResult.SUCCESS;
 			}
 			MatrioBoss.summon(sl, bossId, pos.above(2), sp);
 			sl.sendParticles(ParticleTypes.EXPLOSION_EMITTER, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 1, 0, 0, 0, 0);
