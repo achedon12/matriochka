@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_3",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "world": 3,
+  "archetype": "maze",
+  "role": "exploration",
+  "size": "large",
+  "structure_id": "trap_maze"
+}
