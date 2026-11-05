@@ -84,8 +84,12 @@ docs/             website (GitHub Pages)
 
 Matriochka is in alpha. All ten worlds, their rules, mobs, bosses, stations and progression are playable. Models and textures are generated placeholders made to be replaced with hand-made Blockbench art. See the [roadmap](https://github.com/achedon12/matriochka/wiki/Roadmap) for what comes next.
 
+## Contributing
+
+Matriochka is open source and contributions are welcome: bug reports, balance feedback, translations, models and code. Start with [CONTRIBUTING.md](CONTRIBUTING.md), which explains how the content table and the generators fit together. Everyone taking part follows the [code of conduct](CODE_OF_CONDUCT.md); security issues go through the [security policy](SECURITY.md).
+
 ## License
 
-The code is released under the [MIT License](LICENSE). Models, textures and other art assets are all rights reserved by their author.
+Code and assets are released under the [MIT License](LICENSE).
 
 Made by [achedon12](https://github.com/achedon12).
