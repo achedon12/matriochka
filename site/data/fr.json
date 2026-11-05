@@ -168,6 +168,21 @@
      "p": "Jusqu'à huit joueurs partagent un groupe, ses mondes et ses boss vaincus. Les boss se renforcent à chaque joueur qui rejoint le combat."
     }
    ],
+   "reelWatch": "Voir la bande-annonce",
+   "stripH": "Dix mondes, l'un dans l'autre",
+   "stripP": "Chaque monde est scellé dans un bloc que tu fais pousser dans le monde précédent. Ouvre-en un.",
+   "bossesH": "Onze boss te barrent la route",
+   "bossesP": "Chacun garde le noyau qui ouvre le monde suivant, prévient avant son pire coup, puis laisse une ouverture.",
+   "lifeH": "Cinquante créatures, 160 attaques",
+   "lifeP": "Aucune créature ne se bat comme une autre. Chacune a ses propres attaques, tirées de ce qu'elle est : le rat ronge, le bourreau rend son verdict, le guetteur éteint la lumière.",
+   "lifePicks": [
+    "executioner",
+    "sky_harpooner",
+    "shadow_mother",
+    "hour_keeper",
+    "mimic",
+    "trench_eel"
+   ],
    "galleryH": "Dans les blocs",
    "galleryP": "Captures du mod en jeu, sous Minecraft 26.3.",
    "gallery": [

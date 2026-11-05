@@ -168,6 +168,21 @@
      "p": "Up to eight players share a group, its worlds and its defeated bosses. Bosses grow tougher with every player who joins the fight."
     }
    ],
+   "reelWatch": "Watch the trailer",
+   "stripH": "Ten worlds, one inside the other",
+   "stripP": "Every world is sealed in a block you grow inside the world before it. Open one.",
+   "bossesH": "Eleven bosses stand in your way",
+   "bossesP": "Each one guards the core that opens the next world, warns you before its worst blow, then leaves an opening.",
+   "lifeH": "Fifty creatures, 160 attacks",
+   "lifeP": "No two creatures fight alike. Each has its own attacks, drawn from what it is: the rat gnaws, the executioner passes its verdict, the watcher snuffs out the light.",
+   "lifePicks": [
+    "executioner",
+    "sky_harpooner",
+    "shadow_mother",
+    "hour_keeper",
+    "mimic",
+    "trench_eel"
+   ],
    "galleryH": "Inside the blocks",
    "galleryP": "Captures from the mod running in Minecraft 26.3.",
    "gallery": [

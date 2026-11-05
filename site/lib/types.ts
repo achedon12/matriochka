@@ -72,5 +72,5 @@ export interface SiteData {
 
 export interface Shared {
   version: string; repo: string; releases: string; wiki: string; site: string;
-  icons: Record<string, string>; hasTrailer: boolean;
+  icons: Record<string, string>; hasTrailer: boolean; hasReel: boolean;
 }

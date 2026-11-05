@@ -1,11 +1,22 @@
 import Link from "next/link";
-import { asset, getData, href, SHARED } from "@/lib/data";
-import type { Lang } from "@/lib/types";
+import { asset, creature, getData, href, SHARED } from "@/lib/data";
+import type { Lang, Mob } from "@/lib/types";
 import { Icon, Inlay, Shot } from "../Bits";
-import { DollRow } from "../Dolls";
+import { DollRow, DollWindow } from "../Dolls";
+import WorldBestiary, { type BestiaryEntry } from "../WorldBestiary";
+import { viewerLabels } from "./CreaturesPages";
 import { DollCaption } from "../Islands";
 import { Lacquer, Vine } from "../Ornament";
 import { Shell } from "../Shell";
+
+function picks(lang: Lang, ids: string[]): BestiaryEntry[] {
+  const ui = getData(lang).copy.ui;
+  return ids.map((id) => creature(lang, id) as Mob | undefined).filter((c): c is Mob => !!c).map((c) => ({
+    id: c.id, name: c.name, tex: c.tex, anims: c.anims, badge: c.worldName, line: c.desc,
+    moves: c.moves.map((x) => ({ name: x.name, desc: x.desc })), href: href(lang, `creatures/${c.id}/`),
+    stats: [{ l: ui.health, v: c.hp }, { l: ui.damage, v: c.dmg }],
+  }));
+}
 
 export default function HomePage({ lang }: { lang: Lang }) {
   const d = getData(lang);
@@ -13,6 +24,20 @@ export default function HomePage({ lang }: { lang: Lang }) {
   const ui = d.copy.ui;
   return (
     <Shell lang={lang} path="">
+      {SHARED.hasReel && (
+        <section className="reel" aria-label={h.tagline}>
+          <video className="reel-v" autoPlay muted loop playsInline preload="auto" poster={asset("reel.jpg")} aria-hidden="true">
+            <source src={asset("reel.mp4")} type="video/mp4" />
+          </video>
+          <div className="reel-in wrap">
+            <p className="reel-kicker">{h.tagline}</p>
+            <p className="cta">
+              <Link className="btn" href={href(lang, "download/")}><Icon name="download" />{h.download}</Link>
+              {SHARED.hasTrailer && <a className="btn btn-dark" href="#trailer-h">{h.reelWatch}</a>}
+            </p>
+          </div>
+        </section>
+      )}
       <section className="hero" aria-labelledby="hero-h">
         <svg className="hero-side hero-side-l" aria-hidden="true" focusable="false"><rect width="100%" height="100%" fill="url(#vine-red-v)" /></svg>
         <svg className="hero-side hero-side-r" aria-hidden="true" focusable="false"><rect width="100%" height="100%" fill="url(#vine-red-v)" /></svg>
@@ -47,6 +72,52 @@ export default function HomePage({ lang }: { lang: Lang }) {
           </div>
         </section>
       )}
+
+      <Vine className="vine-sep" />
+      <section className="strip" aria-labelledby="strip-h">
+        <div className="wrap">
+          <h2 id="strip-h">{h.stripH}</h2>
+          <p className="strip-p">{h.stripP}</p>
+          <ol className="strip-row">
+            {d.worlds.map((w) => (
+              <li key={w.n} style={{ "--wl": w.light } as React.CSSProperties}>
+                <Link href={href(lang, `worlds/${w.n}/`)} className="strip-card">
+                  <DollWindow world={w} alt={w.name} id={`s${w.n}`} />
+                  <span className="strip-n num">{w.n}</span>
+                  <span className="strip-name">{w.name}</span>
+                  <span className="strip-rule">{w.short}</span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="bossband" aria-labelledby="bosses-h">
+        <div className="wrap">
+          <h2 id="bosses-h">{h.bossesH}</h2>
+          <p className="strip-p">{h.bossesP}</p>
+          <ol className="boss-row">
+            {d.bosses.map((b) => (
+              <li key={b.id}>
+                <Link href={href(lang, `creatures/${b.id}/`)} className="boss-card">
+                  {b.shot ? <img src={asset(b.shot)} alt="" loading="lazy" decoding="async" /> : <span className="boss-blank" style={{ backgroundImage: `url(${asset(b.block)})` }} />}
+                  <span className="boss-w">{b.worldName}</span>
+                  <span className="boss-name">{b.name}</span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="band" aria-labelledby="life-h">
+        <div className="wrap">
+          <h2 id="life-h">{h.lifeH}</h2>
+          <p className="strip-p">{h.lifeP}</p>
+          <WorldBestiary entries={picks(lang, h.lifePicks)} labels={viewerLabels(ui)} sheet={ui.openSheet} movesH={ui.moves} />
+        </div>
+      </section>
 
       <Vine className="vine-sep" />
       <section className="band">

@@ -1078,6 +1078,17 @@ def build_copy():
             ("return_thread", t("Play as a group", "Joue en groupe"),
              t("Up to eight players share a group, its worlds and its defeated bosses. Bosses grow tougher with every player who joins the fight.",
                "Jusqu'à huit joueurs partagent un groupe, ses mondes et ses boss vaincus. Les boss se renforcent à chaque joueur qui rejoint le combat."))]],
+        reelWatch=t("Watch the trailer", "Voir la bande-annonce"),
+        stripH=t("Ten worlds, one inside the other", "Dix mondes, l'un dans l'autre"),
+        stripP=t("Every world is sealed in a block you grow inside the world before it. Open one.",
+                 "Chaque monde est scellé dans un bloc que tu fais pousser dans le monde précédent. Ouvre-en un."),
+        bossesH=t("Eleven bosses stand in your way", "Onze boss te barrent la route"),
+        bossesP=t("Each one guards the core that opens the next world, warns you before its worst blow, then leaves an opening.",
+                  "Chacun garde le noyau qui ouvre le monde suivant, prévient avant son pire coup, puis laisse une ouverture."),
+        lifeH=t("Fifty creatures, 160 attacks", "Cinquante créatures, 160 attaques"),
+        lifeP=t("No two creatures fight alike. Each has its own attacks, drawn from what it is: the rat gnaws, the executioner passes its verdict, the watcher snuffs out the light.",
+                "Aucune créature ne se bat comme une autre. Chacune a ses propres attaques, tirées de ce qu'elle est : le rat ronge, le bourreau rend son verdict, le guetteur éteint la lumière."),
+        lifePicks=["executioner", "sky_harpooner", "shadow_mother", "hour_keeper", "mimic", "trench_eel"],
         galleryH=t("Inside the blocks", "Dans les blocs"),
         galleryP=t("Captures from the mod running in Minecraft 26.3.", "Captures du mod en jeu, sous Minecraft 26.3."),
         gallery=[dict(src=shot(k), caption=c) for k, c in (
@@ -1290,7 +1301,8 @@ def main():
     os.makedirs(DATA, exist_ok=True)
     copy_assets()
     shared = dict(version=VERSION, repo=REPO, releases=RELEASES, wiki=WIKI, site=SITE, icons=ICONS,
-                  hasTrailer=os.path.exists(os.path.join(PUBLIC, "trailer.mp4")))
+                  hasTrailer=os.path.exists(os.path.join(PUBLIC, "trailer.mp4")),
+                  hasReel=os.path.exists(os.path.join(PUBLIC, "reel.mp4")))
     for lang in ("en", "fr"):
         LANG = lang
         data = dict(lang=lang, copy=build_copy(), worlds=build_worlds(), mobs=build_mobs(), bosses=build_bosses())
