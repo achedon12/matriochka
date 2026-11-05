@@ -51,6 +51,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('systems')) {
 				vmArgs '-Dmatriochka.capture=systems'
 			}
+			if (name == 'clientGameTest' && project.hasProperty('scale')) {
+				vmArgs '-Dmatriochka.capture=scale'
+			}
 			if (name == 'clientGameTest' && project.hasProperty('moves')) {
 				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true'
 			}
