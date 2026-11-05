@@ -107,7 +107,7 @@
   "home": {
    "tagline": "Chaque bloc peut contenir un monde.",
    "intro": "Un mod Fabric pour Minecraft 26.3. Dix mondes, chacun scellé dans un seul bloc et emboîté dans le précédent. Chaque monde a sa règle, ses créatures, sa station, et un boss qui garde le noyau ouvrant le suivant.",
-   "facts": "Minecraft 26.3 sous Fabric, version 0.1.0. Solo et multijoueur.",
+   "facts": "Minecraft 26.3 sous Fabric, version 0.2.0. Solo et multijoueur.",
    "dollsTitle": "Un jeu de onze poupées gigognes qu'on vient d'ouvrir : la Surface, puis les mondes 1 à 10, de la plus grande à la plus petite",
    "dollsCaption": "La Surface, puis les dix mondes qu'elle contient. Choisis une poupée pour ouvrir son monde.",
    "trailerH": "La bande-annonce",
@@ -219,7 +219,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.1.0, journal des changements et code source",
+     "note": "Version 0.2.0, journal des changements et code source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -282,8 +282,8 @@
    "gallery": [],
    "ctaH": "Prêt à rétrécir ?",
    "ctaP": "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25.",
-   "ctaBtn": "Obtenir la version 0.1.0",
-   "download": "Télécharger la 0.1.0",
+   "ctaBtn": "Obtenir la version 0.2.0",
+   "download": "Télécharger la 0.2.0",
    "desc": "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
   },
   "worlds": {
@@ -862,7 +862,7 @@
   "download": {
    "h": "Télécharger",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.1.0 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
+   "lead": "Version 0.2.0 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
    "desc": "Télécharger Matriochka pour Minecraft 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur.",
    "sources": [
     {
@@ -912,7 +912,7 @@
    "installH": "Installation",
    "steps": [
     "Installe Fabric Loader pour Minecraft 26.3.",
-    "Télécharge matriochka-0.1.0.jar depuis les versions GitHub.",
+    "Télécharge matriochka-0.2.0+26.3.jar depuis les versions GitHub.",
     "Place-le dans ton dossier mods avec Fabric API et GeckoLib.",
     "Lance le profil Fabric et crée un nouveau monde. Le Parchemin de l'artisan t'attend dans l'inventaire."
    ],
@@ -939,12 +939,12 @@
     {
      "k": "mobHealthMultiplier",
      "v": "1.0",
-     "d": "Ajuste la vie de toutes les créatures"
+     "d": "Ajuste la vie de toutes les créatures et des boss"
     },
     {
      "k": "mobDamageMultiplier",
      "v": "1.0",
-     "d": "Ajuste les dégâts de toutes les créatures"
+     "d": "Ajuste les dégâts de toutes les créatures et des boss"
     },
     {
      "k": "maxGroupSize",
@@ -952,14 +952,9 @@
      "d": "Joueurs par groupe"
     },
     {
-     "k": "screenShake",
-     "v": "true",
-     "d": "Tremblements de caméra lors des gros coups"
-    },
-    {
      "k": "difficulty",
      "v": "\"normal\"",
-     "d": "Préréglage général de difficulté"
+     "d": "story (70 % des dégâts), normal, nightmare (130 % des dégâts, une charge par Berceau d'âme) ou hardcore (comme nightmare, et la Poupée de vie ne te sauve plus)"
     }
    ]
   }
@@ -8593,7 +8588,7 @@
      "id": "apnea_kelp",
      "tex": "items/apnea_kelp.png",
      "name": "Algue d'apnée",
-     "effect": "Oxygène prolongé d'1 minute."
+     "effect": "L'oxygène dure deux fois plus longtemps pendant 5 minutes."
     }
    ],
    "armor": {
@@ -8840,7 +8835,7 @@
       "name": "Algue d'apnée",
       "kind": "food",
       "rarity": "Commun",
-      "effect": "Oxygène prolongé d'1 minute.",
+      "effect": "L'oxygène dure deux fois plus longtemps pendant 5 minutes.",
       "station": "Presse abyssale",
       "inputs": [
        {
@@ -9108,7 +9103,7 @@
       "cat": "Caché",
       "hidden": true,
       "name": "Plaque oubliée",
-      "desc": "Réparer l'ancien sous-marin."
+      "desc": "Fouiller une épave engloutie."
      },
      {
       "cat": "Caché",
@@ -9355,7 +9350,7 @@
    "n": 8,
    "name": "Saisons accélérées",
    "short": "Une journée dure huit minutes. Une saison, deux.",
-   "long": "Le temps passe trois fois plus vite : un jour et une nuit tiennent en huit minutes, chaque saison en deux. L'été te creuse l'estomac, l'hiver te ralentit, le printemps et l'automne sont tes fenêtres. Une Conserve de saison te protège deux minutes, le Sablier retient l'horloge 90 secondes, et l'Atelier du temps n'accepte de recettes qu'à l'aube et au crépuscule.",
+   "long": "Le temps passe deux fois et demie plus vite : un jour et une nuit tiennent en huit minutes, chaque saison en deux. L'été te creuse l'estomac, l'hiver te ralentit, le printemps et l'automne sont tes fenêtres. Une Conserve de saison te protège deux minutes, le Sablier retient l'horloge 90 secondes, et l'Atelier du temps n'accepte de recettes qu'à l'aube et au crépuscule.",
    "nums": [
     {
      "v": "×3",
@@ -9689,7 +9684,7 @@
      "id": "season_jam",
      "tex": "items/season_jam.png",
      "name": "Conserve de saison sucrée",
-     "effect": "Protège de la saison en cours."
+     "effect": "Protège de la saison pendant 3 minutes."
     }
    ],
    "armor": {
@@ -9960,7 +9955,7 @@
       "name": "Conserve de saison sucrée",
       "kind": "food",
       "rarity": "Commun",
-      "effect": "Protège de la saison en cours.",
+      "effect": "Protège de la saison pendant 3 minutes.",
       "station": "Atelier du temps",
       "inputs": [
        {
@@ -10777,7 +10772,7 @@
      "id": "anchor_bread",
      "tex": "items/anchor_bread.png",
      "name": "Pain d'ancrage",
-     "effect": "Moins de recul pendant 5 minutes."
+     "effect": "Pied ferme pendant 5 minutes."
     }
    ],
    "armor": {
@@ -11024,7 +11019,7 @@
       "name": "Pain d'ancrage",
       "kind": "food",
       "rarity": "Commun",
-      "effect": "Moins de recul pendant 5 minutes.",
+      "effect": "Pied ferme pendant 5 minutes.",
       "station": "Ancre de terrain",
       "inputs": [
        {
@@ -11848,7 +11843,7 @@
      "id": "workshop_feast",
      "tex": "items/workshop_feast.png",
      "name": "Festin de l'atelier",
-     "effect": "Regroupe deux effets."
+     "effect": "Les effets de tous les plats pendant 2 minutes."
     }
    ],
    "armor": {
@@ -12069,7 +12064,7 @@
       "name": "Festin de l'atelier",
       "kind": "food",
       "rarity": "Commun",
-      "effect": "Regroupe deux effets.",
+      "effect": "Les effets de tous les plats pendant 2 minutes.",
       "station": "Métier final",
       "inputs": [
        {
@@ -12331,7 +12326,7 @@
       "cat": "Exploration",
       "hidden": false,
       "name": "Une miette",
-      "desc": "Trouver sa base, vue du monde géant."
+      "desc": "Grimper sur l'Établi titanesque."
      },
      {
       "cat": "Exploration",
@@ -12367,7 +12362,7 @@
       "cat": "Caché",
       "hidden": true,
       "name": "Poser les outils",
-      "desc": "Obtenir la troisième fin."
+      "desc": "Vaincre l'Inachevée avec les 10 poupées cachées sur soi."
      }
     ]
    },

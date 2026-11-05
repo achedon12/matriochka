@@ -107,7 +107,7 @@
   "home": {
    "tagline": "Every block can hold a world.",
    "intro": "A Fabric mod for Minecraft 26.3. Ten worlds, each sealed inside a single block and nested in the one before it. Every world has its own rule, its own creatures, its own station, and a boss guarding the core that opens the next.",
-   "facts": "Minecraft 26.3 on Fabric, version 0.1.0. Solo and multiplayer.",
+   "facts": "Minecraft 26.3 on Fabric, version 0.2.0. Solo and multiplayer.",
    "dollsTitle": "A set of eleven nesting dolls, just opened: the Surface, then worlds 1 to 10, from the largest to the smallest",
    "dollsCaption": "The Surface, then the ten worlds it holds. Pick a doll to open its world.",
    "trailerH": "The trailer",
@@ -219,7 +219,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.1.0, changelog and source",
+     "note": "Version 0.2.0, changelog and source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -282,8 +282,8 @@
    "gallery": [],
    "ctaH": "Ready to shrink?",
    "ctaP": "Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25.",
-   "ctaBtn": "Get version 0.1.0",
-   "download": "Download 0.1.0",
+   "ctaBtn": "Get version 0.2.0",
+   "download": "Download 0.2.0",
    "desc": "Matriochka, a Fabric mod for Minecraft 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss."
   },
   "worlds": {
@@ -862,7 +862,7 @@
   "download": {
    "h": "Download",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.1.0 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
+   "lead": "Version 0.2.0 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
    "desc": "Download Matriochka for Minecraft 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
    "sources": [
     {
@@ -912,7 +912,7 @@
    "installH": "Installing",
    "steps": [
     "Install Fabric Loader for Minecraft 26.3.",
-    "Download matriochka-0.1.0.jar from the GitHub releases.",
+    "Download matriochka-0.2.0+26.3.jar from the GitHub releases.",
     "Put it in your mods folder with Fabric API and GeckoLib.",
     "Launch the Fabric profile and create a new world. The Artisan's Scroll is waiting in your inventory."
    ],
@@ -939,12 +939,12 @@
     {
      "k": "mobHealthMultiplier",
      "v": "1.0",
-     "d": "Scales the health of every creature"
+     "d": "Scales the health of every creature and boss"
     },
     {
      "k": "mobDamageMultiplier",
      "v": "1.0",
-     "d": "Scales the damage of every creature"
+     "d": "Scales the damage of every creature and boss"
     },
     {
      "k": "maxGroupSize",
@@ -952,14 +952,9 @@
      "d": "Players per group"
     },
     {
-     "k": "screenShake",
-     "v": "true",
-     "d": "Camera shake during big hits"
-    },
-    {
      "k": "difficulty",
      "v": "\"normal\"",
-     "d": "Overall difficulty preset"
+     "d": "story (70% damage), normal, nightmare (130% damage, one charge per Soul Cradle) or hardcore (as nightmare, and the Doll of Life never saves you)"
     }
    ]
   }
@@ -8593,7 +8588,7 @@
      "id": "apnea_kelp",
      "tex": "items/apnea_kelp.png",
      "name": "Apnea Kelp",
-     "effect": "Oxygen +1 minute."
+     "effect": "Oxygen lasts twice as long for 5 minutes."
     }
    ],
    "armor": {
@@ -8840,7 +8835,7 @@
       "name": "Apnea Kelp",
       "kind": "food",
       "rarity": "Common",
-      "effect": "Oxygen +1 minute.",
+      "effect": "Oxygen lasts twice as long for 5 minutes.",
       "station": "Abyssal Press",
       "inputs": [
        {
@@ -9108,7 +9103,7 @@
       "cat": "Hidden",
       "hidden": true,
       "name": "Forgotten Plate",
-      "desc": "Repair the old submarine."
+      "desc": "Search a sunken wreck."
      },
      {
       "cat": "Hidden",
@@ -9355,7 +9350,7 @@
    "n": 8,
    "name": "Hastened Seasons",
    "short": "A day lasts eight minutes. A season, two.",
-   "long": "Time runs three times faster: a full day and night take eight minutes, each season two. Summer leaves you hungry, winter slows you down, spring and autumn are your windows. A Season Preserve shields you for two minutes, the Hourglass holds the clock for 90 seconds, and the Time Workshop only accepts recipes at dawn and dusk.",
+   "long": "Time runs two and a half times faster: a full day and night take eight minutes, each season two. Summer leaves you hungry, winter slows you down, spring and autumn are your windows. A Season Preserve shields you for two minutes, the Hourglass holds the clock for 90 seconds, and the Time Workshop only accepts recipes at dawn and dusk.",
    "nums": [
     {
      "v": "×3",
@@ -9689,7 +9684,7 @@
      "id": "season_jam",
      "tex": "items/season_jam.png",
      "name": "Season Jam",
-     "effect": "Protection from the season."
+     "effect": "Protection from the season for 3 minutes."
     }
    ],
    "armor": {
@@ -9960,7 +9955,7 @@
       "name": "Season Jam",
       "kind": "food",
       "rarity": "Common",
-      "effect": "Protection from the season.",
+      "effect": "Protection from the season for 3 minutes.",
       "station": "Time Workshop",
       "inputs": [
        {
@@ -10777,7 +10772,7 @@
      "id": "anchor_bread",
      "tex": "items/anchor_bread.png",
      "name": "Anchor Bread",
-     "effect": "Less knockback for 5 minutes."
+     "effect": "Steady footing for 5 minutes."
     }
    ],
    "armor": {
@@ -11024,7 +11019,7 @@
       "name": "Anchor Bread",
       "kind": "food",
       "rarity": "Common",
-      "effect": "Less knockback for 5 minutes.",
+      "effect": "Steady footing for 5 minutes.",
       "station": "Terrain Anchor",
       "inputs": [
        {
@@ -11848,7 +11843,7 @@
      "id": "workshop_feast",
      "tex": "items/workshop_feast.png",
      "name": "Workshop Feast",
-     "effect": "Two effects of your choice."
+     "effect": "Every dish's effect for 2 minutes."
     }
    ],
    "armor": {
@@ -12069,7 +12064,7 @@
       "name": "Workshop Feast",
       "kind": "food",
       "rarity": "Common",
-      "effect": "Two effects of your choice.",
+      "effect": "Every dish's effect for 2 minutes.",
       "station": "Final Loom",
       "inputs": [
        {
@@ -12331,7 +12326,7 @@
       "cat": "Exploration",
       "hidden": false,
       "name": "A Crumb",
-      "desc": "Find your base, seen from the giant world."
+      "desc": "Climb onto the Titanic Workbench."
      },
      {
       "cat": "Exploration",
@@ -12367,7 +12362,7 @@
       "cat": "Hidden",
       "hidden": true,
       "name": "Set Down the Tools",
-      "desc": "Reach the third ending."
+      "desc": "Defeat the Unfinished with the 10 hidden dolls on you."
      }
     ]
    },

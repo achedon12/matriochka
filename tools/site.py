@@ -544,11 +544,11 @@ RULE_LONG = {
         "le scaphandre complet. Remonter à la surface la recharge de 10 par seconde. Sous y 110, la pression commence à "
         "t'écraser ; le scaphandre complet repousse cette limite à y 40. Capsules d'oxygène et Algue d'apnée font gagner "
         "du temps, le Propulseur te ramène vite en haut."),
-    8: ("Time runs three times faster: a full day and night take eight minutes, each season two. Summer leaves you "
+    8: ("Time runs two and a half times faster: a full day and night take eight minutes, each season two. Summer leaves you "
         "hungry, winter slows you down, spring and autumn are your windows. A Season Preserve shields you for two "
         "minutes, the Hourglass holds the clock for 90 seconds, and the Time Workshop only accepts recipes at dawn and "
         "dusk.",
-        "Le temps passe trois fois plus vite : un jour et une nuit tiennent en huit minutes, chaque saison en deux. "
+        "Le temps passe deux fois et demie plus vite : un jour et une nuit tiennent en huit minutes, chaque saison en deux. "
         "L'été te creuse l'estomac, l'hiver te ralentit, le printemps et l'automne sont tes fenêtres. Une Conserve de "
         "saison te protège deux minutes, le Sablier retient l'horloge 90 secondes, et l'Atelier du temps n'accepte de "
         "recettes qu'à l'aube et au crépuscule."),
