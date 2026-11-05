@@ -1,0 +1,326 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.pressure_leviathan",
+    "texture_width": 128,
+    "texture_height": 128,
+    "visible_bounds_width": 6,
+    "visible_bounds_height": 3,
+    "visible_bounds_offset": [
+     0,
+     0.46875,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "head",
+     "parent": "root",
+     "pivot": [
+      0,
+      8,
+      16
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -7.0,
+        1.0,
+        0
+       ],
+       "size": [
+        14,
+        14,
+        16
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg1",
+     "parent": "head",
+     "pivot": [
+      0,
+      8,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -6.5,
+        1.5,
+        -16
+       ],
+       "size": [
+        13,
+        13,
+        16
+       ],
+       "uv": [
+        60,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg2",
+     "parent": "seg1",
+     "pivot": [
+      0,
+      8,
+      -16
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -6.0,
+        2.0,
+        -32
+       ],
+       "size": [
+        12,
+        12,
+        16
+       ],
+       "uv": [
+        0,
+        30
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg3",
+     "parent": "seg2",
+     "pivot": [
+      0,
+      8,
+      -32
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -5.5,
+        2.5,
+        -48
+       ],
+       "size": [
+        11,
+        11,
+        16
+       ],
+       "uv": [
+        56,
+        30
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg4",
+     "parent": "seg3",
+     "pivot": [
+      0,
+      8,
+      -48
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -5.0,
+        3.0,
+        -64
+       ],
+       "size": [
+        10,
+        10,
+        16
+       ],
+       "uv": [
+        0,
+        58
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg5",
+     "parent": "seg4",
+     "pivot": [
+      0,
+      8,
+      -64
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -4.5,
+        3.5,
+        -80
+       ],
+       "size": [
+        9,
+        9,
+        16
+       ],
+       "uv": [
+        52,
+        58
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg6",
+     "parent": "seg5",
+     "pivot": [
+      0,
+      8,
+      -80
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -4.0,
+        4.0,
+        -96
+       ],
+       "size": [
+        8,
+        8,
+        16
+       ],
+       "uv": [
+        0,
+        84
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg7",
+     "parent": "seg6",
+     "pivot": [
+      0,
+      8,
+      -96
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3.5,
+        4.5,
+        -112
+       ],
+       "size": [
+        7,
+        7,
+        16
+       ],
+       "uv": [
+        48,
+        84
+       ]
+      }
+     ]
+    },
+    {
+     "name": "jaw",
+     "parent": "head",
+     "pivot": [
+      0,
+      4,
+      16
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -6,
+        0,
+        14
+       ],
+       "size": [
+        12,
+        4,
+        10
+       ],
+       "uv": [
+        0,
+        108
+       ]
+      }
+     ]
+    },
+    {
+     "name": "fin_l",
+     "parent": "head",
+     "pivot": [
+      7,
+      8,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        7,
+        8,
+        -6
+       ],
+       "size": [
+        10,
+        1,
+        8
+       ],
+       "uv": [
+        44,
+        108
+       ]
+      }
+     ]
+    },
+    {
+     "name": "fin_r",
+     "parent": "head",
+     "pivot": [
+      -7,
+      8,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -17,
+        8,
+        -6
+       ],
+       "size": [
+        10,
+        1,
+        8
+       ],
+       "uv": [
+        80,
+        108
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
