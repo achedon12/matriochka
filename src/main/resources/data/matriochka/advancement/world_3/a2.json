@@ -1,0 +1,33 @@
+{
+  "parent": "matriochka:world_3/a1",
+  "display": {
+    "icon": {
+      "id": "matriochka:seed_3"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w3.a2.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w3.a2.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "matriochka:grand_jailer"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}
