@@ -1,0 +1,207 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.trench_eel",
+    "texture_width": 64,
+    "texture_height": 64,
+    "visible_bounds_width": 6,
+    "visible_bounds_height": 3,
+    "visible_bounds_offset": [
+     0,
+     0.203125,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "head",
+     "parent": "root",
+     "pivot": [
+      0,
+      3.0,
+      10
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3.0,
+        0,
+        0
+       ],
+       "size": [
+        6,
+        6,
+        10
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -3.5,
+        -0.5,
+        9
+       ],
+       "size": [
+        7,
+        7,
+        3
+       ],
+       "uv": [
+        32,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg1",
+     "parent": "head",
+     "pivot": [
+      0,
+      3.0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3.0,
+        0,
+        -10
+       ],
+       "size": [
+        6,
+        6,
+        10
+       ],
+       "uv": [
+        0,
+        16
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg2",
+     "parent": "seg1",
+     "pivot": [
+      0,
+      3.0,
+      -10
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3.0,
+        0,
+        -20
+       ],
+       "size": [
+        6,
+        6,
+        10
+       ],
+       "uv": [
+        32,
+        16
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg3",
+     "parent": "seg2",
+     "pivot": [
+      0,
+      3.0,
+      -20
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3.0,
+        0,
+        -30
+       ],
+       "size": [
+        6,
+        6,
+        10
+       ],
+       "uv": [
+        0,
+        32
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg4",
+     "parent": "seg3",
+     "pivot": [
+      0,
+      3.0,
+      -30
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3.0,
+        0,
+        -40
+       ],
+       "size": [
+        6,
+        6,
+        10
+       ],
+       "uv": [
+        32,
+        32
+       ]
+      }
+     ]
+    },
+    {
+     "name": "seg5",
+     "parent": "seg4",
+     "pivot": [
+      0,
+      3.0,
+      -40
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3.0,
+        0,
+        -50
+       ],
+       "size": [
+        6,
+        6,
+        10
+       ],
+       "uv": [
+        0,
+        48
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,315 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.light_eater",
+    "texture_width": 128,
+    "texture_height": 128,
+    "visible_bounds_width": 6,
+    "visible_bounds_height": 3,
+    "visible_bounds_offset": [
+     0,
+     0.6875,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "parent": "root",
+     "pivot": [
+      0,
+      12,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -5,
+        10,
+        -9
+       ],
+       "size": [
+        10,
+        10,
+        18
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -4,
+        20,
+        -6
+       ],
+       "size": [
+        8,
+        2,
+        12
+       ],
+       "uv": [
+        56,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "parent": "body",
+     "pivot": [
+      0,
+      16,
+      -9
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -7,
+        9,
+        -24
+       ],
+       "size": [
+        14,
+        12,
+        16
+       ],
+       "uv": [
+        0,
+        28
+       ]
+      }
+     ]
+    },
+    {
+     "name": "tail",
+     "parent": "body",
+     "pivot": [
+      0,
+      17,
+      9
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1,
+        16,
+        9
+       ],
+       "size": [
+        2,
+        2,
+        10
+       ],
+       "uv": [
+        60,
+        28
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_fl",
+     "parent": "root",
+     "pivot": [
+      3,
+      10,
+      -6
+     ],
+     "cubes": [
+      {
+       "origin": [
+        1.0,
+        0,
+        -8.0
+       ],
+       "size": [
+        4,
+        10,
+        4
+       ],
+       "uv": [
+        84,
+        28
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_fr",
+     "parent": "root",
+     "pivot": [
+      -3,
+      10,
+      -6
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -5.0,
+        0,
+        -8.0
+       ],
+       "size": [
+        4,
+        10,
+        4
+       ],
+       "uv": [
+        100,
+        28
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_bl",
+     "parent": "root",
+     "pivot": [
+      3,
+      10,
+      6
+     ],
+     "cubes": [
+      {
+       "origin": [
+        1.0,
+        0,
+        4.0
+       ],
+       "size": [
+        4,
+        10,
+        4
+       ],
+       "uv": [
+        0,
+        56
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_br",
+     "parent": "root",
+     "pivot": [
+      -3,
+      10,
+      6
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -5.0,
+        0,
+        4.0
+       ],
+       "size": [
+        4,
+        10,
+        4
+       ],
+       "uv": [
+        16,
+        56
+       ]
+      }
+     ]
+    },
+    {
+     "name": "jaw",
+     "parent": "head",
+     "pivot": [
+      0,
+      10,
+      -10
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -6,
+        6,
+        -23
+       ],
+       "size": [
+        12,
+        4,
+        14
+       ],
+       "uv": [
+        32,
+        56
+       ]
+      }
+     ]
+    },
+    {
+     "name": "tendril_l",
+     "parent": "body",
+     "pivot": [
+      5,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        5,
+        20,
+        -1
+       ],
+       "size": [
+        10,
+        1,
+        2
+       ],
+       "uv": [
+        84,
+        56
+       ]
+      }
+     ]
+    },
+    {
+     "name": "tendril_r",
+     "parent": "body",
+     "pivot": [
+      -5,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -15,
+        20,
+        -1
+       ],
+       "size": [
+        10,
+        1,
+        2
+       ],
+       "uv": [
+        0,
+        74
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,250 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.terrain_heart_boss",
+    "texture_width": 128,
+    "texture_height": 128,
+    "visible_bounds_width": 6,
+    "visible_bounds_height": 3.625,
+    "visible_bounds_offset": [
+     0,
+     1.3125,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "parent": "root",
+     "pivot": [
+      0,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -12,
+        8,
+        -12
+       ],
+       "size": [
+        24,
+        24,
+        24
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -8,
+        32,
+        -4
+       ],
+       "size": [
+        6,
+        8,
+        6
+       ],
+       "uv": [
+        96,
+        0
+       ]
+      },
+      {
+       "origin": [
+        2,
+        32,
+        -2
+       ],
+       "size": [
+        6,
+        10,
+        6
+       ],
+       "uv": [
+        0,
+        48
+       ]
+      }
+     ]
+    },
+    {
+     "name": "spike0",
+     "parent": "body",
+     "pivot": [
+      0,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        14.0,
+        16,
+        -2.0
+       ],
+       "size": [
+        4,
+        4,
+        4
+       ],
+       "uv": [
+        24,
+        48
+       ]
+      }
+     ]
+    },
+    {
+     "name": "spike1",
+     "parent": "body",
+     "pivot": [
+      0,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        6.0,
+        22,
+        11.856
+       ],
+       "size": [
+        4,
+        4,
+        4
+       ],
+       "uv": [
+        40,
+        48
+       ]
+      }
+     ]
+    },
+    {
+     "name": "spike2",
+     "parent": "body",
+     "pivot": [
+      0,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -10.0,
+        16,
+        11.856
+       ],
+       "size": [
+        4,
+        4,
+        4
+       ],
+       "uv": [
+        56,
+        48
+       ]
+      }
+     ]
+    },
+    {
+     "name": "spike3",
+     "parent": "body",
+     "pivot": [
+      0,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -18.0,
+        22,
+        -2.0
+       ],
+       "size": [
+        4,
+        4,
+        4
+       ],
+       "uv": [
+        72,
+        48
+       ]
+      }
+     ]
+    },
+    {
+     "name": "spike4",
+     "parent": "body",
+     "pivot": [
+      0,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -10.0,
+        16,
+        -15.856
+       ],
+       "size": [
+        4,
+        4,
+        4
+       ],
+       "uv": [
+        88,
+        48
+       ]
+      }
+     ]
+    },
+    {
+     "name": "spike5",
+     "parent": "body",
+     "pivot": [
+      0,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        6.0,
+        22,
+        -15.856
+       ],
+       "size": [
+        4,
+        4,
+        4
+       ],
+       "uv": [
+        104,
+        48
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

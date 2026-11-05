@@ -1,0 +1,212 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.silent_one",
+    "texture_width": 128,
+    "texture_height": 128,
+    "visible_bounds_width": 6,
+    "visible_bounds_height": 3,
+    "visible_bounds_offset": [
+     0,
+     0.96875,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "parent": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -5,
+        0,
+        -4
+       ],
+       "size": [
+        10,
+        18,
+        8
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -4,
+        18,
+        -3
+       ],
+       "size": [
+        8,
+        4,
+        6
+       ],
+       "uv": [
+        36,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "parent": "body",
+     "pivot": [
+      0,
+      22,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        22,
+        -4
+       ],
+       "size": [
+        8,
+        8,
+        8
+       ],
+       "uv": [
+        64,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -4.5,
+        25,
+        -4.5
+       ],
+       "size": [
+        9,
+        6,
+        9
+       ],
+       "uv": [
+        0,
+        26
+       ]
+      }
+     ]
+    },
+    {
+     "name": "arm_l",
+     "parent": "body",
+     "pivot": [
+      6,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        5,
+        8,
+        -1.5
+       ],
+       "size": [
+        3,
+        13,
+        3
+       ],
+       "uv": [
+        36,
+        26
+       ]
+      }
+     ]
+    },
+    {
+     "name": "arm_r",
+     "parent": "body",
+     "pivot": [
+      -6,
+      20,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -8,
+        8,
+        -1.5
+       ],
+       "size": [
+        3,
+        13,
+        3
+       ],
+       "uv": [
+        48,
+        26
+       ]
+      }
+     ]
+    },
+    {
+     "name": "chain",
+     "parent": "body",
+     "pivot": [
+      0,
+      12,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -6,
+        12,
+        -4.5
+       ],
+       "size": [
+        12,
+        1,
+        1
+       ],
+       "uv": [
+        60,
+        26
+       ]
+      },
+      {
+       "origin": [
+        -1,
+        2,
+        -4.5
+       ],
+       "size": [
+        2,
+        10,
+        1
+       ],
+       "uv": [
+        86,
+        26
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

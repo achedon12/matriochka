@@ -1,0 +1,207 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.earth_hand",
+    "texture_width": 64,
+    "texture_height": 64,
+    "visible_bounds_width": 6,
+    "visible_bounds_height": 3,
+    "visible_bounds_offset": [
+     0,
+     0.5,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "parent": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -6,
+        0,
+        -6
+       ],
+       "size": [
+        12,
+        6,
+        12
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -4,
+        -6,
+        -4
+       ],
+       "size": [
+        8,
+        6,
+        8
+       ],
+       "uv": [
+        0,
+        18
+       ]
+      }
+     ]
+    },
+    {
+     "name": "finger0",
+     "parent": "body",
+     "pivot": [
+      -5,
+      6,
+      -4
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -6,
+        6,
+        -5
+       ],
+       "size": [
+        2.5,
+        10,
+        2.5
+       ],
+       "uv": [
+        32,
+        18
+       ]
+      }
+     ]
+    },
+    {
+     "name": "finger1",
+     "parent": "body",
+     "pivot": [
+      -2.5,
+      6,
+      -4
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3.5,
+        6,
+        -5
+       ],
+       "size": [
+        2.5,
+        10,
+        2.5
+       ],
+       "uv": [
+        44,
+        18
+       ]
+      }
+     ]
+    },
+    {
+     "name": "finger2",
+     "parent": "body",
+     "pivot": [
+      0,
+      6,
+      -4
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1,
+        6,
+        -5
+       ],
+       "size": [
+        2.5,
+        10,
+        2.5
+       ],
+       "uv": [
+        0,
+        32
+       ]
+      }
+     ]
+    },
+    {
+     "name": "finger3",
+     "parent": "body",
+     "pivot": [
+      2.5,
+      6,
+      -4
+     ],
+     "cubes": [
+      {
+       "origin": [
+        1.5,
+        6,
+        -5
+       ],
+       "size": [
+        2.5,
+        10,
+        2.5
+       ],
+       "uv": [
+        12,
+        32
+       ]
+      }
+     ]
+    },
+    {
+     "name": "thumb",
+     "parent": "body",
+     "pivot": [
+      6,
+      4,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        6,
+        4,
+        -1
+       ],
+       "size": [
+        2.5,
+        8,
+        2.5
+       ],
+       "uv": [
+        24,
+        32
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

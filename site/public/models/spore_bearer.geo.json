@@ -1,0 +1,99 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.spore_bearer",
+    "texture_width": 64,
+    "texture_height": 64,
+    "visible_bounds_width": 6,
+    "visible_bounds_height": 3,
+    "visible_bounds_offset": [
+     0,
+     0.40625,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "parent": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -6,
+        0,
+        -6
+       ],
+       "size": [
+        12,
+        10,
+        12
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -4,
+        10,
+        -4
+       ],
+       "size": [
+        8,
+        3,
+        8
+       ],
+       "uv": [
+        0,
+        22
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "parent": "body",
+     "pivot": [
+      0,
+      6,
+      -6
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -3,
+        5,
+        -7
+       ],
+       "size": [
+        6,
+        3,
+        1
+       ],
+       "uv": [
+        32,
+        22
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
