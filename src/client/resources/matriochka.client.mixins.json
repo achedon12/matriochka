@@ -1,0 +1,1 @@
+{ "required": true, "package": "fr.achedon12.matriochka.mixin.client", "compatibilityLevel": "JAVA_25", "client": [], "injectors": { "defaultRequire": 1 } }

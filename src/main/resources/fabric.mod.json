@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "matriochka",
+  "version": "${version}",
+  "name": "Matriochka",
+  "description": "Every block can hold a world. Ten nested worlds, ten bosses, one Artisan.",
+  "authors": ["achedon12"],
+  "contact": { "sources": "https://github.com/achedon12/matriochka", "homepage": "https://achedon12.github.io/matriochka/" },
+  "license": "MIT",
+  "icon": "assets/matriochka/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["fr.achedon12.matriochka.Matriochka"],
+    "client": ["fr.achedon12.matriochka.client.MatrioClient"]
+  },
+  "mixins": ["matriochka.mixins.json", { "config": "matriochka.client.mixins.json", "environment": "client" }],
+  "accessWidener": "matriochka.classtweaker",
+  "depends": { "fabricloader": ">=0.20.0", "minecraft": "~26.3", "java": ">=25", "fabric-api": "*", "geckolib": ">=5.5" }
+}
