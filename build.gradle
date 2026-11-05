@@ -27,6 +27,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('trailer')) {
 				vmArgs '-Dmatriochka.capture=trailer', '-Xmx4G'
 			}
+			if (name == 'clientGameTest' && project.hasProperty('moves')) {
+				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true'
+			}
 		}
 	}
 	mods {
