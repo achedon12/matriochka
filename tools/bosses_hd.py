@@ -463,6 +463,13 @@ def standard_anims(rig, gait="biped", heavy=1.0):
     for b in roles(rig, "arm_l0") + roles(rig, "arm_r0"):
         chan(re, b, "rotation", [(0, [0, 0, 0]), (0.3, [10, 0, 0]), (2.0, [8, 0, 0]), (2.4, [0, 0, 0])])
     A_["misc.rest"] = re
+    # GeckoLib turns X the other way from Blockbench's preview: a lower jaw opens with a positive angle in game
+    for anim in A_.values():
+        for b in roles(rig, "jaw"):
+            ch = anim["bones"].get(b, {}).get("rotation")
+            if ch:
+                for k in ch.values():
+                    k["post"][0] = -k["post"][0]
     return A_
 
 
