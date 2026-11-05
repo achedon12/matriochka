@@ -93,9 +93,7 @@ public final class BossFeats {
 				case "the_unfinished" -> {
 					if (!f.contains("died")) Achievements.grant(p, "ten_shells");
 					if (gear.getOrDefault(p.getUUID(), 0) == 0b11111111110) Achievements.grant(p, "all_gear");
-					int dolls = 0;
-					for (int w = 1; w <= 10; w++) if (fr.achedon12.matriochka.block.Stations.count(p.getInventory(), ModContent.item("hidden_doll_" + w)) > 0) dolls++;
-					if (dolls == 10) Achievements.grant(p, "third_end");
+					// "Set Down the Tools" (third_end) is no longer earned here: it is the third ending, in World 0
 				}
 				default -> {}
 			}

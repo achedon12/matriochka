@@ -32,6 +32,7 @@ public class MatrioClient implements ClientModInitializer {
 		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
 		ClientPlayNetworking.registerGlobalReceiver(Net.StatePayload.TYPE, (p, ctx) -> state = p.tag());
 		ClientPlayNetworking.registerGlobalReceiver(Net.OpenJournalPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new JournalScreen(p.scroll())));
+		ClientPlayNetworking.registerGlobalReceiver(Net.EndingPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new EndingScreen(p.kind())));
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
