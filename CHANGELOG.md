@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 (alpha)
+
+The story is complete: the Artisan's Journal, the hidden dolls, World 0, three endings and the New Cycle. World 7 is now entirely under water, worlds 3, 5, 6, 9 and 10 have their full mechanics, and the mod has its own music and sounds. Trailer: [matriochka-trailer.mp4](https://github.com/achedon12/matriochka/releases/download/v0.3.0/matriochka-trailer.mp4).
 
 - Matriochka has its own sounds and music, synthesized from seeded recipes (no recordings): a theme per world on Slavic folk modes (music box, balalaika and domra, gusli, wooden flute, bayan, bells, frame drum), played every few minutes in that world; a boss theme during every boss fight, fiercer below a third of the boss's health; and an endings' theme over the Scroll. The lullaby of World 0 comes back in World 10, the boss fight and the endings.
 - Each world has its own ambience: a seamless loop and random sounds (jungle breath and insects, embers and hammers, chains and far doors, wind and thunder, breaths and footsteps in the dark, backwards chimes, drips and pressure groans, ticking clocks and a cuckoo, the ground's heartbeat and grinding rock).
@@ -12,7 +14,6 @@
 - World 6: gravity changes by zone. The realm is cut into 32 x 32 columns and about a third of them are upside down, the pattern changing every 90 seconds: inside one, players, creatures and dropped items fall upward and stand on ceilings, up to 16 blocks above the ground. Purple sparks trace the borders. Gravity Boots, the Stabilizer and the Flipped Apple still protect you; Ceiling Walk and Vertigo come from the real thing.
 - World 9: whole 16 x 16 zones move. Every minute up to three zones around each player rise, sink, slide or close their chasms, carrying players, creatures and builds along (My Base Walks) without ever burying anyone. Terrain Anchors (16 blocks), Anchors and Anchor Bread (4 blocks around you) and Grip Boots hold the ground still; zones with chests, stations or unbreakable blocks never move.
 - Blocks placed by players are now remembered in worlds 3, 5, 9 and 10, so the moving worlds can protect, burn or carry them.
-- New in-game check of these four mechanics: `./gradlew runClientGameTest -Prules`.
 - World 7, the Pressure Ocean, is now entirely under water: the sea fills it from the floor up to y 240, with no dry land. The sea floor rolls around y 140, with reef crowns, rare trenches below y 20, caves and air pockets underneath, kelp forests, coral reefs and spires of glowing Pressure Coral.
 - You arrive in a diving chamber on the sea floor: an air-filled glass dome around the Threshold, with a door that holds the water back, a chest of supplies and an Air Vent outside.
 - Snorkel helmets: the only way to breathe for long under water. One per ore of the world (Abyssal Salt, and the new Nacre Vein, Abyssal Cobalt Ore and Pearl Bed), crafted at the Abyssal Press. They breathe for you from a tank that drains under water and refills in air pockets, in bubble columns, over Air Vents, with an Oxygen Capsule or with the press's new Refill button. They are fragile: hits wear them fast. Higher tiers hold more air, wear less and let you dive deeper.
@@ -28,7 +29,6 @@
 - Three endings. After the Unfinished, your karma decides: Sealed (two more hearts) or Absorbed (stronger strikes, but your karma can never rise again). World 0 holds the third, Set Down the Tools, and the Blank Scroll. Each ending plays a crawl on the Scroll, then the credits, and has its advancement in a new Endings tab. The hidden achievement Set Down the Tools now belongs to the third ending.
 - New Cycle: after an ending, the Journal can begin the next cycle. Your group starts over from the Guardian in fresh worlds where creatures and bosses have 50% more health and 25% more damage per cycle. You keep your souls, karma, pages, quests, endings and gear; the cores, Seeds, World Soils, offerings and keys of the old cycle are taken back, and its World Blocks crumble.
 - New commands for operators: `/matriochka world zero`, `/matriochka ending <seal|absorb|tools>`, `/matriochka cycle show|begin`.
-- An in-game check of all this: `./gradlew runClientGameTest -Pstory`.
 - The Refuge Doll: every player who fights the Grand Jailer gets a pocket base for the group, a lacquered room that grows after worlds 5, 7 and 9 and stays shut while a boss is awake nearby.
 - Layered armor: Lacquer Layers from the Lightning Forge are laid on armor at the Class Table; when the outer layer breaks the next takes over. The class decides how many a piece holds.
 - Nesting chests come in three sizes; each holds the smaller ones with their contents, keeps everything when broken, and sorts items into the smaller chests by type.
@@ -40,13 +40,11 @@
 - Group leaders can kick, hand over the lead and disband; administrators can list, repair, move and reset worlds and reset bosses.
 - Villager trades involving diamonds wait until World 5.
 - Difficulty modes: story keeps the inventory on death; hardcore makes death permanent and a broken World Block deletes its world.
-- Gear class levels read from item components are bounded.
 - World variants: a Seed now hatches into a variant of its world. Feeding the planted Seed (flowers, honey, berries, moss lean it calm; gunpowder, blaze powder, rotten flesh, bones, spider eyes, magma cream lean it wild) and the blocks within 3 of it decide; at karma +100 the world is Hallowed, at -100 Cursed. Calm worlds have fewer, weaker creatures and a gentler rule; wild and cursed ones more and stronger creatures, a harsher rule and richer drops. Each world names its calm and wild variants; the Journal's Worlds tab marks them with a seal and explains them on hover. Only the planter's group can feed its Seed.
 - Boss mutations: from World 6, the boss of a wild, hallowed or cursed world wakes mutated (Searing, Frenzied, Echoing, Radiant or Hollow), named in its boss bar. A mutated boss drops a Mutated Scale and two more Shell Shards.
 - Effects between the scales: a World Block now leaks its world within 8 blocks (spores and growth, heat for furnaces and sparks, slammed doors, gusts and charged lightning rods, snuffed candles, floating items, soaked farmland, hastened crops and spoiled food, cracking stone) and shakes while a boss fight rages inside. In return, water, ice, redstone, storms, lights, dry ground or Terrain Anchors around it soften or strengthen the rule inside, and moving a World Block makes its world quake.
 - Every World Block shows a small turning island of its world above it, tinted by its variant.
 - World 10 at doll scale: giant spools, nails, pins, buttons, thimbles, scissors, pencils and wood offcuts lie on the workshop floor, and the Titanic Workbench is now a towering bench whose top holds the Maquette: a quarter-scale model of your base, captured when the World 10 Seed hatches and built with real blocks on your first visit.
-- New in-game check of all this: `./gradlew runClientGameTest -Pscale`.
 
 ## 0.2.0 (alpha)
 
