@@ -67,6 +67,7 @@ ICONS = {
     'users': '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/> <circle cx="9" cy="7" r="4"/> <path d="M22 21v-2a4 4 0 0 0-3-3.87"/> <path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
     'wind': '<path d="M12.8 19.6A2 2 0 1 0 14 16H2"/> <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/> <path d="M9.8 4.4A2 2 0 1 1 11 8H2"/>',
     'x': '<path d="M18 6 6 18"/> <path d="m6 6 12 12"/>',
+    'play': '<polygon points="6 3 20 12 6 21 6 3"/>',
 }
 
 
@@ -213,6 +214,7 @@ def copy_assets():
     _copy_dir(GEO, os.path.join(PUBLIC, "models"), ".geo.json")
     _copy_dir(ANIM, os.path.join(PUBLIC, "animations"), ".animation.json")
     process_shots(os.path.join(PUBLIC, "shots"))
+    process_frames(os.path.join(PUBLIC, "shots"))
     if os.path.exists(TRAILER_SRC):
         shutil.copy2(TRAILER_SRC, os.path.join(PUBLIC, "trailer.mp4"))
         if Image is not None:
@@ -334,6 +336,35 @@ def process_shots(dst):
         rgb.crop(wide).resize((960, 720), Image.LANCZOS).save(
             os.path.join(dst, key + ".jpg"), quality=82, optimize=True, progressive=True)
         SHOTS[key] = key + ".jpg"
+
+
+# Frames picked by eye from the trailer capture (media/trailer/frames): key -> (sequence, frame).
+FRAMES = os.path.join(ROOT, "media/trailer/frames")
+FRAME_PICKS = {}
+
+
+def process_frames(dst):
+    """Each picked frame becomes a 21:9 banner, a 4:3 card and a tall doll-window crop."""
+    if Image is None or not os.path.isdir(FRAMES):
+        return
+    for key, (seq, n) in FRAME_PICKS.items():
+        src = os.path.join(FRAMES, f"seq_{seq}_{n:04d}.png")
+        if not os.path.exists(src):
+            continue
+        img = Image.open(src).convert("RGB")
+        W, H = img.size
+        bh = int(W * 9 / 21)
+        img.crop((0, (H - bh) // 2, W, (H + bh) // 2)).resize((1920, 823), Image.LANCZOS).save(
+            os.path.join(dst, key + "_banner.jpg"), quality=80, optimize=True, progressive=True)
+        SHOTS[key + "_banner"] = key + "_banner.jpg"
+        cw = H * 4 // 3
+        img.crop(((W - cw) // 2, 0, (W + cw) // 2, H)).resize((960, 720), Image.LANCZOS).save(
+            os.path.join(dst, key + ".jpg"), quality=82, optimize=True, progressive=True)
+        SHOTS[key] = key + ".jpg"
+        tw = H * 2 // 3
+        img.crop(((W - tw) // 2, 0, (W + tw) // 2, H)).resize((480, 720), Image.LANCZOS).save(
+            os.path.join(dst, key + "_tall.jpg"), quality=82, optimize=True, progressive=True)
+        SHOTS[key + "_tall"] = key + "_tall.jpg"
 
 
 def shot(key):
@@ -723,7 +754,8 @@ def build_worlds():
         d = dict(n=n, name=world_name(n), short=t(*RULE_SHORT[n]), long=t(*RULE_LONG[n]),
                  nums=[dict(v=(a if LANG == "en" else b), l=(c if LANG == "en" else dd)) for a, b, c, dd in RULE_NUMS[n]],
                  doll=doll(n), light=light(n), bg=world_bg(n), block=f"blocks/{WORLD_BLOCK[n]}.png",
-                 tall=shot("00_surface_tall" if n == 0 else f"w{n:02d}_view_tall"),
+                 tall=shot(f"w{n:02d}_view_tall") or (shot("00_surface_tall") if n == 0 else None),
+                 banner=shot(f"w{n:02d}_view_banner"),
                  wide=None if n == 0 else shot(f"w{n:02d}_view"),
                  boss=dict(id=boss["id"], name=boss[LANG], hp=fmt(boss["hp"]), core=boss["core"], coreTex=tex(boss["core"]), coreName=name(boss["core"])),
                  mobs=[dict(id=m["id"], name=name(m["id"]), elite=m["elite"], tex=tex(m["drop"])) for m in MOBS_OF.get(n, [])])
@@ -1011,7 +1043,10 @@ def build_copy():
         animations=t("Animations", "Animations"), autoRotate=t("Turn slowly", "Tourner lentement"),
         role=t("Role", "Rôle"), attackSpeed=t("Attack speed", "Vitesse d'attaque"), attackEvery=t("one hit every", "un coup toutes les"),
         noMelee=t("no melee attack", "aucune attaque au corps à corps"), moveSpeed=t("Movement speed", "Vitesse de déplacement"),
-        behaviour=t("How it fights", "Comment il combat"), moves=t("Attacks", "Attaques"), openSheet=t("Open its technical sheet", "Ouvrir sa fiche technique"), movesLead=t("Its own attacks, shared with no other creature. It picks among them, never the same one twice in a row, and each has a wind-up you can read before it lands.", "Ses attaques à elle, qu'aucune autre créature ne partage. Elle choisit parmi elles, jamais deux fois la même d'affilée, et chacune a une préparation lisible avant de frapper."), recharge=t("Recharge", "Recharge"), drops=t("Drops", "Butin"), chance=t("Chance", "Chance"), count=t("Count", "Quantité"),
+        behaviour=t("How it fights", "Comment il combat"), moves=t("Attacks", "Attaques"), openSheet=t("Open its technical sheet", "Ouvrir sa fiche technique"),
+        search=t("Search the bestiary", "Chercher dans le bestiaire"), searchPh=t("A creature or an attack…", "Une créature ou une attaque…"),
+        elitesOnly=t("Elites only", "Élites seulement"), elite=t("Elite", "Élite"),
+        noMatch=t("No creature matches. Clear the search or pick another world.", "Aucune créature ne correspond. Vide la recherche ou choisis un autre monde."), movesLead=t("Its own attacks, shared with no other creature. It picks among them, never the same one twice in a row, and each has a wind-up you can read before it lands.", "Ses attaques à elle, qu'aucune autre créature ne partage. Elle choisit parmi elles, jamais deux fois la même d'affilée, et chacune a une préparation lisible avant de frapper."), recharge=t("Recharge", "Recharge"), drops=t("Drops", "Butin"), chance=t("Chance", "Chance"), count=t("Count", "Quantité"),
         spawns=t("Where it spawns", "Où il apparaît"), spawnWeight=t("spawn weight", "poids d'apparition"),
         spawnShare=t("of the creatures that spawn in its world", "des créatures qui apparaissent dans son monde"),
         group=t("per group", "par groupe"), quests=t("Quests", "Quêtes"), achievements=t("Achievements", "Succès"),
@@ -1079,6 +1114,52 @@ def build_copy():
              t("Up to eight players share a group, its worlds and its defeated bosses. Bosses grow tougher with every player who joins the fight.",
                "Jusqu'à huit joueurs partagent un groupe, ses mondes et ses boss vaincus. Les boss se renforcent à chaque joueur qui rejoint le combat."))]],
         reelWatch=t("Watch the trailer", "Voir la bande-annonce"),
+        heroGenre=t("A Minecraft mod of ten worlds, each sealed inside a block of the one before.",
+                    "Un mod Minecraft de dix mondes, chacun scellé dans un bloc du précédent."),
+        heroStatus=t("alpha, out now for Minecraft 26.3 on Fabric. Free and open source.",
+                     "alpha, disponible pour Minecraft 26.3 sur Fabric. Gratuit et open source."),
+        heroImg=shot("w00_view_banner") or shot("00_surface"),
+        surfaceLabel=t("The Surface", "La Surface"),
+        openWorld=t("Open", "Ouvrir"),
+        verbsH=t("What you do in Matriochka", "Ce que tu fais dans Matriochka"),
+        verbsP=t("Four things, over and over, ten worlds deep.", "Quatre choses, encore et encore, sur dix mondes de profondeur."),
+        verbs=[dict(verb=t("Grow a world", "Fais pousser un monde"), p=t("Craft a Seed, plant it on World Soil, meet its condition. The block that hatches holds a world.",
+                                                                      "Fabrique une Graine, plante-la sur une Terre de monde, remplis sa condition. Le bloc qui éclot contient un monde."),
+                    img=shot("gui_station_matrix_workbench"), href="systems/"),
+               dict(verb=t("Survive its rule", "Survis à sa règle"), p=t("Toxic air, rising heat, total darkness, upside-down gravity: each world bends one rule.",
+                                                                         "Air toxique, chaleur, obscurité totale, gravité inversée : chaque monde tord une règle."),
+                    img=shot("w04_view"), href="worlds/"),
+               dict(verb=t("Fight what lives there", "Affronte ce qui y vit"), p=t("Fifty creatures with their own attacks, and a boss that guards the core of the next world.",
+                                                                                 "Cinquante créatures aux attaques propres, et un boss qui garde le noyau du monde suivant."),
+                    img=shot("w03_fight") or shot("w02_boss"), href="bestiary/"),
+               dict(verb=t("Craft what it gives", "Fabrique ce qu'il donne"), p=t("Each world has its station, its armour and its tools, the ones you need for the world below.",
+                                                                                  "Chaque monde a sa station, son armure et ses outils, ceux qu'il te faut pour le monde suivant."),
+                    img=shot("gui_station_spore_vat"), href="worlds/1/")],
+        allCreatures=t("See all fifty creatures", "Voir les cinquante créatures"),
+        sysImg=shot("gui_journal_1"),
+        getH=t("Get Matriochka", "Obtenir Matriochka"),
+        getP=t("Install it on the client to play solo, and on both server and clients to play together.",
+               "Installe-le sur le client pour jouer seul, et sur le serveur comme sur les clients pour jouer ensemble."),
+        platforms=[dict(name="GitHub", note=t(f"Version {VERSION}, changelog and source", f"Version {VERSION}, journal des changements et code source"), href=RELEASES, icon="github"),
+                   dict(name="Modrinth", note=t("Coming soon", "Bientôt"), href=None, icon="package"),
+                   dict(name="CurseForge", note=t("Coming soon", "Bientôt"), href=None, icon="package")],
+        faqH=t("Questions", "Questions"),
+        faq=[dict(q=t("Where do I start?", "Par où commencer ?"),
+                  a=t("Read the Artisan's Scroll you spawn with, then find the Guardian's Sanctuary on the Surface and wake the Block Guardian.",
+                      "Lis le Parchemin de l'artisan reçu au départ, puis trouve le Sanctuaire du Gardien sur la Surface et réveille le Gardien du bloc.")),
+             dict(q=t("My Seed does not hatch.", "Ma Graine n'éclot pas."),
+                  a=t("Check that it sits on tilled World Soil of the previous world and that its condition is met: smoke puffs mean it is still waiting.",
+                      "Vérifie qu'elle est sur une Terre de monde du monde précédent, bêchée, et que sa condition est remplie : des volutes de fumée veulent dire qu'elle attend encore.")),
+             dict(q=t("I died inside a world. Are my things gone?", "Je suis mort dans un monde. Mes affaires sont perdues ?"),
+                  a=t("No. A death chest keeps them where you fell, and a Soul Cradle placed beforehand lets you wake up inside the world.",
+                      "Non. Un coffre de mort les garde là où tu es tombé, et un Berceau d'âmes posé avant te fait renaître dans le monde.")),
+             dict(q=t("Does it work on servers?", "Ça marche en multijoueur ?"),
+                  a=t("Yes, with the mod on the server and on every client. Up to eight players share a group, its worlds and its bosses.",
+                      "Oui, avec le mod sur le serveur et sur chaque client. Jusqu'à huit joueurs partagent un groupe, ses mondes et ses boss.")),
+             dict(q=t("Does it work on Lunar Client?", "Ça marche sur Lunar Client ?"),
+                  a=t("Through Lunar Client's Fabric profile for 26.3, with Fabric API and GeckoLib.", "Via le profil Fabric de Lunar Client pour la 26.3, avec Fabric API et GeckoLib.")),
+             dict(q=t("Can I fight a boss again?", "Je peux refaire un boss ?"),
+                  a=t("Yes. Its altar wakes it again, and it drops its core, soil and souls again.", "Oui. Son autel le réveille à nouveau, et il laisse encore son noyau, sa terre et ses âmes."))],
         stripH=t("Ten worlds, one inside the other", "Dix mondes, l'un dans l'autre"),
         stripP=t("Every world is sealed in a block you grow inside the world before it. Open one.",
                  "Chaque monde est scellé dans un bloc que tu fais pousser dans le monde précédent. Ouvre-en un."),
@@ -1103,6 +1184,7 @@ def build_copy():
                "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."),
     )
     worlds = dict(
+        headImg=shot("w04_view_banner"),
         lifeH=t("Who lives here", "Qui vit ici"),
         lifeP=t("Pick a creature to watch it move and use its own attacks. The boss guards the core that opens the next world.",
                 "Choisis une créature pour la voir bouger et lancer ses propres attaques. Le boss garde le noyau qui ouvre le monde suivant."),
@@ -1121,6 +1203,7 @@ def build_copy():
         inGame=t("in game", "en jeu"),
     )
     bestiary = dict(
+        headImg=shot("w05_fight_banner") or shot("w03_fight_banner"),
         h=t("Bestiary", "Bestiaire"),
         lead=t("Fifty creatures, five per world. Health and damage already include the world's multiplier: health grows by 35% and damage by 20% with every world you go down.",
                "Cinquante créatures, cinq par monde. La vie et les dégâts incluent déjà le multiplicateur du monde : la vie augmente de 35 % et les dégâts de 20 % à chaque monde franchi."),
@@ -1135,6 +1218,7 @@ def build_copy():
         rare=t("rare", "rare"),
     )
     bosses = dict(
+        headImg=shot("w02_boss_banner") or shot("w10_boss_banner"),
         h=t("Bosses", "Boss"),
         lead=t("Eleven fights, each built the same way: an announcement you can read, a fast and dangerous attack, then an opening. Hit a boss during its opening and it takes 1.5 times the damage; outside of it, only three quarters.",
                "Onze combats, tous construits pareil : une annonce lisible, une attaque rapide et dangereuse, puis une ouverture. Frappé pendant son ouverture, un boss subit 1,5 fois les dégâts ; en dehors, seulement les trois quarts."),
@@ -1165,7 +1249,7 @@ def build_systems(d):
     nq = len(C.QUESTS)
     nach = sum(len(v) for v in C.ACH.values())
     return dict(
-        h=t("Systems", "Systèmes"),
+        h=t("Systems", "Systèmes"), headImg=shot("w08_view_banner"),
         lead=t("What keeps you alive, what you trade for power, and how your gear grows. Everything here works the same in solo and on a server.",
                "Ce qui te garde en vie, ce que tu échanges contre de la puissance, et comment ton équipement grandit. Tout fonctionne pareil en solo et sur serveur."),
         desc=t("Doll of Life, death and respawn, souls and karma, gear classes, groups and quests in Matriochka.",
@@ -1254,7 +1338,7 @@ def build_systems(d):
 
 def build_download():
     return dict(
-        h=t("Download", "Télécharger"),
+        h=t("Download", "Télécharger"), headImg=shot("w00_view_banner"),
         lead=t(f"Version {VERSION} for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
                f"Version {VERSION} pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble."),
         desc=t("Download Matriochka for Minecraft 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
