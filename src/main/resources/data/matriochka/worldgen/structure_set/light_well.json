@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731505,
+    "separation": 11,
+    "spacing": 34
+  },
+  "structures": [
+    {
+      "structure": "matriochka:light_well",
+      "weight": 1
+    }
+  ]
+}

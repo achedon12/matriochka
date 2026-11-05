@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731507,
+    "separation": 21,
+    "spacing": 64
+  },
+  "structures": [
+    {
+      "structure": "matriochka:fresco_gallery",
+      "weight": 1
+    }
+  ]
+}

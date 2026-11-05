@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731508,
+    "separation": 14,
+    "spacing": 42
+  },
+  "structures": [
+    {
+      "structure": "matriochka:silent_village",
+      "weight": 1
+    }
+  ]
+}

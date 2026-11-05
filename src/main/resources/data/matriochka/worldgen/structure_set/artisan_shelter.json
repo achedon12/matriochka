@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731509,
+    "separation": 21,
+    "spacing": 64
+  },
+  "structures": [
+    {
+      "structure": "matriochka:artisan_shelter",
+      "weight": 1
+    }
+  ]
+}

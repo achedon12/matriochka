@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731504,
+    "separation": 14,
+    "spacing": 42
+  },
+  "structures": [
+    {
+      "structure": "matriochka:bottomless_mine",
+      "weight": 1
+    }
+  ]
+}
