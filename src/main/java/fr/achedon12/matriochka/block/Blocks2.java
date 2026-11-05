@@ -137,6 +137,11 @@ public final class Blocks2 {
 		@Override
 		protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 			if (level instanceof ServerLevel sl && player instanceof ServerPlayer sp && level.getBlockEntity(pos) instanceof DataBlockEntity be) {
+				// only the planter's group may lean its Seed
+				if (!MatrioData.get(sl.getServer()).sameGroup(be.data().getStringOr("owner", ""), sp)) {
+					sp.sendOverlayMessage(Component.translatable("message.matriochka.not_yours"));
+					return InteractionResult.FAIL;
+				}
 				if (fr.achedon12.matriochka.world.Variants.feed(sl, pos, be.data(), stack, sp)) {
 					be.setChanged();
 					return InteractionResult.SUCCESS;
