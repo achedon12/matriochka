@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "matriochka:block/spore_vat_top",
+    "bottom": "matriochka:block/painted_wood",
+    "side": "matriochka:block/spore_vat"
+  }
+}
