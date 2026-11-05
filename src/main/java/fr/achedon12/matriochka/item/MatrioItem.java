@@ -65,6 +65,7 @@ public class MatrioItem extends Item {
 		}
 		fr.achedon12.matriochka.rules.Snorkel.appendTooltip(stack, out);
 		if (def.world() > 0) out.accept(Component.translatable("tooltip.matriochka.world", def.world()).withStyle(ChatFormatting.DARK_GRAY));
+		if (def.id().equals("drill")) Drill.appendTooltip(stack, out);
 		GearClasses.appendTooltip(stack, out);
 	}
 
@@ -119,6 +120,9 @@ public class MatrioItem extends Item {
 			case "season_preserve" -> { ps.setFlagTime("preserve", sl.getGameTime() + 20 * 120); consume = true; }
 			case "silence", "anchor" -> { ps.setFlagTime("anchor", sl.getGameTime() + 20 * 600); consume = true; }
 			case "return_thread" -> { if (Travel.returnToWorldBlock(sp)) consume = true; }
+			case "refuge_doll" -> {
+				if (fr.achedon12.matriochka.world.Refuge.use(sp)) sp.getCooldowns().addCooldown(stack, 40);
+			}
 			case "solar_lantern" -> {
 				sp.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 20 * 60 * 20, 0, false, false, true));
 				ps.setFlagTime("lantern", sl.getGameTime() + 20 * 60 * 20);
@@ -205,7 +209,7 @@ public class MatrioItem extends Item {
 
 	private static boolean special(String id) {
 		return switch (id) {
-			case "antidote", "cooling_water", "silence_balm", "oxygen_capsule", "stabilizer", "season_preserve", "anchor", "return_thread",
+			case "antidote", "cooling_water", "silence_balm", "oxygen_capsule", "stabilizer", "season_preserve", "anchor", "return_thread", "refuge_doll",
 				 "solar_lantern", "sonar", "hourglass", "grappling_hook", "thruster", "labyrinth_map", "artisan_scroll", "artisan_journal",
 				 "nested_dolls", "whole_matryoshka", "blank_scroll" -> true;
 			default -> id.startsWith("hidden_doll_");

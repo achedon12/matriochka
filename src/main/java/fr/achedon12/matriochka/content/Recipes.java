@@ -51,6 +51,9 @@ public final class Recipes {
 		r(W, "class_table", 1, 0, "minecraft:smithing_table", 1, "minecraft:iron_ingot", 6);
 		r(W, "soul_altar", 1, 0, "minecraft:crying_obsidian", 4, "minecraft:gold_ingot", 4);
 		r(W, "nesting_chest", 1, 2, "minecraft:chest", 2, "ash_ingot", 2);
+		r(W, "nesting_chest_medium", 1, 2, "minecraft:chest", 1, "ash_ingot", 1);
+		r(W, "nesting_chest_little", 2, 2, "minecraft:chest", 1, "wool_thread", 2);
+		r(W, "refuge_doll", 1, 3, "painted_wood", 8, "sealed_fragment", 4, "minecraft:gold_ingot", 2);
 		r(W, "painted_wood", 8, -1, "minecraft:oak_planks", 8, "minecraft:red_dye", 1);
 		r(W, "lacquer_block", 4, -1, "painted_wood", 4, "minecraft:honeycomb", 1);
 		r(W, "spore_vat", 1, 0, "minecraft:cauldron", 1, "minecraft:iron_ingot", 4);
@@ -89,6 +92,7 @@ public final class Recipes {
 		r("lightning_forge", "glider", 1, -1, "ray_membrane", 8, "minecraft:stick", 4, "storm_essence", 2);
 		r("lightning_forge", "grappling_hook", 1, -1, "celestial_crystal", 2, "minecraft:string", 8, "minecraft:iron_ingot", 3);
 		r("lightning_forge", "cloud_fruit", 2, -1, "minecraft:apple", 2, "storm_essence", 1);
+		r("lightning_forge", "armor_layer", 2, -1, "celestial_crystal", 1, "storm_essence", 1, "minecraft:honeycomb", 2);
 		gear("lightning_forge", 4, "lightning_lance", "celestial", "celestial_crystal");
 		r("lightning_forge", "storm_censer", 1, -1, "storm_essence", 4, "celestial_crystal", 2, "ray_membrane", 2);
 		// World 5

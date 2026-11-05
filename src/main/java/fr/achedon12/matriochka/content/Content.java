@@ -32,6 +32,7 @@ public final class Content {
 		new Defs.ItemDef("cracked_doll", 0, "doll", "none", "", ""),
 		new Defs.ItemDef("journal_page", 0, "page", "none", "", ""),
 		new Defs.ItemDef("wool_thread", 0, "resource", "common", "", ""),
+		new Defs.ItemDef("shell_shard", 0, "resource", "epic", "", ""),
 		new Defs.ItemDef("spores", 1, "resource", "common", "", ""),
 		new Defs.ItemDef("roots", 1, "resource", "common", "", ""),
 		new Defs.ItemDef("sporite", 1, "gem", "rare", "", ""),
@@ -63,6 +64,7 @@ public final class Content {
 		new Defs.ItemDef("jailer_chestplate", 3, "armor", "rare", "chestplate", "jailer"),
 		new Defs.ItemDef("jailer_leggings", 3, "armor", "rare", "leggings", "jailer"),
 		new Defs.ItemDef("jailer_boots", 3, "armor", "rare", "boots", "jailer"),
+		new Defs.ItemDef("refuge_doll", 3, "doll", "legendary", "", ""),
 		new Defs.ItemDef("ray_membrane", 4, "resource", "common", "", ""),
 		new Defs.ItemDef("storm_essence", 4, "resource", "rare", "", ""),
 		new Defs.ItemDef("celestial_crystal", 4, "gem", "rare", "", ""),
@@ -73,6 +75,7 @@ public final class Content {
 		new Defs.ItemDef("celestial_chestplate", 4, "armor", "rare", "chestplate", "celestial"),
 		new Defs.ItemDef("celestial_leggings", 4, "armor", "rare", "leggings", "celestial"),
 		new Defs.ItemDef("celestial_boots", 4, "armor", "rare", "boots", "celestial"),
+		new Defs.ItemDef("armor_layer", 4, "layer", "rare", "", ""),
 		new Defs.ItemDef("shadow_shard", 5, "resource", "rare", "", ""),
 		new Defs.ItemDef("diamond_fragment", 5, "gem", "epic", "", ""),
 		new Defs.ItemDef("solar_lantern", 5, "lantern", "epic", "", ""),
@@ -197,6 +200,8 @@ public final class Content {
 		new Defs.BlockDef("soul_cradle", 0, "cradle", "wood", ""),
 		new Defs.BlockDef("death_chest", 0, "death_chest", "wood", ""),
 		new Defs.BlockDef("nesting_chest", 2, "nesting_chest", "wood", ""),
+		new Defs.BlockDef("nesting_chest_medium", 2, "nesting_chest", "wood", ""),
+		new Defs.BlockDef("nesting_chest_little", 2, "nesting_chest", "wood", ""),
 		new Defs.BlockDef("sanctuary_altar", 0, "boss_altar", "stone_rune", ""),
 		new Defs.BlockDef("arena_altar", 0, "boss_altar", "stone_rune", ""),
 		new Defs.BlockDef("lair_heart", 0, "lair_heart", "lair_heart", ""),
@@ -517,7 +522,13 @@ public final class Content {
 		new Defs.QuestDef("the_apprentices", 10, "npc", "deliver", "artisan_thread", 16, "title", "apprentice", 1),
 		new Defs.QuestDef("every_tool", 10, "npc", "kill", "colossus_prowler", 1, "item", "journal_page", 1),
 		new Defs.QuestDef("last_pardon", 10, "karma", "choice", "", 10, "souls", "", 100),
-		new Defs.QuestDef("all_at_once", 10, "challenge", "kill", "the_unfinished", 1, "title", "seamless", 1)
+		new Defs.QuestDef("all_at_once", 10, "challenge", "kill", "the_unfinished", 1, "title", "seamless", 1),
+		new Defs.QuestDef("light_for_others", 11, "help", "purify", "souls", 100, "item", "chance_doll", 1),
+		new Defs.QuestDef("many_hands", 11, "help", "trade", "any", 10, "souls", "", 40),
+		new Defs.QuestDef("warm_hearth", 11, "help", "deliver", "wool_thread", 16, "item", "soul_cradle", 1),
+		new Defs.QuestDef("hunger", 11, "pact", "devour", "souls", 100, "souls", "", 60),
+		new Defs.QuestDef("price_of_silence", 11, "pact", "contraband", "any", 3, "item", "shell_shard", 2),
+		new Defs.QuestDef("no_witnesses", 11, "pact", "kill", "innocent", 3, "item", "diamond_fragment", 2)
 	);
 	public static final List<Defs.AchDef> ACHIEVEMENTS = List.of(
 		new Defs.AchDef("world_1/a0", 1, "progress", "enter", "1"),

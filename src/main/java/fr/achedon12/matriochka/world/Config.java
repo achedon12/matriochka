@@ -9,8 +9,9 @@ import net.fabricmc.loader.api.FabricLoader;
 
 /**
  * config/matriochka.json: progression gates, difficulty, creature multipliers, group size.
- * difficulty: "story" (creatures deal 70% damage), "normal", "nightmare" (130% damage, Soul Cradles hold one charge),
- * "hardcore" (as nightmare, and the Doll of Life never saves you).
+ * difficulty: "story" (creatures deal 70% damage, the inventory is kept on death), "normal", "nightmare" (130% damage,
+ * Soul Cradles hold one charge), "hardcore" (as nightmare, the Doll of Life never saves you, death is permanent and a
+ * broken World Block deletes its world for the group).
  */
 public final class Config {
 	public static class Values {
@@ -65,6 +66,11 @@ public final class Config {
 	/** Damage multiplier for every Matriochka creature and boss. */
 	public static float damageMult() {
 		return Math.max(0.1f, values.mobDamageMultiplier) * difficultyScale();
+	}
+
+	/** Story mode: nothing is lost on death. */
+	public static boolean keepInventory() {
+		return mode().equals("story");
 	}
 
 	public static boolean hardcore() {

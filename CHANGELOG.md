@@ -24,6 +24,18 @@
 - New Cycle: after an ending, the Journal can begin the next cycle. Your group starts over from the Guardian in fresh worlds where creatures and bosses have 50% more health and 25% more damage per cycle. You keep your souls, karma, pages, quests, endings and gear; the cores, Seeds, World Soils, offerings and keys of the old cycle are taken back, and its World Blocks crumble.
 - New commands for operators: `/matriochka world zero`, `/matriochka ending <seal|absorb|tools>`, `/matriochka cycle show|begin`.
 - An in-game check of all this: `./gradlew runClientGameTest -Pstory`.
+- The Refuge Doll: every player who fights the Grand Jailer gets a pocket base for the group, a lacquered room that grows after worlds 5, 7 and 9 and stays shut while a boss is awake nearby.
+- Layered armor: Lacquer Layers from the Lightning Forge are laid on armor at the Class Table; when the outer layer breaks the next takes over. The class decides how many a piece holds.
+- Nesting chests come in three sizes; each holds the smaller ones with their contents, keeps everything when broken, and sorts items into the smaller chests by type.
+- The Drill mines 3x3 squares and burns Blazing Rock.
+- The Lightning Forge takes Storm Essence as a charge, Spore Vat brews give more when ripe or aged, and the Inverter swaps the class, level and enchantments of two pieces at a cost.
+- Karma reaches the Surface: villager prices, refusals and reactions follow it, and killing an innocent costs karma. Black markets open from karma -25, and a Karma Paths chapter adds three mutual-help and three pact quests.
+- Reaper gear harvests extra souls, Prowler gear dodges blows, and class upgrades also need Shell Shards, left by every boss.
+- Bosses attack faster with more players, and the newest world's gear asks to have taken part in its last boss fight.
+- Group leaders can kick, hand over the lead and disband; administrators can list, repair, move and reset worlds and reset bosses.
+- Villager trades involving diamonds wait until World 5.
+- Difficulty modes: story keeps the inventory on death; hardcore makes death permanent and a broken World Block deletes its world.
+- Gear class levels read from item components are bounded.
 
 ## 0.2.0 (alpha)
 

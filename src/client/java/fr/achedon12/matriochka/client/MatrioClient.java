@@ -32,6 +32,10 @@ public class MatrioClient implements ClientModInitializer {
 		MenuScreens.register(ModContent.STATION_MENU, StationScreen::new);
 		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
 		ClientPlayNetworking.registerGlobalReceiver(Net.StatePayload.TYPE, (p, ctx) -> state = p.tag());
+		// class and armor layers on gear from outside the mod (Matriochka items write their own tooltip)
+		net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback.EVENT.register((stack, ctx, flag, lines) -> {
+			if (!(stack.getItem() instanceof fr.achedon12.matriochka.item.MatrioItem)) fr.achedon12.matriochka.gear.GearClasses.appendTooltip(stack, lines::add);
+		});
 		ClientPlayNetworking.registerGlobalReceiver(Net.OpenJournalPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new JournalScreen(p.scroll())));
 		ClientPlayNetworking.registerGlobalReceiver(Net.EndingPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new EndingScreen(p.kind())));
 	}

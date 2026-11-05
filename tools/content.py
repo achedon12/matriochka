@@ -93,6 +93,8 @@ item("journal_page", "Journal Page", "Page du Journal", 0, "page", "none", "page
      "A lost page of the Artisan's Journal.", "Une page perdue du Journal de l'artisan.")
 item("wool_thread", "Wool Thread", "Fil de laine", 0, "resource", "common", "thread",
      "Used for cradles and threads.", "Sert aux berceaux et aux fils.")
+item("shell_shard", "Shell Shard", "Éclat d'enveloppe", 0, "resource", "epic", "shard",
+     "Left by a fallen boss. Every class upgrade needs some.", "Laissé par un boss vaincu. Chaque amélioration de classe en demande.")
 
 # World 1
 item("spores", "Spores", "Spores", 1, "resource", "common", "dust", "Base of antidotes.", "Base des antidotes.")
@@ -119,6 +121,9 @@ item("lockpick_kit", "Lockpick Kit", "Kit de crochetage", 3, "tool", "common", "
 item("portable_trap", "Portable Trap", "Piège portatif", 3, "consumable", "common", "trap", "Immobilizes a mob.", "Immobilise un mob.")
 item("jailer_blade", "Jailer's Blade", "Lame du Geôlier", 3, "weapon", "rare", "sword")
 item("jailer", "", "", 3, "armorset", "rare", "armor", set_en="Jailer", set_fr="de Geôlier")
+item("refuge_doll", "Refuge Doll", "Poupée-refuge", 3, "doll", "legendary", "doll",
+     "A pocket base for your group. Use it to enter, use it again to leave.",
+     "Une base de poche pour ton groupe. Utilise-la pour entrer, puis de nouveau pour sortir.")
 # World 4
 item("ray_membrane", "Ray Membrane", "Membrane de raie", 4, "resource", "common", "membrane", "Glider cloth.", "Toile du planeur.")
 item("storm_essence", "Storm Essence", "Essence de tempête", 4, "resource", "rare", "orb", "Energy of the Lightning Forge.", "Énergie de la Forge à foudre.")
@@ -127,6 +132,9 @@ item("glider", "Glider", "Planeur", 4, "glider", "epic", "glider", "Glide betwee
 item("grappling_hook", "Grappling Hook", "Grappin", 4, "hook", "rare", "hook", "Pulls you toward a surface.", "Te tire vers une surface.")
 item("lightning_lance", "Lightning Lance", "Lance de foudre", 4, "weapon", "rare", "spear")
 item("celestial", "", "", 4, "armorset", "rare", "armor", set_en="Celestial", set_fr="céleste")
+item("armor_layer", "Lacquer Layer", "Couche laquée", 4, "layer", "rare", "plate",
+     "Laid on armor at the Class Table. When the outer layer breaks, the next takes over.",
+     "Se pose sur une armure à la Table de classe. Quand la couche extérieure casse, la suivante prend le relais.")
 # World 5
 item("shadow_shard", "Shadow Shard", "Éclat d'ombre", 5, "resource", "rare", "shard", "Base of World 5 gear.", "Base de l'équipement du monde 5.")
 item("diamond_fragment", "Diamond Fragment", "Fragment de diamant", 5, "gem", "epic", "fragment", "4 fragments make 1 diamond.", "4 fragments donnent 1 diamant.")
@@ -292,7 +300,13 @@ block("planted_seed", "Planted Seed", "Graine plantée", 0, "planted_seed", "spe
 block("threshold", "Threshold", "Seuil", 0, "threshold", "lacquer")
 block("soul_cradle", "Soul Cradle", "Berceau d'âme", 0, "cradle", "wood")
 block("death_chest", "Death Chest", "Coffre de mort", 0, "death_chest", "wood")
-block("nesting_chest", "Nesting Chest", "Coffre gigogne", 2, "nesting_chest", "wood")
+block("nesting_chest", "Nesting Chest", "Coffre gigogne", 2, "nesting_chest", "wood",
+      note_en="Holds the smaller nesting chests. Sneak and use it to set what it sorts.",
+      note_fr="Contient les coffres gigognes plus petits. Accroupis-toi et utilise-le pour choisir ce qu'il trie.")
+block("nesting_chest_medium", "Middle Nesting Chest", "Coffre gigogne moyen", 2, "nesting_chest", "wood", inset=2,
+      note_en="Two rows. Fits in a Nesting Chest, holds a Little one.", note_fr="Deux rangées. Tient dans un Coffre gigogne, contient un petit.")
+block("nesting_chest_little", "Little Nesting Chest", "Petit coffre gigogne", 2, "nesting_chest", "wood", inset=4,
+      note_en="One row. Fits in the larger nesting chests.", note_fr="Une rangée. Tient dans les coffres gigognes plus grands.")
 block("sanctuary_altar", "Guardian's Altar", "Autel du Gardien", 0, "boss_altar", "stone_rune", boss="block_guardian")
 block("arena_altar", "Arena Altar", "Autel d'arène", 0, "boss_altar", "stone_rune")
 block("lair_heart", "Lair Heart", "Cœur d'antre", 0, "lair_heart", "lair_heart",
@@ -309,12 +323,12 @@ STATIONS = [
     ("matrix_workbench", "Matrix Workbench", "Établi matriciel", 0, "Crafts Seeds; recipes unlock with cores.", "Fabrique les Graines ; recettes débloquées par les noyaux."),
     ("class_table", "Class Table", "Table de classe", 0, "Upgrades an item's class.", "Améliore la classe d'un objet."),
     ("soul_altar", "Soul Altar", "Autel des âmes", 0, "Purify or devour an item.", "Purifie ou dévore un objet."),
-    ("spore_vat", "Spore Vat", "Cuve de spores", 1, "Result depends on fermentation time.", "Le résultat dépend du temps de fermentation."),
+    ("spore_vat", "Spore Vat", "Cuve de spores", 1, "Ripe brews (1 min) give more, aged ones (5 min) twice as much.", "Une cuvée mûre (1 min) donne plus, vieillie (5 min) deux fois plus."),
     ("ash_foundry", "Ash Foundry", "Fonderie de cendre", 2, "Keep the temperature in the green.", "Garde la température dans le vert."),
     ("jailer_table", "Jailer's Table", "Table du Geôlier", 3, "Reproduce the lock pattern.", "Reproduis le motif de la serrure."),
     ("lightning_forge", "Lightning Forge", "Forge à foudre", 4, "Needs a lightning strike or storm essence.", "Demande un éclair ou de l'essence de tempête."),
     ("dark_altar", "Dark Altar", "Autel obscur", 5, "Works only in complete darkness.", "Fonctionne seulement dans le noir complet."),
-    ("inverter", "Inverter", "Inverseur", 6, "Every gain comes with a flaw.", "Chaque gain s'accompagne d'un défaut."),
+    ("inverter", "Inverter", "Inverseur", 6, "Swaps the properties of two items. Every gain comes with a flaw.", "Échange les propriétés de deux objets. Chaque gain s'accompagne d'un défaut."),
     ("abyssal_press", "Abyssal Press", "Presse abyssale", 7, "Must be deep underwater. Also refills a snorkel helmet.", "Doit être sous l'eau profonde. Remplit aussi un casque-tuba."),
     ("time_workshop", "Time Workshop", "Atelier du temps", 8, "Accepts recipes at dawn and dusk.", "Accepte les recettes à l'aube et au crépuscule."),
     ("terrain_anchor", "Terrain Anchor", "Ancre de terrain", 9, "Stabilizes the ground (radius 16).", "Stabilise le sol (rayon 16)."),
@@ -675,8 +689,8 @@ STRUCTURES = {
          ("creature_throne", "Throne of the Creature", "Trône de la créature", "secret", "medium", "unique", "throne")],
 }
 
-# ---------------------------------------------------------------- quests (64)
-# type: guide | npc | karma | challenge ; obj: (kind, target, count)
+# ---------------------------------------------------------------- quests (64, plus the karma paths)
+# type: guide | npc | karma | challenge | help | pact ; obj: (kind, target, count)
 QUESTS = [
     # Surface
     ("read_between_lines", 0, "guide", ("read", "artisan_scroll", 5), "Read Between the Lines", "Lire entre les lignes", "Read the 5 pages of the Scroll.", "Lire les 5 pages du Parchemin.", ("item", "return_thread", 5)),
@@ -749,6 +763,20 @@ _Q = {
 for w, lst in _Q.items():
     for (qid, t, obj, en, fr, den, dfr, rew) in lst:
         QUESTS.append((qid, w, t, obj, en, fr, den, dfr, rew))
+
+# Karma paths: a chapter of its own (world 11 in the table). Mutual-help quests open at karma +50, pact quests at -50;
+# each one completed moves the karma a little further along its path.
+KARMA_CHAPTER = 11
+_KARMA_PATHS = [
+    ("light_for_others", "help", ("purify", "souls", 100), "A Light for Others", "Une lumière pour les autres", "Free 100 souls at the Soul Altar.", "Libérer 100 âmes à l'Autel des âmes.", ("item", "chance_doll", 1)),
+    ("many_hands", "help", ("trade", "any", 10), "Many Hands", "Mille mains", "Trade 10 times with the peoples of the worlds.", "Commercer 10 fois avec les peuples des mondes.", ("souls", "", 40)),
+    ("warm_hearth", "help", ("deliver", "wool_thread", 16), "A Warm Hearth", "Un foyer chaud", "Gather 16 wool threads for the cradles of the lost.", "Réunir 16 fils de laine pour les berceaux des égarés.", ("item", "soul_cradle", 1)),
+    ("hunger", "pact", ("devour", "souls", 100), "Hunger", "La faim", "Absorb 100 souls at the Soul Altar.", "Absorber 100 âmes à l'Autel des âmes.", ("souls", "", 60)),
+    ("price_of_silence", "pact", ("contraband", "any", 3), "The Price of Silence", "Le prix du silence", "Buy 3 goods on a black market.", "Acheter 3 marchandises au marché clandestin.", ("item", "shell_shard", 2)),
+    ("no_witnesses", "pact", ("kill", "innocent", 3), "No Witnesses", "Pas de témoins", "Silence 3 innocents, on the Surface or in the worlds.", "Faire taire 3 innocents, sur la Surface ou dans les mondes.", ("item", "diamond_fragment", 2)),
+]
+for (qid, t, obj, en, fr, den, dfr, rew) in _KARMA_PATHS:
+    QUESTS.append((qid, KARMA_CHAPTER, t, obj, en, fr, den, dfr, rew))
 
 # ---------------------------------------------------------------- achievements (100)
 # type: progress | explore | combat | hidden; trigger: (kind, arg) evaluated by gen / java

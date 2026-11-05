@@ -30,8 +30,10 @@ public class StationMenu extends AbstractContainerMenu {
 	}
 
 	public static final int PANEL_W = 256, PANEL_H = 222;
+	/** The two Inverter sockets, in the niche on the right of the cabinet. */
+	public static final int INVERTER_A_X = 204, INVERTER_B_X = 226, INVERTER_Y = 30;
 	public final Data data;
-	public final SimpleContainer slot = new SimpleContainer(1);
+	public final SimpleContainer slot = new SimpleContainer(2);
 	public final ContainerData sync;
 	private final Player player;
 
@@ -42,6 +44,10 @@ public class StationMenu extends AbstractContainerMenu {
 		this.sync = new SimpleContainerData(8);
 		boolean hasSlot = data.station().equals("soul_altar") || data.station().equals("class_table");
 		if (hasSlot) addSlot(new Slot(slot, 0, 120, 70));
+		if (data.station().equals("inverter")) {
+			addSlot(new Slot(slot, 0, INVERTER_A_X, INVERTER_Y));
+			addSlot(new Slot(slot, 1, INVERTER_B_X, INVERTER_Y));
+		}
 		for (int r = 0; r < 3; r++)
 			for (int c = 0; c < 9; c++) addSlot(new Slot(inv, c + r * 9 + 9, 48 + c * 18, 140 + r * 18));
 		for (int c = 0; c < 9; c++) addSlot(new Slot(inv, c, 48 + c * 18, 198));
@@ -57,7 +63,10 @@ public class StationMenu extends AbstractContainerMenu {
 	public void broadcastChanges() {
 		DataBlockEntity be = be();
 		if (be != null && player.level() instanceof ServerLevel sl) {
-			sync.set(0, Stations.condition(sl, data.pos(), data.station(), be));
+			int cond = Stations.condition(sl, data.pos(), data.station(), be);
+			// the forge also counts as ready when the player carries a Storm Essence to feed it
+			if (cond == 0 && data.station().equals("lightning_forge") && Stations.count(player.getInventory(), ModContent.item("storm_essence")) > 0) cond = 1;
+			sync.set(0, cond);
 			sync.set(1, data.station().equals("ash_foundry") ? Stations.heat(sl, data.pos()) : be.data().getIntOr("charge", 0));
 			for (int i = 0; i < 3; i++) sync.set(2 + i, be.data().getIntOr("code" + i, 0));
 			sync.set(5, be.data().getIntOr("entered", 0));
@@ -87,6 +96,10 @@ public class StationMenu extends AbstractContainerMenu {
 			err = Stations.reroll(sp, slot.getItem(0));
 		} else if (id == 220 && data.station().equals("abyssal_press")) {
 			err = Stations.refillSnorkel(sp, sl, data.pos(), be);
+		} else if (id == 212) {
+			err = Stations.addLayer(sp, slot.getItem(0));
+		} else if (id == 220) {
+			err = Stations.invert(sp, slot.getItem(0), slot.getItem(1));
 		}
 		if (err != null) sp.sendSystemMessage(Component.translatable(err));
 		broadcastChanges();

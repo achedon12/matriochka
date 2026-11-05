@@ -509,7 +509,8 @@ public class MatrioMob extends Monster implements GeoEntity {
 		if (source.getEntity() instanceof ServerPlayer sp) {
 			PlayerState ps = PlayerState.of(sp);
 			ps.progress("kill", def().id(), 1);
-			if (def().elite()) ps.addSouls(5);
+			int souls = fr.achedon12.matriochka.gear.GearClasses.reapSouls(sp, def().elite() ? 5 : 0, sp.getRandom());
+			if (souls > 0) ps.addSouls(souls);
 			float steal = fr.achedon12.matriochka.gear.GearClasses.lifeSteal(sp);
 			if (steal > 0) sp.heal(def().hp() * steal * 0.1f);
 		}

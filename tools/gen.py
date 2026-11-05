@@ -141,6 +141,14 @@ def gen_blocks():
         elif b["kind"] == "planted_seed":
             model = {"parent": "minecraft:block/cross", "textures": {"cross": f"{NS}:block/planted_seed_cross"}}
             paint_item("seed", p, "seed_block", os.path.join(A, "textures/block/planted_seed_cross.png"))
+        elif b.get("inset"):
+            # the smaller nesting chests: a smaller box standing on the floor
+            a = b["inset"]
+            box = {"from": [a, 0, a], "to": [16 - a, 16 - 2 * a, 16 - a],
+                   "faces": {f: {"texture": "#all", "uv": [a, a if f in ("up", "down") else 2 * a, 16 - a, 16 - a if f in ("up", "down") else 16],
+                                 **({"cullface": "down"} if f == "down" else {})}
+                             for f in ("north", "south", "east", "west", "up", "down")}}
+            model = {"parent": "minecraft:block/block", "textures": {"particle": f"{NS}:block/{bid}", "all": f"{NS}:block/{bid}"}, "elements": [box]}
         elif b["style"] == "glass":
             model = {"parent": "minecraft:block/cube_all", "textures": {"all": {"sprite": f"{NS}:block/{bid}", "force_translucent": True}}}
         else:

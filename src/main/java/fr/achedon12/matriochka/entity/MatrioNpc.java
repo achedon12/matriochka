@@ -35,6 +35,8 @@ import org.jspecify.annotations.Nullable;
 public class MatrioNpc extends AbstractVillager implements GeoEntity {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	public final Defs.NpcDef def;
+	/** The black market: offers shown only to a player of karma -25 or lower, kept apart from the regular ones. */
+	private MerchantOffers contraband;
 
 	public MatrioNpc(EntityType<? extends AbstractVillager> type, Level level, Defs.NpcDef def) {
 		super(type, level);
@@ -81,6 +83,76 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 		};
 	}
 
+	/** Forbidden goods per world: boss offerings, materials of later worlds, diamonds before their time. */
+	private static String[][] contrabandFor(int world) {
+		return switch (world) {
+			case 0 -> new String[][]{{"minecraft:emerald", "20", "diamond_fragment", "1"}, {"minecraft:emerald", "12", "shell_shard", "1"}};
+			case 1 -> new String[][]{{"roots", "12", "sporite", "2"}};
+			case 2 -> new String[][]{{"blazing_rock", "16", "giant_ore", "2"}};
+			case 3 -> new String[][]{{"sealed_fragment", "8", "sealed_shackle", "1"}};
+			case 4 -> new String[][]{{"ray_membrane", "12", "storm_censer", "1"}};
+			case 5 -> new String[][]{{"shadow_shard", "6", "diamond_fragment", "2"}};
+			case 6 -> new String[][]{{"unstable_alloy", "4", "inverted_crystal", "1"}};
+			case 7 -> new String[][]{{"abyssal_salt", "8", "pressure_pearl", "1"}};
+			case 8 -> new String[][]{{"temporal_sand", "10", "wreath_of_seasons", "1"}};
+			case 9 -> new String[][]{{"terrain_fragment", "24", "terrain_heart", "1"}};
+			default -> new String[][]{{"artisan_thread", "12", "artisan_shard", "1"}};
+		};
+	}
+
+	public MerchantOffers contraband() {
+		if (contraband == null) {
+			contraband = new MerchantOffers();
+			for (String[] t : contrabandFor(def.world())) {
+				var cost = fr.achedon12.matriochka.block.Stations.resolve(t[0]);
+				var res = fr.achedon12.matriochka.block.Stations.resolve(t[2]);
+				contraband.add(new MerchantOffer(new ItemCost(cost, Integer.parseInt(t[1])), new ItemStack(res, Integer.parseInt(t[3])), 3, 0, 0.05f));
+			}
+		}
+		return contraband;
+	}
+
+	private void hideContraband() {
+		if (contraband != null && offers != null) offers.removeIf(o -> contraband.stream().anyMatch(c -> c == o));
+	}
+
+	@Override
+	public void setTradingPlayer(@Nullable Player player) {
+		if (player == null) hideContraband();
+		super.setTradingPlayer(player);
+	}
+
+	@Override
+	protected void stopTrading() {
+		hideContraband();
+		super.stopTrading();
+	}
+
+	@Override
+	public void notifyTrade(MerchantOffer offer) {
+		super.notifyTrade(offer);
+		if (getTradingPlayer() instanceof ServerPlayer sp) {
+			PlayerState ps = PlayerState.of(sp);
+			ps.progress("trade", "any", 1);
+			if (contraband != null && contraband.stream().anyMatch(c -> c == offer)) ps.progress("contraband", "any", 1);
+		}
+	}
+
+	@Override
+	protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput out) {
+		boolean shown = contraband != null && offers != null && offers.stream().anyMatch(o -> contraband.stream().anyMatch(c -> c == o));
+		hideContraband();
+		super.addAdditionalSaveData(out);
+		if (contraband != null) out.store("matriochka_contraband", MerchantOffers.CODEC, contraband);
+		if (shown) offers.addAll(contraband);
+	}
+
+	@Override
+	protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput in) {
+		super.readAdditionalSaveData(in);
+		in.read("matriochka_contraband", MerchantOffers.CODEC).ifPresent(c -> contraband = c);
+	}
+
 	@Override
 	protected void updateTrades(ServerLevel level) {
 		MerchantOffers offers = getOffers();
@@ -107,6 +179,12 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 			if (karma <= -50 && def.world() > 0 && random.nextInt(3) == 0) {
 				sp.sendSystemMessage(Component.translatable("message.matriochka.npc_hostile"));
 				return InteractionResult.FAIL;
+			}
+			// a dark reputation opens the black market
+			hideContraband();
+			if (karma <= -fr.achedon12.matriochka.world.Karma.TIER1) {
+				getOffers().addAll(contraband());
+				sp.sendOverlayMessage(Component.translatable("message.matriochka.black_market").withStyle(net.minecraft.ChatFormatting.DARK_PURPLE));
 			}
 			setTradingPlayer(sp);
 			openTradingScreen(sp, getDisplayName(), 1);

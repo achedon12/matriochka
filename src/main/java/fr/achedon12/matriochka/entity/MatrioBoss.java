@@ -74,6 +74,8 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	private Vec3 aim = Vec3.ZERO;
 	private int nodes;
 	private int calmUntil;
+	/** Attack pace from the number of players in the fight (see Defs.bossAttackSpeedPlayers). */
+	private float pace = 1f;
 
 	public MatrioBoss(EntityType<? extends Monster> type, Level level, Defs.BossDef def) {
 		super(type, level);
@@ -119,6 +121,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		boss.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(boss.def.damage() * fr.achedon12.matriochka.world.Config.damageMult()
 			* fr.achedon12.matriochka.world.Cycles.damageFactor(cycle));
 		boss.setHealth(hp);
+		boss.pace = Defs.bossAttackSpeedPlayers(players);
 		boss.setPos(Vec3.atBottomCenterOf(at));
 		boss.setTarget(by);
 		level.addFreshEntity(boss);
@@ -184,6 +187,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		super.customServerAiStep(level);
 		bar.setProgress(getHealth() / getMaxHealth());
 		if (tickCount % 10 == 0) feats.watch(this, level);
+		if (tickCount % 100 == 0) pace = Defs.bossAttackSpeedPlayers(fighters(level));
 		LivingEntity target = getTarget();
 		stateTicks++;
 		if (tickCount < calmUntil) {
@@ -254,12 +258,22 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		}
 	}
 
+	/** Players taking part in the fight right now. */
+	private int fighters(ServerLevel level) {
+		return Math.max(1, level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(48), p -> !p.isSpectator() && p.isAlive()).size());
+	}
+
+	public float pace() {
+		return pace;
+	}
+
 	private int chooseAttack(ServerLevel level, double distance) {
 		long now = level.getGameTime();
 		int speedUp = phase * 20;
-		boolean sig = now - lastUse[2] > 400 - speedUp;
-		boolean med = now - lastUse[1] > 160 - speedUp / 2;
-		boolean light = now - lastUse[0] > 80 - speedUp / 4;
+		// more players, faster attacks: every cooldown shrinks with the pace
+		boolean sig = now - lastUse[2] > (400 - speedUp) / pace;
+		boolean med = now - lastUse[1] > (160 - speedUp / 2) / pace;
+		boolean light = now - lastUse[0] > (80 - speedUp / 4) / pace;
 		if (sig && (phase > 0 || random.nextInt(3) == 0)) return 2;
 		if (med && distance > 4) return 1;
 		if (light && distance <= 5) return 0;
@@ -572,17 +586,29 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		int w = def.world();
 		List<ServerPlayer> present = level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(64));
 		feats.award(this, level, present);
+		// everyone who fought it took part, even if they fell before the end: that is what the next world's gear asks for
+		for (java.util.UUID id : feats.participants()) {
+			ServerPlayer fighter = level.getServer().getPlayerList().getPlayer(id);
+			if (fighter != null && !present.contains(fighter)) PlayerState.of(fighter).set("boss_" + w, true);
+		}
 		for (ServerPlayer p : present) {
 			String group = data.groupOf(p.getUUID());
 			data.markDefeated(group, w);
 			PlayerState ps = PlayerState.of(p);
-			ps.addSouls(100);
+			ps.addSouls(fr.achedon12.matriochka.gear.GearClasses.reapSouls(p, 100, p.getRandom()));
+			ItemStack shards = new ItemStack(ModContent.item("shell_shard"), 2);
+			if (!p.getInventory().add(shards)) spawnAtLocation(level, shards);
 			ps.progress("kill", def.id(), 1);
 			// doll of life: one layer after worlds 1, 5 and 8; every boss refills one layer
 			int max = ps.dollMax();
 			if (w == 1 || w == 5 || w == 8) max = Math.min(3, max + 1);
 			ps.setDoll(ps.dollLayers() + 1, max);
 			ps.set("boss_" + w, true);
+			if (w == 3 && !ps.has("refuge_doll_given")) {
+				ps.set("refuge_doll_given", true);
+				ItemStack refuge = new ItemStack(ModContent.item("refuge_doll"));
+				if (!p.getInventory().add(refuge)) spawnAtLocation(level, refuge);
+			}
 			p.sendSystemMessage(Component.translatable("message.matriochka.boss_down." + w).withStyle(ChatFormatting.GOLD));
 			if (w == 0) {
 				for (int i = 0; i < p.getInventory().getContainerSize(); i++) {

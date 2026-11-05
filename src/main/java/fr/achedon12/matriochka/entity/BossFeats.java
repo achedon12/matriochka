@@ -133,6 +133,11 @@ public final class BossFeats {
 		return bits;
 	}
 
+	/** Every player who came within reach of the boss during the fight. */
+	public Set<UUID> participants() {
+		return flags.keySet();
+	}
+
 	/** Mark a player for the fight of every boss near them. */
 	public static void markNear(ServerPlayer p, String flag) {
 		if (!(p.level() instanceof ServerLevel level)) return;

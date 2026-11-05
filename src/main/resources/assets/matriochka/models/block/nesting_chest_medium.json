@@ -1,0 +1,78 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "matriochka:block/nesting_chest_medium",
+    "all": "matriochka:block/nesting_chest_medium"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        12,
+        14
+      ],
+      "faces": {
+        "north": {
+          "texture": "#all",
+          "uv": [
+            2,
+            4,
+            14,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#all",
+          "uv": [
+            2,
+            4,
+            14,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#all",
+          "uv": [
+            2,
+            4,
+            14,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#all",
+          "uv": [
+            2,
+            4,
+            14,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#all",
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ]
+        },
+        "down": {
+          "texture": "#all",
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "cullface": "down"
+        }
+      }
+    }
+  ]
+}

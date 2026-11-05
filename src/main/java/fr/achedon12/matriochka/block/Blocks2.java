@@ -260,6 +260,15 @@ public final class Blocks2 {
 				for (ServerPlayer p : sl.getServer().getPlayerList().getPlayers()) {
 					if (Worlds.number(p.level()) == world && data.groupOf(p.getUUID()).equals(group)) Travel.leave(p);
 				}
+				if (fr.achedon12.matriochka.world.Config.hardcore()) {
+					// hardcore: the world goes with its block, for good
+					fr.achedon12.matriochka.world.WorldAdmin.reset(sl.getServer(), group, world);
+					for (ServerPlayer p : sl.getServer().getPlayerList().getPlayers()) {
+						if (data.groupOf(p.getUUID()).equals(group)) p.sendSystemMessage(Component.translatable("message.matriochka.world_deleted", world));
+					}
+					level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1f, 0.4f);
+					return super.playerWillDestroy(level, pos, state, player);
+				}
 				ItemStack doll = new ItemStack(ModContent.item("cracked_doll"));
 				net.minecraft.nbt.CompoundTag t = new net.minecraft.nbt.CompoundTag();
 				t.putInt("world", world);
@@ -290,7 +299,10 @@ public final class Blocks2 {
 
 		@Override
 		protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-			if (player instanceof ServerPlayer sp) Travel.leave(sp);
+			if (player instanceof ServerPlayer sp) {
+				if (fr.achedon12.matriochka.world.Refuge.inRefuge(level)) fr.achedon12.matriochka.world.Refuge.leave(sp);
+				else Travel.leave(sp);
+			}
 			return InteractionResult.SUCCESS;
 		}
 

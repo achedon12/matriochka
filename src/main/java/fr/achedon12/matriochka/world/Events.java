@@ -135,16 +135,18 @@ public final class Events {
 				player.sendOverlayMessage(Component.translatable("message.matriochka.doll_broke", ps.dollLayers()).withStyle(ChatFormatting.GOLD));
 				return false;
 			}
-			if (Worlds.isModWorld(player.level()) && !player.level().getGameRules().get(net.minecraft.world.level.gamerules.GameRules.KEEP_INVENTORY)) {
-				deathChest(player);
-			}
+			boolean keep = player.level().getGameRules().get(net.minecraft.world.level.gamerules.GameRules.KEEP_INVENTORY);
+			if (Config.keepInventory() && !keep) Deaths.keepInventory(player);
+			else if (Worlds.isModWorld(player.level()) && !keep) deathChest(player);
 			ps.tag().putInt("died_in", Worlds.number(player.level()));
 			fr.achedon12.matriochka.entity.BossFeats.markNear(player, "died");
 			return true;
 		});
 
 		ServerPlayerEvents.AFTER_RESPAWN.register((oldP, player, alive) -> {
+			Deaths.afterRespawn(player, alive);
 			Endings.applyLasting(player);
+			if (Config.hardcore() && !alive) return;
 			PlayerState ps = PlayerState.of(player);
 			int w = ps.tag().getIntOr("died_in", 0);
 			if (w <= 0 || alive) return;

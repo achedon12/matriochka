@@ -50,7 +50,7 @@ public final class Travel {
 		if (entry.contains("seuil_y")) {
 			return new BlockPos(entry.getIntOr("seuil_x", 0), entry.getIntOr("seuil_y", 64), entry.getIntOr("seuil_z", 0));
 		}
-		BlockPos c = Worlds.parcelCenter(data.parcel(group));
+		BlockPos c = Worlds.parcelCenter(data.parcel(group, world));
 		level.getChunk(c);
 		int y;
 		if (Worlds.ceiling(world)) {
@@ -77,7 +77,7 @@ public final class Travel {
 		return base;
 	}
 
-	private static void buildPlatform(ServerLevel level, BlockPos base, int world) {
+	public static void buildPlatform(ServerLevel level, BlockPos base, int world) {
 		BlockState lacquer = ModContent.block("lacquer_block").defaultBlockState();
 		BlockState wood = ModContent.block("painted_wood").defaultBlockState();
 		for (int dx = -3; dx <= 3; dx++) {
@@ -107,6 +107,19 @@ public final class Travel {
 			pos = new BlockPos(ret.getIntOr("x", 0), ret.getIntOr("y", 64), ret.getIntOr("z", 0));
 		} else {
 			pos = null;
+		}
+		// the World Block may have been moved (broken and set down again, or by an administrator) since the player came in
+		int here = Worlds.number(player.level());
+		if (here > 0) {
+			MatrioData data = MatrioData.get(player.level().getServer());
+			CompoundTag e = data.worldEntry(data.groupOf(player.getUUID()), here);
+			if (e.contains("block_dim")) {
+				ServerLevel at = player.level().getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse(e.getStringOr("block_dim", ""))));
+				if (at != null) {
+					target = at;
+					pos = BlockPos.of(e.getLongOr("block_pos", 0L));
+				}
+			}
 		}
 		if (target == null) {
 			target = player.level().getServer().overworld();

@@ -73,7 +73,8 @@ public class MatrioData extends SavedData {
 		CompoundTag grp = group(group);
 		ListTag members = grp.getListOrEmpty("members");
 		if (members.size() >= Config.maxGroupSize()) return false;
-		leave(player);
+		removeFrom(groupOf(player), player);
+		members = grp.getListOrEmpty("members");
 		members.add(StringTag.valueOf(player.toString()));
 		grp.put("members", members);
 		sub(root, "players").putString(player.toString(), group);
@@ -81,8 +82,8 @@ public class MatrioData extends SavedData {
 		return true;
 	}
 
-	public void leave(UUID player) {
-		String g = groupOf(player);
+	/** Takes a player off a group's member list; the lead passes to the oldest member left. */
+	private void removeFrom(String g, UUID player) {
 		CompoundTag grp = group(g);
 		ListTag members = grp.getListOrEmpty("members");
 		ListTag kept = new ListTag();
@@ -91,14 +92,57 @@ public class MatrioData extends SavedData {
 		if (grp.getStringOr("leader", "").equals(player.toString()) && !kept.isEmpty()) {
 			grp.putString("leader", kept.getFirst().asString().orElse(""));
 		}
+	}
+
+	public void leave(UUID player) {
+		removeFrom(groupOf(player), player);
+		// back to a group of one: the player's own group, unless others still use it (they founded it with them)
 		String own = player.toString();
-		sub(root, "players").putString(own, own);
+		if (!group(own).getListOrEmpty("members").isEmpty()) own = own + "#" + java.util.UUID.randomUUID().toString().substring(0, 8);
+		sub(root, "players").putString(player.toString(), own);
 		CompoundTag mine = group(own);
-		mine.putString("leader", own);
+		mine.putString("leader", player.toString());
 		ListTag m = new ListTag();
-		m.add(StringTag.valueOf(own));
+		m.add(StringTag.valueOf(player.toString()));
 		mine.put("members", m);
+		mine.remove("disbanded_at");
 		setDirty();
+	}
+
+	public String leader(String group) {
+		return group(group).getStringOr("leader", "");
+	}
+
+	public boolean isLeader(UUID player) {
+		return leader(groupOf(player)).equals(player.toString());
+	}
+
+	/** Hands the lead to another member. False when they are not in the group. */
+	public boolean transfer(String group, UUID to) {
+		if (!members(group).contains(to)) return false;
+		group(group).putString("leader", to.toString());
+		setDirty();
+		return true;
+	}
+
+	/**
+	 * Dissolves a group: every member goes back to a group of one. The worlds stay recorded under the old group, dated,
+	 * so that an administrator can delete them after 30 days.
+	 */
+	public List<UUID> disband(String group, long now) {
+		List<UUID> was = members(group);
+		for (UUID u : was) leave(u);
+		CompoundTag g = group(group);
+		g.put("members", new ListTag());
+		g.putString("leader", "");
+		g.putLong("disbanded_at", now);
+		setDirty();
+		return was;
+	}
+
+	/** Every group id ever recorded. */
+	public java.util.Set<String> groups() {
+		return sub(root, "groups").keySet();
 	}
 
 	// ----------------------------------------------------------- progression (bit 0 = Block Guardian, bit n = world n boss)
@@ -117,6 +161,12 @@ public class MatrioData extends SavedData {
 		int best = -1;
 		for (int i = 0; i <= 10; i++) if ((bits & (1 << i)) != 0) best = i;
 		return best;
+	}
+
+	public void unmarkDefeated(String group, int world) {
+		CompoundTag g = group(group);
+		g.putInt("done", g.getIntOr("done", 0) & ~(1 << world));
+		setDirty();
 	}
 
 	public boolean defeated(ServerPlayer p, int world) {
@@ -143,6 +193,20 @@ public class MatrioData extends SavedData {
 			if (g.contains("parcel") && g.getIntOr("parcel", -1) == parcel) return id;
 		}
 		return null;
+	}
+
+	/** The parcel of one world of a group: its own when an administrator reset that world, the group's otherwise. */
+	public int parcel(String group, int world) {
+		CompoundTag e = worldEntry(group, world);
+		return e.contains("parcel") ? e.getIntOr("parcel", 0) : parcel(group);
+	}
+
+	/** A fresh, never used parcel index. */
+	public int newParcel() {
+		int next = root.getIntOr("parcel_counter", 0);
+		root.putInt("parcel_counter", next + 1);
+		setDirty();
+		return next;
 	}
 
 	/** Whether this player may break or use something owned by the player with this UUID string (same group, or no owner). */

@@ -9,6 +9,7 @@ import fr.achedon12.matriochka.rules.PlayerState;
 import fr.achedon12.matriochka.world.Lairs;
 import fr.achedon12.matriochka.world.MatrioData;
 import fr.achedon12.matriochka.world.Travel;
+import fr.achedon12.matriochka.world.WorldAdmin;
 import fr.achedon12.matriochka.world.Worlds;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.commands.CommandSourceStack;
@@ -19,7 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
-/** /matriochka — groups, progression, worlds, bosses, karma and debug. */
+/** /matriochka: groups (leader, kicks, disband), progression, worlds (list, repair, move, reset), bosses, karma and debug. */
 public final class MatrioCommand {
 	private MatrioCommand() {}
 
@@ -38,6 +39,36 @@ public final class MatrioCommand {
 		return Lairs.heart(world, seuil.offset(0, 0, Worlds.ARENA_OFFSET));
 	}
 
+	private static String groupOf(com.mojang.brigadier.context.CommandContext<CommandSourceStack> c, String arg) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+		return MatrioData.get(c.getSource().getServer()).groupOf(EntityArgument.getPlayer(c, arg).getUUID());
+	}
+
+	/** Only the leader invites, kicks, hands over the lead or disbands. */
+	private static boolean leads(CommandSourceStack s, ServerPlayer p) {
+		if (MatrioData.get(s.getServer()).isLeader(p.getUUID())) return true;
+		s.sendFailure(Component.translatable("command.matriochka.group.not_leader"));
+		return false;
+	}
+
+	private static String name(CommandSourceStack s, String uuid) {
+		try {
+			ServerPlayer p = s.getServer().getPlayerList().getPlayer(java.util.UUID.fromString(uuid));
+			if (p != null) return p.getGameProfile().name();
+		} catch (IllegalArgumentException ignored) {
+			// no leader recorded
+		}
+		return uuid.length() > 8 ? uuid.substring(0, 8) : uuid;
+	}
+
+	private static String names(CommandSourceStack s, java.util.List<java.util.UUID> ids) {
+		StringBuilder b = new StringBuilder();
+		for (java.util.UUID u : ids) {
+			if (!b.isEmpty()) b.append(", ");
+			b.append(name(s, u.toString()));
+		}
+		return b.toString();
+	}
+
 	private static int msg(CommandSourceStack s, String key, Object... args) {
 		s.sendSuccess(() -> Component.translatable(key, args), false);
 		return 1;
@@ -51,10 +82,17 @@ public final class MatrioCommand {
 					ServerPlayer p = c.getSource().getPlayerOrException();
 					MatrioData data = MatrioData.get(c.getSource().getServer());
 					String g = data.groupOf(p.getUUID());
-					return msg(c.getSource(), "command.matriochka.group.info", data.members(g).size(), Integer.toBinaryString(data.group(g).getIntOr("done", 0)));
+					msg(c.getSource(), "command.matriochka.group.info", data.members(g).size(), Integer.toBinaryString(data.group(g).getIntOr("done", 0)));
+					return msg(c.getSource(), "command.matriochka.group.members", names(c.getSource(), data.members(g)), name(c.getSource(), data.leader(g)));
+				}))
+				.then(Commands.literal("leader").executes(c -> {
+					MatrioData data = MatrioData.get(c.getSource().getServer());
+					String g = data.groupOf(c.getSource().getPlayerOrException().getUUID());
+					return msg(c.getSource(), "command.matriochka.group.leader", name(c.getSource(), data.leader(g)));
 				}))
 				.then(Commands.literal("invite").then(Commands.argument("player", EntityArgument.player()).executes(c -> {
 					ServerPlayer p = c.getSource().getPlayerOrException();
+					if (!leads(c.getSource(), p)) return 0;
 					ServerPlayer t = EntityArgument.getPlayer(c, "player");
 					PlayerState.of(t).tag().putString("invite", MatrioData.get(c.getSource().getServer()).groupOf(p.getUUID()));
 					t.sendSystemMessage(Component.translatable("command.matriochka.group.invited", p.getDisplayName()));
@@ -64,14 +102,56 @@ public final class MatrioCommand {
 					ServerPlayer p = c.getSource().getPlayerOrException();
 					String inv = PlayerState.of(p).tag().getStringOr("invite", "");
 					if (inv.isEmpty()) return msg(c.getSource(), "command.matriochka.group.no_invite");
-					boolean ok = MatrioData.get(c.getSource().getServer()).join(p.getUUID(), inv);
+					MatrioData data = MatrioData.get(c.getSource().getServer());
+					String old = data.groupOf(p.getUUID());
+					boolean ok = data.join(p.getUUID(), inv);
+					if (ok) {
+						PlayerState.of(p).tag().remove("invite");
+						WorldAdmin.expel(c.getSource().getServer(), p.getUUID(), old);
+					}
 					return msg(c.getSource(), ok ? "command.matriochka.group.joined" : "command.matriochka.group.full");
 				}))
 				.then(Commands.literal("leave").executes(c -> {
-					MatrioData.get(c.getSource().getServer()).leave(c.getSource().getPlayerOrException().getUUID());
+					WorldAdmin.kick(c.getSource().getServer(), c.getSource().getPlayerOrException().getUUID());
 					return msg(c.getSource(), "command.matriochka.group.left");
+				}))
+				.then(Commands.literal("kick").then(Commands.argument("player", EntityArgument.player()).executes(c -> {
+					ServerPlayer p = c.getSource().getPlayerOrException();
+					if (!leads(c.getSource(), p)) return 0;
+					ServerPlayer t = EntityArgument.getPlayer(c, "player");
+					MatrioData data = MatrioData.get(c.getSource().getServer());
+					if (t == p || !data.groupOf(t.getUUID()).equals(data.groupOf(p.getUUID()))) return msg(c.getSource(), "command.matriochka.group.not_member", t.getDisplayName());
+					WorldAdmin.kick(c.getSource().getServer(), t.getUUID());
+					t.sendSystemMessage(Component.translatable("command.matriochka.group.kicked_you", p.getDisplayName()));
+					return msg(c.getSource(), "command.matriochka.group.kicked", t.getDisplayName());
+				})))
+				.then(Commands.literal("transfer").then(Commands.argument("player", EntityArgument.player()).executes(c -> {
+					ServerPlayer p = c.getSource().getPlayerOrException();
+					if (!leads(c.getSource(), p)) return 0;
+					ServerPlayer t = EntityArgument.getPlayer(c, "player");
+					MatrioData data = MatrioData.get(c.getSource().getServer());
+					if (!data.transfer(data.groupOf(p.getUUID()), t.getUUID())) return msg(c.getSource(), "command.matriochka.group.not_member", t.getDisplayName());
+					t.sendSystemMessage(Component.translatable("command.matriochka.group.lead_given"));
+					return msg(c.getSource(), "command.matriochka.group.transferred", t.getDisplayName());
+				})))
+				.then(Commands.literal("disband").executes(c -> {
+					ServerPlayer p = c.getSource().getPlayerOrException();
+					if (!leads(c.getSource(), p)) return 0;
+					MatrioData data = MatrioData.get(c.getSource().getServer());
+					var was = WorldAdmin.disband(c.getSource().getServer(), data.groupOf(p.getUUID()));
+					for (var u : was) {
+						ServerPlayer m = c.getSource().getServer().getPlayerList().getPlayer(u);
+						if (m != null && m != p) m.sendSystemMessage(Component.translatable("command.matriochka.group.disbanded"));
+					}
+					return msg(c.getSource(), "command.matriochka.group.disbanded");
 				})))
 			.then(Commands.literal("progression").requires(op)
+				.then(Commands.literal("show").then(Commands.argument("player", EntityArgument.player()).executes(c -> {
+					ServerPlayer t = EntityArgument.getPlayer(c, "player");
+					MatrioData data = MatrioData.get(c.getSource().getServer());
+					String g = data.groupOf(t.getUUID());
+					return msg(c.getSource(), "command.matriochka.progression.show", t.getDisplayName(), data.highestDefeated(g), Integer.toBinaryString(data.group(g).getIntOr("done", 0)));
+				})))
 				.then(Commands.literal("set").then(Commands.argument("world", IntegerArgumentType.integer(0, 10)).executes(c -> {
 					ServerPlayer p = c.getSource().getPlayerOrException();
 					MatrioData data = MatrioData.get(c.getSource().getServer());
@@ -90,8 +170,38 @@ public final class MatrioCommand {
 					fr.achedon12.matriochka.world.WorldZero.enter(c.getSource().getPlayerOrException());
 					return 1;
 				}))
-				.then(Commands.literal("leave").executes(c -> Travel.leave(c.getSource().getPlayerOrException()) ? 1 : 0)))
+				.then(Commands.literal("leave").executes(c -> Travel.leave(c.getSource().getPlayerOrException()) ? 1 : 0))
+				.then(Commands.literal("list").executes(c -> {
+					var lines = WorldAdmin.list(c.getSource().getServer());
+					if (lines.isEmpty()) return msg(c.getSource(), "command.matriochka.world.none");
+					for (Component line : lines) c.getSource().sendSuccess(() -> line, false);
+					return lines.size();
+				}))
+				.then(Commands.literal("repair").then(Commands.argument("player", EntityArgument.player()).then(Commands.argument("world", IntegerArgumentType.integer(1, 10)).executes(c -> {
+					String g = groupOf(c, "player");
+					int w = IntegerArgumentType.getInteger(c, "world");
+					return WorldAdmin.repair(c.getSource().getServer(), g, w) ? msg(c.getSource(), "command.matriochka.world.repaired", w) : msg(c.getSource(), "command.matriochka.world.unknown", w);
+				}))))
+				.then(Commands.literal("move").then(Commands.argument("player", EntityArgument.player()).then(Commands.argument("world", IntegerArgumentType.integer(1, 10)).executes(c -> {
+					String g = groupOf(c, "player");
+					int w = IntegerArgumentType.getInteger(c, "world");
+					BlockPos at = BlockPos.containing(c.getSource().getPosition());
+					WorldAdmin.move(c.getSource().getServer(), g, w, c.getSource().getLevel(), at);
+					return msg(c.getSource(), "command.matriochka.world.moved", w, at.getX(), at.getY(), at.getZ());
+				}))))
+				.then(Commands.literal("reset").then(Commands.argument("player", EntityArgument.player()).then(Commands.argument("world", IntegerArgumentType.integer(1, 10)).executes(c -> {
+					String g = groupOf(c, "player");
+					int w = IntegerArgumentType.getInteger(c, "world");
+					WorldAdmin.reset(c.getSource().getServer(), g, w);
+					return msg(c.getSource(), "command.matriochka.world.reset", w);
+				})))))
 			.then(Commands.literal("boss").requires(op)
+				.then(Commands.literal("reset").then(Commands.argument("player", EntityArgument.player()).then(Commands.argument("world", IntegerArgumentType.integer(0, 10)).executes(c -> {
+					String g = groupOf(c, "player");
+					int w = IntegerArgumentType.getInteger(c, "world");
+					WorldAdmin.resetBoss(c.getSource().getServer(), g, w);
+					return msg(c.getSource(), "command.matriochka.boss.reset", w);
+				}))))
 				.then(Commands.argument("id", StringArgumentType.word()).executes(c -> {
 					ServerPlayer p = c.getSource().getPlayerOrException();
 					String id = StringArgumentType.getString(c, "id");

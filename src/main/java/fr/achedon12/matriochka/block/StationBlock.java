@@ -67,6 +67,20 @@ public class StationBlock extends Block implements EntityBlock {
 		return InteractionResult.SUCCESS;
 	}
 
+	/** Storm Essence held against the Lightning Forge charges it, as a lightning strike would. */
+	@Override
+	protected InteractionResult useItemOn(net.minecraft.world.item.ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, net.minecraft.world.InteractionHand hand, BlockHitResult hit) {
+		if (station.equals("lightning_forge") && stack.is(ModContent.item("storm_essence"))) {
+			if (player instanceof ServerPlayer sp && level.getBlockEntity(pos) instanceof DataBlockEntity be) {
+				if (Stations.feedEssence(sp, (ServerLevel) level, pos, be)) {
+					sp.sendOverlayMessage(Component.translatable("message.matriochka.station.forge_fed", be.data().getIntOr("charge", 0)));
+				}
+			}
+			return InteractionResult.SUCCESS;
+		}
+		return InteractionResult.TRY_WITH_EMPTY_HAND;
+	}
+
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
 		if (random.nextInt(4) != 0) return;
