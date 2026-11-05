@@ -40,6 +40,7 @@ generates the textures, GeckoLib models and animations, lang files, worldgen and
 | `tools/bosses_hd.py` | the eleven hand-rigged bosses |
 | `tools/gui.py` | GUI art painted at twice its size: lacquer, gold leaf, khokhloma, parchment, dolls |
 | `tools/ui_lang.py` | hand-written UI strings (EN and FR) |
+| `tools/translations.py`, `tools/i18n/` | the other languages, checked against English |
 | `tools/sound.py` | the sound table: ids, subtitles, biome music and ambience |
 | `tools/sfx.py`, `tools/music.py`, `tools/synth.py` | sound recipes, the folk composer and the synthesizer |
 | `tools/site.py` | data and images for the website in `site/` |
@@ -48,7 +49,7 @@ Hand-written Java lives in `src/main/java` (game logic) and `src/client/java` (s
 
 ## Translations
 
-Lang files are generated. Add or fix strings in `tools/content.py` (content names and descriptions) or `tools/ui_lang.py` (interface text), then regenerate. A new language means adding a column to those tables; open an issue and we will set it up together.
+Lang files are generated. English and French live in `tools/content.py` (content names and descriptions) and `tools/ui_lang.py` (interface text, run it before `gen.py`). Spanish, German and Brazilian Portuguese live in `tools/i18n/<code>.json`, one table per language checked against English by `gen.py`; `python3 tools/translations.py <code>` lists what is missing. A missing key falls back to English. For a new language, open an issue and we will set it up together.
 
 ## Pull requests
 

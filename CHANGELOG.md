@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- First steps: until you enter World 1, a small lacquered card under the HUD plaque shows the next of ten steps (read the Scroll, find the Guardian's Sanctuary, wake and defeat the Guardian, place the Matrix Workbench, craft the World 1 Seed, till World Soil, plant it by water, wait for it to hatch, enter), with the step's item, a short hint and a compass needle toward the nearest sanctuary with its distance. Every step is detected from what you really do, a later step done first skips ahead, and progress is kept per player. Hide it or bring it back with the Guide button on the Scroll and on the Journal's Objective page.
+- Matriochka is translated into Spanish, German and Brazilian Portuguese: every name, the interface, quests, achievements, the Scroll, the fifty Journal pages, endings, credits and subtitles. A string missing from a language shows in English.
+- Button and ribbon labels shrink to fit when a language makes them longer.
+- Mod Menu (optional): Matriochka's entry has its summary, links to the wiki, the Discord and the issues, and a small info screen.
+- Xaero's Minimap and World Map: their cave view and entity radar are turned off in the Lightless Deep (World 5), where they would show what the darkness hides, and back on when you leave.
+- Checked with Sodium, Iris, Xaero's maps, JourneyMap, VoxelMap and Traveler's Backpack for 26.3: no conflict found, and no backpack way around the progression (see the Compatibility page).
+
 ## 0.3.0 (alpha)
 
 The story is complete: the Artisan's Journal, the hidden dolls, World 0, three endings and the New Cycle. World 7 is now entirely under water, worlds 3, 5, 6, 9 and 10 have their full mechanics, and the mod has its own music and sounds. Trailer: [matriochka-trailer.mp4](https://github.com/achedon12/matriochka/releases/download/v0.3.0/matriochka-trailer.mp4).
