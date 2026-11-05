@@ -45,7 +45,8 @@
    "noMelee": "no melee attack",
    "moveSpeed": "Movement speed",
    "behaviour": "How it fights",
-   "moves": "Moveset",
+   "moves": "Attacks",
+   "openSheet": "Open its technical sheet",
    "movesLead": "Its own attacks, shared with no other creature. It picks among them, never the same one twice in a row, and each has a wind-up you can read before it lands.",
    "recharge": "Recharge",
    "drops": "Drops",
@@ -190,6 +191,19 @@
    "desc": "Matriochka, a Fabric mod for Minecraft 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss."
   },
   "worlds": {
+   "lifeH": "Who lives here",
+   "lifeP": "Pick a creature to watch it move and use its own attacks. The boss guards the core that opens the next world.",
+   "codexH": "Everything in this world",
+   "codexP": "Every item and block, how to make or find it, and what the world asks of you.",
+   "cItems": "Items",
+   "cBlocks": "Blocks",
+   "cQuests": "Quests",
+   "cAch": "Achievements",
+   "cMade": "Made at",
+   "cFound": "Found on",
+   "cGives": "Mined, it gives",
+   "cMakes": "makes",
+   "cHidden": "Hidden until you earn it",
    "h": "The ten worlds",
    "lead": "Each world is planted inside the one before it, and each one bends a rule you thought you knew. Numbers below come straight from the mod's code.",
    "desc": "The ten worlds of Matriochka: rules, Seeds, stations, recipes, creatures, bosses and structures.",
@@ -984,7 +998,415 @@
    "bossNote": "It drops the Guardian Core, the Matrix Workbench and four World Soil 0. Your Scroll becomes the Artisan's Journal.",
    "items": [],
    "armor": null,
-   "structures": []
+   "structures": [],
+   "codex": {
+    "items": [
+     {
+      "id": "artisan_scroll",
+      "tex": "items/artisan_scroll.png",
+      "name": "Artisan's Scroll",
+      "kind": "guide",
+      "rarity": "",
+      "effect": "Explains the mod. Becomes the Journal.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:paper",
+        "tex": null,
+        "n": 3,
+        "name": "Paper"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_journal",
+      "tex": "items/artisan_journal.png",
+      "name": "Artisan's Journal",
+      "kind": "guide",
+      "rarity": "",
+      "effect": "Story, objectives, quests and karma.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "guardian_core",
+      "tex": "items/guardian_core.png",
+      "name": "Guardian Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 1 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Block Guardian"
+      ]
+     },
+     {
+      "id": "life_doll",
+      "tex": "items/life_doll.png",
+      "name": "Life Doll",
+      "kind": "doll",
+      "rarity": "Legendary",
+      "effect": "Breaks a layer instead of letting you die.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "return_thread",
+      "tex": "items/return_thread.png",
+      "name": "Return Thread",
+      "kind": "consumable",
+      "rarity": "Common",
+      "effect": "Brings you back to the world block.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 2,
+        "name": "Wool Thread"
+       },
+       {
+        "id": "minecraft:ender_pearl",
+        "tex": null,
+        "n": 1,
+        "name": "Ender Pearl"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "chance_doll",
+      "tex": "items/chance_doll.png",
+      "name": "Chance Doll",
+      "kind": "consumable",
+      "rarity": "Rare",
+      "effect": "Rerolls the class of an item.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:oak_planks",
+        "tex": null,
+        "n": 2,
+        "name": "Oak Planks"
+       },
+       {
+        "id": "minecraft:red_dye",
+        "tex": null,
+        "n": 1,
+        "name": "Red Dye"
+       },
+       {
+        "id": "minecraft:gold_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Gold Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cracked_doll",
+      "tex": "items/cracked_doll.png",
+      "name": "Cracked Doll",
+      "kind": "doll",
+      "rarity": "",
+      "effect": "Holds the access to a broken world.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "journal_page",
+      "tex": "items/journal_page.png",
+      "name": "Journal Page",
+      "kind": "page",
+      "rarity": "",
+      "effect": "A lost page of the Artisan's Journal.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "wool_thread",
+      "tex": "items/wool_thread.png",
+      "name": "Wool Thread",
+      "kind": "resource",
+      "rarity": "Common",
+      "effect": "Used for cradles and threads.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:white_wool",
+        "tex": null,
+        "n": 1,
+        "name": "White Wool"
+       }
+      ],
+      "count": 4,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_0",
+      "tex": "blocks/world_soil_0.png",
+      "name": "World Soil 0",
+      "kind": "soil",
+      "effect": "Till it to plant the World 1 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "world_block",
+      "tex": "blocks/world_block.png",
+      "name": "World Block",
+      "kind": "world_block",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "planted_seed",
+      "tex": "blocks/planted_seed.png",
+      "name": "Planted Seed",
+      "kind": "planted_seed",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "threshold",
+      "tex": "blocks/threshold.png",
+      "name": "Threshold",
+      "kind": "threshold",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "soul_cradle",
+      "tex": "blocks/soul_cradle.png",
+      "name": "Soul Cradle",
+      "kind": "cradle",
+      "effect": "",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:oak_planks",
+        "tex": null,
+        "n": 4,
+        "name": "Oak Planks"
+       },
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 1,
+        "name": "Wool Thread"
+       },
+       {
+        "id": "roots",
+        "tex": "items/roots.png",
+        "n": 2,
+        "name": "Roots"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "death_chest",
+      "tex": "blocks/death_chest.png",
+      "name": "Death Chest",
+      "kind": "death_chest",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sanctuary_altar",
+      "tex": "blocks/sanctuary_altar.png",
+      "name": "Guardian's Altar",
+      "kind": "boss_altar",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "arena_altar",
+      "tex": "blocks/arena_altar.png",
+      "name": "Arena Altar",
+      "kind": "boss_altar",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "painted_wood",
+      "tex": "blocks/painted_wood.png",
+      "name": "Painted Wood",
+      "kind": "deco",
+      "effect": "",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:oak_planks",
+        "tex": null,
+        "n": 8,
+        "name": "Oak Planks"
+       },
+       {
+        "id": "minecraft:red_dye",
+        "tex": null,
+        "n": 1,
+        "name": "Red Dye"
+       }
+      ],
+      "count": 8,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "lacquer_block",
+      "tex": "blocks/lacquer_block.png",
+      "name": "Lacquer Block",
+      "kind": "deco",
+      "effect": "",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "painted_wood",
+        "tex": "blocks/painted_wood.png",
+        "n": 4,
+        "name": "Painted Wood"
+       },
+       {
+        "id": "minecraft:honeycomb",
+        "tex": null,
+        "n": 1,
+        "name": "Honeycomb"
+       }
+      ],
+      "count": 4,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "matrix_workbench",
+      "tex": "blocks/matrix_workbench.png",
+      "name": "Matrix Workbench",
+      "kind": "station",
+      "effect": "Crafts Seeds; recipes unlock with cores.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "class_table",
+      "tex": "blocks/class_table.png",
+      "name": "Class Table",
+      "kind": "station",
+      "effect": "Upgrades an item's class.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:smithing_table",
+        "tex": null,
+        "n": 1,
+        "name": "Smithing Table"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 6,
+        "name": "Iron Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "soul_altar",
+      "tex": "blocks/soul_altar.png",
+      "name": "Soul Altar",
+      "kind": "station",
+      "effect": "Purify or devour an item.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:crying_obsidian",
+        "tex": null,
+        "n": 4,
+        "name": "Crying Obsidian"
+       },
+       {
+        "id": "minecraft:gold_ingot",
+        "tex": null,
+        "n": 4,
+        "name": "Gold Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     }
+    ],
+    "quests": [
+     {
+      "name": "Read Between the Lines",
+      "desc": "Read the 5 pages of the Scroll."
+     },
+     {
+      "name": "The First Guardian",
+      "desc": "Defeat the Block Guardian."
+     },
+     {
+      "name": "Fingers in the Doll",
+      "desc": "Craft the Matrix Workbench and a Seed."
+     },
+     {
+      "name": "The Peddler",
+      "desc": "Find the Peddler and trade with him."
+     }
+    ],
+    "ach": []
+   }
   },
   {
    "n": 1,
@@ -1356,7 +1778,484 @@
      ]
     }
    ],
-   "bossNote": "It drops the Queen Core."
+   "bossNote": "It drops the Queen Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "spores",
+      "tex": "items/spores.png",
+      "name": "Spores",
+      "kind": "resource",
+      "rarity": "Common",
+      "effect": "Base of antidotes.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Sporeling",
+       "Snare Flower",
+       "Spore Bearer"
+      ]
+     },
+     {
+      "id": "roots",
+      "tex": "items/roots.png",
+      "name": "Roots",
+      "kind": "resource",
+      "rarity": "Common",
+      "effect": "Living wood.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Root Creeper",
+       "Snare Flower"
+      ]
+     },
+     {
+      "id": "sporite",
+      "tex": "items/sporite.png",
+      "name": "Sporite",
+      "kind": "gem",
+      "rarity": "Rare",
+      "effect": "World 1 ore.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Sporite Ore"
+      ]
+     },
+     {
+      "id": "chitin",
+      "tex": "items/chitin.png",
+      "name": "Chitin",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Armor of the world.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Chitin Guard"
+      ]
+     },
+     {
+      "id": "antidote",
+      "tex": "items/antidote.png",
+      "name": "Antidote",
+      "kind": "consumable",
+      "rarity": "Common",
+      "effect": "Reduces toxin by 50.",
+      "station": "Spore Vat",
+      "inputs": [
+       {
+        "id": "spores",
+        "tex": "items/spores.png",
+        "n": 4,
+        "name": "Spores"
+       },
+       {
+        "id": "minecraft:glass_bottle",
+        "tex": null,
+        "n": 2,
+        "name": "Glass Bottle"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "filter_mask",
+      "tex": "items/filter_mask.png",
+      "name": "Filter Mask",
+      "kind": "mask",
+      "rarity": "Rare",
+      "effect": "Halves toxin gain.",
+      "station": "Spore Vat",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 2,
+        "name": "Chitin"
+       },
+       {
+        "id": "spores",
+        "tex": "items/spores.png",
+        "n": 8,
+        "name": "Spores"
+       },
+       {
+        "id": "minecraft:string",
+        "tex": null,
+        "n": 2,
+        "name": "String"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "sporite_sword",
+      "tex": "items/sporite_sword.png",
+      "name": "Sporite Sword",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Spore Vat",
+      "inputs": [
+       {
+        "id": "sporite",
+        "tex": "items/sporite.png",
+        "n": 8,
+        "name": "Sporite"
+       },
+       {
+        "id": "roots",
+        "tex": "items/roots.png",
+        "n": 1,
+        "name": "Roots"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "queen_core",
+      "tex": "items/queen_core.png",
+      "name": "Queen Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 2 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Spore Queen"
+      ]
+     },
+     {
+      "id": "seed_1",
+      "tex": "items/seed_1.png",
+      "name": "World 1 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 0 to grow World 1.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "guardian_core",
+        "tex": "items/guardian_core.png",
+        "n": 1,
+        "name": "Guardian Core"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 16,
+        "name": "Iron Ingot"
+       },
+       {
+        "id": "minecraft:oak_log",
+        "tex": null,
+        "n": 16,
+        "name": "Oak Log"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_1",
+      "tex": "items/hidden_doll_1.png",
+      "name": "Hidden Doll 1",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "root_broth",
+      "tex": "items/root_broth.png",
+      "name": "Root Broth",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Slows toxin for 5 minutes.",
+      "station": "Spore Vat",
+      "inputs": [
+       {
+        "id": "roots",
+        "tex": "items/roots.png",
+        "n": 3,
+        "name": "Roots"
+       },
+       {
+        "id": "minecraft:bowl",
+        "tex": null,
+        "n": 2,
+        "name": "Bowl"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "chitin_helmet",
+      "tex": "items/chitin_helmet.png",
+      "name": "Chitin Helmet",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Spore Vat",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 5,
+        "name": "Chitin"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "chitin_chestplate",
+      "tex": "items/chitin_chestplate.png",
+      "name": "Chitin Chestplate",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Spore Vat",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 8,
+        "name": "Chitin"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "chitin_leggings",
+      "tex": "items/chitin_leggings.png",
+      "name": "Chitin Leggings",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Spore Vat",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 7,
+        "name": "Chitin"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "chitin_boots",
+      "tex": "items/chitin_boots.png",
+      "name": "Chitin Boots",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Spore Vat",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 4,
+        "name": "Chitin"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_1",
+      "tex": "blocks/world_soil_1.png",
+      "name": "World Soil 1",
+      "kind": "soil",
+      "effect": "Till it to plant the World 2 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "spore_vat",
+      "tex": "blocks/spore_vat.png",
+      "name": "Spore Vat",
+      "kind": "station",
+      "effect": "Result depends on fermentation time.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:cauldron",
+        "tex": null,
+        "n": 1,
+        "name": "Cauldron"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 4,
+        "name": "Iron Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "spore_moss",
+      "tex": "blocks/spore_moss.png",
+      "name": "Spore Moss",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "rootstone",
+      "tex": "blocks/rootstone.png",
+      "name": "Rootstone",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "spore_bloom",
+      "tex": "blocks/spore_bloom.png",
+      "name": "Spore Bloom",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sporite_ore",
+      "tex": "blocks/sporite_ore.png",
+      "name": "Sporite Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Sporite"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Breathe to Begin",
+      "desc": "Craft a Filter Mask."
+     },
+     {
+      "name": "The Vat",
+      "desc": "Ferment a first recipe."
+     },
+     {
+      "name": "Hard Harvest",
+      "desc": "Bring 16 spores to the herbalist."
+     },
+     {
+      "name": "The Lost Scouts",
+      "desc": "Clear the jungle of 10 Sporelings."
+     },
+     {
+      "name": "The Clearing",
+      "desc": "Purify the clearing (+5) or burn it for loot (-5)."
+     },
+     {
+      "name": "No Filter",
+      "desc": "Kill a Chitin Guard without a mask."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "First Seed",
+      "desc": "Open World 1."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Breathe Anyway",
+      "desc": "Craft a filter mask."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Fallen Queen",
+      "desc": "Defeat the Spore Queen."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Living Frescoes",
+      "desc": "Find a fresco of the world."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Botanist",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Every Page",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Broken Shield",
+      "desc": "Defeat a Chitin Guard."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Short of Breath",
+      "desc": "Beat the Queen without a mask."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Friend of Flowers",
+      "desc": "Get caught by a Snare Flower."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "First Doll",
+      "desc": "Find the hidden doll of the world."
+     }
+    ]
+   }
   },
   {
    "n": 2,
@@ -1748,7 +2647,515 @@
      ]
     }
    ],
-   "bossNote": "It drops the Titan Core."
+   "bossNote": "It drops the Titan Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "blazing_rock",
+      "tex": "items/blazing_rock.png",
+      "name": "Blazing Rock",
+      "kind": "resource",
+      "rarity": "Common",
+      "effect": "Powerful fuel.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Rock Salamander",
+       "Slag Golem",
+       "Blazing Rock Ore"
+      ]
+     },
+     {
+      "id": "giant_ore",
+      "tex": "items/giant_ore.png",
+      "name": "Giant Ore",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "A whole vein in one block.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Living Vein",
+       "Giant Vein"
+      ]
+     },
+     {
+      "id": "ash_ingot",
+      "tex": "items/ash_ingot.png",
+      "name": "Ash Ingot",
+      "kind": "ingot",
+      "rarity": "Rare",
+      "effect": "Base of World 2 gear.",
+      "station": "Ash Foundry",
+      "inputs": [
+       {
+        "id": "giant_ore",
+        "tex": "items/giant_ore.png",
+        "n": 1,
+        "name": "Giant Ore"
+       },
+       {
+        "id": "blazing_rock",
+        "tex": "items/blazing_rock.png",
+        "n": 1,
+        "name": "Blazing Rock"
+       }
+      ],
+      "count": 1,
+      "drops": [
+       "Ash Miner",
+       "Dead Smith"
+      ]
+     },
+     {
+      "id": "cooling_water",
+      "tex": "items/cooling_water.png",
+      "name": "Cooling Water",
+      "kind": "consumable",
+      "rarity": "Common",
+      "effect": "Reduces heat by 50.",
+      "station": "Ash Foundry",
+      "inputs": [
+       {
+        "id": "minecraft:ice",
+        "tex": null,
+        "n": 2,
+        "name": "Ice"
+       },
+       {
+        "id": "minecraft:glass_bottle",
+        "tex": null,
+        "n": 2,
+        "name": "Glass Bottle"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "drill",
+      "tex": "items/drill.png",
+      "name": "Drill",
+      "kind": "drill",
+      "rarity": "Epic",
+      "effect": "Mines 3x3, burns Blazing Rock.",
+      "station": "Ash Foundry",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 6,
+        "name": "Ash Ingot"
+       },
+       {
+        "id": "blazing_rock",
+        "tex": "items/blazing_rock.png",
+        "n": 4,
+        "name": "Blazing Rock"
+       },
+       {
+        "id": "minecraft:redstone",
+        "tex": null,
+        "n": 4,
+        "name": "Redstone Dust"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "ash_hammer",
+      "tex": "items/ash_hammer.png",
+      "name": "Ash Hammer",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Ash Foundry",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 8,
+        "name": "Ash Ingot"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Stick"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "titan_core",
+      "tex": "items/titan_core.png",
+      "name": "Titan Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 3 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Ash Titan"
+      ]
+     },
+     {
+      "id": "seed_2",
+      "tex": "items/seed_2.png",
+      "name": "World 2 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 1 to grow World 2.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "queen_core",
+        "tex": "items/queen_core.png",
+        "n": 1,
+        "name": "Queen Core"
+       },
+       {
+        "id": "sporite",
+        "tex": "items/sporite.png",
+        "n": 8,
+        "name": "Sporite"
+       },
+       {
+        "id": "spores",
+        "tex": "items/spores.png",
+        "n": 16,
+        "name": "Spores"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_2",
+      "tex": "items/hidden_doll_2.png",
+      "name": "Hidden Doll 2",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "ice_bread",
+      "tex": "items/ice_bread.png",
+      "name": "Ice Bread",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Slows heat for 5 minutes.",
+      "station": "Ash Foundry",
+      "inputs": [
+       {
+        "id": "minecraft:bread",
+        "tex": null,
+        "n": 2,
+        "name": "Bread"
+       },
+       {
+        "id": "minecraft:ice",
+        "tex": null,
+        "n": 1,
+        "name": "Ice"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "thermal_helmet",
+      "tex": "items/thermal_helmet.png",
+      "name": "Thermal Helmet",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "Halves heat gain.",
+      "station": "Ash Foundry",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 5,
+        "name": "Ash Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "thermal_chestplate",
+      "tex": "items/thermal_chestplate.png",
+      "name": "Thermal Chestplate",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "Halves heat gain.",
+      "station": "Ash Foundry",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 8,
+        "name": "Ash Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "thermal_leggings",
+      "tex": "items/thermal_leggings.png",
+      "name": "Thermal Leggings",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "Halves heat gain.",
+      "station": "Ash Foundry",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 7,
+        "name": "Ash Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "thermal_boots",
+      "tex": "items/thermal_boots.png",
+      "name": "Thermal Boots",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "Halves heat gain.",
+      "station": "Ash Foundry",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 4,
+        "name": "Ash Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_2",
+      "tex": "blocks/world_soil_2.png",
+      "name": "World Soil 2",
+      "kind": "soil",
+      "effect": "Till it to plant the World 3 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "nesting_chest",
+      "tex": "blocks/nesting_chest.png",
+      "name": "Nesting Chest",
+      "kind": "nesting_chest",
+      "effect": "",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:chest",
+        "tex": null,
+        "n": 2,
+        "name": "Chest"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 2,
+        "name": "Ash Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "ash_foundry",
+      "tex": "blocks/ash_foundry.png",
+      "name": "Ash Foundry",
+      "kind": "station",
+      "effect": "Keep the temperature in the green.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:blast_furnace",
+        "tex": null,
+        "n": 1,
+        "name": "Blast Furnace"
+       },
+       {
+        "id": "sporite",
+        "tex": "items/sporite.png",
+        "n": 4,
+        "name": "Sporite"
+       },
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 2,
+        "name": "Chitin"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "ashrock",
+      "tex": "blocks/ashrock.png",
+      "name": "Ashrock",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "ember_stone",
+      "tex": "blocks/ember_stone.png",
+      "name": "Ember Stone",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "giant_ore_block",
+      "tex": "blocks/giant_ore_block.png",
+      "name": "Giant Vein",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Giant Ore"
+     },
+     {
+      "id": "blazing_rock_ore",
+      "tex": "blocks/blazing_rock_ore.png",
+      "name": "Blazing Rock Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Blazing Rock"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Under Control",
+      "desc": "Keep the Foundry at the right temperature."
+     },
+     {
+      "name": "The First Vein",
+      "desc": "Extract a whole giant ore."
+     },
+     {
+      "name": "The Miners' Pay",
+      "desc": "Bring 8 ash ingots to the foreman."
+     },
+     {
+      "name": "Flooded Shaft",
+      "desc": "Rescue a stuck team (8 salamanders)."
+     },
+     {
+      "name": "The Strike",
+      "desc": "Support the miners (+5) or sell their plans (-5)."
+     },
+     {
+      "name": "Bare Hands",
+      "desc": "Kill a Slag Golem without armor."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Rising Heat",
+      "desc": "Open World 2."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "The Right Fire",
+      "desc": "Smelt an ash ingot."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Titan Snuffed",
+      "desc": "Defeat the Ash Titan."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Deep Miner",
+      "desc": "Mine a giant vein."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Total Prospecting",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Site Notebooks",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "No Cooling",
+      "desc": "Defeat a Slag Golem."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Molten Armor",
+      "desc": "Beat the Titan without touching lava."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Too Greedy",
+      "desc": "Overheat a Foundry."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Ash Doll",
+      "desc": "Find the hidden doll of the world."
+     }
+    ]
+   }
   },
   {
    "n": 3,
@@ -2144,7 +3551,501 @@
      ]
     }
    ],
-   "bossNote": "It drops the Jailer Core."
+   "bossNote": "It drops the Jailer Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "dungeon_key",
+      "tex": "items/dungeon_key.png",
+      "name": "Dungeon Key",
+      "kind": "key",
+      "rarity": "Rare",
+      "effect": "Opens a sealed door once.",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 3,
+        "name": "Sealed Fragment"
+       },
+       {
+        "id": "minecraft:gold_nugget",
+        "tex": null,
+        "n": 4,
+        "name": "Gold Nugget"
+       }
+      ],
+      "count": 1,
+      "drops": [
+       "Jailer",
+       "Living Lock"
+      ]
+     },
+     {
+      "id": "sealed_fragment",
+      "tex": "items/sealed_fragment.png",
+      "name": "Sealed Fragment",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Traps and gear.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Sentinel",
+       "Dungeon Rat",
+       "Executioner",
+       "Sealed Ore"
+      ]
+     },
+     {
+      "id": "labyrinth_map",
+      "tex": "items/labyrinth_map.png",
+      "name": "Labyrinth Map",
+      "kind": "tool",
+      "rarity": "Common",
+      "effect": "Reveals nearby structures.",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "minecraft:paper",
+        "tex": null,
+        "n": 4,
+        "name": "Paper"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 1,
+        "name": "Sealed Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "lockpick_kit",
+      "tex": "items/lockpick_kit.png",
+      "name": "Lockpick Kit",
+      "kind": "tool",
+      "rarity": "Common",
+      "effect": "Opens an ordinary lock.",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "minecraft:iron_nugget",
+        "tex": null,
+        "n": 4,
+        "name": "Iron Nugget"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 1,
+        "name": "Sealed Fragment"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "portable_trap",
+      "tex": "items/portable_trap.png",
+      "name": "Portable Trap",
+      "kind": "consumable",
+      "rarity": "Common",
+      "effect": "Immobilizes a mob.",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Iron Ingot"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 1,
+        "name": "Sealed Fragment"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "jailer_blade",
+      "tex": "items/jailer_blade.png",
+      "name": "Jailer's Blade",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 8,
+        "name": "Sealed Fragment"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Stick"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "jailer_core",
+      "tex": "items/jailer_core.png",
+      "name": "Jailer Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 4 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Grand Jailer"
+      ]
+     },
+     {
+      "id": "seed_3",
+      "tex": "items/seed_3.png",
+      "name": "World 3 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 2 to grow World 3.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "titan_core",
+        "tex": "items/titan_core.png",
+        "n": 1,
+        "name": "Titan Core"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 8,
+        "name": "Ash Ingot"
+       },
+       {
+        "id": "blazing_rock",
+        "tex": "items/blazing_rock.png",
+        "n": 16,
+        "name": "Blazing Rock"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_3",
+      "tex": "items/hidden_doll_3.png",
+      "name": "Hidden Doll 3",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cell_ration",
+      "tex": "items/cell_ration.png",
+      "name": "Cell Ration",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Long-lasting saturation.",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "minecraft:bread",
+        "tex": null,
+        "n": 1,
+        "name": "Bread"
+       },
+       {
+        "id": "minecraft:cooked_beef",
+        "tex": null,
+        "n": 1,
+        "name": "Steak"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "jailer_helmet",
+      "tex": "items/jailer_helmet.png",
+      "name": "Jailer Helmet",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 5,
+        "name": "Sealed Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "jailer_chestplate",
+      "tex": "items/jailer_chestplate.png",
+      "name": "Jailer Chestplate",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 8,
+        "name": "Sealed Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "jailer_leggings",
+      "tex": "items/jailer_leggings.png",
+      "name": "Jailer Leggings",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 7,
+        "name": "Sealed Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "jailer_boots",
+      "tex": "items/jailer_boots.png",
+      "name": "Jailer Boots",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 4,
+        "name": "Sealed Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_3",
+      "tex": "blocks/world_soil_3.png",
+      "name": "World Soil 3",
+      "kind": "soil",
+      "effect": "Till it to plant the World 4 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sealed_door",
+      "tex": "blocks/sealed_door.png",
+      "name": "Sealed Door",
+      "kind": "sealed_door",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "jailer_table",
+      "tex": "blocks/jailer_table.png",
+      "name": "Jailer's Table",
+      "kind": "station",
+      "effect": "Reproduce the lock pattern.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:smithing_table",
+        "tex": null,
+        "n": 1,
+        "name": "Smithing Table"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 4,
+        "name": "Ash Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "dungeon_brick",
+      "tex": "blocks/dungeon_brick.png",
+      "name": "Dungeon Brick",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sealed_brick",
+      "tex": "blocks/sealed_brick.png",
+      "name": "Sealed Brick",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "cold_lamp",
+      "tex": "blocks/cold_lamp.png",
+      "name": "Cold Lamp",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sealed_fragment_ore",
+      "tex": "blocks/sealed_fragment_ore.png",
+      "name": "Sealed Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Sealed Fragment"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Turn the Key",
+      "desc": "Open 3 doors with keys."
+     },
+     {
+      "name": "Read the Plan",
+      "desc": "Complete a labyrinth map."
+     },
+     {
+      "name": "The Locksmith",
+      "desc": "Defeat 5 living locks."
+     },
+     {
+      "name": "Last Message",
+      "desc": "Carry a letter from cell to cell."
+     },
+     {
+      "name": "The Escape",
+      "desc": "Free the prisoners (+10) or claim the bounty (-10)."
+     },
+     {
+      "name": "Keyless",
+      "desc": "Defeat an Executioner."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Under Lock",
+      "desc": "Open World 3."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "The Right Key",
+      "desc": "Open a first sealed door."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Empty Cell",
+      "desc": "Defeat the Grand Jailer."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Full Plan",
+      "desc": "Craft a labyrinth map."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Guided Tour",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Prison Register",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Trap Returned",
+      "desc": "Trap a mob with a portable trap."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Open Cell",
+      "desc": "Defeat an Executioner."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "It Won't Open",
+      "desc": "Try a key on a living lock."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Captive Doll",
+      "desc": "Find the hidden doll of the world."
+     }
+    ]
+   }
   },
   {
    "n": 4,
@@ -2522,7 +4423,482 @@
      ]
     }
    ],
-   "bossNote": "It drops the Storm King Core."
+   "bossNote": "It drops the Storm King Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "ray_membrane",
+      "tex": "items/ray_membrane.png",
+      "name": "Ray Membrane",
+      "kind": "resource",
+      "rarity": "Common",
+      "effect": "Glider cloth.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Wind Ray"
+      ]
+     },
+     {
+      "id": "storm_essence",
+      "tex": "items/storm_essence.png",
+      "name": "Storm Essence",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Energy of the Lightning Forge.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Storm Bird",
+       "Cloud Mine"
+      ]
+     },
+     {
+      "id": "celestial_crystal",
+      "tex": "items/celestial_crystal.png",
+      "name": "Celestial Crystal",
+      "kind": "gem",
+      "rarity": "Rare",
+      "effect": "Gear and World 5 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Island Warden",
+       "Sky Harpooner",
+       "Celestial Crystal Ore"
+      ]
+     },
+     {
+      "id": "glider",
+      "tex": "items/glider.png",
+      "name": "Glider",
+      "kind": "glider",
+      "rarity": "Epic",
+      "effect": "Glide between islands.",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "ray_membrane",
+        "tex": "items/ray_membrane.png",
+        "n": 8,
+        "name": "Ray Membrane"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 4,
+        "name": "Stick"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 2,
+        "name": "Storm Essence"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "grappling_hook",
+      "tex": "items/grappling_hook.png",
+      "name": "Grappling Hook",
+      "kind": "hook",
+      "rarity": "Rare",
+      "effect": "Pulls you toward a surface.",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 2,
+        "name": "Celestial Crystal"
+       },
+       {
+        "id": "minecraft:string",
+        "tex": null,
+        "n": 8,
+        "name": "String"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 3,
+        "name": "Iron Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "lightning_lance",
+      "tex": "items/lightning_lance.png",
+      "name": "Lightning Lance",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 8,
+        "name": "Celestial Crystal"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Stick"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "storm_king_core",
+      "tex": "items/storm_king_core.png",
+      "name": "Storm King Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 5 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Storm King"
+      ]
+     },
+     {
+      "id": "seed_4",
+      "tex": "items/seed_4.png",
+      "name": "World 4 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 3 to grow World 4.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "jailer_core",
+        "tex": "items/jailer_core.png",
+        "n": 1,
+        "name": "Jailer Core"
+       },
+       {
+        "id": "dungeon_key",
+        "tex": "items/dungeon_key.png",
+        "n": 8,
+        "name": "Dungeon Key"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 8,
+        "name": "Sealed Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_4",
+      "tex": "items/hidden_doll_4.png",
+      "name": "Hidden Doll 4",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cloud_fruit",
+      "tex": "items/cloud_fruit.png",
+      "name": "Cloud Fruit",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Slow falling for 3 minutes.",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "minecraft:apple",
+        "tex": null,
+        "n": 2,
+        "name": "Apple"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 1,
+        "name": "Storm Essence"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "celestial_helmet",
+      "tex": "items/celestial_helmet.png",
+      "name": "Celestial Helmet",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 5,
+        "name": "Celestial Crystal"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "celestial_chestplate",
+      "tex": "items/celestial_chestplate.png",
+      "name": "Celestial Chestplate",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 8,
+        "name": "Celestial Crystal"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "celestial_leggings",
+      "tex": "items/celestial_leggings.png",
+      "name": "Celestial Leggings",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 7,
+        "name": "Celestial Crystal"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "celestial_boots",
+      "tex": "items/celestial_boots.png",
+      "name": "Celestial Boots",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 4,
+        "name": "Celestial Crystal"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_4",
+      "tex": "blocks/world_soil_4.png",
+      "name": "World Soil 4",
+      "kind": "soil",
+      "effect": "Till it to plant the World 5 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "lightning_forge",
+      "tex": "blocks/lightning_forge.png",
+      "name": "Lightning Forge",
+      "kind": "station",
+      "effect": "Needs a lightning strike or storm essence.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:lightning_rod",
+        "tex": null,
+        "n": 2,
+        "name": "Lightning Rod"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 4,
+        "name": "Ash Ingot"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 4,
+        "name": "Sealed Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "skygrass",
+      "tex": "blocks/skygrass.png",
+      "name": "Skygrass",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "cloudstone",
+      "tex": "blocks/cloudstone.png",
+      "name": "Cloudstone",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "storm_glass",
+      "tex": "blocks/storm_glass.png",
+      "name": "Storm Glass",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "celestial_crystal_ore",
+      "tex": "blocks/celestial_crystal_ore.png",
+      "name": "Celestial Crystal Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Celestial Crystal"
+     }
+    ],
+    "quests": [
+     {
+      "name": "First Flight",
+      "desc": "Craft a glider and cross three islands."
+     },
+     {
+      "name": "Catch the Lightning",
+      "desc": "Charge an item at the Forge."
+     },
+     {
+      "name": "Light the Lighthouse",
+      "desc": "Rekindle 3 lighthouses."
+     },
+     {
+      "name": "The Cartographer's Road",
+      "desc": "Clear the routes of 6 wind rays."
+     },
+     {
+      "name": "The Wreck",
+      "desc": "Return the cargo (+5) or keep it (-5)."
+     },
+     {
+      "name": "Perfect Storm",
+      "desc": "Defeat a Sky Harpooner."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Open Sky",
+      "desc": "Open World 4."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "No Net",
+      "desc": "Craft a glider."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Fallen King",
+      "desc": "Defeat the Storm King."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Wind Mapper",
+      "desc": "Find the Storm Lighthouse."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "View from Above",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Flying Paper",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Misplaced",
+      "desc": "Pull a mob into the void with the hook."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Under the Lightning",
+      "desc": "Beat the King without being struck."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "One Way",
+      "desc": "Fall from the highest island."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Cloud Doll",
+      "desc": "Find the hidden doll of the world."
+     }
+    ]
+   }
   },
   {
    "n": 5,
@@ -2914,7 +5290,488 @@
      ]
     }
    ],
-   "bossNote": "It drops the Light Eater Core."
+   "bossNote": "It drops the Light Eater Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "shadow_shard",
+      "tex": "items/shadow_shard.png",
+      "name": "Shadow Shard",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Base of World 5 gear.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Blind Prowler",
+       "Glow Devourer",
+       "Shadow Mother"
+      ]
+     },
+     {
+      "id": "diamond_fragment",
+      "tex": "items/diamond_fragment.png",
+      "name": "Diamond Fragment",
+      "kind": "gem",
+      "rarity": "Epic",
+      "effect": "4 fragments make 1 diamond.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Echo",
+       "Eyeless Watcher",
+       "Diamond Fragment Ore"
+      ]
+     },
+     {
+      "id": "solar_lantern",
+      "tex": "items/solar_lantern.png",
+      "name": "Solar Lantern",
+      "kind": "lantern",
+      "rarity": "Epic",
+      "effect": "20 minutes of light.",
+      "station": "Dark Altar",
+      "inputs": [
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 4,
+        "name": "Storm Essence"
+       },
+       {
+        "id": "minecraft:lantern",
+        "tex": null,
+        "n": 1,
+        "name": "Lantern"
+       },
+       {
+        "id": "minecraft:gold_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Gold Ingot"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "sonar",
+      "tex": "items/sonar.png",
+      "name": "Sonar",
+      "kind": "sonar",
+      "rarity": "Rare",
+      "effect": "Reveals nearby creatures.",
+      "station": "Dark Altar",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 4,
+        "name": "Shadow Shard"
+       },
+       {
+        "id": "minecraft:amethyst_shard",
+        "tex": null,
+        "n": 2,
+        "name": "Amethyst Shard"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "silence_balm",
+      "tex": "items/silence_balm.png",
+      "name": "Silence Balm",
+      "kind": "consumable",
+      "rarity": "Common",
+      "effect": "Clears your noise.",
+      "station": "Dark Altar",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 1,
+        "name": "Shadow Shard"
+       },
+       {
+        "id": "minecraft:honey_bottle",
+        "tex": null,
+        "n": 1,
+        "name": "Honey Bottle"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "shadow_blade",
+      "tex": "items/shadow_blade.png",
+      "name": "Shadow Blade",
+      "kind": "weapon",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Dark Altar",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 8,
+        "name": "Shadow Shard"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Stick"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "light_eater_core",
+      "tex": "items/light_eater_core.png",
+      "name": "Light Eater Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 6 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Light Eater"
+      ]
+     },
+     {
+      "id": "seed_5",
+      "tex": "items/seed_5.png",
+      "name": "World 5 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 4 to grow World 5.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "storm_king_core",
+        "tex": "items/storm_king_core.png",
+        "n": 1,
+        "name": "Storm King Core"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 8,
+        "name": "Storm Essence"
+       },
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 8,
+        "name": "Celestial Crystal"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_5",
+      "tex": "items/hidden_doll_5.png",
+      "name": "Hidden Doll 5",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mute_mushroom",
+      "tex": "items/mute_mushroom.png",
+      "name": "Mute Mushroom",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Noise reduced for 5 minutes.",
+      "station": "Dark Altar",
+      "inputs": [
+       {
+        "id": "minecraft:brown_mushroom",
+        "tex": null,
+        "n": 2,
+        "name": "Brown Mushroom"
+       },
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 1,
+        "name": "Shadow Shard"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "nocturnal_helmet",
+      "tex": "items/nocturnal_helmet.png",
+      "name": "Nocturnal Helmet",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Dark Altar",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 5,
+        "name": "Shadow Shard"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nocturnal_chestplate",
+      "tex": "items/nocturnal_chestplate.png",
+      "name": "Nocturnal Chestplate",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Dark Altar",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 8,
+        "name": "Shadow Shard"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nocturnal_leggings",
+      "tex": "items/nocturnal_leggings.png",
+      "name": "Nocturnal Leggings",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Dark Altar",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 7,
+        "name": "Shadow Shard"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nocturnal_boots",
+      "tex": "items/nocturnal_boots.png",
+      "name": "Nocturnal Boots",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Dark Altar",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 4,
+        "name": "Shadow Shard"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_5",
+      "tex": "blocks/world_soil_5.png",
+      "name": "World Soil 5",
+      "kind": "soil",
+      "effect": "Till it to plant the World 6 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "dark_altar",
+      "tex": "blocks/dark_altar.png",
+      "name": "Dark Altar",
+      "kind": "station",
+      "effect": "Works only in complete darkness.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:obsidian",
+        "tex": null,
+        "n": 4,
+        "name": "Obsidian"
+       },
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 4,
+        "name": "Celestial Crystal"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 2,
+        "name": "Storm Essence"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "umbral_stone",
+      "tex": "blocks/umbral_stone.png",
+      "name": "Umbral Stone",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "umbral_moss",
+      "tex": "blocks/umbral_moss.png",
+      "name": "Umbral Moss",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "faint_glow",
+      "tex": "blocks/faint_glow.png",
+      "name": "Faint Glow",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "diamond_fragment_ore",
+      "tex": "blocks/diamond_fragment_ore.png",
+      "name": "Diamond Fragment Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Diamond Fragment"
+     }
+    ],
+    "quests": [
+     {
+      "name": "A Lasting Light",
+      "desc": "Craft a Solar Lantern."
+     },
+     {
+      "name": "Hear the Danger",
+      "desc": "Spot 3 mobs with the sonar."
+     },
+     {
+      "name": "The Signs",
+      "desc": "Learn 5 signs of the Silent Ones."
+     },
+     {
+      "name": "The Night Light",
+      "desc": "Escort the keeper (6 Glow Devourers)."
+     },
+     {
+      "name": "The Last Fire",
+      "desc": "Relight the village (+5) or steal its flame (-5)."
+     },
+     {
+      "name": "Pitch Black",
+      "desc": "Defeat a Shadow Mother."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Pitch Darkness",
+      "desc": "Open World 5."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "A Glimmer",
+      "desc": "Craft a Solar Lantern."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "End of the Feast",
+      "desc": "Defeat the Light Eater."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "First Glint",
+      "desc": "Find a diamond fragment."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Groping Around",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Written in the Dark",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Total Silence",
+      "desc": "Kill a Blind Prowler without being spotted."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Flameless",
+      "desc": "Beat the Eater without artificial light."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "It Was You",
+      "desc": "Get lured by an Echo."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Shadow Doll",
+      "desc": "Find the hidden doll of the world."
+     }
+    ]
+   }
   },
   {
    "n": 6,
@@ -3268,7 +6125,451 @@
      ]
     }
    ],
-   "bossNote": "It drops the Double Core."
+   "bossNote": "It drops the Double Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "unstable_alloy",
+      "tex": "items/unstable_alloy.png",
+      "name": "Unstable Alloy",
+      "kind": "ingot",
+      "rarity": "Rare",
+      "effect": "Base of World 6 gear.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Ceiling Walker",
+       "Unstable Sphere",
+       "Unstable Alloy Ore"
+      ]
+     },
+     {
+      "id": "inverted_crystal",
+      "tex": "items/inverted_crystal.png",
+      "name": "Inverted Crystal",
+      "kind": "gem",
+      "rarity": "Epic",
+      "effect": "Inverter and World 7 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Reflection",
+       "Inverted Strider",
+       "Broken Mirror"
+      ]
+     },
+     {
+      "id": "gravity_boots",
+      "tex": "items/gravity_boots.png",
+      "name": "Gravity Boots",
+      "kind": "boots",
+      "rarity": "Epic",
+      "effect": "Ignore gravity flips.",
+      "station": "Inverter",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 6,
+        "name": "Unstable Alloy"
+       },
+       {
+        "id": "inverted_crystal",
+        "tex": "items/inverted_crystal.png",
+        "n": 2,
+        "name": "Inverted Crystal"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "stabilizer",
+      "tex": "items/stabilizer.png",
+      "name": "Stabilizer",
+      "kind": "consumable",
+      "rarity": "Common",
+      "effect": "Cancels an inversion.",
+      "station": "Inverter",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 1,
+        "name": "Unstable Alloy"
+       },
+       {
+        "id": "minecraft:quartz",
+        "tex": null,
+        "n": 2,
+        "name": "Nether Quartz"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "mirror_blade",
+      "tex": "items/mirror_blade.png",
+      "name": "Mirror Blade",
+      "kind": "weapon",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Inverter",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 8,
+        "name": "Unstable Alloy"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Stick"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "double_core",
+      "tex": "items/double_core.png",
+      "name": "Double Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 7 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Your Double"
+      ]
+     },
+     {
+      "id": "seed_6",
+      "tex": "items/seed_6.png",
+      "name": "World 6 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 5 to grow World 6.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "light_eater_core",
+        "tex": "items/light_eater_core.png",
+        "n": 1,
+        "name": "Light Eater Core"
+       },
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 8,
+        "name": "Shadow Shard"
+       },
+       {
+        "id": "diamond_fragment",
+        "tex": "items/diamond_fragment.png",
+        "n": 4,
+        "name": "Diamond Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_6",
+      "tex": "items/hidden_doll_6.png",
+      "name": "Hidden Doll 6",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "flipped_apple",
+      "tex": "items/flipped_apple.png",
+      "name": "Flipped Apple",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Stability for 30 seconds.",
+      "station": "Inverter",
+      "inputs": [
+       {
+        "id": "minecraft:apple",
+        "tex": null,
+        "n": 2,
+        "name": "Apple"
+       },
+       {
+        "id": "inverted_crystal",
+        "tex": "items/inverted_crystal.png",
+        "n": 1,
+        "name": "Inverted Crystal"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "mirror_helmet",
+      "tex": "items/mirror_helmet.png",
+      "name": "Mirror Helmet",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Inverter",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 5,
+        "name": "Unstable Alloy"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mirror_chestplate",
+      "tex": "items/mirror_chestplate.png",
+      "name": "Mirror Chestplate",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Inverter",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 8,
+        "name": "Unstable Alloy"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mirror_leggings",
+      "tex": "items/mirror_leggings.png",
+      "name": "Mirror Leggings",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Inverter",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 7,
+        "name": "Unstable Alloy"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mirror_boots",
+      "tex": "items/mirror_boots.png",
+      "name": "Mirror Boots",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Inverter",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 4,
+        "name": "Unstable Alloy"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_6",
+      "tex": "blocks/world_soil_6.png",
+      "name": "World Soil 6",
+      "kind": "soil",
+      "effect": "Till it to plant the World 7 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "inverter",
+      "tex": "blocks/inverter.png",
+      "name": "Inverter",
+      "kind": "station",
+      "effect": "Every gain comes with a flaw.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:observer",
+        "tex": null,
+        "n": 2,
+        "name": "Observer"
+       },
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 6,
+        "name": "Shadow Shard"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "inverted_stone",
+      "tex": "blocks/inverted_stone.png",
+      "name": "Inverted Stone",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "mirror_glass",
+      "tex": "blocks/mirror_glass.png",
+      "name": "Mirror Glass",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "prism_moss",
+      "tex": "blocks/prism_moss.png",
+      "name": "Prism Moss",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "unstable_alloy_ore",
+      "tex": "blocks/unstable_alloy_ore.png",
+      "name": "Unstable Alloy Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Unstable Alloy"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Fall Upward",
+      "desc": "Craft gravity boots."
+     },
+     {
+      "name": "Double Meaning",
+      "desc": "Use the Inverter."
+     },
+     {
+      "name": "Lost Reflection",
+      "desc": "Bring back an NPC's double."
+     },
+     {
+      "name": "The Impossible Stair",
+      "desc": "Reach the top of the stair."
+     },
+     {
+      "name": "Who Is Real?",
+      "desc": "Free the Reflection (+5) or take its place (-5)."
+     },
+     {
+      "name": "Upside Down",
+      "desc": "Defeat a Broken Mirror."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Upside Down",
+      "desc": "Open World 6."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Feet on the Ground",
+      "desc": "Craft gravity boots."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Face to Face",
+      "desc": "Defeat Your Double."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Ceiling Walk",
+      "desc": "Live through a gravity flip."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Impossible Geometry",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Reading Backwards",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Return to Sender",
+      "desc": "Kill a Reflection."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "No Copy",
+      "desc": "Beat the Double with different gear each phase."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Vertigo",
+      "desc": "Fall upward for 10 seconds."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Flipped Doll",
+      "desc": "Find the hidden doll of the world."
+     }
+    ]
+   }
   },
   {
    "n": 7,
@@ -3648,7 +6949,470 @@
      ]
     }
    ],
-   "bossNote": "It drops the Leviathan Core."
+   "bossNote": "It drops the Leviathan Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "abyssal_salt",
+      "tex": "items/abyssal_salt.png",
+      "name": "Abyssal Salt",
+      "kind": "dust",
+      "rarity": "Rare",
+      "effect": "Protects gear from pressure.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Abyssal Hunter",
+       "Blade School",
+       "Abyssal Salt Ore"
+      ]
+     },
+     {
+      "id": "pressure_pearl",
+      "tex": "items/pressure_pearl.png",
+      "name": "Pressure Pearl",
+      "kind": "gem",
+      "rarity": "Epic",
+      "effect": "Diving suit and World 8 Seed.",
+      "station": "Abyssal Press",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 6,
+        "name": "Abyssal Salt"
+       },
+       {
+        "id": "minecraft:prismarine_crystals",
+        "tex": null,
+        "n": 2,
+        "name": "Prismarine Crystals"
+       }
+      ],
+      "count": 1,
+      "drops": [
+       "Pressure Jelly",
+       "Bell Crab",
+       "Trench Eel"
+      ]
+     },
+     {
+      "id": "oxygen_capsule",
+      "tex": "items/oxygen_capsule.png",
+      "name": "Oxygen Capsule",
+      "kind": "consumable",
+      "rarity": "Common",
+      "effect": "Refills oxygen.",
+      "station": "Abyssal Press",
+      "inputs": [
+       {
+        "id": "minecraft:kelp",
+        "tex": null,
+        "n": 4,
+        "name": "Kelp"
+       },
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 1,
+        "name": "Abyssal Salt"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "thruster",
+      "tex": "items/thruster.png",
+      "name": "Thruster",
+      "kind": "thruster",
+      "rarity": "Epic",
+      "effect": "Speeds you up underwater.",
+      "station": "Abyssal Press",
+      "inputs": [
+       {
+        "id": "pressure_pearl",
+        "tex": "items/pressure_pearl.png",
+        "n": 2,
+        "name": "Pressure Pearl"
+       },
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 4,
+        "name": "Unstable Alloy"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "trench_trident",
+      "tex": "items/trench_trident.png",
+      "name": "Trench Trident",
+      "kind": "weapon",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Abyssal Press",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 8,
+        "name": "Abyssal Salt"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Stick"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "leviathan_core",
+      "tex": "items/leviathan_core.png",
+      "name": "Leviathan Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 8 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Pressure Leviathan"
+      ]
+     },
+     {
+      "id": "seed_7",
+      "tex": "items/seed_7.png",
+      "name": "World 7 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 6 to grow World 7.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "double_core",
+        "tex": "items/double_core.png",
+        "n": 1,
+        "name": "Double Core"
+       },
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 8,
+        "name": "Unstable Alloy"
+       },
+       {
+        "id": "inverted_crystal",
+        "tex": "items/inverted_crystal.png",
+        "n": 4,
+        "name": "Inverted Crystal"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_7",
+      "tex": "items/hidden_doll_7.png",
+      "name": "Hidden Doll 7",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "apnea_kelp",
+      "tex": "items/apnea_kelp.png",
+      "name": "Apnea Kelp",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Oxygen +1 minute.",
+      "station": "Abyssal Press",
+      "inputs": [
+       {
+        "id": "minecraft:dried_kelp",
+        "tex": null,
+        "n": 3,
+        "name": "Dried Kelp"
+       },
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 1,
+        "name": "Abyssal Salt"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "diving_helmet",
+      "tex": "items/diving_helmet.png",
+      "name": "Diving Helmet",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "Resists pressure.",
+      "station": "Abyssal Press",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 5,
+        "name": "Abyssal Salt"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "diving_chestplate",
+      "tex": "items/diving_chestplate.png",
+      "name": "Diving Chestplate",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "Resists pressure.",
+      "station": "Abyssal Press",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 8,
+        "name": "Abyssal Salt"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "diving_leggings",
+      "tex": "items/diving_leggings.png",
+      "name": "Diving Leggings",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "Resists pressure.",
+      "station": "Abyssal Press",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 7,
+        "name": "Abyssal Salt"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "diving_boots",
+      "tex": "items/diving_boots.png",
+      "name": "Diving Boots",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "Resists pressure.",
+      "station": "Abyssal Press",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 4,
+        "name": "Abyssal Salt"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_7",
+      "tex": "blocks/world_soil_7.png",
+      "name": "World Soil 7",
+      "kind": "soil",
+      "effect": "Till it to plant the World 8 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "abyssal_press",
+      "tex": "blocks/abyssal_press.png",
+      "name": "Abyssal Press",
+      "kind": "station",
+      "effect": "Must be deep underwater.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:piston",
+        "tex": null,
+        "n": 2,
+        "name": "Piston"
+       },
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 6,
+        "name": "Unstable Alloy"
+       },
+       {
+        "id": "inverted_crystal",
+        "tex": "items/inverted_crystal.png",
+        "n": 1,
+        "name": "Inverted Crystal"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "abyssal_sand",
+      "tex": "blocks/abyssal_sand.png",
+      "name": "Abyssal Sand",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "trench_rock",
+      "tex": "blocks/trench_rock.png",
+      "name": "Trench Rock",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "pressure_coral",
+      "tex": "blocks/pressure_coral.png",
+      "name": "Pressure Coral",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "abyssal_salt_ore",
+      "tex": "blocks/abyssal_salt_ore.png",
+      "name": "Abyssal Salt Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Abyssal Salt"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Under Pressure",
+      "desc": "Craft a diving suit."
+     },
+     {
+      "name": "Compress",
+      "desc": "Press something at the Abyssal Press."
+     },
+     {
+      "name": "The Silent Station",
+      "desc": "Repair 3 station cables."
+     },
+     {
+      "name": "The Wreck's Crew",
+      "desc": "Recover 3 crew plates."
+     },
+     {
+      "name": "The Signal",
+      "desc": "Rescue the castaways (+10) or divert their oxygen (-10)."
+     },
+     {
+      "name": "One Breath",
+      "desc": "Defeat a Trench Eel."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Great Depth",
+      "desc": "Open World 7."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Pressurized",
+      "desc": "Craft a diving helmet."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Silence of the Trenches",
+      "desc": "Defeat the Leviathan."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Extreme Dive",
+      "desc": "Reach the deepest trench."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Open Sea",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Wet Paper",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "School Scattered",
+      "desc": "Kill 5 Blade Schools."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Last Breath",
+      "desc": "Beat the Leviathan with under 5% oxygen."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Forgotten Plate",
+      "desc": "Repair the old submarine."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Drowned Doll",
+      "desc": "Find the hidden doll of the world."
+     }
+    ]
+   }
   },
   {
    "n": 8,
@@ -4014,7 +7778,463 @@
      ]
     }
    ],
-   "bossNote": "It drops the Seasons Core."
+   "bossNote": "It drops the Seasons Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "temporal_sand",
+      "tex": "items/temporal_sand.png",
+      "name": "Temporal Sand",
+      "kind": "dust",
+      "rarity": "Rare",
+      "effect": "Base of World 8 gear.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Hourglass Elder",
+       "Dusk Shade",
+       "Hour Keeper"
+      ]
+     },
+     {
+      "id": "season_fragment",
+      "tex": "items/season_fragment.png",
+      "name": "Season Fragment",
+      "kind": "gem",
+      "rarity": "Epic",
+      "effect": "World 9 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Seasonal Creature",
+       "Child of Minutes",
+       "Season Ore"
+      ]
+     },
+     {
+      "id": "hourglass",
+      "tex": "items/hourglass.png",
+      "name": "Hourglass",
+      "kind": "hourglass",
+      "rarity": "Epic",
+      "effect": "Slows the world cycle.",
+      "station": "Time Workshop",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 6,
+        "name": "Temporal Sand"
+       },
+       {
+        "id": "minecraft:glass",
+        "tex": null,
+        "n": 2,
+        "name": "Glass"
+       },
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 1,
+        "name": "Season Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "season_preserve",
+      "tex": "items/season_preserve.png",
+      "name": "Season Preserve",
+      "kind": "consumable",
+      "rarity": "Common",
+      "effect": "Protects from the current season.",
+      "station": "Time Workshop",
+      "inputs": [
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 1,
+        "name": "Season Fragment"
+       },
+       {
+        "id": "minecraft:glass_bottle",
+        "tex": null,
+        "n": 3,
+        "name": "Glass Bottle"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "season_scythe",
+      "tex": "items/season_scythe.png",
+      "name": "Scythe of Seasons",
+      "kind": "weapon",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Time Workshop",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 8,
+        "name": "Temporal Sand"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Stick"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seasons_core",
+      "tex": "items/seasons_core.png",
+      "name": "Seasons Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 9 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Master of Seasons"
+      ]
+     },
+     {
+      "id": "seed_8",
+      "tex": "items/seed_8.png",
+      "name": "World 8 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 7 to grow World 8.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "leviathan_core",
+        "tex": "items/leviathan_core.png",
+        "n": 1,
+        "name": "Leviathan Core"
+       },
+       {
+        "id": "pressure_pearl",
+        "tex": "items/pressure_pearl.png",
+        "n": 4,
+        "name": "Pressure Pearl"
+       },
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 8,
+        "name": "Abyssal Salt"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_8",
+      "tex": "items/hidden_doll_8.png",
+      "name": "Hidden Doll 8",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "season_jam",
+      "tex": "items/season_jam.png",
+      "name": "Season Jam",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Protection from the season.",
+      "station": "Time Workshop",
+      "inputs": [
+       {
+        "id": "minecraft:sweet_berries",
+        "tex": null,
+        "n": 4,
+        "name": "Sweet Berries"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 1,
+        "name": "Temporal Sand"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "seasonal_helmet",
+      "tex": "items/seasonal_helmet.png",
+      "name": "Seasonal Helmet",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Time Workshop",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 5,
+        "name": "Temporal Sand"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seasonal_chestplate",
+      "tex": "items/seasonal_chestplate.png",
+      "name": "Seasonal Chestplate",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Time Workshop",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 8,
+        "name": "Temporal Sand"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seasonal_leggings",
+      "tex": "items/seasonal_leggings.png",
+      "name": "Seasonal Leggings",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Time Workshop",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 7,
+        "name": "Temporal Sand"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seasonal_boots",
+      "tex": "items/seasonal_boots.png",
+      "name": "Seasonal Boots",
+      "kind": "armor",
+      "rarity": "Epic",
+      "effect": "",
+      "station": "Time Workshop",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 4,
+        "name": "Temporal Sand"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_8",
+      "tex": "blocks/world_soil_8.png",
+      "name": "World Soil 8",
+      "kind": "soil",
+      "effect": "Till it to plant the World 9 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "time_workshop",
+      "tex": "blocks/time_workshop.png",
+      "name": "Time Workshop",
+      "kind": "station",
+      "effect": "Accepts recipes at dawn and dusk.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:clock",
+        "tex": null,
+        "n": 2,
+        "name": "Clock"
+       },
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 6,
+        "name": "Abyssal Salt"
+       },
+       {
+        "id": "pressure_pearl",
+        "tex": "items/pressure_pearl.png",
+        "n": 1,
+        "name": "Pressure Pearl"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "chrono_grass",
+      "tex": "blocks/chrono_grass.png",
+      "name": "Chrono Grass",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "hourstone",
+      "tex": "blocks/hourstone.png",
+      "name": "Hourstone",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "temporal_sand_block",
+      "tex": "blocks/temporal_sand_block.png",
+      "name": "Temporal Sand Block",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "season_ore",
+      "tex": "blocks/season_ore.png",
+      "name": "Season Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Season Fragment"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Four Seasons",
+      "desc": "Live through a full cycle."
+     },
+     {
+      "name": "Stop the Instant",
+      "desc": "Use an hourglass."
+     },
+     {
+      "name": "A Life in a Day",
+      "desc": "Help an Ephemeral before nightfall."
+     },
+     {
+      "name": "The Archives",
+      "desc": "Find 5 books of the library."
+     },
+     {
+      "name": "The Hour Seller",
+      "desc": "Give an Ephemeral its time back (+5) or buy it (-5)."
+     },
+     {
+      "name": "Out of Season",
+      "desc": "Defeat an Hour Keeper."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Counted Time",
+      "desc": "Open World 8."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Suspended Instant",
+      "desc": "Use an hourglass."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "End of Season",
+      "desc": "Defeat the Master of Seasons."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Every Season",
+      "desc": "See the 4 seasons."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Lost Hours",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Old Papers",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Right on Time",
+      "desc": "Defeat an Hour Keeper."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Four Times Victor",
+      "desc": "Hit the Master in every season."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Grandpa",
+      "desc": "Watch a Child of Minutes grow old."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Faded Doll",
+      "desc": "Find the hidden doll of the world."
+     }
+    ]
+   }
   },
   {
    "n": 9,
@@ -4380,7 +8600,470 @@
      ]
     }
    ],
-   "bossNote": "It drops the Terrain Core."
+   "bossNote": "It drops the Terrain Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "terrain_fragment",
+      "tex": "items/terrain_fragment.png",
+      "name": "Terrain Fragment",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Base of World 9 gear.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Crawling Block",
+       "Mimic",
+       "Foundation Eater",
+       "Earth Hand",
+       "Walking Column",
+       "Terrain Ore"
+      ]
+     },
+     {
+      "id": "terrain_heart",
+      "tex": "items/terrain_heart.png",
+      "name": "Terrain Heart",
+      "kind": "resource",
+      "rarity": "Legendary",
+      "effect": "World 10 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Walking Column"
+      ]
+     },
+     {
+      "id": "anchor",
+      "tex": "items/anchor.png",
+      "name": "Anchor",
+      "kind": "anchor",
+      "rarity": "Rare",
+      "effect": "Calms the ground (radius 4).",
+      "station": "Terrain Anchor",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 2,
+        "name": "Terrain Fragment"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Iron Ingot"
+       }
+      ],
+      "count": 4,
+      "drops": []
+     },
+     {
+      "id": "grip_boots",
+      "tex": "items/grip_boots.png",
+      "name": "Grip Boots",
+      "kind": "boots",
+      "rarity": "Epic",
+      "effect": "No falls from moving ground.",
+      "station": "Terrain Anchor",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 6,
+        "name": "Terrain Fragment"
+       },
+       {
+        "id": "minecraft:leather_boots",
+        "tex": null,
+        "n": 1,
+        "name": "Leather Boots"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seismic_mace",
+      "tex": "items/seismic_mace.png",
+      "name": "Seismic Mace",
+      "kind": "weapon",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Terrain Anchor",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 8,
+        "name": "Terrain Fragment"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Stick"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "last_doll_key",
+      "tex": "items/last_doll_key.png",
+      "name": "Key of the Last Doll",
+      "kind": "key",
+      "rarity": "",
+      "effect": "World 10 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "terrain_core",
+      "tex": "items/terrain_core.png",
+      "name": "Terrain Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "Opens the World 10 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Heart of the Terrain"
+      ]
+     },
+     {
+      "id": "seed_9",
+      "tex": "items/seed_9.png",
+      "name": "World 9 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 8 to grow World 9.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "seasons_core",
+        "tex": "items/seasons_core.png",
+        "n": 1,
+        "name": "Seasons Core"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 8,
+        "name": "Temporal Sand"
+       },
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 4,
+        "name": "Season Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_9",
+      "tex": "items/hidden_doll_9.png",
+      "name": "Hidden Doll 9",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "anchor_bread",
+      "tex": "items/anchor_bread.png",
+      "name": "Anchor Bread",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Less knockback for 5 minutes.",
+      "station": "Terrain Anchor",
+      "inputs": [
+       {
+        "id": "minecraft:bread",
+        "tex": null,
+        "n": 2,
+        "name": "Bread"
+       },
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 1,
+        "name": "Terrain Fragment"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "living_rock_helmet",
+      "tex": "items/living_rock_helmet.png",
+      "name": "Living Rock Helmet",
+      "kind": "armor",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Terrain Anchor",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 5,
+        "name": "Terrain Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "living_rock_chestplate",
+      "tex": "items/living_rock_chestplate.png",
+      "name": "Living Rock Chestplate",
+      "kind": "armor",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Terrain Anchor",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 8,
+        "name": "Terrain Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "living_rock_leggings",
+      "tex": "items/living_rock_leggings.png",
+      "name": "Living Rock Leggings",
+      "kind": "armor",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Terrain Anchor",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 7,
+        "name": "Terrain Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "living_rock_boots",
+      "tex": "items/living_rock_boots.png",
+      "name": "Living Rock Boots",
+      "kind": "armor",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Terrain Anchor",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 4,
+        "name": "Terrain Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_9",
+      "tex": "blocks/world_soil_9.png",
+      "name": "World Soil 9",
+      "kind": "soil",
+      "effect": "Till it to plant the World 10 Seed.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "terrain_anchor",
+      "tex": "blocks/terrain_anchor.png",
+      "name": "Terrain Anchor",
+      "kind": "station",
+      "effect": "Stabilizes the ground (radius 16).",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:anvil",
+        "tex": null,
+        "n": 1,
+        "name": "Anvil"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 8,
+        "name": "Temporal Sand"
+       },
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 1,
+        "name": "Season Fragment"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "living_rock",
+      "tex": "blocks/living_rock.png",
+      "name": "Living Rock",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "flesh_stone",
+      "tex": "blocks/flesh_stone.png",
+      "name": "Flesh Stone",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "pulse_vein",
+      "tex": "blocks/pulse_vein.png",
+      "name": "Pulse Vein",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "terrain_ore",
+      "tex": "blocks/terrain_ore.png",
+      "name": "Terrain Ore",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Terrain Fragment"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Keep Your Footing",
+      "desc": "Craft a Terrain Anchor."
+     },
+     {
+      "name": "The Ground Plan",
+      "desc": "Discover 5 zones."
+     },
+     {
+      "name": "The Drifting Fort",
+      "desc": "Stabilize 3 walls of the fort."
+     },
+     {
+      "name": "The Surveyor",
+      "desc": "Measure a living chasm."
+     },
+     {
+      "name": "The Vein",
+      "desc": "Heal the beating vein (+10) or drain it (-10)."
+     },
+     {
+      "name": "Unanchored",
+      "desc": "Defeat a Walking Column."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Slippery Ground",
+      "desc": "Open World 9."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Fixed Point",
+      "desc": "Craft a Terrain Anchor."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "That Traveler Was You",
+      "desc": "Defeat the Heart of the Terrain."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Surveyor",
+      "desc": "Find a living chasm."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Unstable Ground",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Displaced Page",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Mimic Unmasked",
+      "desc": "Kill a Mimic."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Anchorless",
+      "desc": "Beat the Heart without placing an anchor."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "My Base Walks",
+      "desc": "See a building moved by the ground."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Moving Doll",
+      "desc": "Find the hidden doll of the world."
+     }
+    ]
+   }
   },
   {
    "n": 10,
@@ -4726,7 +9409,437 @@
      ]
     }
    ],
-   "bossNote": "It drops the Unfinished Core."
+   "bossNote": "It drops the Unfinished Core.",
+   "codex": {
+    "items": [
+     {
+      "id": "artisan_thread",
+      "tex": "items/artisan_thread.png",
+      "name": "Artisan's Thread",
+      "kind": "thread",
+      "rarity": "Rare",
+      "effect": "Base of the final gear.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Giant Sporeling",
+       "Ash Titanid",
+       "Colossal Jailer",
+       "Titan Ray",
+       "Thread Spool"
+      ]
+     },
+     {
+      "id": "artisan_shard",
+      "tex": "items/artisan_shard.png",
+      "name": "Artisan's Shard",
+      "kind": "gem",
+      "rarity": "Legendary",
+      "effect": "Upgrades the final gear.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Colossus Prowler"
+      ]
+     },
+     {
+      "id": "artisan_blade",
+      "tex": "items/artisan_blade.png",
+      "name": "Artisan's Blade",
+      "kind": "weapon",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Final Loom",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 8,
+        "name": "Artisan's Thread"
+       },
+       {
+        "id": "artisan_shard",
+        "tex": "items/artisan_shard.png",
+        "n": 1,
+        "name": "Artisan's Shard"
+       },
+       {
+        "id": "sporite_sword",
+        "tex": "items/sporite_sword.png",
+        "n": 1,
+        "name": "Sporite Sword"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "unfinished_core",
+      "tex": "items/unfinished_core.png",
+      "name": "Unfinished Core",
+      "kind": "core",
+      "rarity": "Legendary",
+      "effect": "The heart of the creature.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "The Unfinished"
+      ]
+     },
+     {
+      "id": "seed_10",
+      "tex": "items/seed_10.png",
+      "name": "World 10 Seed",
+      "kind": "seed",
+      "rarity": "Epic",
+      "effect": "Plant on tilled World Soil 9 to grow World 10.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "terrain_core",
+        "tex": "items/terrain_core.png",
+        "n": 1,
+        "name": "Terrain Core"
+       },
+       {
+        "id": "terrain_heart",
+        "tex": "items/terrain_heart.png",
+        "n": 1,
+        "name": "Terrain Heart"
+       },
+       {
+        "id": "last_doll_key",
+        "tex": "items/last_doll_key.png",
+        "n": 1,
+        "name": "Key of the Last Doll"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_10",
+      "tex": "items/hidden_doll_10.png",
+      "name": "Hidden Doll 10",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Nest the ten dolls in order...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "workshop_feast",
+      "tex": "items/workshop_feast.png",
+      "name": "Workshop Feast",
+      "kind": "food",
+      "rarity": "Common",
+      "effect": "Two effects of your choice.",
+      "station": "Final Loom",
+      "inputs": [
+       {
+        "id": "root_broth",
+        "tex": "items/root_broth.png",
+        "n": 1,
+        "name": "Root Broth"
+       },
+       {
+        "id": "ice_bread",
+        "tex": "items/ice_bread.png",
+        "n": 1,
+        "name": "Ice Bread"
+       },
+       {
+        "id": "cloud_fruit",
+        "tex": "items/cloud_fruit.png",
+        "n": 1,
+        "name": "Cloud Fruit"
+       },
+       {
+        "id": "season_jam",
+        "tex": "items/season_jam.png",
+        "n": 1,
+        "name": "Season Jam"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_helmet",
+      "tex": "items/artisan_helmet.png",
+      "name": "Artisan Helmet",
+      "kind": "armor",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Final Loom",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 5,
+        "name": "Artisan's Thread"
+       },
+       {
+        "id": "chitin_helmet",
+        "tex": "items/chitin_helmet.png",
+        "n": 1,
+        "name": "Chitin Helmet"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_chestplate",
+      "tex": "items/artisan_chestplate.png",
+      "name": "Artisan Chestplate",
+      "kind": "armor",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Final Loom",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 8,
+        "name": "Artisan's Thread"
+       },
+       {
+        "id": "celestial_chestplate",
+        "tex": "items/celestial_chestplate.png",
+        "n": 1,
+        "name": "Celestial Chestplate"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_leggings",
+      "tex": "items/artisan_leggings.png",
+      "name": "Artisan Leggings",
+      "kind": "armor",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Final Loom",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 7,
+        "name": "Artisan's Thread"
+       },
+       {
+        "id": "diving_leggings",
+        "tex": "items/diving_leggings.png",
+        "n": 1,
+        "name": "Diving Leggings"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_boots",
+      "tex": "items/artisan_boots.png",
+      "name": "Artisan Boots",
+      "kind": "armor",
+      "rarity": "Legendary",
+      "effect": "",
+      "station": "Final Loom",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 4,
+        "name": "Artisan's Thread"
+       },
+       {
+        "id": "gravity_boots",
+        "tex": "items/gravity_boots.png",
+        "n": 1,
+        "name": "Gravity Boots"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "final_loom",
+      "tex": "blocks/final_loom.png",
+      "name": "Final Loom",
+      "kind": "station",
+      "effect": "Weaves materials from every world.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "minecraft:loom",
+        "tex": null,
+        "n": 1,
+        "name": "Loom"
+       },
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 8,
+        "name": "Terrain Fragment"
+       },
+       {
+        "id": "terrain_heart",
+        "tex": "items/terrain_heart.png",
+        "n": 1,
+        "name": "Terrain Heart"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "giant_plank",
+      "tex": "blocks/giant_plank.png",
+      "name": "Giant Plank",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "workshop_felt",
+      "tex": "blocks/workshop_felt.png",
+      "name": "Workshop Felt",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "lacquer_glow",
+      "tex": "blocks/lacquer_glow.png",
+      "name": "Lacquer Glow",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "artisan_thread_ore",
+      "tex": "blocks/artisan_thread_ore.png",
+      "name": "Thread Spool",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Artisan's Thread"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Looking Down",
+      "desc": "Find your base, now a mere object."
+     },
+     {
+      "name": "The Workshop",
+      "desc": "Craft at the Final Loom."
+     },
+     {
+      "name": "The Apprentices",
+      "desc": "Find 5 old apprentices."
+     },
+     {
+      "name": "Every Tool",
+      "desc": "Use a tool from every world."
+     },
+     {
+      "name": "The Last Pardon",
+      "desc": "Spare an apprentice (+10) or take their core (-10)."
+     },
+     {
+      "name": "All at Once",
+      "desc": "Defeat the Unfinished without losing a layer."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "All the Way Up",
+      "desc": "Open World 10."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Final Loom",
+      "desc": "Craft an item at the Final Loom."
+     },
+     {
+      "cat": "Progress",
+      "hidden": false,
+      "name": "Last Thread",
+      "desc": "Defeat the Unfinished."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "A Crumb",
+      "desc": "Find your base, seen from the giant world."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Full Workshop",
+      "desc": "Visit the 10 structure types."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Last Letter",
+      "desc": "Find the 5 Journal pages."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Ten Shells",
+      "desc": "Break the 10 shells in one attempt."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "All the Way",
+      "desc": "Use gear from every world against the Unfinished."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Every Doll",
+      "desc": "Gather the 10 hidden dolls."
+     },
+     {
+      "cat": "Hidden",
+      "hidden": true,
+      "name": "Set Down the Tools",
+      "desc": "Reach the third ending."
+     }
+    ]
+   }
   }
  ],
  "mobs": [

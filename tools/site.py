@@ -732,7 +732,7 @@ def build_worlds():
                      surface=[rec(r) for r in surface_recipes],
                      bossNote=t("It drops the Guardian Core, the Matrix Workbench and four World Soil 0. Your Scroll becomes the Artisan's Journal.",
                                 "Il laisse le Noyau du Gardien, l'Établi matriciel et quatre Terres de monde 0. Ton Parchemin devient le Journal de l'artisan."),
-                     items=[], armor=None, structures=[])
+                     items=[], armor=None, structures=[], codex=codex(0))
             out.append(d)
             continue
         st, seed = recipe_for(f"seed_{n}")
@@ -764,9 +764,67 @@ def build_worlds():
                               recipes=[rec(r) for r in RECIPES.get(station, [])]),
                  items=item_list, armor=armor_d,
                  structures=[dict(role=t(*ROLE[r]), names=structs[r]) for r in ROLE if r in structs],
-                 bossNote=t(f"It drops the {name(boss['core'])}.", f"Il laisse le {name(boss['core'])}."))
+                 bossNote=t(f"It drops the {name(boss['core'])}.", f"Il laisse le {name(boss['core'])}."), codex=codex(n))
         out.append(d)
     return out
+
+
+RARITY = {"common": ("Common", "Commun"), "rare": ("Rare", "Rare"), "epic": ("Epic", "Épique"), "legendary": ("Legendary", "Légendaire"), "none": ("", "")}
+STATION_NAME = lambda st: name(st) if st else None  # noqa: E731
+
+
+def _sources_of(item_id):
+    """Where an item comes from: the creatures that drop it, the boss that leaves it."""
+    out = []
+    for m in C.MOBS:
+        if m["drop"] == item_id or m["rare_drop"] == item_id:
+            out.append(name(m["id"]))
+    for b in C.BOSSES:
+        if b["core"] == item_id:
+            out.append(name(b["id"]))
+    for blk, drop in C.ORE_DROPS.items():
+        if drop == item_id:
+            out.append(name(blk))
+    return out
+
+
+def codex(n):
+    """Everything a world holds: every item and block, how you get it, its quests and its achievements."""
+    items = []
+    for it in C.ITEMS:
+        if it["world"] != n or it["kind"] == "armorset":
+            continue
+        st, r = recipe_for(it["id"])
+        items.append(dict(id=it["id"], tex=tex(it["id"]), name=name(it["id"]), kind=it["kind"], rarity=t(*RARITY.get(it["rarity"], ("", ""))),
+                          effect=it.get("effect_" + LANG, ""), station=STATION_NAME(st), inputs=ing(r["inputs"]) if r else [],
+                          count=r["count"] if r else 1, drops=_sources_of(it["id"])))
+    armor = next((it for it in C.ITEMS if it["world"] == n and it["kind"] == "armorset"), None)
+    if armor:
+        for p in ("helmet", "chestplate", "leggings", "boots"):
+            pid = f'{armor["id"]}_{p}'
+            st, r = recipe_for(pid)
+            items.append(dict(id=pid, tex=tex(pid), name=name(pid), kind="armor", rarity=t(*RARITY.get(armor["rarity"], ("", ""))),
+                              effect=armor.get("effect_" + LANG, ""), station=STATION_NAME(st), inputs=ing(r["inputs"]) if r else [],
+                              count=r["count"] if r else 1, drops=[]))
+    for f in C.FOODS:
+        if f[3] == n and all(x["id"] != f[0] for x in items):
+            st, r = recipe_for(f[0])
+            items.append(dict(id=f[0], tex=tex(f[0]), name=name(f[0]), kind="food", rarity="", effect=f[4] if LANG == "en" else f[5],
+                              station=STATION_NAME(st), inputs=ing(r["inputs"]) if r else [], count=r["count"] if r else 1, drops=[]))
+    blocks = []
+    for b in C.BLOCKS:
+        if b["world"] != n:
+            continue
+        st, r = recipe_for(b["id"])
+        blocks.append(dict(id=b["id"], tex=f"blocks/{b['id']}.png", name=name(b["id"]), kind=b["kind"], effect=b.get("note_" + LANG, ""),
+                           station=STATION_NAME(st), inputs=ing(r["inputs"]) if r else [], count=r["count"] if r else 1,
+                           drops=[], yields=name(C.ORE_DROPS[b["id"]]) if b["id"] in C.ORE_DROPS else None))
+    quests = [dict(name=q[4] if LANG == "en" else q[5], desc=q[6] if LANG == "en" else q[7]) for q in C.QUESTS if q[1] == n]
+    ach = ach_list(lambda a, n=n: False) if False else [
+        dict(cat={"progress": t("Progress", "Progression"), "explore": t("Exploration", "Exploration"), "combat": t("Combat", "Combat"),
+                  "hidden": t("Hidden", "Caché")}[a[0]], hidden=a[0] == "hidden", name=a[1] if LANG == "en" else a[2], desc=a[3] if LANG == "en" else a[4])
+        for a in C.ACH.get(n, [])]
+    return dict(items=items, blocks=blocks, quests=quests, ach=ach)
 
 
 def role_tags(m):
@@ -953,7 +1011,7 @@ def build_copy():
         animations=t("Animations", "Animations"), autoRotate=t("Turn slowly", "Tourner lentement"),
         role=t("Role", "Rôle"), attackSpeed=t("Attack speed", "Vitesse d'attaque"), attackEvery=t("one hit every", "un coup toutes les"),
         noMelee=t("no melee attack", "aucune attaque au corps à corps"), moveSpeed=t("Movement speed", "Vitesse de déplacement"),
-        behaviour=t("How it fights", "Comment il combat"), moves=t("Moveset", "Attaques"), movesLead=t("Its own attacks, shared with no other creature. It picks among them, never the same one twice in a row, and each has a wind-up you can read before it lands.", "Ses attaques à elle, qu'aucune autre créature ne partage. Elle choisit parmi elles, jamais deux fois la même d'affilée, et chacune a une préparation lisible avant de frapper."), recharge=t("Recharge", "Recharge"), drops=t("Drops", "Butin"), chance=t("Chance", "Chance"), count=t("Count", "Quantité"),
+        behaviour=t("How it fights", "Comment il combat"), moves=t("Attacks", "Attaques"), openSheet=t("Open its technical sheet", "Ouvrir sa fiche technique"), movesLead=t("Its own attacks, shared with no other creature. It picks among them, never the same one twice in a row, and each has a wind-up you can read before it lands.", "Ses attaques à elle, qu'aucune autre créature ne partage. Elle choisit parmi elles, jamais deux fois la même d'affilée, et chacune a une préparation lisible avant de frapper."), recharge=t("Recharge", "Recharge"), drops=t("Drops", "Butin"), chance=t("Chance", "Chance"), count=t("Count", "Quantité"),
         spawns=t("Where it spawns", "Où il apparaît"), spawnWeight=t("spawn weight", "poids d'apparition"),
         spawnShare=t("of the creatures that spawn in its world", "des créatures qui apparaissent dans son monde"),
         group=t("per group", "par groupe"), quests=t("Quests", "Quêtes"), achievements=t("Achievements", "Succès"),
@@ -1034,6 +1092,15 @@ def build_copy():
                "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."),
     )
     worlds = dict(
+        lifeH=t("Who lives here", "Qui vit ici"),
+        lifeP=t("Pick a creature to watch it move and use its own attacks. The boss guards the core that opens the next world.",
+                "Choisis une créature pour la voir bouger et lancer ses propres attaques. Le boss garde le noyau qui ouvre le monde suivant."),
+        codexH=t("Everything in this world", "Tout ce que contient ce monde"),
+        codexP=t("Every item and block, how to make or find it, and what the world asks of you.",
+                 "Chaque objet et chaque bloc, comment le fabriquer ou le trouver, et ce que le monde attend de toi."),
+        cItems=t("Items", "Objets"), cBlocks=t("Blocks", "Blocs"), cQuests=t("Quests", "Quêtes"), cAch=t("Achievements", "Succès"),
+        cMade=t("Made at", "Fabriqué à"), cFound=t("Found on", "Obtenu sur"), cGives=t("Mined, it gives", "Miné, il donne"),
+        cMakes=t("makes", "donne"), cHidden=t("Hidden until you earn it", "Caché jusqu'à ce que tu l'obtiennes"),
         h=t("The ten worlds", "Les dix mondes"),
         lead=t("Each world is planted inside the one before it, and each one bends a rule you thought you knew. Numbers below come straight from the mod's code.",
                "Chaque monde est planté dans le précédent, et chacun tord une règle que tu croyais connaître. Les chiffres ci-dessous viennent directement du code du mod."),

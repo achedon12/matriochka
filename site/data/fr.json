@@ -46,6 +46,7 @@
    "moveSpeed": "Vitesse de déplacement",
    "behaviour": "Comment il combat",
    "moves": "Attaques",
+   "openSheet": "Ouvrir sa fiche technique",
    "movesLead": "Ses attaques à elle, qu'aucune autre créature ne partage. Elle choisit parmi elles, jamais deux fois la même d'affilée, et chacune a une préparation lisible avant de frapper.",
    "recharge": "Recharge",
    "drops": "Butin",
@@ -190,6 +191,19 @@
    "desc": "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
   },
   "worlds": {
+   "lifeH": "Qui vit ici",
+   "lifeP": "Choisis une créature pour la voir bouger et lancer ses propres attaques. Le boss garde le noyau qui ouvre le monde suivant.",
+   "codexH": "Tout ce que contient ce monde",
+   "codexP": "Chaque objet et chaque bloc, comment le fabriquer ou le trouver, et ce que le monde attend de toi.",
+   "cItems": "Objets",
+   "cBlocks": "Blocs",
+   "cQuests": "Quêtes",
+   "cAch": "Succès",
+   "cMade": "Fabriqué à",
+   "cFound": "Obtenu sur",
+   "cGives": "Miné, il donne",
+   "cMakes": "donne",
+   "cHidden": "Caché jusqu'à ce que tu l'obtiennes",
    "h": "Les dix mondes",
    "lead": "Chaque monde est planté dans le précédent, et chacun tord une règle que tu croyais connaître. Les chiffres ci-dessous viennent directement du code du mod.",
    "desc": "Les dix mondes de Matriochka : règles, Graines, stations, recettes, créatures, boss et structures.",
@@ -984,7 +998,415 @@
    "bossNote": "Il laisse le Noyau du Gardien, l'Établi matriciel et quatre Terres de monde 0. Ton Parchemin devient le Journal de l'artisan.",
    "items": [],
    "armor": null,
-   "structures": []
+   "structures": [],
+   "codex": {
+    "items": [
+     {
+      "id": "artisan_scroll",
+      "tex": "items/artisan_scroll.png",
+      "name": "Parchemin de l'artisan",
+      "kind": "guide",
+      "rarity": "",
+      "effect": "Explique le mod, puis devient le Journal.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:paper",
+        "tex": null,
+        "n": 3,
+        "name": "Papier"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_journal",
+      "tex": "items/artisan_journal.png",
+      "name": "Journal de l'artisan",
+      "kind": "guide",
+      "rarity": "",
+      "effect": "Histoire, objectifs, quêtes et karma.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "guardian_core",
+      "tex": "items/guardian_core.png",
+      "name": "Noyau du Gardien",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 1.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Gardien du bloc"
+      ]
+     },
+     {
+      "id": "life_doll",
+      "tex": "items/life_doll.png",
+      "name": "Poupée de vie",
+      "kind": "doll",
+      "rarity": "Légendaire",
+      "effect": "Brise une couche au lieu de te laisser mourir.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "return_thread",
+      "tex": "items/return_thread.png",
+      "name": "Fil de retour",
+      "kind": "consumable",
+      "rarity": "Commun",
+      "effect": "Te ramène au bloc-monde.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 2,
+        "name": "Fil de laine"
+       },
+       {
+        "id": "minecraft:ender_pearl",
+        "tex": null,
+        "n": 1,
+        "name": "Perle de l'Ender"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "chance_doll",
+      "tex": "items/chance_doll.png",
+      "name": "Poupée du hasard",
+      "kind": "consumable",
+      "rarity": "Rare",
+      "effect": "Change aléatoirement la classe d'un objet.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:oak_planks",
+        "tex": null,
+        "n": 2,
+        "name": "Planches de chêne"
+       },
+       {
+        "id": "minecraft:red_dye",
+        "tex": null,
+        "n": 1,
+        "name": "Teinture rouge"
+       },
+       {
+        "id": "minecraft:gold_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Lingot d'or"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cracked_doll",
+      "tex": "items/cracked_doll.png",
+      "name": "Poupée fêlée",
+      "kind": "doll",
+      "rarity": "",
+      "effect": "Conserve l'accès à un monde cassé.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "journal_page",
+      "tex": "items/journal_page.png",
+      "name": "Page du Journal",
+      "kind": "page",
+      "rarity": "",
+      "effect": "Une page perdue du Journal de l'artisan.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "wool_thread",
+      "tex": "items/wool_thread.png",
+      "name": "Fil de laine",
+      "kind": "resource",
+      "rarity": "Commun",
+      "effect": "Sert aux berceaux et aux fils.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:white_wool",
+        "tex": null,
+        "n": 1,
+        "name": "Laine blanche"
+       }
+      ],
+      "count": 4,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_0",
+      "tex": "blocks/world_soil_0.png",
+      "name": "Terre de monde 0",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 1.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "world_block",
+      "tex": "blocks/world_block.png",
+      "name": "Bloc-monde",
+      "kind": "world_block",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "planted_seed",
+      "tex": "blocks/planted_seed.png",
+      "name": "Graine plantée",
+      "kind": "planted_seed",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "threshold",
+      "tex": "blocks/threshold.png",
+      "name": "Seuil",
+      "kind": "threshold",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "soul_cradle",
+      "tex": "blocks/soul_cradle.png",
+      "name": "Berceau d'âme",
+      "kind": "cradle",
+      "effect": "",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:oak_planks",
+        "tex": null,
+        "n": 4,
+        "name": "Planches de chêne"
+       },
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 1,
+        "name": "Fil de laine"
+       },
+       {
+        "id": "roots",
+        "tex": "items/roots.png",
+        "n": 2,
+        "name": "Racines"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "death_chest",
+      "tex": "blocks/death_chest.png",
+      "name": "Coffre de mort",
+      "kind": "death_chest",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sanctuary_altar",
+      "tex": "blocks/sanctuary_altar.png",
+      "name": "Autel du Gardien",
+      "kind": "boss_altar",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "arena_altar",
+      "tex": "blocks/arena_altar.png",
+      "name": "Autel d'arène",
+      "kind": "boss_altar",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "painted_wood",
+      "tex": "blocks/painted_wood.png",
+      "name": "Bois peint",
+      "kind": "deco",
+      "effect": "",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:oak_planks",
+        "tex": null,
+        "n": 8,
+        "name": "Planches de chêne"
+       },
+       {
+        "id": "minecraft:red_dye",
+        "tex": null,
+        "n": 1,
+        "name": "Teinture rouge"
+       }
+      ],
+      "count": 8,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "lacquer_block",
+      "tex": "blocks/lacquer_block.png",
+      "name": "Bloc laqué",
+      "kind": "deco",
+      "effect": "",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "painted_wood",
+        "tex": "blocks/painted_wood.png",
+        "n": 4,
+        "name": "Bois peint"
+       },
+       {
+        "id": "minecraft:honeycomb",
+        "tex": null,
+        "n": 1,
+        "name": "Rayon de miel"
+       }
+      ],
+      "count": 4,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "matrix_workbench",
+      "tex": "blocks/matrix_workbench.png",
+      "name": "Établi matriciel",
+      "kind": "station",
+      "effect": "Fabrique les Graines ; recettes débloquées par les noyaux.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "class_table",
+      "tex": "blocks/class_table.png",
+      "name": "Table de classe",
+      "kind": "station",
+      "effect": "Améliore la classe d'un objet.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:smithing_table",
+        "tex": null,
+        "n": 1,
+        "name": "Table de forge"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 6,
+        "name": "Lingot de fer"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "soul_altar",
+      "tex": "blocks/soul_altar.png",
+      "name": "Autel des âmes",
+      "kind": "station",
+      "effect": "Purifie ou dévore un objet.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:crying_obsidian",
+        "tex": null,
+        "n": 4,
+        "name": "Obsidienne pleureuse"
+       },
+       {
+        "id": "minecraft:gold_ingot",
+        "tex": null,
+        "n": 4,
+        "name": "Lingot d'or"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     }
+    ],
+    "quests": [
+     {
+      "name": "Lire entre les lignes",
+      "desc": "Lire les 5 pages du Parchemin."
+     },
+     {
+      "name": "Le premier Gardien",
+      "desc": "Vaincre le Gardien du bloc."
+     },
+     {
+      "name": "Les doigts dans la poupée",
+      "desc": "Fabriquer l'Établi matriciel et une Graine."
+     },
+     {
+      "name": "Le Colporteur",
+      "desc": "Trouver le Colporteur et commercer avec lui."
+     }
+    ],
+    "ach": []
+   }
   },
   {
    "n": 1,
@@ -1356,7 +1778,484 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau de la Reine."
+   "bossNote": "Il laisse le Noyau de la Reine.",
+   "codex": {
+    "items": [
+     {
+      "id": "spores",
+      "tex": "items/spores.png",
+      "name": "Spores",
+      "kind": "resource",
+      "rarity": "Commun",
+      "effect": "Base des antidotes.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Sporelin",
+       "Fleur-piège",
+       "Porte-spores"
+      ]
+     },
+     {
+      "id": "roots",
+      "tex": "items/roots.png",
+      "name": "Racines",
+      "kind": "resource",
+      "rarity": "Commun",
+      "effect": "Bois vivant.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Rampeur de racines",
+       "Fleur-piège"
+      ]
+     },
+     {
+      "id": "sporite",
+      "tex": "items/sporite.png",
+      "name": "Sporite",
+      "kind": "gem",
+      "rarity": "Rare",
+      "effect": "Minerai du monde 1.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Minerai de sporite"
+      ]
+     },
+     {
+      "id": "chitin",
+      "tex": "items/chitin.png",
+      "name": "Chitine",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Armure du monde.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Gardien de chitine"
+      ]
+     },
+     {
+      "id": "antidote",
+      "tex": "items/antidote.png",
+      "name": "Antidote",
+      "kind": "consumable",
+      "rarity": "Commun",
+      "effect": "Réduit la toxine de 50.",
+      "station": "Cuve de spores",
+      "inputs": [
+       {
+        "id": "spores",
+        "tex": "items/spores.png",
+        "n": 4,
+        "name": "Spores"
+       },
+       {
+        "id": "minecraft:glass_bottle",
+        "tex": null,
+        "n": 2,
+        "name": "Fiole"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "filter_mask",
+      "tex": "items/filter_mask.png",
+      "name": "Masque filtrant",
+      "kind": "mask",
+      "rarity": "Rare",
+      "effect": "Divise par 2 la montée de toxine.",
+      "station": "Cuve de spores",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 2,
+        "name": "Chitine"
+       },
+       {
+        "id": "spores",
+        "tex": "items/spores.png",
+        "n": 8,
+        "name": "Spores"
+       },
+       {
+        "id": "minecraft:string",
+        "tex": null,
+        "n": 2,
+        "name": "Ficelle"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "sporite_sword",
+      "tex": "items/sporite_sword.png",
+      "name": "Épée de sporite",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Cuve de spores",
+      "inputs": [
+       {
+        "id": "sporite",
+        "tex": "items/sporite.png",
+        "n": 8,
+        "name": "Sporite"
+       },
+       {
+        "id": "roots",
+        "tex": "items/roots.png",
+        "n": 1,
+        "name": "Racines"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "queen_core",
+      "tex": "items/queen_core.png",
+      "name": "Noyau de la Reine",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 2.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Reine des spores"
+      ]
+     },
+     {
+      "id": "seed_1",
+      "tex": "items/seed_1.png",
+      "name": "Graine du monde 1",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 0 bêchée pour faire éclore le monde 1.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "guardian_core",
+        "tex": "items/guardian_core.png",
+        "n": 1,
+        "name": "Noyau du Gardien"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 16,
+        "name": "Lingot de fer"
+       },
+       {
+        "id": "minecraft:oak_log",
+        "tex": null,
+        "n": 16,
+        "name": "Bûche de chêne"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_1",
+      "tex": "items/hidden_doll_1.png",
+      "name": "Poupée cachée 1",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "root_broth",
+      "tex": "items/root_broth.png",
+      "name": "Bouillie de racines",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Toxine ralentie pendant 5 minutes.",
+      "station": "Cuve de spores",
+      "inputs": [
+       {
+        "id": "roots",
+        "tex": "items/roots.png",
+        "n": 3,
+        "name": "Racines"
+       },
+       {
+        "id": "minecraft:bowl",
+        "tex": null,
+        "n": 2,
+        "name": "Bol"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "chitin_helmet",
+      "tex": "items/chitin_helmet.png",
+      "name": "Casque de chitine",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Cuve de spores",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 5,
+        "name": "Chitine"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "chitin_chestplate",
+      "tex": "items/chitin_chestplate.png",
+      "name": "Plastron de chitine",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Cuve de spores",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 8,
+        "name": "Chitine"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "chitin_leggings",
+      "tex": "items/chitin_leggings.png",
+      "name": "Jambières de chitine",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Cuve de spores",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 7,
+        "name": "Chitine"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "chitin_boots",
+      "tex": "items/chitin_boots.png",
+      "name": "Bottes de chitine",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Cuve de spores",
+      "inputs": [
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 4,
+        "name": "Chitine"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_1",
+      "tex": "blocks/world_soil_1.png",
+      "name": "Terre de monde 1",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 2.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "spore_vat",
+      "tex": "blocks/spore_vat.png",
+      "name": "Cuve de spores",
+      "kind": "station",
+      "effect": "Le résultat dépend du temps de fermentation.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:cauldron",
+        "tex": null,
+        "n": 1,
+        "name": "Chaudron"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 4,
+        "name": "Lingot de fer"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "spore_moss",
+      "tex": "blocks/spore_moss.png",
+      "name": "Mousse à spores",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "rootstone",
+      "tex": "blocks/rootstone.png",
+      "name": "Pierre-racine",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "spore_bloom",
+      "tex": "blocks/spore_bloom.png",
+      "name": "Floraison de spores",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sporite_ore",
+      "tex": "blocks/sporite_ore.png",
+      "name": "Minerai de sporite",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Sporite"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Respirer pour commencer",
+      "desc": "Fabriquer un masque filtrant."
+     },
+     {
+      "name": "La Cuve",
+      "desc": "Fermenter une première recette."
+     },
+     {
+      "name": "Récolte difficile",
+      "desc": "Rapporter 16 spores à l'herboriste."
+     },
+     {
+      "name": "Les éclaireurs perdus",
+      "desc": "Débarrasser la jungle de 10 Sporelins."
+     },
+     {
+      "name": "La clairière",
+      "desc": "Purifier la clairière (+5) ou la brûler pour son butin (-5)."
+     },
+     {
+      "name": "Sans filtre",
+      "desc": "Tuer un Gardien de chitine sans masque."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Première Graine",
+      "desc": "Ouvrir le monde 1."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Respirer malgré tout",
+      "desc": "Fabriquer un masque filtrant."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Reine déchue",
+      "desc": "Vaincre la Reine des spores."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Fresques vivantes",
+      "desc": "Trouver une fresque du monde."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Botaniste",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Toutes les pages",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Bouclier brisé",
+      "desc": "Vaincre un Gardien de chitine."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Le souffle court",
+      "desc": "Battre la Reine sans masque."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Ami des fleurs",
+      "desc": "Se faire attraper par une fleur-piège."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Première poupée",
+      "desc": "Trouver la poupée cachée du monde."
+     }
+    ]
+   }
   },
   {
    "n": 2,
@@ -1748,7 +2647,515 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau du Titan."
+   "bossNote": "Il laisse le Noyau du Titan.",
+   "codex": {
+    "items": [
+     {
+      "id": "blazing_rock",
+      "tex": "items/blazing_rock.png",
+      "name": "Roche ardente",
+      "kind": "resource",
+      "rarity": "Commun",
+      "effect": "Combustible puissant.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Salamandre de roche",
+       "Golem de scories",
+       "Minerai de roche ardente"
+      ]
+     },
+     {
+      "id": "giant_ore",
+      "tex": "items/giant_ore.png",
+      "name": "Minerai géant",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Un filon entier en un bloc.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Filon vivant",
+       "Filon géant"
+      ]
+     },
+     {
+      "id": "ash_ingot",
+      "tex": "items/ash_ingot.png",
+      "name": "Lingot de cendre",
+      "kind": "ingot",
+      "rarity": "Rare",
+      "effect": "Base de l'équipement du monde 2.",
+      "station": "Fonderie de cendre",
+      "inputs": [
+       {
+        "id": "giant_ore",
+        "tex": "items/giant_ore.png",
+        "n": 1,
+        "name": "Minerai géant"
+       },
+       {
+        "id": "blazing_rock",
+        "tex": "items/blazing_rock.png",
+        "n": 1,
+        "name": "Roche ardente"
+       }
+      ],
+      "count": 1,
+      "drops": [
+       "Mineur de cendre",
+       "Forgeron éteint"
+      ]
+     },
+     {
+      "id": "cooling_water",
+      "tex": "items/cooling_water.png",
+      "name": "Eau de refroidissement",
+      "kind": "consumable",
+      "rarity": "Commun",
+      "effect": "Réduit la chaleur de 50.",
+      "station": "Fonderie de cendre",
+      "inputs": [
+       {
+        "id": "minecraft:ice",
+        "tex": null,
+        "n": 2,
+        "name": "Glace"
+       },
+       {
+        "id": "minecraft:glass_bottle",
+        "tex": null,
+        "n": 2,
+        "name": "Fiole"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "drill",
+      "tex": "items/drill.png",
+      "name": "Foreuse",
+      "kind": "drill",
+      "rarity": "Épique",
+      "effect": "Mine en 3x3 et brûle de la Roche ardente.",
+      "station": "Fonderie de cendre",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 6,
+        "name": "Lingot de cendre"
+       },
+       {
+        "id": "blazing_rock",
+        "tex": "items/blazing_rock.png",
+        "n": 4,
+        "name": "Roche ardente"
+       },
+       {
+        "id": "minecraft:redstone",
+        "tex": null,
+        "n": 4,
+        "name": "Poudre de redstone"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "ash_hammer",
+      "tex": "items/ash_hammer.png",
+      "name": "Marteau de cendre",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Fonderie de cendre",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 8,
+        "name": "Lingot de cendre"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Bâton"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "titan_core",
+      "tex": "items/titan_core.png",
+      "name": "Noyau du Titan",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 3.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Titan de cendre"
+      ]
+     },
+     {
+      "id": "seed_2",
+      "tex": "items/seed_2.png",
+      "name": "Graine du monde 2",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 1 bêchée pour faire éclore le monde 2.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "queen_core",
+        "tex": "items/queen_core.png",
+        "n": 1,
+        "name": "Noyau de la Reine"
+       },
+       {
+        "id": "sporite",
+        "tex": "items/sporite.png",
+        "n": 8,
+        "name": "Sporite"
+       },
+       {
+        "id": "spores",
+        "tex": "items/spores.png",
+        "n": 16,
+        "name": "Spores"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_2",
+      "tex": "items/hidden_doll_2.png",
+      "name": "Poupée cachée 2",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "ice_bread",
+      "tex": "items/ice_bread.png",
+      "name": "Pain de glace",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Chaleur ralentie pendant 5 minutes.",
+      "station": "Fonderie de cendre",
+      "inputs": [
+       {
+        "id": "minecraft:bread",
+        "tex": null,
+        "n": 2,
+        "name": "Pain"
+       },
+       {
+        "id": "minecraft:ice",
+        "tex": null,
+        "n": 1,
+        "name": "Glace"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "thermal_helmet",
+      "tex": "items/thermal_helmet.png",
+      "name": "Casque thermique",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "Divise par 2 la chaleur.",
+      "station": "Fonderie de cendre",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 5,
+        "name": "Lingot de cendre"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "thermal_chestplate",
+      "tex": "items/thermal_chestplate.png",
+      "name": "Plastron thermique",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "Divise par 2 la chaleur.",
+      "station": "Fonderie de cendre",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 8,
+        "name": "Lingot de cendre"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "thermal_leggings",
+      "tex": "items/thermal_leggings.png",
+      "name": "Jambières thermique",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "Divise par 2 la chaleur.",
+      "station": "Fonderie de cendre",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 7,
+        "name": "Lingot de cendre"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "thermal_boots",
+      "tex": "items/thermal_boots.png",
+      "name": "Bottes thermique",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "Divise par 2 la chaleur.",
+      "station": "Fonderie de cendre",
+      "inputs": [
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 4,
+        "name": "Lingot de cendre"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_2",
+      "tex": "blocks/world_soil_2.png",
+      "name": "Terre de monde 2",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 3.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "nesting_chest",
+      "tex": "blocks/nesting_chest.png",
+      "name": "Coffre gigogne",
+      "kind": "nesting_chest",
+      "effect": "",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:chest",
+        "tex": null,
+        "n": 2,
+        "name": "Coffre"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 2,
+        "name": "Lingot de cendre"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "ash_foundry",
+      "tex": "blocks/ash_foundry.png",
+      "name": "Fonderie de cendre",
+      "kind": "station",
+      "effect": "Garde la température dans le vert.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:blast_furnace",
+        "tex": null,
+        "n": 1,
+        "name": "Haut fourneau"
+       },
+       {
+        "id": "sporite",
+        "tex": "items/sporite.png",
+        "n": 4,
+        "name": "Sporite"
+       },
+       {
+        "id": "chitin",
+        "tex": "items/chitin.png",
+        "n": 2,
+        "name": "Chitine"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "ashrock",
+      "tex": "blocks/ashrock.png",
+      "name": "Roche de cendre",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "ember_stone",
+      "tex": "blocks/ember_stone.png",
+      "name": "Pierre de braise",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "giant_ore_block",
+      "tex": "blocks/giant_ore_block.png",
+      "name": "Filon géant",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Minerai géant"
+     },
+     {
+      "id": "blazing_rock_ore",
+      "tex": "blocks/blazing_rock_ore.png",
+      "name": "Minerai de roche ardente",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Roche ardente"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Sous contrôle",
+      "desc": "Maintenir la Fonderie à la bonne température."
+     },
+     {
+      "name": "Le premier filon",
+      "desc": "Extraire un minerai géant entier."
+     },
+     {
+      "name": "La paie des mineurs",
+      "desc": "Rapporter 8 lingots de cendre au contremaître."
+     },
+     {
+      "name": "Puits inondé de lave",
+      "desc": "Secourir une équipe bloquée (8 salamandres)."
+     },
+     {
+      "name": "La grève",
+      "desc": "Soutenir les mineurs (+5) ou vendre leurs plans (-5)."
+     },
+     {
+      "name": "Mains nues",
+      "desc": "Tuer un Golem de scories sans armure."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Chaleur tournante",
+      "desc": "Ouvrir le monde 2."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Le bon feu",
+      "desc": "Fondre un lingot de cendre."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Titan éteint",
+      "desc": "Vaincre le Titan de cendre."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Mineur de fond",
+      "desc": "Miner un filon géant."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Prospection totale",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Carnets de chantier",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Sans refroidir",
+      "desc": "Vaincre un Golem de scories."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Armure fondue",
+      "desc": "Battre le Titan sans toucher la lave."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Trop gourmand",
+      "desc": "Faire exploser une Fonderie par surchauffe."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Poupée de cendre",
+      "desc": "Trouver la poupée cachée du monde."
+     }
+    ]
+   }
   },
   {
    "n": 3,
@@ -2144,7 +3551,501 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau du Geôlier."
+   "bossNote": "Il laisse le Noyau du Geôlier.",
+   "codex": {
+    "items": [
+     {
+      "id": "dungeon_key",
+      "tex": "items/dungeon_key.png",
+      "name": "Clé de donjon",
+      "kind": "key",
+      "rarity": "Rare",
+      "effect": "Ouvre une porte scellée, une fois.",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 3,
+        "name": "Fragment scellé"
+       },
+       {
+        "id": "minecraft:gold_nugget",
+        "tex": null,
+        "n": 4,
+        "name": "Pépite d'or"
+       }
+      ],
+      "count": 1,
+      "drops": [
+       "Geôlier",
+       "Serrure vivante"
+      ]
+     },
+     {
+      "id": "sealed_fragment",
+      "tex": "items/sealed_fragment.png",
+      "name": "Fragment scellé",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Pièges et équipement.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Sentinelle",
+       "Rat de cachot",
+       "Bourreau",
+       "Minerai scellé"
+      ]
+     },
+     {
+      "id": "labyrinth_map",
+      "tex": "items/labyrinth_map.png",
+      "name": "Carte du labyrinthe",
+      "kind": "tool",
+      "rarity": "Commun",
+      "effect": "Révèle les structures proches.",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "minecraft:paper",
+        "tex": null,
+        "n": 4,
+        "name": "Papier"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 1,
+        "name": "Fragment scellé"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "lockpick_kit",
+      "tex": "items/lockpick_kit.png",
+      "name": "Kit de crochetage",
+      "kind": "tool",
+      "rarity": "Commun",
+      "effect": "Ouvre une serrure ordinaire.",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "minecraft:iron_nugget",
+        "tex": null,
+        "n": 4,
+        "name": "Pépite de fer"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 1,
+        "name": "Fragment scellé"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "portable_trap",
+      "tex": "items/portable_trap.png",
+      "name": "Piège portatif",
+      "kind": "consumable",
+      "rarity": "Commun",
+      "effect": "Immobilise un mob.",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Lingot de fer"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 1,
+        "name": "Fragment scellé"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "jailer_blade",
+      "tex": "items/jailer_blade.png",
+      "name": "Lame du Geôlier",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 8,
+        "name": "Fragment scellé"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Bâton"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "jailer_core",
+      "tex": "items/jailer_core.png",
+      "name": "Noyau du Geôlier",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 4.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Grand Geôlier"
+      ]
+     },
+     {
+      "id": "seed_3",
+      "tex": "items/seed_3.png",
+      "name": "Graine du monde 3",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 2 bêchée pour faire éclore le monde 3.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "titan_core",
+        "tex": "items/titan_core.png",
+        "n": 1,
+        "name": "Noyau du Titan"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 8,
+        "name": "Lingot de cendre"
+       },
+       {
+        "id": "blazing_rock",
+        "tex": "items/blazing_rock.png",
+        "n": 16,
+        "name": "Roche ardente"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_3",
+      "tex": "items/hidden_doll_3.png",
+      "name": "Poupée cachée 3",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cell_ration",
+      "tex": "items/cell_ration.png",
+      "name": "Ration de cellule",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Satiété durable.",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "minecraft:bread",
+        "tex": null,
+        "n": 1,
+        "name": "Pain"
+       },
+       {
+        "id": "minecraft:cooked_beef",
+        "tex": null,
+        "n": 1,
+        "name": "Steak"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "jailer_helmet",
+      "tex": "items/jailer_helmet.png",
+      "name": "Casque de Geôlier",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 5,
+        "name": "Fragment scellé"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "jailer_chestplate",
+      "tex": "items/jailer_chestplate.png",
+      "name": "Plastron de Geôlier",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 8,
+        "name": "Fragment scellé"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "jailer_leggings",
+      "tex": "items/jailer_leggings.png",
+      "name": "Jambières de Geôlier",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 7,
+        "name": "Fragment scellé"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "jailer_boots",
+      "tex": "items/jailer_boots.png",
+      "name": "Bottes de Geôlier",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 4,
+        "name": "Fragment scellé"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_3",
+      "tex": "blocks/world_soil_3.png",
+      "name": "Terre de monde 3",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 4.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sealed_door",
+      "tex": "blocks/sealed_door.png",
+      "name": "Porte scellée",
+      "kind": "sealed_door",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "jailer_table",
+      "tex": "blocks/jailer_table.png",
+      "name": "Table du Geôlier",
+      "kind": "station",
+      "effect": "Reproduis le motif de la serrure.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:smithing_table",
+        "tex": null,
+        "n": 1,
+        "name": "Table de forge"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 4,
+        "name": "Lingot de cendre"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "dungeon_brick",
+      "tex": "blocks/dungeon_brick.png",
+      "name": "Brique de donjon",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sealed_brick",
+      "tex": "blocks/sealed_brick.png",
+      "name": "Brique scellée",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "cold_lamp",
+      "tex": "blocks/cold_lamp.png",
+      "name": "Lampe froide",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "sealed_fragment_ore",
+      "tex": "blocks/sealed_fragment_ore.png",
+      "name": "Minerai scellé",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Fragment scellé"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Tourner la clé",
+      "desc": "Ouvrir 3 zones avec des clés."
+     },
+     {
+      "name": "Lire le plan",
+      "desc": "Compléter une carte du labyrinthe."
+     },
+     {
+      "name": "Le serrurier",
+      "desc": "Rapporter 5 serrures vivantes vaincues."
+     },
+     {
+      "name": "Dernier message",
+      "desc": "Porter une lettre de cellule en cellule."
+     },
+     {
+      "name": "L'évasion",
+      "desc": "Libérer les prisonniers (+10) ou réclamer la prime (-10)."
+     },
+     {
+      "name": "Sans clé",
+      "desc": "Vaincre un Bourreau."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Sous les verrous",
+      "desc": "Ouvrir le monde 3."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "La bonne clé",
+      "desc": "Ouvrir une première zone."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Cellule vide",
+      "desc": "Vaincre le Grand Geôlier."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Plan complet",
+      "desc": "Compléter une carte du labyrinthe."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Visite guidée",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Registre d'écrou",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Piège retourné",
+      "desc": "Piéger un mob avec un piège portatif."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Cellule ouverte",
+      "desc": "Battre un Bourreau."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Ça n'ouvre pas",
+      "desc": "Essayer une clé sur une serrure vivante."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Poupée captive",
+      "desc": "Trouver la poupée cachée du monde."
+     }
+    ]
+   }
   },
   {
    "n": 4,
@@ -2522,7 +4423,482 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau du Roi."
+   "bossNote": "Il laisse le Noyau du Roi.",
+   "codex": {
+    "items": [
+     {
+      "id": "ray_membrane",
+      "tex": "items/ray_membrane.png",
+      "name": "Membrane de raie",
+      "kind": "resource",
+      "rarity": "Commun",
+      "effect": "Toile du planeur.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Raie du vent"
+      ]
+     },
+     {
+      "id": "storm_essence",
+      "tex": "items/storm_essence.png",
+      "name": "Essence de tempête",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Énergie de la Forge à foudre.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Oiseau-tempête",
+       "Nuage-mine"
+      ]
+     },
+     {
+      "id": "celestial_crystal",
+      "tex": "items/celestial_crystal.png",
+      "name": "Cristal céleste",
+      "kind": "gem",
+      "rarity": "Rare",
+      "effect": "Équipement et Graine du monde 5.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Gardien d'île",
+       "Harponneur céleste",
+       "Minerai de cristal céleste"
+      ]
+     },
+     {
+      "id": "glider",
+      "tex": "items/glider.png",
+      "name": "Planeur",
+      "kind": "glider",
+      "rarity": "Épique",
+      "effect": "Plane entre les îles.",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "ray_membrane",
+        "tex": "items/ray_membrane.png",
+        "n": 8,
+        "name": "Membrane de raie"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 4,
+        "name": "Bâton"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 2,
+        "name": "Essence de tempête"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "grappling_hook",
+      "tex": "items/grappling_hook.png",
+      "name": "Grappin",
+      "kind": "hook",
+      "rarity": "Rare",
+      "effect": "Te tire vers une surface.",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 2,
+        "name": "Cristal céleste"
+       },
+       {
+        "id": "minecraft:string",
+        "tex": null,
+        "n": 8,
+        "name": "Ficelle"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 3,
+        "name": "Lingot de fer"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "lightning_lance",
+      "tex": "items/lightning_lance.png",
+      "name": "Lance de foudre",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 8,
+        "name": "Cristal céleste"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Bâton"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "storm_king_core",
+      "tex": "items/storm_king_core.png",
+      "name": "Noyau du Roi",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 5.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Roi des tempêtes"
+      ]
+     },
+     {
+      "id": "seed_4",
+      "tex": "items/seed_4.png",
+      "name": "Graine du monde 4",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 3 bêchée pour faire éclore le monde 4.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "jailer_core",
+        "tex": "items/jailer_core.png",
+        "n": 1,
+        "name": "Noyau du Geôlier"
+       },
+       {
+        "id": "dungeon_key",
+        "tex": "items/dungeon_key.png",
+        "n": 8,
+        "name": "Clé de donjon"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 8,
+        "name": "Fragment scellé"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_4",
+      "tex": "items/hidden_doll_4.png",
+      "name": "Poupée cachée 4",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cloud_fruit",
+      "tex": "items/cloud_fruit.png",
+      "name": "Fruit de nuage",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Chutes réduites pendant 3 minutes.",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "minecraft:apple",
+        "tex": null,
+        "n": 2,
+        "name": "Pomme"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 1,
+        "name": "Essence de tempête"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "celestial_helmet",
+      "tex": "items/celestial_helmet.png",
+      "name": "Casque céleste",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 5,
+        "name": "Cristal céleste"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "celestial_chestplate",
+      "tex": "items/celestial_chestplate.png",
+      "name": "Plastron céleste",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 8,
+        "name": "Cristal céleste"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "celestial_leggings",
+      "tex": "items/celestial_leggings.png",
+      "name": "Jambières céleste",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 7,
+        "name": "Cristal céleste"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "celestial_boots",
+      "tex": "items/celestial_boots.png",
+      "name": "Bottes céleste",
+      "kind": "armor",
+      "rarity": "Rare",
+      "effect": "",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 4,
+        "name": "Cristal céleste"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_4",
+      "tex": "blocks/world_soil_4.png",
+      "name": "Terre de monde 4",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 5.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "lightning_forge",
+      "tex": "blocks/lightning_forge.png",
+      "name": "Forge à foudre",
+      "kind": "station",
+      "effect": "Demande un éclair ou de l'essence de tempête.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:lightning_rod",
+        "tex": null,
+        "n": 2,
+        "name": "Paratonnerre"
+       },
+       {
+        "id": "ash_ingot",
+        "tex": "items/ash_ingot.png",
+        "n": 4,
+        "name": "Lingot de cendre"
+       },
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 4,
+        "name": "Fragment scellé"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "skygrass",
+      "tex": "blocks/skygrass.png",
+      "name": "Herbe céleste",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "cloudstone",
+      "tex": "blocks/cloudstone.png",
+      "name": "Pierre de nuage",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "storm_glass",
+      "tex": "blocks/storm_glass.png",
+      "name": "Verre d'orage",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "celestial_crystal_ore",
+      "tex": "blocks/celestial_crystal_ore.png",
+      "name": "Minerai de cristal céleste",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Cristal céleste"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Le premier vol",
+      "desc": "Fabriquer un planeur et traverser trois îles."
+     },
+     {
+      "name": "Attraper la foudre",
+      "desc": "Charger un objet à la Forge."
+     },
+     {
+      "name": "Allumer le phare",
+      "desc": "Rallumer 3 phares."
+     },
+     {
+      "name": "La route du cartographe",
+      "desc": "Dégager les routes de 6 raies du vent."
+     },
+     {
+      "name": "L'épave",
+      "desc": "Rendre la cargaison (+5) ou la garder (-5)."
+     },
+     {
+      "name": "Tempête parfaite",
+      "desc": "Vaincre un Harponneur céleste."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Le ciel ouvert",
+      "desc": "Ouvrir le monde 4."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Sans filet",
+      "desc": "Faire un premier vol en planeur."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Roi tombé",
+      "desc": "Vaincre le Roi des tempêtes."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Cartographe des vents",
+      "desc": "Découvrir le phare des tempêtes."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Vue d'en haut",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Papier volé",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Mal placé",
+      "desc": "Envoyer un mob dans le vide au grappin."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Sous la foudre",
+      "desc": "Battre le Roi sans être foudroyé."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Aller simple",
+      "desc": "Tomber de l'île la plus haute."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Poupée de nuage",
+      "desc": "Trouver la poupée cachée du monde."
+     }
+    ]
+   }
   },
   {
    "n": 5,
@@ -2914,7 +5290,488 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau du Mangeur."
+   "bossNote": "Il laisse le Noyau du Mangeur.",
+   "codex": {
+    "items": [
+     {
+      "id": "shadow_shard",
+      "tex": "items/shadow_shard.png",
+      "name": "Éclat d'ombre",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Base de l'équipement du monde 5.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Rôdeur aveugle",
+       "Dévoreur de lueur",
+       "Mère des ombres"
+      ]
+     },
+     {
+      "id": "diamond_fragment",
+      "tex": "items/diamond_fragment.png",
+      "name": "Fragment de diamant",
+      "kind": "gem",
+      "rarity": "Épique",
+      "effect": "4 fragments donnent 1 diamant.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Écho",
+       "Veilleur sans yeux",
+       "Minerai de fragments de diamant"
+      ]
+     },
+     {
+      "id": "solar_lantern",
+      "tex": "items/solar_lantern.png",
+      "name": "Lanterne solaire",
+      "kind": "lantern",
+      "rarity": "Épique",
+      "effect": "20 minutes de lumière.",
+      "station": "Autel obscur",
+      "inputs": [
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 4,
+        "name": "Essence de tempête"
+       },
+       {
+        "id": "minecraft:lantern",
+        "tex": null,
+        "n": 1,
+        "name": "Lanterne"
+       },
+       {
+        "id": "minecraft:gold_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Lingot d'or"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "sonar",
+      "tex": "items/sonar.png",
+      "name": "Sonar",
+      "kind": "sonar",
+      "rarity": "Rare",
+      "effect": "Révèle les créatures proches.",
+      "station": "Autel obscur",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 4,
+        "name": "Éclat d'ombre"
+       },
+       {
+        "id": "minecraft:amethyst_shard",
+        "tex": null,
+        "n": 2,
+        "name": "Éclat d'améthyste"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "silence_balm",
+      "tex": "items/silence_balm.png",
+      "name": "Baume de silence",
+      "kind": "consumable",
+      "rarity": "Commun",
+      "effect": "Efface ton bruit.",
+      "station": "Autel obscur",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 1,
+        "name": "Éclat d'ombre"
+       },
+       {
+        "id": "minecraft:honey_bottle",
+        "tex": null,
+        "n": 1,
+        "name": "Fiole de miel"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "shadow_blade",
+      "tex": "items/shadow_blade.png",
+      "name": "Lame d'ombre",
+      "kind": "weapon",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Autel obscur",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 8,
+        "name": "Éclat d'ombre"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Bâton"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "light_eater_core",
+      "tex": "items/light_eater_core.png",
+      "name": "Noyau du Mangeur",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 6.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Mangeur de lumière"
+      ]
+     },
+     {
+      "id": "seed_5",
+      "tex": "items/seed_5.png",
+      "name": "Graine du monde 5",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 4 bêchée pour faire éclore le monde 5.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "storm_king_core",
+        "tex": "items/storm_king_core.png",
+        "n": 1,
+        "name": "Noyau du Roi"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 8,
+        "name": "Essence de tempête"
+       },
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 8,
+        "name": "Cristal céleste"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_5",
+      "tex": "items/hidden_doll_5.png",
+      "name": "Poupée cachée 5",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mute_mushroom",
+      "tex": "items/mute_mushroom.png",
+      "name": "Champignon muet",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Bruit réduit pendant 5 minutes.",
+      "station": "Autel obscur",
+      "inputs": [
+       {
+        "id": "minecraft:brown_mushroom",
+        "tex": null,
+        "n": 2,
+        "name": "Champignon brun"
+       },
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 1,
+        "name": "Éclat d'ombre"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "nocturnal_helmet",
+      "tex": "items/nocturnal_helmet.png",
+      "name": "Casque nocturne",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Autel obscur",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 5,
+        "name": "Éclat d'ombre"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nocturnal_chestplate",
+      "tex": "items/nocturnal_chestplate.png",
+      "name": "Plastron nocturne",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Autel obscur",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 8,
+        "name": "Éclat d'ombre"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nocturnal_leggings",
+      "tex": "items/nocturnal_leggings.png",
+      "name": "Jambières nocturne",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Autel obscur",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 7,
+        "name": "Éclat d'ombre"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "nocturnal_boots",
+      "tex": "items/nocturnal_boots.png",
+      "name": "Bottes nocturne",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Autel obscur",
+      "inputs": [
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 4,
+        "name": "Éclat d'ombre"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_5",
+      "tex": "blocks/world_soil_5.png",
+      "name": "Terre de monde 5",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 6.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "dark_altar",
+      "tex": "blocks/dark_altar.png",
+      "name": "Autel obscur",
+      "kind": "station",
+      "effect": "Fonctionne seulement dans le noir complet.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:obsidian",
+        "tex": null,
+        "n": 4,
+        "name": "Obsidienne"
+       },
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 4,
+        "name": "Cristal céleste"
+       },
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 2,
+        "name": "Essence de tempête"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "umbral_stone",
+      "tex": "blocks/umbral_stone.png",
+      "name": "Pierre ombrale",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "umbral_moss",
+      "tex": "blocks/umbral_moss.png",
+      "name": "Mousse ombrale",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "faint_glow",
+      "tex": "blocks/faint_glow.png",
+      "name": "Lueur faible",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "diamond_fragment_ore",
+      "tex": "blocks/diamond_fragment_ore.png",
+      "name": "Minerai de fragments de diamant",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Fragment de diamant"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Une lumière qui dure",
+      "desc": "Fabriquer une lanterne solaire."
+     },
+     {
+      "name": "Entendre le danger",
+      "desc": "Repérer 3 mobs avec le sonar."
+     },
+     {
+      "name": "Les signes",
+      "desc": "Apprendre 5 signes des Silencieux."
+     },
+     {
+      "name": "La veilleuse",
+      "desc": "Accompagner la veilleuse (6 Dévoreurs de lueur)."
+     },
+     {
+      "name": "Le dernier feu",
+      "desc": "Rallumer le village (+5) ou voler sa flamme (-5)."
+     },
+     {
+      "name": "Noir complet",
+      "desc": "Vaincre une Mère des ombres."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Le noir complet",
+      "desc": "Ouvrir le monde 5."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Une lueur",
+      "desc": "Fabriquer une lanterne solaire."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Fin du festin",
+      "desc": "Vaincre le Mangeur de lumière."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Première lueur",
+      "desc": "Trouver un fragment de diamant."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "À tâtons",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Écrit dans le noir",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Silence total",
+      "desc": "Tuer un Rôdeur aveugle sans être repéré."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Sans flamme",
+      "desc": "Battre le Mangeur sans lumière artificielle."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "C'était toi",
+      "desc": "Être attiré par un Écho."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Poupée d'ombre",
+      "desc": "Trouver la poupée cachée du monde."
+     }
+    ]
+   }
   },
   {
    "n": 6,
@@ -3268,7 +6125,451 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau du Double."
+   "bossNote": "Il laisse le Noyau du Double.",
+   "codex": {
+    "items": [
+     {
+      "id": "unstable_alloy",
+      "tex": "items/unstable_alloy.png",
+      "name": "Alliage instable",
+      "kind": "ingot",
+      "rarity": "Rare",
+      "effect": "Base de l'équipement du monde 6.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Marcheur de plafond",
+       "Sphère instable",
+       "Minerai d'alliage instable"
+      ]
+     },
+     {
+      "id": "inverted_crystal",
+      "tex": "items/inverted_crystal.png",
+      "name": "Cristal inversé",
+      "kind": "gem",
+      "rarity": "Épique",
+      "effect": "Inverseur et Graine du monde 7.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Reflet",
+       "Arpenteur inversé",
+       "Miroir brisé"
+      ]
+     },
+     {
+      "id": "gravity_boots",
+      "tex": "items/gravity_boots.png",
+      "name": "Bottes de gravité",
+      "kind": "boots",
+      "rarity": "Épique",
+      "effect": "Ignorent les inversions de gravité.",
+      "station": "Inverseur",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 6,
+        "name": "Alliage instable"
+       },
+       {
+        "id": "inverted_crystal",
+        "tex": "items/inverted_crystal.png",
+        "n": 2,
+        "name": "Cristal inversé"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "stabilizer",
+      "tex": "items/stabilizer.png",
+      "name": "Stabilisateur",
+      "kind": "consumable",
+      "rarity": "Commun",
+      "effect": "Annule une inversion.",
+      "station": "Inverseur",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 1,
+        "name": "Alliage instable"
+       },
+       {
+        "id": "minecraft:quartz",
+        "tex": null,
+        "n": 2,
+        "name": "Quartz du Nether"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "mirror_blade",
+      "tex": "items/mirror_blade.png",
+      "name": "Lame miroir",
+      "kind": "weapon",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Inverseur",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 8,
+        "name": "Alliage instable"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Bâton"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "double_core",
+      "tex": "items/double_core.png",
+      "name": "Noyau du Double",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 7.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Ton Double"
+      ]
+     },
+     {
+      "id": "seed_6",
+      "tex": "items/seed_6.png",
+      "name": "Graine du monde 6",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 5 bêchée pour faire éclore le monde 6.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "light_eater_core",
+        "tex": "items/light_eater_core.png",
+        "n": 1,
+        "name": "Noyau du Mangeur"
+       },
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 8,
+        "name": "Éclat d'ombre"
+       },
+       {
+        "id": "diamond_fragment",
+        "tex": "items/diamond_fragment.png",
+        "n": 4,
+        "name": "Fragment de diamant"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_6",
+      "tex": "items/hidden_doll_6.png",
+      "name": "Poupée cachée 6",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "flipped_apple",
+      "tex": "items/flipped_apple.png",
+      "name": "Pomme retournée",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Stabilité pendant 30 secondes.",
+      "station": "Inverseur",
+      "inputs": [
+       {
+        "id": "minecraft:apple",
+        "tex": null,
+        "n": 2,
+        "name": "Pomme"
+       },
+       {
+        "id": "inverted_crystal",
+        "tex": "items/inverted_crystal.png",
+        "n": 1,
+        "name": "Cristal inversé"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "mirror_helmet",
+      "tex": "items/mirror_helmet.png",
+      "name": "Casque miroir",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Inverseur",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 5,
+        "name": "Alliage instable"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mirror_chestplate",
+      "tex": "items/mirror_chestplate.png",
+      "name": "Plastron miroir",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Inverseur",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 8,
+        "name": "Alliage instable"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mirror_leggings",
+      "tex": "items/mirror_leggings.png",
+      "name": "Jambières miroir",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Inverseur",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 7,
+        "name": "Alliage instable"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "mirror_boots",
+      "tex": "items/mirror_boots.png",
+      "name": "Bottes miroir",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Inverseur",
+      "inputs": [
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 4,
+        "name": "Alliage instable"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_6",
+      "tex": "blocks/world_soil_6.png",
+      "name": "Terre de monde 6",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 7.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "inverter",
+      "tex": "blocks/inverter.png",
+      "name": "Inverseur",
+      "kind": "station",
+      "effect": "Chaque gain s'accompagne d'un défaut.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:observer",
+        "tex": null,
+        "n": 2,
+        "name": "Observateur"
+       },
+       {
+        "id": "shadow_shard",
+        "tex": "items/shadow_shard.png",
+        "n": 6,
+        "name": "Éclat d'ombre"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "inverted_stone",
+      "tex": "blocks/inverted_stone.png",
+      "name": "Pierre inversée",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "mirror_glass",
+      "tex": "blocks/mirror_glass.png",
+      "name": "Verre miroir",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "prism_moss",
+      "tex": "blocks/prism_moss.png",
+      "name": "Mousse prismatique",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "unstable_alloy_ore",
+      "tex": "blocks/unstable_alloy_ore.png",
+      "name": "Minerai d'alliage instable",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Alliage instable"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Tomber vers le haut",
+      "desc": "Fabriquer les bottes de gravité."
+     },
+     {
+      "name": "Le double sens",
+      "desc": "Utiliser l'Inverseur."
+     },
+     {
+      "name": "Reflet perdu",
+      "desc": "Ramener le double d'un PNJ."
+     },
+     {
+      "name": "L'escalier impossible",
+      "desc": "Atteindre le sommet de l'escalier."
+     },
+     {
+      "name": "Qui est le vrai ?",
+      "desc": "Libérer le Reflet (+5) ou prendre sa place (-5)."
+     },
+     {
+      "name": "Sens dessus dessous",
+      "desc": "Vaincre un Miroir brisé."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "L'envers",
+      "desc": "Ouvrir le monde 6."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Pieds sur terre",
+      "desc": "Fabriquer les bottes de gravité."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Face à toi",
+      "desc": "Vaincre Ton Double."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Marcher au plafond",
+      "desc": "Traverser une inversion de gravité."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Géométrie impossible",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Lire à l'envers",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Renvoi",
+      "desc": "Tuer un Reflet."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Sans copie",
+      "desc": "Battre le Double avec un équipement différent à chaque phase."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Vertige",
+      "desc": "Tomber vers le haut pendant 10 secondes."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Poupée retournée",
+      "desc": "Trouver la poupée cachée du monde."
+     }
+    ]
+   }
   },
   {
    "n": 7,
@@ -3648,7 +6949,470 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau du Léviathan."
+   "bossNote": "Il laisse le Noyau du Léviathan.",
+   "codex": {
+    "items": [
+     {
+      "id": "abyssal_salt",
+      "tex": "items/abyssal_salt.png",
+      "name": "Sel des profondeurs",
+      "kind": "dust",
+      "rarity": "Rare",
+      "effect": "Protège de la pression.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Chasseur abyssal",
+       "Banc de lames",
+       "Minerai de sel"
+      ]
+     },
+     {
+      "id": "pressure_pearl",
+      "tex": "items/pressure_pearl.png",
+      "name": "Perle de pression",
+      "kind": "gem",
+      "rarity": "Épique",
+      "effect": "Scaphandre et Graine du monde 8.",
+      "station": "Presse abyssale",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 6,
+        "name": "Sel des profondeurs"
+       },
+       {
+        "id": "minecraft:prismarine_crystals",
+        "tex": null,
+        "n": 2,
+        "name": "Cristaux de prismarine"
+       }
+      ],
+      "count": 1,
+      "drops": [
+       "Méduse de pression",
+       "Crabe-cloche",
+       "Murène des fosses"
+      ]
+     },
+     {
+      "id": "oxygen_capsule",
+      "tex": "items/oxygen_capsule.png",
+      "name": "Capsule d'oxygène",
+      "kind": "consumable",
+      "rarity": "Commun",
+      "effect": "Rend de l'oxygène.",
+      "station": "Presse abyssale",
+      "inputs": [
+       {
+        "id": "minecraft:kelp",
+        "tex": null,
+        "n": 4,
+        "name": "Algue"
+       },
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 1,
+        "name": "Sel des profondeurs"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "thruster",
+      "tex": "items/thruster.png",
+      "name": "Propulseur",
+      "kind": "thruster",
+      "rarity": "Épique",
+      "effect": "Accélère sous l'eau.",
+      "station": "Presse abyssale",
+      "inputs": [
+       {
+        "id": "pressure_pearl",
+        "tex": "items/pressure_pearl.png",
+        "n": 2,
+        "name": "Perle de pression"
+       },
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 4,
+        "name": "Alliage instable"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "trench_trident",
+      "tex": "items/trench_trident.png",
+      "name": "Trident des fosses",
+      "kind": "weapon",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Presse abyssale",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 8,
+        "name": "Sel des profondeurs"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Bâton"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "leviathan_core",
+      "tex": "items/leviathan_core.png",
+      "name": "Noyau du Léviathan",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 8.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Léviathan de pression"
+      ]
+     },
+     {
+      "id": "seed_7",
+      "tex": "items/seed_7.png",
+      "name": "Graine du monde 7",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 6 bêchée pour faire éclore le monde 7.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "double_core",
+        "tex": "items/double_core.png",
+        "n": 1,
+        "name": "Noyau du Double"
+       },
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 8,
+        "name": "Alliage instable"
+       },
+       {
+        "id": "inverted_crystal",
+        "tex": "items/inverted_crystal.png",
+        "n": 4,
+        "name": "Cristal inversé"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_7",
+      "tex": "items/hidden_doll_7.png",
+      "name": "Poupée cachée 7",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "apnea_kelp",
+      "tex": "items/apnea_kelp.png",
+      "name": "Algue d'apnée",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Oxygène prolongé d'1 minute.",
+      "station": "Presse abyssale",
+      "inputs": [
+       {
+        "id": "minecraft:dried_kelp",
+        "tex": null,
+        "n": 3,
+        "name": "Algue séchée"
+       },
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 1,
+        "name": "Sel des profondeurs"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "diving_helmet",
+      "tex": "items/diving_helmet.png",
+      "name": "Casque de plongée",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "Résiste à la pression.",
+      "station": "Presse abyssale",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 5,
+        "name": "Sel des profondeurs"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "diving_chestplate",
+      "tex": "items/diving_chestplate.png",
+      "name": "Plastron de plongée",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "Résiste à la pression.",
+      "station": "Presse abyssale",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 8,
+        "name": "Sel des profondeurs"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "diving_leggings",
+      "tex": "items/diving_leggings.png",
+      "name": "Jambières de plongée",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "Résiste à la pression.",
+      "station": "Presse abyssale",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 7,
+        "name": "Sel des profondeurs"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "diving_boots",
+      "tex": "items/diving_boots.png",
+      "name": "Bottes de plongée",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "Résiste à la pression.",
+      "station": "Presse abyssale",
+      "inputs": [
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 4,
+        "name": "Sel des profondeurs"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_7",
+      "tex": "blocks/world_soil_7.png",
+      "name": "Terre de monde 7",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 8.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "abyssal_press",
+      "tex": "blocks/abyssal_press.png",
+      "name": "Presse abyssale",
+      "kind": "station",
+      "effect": "Doit être sous l'eau profonde.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:piston",
+        "tex": null,
+        "n": 2,
+        "name": "Piston"
+       },
+       {
+        "id": "unstable_alloy",
+        "tex": "items/unstable_alloy.png",
+        "n": 6,
+        "name": "Alliage instable"
+       },
+       {
+        "id": "inverted_crystal",
+        "tex": "items/inverted_crystal.png",
+        "n": 1,
+        "name": "Cristal inversé"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "abyssal_sand",
+      "tex": "blocks/abyssal_sand.png",
+      "name": "Sable abyssal",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "trench_rock",
+      "tex": "blocks/trench_rock.png",
+      "name": "Roche des fosses",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "pressure_coral",
+      "tex": "blocks/pressure_coral.png",
+      "name": "Corail de pression",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "abyssal_salt_ore",
+      "tex": "blocks/abyssal_salt_ore.png",
+      "name": "Minerai de sel",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Sel des profondeurs"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Sous pression",
+      "desc": "Fabriquer un scaphandre."
+     },
+     {
+      "name": "Comprimer",
+      "desc": "Comprimer à la Presse abyssale."
+     },
+     {
+      "name": "La station se tait",
+      "desc": "Réparer 3 câbles de la station."
+     },
+     {
+      "name": "L'équipage de l'épave",
+      "desc": "Remonter 3 plaques d'équipage."
+     },
+     {
+      "name": "Le signal",
+      "desc": "Secourir les naufragés (+10) ou détourner leur oxygène (-10)."
+     },
+     {
+      "name": "Un souffle",
+      "desc": "Vaincre une Murène des fosses."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Grande profondeur",
+      "desc": "Ouvrir le monde 7."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Sous pression",
+      "desc": "Fabriquer un scaphandre."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Le silence des fosses",
+      "desc": "Vaincre le Léviathan."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Plongée extrême",
+      "desc": "Atteindre la fosse la plus profonde."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Grand large",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Papier mouillé",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Banc dispersé",
+      "desc": "Éliminer un banc de lames entier."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Dernier souffle",
+      "desc": "Battre le Léviathan avec moins de 5 % d'oxygène."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Plaque oubliée",
+      "desc": "Réparer l'ancien sous-marin."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Poupée noyée",
+      "desc": "Trouver la poupée cachée du monde."
+     }
+    ]
+   }
   },
   {
    "n": 8,
@@ -4014,7 +7778,463 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau du Maître."
+   "bossNote": "Il laisse le Noyau du Maître.",
+   "codex": {
+    "items": [
+     {
+      "id": "temporal_sand",
+      "tex": "items/temporal_sand.png",
+      "name": "Sable temporel",
+      "kind": "dust",
+      "rarity": "Rare",
+      "effect": "Base de l'équipement du monde 8.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Vieillard du sablier",
+       "Ombre du crépuscule",
+       "Gardien de l'heure"
+      ]
+     },
+     {
+      "id": "season_fragment",
+      "tex": "items/season_fragment.png",
+      "name": "Fragment de saison",
+      "kind": "gem",
+      "rarity": "Épique",
+      "effect": "Graine du monde 9.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Créature saisonnière",
+       "Enfant des minutes",
+       "Minerai de saison"
+      ]
+     },
+     {
+      "id": "hourglass",
+      "tex": "items/hourglass.png",
+      "name": "Sablier",
+      "kind": "hourglass",
+      "rarity": "Épique",
+      "effect": "Ralentit le cycle du monde.",
+      "station": "Atelier du temps",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 6,
+        "name": "Sable temporel"
+       },
+       {
+        "id": "minecraft:glass",
+        "tex": null,
+        "n": 2,
+        "name": "Verre"
+       },
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 1,
+        "name": "Fragment de saison"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "season_preserve",
+      "tex": "items/season_preserve.png",
+      "name": "Conserve de saison",
+      "kind": "consumable",
+      "rarity": "Commun",
+      "effect": "Protège de la saison en cours.",
+      "station": "Atelier du temps",
+      "inputs": [
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 1,
+        "name": "Fragment de saison"
+       },
+       {
+        "id": "minecraft:glass_bottle",
+        "tex": null,
+        "n": 3,
+        "name": "Fiole"
+       }
+      ],
+      "count": 3,
+      "drops": []
+     },
+     {
+      "id": "season_scythe",
+      "tex": "items/season_scythe.png",
+      "name": "Faux des saisons",
+      "kind": "weapon",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Atelier du temps",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 8,
+        "name": "Sable temporel"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Bâton"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seasons_core",
+      "tex": "items/seasons_core.png",
+      "name": "Noyau du Maître",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 9.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Maître des saisons"
+      ]
+     },
+     {
+      "id": "seed_8",
+      "tex": "items/seed_8.png",
+      "name": "Graine du monde 8",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 7 bêchée pour faire éclore le monde 8.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "leviathan_core",
+        "tex": "items/leviathan_core.png",
+        "n": 1,
+        "name": "Noyau du Léviathan"
+       },
+       {
+        "id": "pressure_pearl",
+        "tex": "items/pressure_pearl.png",
+        "n": 4,
+        "name": "Perle de pression"
+       },
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 8,
+        "name": "Sel des profondeurs"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_8",
+      "tex": "items/hidden_doll_8.png",
+      "name": "Poupée cachée 8",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "season_jam",
+      "tex": "items/season_jam.png",
+      "name": "Conserve de saison sucrée",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Protège de la saison en cours.",
+      "station": "Atelier du temps",
+      "inputs": [
+       {
+        "id": "minecraft:sweet_berries",
+        "tex": null,
+        "n": 4,
+        "name": "Baies sucrées"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 1,
+        "name": "Sable temporel"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "seasonal_helmet",
+      "tex": "items/seasonal_helmet.png",
+      "name": "Casque saisonnière",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Atelier du temps",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 5,
+        "name": "Sable temporel"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seasonal_chestplate",
+      "tex": "items/seasonal_chestplate.png",
+      "name": "Plastron saisonnière",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Atelier du temps",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 8,
+        "name": "Sable temporel"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seasonal_leggings",
+      "tex": "items/seasonal_leggings.png",
+      "name": "Jambières saisonnière",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Atelier du temps",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 7,
+        "name": "Sable temporel"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seasonal_boots",
+      "tex": "items/seasonal_boots.png",
+      "name": "Bottes saisonnière",
+      "kind": "armor",
+      "rarity": "Épique",
+      "effect": "",
+      "station": "Atelier du temps",
+      "inputs": [
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 4,
+        "name": "Sable temporel"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_8",
+      "tex": "blocks/world_soil_8.png",
+      "name": "Terre de monde 8",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 9.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "time_workshop",
+      "tex": "blocks/time_workshop.png",
+      "name": "Atelier du temps",
+      "kind": "station",
+      "effect": "Accepte les recettes à l'aube et au crépuscule.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:clock",
+        "tex": null,
+        "n": 2,
+        "name": "Horloge"
+       },
+       {
+        "id": "abyssal_salt",
+        "tex": "items/abyssal_salt.png",
+        "n": 6,
+        "name": "Sel des profondeurs"
+       },
+       {
+        "id": "pressure_pearl",
+        "tex": "items/pressure_pearl.png",
+        "n": 1,
+        "name": "Perle de pression"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "chrono_grass",
+      "tex": "blocks/chrono_grass.png",
+      "name": "Herbe chrono",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "hourstone",
+      "tex": "blocks/hourstone.png",
+      "name": "Pierre des heures",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "temporal_sand_block",
+      "tex": "blocks/temporal_sand_block.png",
+      "name": "Bloc de sable temporel",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "season_ore",
+      "tex": "blocks/season_ore.png",
+      "name": "Minerai de saison",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Fragment de saison"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Quatre saisons",
+      "desc": "Traverser un cycle complet."
+     },
+     {
+      "name": "Arrêter l'instant",
+      "desc": "Utiliser un sablier."
+     },
+     {
+      "name": "Une vie en un jour",
+      "desc": "Aider un Éphémère avant la nuit."
+     },
+     {
+      "name": "Les archives",
+      "desc": "Retrouver 5 livres de la bibliothèque."
+     },
+     {
+      "name": "Le vendeur d'heures",
+      "desc": "Rendre son temps à un Éphémère (+5) ou le lui acheter (-5)."
+     },
+     {
+      "name": "Hors saison",
+      "desc": "Battre un Gardien de l'heure."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Temps compté",
+      "desc": "Ouvrir le monde 8."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Instant suspendu",
+      "desc": "Utiliser un sablier."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Fin de saison",
+      "desc": "Vaincre le Maître des saisons."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Toutes les saisons",
+      "desc": "Voir les 4 saisons."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Heures perdues",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Vieux papiers",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Pile à l'heure",
+      "desc": "Vaincre un Gardien de l'heure."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Quatre fois vainqueur",
+      "desc": "Battre le Maître en le frappant à chaque saison."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Grand-père",
+      "desc": "Voir un Enfant des minutes vieillir complètement."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Poupée fanée",
+      "desc": "Trouver la poupée cachée du monde."
+     }
+    ]
+   }
   },
   {
    "n": 9,
@@ -4380,7 +8600,470 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau du Terrain."
+   "bossNote": "Il laisse le Noyau du Terrain.",
+   "codex": {
+    "items": [
+     {
+      "id": "terrain_fragment",
+      "tex": "items/terrain_fragment.png",
+      "name": "Fragment de terrain",
+      "kind": "resource",
+      "rarity": "Rare",
+      "effect": "Base de l'équipement du monde 9.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Bloc rampant",
+       "Mimique",
+       "Dévoreur de fondations",
+       "Main de terre",
+       "Colonne marcheuse",
+       "Minerai de terrain"
+      ]
+     },
+     {
+      "id": "terrain_heart",
+      "tex": "items/terrain_heart.png",
+      "name": "Cœur de terrain",
+      "kind": "resource",
+      "rarity": "Légendaire",
+      "effect": "Graine du monde 10.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Colonne marcheuse"
+      ]
+     },
+     {
+      "id": "anchor",
+      "tex": "items/anchor.png",
+      "name": "Ancre",
+      "kind": "anchor",
+      "rarity": "Rare",
+      "effect": "Calme le sol (rayon 4).",
+      "station": "Ancre de terrain",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 2,
+        "name": "Fragment de terrain"
+       },
+       {
+        "id": "minecraft:iron_ingot",
+        "tex": null,
+        "n": 2,
+        "name": "Lingot de fer"
+       }
+      ],
+      "count": 4,
+      "drops": []
+     },
+     {
+      "id": "grip_boots",
+      "tex": "items/grip_boots.png",
+      "name": "Bottes d'accroche",
+      "kind": "boots",
+      "rarity": "Épique",
+      "effect": "Plus de chutes dues au sol.",
+      "station": "Ancre de terrain",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 6,
+        "name": "Fragment de terrain"
+       },
+       {
+        "id": "minecraft:leather_boots",
+        "tex": null,
+        "n": 1,
+        "name": "Bottes en cuir"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "seismic_mace",
+      "tex": "items/seismic_mace.png",
+      "name": "Masse sismique",
+      "kind": "weapon",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Ancre de terrain",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 8,
+        "name": "Fragment de terrain"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 1,
+        "name": "Bâton"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "last_doll_key",
+      "tex": "items/last_doll_key.png",
+      "name": "Clé de la dernière poupée",
+      "kind": "key",
+      "rarity": "",
+      "effect": "Graine du monde 10.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "terrain_core",
+      "tex": "items/terrain_core.png",
+      "name": "Noyau du Terrain",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Ouvre la Graine du monde 10.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Cœur du terrain"
+      ]
+     },
+     {
+      "id": "seed_9",
+      "tex": "items/seed_9.png",
+      "name": "Graine du monde 9",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 8 bêchée pour faire éclore le monde 9.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "seasons_core",
+        "tex": "items/seasons_core.png",
+        "n": 1,
+        "name": "Noyau du Maître"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 8,
+        "name": "Sable temporel"
+       },
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 4,
+        "name": "Fragment de saison"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_9",
+      "tex": "items/hidden_doll_9.png",
+      "name": "Poupée cachée 9",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "anchor_bread",
+      "tex": "items/anchor_bread.png",
+      "name": "Pain d'ancrage",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Moins de recul pendant 5 minutes.",
+      "station": "Ancre de terrain",
+      "inputs": [
+       {
+        "id": "minecraft:bread",
+        "tex": null,
+        "n": 2,
+        "name": "Pain"
+       },
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 1,
+        "name": "Fragment de terrain"
+       }
+      ],
+      "count": 2,
+      "drops": []
+     },
+     {
+      "id": "living_rock_helmet",
+      "tex": "items/living_rock_helmet.png",
+      "name": "Casque de roche vivante",
+      "kind": "armor",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Ancre de terrain",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 5,
+        "name": "Fragment de terrain"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "living_rock_chestplate",
+      "tex": "items/living_rock_chestplate.png",
+      "name": "Plastron de roche vivante",
+      "kind": "armor",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Ancre de terrain",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 8,
+        "name": "Fragment de terrain"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "living_rock_leggings",
+      "tex": "items/living_rock_leggings.png",
+      "name": "Jambières de roche vivante",
+      "kind": "armor",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Ancre de terrain",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 7,
+        "name": "Fragment de terrain"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "living_rock_boots",
+      "tex": "items/living_rock_boots.png",
+      "name": "Bottes de roche vivante",
+      "kind": "armor",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Ancre de terrain",
+      "inputs": [
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 4,
+        "name": "Fragment de terrain"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "world_soil_9",
+      "tex": "blocks/world_soil_9.png",
+      "name": "Terre de monde 9",
+      "kind": "soil",
+      "effect": "Se bêche pour planter la Graine du monde 10.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "terrain_anchor",
+      "tex": "blocks/terrain_anchor.png",
+      "name": "Ancre de terrain",
+      "kind": "station",
+      "effect": "Stabilise le sol (rayon 16).",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:anvil",
+        "tex": null,
+        "n": 1,
+        "name": "Enclume"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 8,
+        "name": "Sable temporel"
+       },
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 1,
+        "name": "Fragment de saison"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "living_rock",
+      "tex": "blocks/living_rock.png",
+      "name": "Roche vivante",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "flesh_stone",
+      "tex": "blocks/flesh_stone.png",
+      "name": "Pierre de chair",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "pulse_vein",
+      "tex": "blocks/pulse_vein.png",
+      "name": "Veine battante",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "terrain_ore",
+      "tex": "blocks/terrain_ore.png",
+      "name": "Minerai de terrain",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Fragment de terrain"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Garder pied",
+      "desc": "Fabriquer une Ancre de terrain."
+     },
+     {
+      "name": "Le plan du sol",
+      "desc": "Découvrir 5 zones."
+     },
+     {
+      "name": "Le fort dérive",
+      "desc": "Stabiliser 3 murs du fort."
+     },
+     {
+      "name": "Le géomètre",
+      "desc": "Mesurer un gouffre vivant."
+     },
+     {
+      "name": "La veine",
+      "desc": "Soigner la veine battante (+10) ou la vider (-10)."
+     },
+     {
+      "name": "Sans ancre",
+      "desc": "Vaincre une Colonne marcheuse."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Terrain glissant",
+      "desc": "Ouvrir le monde 9."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Point fixe",
+      "desc": "Fabriquer une Ancre de terrain."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Ce voyageur, c'était toi",
+      "desc": "Vaincre le Cœur du terrain."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Géomètre",
+      "desc": "Découvrir un gouffre vivant."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Sol instable",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Page déplacée",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Mimique démasquée",
+      "desc": "Repérer et tuer une mimique."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Sans ancre",
+      "desc": "Battre le Cœur sans poser d'ancre."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Ma base marche",
+      "desc": "Voir une construction déplacée par le terrain."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Poupée mouvante",
+      "desc": "Trouver la poupée cachée du monde."
+     }
+    ]
+   }
   },
   {
    "n": 10,
@@ -4726,7 +9409,437 @@
      ]
     }
    ],
-   "bossNote": "Il laisse le Noyau de l'Inachevée."
+   "bossNote": "Il laisse le Noyau de l'Inachevée.",
+   "codex": {
+    "items": [
+     {
+      "id": "artisan_thread",
+      "tex": "items/artisan_thread.png",
+      "name": "Fil d'Artisan",
+      "kind": "thread",
+      "rarity": "Rare",
+      "effect": "Base de l'équipement final.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Sporelin géant",
+       "Titanide de cendre",
+       "Geôlier colossal",
+       "Raie-titan",
+       "Bobine de fil"
+      ]
+     },
+     {
+      "id": "artisan_shard",
+      "tex": "items/artisan_shard.png",
+      "name": "Éclat d'Artisan",
+      "kind": "gem",
+      "rarity": "Légendaire",
+      "effect": "Améliore l'équipement final.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Rôdeur-colosse"
+      ]
+     },
+     {
+      "id": "artisan_blade",
+      "tex": "items/artisan_blade.png",
+      "name": "Lame de l'Artisan",
+      "kind": "weapon",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Métier final",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 8,
+        "name": "Fil d'Artisan"
+       },
+       {
+        "id": "artisan_shard",
+        "tex": "items/artisan_shard.png",
+        "n": 1,
+        "name": "Éclat d'Artisan"
+       },
+       {
+        "id": "sporite_sword",
+        "tex": "items/sporite_sword.png",
+        "n": 1,
+        "name": "Épée de sporite"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "unfinished_core",
+      "tex": "items/unfinished_core.png",
+      "name": "Noyau de l'Inachevée",
+      "kind": "core",
+      "rarity": "Légendaire",
+      "effect": "Le cœur de la créature.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "L'Inachevée"
+      ]
+     },
+     {
+      "id": "seed_10",
+      "tex": "items/seed_10.png",
+      "name": "Graine du monde 10",
+      "kind": "seed",
+      "rarity": "Épique",
+      "effect": "Se plante sur la Terre de monde 9 bêchée pour faire éclore le monde 10.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "terrain_core",
+        "tex": "items/terrain_core.png",
+        "n": 1,
+        "name": "Noyau du Terrain"
+       },
+       {
+        "id": "terrain_heart",
+        "tex": "items/terrain_heart.png",
+        "n": 1,
+        "name": "Cœur de terrain"
+       },
+       {
+        "id": "last_doll_key",
+        "tex": "items/last_doll_key.png",
+        "n": 1,
+        "name": "Clé de la dernière poupée"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "hidden_doll_10",
+      "tex": "items/hidden_doll_10.png",
+      "name": "Poupée cachée 10",
+      "kind": "secret",
+      "rarity": "",
+      "effect": "Emboîte les dix poupées dans l'ordre...",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "workshop_feast",
+      "tex": "items/workshop_feast.png",
+      "name": "Festin de l'atelier",
+      "kind": "food",
+      "rarity": "Commun",
+      "effect": "Regroupe deux effets.",
+      "station": "Métier final",
+      "inputs": [
+       {
+        "id": "root_broth",
+        "tex": "items/root_broth.png",
+        "n": 1,
+        "name": "Bouillie de racines"
+       },
+       {
+        "id": "ice_bread",
+        "tex": "items/ice_bread.png",
+        "n": 1,
+        "name": "Pain de glace"
+       },
+       {
+        "id": "cloud_fruit",
+        "tex": "items/cloud_fruit.png",
+        "n": 1,
+        "name": "Fruit de nuage"
+       },
+       {
+        "id": "season_jam",
+        "tex": "items/season_jam.png",
+        "n": 1,
+        "name": "Conserve de saison sucrée"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_helmet",
+      "tex": "items/artisan_helmet.png",
+      "name": "Casque de l'Artisan",
+      "kind": "armor",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Métier final",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 5,
+        "name": "Fil d'Artisan"
+       },
+       {
+        "id": "chitin_helmet",
+        "tex": "items/chitin_helmet.png",
+        "n": 1,
+        "name": "Casque de chitine"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_chestplate",
+      "tex": "items/artisan_chestplate.png",
+      "name": "Plastron de l'Artisan",
+      "kind": "armor",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Métier final",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 8,
+        "name": "Fil d'Artisan"
+       },
+       {
+        "id": "celestial_chestplate",
+        "tex": "items/celestial_chestplate.png",
+        "n": 1,
+        "name": "Plastron céleste"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_leggings",
+      "tex": "items/artisan_leggings.png",
+      "name": "Jambières de l'Artisan",
+      "kind": "armor",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Métier final",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 7,
+        "name": "Fil d'Artisan"
+       },
+       {
+        "id": "diving_leggings",
+        "tex": "items/diving_leggings.png",
+        "n": 1,
+        "name": "Jambières de plongée"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "artisan_boots",
+      "tex": "items/artisan_boots.png",
+      "name": "Bottes de l'Artisan",
+      "kind": "armor",
+      "rarity": "Légendaire",
+      "effect": "",
+      "station": "Métier final",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 4,
+        "name": "Fil d'Artisan"
+       },
+       {
+        "id": "gravity_boots",
+        "tex": "items/gravity_boots.png",
+        "n": 1,
+        "name": "Bottes de gravité"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     }
+    ],
+    "blocks": [
+     {
+      "id": "final_loom",
+      "tex": "blocks/final_loom.png",
+      "name": "Métier final",
+      "kind": "station",
+      "effect": "Tisse les matériaux de tous les mondes.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "minecraft:loom",
+        "tex": null,
+        "n": 1,
+        "name": "Métier à tisser"
+       },
+       {
+        "id": "terrain_fragment",
+        "tex": "items/terrain_fragment.png",
+        "n": 8,
+        "name": "Fragment de terrain"
+       },
+       {
+        "id": "terrain_heart",
+        "tex": "items/terrain_heart.png",
+        "n": 1,
+        "name": "Cœur de terrain"
+       }
+      ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "giant_plank",
+      "tex": "blocks/giant_plank.png",
+      "name": "Planche géante",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "workshop_felt",
+      "tex": "blocks/workshop_felt.png",
+      "name": "Feutre d'atelier",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "lacquer_glow",
+      "tex": "blocks/lacquer_glow.png",
+      "name": "Laque lumineuse",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "artisan_thread_ore",
+      "tex": "blocks/artisan_thread_ore.png",
+      "name": "Bobine de fil",
+      "kind": "terrain",
+      "effect": "",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Fil d'Artisan"
+     }
+    ],
+    "quests": [
+     {
+      "name": "Le regard d'en bas",
+      "desc": "Trouver sa base, devenue un simple objet."
+     },
+     {
+      "name": "L'atelier",
+      "desc": "Fabriquer au Métier final."
+     },
+     {
+      "name": "Les apprentis",
+      "desc": "Retrouver 5 anciens apprentis."
+     },
+     {
+      "name": "Tous les outils",
+      "desc": "Utiliser un outil de chaque monde."
+     },
+     {
+      "name": "Le dernier pardon",
+      "desc": "Épargner un apprenti (+10) ou prendre son noyau (-10)."
+     },
+     {
+      "name": "Tout d'un coup",
+      "desc": "Vaincre l'Inachevée sans perdre de couche."
+     }
+    ],
+    "ach": [
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Tout en haut",
+      "desc": "Ouvrir le monde 10."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Métier final",
+      "desc": "Fabriquer un objet au Métier final."
+     },
+     {
+      "cat": "Progression",
+      "hidden": false,
+      "name": "Dernier fil",
+      "desc": "Vaincre l'Inachevée."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Une miette",
+      "desc": "Trouver sa base, vue du monde géant."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Atelier complet",
+      "desc": "Visiter les 10 types de structures."
+     },
+     {
+      "cat": "Exploration",
+      "hidden": false,
+      "name": "Dernière lettre",
+      "desc": "Trouver les 5 pages du Journal."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Dix enveloppes",
+      "desc": "Briser les 10 enveloppes en un seul essai."
+     },
+     {
+      "cat": "Combat",
+      "hidden": false,
+      "name": "Tout le chemin",
+      "desc": "Utiliser un équipement de chaque monde contre l'Inachevée."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Toutes les poupées",
+      "desc": "Réunir les 10 poupées cachées."
+     },
+     {
+      "cat": "Caché",
+      "hidden": true,
+      "name": "Poser les outils",
+      "desc": "Obtenir la troisième fin."
+     }
+    ]
+   }
   }
  ],
  "mobs": [

@@ -23,6 +23,17 @@ export interface World {
   items: Item[];
   armor: { pieces: { tex: string | null; name: string }[]; text: string } | null;
   structures: { role: string; names: string[] }[];
+  gallery?: { src: string; caption: string }[];
+  codex: Codex;
+}
+
+export interface CodexEntry {
+  id: string; tex: string | null; name: string; kind: string; rarity?: string; effect: string;
+  station: string | null; inputs: Ing[]; count: number; drops: string[]; yields?: string | null;
+}
+export interface Codex {
+  items: CodexEntry[]; blocks: CodexEntry[]; quests: { name: string; desc: string }[];
+  ach: { cat: string; hidden: boolean; name: string; desc: string }[];
 }
 
 interface CreatureBase {

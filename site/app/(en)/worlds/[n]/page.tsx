@@ -5,7 +5,7 @@ import { meta } from "@/lib/meta";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return Array.from({ length: 10 }, (_, i) => ({ n: String(i + 1) }));
+  return Array.from({ length: 11 }, (_, i) => ({ n: String(i) }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ n: string }> }) {
