@@ -1,0 +1,31 @@
+{
+  "parent": "matriochka:world_7/a0",
+  "display": {
+    "icon": {
+      "id": "matriochka:diving_helmet"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w7.a1.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w7.a1.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:diving_helmet"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}
