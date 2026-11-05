@@ -12,10 +12,20 @@
   "entrypoints": {
     "main": ["fr.achedon12.matriochka.Matriochka"],
     "client": ["fr.achedon12.matriochka.client.MatrioClient"],
-    "jei_mod_plugin": ["fr.achedon12.matriochka.compat.jei.MatrioJeiPlugin"]
+    "jei_mod_plugin": ["fr.achedon12.matriochka.compat.jei.MatrioJeiPlugin"],
+    "modmenu": ["fr.achedon12.matriochka.compat.modmenu.MatrioModMenu"]
   },
   "mixins": ["matriochka.mixins.json", { "config": "matriochka.client.mixins.json", "environment": "client" }],
   "accessWidener": "matriochka.classtweaker",
   "depends": { "fabricloader": ">=0.20.0", "minecraft": "~26.3", "java": ">=25", "fabric-api": "*", "geckolib": ">=5.5" },
-  "suggests": { "jei": "*" }
+  "suggests": { "jei": "*", "modmenu": "*" },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.wiki": "https://github.com/achedon12/matriochka/wiki",
+        "modmenu.discord": "https://discord.gg/SPVCf5hRuh",
+        "modmenu.issues": "https://github.com/achedon12/matriochka/issues"
+      }
+    }
+  }
 }

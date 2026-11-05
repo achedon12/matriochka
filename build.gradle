@@ -59,6 +59,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('scale')) {
 				vmArgs '-Dmatriochka.capture=scale'
 			}
+			if (name == 'clientGameTest' && project.hasProperty('onboarding')) {
+				vmArgs '-Dmatriochka.capture=onboarding'
+			}
 			if (name == 'clientGameTest' && project.hasProperty('moves')) {
 				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true'
 			}
@@ -91,6 +94,15 @@ dependencies {
 	clientCompileOnly "mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}"
 	// ./gradlew runClient -Pjei to try the recipe pages in a dev client
 	if (project.hasProperty('jei')) localRuntime "mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}"
+	// Mod Menu: optional, only compiled against (its entrypoint loads only when Mod Menu is installed)
+	clientCompileOnly("maven.modrinth:modmenu:${project.modmenu_version}") { transitive = false }
+	// ./gradlew runClient -Pcompat to try the mod with Sodium, Iris and Mod Menu in a dev client (see docs-wiki-drafts/Compatibility.md)
+	if (project.hasProperty('compat')) {
+		localRuntime("maven.modrinth:modmenu:${project.modmenu_version}") { transitive = false }
+		localRuntime("maven.modrinth:placeholder-api:${project.placeholder_api_version}") { transitive = false }
+		localRuntime("maven.modrinth:sodium:${project.sodium_version}") { transitive = false }
+		localRuntime("maven.modrinth:iris:${project.iris_version}") { transitive = false }
+	}
 }
 
 processResources {
