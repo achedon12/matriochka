@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731610,
+    "separation": 11,
+    "spacing": 34
+  },
+  "structures": [
+    {
+      "structure": "matriochka:hanging_outpost",
+      "weight": 1
+    }
+  ]
+}

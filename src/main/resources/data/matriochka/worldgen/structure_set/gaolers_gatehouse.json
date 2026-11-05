@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731310,
+    "separation": 11,
+    "spacing": 34
+  },
+  "structures": [
+    {
+      "structure": "matriochka:gaolers_gatehouse",
+      "weight": 1
+    }
+  ]
+}
