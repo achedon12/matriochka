@@ -185,6 +185,27 @@ U = {
  "command.matriochka.boss.unknown": ("Unknown boss: %s", "Boss inconnu : %s"),
  "command.matriochka.karma.show": ("Karma %s, souls %s.", "Karma %s, âmes %s."),
  "command.matriochka.debug": ("World %s, parcel %s, gauges %s, doll layers %s", "Monde %s, parcelle %s, jauges %s, couches %s"),
+ # world variants, boss mutations
+ "message.matriochka.variant.lean_calm": ("The Seed leans calm (%s).", "La Graine penche vers le calme (%s)."),
+ "message.matriochka.variant.lean_wild": ("The Seed leans wild (%s).", "La Graine penche vers la sauvagerie (%s)."),
+ "message.matriochka.variant.lean_none": ("The Seed hesitates.", "La Graine hésite."),
+ "message.matriochka.variant.hatched": ("%s hatched as: %s.", "%s a éclos en : %s."),
+ "journal.matriochka.variant": ("Variant: %s", "Variante : %s"),
+ "boss.matriochka.mutated": ("%s — %s", "%s — %s"),
+ "message.matriochka.mutation.woke": ("It wakes mutated. %s", "Il s'éveille muté. %s"),
+ "message.matriochka.mutation.bonus": ("The mutated boss sheds a Mutated Scale.", "Le boss muté laisse une Écaille mutée."),
+ # the Maquette on the Titanic Workbench
+ "message.matriochka.maquette": ("On the Titanic Workbench stands a scale model of your own base. Here, it is only a toy.", "Sur l'Établi titanesque se dresse une maquette de ta propre base. Ici, ce n'est qu'un jouet."),
+ # effects between the inside and the outside of a World Block
+ "message.matriochka.link.damp": ("Water around your World Block soaks the jungle: the toxin rises half as fast for 5 minutes.", "L'eau autour de ton bloc-monde détrempe la jungle : la toxine monte deux fois moins vite pendant 5 minutes."),
+ "message.matriochka.link.cool": ("Ice around your World Block cools the veins: the heat rises half as fast for 5 minutes.", "La glace autour de ton bloc-monde refroidit les filons : la chaleur monte deux fois moins vite pendant 5 minutes."),
+ "message.matriochka.link.unlocked": ("A redstone signal reaches your World Block: sealed doors open by hand for 1 minute.", "Un signal de redstone atteint ton bloc-monde : les portes scellées s'ouvrent à la main pendant 1 minute."),
+ "message.matriochka.link.storm": ("A storm rages over your World Block: the gusts grow stronger here.", "Un orage gronde au-dessus de ton bloc-monde : les rafales forcissent ici."),
+ "message.matriochka.link.lit": ("Lights around your World Block feed your lantern: 5 more minutes.", "Les lumières autour de ton bloc-monde nourrissent ta lanterne : 5 minutes de plus."),
+ "message.matriochka.link.dry": ("The ground around your World Block is dry: the pressure eases for 5 minutes.", "Le sol autour de ton bloc-monde est sec : la pression se relâche pendant 5 minutes."),
+ "message.matriochka.link.calm": ("Anchors around your World Block hold the ground still for 5 minutes.", "Des ancres autour de ton bloc-monde tiennent le sol immobile pendant 5 minutes."),
+ "message.matriochka.link.quake": ("Your World Block was moved: the whole world quakes!", "Ton bloc-monde a été déplacé : le monde entier tremble !"),
+ "message.matriochka.link.boss": ("Your World Block shakes and cracks: a boss fight rages inside.", "Ton bloc-monde tremble et se fissure : un combat de boss fait rage à l'intérieur."),
 }
 cond = {"ash_foundry": ("The foundry needs 1 to 3 heat sources around it (lava, magma, fire).", "La fonderie demande 1 à 3 sources de chaleur autour d'elle (lave, magma, feu)."),
         "lightning_forge": ("The forge has no charge. Wait for lightning under open sky, or feed it Storm Essence.", "La forge n'a pas de charge. Attends la foudre à ciel ouvert, ou nourris-la d'Essence de tempête."),

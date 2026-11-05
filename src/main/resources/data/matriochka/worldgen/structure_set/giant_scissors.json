@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 741006,
+    "separation": 7,
+    "spacing": 18
+  },
+  "structures": [
+    {
+      "structure": "matriochka:giant_scissors",
+      "weight": 1
+    }
+  ]
+}

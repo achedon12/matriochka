@@ -564,6 +564,16 @@ def gen_worldgen():
             w(os.path.join(D, f"worldgen/structure_set/{sid}.json"), {
                 "placement": {"type": "minecraft:random_spread", "salt": 731000 + n * 100 + i, "separation": max(4, spacing // 3), "spacing": spacing},
                 "structures": [{"structure": f"{NS}:{sid}", "weight": 1}]})
+        # World 10 at doll scale: the giant sewing and carpentry things on the workshop floor (scenery only)
+        if n == 10:
+            for i, (sid, en, fr, arch, spacing, sep) in enumerate(WORKSHOP_PROPS):
+                lang(f"structure.{NS}.{sid}", en, fr)
+                w(os.path.join(D, f"worldgen/structure/{sid}.json"), {
+                    "type": f"{NS}:procedural", "biomes": f"{NS}:{key}", "spawn_overrides": {}, "step": "surface_structures",
+                    "terrain_adaptation": "beard_thin", "world": n, "archetype": arch, "role": "decor", "size": "large", "structure_id": sid})
+                w(os.path.join(D, f"worldgen/structure_set/{sid}.json"), {
+                    "placement": {"type": "minecraft:random_spread", "salt": 741000 + i, "separation": sep, "spacing": spacing},
+                    "structures": [{"structure": f"{NS}:{sid}", "weight": 1}]})
     # refuge dimension (pocket doll): flat void
     w(os.path.join(D, "dimension/refuge.json"), {"type": f"{NS}:refuge", "generator": {"type": "minecraft:flat", "settings": {
         "biome": f"{NS}:refuge", "layers": [], "lakes": False, "features": False, "structure_overrides": []}}})
@@ -770,6 +780,15 @@ def gen_lang_misc():
     for r, (en, fr) in {"none": ("Soulless", "Sans âme"), "common": ("Common", "Commun"), "rare": ("Rare", "Rare"),
                         "epic": ("Epic", "Épique"), "legendary": ("Legendary", "Légendaire")}.items():
         lang(f"rarity.{NS}.{r}", en, fr)
+    for (vid, rule, danger, loot, spawn, en, fr, den, dfr) in VARIANT_KINDS:
+        lang(f"variant.{NS}.{vid}", en, fr)
+        lang(f"variant.{NS}.{vid}.desc", den, dfr)
+    for n, ((cen, cfr), (wen, wfr)) in VARIANT_NAMES.items():
+        lang(f"variant.{NS}.{n}.calm", cen, cfr)
+        lang(f"variant.{NS}.{n}.wild", wen, wfr)
+    for (mid, en, fr, den, dfr) in MUTATIONS:
+        lang(f"mutation.{NS}.{mid}", en, fr)
+        lang(f"mutation.{NS}.{mid}.desc", den, dfr)
     lang(f"itemGroup.{NS}.main", "Matriochka", "Matriochka")
     lang(f"itemGroup.{NS}.worlds", "Matriochka — Worlds", "Matriochka — Mondes")
 
@@ -798,8 +817,26 @@ def gen_java():
     L.append("\t/** Index of the coded page of every world in the Artisan's Journal. */")
     L.append(f"\tpublic static final int JOURNAL_CODED = {JOURNAL_CODED};")
     L.append("\tpublic static final List<Defs.WorldDef> WORLDS = List.of(")
-    L.append(",\n".join(f"\t\tnew Defs.WorldDef({wd['n']}, {jstr(wd['rule'])}, {jstr(wd['tier'])}, 0x{wd['pal'][0]}, 0x{wd['pal'][2]}, {str(wd['ceiling']).lower()})" for wd in WORLDS))
+    rows = []
+    for wd in WORLDS:
+        n = wd["n"]
+        glow = ([b for (b, e, f, st) in TERRAIN[n] if st in ("glow", "glass")] or [TERRAIN[n][2][0]])[0]
+        rows.append(f"\t\tnew Defs.WorldDef({n}, {jstr(wd['rule'])}, {jstr(wd['tier'])}, 0x{wd['pal'][0]}, 0x{wd['pal'][2]}, {str(wd['ceiling']).lower()}, "
+                    f"0x{wd['sky']}, {jstr(SURF[n][0])}, {jstr(SURF[n][1])}, {jstr(glow)})")
+    L.append(",\n".join(rows))
     L.append("\t);")
+    L.append("\t/** World variants, chosen while a Seed hatches (see tools/content.py VARIANT_KINDS). */")
+    L.append("\tpublic static final List<Defs.VariantDef> VARIANTS = List.of(")
+    L.append(",\n".join(f"\t\tnew Defs.VariantDef({jstr(v[0])}, {v[1]}f, {v[2]}f, {v[3]}f, {v[4]}f)" for v in VARIANT_KINDS))
+    L.append("\t);")
+    for kind in ("calm", "wild"):
+        L.append(f"\tpublic static final List<String> VARIANT_FEED_{kind.upper()} = List.of(" + ", ".join(jstr(x) for x in VARIANT_FEED[kind]) + ");")
+        L.append(f"\tpublic static final List<String> VARIANT_GROUND_{kind.upper()} = List.of(" + ", ".join(jstr(x) for x in VARIANT_GROUND[kind]) + ");")
+    L.append(f"\tpublic static final int VARIANT_LEAN = {VARIANT_LEAN};")
+    L.append(f"\tpublic static final int MUTATION_FROM = {MUTATION_FROM};")
+    L.append("\tpublic static final List<String> MUTATIONS = List.of(" + ", ".join(jstr(m[0]) for m in MUTATIONS) + ");")
+    L.append("\t/** Mutation of a wild world's boss, by world number (empty: none). */")
+    L.append("\tpublic static final String[] WILD_MUTATION = {" + ", ".join(jstr(WILD_MUTATION.get(i, "")) for i in range(12)) + "};")
     L.append("\tpublic static final List<Defs.ItemDef> ITEMS = List.of(")
     rows = []
     for it in ALL_ITEMS:

@@ -4,7 +4,11 @@ package fr.achedon12.matriochka.content;
 public final class Defs {
 	private Defs() {}
 
-	public record WorldDef(int n, String rule, String tier, int primary, int accent, boolean ceiling) {}
+	/** top, stone and glow are the world's surface, ground and light blocks (the World Block preview paints them). */
+	public record WorldDef(int n, String rule, String tier, int primary, int accent, boolean ceiling, int sky, String top, String stone, String glow) {}
+
+	/** A world variant: rule strength, creature danger, extra drop chance and spawn rate multipliers. */
+	public record VariantDef(String id, float rule, float danger, float loot, float spawn) {}
 
 	public record ItemDef(String id, int world, String kind, String rarity, String piece, String set) {}
 

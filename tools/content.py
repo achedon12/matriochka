@@ -95,6 +95,8 @@ item("wool_thread", "Wool Thread", "Fil de laine", 0, "resource", "common", "thr
      "Used for cradles and threads.", "Sert aux berceaux et aux fils.")
 item("shell_shard", "Shell Shard", "Éclat d'enveloppe", 0, "resource", "epic", "shard",
      "Left by a fallen boss. Every class upgrade needs some.", "Laissé par un boss vaincu. Chaque amélioration de classe en demande.")
+item("mutated_scale", "Mutated Scale", "Écaille mutée", 0, "gem", "epic", "gem",
+     "Shed by a mutated boss. Rich in soul.", "Perdue par un boss muté. Riche en âme.", pal=("6a2a8a", "c84ad8", "f0c050", "1a0a24"))
 
 # World 1
 item("spores", "Spores", "Spores", 1, "resource", "common", "dust", "Base of antidotes.", "Base des antidotes.")
@@ -688,6 +690,84 @@ STRUCTURES = {
          ("city_of_giants", "City of Giants", "Cité des géants", "utility", "large", "rare", "city"),
          ("creature_throne", "Throne of the Creature", "Trône de la créature", "secret", "medium", "unique", "throne")],
 }
+
+# ---------------------------------------------------------------- World 10 at doll scale
+# The Giant Workshop is the Artisan's workshop seen by a doll: giant sewing and carpentry things lie on its felt
+# floor. They are scenery only (no chest, no page), so they stay out of STRUCTURES and of the "visit 10 structures"
+# achievements. Builders live in structure/Workshop.java. (id, en, fr, archetype, spacing, separation in chunks)
+WORKSHOP_PROPS = [
+    ("giant_spool", "Giant Spool", "Bobine géante", "prop_spool", 11, 4),
+    ("giant_nail", "Giant Nail", "Clou géant", "prop_nail", 8, 3),
+    ("giant_pin", "Giant Pin", "Épingle géante", "prop_pin", 9, 3),
+    ("giant_button", "Giant Button", "Bouton géant", "prop_button", 12, 5),
+    ("giant_thimble", "Giant Thimble", "Dé à coudre géant", "prop_thimble", 16, 6),
+    ("wood_offcuts", "Wood Offcuts", "Chutes de bois", "prop_offcut", 7, 2),
+    ("giant_scissors", "Giant Scissors", "Ciseaux géants", "prop_scissors", 18, 7),
+    ("giant_pencil", "Giant Pencil", "Crayon géant", "prop_pencil", 14, 5),
+]
+
+# ---------------------------------------------------------------- world variants
+# A Seed hatches into a variant of its world, chosen while it hatches (world/Variants.java). Feeding the planted Seed
+# (use an item on it) and what lies around it lean it calm or wild; the planter's karma at +100 or -100 overrides
+# both. A variant never changes the terrain: it changes the creatures (how many come, their health and damage), the
+# strength of the world's rule and the drops. Stored per group and world.
+# (id, rule strength, danger, extra drop chance, spawn rate, en, fr, description en, description fr)
+VARIANT_KINDS = [
+    ("plain", 1.0, 1.0, 0.0, 1.0, "Plain", "Ordinaire",
+     "The world as the Artisan made it.", "Le monde tel que l'artisan l'a fait."),
+    ("calm", 0.75, 0.85, 0.0, 0.7, "Calm", "Apaisée",
+     "Fewer and weaker creatures, a gentler rule, plainer loot.", "Moins de créatures, plus faibles, une règle plus douce, un butin ordinaire."),
+    ("wild", 1.25, 1.25, 0.5, 1.5, "Wild", "Sauvage",
+     "More and stronger creatures, a harsher rule, richer drops.", "Plus de créatures, plus fortes, une règle plus rude, un butin plus riche."),
+    ("blessed", 0.8, 1.0, 0.35, 0.85, "Hallowed", "Bénie",
+     "Karma +100: a kinder rule and richer drops; its boss shines.", "Karma +100 : une règle plus clémente, un butin plus riche ; son boss rayonne."),
+    ("cursed", 1.3, 1.4, 1.0, 1.6, "Cursed", "Maudite",
+     "Karma -100: a crushing rule, swarms of strong creatures and the richest drops.", "Karma -100 : une règle écrasante, des nuées de créatures fortes et le meilleur butin."),
+]
+# What each world calls its calm and wild variants: ((calm en, calm fr), (wild en, wild fr))
+VARIANT_NAMES = {
+    1: (("Withered Jungle", "Jungle flétrie"), ("Overgrown Jungle", "Jungle débordante")),
+    2: (("Cooling Veins", "Filons refroidis"), ("Erupting Veins", "Filons en éruption")),
+    3: (("Drowsy Dungeon", "Donjon assoupi"), ("Grinding Dungeon", "Donjon grinçant")),
+    4: (("Becalmed Archipelago", "Archipel apaisé"), ("Thundering Archipelago", "Archipel tonnant")),
+    5: (("Glimmering Deep", "Profondeur scintillante"), ("Starving Deep", "Profondeur affamée")),
+    6: (("Steady Realm", "Royaume stable"), ("Spinning Realm", "Royaume tournoyant")),
+    7: (("Slack-Tide Ocean", "Océan étale"), ("Crushing Ocean", "Océan écrasant")),
+    8: (("Lingering Seasons", "Saisons lentes"), ("Racing Seasons", "Saisons folles")),
+    9: (("Dozing Ground", "Terre assoupie"), ("Heaving Ground", "Terre soulevée")),
+    10: (("Tidy Workshop", "Atelier rangé"), ("Cluttered Workshop", "Atelier encombré")),
+}
+# What leans a hatching Seed: items fed to it, and blocks within 3 blocks of it ("#" = a tag).
+VARIANT_FEED = {
+    "calm": ["#minecraft:flowers", "minecraft:honey_bottle", "minecraft:sweet_berries", "minecraft:glow_berries", "minecraft:moss_block"],
+    "wild": ["minecraft:gunpowder", "minecraft:blaze_powder", "minecraft:rotten_flesh", "minecraft:bone", "minecraft:spider_eye", "minecraft:magma_cream"],
+}
+VARIANT_GROUND = {
+    "calm": ["#minecraft:flowers", "#minecraft:leaves", "minecraft:moss_block", "minecraft:water"],
+    "wild": ["minecraft:fire", "minecraft:soul_fire", "minecraft:soul_sand", "minecraft:soul_soil", "minecraft:wither_rose", "minecraft:lava"],
+}
+# Points needed (fed + ground, wild minus calm) to lean a Seed one way.
+VARIANT_LEAN = 2
+
+# ---------------------------------------------------------------- boss mutations
+# From World 6 on, a boss whose world hatched wild, hallowed or cursed wakes mutated: one more attack, an element
+# or a phase change on top of its fight (entity/Mutations.java). Its name in the boss bar says so, and it sheds a
+# Mutated Scale and more Shell Shards.
+MUTATION_FROM = 6
+MUTATIONS = [
+    ("searing", "Searing Mutation", "Mutation ardente",
+     "Its blows set you on fire; a ring of flames follows every big attack.", "Ses coups t'enflamment ; un cercle de flammes suit chaque grande attaque."),
+    ("frenzied", "Frenzied Mutation", "Mutation frénétique",
+     "Below half health it heals a little, then speeds up and attacks faster.", "Sous la moitié de sa vie, il se soigne un peu, puis accélère et attaque plus vite."),
+    ("echoing", "Echoing Mutation", "Mutation en écho",
+     "Every big attack is followed by an echo: a second shockwave.", "Chaque grande attaque est suivie d'un écho : une seconde onde de choc."),
+    ("radiant", "Radiant Mutation", "Mutation radieuse",
+     "A pulse of light every 15 seconds blinds and slows those near it.", "Toutes les 15 secondes, une impulsion de lumière aveugle et ralentit ceux qui l'entourent."),
+    ("hollow", "Hollow Mutation", "Mutation creuse",
+     "Every 20 seconds it calls creatures of its world out of its shell.", "Toutes les 20 secondes, il fait sortir de sa coquille des créatures de son monde."),
+]
+# The mutation of a wild world's boss; the hallowed variant gives "radiant", the cursed one "hollow".
+WILD_MUTATION = {6: "echoing", 7: "frenzied", 8: "searing", 9: "echoing", 10: "frenzied"}
 
 # ---------------------------------------------------------------- quests (64, plus the karma paths)
 # type: guide | npc | karma | challenge | help | pact ; obj: (kind, target, count)

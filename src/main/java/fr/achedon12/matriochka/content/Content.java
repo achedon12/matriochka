@@ -11,17 +11,34 @@ public final class Content {
 	/** Index of the coded page of every world in the Artisan's Journal. */
 	public static final int JOURNAL_CODED = 3;
 	public static final List<Defs.WorldDef> WORLDS = List.of(
-		new Defs.WorldDef(1, "toxin", "learning", 0x3f6b2a, 0xb7e04a, false),
-		new Defs.WorldDef(2, "heat", "learning", 0x2b2220, 0xffb347, false),
-		new Defs.WorldDef(3, "locks", "learning", 0x5a5a62, 0x7fd3ff, true),
-		new Defs.WorldDef(4, "wind", "mastery", 0xd8e8f8, 0xffe14a, false),
-		new Defs.WorldDef(5, "darkness", "mastery", 0x15151f, 0x6a8aff, true),
-		new Defs.WorldDef(6, "gravity", "mastery", 0xc84ad8, 0xf0f0f0, false),
-		new Defs.WorldDef(7, "pressure", "expertise", 0x0a3a5a, 0x9af0ff, false),
-		new Defs.WorldDef(8, "time", "expertise", 0xc8a040, 0xf0f0ff, false),
-		new Defs.WorldDef(9, "ground", "expertise", 0x6a3a2a, 0xe8a070, false),
-		new Defs.WorldDef(10, "synthesis", "final", 0xb0402a, 0x3a6ab8, false)
+		new Defs.WorldDef(1, "toxin", "learning", 0x3f6b2a, 0xb7e04a, false, 0x6f8f4f, "spore_moss", "rootstone", "spore_bloom"),
+		new Defs.WorldDef(2, "heat", "learning", 0x2b2220, 0xffb347, false, 0x7a3a1a, "ashrock", "ashrock", "ember_stone"),
+		new Defs.WorldDef(3, "locks", "learning", 0x5a5a62, 0x7fd3ff, true, 0x2a2a33, "dungeon_brick", "dungeon_brick", "cold_lamp"),
+		new Defs.WorldDef(4, "wind", "mastery", 0xd8e8f8, 0xffe14a, false, 0x7ab0ff, "skygrass", "cloudstone", "storm_glass"),
+		new Defs.WorldDef(5, "darkness", "mastery", 0x15151f, 0x6a8aff, true, 0x000000, "umbral_moss", "umbral_stone", "faint_glow"),
+		new Defs.WorldDef(6, "gravity", "mastery", 0xc84ad8, 0xf0f0f0, false, 0x40e0d0, "prism_moss", "inverted_stone", "mirror_glass"),
+		new Defs.WorldDef(7, "pressure", "expertise", 0x0a3a5a, 0x9af0ff, false, 0x1a5a8a, "abyssal_sand", "trench_rock", "pressure_coral"),
+		new Defs.WorldDef(8, "time", "expertise", 0xc8a040, 0xf0f0ff, false, 0x90b8e8, "chrono_grass", "hourstone", "temporal_sand_block"),
+		new Defs.WorldDef(9, "ground", "expertise", 0x6a3a2a, 0xe8a070, false, 0xa86a5a, "flesh_stone", "living_rock", "pulse_vein"),
+		new Defs.WorldDef(10, "synthesis", "final", 0xb0402a, 0x3a6ab8, false, 0xe8d0a0, "workshop_felt", "giant_plank", "lacquer_glow")
 	);
+	/** World variants, chosen while a Seed hatches (see tools/content.py VARIANT_KINDS). */
+	public static final List<Defs.VariantDef> VARIANTS = List.of(
+		new Defs.VariantDef("plain", 1.0f, 1.0f, 0.0f, 1.0f),
+		new Defs.VariantDef("calm", 0.75f, 0.85f, 0.0f, 0.7f),
+		new Defs.VariantDef("wild", 1.25f, 1.25f, 0.5f, 1.5f),
+		new Defs.VariantDef("blessed", 0.8f, 1.0f, 0.35f, 0.85f),
+		new Defs.VariantDef("cursed", 1.3f, 1.4f, 1.0f, 1.6f)
+	);
+	public static final List<String> VARIANT_FEED_CALM = List.of("#minecraft:flowers", "minecraft:honey_bottle", "minecraft:sweet_berries", "minecraft:glow_berries", "minecraft:moss_block");
+	public static final List<String> VARIANT_GROUND_CALM = List.of("#minecraft:flowers", "#minecraft:leaves", "minecraft:moss_block", "minecraft:water");
+	public static final List<String> VARIANT_FEED_WILD = List.of("minecraft:gunpowder", "minecraft:blaze_powder", "minecraft:rotten_flesh", "minecraft:bone", "minecraft:spider_eye", "minecraft:magma_cream");
+	public static final List<String> VARIANT_GROUND_WILD = List.of("minecraft:fire", "minecraft:soul_fire", "minecraft:soul_sand", "minecraft:soul_soil", "minecraft:wither_rose", "minecraft:lava");
+	public static final int VARIANT_LEAN = 2;
+	public static final int MUTATION_FROM = 6;
+	public static final List<String> MUTATIONS = List.of("searing", "frenzied", "echoing", "radiant", "hollow");
+	/** Mutation of a wild world's boss, by world number (empty: none). */
+	public static final String[] WILD_MUTATION = {"", "", "", "", "", "", "echoing", "frenzied", "searing", "echoing", "frenzied", ""};
 	public static final List<Defs.ItemDef> ITEMS = List.of(
 		new Defs.ItemDef("artisan_scroll", 0, "guide", "none", "", ""),
 		new Defs.ItemDef("artisan_journal", 0, "guide", "none", "", ""),
@@ -33,6 +50,7 @@ public final class Content {
 		new Defs.ItemDef("journal_page", 0, "page", "none", "", ""),
 		new Defs.ItemDef("wool_thread", 0, "resource", "common", "", ""),
 		new Defs.ItemDef("shell_shard", 0, "resource", "epic", "", ""),
+		new Defs.ItemDef("mutated_scale", 0, "gem", "epic", "", ""),
 		new Defs.ItemDef("spores", 1, "resource", "common", "", ""),
 		new Defs.ItemDef("roots", 1, "resource", "common", "", ""),
 		new Defs.ItemDef("sporite", 1, "gem", "rare", "", ""),

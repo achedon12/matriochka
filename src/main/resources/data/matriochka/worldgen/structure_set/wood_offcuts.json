@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 741005,
+    "separation": 2,
+    "spacing": 7
+  },
+  "structures": [
+    {
+      "structure": "matriochka:wood_offcuts",
+      "weight": 1
+    }
+  ]
+}
