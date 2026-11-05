@@ -409,6 +409,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			double a = random.nextDouble() * Math.PI * 2;
 			level.sendParticles(attack == 2 ? ParticleTypes.FLAME : ParticleTypes.CRIT, aim.x + Math.cos(a) * r, aim.y + 0.1, aim.z + Math.sin(a) * r, 1, 0, 0.02, 0, 0);
 		}
+		BossFx.telegraph(level, def.world() == 0 ? 0 : world(), aim, r, attack == 2 ? 16 : 8);
 	}
 
 	private float dmg(float f) {
@@ -424,6 +425,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	private void execute(ServerLevel level, LivingEntity target) {
 		triggerAnim("action", attack == 1 ? "cast" : "slam");
 		int w = def.world() == 0 ? 0 : world();
+		BossFx.attack(level, this, w, attack, aim);
 		if (attack == 0) {
 			for (LivingEntity e : victims(level, position().add(getLookAngle().scale(2)), 3.2)) e.hurtServer(level, damageSources().mobAttack(this), dmg(0.6f));
 			level.playSound(null, blockPosition(), SoundEvents.PLAYER_ATTACK_STRONG, SoundSource.HOSTILE, 1.2f, 0.6f);
