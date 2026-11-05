@@ -114,7 +114,7 @@ VANILLA = {
     "quartz": ("Nether Quartz", "Quartz du Nether"), "kelp": ("Kelp", "Algue"),
     "prismarine_crystals": ("Prismarine Crystals", "Cristaux de prismarine"), "dried_kelp": ("Dried Kelp", "Algue séchée"),
     "glass": ("Glass", "Verre"), "sweet_berries": ("Sweet Berries", "Baies sucrées"),
-    "leather_boots": ("Leather Boots", "Bottes en cuir"),
+    "leather_boots": ("Leather Boots", "Bottes en cuir"), "iron_chain": ("Iron Chain", "Chaîne en fer"),
 }
 
 
@@ -999,6 +999,12 @@ def build_bosses():
         if w == 8:
             unlocks.append(t("The End opens, and elytra fly again.", "L'End s'ouvre, et les élytres volent de nouveau."))
         special = []
+        if b.get("meet") == "lair":
+            special.append(t("It sleeps in its lair, 160 blocks south of the Threshold. Come within 10 blocks of the lair heart at the centre to wake it. When it falls, the seal of the treasure alcove breaks and its chests fill with the world's best loot; the heart wakes again 10 minutes later.",
+                             "Il dort dans son antre, à 160 blocs au sud du Seuil. Approche-toi à moins de 10 blocs du cœur d'antre, au centre, pour le réveiller. Quand il tombe, le sceau de l'alcôve au trésor se brise et ses coffres se remplissent du meilleur butin du monde ; le cœur se réveille 10 minutes plus tard."))
+        elif b.get("offering"):
+            special.append(t(f"Wake it at the arena altar, 160 blocks south of the Threshold, while holding a {name(b['offering'])}. The offering is consumed and a three-second ritual summons it; every fight costs one offering.",
+                             f"Réveille-le à l'autel d'arène, à 160 blocs au sud du Seuil, en tenant l'offrande {name(b['offering'])}. Elle est consommée et un rituel de trois secondes l'invoque ; chaque combat coûte une offrande."))
         if b["id"] == "spore_queen":
             special.append(t("At her last phase she calls three Chitin Guards; her cocoon holds until those nodes are broken.", "À sa dernière phase, elle appelle trois Gardiens de chitine ; son cocon tient tant que ces nœuds ne sont pas brisés."))
         if b["id"] == "block_guardian":

@@ -1385,6 +1385,18 @@
       "yields": null
      },
      {
+      "id": "lair_heart",
+      "tex": "blocks/lair_heart.png",
+      "name": "Cœur d'antre",
+      "kind": "lair_heart",
+      "effect": "Réveille le boss de son antre quand on s'approche.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
       "id": "painted_wood",
       "tex": "blocks/painted_wood.png",
       "name": "Bois peint",
@@ -3485,6 +3497,32 @@
       ]
      },
      {
+      "out": "sealed_shackle",
+      "tex": "items/sealed_shackle.png",
+      "name": "Entrave scellée",
+      "count": 1,
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 6,
+        "name": "Fragment scellé"
+       },
+       {
+        "id": "dungeon_key",
+        "tex": "items/dungeon_key.png",
+        "n": 1,
+        "name": "Clé de donjon"
+       },
+       {
+        "id": "minecraft:iron_chain",
+        "tex": null,
+        "n": 2,
+        "name": "Chaîne en fer"
+       }
+      ]
+     },
+     {
       "out": "jailer_blade",
       "tex": "items/jailer_blade.png",
       "name": "Lame du Geôlier",
@@ -3598,6 +3636,12 @@
      "tex": "items/jailer_blade.png",
      "name": "Lame du Geôlier",
      "effect": ""
+    },
+    {
+     "id": "sealed_shackle",
+     "tex": "items/sealed_shackle.png",
+     "name": "Entrave scellée",
+     "effect": "Tenue à l'autel d'arène, elle réveille le Grand Geôlier."
     },
     {
      "id": "cell_ration",
@@ -3866,6 +3910,37 @@
       "effect": "Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "sealed_shackle",
+      "tex": "items/sealed_shackle.png",
+      "name": "Entrave scellée",
+      "kind": "offering",
+      "rarity": "Épique",
+      "effect": "Tenue à l'autel d'arène, elle réveille le Grand Geôlier.",
+      "station": "Table du Geôlier",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 6,
+        "name": "Fragment scellé"
+       },
+       {
+        "id": "dungeon_key",
+        "tex": "items/dungeon_key.png",
+        "n": 1,
+        "name": "Clé de donjon"
+       },
+       {
+        "id": "minecraft:iron_chain",
+        "tex": null,
+        "n": 2,
+        "name": "Chaîne en fer"
+       }
+      ],
       "count": 1,
       "drops": []
      },
@@ -4358,6 +4433,32 @@
       ]
      },
      {
+      "out": "storm_censer",
+      "tex": "items/storm_censer.png",
+      "name": "Encensoir d'orage",
+      "count": 1,
+      "inputs": [
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 4,
+        "name": "Essence de tempête"
+       },
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 2,
+        "name": "Cristal céleste"
+       },
+       {
+        "id": "ray_membrane",
+        "tex": "items/ray_membrane.png",
+        "n": 2,
+        "name": "Membrane de raie"
+       }
+      ]
+     },
+     {
       "out": "lightning_lance",
       "tex": "items/lightning_lance.png",
       "name": "Lance de foudre",
@@ -4471,6 +4572,12 @@
      "tex": "items/lightning_lance.png",
      "name": "Lance de foudre",
      "effect": ""
+    },
+    {
+     "id": "storm_censer",
+     "tex": "items/storm_censer.png",
+     "name": "Encensoir d'orage",
+     "effect": "Tenu à l'autel d'arène, il réveille le Roi des tempêtes."
     },
     {
      "id": "cloud_fruit",
@@ -4726,6 +4833,37 @@
       "effect": "Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "storm_censer",
+      "tex": "items/storm_censer.png",
+      "name": "Encensoir d'orage",
+      "kind": "offering",
+      "rarity": "Épique",
+      "effect": "Tenu à l'autel d'arène, il réveille le Roi des tempêtes.",
+      "station": "Forge à foudre",
+      "inputs": [
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 4,
+        "name": "Essence de tempête"
+       },
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 2,
+        "name": "Cristal céleste"
+       },
+       {
+        "id": "ray_membrane",
+        "tex": "items/ray_membrane.png",
+        "n": 2,
+        "name": "Membrane de raie"
+       }
+      ],
       "count": 1,
       "drops": []
      },
@@ -7723,6 +7861,32 @@
       ]
      },
      {
+      "out": "wreath_of_seasons",
+      "tex": "items/wreath_of_seasons.png",
+      "name": "Couronne des saisons",
+      "count": 1,
+      "inputs": [
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 2,
+        "name": "Fragment de saison"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 6,
+        "name": "Sable temporel"
+       },
+       {
+        "id": "season_preserve",
+        "tex": "items/season_preserve.png",
+        "n": 1,
+        "name": "Conserve de saison"
+       }
+      ]
+     },
+     {
       "out": "season_scythe",
       "tex": "items/season_scythe.png",
       "name": "Faux des saisons",
@@ -7830,6 +7994,12 @@
      "tex": "items/season_scythe.png",
      "name": "Faux des saisons",
      "effect": ""
+    },
+    {
+     "id": "wreath_of_seasons",
+     "tex": "items/wreath_of_seasons.png",
+     "name": "Couronne des saisons",
+     "effect": "Tenue à l'autel d'arène, elle réveille le Maître des saisons."
     },
     {
      "id": "season_jam",
@@ -8066,6 +8236,37 @@
       "effect": "Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "wreath_of_seasons",
+      "tex": "items/wreath_of_seasons.png",
+      "name": "Couronne des saisons",
+      "kind": "offering",
+      "rarity": "Épique",
+      "effect": "Tenue à l'autel d'arène, elle réveille le Maître des saisons.",
+      "station": "Atelier du temps",
+      "inputs": [
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 2,
+        "name": "Fragment de saison"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 6,
+        "name": "Sable temporel"
+       },
+       {
+        "id": "season_preserve",
+        "tex": "items/season_preserve.png",
+        "n": 1,
+        "name": "Conserve de saison"
+       }
+      ],
       "count": 1,
       "drops": []
      },
@@ -9412,6 +9613,32 @@
       ]
      },
      {
+      "out": "unfinished_effigy",
+      "tex": "items/unfinished_effigy.png",
+      "name": "Effigie inachevée",
+      "count": 1,
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 6,
+        "name": "Fil d'Artisan"
+       },
+       {
+        "id": "artisan_shard",
+        "tex": "items/artisan_shard.png",
+        "n": 1,
+        "name": "Éclat d'Artisan"
+       },
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 4,
+        "name": "Fil de laine"
+       }
+      ]
+     },
+     {
       "out": "workshop_feast",
       "tex": "items/workshop_feast.png",
       "name": "Festin de l'atelier",
@@ -9463,6 +9690,12 @@
      "tex": "items/artisan_blade.png",
      "name": "Lame de l'Artisan",
      "effect": ""
+    },
+    {
+     "id": "unfinished_effigy",
+     "tex": "items/unfinished_effigy.png",
+     "name": "Effigie inachevée",
+     "effect": "Tenue à l'autel d'arène, elle réveille l'Inachevée."
     },
     {
      "id": "workshop_feast",
@@ -9649,6 +9882,37 @@
       "effect": "Emboîte les dix poupées dans l'ordre...",
       "station": null,
       "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "unfinished_effigy",
+      "tex": "items/unfinished_effigy.png",
+      "name": "Effigie inachevée",
+      "kind": "offering",
+      "rarity": "Épique",
+      "effect": "Tenue à l'autel d'arène, elle réveille l'Inachevée.",
+      "station": "Métier final",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 6,
+        "name": "Fil d'Artisan"
+       },
+       {
+        "id": "artisan_shard",
+        "tex": "items/artisan_shard.png",
+        "n": 1,
+        "name": "Éclat d'Artisan"
+       },
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 4,
+        "name": "Fil de laine"
+       }
+      ],
       "count": 1,
       "drops": []
      },
@@ -15795,6 +16059,7 @@
     "Ta Poupée de vie gagne une couche."
    ],
    "special": [
+    "Il dort dans son antre, à 160 blocs au sud du Seuil. Approche-toi à moins de 10 blocs du cœur d'antre, au centre, pour le réveiller. Quand il tombe, le sceau de l'alcôve au trésor se brise et ses coffres se remplissent du meilleur butin du monde ; le cœur se réveille 10 minutes plus tard.",
     "À sa dernière phase, elle appelle trois Gardiens de chitine ; son cocon tient tant que ces nœuds ne sont pas brisés."
    ],
    "story": "La Reine des spores se fane. Une première couche pousse sur ta Poupée de vie. Les mondes ont été fabriqués.",
@@ -15968,6 +16233,7 @@
     "Enchantements, enclumes et Nether s'ouvrent."
    ],
    "special": [
+    "Il dort dans son antre, à 160 blocs au sud du Seuil. Approche-toi à moins de 10 blocs du cœur d'antre, au centre, pour le réveiller. Quand il tombe, le sceau de l'alcôve au trésor se brise et ses coffres se remplissent du meilleur butin du monde ; le cœur se réveille 10 minutes plus tard.",
     "Dans sa dernière phase, son armure a fondu : il subit 30 % de dégâts en plus du multiplicateur habituel."
    ],
    "story": "Le Titan de cendre refroidit. Les enchantements et le Nether te répondent désormais. Chaque monde enferme quelque chose.",
@@ -16139,7 +16405,9 @@
     "Son noyau est l'ingrédient clé de la Graine du monde 4.",
     "Ta Poupée de vie récupère une couche."
    ],
-   "special": [],
+   "special": [
+    "Réveille-le à l'autel d'arène, à 160 blocs au sud du Seuil, en tenant l'offrande Entrave scellée. Elle est consommée et un rituel de trois secondes l'invoque ; chaque combat coûte une offrande."
+   ],
    "story": "La cellule du Grand Geôlier est vide. Une poupée-refuge est à toi. Un ancien artisan a laissé des plans.",
    "shot": null,
    "block": "blocks/dungeon_brick.png",
@@ -16302,7 +16570,9 @@
     "Son noyau est l'ingrédient clé de la Graine du monde 5.",
     "Ta Poupée de vie récupère une couche."
    ],
-   "special": [],
+   "special": [
+    "Réveille-le à l'autel d'arène, à 160 blocs au sud du Seuil, en tenant l'offrande Encensoir d'orage. Elle est consommée et un rituel de trois secondes l'invoque ; chaque combat coûte une offrande."
+   ],
    "story": "Le Roi des tempêtes tombe du ciel. L'Artisan a voulu arrêter son œuvre.",
    "shot": "shots/w04_boss.jpg",
    "block": "blocks/cloudstone.png",
@@ -16472,7 +16742,9 @@
     "Son noyau est l'ingrédient clé de la Graine du monde 6.",
     "Ta Poupée de vie gagne une couche."
    ],
-   "special": [],
+   "special": [
+    "Il dort dans son antre, à 160 blocs au sud du Seuil. Approche-toi à moins de 10 blocs du cœur d'antre, au centre, pour le réveiller. Quand il tombe, le sceau de l'alcôve au trésor se brise et ses coffres se remplissent du meilleur butin du monde ; le cœur se réveille 10 minutes plus tard."
+   ],
    "story": "Le Mangeur de lumière s'éteint de faim. Une deuxième couche pousse sur ta poupée. Le diamant revient. Une présence t'observe.",
    "shot": null,
    "block": "blocks/umbral_stone.png",
@@ -16642,7 +16914,9 @@
     "Son noyau est l'ingrédient clé de la Graine du monde 7.",
     "Ta Poupée de vie récupère une couche."
    ],
-   "special": [],
+   "special": [
+    "Il dort dans son antre, à 160 blocs au sud du Seuil. Approche-toi à moins de 10 blocs du cœur d'antre, au centre, pour le réveiller. Quand il tombe, le sceau de l'alcôve au trésor se brise et ses coffres se remplissent du meilleur butin du monde ; le cœur se réveille 10 minutes plus tard."
+   ],
    "story": "Ton Double se brise. Les boss sont liés entre eux.",
    "shot": null,
    "block": "blocks/inverted_stone.png",
@@ -16812,7 +17086,9 @@
     "Son noyau est l'ingrédient clé de la Graine du monde 8.",
     "Ta Poupée de vie récupère une couche."
    ],
-   "special": [],
+   "special": [
+    "Il dort dans son antre, à 160 blocs au sud du Seuil. Approche-toi à moins de 10 blocs du cœur d'antre, au centre, pour le réveiller. Quand il tombe, le sceau de l'alcôve au trésor se brise et ses coffres se remplissent du meilleur butin du monde ; le cœur se réveille 10 minutes plus tard."
+   ],
    "story": "Le Léviathan sombre. Toutes les prisons enferment une seule créature.",
    "shot": "shots/w07_boss.jpg",
    "block": "blocks/trench_rock.png",
@@ -16983,7 +17259,9 @@
     "Ta Poupée de vie gagne une couche.",
     "L'End s'ouvre, et les élytres volent de nouveau."
    ],
-   "special": [],
+   "special": [
+    "Réveille-le à l'autel d'arène, à 160 blocs au sud du Seuil, en tenant l'offrande Couronne des saisons. Elle est consommée et un rituel de trois secondes l'invoque ; chaque combat coûte une offrande."
+   ],
    "story": "Le Maître des saisons s'arrête. Une troisième couche pousse sur ta poupée. L'End s'ouvre. Quelqu'un est déjà passé par là.",
    "shot": null,
    "block": "blocks/hourstone.png",
@@ -17159,7 +17437,9 @@
     "Son noyau est l'ingrédient clé de la Graine du monde 10.",
     "Ta Poupée de vie récupère une couche."
    ],
-   "special": [],
+   "special": [
+    "Il dort dans son antre, à 160 blocs au sud du Seuil. Approche-toi à moins de 10 blocs du cœur d'antre, au centre, pour le réveiller. Quand il tombe, le sceau de l'alcôve au trésor se brise et ses coffres se remplissent du meilleur butin du monde ; le cœur se réveille 10 minutes plus tard."
+   ],
    "story": "Le Cœur du terrain cesse de battre. Tu tiens la Clé de la dernière poupée. Ce voyageur, c'était toi.",
    "shot": null,
    "block": "blocks/living_rock.png",
@@ -17314,7 +17594,9 @@
    "unlocks": [
     "Ta Poupée de vie récupère une couche."
    ],
-   "special": [],
+   "special": [
+    "Réveille-le à l'autel d'arène, à 160 blocs au sud du Seuil, en tenant l'offrande Effigie inachevée. Elle est consommée et un rituel de trois secondes l'invoque ; chaque combat coûte une offrande."
+   ],
    "story": "L'Inachevée se défait, enveloppe après enveloppe. En brisant les prisons, tu l'as libérée.",
    "shot": "shots/w10_boss.jpg",
    "block": "blocks/giant_plank.png",

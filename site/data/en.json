@@ -1385,6 +1385,18 @@
       "yields": null
      },
      {
+      "id": "lair_heart",
+      "tex": "blocks/lair_heart.png",
+      "name": "Lair Heart",
+      "kind": "lair_heart",
+      "effect": "Wakes the boss of its lair when someone comes close.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
       "id": "painted_wood",
       "tex": "blocks/painted_wood.png",
       "name": "Painted Wood",
@@ -3485,6 +3497,32 @@
       ]
      },
      {
+      "out": "sealed_shackle",
+      "tex": "items/sealed_shackle.png",
+      "name": "Sealed Shackle",
+      "count": 1,
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 6,
+        "name": "Sealed Fragment"
+       },
+       {
+        "id": "dungeon_key",
+        "tex": "items/dungeon_key.png",
+        "n": 1,
+        "name": "Dungeon Key"
+       },
+       {
+        "id": "minecraft:iron_chain",
+        "tex": null,
+        "n": 2,
+        "name": "Iron Chain"
+       }
+      ]
+     },
+     {
       "out": "jailer_blade",
       "tex": "items/jailer_blade.png",
       "name": "Jailer's Blade",
@@ -3598,6 +3636,12 @@
      "tex": "items/jailer_blade.png",
      "name": "Jailer's Blade",
      "effect": ""
+    },
+    {
+     "id": "sealed_shackle",
+     "tex": "items/sealed_shackle.png",
+     "name": "Sealed Shackle",
+     "effect": "Held at the arena altar, it wakes the Grand Jailer."
     },
     {
      "id": "cell_ration",
@@ -3866,6 +3910,37 @@
       "effect": "Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "sealed_shackle",
+      "tex": "items/sealed_shackle.png",
+      "name": "Sealed Shackle",
+      "kind": "offering",
+      "rarity": "Epic",
+      "effect": "Held at the arena altar, it wakes the Grand Jailer.",
+      "station": "Jailer's Table",
+      "inputs": [
+       {
+        "id": "sealed_fragment",
+        "tex": "items/sealed_fragment.png",
+        "n": 6,
+        "name": "Sealed Fragment"
+       },
+       {
+        "id": "dungeon_key",
+        "tex": "items/dungeon_key.png",
+        "n": 1,
+        "name": "Dungeon Key"
+       },
+       {
+        "id": "minecraft:iron_chain",
+        "tex": null,
+        "n": 2,
+        "name": "Iron Chain"
+       }
+      ],
       "count": 1,
       "drops": []
      },
@@ -4358,6 +4433,32 @@
       ]
      },
      {
+      "out": "storm_censer",
+      "tex": "items/storm_censer.png",
+      "name": "Storm Censer",
+      "count": 1,
+      "inputs": [
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 4,
+        "name": "Storm Essence"
+       },
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 2,
+        "name": "Celestial Crystal"
+       },
+       {
+        "id": "ray_membrane",
+        "tex": "items/ray_membrane.png",
+        "n": 2,
+        "name": "Ray Membrane"
+       }
+      ]
+     },
+     {
       "out": "lightning_lance",
       "tex": "items/lightning_lance.png",
       "name": "Lightning Lance",
@@ -4471,6 +4572,12 @@
      "tex": "items/lightning_lance.png",
      "name": "Lightning Lance",
      "effect": ""
+    },
+    {
+     "id": "storm_censer",
+     "tex": "items/storm_censer.png",
+     "name": "Storm Censer",
+     "effect": "Held at the arena altar, it wakes the Storm King."
     },
     {
      "id": "cloud_fruit",
@@ -4726,6 +4833,37 @@
       "effect": "Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "storm_censer",
+      "tex": "items/storm_censer.png",
+      "name": "Storm Censer",
+      "kind": "offering",
+      "rarity": "Epic",
+      "effect": "Held at the arena altar, it wakes the Storm King.",
+      "station": "Lightning Forge",
+      "inputs": [
+       {
+        "id": "storm_essence",
+        "tex": "items/storm_essence.png",
+        "n": 4,
+        "name": "Storm Essence"
+       },
+       {
+        "id": "celestial_crystal",
+        "tex": "items/celestial_crystal.png",
+        "n": 2,
+        "name": "Celestial Crystal"
+       },
+       {
+        "id": "ray_membrane",
+        "tex": "items/ray_membrane.png",
+        "n": 2,
+        "name": "Ray Membrane"
+       }
+      ],
       "count": 1,
       "drops": []
      },
@@ -7723,6 +7861,32 @@
       ]
      },
      {
+      "out": "wreath_of_seasons",
+      "tex": "items/wreath_of_seasons.png",
+      "name": "Wreath of Seasons",
+      "count": 1,
+      "inputs": [
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 2,
+        "name": "Season Fragment"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 6,
+        "name": "Temporal Sand"
+       },
+       {
+        "id": "season_preserve",
+        "tex": "items/season_preserve.png",
+        "n": 1,
+        "name": "Season Preserve"
+       }
+      ]
+     },
+     {
       "out": "season_scythe",
       "tex": "items/season_scythe.png",
       "name": "Scythe of Seasons",
@@ -7830,6 +7994,12 @@
      "tex": "items/season_scythe.png",
      "name": "Scythe of Seasons",
      "effect": ""
+    },
+    {
+     "id": "wreath_of_seasons",
+     "tex": "items/wreath_of_seasons.png",
+     "name": "Wreath of Seasons",
+     "effect": "Held at the arena altar, it wakes the Master of Seasons."
     },
     {
      "id": "season_jam",
@@ -8066,6 +8236,37 @@
       "effect": "Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "wreath_of_seasons",
+      "tex": "items/wreath_of_seasons.png",
+      "name": "Wreath of Seasons",
+      "kind": "offering",
+      "rarity": "Epic",
+      "effect": "Held at the arena altar, it wakes the Master of Seasons.",
+      "station": "Time Workshop",
+      "inputs": [
+       {
+        "id": "season_fragment",
+        "tex": "items/season_fragment.png",
+        "n": 2,
+        "name": "Season Fragment"
+       },
+       {
+        "id": "temporal_sand",
+        "tex": "items/temporal_sand.png",
+        "n": 6,
+        "name": "Temporal Sand"
+       },
+       {
+        "id": "season_preserve",
+        "tex": "items/season_preserve.png",
+        "n": 1,
+        "name": "Season Preserve"
+       }
+      ],
       "count": 1,
       "drops": []
      },
@@ -9412,6 +9613,32 @@
       ]
      },
      {
+      "out": "unfinished_effigy",
+      "tex": "items/unfinished_effigy.png",
+      "name": "Unfinished Effigy",
+      "count": 1,
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 6,
+        "name": "Artisan's Thread"
+       },
+       {
+        "id": "artisan_shard",
+        "tex": "items/artisan_shard.png",
+        "n": 1,
+        "name": "Artisan's Shard"
+       },
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 4,
+        "name": "Wool Thread"
+       }
+      ]
+     },
+     {
       "out": "workshop_feast",
       "tex": "items/workshop_feast.png",
       "name": "Workshop Feast",
@@ -9463,6 +9690,12 @@
      "tex": "items/artisan_blade.png",
      "name": "Artisan's Blade",
      "effect": ""
+    },
+    {
+     "id": "unfinished_effigy",
+     "tex": "items/unfinished_effigy.png",
+     "name": "Unfinished Effigy",
+     "effect": "Held at the arena altar, it wakes the Unfinished."
     },
     {
      "id": "workshop_feast",
@@ -9649,6 +9882,37 @@
       "effect": "Nest the ten dolls in order...",
       "station": null,
       "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "unfinished_effigy",
+      "tex": "items/unfinished_effigy.png",
+      "name": "Unfinished Effigy",
+      "kind": "offering",
+      "rarity": "Epic",
+      "effect": "Held at the arena altar, it wakes the Unfinished.",
+      "station": "Final Loom",
+      "inputs": [
+       {
+        "id": "artisan_thread",
+        "tex": "items/artisan_thread.png",
+        "n": 6,
+        "name": "Artisan's Thread"
+       },
+       {
+        "id": "artisan_shard",
+        "tex": "items/artisan_shard.png",
+        "n": 1,
+        "name": "Artisan's Shard"
+       },
+       {
+        "id": "wool_thread",
+        "tex": "items/wool_thread.png",
+        "n": 4,
+        "name": "Wool Thread"
+       }
+      ],
       "count": 1,
       "drops": []
      },
@@ -15795,6 +16059,7 @@
     "Your Doll of Life gains a layer."
    ],
    "special": [
+    "It sleeps in its lair, 160 blocks south of the Threshold. Come within 10 blocks of the lair heart at the centre to wake it. When it falls, the seal of the treasure alcove breaks and its chests fill with the world's best loot; the heart wakes again 10 minutes later.",
     "At her last phase she calls three Chitin Guards; her cocoon holds until those nodes are broken."
    ],
    "story": "The Spore Queen withers. A first layer grows on your Doll of Life. The worlds were made.",
@@ -15968,6 +16233,7 @@
     "Enchanting, anvils and the Nether open."
    ],
    "special": [
+    "It sleeps in its lair, 160 blocks south of the Threshold. Come within 10 blocks of the lair heart at the centre to wake it. When it falls, the seal of the treasure alcove breaks and its chests fill with the world's best loot; the heart wakes again 10 minutes later.",
     "In its last phase its armour has melted: it takes 30% more damage on top of the usual multiplier."
    ],
    "story": "The Ash Titan cools down. Enchanting and the Nether answer you now. Each world holds something.",
@@ -16139,7 +16405,9 @@
     "Its core is the key ingredient of the World 4 Seed.",
     "Your Doll of Life gets one layer back."
    ],
-   "special": [],
+   "special": [
+    "Wake it at the arena altar, 160 blocks south of the Threshold, while holding a Sealed Shackle. The offering is consumed and a three-second ritual summons it; every fight costs one offering."
+   ],
    "story": "The Grand Jailer's cell is empty. A refuge doll is yours. An old artisan left plans.",
    "shot": null,
    "block": "blocks/dungeon_brick.png",
@@ -16302,7 +16570,9 @@
     "Its core is the key ingredient of the World 5 Seed.",
     "Your Doll of Life gets one layer back."
    ],
-   "special": [],
+   "special": [
+    "Wake it at the arena altar, 160 blocks south of the Threshold, while holding a Storm Censer. The offering is consumed and a three-second ritual summons it; every fight costs one offering."
+   ],
    "story": "The Storm King falls from the sky. The Artisan tried to stop his work.",
    "shot": "shots/w04_boss.jpg",
    "block": "blocks/cloudstone.png",
@@ -16472,7 +16742,9 @@
     "Its core is the key ingredient of the World 6 Seed.",
     "Your Doll of Life gains a layer."
    ],
-   "special": [],
+   "special": [
+    "It sleeps in its lair, 160 blocks south of the Threshold. Come within 10 blocks of the lair heart at the centre to wake it. When it falls, the seal of the treasure alcove breaks and its chests fill with the world's best loot; the heart wakes again 10 minutes later."
+   ],
    "story": "The Light Eater starves. A second layer grows on your doll. Diamonds return. Something is watching you.",
    "shot": null,
    "block": "blocks/umbral_stone.png",
@@ -16642,7 +16914,9 @@
     "Its core is the key ingredient of the World 7 Seed.",
     "Your Doll of Life gets one layer back."
    ],
-   "special": [],
+   "special": [
+    "It sleeps in its lair, 160 blocks south of the Threshold. Come within 10 blocks of the lair heart at the centre to wake it. When it falls, the seal of the treasure alcove breaks and its chests fill with the world's best loot; the heart wakes again 10 minutes later."
+   ],
    "story": "Your Double shatters. The bosses are linked to one another.",
    "shot": null,
    "block": "blocks/inverted_stone.png",
@@ -16812,7 +17086,9 @@
     "Its core is the key ingredient of the World 8 Seed.",
     "Your Doll of Life gets one layer back."
    ],
-   "special": [],
+   "special": [
+    "It sleeps in its lair, 160 blocks south of the Threshold. Come within 10 blocks of the lair heart at the centre to wake it. When it falls, the seal of the treasure alcove breaks and its chests fill with the world's best loot; the heart wakes again 10 minutes later."
+   ],
    "story": "The Leviathan sinks. Every prison was made for a single creature.",
    "shot": "shots/w07_boss.jpg",
    "block": "blocks/trench_rock.png",
@@ -16983,7 +17259,9 @@
     "Your Doll of Life gains a layer.",
     "The End opens, and elytra fly again."
    ],
-   "special": [],
+   "special": [
+    "Wake it at the arena altar, 160 blocks south of the Threshold, while holding a Wreath of Seasons. The offering is consumed and a three-second ritual summons it; every fight costs one offering."
+   ],
    "story": "The Master of Seasons stops. A third layer grows on your doll. The End opens. Someone came this way before.",
    "shot": null,
    "block": "blocks/hourstone.png",
@@ -17159,7 +17437,9 @@
     "Its core is the key ingredient of the World 10 Seed.",
     "Your Doll of Life gets one layer back."
    ],
-   "special": [],
+   "special": [
+    "It sleeps in its lair, 160 blocks south of the Threshold. Come within 10 blocks of the lair heart at the centre to wake it. When it falls, the seal of the treasure alcove breaks and its chests fill with the world's best loot; the heart wakes again 10 minutes later."
+   ],
    "story": "The Heart of the Terrain stops beating. You hold the Key of the Last Doll. That traveler was you.",
    "shot": null,
    "block": "blocks/living_rock.png",
@@ -17314,7 +17594,9 @@
    "unlocks": [
     "Your Doll of Life gets one layer back."
    ],
-   "special": [],
+   "special": [
+    "Wake it at the arena altar, 160 blocks south of the Threshold, while holding a Unfinished Effigy. The offering is consumed and a three-second ritual summons it; every fight costs one offering."
+   ],
    "story": "The Unfinished comes apart, shell after shell. Breaking the prisons, you set it free.",
    "shot": "shots/w10_boss.jpg",
    "block": "blocks/giant_plank.png",
