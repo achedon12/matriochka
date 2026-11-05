@@ -153,6 +153,10 @@ public final class Content {
 		new Defs.ItemDef("hidden_doll_8", 8, "secret", "none", "", ""),
 		new Defs.ItemDef("hidden_doll_9", 9, "secret", "none", "", ""),
 		new Defs.ItemDef("hidden_doll_10", 10, "secret", "none", "", ""),
+		new Defs.ItemDef("sealed_shackle", 3, "offering", "epic", "", ""),
+		new Defs.ItemDef("storm_censer", 4, "offering", "epic", "", ""),
+		new Defs.ItemDef("wreath_of_seasons", 8, "offering", "epic", "", ""),
+		new Defs.ItemDef("unfinished_effigy", 10, "offering", "epic", "", ""),
 		new Defs.ItemDef("root_broth", 1, "food", "common", "", ""),
 		new Defs.ItemDef("ice_bread", 2, "food", "common", "", ""),
 		new Defs.ItemDef("cell_ration", 3, "food", "common", "", ""),
@@ -183,6 +187,7 @@ public final class Content {
 		new Defs.BlockDef("nesting_chest", 2, "nesting_chest", "wood", ""),
 		new Defs.BlockDef("sanctuary_altar", 0, "boss_altar", "stone_rune", ""),
 		new Defs.BlockDef("arena_altar", 0, "boss_altar", "stone_rune", ""),
+		new Defs.BlockDef("lair_heart", 0, "lair_heart", "lair_heart", ""),
 		new Defs.BlockDef("sealed_door", 3, "sealed_door", "brick", ""),
 		new Defs.BlockDef("painted_wood", 0, "deco", "wood", ""),
 		new Defs.BlockDef("lacquer_block", 0, "deco", "lacquer", ""),
@@ -293,17 +298,17 @@ public final class Content {
 		new Defs.MobDef("colossus_prowler", 10, 745f, 41.3f, "sound_hunter", 2.6f, 0.89f, 1.52f, "artisan_shard", "", true, false, false, false, List.of(new Defs.AttackDef("quake", "leap", 1.5f, 0f, 1, 4, 0f, 0.6f, 9, 24, 90, 3f, 12f, 40, 100, 0, 0f, 1, "", "", "", "", "sculk_soul", "entity.warden.attack_impact"), new Defs.AttackDef("dark", "roar", 0f, 12f, 1, 4, 0f, 0f, 12, 24, 220, 0f, 10f, 40, 100, 0, 0f, 1, "", "darkness:160:0", "", "", "sculk_soul", "entity.warden.roar"), new Defs.AttackDef("maul", "melee", 0.7f, 3.0f, 3, 5, 0f, 0f, 8, 14, 80, 0f, 3.2f, 40, 100, 0, 0f, 1, "", "", "", "", "squid_ink", "entity.ravager.attack"), new Defs.AttackDef("tremor", "quake", 0.6f, 8f, 3, 5, 0f, 0f, 12, 28, 140, 0f, 7f, 40, 100, 0, 0f, 1, "", "", "", "", "sculk_soul", "entity.warden.step")))
 	);
 	public static final List<Defs.BossDef> BOSSES = List.of(
-		new Defs.BossDef("block_guardian", 0, 300f, 12f, 2.2f, 2.20f, 3.46f, "guardian_core", new float[]{0.5f}, false, false),
-		new Defs.BossDef("spore_queen", 1, 500f, 12f, 2.4f, 2.20f, 2.58f, "queen_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("ash_titan", 2, 675f, 14.4f, 3.0f, 2.20f, 4.08f, "titan_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("grand_jailer", 3, 911f, 17.3f, 2.6f, 1.69f, 3.22f, "jailer_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("storm_king", 4, 1230f, 20.7f, 2.6f, 2.20f, 3.48f, "storm_king_core", new float[]{0.66f, 0.33f}, true, false),
-		new Defs.BossDef("light_eater", 5, 1661f, 24.9f, 2.6f, 2.20f, 1.97f, "light_eater_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("your_double", 6, 2242f, 29.9f, 1.0f, 2.20f, 3.08f, "double_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("pressure_leviathan", 7, 3027f, 35.8f, 3.2f, 2.20f, 1.57f, "leviathan_core", new float[]{0.66f, 0.33f}, false, true),
-		new Defs.BossDef("seasons_master", 8, 4086f, 43f, 2.8f, 2.20f, 4.66f, "seasons_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("terrain_heart_boss", 9, 5516f, 51.6f, 3.0f, 2.20f, 3.15f, "terrain_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("the_unfinished", 10, 14894f, 61.9f, 3.4f, 2.20f, 3.04f, "unfinished_core", new float[]{0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f, 0.3f, 0.2f, 0.1f}, false, false)
+		new Defs.BossDef("block_guardian", 0, 300f, 12f, 2.2f, 2.20f, 3.46f, "guardian_core", new float[]{0.5f}, false, false, "altar", ""),
+		new Defs.BossDef("spore_queen", 1, 500f, 12f, 2.4f, 2.20f, 2.58f, "queen_core", new float[]{0.66f, 0.33f}, false, false, "lair", ""),
+		new Defs.BossDef("ash_titan", 2, 675f, 14.4f, 3.0f, 2.20f, 4.08f, "titan_core", new float[]{0.66f, 0.33f}, false, false, "lair", ""),
+		new Defs.BossDef("grand_jailer", 3, 911f, 17.3f, 2.6f, 1.69f, 3.22f, "jailer_core", new float[]{0.66f, 0.33f}, false, false, "altar", "sealed_shackle"),
+		new Defs.BossDef("storm_king", 4, 1230f, 20.7f, 2.6f, 2.20f, 3.48f, "storm_king_core", new float[]{0.66f, 0.33f}, true, false, "altar", "storm_censer"),
+		new Defs.BossDef("light_eater", 5, 1661f, 24.9f, 2.6f, 2.20f, 1.97f, "light_eater_core", new float[]{0.66f, 0.33f}, false, false, "lair", ""),
+		new Defs.BossDef("your_double", 6, 2242f, 29.9f, 1.0f, 2.20f, 3.08f, "double_core", new float[]{0.66f, 0.33f}, false, false, "lair", ""),
+		new Defs.BossDef("pressure_leviathan", 7, 3027f, 35.8f, 3.2f, 2.20f, 1.57f, "leviathan_core", new float[]{0.66f, 0.33f}, false, true, "lair", ""),
+		new Defs.BossDef("seasons_master", 8, 4086f, 43f, 2.8f, 2.20f, 4.66f, "seasons_core", new float[]{0.66f, 0.33f}, false, false, "altar", "wreath_of_seasons"),
+		new Defs.BossDef("terrain_heart_boss", 9, 5516f, 51.6f, 3.0f, 2.20f, 3.15f, "terrain_core", new float[]{0.66f, 0.33f}, false, false, "lair", ""),
+		new Defs.BossDef("the_unfinished", 10, 14894f, 61.9f, 3.4f, 2.20f, 3.04f, "unfinished_core", new float[]{0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f, 0.3f, 0.2f, 0.1f}, false, false, "altar", "unfinished_effigy")
 	);
 	public static final List<Defs.NpcDef> PEOPLES = List.of(
 		new Defs.NpcDef("doll_peddler", 0),

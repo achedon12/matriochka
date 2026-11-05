@@ -144,7 +144,7 @@ def gen_blocks():
             w(os.path.join(A, f"items/{bid}.json"), {"model": {"type": "minecraft:model", "model": f"{NS}:block/{bid}"}})
         # loot
         drop = ORE_DROPS.get(bid)
-        if b["kind"] in ("world_block", "planted_seed", "death_chest", "boss_altar", "sealed_door", "threshold"):
+        if b["kind"] in ("world_block", "planted_seed", "death_chest", "boss_altar", "sealed_door", "threshold", "lair_heart"):
             continue
         if drop:
             pool = {"rolls": 1, "entries": [{"type": "minecraft:alternatives", "children": [
@@ -194,6 +194,8 @@ def gen_entities():
         lang(f"entity.{NS}.{bid}", b["en"], b["fr"])
         for i, (en, fr) in enumerate(b["atk"]):
             lang(f"boss.{NS}.{bid}.attack{i}", en, fr)
+        if b.get("wake"):
+            lang(f"message.{NS}.lair.wake.{bid}", *b["wake"])
         wd, ht = HD_BOSSES[bid]
         ENTITY_DIMS[bid] = (max(0.6, min(wd, 2.2)), max(0.8, ht))
     for (pid, en, fr, wd) in PEOPLES:
@@ -540,7 +542,7 @@ def gen_java():
         wd, ht = ENTITY_DIMS[b["id"]]
         ph = ", ".join(f"{p}f" for p in b["phases"])
         rows.append(f"\t\tnew Defs.BossDef({jstr(b['id'])}, {b['world']}, {b['hp']}f, {b['dmg']}f, {b['size']}f, {wd:.2f}f, {ht:.2f}f, {jstr(b['core'])}, new float[]{{{ph}}}, "
-                    f"{str(b.get('flying', False)).lower()}, {str(b.get('aquatic', False)).lower()})")
+                    f"{str(b.get('flying', False)).lower()}, {str(b.get('aquatic', False)).lower()}, {jstr(b.get('meet', 'altar'))}, {jstr(b.get('offering', ''))})")
     L.append(",\n".join(rows))
     L.append("\t);")
     L.append("\tpublic static final List<Defs.NpcDef> PEOPLES = List.of(")
