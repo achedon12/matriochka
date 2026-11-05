@@ -294,7 +294,7 @@ public final class ReplayGear {
 	}
 
 	/** The Quake Pick's tremor: creatures around stagger, slowed, lifted and hurt. */
-	static void tremor(ServerLevel level, Player player, BlockPos at) {
+	public static void tremor(ServerLevel level, Player player, BlockPos at) {
 		level.sendParticles(ParticleTypes.EXPLOSION, at.getX() + 0.5, at.getY() + 1, at.getZ() + 0.5, 6, 2, 0.1, 2, 0);
 		level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, at.getX() + 0.5, at.getY() + 1, at.getZ() + 0.5, 30, 3, 0.1, 3, 0.01);
 		level.playSound(null, at, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 0.8f, 0.5f);
