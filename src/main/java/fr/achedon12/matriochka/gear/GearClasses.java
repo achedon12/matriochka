@@ -194,7 +194,8 @@ public final class GearClasses {
 			}
 			case "berserker" -> {
 				if (kind == Kind.WEAPON) {
-					out.add(new Bonus(Attributes.ATTACK_DAMAGE, Math.max(1, baseValue(base, Attributes.ATTACK_DAMAGE) * 0.08) * mult, add));
+					// 8% of the weapon's damage, plus the level's whole bonus (design: +50% at level 5)
+					out.add(new Bonus(Attributes.ATTACK_DAMAGE, Math.max(1, baseValue(base, Attributes.ATTACK_DAMAGE) * (0.08 + (mult - 1))), add));
 					out.add(new Bonus(Attributes.ATTACK_SPEED, 0.08 * mult, add));
 				} else {
 					out.add(new Bonus(Attributes.ATTACK_DAMAGE, 0.03 * mult, pct));

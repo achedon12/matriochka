@@ -443,9 +443,9 @@ mob("sentinel", "Sentinel", "Sentinelle", 3, 55, 7.2, "chain_ranged", "floating_
     desc_en="Throws chains from above.", desc_fr="Tire des chaînes depuis les hauteurs.")
 mob("living_lock", "Living Lock", "Serrure vivante", 3, 44, 5.8, "mimic", "block", 1.0, "dungeon_key",
     desc_en="Pretends to be a locked door.", desc_fr="Imite une porte verrouillée.")
-mob("dungeon_rat", "Dungeon Rat", "Rat de cachot", 3, 18, 4.3, "swarm", "rat", 0.5, "sealed_fragment",
+mob("dungeon_rat", "Dungeon Rat", "Rat de cachot", 3, 22, 4.3, "swarm", "rat", 0.5, "sealed_fragment",
     desc_en="Slips under bars, attacks in swarms.", desc_fr="Passe sous les grilles, attaque en nuée.")
-mob("executioner", "Executioner", "Bourreau", 3, 82, 11.5, "charger_cage", "brute", 1.4, "sealed_fragment", elite=True,
+mob("executioner", "Executioner", "Bourreau", 3, 82, 10.1, "charger_cage", "brute", 1.4, "sealed_fragment", elite=True,
     desc_en="Elite. Charges and cages you.", desc_fr="Élite, charge et enferme le joueur.")
 
 mob("wind_ray", "Wind Ray", "Raie du vent", 4, 44, 8.6, "flyer_push", "ray", 1.4, "ray_membrane", flying=True,
@@ -456,7 +456,7 @@ mob("island_warden", "Island Warden", "Gardien d'île", 4, 98, 10.4, "area_slam"
     desc_en="Guards a crystal and slams the area.", desc_fr="Protège un cristal et frappe en zone.")
 mob("cloud_mine", "Cloud Mine", "Nuage-mine", 4, 34, 12.1, "exploder", "orb", 1.0, "storm_essence", flying=True,
     desc_en="Floats, then explodes near you.", desc_fr="Flotte puis explose près du joueur.")
-mob("sky_harpooner", "Sky Harpooner", "Harponneur céleste", 4, 59, 8.6, "harpoon", "biped", 1.1, "celestial_crystal", elite=True,
+mob("sky_harpooner", "Sky Harpooner", "Harponneur céleste", 4, 111, 10.4, "harpoon", "biped", 1.1, "celestial_crystal", elite=True,
     desc_en="Elite. Drags you toward the void.", desc_fr="Élite, attire le joueur vers le vide.")
 
 mob("blind_prowler", "Blind Prowler", "Rôdeur aveugle", 5, 86, 14.5, "sound_hunter", "quad", 1.2, "shadow_shard",
@@ -474,7 +474,7 @@ mob("reflection", "Reflection", "Reflet", 6, 90, 14.9, "copycat", "biped", 1.0, 
     desc_en="Copies your last attack.", desc_fr="Copie la dernière attaque du joueur.")
 mob("ceiling_walker", "Ceiling Walker", "Marcheur de plafond", 6, 117, 12.4, "wall_crawler", "spider", 1.2, "unstable_alloy",
     desc_en="Walks on every surface.", desc_fr="Se déplace sur toutes les surfaces.")
-mob("unstable_sphere", "Unstable Sphere", "Sphère instable", 6, 63, 19.9, "gravity_orb", "orb", 1.0, "unstable_alloy", flying=True,
+mob("unstable_sphere", "Unstable Sphere", "Sphère instable", 6, 63, 17.4, "gravity_orb", "orb", 1.0, "unstable_alloy", flying=True,
     desc_en="Flips gravity around it when it dies.", desc_fr="Inverse la gravité autour d'elle à sa mort.")
 mob("inverted_strider", "Inverted Strider", "Arpenteur inversé", 6, 135, 14.9, "melee_reach", "tall", 1.4, "inverted_crystal",
     desc_en="Fights upside down, strikes through platforms.", desc_fr="Combat la tête en bas et frappe à travers les plateformes.")
@@ -509,7 +509,7 @@ mob("mimic", "Mimic", "Mimique", 9, 287, 30.1, "mimic", "chest", 1.0, "terrain_f
     desc_en="Pretends to be a chest, an ore or a door.", desc_fr="Imite un coffre, un minerai ou une porte.")
 mob("foundation_eater", "Foundation Eater", "Dévoreur de fondations", 9, 309, 21.5, "block_eater", "worm", 1.3, "terrain_fragment",
     desc_en="Eats unanchored blocks.", desc_fr="Mange les blocs non ancrés.")
-mob("earth_hand", "Earth Hand", "Main de terre", 9, 265, 34.4, "grabber", "hand", 1.4, "terrain_fragment",
+mob("earth_hand", "Earth Hand", "Main de terre", 9, 265, 30.1, "grabber", "hand", 1.4, "terrain_fragment",
     desc_en="Bursts from the ground and grabs you.", desc_fr="Surgit du sol et attrape le joueur.")
 mob("walking_column", "Walking Column", "Colonne marcheuse", 9, 496, 34.4, "area_slam", "column", 1.8, "terrain_fragment", "terrain_heart", elite=True, nesting=True,
     desc_en="Elite, nesting: falls and opens chasms.", desc_fr="Élite, gigogne, tombe et crée des gouffres.")
@@ -520,7 +520,7 @@ mob("ash_titanid", "Ash Titanid", "Titanide de cendre", 10, 536, 31, "lava_heat"
     desc_en="Raises the heat of the area.", desc_fr="Fait monter la chaleur de la zone.")
 mob("colossal_jailer", "Colossal Jailer", "Geôlier colossal", 10, 596, 36.1, "caller", "robed", 2.6, "artisan_thread",
     desc_en="Locks whole sections of the workshop.", desc_fr="Ferme des pans entiers de l'atelier.")
-mob("titan_ray", "Titan Ray", "Raie-titan", 10, 417, 41.3, "flyer_push", "ray", 3.0, "artisan_thread", flying=True,
+mob("titan_ray", "Titan Ray", "Raie-titan", 10, 417, 36.1, "flyer_push", "ray", 3.0, "artisan_thread", flying=True,
     desc_en="Pushes you with huge gusts.", desc_fr="Pousse le joueur par de grandes rafales.")
 mob("colossus_prowler", "Colossus Prowler", "Rôdeur-colosse", 10, 745, 41.3, "sound_hunter", "quad", 2.6, "artisan_shard", elite=True,
     desc_en="Elite. Hunts by sound in the dark.", desc_fr="Élite, chasse au son dans le noir.")
