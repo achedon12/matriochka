@@ -1150,7 +1150,7 @@ STORY_UI = {
     "message.matriochka.zero.chamber.0": ("The first chamber smells of spores, ash and old keys.", "La première chambre sent les spores, la cendre et les vieilles clés."),
     "message.matriochka.zero.chamber.1": ("The second chamber is windy, dark and upside down.", "La deuxième chambre est venteuse, sombre et à l'envers."),
     "message.matriochka.zero.chamber.2": ("The third chamber is wet, old, and it moves.", "La troisième chambre est humide, vieille, et elle bouge."),
-    "message.matriochka.zero.cleared": ("The painted wall slides open.", "Le mur peint s'ouvre en glissant."),
+    "message.matriochka.zero.cleared": ("The sealed gate sinks into the floor.", "La porte scellée s'enfonce dans le sol."),
     "message.matriochka.zero.room": ("A bed, a bench, a Scroll. A doll your size, empty. You know this room.", "Un lit, un établi, un Parchemin. Une poupée à ta taille, vide. Tu connais cette chambre."),
     "message.matriochka.zero.diorama": ("On the bench, a cracked doll holds a tiny meadow, a tiny village, a tiny sanctuary. The Surface. It was one more doll.", "Sur l'établi, une poupée fêlée contient une prairie minuscule, un village minuscule, un sanctuaire minuscule. La Surface. Ce n'était qu'une poupée de plus."),
     "message.matriochka.zero.wake": ("Your shadow rises from the bench, a chisel in each hand.", "Ton ombre se lève de l'établi, un ciseau dans chaque main."),

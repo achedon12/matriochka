@@ -16,7 +16,7 @@ A sealed hollow of painted wood and lacquer, with no sky. Its walls cannot be br
 | Third chamber | Worlds 7 to 9, flooded in places (Bell Crab, Hour Keeper, Walking Column) |
 | The Artisan's room | His bed, his bench, the first Scroll on its lectern, an empty doll your size, and a cracked doll holding a tiny Surface |
 
-Each chamber is shut by a painted gate that opens once its guards are gone. The guards of World 0 are at least as strong as the colossi of the Giant Workshop.
+Each chamber is shut by a sealed gate that opens once its guards are gone. The guards of World 0 are at least as strong as the colossi of the Giant Workshop.
 
 ## The rule: Obsession
 

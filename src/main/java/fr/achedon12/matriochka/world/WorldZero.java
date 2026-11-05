@@ -40,7 +40,7 @@ import net.minecraft.world.phys.Vec3;
  * <p>
  * Layout, built once per group at the centre of its parcel, all of it sealed in unbreakable brick and dressed in
  * painted wood and lacquer: an entry hall with the Threshold, three chambers that replay the prisons three by three
- * (worlds 1-3, 4-6, 7-9) and each hold their elite guards behind a painted gate, then the Artisan's room: his bed,
+ * (worlds 1-3, 4-6, 7-9) and each hold their elite guards behind a sealed gate, then the Artisan's room: his bed,
  * his bench, the first Scroll on a lectern, an empty doll his size, and on a table a cracked doll holding a tiny
  * Surface (the reveal: the Surface was one more doll).
  * <p>
@@ -196,6 +196,8 @@ public final class WorldZero {
 
 	/** Index of a space in {@link #spaces()}: 0 hall, 1 connector, 2/4/6 chambers, 3/5/7 corridors, 8 room. */
 	private static void skin(ServerLevel level, BlockPos o, int[] s, int index) {
+		// the gated corridors keep their bare brick, so that nobody digs around a gate
+		if (index == 3 || index == 5 || index == 7) return;
 		boolean chamberSpace = index >= 2 && index <= 7 && index % 2 == 0;
 		int k = (index - 2) / 2;
 		for (int x = s[0] - 1; x <= s[1] + 1; x++)
@@ -221,14 +223,11 @@ public final class WorldZero {
 				}
 	}
 
-	/** The painted gate that closes the corridor after chamber k, five by five of unbreakable brick and lacquer. */
+	/** The gate that closes the corridor after chamber k: five by five of unbreakable sealed brick. */
 	private static void gate(ServerLevel level, BlockPos o, int k, boolean closed) {
 		int z = gateZ(k) + 1;
 		for (int x = -2; x <= 2; x++)
-			for (int y = 0; y <= 4; y++) {
-				BlockState st = !closed ? Blocks.AIR.defaultBlockState() : (x == 0 || y == 2) ? b("sealed_brick") : b("dungeon_brick");
-				set(level, o, x, y, z, st);
-			}
+			for (int y = 0; y <= 4; y++) set(level, o, x, y, z, closed ? b("sealed_brick") : Blocks.AIR.defaultBlockState());
 		if (!closed) level.playSound(null, o.offset(0, 1, z), SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS, 1.5f, 0.5f);
 	}
 
@@ -264,7 +263,7 @@ public final class WorldZero {
 				for (int dx = 0; dx <= 1; dx++) for (int dz = 0; dz <= 1; dz++) set(level, o, p[0] + dx, -1, z0 + p[1] + dz, Blocks.WATER.defaultBlockState());
 			}
 		} else {
-			for (int[] p : new int[][]{{-8, 9}, {8, 9}}) set(level, o, p[0], 1, z0 + p[1], Blocks.CAMPFIRE.defaultBlockState());
+			for (int[] p : new int[][]{{-8, 9}, {8, 9}}) set(level, o, p[0], 0, z0 + p[1], Blocks.CAMPFIRE.defaultBlockState());
 		}
 	}
 
