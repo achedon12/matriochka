@@ -51,12 +51,15 @@ public class ProceduralStructure extends Structure {
 			BlockPos pos = new BlockPos(cp.getMiddleBlockX(), y, cp.getMiddleBlockZ());
 			return Optional.of(new GenerationStub(pos, b -> b.addPiece(new ProceduralPiece(this, pos, context.random()))));
 		}
-		return onTopOfChunkCenter(context, Heightmap.Types.WORLD_SURFACE_WG, b -> {
+		// in the Pressure Ocean the ground is the sea floor: the water surface would leave the structures floating
+		Heightmap.Types ground = world == 7 ? Heightmap.Types.OCEAN_FLOOR_WG : Heightmap.Types.WORLD_SURFACE_WG;
+		return onTopOfChunkCenter(context, ground, b -> {
 			var cp = context.chunkPos();
-			int y = context.chunkGenerator().getFirstOccupiedHeight(cp.getMiddleBlockX(), cp.getMiddleBlockZ(), Heightmap.Types.WORLD_SURFACE_WG,
+			int y = context.chunkGenerator().getFirstOccupiedHeight(cp.getMiddleBlockX(), cp.getMiddleBlockZ(), ground,
 				context.heightAccessor(), context.randomState());
 			if (world == 4 && y <= context.heightAccessor().getMinY() + 4) y = 90;
-			if (world == 7) y = Math.max(context.heightAccessor().getMinY() + 10, y);
+			// keep them on the floor, under the surface (a sunken lighthouse still stays under water)
+			if (world == 7) y = Math.max(context.heightAccessor().getMinY() + 10, Math.min(y, fr.achedon12.matriochka.world.Ocean.SEA_LEVEL - 40));
 			BlockPos pos = new BlockPos(cp.getMiddleBlockX(), y, cp.getMiddleBlockZ());
 			b.addPiece(new ProceduralPiece(this, pos, context.random()));
 		});

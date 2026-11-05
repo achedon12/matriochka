@@ -895,8 +895,14 @@ public final class Kit {
 					if (s.hasBlockEntity()) continue;
 					BlockState aged = aged(s, x, y, z);
 					if (aged != null && hc(x, y, z, 29, amount * 0.4)) lvl.setBlock(pos, aged, 2);
-					if (y > y0 + 1 && hc(x, y, z, 31, amount * 0.10) && emptyAt(x, y + 1, z) && isBuilt(s)) lvl.setBlock(pos, p.fill, 2);
+					if (y > y0 + 1 && hc(x, y, z, 31, amount * 0.10) && emptyAt(x, y + 1, z) && isBuilt(s) && !(p.underwater && besideAir(pos))) lvl.setBlock(pos, p.fill, 2);
 				}
+	}
+
+	/** Under water, a wall next to a dry pocket must not break open, or the sea would flood the refuge. */
+	private boolean besideAir(BlockPos pos) {
+		for (Direction d : Direction.values()) if (lvl.getBlockState(pos.relative(d)).isAir()) return true;
+		return false;
 	}
 
 	private boolean isBuilt(BlockState s) {
