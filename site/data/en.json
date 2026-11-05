@@ -225,15 +225,21 @@
     },
     {
      "name": "Modrinth",
-     "note": "Coming soon",
+     "note": "In review, coming soon",
      "href": null,
      "icon": "package"
     },
     {
      "name": "CurseForge",
-     "note": "Coming soon",
+     "note": "In review, coming soon",
      "href": null,
      "icon": "package"
+    },
+    {
+     "name": "Discord",
+     "note": "News, help and screenshots",
+     "href": "https://discord.gg/SPVCf5hRuh",
+     "icon": "users"
     }
    ],
    "faqH": "Questions",

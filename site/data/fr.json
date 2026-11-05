@@ -225,15 +225,21 @@
     },
     {
      "name": "Modrinth",
-     "note": "Bientôt",
+     "note": "En cours de validation, bientôt",
      "href": null,
      "icon": "package"
     },
     {
      "name": "CurseForge",
-     "note": "Bientôt",
+     "note": "En cours de validation, bientôt",
      "href": null,
      "icon": "package"
+    },
+    {
+     "name": "Discord",
+     "note": "Nouvelles, aide et captures",
+     "href": "https://discord.gg/SPVCf5hRuh",
+     "icon": "users"
     }
    ],
    "faqH": "Questions",

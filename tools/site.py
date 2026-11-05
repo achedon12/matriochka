@@ -30,6 +30,7 @@ REPO = "https://github.com/achedon12/matriochka"
 RELEASES = REPO + "/releases"
 WIKI = REPO + "/wiki"
 SITE = "https://achedon12.github.io/matriochka/"
+DISCORD = "https://discord.gg/SPVCf5hRuh"
 # the version shown on the site follows gradle.properties
 VERSION = next(l.split("=", 1)[1].strip() for l in open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "gradle.properties")) if l.startswith("mod_version="))
 
@@ -1335,8 +1336,9 @@ def build_copy():
         getP=t("Install it on the client to play solo, and on both server and clients to play together.",
                "Installe-le sur le client pour jouer seul, et sur le serveur comme sur les clients pour jouer ensemble."),
         platforms=[dict(name="GitHub", note=t(f"Version {VERSION}, changelog and source", f"Version {VERSION}, journal des changements et code source"), href=RELEASES, icon="github"),
-                   dict(name="Modrinth", note=t("Coming soon", "Bientôt"), href=None, icon="package"),
-                   dict(name="CurseForge", note=t("Coming soon", "Bientôt"), href=None, icon="package")],
+                   dict(name="Modrinth", note=t("In review, coming soon", "En cours de validation, bientôt"), href=None, icon="package"),
+                   dict(name="CurseForge", note=t("In review, coming soon", "En cours de validation, bientôt"), href=None, icon="package"),
+                   dict(name="Discord", note=t("News, help and screenshots", "Nouvelles, aide et captures"), href=DISCORD, icon="users")],
         faqH=t("Questions", "Questions"),
         faq=[dict(q=t("Where do I start?", "Par où commencer ?"),
                   a=t("Read the Artisan's Scroll you spawn with, then find the Guardian's Sanctuary on the Surface and wake the Block Guardian.",
@@ -1584,7 +1586,7 @@ def main():
     os.makedirs(PUBLIC, exist_ok=True)
     os.makedirs(DATA, exist_ok=True)
     copy_assets()
-    shared = dict(version=VERSION, repo=REPO, releases=RELEASES, wiki=WIKI, site=SITE, icons=ICONS,
+    shared = dict(version=VERSION, discord=DISCORD, repo=REPO, releases=RELEASES, wiki=WIKI, site=SITE, icons=ICONS,
                   hasTrailer=os.path.exists(os.path.join(PUBLIC, "trailer.mp4")),
                   hasReel=os.path.exists(os.path.join(PUBLIC, "reel.mp4")))
     for lang in ("en", "fr"):
