@@ -45,11 +45,23 @@ final class FixesTest {
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamemode survival @a");
 			ctx.waitTicks(40);
-			List<String> report = server.computeOnServer(FixesTest::checks);
+			List<String> report = new java.util.ArrayList<>(server.computeOnServer(FixesTest::checks));
+			ctx.waitTicks(60);
+			report.addAll(server.computeOnServer(FixesTest::mimicMoved));
 			for (String line : report) Matriochka.LOG.info("[fixes] {}", line);
 			long failed = report.stream().filter(l -> l.startsWith("FAIL")).count();
 			if (failed > 0) throw new AssertionError(failed + " fix check(s) failed: " + report);
 		}
+	}
+
+	private static net.minecraft.world.entity.Entity MIMIC;
+
+	private static List<String> mimicMoved(net.minecraft.server.MinecraftServer server) {
+		List<String> out = new ArrayList<>();
+		double speed = MIMIC instanceof LivingEntity le ? le.getAttributeBaseValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED) : -1;
+		check(out, speed > 0, "an unmasked Mimic can move (speed " + speed + ", id " + (MIMIC == null ? -1 : MIMIC.getId()) + ")");
+		if (MIMIC != null) MIMIC.discard();
+		return out;
 	}
 
 	private static void check(List<String> out, boolean ok, String what) {
@@ -136,14 +148,12 @@ final class FixesTest {
 			}
 			check(out, diamonds == 0, "no diamond in 300 buried treasures (" + diamonds + ")");
 
-			// a mimic that has been unmasked can walk
+			// a mimic next to the player: it is unmasked on its next real ticks (checked in mimicMoved)
 			var mimic = ModContent.entity("mimic").create(level, EntitySpawnReason.COMMAND);
-			mimic.setPos(p.getX() + 2, p.getY(), p.getZ());
+			mimic.setPos(p.getX() + 1.5, p.getY(), p.getZ());
+			mimic.setNoGravity(true);
 			level.addFreshEntity(mimic);
-			for (int i = 0; i < 5; i++) mimic.tick();
-			double speed = ((LivingEntity) mimic).getAttributeBaseValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);
-			check(out, speed > 0, "an unmasked Mimic can move (speed " + speed + ")");
-			mimic.discard();
+			MIMIC = mimic;
 		} catch (Throwable t) {
 			out.add("FAIL exception " + t);
 			Matriochka.LOG.error("[fixes]", t);
