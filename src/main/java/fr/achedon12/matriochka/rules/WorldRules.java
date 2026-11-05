@@ -62,7 +62,8 @@ public final class WorldRules {
 	}
 
 	private static void border(ServerPlayer p) {
-		BlockPos c = Worlds.parcelCenter(MatrioData.get(p.level().getServer()).parcel(MatrioData.get(p.level().getServer()).groupOf(p.getUUID())));
+		MatrioData data = MatrioData.get(p.level().getServer());
+		BlockPos c = Worlds.parcelCenter(data.parcel(data.groupOf(p.getUUID()), Worlds.number(p.level())));
 		double half = Worlds.PARCEL_SIZE / 2.0;
 		double dx = p.getX() - c.getX(), dz = p.getZ() - c.getZ();
 		if (Math.abs(dx) > half || Math.abs(dz) > half) {
