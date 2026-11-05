@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731201,
+    "separation": 14,
+    "spacing": 42
+  },
+  "structures": [
+    {
+      "structure": "matriochka:giant_furnace",
+      "weight": 1
+    }
+  ]
+}

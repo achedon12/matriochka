@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_2",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 2,
+  "archetype": "nest",
+  "role": "combat",
+  "size": "medium",
+  "structure_id": "salamander_cavern"
+}

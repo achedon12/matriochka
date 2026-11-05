@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731207,
+    "separation": 24,
+    "spacing": 72
+  },
+  "structures": [
+    {
+      "structure": "matriochka:vein_sanctuary",
+      "weight": 1
+    }
+  ]
+}
