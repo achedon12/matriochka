@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Comfort options, opened from the Journal (Comfort button) and saved in `config/matriochka-client.json`: screen shake strength, flashes, soft effects (no Nausea or Darkness, a gentle tint instead; the server skips the effects for that player), cinematics, large boss attack subtitles, fewer particles, colour-blind gauge patterns, HUD plaque size and corner, and a volume per kind of music.
+- Boss introductions: letterbox bars, the camera turning toward the boss with a slow push-in, and a framed title card with the boss's name and title.
+- A title card the first time you enter each world, with its rule medallion and a line about its law.
+- Boss phase breaks freeze-frame with a flash and the shell's number; heavy boss blows, World 9's moving ground, a moved World Block's quake and a trembling World Block nearby shake the camera.
+- The endings' crawl is framed by letterbox bars.
+- Adaptive music: a danger theme while creatures hunt you, the boss themes during fights, a heartbeat at low health or breath, and stings for a structure, a Journal page or a quest; themes fade into one another and the world theme comes back soon after.
+- Server options in `config/matriochka.json`: `karma` (on or off), `soulGainMultiplier`, `maxActiveGroups` and `maxParcels`.
+
 ## 0.3.0 (alpha)
 
 The story is complete: the Artisan's Journal, the hidden dolls, World 0, three endings and the New Cycle. World 7 is now entirely under water, worlds 3, 5, 6, 9 and 10 have their full mechanics, and the mod has its own music and sounds. Trailer: [matriochka-trailer.mp4](https://github.com/achedon12/matriochka/releases/download/v0.3.0/matriochka-trailer.mp4).
