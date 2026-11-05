@@ -165,6 +165,8 @@
  "command.matriochka.world.moved": "Monde %s : son Bloc-monde se trouve désormais en %s %s %s.",
  "command.matriochka.world.reset": "Monde %s réinitialisé : une nouvelle parcelle attend la prochaine Graine.",
  "command.matriochka.boss.reset": "Le boss du monde %s peut de nouveau être combattu.",
+ "message.matriochka.hardcore_dead": "Hardcore : ta mort est définitive. Tu observes désormais les mondes en spectateur.",
+ "message.matriochka.world_deleted": "Hardcore : le monde %s s'est brisé avec son bloc. Il est perdu pour ton groupe ; sa Graine en ouvrirait un nouveau.",
  "command.matriochka.group.info": "Groupe : %s membre(s), boss vaincus : %s",
  "command.matriochka.group.invited": "%s t'invite dans son groupe. /matriochka group join",
  "command.matriochka.group.invite_sent": "Invitation envoyée à %s.",

@@ -155,6 +155,8 @@ U = {
  'command.matriochka.world.moved': ('World %s: its World Block now stands at %s %s %s.', 'Monde %s : son Bloc-monde se trouve désormais en %s %s %s.'),
  'command.matriochka.world.reset': ('World %s reset: a new parcel waits for the next Seed.', 'Monde %s réinitialisé : une nouvelle parcelle attend la prochaine Graine.'),
  'command.matriochka.boss.reset': ('The boss of world %s can be fought again.', 'Le boss du monde %s peut de nouveau être combattu.'),
+ 'message.matriochka.hardcore_dead': ('Hardcore: your death is final. You watch the worlds as a spectator now.', 'Hardcore : ta mort est définitive. Tu observes désormais les mondes en spectateur.'),
+ 'message.matriochka.world_deleted': ('Hardcore: World %s broke with its block. It is gone for your group; its Seed would open a new one.', "Hardcore : le monde %s s'est brisé avec son bloc. Il est perdu pour ton groupe ; sa Graine en ouvrirait un nouveau."),
  "command.matriochka.group.info": ("Group: %s member(s), defeated bosses: %s", "Groupe : %s membre(s), boss vaincus : %s"),
  "command.matriochka.group.invited": ("%s invites you to their group. /matriochka group join", "%s t'invite dans son groupe. /matriochka group join"),
  "command.matriochka.group.invite_sent": ("Invitation sent to %s.", "Invitation envoyée à %s."),
