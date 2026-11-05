@@ -1,0 +1,192 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "misc.idle": {
+   "loop": true,
+   "animation_length": 4.0,
+   "bones": {
+    "body": {
+     "position": [
+      0,
+      "math.sin(query.anim_time*180)*0.4",
+      0
+     ]
+    }
+   }
+  },
+  "move.walk": {
+   "loop": true,
+   "animation_length": 1.8,
+   "bones": {
+    "body": {
+     "position": [
+      0,
+      "math.abs(math.sin(query.anim_time*400))*0.8",
+      0
+     ]
+    },
+    "finger1": {
+     "rotation": [
+      "-math.sin(query.anim_time*400)*24",
+      "0",
+      "0"
+     ]
+    },
+    "finger3": {
+     "rotation": [
+      "-math.sin(query.anim_time*400)*24",
+      "0",
+      "0"
+     ]
+    },
+    "thumb": {
+     "rotation": [
+      "-math.sin(query.anim_time*400)*24",
+      "0",
+      "0"
+     ]
+    },
+    "finger0": {
+     "rotation": [
+      "math.sin(query.anim_time*400)*24",
+      "0",
+      "0"
+     ]
+    },
+    "finger2": {
+     "rotation": [
+      "math.sin(query.anim_time*400)*24",
+      "0",
+      "0"
+     ]
+    }
+   }
+  },
+  "attack.strike": {
+   "loop": false,
+   "animation_length": 0.6,
+   "bones": {
+    "finger0": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.15": [
+       -110,
+       0,
+       0
+      ],
+      "0.35": [
+       20,
+       0,
+       0
+      ],
+      "0.6": [
+       0,
+       0,
+       0
+      ]
+     }
+    },
+    "finger2": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.15": [
+       -110,
+       0,
+       0
+      ],
+      "0.35": [
+       20,
+       0,
+       0
+      ],
+      "0.6": [
+       0,
+       0,
+       0
+      ]
+     }
+    },
+    "finger1": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.15": [
+       -110,
+       0,
+       0
+      ],
+      "0.35": [
+       20,
+       0,
+       0
+      ],
+      "0.6": [
+       0,
+       0,
+       0
+      ]
+     }
+    },
+    "finger3": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.15": [
+       -110,
+       0,
+       0
+      ],
+      "0.35": [
+       20,
+       0,
+       0
+      ],
+      "0.6": [
+       0,
+       0,
+       0
+      ]
+     }
+    },
+    "thumb": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.15": [
+       -110,
+       0,
+       0
+      ],
+      "0.35": [
+       20,
+       0,
+       0
+      ],
+      "0.6": [
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   }
+  }
+ }
+}
