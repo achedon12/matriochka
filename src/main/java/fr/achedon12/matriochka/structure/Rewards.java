@@ -65,9 +65,9 @@ public final class Rewards {
 				for (int i = 0; i < chosen.size(); i++) {
 					Kit.Mark m = chosen.get(i);
 					int tier = (i == 0 && !k.small()) || (i == 1 && k.large()) ? RARE : COMMON;
-					chest(k, m.pos(), m.facing(), m.flipped(), tier, false, false);
+					chest(k, m.pos(), m.facing(), m.flipped(), tier, i == 0, false);
 				}
-				if (chosen.isEmpty()) chest(k, k.o.above(), Direction.SOUTH, false, RARE, false, false);
+				if (chosen.isEmpty()) chest(k, k.o.above(), Direction.SOUTH, false, RARE, true, false);
 			}
 			case "story" -> {
 				Kit.Mark m = k.reading != null ? k.reading : new Kit.Mark(k.o.above(), Direction.SOUTH, false);
@@ -196,13 +196,30 @@ public final class Rewards {
 			ItemStack pg = new ItemStack(ModContent.item("journal_page"));
 			CompoundTag t = new CompoundTag();
 			t.putInt("world", world);
-			int idx = Math.floorMod((int) (seed ^ (seed >>> 32)), 5);
+			int idx = pageIndex(k.world, k.id, seed);
 			t.putInt("index", idx);
 			pg.set(DataComponents.CUSTOM_DATA, CustomData.of(t));
 			pg.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.translatable("item.matriochka.journal_page.n", world, idx + 1));
 			chest.setItem(13, pg);
 		}
 		if (doll && world > 0) chest.setItem(22, new ItemStack(ModContent.item("hidden_doll_" + world)));
+	}
+
+	/**
+	 * Which of the world's five Journal pages a structure holds. The three exploration structures (common, found again
+	 * and again) hold pages 1 to 3 and the two story structures pages 4 and 5, so every page can be found in every world;
+	 * the secret structure holds a random one.
+	 */
+	public static int pageIndex(int world, String id, long seed) {
+		int n = 0;
+		for (String role : new String[]{"exploration", "story"}) {
+			for (Defs.StructureDef s : Content.STRUCTURES) {
+				if (s.world() != world || !s.role().equals(role)) continue;
+				if (s.id().equals(id)) return n % 5;
+				n++;
+			}
+		}
+		return Math.floorMod((int) (seed ^ (seed >>> 32)), 5);
 	}
 
 	private static List<Defs.ItemDef> items(int world, Set<String> kinds, boolean rare) {
