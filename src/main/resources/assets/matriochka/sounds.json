@@ -841,5 +841,37 @@
         "stream": true
       }
     ]
+  },
+  "music.danger": {
+    "sounds": [
+      {
+        "name": "matriochka:music/danger",
+        "stream": true
+      }
+    ]
+  },
+  "music.layer_heartbeat": {
+    "sounds": [
+      {
+        "name": "matriochka:music/layer_heartbeat",
+        "stream": true
+      }
+    ]
+  },
+  "music.sting_discovery": {
+    "sounds": [
+      {
+        "name": "matriochka:music/sting_discovery",
+        "stream": true
+      }
+    ]
+  },
+  "music.sting_quest": {
+    "sounds": [
+      {
+        "name": "matriochka:music/sting_quest",
+        "stream": true
+      }
+    ]
   }
 }

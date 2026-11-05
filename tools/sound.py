@@ -56,7 +56,12 @@ PIECES = {
                        lead="tremolo", counter="bell", bass="pluck", drum="drive", pad=True, reverb=(1.6, 0.22), passes=2, intro=1),
     "endings": dict(seed=3200, motif_seed=LULLABY, tonic=65, mode="ionian", bpm=66, beats=3, prog=[0, 3, 4, 0], prog_b=[5, 3, 1, 4],
                     lead="box", counter="flute", bass="pluck_soft", pad=True, reverb=(3.0, 0.35), passes=3, transpose_pass=0),
+    # the adaptive music's tense variant, while creatures hunt the player: the lullaby in a dark mode, muffled
+    "danger": dict(seed=3300, motif_seed=LULLABY, tonic=57, mode="phrygian", bpm=104, beats=4, prog=[0, 1, 0, 6], prog_b=[5, 1, 6, 0],
+                   lead="tremolo", bass="pluck", drum="march", drone=True, reverb=(2.2, 0.3), passes=2, lowpass=3400, lead_vel=0.75),
 }
+# the adaptive music's layers and stings, rendered by tools/cues.py: (id, recipe)
+CUES = [("music.layer_heartbeat", "layer_heartbeat"), ("music.sting_discovery", "sting_discovery"), ("music.sting_quest", "sting_quest")]
 
 # ------------------------------------------------------------------ the table
 # kind: sfx (one-shot), loop (ambient, seamless), music (streamed).
@@ -106,6 +111,8 @@ def _sounds():
         s(f"music.world_{w}", "music", "theme", 1, None, None, world=w)
     for p in PIECES:
         s(f"music.{p}", "music", "piece", 1, None, None, piece=p)
+    for sid, recipe in CUES:
+        s(sid, "music", recipe, 1, None, None)
     return t
 
 
@@ -187,7 +194,9 @@ def biome_audio(n):
 def _hash(entry):
     src = b"".join(open(os.path.join(HERE, f), "rb").read() for f in ("synth.py", "music.py", "sfx.py"))
     spec = json.dumps({k: entry[k] for k in ("id", "kind", "recipe", "variants", "args")}, sort_keys=True)
-    if entry["kind"] == "music":
+    if entry["recipe"] in dict(CUES).values():
+        src += open(os.path.join(HERE, "cues.py"), "rb").read()
+    elif entry["kind"] == "music":
         spec += json.dumps(WORLD_THEMES.get(entry["args"].get("world"), PIECES.get(entry["args"].get("piece"))), sort_keys=True)
     return hashlib.sha256(src + spec.encode()).hexdigest()[:16]
 
@@ -223,10 +232,11 @@ def render_all(sound_dir, force=False):
     except ImportError:
         print(f"sound: {len(todo)} sounds out of date, but numpy is missing; keeping the committed files")
         return 0
+    import cues
     import sfx
     for e in todo:
         for i, f in enumerate(_files(e)):
-            x, q = sfx.render(e, i)
+            x, q = (cues if e["recipe"] in cues.RECIPES else sfx).render(e, i)
             _encode(x, os.path.join(sound_dir, f + ".ogg"), q)
         lock[e["id"]] = _hash(e)
         print(f"sound: rendered {e['id']}")
