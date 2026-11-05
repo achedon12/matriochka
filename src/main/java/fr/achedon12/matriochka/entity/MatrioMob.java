@@ -442,7 +442,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(DefaultAnimations.genericWalkIdleController());
 		AnimationController<MatrioMob> attack = new AnimationController<MatrioMob>("attack", test -> com.geckolib.animation.object.PlayState.STOP).triggerableAnim("strike", STRIKE);
-		for (String m : MobMoves.MOVES.keySet()) attack.triggerableAnim(m, RawAnimation.begin().thenPlay("attack." + m));
+		for (Defs.AttackDef a : def().attacks()) attack.triggerableAnim(a.id(), RawAnimation.begin().thenPlay("attack." + a.id()));
 		controllers.add(attack);
 	}
 
