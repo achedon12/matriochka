@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "matriochka:living_rock"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "matriochka:living_rock"
+      }
+    ]
+  }
+}

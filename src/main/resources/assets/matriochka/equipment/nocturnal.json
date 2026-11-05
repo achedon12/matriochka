@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "matriochka:nocturnal"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "matriochka:nocturnal"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "matriochka:seasonal"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "matriochka:seasonal"
+      }
+    ]
+  }
+}
