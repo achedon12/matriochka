@@ -51,12 +51,39 @@ public final class Net {
 		}
 	}
 
+	/** Plays an ending's crawl on the client: "seal", "absorb" or "tools". */
+	public record EndingPayload(String kind) implements CustomPacketPayload {
+		public static final Type<EndingPayload> TYPE = new Type<>(Matriochka.id("ending"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, EndingPayload> CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, EndingPayload::kind, EndingPayload::new);
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
+	/** The Journal's "New Cycle" button. */
+	public record CyclePayload(boolean confirm) implements CustomPacketPayload {
+		public static final Type<CyclePayload> TYPE = new Type<>(Matriochka.id("new_cycle"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, CyclePayload> CODEC = StreamCodec.composite(ByteBufCodecs.BOOL, CyclePayload::confirm, CyclePayload::new);
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
 	private Net() {}
 
 	public static void init() {
 		PayloadTypeRegistry.clientboundPlay().register(StatePayload.TYPE, StatePayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(OpenJournalPayload.TYPE, OpenJournalPayload.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(EndingPayload.TYPE, EndingPayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(ChoicePayload.TYPE, ChoicePayload.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(CyclePayload.TYPE, CyclePayload.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(CyclePayload.TYPE, (payload, ctx) -> {
+			if (payload.confirm()) fr.achedon12.matriochka.world.Cycles.begin(ctx.player());
+		});
 		ServerPlayNetworking.registerGlobalReceiver(ChoicePayload.TYPE, (payload, ctx) -> {
 			ServerPlayer p = ctx.player();
 			for (Defs.QuestDef q : Content.QUESTS) {
@@ -77,7 +104,13 @@ public final class Net {
 		t.putInt("done", data.group(group).getIntOr("done", 0));
 		t.putInt("members", data.members(group).size());
 		t.putInt("here", Worlds.number(player.level()));
+		t.putInt("cycle", fr.achedon12.matriochka.world.Cycles.of(data, group));
 		ServerPlayNetworking.send(player, new StatePayload(t));
+	}
+
+	public static void playEnding(ServerPlayer player, String kind) {
+		if (player.connection == null) return;
+		ServerPlayNetworking.send(player, new EndingPayload(kind));
 	}
 
 	public static void openJournal(ServerPlayer player, boolean scroll) {

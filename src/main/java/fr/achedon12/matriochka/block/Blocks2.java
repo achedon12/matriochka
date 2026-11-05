@@ -170,6 +170,7 @@ public final class Blocks2 {
 				if (level.getBlockEntity(pos) instanceof DataBlockEntity wb) {
 					wb.data().putInt("world", world);
 					wb.data().putString("owner", seedOwner);
+					if (!seedGroup.isEmpty()) wb.data().putInt("cycle", fr.achedon12.matriochka.world.Cycles.of(md, seedGroup));
 					wb.changed();
 					if (!seedGroup.isEmpty()) md.setWorldBlock(seedGroup, world, level, pos);
 				}
@@ -223,6 +224,14 @@ public final class Blocks2 {
 					sp.sendSystemMessage(Component.translatable("message.matriochka.not_your_world"));
 					return InteractionResult.FAIL;
 				}
+				String group = owner.isEmpty() ? data.groupOf(sp.getUUID()) : data.groupOf(java.util.UUID.fromString(owner));
+				if (be.data().getIntOr("cycle", 0) < fr.achedon12.matriochka.world.Cycles.of(data, group)) {
+					// a World Block of an older cycle: its prison was closed again by the New Cycle
+					data.clearWorldBlock(group, world, pos);
+					level.destroyBlock(pos, false);
+					sp.sendSystemMessage(Component.translatable("message.matriochka.cycle.old_block"));
+					return InteractionResult.SUCCESS;
+				}
 				Travel.enter(sp, world, pos);
 				Achievements.grantId(sp, "world_" + world + "/a0");
 			}
@@ -255,6 +264,7 @@ public final class Blocks2 {
 				net.minecraft.nbt.CompoundTag t = new net.minecraft.nbt.CompoundTag();
 				t.putInt("world", world);
 				t.putString("owner", be.data().getStringOr("owner", ""));
+				t.putInt("cycle", be.data().getIntOr("cycle", 0));
 				doll.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(t));
 				Block.popResource(level, pos, doll);
 				data.worldEntry(group, world).putLong("unstable_until", sl.getGameTime() + 20 * 60 * 20);
@@ -301,6 +311,12 @@ public final class Blocks2 {
 		String owner = t.getStringOr("owner", player.getUUID().toString());
 		MatrioData md = MatrioData.get(level.getServer());
 		String group = md.groupOf(java.util.UUID.fromString(owner.isEmpty() ? player.getUUID().toString() : owner));
+		int cycle = fr.achedon12.matriochka.world.Cycles.of(md, group);
+		if (t.getIntOr("cycle", 0) < cycle) {
+			stack.consume(1, player);
+			player.sendSystemMessage(Component.translatable("message.matriochka.cycle.old_block"));
+			return false;
+		}
 		if (md.hasWorldBlock(level.getServer(), group, world)) {
 			player.sendOverlayMessage(Component.translatable("message.matriochka.world_exists", world));
 			return false;
@@ -309,6 +325,7 @@ public final class Blocks2 {
 		if (level.getBlockEntity(at) instanceof DataBlockEntity be) {
 			be.data().putInt("world", world);
 			be.data().putString("owner", owner);
+			be.data().putInt("cycle", cycle);
 			be.changed();
 		}
 		md.setWorldBlock(group, world, level, at);

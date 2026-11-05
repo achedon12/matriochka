@@ -94,8 +94,10 @@ public final class Events {
 	}
 
 	public static void init() {
+		WorldZero.init();
 		ServerTickEvents.END_SERVER_TICK.register(server -> {
 			WorldRules.serverTick(server);
+			WorldZero.tick(server);
 			Rituals.tick(server);
 			if (server.overworld().getGameTime() % 100 == 0) for (ServerPlayer p : server.getPlayerList().getPlayers()) scanInventory(p);
 			if (server.overworld().getGameTime() % 4800 == 2400) peddler(server.overworld());
@@ -112,6 +114,8 @@ public final class Events {
 				player.getInventory().add(new ItemStack(ModContent.item("artisan_scroll")));
 				fr.achedon12.matriochka.net.Net.openJournal(player, true);
 			}
+			Cycles.catchUp(player);
+			Endings.applyLasting(player);
 			ps.sync();
 		});
 
@@ -140,6 +144,7 @@ public final class Events {
 		});
 
 		ServerPlayerEvents.AFTER_RESPAWN.register((oldP, player, alive) -> {
+			Endings.applyLasting(player);
 			PlayerState ps = PlayerState.of(player);
 			int w = ps.tag().getIntOr("died_in", 0);
 			if (w <= 0 || alive) return;
@@ -279,7 +284,12 @@ public final class Events {
 		}
 		int dolls = 0;
 		for (int w = 1; w <= 10; w++) if (fr.achedon12.matriochka.block.Stations.count(inv, ModContent.item("hidden_doll_" + w)) > 0) dolls++;
-		if (dolls == 10) Achievements.grant(p, "all_dolls");
+		// dolls already nested count too
+		for (int i = 0; i < inv.getContainerSize(); i++) {
+			ItemStack s = inv.getItem(i);
+			if (s.is(ModContent.item("nested_dolls")) || s.is(ModContent.item("whole_matryoshka"))) dolls += fr.achedon12.matriochka.item.Nesting.depth(s);
+		}
+		if (dolls >= 10) Achievements.grant(p, "all_dolls");
 		if (p.isFallFlying() || (p.getY() > 220 && Worlds.number(p.level()) == 4)) Achievements.grant(p, "high_fall");
 		if (Worlds.number(p.level()) == 10) {
 			ps.progress("enter", "world_10", 1);

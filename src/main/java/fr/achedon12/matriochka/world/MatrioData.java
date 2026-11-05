@@ -135,6 +135,16 @@ public class MatrioData extends SavedData {
 		return g.getIntOr("parcel", 0);
 	}
 
+	/** The group that owns a parcel number, or null when none does (a parcel left behind by a New Cycle). */
+	public String groupOfParcel(int parcel) {
+		CompoundTag groups = sub(root, "groups");
+		for (String id : groups.keySet()) {
+			CompoundTag g = groups.getCompoundOrEmpty(id);
+			if (g.contains("parcel") && g.getIntOr("parcel", -1) == parcel) return id;
+		}
+		return null;
+	}
+
 	/** Whether this player may break or use something owned by the player with this UUID string (same group, or no owner). */
 	public boolean sameGroup(String owner, ServerPlayer player) {
 		if (owner == null || owner.isEmpty() || player.isCreative()) return true;
