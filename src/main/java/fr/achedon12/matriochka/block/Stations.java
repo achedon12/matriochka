@@ -66,6 +66,39 @@ public final class Stations {
 		};
 	}
 
+	/** Charge one Storm Essence gives the Lightning Forge, as an alternative to a lightning strike. */
+	public static final int ESSENCE_CHARGE = 2;
+
+	/** Feeds one Storm Essence to the Lightning Forge. False when it is full or the player has none. */
+	public static boolean feedEssence(ServerPlayer player, ServerLevel level, BlockPos pos, DataBlockEntity be) {
+		int charge = be.data().getIntOr("charge", 0);
+		Item essence = ModContent.item("storm_essence");
+		if (charge >= 8 || (count(player.getInventory(), essence) < 1 && !player.isCreative())) return false;
+		if (!player.isCreative()) take(player.getInventory(), essence, 1);
+		be.data().putInt("charge", Math.min(8, charge + ESSENCE_CHARGE));
+		be.changed();
+		level.playSound(null, pos, SoundEvents.TRIDENT_THUNDER.value(), SoundSource.BLOCKS, 0.5f, 1.8f);
+		level.sendParticles(net.minecraft.core.particles.ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, 20, 0.3, 0.2, 0.3, 0.2);
+		return true;
+	}
+
+	/** Spore Vat fermentation stage from the seconds it has fermented: 0 fresh, 1 ripe (one minute), 2 aged (five minutes). */
+	public static int fermentStage(int seconds) {
+		return seconds >= 300 ? 2 : seconds >= 60 ? 1 : 0;
+	}
+
+	/** What a Spore Vat brew yields at a stage: ripe brews give half as much again, aged ones twice as much. Gear is not brewed. */
+	public static int vatYield(Recipes.Recipe r, int stage) {
+		Defs.ItemDef d = ModContent.def(r.output());
+		boolean brew = d != null && (d.kind().equals("consumable") || d.kind().equals("food"));
+		if (!brew) return r.count();
+		return switch (stage) {
+			case 2 -> r.count() * 2;
+			case 1 -> r.count() + (r.count() + 1) / 2;
+			default -> r.count();
+		};
+	}
+
 	/** Number of heat sources around the foundry (lava, magma, fire). */
 	public static int heat(ServerLevel level, BlockPos pos) {
 		int n = 0;
@@ -105,6 +138,8 @@ public final class Stations {
 		if (index < 0 || index >= list.size()) return "message.matriochka.station.unknown";
 		Recipes.Recipe r = list.get(index);
 		if (!canSeeRecipe(player, r)) return "message.matriochka.station.locked";
+		// no lightning yet: a Storm Essence the player carries charges the forge instead
+		if (station.equals("lightning_forge") && be.data().getIntOr("charge", 0) <= 0 && !player.isCreative()) feedEssence(player, level, pos, be);
 		if (condition(level, pos, station, be) == 0 && !player.isCreative()) return "message.matriochka.station.condition." + station;
 		if (station.equals("spore_vat") && r.output().equals("filter_mask") && be.data().getIntOr("ferment", 0) < 60) return "message.matriochka.station.ferment";
 		Inventory inv = player.getInventory();
@@ -112,7 +147,12 @@ public final class Stations {
 			if (count(inv, resolve(ing.id())) < ing.count() && !player.isCreative()) return "message.matriochka.station.missing";
 		}
 		if (!player.isCreative()) for (Recipes.Ing ing : r.inputs()) take(inv, resolve(ing.id()), ing.count());
-		ItemStack out = new ItemStack(resolve(r.output()), r.count());
+		int made = r.count();
+		if (station.equals("spore_vat")) {
+			made = vatYield(r, fermentStage(be.data().getIntOr("ferment", 0)));
+			if (made > r.count()) player.sendOverlayMessage(Component.translatable("message.matriochka.station.vat_bonus", made - r.count()));
+		}
+		ItemStack out = new ItemStack(resolve(r.output()), made);
 		GearClasses.roll(out, level.getRandom());
 		if (station.equals("inverter") && out.isDamageableItem()) out.setDamageValue(out.getMaxDamage() / 4);
 		if (!inv.add(out)) net.minecraft.world.level.block.Block.popResource(player.level(), player.blockPosition(), out);
@@ -132,8 +172,48 @@ public final class Stations {
 		}
 		be.setChanged();
 		level.playSound(null, pos, SoundEvents.SMITHING_TABLE_USE, SoundSource.BLOCKS, 0.8f, 1.1f);
-		PlayerState.of(player).progress("craft", r.output(), r.count());
+		PlayerState.of(player).progress("craft", r.output(), made);
 		return null;
+	}
+
+	/**
+	 * Inverter: the two pieces trade their class, class level and enchantments. Every gain has its flaw: each piece
+	 * loses a quarter of its durability, counts one more class change (rerolls cost more), and an enchantment the
+	 * other piece cannot carry is lost.
+	 */
+	public static String invert(ServerPlayer player, ItemStack a, ItemStack b) {
+		if (a.isEmpty() || b.isEmpty()) return "message.matriochka.inverter.empty";
+		GearClasses.Kind ka = GearClasses.kind(a), kb = GearClasses.kind(b);
+		if (ka == GearClasses.Kind.NONE || ka != kb) return "message.matriochka.inverter.mismatch";
+		GearClasses.Gear ga = a.get(GearClasses.GEAR), gb = b.get(GearClasses.GEAR);
+		if (ga == null) GearClasses.roll(a, player.getRandom());
+		if (gb == null) GearClasses.roll(b, player.getRandom());
+		ga = a.get(GearClasses.GEAR);
+		gb = b.get(GearClasses.GEAR);
+		var ea = net.minecraft.world.item.enchantment.EnchantmentHelper.getEnchantmentsForCrafting(a);
+		var eb = net.minecraft.world.item.enchantment.EnchantmentHelper.getEnchantmentsForCrafting(b);
+		int lost = moveEnchantments(eb, a) + moveEnchantments(ea, b);
+		GearClasses.apply(a, new GearClasses.Gear(gb.cls(), gb.level(), ga.changes() + 1));
+		GearClasses.apply(b, new GearClasses.Gear(ga.cls(), ga.level(), gb.changes() + 1));
+		for (ItemStack s : new ItemStack[]{a, b}) {
+			if (s.isDamageableItem()) s.setDamageValue(Math.min(s.getMaxDamage() - 1, s.getDamageValue() + s.getMaxDamage() / 4));
+		}
+		player.level().playSound(null, player.blockPosition(), SoundEvents.ILLUSIONER_MIRROR_MOVE, SoundSource.PLAYERS, 0.9f, 1f);
+		player.sendSystemMessage(Component.translatable(lost > 0 ? "message.matriochka.inverter.done_lost" : "message.matriochka.inverter.done", lost));
+		PlayerState.of(player).progress("use", "inverter", 1);
+		return null;
+	}
+
+	/** Replaces the enchantments of target with those it can carry; returns how many were lost. */
+	private static int moveEnchantments(net.minecraft.world.item.enchantment.ItemEnchantments from, ItemStack target) {
+		var keep = new net.minecraft.world.item.enchantment.ItemEnchantments.Mutable(net.minecraft.world.item.enchantment.ItemEnchantments.EMPTY);
+		int lost = 0;
+		for (var e : from.entrySet()) {
+			if (e.getKey().value().canEnchant(target)) keep.set(e.getKey(), e.getIntValue());
+			else lost++;
+		}
+		net.minecraft.world.item.enchantment.EnchantmentHelper.setEnchantments(target, keep.toImmutable());
+		return lost;
 	}
 
 	/** Jailer's table: pressing a pin (0..3). */

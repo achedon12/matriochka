@@ -74,6 +74,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 				buttons.add(l + 150, t + 60, 92, 18, Component.translatable("station.matriochka.reroll"), () -> click(211));
 				buttons.add(l + 150, t + 82, 92, 18, Component.translatable("station.matriochka.layer"), () -> click(212));
 			}
+			case "inverter" -> buttons.add(l + 199, t + 52, 46, 16, Component.translatable("station.matriochka.invert"), () -> click(220));
 			case "jailer_table" -> {
 				for (int i = 0; i < 4; i++) {
 					int pin = i;
@@ -110,7 +111,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		return switch (menu.data.station()) {
 			case "ash_foundry" -> Math.min(1f, menu.sync.get(1) / 3f);
 			case "lightning_forge" -> menu.sync.get(1) / 8f;
-			case "spore_vat" -> menu.sync.get(6) / 60f;
+			case "spore_vat" -> menu.sync.get(6) / 300f;
 			case "jailer_table" -> menu.sync.get(5) / 3f;
 			default -> ready ? 1f : 0f;
 		};
@@ -208,7 +209,25 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		}
 	}
 
+	/** The Inverter's niche: two sockets facing each other, the swap mark between them, the warning below. */
+	private void inverterNiche(GuiGraphicsExtractor g, int l, int t, int mx, int my) {
+		int ax = l + StationMenu.INVERTER_A_X, bx = l + StationMenu.INVERTER_B_X, y = t + StationMenu.INVERTER_Y;
+		float pulse = 0.2f + 0.15f * (float) Math.sin(Ui.now() / 380.0);
+		Ui.sprite(g, "glow", ax - 4, y - 4, 24, 24, Ui.white(pulse));
+		Ui.sprite(g, "glow", bx - 4, y - 4, 24, 24, Ui.white(0.35f - pulse));
+		Component swap = Component.literal("<>");
+		Ui.embossed(g, font, swap, (ax + 16 + bx) / 2 - font.width(swap) / 2, y + 4, Ui.GOLD);
+		Component desc = Component.translatable("station.matriochka.inverter.help");
+		var lines = font.split(desc, 50);
+		for (int i = 0; i < Math.min(6, lines.size()); i++) g.text(font, lines.get(i), l + 198, t + 74 + i * 9, Ui.MUTED, false);
+		if (lines.size() > 6 && mx >= l + 195 && mx < l + 248 && my >= t + 70 && my < t + 133) g.setTooltipForNextFrame(font, desc, mx, my);
+	}
+
 	private void niche(GuiGraphicsExtractor g, int l, int t, boolean ready, float dt, int mx, int my) {
+		if (menu.data.station().equals("inverter")) {
+			inverterNiche(g, l, t, mx, my);
+			return;
+		}
 		if (ready && !wasReady) {
 			readyAt = Ui.now();
 			if (Ui.now() - motion.openedAt() > 400) Ui.sound(SoundEvents.AMETHYST_BLOCK_CHIME, 1.6f, 0.6f);
@@ -246,7 +265,10 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		}
 		int sx = l + 198;
 		if (!jailer()) {
-			Component st = Component.translatable(ready ? "station.matriochka.ready" : "station.matriochka.not_ready");
+			int ferment = menu.sync.get(6);
+			Component st = menu.data.station().equals("spore_vat")
+				? Component.translatable("station.matriochka.ferment." + (ferment >= 300 ? "aged" : ferment >= 60 ? "ripe" : "fresh"))
+				: Component.translatable(ready ? "station.matriochka.ready" : "station.matriochka.not_ready");
 			Ui.embossed(g, font, st, l + 222 - font.width(st) / 2, t + 82, ready ? Ui.OK : Ui.WARN);
 			Component desc = Component.translatable("block.matriochka." + menu.data.station() + ".desc");
 			var lines = font.split(desc, 50);
