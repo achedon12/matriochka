@@ -5,6 +5,7 @@ import BestiaryTable from "../BestiaryTable";
 import { Inlay } from "../Bits";
 import { Lacquer, Vine } from "../Ornament";
 import { PageHead, Shell } from "../Shell";
+import { btn, wrap } from "../ui";
 import ModelViewer, { type ViewerLabels } from "../viewer/ModelViewer";
 
 export function viewerLabels(ui: Record<string, string>): ViewerLabels {
@@ -48,7 +49,55 @@ export function BossesPage({ lang }: { lang: Lang }) {
   return (
     <Shell lang={lang} path="bosses/" section="bosses">
       <PageHead title={c.h} lead={c.lead} img={c.headImg} />
-      <div className="wrap rules-tables">
+      {/* the eleven, as a row of portraits that jump to each poster */}
+      <nav className={`${wrap} pb-4`} aria-label={c.h}>
+        <ol className="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(96px,1fr))] gap-2 p-0">
+          {d.bosses.map((b) => (
+            <li key={b.id}>
+              <a href={`#boss-${b.id}`} className="group grid justify-items-center gap-1 rounded-[3px] border border-rule bg-ink/60 p-2 text-center text-paper no-underline transition-colors hover:border-gold-b hover:text-gold-b">
+                <img className="h-20 w-auto drop-shadow-[0_6px_8px_rgba(0,0,0,.6)] transition-transform duration-200 group-hover:-translate-y-1" src={asset(`portraits/${b.id}.png`)} alt="" width={160} height={160} loading="lazy" />
+                <span className="font-pixel text-base leading-none" style={{ color: b.light }}>{b.world}</span>
+                <span className="text-[13px] leading-tight">{b.name}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+      {d.bosses.map((b, i) => (
+        <section key={b.id} id={`boss-${b.id}`} aria-labelledby={`bh-${b.id}`} className="relative isolate overflow-hidden border-t-2 border-gold bg-ink">
+          {b.shot && <img className="absolute inset-0 -z-20 size-full object-cover opacity-35 saturate-[.8]" src={asset(b.shot)} alt="" loading="lazy" width={960} height={720} />}
+          <span className="absolute inset-0 -z-10" style={{ background: `radial-gradient(ellipse at ${i % 2 ? "75%" : "25%"} 45%, ${b.light}44 0%, ${b.bg}dd 45%, #0e0806 100%)` }} />
+          <div className={`${wrap} grid items-center gap-[clamp(20px,4vw,56px)] py-[clamp(48px,7vw,96px)] min-[960px]:grid-cols-2`}>
+            <div className={`relative ${i % 2 ? "min-[960px]:order-2" : ""}`}>
+              <img className="mx-auto block h-auto w-full max-w-[540px] drop-shadow-[0_30px_40px_rgba(0,0,0,.75)]" src={asset(`portraits/${b.id}.png`)} alt={b.name} width={512} height={512} loading="lazy" />
+            </div>
+            <div>
+              <p className="m-0 mb-1 font-pixel text-2xl" style={{ color: b.light }}>{b.world ? `${ui.world} ${b.world}` : b.worldName}<span className="font-body text-base text-paper-dim"> {b.world ? b.worldName : ""}</span></p>
+              <h2 id={`bh-${b.id}`} className="m-0 mb-4 font-display text-[clamp(40px,5vw,72px)] leading-[0.95] font-normal text-gold-b [text-shadow:0_5px_0_#17100d]">{b.name}</h2>
+              <dl className="m-0 mb-6 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
+                {[[ui.solo, b.hp], [ui.heavy, b.dmg], [c.tierCols[1], b.timings[1].v], [c.tierCols[3], b.timings[3].v]].map(([l, v]) => (
+                  <div key={l} className="border-t-2 border-gold pt-2"><dt className="text-[13px] text-paper-dim">{l}</dt><dd className="m-0 font-pixel text-[28px] leading-none text-paper">{v}</dd></div>
+                ))}
+              </dl>
+              <ol className="m-0 mb-5 grid list-none gap-2 p-0">
+                {b.atks.map((a, k) => (
+                  <li key={a.label} className="grid grid-cols-[34px_minmax(0,1fr)] items-baseline gap-3 border-b border-rule py-2">
+                    <span className="font-pixel text-xl text-gold-b">{k + 1}</span>
+                    <span><strong className="block font-display text-xl font-normal text-paper">{a.name}</strong><small className="text-sm text-paper-dim">{a.label}</small></span>
+                  </li>
+                ))}
+              </ol>
+              <p className="m-0 mb-3 text-base text-paper"><strong className="text-gold-b">{ui.phases}.</strong> {b.phases}.</p>
+              <p className="m-0 mb-5 flex items-center gap-2 text-base text-paper"><Inlay src={b.coreTex} /><span><strong>{b.drops[0].name}</strong> {c.rewardNote}</span></p>
+              <p className="m-0 flex flex-wrap gap-3">
+                <Link className={btn} href={href(lang, `creatures/${b.id}/`)}>{ui.open}</Link>
+              </p>
+            </div>
+          </div>
+        </section>
+      ))}
+      {/* the rules every boss fight follows */}
+      <section className={`${wrap} grid gap-10 py-[clamp(48px,7vw,96px)] min-[960px]:grid-cols-[3fr_2fr]`}>
         <div>
           <h2 className="h-plate">{ui.timings}</h2>
           <div className="tbl">
@@ -73,37 +122,7 @@ export function BossesPage({ lang }: { lang: Lang }) {
           </div>
           <p className="small">{c.mpNote}</p>
         </div>
-      </div>
-      {d.bosses.map((b, i) => (
-        <section key={b.id} id={`boss-${b.id}`} className="boss-plate" aria-labelledby={`bh-${b.id}`}
-          style={{ "--wb": b.bg, "--wl": b.light } as React.CSSProperties}>
-          <Vine className="vine-sep" />
-          <div className={`wrap plate-grid${b.shot ? " has-shot" : ""}${i % 2 ? " plate-flip" : ""}`}>
-            {b.shot && (
-              <figure className="shot shot-framed plate-shot"><img src={asset(b.shot)} alt={`${b.name}, ${ui.inArena}`} loading="lazy" /><figcaption>{b.name}, {ui.inArena}</figcaption></figure>
-            )}
-            <ModelViewer id={b.id} name={b.name} anims={b.anims} labels={vl} tex={b.tex} auto release className="viewer-plate plate-viewer" />
-            <Lacquer className="plate-panel">
-              <p className="small plate-world">{b.world ? `${ui.world} ${b.world}, ${b.worldName}` : b.worldName}</p>
-              <h2 id={`bh-${b.id}`} className="plate-name">{b.name}</h2>
-              <dl className="stats">
-                <div><dt>{ui.solo}</dt><dd className="num">{b.hp}</dd></div>
-                <div><dt>{ui.heavy}</dt><dd className="num">{b.dmg}</dd></div>
-                <div><dt>{c.tierCols[1]}</dt><dd className="num">{b.timings[1].v}</dd></div>
-                <div><dt>{c.tierCols[3]}</dt><dd className="num">{b.timings[3].v}</dd></div>
-              </dl>
-              <h3>{ui.attacks}</h3>
-              <ol className="atks">{b.atks.map((a) => <li key={a.label}><span className="atk-l">{a.label}</span>{a.name}</li>)}</ol>
-              <h3>{ui.phases}</h3>
-              <p>{b.phases}.</p>
-              <h3>{ui.reward}</h3>
-              <p className="reward"><Inlay src={b.coreTex} /><span><strong>{b.drops[0].name}</strong> {c.rewardNote}</span></p>
-              <details className="spoiler"><summary>{ui.reveal}</summary><p>{b.story}</p></details>
-              <p><Link className="quiet" href={href(lang, `creatures/${b.id}/`)}>{ui.open}</Link></p>
-            </Lacquer>
-          </div>
-        </section>
-      ))}
+      </section>
     </Shell>
   );
 }
