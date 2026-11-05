@@ -52,6 +52,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 	public static final java.util.Map<EntityType<?>, Defs.MobDef> DEFS = new java.util.HashMap<>();
 	private Defs.MobDef def;
 	private int special;
+	private MobMoves moves;
 	private boolean revealed;
 
 	public MatrioMob(EntityType<? extends Monster> type, Level level, Defs.MobDef def) {
@@ -85,6 +86,11 @@ public class MatrioMob extends Monster implements GeoEntity {
 		return def;
 	}
 
+	MobMoves moves() {
+		if (moves == null) moves = new MobMoves(this);
+		return moves;
+	}
+
 	private boolean behavior(String b) {
 		return def().behavior().equals(b);
 	}
@@ -94,6 +100,16 @@ public class MatrioMob extends Monster implements GeoEntity {
 		goalSelector.addGoal(0, new FloatGoal(this));
 		if (!behavior("puller") && !behavior("statue")) {
 			goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.15, true) {
+				@Override
+				public boolean canUse() {
+					return !moves().busy() && super.canUse();
+				}
+
+				@Override
+				public boolean canContinueToUse() {
+					return !moves().busy() && super.canContinueToUse();
+				}
+
 				@Override
 				protected int getAttackInterval() {
 					return Math.max(6, (int) (20 / Defs.speedMultiplier(def().world())));
@@ -127,6 +143,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 				return;
 			}
 		}
+		moves().tick(level, target);
 		if (target == null) return;
 		double d2 = distanceToSqr(target);
 		switch (def().behavior()) {
@@ -424,7 +441,9 @@ public class MatrioMob extends Monster implements GeoEntity {
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(DefaultAnimations.genericWalkIdleController());
-		controllers.add(new AnimationController<MatrioMob>("attack", test -> com.geckolib.animation.object.PlayState.STOP).triggerableAnim("strike", STRIKE));
+		AnimationController<MatrioMob> attack = new AnimationController<MatrioMob>("attack", test -> com.geckolib.animation.object.PlayState.STOP).triggerableAnim("strike", STRIKE);
+		for (String m : MobMoves.MOVES.keySet()) attack.triggerableAnim(m, RawAnimation.begin().thenPlay("attack." + m));
+		controllers.add(attack);
 	}
 
 	@Override
