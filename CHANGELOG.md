@@ -8,6 +8,17 @@
 - The eleven bosses are rebuilt as full rigs with joints, secondary motion and glowing eyes and cores.
 - Texture generation is reproducible; the build no longer needs a local copy of Minecraft data.
 - New releases are announced automatically in the Discord changelog channel.
+- Every achievement can now be earned. The boss challenges ("beat the Queen without a mask", "the Titan without touching lava"...) are tracked over the whole fight; Forgotten Plate, A Crumb and Set Down the Tools have new conditions that exist in the game.
+- Every world offers its five Journal pages: the exploration structures hold pages 1 to 3, the story structures pages 4 and 5.
+- The ten world dishes now give their effects.
+- The Grappling Hook pulls creatures toward you.
+- The Doll Peddler wanders the Surface like a trader.
+- Once unmasked, Mimics and Crawling Blocks chase you. The Dusk Shade only comes out at dusk.
+- A broken world stays unstable for 20 minutes, with more creatures around.
+- Only its group can break a World Block or a Soul Cradle; a group has one World Block per world; a cradle stays shut while a boss is awake near it.
+- The config is applied: creature health and damage multipliers, group size, and four difficulty modes (story, normal, nightmare, hardcore).
+- No more diamonds in vanilla loot chests.
+- A day in World 8 lasts 8 minutes, as designed.
 
 ## 0.1.0 (alpha)
 
