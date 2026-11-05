@@ -2,6 +2,7 @@ package fr.achedon12.matriochka.showcase;
 
 import fr.achedon12.matriochka.content.Content;
 import fr.achedon12.matriochka.content.Defs;
+import fr.achedon12.matriochka.world.Worlds;
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
@@ -40,7 +41,10 @@ public class TrailerCapture implements FabricClientGameTest {
 			s.runCommand("effect give @a saturation infinite 255 true");
 			s.runCommand("execute as @p run matriochka progression set 10");
 			s.runCommand("difficulty normal");
+			String only = System.getProperty("matriochka.worlds", "");
+			String takes = System.getProperty("matriochka.takes", "adbfcg");
 			for (int w = 0; w <= 10; w++) {
+				if (!only.isEmpty() && !("," + only + ",").contains("," + w + ",")) continue;
 				String tag = String.format("w%02d", w);
 				if (w > 0) {
 					s.runCommand("execute as @p run matriochka world enter " + w);
@@ -48,87 +52,116 @@ public class TrailerCapture implements FabricClientGameTest {
 					ctx.waitTicks(100);
 					sp.getConnection().waitForChunksRender();
 				}
-				third(ctx, false);
+				s.runCommand("kill @e[type=marker]");
+				s.runCommand("execute as @p at @s run summon marker ~ ~ ~ {Tags:[\"home\"]}");
+				boolean under = w == 3 || w == 5;
+				final int world = w;
+				// the mod's own boss arena, built 26 blocks ahead: lit, open and the same stage in every world
+				net.minecraft.core.BlockPos arena = sp.getServer().computeOnServer(server -> {
+					var p = server.getPlayerList().getPlayers().get(0);
+					var c = p.blockPosition().offset(0, 0, 26);
+					fr.achedon12.matriochka.world.Arenas.build((net.minecraft.server.level.ServerLevel) p.level(), world, c);
+					return c;
+				});
+				// the Endless Dungeon rearranges its halls: rebuild the stage before each take there
+				Runnable rebuild = () -> {
+					if (world != 3) return;
+					sp.getServer().runOnServer(server -> fr.achedon12.matriochka.world.Arenas.build(
+						(net.minecraft.server.level.ServerLevel) server.getPlayerList().getPlayers().get(0).level(), world, arena));
+				};
+				if (w == 7) s.runCommand("effect give @a conduit_power infinite 0 true");
+				s.runCommand("kill @e[type=marker,tag=arena]");
+				s.runCommand("execute at @p run summon marker " + arena.getX() + " " + arena.getY() + " " + arena.getZ() + " {Tags:[\"arena\"]}");
 				s.runCommand("gamemode spectator @a");
-				// A: high aerial glide, looking down over the world
-				s.runCommand("execute as @p at @s run tp @s ~ ~22 ~ 200 28");
-				ctx.waitTicks(40);
+				if (takes.contains("a")) {
+				// A: the world from the air (underground worlds: a slow drift through the halls by the arena)
+				if (under) {
+					s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~-9 ~4 ~-9 -45 14");
+				} else {
+					s.runCommand("execute at @e[tag=home,limit=1] run tp @p ~ ~" + (w == 2 ? 8 : 24) + " ~ 200 " + (w == 2 ? 14 : 28));
+				}
+				ctx.waitTicks(50);
 				sp.getConnection().waitForChunksRender();
 				for (int f = 0; f < 120; f++) {
-					s.runCommand("execute as @p at @s run tp @s ^ ^-0.04 ^0.55 ~0.25 ~-0.06");
+					s.runCommand(under ? "execute as @p at @s run tp @s ^0.05 ^0.01 ^0.1 ~0.5 ~"
+						: "execute as @p at @s run tp @s ^ ^-0.04 ^0.55 ~0.25 ~-0.06");
 					ctx.waitTick();
 					frame(ctx, String.format("seq_%s_a_%04d", tag, f));
 				}
-				// D: low dolly close to the ground
-				s.runCommand("execute as @p at @s run tp @s ~ ~-18 ~ ~140 6");
-				ctx.waitTicks(30);
+				// the arena, 160 blocks from the Threshold: lit, open, the same place for every world
+				}
+				if (takes.contains("d")) {
+				// D: low sweep across the arena floor and its pillars
+				s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~-11 ~2.2 ~-11 -45 8");
+				ctx.waitTicks(50);
 				sp.getConnection().waitForChunksRender();
 				for (int f = 0; f < 72; f++) {
-					s.runCommand("execute as @p at @s run tp @s ^-0.05 ^0.03 ^0.3 ~-0.4 ~");
+					s.runCommand("execute as @p at @s run tp @s ^0.06 ^0.02 ^0.26 ~-0.35 ~");
 					ctx.waitTick();
 					frame(ctx, String.format("seq_%s_d_%04d", tag, f));
 				}
+				}
+				rebuild.run();
+				if (takes.contains("b")) {
 				// B: the world's creatures, still, the camera circling them
-				s.runCommand("gamemode creative @a");
-				s.runCommand("execute as @p at @s run tp @s ~ ~ ~" + 40 + " 12");
-				ctx.waitTicks(40);
-				sp.getConnection().waitForChunksRender();
 				int k = 0;
 				for (Defs.MobDef m : Content.MOBS) {
 					if (m.world() != w) continue;
-					s.runCommand("execute as @p at @s run summon matriochka:" + m.id() + " ^" + (k * 2 - 4) + " ^ ^7 {NoAI:1b,PersistenceRequired:1b}");
+					s.runCommand("execute at @e[tag=arena,limit=1] run summon matriochka:" + m.id() + " ~" + (k * 3 - 6) + " ~ ~4 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}");
 					k++;
 				}
-				if (w == 0) s.runCommand("execute as @p at @s run summon matriochka:doll_peddler ^ ^ ^6 {NoAI:1b}");
-				s.runCommand("gamemode spectator @a");
+				if (w == 0) s.runCommand("execute at @e[tag=arena,limit=1] run summon matriochka:doll_peddler ~ ~ ~4 {NoAI:1b,Rotation:[180f,0f]}");
+				s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~-9 ~2.4 ~-4 -40 14");
+				ctx.waitTicks(30);
 				for (int f = 0; f < 72; f++) {
-					s.runCommand("execute as @p at @s run tp @s ^0.32 ^ ^0.08 ~-1.6 ~");
+					s.runCommand("execute as @p at @s run tp @s ^0.3 ^ ^0.06 ~-1.1 ~");
 					ctx.waitTick();
 					frame(ctx, String.format("seq_%s_b_%04d", tag, f));
 				}
-				s.runCommand("kill @e[type=!player]");
-				// F: two creatures attacking the player, seen over the shoulder
+				s.runCommand("kill @e[type=!player,type=!marker]");
+				}
+				rebuild.run();
+				if (takes.contains("f")) {
+				// F: two creatures come for the player, seen through the player's eyes
 				if (w > 0) {
 					s.runCommand("gamemode adventure @a");
-					s.runCommand("execute as @p at @s run tp @s ~ ~ ~" + 70 + " 8");
-					ctx.waitTicks(30);
-					sp.getConnection().waitForChunksRender();
+					s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~ ~ ~-10 0 6");
+					ctx.waitTicks(20);
 					int n = 0;
 					for (Defs.MobDef m : Content.MOBS) {
 						if (m.world() != w || n >= 2 || m.behavior().equals("statue") || m.behavior().equals("mimic") || m.behavior().equals("ambush_root")) continue;
-						s.runCommand("execute as @p at @s run summon matriochka:" + m.id() + " ^" + (n * 4 - 2) + " ^1 ^7");
+						s.runCommand("execute at @e[tag=arena,limit=1] run summon matriochka:" + m.id() + " ~" + (n * 4 - 2) + " ~ ~-2");
 						n++;
 					}
-					third(ctx, true);
 					for (int f = 0; f < 120; f++) {
-						if (f % 15 == 0) s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=!player,limit=1,sort=nearest] feet");
+						if (f % 10 == 0) s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=!player,type=!marker,limit=1,sort=nearest] eyes");
 						ctx.waitTicks(2);
 						frame(ctx, String.format("seq_%s_f_%04d", tag, f));
 					}
-					third(ctx, false);
-					s.runCommand("kill @e[type=!player]");
+					s.runCommand("kill @e[type=!player,type=!marker]");
 				}
+				}
+				rebuild.run();
+				if (takes.contains("c")) {
 				// C: the boss, awake, fighting the player
 				s.runCommand("gamemode adventure @a");
-				s.runCommand("execute as @p at @s run tp @s ~ ~ ~" + (w == 0 ? 30 : 100) + " 0");
-				ctx.waitTicks(40);
-				sp.getConnection().waitForChunksRender();
-				s.runCommand("execute as @p at @s run summon matriochka:" + BOSSES[w] + " ^ ^ ^11");
-				s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=matriochka:" + BOSSES[w] + ",limit=1] eyes");
-				third(ctx, true);
+				s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~ ~ ~-12 0 0");
+				ctx.waitTicks(20);
+				s.runCommand("execute at @e[tag=arena,limit=1] run summon matriochka:" + BOSSES[w] + " ~ ~ ~");
 				for (int f = 0; f < 150; f++) {
-					if (f % 10 == 0) s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=matriochka:" + BOSSES[w] + ",limit=1] eyes");
+					if (f % 8 == 0) s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=matriochka:" + BOSSES[w] + ",limit=1] eyes");
 					ctx.waitTicks(2);
 					frame(ctx, String.format("seq_%s_c_%04d", tag, f));
 				}
-				third(ctx, false);
 				s.runCommand("kill @e[type=!player]");
+				}
 				s.runCommand("gamemode creative @a");
 				if (w > 0) {
 					s.runCommand("execute as @p run matriochka world leave");
 					ctx.waitTicks(40);
 				}
 			}
+			if (!takes.contains("g")) return;
 			// G: the interfaces, with the HUD back on
 			ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
 			s.runCommand("execute as @p run matriochka karma soul @p 420");
