@@ -64,6 +64,11 @@ public class TutorialCard implements HudElement {
 	public void extractRenderState(GuiGraphicsExtractor g, DeltaTracker delta) {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.player == null || mc.gui.hud.isHidden() || MatrioClient.state.isEmpty()) return;
+		// no card before the server's first check of this player (see Tutorial.tick)
+		if (!MatrioClient.state.contains("tut_step")) {
+			lastStep = -1;
+			return;
+		}
 		int step = step();
 		long now = Ui.now();
 		if (step != lastStep) {

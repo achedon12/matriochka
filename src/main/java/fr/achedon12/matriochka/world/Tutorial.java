@@ -74,7 +74,9 @@ public final class Tutorial {
 				break;
 			}
 		}
-		if (reached > s) {
+		// the first check of a player writes the step even when it stays 0: until then the client shows no card,
+		// so a returning player never sees step 0 flash before skipping ahead
+		if (reached > s || !ps.tag().contains("tut_step")) {
 			ps.tag().putInt("tut_step", reached);
 			s = reached;
 			ps.sync();
