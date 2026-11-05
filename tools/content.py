@@ -256,7 +256,13 @@ block("planted_seed", "Planted Seed", "Graine plantée", 0, "planted_seed", "spe
 block("threshold", "Threshold", "Seuil", 0, "threshold", "lacquer")
 block("soul_cradle", "Soul Cradle", "Berceau d'âme", 0, "cradle", "wood")
 block("death_chest", "Death Chest", "Coffre de mort", 0, "death_chest", "wood")
-block("nesting_chest", "Nesting Chest", "Coffre gigogne", 2, "nesting_chest", "wood")
+block("nesting_chest", "Nesting Chest", "Coffre gigogne", 2, "nesting_chest", "wood",
+      note_en="Holds the smaller nesting chests. Sneak and use it to set what it sorts.",
+      note_fr="Contient les coffres gigognes plus petits. Accroupis-toi et utilise-le pour choisir ce qu'il trie.")
+block("nesting_chest_medium", "Middle Nesting Chest", "Coffre gigogne moyen", 2, "nesting_chest", "wood", inset=2,
+      note_en="Two rows. Fits in a Nesting Chest, holds a Little one.", note_fr="Deux rangées. Tient dans un Coffre gigogne, contient un petit.")
+block("nesting_chest_little", "Little Nesting Chest", "Petit coffre gigogne", 2, "nesting_chest", "wood", inset=4,
+      note_en="One row. Fits in the larger nesting chests.", note_fr="Une rangée. Tient dans les coffres gigognes plus grands.")
 block("sanctuary_altar", "Guardian's Altar", "Autel du Gardien", 0, "boss_altar", "stone_rune", boss="block_guardian")
 block("arena_altar", "Arena Altar", "Autel d'arène", 0, "boss_altar", "stone_rune")
 block("lair_heart", "Lair Heart", "Cœur d'antre", 0, "lair_heart", "lair_heart",

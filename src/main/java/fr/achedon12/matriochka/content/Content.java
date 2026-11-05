@@ -188,6 +188,8 @@ public final class Content {
 		new Defs.BlockDef("soul_cradle", 0, "cradle", "wood", ""),
 		new Defs.BlockDef("death_chest", 0, "death_chest", "wood", ""),
 		new Defs.BlockDef("nesting_chest", 2, "nesting_chest", "wood", ""),
+		new Defs.BlockDef("nesting_chest_medium", 2, "nesting_chest", "wood", ""),
+		new Defs.BlockDef("nesting_chest_little", 2, "nesting_chest", "wood", ""),
 		new Defs.BlockDef("sanctuary_altar", 0, "boss_altar", "stone_rune", ""),
 		new Defs.BlockDef("arena_altar", 0, "boss_altar", "stone_rune", ""),
 		new Defs.BlockDef("lair_heart", 0, "lair_heart", "lair_heart", ""),

@@ -17,13 +17,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -124,10 +120,25 @@ public final class Blocks3 {
 		}
 	}
 
-	// ---------------------------------------------------------------- Nesting chest: holds a 27-slot inventory
+	// ---------------------------------------------------------------- Nesting chest: three rows, two rows or one row; holds the smaller ones
 	public static class NestingChest extends Block implements EntityBlock {
-		public NestingChest(BlockBehaviour.Properties p) {
+		private final int rows;
+		private final net.minecraft.world.phys.shapes.VoxelShape shape;
+
+		public NestingChest(BlockBehaviour.Properties p, int rows) {
 			super(p);
+			this.rows = rows;
+			int inset = (3 - rows) * 2;
+			this.shape = Block.box(inset, 0, inset, 16 - inset, 16 - inset * 2, 16 - inset);
+		}
+
+		public int rows() {
+			return rows;
+		}
+
+		@Override
+		protected net.minecraft.world.phys.shapes.VoxelShape getShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext ctx) {
+			return shape;
 		}
 
 		@Override
@@ -138,33 +149,38 @@ public final class Blocks3 {
 		@Override
 		protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
 			if (player instanceof ServerPlayer sp && level.getBlockEntity(pos) instanceof DataBlockEntity be) {
-				SimpleContainer c = new SimpleContainer(27) {
-					@Override
-					public void setChanged() {
-						super.setChanged();
-						NonNullList<ItemStack> l = NonNullList.withSize(27, ItemStack.EMPTY);
-						for (int i = 0; i < 27; i++) l.set(i, getItem(i));
-						ContainerTags.save(be.data(), level.registryAccess(), l);
-						be.setChanged();
-					}
-				};
-				NonNullList<ItemStack> items = ContainerTags.load(be.data(), level.registryAccess(), 27);
-				for (int i = 0; i < 27; i++) c.setItem(i, items.get(i));
-				sp.openMenu(new SimpleMenuProvider((id, inv, p) -> ChestMenu.threeRows(id, inv, c), Component.translatable("block.matriochka.nesting_chest")));
-				level.playSound(null, pos, SoundEvents.CHEST_OPEN, SoundSource.BLOCKS, 0.8f, 1.3f);
+				if (sp.isSecondaryUseActive()) NestingChests.cycleRule(sp, be);
+				else NestingChests.open(sp, (ServerLevel) level, be, rows);
 			}
 			return InteractionResult.SUCCESS;
 		}
 
 		@Override
-		protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean moved) {
-			super.affectNeighborsAfterRemoval(state, level, pos, moved);
+		public void setPlacedBy(Level level, BlockPos pos, BlockState state, net.minecraft.world.entity.@Nullable LivingEntity by, ItemStack stack) {
+			if (!level.isClientSide() && level.getBlockEntity(pos) instanceof DataBlockEntity be) {
+				NestingChests.fromItem(stack, be.data(), level.registryAccess(), rows);
+				be.changed();
+			}
+		}
+
+		/** The chest drops as one item holding its contents and its sorting rule, like a doll closing on the smaller ones. */
+		@Override
+		protected java.util.List<ItemStack> getDrops(BlockState state, net.minecraft.world.level.storage.loot.LootParams.Builder params) {
+			BlockEntity be = params.getOptionalParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.BLOCK_ENTITY);
+			if (be instanceof DataBlockEntity d) {
+				NestingChests.forget(d);
+				return java.util.List.of(NestingChests.toItem(this, d.data(), params.getLevel().registryAccess()));
+			}
+			return super.getDrops(state, params);
 		}
 
 		@Override
 		public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-			if (level.getBlockEntity(pos) instanceof DataBlockEntity be) {
-				for (ItemStack s : ContainerTags.load(be.data(), level.registryAccess(), 27)) Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), s);
+			// creative breaking drops nothing: keep the contents anyway
+			if (!level.isClientSide() && player.isCreative() && level.getBlockEntity(pos) instanceof DataBlockEntity be && be.data().contains("items")
+				&& !be.data().getListOrEmpty("items").isEmpty()) {
+				NestingChests.forget(be);
+				Block.popResource(level, pos, NestingChests.toItem(this, be.data(), level.registryAccess()));
 			}
 			return super.playerWillDestroy(level, pos, state, player);
 		}

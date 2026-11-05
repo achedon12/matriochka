@@ -121,7 +121,10 @@ public final class ModContent {
 			case "threshold" -> new Blocks2.Threshold(p.strength(-1f, 3600000f).lightLevel(s -> 12).noLootTable());
 			case "cradle" -> new Blocks3.SoulCradle(p.strength(1.5f).sound(SoundType.WOOD).noOcclusion());
 			case "death_chest" -> new Blocks3.DeathChest(p.strength(-1f, 3600000f).sound(SoundType.WOOD).noLootTable());
-			case "nesting_chest" -> new Blocks3.NestingChest(p.strength(2f).sound(SoundType.WOOD));
+			case "nesting_chest" -> {
+				int rows = d.id().endsWith("_little") ? 1 : d.id().endsWith("_medium") ? 2 : 3;
+				yield new Blocks3.NestingChest(rows == 3 ? p.strength(2f).sound(SoundType.WOOD) : p.strength(1.5f).sound(SoundType.WOOD).noOcclusion(), rows);
+			}
 			case "boss_altar" -> new Blocks3.BossAltar(p.strength(-1f, 3600000f).lightLevel(s -> 10).noLootTable());
 			case "lair_heart" -> new Blocks3.LairHeart(p.strength(-1f, 3600000f).sound(SoundType.SCULK_CATALYST).lightLevel(s -> 5).noLootTable());
 			case "sealed_door" -> new Blocks3.SealedDoor(p.strength(-1f, 3600000f).sound(SoundType.STONE));
@@ -229,6 +232,7 @@ public final class ModContent {
 					public void appendHoverText(ItemStack stack, TooltipContext ctx, TooltipDisplay disp, Consumer<Component> out, net.minecraft.world.item.TooltipFlag flag) {
 						String key = "block.matriochka." + d.id() + ".desc";
 						if (net.minecraft.locale.Language.getInstance().has(key)) out.accept(Component.translatable(key).withStyle(net.minecraft.ChatFormatting.GRAY));
+						if (d.kind().equals("nesting_chest")) fr.achedon12.matriochka.block.NestingChests.appendTooltip(stack, out);
 					}
 				});
 				ITEMS.put(d.id(), item);
