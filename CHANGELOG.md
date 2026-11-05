@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- World 3: the halls really move. Every five minutes, 8 x 8 hall sections 16 to 40 blocks from each player swap places or turn, opening and closing passages; dust falls on them during the ten-second warning. Rooms, structures, locks, chests, stations, sealed doors and anything a player built never move, and no section next to a player does.
+- World 5: the lights you bring burn out. A placed torch, lantern, candle, campfire or glowing block lasts one minute and smokes for its last five seconds: torches crumble to a stick, campfires and candles are snuffed (relight them), glowing blocks become the new Spent Glow, the rest falls back as an item. The Deep's own blocks keep glowing, and a lit Solar Lantern now carries a real light with you. The Darkness pulse only hits players standing in the dark.
+- World 6: gravity changes by zone. The realm is cut into 32 x 32 columns and about a third of them are upside down, the pattern changing every 90 seconds: inside one, players, creatures and dropped items fall upward and stand on ceilings, up to 16 blocks above the ground. Purple sparks trace the borders. Gravity Boots, the Stabilizer and the Flipped Apple still protect you; Ceiling Walk and Vertigo come from the real thing.
+- World 9: whole 16 x 16 zones move. Every minute up to three zones around each player rise, sink, slide or close their chasms, carrying players, creatures and builds along (My Base Walks) without ever burying anyone. Terrain Anchors (16 blocks), Anchors and Anchor Bread (4 blocks around you) and Grip Boots hold the ground still; zones with chests, stations or unbreakable blocks never move.
+- Blocks placed by players are now remembered in worlds 3, 5, 9 and 10, so the moving worlds can protect, burn or carry them.
+- New in-game check of these four mechanics: `./gradlew runClientGameTest -Prules`.
+
 ## 0.2.0 (alpha)
 
 - Every creature now has its own signature attacks: 160 in all, three per creature and four per elite, none shared. Each has its own wind-up animation, numbers, afflictions, particles and sound, drawn from what the creature is.
