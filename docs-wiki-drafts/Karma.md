@@ -20,7 +20,7 @@ Killing a villager or one of the peoples of the worlds costs 5 karma (less once 
 
 ## Black markets
 
-From karma -25, every people keeps other goods under the counter: diamond fragments before their time, boss offerings, materials of the next world. Each offer can be bought three times before it restocks.
+From karma -25, every people keeps other goods under the counter: diamond fragments before their time, boss offerings, materials of the next world. Each black-market offer can be bought three times.
 
 ## Karma Paths quests
 
