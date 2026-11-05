@@ -16,7 +16,11 @@ public class ShowcaseTest implements FabricClientGameTest {
 
 	@Override
 	public void runTest(ClientGameTestContext ctx) {
-		try (TestSingleplayerContext sp = ctx.worldBuilder().create()) {
+		if ("trailer".equals(System.getProperty("matriochka.capture"))) {
+			new TrailerCapture().runTest(ctx);
+			return;
+		}
+		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
 			sp.getConnection().waitForChunksRender();
 			server.runCommand("gamerule advance_time false");

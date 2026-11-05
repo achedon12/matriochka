@@ -23,6 +23,11 @@ loom {
 			programArgs '--quickPlaySingleplayer', 'matrio_test'
 			vmArgs '-Xmx3G'
 		}
+		configureEach {
+			if (name == 'clientGameTest' && project.hasProperty('trailer')) {
+				vmArgs '-Dmatriochka.capture=trailer', '-Xmx4G'
+			}
+		}
 	}
 	mods {
 		matriochka {
