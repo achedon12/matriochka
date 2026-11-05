@@ -18,13 +18,17 @@ import net.minecraft.sounds.SoundEvents;
 public class JournalScreen extends Screen {
 	private static final int BW = 340, BH = 214, PW = 155;
 	private static final int TURN_MS = 420, UNROLL_MS = 560, ROLLUP_MS = 220;
-	private static final String[] TABS = {"objective", "quests", "karma", "worlds", "scroll"};
+	private static final String[] TABS = {"objective", "quests", "karma", "worlds", "scroll", "pages"};
+	private static final int PAGES_TAB = 5;
 	private static final int[] NEST_W = {42, 34, 28, 22, 16}, NEST_H = {64, 52, 42, 33, 25};
 	private final boolean scroll;
 	private final Ui.Buttons buttons = new Ui.Buttons();
 	private final Ui.Motion motion = new Ui.Motion(320, 170);
 	private final float[] hang = new float[TABS.length];
 	private int tab, page, questWorld;
+	// the Pages tab: the selected Journal page (world 1..10, index 0..4)
+	private int pageWorld = 1, pageIndex = 0;
+	private boolean cycleConfirm;
 	// page turn: the previous left page stays visible until the turning sheet covers it
 	private long turnAt = -1, pageAt = -1;
 	private int turnDir = 1, prevTab, prevPage;
@@ -34,6 +38,16 @@ public class JournalScreen extends Screen {
 		super(Component.translatable(scroll ? "item.matriochka.artisan_scroll" : "item.matriochka.artisan_journal"));
 		this.scroll = scroll;
 		for (int i = 0; i < hang.length; i++) hang[i] = 6;
+		int[] first = JournalPages.first();
+		if (first != null) {
+			pageWorld = first[0];
+			pageIndex = first[1];
+		}
+	}
+
+	/** Left edge of a ribbon bookmark above the cover. */
+	private int ribbonX(int i) {
+		return left() + 7 + i * 55;
 	}
 
 	/** Opens the journal on a given tab (used by the showcase). */
@@ -63,6 +77,24 @@ public class JournalScreen extends Screen {
 			buttons.add(l + BW / 2 - 70, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.previous"), () -> turnPage(-1), () -> page > 0);
 			buttons.add(l + BW / 2 + 30, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.next"), () -> turnPage(1), () -> page < 4);
 		}
+		if (!scroll && tab == PAGES_TAB) {
+			buttons.add(l + BW / 2 + 18, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.previous"), () -> stepPage(-1),
+				() -> JournalPages.step(pageWorld, pageIndex, -1) != null);
+			buttons.add(l + BW - 62, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.next"), () -> stepPage(1),
+				() -> JournalPages.step(pageWorld, pageIndex, 1) != null);
+		}
+		if (!scroll && tab == 0 && JournalPages.endingsSeen() > 0) {
+			Component label = Component.translatable(cycleConfirm ? "journal.matriochka.new_cycle.confirm" : "journal.matriochka.new_cycle");
+			buttons.add(l + BW - 98, t + BH - 30, 76, 16, label, () -> {
+				if (!cycleConfirm) {
+					cycleConfirm = true;
+					rebuild();
+					return;
+				}
+				ClientPlayNetworking.send(new Net.CyclePayload(true));
+				onClose();
+			});
+		}
 		if (!scroll && tab == 1) {
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> { questWorld = Math.max(0, questWorld - 1); pageAt = Ui.now(); turnDir = -1; rebuild(); }, () -> questWorld > 0);
 			buttons.add(l + BW - 40, t + BH - 30, 18, 16, Component.literal(">"), () -> { questWorld = Math.min(10, questWorld + 1); pageAt = Ui.now(); turnDir = 1; rebuild(); }, () -> questWorld < 10);
@@ -90,6 +122,22 @@ public class JournalScreen extends Screen {
 		Ui.pageTurn();
 	}
 
+	/** Moves to the previous or next page found, sliding the right page in. */
+	private void stepPage(int dir) {
+		int[] next = JournalPages.step(pageWorld, pageIndex, dir);
+		if (next == null) return;
+		selectPage(next[0], next[1], dir);
+	}
+
+	private void selectPage(int world, int index, int dir) {
+		if (world == pageWorld && index == pageIndex) return;
+		pageWorld = world;
+		pageIndex = index;
+		pageAt = Ui.now();
+		turnDir = dir;
+		Ui.pageTurn();
+	}
+
 	/** Turns to a tab as a click on its ribbon would (used by the showcase). */
 	public void turnTo(int i) {
 		switchTab(i);
@@ -102,6 +150,7 @@ public class JournalScreen extends Screen {
 		turnDir = i > tab ? 1 : -1;
 		tab = i;
 		page = 0;
+		cycleConfirm = false;
 		turnAt = Ui.now();
 		Ui.pageTurn();
 		rebuild();
@@ -174,7 +223,7 @@ public class JournalScreen extends Screen {
 		last = now;
 		// ribbons peek above the cover; the active one is pulled lower and glows, hovered ones lift a little
 		for (int i = 0; i < TABS.length; i++) {
-			int rx = l + 28 + i * 60;
+			int rx = ribbonX(i);
 			boolean on = tab == i;
 			boolean over = !on && mx >= rx && mx < rx + 54 && my >= t - 18 && my < t;
 			hang[i] = Ui.approach(hang[i], on ? 23 : over ? 18 : 15, on ? 9 : 14, dt);
@@ -221,8 +270,10 @@ public class JournalScreen extends Screen {
 			case 1 -> quests(g, rx, t + 24, cw, mx, my);
 			case 2 -> karma(g, rx, t + 24, cw);
 			case 3 -> worlds(g, rx, t + 24, cw, mx, my);
+			case PAGES_TAB -> journalPage(g, rx, t + 24, cw);
 			default -> drawScrollPage(g, rx, t + 24, cw, 1);
 		}
+		if (tab == PAGES_TAB && turn >= 1) pageIndexHover(g, lx, t, cw, mx, my);
 		g.pose().popMatrix();
 		buttons.draw(g, font, mx, my);
 		if (turn < 1) drawTurningSheet(g, l, t, turn);
@@ -260,7 +311,92 @@ public class JournalScreen extends Screen {
 		Component chapter = Component.translatable("journal.matriochka.tab." + TABS[forTab]);
 		g.text(font, chapter, lx + cw / 2 - font.width(chapter) / 2, t + 22, Ui.RED_INK, false);
 		Ui.sprite(g, "divider", lx + cw / 2 - 60, t + 31, 120, 10);
+		if (forTab == PAGES_TAB) {
+			pageIndex(g, lx, t, cw);
+			return;
+		}
 		drawDolls(g, lx + cw / 2, t + 176, forTab == 4 ? forPage : Math.max(0, Math.min(4, highest() + 1)), cw - 4);
+	}
+
+	// ---------------------------------------------------------------- the Pages tab
+	private static final int INDEX_Y = 42, INDEX_ROW = 13, PIP_X = 82, PIP_STEP = 10;
+
+	/** Left page of the Pages tab: one row per world, five pips for its five pages (gilded when read, red when found). */
+	private void pageIndex(GuiGraphicsExtractor g, int lx, int t, int cw) {
+		for (int w = 1; w <= 10; w++) {
+			int ry = t + INDEX_Y + (w - 1) * INDEX_ROW;
+			int found = JournalPages.found(w);
+			Component name = Component.translatable("hud.matriochka.world", w);
+			g.text(font, name, lx + 2, ry, found == 0 ? 0xFF9A8A6E : Ui.INK, false);
+			g.fill(lx + PIP_X - 6, ry + 2, lx + PIP_X - 3, ry + 5, found > 0 ? Ui.worldColor(w) : 0x60605048);
+			for (int i = 0; i < 5; i++) {
+				int px = lx + PIP_X + i * PIP_STEP;
+				boolean have = (found & (1 << i)) != 0;
+				boolean sel = w == pageWorld && i == pageIndex;
+				if (sel) {
+					g.fill(px - 2, ry - 2, px + 9, ry + 9, 0x2E8A2018);
+					g.fill(px - 2, ry + 9, px + 9, ry + 10, 0xFFB0782A);
+				}
+				String pip = !have ? "pip_locked" : JournalPages.readable(w, i) ? "pip_done" : "pip_open";
+				Ui.sprite(g, pip, px, ry, 7, 7);
+			}
+		}
+		Component total = Component.translatable("journal.matriochka.pages", JournalPages.total());
+		g.text(font, total, lx + cw / 2 - font.width(total) / 2, t + INDEX_Y + 10 * INDEX_ROW + 6, Ui.INK_SOFT, false);
+	}
+
+	/** Hover outline and tooltip over the index pips. */
+	private void pageIndexHover(GuiGraphicsExtractor g, int lx, int t, int cw, int mx, int my) {
+		int[] at = pipAt(lx, t, mx, my);
+		if (at == null) return;
+		int px = lx + PIP_X + at[1] * PIP_STEP, ry = t + INDEX_Y + (at[0] - 1) * INDEX_ROW;
+		g.fill(px - 1, ry - 1, px + 8, ry, 0xFFB0782A);
+		boolean have = (JournalPages.found(at[0]) & (1 << at[1])) != 0;
+		Component tip = have ? Component.translatable("journal.matriochka.page." + at[0] + "." + at[1] + ".title")
+			: Component.translatable("journal.matriochka.pages.label", at[0], at[1] + 1);
+		g.setTooltipForNextFrame(font, font.split(tip, 160), mx, my);
+	}
+
+	/** The (world, index) of the pip under the mouse, or null. */
+	private int[] pipAt(int lx, int t, double mx, double my) {
+		for (int w = 1; w <= 10; w++) {
+			int ry = t + INDEX_Y + (w - 1) * INDEX_ROW;
+			if (my < ry - 2 || my >= ry + 10) continue;
+			for (int i = 0; i < 5; i++) {
+				int px = lx + PIP_X + i * PIP_STEP;
+				if (mx >= px - 2 && mx < px + 9) return new int[]{w, i};
+			}
+		}
+		return null;
+	}
+
+	/** Right page of the Pages tab: the selected page, enciphered while it cannot be read yet. */
+	private void journalPage(GuiGraphicsExtractor g, int x, int y, int w) {
+		if (JournalPages.total() == 0) {
+			g.textWithWordWrap(font, Component.translatable("journal.matriochka.pages.none"), x, y + 4, w, Ui.INK_SOFT, false);
+			return;
+		}
+		Component label = Component.translatable("journal.matriochka.pages.label", pageWorld, pageIndex + 1);
+		g.text(font, label, x, y, Ui.INK_SOFT, false);
+		g.fill(x + w - 4, y + 2, x + w, y + 6, Ui.worldColor(pageWorld));
+		boolean have = (JournalPages.found(pageWorld) & (1 << pageIndex)) != 0;
+		if (!have) {
+			g.textWithWordWrap(font, Component.translatable("journal.matriochka.pages.missing", pageWorld), x, y + 16, w, 0xFF9A8A6E, false);
+			return;
+		}
+		String base = "journal.matriochka.page." + pageWorld + "." + pageIndex;
+		int yy = y + 13 + g.textWithWordWrap(font, Component.translatable(base + ".title"), x, y + 13, w, Ui.RED_INK, false);
+		g.fill(x, yy + 1, x + Math.min(w, 60), yy + 2, 0xFFB0782A);
+		yy += 7;
+		boolean coded = JournalPages.coded(pageIndex);
+		boolean readable = JournalPages.readable(pageWorld, pageIndex);
+		Component body = Component.translatable(base);
+		if (coded && !readable) body = Component.literal(JournalPages.cipher(body.getString(), pageWorld));
+		int bodyH = g.textWithWordWrap(font, body, x, yy, w, readable ? Ui.INK : 0xFF5A3A5A, false);
+		if (coded) {
+			Component note = Component.translatable(readable ? "journal.matriochka.pages.decoded" : "journal.matriochka.pages.coded");
+			g.textWithWordWrap(font, note, x, yy + bodyH + 6, w, readable ? Ui.GREEN : Ui.RED_INK, false);
+		}
 	}
 
 	private void drawScrollPage(GuiGraphicsExtractor g, int x, int y, int w, float alpha) {
@@ -277,6 +413,7 @@ public class JournalScreen extends Screen {
 	private void objective(GuiGraphicsExtractor g, int x, int y, int w) {
 		int h = highest();
 		String key = h < 0 ? "journal.matriochka.objective.guardian" : h >= 10 ? "journal.matriochka.objective.end" : "journal.matriochka.objective.next";
+		if (h >= 10 && JournalPages.carries("whole_matryoshka") && !MatrioClient.state.getBooleanOr("f_end_tools", false)) key = "journal.matriochka.objective.zero";
 		int yy = y + g.textWithWordWrap(font, Component.translatable(key, h + 1), x, y, w, Ui.INK, false) + 10;
 		var s = MatrioClient.state;
 		int max = s.getIntOr("doll_max", 0), layers = s.getIntOr("doll_layers", 0);
@@ -294,6 +431,14 @@ public class JournalScreen extends Screen {
 		g.text(font, Component.translatable("journal.matriochka.pages", pages), x, yy + 12, Ui.INK_SOFT, false);
 		String title = s.getStringOr("title", "");
 		if (!title.isEmpty()) g.text(font, Component.translatable("title.matriochka." + title), x, yy + 24, Ui.RED_INK, false);
+		yy += 36;
+		int cycle = s.getIntOr("cycle", 0);
+		if (cycle > 0) {
+			g.text(font, Component.translatable("journal.matriochka.cycle", cycle + 1), x, yy, Ui.RED_INK, false);
+			yy += 12;
+		}
+		Component endings = JournalPages.endingNames();
+		if (endings != null) g.textWithWordWrap(font, Component.translatable("journal.matriochka.endings", endings), x, yy, w, Ui.INK_SOFT, false);
 	}
 
 	private void quests(GuiGraphicsExtractor g, int x, int y, int w, int mx, int my) {
@@ -403,10 +548,17 @@ public class JournalScreen extends Screen {
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
 		if (motion.closing()) return true;
 		if (buttons.click(event.x(), event.y())) return true;
+		if (!scroll && tab == PAGES_TAB) {
+			int[] at = pipAt(left() + 20, top(), event.x(), event.y());
+			if (at != null) {
+				selectPage(at[0], at[1], at[0] * 5 + at[1] > pageWorld * 5 + pageIndex ? 1 : -1);
+				return true;
+			}
+		}
 		if (!scroll) {
 			int l = left(), t = top();
 			for (int i = 0; i < TABS.length; i++) {
-				int rx = l + 28 + i * 60;
+				int rx = ribbonX(i);
 				if (event.x() >= rx && event.x() < rx + 54 && event.y() >= t - Math.max(15, hang[i]) && event.y() < t) {
 					switchTab(i);
 					return true;
