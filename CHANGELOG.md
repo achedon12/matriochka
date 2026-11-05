@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- New hand-painted textures for the items and blocks you see most, in the vanilla style (outlines, three to four tones lit from the top left, warm highlights and cool shadows): the ten hidden dolls, the Nested Dolls, the Whole Matryoshka and the other dolls, the eleven cores, the ten Seeds, every armor piece and world weapon, the four snorkel helmets, the Scroll, Journal and pages, the four boss offerings, the World Soils, the World Block, the Threshold and every face of the thirteen stations. Each world's objects share its palette and glyph.
+- The lit parts of the stations and the Threshold's doorway glow in the dark (emissive faces, as vanilla does for the firefly bush).
+- Every world has its own light and fog: spore haze in World 1, heat and falling embers in World 2, cold dust in World 3, a storm sky in World 4, near-black fog in World 5, an inverted pastel sky in World 6, deep blue water fog in World 7, light tinted by the season in World 8 (petals, pollen, leaves or snow), rust haze in World 9, warm workshop light with floating fluff in World 10, and lantern light with gold dust in World 0.
+- Eighteen new particles (spores, embers, cold dust, chain glints, lightning sparks, shadow wisps, deep motes, mirror shards, bubbles, petals, pollen, leaves, snowflakes, grit, rust, thread scraps, fluff, gold dust). Boss attacks spray their world's particles where they land and around their warning ring, and many creature attacks use them.
+- Matriochka HD: an optional resource pack with the same textures at 32 x 32, attached to each release.
+- Works with Iris shader packs through vanilla light only (emissive faces, full-bright particles); see the Visuals page of the wiki.
+
 ## 0.3.0 (alpha)
 
 The story is complete: the Artisan's Journal, the hidden dolls, World 0, three endings and the New Cycle. World 7 is now entirely under water, worlds 3, 5, 6, 9 and 10 have their full mechanics, and the mod has its own music and sounds. Trailer: [matriochka-trailer.mp4](https://github.com/achedon12/matriochka/releases/download/v0.3.0/matriochka-trailer.mp4).

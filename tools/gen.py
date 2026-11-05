@@ -12,6 +12,9 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from content import *  # noqa
 from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx, paint_snorkel_item, paint_snorkel_layer
+import atmosphere
+import craft
+import particles
 import models
 import bosses_hd
 import attacks
@@ -25,6 +28,7 @@ A = os.path.join(RES, "assets/matriochka")
 D = os.path.join(RES, "data/matriochka")
 JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Content.java")
 SOUNDS_JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Sounds.java")
+PARTICLES_JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Particles.java")
 MC = os.environ.get("MC_DATA", os.path.join(os.path.dirname(os.path.abspath(__file__)), "vanilla"))
 NS = "matriochka"
 
@@ -92,7 +96,10 @@ def gen_items():
             lang(f"item.{NS}.{iid}.desc", it["effect_en"], it["effect_fr"])
         p = it.get("pal") or pal(it["world"])
         tpath = os.path.join(A, f"textures/item/{iid}.png")
-        if it["kind"] == "armor":
+        hand = craft.crafted_item(it)
+        if hand is not None:
+            hand.image().save(tpath)
+        elif it["kind"] == "armor":
             paint_armor_item(it["piece"], p, iid, tpath)
         elif it["kind"] == "snorkel":
             paint_snorkel_item(SNORKEL_PAL[iid], iid, tpath)
@@ -122,6 +129,25 @@ def gen_items():
 
 
 # ------------------------------------------------------------------ blocks
+def emissive_cube(tex, glow):
+    """A full cube (up/down/side textures) with an emissive overlay on the faces that have a glow texture: the overlay
+    is a second, coplanar element with light_emission 15, as vanilla does for the firefly bush and the eyeblossom, so
+    the lit parts stay bright in the dark and with shader packs that respect vanilla block light."""
+    faces = {"north": "side", "south": "side", "east": "side", "west": "side", "up": "up", "down": "down"}
+    textures = {"particle": tex["side"]}
+    for key in ("up", "down", "side"):
+        textures[key] = tex[key]
+        if glow.get(key):
+            textures[key + "_glow"] = glow[key]
+    base = {"from": [0, 0, 0], "to": [16, 16, 16],
+            "faces": {f: {"uv": [0, 0, 16, 16], "texture": "#" + k, "cullface": f} for f, k in faces.items()}}
+    elements = [base]
+    lit = {f: {"uv": [0, 0, 16, 16], "texture": "#" + k + "_glow", "cullface": f} for f, k in faces.items() if glow.get(k)}
+    if lit:
+        elements.append({"from": [0, 0, 0], "to": [16, 16, 16], "light_emission": 15, "faces": lit})
+    return {"parent": "minecraft:block/block", "textures": textures, "elements": elements}
+
+
 def gen_blocks():
     for b in BLOCKS:
         bid = b["id"]
@@ -130,16 +156,31 @@ def gen_blocks():
             lang(f"block.{NS}.{bid}.desc", b["note_en"], b["note_fr"])
         p = ORE_PAL.get(b["id"]) or pal(b["world"])
         tpath = mk(os.path.join(A, f"textures/block/{bid}.png"))
-        paint_block(b["style"], p, bid, tpath)
+        hand = craft.crafted_block(bid)
+        glows = {}
+        if hand is not None:
+            for suffix, spr in hand.items():
+                spr.image().save(os.path.join(A, f"textures/block/{bid}{suffix}.png"))
+                if spr.glow:
+                    spr.glow_image().save(os.path.join(A, f"textures/block/{bid}{suffix}_glow.png"))
+                    glows[suffix] = f"{NS}:block/{bid}{suffix}_glow"
+        else:
+            paint_block(b["style"], p, bid, tpath)
         if b["kind"] == "station":
-            paint_station_top(p, bid + "t", os.path.join(A, f"textures/block/{bid}_top.png"))
-            model = {"parent": "minecraft:block/cube_bottom_top",
-                     "textures": {"top": f"{NS}:block/{bid}_top", "bottom": f"{NS}:block/painted_wood", "side": f"{NS}:block/{bid}"}}
+            if hand is None:
+                paint_station_top(p, bid + "t", os.path.join(A, f"textures/block/{bid}_top.png"))
+            bottom = f"{NS}:block/{bid}_bottom" if hand is not None else f"{NS}:block/painted_wood"
+            model = emissive_cube({"up": f"{NS}:block/{bid}_top", "down": bottom, "side": f"{NS}:block/{bid}"},
+                                  {"up": glows.get("_top"), "down": glows.get("_bottom"), "side": glows.get("")})
         elif b["kind"] == "soil":
-            paint_block("soil", p, bid + "f", os.path.join(A, f"textures/block/{bid}_tilled.png"))
+            if hand is None:
+                paint_block("soil", p, bid + "f", os.path.join(A, f"textures/block/{bid}_tilled.png"))
             model = {"parent": "minecraft:block/cube_all", "textures": {"all": f"{NS}:block/{bid}"}}
             w(os.path.join(A, f"models/block/{bid}_tilled.json"),
               {"parent": "minecraft:block/template_cube_bottom_top_indented", "textures": {"bottom": f"{NS}:block/{bid}", "side": f"{NS}:block/{bid}", "top": f"{NS}:block/{bid}_tilled"}})
+        elif glows:
+            model = emissive_cube({"up": f"{NS}:block/{bid}", "down": f"{NS}:block/{bid}", "side": f"{NS}:block/{bid}"},
+                                  {"up": glows.get(""), "down": glows.get(""), "side": glows.get("")})
         elif b["kind"] == "planted_seed":
             model = {"parent": "minecraft:block/cross", "textures": {"cross": f"{NS}:block/planted_seed_cross"}}
             paint_item("seed", p, "seed_block", os.path.join(A, "textures/block/planted_seed_cross.png"))
@@ -473,7 +514,10 @@ def gen_worldgen():
             if "clock" in moon:
                 moon["clock"] = f"{NS}:hastened"
             w(os.path.join(D, "timeline/hastened_moon.json"), moon)
-            w(os.path.join(D, "tags/timeline/in_hastened.json"), {"values": ["#minecraft:universal", f"{NS}:hastened_day", f"{NS}:hastened_moon"]})
+            # the seasons tint the light and change the floating particles (tools/atmosphere.py)
+            w(os.path.join(D, "world_clock/seasons.json"), {})
+            w(os.path.join(D, "timeline/seasons.json"), atmosphere.season_timeline())
+            w(os.path.join(D, "tags/timeline/in_hastened.json"), {"values": ["#minecraft:universal", f"{NS}:hastened_day", f"{NS}:hastened_moon", f"{NS}:seasons"]})
         w(os.path.join(D, f"dimension_type/{key}.json"), dt)
 
         # biome
@@ -549,6 +593,7 @@ def gen_worldgen():
         bio["temperature"] = {1: 0.95, 2: 2.0, 4: 0.5, 7: 0.5}.get(n, 0.8)
         bio["downfall"] = 0.9 if n in (1, 4) else 0.3
         bio["attributes"].update(sound.biome_audio(n))
+        bio["attributes"].update(atmosphere.biome(n))
         w(os.path.join(D, f"worldgen/biome/{key}.json"), bio)
         lang(f"biome.{NS}.{key}", f"World {n}", f"Monde {n}")
 
@@ -667,6 +712,7 @@ def gen_world_zero():
     bio["temperature"] = 0.8
     bio["downfall"] = 0.0
     bio["attributes"].update(sound.biome_audio(0))
+    bio["attributes"].update(atmosphere.biome(wd["n"]))
     w(os.path.join(D, f"worldgen/biome/{key}.json"), bio)
     w(os.path.join(D, f"dimension/{key}.json"), {"type": f"{NS}:{key}", "generator": {
         "type": "minecraft:noise", "biome_source": {"type": "minecraft:fixed", "biome": f"{NS}:{key}"}, "settings": f"{NS}:{key}"}})
@@ -916,6 +962,7 @@ def main():
     gen_lang_misc()
     gen_lang_story()
     gen_java()
+    particles.gen(A, PARTICLES_JAVA)
     rendered = sound.gen(A, SOUNDS_JAVA, lang, w)
     # merge hand-written lang (ui strings)
     for code, table in (("en_us", EN), ("fr_fr", FR)):

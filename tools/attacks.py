@@ -35,9 +35,9 @@ D = {  # delivery defaults
 A = {
     # ---------------------------------------------------------------- World 1, Toxic Jungle
     "sporeling": [
-        ("nip", "Spore Nip", "Morsure de spores", "melee", dict(n=2, iv=4, m=0.6, g=[("toxin", 3)], p="spore_blossom_air", s="entity.fox.bite")),
+        ("nip", "Spore Nip", "Morsure de spores", "melee", dict(n=2, iv=4, m=0.6, g=[("toxin", 3)], p="matriochka:spore", s="entity.fox.bite")),
         ("pop", "Puffball Pop", "Vesse-de-loup", "ring", dict(r=2.5, m=0.6, up=0.2, g=[("toxin", 8)], p="falling_spore_blossom", s="entity.puffer_fish.blow_up", hit=10, end=16)),
-        ("scatter", "Scatter Hop", "Saut d'essaim", "leap", dict(m=0.9, up=0.55, min=2, max=7, p="spore_blossom_air", s="entity.slime.jump")),
+        ("scatter", "Scatter Hop", "Saut d'essaim", "leap", dict(m=0.9, up=0.55, min=2, max=7, p="matriochka:spore", s="entity.slime.jump")),
     ],
     "root_creeper": [
         ("tangle", "Root Tangle", "Entrave de racines", "grab", dict(hold=60, m=0.4, fx=[("slowness", 60, 4)], p="mycelium", s="block.rooted_dirt.break")),
@@ -46,11 +46,11 @@ A = {
     ],
     "snare_flower": [
         ("spit", "Nectar Spit", "Crachat de nectar", "bolt", dict(m=0.7, g=[("toxin", 6)], fx=[("nausea", 60, 0)], p="falling_spore_blossom", s="entity.llama.spit")),
-        ("bloom", "Carnivore Bloom", "Floraison carnivore", "ring", dict(r=3.0, m=1.1, up=0.1, fx=[("poison", 60, 1)], p="spore_blossom_air", s="block.big_dripleaf.tilt_down")),
+        ("bloom", "Carnivore Bloom", "Floraison carnivore", "ring", dict(r=3.0, m=1.1, up=0.1, fx=[("poison", 60, 1)], p="matriochka:spore", s="block.big_dripleaf.tilt_down")),
         ("reel", "Pollen Reel", "Ressac de pollen", "pull", dict(r=10, kb=0.9, m=0.6, g=[("toxin", 4)], p="falling_spore_blossom", s="entity.fishing_bobber.retrieve")),
     ],
     "spore_bearer": [
-        ("cough", "Spore Cough", "Toux de spores", "bolt", dict(n=3, iv=3, m=0.35, g=[("toxin", 3)], p="spore_blossom_air", s="entity.panda.sneeze")),
+        ("cough", "Spore Cough", "Toux de spores", "bolt", dict(n=3, iv=3, m=0.35, g=[("toxin", 3)], p="matriochka:spore", s="entity.panda.sneeze")),
         ("veil", "Choking Veil", "Voile étouffant", "trail", dict(r=3.0, dur=140, fx=[("poison", 60, 0), ("blindness", 40, 0)], p="falling_spore_blossom", s="block.fungus.break")),
         ("burst", "Sac Burst", "Éclatement du sac", "ring", dict(r=4.0, m=0.5, up=0.3, fx=[("weakness", 100, 0)], p="crimson_spore", s="entity.slime.squish")),
     ],
@@ -58,13 +58,13 @@ A = {
         ("bash", "Carapace Bash", "Coup de carapace", "dash", dict(m=1.1, kb=1.4, p="crit", s="entity.ravager.attack")),
         ("pincer", "Pincer Clamp", "Étau de pinces", "grab", dict(hold=30, m=0.8, fx=[("slowness", 30, 6)], p="crit", s="entity.player.attack.crit")),
         ("harden", "Harden Shell", "Durcir la coque", "ward", dict(self=[("resistance", 100, 2)], p="wax_on", s="item.armor.equip_netherite")),
-        ("stomp", "Hive Stomp", "Piétinement de ruche", "quake", dict(r=5, m=0.6, n=2, p="falling_spore_blossom", s="entity.iron_golem.attack")),
+        ("stomp", "Hive Stomp", "Piétinement de ruche", "quake", dict(r=5, m=0.6, n=2, p="matriochka:spore", s="entity.iron_golem.attack")),
     ],
     # ---------------------------------------------------------------- World 2, Giant Veins
     "ash_miner": [
         ("pick", "Pick Swing", "Coup de pioche", "melee", dict(m=1.1, r=3.2, fx=[("mining_fatigue", 80, 0)], p="crit", s="block.stone.break")),
         ("lamp", "Lamp Flare", "Éclat de lampe", "bolt", dict(m=0.6, fire=3, p="flame", s="entity.blaze.shoot")),
-        ("cave", "Cave-In", "Éboulement", "rain", dict(r=2.5, m=1.3, p="ash", s="block.pointed_dripstone.land")),
+        ("cave", "Cave-In", "Éboulement", "rain", dict(r=2.5, m=1.3, p="matriochka:grit", s="block.pointed_dripstone.land")),
     ],
     "living_vein": [
         ("pulse", "Molten Pulse", "Pulsation en fusion", "ring", dict(r=3.0, m=0.9, g=[("heat", 8)], p="lava", s="block.lava.pop")),
@@ -73,12 +73,12 @@ A = {
     ],
     "rock_salamander": [
         ("tongue", "Searing Tongue", "Langue brûlante", "pull", dict(r=8, kb=1.0, m=0.7, fire=3, p="flame", s="entity.frog.tongue")),
-        ("roll", "Ember Roll", "Roulade de braises", "dash", dict(m=0.9, kb=0.6, g=[("heat", 5)], p="small_flame", s="entity.blaze.burn")),
+        ("roll", "Ember Roll", "Roulade de braises", "dash", dict(m=0.9, kb=0.6, g=[("heat", 5)], p="matriochka:ember", s="entity.blaze.burn")),
         ("tailflick", "Tail Flick", "Coup de queue", "spin", dict(n=2, m=0.6, r=2.4, fire=2, p="flame", s="entity.player.attack.sweep")),
     ],
     "dead_smith": [
         ("hammer", "Anvil Blow", "Coup d'enclume", "melee", dict(m=1.4, r=3.0, fx=[("slowness", 40, 1)], p="crit", s="block.anvil.land", hit=12, end=18)),
-        ("sparks", "Forge Sparks", "Gerbe d'étincelles", "cone", dict(r=4.0, m=0.6, fire=4, kb=0.3, p="flame", s="block.grindstone.use")),
+        ("sparks", "Forge Sparks", "Gerbe d'étincelles", "cone", dict(r=4.0, m=0.6, fire=4, kb=0.3, p="matriochka:ember", s="block.grindstone.use")),
         ("tongs", "Red-Hot Tongs", "Tenailles rougies", "grab", dict(hold=30, m=0.7, fire=3, p="small_flame", s="block.smithing_table.use")),
     ],
     "slag_golem": [
@@ -90,7 +90,7 @@ A = {
     # ---------------------------------------------------------------- World 3, Endless Dungeon
     "jailer_mob": [
         ("baton", "Baton Strike", "Coup de matraque", "melee", dict(m=1.0, fx=[("slowness", 40, 2)], p="crit", s="entity.player.attack.knockback")),
-        ("shackle", "Thrown Shackle", "Menottes lancées", "bolt", dict(m=0.5, fx=[("slowness", 60, 3)], p="crit", s="block.chain.place")),
+        ("shackle", "Thrown Shackle", "Menottes lancées", "bolt", dict(m=0.5, fx=[("slowness", 60, 3)], p="matriochka:chain_glint", s="block.chain.place")),
         ("lockdown", "Lockdown", "Confinement", "roar", dict(r=10, fx=[("slowness", 80, 1), ("mining_fatigue", 80, 1)], p="angry_villager", s="block.bell.use")),
     ],
     "sentinel": [
@@ -100,12 +100,12 @@ A = {
     ],
     "living_lock": [
         ("snap", "Tumbler Snap", "Claquement de gorge", "melee", dict(m=1.2, r=2.6, p="crit", s="block.iron_trapdoor.close")),
-        ("keyhole", "Keyhole Draw", "Appel de la serrure", "pull", dict(r=7, kb=1.4, m=0.4, p="portal", s="block.iron_door.open")),
+        ("keyhole", "Keyhole Draw", "Appel de la serrure", "pull", dict(r=7, kb=1.4, m=0.4, p="matriochka:chain_glint", s="block.iron_door.open")),
         ("seal", "Seal Shut", "Scellé", "grab", dict(hold=50, m=0.3, fx=[("weakness", 80, 1)], p="wax_on", s="block.chest.locked")),
     ],
     "dungeon_rat": [
         ("gnaw", "Gnaw", "Rongement", "melee", dict(n=3, iv=3, m=0.35, fx=[("hunger", 80, 0)], p="crit", s="entity.silverfish.hurt")),
-        ("skitter", "Skitter", "Détalade", "leap", dict(m=0.8, up=0.3, min=2, max=6, p="poof", s="entity.silverfish.step")),
+        ("skitter", "Skitter", "Détalade", "leap", dict(m=0.8, up=0.3, min=2, max=6, p="matriochka:cold_dust", s="entity.silverfish.step")),
         ("plague", "Plague Squeak", "Couinement de peste", "roar", dict(r=6, fx=[("hunger", 120, 1)], p="mycelium", s="entity.bat.ambient")),
     ],
     "executioner": [
@@ -122,7 +122,7 @@ A = {
     ],
     "storm_bird": [
         ("dive", "Thunder Dive", "Piqué tonnerre", "leap", dict(m=1.3, up=0.1, p="electric_spark", s="entity.phantom.swoop")),
-        ("static", "Static Feathers", "Plumes statiques", "bolt", dict(n=3, iv=2, m=0.35, fx=[("slowness", 20, 1)], p="electric_spark", s="entity.breeze.shoot")),
+        ("static", "Static Feathers", "Plumes statiques", "bolt", dict(n=3, iv=2, m=0.35, fx=[("slowness", 20, 1)], p="matriochka:storm_spark", s="entity.breeze.shoot")),
         ("screech", "Storm Screech", "Cri d'orage", "roar", dict(r=9, fx=[("nausea", 80, 0)], p="electric_spark", s="entity.parrot.imitate.phantom")),
     ],
     "island_warden": [
@@ -132,46 +132,46 @@ A = {
     ],
     "cloud_mine": [
         ("drift", "Drift Charge", "Dérive chargée", "dash", dict(m=0.7, kb=1.0, p="electric_spark", s="entity.creeper.primed")),
-        ("arc", "Static Arc", "Arc statique", "beam", dict(m=0.2, n=5, iv=4, r=6, p="electric_spark", s="entity.guardian.attack")),
+        ("arc", "Static Arc", "Arc statique", "beam", dict(m=0.2, n=5, iv=4, r=6, p="matriochka:storm_spark", s="entity.guardian.attack")),
         ("puff", "Thunderhead", "Cumulonimbus", "ring", dict(r=3.0, m=0.6, up=0.8, fx=[("levitation", 15, 1)], p="cloud", s="entity.breeze.wind_burst")),
     ],
     "sky_harpooner": [
         ("harpoon", "Barbed Harpoon", "Harpon barbelé", "bolt", dict(m=1.0, fx=[("slowness", 40, 2)], p="crit", s="item.trident.throw")),
         ("reel", "Line Reel", "Ressac de ligne", "pull", dict(r=14, kb=1.6, m=0.6, p="crit", s="item.trident.return")),
         ("deck", "Deck Sweep", "Balayage de pont", "cone", dict(r=4.0, m=0.9, kb=1.6, p="sweep_attack", s="entity.player.attack.sweep")),
-        ("storm", "Harpoon Storm", "Tempête de harpons", "rain", dict(r=3.5, m=1.0, p="electric_spark", s="item.trident.thunder")),
+        ("storm", "Harpoon Storm", "Tempête de harpons", "rain", dict(r=3.5, m=1.0, p="matriochka:storm_spark", s="item.trident.thunder")),
     ],
     # ---------------------------------------------------------------- World 5, Lightless Deep
     "blind_prowler": [
         ("maul", "Blind Maul", "Mutilation aveugle", "melee", dict(n=2, iv=5, m=0.8, p="squid_ink", s="entity.warden.attack_impact")),
-        ("hunt", "Echo Hunt", "Chasse à l'écho", "leap", dict(m=1.2, min=3, max=10, p="sculk_soul", s="entity.warden.sniff")),
+        ("hunt", "Echo Hunt", "Chasse à l'écho", "leap", dict(m=1.2, min=3, max=10, p="matriochka:shadow_wisp", s="entity.warden.sniff")),
         ("howl", "Lightless Howl", "Hurlement sans lumière", "roar", dict(r=10, fx=[("darkness", 120, 0)], p="sculk_soul", s="entity.warden.roar")),
     ],
     "glow_devourer": [
-        ("slurp", "Glow Slurp", "Lampée de lueur", "pull", dict(r=8, kb=1.0, m=0.5, fx=[("blindness", 40, 0)], p="glow", s="entity.generic.drink")),
+        ("slurp", "Glow Slurp", "Lampée de lueur", "pull", dict(r=8, kb=1.0, m=0.5, fx=[("blindness", 40, 0)], p="matriochka:deep_mote", s="entity.generic.drink")),
         ("gulp", "Lantern Gulp", "Gorgée de lanterne", "grab", dict(hold=40, m=0.6, heal=0.1, p="glow", s="entity.generic.eat")),
         ("ink", "Ink Burst", "Jet d'encre", "ring", dict(r=4.0, m=0.4, up=0.1, fx=[("blindness", 80, 0)], p="squid_ink", s="entity.glow_squid.squirt")),
     ],
     "echo": [
         ("mimic", "Borrowed Cry", "Cri emprunté", "blink", dict(m=0.9, p="sculk_soul", s="entity.player.hurt")),
         ("reverb", "Reverb", "Réverbération", "quake", dict(r=7, n=3, m=0.4, fx=[("nausea", 60, 0)], p="sonic_boom", s="entity.warden.sonic_charge")),
-        ("whisper", "Whisper", "Murmure", "bolt", dict(m=0.6, fx=[("darkness", 60, 0)], p="soul", s="entity.allay.ambient_without_item")),
+        ("whisper", "Whisper", "Murmure", "bolt", dict(m=0.6, fx=[("darkness", 60, 0)], p="matriochka:shadow_wisp", s="entity.allay.ambient_without_item")),
     ],
     "eyeless_watcher": [
         ("stare", "Eyeless Stare", "Regard sans yeux", "beam", dict(m=0.25, n=6, iv=5, r=10, fx=[("darkness", 40, 0)], p="soul", s="entity.elder_guardian.curse")),
-        ("grasp", "Cold Grasp", "Étreinte froide", "grab", dict(hold=40, m=0.5, fx=[("weakness", 60, 1)], p="soul", s="entity.vex.charge")),
+        ("grasp", "Cold Grasp", "Étreinte froide", "grab", dict(hold=40, m=0.5, fx=[("weakness", 60, 1)], p="matriochka:shadow_wisp", s="entity.vex.charge")),
         ("snuff", "Snuff Out", "Mouchage", "roar", dict(r=8, fx=[("blindness", 60, 0)], p="large_smoke", s="block.candle.extinguish")),
     ],
     "shadow_mother": [
         ("rend", "Rend", "Lacération", "melee", dict(n=3, iv=4, m=0.6, p="squid_ink", s="entity.ravager.attack")),
         ("brood", "Call the Brood", "Appel de la nichée", "summon", dict(summon="blind_prowler", count=1, p="squid_ink", s="entity.warden.emerge")),
-        ("pounce", "Night Pounce", "Bond nocturne", "leap", dict(m=1.4, up=0.5, min=3, max=10, p="squid_ink", s="entity.warden.attack_impact")),
-        ("smother", "Smother", "Étouffement", "ring", dict(r=4.0, m=0.8, fx=[("darkness", 100, 0), ("slowness", 60, 1)], p="squid_ink", s="entity.warden.heartbeat")),
+        ("pounce", "Night Pounce", "Bond nocturne", "leap", dict(m=1.4, up=0.5, min=3, max=10, p="matriochka:shadow_wisp", s="entity.warden.attack_impact")),
+        ("smother", "Smother", "Étouffement", "ring", dict(r=4.0, m=0.8, fx=[("darkness", 100, 0), ("slowness", 60, 1)], p="matriochka:shadow_wisp", s="entity.warden.heartbeat")),
     ],
     # ---------------------------------------------------------------- World 6, Upside Realm
     "reflection": [
         ("mirror", "Mirror Strike", "Frappe miroir", "blink", dict(m=1.1, p="reverse_portal", s="entity.illusioner.mirror_move")),
-        ("shards", "Glass Shards", "Éclats de verre", "bolt", dict(n=4, iv=2, m=0.3, p="end_rod", s="block.glass.break")),
+        ("shards", "Glass Shards", "Éclats de verre", "bolt", dict(n=4, iv=2, m=0.3, p="matriochka:mirror_shard", s="block.glass.break")),
         ("parry", "Reversed Parry", "Parade inversée", "ward", dict(self=[("resistance", 60, 3)], p="reverse_portal", s="item.shield.block")),
     ],
     "ceiling_walker": [
@@ -190,10 +190,10 @@ A = {
         ("stride", "Long Stride", "Grande enjambée", "dash", dict(m=1.0, kb=1.0, p="poof", s="entity.strider.step")),
     ],
     "broken_mirror": [
-        ("splinter", "Splinter Storm", "Tempête d'éclats", "ring", dict(r=4.0, m=0.7, up=0.1, p="end_rod", s="block.glass.break")),
+        ("splinter", "Splinter Storm", "Tempête d'éclats", "ring", dict(r=4.0, m=0.7, up=0.1, p="matriochka:mirror_shard", s="block.glass.break")),
         ("refract", "Refraction Beam", "Rayon réfracté", "beam", dict(m=0.3, n=6, iv=4, r=12, fx=[("nausea", 60, 0)], p="end_rod", s="block.amethyst_block.resonate")),
         ("twin", "Shattered Twin", "Jumeau brisé", "summon", dict(summon="reflection", count=1, p="reverse_portal", s="entity.illusioner.prepare_mirror")),
-        ("shard", "Crack Shard", "Fêlure", "cone", dict(r=4.0, m=1.0, kb=0.6, fx=[("weakness", 60, 0)], p="end_rod", s="block.glass.break")),
+        ("shard", "Crack Shard", "Fêlure", "cone", dict(r=4.0, m=1.0, kb=0.6, fx=[("weakness", 60, 0)], p="matriochka:mirror_shard", s="block.glass.break")),
     ],
     # ---------------------------------------------------------------- World 7, Pressure Ocean
     "abyssal_hunter": [
@@ -224,9 +224,9 @@ A = {
     ],
     # ---------------------------------------------------------------- World 8, Hastened Seasons
     "seasonal_creature": [
-        ("thaw", "Spring Thaw", "Dégel printanier", "trail", dict(r=2.5, dur=100, fx=[("poison", 40, 0)], p="happy_villager", s="block.azalea_leaves.break")),
+        ("thaw", "Spring Thaw", "Dégel printanier", "trail", dict(r=2.5, dur=100, fx=[("poison", 40, 0)], p="matriochka:petal", s="block.azalea_leaves.break")),
         ("heat", "Summer Charge", "Charge estivale", "dash", dict(m=1.0, fire=3, p="small_flame", s="entity.ravager.step")),
-        ("fall", "Leaf Fall", "Chute des feuilles", "rain", dict(r=3.0, m=1.0, fx=[("weakness", 60, 0)], p="cherry_leaves", s="block.cherry_leaves.break")),
+        ("fall", "Leaf Fall", "Chute des feuilles", "rain", dict(r=3.0, m=1.0, fx=[("weakness", 60, 0)], p="matriochka:autumn_leaf", s="block.cherry_leaves.break")),
     ],
     "hourglass_elder": [
         ("sand", "Sand of Hours", "Sable des heures", "beam", dict(m=0.2, n=8, iv=4, r=10, fx=[("slowness", 40, 1)], p="white_ash", s="block.sand.fall")),
@@ -235,7 +235,7 @@ A = {
     ],
     "dusk_shade": [
         ("fade", "Dusk Fade", "Fondu du crépuscule", "blink", dict(m=1.1, p="large_smoke", s="entity.phantom.flap")),
-        ("cut", "Twilight Cut", "Taille crépusculaire", "melee", dict(n=2, iv=5, m=0.7, fx=[("darkness", 40, 0)], p="squid_ink", s="entity.player.attack.sweep")),
+        ("cut", "Twilight Cut", "Taille crépusculaire", "melee", dict(n=2, iv=5, m=0.7, fx=[("darkness", 40, 0)], p="matriochka:shadow_wisp", s="entity.player.attack.sweep")),
         ("nightfall", "Nightfall", "Tombée de la nuit", "ring", dict(r=4.0, m=0.6, fx=[("blindness", 60, 0)], p="large_smoke", s="entity.phantom.swoop")),
     ],
     "minute_child": [
@@ -251,7 +251,7 @@ A = {
     ],
     # ---------------------------------------------------------------- World 9, Restless Ground
     "crawling_block": [
-        ("slam", "Block Slam", "Écrasement de bloc", "rain", dict(r=1.8, m=1.5, p="poof", s="block.stone.place")),
+        ("slam", "Block Slam", "Écrasement de bloc", "rain", dict(r=1.8, m=1.5, p="matriochka:grit", s="block.stone.place")),
         ("tumble", "Tumble", "Culbute", "dash", dict(m=1.0, kb=1.0, p="crit", s="block.stone.step")),
         ("bury", "Bury", "Enfouissement", "grab", dict(hold=40, m=0.5, fx=[("slowness", 40, 5)], p="crimson_spore", s="block.rooted_dirt.place")),
     ],
@@ -262,23 +262,23 @@ A = {
     ],
     "foundation_eater": [
         ("burrow", "Burrow Strike", "Frappe enfouie", "blink", dict(m=1.2, p="crimson_spore", s="block.rooted_dirt.break")),
-        ("tremor", "Tremor", "Secousse", "quake", dict(r=6, n=3, m=0.6, fx=[("mining_fatigue", 60, 1)], p="crimson_spore", s="block.gravel.break")),
+        ("tremor", "Tremor", "Secousse", "quake", dict(r=6, n=3, m=0.6, fx=[("mining_fatigue", 60, 1)], p="matriochka:grit", s="block.gravel.break")),
         ("swallow", "Swallow", "Engloutissement", "grab", dict(hold=50, m=0.6, fx=[("blindness", 40, 0)], p="crimson_spore", s="entity.generic.eat")),
     ],
     "earth_hand": [
-        ("crush", "Earthen Grip", "Poigne de terre", "grab", dict(hold=50, m=0.8, fx=[("slowness", 50, 6)], p="crimson_spore", s="block.rooted_dirt.break")),
+        ("crush", "Earthen Grip", "Poigne de terre", "grab", dict(hold=50, m=0.8, fx=[("slowness", 50, 6)], p="matriochka:grit", s="block.rooted_dirt.break")),
         ("slap", "Palm Slap", "Gifle", "cone", dict(r=4.0, m=0.9, kb=1.8, up=0.4, p="poof", s="entity.player.attack.knockback")),
         ("rise", "Rising Fingers", "Doigts surgissants", "rain", dict(r=2.5, m=1.1, up=0.7, p="crimson_spore", s="block.gravel.place")),
     ],
     "walking_column": [
         ("topple", "Topple", "Basculement", "cone", dict(r=5.5, m=1.3, kb=0.6, hit=16, end=24, p="poof", s="block.stone.fall")),
-        ("pillar", "Pillar Strike", "Frappe de pilier", "rain", dict(r=2.5, m=1.4, up=0.5, p="crimson_spore", s="block.basalt.break")),
+        ("pillar", "Pillar Strike", "Frappe de pilier", "rain", dict(r=2.5, m=1.4, up=0.5, p="matriochka:grit", s="block.basalt.break")),
         ("hold", "Load-Bearing", "Porte-charge", "ward", dict(self=[("resistance", 120, 2)], p="poof", s="block.stone.place")),
-        ("rubble", "Rubble Rain", "Pluie de gravats", "quake", dict(r=7, n=3, m=0.6, p="ash", s="block.gravel.break")),
+        ("rubble", "Rubble Rain", "Pluie de gravats", "quake", dict(r=7, n=3, m=0.6, p="matriochka:grit", s="block.gravel.break")),
     ],
     # ---------------------------------------------------------------- World 10, The Giant Workshop
     "giant_sporeling": [
-        ("stomp", "Giant Stomp", "Piétinement géant", "ring", dict(r=4.0, m=1.0, up=0.6, g=[("toxin", 6)], p="spore_blossom_air", s="entity.ravager.step")),
+        ("stomp", "Giant Stomp", "Piétinement géant", "ring", dict(r=4.0, m=1.0, up=0.6, g=[("toxin", 6)], p="matriochka:spore", s="entity.ravager.step")),
         ("sneeze", "Spore Sneeze", "Éternuement de spores", "cone", dict(r=6.0, m=0.6, kb=1.2, g=[("toxin", 8)], p="sneeze", s="entity.panda.sneeze")),
         ("bud", "Budding", "Bourgeonnement", "summon", dict(summon="sporeling", count=2, p="falling_spore_blossom", s="block.fungus.place")),
     ],
@@ -289,12 +289,12 @@ A = {
     ],
     "colossal_jailer": [
         ("gavel", "Iron Gavel", "Marteau de fer", "quake", dict(r=7, n=3, m=0.7, fx=[("slowness", 60, 2)], p="crit", s="block.anvil.land")),
-        ("chains", "Chain Volley", "Volée de chaînes", "bolt", dict(n=3, iv=3, m=0.4, fx=[("slowness", 60, 2)], p="crit", s="block.chain.place")),
+        ("chains", "Chain Volley", "Volée de chaînes", "bolt", dict(n=3, iv=3, m=0.4, fx=[("slowness", 60, 2)], p="matriochka:chain_glint", s="block.chain.place")),
         ("warden", "Call the Wardens", "Appel des geôliers", "summon", dict(summon="jailer_mob", count=2, p="angry_villager", s="block.bell.use")),
     ],
     "titan_ray": [
         ("eclipse", "Eclipse Glide", "Planée d'éclipse", "dash", dict(m=1.2, kb=1.0, fx=[("darkness", 40, 0)], p="cloud", s="entity.phantom.swoop")),
-        ("tempest", "Tempest Wing", "Aile de tempête", "cone", dict(r=7.0, m=0.6, kb=2.2, up=0.6, p="cloud", s="entity.breeze.wind_burst")),
+        ("tempest", "Tempest Wing", "Aile de tempête", "cone", dict(r=7.0, m=0.6, kb=2.2, up=0.6, p="matriochka:storm_spark", s="entity.breeze.wind_burst")),
         ("downpour", "Downpour", "Averse", "rain", dict(r=4.0, m=1.1, fx=[("slowness", 60, 1)], p="splash", s="weather.rain.above")),
     ],
     "colossus_prowler": [

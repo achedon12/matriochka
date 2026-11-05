@@ -13,7 +13,17 @@ public final class HastenedClock {
 
 	private HastenedClock() {}
 
+	/** The clock of World 8's season timeline (light tint and season particles, see tools/atmosphere.py). */
+	public static final ResourceKey<WorldClock> SEASONS = ResourceKey.create(Registries.WORLD_CLOCK, Matriochka.id("seasons"));
+
 	public static void tick(ServerLevel level) {
+		// keep the season clock on the game time, which is what season() reads: a resync only when it drifts
+		if (level.getGameTime() % 100 == 0 && level.clockManager() instanceof ServerClockManager clocks) {
+			level.registryAccess().lookupOrThrow(Registries.WORLD_CLOCK).get(SEASONS).ifPresent(h -> {
+				long want = level.getGameTime() % 9600;
+				if (Math.abs(clocks.getInstance(h).totalTicks() % 9600 - want) > 40) clocks.setTotalTicks(h, want);
+			});
+		}
 		var holder = level.registryAccess().lookupOrThrow(Registries.WORLD_CLOCK).get(KEY);
 		if (holder.isEmpty()) return;
 		if (level.clockManager() instanceof ServerClockManager mgr) {

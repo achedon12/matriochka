@@ -36,6 +36,9 @@ generates the textures, GeckoLib models and animations, lang files, worldgen and
 | `tools/content.py` | the data table everything reads |
 | `tools/gen.py` | all generated assets, data and Java |
 | `tools/paint.py` | item, block and armor pixel art |
+| `tools/craft.py` | the hand-painted dolls, cores, Seeds, gear, writings, offerings, soils and stations, at any size |
+| `tools/particles.py`, `tools/atmosphere.py` | the mod's particles, and each world's light, fog and floating particles |
+| `tools/hdpack.py`, `tools/texsheets.py` | the optional Matriochka HD resource pack, and preview sheets of the textures |
 | `tools/models.py` | creature rigs and animations |
 | `tools/bosses_hd.py` | the eleven hand-rigged bosses |
 | `tools/gui.py` | GUI art painted at twice its size: lacquer, gold leaf, khokhloma, parchment, dolls |

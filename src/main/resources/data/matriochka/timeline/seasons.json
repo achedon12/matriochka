@@ -1,0 +1,172 @@
+{
+  "clock": "matriochka:seasons",
+  "period_ticks": 9600,
+  "tracks": {
+    "minecraft:visual/sky_light_color": {
+      "modifier": "multiply",
+      "keyframes": [
+        {
+          "ticks": 200,
+          "value": "#ffe8f0"
+        },
+        {
+          "ticks": 2200,
+          "value": "#ffe8f0"
+        },
+        {
+          "ticks": 2600,
+          "value": "#fff4c8"
+        },
+        {
+          "ticks": 4600,
+          "value": "#fff4c8"
+        },
+        {
+          "ticks": 5000,
+          "value": "#ffcc98"
+        },
+        {
+          "ticks": 7000,
+          "value": "#ffcc98"
+        },
+        {
+          "ticks": 7400,
+          "value": "#d8e6ff"
+        },
+        {
+          "ticks": 9400,
+          "value": "#d8e6ff"
+        }
+      ]
+    },
+    "minecraft:visual/fog_color": {
+      "modifier": "multiply",
+      "keyframes": [
+        {
+          "ticks": 200,
+          "value": "#ffe0e8"
+        },
+        {
+          "ticks": 2200,
+          "value": "#ffe0e8"
+        },
+        {
+          "ticks": 2600,
+          "value": "#fff0c0"
+        },
+        {
+          "ticks": 4600,
+          "value": "#fff0c0"
+        },
+        {
+          "ticks": 5000,
+          "value": "#ffc890"
+        },
+        {
+          "ticks": 7000,
+          "value": "#ffc890"
+        },
+        {
+          "ticks": 7400,
+          "value": "#e4ecff"
+        },
+        {
+          "ticks": 9400,
+          "value": "#e4ecff"
+        }
+      ]
+    },
+    "minecraft:visual/ambient_particles": {
+      "keyframes": [
+        {
+          "ticks": 200,
+          "value": [
+            {
+              "particle": {
+                "type": "matriochka:petal"
+              },
+              "probability": 0.004
+            }
+          ]
+        },
+        {
+          "ticks": 2200,
+          "value": [
+            {
+              "particle": {
+                "type": "matriochka:petal"
+              },
+              "probability": 0.004
+            }
+          ]
+        },
+        {
+          "ticks": 2600,
+          "value": [
+            {
+              "particle": {
+                "type": "matriochka:pollen"
+              },
+              "probability": 0.004
+            }
+          ]
+        },
+        {
+          "ticks": 4600,
+          "value": [
+            {
+              "particle": {
+                "type": "matriochka:pollen"
+              },
+              "probability": 0.004
+            }
+          ]
+        },
+        {
+          "ticks": 5000,
+          "value": [
+            {
+              "particle": {
+                "type": "matriochka:autumn_leaf"
+              },
+              "probability": 0.004
+            }
+          ]
+        },
+        {
+          "ticks": 7000,
+          "value": [
+            {
+              "particle": {
+                "type": "matriochka:autumn_leaf"
+              },
+              "probability": 0.004
+            }
+          ]
+        },
+        {
+          "ticks": 7400,
+          "value": [
+            {
+              "particle": {
+                "type": "matriochka:snowflake"
+              },
+              "probability": 0.006
+            }
+          ]
+        },
+        {
+          "ticks": 9400,
+          "value": [
+            {
+              "particle": {
+                "type": "matriochka:snowflake"
+              },
+              "probability": 0.006
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
