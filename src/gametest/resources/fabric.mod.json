@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "matriochka-showcase",
+  "version": "1.0.0",
+  "name": "Matriochka Showcase",
+  "environment": "*",
+  "entrypoints": { "fabric-client-gametest": ["fr.achedon12.matriochka.showcase.ShowcaseTest"] },
+  "depends": { "matriochka": "*" }
+}
