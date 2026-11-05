@@ -263,6 +263,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 			PlaythroughTest.run(ctx);
 			return;
 		}
+		if ("onboarding".equals(System.getProperty("matriochka.capture"))) {
+			OnboardingTest.run(ctx);
+			return;
+		}
 		if ("moves".equals(System.getProperty("matriochka.capture"))) {
 			moves(ctx);
 			return;

@@ -362,7 +362,15 @@ public final class Ui {
 				int tw = font.width(b.label);
 				int ty = b.y + (b.h - 8) / 2 + (down ? 1 : 0);
 				int col = on ? (b.hover > 0.5f ? 0xFFFFF4D8 : LIGHT) : 0xFF8A7A70;
-				embossed(g, font, b.label, b.x + (b.w - tw) / 2, ty, col);
+				if (tw > b.w - 6) {
+					// a longer label (other languages) shrinks to fit its button
+					float sc = (b.w - 6f) / tw;
+					g.pose().pushMatrix();
+					g.pose().translate(b.x + b.w / 2f, ty + 4);
+					g.pose().scale(sc, sc);
+					embossed(g, font, b.label, -tw / 2, -4, col);
+					g.pose().popMatrix();
+				} else embossed(g, font, b.label, b.x + (b.w - tw) / 2, ty, col);
 			}
 		}
 

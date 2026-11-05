@@ -86,7 +86,7 @@ There are ten Hidden Dolls, one in the vault chest of each world's secret struct
 | Cracked Doll | doll | - | Holds the access to a broken world. In code: Right-click a block face to put the broken World Block back. Keeps its world and owner. |
 | Journal Page | page | - | A lost page of the Artisan's Journal. In code: Pages found in structure chests are recorded in the Journal's Pages tab when they are in your inventory. Fifty pages, five per world. |
 | Wool Thread | resource | common (1) | Used for cradles and threads. |
-| Shell Shard | resource | epic (30) | Left by a fallen boss: 2 for every player in the fight, 2 more from a mutated boss. Every class upgrade needs some (see [Equipment classes](Equipment-Classes)). |
+| Shell Shard | resource | epic (30) | Left by a fallen boss: 3 for every player in the fight, 2 more from a mutated boss. Every class upgrade needs some (see [Equipment classes](Equipment-Classes)). |
 | Mutated Scale | gem | epic (30) | Shed by a mutated boss (1 or 2). Rich in soul. See [World variants and mutations](World-Variants-and-Mutations). |
 | Doll Mallet | tool | rare | Made at the Matrix Workbench (3 Painted Wood, 2 sticks). Use it on a World Block of your group to shake the world inside and hinder those in it. See [Effects between the scales](Effects-Between-the-Scales#shaking-the-block-on-purpose). |
 | Soul Shard | soul | common | Found in structure chests. Holds 5 souls: use it to free them (sneak: the whole stack). Neutral souls, refused by the Soul Altar. |

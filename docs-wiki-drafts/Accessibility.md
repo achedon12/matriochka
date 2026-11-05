@@ -1,6 +1,6 @@
 # Accessibility and Comfort
 
-Every screen effect of Matriochka can be softened or turned off. Open the **Artisan's Journal** and press **Comfort** at the foot of the left page. The options are saved at once, per player, in `config/matriochka-client.json`; hover a line to read what it does.
+Every screen effect of Matriochka can be softened or turned off. Open the **Artisan's Journal** and press **Comfort** at the foot of the left page, or, with Mod Menu, use Matriochka's configure button and press **Comfort** (it works from the title screen too). The options are saved at once, per player, in `config/matriochka-client.json`; hover a line to read what it does.
 
 ## Screen
 

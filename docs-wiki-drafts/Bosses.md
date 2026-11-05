@@ -69,7 +69,7 @@ When a boss dies, every player within 64 blocks:
 - marks the boss as defeated for their group (this unlocks the next Seed, recipes and gates);
 - gets 100 souls and the kill for quests;
 - gets one Doll of Life layer back, and one extra maximum layer after the bosses of worlds 1, 5 and 8 (see [Doll of Life and death](Doll-of-Life-and-Death));
-- gets 2 Shell Shards, the material of class upgrades;
+- gets 3 Shell Shards, the material of class upgrades;
 - reads the boss's revelation line in chat.
 
 The boss drops its core and 4 World Soil of its world (World 10 drops no soil). The Block Guardian drops a Matrix Workbench and 4 World Soil 0 instead, and turns every Artisan's Scroll it finds in nearby inventories into the Journal. The World 9 boss also drops the Key of the Last Doll. Each boss gives 200 experience.

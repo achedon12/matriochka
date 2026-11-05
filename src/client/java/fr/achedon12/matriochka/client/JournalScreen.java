@@ -85,6 +85,10 @@ public class JournalScreen extends Screen {
 			buttons.add(l + 24, t + BH - 30, 64, 16, Component.translatable("comfort.matriochka.open"),
 				() -> minecraft.gui.setScreen(new ComfortScreen(this)));
 		}
+		if (guide()) {
+			int[] at = guideAt();
+			buttons.add(at[0], at[1], 54, 16, Component.translatable("tutorial.matriochka.toggle"), TutorialCard::toggle);
+		}
 		if (!scroll && tab == PAGES_TAB) {
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.previous"), () -> stepPage(-1),
 				() -> JournalPages.step(pageWorld, pageIndex, -1) != null);
@@ -118,12 +122,32 @@ public class JournalScreen extends Screen {
 		}
 	}
 
+	/** The first-steps card's toggle: on the Scroll, and on the Journal's objective page, until the guide is over. */
+	private boolean guide() {
+		return TutorialCard.step() < fr.achedon12.matriochka.world.Tutorial.DONE && (scroll || tab == 0);
+	}
+
+	private int[] guideAt() {
+		return scroll ? new int[]{left() + 44, top() + BH - 30} : new int[]{left() + BW / 2 + 18, top() + BH - 30};
+	}
+
+	/** A pip on the toggle: gilded while the card shows, dark while it is hidden. */
+	private void guidePip(GuiGraphicsExtractor g, int mx, int my) {
+		if (!guide()) return;
+		int[] at = guideAt();
+		Ui.sprite(g, TutorialCard.hidden() ? "pip_locked" : "pip_done", at[0] + 5, at[1] + 5, 7, 7);
+		if (mx >= at[0] && mx < at[0] + 54 && my >= at[1] && my < at[1] + 16)
+			g.setTooltipForNextFrame(font, font.split(Component.translatable("tutorial.matriochka.toggle.tip"), 160), mx, my);
+	}
+
 	private void turnPage(int dir) {
 		int next = Math.max(0, Math.min(4, page + dir));
 		if (next == page) return;
 		prevTab = tab;
 		prevPage = page;
 		page = next;
+		// the second page holds the objective: reading it is the guide's first step
+		if (page >= 1) TutorialCard.scrollRead();
 		turnDir = dir;
 		if (scroll) {
 			pageAt = Ui.now();
@@ -258,9 +282,15 @@ public class JournalScreen extends Screen {
 			Ui.sprite(g, on ? "ribbon_" + i + "_on" : "ribbon_" + i, rx, top, 54, 48);
 			Component label = Component.translatable("journal.matriochka.tab." + TABS[i]);
 			int col = i == 2 ? 0xFF2A1408 : on ? 0xFFFFF4D8 : Ui.LIGHT;
-			int lx = rx + 27 - font.width(label) / 2;
-			if (i == 2) g.text(font, label, lx, top + 5, col, false);
-			else Ui.embossed(g, font, label, lx, top + 5, col);
+			int lw = font.width(label);
+			// a label longer than the ribbon (other languages) shrinks to fit it
+			float fit = Math.min(1f, 48f / lw);
+			g.pose().pushMatrix();
+			g.pose().translate(rx + 27, top + 5 + (1 - fit) * 4);
+			g.pose().scale(fit, fit);
+			if (i == 2) g.text(font, label, -lw / 2, 0, col, false);
+			else Ui.embossed(g, font, label, -lw / 2, 0, col);
+			g.pose().popMatrix();
 		}
 		Ui.sprite(g, "book", l, t, BW, BH);
 		Ui.wanderingGlint(g, new int[][]{{l + 4, t + 4}, {l + BW - 4, t + 4}, {l + 4, t + BH - 4}, {l + BW - 4, t + BH - 4}, {l + BW / 2, t + 6}, {l + BW / 2, t + BH - 6}}, 1700, 11);
@@ -279,6 +309,7 @@ public class JournalScreen extends Screen {
 			int off = Math.round((1 - p) * 18 * turnDir);
 			drawScrollPage(g, l + 46 + off, t + 24, BW - 92, p);
 			buttons.draw(g, font, mx, my);
+			guidePip(g, mx, my);
 			g.disableScissor();
 			return;
 		}
@@ -303,6 +334,7 @@ public class JournalScreen extends Screen {
 		if (tab == PAGES_TAB && turn >= 1) pageIndexHover(g, lx, t, cw, mx, my);
 		g.pose().popMatrix();
 		buttons.draw(g, font, mx, my);
+		if (turn >= 1) guidePip(g, mx, my);
 		if (turn < 1) drawTurningSheet(g, l, t, turn);
 		motion.pop(g);
 	}

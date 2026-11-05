@@ -19,6 +19,7 @@ import models
 import bosses_hd
 import attacks
 import sound
+import translations
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "mobs_hd"))
 import registry as mobs_registry  # noqa: E402
 
@@ -970,6 +971,8 @@ def main():
         if os.path.exists(extra):
             table.update(json.load(open(extra, encoding="utf-8")))
         w(os.path.join(A, f"lang/{code}.json"), dict(sorted(table.items())))
+    # every other language: tools/i18n/<code>.json, checked against English (missing keys fall back to English)
+    print("translations:", translations.write(EN, A, w))
     print(f"items={len(ALL_ITEMS)} blocks={len(BLOCKS)} mobs={len(MOBS)} bosses={len(BOSSES)} "
           f"structures={sum(len(v) for v in STRUCTURES.values())} quests={len(QUESTS)} achievements={sum(len(v) for v in ACH.values())} lang={len(EN)} "
           f"sounds={len(sound.SOUNDS)} rendered={rendered}")

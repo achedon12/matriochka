@@ -31,6 +31,12 @@
   - Bosses leave 3 Shell Shards instead of 2: enough to bring each world's weapon to the class cap.
   - Dungeon Rat 18 -> 22 health; Executioner 11.5 -> 10.1 damage; Sky Harpooner 59 -> 111 health and 8.6 -> 10.4 damage (it was weaker than the Island Warden); Unstable Sphere 19.9 -> 17.4, Earth Hand 34.4 -> 30.1 and Titan Ray 41.3 -> 36.1 damage (regular creatures that hit like elites).
 - A playthrough test (`./gradlew runClientGameTest -Pplaythrough`) plays the whole game in real ticks, from the Guardian through the ten worlds to World 0 and the third ending, and checks every step.
+- First steps: until you enter World 1, a small lacquered card under the HUD plaque shows the next of ten steps (read the Scroll, find the Guardian's Sanctuary, wake and defeat the Guardian, place the Matrix Workbench, craft the World 1 Seed, till World Soil, plant it by water, wait for it to hatch, enter), with the step's item, a short hint and a compass needle toward the nearest sanctuary with its distance. Every step is detected from what you really do, a later step done first skips ahead, and progress is kept per player. Hide it or bring it back with the Guide button on the Scroll and on the Journal's Objective page.
+- Matriochka is translated into Spanish, German and Brazilian Portuguese: every name, the interface, quests, achievements, the Scroll, the fifty Journal pages, endings, credits and subtitles. A string missing from a language shows in English.
+- Button and ribbon labels shrink to fit when a language makes them longer.
+- Mod Menu (optional): Matriochka's entry has its summary, links to the wiki, the Discord and the issues, and a small info screen with a Comfort button that opens the comfort options.
+- Xaero's Minimap and World Map: their cave view and entity radar are turned off in the Lightless Deep (World 5), where they would show what the darkness hides, and back on when you leave.
+- Checked with Sodium, Iris, Xaero's maps, JourneyMap, VoxelMap and Traveler's Backpack for 26.3: no conflict found, and no backpack way around the progression (see the Compatibility page).
 
 ## 0.3.0 (alpha)
 
