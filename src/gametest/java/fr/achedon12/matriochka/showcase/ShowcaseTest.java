@@ -39,13 +39,33 @@ public class ShowcaseTest implements FabricClientGameTest {
 				s.runCommand("kill @e[type=marker]");
 				s.runCommand("execute as @p at @s run summon marker ~ ~ ~ {Tags:[\"st\"]}");
 				int k = 0;
+				final int world = w;
 				for (Defs.StructureDef d : Content.STRUCTURES) {
 					if (d.world() != w) continue;
-					int x = (k % 5) * 110 - 220, z = 260 + (k / 5) * 140;
+					final int dx = (k % 5) * 110 - 220, dz = 260 + (k / 5) * 140;
 					k++;
-					s.runCommand("execute at @e[tag=st,limit=1] run place structure matriochka:" + d.id() + " ~" + x + " ~ ~" + z);
-					int back = d.size().equals("large") ? 46 : d.size().equals("small") ? 22 : 32;
-					s.runCommand("execute at @e[tag=st,limit=1] positioned ~" + x + " ~ ~" + z + " run tp @p ~" + (back * 6 / 10) + " ~" + (back * 6 / 10) + " ~-" + back + " facing ~ ~2 ~");
+					final int back = d.size().equals("large") ? 46 : d.size().equals("small") ? 22 : 32;
+					// fly there first so the chunks load, then place it through the server's own command and aim the camera at it
+					s.runCommand("execute at @e[tag=st,limit=1] run tp @p ~" + dx + " ~30 ~" + (dz - back));
+					ctx.waitTicks(40);
+					sp.getConnection().waitForChunksRender();
+					int[] cam = sp.getServer().computeOnServer(server -> {
+						var p = server.getPlayerList().getPlayers().get(0);
+						var lvl = (net.minecraft.server.level.ServerLevel) p.level();
+						int x = p.getBlockX(), z = p.getBlockZ() + back;
+						boolean ceiling = fr.achedon12.matriochka.world.Worlds.ceiling(world);
+						int y = ceiling ? 30 + Math.floorMod((x >> 4) * 31 + (z >> 4) * 17, 40) : lvl.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, x, z);
+						var src = server.createCommandSourceStack().withLevel(lvl).withPosition(new net.minecraft.world.phys.Vec3(x, y, z)).withSuppressedOutput();
+						try {
+							int r = server.getCommands().getDispatcher().execute("place structure matriochka:" + d.id() + " " + x + " " + y + " " + z, src);
+							org.slf4j.LoggerFactory.getLogger("matriochka").info("[shoot] {} placed ({})", d.id(), r);
+						} catch (Exception e) {
+							org.slf4j.LoggerFactory.getLogger("matriochka").info("[shoot] {} failed: {}", d.id(), e.getMessage());
+						}
+						int top = ceiling ? y : lvl.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+						return new int[]{x, top, z};
+					});
+					s.runCommand("execute as @p at @s run tp @s " + (cam[0] + back / 2) + " " + (cam[1] + back * 4 / 10) + " " + (cam[2] - back * 9 / 10) + " facing " + cam[0] + " " + (cam[1] + 3) + " " + cam[2]);
 					ctx.waitTicks(60);
 					sp.getConnection().waitForChunksRender();
 					ctx.waitTicks(10);

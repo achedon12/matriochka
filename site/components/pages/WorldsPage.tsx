@@ -7,7 +7,9 @@ import { viewerLabels } from "./CreaturesPages";
 import { DollRow, DollWindow } from "../Dolls";
 import { Lacquer, Vine } from "../Ornament";
 import { PageHead, Shell } from "../Shell";
-import { btn, wrap } from "../ui";
+import { btn, btnGhost, wrap } from "../ui";
+import DepthRail from "../DepthRail";
+import { StageCast, StageCorners, StageGround, StageTitle } from "../WorldStage";
 import MeetBoss from "../MeetBoss";
 
 function windowAlt(w: World, lang: Lang, noShot: string, inGame: string) {
@@ -64,45 +66,46 @@ export default function WorldsPage({ lang }: { lang: Lang }) {
   const ui = d.copy.ui;
   return (
     <Shell lang={lang} path="worlds/" section="worlds">
-      <PageHead title={c.h} lead={c.lead} img={c.headImg}>
-        <nav className="doll-index" aria-label={c.h}>
-          <DollRow worlds={d.worlds} lang={lang} title={c.h} animated={false} className="dolls dolls-index" />
-        </nav>
-      </PageHead>
-      <div>
-        {d.worlds.map((w, i) => (
-          <section key={w.n} id={`world-${w.n}`} aria-labelledby={`wh-${w.n}`} className="relative isolate overflow-hidden border-t-2 border-gold bg-ink">
-            {(w.banner ?? w.wide) && <img className="absolute inset-0 -z-20 size-full object-cover opacity-50" src={asset((w.banner ?? w.wide)!)} alt="" loading="lazy" width={1920} height={823} />}
-            <span className="absolute inset-0 -z-10" style={{ background: `linear-gradient(${i % 2 ? 270 : 90}deg, ${w.bg} 0%, ${w.bg}e6 38%, ${w.bg}55 75%, transparent 100%)` }} />
-            <div className={`${wrap} grid items-center gap-[clamp(20px,4vw,64px)] py-[clamp(40px,6vw,84px)] md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]`}>
-              <figure className={`m-0 mx-auto w-full max-w-[300px] ${i % 2 ? "md:order-2" : ""}`}>
-                <DollWindow world={w} alt={windowAlt(w, lang, c.noShot, c.inGame)} id={`w${w.n}`} />
-              </figure>
-              <div>
-                <p className="m-0 font-pixel text-[clamp(44px,5vw,64px)] leading-none" style={{ color: w.light }}>{w.n}</p>
-                <h2 id={`wh-${w.n}`} className="m-0 mb-3 font-display text-[clamp(38px,5vw,68px)] leading-[0.95] font-normal text-gold-b [text-shadow:0_5px_0_#17100d]">{w.name}</h2>
-                {w.rule && <p className="m-0 mb-3 inline-block rounded-[3px] border border-gold px-3 py-1 text-sm text-paper">{ui.rule}: <strong>{w.rule}</strong>, {w.tier}</p>}
-                <p className="m-0 mb-5 max-w-[56ch] font-body text-lg leading-snug font-bold text-paper">{w.short}</p>
-                {w.nums.length > 0 && (
-                  <ul className="m-0 mb-6 flex list-none flex-wrap gap-x-8 gap-y-3 p-0">
-                    {w.nums.map((x) => (
-                      <li key={x.l} className="max-w-[200px] border-t-2 border-gold pt-2"><span className="block font-pixel text-[30px] leading-none text-paper">{x.v}</span><span className="text-[13px] text-paper-dim">{x.l}</span></li>
-                    ))}
-                  </ul>
-                )}
-                <div className="mb-6 flex flex-wrap items-end gap-2">
-                  {[...w.mobs.map((m) => ({ id: m.id, name: m.name, boss: false })), { id: w.boss.id, name: w.boss.name, boss: true }].map((m) => (
-                    <Link key={m.id} href={href(lang, `creatures/${m.id}/`)} title={m.name}
-                      className={`group grid place-items-center rounded-[3px] border bg-ink/70 p-1 transition-colors hover:border-gold-b ${m.boss ? "size-24 border-gold" : "size-16 border-rule"}`}>
-                      <img className="size-full object-contain transition-transform duration-200 group-hover:scale-110" src={asset(`portraits/${m.id}.png`)} alt={m.name} width={128} height={128} loading="lazy" />
-                    </Link>
-                  ))}
+      <PageHead title={c.h} lead={c.lead} img={c.headImg} />
+      <div className={`${wrap} grid gap-8 py-10 lg:grid-cols-[200px_minmax(0,1fr)]`}>
+        <DepthRail worlds={d.worlds} label={c.h} />
+        <div className="grid gap-[clamp(28px,4vw,56px)]">
+          {d.worlds.map((w) => {
+            const sw = { n: w.n, name: w.name, img: w.banner ?? w.wide ?? null, light: w.light, bg: w.bg, boss: w.boss.id, mobs: w.mobs.map((m) => m.id) };
+            return (
+              <section key={w.n} id={`world-${w.n}`} data-world={w.n} aria-labelledby={`wh-${w.n}`}
+                className="relative isolate min-h-[560px] scroll-mt-28 overflow-hidden border-2 border-gold bg-black shadow-frame md:min-h-[620px]">
+                <StageGround w={sw} />
+                <span className="absolute inset-0 -z-20 bg-[linear-gradient(0deg,rgba(10,6,5,.96)_0%,rgba(10,6,5,.6)_55%,rgba(10,6,5,.25)_100%)] md:bg-[linear-gradient(90deg,rgba(10,6,5,.95)_0%,rgba(10,6,5,.72)_38%,rgba(10,6,5,.1)_72%)]" />
+                <StageTitle w={sw} className="top-[6%] text-[clamp(80px,12vw,200px)]" />
+                <StageCast w={sw} className="hidden w-[46%] md:block" />
+                {/* one gold rule per level of nesting: the deeper the world, the more frames around it */}
+                {Array.from({ length: w.n }, (_, k) => (
+                  <span key={k} aria-hidden="true" className="pointer-events-none absolute z-0 border border-gold/45" style={{ inset: `${10 + k * 7}px` }} />
+                ))}
+                <StageCorners />
+                <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-end p-[clamp(22px,4vw,56px)] md:max-w-[50%]">
+                  <p className="m-0 font-pixel text-[clamp(72px,8vw,120px)] leading-[0.8]" style={{ color: w.light }}>{String(w.n).padStart(2, "0")}</p>
+                  <p className="m-0 mb-1 text-[13px] tracking-[0.18em] text-paper-dim">{w.n === 0 ? ui.surface ?? "" : `${ui.world} ${w.n}`}{w.rule ? `, ${w.tier}` : ""}</p>
+                  <h2 id={`wh-${w.n}`} className="m-0 mb-3 font-display text-[clamp(38px,4.6vw,64px)] leading-[0.95] font-normal text-paper [text-shadow:0_4px_0_rgba(0,0,0,.7)]">{w.name}</h2>
+                  {w.rule && <p className="m-0 mb-3 self-start rounded-[2px] bg-gold-b px-2.5 py-1 text-sm font-bold text-ink">{ui.rule}: {w.rule}</p>}
+                  <p className="m-0 mb-4 font-body text-lg leading-snug font-bold text-gold-b">{w.short}</p>
+                  {w.nums.length > 0 && (
+                    <ul className="m-0 mb-6 flex list-none flex-wrap gap-x-7 gap-y-3 p-0">
+                      {w.nums.map((x) => (
+                        <li key={x.l} className="max-w-[190px] border-t-2 border-gold pt-1.5"><span className="block font-pixel text-[30px] leading-none text-paper">{x.v}</span><span className="text-[13px] leading-snug text-paper-dim">{x.l}</span></li>
+                      ))}
+                    </ul>
+                  )}
+                  <p className="m-0 flex flex-wrap gap-3">
+                    <Link className={btn} href={href(lang, `worlds/${w.n}/`)}>{w.n === 0 ? ui.moreAbout : `${ui.explore} ${w.name}`}</Link>
+                    <Link className={btnGhost} href={href(lang, `creatures/${w.boss.id}/`)}>{w.boss.name}</Link>
+                  </p>
                 </div>
-                <p className="m-0"><Link className={btn} href={href(lang, `worlds/${w.n}/`)}>{w.n === 0 ? ui.moreAbout : `${ui.explore} ${w.name}`}</Link></p>
-              </div>
-            </div>
-          </section>
-        ))}
+              </section>
+            );
+          })}
+        </div>
       </div>
     </Shell>
   );
