@@ -1,0 +1,31 @@
+{
+  "parent": "matriochka:world_9/a0",
+  "display": {
+    "icon": {
+      "id": "matriochka:terrain_anchor"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w9.a1.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w9.a1.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:terrain_anchor"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}
