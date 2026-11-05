@@ -77,6 +77,11 @@ public class JournalScreen extends Screen {
 			buttons.add(l + BW / 2 - 70, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.previous"), () -> turnPage(-1), () -> page > 0);
 			buttons.add(l + BW / 2 + 30, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.next"), () -> turnPage(1), () -> page < 4);
 		}
+		if (!scroll) {
+			// the comfort options, at the foot of the left page on every tab
+			buttons.add(l + 24, t + BH - 30, 64, 16, Component.translatable("comfort.matriochka.open"),
+				() -> minecraft.gui.setScreen(new ComfortScreen(this)));
+		}
 		if (!scroll && tab == PAGES_TAB) {
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.previous"), () -> stepPage(-1),
 				() -> JournalPages.step(pageWorld, pageIndex, -1) != null);
