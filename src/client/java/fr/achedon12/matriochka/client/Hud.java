@@ -23,6 +23,8 @@ public class Hud implements HudElement {
 	private long shownAt = Ui.now(), layerChangeAt = -1, lastFrame = Ui.now();
 	private int changedLayer = -1;
 	private boolean layerLost;
+	/** Where the plaque ended up this frame (left edge, bottom edge; bottom 0 when hidden), for the cards drawn under it. */
+	static int plaqueX = 6, plaqueBottom;
 
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor g, DeltaTracker delta) {
@@ -31,6 +33,7 @@ public class Hud implements HudElement {
 		var s = MatrioClient.state;
 		int here = s.getIntOr("here", 0);
 		int layers = s.getIntOr("doll_layers", 0), max = Math.min(3, s.getIntOr("doll_max", 0));
+		plaqueBottom = 0;
 		if (here == 0 && max == 0) {
 			lastHere = -1;
 			return;
@@ -61,6 +64,8 @@ public class Hud implements HudElement {
 		float slide = Ui.easeBack(Ui.since(shownAt, 450));
 		int x = Math.round(6 - (1 - slide) * (w + 10)), y = 6;
 		Ui.sprite(g, "hud_plaque", x, y, w, h);
+		plaqueX = 6;
+		plaqueBottom = y + h;
 		int rowY = y + 5;
 		if (here > 0) {
 			// World 0 (internal number 11) has its own rule, Obsession

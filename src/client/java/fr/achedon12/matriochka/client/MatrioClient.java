@@ -33,6 +33,7 @@ public class MatrioClient implements ClientModInitializer {
 		// the miniature world over every World Block (the renderer skips the other blocks sharing this entity type)
 		net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry.register(ModContent.BE_DATA, WorldBlockRenderer::new);
 		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
+		HudElementRegistry.addLast(Matriochka.id("first_steps"), new TutorialCard());
 		ClientPlayNetworking.registerGlobalReceiver(Net.StatePayload.TYPE, (p, ctx) -> state = p.tag());
 		// class and armor layers on gear from outside the mod (Matriochka items write their own tooltip)
 		net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback.EVENT.register((stack, ctx, flag, lines) -> {
