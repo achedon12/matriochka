@@ -61,7 +61,8 @@ export default function HomePage({ lang }: { lang: Lang }) {
   const h = d.copy.home;
   const ui = d.copy.ui;
   const pw: PickerWorld[] = d.worlds.map((w) => ({
-    n: w.n, name: w.name, short: w.short, long: w.long, img: w.banner ?? w.wide ?? w.tall, tex: w.block, doll: w.doll, light: w.light,
+    n: w.n, name: w.name, short: w.short, long: w.long, img: w.banner ?? w.wide ?? w.tall, tex: w.block, doll: w.doll, light: w.light, bg: w.bg,
+    boss: w.boss.id, mobs: w.mobs.map((m) => m.id),
     href: href(lang, `worlds/${w.n}/`), label: w.n === 0 ? h.surfaceLabel : `${ui.world} ${w.n}`,
   }));
   return (

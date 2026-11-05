@@ -9,6 +9,7 @@ import { btn } from "./ui";
 export interface PickerWorld {
   n: number; name: string; short: string; long: string; img: string | null; tex: string;
   doll: { body: string; scarf: string; orn: string }; light: string; href: string; label: string;
+  bg: string; boss: string; mobs: string[];
 }
 
 export default function WorldPicker({ worlds, open, listLabel, pauseLabel, playLabel }: {
@@ -37,12 +38,29 @@ export default function WorldPicker({ worlds, open, listLabel, pauseLabel, playL
     <div>
       <div role="tabpanel" id="wp-panel" aria-labelledby={`wp-tab-${w.n}`}
         className="relative min-h-[520px] overflow-hidden border-2 border-gold bg-black shadow-frame md:aspect-[21/9] md:min-h-[420px]">
+        {/* the world itself: its photo when there is one, its own colours otherwise */}
         {w.img ? (
-          <img key={w.img} className="absolute inset-0 size-full object-cover motion-safe:animate-[wp-in_.5s_ease-out]" src={asset(w.img)} alt="" width={1920} height={820} />
+          <img key={w.img} className="kenburns absolute inset-0 size-full object-cover motion-safe:animate-[wp-in_.5s_ease-out]" src={asset(w.img)} alt="" width={1920} height={820} />
         ) : (
-          <span className="absolute inset-0 bg-[length:64px] opacity-50 [image-rendering:pixelated]" style={{ backgroundImage: `url(${asset(w.tex)})` }} />
+          <span key={`g${w.n}`} className="absolute inset-0 motion-safe:animate-[wp-in_.5s_ease-out]"
+            style={{ background: `radial-gradient(ellipse at 72% 40%, ${w.light}66 0%, ${w.bg} 48%, #0e0806 100%)` }}>
+            <svg className="absolute top-[6%] right-[6%] h-[88%] w-auto opacity-25" viewBox="0 0 100 170" aria-hidden="true">
+              <use href="#doll" width="100" height="170" style={{ "--db": w.doll.body, "--ds": w.doll.scarf, "--do": w.doll.orn } as React.CSSProperties} />
+            </svg>
+          </span>
         )}
-        <span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(10,6,5,.95)_0%,rgba(10,6,5,.6)_55%,rgba(10,6,5,.1)_100%)] md:bg-[linear-gradient(90deg,rgba(10,6,5,.9)_0%,rgba(10,6,5,.55)_40%,transparent_75%)]" />
+        {/* who lives there: the boss standing behind its five creatures */}
+        <div key={`c${w.n}`} className="pointer-events-none absolute right-0 bottom-0 z-[5] hidden h-full w-[52%] md:block" aria-hidden="true">
+          <img className="bob absolute right-[8%] bottom-[16%] h-[78%] w-auto drop-shadow-[0_24px_30px_rgba(0,0,0,.75)] motion-safe:animate-[wp-in_.6s_ease-out]"
+            src={asset(`portraits/${w.boss}.png`)} alt="" width={512} height={512} />
+          <div className="absolute right-[4%] bottom-[3%] flex items-end gap-1">
+            {w.mobs.map((m, k) => (
+              <img key={m} className="h-[clamp(60px,9vw,120px)] w-auto drop-shadow-[0_10px_12px_rgba(0,0,0,.7)] motion-safe:animate-[wp-in_.5s_ease-out_both]"
+                style={{ animationDelay: `${0.08 * k + 0.15}s` }} src={asset(`portraits/${m}.png`)} alt="" width={256} height={256} />
+            ))}
+          </div>
+        </div>
+        <span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(10,6,5,.95)_0%,rgba(10,6,5,.6)_55%,rgba(10,6,5,.1)_100%)] md:bg-[linear-gradient(90deg,rgba(10,6,5,.92)_0%,rgba(10,6,5,.6)_38%,transparent_62%)]" />
         <div className="absolute right-5 bottom-[clamp(20px,4vw,48px)] left-[clamp(20px,4vw,56px)] z-10 md:right-auto md:max-w-[min(520px,80%)]">
           <p className="m-0 mb-1 font-pixel text-[26px]" style={{ color: w.light }}>{w.label}</p>
           <h3 className="m-0 mb-2.5 font-display text-[clamp(36px,4.6vw,64px)] leading-[0.95] font-normal text-paper [text-shadow:0_4px_0_rgba(0,0,0,.7)]">{w.name}</h3>

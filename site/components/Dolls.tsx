@@ -69,19 +69,17 @@ export function DollWindow({ world, alt, id }: { world: World; alt: string; id: 
   const pid = `tile-${id}`;
   return (
     <svg className="window" viewBox="-4 -4 108 178" role="img" aria-label={alt}>
-      {!world.tall && (
-        <defs>
-          <pattern id={pid} width="20" height="20" patternUnits="userSpaceOnUse">
-            <image href={asset(world.block)} width="20" height="20" className="px-svg" />
-          </pattern>
-        </defs>
-      )}
+
       <path d={DOLL} fill={BLACK} transform="translate(0 3)" opacity=".5" />
       <g clipPath="url(#doll-clip)">
         {world.tall ? (
           <image href={asset(world.tall)} x="-10" y="0" width="120" height="180" preserveAspectRatio="xMidYMid slice" />
         ) : (
-          <rect x="0" y="0" width="100" height="170" fill={`url(#${pid})`} />
+          <>
+            <rect x="0" y="0" width="100" height="170" fill={world.bg} />
+            <rect x="0" y="0" width="100" height="170" fill={world.light} opacity=".18" />
+            <image href={asset(`portraits/${world.boss.id}.png`)} x="-6" y="30" width="112" height="112" preserveAspectRatio="xMidYMid meet" />
+          </>
         )}
         <path d="M2,96 Q50,106 98,96" fill="none" stroke={BLACK} strokeOpacity=".55" strokeWidth="2.4" />
       </g>
