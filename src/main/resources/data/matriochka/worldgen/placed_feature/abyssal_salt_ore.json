@@ -13,10 +13,10 @@
       "height": {
         "type": "minecraft:uniform",
         "min_inclusive": {
-          "above_bottom": 4
+          "absolute": -50
         },
         "max_inclusive": {
-          "below_top": 20
+          "absolute": 200
         }
       }
     },

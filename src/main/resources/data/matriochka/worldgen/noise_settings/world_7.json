@@ -17,7 +17,7 @@
         "type": "minecraft:max",
         "left": {
           "type": "minecraft:sub",
-          "left": "minecraft:overworld/depth",
+          "left": "matriochka:world_7/depth",
           "right": 0.9
         },
         "right": 0.0
@@ -41,61 +41,19 @@
       "xz_scale": 1.0,
       "y_scale": 1.0
     },
-    "surface_level": "minecraft:overworld/preliminary_surface_level"
+    "surface_level": "matriochka:world_7/preliminary_surface_level"
   },
   "debug_functions": [
     {
-      "function": "minecraft:overworld/final_density",
+      "function": "matriochka:world_7/final_density",
       "label": "N"
     },
     {
-      "function": "minecraft:overworld/temperature",
-      "label": "T"
-    },
-    {
-      "function": "minecraft:overworld/vegetation",
-      "label": "V"
-    },
-    {
-      "function": "minecraft:overworld/continents",
-      "label": "C"
-    },
-    {
-      "function": "minecraft:overworld/erosion",
-      "label": "E"
-    },
-    {
-      "function": "minecraft:overworld/depth",
+      "function": "matriochka:world_7/depth",
       "label": "D"
     },
     {
-      "function": "minecraft:overworld/ridges",
-      "label": "W"
-    },
-    {
-      "function": {
-        "type": "minecraft:mul",
-        "left": {
-          "type": "minecraft:add",
-          "left": {
-            "type": "minecraft:abs",
-            "input": {
-              "type": "minecraft:add",
-              "left": {
-                "type": "minecraft:abs",
-                "input": "minecraft:overworld/ridges"
-              },
-              "right": -0.6666667
-            }
-          },
-          "right": -0.33333334
-        },
-        "right": -3.0
-      },
-      "label": "PV"
-    },
-    {
-      "function": "minecraft:overworld/preliminary_surface_level",
+      "function": "matriochka:world_7/preliminary_surface_level",
       "label": "PS"
     }
   ],
@@ -103,22 +61,102 @@
   "default_fluid": "minecraft:water",
   "disable_mob_generation": false,
   "legacy_random_source": false,
-  "material_rule": "minecraft:overworld",
+  "material_rule": {
+    "type": "minecraft:sequence",
+    "sequence": [
+      "minecraft:bedrock_floor",
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:above_preliminary_surface"
+        },
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:condition",
+              "if_true": "minecraft:on_floor",
+              "then_run": {
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:steep"
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": "matriochka:trench_rock"
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface",
+                      "min_threshold": 0.45,
+                      "max_threshold": 10.0
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": "matriochka:trench_rock"
+                    }
+                  },
+                  {
+                    "type": "minecraft:block",
+                    "result_state": "matriochka:abyssal_sand"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": "minecraft:under_floor",
+              "then_run": {
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:steep"
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": "matriochka:trench_rock"
+                    }
+                  },
+                  {
+                    "type": "minecraft:block",
+                    "result_state": "matriochka:abyssal_sand"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
   "noise": {
-    "height": 384,
+    "height": 320,
     "min_y": -64
   },
   "noise_router": {
-    "chunk_surface_level": "minecraft:overworld/chunk_surface_level",
+    "chunk_surface_level": {
+      "type": "minecraft:interpolated",
+      "cell_size_xz": 16,
+      "cell_size_y": 1,
+      "input": "matriochka:world_7/preliminary_surface_level"
+    },
     "continents": "minecraft:overworld/continents",
-    "depth": "minecraft:overworld/depth",
+    "depth": "matriochka:world_7/depth",
     "erosion": "minecraft:overworld/erosion",
-    "final_density": "minecraft:overworld/final_density",
+    "final_density": "matriochka:world_7/final_density",
     "ridges": "minecraft:overworld/ridges",
     "temperature": "minecraft:overworld/temperature",
     "vegetation": "minecraft:overworld/vegetation"
   },
-  "sea_level": 150,
+  "sea_level": 240,
   "spawn_target": [
     {
       "minecraft:overworld/continents": [

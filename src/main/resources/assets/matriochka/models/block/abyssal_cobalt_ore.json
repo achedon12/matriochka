@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "matriochka:block/abyssal_cobalt_ore"
+  }
+}

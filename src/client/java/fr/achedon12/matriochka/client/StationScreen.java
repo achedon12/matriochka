@@ -73,6 +73,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 				buttons.add(l + 150, t + 38, 92, 18, Component.translatable("station.matriochka.upgrade"), () -> click(210));
 				buttons.add(l + 150, t + 60, 92, 18, Component.translatable("station.matriochka.reroll"), () -> click(211));
 			}
+			case "abyssal_press" -> buttons.add(l + 199, t + 113, 46, 16, Component.translatable("station.matriochka.refill"), () -> click(220));
 			case "jailer_table" -> {
 				for (int i = 0; i < 4; i++) {
 					int pin = i;
@@ -249,8 +250,10 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 			Ui.embossed(g, font, st, l + 222 - font.width(st) / 2, t + 82, ready ? Ui.OK : Ui.WARN);
 			Component desc = Component.translatable("block.matriochka." + menu.data.station() + ".desc");
 			var lines = font.split(desc, 50);
-			for (int i = 0; i < Math.min(4, lines.size()); i++) g.text(font, lines.get(i), sx, t + 94 + i * 9, Ui.MUTED, false);
-			if (lines.size() > 4 && mx >= l + 195 && mx < l + 248 && my >= t + 20 && my < t + 133) g.setTooltipForNextFrame(font, desc, mx, my);
+			// the press keeps room under its text for the button that refills snorkel helmets
+			int shown = menu.data.station().equals("abyssal_press") ? 2 : 4;
+			for (int i = 0; i < Math.min(shown, lines.size()); i++) g.text(font, lines.get(i), sx, t + 94 + i * 9, Ui.MUTED, false);
+			if (lines.size() > shown && mx >= l + 195 && mx < l + 248 && my >= t + 20 && my < (shown == 2 ? t + 112 : t + 133)) g.setTooltipForNextFrame(font, desc, mx, my);
 		} else {
 			for (int i = 0; i < 3; i++) {
 				boolean ok = i < menu.sync.get(5);

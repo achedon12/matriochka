@@ -45,9 +45,20 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 		return net.minecraft.world.entity.Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30).add(Attributes.MOVEMENT_SPEED, 0.45);
 	}
 
+	/** The Divers of the Pressure Ocean live under water. */
+	private boolean diver() {
+		return "diver".equals(net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(getType()).getPath());
+	}
+
+	@Override
+	public boolean canBreatheUnderwater() {
+		return diver() || super.canBreatheUnderwater();
+	}
+
 	@Override
 	protected void registerGoals() {
-		goalSelector.addGoal(0, new FloatGoal(this));
+		// a Diver walks the sea floor instead of bobbing up to the surface
+		if (!diver()) goalSelector.addGoal(0, new FloatGoal(this));
 		goalSelector.addGoal(1, new PanicGoal(this, 0.6));
 		goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.35));
 		goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8f));
@@ -63,7 +74,7 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 			case 4 -> new String[][]{{"ray_membrane", "6", "cloud_fruit", "3"}, {"storm_essence", "2", "minecraft:lightning_rod", "1"}};
 			case 5 -> new String[][]{{"shadow_shard", "2", "silence_balm", "3"}, {"minecraft:torch", "16", "mute_mushroom", "2"}};
 			case 6 -> new String[][]{{"unstable_alloy", "2", "stabilizer", "3"}, {"inverted_crystal", "1", "flipped_apple", "3"}};
-			case 7 -> new String[][]{{"abyssal_salt", "3", "oxygen_capsule", "3"}, {"pressure_pearl", "1", "apnea_kelp", "4"}};
+			case 7 -> new String[][]{{"abyssal_salt", "3", "oxygen_capsule", "3"}, {"pressure_pearl", "1", "apnea_kelp", "4"}, {"abyssal_salt", "8", "salt_snorkel", "1"}};
 			case 8 -> new String[][]{{"temporal_sand", "4", "season_preserve", "2"}, {"season_fragment", "1", "season_jam", "3"}};
 			case 9 -> new String[][]{{"terrain_fragment", "3", "anchor", "2"}, {"terrain_fragment", "5", "anchor_bread", "3"}};
 			default -> new String[][]{{"artisan_thread", "4", "journal_page", "1"}, {"artisan_thread", "6", "workshop_feast", "1"}};

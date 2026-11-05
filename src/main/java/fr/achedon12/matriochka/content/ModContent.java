@@ -6,6 +6,7 @@ import fr.achedon12.matriochka.block.Blocks3;
 import fr.achedon12.matriochka.block.DataBlockEntity;
 import fr.achedon12.matriochka.block.StationBlock;
 import fr.achedon12.matriochka.entity.MatrioBoss;
+import fr.achedon12.matriochka.entity.MatrioCritter;
 import fr.achedon12.matriochka.entity.MatrioMob;
 import fr.achedon12.matriochka.entity.MatrioNpc;
 import fr.achedon12.matriochka.item.MatrioItem;
@@ -19,6 +20,7 @@ import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.fabricmc.fabric.api.menu.v1.ExtendedMenuType;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -32,6 +34,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
@@ -126,6 +130,7 @@ public final class ModContent {
 			case "lair_heart" -> new Blocks3.LairHeart(p.strength(-1f, 3600000f).sound(SoundType.SCULK_CATALYST).lightLevel(s -> 5).noLootTable());
 			case "sealed_door" -> new Blocks3.SealedDoor(p.strength(-1f, 3600000f).sound(SoundType.STONE));
 			case "station" -> new StationBlock(d.id(), p.strength(2.5f).sound(SoundType.WOOD).lightLevel(s -> 4));
+			case "vent" -> new fr.achedon12.matriochka.block.AirVent(p.strength(1.8f, 6f).sound(SoundType.BASALT).lightLevel(s -> 6).requiresCorrectToolForDrops());
 			default -> {
 				BlockBehaviour.Properties q = switch (d.style()) {
 					case "moss" -> p.strength(0.6f).sound(SoundType.MOSS);
@@ -162,6 +167,15 @@ public final class ModContent {
 			return new ArmorMaterial(20 + d.world() * 6, def, 12, SoundEvents.ARMOR_EQUIP_NETHERITE, g[2] / 4f, 0.02f * d.world(),
 				TagKey.create(Registries.ITEM, Matriochka.id("repairs/" + s)), asset);
 		});
+	}
+
+	/** A snorkel helmet's material: little durability (it breaks easily), the tier's armor and toughness. */
+	private static ArmorMaterial snorkelMaterial(String id) {
+		Defs.SnorkelDef s = fr.achedon12.matriochka.rules.Snorkel.def(id);
+		Map<ArmorType, Integer> def = new EnumMap<>(ArmorType.class);
+		for (ArmorType t : ArmorType.values()) def.put(t, s.armor());
+		return new ArmorMaterial(s.durability(), def, 10, SoundEvents.ARMOR_EQUIP_TURTLE, s.toughness(), 0f,
+			TagKey.create(Registries.ITEM, Matriochka.id("repairs/" + id)), ResourceKey.create(EquipmentAssets.ROOT_ID, Matriochka.id(id)));
 	}
 
 	private static ToolMaterial tool(int world) {
@@ -201,6 +215,7 @@ public final class ModContent {
 				}
 			}
 			case "drill" -> p.pickaxe(tool(2), 1f, -2.8f);
+			case "snorkel" -> p.humanoidArmor(snorkelMaterial(d.id()), ArmorType.HELMET);
 			case "mask" -> p.stacksTo(1).component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.HEAD)
 				.setAsset(ResourceKey.create(EquipmentAssets.ROOT_ID, Matriochka.id(d.id()))).setEquipSound(SoundEvents.ARMOR_EQUIP_LEATHER).build());
 			case "boots" -> p.stacksTo(1).component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.FEET)
@@ -246,7 +261,11 @@ public final class ModContent {
 
 		for (Defs.MobDef d : Content.MOBS) {
 			ResourceKey<EntityType<?>> key = ResourceKey.create(Registries.ENTITY_TYPE, Matriochka.id(d.id()));
-			EntityType.Builder<MatrioMob> b = EntityType.Builder.<MatrioMob>of((t, l) -> new MatrioMob(t, l, d), MobCategory.MONSTER)
+			// sea creatures spawn in open water rather than on the ground
+			EntityType.Builder<MatrioMob> b = (d.aquatic()
+				? FabricEntityType.Builder.<MatrioMob>createMob((t, l) -> new MatrioMob(t, l, d), MobCategory.MONSTER,
+					m -> m.spawnPlacement(SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MatrioMob::checkAquaticSpawn))
+				: EntityType.Builder.<MatrioMob>of((t, l) -> new MatrioMob(t, l, d), MobCategory.MONSTER))
 				.sized(Math.min(2.5f, d.width() * d.scale()), Math.min(5f, d.height() * d.scale())).clientTrackingRange(8);
 			if (d.world() == 2 || d.behavior().equals("lava_heat")) b = b.fireImmune();
 			EntityType<MatrioMob> type = Registry.register(BuiltInRegistries.ENTITY_TYPE, key, b.build(key));
@@ -260,6 +279,16 @@ public final class ModContent {
 				EntityType.Builder.<MatrioBoss>of((t, l) -> new MatrioBoss(t, l, d), MobCategory.MONSTER)
 					.sized(Math.min(4f, d.width() * d.scale()), Math.min(8f, d.height() * d.scale())).fireImmune().clientTrackingRange(12).build(key));
 			FabricDefaultAttributeRegistry.register(type, MatrioBoss.attributes(d));
+			ENTITIES.put(d.id(), type);
+		}
+		for (Defs.CritterDef d : Content.CRITTERS) {
+			ResourceKey<EntityType<?>> key = ResourceKey.create(Registries.ENTITY_TYPE, Matriochka.id(d.id()));
+			EntityType<MatrioCritter> type = Registry.register(BuiltInRegistries.ENTITY_TYPE, key,
+				FabricEntityType.Builder.<MatrioCritter>createMob(MatrioCritter::new, MobCategory.WATER_AMBIENT,
+						m -> m.spawnPlacement(SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MatrioCritter::checkSpawn))
+					.sized(d.width(), Math.max(0.3f, d.height())).clientTrackingRange(6).build(key));
+			MatrioCritter.DEFS.put(type, d);
+			FabricDefaultAttributeRegistry.register(type, MatrioCritter.attributes(d));
 			ENTITIES.put(d.id(), type);
 		}
 		for (Defs.NpcDef d : Content.PEOPLES) {

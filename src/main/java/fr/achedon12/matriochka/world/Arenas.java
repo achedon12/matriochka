@@ -53,7 +53,7 @@ public final class Arenas {
 				for (int dy = 0; dy < height; dy++) {
 					BlockPos p = center.offset(dx, dy, dz);
 					if (!level.getBlockState(p).isAir() && !(world == 7 && level.getBlockState(p).is(Blocks.WATER))) {
-						level.setBlock(p, world == 7 && p.getY() < 150 ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), 2);
+						level.setBlock(p, world == 7 && p.getY() < Ocean.SEA_LEVEL ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), 2);
 					}
 				}
 				if (ceiling) level.setBlock(center.offset(dx, height, dz), Math.floorMod(dx, 6) == 0 && Math.floorMod(dz, 6) == 0 ? accent : floor, 2);
@@ -124,9 +124,12 @@ public final class Arenas {
 		}
 		for (int z = 8; z < Worlds.ARENA_OFFSET - stop; z += 12) {
 			BlockPos p = center.offset(0, 0, -Worlds.ARENA_OFFSET + z);
-			if (world == 7) {
-				// lights just under the surface, leading to the beacon pillars of the sunken temple
-				level.setBlock(new BlockPos(p.getX(), 148, p.getZ()), Blocks.SEA_LANTERN.defaultBlockState(), 2);
+			if (world == Ocean.WORLD) {
+				// glowing coral posts on the sea floor, from the diving chamber to the trench of the sunken temple
+				int fy = Ocean.floor(level, p.getX(), p.getZ());
+				BlockState post = ModContent.block("trench_rock").defaultBlockState();
+				for (int dy = 0; dy < 2; dy++) level.setBlock(new BlockPos(p.getX(), fy + dy, p.getZ()), post, 2);
+				level.setBlock(new BlockPos(p.getX(), fy + 2, p.getZ()), ModContent.block("pressure_coral").defaultBlockState(), 2);
 				continue;
 			}
 			int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, p.getX(), p.getZ());

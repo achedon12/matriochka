@@ -1,6 +1,9 @@
 package fr.achedon12.matriochka.client;
 
 import fr.achedon12.matriochka.content.Content;
+import fr.achedon12.matriochka.rules.Snorkel;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -15,7 +18,7 @@ import net.minecraft.network.chat.Component;
  */
 public class Hud implements HudElement {
 	private static final int[] LIFE_W = {12, 10, 8}, LIFE_H = {17, 14, 11};
-	private float gaugeShown = -1, flash, soulsShown = -1, lanternFlare, seasonAngle;
+	private float gaugeShown = -1, flash, soulsShown = -1, lanternFlare, seasonAngle, breathShown = 1;
 	private int lastHere = -1, lastLayers = -1, lastSouls = -1;
 	private long shownAt = Ui.now(), layerChangeAt = -1, lastFrame = Ui.now();
 	private int changedLayer = -1;
@@ -90,9 +93,14 @@ public class Hud implements HudElement {
 			int tx = x + 31;
 			Ui.embossed(g, font, Component.translatable("hud.matriochka.world", here), tx, y + 6, Ui.GOLD);
 			Component label = Component.translatable("rule.matriochka." + rule);
+			// with a snorkel helmet on, the vial shows the helmet's tank and a thin line under it your own breath
+			ItemStack helmet = mc.player.getItemBySlot(EquipmentSlot.HEAD);
+			boolean tank = gauge.equals("oxygen") && Snorkel.is(helmet);
+			float breath = s.getFloatOr("g_oxygen", 100f) / 100f;
+			if (tank) label = Component.translatable("hud.matriochka.tank");
 			if (!gauge.isEmpty()) {
 				g.text(font, label, x + w - 7 - font.width(label), y + 6, Ui.MUTED, false);
-				float v = s.getFloatOr("g_" + gauge, gauge.equals("oxygen") ? 100f : 0f) / 100f;
+				float v = tank ? Snorkel.fraction(helmet) : s.getFloatOr("g_" + gauge, gauge.equals("oxygen") ? 100f : 0f) / 100f;
 				if (gaugeShown < 0) gaugeShown = 0;
 				if (v > gaugeShown + 0.03f) flash = 1;
 				gaugeShown = Ui.approach(gaugeShown, v * Ui.easeOut(Ui.since(shownAt + 200, 500)), 5, dt);
@@ -104,6 +112,12 @@ public class Hud implements HudElement {
 					g.fill(tx - 1, y + 17, tx + w - 37, y + 28, Ui.alpha(0xFFD8402A, pulse * 0.35f));
 				}
 				Ui.vial(g, tx, y + 18, w - 37, 9, gaugeShown, col, flash);
+				if (tank) {
+					breathShown = Ui.approach(breathShown, breath, 5, dt);
+					int bw = w - 37;
+					g.fill(tx + 1, y + 28, tx + bw - 1, y + 30, 0xFF2A1408);
+					g.fill(tx + 1, y + 28, tx + 1 + Math.round((bw - 2) * Ui.clamp01(breathShown)), y + 29, breath < 0.25f ? 0xFFD8402A : 0xFFBFE8F8);
+				}
 			} else {
 				Ui.embossed(g, font, label, tx, y + 18, Ui.MUTED);
 			}

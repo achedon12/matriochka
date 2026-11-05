@@ -8,6 +8,15 @@
 - World 9: whole 16 x 16 zones move. Every minute up to three zones around each player rise, sink, slide or close their chasms, carrying players, creatures and builds along (My Base Walks) without ever burying anyone. Terrain Anchors (16 blocks), Anchors and Anchor Bread (4 blocks around you) and Grip Boots hold the ground still; zones with chests, stations or unbreakable blocks never move.
 - Blocks placed by players are now remembered in worlds 3, 5, 9 and 10, so the moving worlds can protect, burn or carry them.
 - New in-game check of these four mechanics: `./gradlew runClientGameTest -Prules`.
+- World 7, the Pressure Ocean, is now entirely under water: the sea fills it from the floor up to y 240, with no dry land. The sea floor rolls around y 140, with reef crowns, rare trenches below y 20, caves and air pockets underneath, kelp forests, coral reefs and spires of glowing Pressure Coral.
+- You arrive in a diving chamber on the sea floor: an air-filled glass dome around the Threshold, with a door that holds the water back, a chest of supplies and an Air Vent outside.
+- Snorkel helmets: the only way to breathe for long under water. One per ore of the world (Abyssal Salt, and the new Nacre Vein, Abyssal Cobalt Ore and Pearl Bed), crafted at the Abyssal Press. They breathe for you from a tank that drains under water and refills in air pockets, in bubble columns, over Air Vents, with an Oxygen Capsule or with the press's new Refill button. They are fragile: hits wear them fast. Higher tiers hold more air, wear less and let you dive deeper.
+- Without a helmet your breath lasts about half a minute under water. The HUD shows the helmet's tank in the oxygen vial and your breath as a thin line under it; the helmet's tooltip shows the air left.
+- The Diving suit keeps its chestplate, leggings and boots (now made of Abyssal Cobalt): each piece lets you dive 22 blocks deeper. The helmet slot is the snorkel's.
+- Every World 7 creature swims, never drowns and spawns in open water; the Bell Crab is now a sea creature too. Lantern Shoals and Glow Jellies, harmless wildlife, light the deep.
+- World 7 structures stand on the sea floor instead of floating at the surface, and their dry refuges no longer spring leaks. The Pressure Leviathan sleeps in a temple at the bottom of a trench cut for it, reached by glowing coral posts.
+- Divers live under water and sell a first helmet. Common World 7 chests sometimes hold a worn one.
+- "Pressurized" now asks you to breathe through a snorkel helmet; "Last Breath" counts the helmet's tank.
 
 ## 0.2.0 (alpha)
 

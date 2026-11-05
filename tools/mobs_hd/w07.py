@@ -380,3 +380,51 @@ def trench_eel():
             r.cube(s_, (-0.3, y0 - 1.8, z + ln + 2.2), (0.6, w + 3.4, 1.0), "w7_eel_volt")
         par, z = s_, z + ln
     return r
+
+
+# ------------------------------------------------------------------ wildlife (harmless)
+mat("w7_lantern_scale", "1a4a5a", "3a8a9a", "scales")
+mat("w7_lantern_glow", "ffd85a", "fff4c0", "glow", True)
+mat("w7_lantern_fin", "2a7a8a", "8af0ff", "membrane")
+mat("w7_drift_bell", "3ac8b0", "8af4e0", "glow", True)
+mat("w7_drift_rim", "1a8a9a", "4ad8e8", "glow", True)
+mat("w7_drift_thread", "8af4e0", "e0fff8", "glow", True)
+
+
+def _lantern_fish(r, name, parent, c, role):
+    """A finger-long fish, nose to -Z, with a glowing lantern spot behind the eye and a glowing tail tip."""
+    x, y, z = c
+    f = r.bone(name, parent, (x, y, z), role=role)
+    r.cube(f, (x - 0.5, y - 0.6, z - 1.6), (1.0, 1.2, 3.0), "w7_lantern_scale")
+    r.cube(f, (x - 0.55, y - 0.1, z - 1.2), (1.1, 0.5, 0.5), "w7_lantern_glow")
+    r.cube(f, (x - 0.1, y + 0.6, z - 0.6), (0.2, 0.6, 1.2), "w7_lantern_fin")
+    t = r.bone(name + "_tail", f, (x, y, z + 1.4), role="tail")
+    r.cube(t, (x - 0.1, y - 0.7, z + 1.4), (0.2, 1.4, 1.0), "w7_lantern_fin")
+    r.cube(t, (x - 0.12, y - 0.2, z + 2.2), (0.24, 0.4, 0.3), "w7_lantern_glow")
+    return f
+
+
+def lantern_shoal():
+    """Seven small fish swimming as one: a leader and a loose cloud around it, each carrying a tiny light."""
+    r = Rig("lantern_shoal")
+    lead = _lantern_fish(r, "body", None, (0, 4, -2), "body")
+    for i, c in enumerate(((-2.4, 3.0, 0.6), (2.2, 5.2, 0.2), (-1.0, 5.8, 2.6), (1.6, 2.6, 3.0))):
+        _lantern_fish(r, f"fish{i}", lead, c, "seg")
+    for i, c in enumerate(((-4.0, 4.6, 3.2), (3.8, 3.4, 4.6))):
+        o = r.bone(f"orbit{i}", lead, (0, 4, 1), role="orbit")
+        _lantern_fish(r, f"stray{i}", o, c, None)
+    return r
+
+
+def glow_jelly():
+    """A palm-sized jellyfish: a soft glowing bell with a darker rim and four trailing threads."""
+    r = Rig("glow_jelly")
+    r.bone("body", None, (0, 8, 0), role="body")
+    _octo(r, "body", 6.0, 1.2, 6.4, 1.8, "w7_drift_rim")
+    _octo(r, "body", 7.2, 1.6, 6.0, 1.8, "w7_drift_bell")
+    _octo(r, "body", 8.8, 1.2, 4.4, 1.2, "w7_drift_bell")
+    _octo(r, "body", 10.0, 0.6, 2.6, 0.8, "w7_drift_bell")
+    for i, (x, z) in enumerate(((-1.8, -1.8), (1.4, -1.8), (-1.8, 1.4), (1.4, 1.4))):
+        t = r.bone(f"ten{i}", "body", (x + 0.2, 6, z + 0.2), rot=(6 if i % 2 else -6, 0, 0), role="tail")
+        r.cube(t, (x, 1.6, z), (0.4, 4.4, 0.4), "w7_drift_thread")
+    return r

@@ -27,7 +27,7 @@ def attack_anims(roles, mob_id):
     wings_l, wings_r = roles.get("wing_l", []), roles.get("wing_r", [])
     tails = roles.get("tail", []) + roles.get("seg", [])
     out = {}
-    for a in ATK.full(mob_id):
+    for a in (ATK.full(mob_id) if mob_id in ATK.A else []):  # harmless wildlife has no attacks
         r = random.Random(ATK.anim_seed(a))
         amp = 0.8 + r.random() * 0.45
         lead, other = (arms_r, arms_l) if r.random() < 0.6 else (arms_l, arms_r)

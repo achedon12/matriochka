@@ -5,6 +5,7 @@ import fr.achedon12.matriochka.content.ModContent;
 import fr.achedon12.matriochka.content.Recipes;
 import fr.achedon12.matriochka.gear.GearClasses;
 import fr.achedon12.matriochka.rules.PlayerState;
+import fr.achedon12.matriochka.rules.Snorkel;
 import fr.achedon12.matriochka.world.Achievements;
 import fr.achedon12.matriochka.world.MatrioData;
 import net.minecraft.core.BlockPos;
@@ -133,6 +134,29 @@ public final class Stations {
 		be.setChanged();
 		level.playSound(null, pos, SoundEvents.SMITHING_TABLE_USE, SoundSource.BLOCKS, 0.8f, 1.1f);
 		PlayerState.of(player).progress("craft", r.output(), r.count());
+		return null;
+	}
+
+	/**
+	 * Abyssal Press: pumps air into a snorkel helmet, the one on your head first, otherwise the emptiest one you carry.
+	 * Like its recipes, it only works deep under water.
+	 */
+	public static String refillSnorkel(ServerPlayer player, ServerLevel level, BlockPos pos, DataBlockEntity be) {
+		if (condition(level, pos, "abyssal_press", be) == 0 && !player.isCreative()) return "message.matriochka.station.condition.abyssal_press";
+		ItemStack helmet = Snorkel.worn(player);
+		if (helmet.isEmpty() || Snorkel.fraction(helmet) >= 1f) {
+			Inventory inv = player.getInventory();
+			for (int i = 0; i < inv.getContainerSize(); i++) {
+				ItemStack s = inv.getItem(i);
+				if (Snorkel.is(s) && Snorkel.fraction(s) < 1f && (helmet.isEmpty() || Snorkel.fraction(s) < Snorkel.fraction(helmet))) helmet = s;
+			}
+		}
+		if (helmet.isEmpty()) return "message.matriochka.snorkel.none";
+		if (Snorkel.fraction(helmet) >= 1f) return "message.matriochka.snorkel.full";
+		Snorkel.setTank(helmet, Snorkel.capacity(helmet));
+		level.playSound(null, pos, SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.BLOCKS, 1f, 0.8f);
+		level.playSound(null, pos, SoundEvents.PISTON_EXTEND, SoundSource.BLOCKS, 0.6f, 0.6f);
+		player.sendOverlayMessage(Component.translatable("message.matriochka.snorkel.refilled").withStyle(net.minecraft.ChatFormatting.AQUA));
 		return null;
 	}
 

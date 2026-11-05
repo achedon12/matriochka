@@ -53,9 +53,8 @@ public final class Lairs {
 	public static final int WAKE_RADIUS = 10;
 	public static final int REARM_TICKS = 20 * 60 * 10;
 	public static final int AWAKEN_TICKS = 60;
-	/** Depth of the Light Eater's pit below the arena centre, and the floor of the Leviathan's trench temple. */
+	/** Depth of the Light Eater's pit below the arena centre (the Leviathan's temple sinks {@link Ocean#LAIR_SINK}). */
 	public static final int PIT_DEPTH = 8;
-	public static final int TRENCH_FLOOR = 122;
 	private static final String TAG = "matriochka.lair:";
 
 	private static final int ARMED = 0, WAKING = 1, AWAKE = 2, BEATEN = 3;
@@ -66,7 +65,7 @@ public final class Lairs {
 	public static BlockPos heart(int world, BlockPos center) {
 		return switch (world) {
 			case 5 -> center.below(PIT_DEPTH);
-			case 7 -> new BlockPos(center.getX(), TRENCH_FLOOR, center.getZ());
+			case 7 -> center.below(Ocean.LAIR_SINK);
 			default -> center;
 		};
 	}
@@ -167,6 +166,7 @@ public final class Lairs {
 	public static void build(ServerLevel level, int world, BlockPos center) {
 		BlockPos heart = heart(world, center);
 		Draw d = new Draw(level, heart, world);
+		if (world == Ocean.WORLD) cutTrench(d);
 		shell(d);
 		switch (world) {
 			case 1 -> hive(d);
@@ -758,12 +758,30 @@ public final class Lairs {
 		for (int x = -8; x <= 8; x++) d.set(x, 14, -GATE - 1, dark);
 		for (int x = -6; x <= 6; x++) d.set(x, 15, -GATE - 1, Math.abs(x) <= 3 ? dark : water);
 		d.set(0, 16, -GATE - 1, lantern);
-		int surface = 149 - d.o.getY();
+		int surface = Ocean.SEA_LEVEL - 1 - d.o.getY();
 		for (int sx : new int[]{-1, 1}) {
 			d.foundation(sx * 10, -1, -GATE - 4);
 			for (int y = 0; y <= surface; y++) d.set(sx * 10, y, -GATE - 4, y % 6 == 5 || y == surface ? lantern : (y % 2 == 0 ? bricks : prismarine));
 		}
 		for (int x = -4; x <= 4; x++) d.set(x, -1, R + 5, dark);
+	}
+
+	/**
+	 * The Leviathan's temple lies at the bottom of a trench cut into the sea floor: every solid block over the lair's
+	 * footprint, from the temple floor up to the sea floor, becomes sea. The uncut rock around it makes the trench walls.
+	 */
+	private static void cutTrench(Draw d) {
+		int minZ = -GATE - 14, maxZ = R + 14, half = R + 8;
+		for (int x = -half; x <= half; x++) {
+			for (int z = minZ; z <= maxZ; z++) {
+				int top = Ocean.floor(d.level, d.o.getX() + x, d.o.getZ() + z) - d.o.getY();
+				for (int y = 0; y <= top; y++) {
+					BlockState s = d.get(x, y, z);
+					if (!s.getFluidState().isEmpty() && s.getBlock() == Blocks.WATER) continue;
+					d.set(x, y, z, d.fluid);
+				}
+			}
+		}
 	}
 
 	// ---------------------------------------------------------------- Heart of the Terrain: the cavern of living rock
@@ -1044,7 +1062,7 @@ public final class Lairs {
 		RandomSource r = level.getRandom();
 		List<Defs.ItemDef> mats = Content.ITEMS.stream().filter(i -> i.world() == world
 			&& List.of("resource", "gem", "ingot", "dust").contains(i.kind()) && !i.rarity().equals("common")).toList();
-		List<Defs.ItemDef> gear = Content.ITEMS.stream().filter(i -> i.world() == world && (i.kind().equals("weapon") || i.kind().equals("armor"))).toList();
+		List<Defs.ItemDef> gear = Content.ITEMS.stream().filter(i -> i.world() == world && (i.kind().equals("weapon") || i.kind().equals("armor") || i.kind().equals("snorkel"))).toList();
 		List<Defs.ItemDef> cons = Content.ITEMS.stream().filter(i -> i.world() == world && (i.kind().equals("consumable") || i.kind().equals("food"))).toList();
 		for (int c = 0; c < 3; c++) {
 			BlockPos p = heart.offset(-2 + c * 2, 1, R + 8);

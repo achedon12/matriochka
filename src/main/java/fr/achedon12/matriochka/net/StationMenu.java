@@ -85,6 +85,8 @@ public class StationMenu extends AbstractContainerMenu {
 			err = Stations.upgrade(sp, slot.getItem(0));
 		} else if (id == 211) {
 			err = Stations.reroll(sp, slot.getItem(0));
+		} else if (id == 220 && data.station().equals("abyssal_press")) {
+			err = Stations.refillSnorkel(sp, sl, data.pos(), be);
 		}
 		if (err != null) sp.sendSystemMessage(Component.translatable(err));
 		broadcastChanges();

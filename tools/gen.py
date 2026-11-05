@@ -11,7 +11,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from content import *  # noqa
-from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx
+from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx, paint_snorkel_item, paint_snorkel_layer
 import models
 import bosses_hd
 import attacks
@@ -57,6 +57,7 @@ def lang(key, en, fr):
 # ------------------------------------------------------------------ items
 ARMOR_PIECES = [("helmet", "Helmet", "Casque"), ("chestplate", "Chestplate", "Plastron"),
                 ("leggings", "Leggings", "Jambières"), ("boots", "Boots", "Bottes")]
+SNORKEL_PAL = {s[0]: s[-1] for s in SNORKELS}
 ALL_ITEMS = []  # (id, world, kind, rarity, extra dict)
 
 
@@ -65,6 +66,8 @@ def expand_items():
     for it in ITEMS:
         if it["kind"] == "armorset":
             for pid, pen, pfr in ARMOR_PIECES:
+                if pid not in it.get("pieces", [p[0] for p in ARMOR_PIECES]):
+                    continue
                 iid = f"{it['id']}_{pid}"
                 ALL_ITEMS.append(dict(id=iid, world=it["world"], kind="armor", rarity=it["rarity"], piece=pid, set=it["id"],
                                       en=f"{it['set_en']} {pen}", fr=f"{pfr} {it['set_fr']}", shape="armor",
@@ -83,10 +86,12 @@ def gen_items():
         lang(f"item.{NS}.{iid}", it["en"], it["fr"])
         if it.get("effect_en"):
             lang(f"item.{NS}.{iid}.desc", it["effect_en"], it["effect_fr"])
-        p = pal(it["world"])
+        p = it.get("pal") or pal(it["world"])
         tpath = os.path.join(A, f"textures/item/{iid}.png")
         if it["kind"] == "armor":
             paint_armor_item(it["piece"], p, iid, tpath)
+        elif it["kind"] == "snorkel":
+            paint_snorkel_item(SNORKEL_PAL[iid], iid, tpath)
         else:
             paint_item(it["shape"], p, iid, tpath, it["rarity"])
         parent = "minecraft:item/handheld" if it["kind"] in ("weapon", "drill", "tool") or it["shape"] in ("pick", "hook") else "minecraft:item/generated"
@@ -104,6 +109,12 @@ def gen_items():
     for eq, wd in (("filter_mask", 1), ("gravity_boots", 6), ("grip_boots", 9)):
         paint_armor_layer(pal(wd), eq, mk(os.path.join(A, f"textures/entity/equipment/humanoid/{eq}.png")))
         w(os.path.join(A, f"equipment/{eq}.json"), {"layers": {"humanoid": [{"texture": f"{NS}:{eq}"}]}})
+    for s in SNORKELS:
+        sid, ore, palette = s[0], s[3], s[-1]
+        paint_snorkel_layer(palette, sid, mk(os.path.join(A, f"textures/entity/equipment/humanoid/{sid}.png")))
+        w(os.path.join(A, f"equipment/{sid}.json"), {"layers": {"humanoid": [{"texture": f"{NS}:{sid}"}]}})
+        # a cracked helmet is mended at the anvil with its own ore
+        w(os.path.join(D, f"tags/item/repairs/{sid}.json"), {"values": [f"{NS}:{ore}"]})
 
 
 # ------------------------------------------------------------------ blocks
@@ -113,7 +124,7 @@ def gen_blocks():
         lang(f"block.{NS}.{bid}", b["en"], b["fr"])
         if b.get("note_en"):
             lang(f"block.{NS}.{bid}.desc", b["note_en"], b["note_fr"])
-        p = pal(b["world"])
+        p = ORE_PAL.get(b["id"]) or pal(b["world"])
         tpath = mk(os.path.join(A, f"textures/block/{bid}.png"))
         paint_block(b["style"], p, bid, tpath)
         if b["kind"] == "station":
@@ -156,7 +167,7 @@ def gen_blocks():
             pool = {"rolls": 1, "entries": [{"type": "minecraft:item", "name": f"{NS}:{bid}"}], "conditions": [{"condition": "minecraft:survives_explosion"}]}
         w(os.path.join(D, f"loot_table/blocks/{bid}.json"), {"type": "minecraft:block", "pools": [pool]})
     # tags
-    pick = [f"{NS}:{b['id']}" for b in BLOCKS if b["kind"] in ("terrain", "station", "deco", "sealed_door") and b["style"] not in ("moss", "sand", "wood")]
+    pick = [f"{NS}:{b['id']}" for b in BLOCKS if b["kind"] in ("terrain", "station", "deco", "sealed_door", "vent") and b["style"] not in ("moss", "sand", "wood")]
     shovel = [f"{NS}:{b['id']}" for b in BLOCKS if b["kind"] == "soil" or b["style"] in ("moss", "sand")]
     axe = [f"{NS}:{b['id']}" for b in BLOCKS if b["style"] == "wood"] + [f"{NS}:soul_cradle", f"{NS}:nesting_chest"]
     w(os.path.join(RES, "data/minecraft/tags/block/mineable/pickaxe.json"), {"values": pick})
@@ -198,6 +209,14 @@ def gen_entities():
             lang(f"message.{NS}.lair.wake.{bid}", *b["wake"])
         wd, ht = HD_BOSSES[bid]
         ENTITY_DIMS[bid] = (max(0.6, min(wd, 2.2)), max(0.8, ht))
+    for c in CRITTERS:
+        cid = c["id"]
+        lang(f"entity.{NS}.{cid}", c["en"], c["fr"])
+        lang(f"entity.{NS}.{cid}.desc", c["desc_en"], c["desc_fr"])
+        wd, ht = mobs_registry.build(cid)
+        ENTITY_DIMS[cid] = (max(0.4, min(wd, 1.2)), max(0.3, ht))
+        pools = [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": c["drop"]}]}] if c.get("drop") else []
+        w(os.path.join(D, f"loot_table/entities/{cid}.json"), {"type": "minecraft:entity", "pools": pools})
     for (pid, en, fr, wd) in PEOPLES:
         lang(f"entity.{NS}.{pid}", en, fr)
         p = pal(wd) if wd else ("6a4a8a", "e8c050", "f0d0b0", "2a1a3a")
@@ -223,11 +242,146 @@ VANILLA_FEATURES = {
     1: ["minecraft:trees_jungle", "minecraft:bamboo_vegetation", "minecraft:patch_grass_jungle", "minecraft:vines", "minecraft:patch_melon"],
     4: ["minecraft:trees_meadow", "minecraft:patch_grass_plain", "minecraft:flower_meadow"],
     6: ["minecraft:trees_cherry", "minecraft:patch_grass_plain"],
-    7: ["minecraft:seagrass_deep", "minecraft:kelp_cold", "minecraft:sea_pickle"],
     8: ["minecraft:trees_birch_and_oak_leaf_litter", "minecraft:flower_forest_flowers", "minecraft:patch_grass_forest", "minecraft:patch_pumpkin"],
     9: ["minecraft:patch_dead_bush_badlands"],
     10: ["minecraft:trees_plains", "minecraft:patch_grass_plain"],
 }
+
+
+# ------------------------------------------------------------------ World 7: the ocean
+# The whole world is sea: water from the sea floor up to OCEAN_SEA (y 240), 16 blocks of air above it and no dry
+# land. The sea floor rolls around y 140, raised into reefs and cut by trenches that drop below y 20; caves and air
+# grottoes (from the aquifers) run under it. The same numbers live in world/Ocean.java.
+OCEAN_SEA = 240
+OCEAN_MIN_Y, OCEAN_HEIGHT = -64, 320
+OCEAN_FLOOR = 140
+
+
+def _df(t, **kw):
+    d = {"type": f"minecraft:{t}"}
+    d.update(kw)
+    return d
+
+
+def _add(a, b):
+    return _df("add", left=a, right=b)
+
+
+def _mul(a, b):
+    return _df("mul", left=a, right=b)
+
+
+def _noise2d(name, xz):
+    return _df("noise", noise=f"{NS}:{name}", shift_x="minecraft:shift_x", shift_z="minecraft:shift_z", xz_scale=xz, y_scale=0.0)
+
+
+def ocean_settings(ns, n):
+    """Rewrites the overworld noise settings into the ocean: a custom terrain density, the vanilla cave system carved
+    under it, a sea level near the top of the world and a sea-floor surface rule."""
+    sand, rock = f"{NS}:abyssal_sand", f"{NS}:trench_rock"
+    base = f"{NS}:world_{n}"
+    # noises: broad hills, reef crowns, trench lines and the mask that keeps trenches rare
+    for name, octave, count, amp in (("hills", -9, 4, 1.0), ("reef", -6, 3, 1.0), ("trench", -8, 3, 1.0), ("trench_mask", -9, 2, 1.0)):
+        w(os.path.join(D, f"worldgen/noise/w{n}_{name}.json"), {"base_amplitude": amp, "base_octave": octave, "octave_count": count})
+    # offset: where the floor sits, in depth units (1.0 = 128 blocks); 0.34375 puts it at y 140
+    floor = (OCEAN_FLOOR - OCEAN_MIN_Y) / 128.0 - 1.25
+    hills = _mul(0.22, _noise2d(f"w{n}_hills", 1.0))
+    reef = _mul(0.30, _df("clamp", input=_mul(4.0, _add(_noise2d(f"w{n}_reef", 1.0), -0.55)), min=0.0, max=1.0))
+    line = _df("square", input=_df("clamp", input=_add(1.0, _mul(-6.0, _df("abs", input=_noise2d(f"w{n}_trench", 0.6)))), min=0.0, max=1.0))
+    mask = _df("clamp", input=_add(_mul(2.5, _noise2d(f"w{n}_trench_mask", 1.0)), 0.4), min=0.0, max=1.0)
+    trench = _mul(-0.9, _mul(line, mask))
+    w(os.path.join(D, f"worldgen/density_function/world_{n}/offset.json"), _df("cache", input=_add(floor, _add(hills, _add(reef, trench)))))
+    grad = _df("gradient", axis="y", from_coordinate=OCEAN_MIN_Y, from_value=1.25, to_coordinate=OCEAN_MIN_Y + OCEAN_HEIGHT, to_value=-1.25)
+    w(os.path.join(D, f"worldgen/density_function/world_{n}/depth.json"), _add(grad, f"{base}/offset"))
+    # terrain: steep below the floor, soft above it (overhangs and arches), roughened by the vanilla 3D noise
+    terrain = _df("cache", input=_add(_mul(_df("quarter_negative", input=_mul(f"{base}/depth", 3.0)), 4.0),
+                                      _mul(0.4, "minecraft:overworld/base_3d_noise")))
+    w(os.path.join(D, f"worldgen/density_function/world_{n}/terrain.json"), terrain)
+    T = f"{base}/terrain"
+    # the vanilla cave system (cheese, spaghetti, noodles, pillars, entrances) carved under that terrain
+    caves = _df("range_choice", input=T, min_inclusive=-1000000.0, max_exclusive=1.5625,
+                when_in_range=_df("min", left=T, right=_mul("minecraft:overworld/caves/entrances", 5.0)),
+                when_out_of_range=_df("max", left=_df("min", left=_df("min", left=_add(
+                    _mul(_df("square", input=_df("noise", noise="minecraft:cave_layer", xz_scale=1.0, y_scale=8.0)), 4.0),
+                    _add(_df("clamp", input=_add(_df("noise", noise="minecraft:cave_cheese", xz_scale=1.0, y_scale=0.6666666666666666), 0.27), min=-1.0, max=1.0),
+                         _df("clamp", input=_add(_mul(T, -0.64), 1.5), min=0.0, max=0.5))),
+                    right="minecraft:overworld/caves/entrances"),
+                    right=_add("minecraft:overworld/caves/spaghetti_2d", "minecraft:overworld/caves/spaghetti_roughness_function")),
+                    right=_df("range_choice", input="minecraft:overworld/caves/pillars", min_inclusive=-1000000.0, max_exclusive=0.03,
+                              when_in_range=-1000000.0, when_out_of_range="minecraft:overworld/caves/pillars")))
+    top = OCEAN_MIN_Y + OCEAN_HEIGHT
+    shaped = _df("lerp", alpha=_df("gradient", axis="y", from_coordinate=OCEAN_MIN_Y, from_value=0.0, to_coordinate=OCEAN_MIN_Y + 24, to_value=1.0),
+                 first=0.1171875,
+                 second=_df("lerp", alpha=_df("gradient", axis="y", from_coordinate=top - 16, from_value=1.0, to_coordinate=top, to_value=0.0),
+                            first=-0.078125, second=caves))
+    final = _add(_df("min", left=_df("squeeze", input=_df("interpolated", cell_size_xz=4, cell_size_y=8,
+                                                          input=_mul(_df("blend_density", input=shaped), 0.64))),
+                     right="minecraft:overworld/caves/noodle"), _df("beardifier"))
+    w(os.path.join(D, f"worldgen/density_function/world_{n}/final_density.json"), final)
+    surface = _df("find_top_surface", cell_height=8, lower_bound=OCEAN_MIN_Y, upper_bound=float(OCEAN_SEA - 8),
+                  density=_add(_mul(_df("quarter_negative", input=_mul(f"{base}/depth", 3.0)), 4.0), -0.390625))
+    w(os.path.join(D, f"worldgen/density_function/world_{n}/preliminary_surface_level.json"), surface)
+    r = ns["noise_router"]
+    r["depth"] = f"{base}/depth"
+    r["final_density"] = f"{base}/final_density"
+    r["chunk_surface_level"] = _df("interpolated", cell_size_xz=16, cell_size_y=1, input=f"{base}/preliminary_surface_level")
+    aq = ns["aquifers"]
+    aq["surface_level"] = f"{base}/preliminary_surface_level"
+    aq["exclusion"] = _df("min", left=_df("sub", left=-0.225, right="minecraft:overworld/erosion"),
+                          right=_df("max", left=_df("sub", left=f"{base}/depth", right=0.9), right=0.0))
+    ns["debug_functions"] = [{"function": f"{base}/final_density", "label": "N"}, {"function": f"{base}/depth", "label": "D"},
+                             {"function": f"{base}/preliminary_surface_level", "label": "PS"}]
+    ns["noise"] = {"height": OCEAN_HEIGHT, "min_y": OCEAN_MIN_Y}
+    ns["sea_level"] = OCEAN_SEA
+    ns["default_block"] = rock
+    ns["default_fluid"] = "minecraft:water"
+    # sea floor: sand on gentle ground, bare rock on slopes and in patches, sand a few blocks deep
+    block = lambda b: _df("block", result_state=b)
+    cond = lambda c, then: _df("condition", if_true=c, then_run=then)
+    ns["material_rule"] = _df("sequence", sequence=[
+        "minecraft:bedrock_floor",
+        cond(_df("above_preliminary_surface"), _df("sequence", sequence=[
+            cond("minecraft:on_floor", _df("sequence", sequence=[
+                cond(_df("steep"), block(rock)),
+                cond(_df("noise_threshold", noise="minecraft:surface", min_threshold=0.45, max_threshold=10.0), block(rock)),
+                block(sand)])),
+            cond("minecraft:under_floor", _df("sequence", sequence=[
+                cond(_df("steep"), block(rock)),
+                block(sand)])),
+        ])),
+    ])
+    return ns
+
+
+def ocean_features(n, feats):
+    """Life on the sea floor of World 7: kelp forests, seagrass, coral reefs, glowing coral spires, sea pickles,
+    air vents and glowing patches in the rock."""
+    floor = [{"type": "minecraft:heightmap", "heightmap": "OCEAN_FLOOR"},
+             {"type": "minecraft:block_predicate_filter", "predicate": {"type": "minecraft:matching_blocks", "blocks": "minecraft:water"}},
+             {"type": "minecraft:biome"}]
+    # pressure coral spires: glowing columns rising from the floor
+    w(os.path.join(D, "worldgen/feature/pressure_coral_spire.json"), {
+        "type": "minecraft:block_column", "allowed_placement": {"type": "minecraft:matching_blocks", "blocks": "minecraft:water"},
+        "direction": "up", "prioritize_tip": False,
+        "layers": [{"height": {"type": "minecraft:biased_to_bottom", "min_inclusive": 1, "max_inclusive": 5}, "provider": {"id": f"{NS}:pressure_coral"}}]})
+    w(os.path.join(D, "worldgen/placed_feature/pressure_coral_spire.json"), {
+        "feature": f"{NS}:pressure_coral_spire", "placement": [{"type": "minecraft:count", "count": 3}, {"type": "minecraft:in_square"}] + floor})
+    # air vents: rare cracks breathing air, where a snorkel helmet refills
+    w(os.path.join(D, "worldgen/feature/air_vent.json"), {"type": "minecraft:simple_block", "to_place": {"id": f"{NS}:air_vent"}})
+    w(os.path.join(D, "worldgen/placed_feature/air_vent.json"), {
+        "feature": f"{NS}:air_vent", "placement": [{"type": "minecraft:rarity_filter", "chance": 3}, {"type": "minecraft:in_square"}] + floor})
+    # the floor glows in places: pressure coral set into the sand
+    w(os.path.join(D, "worldgen/feature/pressure_coral_bed.json"), {
+        "type": "minecraft:ore", "discard_chance_on_air_exposure": 0.0, "size": 5,
+        "targets": [{"state": f"{NS}:pressure_coral", "target": {"predicate_type": "minecraft:block_match", "block": f"{NS}:abyssal_sand"}}]})
+    w(os.path.join(D, "worldgen/placed_feature/pressure_coral_bed.json"), {
+        "feature": f"{NS}:pressure_coral_bed", "placement": [{"type": "minecraft:count", "count": 2}, {"type": "minecraft:in_square"},
+                                                             {"type": "minecraft:heightmap", "heightmap": "OCEAN_FLOOR"},
+                                                             {"type": "minecraft:biome"}]})
+    feats[7].append(f"{NS}:pressure_coral_bed")
+    feats[9] = ["minecraft:warm_ocean_vegetation", "minecraft:seagrass_deep_warm", "minecraft:kelp_warm", "minecraft:kelp_cold",
+                "minecraft:sea_pickle", f"{NS}:pressure_coral_spire", f"{NS}:air_vent"]
+    return feats
 
 
 def gen_worldgen():
@@ -247,9 +401,7 @@ def gen_worldgen():
         ns = json.loads(txt)
         ns["disable_mob_generation"] = False
         if wd["gen"] == "ocean":
-            ns["sea_level"] = 150
-            txt2 = json.dumps(ns).replace('"minecraft:sand"', f'"{NS}:abyssal_sand"').replace('"minecraft:gravel"', f'"{NS}:abyssal_sand"')
-            ns = json.loads(txt2)
+            ns = ocean_settings(ns, n)
         if wd["gen"] == "ceiling":
             ns["default_fluid"] = "minecraft:water" if n == 3 else "minecraft:air"
             ns["sea_level"] = 0
@@ -329,6 +481,11 @@ def gen_worldgen():
         for (pid, en, fr, pw) in PEOPLES:
             if pw == n:
                 spawns["creature"].append({"type": f"{NS}:{pid}", "count": 1, "weight": 2})
+        for c in CRITTERS:
+            if c["world"] == n:
+                hi = 5 if c["behavior"] == "shoal" else 3
+                spawns["water_ambient"].append({"type": f"{NS}:{c['id']}", "count": {"type": "minecraft:uniform", "min_inclusive": 1, "max_inclusive": hi},
+                                                "weight": 30 if c["behavior"] == "shoal" else 20})
         bio["attributes"]["minecraft:gameplay/natural_mob_spawns"] = {"argument": {"spawn_costs": {}, "spawns_by_category": {k: v for k, v in spawns.items() if v}}} if False else None
         bio["attributes"].pop("minecraft:gameplay/natural_mob_spawns")
         pl = jl("worldgen/biome/plains.json")["attributes"]["minecraft:gameplay/natural_mob_spawns"]
@@ -347,13 +504,19 @@ def gen_worldgen():
                 ores.append(bid)
         for bid in ores:
             big = bid == "giant_ore_block"
+            if bid in ORE_GEN:
+                size, count, lo, hi, extra = ORE_GEN[bid]
+                rng = {"type": "minecraft:uniform", "min_inclusive": {"absolute": lo}, "max_inclusive": {"absolute": hi}}
+            else:
+                size, count, extra = 24 if big else 9, 6 if big else 14, ()
+                rng = {"type": "minecraft:uniform", "min_inclusive": {"above_bottom": 4}, "max_inclusive": {"below_top": 20}}
+            hosts = [stone, deep] + [f"{NS}:{x}" for x in extra]
             w(os.path.join(D, f"worldgen/feature/{bid}.json"), {
-                "type": "minecraft:ore", "discard_chance_on_air_exposure": 0.0, "size": 24 if big else 9,
-                "targets": [{"state": f"{NS}:{bid}", "target": {"predicate_type": "minecraft:block_match", "block": stone}},
-                            {"state": f"{NS}:{bid}", "target": {"predicate_type": "minecraft:block_match", "block": deep}}]})
+                "type": "minecraft:ore", "discard_chance_on_air_exposure": 0.0, "size": size,
+                "targets": [{"state": f"{NS}:{bid}", "target": {"predicate_type": "minecraft:block_match", "block": h}} for h in hosts]})
             w(os.path.join(D, f"worldgen/placed_feature/{bid}.json"), {
-                "feature": f"{NS}:{bid}", "placement": [{"type": "minecraft:count", "count": 6 if big else 14}, {"type": "minecraft:in_square"},
-                                                        {"type": "minecraft:height_range", "height": {"type": "minecraft:uniform", "min_inclusive": {"above_bottom": 4}, "max_inclusive": {"below_top": 20}}},
+                "feature": f"{NS}:{bid}", "placement": [{"type": "minecraft:count", "count": count}, {"type": "minecraft:in_square"},
+                                                        {"type": "minecraft:height_range", "height": rng},
                                                         {"type": "minecraft:biome"}]})
             feats[6].append(f"{NS}:{bid}")
         glow = ([b for (b, e, f, s) in TERRAIN[n] if s in ("glow", "glass")] or [TERRAIN[n][2][0]])[0]
@@ -366,6 +529,8 @@ def gen_worldgen():
                                                          {"type": "minecraft:biome"}]})
         feats[6].append(f"{NS}:{glow}_patch")
         feats[9] = list(VANILLA_FEATURES.get(n, []))
+        if wd["gen"] == "ocean":
+            feats = ocean_features(n, feats)
         bio["features"] = feats
         bio["carvers"] = ["minecraft:cave", "minecraft:canyon"] if not wd["ceiling"] else ["minecraft:nether_cave"]
         bio["has_precipitation"] = n in (1, 4, 8)
@@ -547,6 +712,13 @@ def gen_java():
     L.append("\t);")
     L.append("\tpublic static final List<Defs.NpcDef> PEOPLES = List.of(")
     L.append(",\n".join(f"\t\tnew Defs.NpcDef({jstr(p[0])}, {p[3]})" for p in PEOPLES))
+    L.append("\t);")
+    L.append("\tpublic static final List<Defs.CritterDef> CRITTERS = List.of(")
+    L.append(",\n".join(f"\t\tnew Defs.CritterDef({jstr(c['id'])}, {c['world']}, {c['hp']}f, {jstr(c['behavior'])}, "
+                        f"{ENTITY_DIMS[c['id']][0]:.2f}f, {ENTITY_DIMS[c['id']][1]:.2f}f)" for c in CRITTERS))
+    L.append("\t);")
+    L.append("\tpublic static final List<Defs.SnorkelDef> SNORKELS = List.of(")
+    L.append(",\n".join(f"\t\tnew Defs.SnorkelDef({jstr(s[0])}, {jstr(s[3])}, {s[4]}, {s[5]}, {s[6]}, {s[7]}, {s[8]}f, {s[9]}f, {s[10]})" for s in SNORKELS))
     L.append("\t);")
     L.append("\tpublic static final List<Defs.StructureDef> STRUCTURES = List.of(")
     rows = []

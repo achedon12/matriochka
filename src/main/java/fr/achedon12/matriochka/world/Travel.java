@@ -55,13 +55,20 @@ public final class Travel {
 		int y;
 		if (Worlds.ceiling(world)) {
 			y = 48;
+		} else if (world == Ocean.WORLD) {
+			// the Pressure Ocean has no dry land: the Threshold stands in a diving chamber on the sea floor
+			y = Ocean.thresholdY(level, c);
 		} else {
 			y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, c.getX(), c.getZ());
-			if (world == 7) y = Math.max(y, 151);
 			if (world == 4 && y <= level.getMinY() + 2) y = 120;
 		}
 		BlockPos base = new BlockPos(c.getX(), y, c.getZ());
-		buildPlatform(level, base, world);
+		if (world == Ocean.WORLD) {
+			Ocean.buildChamber(level, base);
+			level.setBlock(base, ModContent.block("threshold").defaultBlockState(), 3);
+		} else {
+			buildPlatform(level, base, world);
+		}
 		entry.putInt("seuil_x", base.getX());
 		entry.putInt("seuil_y", base.getY());
 		entry.putInt("seuil_z", base.getZ());

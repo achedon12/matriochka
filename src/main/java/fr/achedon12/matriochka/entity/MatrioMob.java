@@ -27,7 +27,18 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
@@ -64,7 +75,59 @@ public class MatrioMob extends Monster implements GeoEntity {
 		DEFS.putIfAbsent(type, def);
 		this.xpReward = def.elite() ? 20 : 6;
 		if (def.flying() || def.aquatic()) setNoGravity(def.flying());
+		if (def.aquatic()) {
+			// a sea creature steers in three dimensions like a dolphin, and looks where it swims
+			this.moveControl = new SmoothSwimmingMoveControl<>(this, 85, 10, 0.08f, 0.1f, false);
+			this.lookControl = new SmoothSwimmingLookControl(this, 10);
+		}
 		if (behavior("mimic") || behavior("ambush_root")) revealed = false; else revealed = true;
+	}
+
+	/** Sea creatures path through the water, not along the floor. Runs inside the super constructor (def not set yet). */
+	@Override
+	protected PathNavigation createNavigation(Level level) {
+		Defs.MobDef d = DEFS.get(getType());
+		if (d != null && d.aquatic()) return new WaterBoundPathNavigation(this, level);
+		return super.createNavigation(level);
+	}
+
+	/** Natural spawning of the sea creatures: in open, dark water. */
+	public static boolean checkAquaticSpawn(EntityType<MatrioMob> type, ServerLevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+		if (!level.getFluidState(pos).is(FluidTags.WATER) || !level.getFluidState(pos.above()).is(FluidTags.WATER)) return false;
+		if (reason != EntitySpawnReason.NATURAL && reason != EntitySpawnReason.CHUNK_GENERATION) return true;
+		return level.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(level, pos, random);
+	}
+
+	private boolean aquatic() {
+		Defs.MobDef d = def();
+		return d != null && d.aquatic();
+	}
+
+	@Override
+	public boolean canBreatheUnderwater() {
+		return aquatic() || super.canBreatheUnderwater();
+	}
+
+	@Override
+	public boolean isPushedByFluid() {
+		return !aquatic() && super.isPushedByFluid();
+	}
+
+	@Override
+	public boolean checkSpawnObstruction(LevelReader level) {
+		return aquatic() ? level.isUnobstructed(this) : super.checkSpawnObstruction(level);
+	}
+
+	/** Under water a sea creature swims freely: no sinking, a little drag. */
+	@Override
+	protected void travelInWater(Vec3 input, double gravity, boolean falling, double y) {
+		if (!aquatic()) {
+			super.travelInWater(input, gravity, falling, y);
+			return;
+		}
+		moveRelative(getSpeed(), input);
+		move(MoverType.SELF, getDeltaMovement());
+		setDeltaMovement(getDeltaMovement().scale(0.9));
 	}
 
 	public static AttributeSupplier.Builder attributes(Defs.MobDef def) {
@@ -100,7 +163,10 @@ public class MatrioMob extends Monster implements GeoEntity {
 
 	@Override
 	protected void registerGoals() {
-		goalSelector.addGoal(0, new FloatGoal(this));
+		Defs.MobDef d0 = def();
+		boolean sea = d0 != null && d0.aquatic();
+		// a sea creature must not bob up to the surface like a land mob caught in water
+		if (!sea) goalSelector.addGoal(0, new FloatGoal(this));
 		if (!behavior("puller") && !behavior("statue")) {
 			goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.15, true) {
 				@Override
@@ -118,7 +184,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 					return Math.max(6, (int) (20 / Defs.speedMultiplier(def().world())));
 				}
 			});
-			goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.8));
+			goalSelector.addGoal(6, sea ? new RandomSwimmingGoal(this, 0.9, 40) : new WaterAvoidingRandomStrollGoal(this, 0.8));
 		}
 		goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 12f));
 		goalSelector.addGoal(8, new RandomLookAroundGoal(this));

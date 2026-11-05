@@ -22,6 +22,9 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.ItemStack;
+import fr.achedon12.matriochka.world.Ocean;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
@@ -178,22 +181,34 @@ public final class WorldRules {
 				// gravity columns, their warning and their sparks run every tick in GravityZones
 			}
 			case 7 -> {
-				boolean under = p.isUnderWater();
-				int suit = setCount(p, "diving");
-				if (under) {
-					float drain = suit >= 4 ? 100f / 300f : 2f;
-					if (ps.flagActive("apnea", t)) drain *= 0.5f;
-					ps.addGauge("oxygen", -drain);
+				// Oxygen: the gauge is your breath. Under water it runs out in about half a minute, unless a snorkel
+				// helmet feeds you from its tank; the helmet refills in air, in bubble columns and over air vents.
+				ItemStack helmet = Snorkel.worn(p);
+				float mult = (ps.flagActive("apnea", t) ? 0.5f : 1f) * resist;
+				if (p.isUnderWater()) {
+					if (Snorkel.atAirSource(level, p)) {
+						if (!helmet.isEmpty()) Snorkel.refill(helmet, Snorkel.VENT_RATE);
+						ps.addGauge("oxygen", 5);
+						level.sendParticles(ParticleTypes.BUBBLE, p.getX(), p.getY() + 1, p.getZ(), 6, 0.3, 0.6, 0.3, 0.05);
+					}
+					if (Snorkel.breathe(p, ps, helmet, mult, t)) {
+						Achievements.grant(p, "snorkel");
+					} else {
+						ps.addGauge("oxygen", -Snorkel.HOLD_DRAIN * mult);
+					}
 					p.setAirSupply(p.getMaxAirSupply());
 					if (ps.gauge("oxygen") <= 0) p.hurtServer(level, level.damageSources().drown(), 2f);
-					int limit = suit >= 4 ? 40 : 110;
+					// pressure: each diving piece and the helmet's tier let you go deeper
+					int limit = Ocean.PRESSURE_Y - Ocean.PER_DIVING_PIECE * setCount(p, "diving") - Snorkel.depthBonus(helmet);
 					if (p.getY() < limit) {
 						p.hurtServer(level, level.damageSources().cramming(), 1.5f);
 						p.sendOverlayMessage(Component.translatable("message.matriochka.rule.pressure").withStyle(ChatFormatting.DARK_AQUA));
 					}
 					if (p.getY() < 30) Achievements.grant(p, "deep_dive");
 				} else {
+					// a breath of real air: an air pocket, a grotto, a habitat, the chamber or the surface
 					ps.addGauge("oxygen", 10);
+					if (!helmet.isEmpty()) Snorkel.refill(helmet, Snorkel.AIR_RATE);
 				}
 			}
 			case 8 -> {
