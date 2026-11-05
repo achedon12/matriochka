@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_9",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 9,
+  "archetype": "vault",
+  "role": "secret",
+  "size": "small",
+  "structure_id": "stable_sanctuary"
+}
