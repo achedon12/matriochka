@@ -67,6 +67,35 @@ public class MatrioItem extends Item {
 		GearClasses.appendTooltip(stack, out);
 	}
 
+	/** The world dishes: each one eases its world's rule for a while. */
+	@Override
+	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+		if (entity instanceof ServerPlayer sp && "food".equals(def.kind())) eat(sp, def.id(), level.getGameTime());
+		return super.finishUsingItem(stack, level, entity);
+	}
+
+	private static void eat(ServerPlayer sp, String id, long now) {
+		PlayerState ps = PlayerState.of(sp);
+		int min = 20 * 60;
+		switch (id) {
+			case "root_broth" -> ps.setFlagTime("root_broth", now + 5 * min);
+			case "ice_bread" -> ps.setFlagTime("ice_bread", now + 5 * min);
+			case "cell_ration" -> sp.addEffect(new MobEffectInstance(MobEffects.SATURATION, 40, 0));
+			case "cloud_fruit" -> sp.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 3 * min, 0));
+			case "mute_mushroom" -> ps.setFlagTime("mute", now + 5 * min);
+			case "flipped_apple" -> ps.setFlagTime("flipped_apple", now + 20 * 30);
+			case "apnea_kelp" -> { ps.setFlagTime("apnea", now + 5 * min); ps.addGauge("oxygen", 30); }
+			case "season_jam" -> ps.setFlagTime("preserve", now + 3 * min);
+			case "anchor_bread" -> ps.setFlagTime("anchor", now + 5 * min);
+			case "workshop_feast" -> {
+				for (String f : new String[]{"root_broth", "ice_bread", "mute", "apnea", "preserve", "anchor"}) ps.setFlagTime(f, now + 2 * min);
+				sp.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 2 * min, 0));
+			}
+			default -> {}
+		}
+		ps.sync();
+	}
+
 	@Override
 	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
@@ -106,7 +135,19 @@ public class MatrioItem extends Item {
 				Vec3 eye = sp.getEyePosition();
 				Vec3 end = eye.add(sp.getLookAngle().scale(32));
 				BlockHitResult hit = sl.clip(new ClipContext(eye, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, sp));
-				if (hit.getType() == HitResult.Type.BLOCK) {
+				// a creature in the line of the hook is pulled to you instead
+				Vec3 reach = hit.getType() == HitResult.Type.BLOCK ? hit.getLocation() : end;
+				var mob = net.minecraft.world.entity.projectile.ProjectileUtil.getEntityHitResult(sp, eye, reach,
+					sp.getBoundingBox().expandTowards(reach.subtract(eye)).inflate(1), e -> e instanceof net.minecraft.world.entity.LivingEntity && e.isPickable() && !e.isSpectator(),
+					eye.distanceToSqr(reach));
+				if (mob != null && mob.getEntity() instanceof net.minecraft.world.entity.LivingEntity le && !(le instanceof fr.achedon12.matriochka.entity.MatrioBoss)) {
+					Vec3 pull = sp.position().subtract(le.position()).normalize().scale(1.6).add(0, 0.35, 0);
+					le.setDeltaMovement(pull);
+					le.needsSync = true;
+					Hooked.mark(le, sp, sl.getGameTime());
+					sl.playSound(null, sp.blockPosition(), SoundEvents.FISHING_BOBBER_RETRIEVE, SoundSource.PLAYERS, 1f, 1.1f);
+					sp.getCooldowns().addCooldown(stack, 30);
+				} else if (hit.getType() == HitResult.Type.BLOCK) {
 					Vec3 pull = hit.getLocation().subtract(sp.position()).normalize().scale(1.8).add(0, 0.4, 0);
 					sp.setDeltaMovement(pull);
 					sp.needsSync = true;
