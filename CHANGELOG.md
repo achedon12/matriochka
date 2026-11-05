@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Station automation: every station with recipes now works with hoppers. A station keeps one recipe, the last one crafted there by hand or the one picked with the new gilded funnel on its drawer. Ingredients go in from the top and the sides (each ingredient has its own slots, anything else is refused), the result comes out from below, and a comparator reads how full the station is. Each station keeps its condition: heat for the Ash Foundry, a charge for the Lightning Forge (lightning, or Storm Essence fed into its fuel slot), darkness, deep water, dawn and dusk; the Spore Vat waits for a ripe brew and the Jailer's Table makes one batch per lock pattern entered. The Soul Altar and the Class Table stay manual. Breaking a station drops its buffer.
+- Shake a World Block on purpose: a player of the owning group outside can sneak and use it with empty hands to help those inside (creatures stunned and thrown off their feet for 3 seconds, a boss staggered and open), or strike it with the new Doll Mallet to hinder them (the world quakes and loose blocks fall over their heads). One shake per world every 30 seconds; other groups cannot.
+- Rebuilding a Doll of Life layer at the Soul Altar now also costs 4 rare resources of the current world, as the design asks. The cost is shown under the button, with a tooltip listing the resources that count.
+- Structure chests now keep souls: Soul Shards (5 souls) and Soul Vessels (20), about 10 souls per chest and 100 per world, a little more in the deeper worlds. Use them to free their souls (sneak for the whole stack); they do not move karma. Chests generated before keep their loot.
+- Every quest checks what its description says. Deliveries are handed to the world's people (Hard Harvest, The Miners' Pay, A Life in a Day by day, A Warm Hearth); places are reached (Read the Plan, Last Message, The Impossible Stair, The Wreck's Crew, The Ground Plan, The Surveyor, Looking Down); stations are used (The Vat with a ripe brew, Under Control, Catch the Lightning, Double Meaning, Compress, The Workshop); kills ask for their condition (No Filter, Bare Hands, The Night Light, Lost Reflection, All at Once); and Read Between the Lines, Fingers in the Doll, First Flight, Light the Lighthouse, Hear the Danger, The Signs, The Silent Station, Four Seasons, The Archives, The Drifting Fort, The Apprentices and Every Tool watch the real action. Several descriptions say more precisely what to do. Many Hands only counts the peoples of the worlds.
+- The Unfinished now fights on the shortest timing tier on every shell, as the final fight of the design.
+- New check run: `./gradlew runClientGameTest -Pautomation`.
+
 ## 0.3.0 (alpha)
 
 The story is complete: the Artisan's Journal, the hidden dolls, World 0, three endings and the New Cycle. World 7 is now entirely under water, worlds 3, 5, 6, 9 and 10 have their full mechanics, and the mod has its own music and sounds. Trailer: [matriochka-trailer.mp4](https://github.com/achedon12/matriochka/releases/download/v0.3.0/matriochka-trailer.mp4).
