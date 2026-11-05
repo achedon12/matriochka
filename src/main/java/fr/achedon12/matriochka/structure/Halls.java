@@ -866,7 +866,7 @@ final class Halls {
 		k.site(R, 22);
 		// three-tier round platform
 		for (int t = 0; t < 3; t++) {
-			double rad = R - t * 2;
+			double rad = R - t;
 			for (int x = -R; x <= R; x++)
 				for (int z = -R; z <= R; z++) {
 					double d = Math.sqrt(x * x + z * z);
@@ -923,9 +923,8 @@ final class Halls {
 			Direction side = d.getClockWise();
 			for (int s = -1; s <= 1; s++) {
 				for (int t = 0; t < 3; t++) {
-					int dist = R - t * 2;
+					int dist = R - t;
 					k.stair(d.getStepX() * dist + side.getStepX() * s, t, d.getStepZ() * dist + side.getStepZ() * s, d.getOpposite(), false);
-					k.stair(d.getStepX() * (dist - 1) + side.getStepX() * s, t, d.getStepZ() * (dist - 1) + side.getStepZ() * s, d.getOpposite(), false);
 				}
 			}
 			for (int s : new int[] {-2, 2}) {
