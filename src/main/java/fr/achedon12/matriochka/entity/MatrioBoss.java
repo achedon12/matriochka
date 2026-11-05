@@ -283,6 +283,34 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		return def.world();
 	}
 
+	/**
+	 * The world whose timing tier (telegraph and opening windows) the boss uses. Every shell of the Unfinished borrows
+	 * the attacks of an older boss but keeps the final tier, the shortest: it is the last test of what was learned.
+	 */
+	public int timingWorld() {
+		return def.world() == 10 ? 10 : world();
+	}
+
+	/** Telegraph length of the current attack, in ticks. */
+	public int telegraphTicks() {
+		int tele = Defs.telegraphTicks(timingWorld()) * (attack == 2 ? 2 : 1);
+		return attack == 0 ? Math.max(6, tele / 2) : tele;
+	}
+
+	/** Whether the boss is announcing an attack right now, and which one (0 light, 1 medium, 2 signature). */
+	public boolean telegraphing() {
+		return state == State.TELEGRAPH;
+	}
+
+	public int attackIndex() {
+		return attack;
+	}
+
+	/** Opening after the current attack, in ticks. */
+	public int openingTicks() {
+		return Defs.openingTicks(timingWorld()) * (attack == 2 ? 1 : 2) / 2;
+	}
+
 	/** Holds the boss still, without attacking, for a number of ticks (the Shadow before a kneeling player). */
 	public void calm(int ticks) {
 		calmUntil = Math.max(calmUntil, tickCount + ticks);
@@ -342,8 +370,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 				}
 			}
 			case TELEGRAPH -> {
-				int tele = Defs.telegraphTicks(world()) * (attack == 2 ? 2 : 1);
-				if (attack == 0) tele = Math.max(6, tele / 2);
+				int tele = telegraphTicks();
 				telegraphParticles(level);
 				if (stateTicks >= tele) {
 					execute(level, target);
@@ -355,7 +382,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 				}
 			}
 			case OPENING -> {
-				if (stateTicks >= Defs.openingTicks(world()) * (attack == 2 ? 1 : 2) / 2) {
+				if (stateTicks >= openingTicks()) {
 					state = State.CHASE;
 					stateTicks = 0;
 				}
