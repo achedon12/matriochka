@@ -1,0 +1,24 @@
+{
+  "parent": "matriochka:endings/root",
+  "display": {
+    "icon": {
+      "id": "matriochka:unfinished_core"
+    },
+    "title": {
+      "translate": "advancement.matriochka.endings.absorb.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.endings.absorb.desc"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/hidden"
+  }
+}
