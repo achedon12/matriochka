@@ -33,16 +33,35 @@ import net.minecraft.world.item.equipment.Equippable;
  */
 public final class GearClasses {
 	public record Gear(String cls, int level, int changes) {
+		/** Levels outside 1..5 and absurd change counts (a hand-made item component) are brought back in range. */
+		public Gear {
+			level = clampLevel(level);
+			changes = Math.max(0, Math.min(MAX_CHANGES, changes));
+		}
+
 		public static final Codec<Gear> CODEC = RecordCodecBuilder.create(i -> i.group(
 			Codec.STRING.fieldOf("class").forGetter(Gear::cls),
-			Codec.INT.fieldOf("level").forGetter(Gear::level),
-			Codec.INT.fieldOf("changes").forGetter(Gear::changes)).apply(i, Gear::new));
+			Codec.intRange(1, 5).fieldOf("level").forGetter(Gear::level),
+			Codec.intRange(0, MAX_CHANGES).fieldOf("changes").forGetter(Gear::changes)).apply(i, Gear::new));
 		public static final StreamCodec<RegistryFriendlyByteBuf, Gear> STREAM = StreamCodec.composite(
 			ByteBufCodecs.STRING_UTF8, Gear::cls, ByteBufCodecs.VAR_INT, Gear::level, ByteBufCodecs.VAR_INT, Gear::changes, Gear::new);
 	}
 
 	public static final DataComponentType<Gear> GEAR = Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, Matriochka.id("gear"),
 		DataComponentType.<Gear>builder().persistent(Gear.CODEC).networkSynchronized(Gear.STREAM).build());
+
+	public static final int MAX_LEVEL = 5;
+	/** The reroll cost doubles with each change: past this it would overflow. */
+	public static final int MAX_CHANGES = 20;
+
+	public static int clampLevel(int level) {
+		return Math.max(1, Math.min(MAX_LEVEL, level));
+	}
+
+	/** Class bonus for a level, safe for any level value. */
+	public static float bonus(int level) {
+		return BONUS[clampLevel(level)];
+	}
 
 	public static final String[] ARMOR = {"guardian", "berserker", "prowler", "reaper", "survivor"};
 	public static final String[] WEAPON = {"berserker", "prowler", "reaper", "survivor"};
@@ -118,12 +137,12 @@ public final class GearClasses {
 			next = p[random.nextInt(p.length)];
 		} while (next.equals(g.cls()));
 		apply(stack, new Gear(next, g.level(), g.changes() + 1));
-		return 20 << g.changes();
+		return 20 << Math.min(MAX_CHANGES, g.changes());
 	}
 
 	public static int rerollCost(ItemStack stack) {
 		Gear g = stack.get(GEAR);
-		return g == null ? 20 : 20 << g.changes();
+		return g == null ? 20 : 20 << Math.min(MAX_CHANGES, g.changes());
 	}
 
 	public static void apply(ItemStack stack, Gear gear) {
@@ -139,7 +158,7 @@ public final class GearClasses {
 		ItemAttributeModifiers mods = base;
 		Gear gear = stack.get(GEAR);
 		if (gear != null) {
-			float mult = 1f + BONUS[Math.max(1, Math.min(5, gear.level()))];
+			float mult = 1f + bonus(gear.level());
 			int i = 0;
 			for (Bonus b : bonuses(gear.cls(), kind(stack), mult, base)) {
 				mods = mods.withModifierAdded(b.attr, new AttributeModifier(MOD_ID.withSuffix("_" + i++), b.amount, b.op), group);
@@ -194,7 +213,7 @@ public final class GearClasses {
 		float s = 0;
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			Gear g = e.getItemBySlot(slot).get(GEAR);
-			if (g != null && g.cls().equals("reaper")) s += 0.03f * (1 + BONUS[g.level()]);
+			if (g != null && g.cls().equals("reaper")) s += 0.03f * (1 + bonus(g.level()));
 		}
 		return s;
 	}
@@ -204,7 +223,7 @@ public final class GearClasses {
 		float s = 0;
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			Gear g = e.getItemBySlot(slot).get(GEAR);
-			if (g != null && g.cls().equals("reaper")) s += 0.05f * (1 + BONUS[g.level()]);
+			if (g != null && g.cls().equals("reaper")) s += 0.05f * (1 + bonus(g.level()));
 		}
 		return Math.min(1f, s);
 	}
@@ -226,7 +245,7 @@ public final class GearClasses {
 		float s = 0;
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			Gear g = e.getItemBySlot(slot).get(GEAR);
-			if (g != null && g.cls().equals("prowler")) s += 0.025f * (1 + BONUS[g.level()]);
+			if (g != null && g.cls().equals("prowler")) s += 0.025f * (1 + bonus(g.level()));
 		}
 		return Math.min(0.3f, s);
 	}
@@ -236,7 +255,7 @@ public final class GearClasses {
 		float s = 0;
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			Gear g = e.getItemBySlot(slot).get(GEAR);
-			if (g != null && g.cls().equals("survivor")) s += 0.06f * (1 + BONUS[g.level()]);
+			if (g != null && g.cls().equals("survivor")) s += 0.06f * (1 + bonus(g.level()));
 		}
 		return Math.min(0.6f, s);
 	}

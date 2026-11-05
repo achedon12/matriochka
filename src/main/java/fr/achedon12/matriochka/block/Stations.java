@@ -202,9 +202,10 @@ public final class Stations {
 		int max = GearClasses.maxLevel(MatrioData.get(player.level().getServer()).highestDefeated(MatrioData.get(player.level().getServer()).groupOf(player.getUUID())));
 		if (g.level() >= 5) return "message.matriochka.class.max";
 		if (g.level() >= max && !player.isCreative()) return "message.matriochka.class.progress";
-		int cost = GearClasses.UPGRADE_COST[g.level() + 1];
+		int next = GearClasses.clampLevel(g.level() + 1);
+		int cost = GearClasses.UPGRADE_COST[next];
 		// every upgrade also asks for a boss material: Shell Shards, left by fallen bosses
-		int shards = GearClasses.SHARD_COST[g.level() + 1];
+		int shards = GearClasses.SHARD_COST[next];
 		Item shard = ModContent.item("shell_shard");
 		if (!player.isCreative() && count(player.getInventory(), shard) < shards) return "message.matriochka.class.need_shard";
 		if (PlayerState.of(player).souls() < cost && !player.isCreative()) return "message.matriochka.altar.no_souls";
@@ -212,7 +213,7 @@ public final class Stations {
 			PlayerState.of(player).spendSouls(cost);
 			take(player.getInventory(), shard, shards);
 		}
-		GearClasses.apply(stack, new GearClasses.Gear(g.cls(), g.level() + 1, g.changes()));
+		GearClasses.apply(stack, new GearClasses.Gear(g.cls(), next, g.changes()));
 		player.level().playSound(null, player.blockPosition(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 0.7f, 1.3f);
 		return null;
 	}
