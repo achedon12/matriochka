@@ -111,6 +111,7 @@ public final class WorldRules {
 					if (gain <= 0 && p.getY() >= 40) gain = -1f;
 				}
 				if (gain > 0) gain *= 1f - 0.125f * setCount(p, "thermal");
+				if (gain > 0 && ps.flagActive("ice_bread", t)) gain *= 0.5f;
 				ps.addGauge("heat", gain * resist);
 				float v = ps.gauge("heat");
 				if (v >= 50) p.addEffect(new MobEffectInstance(MobEffects.HUNGER, 40, 1, true, false));
@@ -224,6 +225,11 @@ public final class WorldRules {
 			}
 			default -> {}
 		}
+	}
+
+	/** Whether the ground under this player is held still right now (anchor, grip boots or a Terrain Anchor nearby). */
+	public static boolean anchoredNow(ServerLevel level, ServerPlayer p) {
+		return anchored(level, p, PlayerState.of(p), level.getGameTime());
 	}
 
 	private static boolean anchored(ServerLevel level, ServerPlayer p, PlayerState ps, long t) {

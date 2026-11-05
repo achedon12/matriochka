@@ -69,6 +69,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	private int stateTicks;
 	private int attack;
 	private int phase;
+	private final BossFeats feats = new BossFeats();
 	private final long[] lastUse = new long[3];
 	private Vec3 aim = Vec3.ZERO;
 	private int nodes;
@@ -110,8 +111,9 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		Entity e = ModContent.entity(id).create(level, EntitySpawnReason.EVENT);
 		if (!(e instanceof MatrioBoss boss)) return null;
 		int players = Math.max(1, level.getEntitiesOfClass(Player.class, new net.minecraft.world.phys.AABB(at).inflate(48)).size());
-		float hp = boss.def.hp() * Defs.bossHealthPlayers(players);
+		float hp = boss.def.hp() * Defs.bossHealthPlayers(players) * fr.achedon12.matriochka.world.Config.healthMult();
 		boss.getAttribute(Attributes.MAX_HEALTH).setBaseValue(hp);
+		boss.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(boss.def.damage() * fr.achedon12.matriochka.world.Config.damageMult());
 		boss.setHealth(hp);
 		boss.setPos(Vec3.atBottomCenterOf(at));
 		boss.setTarget(by);
@@ -151,6 +153,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	protected void customServerAiStep(ServerLevel level) {
 		super.customServerAiStep(level);
 		bar.setProgress(getHealth() / getMaxHealth());
+		if (tickCount % 10 == 0) feats.watch(this, level);
 		LivingEntity target = getTarget();
 		stateTicks++;
 		if (nodes > 0) {
@@ -481,6 +484,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		float mult = state == State.OPENING ? 1.5f : 0.75f;
 		if (def.id().equals("ash_titan") && phase >= 2) mult += 0.3f;
 		boolean r = super.hurtServer(level, source, amount * mult);
+		if (r && source.getEntity() instanceof ServerPlayer sp) feats.hit(this, level, sp);
 		checkPhase(level);
 		return r;
 	}
@@ -519,7 +523,9 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		if (!(level() instanceof ServerLevel level)) return;
 		MatrioData data = MatrioData.get(level.getServer());
 		int w = def.world();
-		for (ServerPlayer p : level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(64))) {
+		List<ServerPlayer> present = level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(64));
+		feats.award(this, level, present);
+		for (ServerPlayer p : present) {
 			String group = data.groupOf(p.getUUID());
 			data.markDefeated(group, w);
 			PlayerState ps = PlayerState.of(p);
@@ -565,6 +571,10 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	@Override
 	public boolean causeFallDamage(double fallDistance, float multiplier, DamageSource source) {
 		return false;
+	}
+
+	public BossFeats feats() {
+		return feats;
 	}
 
 	public int phase() {
