@@ -72,7 +72,7 @@ public class MatrioData extends SavedData {
 	public boolean join(UUID player, String group) {
 		CompoundTag grp = group(group);
 		ListTag members = grp.getListOrEmpty("members");
-		if (members.size() >= 8) return false;
+		if (members.size() >= Config.maxGroupSize()) return false;
 		leave(player);
 		members.add(StringTag.valueOf(player.toString()));
 		grp.put("members", members);
@@ -133,6 +133,47 @@ public class MatrioData extends SavedData {
 			setDirty();
 		}
 		return g.getIntOr("parcel", 0);
+	}
+
+	/** Whether this player may break or use something owned by the player with this UUID string (same group, or no owner). */
+	public boolean sameGroup(String owner, ServerPlayer player) {
+		if (owner == null || owner.isEmpty() || player.isCreative()) return true;
+		try {
+			return groupOf(java.util.UUID.fromString(owner)).equals(groupOf(player.getUUID()));
+		} catch (IllegalArgumentException e) {
+			return true;
+		}
+	}
+
+	/** The single World Block of a group for a world, as dimension and position; empty when there is none. */
+	public void setWorldBlock(String group, int world, net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos) {
+		CompoundTag e = worldEntry(group, world);
+		e.putString("block_dim", level.dimension().identifier().toString());
+		e.putLong("block_pos", pos.asLong());
+		setDirty();
+	}
+
+	public void clearWorldBlock(String group, int world, net.minecraft.core.BlockPos pos) {
+		CompoundTag e = worldEntry(group, world);
+		if (e.getLongOr("block_pos", Long.MIN_VALUE) == pos.asLong()) {
+			e.remove("block_dim");
+			e.remove("block_pos");
+			setDirty();
+		}
+	}
+
+	/** Whether the group's recorded World Block for this world still stands. */
+	public boolean hasWorldBlock(net.minecraft.server.MinecraftServer server, String group, int world) {
+		CompoundTag e = worldEntry(group, world);
+		String dim = e.getStringOr("block_dim", "");
+		if (dim.isEmpty()) return false;
+		var key = net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION, net.minecraft.resources.Identifier.parse(dim));
+		var level = server.getLevel(key);
+		if (level == null) return false;
+		var pos = net.minecraft.core.BlockPos.of(e.getLongOr("block_pos", 0L));
+		// an unloaded chunk is assumed to still hold it
+		if (!level.isLoaded(pos)) return true;
+		return level.getBlockState(pos).is(fr.achedon12.matriochka.content.ModContent.block("world_block"));
 	}
 
 	public CompoundTag worldEntry(String group, int world) {

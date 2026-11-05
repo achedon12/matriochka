@@ -152,12 +152,26 @@ public final class Blocks2 {
 				level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 0.6f, 0.5f + t / 200f);
 			}
 			if (t >= 200) {
+				String seedOwner = be.data().getStringOr("owner", "");
+				MatrioData md = MatrioData.get(level.getServer());
+				String seedGroup = seedOwner.isEmpty() ? "" : md.groupOf(java.util.UUID.fromString(seedOwner));
+				if (!seedGroup.isEmpty() && md.hasWorldBlock(level.getServer(), seedGroup, world)) {
+					// one World Block per world and group: the Seed waits until the old one is broken
+					be.data().putInt("t", 199);
+					be.setChanged();
+					if (level.getGameTime() % 100 == 0) {
+						var op = level.getServer().getPlayerList().getPlayer(java.util.UUID.fromString(seedOwner));
+						if (op != null) op.sendOverlayMessage(Component.translatable("message.matriochka.world_exists", world));
+					}
+					return;
+				}
 				level.setBlock(pos.below(), soil.setValue(WorldSoil.TILLED, false), 3);
 				level.setBlock(pos, ModContent.block("world_block").defaultBlockState(), 3);
 				if (level.getBlockEntity(pos) instanceof DataBlockEntity wb) {
 					wb.data().putInt("world", world);
-					wb.data().putString("owner", be.data().getStringOr("owner", ""));
+					wb.data().putString("owner", seedOwner);
 					wb.changed();
+					if (!seedGroup.isEmpty()) md.setWorldBlock(seedGroup, world, level, pos);
 				}
 				level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 60, 0.5, 0.5, 0.5, 0.4);
 				level.playSound(null, pos, SoundEvents.CHEST_OPEN, SoundSource.BLOCKS, 1.2f, 0.5f);
@@ -216,12 +230,24 @@ public final class Blocks2 {
 		}
 
 		@Override
+		protected float getDestroyProgress(BlockState state, Player player, net.minecraft.world.level.BlockGetter level, BlockPos pos) {
+			if (player instanceof ServerPlayer sp && level.getBlockEntity(pos) instanceof DataBlockEntity be
+				&& !MatrioData.get(sp.level().getServer()).sameGroup(be.data().getStringOr("owner", ""), sp)) {
+				if (sp.level().getGameTime() % 20 == 0) sp.sendOverlayMessage(Component.translatable("message.matriochka.not_yours"));
+				return 0f;
+			}
+			return super.getDestroyProgress(state, player, level, pos);
+		}
+
+		@Override
 		public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
 			if (level instanceof ServerLevel sl && level.getBlockEntity(pos) instanceof DataBlockEntity be) {
 				int world = be.data().getIntOr("world", 1);
-				// expel everybody of this group who is inside, without harm
+				// expel everybody of the owner's group who is inside, without harm
 				MatrioData data = MatrioData.get(sl.getServer());
-				String group = data.groupOf(player.getUUID());
+				String owner = be.data().getStringOr("owner", "");
+				String group = owner.isEmpty() ? data.groupOf(player.getUUID()) : data.groupOf(java.util.UUID.fromString(owner));
+				data.clearWorldBlock(group, world, pos);
 				for (ServerPlayer p : sl.getServer().getPlayerList().getPlayers()) {
 					if (Worlds.number(p.level()) == world && data.groupOf(p.getUUID()).equals(group)) Travel.leave(p);
 				}
@@ -271,12 +297,21 @@ public final class Blocks2 {
 		var t = cd.copyTag();
 		ServerLevel level = (ServerLevel) player.level();
 		if (!level.getBlockState(at).isAir()) return false;
+		int world = t.getIntOr("world", 1);
+		String owner = t.getStringOr("owner", player.getUUID().toString());
+		MatrioData md = MatrioData.get(level.getServer());
+		String group = md.groupOf(java.util.UUID.fromString(owner.isEmpty() ? player.getUUID().toString() : owner));
+		if (md.hasWorldBlock(level.getServer(), group, world)) {
+			player.sendOverlayMessage(Component.translatable("message.matriochka.world_exists", world));
+			return false;
+		}
 		level.setBlock(at, ModContent.block("world_block").defaultBlockState(), 3);
 		if (level.getBlockEntity(at) instanceof DataBlockEntity be) {
-			be.data().putInt("world", t.getIntOr("world", 1));
-			be.data().putString("owner", t.getStringOr("owner", player.getUUID().toString()));
+			be.data().putInt("world", world);
+			be.data().putString("owner", owner);
 			be.changed();
 		}
+		md.setWorldBlock(group, world, level, at);
 		stack.consume(1, player);
 		level.playSound(null, at, SoundEvents.CHEST_CLOSE, SoundSource.BLOCKS, 1f, 0.6f);
 		PlayerState.of(player).sync();

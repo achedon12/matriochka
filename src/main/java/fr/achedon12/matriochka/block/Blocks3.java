@@ -56,7 +56,7 @@ public final class Blocks3 {
 			if (by instanceof ServerPlayer sp && level.getBlockEntity(pos) instanceof DataBlockEntity be) {
 				int world = Worlds.number(level);
 				be.data().putString("owner", sp.getUUID().toString());
-				be.data().putInt("charges", 3);
+				be.data().putInt("charges", fr.achedon12.matriochka.world.Config.cradleCharges());
 				be.changed();
 				var t = PlayerState.of(sp).tag();
 				net.minecraft.nbt.CompoundTag c = new net.minecraft.nbt.CompoundTag();
@@ -64,7 +64,7 @@ public final class Blocks3 {
 				c.putInt("y", pos.getY());
 				c.putInt("z", pos.getZ());
 				t.put("cradle_" + world, c);
-				sp.sendSystemMessage(Component.translatable("message.matriochka.cradle_set", 3));
+				sp.sendSystemMessage(Component.translatable("message.matriochka.cradle_set", fr.achedon12.matriochka.world.Config.cradleCharges()));
 			}
 		}
 
@@ -82,6 +82,15 @@ public final class Blocks3 {
 				sp.sendSystemMessage(Component.translatable("message.matriochka.cradle_charges", be.data().getIntOr("charges", 0)));
 			}
 			return InteractionResult.SUCCESS;
+		}
+
+		@Override
+		protected float getDestroyProgress(BlockState state, Player player, net.minecraft.world.level.BlockGetter level, BlockPos pos) {
+			if (player instanceof ServerPlayer sp && level.getBlockEntity(pos) instanceof DataBlockEntity be
+				&& !fr.achedon12.matriochka.world.MatrioData.get(sp.level().getServer()).sameGroup(be.data().getStringOr("owner", ""), sp)) {
+				return 0f;
+			}
+			return super.getDestroyProgress(state, player, level, pos);
 		}
 	}
 
