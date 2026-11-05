@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bestiary | Matriochka</title>
+<meta name="description" content="Every creature of Matriochka with its health, damage, behaviour and drops.">
+<meta name="author" content="achedon12">
+<meta name="theme-color" content="#141210">
+<meta property="og:title" content="Bestiary | Matriochka">
+<meta property="og:description" content="Every creature of Matriochka with its health, damage, behaviour and drops.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://achedon12.github.io/matriochka/assets/icon.png">
+<link rel="alternate" hreflang="en" href="https://achedon12.github.io/matriochka/bestiary.html">
+<link rel="alternate" hreflang="fr" href="https://achedon12.github.io/matriochka/fr/bestiary.html">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=Yeseva+One&amp;display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="page-bestiary">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html"><img class="px" src="assets/icon.png" width="28" height="28" alt=""><span>Matriochka</span></a>
+    <nav class="nav" aria-label="Main"><ul><li><a href="index.html">Home</a></li><li><a href="worlds.html">Worlds</a></li><li><a href="bestiary.html" aria-current="page">Bestiary</a></li><li><a href="bosses.html">Bosses</a></li><li><a href="systems.html">Systems</a></li><li><a href="download.html">Download</a></li></ul></nav>
+    <div class="top-tools">
+      <a class="lang" href="fr/bestiary.html" hreflang="fr" lang="fr"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 8 6 6"/> <path d="m4 14 6-6 2-3"/> <path d="M2 5h12"/> <path d="M7 2h1"/> <path d="m22 22-5-10-5 10"/> <path d="M14 18h6"/></svg><span>Français</span></a>
+      <a class="gh" href="https://github.com/achedon12/matriochka" aria-label="Source code on GitHub"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/> <path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="phead"><div class="wrap"><h1>Bestiary</h1><p class="lead">Fifty creatures, five per world. Health and damage already include the world&#x27;s multiplier: health grows by 35% and damage by 20% with every world you go down.</p></div></section>
+<div class="wrap">
+  <div class="filters js-only" role="group" aria-label="Filter by world"><button type="button" class="fbtn" aria-pressed="true" data-world="all">All worlds</button><button type="button" class="fbtn" aria-pressed="false" data-world="1" style="--c:#b7e04a"><span class="led"></span>1</button><button type="button" class="fbtn" aria-pressed="false" data-world="2" style="--c:#ffb347"><span class="led"></span>2</button><button type="button" class="fbtn" aria-pressed="false" data-world="3" style="--c:#7fd3ff"><span class="led"></span>3</button><button type="button" class="fbtn" aria-pressed="false" data-world="4" style="--c:#ffe14a"><span class="led"></span>4</button><button type="button" class="fbtn" aria-pressed="false" data-world="5" style="--c:#6a8aff"><span class="led"></span>5</button><button type="button" class="fbtn" aria-pressed="false" data-world="6" style="--c:#c84ad8"><span class="led"></span>6</button><button type="button" class="fbtn" aria-pressed="false" data-world="7" style="--c:#9af0ff"><span class="led"></span>7</button><button type="button" class="fbtn" aria-pressed="false" data-world="8" style="--c:#f0f0ff"><span class="led"></span>8</button><button type="button" class="fbtn" aria-pressed="false" data-world="9" style="--c:#e8a070"><span class="led"></span>9</button><button type="button" class="fbtn" aria-pressed="false" data-world="10" style="--c:#e8c070"><span class="led"></span>10</button></div>
+  <div class="legend-tags">
+    <p><strong>Nesting</strong> creatures split open when they die and release a smaller, faster one. Elites guard the world&#x27;s best drops.</p>
+  </div>
+  
+<section class="mgroup" data-world="1" id="world-1" style="--accent:#b7e04a">
+  <h2><span class="world-n sm">1</span>Toxic Jungle<span class="led"></span><small>Toxin</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-sporeling">
+  <div class="plate"><img class="px" src="assets/entities/sporeling.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Sporeling</h3>
+    <p>Attacks in groups and adds toxin.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>16</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>3</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/spores.png" width="24" height="24" alt="" loading="lazy">Spores</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-root_creeper">
+  <div class="plate"><img class="px" src="assets/entities/root_creeper.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Root Creeper</h3>
+    <p>Waits underground, then roots you.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>24</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>4</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/roots.png" width="24" height="24" alt="" loading="lazy">Roots</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-snare_flower">
+  <div class="plate"><img class="px" src="assets/entities/snare_flower.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Snare Flower</h3>
+    <p>Immobile, pulls you toward it.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>30</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>5</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/spores.png" width="24" height="24" alt="" loading="lazy">Spores</span><span class="drop drop-rare"><img class="px" src="assets/items/roots.png" width="24" height="24" alt="" loading="lazy">Roots<em>rare</em></span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-spore_bearer">
+  <div class="plate"><img class="px" src="assets/entities/spore_bearer.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Spore Bearer</h3>
+    <p>Flees and leaves toxic clouds.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>20</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>3</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/spores.png" width="24" height="24" alt="" loading="lazy">Spores</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-chitin_guard">
+  <div class="plate"><img class="px" src="assets/entities/chitin_guard.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Chitin Guard</h3>
+    <p>Elite. A shield you must break from behind.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>40</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>6</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/chitin.png" width="24" height="24" alt="" loading="lazy">Chitin</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li></ul>
+  </div>
+</li></ul>
+</section>
+<section class="mgroup" data-world="2" id="world-2" style="--accent:#ffb347">
+  <h2><span class="world-n sm">2</span>Giant Veins<span class="led"></span><small>Heat</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-ash_miner">
+  <div class="plate"><img class="px" src="assets/entities/ash_miner.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Ash Miner</h3>
+    <p>Digs to reach you.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>30</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>6</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/ash_ingot.png" width="24" height="24" alt="" loading="lazy">Ash Ingot</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-living_vein">
+  <div class="plate"><img class="px" src="assets/entities/living_vein.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Living Vein</h3>
+    <p>Nesting: splits into shards.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>49</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>6</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/giant_ore.png" width="24" height="24" alt="" loading="lazy">Giant Ore</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/> <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/> <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>Nesting</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-rock_salamander">
+  <div class="plate"><img class="px" src="assets/entities/rock_salamander.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Rock Salamander</h3>
+    <p>Crosses lava and raises your heat.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>27</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>7.2</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/blazing_rock.png" width="24" height="24" alt="" loading="lazy">Blazing Rock</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-dead_smith">
+  <div class="plate"><img class="px" src="assets/entities/dead_smith.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Dead Smith</h3>
+    <p>Heats its hammer before striking.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>40</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>7.2</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/ash_ingot.png" width="24" height="24" alt="" loading="lazy">Ash Ingot</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-slag_golem">
+  <div class="plate"><img class="px" src="assets/entities/slag_golem.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Slag Golem</h3>
+    <p>Elite. Hardens when it cools down.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>61</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>8.4</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/blazing_rock.png" width="24" height="24" alt="" loading="lazy">Blazing Rock</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li></ul>
+  </div>
+</li></ul>
+</section>
+<section class="mgroup" data-world="3" id="world-3" style="--accent:#7fd3ff">
+  <h2><span class="world-n sm">3</span>Endless Dungeon<span class="led"></span><small>Locks</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-jailer_mob">
+  <div class="plate"><img class="px" src="assets/entities/jailer_mob.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Jailer</h3>
+    <p>Calls allies and closes doors.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>51</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>7.2</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/dungeon_key.png" width="24" height="24" alt="" loading="lazy">Dungeon Key</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-sentinel">
+  <div class="plate"><img class="px" src="assets/entities/sentinel.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Sentinel</h3>
+    <p>Throws chains from above.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>55</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>7.2</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/sealed_fragment.png" width="24" height="24" alt="" loading="lazy">Sealed Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-living_lock">
+  <div class="plate"><img class="px" src="assets/entities/living_lock.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Living Lock</h3>
+    <p>Pretends to be a locked door.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>44</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>5.8</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/dungeon_key.png" width="24" height="24" alt="" loading="lazy">Dungeon Key</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-dungeon_rat">
+  <div class="plate"><img class="px" src="assets/entities/dungeon_rat.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Dungeon Rat</h3>
+    <p>Slips under bars, attacks in swarms.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>18</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>4.3</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/sealed_fragment.png" width="24" height="24" alt="" loading="lazy">Sealed Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-executioner">
+  <div class="plate"><img class="px" src="assets/entities/executioner.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Executioner</h3>
+    <p>Elite. Charges and cages you.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>82</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>11.5</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/sealed_fragment.png" width="24" height="24" alt="" loading="lazy">Sealed Fragment</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li></ul>
+  </div>
+</li></ul>
+</section>
+<section class="mgroup" data-world="4" id="world-4" style="--accent:#ffe14a">
+  <h2><span class="world-n sm">4</span>Storm Archipelago<span class="led"></span><small>Wind</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-wind_ray">
+  <div class="plate"><img class="px" src="assets/entities/wind_ray.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Wind Ray</h3>
+    <p>Glides and pushes you off the islands.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>44</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>8.6</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/ray_membrane.png" width="24" height="24" alt="" loading="lazy">Ray Membrane</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/> <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/> <path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>Flying</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-storm_bird">
+  <div class="plate"><img class="px" src="assets/entities/storm_bird.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Storm Bird</h3>
+    <p>Dives during storms.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>39</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>8.6</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/storm_essence.png" width="24" height="24" alt="" loading="lazy">Storm Essence</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/> <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/> <path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>Flying</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-island_warden">
+  <div class="plate"><img class="px" src="assets/entities/island_warden.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Island Warden</h3>
+    <p>Guards a crystal and slams the area.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>98</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>10.4</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/celestial_crystal.png" width="24" height="24" alt="" loading="lazy">Celestial Crystal</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-cloud_mine">
+  <div class="plate"><img class="px" src="assets/entities/cloud_mine.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Cloud Mine</h3>
+    <p>Floats, then explodes near you.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>34</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>12.1</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/storm_essence.png" width="24" height="24" alt="" loading="lazy">Storm Essence</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/> <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/> <path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>Flying</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-sky_harpooner">
+  <div class="plate"><img class="px" src="assets/entities/sky_harpooner.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Sky Harpooner</h3>
+    <p>Elite. Drags you toward the void.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>59</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>8.6</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/celestial_crystal.png" width="24" height="24" alt="" loading="lazy">Celestial Crystal</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li></ul>
+  </div>
+</li></ul>
+</section>
+<section class="mgroup" data-world="5" id="world-5" style="--accent:#6a8aff">
+  <h2><span class="world-n sm">5</span>Lightless Deep<span class="led"></span><small>Noise</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-blind_prowler">
+  <div class="plate"><img class="px" src="assets/entities/blind_prowler.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Blind Prowler</h3>
+    <p>Hunts by sound. Sneak.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>86</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>14.5</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/shadow_shard.png" width="24" height="24" alt="" loading="lazy">Shadow Shard</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-glow_devourer">
+  <div class="plate"><img class="px" src="assets/entities/glow_devourer.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Glow Devourer</h3>
+    <p>Snuffs out your lights.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>73</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>8.3</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/shadow_shard.png" width="24" height="24" alt="" loading="lazy">Shadow Shard</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-echo">
+  <div class="plate"><img class="px" src="assets/entities/echo.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Echo</h3>
+    <p>Mimics sounds to lure you.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>53</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>10.4</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/diamond_fragment.png" width="24" height="24" alt="" loading="lazy">Diamond Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-eyeless_watcher">
+  <div class="plate"><img class="px" src="assets/entities/eyeless_watcher.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Eyeless Watcher</h3>
+    <p>Still while you are silent.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>100</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>12.4</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/diamond_fragment.png" width="24" height="24" alt="" loading="lazy">Diamond Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-shadow_mother">
+  <div class="plate"><img class="px" src="assets/entities/shadow_mother.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Shadow Mother</h3>
+    <p>Elite, nesting: releases shadows.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>146</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>14.5</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/shadow_shard.png" width="24" height="24" alt="" loading="lazy">Shadow Shard</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/> <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/> <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>Nesting</li></ul>
+  </div>
+</li></ul>
+</section>
+<section class="mgroup" data-world="6" id="world-6" style="--accent:#c84ad8">
+  <h2><span class="world-n sm">6</span>Upside Realm<span class="led"></span><small>Gravity</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-reflection">
+  <div class="plate"><img class="px" src="assets/entities/reflection.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Reflection</h3>
+    <p>Copies your last attack.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>90</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>14.9</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/inverted_crystal.png" width="24" height="24" alt="" loading="lazy">Inverted Crystal</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-ceiling_walker">
+  <div class="plate"><img class="px" src="assets/entities/ceiling_walker.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Ceiling Walker</h3>
+    <p>Walks on every surface.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>117</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>12.4</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/unstable_alloy.png" width="24" height="24" alt="" loading="lazy">Unstable Alloy</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-unstable_sphere">
+  <div class="plate"><img class="px" src="assets/entities/unstable_sphere.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Unstable Sphere</h3>
+    <p>Flips gravity around it when it dies.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>63</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>19.9</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/unstable_alloy.png" width="24" height="24" alt="" loading="lazy">Unstable Alloy</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/> <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/> <path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>Flying</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-inverted_strider">
+  <div class="plate"><img class="px" src="assets/entities/inverted_strider.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Inverted Strider</h3>
+    <p>Fights upside down, strikes through platforms.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>135</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>14.9</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/inverted_crystal.png" width="24" height="24" alt="" loading="lazy">Inverted Crystal</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-broken_mirror">
+  <div class="plate"><img class="px" src="assets/entities/broken_mirror.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Broken Mirror</h3>
+    <p>Elite, nesting: reflects damage.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>179</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>17.4</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/inverted_crystal.png" width="24" height="24" alt="" loading="lazy">Inverted Crystal</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/> <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/> <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>Nesting</li></ul>
+  </div>
+</li></ul>
+</section>
+<section class="mgroup" data-world="7" id="world-7" style="--accent:#9af0ff">
+  <h2><span class="world-n sm">7</span>Pressure Ocean<span class="led"></span><small>Oxygen</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-abyssal_hunter">
+  <div class="plate"><img class="px" src="assets/entities/abyssal_hunter.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Abyssal Hunter</h3>
+    <p>Circles, then charges from below.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>157</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>20.9</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/abyssal_salt.png" width="24" height="24" alt="" loading="lazy">Abyssal Salt</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>Aquatic</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-blade_school">
+  <div class="plate"><img class="px" src="assets/entities/blade_school.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Blade School</h3>
+    <p>Fast swarm, drains oxygen.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>73</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>11.9</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/abyssal_salt.png" width="24" height="24" alt="" loading="lazy">Abyssal Salt</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>Aquatic</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-pressure_jelly">
+  <div class="plate"><img class="px" src="assets/entities/pressure_jelly.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Pressure Jelly</h3>
+    <p>Raises pressure around it.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>121</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>14.9</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/pressure_pearl.png" width="24" height="24" alt="" loading="lazy">Pressure Pearl</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>Aquatic</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-bell_crab">
+  <div class="plate"><img class="px" src="assets/entities/bell_crab.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Bell Crab</h3>
+    <p>Nesting: shelters smaller crabs.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>242</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>17.9</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/pressure_pearl.png" width="24" height="24" alt="" loading="lazy">Pressure Pearl</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/> <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/> <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>Nesting</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-trench_eel">
+  <div class="plate"><img class="px" src="assets/entities/trench_eel.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Trench Eel</h3>
+    <p>Elite. Bursts from walls and grabs you.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>182</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>23.9</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/pressure_pearl.png" width="24" height="24" alt="" loading="lazy">Pressure Pearl</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>Aquatic</li></ul>
+  </div>
+</li></ul>
+</section>
+<section class="mgroup" data-world="8" id="world-8" style="--accent:#f0f0ff">
+  <h2><span class="world-n sm">8</span>Hastened Seasons<span class="led"></span><small>Season</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-seasonal_creature">
+  <div class="plate"><img class="px" src="assets/entities/seasonal_creature.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Seasonal Creature</h3>
+    <p>Changes attacks with the season.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>180</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>21.5</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/season_fragment.png" width="24" height="24" alt="" loading="lazy">Season Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-hourglass_elder">
+  <div class="plate"><img class="px" src="assets/entities/hourglass_elder.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Hourglass Elder</h3>
+    <p>Slows everything around it.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>245</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>17.9</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/temporal_sand.png" width="24" height="24" alt="" loading="lazy">Temporal Sand</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-dusk_shade">
+  <div class="plate"><img class="px" src="assets/entities/dusk_shade.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Dusk Shade</h3>
+    <p>Appears only when day turns to night.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>196</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>25.1</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/temporal_sand.png" width="24" height="24" alt="" loading="lazy">Temporal Sand</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-minute_child">
+  <div class="plate"><img class="px" src="assets/entities/minute_child.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Child of Minutes</h3>
+    <p>Grows stronger during the fight.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>114</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>14.3</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/season_fragment.png" width="24" height="24" alt="" loading="lazy">Season Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-hour_keeper">
+  <div class="plate"><img class="px" src="assets/entities/hour_keeper.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Hour Keeper</h3>
+    <p>Elite. Repeats its strikes on a cycle.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>368</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>28.7</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/temporal_sand.png" width="24" height="24" alt="" loading="lazy">Temporal Sand</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li></ul>
+  </div>
+</li></ul>
+</section>
+<section class="mgroup" data-world="9" id="world-9" style="--accent:#e8a070">
+  <h2><span class="world-n sm">9</span>Restless Ground<span class="led"></span><small>Tremor</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-crawling_block">
+  <div class="plate"><img class="px" src="assets/entities/crawling_block.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Crawling Block</h3>
+    <p>Disguises itself as terrain.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>331</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>25.8</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/terrain_fragment.png" width="24" height="24" alt="" loading="lazy">Terrain Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-mimic">
+  <div class="plate"><img class="px" src="assets/entities/mimic.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Mimic</h3>
+    <p>Pretends to be a chest, an ore or a door.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>287</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>30.1</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/terrain_fragment.png" width="24" height="24" alt="" loading="lazy">Terrain Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-foundation_eater">
+  <div class="plate"><img class="px" src="assets/entities/foundation_eater.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Foundation Eater</h3>
+    <p>Eats unanchored blocks.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>309</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>21.5</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/terrain_fragment.png" width="24" height="24" alt="" loading="lazy">Terrain Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-earth_hand">
+  <div class="plate"><img class="px" src="assets/entities/earth_hand.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Earth Hand</h3>
+    <p>Bursts from the ground and grabs you.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>265</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>34.4</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/terrain_fragment.png" width="24" height="24" alt="" loading="lazy">Terrain Fragment</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-walking_column">
+  <div class="plate"><img class="px" src="assets/entities/walking_column.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Walking Column</h3>
+    <p>Elite, nesting: falls and opens chasms.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>496</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>34.4</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/terrain_fragment.png" width="24" height="24" alt="" loading="lazy">Terrain Fragment</span><span class="drop drop-rare"><img class="px" src="assets/items/terrain_heart.png" width="24" height="24" alt="" loading="lazy">Terrain Heart<em>rare</em></span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/> <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/> <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>Nesting</li></ul>
+  </div>
+</li></ul>
+</section>
+<section class="mgroup" data-world="10" id="world-10" style="--accent:#e8c070">
+  <h2><span class="world-n sm">10</span>The Giant Workshop<span class="led"></span><small>Synthesis</small></h2>
+  <ul class="mobs">
+<li class="mob panel" id="mob-giant_sporeling">
+  <div class="plate"><img class="px" src="assets/entities/giant_sporeling.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Giant Sporeling</h3>
+    <p>Splits into groups of Sporelings.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>447</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>36.1</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/artisan_thread.png" width="24" height="24" alt="" loading="lazy">Artisan&#x27;s Thread</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-ash_titanid">
+  <div class="plate"><img class="px" src="assets/entities/ash_titanid.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Ash Titanid</h3>
+    <p>Raises the heat of the area.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>536</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>31</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/artisan_thread.png" width="24" height="24" alt="" loading="lazy">Artisan&#x27;s Thread</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-colossal_jailer">
+  <div class="plate"><img class="px" src="assets/entities/colossal_jailer.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Colossal Jailer</h3>
+    <p>Locks whole sections of the workshop.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>596</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>36.1</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/artisan_thread.png" width="24" height="24" alt="" loading="lazy">Artisan&#x27;s Thread</span></div>
+    
+  </div>
+</li>
+<li class="mob panel" id="mob-titan_ray">
+  <div class="plate"><img class="px" src="assets/entities/titan_ray.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Titan Ray</h3>
+    <p>Pushes you with huge gusts.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>417</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>41.3</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/artisan_thread.png" width="24" height="24" alt="" loading="lazy">Artisan&#x27;s Thread</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/> <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/> <path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>Flying</li></ul>
+  </div>
+</li>
+<li class="mob panel" id="mob-colossus_prowler">
+  <div class="plate"><img class="px" src="assets/entities/colossus_prowler.png" width="96" height="96" alt="" loading="lazy"></div>
+  <div class="mob-body">
+    <h3>Colossus Prowler</h3>
+    <p>Elite. Hunts by sound in the dark.</p>
+    <dl class="stats">
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>Health</span></dt><dd>745</dd></div>
+      <div><dt><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/> <line x1="13" x2="19" y1="19" y2="13"/> <line x1="16" x2="20" y1="16" y2="20"/> <line x1="19" x2="21" y1="21" y2="19"/> <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/> <line x1="5" x2="9" y1="14" y2="18"/> <line x1="7" x2="4" y1="17" y2="20"/> <line x1="3" x2="5" y1="19" y2="21"/></svg><span>Damage</span></dt><dd>41.3</dd></div>
+    </dl>
+    <div class="drops"><span class="drop"><img class="px" src="assets/items/artisan_shard.png" width="24" height="24" alt="" loading="lazy">Artisan&#x27;s Shard</span></div>
+    <ul class="tags"><li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Elite</li></ul>
+  </div>
+</li></ul>
+</section>
+  <section class="mgroup peoples" id="peoples">
+    <h2>The peoples</h2>
+    <p class="sub">Every world has its own people, with villages, traders and quest givers. How they greet you depends on your karma. On the Surface, the Doll Peddler wanders between villages.</p>
+    <ul class="people"><li class="person" style="--accent:#D9A441"><div class="plate sm"><img class="px" src="assets/entities/doll_peddler.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Doll Peddler</strong><small>The Surface</small></div></li><li class="person" style="--accent:#b7e04a"><div class="plate sm"><img class="px" src="assets/entities/gatherer.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Gatherer</strong><small>Toxic Jungle</small></div></li><li class="person" style="--accent:#ffb347"><div class="plate sm"><img class="px" src="assets/entities/free_miner.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Free Miner</strong><small>Giant Veins</small></div></li><li class="person" style="--accent:#7fd3ff"><div class="plate sm"><img class="px" src="assets/entities/prisoner.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Prisoner</strong><small>Endless Dungeon</small></div></li><li class="person" style="--accent:#ffe14a"><div class="plate sm"><img class="px" src="assets/entities/lighthouse_keeper.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Lighthouse Folk</strong><small>Storm Archipelago</small></div></li><li class="person" style="--accent:#6a8aff"><div class="plate sm"><img class="px" src="assets/entities/silent_one.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Silent One</strong><small>Lightless Deep</small></div></li><li class="person" style="--accent:#c84ad8"><div class="plate sm"><img class="px" src="assets/entities/free_reflection.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Free Reflection</strong><small>Upside Realm</small></div></li><li class="person" style="--accent:#9af0ff"><div class="plate sm"><img class="px" src="assets/entities/diver.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Diver</strong><small>Pressure Ocean</small></div></li><li class="person" style="--accent:#f0f0ff"><div class="plate sm"><img class="px" src="assets/entities/ephemeral.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Ephemeral</strong><small>Hastened Seasons</small></div></li><li class="person" style="--accent:#e8a070"><div class="plate sm"><img class="px" src="assets/entities/anchored.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Anchored</strong><small>Restless Ground</small></div></li><li class="person" style="--accent:#e8c070"><div class="plate sm"><img class="px" src="assets/entities/old_apprentice.png" width="64" height="64" alt="" loading="lazy"></div><div><strong>Old Apprentice</strong><small>The Giant Workshop</small></div></li></ul>
+  </section>
+</div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="foot-brand"><img class="px" src="assets/icon.png" width="40" height="40" alt=""><div><strong>Matriochka</strong><p>A Fabric mod by achedon12, for Minecraft 26.3. Released under the MIT licence.</p></div></div>
+    <ul class="foot-links">
+      <li><a href="https://github.com/achedon12/matriochka/releases"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/> <polyline points="7 10 12 15 17 10"/> <line x1="12" x2="12" y1="15" y2="3"/></svg>Releases</a></li>
+      <li><a href="https://github.com/achedon12/matriochka/wiki"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7v14"/> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Wiki</a></li>
+      <li><a href="https://github.com/achedon12/matriochka"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/> <path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</a></li>
+      <li><a href="https://github.com/achedon12/matriochka/issues"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m8 2 1.88 1.88"/> <path d="M14.12 3.88 16 2"/> <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/> <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/> <path d="M12 20v-9"/> <path d="M6.53 9C4.6 8.8 3 7.1 3 5"/> <path d="M6 13H2"/> <path d="M3 21c0-2.1 1.7-3.9 3.8-4"/> <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/> <path d="M22 13h-4"/> <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg>Report a bug</a></li>
+    </ul>
+    <p class="foot-note">Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+  </div>
+</footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
