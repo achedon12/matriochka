@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - name: Generated files are up to date
+        run: |
+          python3 tools/gen.py
+          git diff --stat --exit-code -- src || (echo "Run python3 tools/gen.py and commit the result." && exit 1)
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: matriochka-jar
+          path: build/libs/*.jar
