@@ -99,6 +99,20 @@ public final class WorldZero {
 		return out;
 	}
 
+	/** The middle of the gate that closes chamber k (used by the story check). */
+	public static BlockPos gateCenter(BlockPos o, int k) {
+		return o.offset(0, 2, gateZ(k) + 1);
+	}
+
+	public static BlockPos chamberCenter(BlockPos o, int k) {
+		return o.offset(0, 0, chamberZ(k) + CH_LEN / 2);
+	}
+
+	/** Where to kneel before the bench. */
+	public static BlockPos kneelSpot(BlockPos o) {
+		return o.offset(0, 0, KNEEL_Z);
+	}
+
 	private static AABB complex(BlockPos o) {
 		return new AABB(o.getX() - ROOM_X - 3, o.getY() - 3, o.getZ() - 3, o.getX() + ROOM_X + 3, o.getY() + ROOM_H + 3, o.getZ() + ROOM_Z1 + 3);
 	}

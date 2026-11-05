@@ -214,7 +214,7 @@ public final class Rewards {
 	}
 
 	/** The note left beside every hidden doll: the structure's hint to the nesting order (count the notches). */
-	static ItemStack carverNote() {
+	public static ItemStack carverNote() {
 		ItemStack note = new ItemStack(Items.PAPER);
 		note.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.translatable("item.matriochka.carver_note"));
 		note.set(DataComponents.LORE, new net.minecraft.world.item.component.ItemLore(List.of(
