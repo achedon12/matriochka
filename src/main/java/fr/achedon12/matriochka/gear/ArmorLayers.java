@@ -27,6 +27,12 @@ import org.jspecify.annotations.Nullable;
  */
 public final class ArmorLayers {
 	public record Layers(int count, int wear) {
+		/** A hand-made component cannot ask for more layers than a piece can ever hold, nor negative wear. */
+		public Layers {
+			count = Math.max(0, Math.min(MAX_LAYERS, count));
+			wear = Math.max(0, wear);
+		}
+
 		public static final Codec<Layers> CODEC = RecordCodecBuilder.create(i -> i.group(
 			Codec.INT.fieldOf("count").forGetter(Layers::count),
 			Codec.INT.fieldOf("wear").forGetter(Layers::wear)).apply(i, Layers::new));
@@ -36,6 +42,9 @@ public final class ArmorLayers {
 
 	public static final DataComponentType<Layers> LAYERS = Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, Matriochka.id("layers"),
 		DataComponentType.<Layers>builder().persistent(Layers.CODEC).networkSynchronized(Layers.STREAM).build());
+
+	/** One, plus class levels 3 and 5, plus the Guardian class. */
+	public static final int MAX_LAYERS = 4;
 
 	private ArmorLayers() {}
 
