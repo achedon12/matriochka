@@ -85,6 +85,12 @@ final class FixesTest {
 			// the Grappling Hook pulls a creature toward the player
 			p.teleportTo(level, p.getX(), p.getY(), p.getZ(), java.util.Set.of(), 0f, 0f, false);
 			Vec3 front = p.position().add(p.getLookAngle().multiply(1, 0, 1).normalize().scale(8));
+			// a clear line between the player and the zombie, whatever the terrain
+			BlockPos from = BlockPos.containing(p.getEyePosition()), to = BlockPos.containing(front.x, p.getEyeY(), front.z);
+			for (BlockPos q : BlockPos.betweenClosed(Math.min(from.getX(), to.getX()) - 1, from.getY() - 1, Math.min(from.getZ(), to.getZ()) - 1,
+				Math.max(from.getX(), to.getX()) + 1, from.getY() + 1, Math.max(from.getZ(), to.getZ()) + 1)) {
+				level.setBlock(q, Blocks.AIR.defaultBlockState(), 3);
+			}
 			var zombie = net.minecraft.world.entity.EntityTypes.ZOMBIE.create(level, EntitySpawnReason.COMMAND);
 			zombie.setNoAi(true);
 			zombie.setPos(front.x, p.getEyeY() - 1.0, front.z);

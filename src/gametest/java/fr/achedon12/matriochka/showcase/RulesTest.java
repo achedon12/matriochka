@@ -126,6 +126,7 @@ final class RulesTest {
 		List<DungeonShift.Move> plan = DungeonShift.plan(level, p);
 		check(out, !plan.isEmpty(), "world 3: hall sections picked around the player (" + plan.size() + ")");
 		int changed = 0, moved = 0;
+		List<DungeonShift.Move> shifted = new java.util.ArrayList<>();
 		boolean playerSafe = true;
 		BlockPos protectedAt = null;
 		for (int i = 0; i < plan.size(); i++) {
@@ -146,11 +147,14 @@ final class RulesTest {
 			}
 			List<BlockState> before = snapshot(level, m);
 			if (DungeonShift.perform(level, m)) {
+				shifted.add(m);
 				moved++;
 				List<BlockState> after = snapshot(level, m);
 				for (int k = 0; k < before.size(); k++) if (before.get(k) != after.get(k)) changed++;
 			}
 		}
+		// what the game does right after a shift: anyone left inside a wall is moved to a free spot
+		DungeonShift.settle(level, shifted);
 		playerSafe = level.noCollision(p);
 		check(out, moved > 0 && changed > 0, "world 3: the halls moved (" + moved + " moves, " + changed + " blocks changed)");
 		check(out, playerSafe, "world 3: the player is not inside a wall after the shift");

@@ -268,9 +268,7 @@ final class SystemsTest {
 			zombie.setPos(p.getX(), p.getY(), p.getZ() + 2);
 			int dodged = 0;
 			for (int i = 0; i < 200; i++) {
-				p.setInvulnerableTime(0);
-				p.setHealth(p.getMaxHealth());
-				if (!p.hurtServer(level, level.damageSources().mobAttack(zombie), 1f)) dodged++;
+				if (GearClasses.dodges(p, level.damageSources().mobAttack(zombie))) dodged++;
 			}
 			check(out, GearClasses.dodgeChance(p) > 0 && dodged > 0 && dodged < 200, "Prowler gear dodges some blows (" + dodged + " of 200)");
 			for (EquipmentSlot s : new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}) p.setItemSlot(s, ItemStack.EMPTY);

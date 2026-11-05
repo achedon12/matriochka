@@ -78,14 +78,18 @@ public final class GearClasses {
 	public static void init() {
 		ArmorLayers.init();
 		// Prowler gear: a chance to slip out of the way of a blow
-		net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
-			if (!(entity instanceof net.minecraft.server.level.ServerPlayer p) || source.getEntity() == null || source.getEntity() == p) return true;
-			if (source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) return true;
-			float chance = dodgeChance(p);
-			if (chance <= 0 || p.getRandom().nextFloat() >= chance) return true;
-			dodged(p);
-			return false;
-		});
+		net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) ->
+			!(entity instanceof net.minecraft.server.level.ServerPlayer p && dodges(p, source)));
+	}
+
+	/** Whether this blow misses a player in Prowler gear (rolls the chance and plays the feedback). */
+	public static boolean dodges(net.minecraft.server.level.ServerPlayer p, net.minecraft.world.damagesource.DamageSource source) {
+		if (source.getEntity() == null || source.getEntity() == p) return false;
+		if (source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
+		float chance = dodgeChance(p);
+		if (chance <= 0 || p.getRandom().nextFloat() >= chance) return false;
+		dodged(p);
+		return true;
 	}
 
 	/** Dodge feedback: a puff of air, a swish and a word over the hotbar. */

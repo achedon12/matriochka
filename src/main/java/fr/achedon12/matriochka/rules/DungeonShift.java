@@ -297,7 +297,7 @@ public final class DungeonShift {
 	}
 
 	/** After moves: nobody stays stuck in a wall, and everyone near hears the halls settle. */
-	private static void settle(ServerLevel level, List<Move> done) {
+	public static void settle(ServerLevel level, List<Move> done) {
 		if (done.isEmpty()) return;
 		for (ServerPlayer p : level.players()) {
 			boolean near = false;

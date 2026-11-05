@@ -84,7 +84,10 @@ public final class WorldRules {
 	}
 
 	static boolean wearing(ServerPlayer p, String id) {
-		for (EquipmentSlot s : EquipmentSlot.values()) if (p.getItemBySlot(s).is(ModContent.item(id))) return true;
+		// a set may not have every piece (the Diving set has no helmet: the head slot is the snorkel's)
+		var item = ModContent.itemOrNull(id);
+		if (item == null) return false;
+		for (EquipmentSlot s : EquipmentSlot.values()) if (p.getItemBySlot(s).is(item)) return true;
 		return false;
 	}
 
