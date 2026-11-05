@@ -84,11 +84,13 @@ public final class Recipes {
 		r("jailer_table", "dungeon_key", 1, -1, "sealed_fragment", 3, "minecraft:gold_nugget", 4);
 		r("jailer_table", "cell_ration", 2, -1, "minecraft:bread", 1, "minecraft:cooked_beef", 1);
 		gear("jailer_table", 3, "jailer_blade", "jailer", "sealed_fragment");
+		r("jailer_table", "sealed_shackle", 1, -1, "sealed_fragment", 6, "dungeon_key", 1, "minecraft:iron_chain", 2);
 		// World 4
 		r("lightning_forge", "glider", 1, -1, "ray_membrane", 8, "minecraft:stick", 4, "storm_essence", 2);
 		r("lightning_forge", "grappling_hook", 1, -1, "celestial_crystal", 2, "minecraft:string", 8, "minecraft:iron_ingot", 3);
 		r("lightning_forge", "cloud_fruit", 2, -1, "minecraft:apple", 2, "storm_essence", 1);
 		gear("lightning_forge", 4, "lightning_lance", "celestial", "celestial_crystal");
+		r("lightning_forge", "storm_censer", 1, -1, "storm_essence", 4, "celestial_crystal", 2, "ray_membrane", 2);
 		// World 5
 		r("dark_altar", "solar_lantern", 1, -1, "storm_essence", 4, "minecraft:lantern", 1, "minecraft:gold_ingot", 2);
 		r("dark_altar", "sonar", 1, -1, "shadow_shard", 4, "minecraft:amethyst_shard", 2);
@@ -112,6 +114,7 @@ public final class Recipes {
 		r("time_workshop", "season_preserve", 3, -1, "season_fragment", 1, "minecraft:glass_bottle", 3);
 		r("time_workshop", "season_jam", 2, -1, "minecraft:sweet_berries", 4, "temporal_sand", 1);
 		gear("time_workshop", 8, "season_scythe", "seasonal", "temporal_sand");
+		r("time_workshop", "wreath_of_seasons", 1, -1, "season_fragment", 2, "temporal_sand", 6, "season_preserve", 1);
 		// World 9
 		r("terrain_anchor", "anchor", 4, -1, "terrain_fragment", 2, "minecraft:iron_ingot", 2);
 		r("terrain_anchor", "grip_boots", 1, -1, "terrain_fragment", 6, "minecraft:leather_boots", 1);
@@ -123,6 +126,7 @@ public final class Recipes {
 		r("final_loom", "artisan_chestplate", 1, -1, "artisan_thread", 8, "celestial_chestplate", 1);
 		r("final_loom", "artisan_leggings", 1, -1, "artisan_thread", 7, "diving_leggings", 1);
 		r("final_loom", "artisan_boots", 1, -1, "artisan_thread", 4, "gravity_boots", 1);
+		r("final_loom", "unfinished_effigy", 1, -1, "artisan_thread", 6, "artisan_shard", 1, "wool_thread", 4);
 		r("final_loom", "workshop_feast", 1, -1, "root_broth", 1, "ice_bread", 1, "cloud_fruit", 1, "season_jam", 1);
 	}
 
