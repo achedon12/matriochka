@@ -12,8 +12,8 @@ import net.minecraft.world.item.ItemStack;
  * Artisan's cipher of the coded pages, and the endings the player has reached.
  */
 final class JournalPages {
-	/** The fourth page of every world is written in the Artisan's cipher (content.py JOURNAL_CODED). */
-	static final int CODED = 3;
+	/** The page of every world written in the Artisan's cipher (the fourth, content.py JOURNAL_CODED). */
+	static final int CODED = fr.achedon12.matriochka.content.Content.JOURNAL_CODED;
 
 	private JournalPages() {}
 
