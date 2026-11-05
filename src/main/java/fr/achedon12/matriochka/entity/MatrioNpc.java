@@ -106,6 +106,12 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 	}
 
 	@Override
+	public void setTradingPlayer(@Nullable Player player) {
+		if (player == null) hideContraband();
+		super.setTradingPlayer(player);
+	}
+
+	@Override
 	protected void stopTrading() {
 		hideContraband();
 		super.stopTrading();
