@@ -256,6 +256,9 @@ block("lair_heart", "Lair Heart", "Cœur d'antre", 0, "lair_heart", "lair_heart"
 block("sealed_door", "Sealed Door", "Porte scellée", 3, "sealed_door", "brick")
 block("painted_wood", "Painted Wood", "Bois peint", 0, "deco", "wood")
 block("lacquer_block", "Lacquer Block", "Bloc laqué", 0, "deco", "lacquer")
+block("spent_glow", "Spent Glow", "Lueur éteinte", 5, "deco", "stone",
+      note_en="What a glowing block becomes once the Lightless Deep has drunk its light.",
+      note_fr="Ce que devient un bloc lumineux une fois que la Profondeur sans lumière a bu sa lumière.")
 
 # stations
 STATIONS = [

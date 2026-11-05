@@ -191,6 +191,7 @@ public final class Content {
 		new Defs.BlockDef("sealed_door", 3, "sealed_door", "brick", ""),
 		new Defs.BlockDef("painted_wood", 0, "deco", "wood", ""),
 		new Defs.BlockDef("lacquer_block", 0, "deco", "lacquer", ""),
+		new Defs.BlockDef("spent_glow", 5, "deco", "stone", ""),
 		new Defs.BlockDef("matrix_workbench", 0, "station", "station", ""),
 		new Defs.BlockDef("class_table", 0, "station", "station", ""),
 		new Defs.BlockDef("soul_altar", 0, "station", "station", ""),
