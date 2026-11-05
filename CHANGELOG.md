@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Creatures now fight with movesets: nine moves (Flurry, Lunge, Sweep, Ground slam, Bolt, Roar, Blink, Whirl, Grab), three or four per creature, each with its own wind-up animation, range and cooldown. Bolts and roars carry the affliction of the creature's world.
+- The eleven bosses are rebuilt as full rigs with joints, secondary motion and glowing eyes and cores.
+- Texture generation is reproducible; the build no longer needs a local copy of Minecraft data.
+- New releases are announced automatically in the Discord changelog channel.
+
 ## 0.1.0 (alpha)
 
 First public alpha for Minecraft 26.3 (Fabric).
