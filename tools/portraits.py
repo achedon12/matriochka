@@ -97,7 +97,13 @@ def render(geo, tex, glow, yaw=35, pitch=-18, size=1024):
         sub[m, :3] = col[m]
         sub[m, 3] = 255
     out = Image.fromarray(img.clip(0, 255).astype(np.uint8), "RGBA")
-    return out.resize((size // 2, size // 2), Image.LANCZOS)
+    out = out.resize((size // 2, size // 2), Image.LANCZOS)
+    # crop to the creature itself so the bottom of the picture is where it stands
+    box = out.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
+    if box:
+        pad = 6
+        out = out.crop((max(0, box[0] - pad), max(0, box[1] - pad), min(out.width, box[2] + pad), min(out.height, box[3] + 2)))
+    return out
 
 
 def portrait(eid):
