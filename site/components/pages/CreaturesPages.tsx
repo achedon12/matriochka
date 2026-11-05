@@ -70,7 +70,7 @@ export function BossesPage({ lang }: { lang: Lang }) {
           <span className="absolute inset-0 -z-10" style={{ background: `radial-gradient(ellipse at ${i % 2 ? "75%" : "25%"} 45%, ${b.light}44 0%, ${b.bg}dd 45%, #0e0806 100%)` }} />
           <div className={`${wrap} grid items-center gap-[clamp(20px,4vw,56px)] py-[clamp(48px,7vw,96px)] min-[960px]:grid-cols-2`}>
             <div className={`relative ${i % 2 ? "min-[960px]:order-2" : ""}`}>
-              <img className="mx-auto block h-auto w-full max-w-[540px] drop-shadow-[0_30px_40px_rgba(0,0,0,.75)]" src={asset(`portraits/${b.id}.png`)} alt={b.name} width={512} height={512} loading="lazy" />
+              <img className="bob mx-auto block h-auto w-full max-w-[540px] drop-shadow-[0_30px_40px_rgba(0,0,0,.75)]" src={asset(`portraits/${b.id}.png`)} alt={b.name} width={512} height={512} loading="lazy" />
             </div>
             <div>
               <p className="m-0 mb-1 font-pixel text-2xl" style={{ color: b.light }}>{b.world ? `${ui.world} ${b.world}` : b.worldName}<span className="font-body text-base text-paper-dim"> {b.world ? b.worldName : ""}</span></p>

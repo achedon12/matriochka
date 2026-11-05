@@ -73,9 +73,15 @@ export default function HomePage({ lang }: { lang: Lang }) {
             <source src={asset("reel.mp4")} type="video/mp4" />
           </video>
         ) : (
-          h.heroImg && <img className="absolute inset-0 -z-20 size-full object-cover" src={asset(h.heroImg)} alt="" width={1920} height={1080} fetchPriority="high" />
+          h.heroImg && <img className="kenburns absolute inset-0 -z-20 size-full object-cover" src={asset(h.heroImg)} alt="" width={1920} height={1080} fetchPriority="high" />
         )}
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(14,8,6,.86)_0%,rgba(14,8,6,.55)_38%,transparent_70%),linear-gradient(0deg,rgba(14,8,6,.9)_0%,transparent_45%)]" />
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+          {Array.from({ length: 22 }, (_, i) => (
+            <span key={i} className="mote absolute bottom-0 block rounded-full bg-gold-b shadow-[0_0_8px_#f0c960]"
+              style={{ left: `${(i * 37) % 100}%`, width: 2 + (i % 3), height: 2 + (i % 3), "--t": `${8 + (i % 5) * 2.3}s`, "--d": `${-(i * 1.7) % 12}s`, "--dx": `${((i * 53) % 80) - 40}px` } as React.CSSProperties} />
+          ))}
+        </div>
         <svg className="pointer-events-none absolute -bottom-[6%] right-[max(16px,calc(50vw-620px))] -z-10 h-[112%] w-auto opacity-55 max-md:hidden" viewBox="0 0 100 170" aria-hidden="true">
           <path d={DOLL} fill="none" stroke="#d9a441" strokeWidth="0.7" />
         </svg>
@@ -95,8 +101,29 @@ export default function HomePage({ lang }: { lang: Lang }) {
         <div className={wrap}>
           <h2 id="worlds-h" className={h2}>{h.stripH}</h2>
           <p className={lead}>{h.stripP}</p>
-          <WorldPicker worlds={pw} open={h.openWorld} listLabel={h.stripH} />
+          <WorldPicker worlds={pw} open={h.openWorld} listLabel={h.stripH} pauseLabel={ui.pause} playLabel={ui.play} />
         </div>
+      </section>
+
+
+      {/* fifty creatures, drifting past: hover to stop, click to open one */}
+      <section className="marquee-wrap overflow-hidden border-y-2 border-gold bg-ink py-6" aria-label={h.lifeH}>
+        {[d.mobs.slice(0, 25), d.mobs.slice(25)].map((row, r) => (
+          <div key={r} className="flex w-max">
+            <ul className={`marquee m-0 flex list-none gap-3 p-0 pr-3 ${r ? "marquee-rev" : ""}`} style={{ "--t": `${70 + r * 12}s` } as React.CSSProperties}>
+              {[...row, ...row].map((m, i) => (
+                <li key={`${m.id}-${i}`} aria-hidden={i >= row.length}>
+                  <Link href={href(lang, `creatures/${m.id}/`)} tabIndex={i >= row.length ? -1 : undefined}
+                    className="group grid w-36 justify-items-center gap-1 rounded-[3px] border border-rule p-2 text-center text-paper no-underline transition-colors hover:border-gold-b hover:text-gold-b"
+                    style={{ background: `radial-gradient(circle at 50% 40%, ${m.light}33, ${m.bg} 70%)` }}>
+                    <img className="h-24 w-auto transition-transform duration-200 group-hover:scale-110" src={asset(`portraits/${m.id}.png`)} alt="" width={128} height={128} loading="lazy" />
+                    <span className="text-[13px] leading-tight">{m.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </section>
 
       {SHARED.hasTrailer && (
@@ -116,11 +143,11 @@ export default function HomePage({ lang }: { lang: Lang }) {
       {/* what you do: four verbs, each with its capture */}
       <section className={section} aria-labelledby="verbs-h">
         <div className={wrap}>
-          <h2 id="verbs-h" className={h2}>{h.verbsH}</h2>
+          <h2 id="verbs-h" className={`reveal ${h2}`}>{h.verbsH}</h2>
           <p className={lead}>{h.verbsP}</p>
           <ul className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
             {h.verbs.map((v: { verb: string; p: string; img: string | null; href: string }) => (
-              <li key={v.verb}>
+              <li key={v.verb} className="reveal">
                 <Link className="group grid gap-2 text-paper no-underline transition-transform duration-200 hover:-translate-y-0.5 hover:text-paper" href={href(lang, v.href)}>
                   <span className="block aspect-[4/3] overflow-hidden border-2 border-gold bg-ink">
                     {v.img && <img className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" src={asset(v.img)} alt="" loading="lazy" decoding="async" width={960} height={720} />}
@@ -137,7 +164,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
       <Vine className="vine-sep" />
       <section className={section} aria-labelledby="loop-h">
         <div className={wrap}>
-          <h2 id="loop-h" className={h2}>{h.loopH}</h2>
+          <h2 id="loop-h" className={`reveal ${h2}`}>{h.loopH}</h2>
           <p className={lead}>{h.loopP}</p>
           <Loop steps={h.loop} title={h.loopH} />
         </div>
@@ -146,16 +173,16 @@ export default function HomePage({ lang }: { lang: Lang }) {
       {/* bosses: each one standing in front of its own arena */}
       <section className={sectionDark} aria-labelledby="bosses-h">
         <div className={wrap}>
-          <h2 id="bosses-h" className={h2}>{h.bossesH}</h2>
+          <h2 id="bosses-h" className={`reveal ${h2}`}>{h.bossesH}</h2>
           <p className={lead}>{h.bossesP}</p>
           <ol className="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(min(100%,230px),1fr))] gap-3.5 p-0">
             {d.bosses.map((b) => (
-              <li key={b.id}>
+              <li key={b.id} className="reveal">
                 <Link href={href(lang, `creatures/${b.id}/`)}
                   className="group relative block aspect-[4/3] overflow-hidden border border-rule bg-black no-underline transition-colors hover:border-gold-b"
                   style={{ background: `radial-gradient(circle at 60% 40%, ${b.light}55 0%, ${b.bg} 55%, #0e0806 100%)` }}>
                   {b.shot && <img className="absolute inset-0 size-full object-cover opacity-45 saturate-[.8]" src={asset(b.shot)} alt="" loading="lazy" decoding="async" width={960} height={720} />}
-                  <img className="absolute right-0 bottom-8 z-10 h-auto w-[64%] origin-bottom-right drop-shadow-[0_12px_18px_rgba(0,0,0,.7)] transition-transform duration-300 group-hover:scale-105"
+                  <img className="bob absolute right-0 bottom-8 z-10 h-auto w-[64%] origin-bottom-right drop-shadow-[0_12px_18px_rgba(0,0,0,.7)] transition-transform duration-300 group-hover:scale-105"
                     src={asset(`portraits/${b.id}.png`)} alt="" loading="lazy" decoding="async" width={512} height={512} />
                   <span className="absolute inset-0 z-10 bg-[linear-gradient(180deg,transparent_45%,rgba(0,0,0,.88))]" />
                   <span className="absolute right-3.5 bottom-11 left-3.5 z-20 text-[13px] text-gold-b">{b.worldName}</span>
@@ -169,7 +196,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
 
       <section className={section} aria-labelledby="life-h">
         <div className={wrap}>
-          <h2 id="life-h" className={h2}>{h.lifeH}</h2>
+          <h2 id="life-h" className={`reveal ${h2}`}>{h.lifeH}</h2>
           <p className={lead}>{h.lifeP}</p>
           <WorldBestiary entries={picks(lang, h.lifePicks)} labels={viewerLabels(ui)} sheet={ui.openSheet} movesH={ui.moves} />
           <p className="mt-6"><Link className={quiet} href={href(lang, "bestiary/")}>{h.allCreatures}</Link></p>
@@ -180,7 +207,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
       <section className={section} aria-labelledby="sys-h">
         <div className={`${wrap} grid items-center gap-[clamp(28px,5vw,72px)] min-[900px]:grid-cols-[6fr_5fr]`}>
           <div>
-            <h2 id="sys-h" className={h2}>{h.sysH}</h2>
+            <h2 id="sys-h" className={`reveal ${h2}`}>{h.sysH}</h2>
             <p className={lead}>{h.sysP}</p>
             <ul className="m-0 mb-5 grid list-none gap-4.5 p-0">
               {h.systems.map((s: { tex: string; h: string; p: string }) => (
@@ -200,7 +227,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
       <section className={sectionDark} aria-labelledby="get-h">
         <div className={`${wrap} grid items-start gap-[clamp(28px,5vw,72px)] min-[900px]:grid-cols-2`}>
           <div>
-            <h2 id="get-h" className={h2}>{h.getH}</h2>
+            <h2 id="get-h" className={`reveal ${h2}`}>{h.getH}</h2>
             <p className={lead}>{h.getP}</p>
             <ul className="m-0 grid list-none gap-3 p-0">
               {h.platforms.map((p: { name: string; note: string; href: string | null; icon: string }) => {

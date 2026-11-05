@@ -2,7 +2,7 @@
 // The ten worlds as a row of dolls: pick one and its world opens in the frame above.
 // Arrow keys move along the row, Home and End jump to the ends.
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { asset } from "@/lib/data";
 import { btn } from "./ui";
 
@@ -11,11 +11,24 @@ export interface PickerWorld {
   doll: { body: string; scarf: string; orn: string }; light: string; href: string; label: string;
 }
 
-export default function WorldPicker({ worlds, open, listLabel }: { worlds: PickerWorld[]; open: string; listLabel: string }) {
+export default function WorldPicker({ worlds, open, listLabel, pauseLabel, playLabel }: {
+  worlds: PickerWorld[]; open: string; listLabel: string; pauseLabel: string; playLabel: string;
+}) {
   const [cur, setCur] = useState(1);
+  // the dolls open one after another until the visitor picks one or pauses
+  const [auto, setAuto] = useState(true);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setAuto(false);
+  }, []);
+  useEffect(() => {
+    if (!auto) return;
+    const t = window.setTimeout(() => setCur((c) => (c + 1) % worlds.length), 7000);
+    return () => window.clearTimeout(t);
+  }, [auto, cur, worlds.length]);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const w = worlds[cur];
   const go = (i: number) => {
+    setAuto(false);
     const j = (i + worlds.length) % worlds.length;
     setCur(j);
     tabs.current[j]?.focus();
@@ -37,6 +50,12 @@ export default function WorldPicker({ worlds, open, listLabel }: { worlds: Picke
           <p className="m-0 mb-4.5 line-clamp-3 text-base leading-normal text-paper">{w.long}</p>
           <Link className={btn} href={w.href}>{open} {w.name}</Link>
         </div>
+        <button type="button" onClick={() => setAuto((a) => !a)} aria-pressed={!auto}
+          className="absolute top-3 right-3 z-20 grid size-11 cursor-pointer place-items-center rounded-full border-2 border-gold bg-ink/70 text-gold-b hover:bg-ink">
+          <span className="sr-only">{auto ? pauseLabel : playLabel}</span>
+          <svg viewBox="0 0 24 24" className="size-5" fill="currentColor" aria-hidden="true">{auto ? <path d="M7 5h4v14H7zM13 5h4v14h-4z" /> : <path d="M8 5l11 7-11 7z" />}</svg>
+        </button>
+        {auto && <span key={`p${cur}`} className="wp-progress absolute right-0 bottom-0 left-0 z-20 h-1 bg-gold-b" style={{ "--t": "7s" } as React.CSSProperties} />}
       </div>
       <div role="tablist" aria-label={listLabel}
         className="flex items-end gap-[clamp(4px,1.2vw,16px)] overflow-x-auto border-b-[3px] border-gold px-1 pt-6 md:justify-center md:overflow-visible"
@@ -48,7 +67,7 @@ export default function WorldPicker({ worlds, open, listLabel }: { worlds: Picke
           const on = i === cur;
           return (
             <button key={x.n} ref={(el) => { tabs.current[i] = el; }} id={`wp-tab-${x.n}`} role="tab" type="button"
-              aria-selected={on} aria-controls="wp-panel" tabIndex={on ? 0 : -1} onClick={() => setCur(i)}
+              aria-selected={on} aria-controls="wp-panel" tabIndex={on ? 0 : -1} onClick={() => { setAuto(false); setCur(i); }}
               className={`group relative grid min-w-11 cursor-pointer justify-items-center gap-1 border-0 bg-transparent px-0 pb-2 ${on ? "text-gold-b" : "text-paper-dim"}`}>
               <svg viewBox="0 0 100 170" aria-hidden="true" style={{ width: `calc(clamp(40px, 6.4vw, 84px) * ${1 - i * 0.045})` }}
                 className={`h-auto drop-shadow-[0_4px_0_rgba(0,0,0,.45)] transition-transform duration-200 motion-reduce:transition-none ${on ? "-translate-y-2.5" : "group-hover:-translate-y-1"}`}>
