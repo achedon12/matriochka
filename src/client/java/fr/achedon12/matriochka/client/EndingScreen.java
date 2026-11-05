@@ -30,6 +30,12 @@ public class EndingScreen extends Screen {
 		this.kind = kind;
 	}
 
+	/** The endings' theme plays over the crawl and the credits, in place of any world's music. */
+	@Override
+	public net.minecraft.sounds.Music getBackgroundMusic() {
+		return MusicThemes.ENDINGS;
+	}
+
 	private int left() { return (width - BW) / 2; }
 	private int top() { return Math.max(0, (height - BH) / 2); }
 	private int textW() { return BW - 120; }

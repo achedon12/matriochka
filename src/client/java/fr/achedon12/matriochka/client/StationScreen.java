@@ -60,7 +60,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 	@Override
 	protected void init() {
 		super.init();
-		if (Ui.now() - motion.openedAt() < 100) Ui.sound(SoundEvents.CHEST_OPEN, 1.25f, 0.35f);
+		if (Ui.now() - motion.openedAt() < 100) Ui.sound(fr.achedon12.matriochka.content.Sounds.DOLL_OPEN, 1f, 0.6f);
 		buttons.clear();
 		int l = leftPos, t = topPos;
 		switch (menu.data.station()) {
@@ -89,7 +89,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 	@Override
 	public void onClose() {
 		if (motion.closing()) return;
-		Ui.sound(SoundEvents.CHEST_CLOSE, 1.3f, 0.3f);
+		Ui.sound(fr.achedon12.matriochka.content.Sounds.DOLL_CLOSE, 1.05f, 0.55f);
 		motion.close(super::onClose);
 	}
 
