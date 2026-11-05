@@ -62,6 +62,9 @@ public class MatrioBoss extends Monster implements GeoEntity {
 
 	private enum State { CHASE, TELEGRAPH, OPENING, PHASE }
 
+	/** Shell Shards every fighter gets: enough to bring each world's weapon to the class cap (see tools/balance.py). */
+	public static final int SHELL_SHARDS = 3;
+
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	public final Defs.BossDef def;
 	private final ServerBossEvent bar;
@@ -697,7 +700,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			data.markDefeated(group, w);
 			PlayerState ps = PlayerState.of(p);
 			ps.addSouls(fr.achedon12.matriochka.gear.GearClasses.reapSouls(p, 100, p.getRandom()));
-			ItemStack shards = new ItemStack(ModContent.item("shell_shard"), 2);
+			ItemStack shards = new ItemStack(ModContent.item("shell_shard"), SHELL_SHARDS);
 			if (!p.getInventory().add(shards)) spawnAtLocation(level, shards);
 			ps.progress("kill", def.id(), 1);
 			// doll of life: one layer after worlds 1, 5 and 8; every boss refills one layer
