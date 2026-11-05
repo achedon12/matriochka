@@ -584,49 +584,7 @@ final class Settlements {
 
 	/** Titanic workbench: a crafting table the size of a house, giant tools on top, chests in its drawers. */
 	private static void workbench(Kit k) {
-		Palette p = k.p;
-		int R = k.R, hw = 10, ty = 9;
-		k.site(R, 26);
-		for (int[] c : new int[][] {{-hw, -hw}, {hw - 2, -hw}, {-hw, hw - 2}, {hw - 2, hw - 2}})
-			for (int y = 1; y < ty; y++) k.box(c[0], y, c[1], c[0] + 2, y, c[1] + 2, p.log);
-		k.box(-hw - 1, ty, -hw - 1, hw + 1, ty + 1, hw + 1, p.alt);
-		for (int x = -hw - 1; x <= hw + 1; x++)
-			for (int z = -hw - 1; z <= hw + 1; z++) {
-				boolean grid = Math.floorMod(x + hw + 1, 7) == 0 || Math.floorMod(z + hw + 1, 7) == 0;
-				if (grid) k.set(x, ty + 1, z, p.trim);
-			}
-		// drawer under the top with chests
-		k.shell(-6, ty - 3, -hw, 6, ty - 1, -hw + 4, p.plank);
-		k.air(-5, ty - 2, -hw, 5, ty - 2, -hw);
-		k.set(0, ty - 2, -hw - 1, Blocks.GOLD_BLOCK.defaultBlockState());
-		k.mark("hidden", -3, ty - 2, -hw + 2, Direction.NORTH);
-		k.mark("hidden", 3, ty - 2, -hw + 2, Direction.NORTH);
-		// a giant ladder up one leg
-		for (int y = 1; y <= ty + 1; y++) k.set(-hw + 1, y, -hw - 1, Kit.ladderFacing(Direction.NORTH));
-		// tools on the top: hammer, saw, ruler, spool
-		for (int x = -7; x <= -1; x++) k.set(x, ty + 2, -5, Kit.axis(p.log, Direction.Axis.X));
-		k.box(-1, ty + 2, -7, 1, ty + 4, -3, Blocks.IRON_BLOCK.defaultBlockState());
-		for (int z = 0; z <= 8; z++) { k.set(5, ty + 2, z, Blocks.IRON_BLOCK.defaultBlockState()); k.set(6, ty + 2, z, (z & 1) == 0 ? Blocks.IRON_BARS.defaultBlockState() : p.fill); }
-		k.box(4, ty + 2, -2, 7, ty + 3, -1, p.plank);
-		for (int x = -8; x <= 8; x++) k.set(x, ty + 2, 8, (x & 1) == 0 ? Blocks.GOLD_BLOCK.defaultBlockState() : p.trim);
-		for (int y = ty + 2; y <= ty + 6; y++)
-			for (int a = -2; a <= 2; a++) for (int b = -2; b <= 2; b++) {
-				double d = Math.sqrt(a * a + b * b);
-				if (d > 2.5) continue;
-				boolean end = y == ty + 2 || y == ty + 6;
-				k.set(-5 + a, y, 3 + b, end ? Blocks.SPRUCE_PLANKS.defaultBlockState() : d <= 1.2 ? ModContent.block("artisan_thread_ore").defaultBlockState() : Blocks.WOOL.blue().defaultBlockState());
-			}
-		k.mark("hidden", -5, ty + 7, 3, Direction.NORTH);
-		k.mark("hidden", 0, 1, 0, Direction.NORTH);
-		k.mark("guard", 0, ty + 2, 0, Direction.NORTH);
-		// felt scraps and pins on the floor
-		for (int i = 0; i < 6; i++) {
-			int x = (int) Math.round(Math.cos(i) * 13), z = (int) Math.round(Math.sin(i) * 13);
-			k.box(x - 1, 1, z - 1, x + 1, 1, z + 1, p.inlay);
-			k.set(x, 2, z, Blocks.END_ROD.defaultBlockState());
-		}
-		Halls.doll(k, 12, -12, 3, k.variant);
-		k.decay(-R, 1, -R, R, 20, R, 0.08);
+		Workshop.workbench(k);
 	}
 
 	// ---------------------------------------------------------------- garden
