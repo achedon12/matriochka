@@ -46,6 +46,7 @@ public final class Recipes {
 		r(W, "soul_cradle", 1, -1, "minecraft:oak_planks", 4, "wool_thread", 1, "roots", 2);
 		r(W, "wool_thread", 4, -1, "minecraft:white_wool", 1);
 		r(W, "return_thread", 2, -1, "wool_thread", 2, "minecraft:ender_pearl", 1);
+		r(W, "doll_mallet", 1, 0, "painted_wood", 3, "minecraft:stick", 2);
 		r(W, "chance_doll", 1, -1, "minecraft:oak_planks", 2, "minecraft:red_dye", 1, "minecraft:gold_ingot", 2);
 		r(W, "artisan_scroll", 1, -1, "minecraft:paper", 3);
 		r(W, "class_table", 1, 0, "minecraft:smithing_table", 1, "minecraft:iron_ingot", 6);

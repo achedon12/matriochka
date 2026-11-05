@@ -51,6 +51,7 @@ public final class Content {
 		new Defs.ItemDef("wool_thread", 0, "resource", "common", "", ""),
 		new Defs.ItemDef("shell_shard", 0, "resource", "epic", "", ""),
 		new Defs.ItemDef("mutated_scale", 0, "gem", "epic", "", ""),
+		new Defs.ItemDef("doll_mallet", 0, "tool", "rare", "", ""),
 		new Defs.ItemDef("soul_shard", 0, "soul", "common", "", ""),
 		new Defs.ItemDef("soul_vessel", 0, "soul", "rare", "", ""),
 		new Defs.ItemDef("spores", 1, "resource", "common", "", ""),

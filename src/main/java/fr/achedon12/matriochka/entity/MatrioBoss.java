@@ -306,6 +306,24 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		return attack;
 	}
 
+	/**
+	 * The World Block was shaken from outside to help: the boss loses its footing, drops the attack it was announcing
+	 * and stays open (taking the opening's extra damage) for a number of ticks. Not during a phase change.
+	 */
+	public boolean stagger(int ticks) {
+		if (state == State.PHASE || !isAlive()) return false;
+		attack = 1;
+		state = State.OPENING;
+		stateTicks = openingTicks() - ticks;
+		getNavigation().stop();
+		triggerAnim("action", "rest");
+		return true;
+	}
+
+	public boolean opening() {
+		return state == State.OPENING;
+	}
+
 	/** Opening after the current attack, in ticks. */
 	public int openingTicks() {
 		return Defs.openingTicks(timingWorld()) * (attack == 2 ? 1 : 2) / 2;

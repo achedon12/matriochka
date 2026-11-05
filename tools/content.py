@@ -97,6 +97,10 @@ item("shell_shard", "Shell Shard", "Éclat d'enveloppe", 0, "resource", "epic", 
      "Left by a fallen boss. Every class upgrade needs some.", "Laissé par un boss vaincu. Chaque amélioration de classe en demande.")
 item("mutated_scale", "Mutated Scale", "Écaille mutée", 0, "gem", "epic", "gem",
      "Shed by a mutated boss. Rich in soul.", "Perdue par un boss muté. Riche en âme.", pal=("6a2a8a", "c84ad8", "f0c050", "1a0a24"))
+item("doll_mallet", "Doll Mallet", "Maillet de poupée", 0, "tool", "rare", "hammer",
+     "Strike a World Block of your group with it: the world inside quakes and loose blocks fall on those in it. Sneak and use the block with empty hands to help them instead.",
+     "Frappe un bloc-monde de ton groupe avec : le monde à l'intérieur tremble et des blocs se détachent sur ceux qui s'y trouvent. Accroupis-toi et utilise le bloc à mains nues pour plutôt les aider.",
+     pal=("8a5a3a", "c8342a", "e8c050", "3a2416"))
 # Souls kept in structure chests (the design budgets about 100 souls per world from them): use one to free its
 # souls, sneak to free the whole stack. Neutral souls: they do not move karma. Values in item/SoulVessels.java.
 item("soul_shard", "Soul Shard", "Éclat d'âme", 0, "soul", "common", "shard",

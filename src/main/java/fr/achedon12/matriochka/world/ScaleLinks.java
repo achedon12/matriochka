@@ -13,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -59,7 +60,8 @@ import net.minecraft.world.phys.Vec3;
  * signal on World 3 lets sealed doors open by hand ("unlocked"), a storm over World 4 strengthens its gusts
  * ("storm"), lights around World 5 lengthen the lantern ("lit"), dry ground around World 7 eases the pressure
  * ("dry"), Terrain Anchors around World 9 hold its ground ("calm"). Moving the block shakes the world inside it
- * ("quake").
+ * ("quake"). A player of the group outside can also shake the block on purpose, to help or to hinder those inside
+ * (see {@link #shake}).
  * <p>
  * Effects only run while the block's chunk is loaded; the rules read the stored state, so a world keeps its last
  * effects without loading the block.
@@ -112,6 +114,95 @@ public final class ScaleLinks {
 		MatrioData data = MatrioData.get(server);
 		start(data, group, world, "quake", server.overworld().getGameTime(), 200);
 		for (ServerPlayer p : inside(server, data, group, world)) p.sendSystemMessage(Component.translatable("message.matriochka.link.quake").withStyle(ChatFormatting.GOLD));
+	}
+
+	// ---------------------------------------------------------------- shaking the block on purpose
+	/** Ticks between two shakes of the same world, whoever shakes it. */
+	public static final long SHAKE_COOLDOWN = 20 * 30;
+	/** How long a helping shake leaves the creatures stunned and a boss open, and how long a hindering one quakes. */
+	public static final int SHAKE_STUN = 60, SHAKE_QUAKE = 100;
+
+	/** Outcome of a shake, for the shaker's message (and the checks). */
+	public enum Shake { HELPED, HINDERED, NOT_YOURS, COOLDOWN, EMPTY }
+
+	/**
+	 * A player outside shakes a World Block on purpose (sneak and use it with empty hands to help, strike it with a Doll
+	 * Mallet to hinder). Only the owning group may; one shake per world every 30 seconds.
+	 * <p>
+	 * Helping: around everyone of the group inside, creatures are thrown off their feet and stunned for 3 seconds and a
+	 * boss staggers, its guard open as after an attack. Hindering: the world quakes for 5 seconds (the players inside are
+	 * shaken about, as when the block is moved) and blocks over their heads come loose and fall.
+	 */
+	public static Shake shake(ServerPlayer by, ServerLevel level, BlockPos pos, boolean hinder) {
+		if (!(level.getBlockEntity(pos) instanceof DataBlockEntity be)) return Shake.EMPTY;
+		MinecraftServer server = level.getServer();
+		MatrioData data = MatrioData.get(server);
+		String owner = be.data().getStringOr("owner", "");
+		if (!data.sameGroup(owner, by)) return Shake.NOT_YOURS;
+		int w = be.data().getIntOr("world", 1);
+		String group = owner.isEmpty() ? data.groupOf(by.getUUID()) : data.groupOf(java.util.UUID.fromString(owner));
+		long now = server.overworld().getGameTime();
+		CompoundTag e = data.worldEntry(group, w);
+		if (e.getLongOr("shake_ready", 0L) > now) return Shake.COOLDOWN;
+		// the block itself rattles on the Surface
+		be.data().putLong("quake", level.getGameTime() + 30);
+		be.changed();
+		double cx = pos.getX() + 0.5, cy = pos.getY() + 0.5, cz = pos.getZ() + 0.5;
+		level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, ModContent.block("world_block").defaultBlockState()), cx, cy + 0.5, cz, 20, 0.4, 0.4, 0.4, 0.1);
+		level.playSound(null, pos, hinder ? SoundEvents.ANVIL_LAND : SoundEvents.WOOD_HIT, SoundSource.BLOCKS, hinder ? 0.7f : 1.2f, hinder ? 0.6f : 0.8f);
+		List<ServerPlayer> in = inside(server, data, group, w);
+		if (in.isEmpty()) return Shake.EMPTY;
+		e.putLong("shake_ready", now + SHAKE_COOLDOWN);
+		data.changed();
+		if (hinder) {
+			start(data, group, w, "quake", now, SHAKE_QUAKE);
+			for (ServerPlayer p : in) {
+				loosen((ServerLevel) p.level(), p.blockPosition(), p.getRandom());
+				p.sendSystemMessage(Component.translatable("message.matriochka.shake.hinder", by.getDisplayName()).withStyle(ChatFormatting.RED));
+			}
+			return Shake.HINDERED;
+		}
+		for (ServerPlayer p : in) {
+			ServerLevel inner = (ServerLevel) p.level();
+			stun(inner, p);
+			for (fr.achedon12.matriochka.entity.MatrioBoss boss : inner.getEntitiesOfClass(fr.achedon12.matriochka.entity.MatrioBoss.class, p.getBoundingBox().inflate(48))) {
+				if (boss.stagger(SHAKE_STUN)) inner.sendParticles(ParticleTypes.CRIT, boss.getX(), boss.getY() + boss.getBbHeight(), boss.getZ(), 30, 0.8, 0.4, 0.8, 0.2);
+			}
+			inner.playSound(null, p.blockPosition(), SoundEvents.DEEPSLATE_BREAK, SoundSource.AMBIENT, 1f, 0.5f);
+			p.sendSystemMessage(Component.translatable("message.matriochka.shake.help", by.getDisplayName()).withStyle(ChatFormatting.AQUA));
+		}
+		return Shake.HELPED;
+	}
+
+	/** The creatures around a player lose their footing: thrown away from them and stunned. */
+	private static void stun(ServerLevel level, ServerPlayer p) {
+		for (net.minecraft.world.entity.Mob m : level.getEntitiesOfClass(net.minecraft.world.entity.Mob.class, p.getBoundingBox().inflate(24),
+			m -> m instanceof net.minecraft.world.entity.monster.Enemy && !(m instanceof fr.achedon12.matriochka.entity.MatrioBoss))) {
+			Vec3 away = m.position().subtract(p.position()).multiply(1, 0, 1);
+			away = away.lengthSqr() < 1.0E-4 ? new Vec3(0, 0, 1) : away.normalize();
+			m.push(away.x * 0.6, 0.45, away.z * 0.6);
+			m.needsSync = true;
+			m.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.SLOWNESS, SHAKE_STUN, 4));
+			m.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.WEAKNESS, SHAKE_STUN, 1));
+			m.getNavigation().stop();
+			level.sendParticles(ParticleTypes.CRIT, m.getX(), m.getY() + m.getBbHeight() + 0.2, m.getZ(), 6, 0.3, 0.1, 0.3, 0.05);
+		}
+	}
+
+	/** Up to six blocks over a player's head come loose and fall: plain, breakable blocks only, never the world's locks. */
+	static int loosen(ServerLevel level, BlockPos at, RandomSource r) {
+		int fell = 0;
+		for (int tries = 0; tries < 40 && fell < 6; tries++) {
+			BlockPos q = at.offset(r.nextInt(9) - 4, 3 + r.nextInt(6), r.nextInt(9) - 4);
+			BlockState s = level.getBlockState(q);
+			float hard = s.getDestroySpeed(level, q);
+			if (s.isAir() || s.hasBlockEntity() || hard < 0 || hard > 3f || !s.isCollisionShapeFullBlock(level, q)) continue;
+			if (BuiltInRegistries.BLOCK.getKey(s.getBlock()).getNamespace().equals("matriochka") && !s.is(BlockTags.MINEABLE_WITH_PICKAXE) && !s.is(BlockTags.MINEABLE_WITH_SHOVEL)) continue;
+			if (!level.getBlockState(q.below()).isAir()) continue;
+			net.minecraft.world.entity.item.FallingBlockEntity.fall(level, q, s);
+			fell++;
+		}
+		return fell;
 	}
 
 	private static List<ServerPlayer> inside(MinecraftServer server, MatrioData data, String group, int world) {

@@ -207,6 +207,14 @@ U = {
  "message.matriochka.link.calm": ("Anchors around your World Block hold the ground still for 5 minutes.", "Des ancres autour de ton bloc-monde tiennent le sol immobile pendant 5 minutes."),
  "message.matriochka.link.quake": ("Your World Block was moved: the whole world quakes!", "Ton bloc-monde a été déplacé : le monde entier tremble !"),
  "message.matriochka.link.boss": ("Your World Block shakes and cracks: a boss fight rages inside.", "Ton bloc-monde tremble et se fissure : un combat de boss fait rage à l'intérieur."),
+ # shaking a World Block on purpose
+ "message.matriochka.shake.helped": ("You shake the block gently: those inside find their footing, the creatures lose theirs.", "Tu secoues doucement le bloc : ceux de l'intérieur gardent pied, les créatures le perdent."),
+ "message.matriochka.shake.hindered": ("You strike the block: the world inside quakes.", "Tu frappes le bloc : le monde à l'intérieur tremble."),
+ "message.matriochka.shake.not_yours": ("This World Block belongs to another group.", "Ce bloc-monde appartient à un autre groupe."),
+ "message.matriochka.shake.cooldown": ("The world inside is still settling. Wait a little before shaking it again.", "Le monde à l'intérieur se tasse encore. Attends un peu avant de le secouer de nouveau."),
+ "message.matriochka.shake.empty": ("The block rattles, but nobody of your group is inside.", "Le bloc tremble, mais personne de ton groupe n'est à l'intérieur."),
+ "message.matriochka.shake.help": ("%s shakes your World Block from outside: the creatures around you stagger.", "%s secoue ton bloc-monde de l'extérieur : les créatures autour de toi chancellent."),
+ "message.matriochka.shake.hinder": ("%s strikes your World Block from outside: the world quakes and the ceiling gives way!", "%s frappe ton bloc-monde de l'extérieur : le monde tremble et le plafond cède !"),
  # Doll of Life rebuilt at the Soul Altar
  "station.matriochka.recharge.tip": ("Rebuilds one Doll of Life layer for %s souls and %s rare resources of %s, in any mix:", "Refait une couche de la Poupée de vie pour %s âmes et %s ressources rares de %s, dans n'importe quel mélange :"),
  "station.matriochka.recharge.have": ("You carry %s of them and %s souls.", "Tu en portes %s et %s âmes."),
