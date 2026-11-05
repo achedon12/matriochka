@@ -1,0 +1,37 @@
+package fr.achedon12.matriochka;
+
+import fr.achedon12.matriochka.command.MatrioCommand;
+import fr.achedon12.matriochka.content.ModContent;
+import fr.achedon12.matriochka.gear.GearClasses;
+import fr.achedon12.matriochka.net.Net;
+import fr.achedon12.matriochka.rules.PlayerState;
+import fr.achedon12.matriochka.structure.ProceduralStructure;
+import fr.achedon12.matriochka.world.Config;
+import fr.achedon12.matriochka.world.Events;
+import net.fabricmc.api.ModInitializer;
+import net.minecraft.resources.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/** Matriochka: every block can hold a world. */
+public class Matriochka implements ModInitializer {
+	public static final String MOD_ID = "matriochka";
+	public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
+
+	public static Identifier id(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
+	}
+
+	@Override
+	public void onInitialize() {
+		Config.load();
+		GearClasses.init();
+		PlayerState.init();
+		ModContent.register();
+		ProceduralStructure.init();
+		Net.init();
+		Events.init();
+		MatrioCommand.init();
+		LOG.info("Matriochka loaded: 10 worlds, {} creatures, {} bosses.", fr.achedon12.matriochka.content.Content.MOBS.size(), fr.achedon12.matriochka.content.Content.BOSSES.size());
+	}
+}
