@@ -1121,7 +1121,7 @@ def slot_label(slot):
 def render_download():
     reqs = [("Minecraft", "26.3", t("Java Edition", "Édition Java")),
             ("Fabric Loader", "0.20+", t("Install it for 26.3 with the Fabric installer", "À installer pour la 26.3 avec l'installeur Fabric")),
-            ("Fabric API", t("latest for 26.3", "dernière pour la 26.3"), t("Goes in the mods folder", "Dans le dossier mods")),
+            ("Fabric API", "0.165.2+", t("Built for 26.3, goes in the mods folder", "Pour la 26.3, dans le dossier mods")),
             ("GeckoLib", "5.5.7", t("Animated models of bosses and creatures", "Modèles animés des boss et créatures")),
             ("Java", "25", t("Bundled with the official launcher", "Fourni avec le launcher officiel"))]
     req = "".join(f'<li class="req"><span class="req-n">{e(n)}</span><span class="req-v">{e(v)}</span><small>{e(s)}</small></li>' for n, v, s in reqs)
