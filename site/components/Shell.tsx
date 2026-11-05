@@ -1,51 +1,79 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { asset, getData, href, otherLang, SHARED } from "@/lib/data";
 import type { Lang } from "@/lib/types";
 import { Icon } from "./Bits";
 import { Sprite, Vine } from "./Ornament";
 import { StickyHeader } from "./Islands";
 
-const LEFT = ["worlds", "bestiary"] as const;
-const RIGHT = ["bosses", "systems"] as const;
 
 /** Header, ornament and footer around every page. `path` is the page path without language, e.g. "worlds/3/". */
 export function Shell({ lang, path, section, children }: { lang: Lang; path: string; section?: string; children: ReactNode }) {
   const { copy } = getData(lang);
   const ui = copy.ui;
   const other = otherLang(lang);
-  const item = (p: (typeof LEFT)[number] | (typeof RIGHT)[number]) => (
-    <li key={p}>
-      <Link href={href(lang, `${p}/`)} aria-current={section === p ? (path === `${p}/` ? "page" : "true") : undefined}>
-        <svg className="cur" viewBox="0 0 100 170" aria-hidden="true"><use href="#doll" /></svg>
-        {copy.nav[p]}
-      </Link>
-    </li>
+  // the nav nests: four painted dolls, each a size smaller, in the colours of the worlds they lead to
+  const NAV = [
+    { p: "worlds", h: 34, c: ["#a8231a", "#d9a441", "#f3e2c2"] },
+    { p: "bestiary", h: 31, c: ["#3f6b2f", "#c9d36a", "#f3e2c2"] },
+    { p: "bosses", h: 28, c: ["#17100d", "#d9a441", "#a8231a"] },
+    { p: "systems", h: 25, c: ["#2f4f7a", "#9fc3e8", "#f3e2c2"] },
+  ] as const;
+  const doll = (c: readonly string[], h: number, open: boolean) => (
+    <svg viewBox="-4 -30 108 204" aria-hidden="true" style={{ height: `calc(${h + 10}px * var(--navdoll, 1))`, width: "auto" }}
+      className="overflow-visible drop-shadow-[0_3px_0_rgba(0,0,0,.45)]">
+      <g className="transition-transform duration-300 motion-reduce:transition-none group-hover:-translate-y-[6px] group-hover:-rotate-3"
+        style={{ transformOrigin: "50px 98px", transform: open ? "translateY(-24px) rotate(-7deg)" : undefined }}>
+        <use href="#doll" width="100" height="170" clipPath="url(#doll-top)" style={{ "--db": c[0], "--ds": c[1], "--do": c[2] } as CSSProperties} />
+      </g>
+      {open && <ellipse cx="50" cy="99" rx="40" ry="5" fill="#0a0605" />}
+      <use href="#doll" width="100" height="170" clipPath="url(#doll-bottom)" style={{ "--db": c[0], "--ds": c[1], "--do": c[2] } as CSSProperties} />
+    </svg>
   );
   return (
     <>
       <Sprite />
       <a className="skip" href="#main">{ui.skip}</a>
       <StickyHeader />
-      <header className="top">
-        <div className="wrap top-in">
-          <a className="lang" href={asset((other === "fr" ? "fr/" : "") + path)} hrefLang={other} lang={other}>{ui.other}</a>
-          <nav className="nav" aria-label={ui.main}>
-            <ul className="nav-l">{LEFT.map((p) => item(p))}</ul>
-            <Link className="brand" href={href(lang)} aria-current={path === "" ? "page" : undefined}>
-              <span className="medal"><img src={asset("logo-128.png")} width="72" height="72" alt="" /></span>
-              <span className="word">Matriochka</span>
-            </Link>
-            <ul className="nav-r">{RIGHT.map((p) => item(p))}<li className="nav-dl"><Link href={href(lang, "download/")}>{copy.nav.download}</Link></li></ul>
+      <header className="sticky top-0 z-30 border-b-2 border-gold bg-lacquer-deep bg-[radial-gradient(120%_160%_at_50%_-40%,#7a2a22_0%,#4a1714_55%,#2a0d0b_100%)] shadow-[0_6px_0_rgba(0,0,0,.35)]">
+        {/* a thin gold bead along the top edge, the rim of a lacquered box */}
+        <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[5px] bg-[radial-gradient(circle,#f0c960_1.3px,transparent_1.7px)] bg-[length:12px_5px] opacity-80" />
+        <div className="wrap flex items-end gap-x-5 gap-y-2 pt-3 pb-2 transition-[padding] duration-200 max-[1060px]:flex-wrap max-[1060px]:justify-between [.is-scrolled_&]:pt-1.5 [.is-scrolled_&]:pb-1">
+          <Link href={href(lang)} aria-current={path === "" ? "page" : undefined}
+            className="group flex shrink-0 items-center gap-3 self-center text-gold-b no-underline hover:text-[#ffdd80]">
+            <span className="grid size-[58px] place-items-center rounded-full bg-ink shadow-[0_0_0_2px_#d9a441,0_0_0_5px_#17100d,0_0_0_6px_rgba(240,201,96,.35)] transition-[width,height] duration-200 [.is-scrolled_&]:size-[42px]">
+              <img src={asset("logo-128.png")} width="50" height="50" alt="" className="size-[84%]" />
+            </span>
+            <span className="font-display text-[clamp(20px,2.2vw,28px)] leading-none tracking-[0.06em] [text-shadow:0_2px_0_rgba(0,0,0,.6)] max-[420px]:hidden">Matriochka</span>
+          </Link>
+          <nav aria-label={ui.main} className="mx-auto max-[1060px]:order-3 max-[1060px]:w-full max-[480px]:[--navdoll:0.8]">
+            <ul className="m-0 flex list-none items-end gap-[clamp(10px,2.4vw,30px)] p-0 max-[1060px]:justify-center max-[480px]:gap-1.5">
+              {NAV.map(({ p, h, c }) => {
+                const here = section === p;
+                return (
+                  <li key={p}>
+                    <Link href={href(lang, `${p}/`)} aria-current={here ? (path === `${p}/` ? "page" : "true") : undefined}
+                      className={`group flex items-end gap-2 rounded-sm px-1 pb-1 font-body text-[17px] font-bold no-underline max-[480px]:flex-col max-[480px]:items-center max-[480px]:gap-0.5 max-[480px]:text-[13px] ${here ? "text-gold-b" : "text-paper hover:text-gold-b"}`}>
+                      {doll(c, h, here)}
+                      <span className={`pb-[3px] ${here ? "border-b-2 border-gold-b" : "border-b-2 border-transparent group-hover:border-gold/60"}`}>{copy.nav[p]}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </nav>
-          <a className="gh" href={SHARED.repo} aria-label={ui.github}><Icon name="github" /></a>
+          <div className="flex shrink-0 items-center gap-3 self-center">
+            <a href={asset((other === "fr" ? "fr/" : "") + path)} hrefLang={other} lang={other}
+              className="rounded-sm border border-gold/50 px-2 py-1 text-[14px] text-paper-dim no-underline hover:border-gold-b hover:text-gold-b">{ui.other}</a>
+            <a href={SHARED.repo} aria-label={ui.github} className="inline-flex text-paper-dim hover:text-gold-b"><Icon name="github" /></a>
+            <Link href={href(lang, "download/")} aria-current={section === "download" ? "page" : undefined}
+              className="inline-flex items-center gap-2 rounded-t-[14px] rounded-b-[4px] border-2 border-[#ffdd80] bg-[linear-gradient(180deg,#f0c960,#d9a441)] px-4 py-2 font-body text-[16px] font-bold text-ink no-underline shadow-[0_3px_0_#7a5212] transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-px motion-reduce:transition-none">
+              <Icon name="download" />
+              <span>{copy.nav.download}</span>
+            </Link>
+          </div>
         </div>
-        <Link className="ribbon" href={href(lang, "download/")} aria-current={section === "download" ? "page" : undefined}>
-          <Icon name="download" />
-          <span>{copy.nav.download}</span>
-        </Link>
       </header>
-      <Vine kind="black" className="vine-top" />
       <main id="main">{children}</main>
       <footer className="foot">
         <Vine kind="black" />
