@@ -308,7 +308,7 @@ mob("sporeling", "Sporeling", "Sporelin", 1, 16, 3, "swarm_toxin", "imp", 0.6, "
     desc_en="Attacks in groups and adds toxin.", desc_fr="Attaque en groupe et ajoute de la toxine.")
 mob("root_creeper", "Root Creeper", "Rampeur de racines", 1, 24, 4, "ambush_root", "crawler", 0.9, "roots",
     desc_en="Waits underground, then roots you.", desc_fr="Attend sous terre, puis immobilise le joueur.")
-mob("snare_flower", "Snare Flower", "Fleur-piège", 1, 30, 5, "puller", "plant", 1.1, "spores", "seed_rare",
+mob("snare_flower", "Snare Flower", "Fleur-piège", 1, 30, 5, "puller", "plant", 1.1, "spores", "roots",
     desc_en="Immobile, pulls you toward it.", desc_fr="Immobile, tire le joueur vers elle.")
 mob("spore_bearer", "Spore Bearer", "Porte-spores", 1, 20, 3, "flee_cloud", "blob", 0.9, "spores",
     desc_en="Flees and leaves toxic clouds.", desc_fr="Fuit et laisse des nuages toxiques.")

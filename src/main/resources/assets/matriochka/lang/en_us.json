@@ -829,6 +829,7 @@
   "message.matriochka.class.need_doll": "You need a Chance Doll.",
   "message.matriochka.class.no_class": "This item cannot hold a class.",
   "message.matriochka.class.progress": "Your progression does not allow a higher level yet.",
+  "message.matriochka.class.single": "Tools have a single class; there is nothing to reroll.",
   "message.matriochka.cradle_charges": "Soul Cradle: %s charges.",
   "message.matriochka.cradle_set": "Soul Cradle set: %s charges.",
   "message.matriochka.cradle_used": "The cradle's doll opens. %s charges left.",

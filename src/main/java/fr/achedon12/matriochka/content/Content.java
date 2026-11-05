@@ -243,7 +243,7 @@ public final class Content {
 	public static final List<Defs.MobDef> MOBS = List.of(
 		new Defs.MobDef("sporeling", 1, 16f, 3f, "swarm_toxin", 0.6f, 0.75f, 1.38f, "spores", "", false, false, false, false),
 		new Defs.MobDef("root_creeper", 1, 24f, 4f, "ambush_root", 0.9f, 1.75f, 0.62f, "roots", "", false, false, false, false),
-		new Defs.MobDef("snare_flower", 1, 30f, 5f, "puller", 1.1f, 0.88f, 1.25f, "spores", "seed_rare", false, false, false, false),
+		new Defs.MobDef("snare_flower", 1, 30f, 5f, "puller", 1.1f, 0.88f, 1.25f, "spores", "roots", false, false, false, false),
 		new Defs.MobDef("spore_bearer", 1, 20f, 3f, "flee_cloud", 0.9f, 0.88f, 0.81f, "spores", "", false, false, false, false),
 		new Defs.MobDef("chitin_guard", 1, 40f, 6f, "shielded", 1.3f, 2.25f, 0.94f, "chitin", "", true, false, false, false),
 		new Defs.MobDef("ash_miner", 2, 30f, 6f, "digger", 0.9f, 1.25f, 1.31f, "ash_ingot", "", false, false, false, false),
