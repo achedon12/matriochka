@@ -15,6 +15,8 @@ from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, 
 import models
 import bosses_hd
 import attacks
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "mobs_hd"))
+import registry as mobs_registry  # noqa: E402
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 RES = os.path.join(ROOT, "src/main/resources")
@@ -175,10 +177,17 @@ def gen_entities():
         lang(f"entity.{NS}.{mid}", m["en"], m["fr"])
         lang(f"entity.{NS}.{mid}.desc", m["desc_en"], m["desc_fr"])
         p = pal(m["world"])
+        hd = mobs_registry.build(mid)
+        if hd:
+            ENTITY_DIMS[mid] = (max(0.4, min(hd[0], 2.5)), max(0.4, hd[1]))
+            continue
         wd, ht = models.build(m["body"], p, mid, mk(os.path.join(A, f"geckolib/models/entity/{mid}.geo.json")),
                               mk(os.path.join(A, f"geckolib/animations/entity/{mid}.animation.json")),
                               mk(os.path.join(A, f"textures/entity/{mid}.png")), mid, moves=mid)
         ENTITY_DIMS[mid] = (max(0.4, min(wd, 2.5)), max(0.4, ht))
+        from PIL import Image as _I
+        _t = _I.open(os.path.join(A, f"textures/entity/{mid}.png"))
+        _I.new("RGBA", _t.size).save(os.path.join(A, f"textures/entity/{mid}_glowmask.png"))
     HD_BOSSES = bosses_hd.build_all()
     for b in BOSSES:
         bid = b["id"]
