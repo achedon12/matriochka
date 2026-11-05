@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "tilled=false": {
+      "model": "matriochka:block/world_soil_1"
+    },
+    "tilled=true": {
+      "model": "matriochka:block/world_soil_1_tilled"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "matriochka:block/world_block"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_cube_bottom_top_indented",
+  "textures": {
+    "bottom": "matriochka:block/world_soil_7",
+    "side": "matriochka:block/world_soil_7",
+    "top": "matriochka:block/world_soil_7_tilled"
+  }
+}
