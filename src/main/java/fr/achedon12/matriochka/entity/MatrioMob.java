@@ -48,37 +48,45 @@ import net.minecraft.world.phys.Vec3;
 public class MatrioMob extends Monster implements GeoEntity {
 	private static final RawAnimation STRIKE = RawAnimation.begin().thenPlay("attack.strike");
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-	public final Defs.MobDef def;
+	/** Definitions by entity type: registerGoals() runs inside the super constructor, before fields are set. */
+	public static final java.util.Map<EntityType<?>, Defs.MobDef> DEFS = new java.util.HashMap<>();
+	private Defs.MobDef def;
 	private int special;
 	private boolean revealed;
 
 	public MatrioMob(EntityType<? extends Monster> type, Level level, Defs.MobDef def) {
 		super(type, level);
 		this.def = def;
-		this.xpReward = def.elite() ? 20 : 6;
-		if (def.flying() || def.aquatic()) setNoGravity(def.flying());
+		DEFS.putIfAbsent(type, def);
+		this.xpReward = def().elite() ? 20 : 6;
+		if (def().flying() || def().aquatic()) setNoGravity(def().flying());
 		if (behavior("mimic") || behavior("ambush_root")) revealed = false; else revealed = true;
 	}
 
 	public static AttributeSupplier.Builder attributes(Defs.MobDef def) {
-		double speed = switch (def.behavior()) {
+		double speed = switch (def().behavior()) {
 			case "puller", "statue", "mimic" -> 0.0;
 			case "swarm", "swarm_toxin", "swimmer_oxygen", "lurer" -> 0.33;
 			case "flee_cloud", "charger", "sound_hunter" -> 0.30;
 			default -> 0.26;
 		};
 		return Monster.createMonsterAttributes()
-			.add(Attributes.MAX_HEALTH, def.hp())
-			.add(Attributes.ATTACK_DAMAGE, def.damage())
+			.add(Attributes.MAX_HEALTH, def().hp())
+			.add(Attributes.ATTACK_DAMAGE, def().damage())
 			.add(Attributes.MOVEMENT_SPEED, speed)
 			.add(Attributes.FLYING_SPEED, 0.5)
 			.add(Attributes.FOLLOW_RANGE, 32)
-			.add(Attributes.ARMOR, def.elite() ? 6 : 2)
-			.add(Attributes.KNOCKBACK_RESISTANCE, def.elite() ? 0.6 : 0.1);
+			.add(Attributes.ARMOR, def().elite() ? 6 : 2)
+			.add(Attributes.KNOCKBACK_RESISTANCE, def().elite() ? 0.6 : 0.1);
+	}
+
+	public Defs.MobDef def() {
+		if (def == null) def = DEFS.get(getType());
+		return def;
 	}
 
 	private boolean behavior(String b) {
-		return def.behavior().equals(b);
+		return def().behavior().equals(b);
 	}
 
 	@Override
@@ -88,7 +96,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 			goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.15, true) {
 				@Override
 				protected int getAttackInterval() {
-					return Math.max(6, (int) (20 / Defs.speedMultiplier(def.world())));
+					return Math.max(6, (int) (20 / Defs.speedMultiplier(def().world())));
 				}
 			});
 			goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.8));
@@ -113,7 +121,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 				setInvisible(false);
 				level.playSound(null, blockPosition(), SoundEvents.CHEST_LOCKED, SoundSource.HOSTILE, 1f, 0.5f);
 				if (behavior("ambush_root")) p.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 5));
-				if (behavior("mimic") && p instanceof ServerPlayer sp && def.world() == 3) Achievements.grant(sp, "key_on_lock");
+				if (behavior("mimic") && p instanceof ServerPlayer sp && def().world() == 3) Achievements.grant(sp, "key_on_lock");
 			} else {
 				getNavigation().stop();
 				return;
@@ -121,7 +129,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 		}
 		if (target == null) return;
 		double d2 = distanceToSqr(target);
-		switch (def.behavior()) {
+		switch (def().behavior()) {
 			case "puller", "harpoon" -> {
 				if (special % 60 == 0 && d2 < 14 * 14 && hasLineOfSight(target)) {
 					Vec3 pull = position().subtract(target.position()).normalize().scale(behavior("harpoon") ? 1.6 : 1.0).add(0, 0.3, 0);
@@ -311,12 +319,12 @@ public class MatrioMob extends Monster implements GeoEntity {
 			triggerAnim("attack", "strike");
 			if (target instanceof ServerPlayer sp) {
 				PlayerState ps = PlayerState.of(sp);
-				switch (def.behavior()) {
+				switch (def().behavior()) {
 					case "swarm_toxin" -> ps.addGauge("toxin", 5);
 					case "lava_heat" -> ps.addGauge("heat", 6);
 					default -> {}
 				}
-				if (def.world() == 1 && def.behavior().contains("toxin")) ps.sync();
+				if (def().world() == 1 && def().behavior().contains("toxin")) ps.sync();
 			}
 		}
 		return hit;
@@ -336,7 +344,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 			att.hurtServer(level, damageSources().thorns(this), amount * 0.3f);
 		}
 		if (behavior("copycat") && source.getEntity() instanceof LivingEntity att) {
-			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(Math.max(def.damage(), amount));
+			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(Math.max(def().damage(), amount));
 		}
 		if (!revealed) {
 			revealed = true;
@@ -350,7 +358,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 		super.die(source);
 		if (!(level() instanceof ServerLevel level)) return;
 		boolean child = entityTags().contains("matrio_child");
-		if ((def.nesting() || behavior("splitter")) && !child) {
+		if ((def().nesting() || behavior("splitter")) && !child) {
 			int n = behavior("splitter") ? 3 : 2;
 			EntityType<?> type = behavior("splitter") ? ModContent.entity("sporeling") : getType();
 			for (int i = 0; i < n; i++) {
@@ -360,8 +368,8 @@ public class MatrioMob extends Monster implements GeoEntity {
 					m.setPos(getX() + random.nextGaussian() * 0.5, getY(), getZ() + random.nextGaussian() * 0.5);
 					if (!behavior("splitter")) {
 						m.getAttribute(Attributes.SCALE).setBaseValue(0.6);
-						m.getAttribute(Attributes.MAX_HEALTH).setBaseValue(def.hp() * 0.4);
-						m.setHealth(def.hp() * 0.4f);
+						m.getAttribute(Attributes.MAX_HEALTH).setBaseValue(def().hp() * 0.4);
+						m.setHealth(def().hp() * 0.4f);
 						m.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(getAttributeBaseValue(Attributes.MOVEMENT_SPEED) * 1.3);
 					}
 					if (getTarget() != null) m.setTarget(getTarget());
@@ -378,10 +386,10 @@ public class MatrioMob extends Monster implements GeoEntity {
 		}
 		if (source.getEntity() instanceof ServerPlayer sp) {
 			PlayerState ps = PlayerState.of(sp);
-			ps.progress("kill", def.id(), 1);
-			if (def.elite()) ps.addSouls(5);
+			ps.progress("kill", def().id(), 1);
+			if (def().elite()) ps.addSouls(5);
 			float steal = fr.achedon12.matriochka.gear.GearClasses.lifeSteal(sp);
-			if (steal > 0) sp.heal(def.hp() * steal * 0.1f);
+			if (steal > 0) sp.heal(def().hp() * steal * 0.1f);
 		}
 	}
 
@@ -389,28 +397,28 @@ public class MatrioMob extends Monster implements GeoEntity {
 	protected void dropCustomDeathLoot(ServerLevel level, DamageSource source, boolean killedByPlayer) {
 		super.dropCustomDeathLoot(level, source, killedByPlayer);
 		if (entityTags().contains("matrio_child")) return;
-		float common = def.elite() ? 1f : 0.6f;
-		if (random.nextFloat() < common) spawnAtLocation(level, new ItemStack(ModContent.item(def.drop()), 1 + (def.elite() ? random.nextInt(2) : 0)));
-		if (!def.rareDrop().isEmpty() && random.nextFloat() < (def.rareDrop().equals("terrain_heart") ? 0.05f : 0.15f)) {
-			var item = ModContent.itemOrNull(def.rareDrop());
+		float common = def().elite() ? 1f : 0.6f;
+		if (random.nextFloat() < common) spawnAtLocation(level, new ItemStack(ModContent.item(def().drop()), 1 + (def().elite() ? random.nextInt(2) : 0)));
+		if (!def().rareDrop().isEmpty() && random.nextFloat() < (def().rareDrop().equals("terrain_heart") ? 0.05f : 0.15f)) {
+			var item = ModContent.itemOrNull(def().rareDrop());
 			if (item != null) spawnAtLocation(level, new ItemStack(item));
 		}
-		if (def.world() == 1 && random.nextFloat() < 0.25f) spawnAtLocation(level, new ItemStack(ModContent.item("roots")));
+		if (def().world() == 1 && random.nextFloat() < 0.25f) spawnAtLocation(level, new ItemStack(ModContent.item("roots")));
 	}
 
 	@Override
 	public boolean removeWhenFarAway(double distSqr) {
-		return !def.elite() && distSqr > 128 * 128;
+		return !def().elite() && distSqr > 128 * 128;
 	}
 
 	@Override
 	public boolean causeFallDamage(double fallDistance, float multiplier, DamageSource source) {
-		return !def.flying() && super.causeFallDamage(fallDistance, multiplier, source);
+		return !def().flying() && super.causeFallDamage(fallDistance, multiplier, source);
 	}
 
 	@Override
 	public boolean fireImmune() {
-		return def.world() == 2 || def.behavior().equals("lava_heat") || super.fireImmune();
+		return def().world() == 2 || def().behavior().equals("lava_heat") || super.fireImmune();
 	}
 
 	@Override

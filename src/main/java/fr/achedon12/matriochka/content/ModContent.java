@@ -249,6 +249,7 @@ public final class ModContent {
 			if (d.world() == 2 || d.behavior().equals("lava_heat")) b = b.fireImmune();
 			EntityType<MatrioMob> type = Registry.register(BuiltInRegistries.ENTITY_TYPE, key, b.build(key));
 			FabricDefaultAttributeRegistry.register(type, MatrioMob.attributes(d));
+			MatrioMob.DEFS.put(type, d);
 			ENTITIES.put(d.id(), type);
 		}
 		for (Defs.BossDef d : Content.BOSSES) {
