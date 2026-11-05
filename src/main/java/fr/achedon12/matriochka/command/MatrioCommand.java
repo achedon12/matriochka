@@ -6,6 +6,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import fr.achedon12.matriochka.content.ModContent;
 import fr.achedon12.matriochka.entity.MatrioBoss;
 import fr.achedon12.matriochka.rules.PlayerState;
+import fr.achedon12.matriochka.world.Lairs;
 import fr.achedon12.matriochka.world.MatrioData;
 import fr.achedon12.matriochka.world.Travel;
 import fr.achedon12.matriochka.world.Worlds;
@@ -14,6 +15,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
 /** /matriochka — groups, progression, worlds, bosses, karma and debug. */
@@ -22,6 +25,17 @@ public final class MatrioCommand {
 
 	public static void init() {
 		CommandRegistrationCallback.EVENT.register((d, ctx, env) -> register(d));
+	}
+
+	/** The lair heart of the player's group in the world they stand in, if that world has a lair. */
+	private static BlockPos lairHeart(ServerPlayer p) {
+		int world = Worlds.number(p.level());
+		if (world == 0 || !ModContent.bossForWorld(world).lair()) return null;
+		MatrioData data = MatrioData.get(p.level().getServer());
+		var entry = data.worldEntry(data.groupOf(p.getUUID()), world);
+		if (!entry.contains("seuil_y")) return null;
+		BlockPos seuil = new BlockPos(entry.getIntOr("seuil_x", 0), entry.getIntOr("seuil_y", 64), entry.getIntOr("seuil_z", 0));
+		return Lairs.heart(world, seuil.offset(0, 0, Worlds.ARENA_OFFSET));
 	}
 
 	private static int msg(CommandSourceStack s, String key, Object... args) {
@@ -79,6 +93,21 @@ public final class MatrioCommand {
 					String id = StringArgumentType.getString(c, "id");
 					if (ModContent.entity(id) == null) return msg(c.getSource(), "command.matriochka.boss.unknown", id);
 					MatrioBoss.summon(c.getSource().getLevel(), id, p.blockPosition().relative(p.getDirection(), 6), p);
+					return 1;
+				})))
+			.then(Commands.literal("lair").requires(op)
+				.then(Commands.literal("rearm").executes(c -> {
+					ServerPlayer p = c.getSource().getPlayerOrException();
+					BlockPos heart = lairHeart(p);
+					if (heart == null || !Lairs.rearm((ServerLevel) p.level(), heart)) return msg(c.getSource(), "command.matriochka.lair.none");
+					return msg(c.getSource(), "command.matriochka.lair.rearmed", heart.getX(), heart.getY(), heart.getZ());
+				}))
+				.then(Commands.literal("tp").executes(c -> {
+					ServerPlayer p = c.getSource().getPlayerOrException();
+					BlockPos heart = lairHeart(p);
+					if (heart == null) return msg(c.getSource(), "command.matriochka.lair.none");
+					BlockPos at = Lairs.forecourt(Worlds.number(p.level()), heart);
+					p.teleportTo(at.getX() + 0.5, at.getY(), at.getZ() + 0.5);
 					return 1;
 				})))
 			.then(Commands.literal("karma")
