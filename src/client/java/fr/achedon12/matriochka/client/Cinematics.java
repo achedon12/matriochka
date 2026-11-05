@@ -221,7 +221,7 @@ public final class Cinematics implements HudElement {
 	}
 
 	/** Bars that slide in from the top and bottom, with a thin gold rule on their inner edge. */
-	private static void letterbox(GuiGraphicsExtractor g, int w, int h, float shown) {
+	static void letterbox(GuiGraphicsExtractor g, int w, int h, float shown) {
 		int bar = Math.round(h * 0.11f * shown);
 		if (bar <= 0) return;
 		g.fill(0, 0, w, bar, 0xFF0A0604);
@@ -347,7 +347,7 @@ public final class Cinematics implements HudElement {
 	}
 
 	/** A soft frame of colour around the screen, fading toward the middle. */
-	private static void edgeGlow(GuiGraphicsExtractor g, int w, int h, int color, float strength) {
+	static void edgeGlow(GuiGraphicsExtractor g, int w, int h, int color, float strength) {
 		if (strength <= 0.01f) return;
 		int band = Math.max(12, Math.min(w, h) / 5), steps = 12;
 		for (int i = 0; i < steps; i++) {

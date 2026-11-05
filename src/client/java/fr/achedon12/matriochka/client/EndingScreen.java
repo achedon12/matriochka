@@ -88,6 +88,13 @@ public class EndingScreen extends Screen {
 	public void extractBackground(GuiGraphicsExtractor g, int mx, int my, float a) {
 		super.extractBackground(g, mx, my, a);
 		int l = left(), t = top();
+		// the cinematic frame: the screen darkens at its edges, letterbox bars slide in and lift once the credits are over
+		if (Comfort.cinematics()) {
+			float bars = Ui.easeOut(Ui.since(opened, 1200));
+			if (over()) bars *= 1 - Ui.easeIn(Math.min(1, (seconds() * SPEED - contentH - windowH()) / 40f));
+			Cinematics.edgeGlow(g, width, height, 0xFF0A0604, 0.8f * bars);
+			Cinematics.letterbox(g, width, height, bars * 0.8f);
+		}
 		int by = Math.round(t + 4 + (BH - 15) * unroll());
 		g.enableScissor(l, t + 4, l + BW, by + 7);
 		Ui.sprite(g, "scroll_paper", l + 30, t + 8, 280, 198);
