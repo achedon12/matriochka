@@ -8,6 +8,7 @@ import { DollRow, DollWindow } from "../Dolls";
 import { Lacquer, Vine } from "../Ornament";
 import { PageHead, Shell } from "../Shell";
 import { btn, wrap } from "../ui";
+import MeetBoss from "../MeetBoss";
 
 function windowAlt(w: World, lang: Lang, noShot: string, inGame: string) {
   if (!w.tall) return noShot;
@@ -197,6 +198,9 @@ export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
           <p className="world-life-p">{c.lifeP}</p>
           <WorldBestiary entries={bestiary(lang, w)} labels={viewerLabels(ui)} sheet={ui.openSheet} movesH={ui.moves} />
         </section>
+        {(() => { const b = creature(lang, w.boss.id) as Boss | undefined; return b ? (
+          <section className={`${wrap} pb-10`}><MeetBoss meet={b.meet} title={`${ui.howMeet}: ${b.name}`} offeringLabel={ui.offering} /></section>
+        ) : null; })()}
         <Vine className="vine-sep" />
         <Codex w={w} lang={lang} />
         <Vine className="vine-sep" />

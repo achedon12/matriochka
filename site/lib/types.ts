@@ -50,6 +50,7 @@ export interface Mob extends CreatureBase {
 }
 
 export interface Boss extends CreatureBase {
+  meet: import("../components/MeetBoss").Meet;
   kind: "boss"; phases: string; atks: { label: string; name: string }[]; timings: { label: string; v: string }[];
   cooldown: string[]; mp: { p: number; mult: string; hp: string }[]; drops: Drop[]; souls: string;
   unlocks: string[]; special: string[]; story: string; shot: string | null; block: string; coreTex: string | null;

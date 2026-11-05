@@ -951,6 +951,35 @@ def build_mobs():
     return out
 
 
+LAIR_NAME = {"spore_queen": ("The Hive", "La Ruche"), "ash_titan": ("The Forge-Hall", "La Halle-forge"), "light_eater": ("The Lightless Pit", "La Fosse sans lumière"),
+             "your_double": ("The Hall of Mirrors", "La Galerie des glaces"), "pressure_leviathan": ("The Sunken Trench Temple", "Le Temple englouti de la fosse"),
+             "terrain_heart_boss": ("The Living Cavern", "La Caverne vivante")}
+
+
+def meet(b):
+    """How to meet a boss, for its poster, its sheet and its world page."""
+    if b.get("meet") == "lair":
+        return dict(mode="lair", modeLabel=t("Lair boss", "Boss d'antre"), place=t(*LAIR_NAME[b["id"]]),
+                    steps=[t("Walk 160 blocks south of the Threshold to its lair gate.", "Marche 160 blocs au sud du Seuil, jusqu'à la porte de son antre."),
+                           t("Come within 10 blocks of the lair heart at the centre of the chamber.", "Approche-toi à moins de 10 blocs du cœur d'antre, au centre de la salle."),
+                           t("It wakes after a three-second tremor. Beat it and the treasure alcove opens: three chests of the world's best loot.", "Il s'éveille après trois secondes de secousse. Bats-le et l'alcôve au trésor s'ouvre : trois coffres du meilleur butin du monde."),
+                           t("The heart wakes again ten minutes later, for a second fight.", "Le cœur se réveille dix minutes plus tard, pour un nouveau combat.")],
+                    heartTex="blocks/lair_heart.png", heartName=name("lair_heart"))
+    if b.get("offering"):
+        st, r = recipe_for(b["offering"])
+        return dict(mode="altar", modeLabel=t("Altar boss", "Boss d'autel"), place=t("The arena altar", "L'autel de l'arène"),
+                    offering=dict(id=b["offering"], tex=tex(b["offering"]), name=name(b["offering"]), station=name(st) if st else None,
+                                  inputs=ing(r["inputs"]) if r else []),
+                    steps=[t(f"Craft a {name(b['offering'])} at the {name(st)}." if st else f"Get a {name(b['offering'])}.", f"Fabrique l'offrande {name(b['offering'])} à la station {name(st)}." if st else f"Obtiens l'offrande {name(b['offering'])}."),
+                           t("Walk 160 blocks south of the Threshold to the arena.", "Marche 160 blocs au sud du Seuil, jusqu'à l'arène."),
+                           t("Hold the offering and use the altar on its dais: a three-second ritual summons the boss.", "Tiens l'offrande et utilise l'autel sur son estrade : un rituel de trois secondes invoque le boss."),
+                           t("Every fight, the first and the next ones, costs one offering.", "Chaque combat, le premier comme les suivants, coûte une offrande.")])
+    return dict(mode="altar", modeLabel=t("Altar boss", "Boss d'autel"), place=t("The Guardian's Sanctuary", "Le Sanctuaire du Gardien"),
+                steps=[t("Follow your Scroll's sketch to the Guardian's Sanctuary on the Surface.", "Suis le croquis du Parchemin jusqu'au Sanctuaire du Gardien, sur la Surface."),
+                       t("Use the sanctuary altar: the Block Guardian rises. No offering needed.", "Utilise l'autel du sanctuaire : le Gardien du bloc se dresse. Aucune offrande n'est nécessaire."),
+                       t("Sneak while using the altar to fight it again.", "Accroupis-toi en utilisant l'autel pour le combattre à nouveau.")])
+
+
 def build_bosses():
     labels = [t("Light", "Légère"), t("Medium", "Moyenne"), t("Signature", "Signature"), t("Final phase", "Phase finale")]
     out = []
@@ -1013,7 +1042,7 @@ def build_bosses():
             special.append(t("In its last phase its armour has melted: it takes 30% more damage on top of the usual multiplier.", "Dans sa dernière phase, son armure a fondu : il subit 30 % de dégâts en plus du multiplicateur habituel."))
         ach = ach_list(lambda a, b=b: a[5] == ("kill", b["id"]) or (a[5][0] == "custom" and a[5][1] in BOSS_ACH.get(b["id"], [])))
         out.append(dict(
-            id=b["id"], kind="boss", name=b[LANG], en=b["en"], fr=b["fr"], world=w, worldName=world_name(w), light=light(w), bg=world_bg(w), doll=doll(w),
+            meet=meet(b), id=b["id"], kind="boss", name=b[LANG], en=b["en"], fr=b["fr"], world=w, worldName=world_name(w), light=light(w), bg=world_bg(w), doll=doll(w),
             hp=fmt(b["hp"]), dmg=fmt(b["dmg"]), phases=phases, atks=atks, timings=timings, cooldown=cooldown,
             mp=[dict(p=p, mult="×" + fmt(round(1 + 0.6 * (p - 1), 1)), hp=fmt(int(round(b["hp"] * (1 + 0.6 * (p - 1)))))) for p in (1, 2, 4, 8)],
             drops=drops, souls=t("100 souls for every player within 64 blocks", "100 âmes pour chaque joueur à moins de 64 blocs"),
@@ -1049,7 +1078,7 @@ def build_copy():
         animations=t("Animations", "Animations"), autoRotate=t("Turn slowly", "Tourner lentement"),
         role=t("Role", "Rôle"), attackSpeed=t("Attack speed", "Vitesse d'attaque"), attackEvery=t("one hit every", "un coup toutes les"),
         noMelee=t("no melee attack", "aucune attaque au corps à corps"), moveSpeed=t("Movement speed", "Vitesse de déplacement"),
-        behaviour=t("How it fights", "Comment il combat"), moves=t("Attacks", "Attaques"), openSheet=t("Open its technical sheet", "Ouvrir sa fiche technique"), explore=t("Explore", "Explorer"),
+        behaviour=t("How it fights", "Comment il combat"), moves=t("Attacks", "Attaques"), openSheet=t("Open its technical sheet", "Ouvrir sa fiche technique"), howMeet=t("How to meet it", "Comment le rencontrer"), offering=t("Offering", "Offrande"), explore=t("Explore", "Explorer"),
         search=t("Search the bestiary", "Chercher dans le bestiaire"), searchPh=t("A creature or an attack…", "Une créature ou une attaque…"),
         elitesOnly=t("Elites only", "Élites seulement"), elite=t("Elite", "Élite"),
         noMatch=t("No creature matches. Clear the search or pick another world.", "Aucune créature ne correspond. Vide la recherche ou choisis un autre monde."), movesLead=t("Its own attacks, shared with no other creature. It picks among them, never the same one twice in a row, and each has a wind-up you can read before it lands.", "Ses attaques à elle, qu'aucune autre créature ne partage. Elle choisit parmi elles, jamais deux fois la même d'affilée, et chacune a une préparation lisible avant de frapper."), recharge=t("Recharge", "Recharge"), drops=t("Drops", "Butin"), chance=t("Chance", "Chance"), count=t("Count", "Quantité"),

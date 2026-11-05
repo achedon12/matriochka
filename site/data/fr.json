@@ -47,6 +47,8 @@
    "behaviour": "Comment il combat",
    "moves": "Attaques",
    "openSheet": "Ouvrir sa fiche technique",
+   "howMeet": "Comment le rencontrer",
+   "offering": "Offrande",
    "explore": "Explorer",
    "search": "Chercher dans le bestiaire",
    "searchPh": "Une créature ou une attaque…",
@@ -15781,6 +15783,16 @@
  ],
  "bosses": [
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Boss d'autel",
+    "place": "Le Sanctuaire du Gardien",
+    "steps": [
+     "Suis le croquis du Parchemin jusqu'au Sanctuaire du Gardien, sur la Surface.",
+     "Utilise l'autel du sanctuaire : le Gardien du bloc se dresse. Aucune offrande n'est nécessaire.",
+     "Accroupis-toi en utilisant l'autel pour le combattre à nouveau."
+    ]
+   },
    "id": "block_guardian",
    "kind": "boss",
    "name": "Gardien du bloc",
@@ -15952,6 +15964,19 @@
    "nextName": "Reine des spores"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Boss d'antre",
+    "place": "La Ruche",
+    "steps": [
+     "Marche 160 blocs au sud du Seuil, jusqu'à la porte de son antre.",
+     "Approche-toi à moins de 10 blocs du cœur d'antre, au centre de la salle.",
+     "Il s'éveille après trois secondes de secousse. Bats-le et l'alcôve au trésor s'ouvre : trois coffres du meilleur butin du monde.",
+     "Le cœur se réveille dix minutes plus tard, pour un nouveau combat."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Cœur d'antre"
+   },
    "id": "spore_queen",
    "kind": "boss",
    "name": "Reine des spores",
@@ -16125,6 +16150,19 @@
    "nextName": "Titan de cendre"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Boss d'antre",
+    "place": "La Halle-forge",
+    "steps": [
+     "Marche 160 blocs au sud du Seuil, jusqu'à la porte de son antre.",
+     "Approche-toi à moins de 10 blocs du cœur d'antre, au centre de la salle.",
+     "Il s'éveille après trois secondes de secousse. Bats-le et l'alcôve au trésor s'ouvre : trois coffres du meilleur butin du monde.",
+     "Le cœur se réveille dix minutes plus tard, pour un nouveau combat."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Cœur d'antre"
+   },
    "id": "ash_titan",
    "kind": "boss",
    "name": "Titan de cendre",
@@ -16299,6 +16337,43 @@
    "nextName": "Grand Geôlier"
   },
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Boss d'autel",
+    "place": "L'autel de l'arène",
+    "offering": {
+     "id": "sealed_shackle",
+     "tex": "items/sealed_shackle.png",
+     "name": "Entrave scellée",
+     "station": "Table du Geôlier",
+     "inputs": [
+      {
+       "id": "sealed_fragment",
+       "tex": "items/sealed_fragment.png",
+       "n": 6,
+       "name": "Fragment scellé"
+      },
+      {
+       "id": "dungeon_key",
+       "tex": "items/dungeon_key.png",
+       "n": 1,
+       "name": "Clé de donjon"
+      },
+      {
+       "id": "minecraft:iron_chain",
+       "tex": null,
+       "n": 2,
+       "name": "Chaîne en fer"
+      }
+     ]
+    },
+    "steps": [
+     "Fabrique l'offrande Entrave scellée à la station Table du Geôlier.",
+     "Marche 160 blocs au sud du Seuil, jusqu'à l'arène.",
+     "Tiens l'offrande et utilise l'autel sur son estrade : un rituel de trois secondes invoque le boss.",
+     "Chaque combat, le premier comme les suivants, coûte une offrande."
+    ]
+   },
    "id": "grand_jailer",
    "kind": "boss",
    "name": "Grand Geôlier",
@@ -16464,6 +16539,43 @@
    "nextName": "Roi des tempêtes"
   },
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Boss d'autel",
+    "place": "L'autel de l'arène",
+    "offering": {
+     "id": "storm_censer",
+     "tex": "items/storm_censer.png",
+     "name": "Encensoir d'orage",
+     "station": "Forge à foudre",
+     "inputs": [
+      {
+       "id": "storm_essence",
+       "tex": "items/storm_essence.png",
+       "n": 4,
+       "name": "Essence de tempête"
+      },
+      {
+       "id": "celestial_crystal",
+       "tex": "items/celestial_crystal.png",
+       "n": 2,
+       "name": "Cristal céleste"
+      },
+      {
+       "id": "ray_membrane",
+       "tex": "items/ray_membrane.png",
+       "n": 2,
+       "name": "Membrane de raie"
+      }
+     ]
+    },
+    "steps": [
+     "Fabrique l'offrande Encensoir d'orage à la station Forge à foudre.",
+     "Marche 160 blocs au sud du Seuil, jusqu'à l'arène.",
+     "Tiens l'offrande et utilise l'autel sur son estrade : un rituel de trois secondes invoque le boss.",
+     "Chaque combat, le premier comme les suivants, coûte une offrande."
+    ]
+   },
    "id": "storm_king",
    "kind": "boss",
    "name": "Roi des tempêtes",
@@ -16636,6 +16748,19 @@
    "nextName": "Mangeur de lumière"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Boss d'antre",
+    "place": "La Fosse sans lumière",
+    "steps": [
+     "Marche 160 blocs au sud du Seuil, jusqu'à la porte de son antre.",
+     "Approche-toi à moins de 10 blocs du cœur d'antre, au centre de la salle.",
+     "Il s'éveille après trois secondes de secousse. Bats-le et l'alcôve au trésor s'ouvre : trois coffres du meilleur butin du monde.",
+     "Le cœur se réveille dix minutes plus tard, pour un nouveau combat."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Cœur d'antre"
+   },
    "id": "light_eater",
    "kind": "boss",
    "name": "Mangeur de lumière",
@@ -16808,6 +16933,19 @@
    "nextName": "Ton Double"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Boss d'antre",
+    "place": "La Galerie des glaces",
+    "steps": [
+     "Marche 160 blocs au sud du Seuil, jusqu'à la porte de son antre.",
+     "Approche-toi à moins de 10 blocs du cœur d'antre, au centre de la salle.",
+     "Il s'éveille après trois secondes de secousse. Bats-le et l'alcôve au trésor s'ouvre : trois coffres du meilleur butin du monde.",
+     "Le cœur se réveille dix minutes plus tard, pour un nouveau combat."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Cœur d'antre"
+   },
    "id": "your_double",
    "kind": "boss",
    "name": "Ton Double",
@@ -16980,6 +17118,19 @@
    "nextName": "Léviathan de pression"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Boss d'antre",
+    "place": "Le Temple englouti de la fosse",
+    "steps": [
+     "Marche 160 blocs au sud du Seuil, jusqu'à la porte de son antre.",
+     "Approche-toi à moins de 10 blocs du cœur d'antre, au centre de la salle.",
+     "Il s'éveille après trois secondes de secousse. Bats-le et l'alcôve au trésor s'ouvre : trois coffres du meilleur butin du monde.",
+     "Le cœur se réveille dix minutes plus tard, pour un nouveau combat."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Cœur d'antre"
+   },
    "id": "pressure_leviathan",
    "kind": "boss",
    "name": "Léviathan de pression",
@@ -17152,6 +17303,43 @@
    "nextName": "Maître des saisons"
   },
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Boss d'autel",
+    "place": "L'autel de l'arène",
+    "offering": {
+     "id": "wreath_of_seasons",
+     "tex": "items/wreath_of_seasons.png",
+     "name": "Couronne des saisons",
+     "station": "Atelier du temps",
+     "inputs": [
+      {
+       "id": "season_fragment",
+       "tex": "items/season_fragment.png",
+       "n": 2,
+       "name": "Fragment de saison"
+      },
+      {
+       "id": "temporal_sand",
+       "tex": "items/temporal_sand.png",
+       "n": 6,
+       "name": "Sable temporel"
+      },
+      {
+       "id": "season_preserve",
+       "tex": "items/season_preserve.png",
+       "n": 1,
+       "name": "Conserve de saison"
+      }
+     ]
+    },
+    "steps": [
+     "Fabrique l'offrande Couronne des saisons à la station Atelier du temps.",
+     "Marche 160 blocs au sud du Seuil, jusqu'à l'arène.",
+     "Tiens l'offrande et utilise l'autel sur son estrade : un rituel de trois secondes invoque le boss.",
+     "Chaque combat, le premier comme les suivants, coûte une offrande."
+    ]
+   },
    "id": "seasons_master",
    "kind": "boss",
    "name": "Maître des saisons",
@@ -17325,6 +17513,19 @@
    "nextName": "Cœur du terrain"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Boss d'antre",
+    "place": "La Caverne vivante",
+    "steps": [
+     "Marche 160 blocs au sud du Seuil, jusqu'à la porte de son antre.",
+     "Approche-toi à moins de 10 blocs du cœur d'antre, au centre de la salle.",
+     "Il s'éveille après trois secondes de secousse. Bats-le et l'alcôve au trésor s'ouvre : trois coffres du meilleur butin du monde.",
+     "Le cœur se réveille dix minutes plus tard, pour un nouveau combat."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Cœur d'antre"
+   },
    "id": "terrain_heart_boss",
    "kind": "boss",
    "name": "Cœur du terrain",
@@ -17503,6 +17704,43 @@
    "nextName": "L'Inachevée"
   },
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Boss d'autel",
+    "place": "L'autel de l'arène",
+    "offering": {
+     "id": "unfinished_effigy",
+     "tex": "items/unfinished_effigy.png",
+     "name": "Effigie inachevée",
+     "station": "Métier final",
+     "inputs": [
+      {
+       "id": "artisan_thread",
+       "tex": "items/artisan_thread.png",
+       "n": 6,
+       "name": "Fil d'Artisan"
+      },
+      {
+       "id": "artisan_shard",
+       "tex": "items/artisan_shard.png",
+       "n": 1,
+       "name": "Éclat d'Artisan"
+      },
+      {
+       "id": "wool_thread",
+       "tex": "items/wool_thread.png",
+       "n": 4,
+       "name": "Fil de laine"
+      }
+     ]
+    },
+    "steps": [
+     "Fabrique l'offrande Effigie inachevée à la station Métier final.",
+     "Marche 160 blocs au sud du Seuil, jusqu'à l'arène.",
+     "Tiens l'offrande et utilise l'autel sur son estrade : un rituel de trois secondes invoque le boss.",
+     "Chaque combat, le premier comme les suivants, coûte une offrande."
+    ]
+   },
    "id": "the_unfinished",
    "kind": "boss",
    "name": "L'Inachevée",

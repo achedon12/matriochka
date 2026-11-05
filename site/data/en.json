@@ -47,6 +47,8 @@
    "behaviour": "How it fights",
    "moves": "Attacks",
    "openSheet": "Open its technical sheet",
+   "howMeet": "How to meet it",
+   "offering": "Offering",
    "explore": "Explore",
    "search": "Search the bestiary",
    "searchPh": "A creature or an attack…",
@@ -15781,6 +15783,16 @@
  ],
  "bosses": [
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Altar boss",
+    "place": "The Guardian's Sanctuary",
+    "steps": [
+     "Follow your Scroll's sketch to the Guardian's Sanctuary on the Surface.",
+     "Use the sanctuary altar: the Block Guardian rises. No offering needed.",
+     "Sneak while using the altar to fight it again."
+    ]
+   },
    "id": "block_guardian",
    "kind": "boss",
    "name": "Block Guardian",
@@ -15952,6 +15964,19 @@
    "nextName": "Spore Queen"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Lair boss",
+    "place": "The Hive",
+    "steps": [
+     "Walk 160 blocks south of the Threshold to its lair gate.",
+     "Come within 10 blocks of the lair heart at the centre of the chamber.",
+     "It wakes after a three-second tremor. Beat it and the treasure alcove opens: three chests of the world's best loot.",
+     "The heart wakes again ten minutes later, for a second fight."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Lair Heart"
+   },
    "id": "spore_queen",
    "kind": "boss",
    "name": "Spore Queen",
@@ -16125,6 +16150,19 @@
    "nextName": "Ash Titan"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Lair boss",
+    "place": "The Forge-Hall",
+    "steps": [
+     "Walk 160 blocks south of the Threshold to its lair gate.",
+     "Come within 10 blocks of the lair heart at the centre of the chamber.",
+     "It wakes after a three-second tremor. Beat it and the treasure alcove opens: three chests of the world's best loot.",
+     "The heart wakes again ten minutes later, for a second fight."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Lair Heart"
+   },
    "id": "ash_titan",
    "kind": "boss",
    "name": "Ash Titan",
@@ -16299,6 +16337,43 @@
    "nextName": "Grand Jailer"
   },
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Altar boss",
+    "place": "The arena altar",
+    "offering": {
+     "id": "sealed_shackle",
+     "tex": "items/sealed_shackle.png",
+     "name": "Sealed Shackle",
+     "station": "Jailer's Table",
+     "inputs": [
+      {
+       "id": "sealed_fragment",
+       "tex": "items/sealed_fragment.png",
+       "n": 6,
+       "name": "Sealed Fragment"
+      },
+      {
+       "id": "dungeon_key",
+       "tex": "items/dungeon_key.png",
+       "n": 1,
+       "name": "Dungeon Key"
+      },
+      {
+       "id": "minecraft:iron_chain",
+       "tex": null,
+       "n": 2,
+       "name": "Iron Chain"
+      }
+     ]
+    },
+    "steps": [
+     "Craft a Sealed Shackle at the Jailer's Table.",
+     "Walk 160 blocks south of the Threshold to the arena.",
+     "Hold the offering and use the altar on its dais: a three-second ritual summons the boss.",
+     "Every fight, the first and the next ones, costs one offering."
+    ]
+   },
    "id": "grand_jailer",
    "kind": "boss",
    "name": "Grand Jailer",
@@ -16464,6 +16539,43 @@
    "nextName": "Storm King"
   },
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Altar boss",
+    "place": "The arena altar",
+    "offering": {
+     "id": "storm_censer",
+     "tex": "items/storm_censer.png",
+     "name": "Storm Censer",
+     "station": "Lightning Forge",
+     "inputs": [
+      {
+       "id": "storm_essence",
+       "tex": "items/storm_essence.png",
+       "n": 4,
+       "name": "Storm Essence"
+      },
+      {
+       "id": "celestial_crystal",
+       "tex": "items/celestial_crystal.png",
+       "n": 2,
+       "name": "Celestial Crystal"
+      },
+      {
+       "id": "ray_membrane",
+       "tex": "items/ray_membrane.png",
+       "n": 2,
+       "name": "Ray Membrane"
+      }
+     ]
+    },
+    "steps": [
+     "Craft a Storm Censer at the Lightning Forge.",
+     "Walk 160 blocks south of the Threshold to the arena.",
+     "Hold the offering and use the altar on its dais: a three-second ritual summons the boss.",
+     "Every fight, the first and the next ones, costs one offering."
+    ]
+   },
    "id": "storm_king",
    "kind": "boss",
    "name": "Storm King",
@@ -16636,6 +16748,19 @@
    "nextName": "Light Eater"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Lair boss",
+    "place": "The Lightless Pit",
+    "steps": [
+     "Walk 160 blocks south of the Threshold to its lair gate.",
+     "Come within 10 blocks of the lair heart at the centre of the chamber.",
+     "It wakes after a three-second tremor. Beat it and the treasure alcove opens: three chests of the world's best loot.",
+     "The heart wakes again ten minutes later, for a second fight."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Lair Heart"
+   },
    "id": "light_eater",
    "kind": "boss",
    "name": "Light Eater",
@@ -16808,6 +16933,19 @@
    "nextName": "Your Double"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Lair boss",
+    "place": "The Hall of Mirrors",
+    "steps": [
+     "Walk 160 blocks south of the Threshold to its lair gate.",
+     "Come within 10 blocks of the lair heart at the centre of the chamber.",
+     "It wakes after a three-second tremor. Beat it and the treasure alcove opens: three chests of the world's best loot.",
+     "The heart wakes again ten minutes later, for a second fight."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Lair Heart"
+   },
    "id": "your_double",
    "kind": "boss",
    "name": "Your Double",
@@ -16980,6 +17118,19 @@
    "nextName": "Pressure Leviathan"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Lair boss",
+    "place": "The Sunken Trench Temple",
+    "steps": [
+     "Walk 160 blocks south of the Threshold to its lair gate.",
+     "Come within 10 blocks of the lair heart at the centre of the chamber.",
+     "It wakes after a three-second tremor. Beat it and the treasure alcove opens: three chests of the world's best loot.",
+     "The heart wakes again ten minutes later, for a second fight."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Lair Heart"
+   },
    "id": "pressure_leviathan",
    "kind": "boss",
    "name": "Pressure Leviathan",
@@ -17152,6 +17303,43 @@
    "nextName": "Master of Seasons"
   },
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Altar boss",
+    "place": "The arena altar",
+    "offering": {
+     "id": "wreath_of_seasons",
+     "tex": "items/wreath_of_seasons.png",
+     "name": "Wreath of Seasons",
+     "station": "Time Workshop",
+     "inputs": [
+      {
+       "id": "season_fragment",
+       "tex": "items/season_fragment.png",
+       "n": 2,
+       "name": "Season Fragment"
+      },
+      {
+       "id": "temporal_sand",
+       "tex": "items/temporal_sand.png",
+       "n": 6,
+       "name": "Temporal Sand"
+      },
+      {
+       "id": "season_preserve",
+       "tex": "items/season_preserve.png",
+       "n": 1,
+       "name": "Season Preserve"
+      }
+     ]
+    },
+    "steps": [
+     "Craft a Wreath of Seasons at the Time Workshop.",
+     "Walk 160 blocks south of the Threshold to the arena.",
+     "Hold the offering and use the altar on its dais: a three-second ritual summons the boss.",
+     "Every fight, the first and the next ones, costs one offering."
+    ]
+   },
    "id": "seasons_master",
    "kind": "boss",
    "name": "Master of Seasons",
@@ -17325,6 +17513,19 @@
    "nextName": "Heart of the Terrain"
   },
   {
+   "meet": {
+    "mode": "lair",
+    "modeLabel": "Lair boss",
+    "place": "The Living Cavern",
+    "steps": [
+     "Walk 160 blocks south of the Threshold to its lair gate.",
+     "Come within 10 blocks of the lair heart at the centre of the chamber.",
+     "It wakes after a three-second tremor. Beat it and the treasure alcove opens: three chests of the world's best loot.",
+     "The heart wakes again ten minutes later, for a second fight."
+    ],
+    "heartTex": "blocks/lair_heart.png",
+    "heartName": "Lair Heart"
+   },
    "id": "terrain_heart_boss",
    "kind": "boss",
    "name": "Heart of the Terrain",
@@ -17503,6 +17704,43 @@
    "nextName": "The Unfinished"
   },
   {
+   "meet": {
+    "mode": "altar",
+    "modeLabel": "Altar boss",
+    "place": "The arena altar",
+    "offering": {
+     "id": "unfinished_effigy",
+     "tex": "items/unfinished_effigy.png",
+     "name": "Unfinished Effigy",
+     "station": "Final Loom",
+     "inputs": [
+      {
+       "id": "artisan_thread",
+       "tex": "items/artisan_thread.png",
+       "n": 6,
+       "name": "Artisan's Thread"
+      },
+      {
+       "id": "artisan_shard",
+       "tex": "items/artisan_shard.png",
+       "n": 1,
+       "name": "Artisan's Shard"
+      },
+      {
+       "id": "wool_thread",
+       "tex": "items/wool_thread.png",
+       "n": 4,
+       "name": "Wool Thread"
+      }
+     ]
+    },
+    "steps": [
+     "Craft a Unfinished Effigy at the Final Loom.",
+     "Walk 160 blocks south of the Threshold to the arena.",
+     "Hold the offering and use the altar on its dais: a three-second ritual summons the boss.",
+     "Every fight, the first and the next ones, costs one offering."
+    ]
+   },
    "id": "the_unfinished",
    "kind": "boss",
    "name": "The Unfinished",

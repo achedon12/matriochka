@@ -6,6 +6,7 @@ import { Inlay } from "../Bits";
 import { Lacquer, Vine } from "../Ornament";
 import { PageHead, Shell } from "../Shell";
 import { btn, wrap } from "../ui";
+import MeetBoss from "../MeetBoss";
 import ModelViewer, { type ViewerLabels } from "../viewer/ModelViewer";
 
 export function viewerLabels(ui: Record<string, string>): ViewerLabels {
@@ -89,6 +90,7 @@ export function BossesPage({ lang }: { lang: Lang }) {
               </ol>
               <p className="m-0 mb-3 text-base text-paper"><strong className="text-gold-b">{ui.phases}.</strong> {b.phases}.</p>
               <p className="m-0 mb-5 flex items-center gap-2 text-base text-paper"><Inlay src={b.coreTex} /><span><strong>{b.drops[0].name}</strong> {c.rewardNote}</span></p>
+              <div className="mb-5"><MeetBoss meet={b.meet} title={ui.howMeet} offeringLabel={ui.offering} compact /></div>
               <p className="m-0 flex flex-wrap gap-3">
                 <Link className={btn} href={href(lang, `creatures/${b.id}/`)}>{ui.open}</Link>
               </p>
@@ -221,6 +223,7 @@ function BossSheet({ lang, b }: { lang: Lang; b: Boss }) {
         <div><dt>{ui.heavy}</dt><dd className="num">{b.dmg}</dd></div>
         <div><dt>{ui.phases}</dt><dd><small>{b.phases}</small></dd></div>
       </dl>
+      <div className="my-8"><MeetBoss meet={b.meet} title={ui.howMeet} offeringLabel={ui.offering} /></div>
       <div className="sheet-cols">
         <section>
           <h2 className="h-plate">{ui.attacks}</h2>
