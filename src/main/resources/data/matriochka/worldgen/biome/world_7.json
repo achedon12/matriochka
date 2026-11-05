@@ -1,0 +1,101 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#1a5a8a",
+    "minecraft:visual/fog_color": "#0a2a4a",
+    "minecraft:visual/water_fog_color": "#0a3a6a",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "matriochka:abyssal_hunter",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:blade_school",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:pressure_jelly",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:bell_crab",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:trench_eel",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 10
+            }
+          ],
+          "creature": [
+            {
+              "type": "matriochka:diver",
+              "count": 1,
+              "weight": 2
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    }
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#0a3a6a",
+    "grass_color": "#0a3a5a",
+    "foliage_color": "#0a3a5a"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:abyssal_salt_ore",
+      "matriochka:pressure_coral_patch"
+    ],
+    [],
+    [],
+    [
+      "minecraft:seagrass_deep",
+      "minecraft:kelp_cold",
+      "minecraft:sea_pickle"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.5
+}
