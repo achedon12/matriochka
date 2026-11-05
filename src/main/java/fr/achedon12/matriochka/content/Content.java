@@ -6,6 +6,10 @@ import java.util.List;
 public final class Content {
 	private Content() {}
 
+	/** Worlds of the hidden dolls, from the smallest (innermost) to the largest: the order they nest in. */
+	public static final int[] NEST_ORDER = {6, 3, 9, 1, 5, 8, 2, 10, 4, 7};
+	/** Index of the coded page of every world in the Artisan's Journal. */
+	public static final int JOURNAL_CODED = 3;
 	public static final List<Defs.WorldDef> WORLDS = List.of(
 		new Defs.WorldDef(1, "toxin", "learning", 0x3f6b2a, 0xb7e04a, false),
 		new Defs.WorldDef(2, "heat", "learning", 0x2b2220, 0xffb347, false),

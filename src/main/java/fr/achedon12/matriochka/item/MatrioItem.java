@@ -171,7 +171,20 @@ public class MatrioItem extends Item {
 				fr.achedon12.matriochka.net.Net.openJournal(sp, def.id().equals("artisan_scroll"));
 				return InteractionResult.SUCCESS;
 			}
+			case "nested_dolls", "whole_matryoshka" -> {
+				Nesting.use(sp, hand);
+				return InteractionResult.SUCCESS;
+			}
+			case "blank_scroll" -> {
+				sp.sendOverlayMessage(Component.translatable("message.matriochka.blank_scroll").withStyle(ChatFormatting.GOLD));
+				sl.playSound(null, sp.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS, 0.8f, 0.7f);
+				return InteractionResult.SUCCESS;
+			}
 			default -> {
+				if (def.id().startsWith("hidden_doll_")) {
+					Nesting.use(sp, hand);
+					return InteractionResult.SUCCESS;
+				}
 				return InteractionResult.PASS;
 			}
 		}
@@ -186,8 +199,9 @@ public class MatrioItem extends Item {
 	private static boolean special(String id) {
 		return switch (id) {
 			case "antidote", "cooling_water", "silence_balm", "oxygen_capsule", "stabilizer", "season_preserve", "anchor", "return_thread",
-				 "solar_lantern", "sonar", "hourglass", "grappling_hook", "thruster", "labyrinth_map", "artisan_scroll", "artisan_journal" -> true;
-			default -> false;
+				 "solar_lantern", "sonar", "hourglass", "grappling_hook", "thruster", "labyrinth_map", "artisan_scroll", "artisan_journal",
+				 "nested_dolls", "whole_matryoshka", "blank_scroll" -> true;
+			default -> id.startsWith("hidden_doll_");
 		};
 	}
 

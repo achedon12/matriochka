@@ -84,6 +84,7 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		if (!isAlive() || isTrading()) return super.mobInteract(player, hand);
 		if (player instanceof ServerPlayer sp) {
+			if (speakOfDolls(sp)) return InteractionResult.SUCCESS;
 			if (getOffers().isEmpty()) return InteractionResult.CONSUME;
 			int karma = PlayerState.of(sp).karma();
 			for (MerchantOffer o : getOffers()) {
@@ -101,6 +102,27 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 			PlayerState.of(sp).progress("trade", def.id(), 1);
 		}
 		return InteractionResult.SUCCESS;
+	}
+
+	/**
+	 * Show a people its hidden doll and it tells which doll sleeps inside it; the Peddler knows how dolls nest, the
+	 * Old Apprentices know what the whole one opens, and the Peddler remembers the previous cycle. Returns true when
+	 * the line replaces the trade.
+	 */
+	private boolean speakOfDolls(ServerPlayer sp) {
+		var held = sp.getMainHandItem();
+		String id = fr.achedon12.matriochka.content.ModContent.idOf(held.getItem());
+		String line = null;
+		if (def.world() > 0 && def.world() <= 10 && id.equals("hidden_doll_" + def.world())) line = "message.matriochka.doll_line." + def.world();
+		else if (def.world() == 0 && (fr.achedon12.matriochka.item.Nesting.rank(held) >= 0 || id.equals("nested_dolls"))) line = "message.matriochka.peddler.dolls";
+		else if (def.world() == 10 && (id.equals("whole_matryoshka") || id.equals("nested_dolls"))) line = "message.matriochka.apprentice.whole";
+		boolean remembers = line == null && def.world() == 0 && fr.achedon12.matriochka.world.Endings.any(PlayerState.of(sp)) && random.nextInt(3) == 0;
+		if (remembers) line = "message.matriochka.peddler.cycle";
+		if (line == null) return false;
+		sp.sendSystemMessage(getDisplayName().copy().withStyle(net.minecraft.ChatFormatting.GOLD).append(": ")
+			.append(Component.translatable(line).withStyle(net.minecraft.ChatFormatting.ITALIC, net.minecraft.ChatFormatting.GRAY)));
+		playSound(net.minecraft.sounds.SoundEvents.VILLAGER_AMBIENT, 0.8f, 0.9f);
+		return !remembers;
 	}
 
 	@Override

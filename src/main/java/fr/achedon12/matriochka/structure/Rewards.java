@@ -202,7 +202,24 @@ public final class Rewards {
 			pg.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.translatable("item.matriochka.journal_page.n", world, idx + 1));
 			chest.setItem(13, pg);
 		}
-		if (doll && world > 0) chest.setItem(22, new ItemStack(ModContent.item("hidden_doll_" + world)));
+		if (doll && world > 0) {
+			chest.setItem(22, new ItemStack(ModContent.item("hidden_doll_" + world)));
+			for (int slot : new int[]{21, 23, 26, 18, 0}) {
+				if (chest.getItem(slot).isEmpty()) {
+					chest.setItem(slot, carverNote());
+					break;
+				}
+			}
+		}
+	}
+
+	/** The note left beside every hidden doll: the structure's hint to the nesting order (count the notches). */
+	static ItemStack carverNote() {
+		ItemStack note = new ItemStack(Items.PAPER);
+		note.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.translatable("item.matriochka.carver_note"));
+		note.set(DataComponents.LORE, new net.minecraft.world.item.component.ItemLore(List.of(
+			net.minecraft.network.chat.Component.translatable("item.matriochka.carver_note.lore").withStyle(net.minecraft.ChatFormatting.GRAY))));
+		return note;
 	}
 
 	/**
