@@ -180,7 +180,7 @@ public final class Rewards {
 	private static final Set<String> COMMON_KINDS = Set.of("resource", "food", "consumable");
 	private static final Set<String> RARE_KINDS = Set.of("resource", "gem", "ingot", "dust", "consumable", "key", "tool", "thread");
 	private static final Set<String> GEAR_KINDS = Set.of("weapon", "armor", "boots", "mask", "glider", "hook", "lantern", "sonar", "drill",
-		"thruster", "anchor", "hourglass");
+		"thruster", "anchor", "hourglass", "snorkel");
 
 	static void chest(Kit k, BlockPos p, Direction f, boolean flipped, int tier, boolean page, boolean doll) {
 		if (!k.inside(p)) return;
@@ -274,6 +274,13 @@ public final class Rewards {
 				add(c, r, new ItemStack(Items.IRON_NUGGET, between(r, 3, 12)));
 				Item misc = w == 7 ? Items.PRISMARINE_SHARD : r.nextBoolean() ? Items.TORCH : Items.COAL;
 				add(c, r, new ItemStack(misc, between(r, 3, 10)));
+				// the drowned left their gear behind: now and then a worn first helmet, half full
+				if (w == 7 && r.nextFloat() < 0.12f) {
+					ItemStack helmet = new ItemStack(ModContent.item("salt_snorkel"));
+					helmet.setDamageValue(helmet.getMaxDamage() / 2);
+					fr.achedon12.matriochka.rules.Snorkel.setTank(helmet, fr.achedon12.matriochka.rules.Snorkel.capacity(helmet) * 0.5f);
+					add(c, r, helmet);
+				}
 				if (r.nextFloat() < 0.4f) add(c, r, new ItemStack(r.nextBoolean() ? Items.ARROW : Items.STRING, between(r, 4, 12)));
 				if (r.nextFloat() < 0.3f) add(c, r, new ItemStack(Items.IRON_INGOT, between(r, 1, 3)));
 			}

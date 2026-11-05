@@ -1062,7 +1062,7 @@ public final class Lairs {
 		RandomSource r = level.getRandom();
 		List<Defs.ItemDef> mats = Content.ITEMS.stream().filter(i -> i.world() == world
 			&& List.of("resource", "gem", "ingot", "dust").contains(i.kind()) && !i.rarity().equals("common")).toList();
-		List<Defs.ItemDef> gear = Content.ITEMS.stream().filter(i -> i.world() == world && (i.kind().equals("weapon") || i.kind().equals("armor"))).toList();
+		List<Defs.ItemDef> gear = Content.ITEMS.stream().filter(i -> i.world() == world && (i.kind().equals("weapon") || i.kind().equals("armor") || i.kind().equals("snorkel"))).toList();
 		List<Defs.ItemDef> cons = Content.ITEMS.stream().filter(i -> i.world() == world && (i.kind().equals("consumable") || i.kind().equals("food"))).toList();
 		for (int c = 0; c < 3; c++) {
 			BlockPos p = heart.offset(-2 + c * 2, 1, R + 8);
