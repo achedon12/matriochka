@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "matriochka:artisan_scroll"
+    },
+    "title": {
+      "translate": "advancement.matriochka.root.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.root.desc"
+    },
+    "background": "matriochka:block/lacquer_block",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}
