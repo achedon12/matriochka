@@ -58,26 +58,26 @@ public class MatrioMob extends Monster implements GeoEntity {
 		super(type, level);
 		this.def = def;
 		DEFS.putIfAbsent(type, def);
-		this.xpReward = def().elite() ? 20 : 6;
-		if (def().flying() || def().aquatic()) setNoGravity(def().flying());
+		this.xpReward = def.elite() ? 20 : 6;
+		if (def.flying() || def.aquatic()) setNoGravity(def.flying());
 		if (behavior("mimic") || behavior("ambush_root")) revealed = false; else revealed = true;
 	}
 
 	public static AttributeSupplier.Builder attributes(Defs.MobDef def) {
-		double speed = switch (def().behavior()) {
+		double speed = switch (def.behavior()) {
 			case "puller", "statue", "mimic" -> 0.0;
 			case "swarm", "swarm_toxin", "swimmer_oxygen", "lurer" -> 0.33;
 			case "flee_cloud", "charger", "sound_hunter" -> 0.30;
 			default -> 0.26;
 		};
 		return Monster.createMonsterAttributes()
-			.add(Attributes.MAX_HEALTH, def().hp())
-			.add(Attributes.ATTACK_DAMAGE, def().damage())
+			.add(Attributes.MAX_HEALTH, def.hp())
+			.add(Attributes.ATTACK_DAMAGE, def.damage())
 			.add(Attributes.MOVEMENT_SPEED, speed)
 			.add(Attributes.FLYING_SPEED, 0.5)
 			.add(Attributes.FOLLOW_RANGE, 32)
-			.add(Attributes.ARMOR, def().elite() ? 6 : 2)
-			.add(Attributes.KNOCKBACK_RESISTANCE, def().elite() ? 0.6 : 0.1);
+			.add(Attributes.ARMOR, def.elite() ? 6 : 2)
+			.add(Attributes.KNOCKBACK_RESISTANCE, def.elite() ? 0.6 : 0.1);
 	}
 
 	public Defs.MobDef def() {
