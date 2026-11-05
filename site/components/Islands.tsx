@@ -27,3 +27,15 @@ export function DollCaption({ text }: { text: string }) {
   }, [text]);
   return <p className="doll-caption" ref={ref} aria-live="polite">{label}</p>;
 }
+
+/** Marks the page once it has scrolled past the header, so the sticky header can fold to its compact form. */
+export function StickyHeader() {
+  useEffect(() => {
+    const root = document.documentElement;
+    const on = () => root.classList.toggle("is-scrolled", window.scrollY > 90);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  return null;
+}

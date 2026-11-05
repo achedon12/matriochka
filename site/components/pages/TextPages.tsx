@@ -39,7 +39,7 @@ export function SystemsPage({ lang }: { lang: Lang }) {
   const s = getData(lang).copy.systems;
   return (
     <Shell lang={lang} path="systems/" section="systems">
-      <PageHead title={s.h} lead={s.lead}>
+      <PageHead title={s.h} lead={s.lead} img={s.headImg}>
         <nav className="subnav" aria-label={s.onPage}>
           <ul>{s.toc.map(([id, l]: [string, string]) => <li key={id}><a href={`#${id}`}>{l}</a></li>)}</ul>
         </nav>
@@ -122,7 +122,7 @@ export function DownloadPage({ lang }: { lang: Lang }) {
   const s = getData(lang).copy.download;
   return (
     <Shell lang={lang} path="download/" section="download">
-      <PageHead title={s.h} lead={s.lead} />
+      <PageHead title={s.h} lead={s.lead} img={s.headImg} />
       <Vine className="vine-sep" />
       <div className="wrap longform dl">
         <Lacquer>

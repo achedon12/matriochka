@@ -47,6 +47,11 @@
    "behaviour": "Comment il combat",
    "moves": "Attaques",
    "openSheet": "Ouvrir sa fiche technique",
+   "search": "Chercher dans le bestiaire",
+   "searchPh": "Une créature ou une attaque…",
+   "elitesOnly": "Élites seulement",
+   "elite": "Élite",
+   "noMatch": "Aucune créature ne correspond. Vide la recherche ou choisis un autre monde.",
    "movesLead": "Ses attaques à elle, qu'aucune autre créature ne partage. Elle choisit parmi elles, jamais deux fois la même d'affilée, et chacune a une préparation lisible avant de frapper.",
    "recharge": "Recharge",
    "drops": "Butin",
@@ -169,6 +174,90 @@
     }
    ],
    "reelWatch": "Voir la bande-annonce",
+   "heroGenre": "Un mod Minecraft de dix mondes, chacun scellé dans un bloc du précédent.",
+   "heroStatus": "alpha, disponible pour Minecraft 26.3 sur Fabric. Gratuit et open source.",
+   "heroImg": "shots/00_surface.jpg",
+   "surfaceLabel": "La Surface",
+   "openWorld": "Ouvrir",
+   "verbsH": "Ce que tu fais dans Matriochka",
+   "verbsP": "Quatre choses, encore et encore, sur dix mondes de profondeur.",
+   "verbs": [
+    {
+     "verb": "Fais pousser un monde",
+     "p": "Fabrique une Graine, plante-la sur une Terre de monde, remplis sa condition. Le bloc qui éclot contient un monde.",
+     "img": "shots/gui_station_matrix_workbench.png",
+     "href": "systems/"
+    },
+    {
+     "verb": "Survis à sa règle",
+     "p": "Air toxique, chaleur, obscurité totale, gravité inversée : chaque monde tord une règle.",
+     "img": "shots/w04_view.jpg",
+     "href": "worlds/"
+    },
+    {
+     "verb": "Affronte ce qui y vit",
+     "p": "Cinquante créatures aux attaques propres, et un boss qui garde le noyau du monde suivant.",
+     "img": "shots/w02_boss.jpg",
+     "href": "bestiary/"
+    },
+    {
+     "verb": "Fabrique ce qu'il donne",
+     "p": "Chaque monde a sa station, son armure et ses outils, ceux qu'il te faut pour le monde suivant.",
+     "img": "shots/gui_station_spore_vat.png",
+     "href": "worlds/1/"
+    }
+   ],
+   "allCreatures": "Voir les cinquante créatures",
+   "sysImg": "shots/gui_journal_1.png",
+   "getH": "Obtenir Matriochka",
+   "getP": "Installe-le sur le client pour jouer seul, et sur le serveur comme sur les clients pour jouer ensemble.",
+   "platforms": [
+    {
+     "name": "GitHub",
+     "note": "Version 0.1.0, journal des changements et code source",
+     "href": "https://github.com/achedon12/matriochka/releases",
+     "icon": "github"
+    },
+    {
+     "name": "Modrinth",
+     "note": "Bientôt",
+     "href": null,
+     "icon": "package"
+    },
+    {
+     "name": "CurseForge",
+     "note": "Bientôt",
+     "href": null,
+     "icon": "package"
+    }
+   ],
+   "faqH": "Questions",
+   "faq": [
+    {
+     "q": "Par où commencer ?",
+     "a": "Lis le Parchemin de l'artisan reçu au départ, puis trouve le Sanctuaire du Gardien sur la Surface et réveille le Gardien du bloc."
+    },
+    {
+     "q": "Ma Graine n'éclot pas.",
+     "a": "Vérifie qu'elle est sur une Terre de monde du monde précédent, bêchée, et que sa condition est remplie : des volutes de fumée veulent dire qu'elle attend encore."
+    },
+    {
+     "q": "Je suis mort dans un monde. Mes affaires sont perdues ?",
+     "a": "Non. Un coffre de mort les garde là où tu es tombé, et un Berceau d'âmes posé avant te fait renaître dans le monde."
+    },
+    {
+     "q": "Ça marche en multijoueur ?",
+     "a": "Oui, avec le mod sur le serveur et sur chaque client. Jusqu'à huit joueurs partagent un groupe, ses mondes et ses boss."
+    },
+    {
+     "q": "Ça marche sur Lunar Client ?",
+     "a": "Via le profil Fabric de Lunar Client pour la 26.3, avec Fabric API et GeckoLib."
+    },
+    {
+     "q": "Je peux refaire un boss ?",
+     "a": "Oui. Son autel le réveille à nouveau, et il laisse encore son noyau, sa terre et ses âmes."
+    }
+   ],
    "stripH": "Dix mondes, l'un dans l'autre",
    "stripP": "Chaque monde est scellé dans un bloc que tu fais pousser dans le monde précédent. Ouvre-en un.",
    "bossesH": "Onze boss te barrent la route",
@@ -206,6 +295,7 @@
    "desc": "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
   },
   "worlds": {
+   "headImg": null,
    "lifeH": "Qui vit ici",
    "lifeP": "Choisis une créature pour la voir bouger et lancer ses propres attaques. Le boss garde le noyau qui ouvre le monde suivant.",
    "codexH": "Tout ce que contient ce monde",
@@ -226,6 +316,7 @@
    "inGame": "en jeu"
   },
   "bestiary": {
+   "headImg": null,
    "h": "Bestiaire",
    "lead": "Cinquante créatures, cinq par monde. La vie et les dégâts incluent déjà le multiplicateur du monde : la vie augmente de 35 % et les dégâts de 20 % à chaque monde franchi.",
    "nesting": "Les créatures gigognes s'ouvrent à leur mort et libèrent une version plus petite et plus rapide. Les élites gardent les meilleurs butins du monde.",
@@ -303,6 +394,7 @@
    "rare": "rare"
   },
   "bosses": {
+   "headImg": null,
    "h": "Boss",
    "lead": "Onze combats, tous construits pareil : une annonce lisible, une attaque rapide et dangereuse, puis une ouverture. Frappé pendant son ouverture, un boss subit 1,5 fois les dégâts ; en dehors, seulement les trois quarts.",
    "tiers": [
@@ -362,6 +454,7 @@
   },
   "systems": {
    "h": "Systèmes",
+   "headImg": null,
    "lead": "Ce qui te garde en vie, ce que tu échanges contre de la puissance, et comment ton équipement grandit. Tout fonctionne pareil en solo et sur serveur.",
    "desc": "Poupée de vie, mort et réapparition, âmes et karma, classes d'équipement, groupes et quêtes dans Matriochka.",
    "onPage": "Sur cette page",
@@ -735,6 +828,7 @@
   },
   "download": {
    "h": "Télécharger",
+   "headImg": null,
    "lead": "Version 0.1.0 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
    "desc": "Télécharger Matriochka pour Minecraft 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur.",
    "sources": [
@@ -862,6 +956,7 @@
    "bg": "#5E1E1A",
    "block": "blocks/painted_wood.png",
    "tall": "shots/00_surface_tall.jpg",
+   "banner": null,
    "wide": null,
    "boss": {
     "id": "block_guardian",
@@ -1451,6 +1546,7 @@
    "bg": "#422317",
    "block": "blocks/spore_moss.png",
    "tall": "shots/w01_view_tall.jpg",
+   "banner": null,
    "wide": "shots/w01_view.jpg",
    "boss": {
     "id": "spore_queen",
@@ -2300,6 +2396,7 @@
    "bg": "#3e1613",
    "block": "blocks/ashrock.png",
    "tall": "shots/w02_view_tall.jpg",
+   "banner": null,
    "wide": "shots/w02_view.jpg",
    "boss": {
     "id": "ash_titan",
@@ -3196,6 +3293,7 @@
    "bg": "#431e1e",
    "block": "blocks/dungeon_brick.png",
    "tall": null,
+   "banner": null,
    "wide": null,
    "boss": {
     "id": "grand_jailer",
@@ -4090,6 +4188,7 @@
    "bg": "#482a35",
    "block": "blocks/cloudstone.png",
    "tall": "shots/w04_view_tall.jpg",
+   "banner": null,
    "wide": "shots/w04_view.jpg",
    "boss": {
     "id": "storm_king",
@@ -4943,6 +5042,7 @@
    "bg": "#391413",
    "block": "blocks/umbral_stone.png",
    "tall": null,
+   "banner": null,
    "wide": null,
    "boss": {
     "id": "light_eater",
@@ -5816,6 +5916,7 @@
    "bg": "#481627",
    "block": "blocks/inverted_stone.png",
    "tall": "shots/w06_view_tall.jpg",
+   "banner": null,
    "wide": "shots/w06_view.jpg",
    "boss": {
     "id": "your_double",
@@ -6614,6 +6715,7 @@
    "bg": "#371819",
    "block": "blocks/trench_rock.png",
    "tall": "shots/w07_view_tall.jpg",
+   "banner": null,
    "wide": "shots/w07_view.jpg",
    "boss": {
     "id": "pressure_leviathan",
@@ -7457,6 +7559,7 @@
    "bg": "#4f2317",
    "block": "blocks/hourstone.png",
    "tall": "shots/w08_view_tall.jpg",
+   "banner": null,
    "wide": "shots/w08_view.jpg",
    "boss": {
     "id": "seasons_master",
@@ -8279,6 +8382,7 @@
    "bg": "#481a15",
    "block": "blocks/living_rock.png",
    "tall": "shots/w09_view_tall.jpg",
+   "banner": null,
    "wide": "shots/w09_view.jpg",
    "boss": {
     "id": "terrain_heart_boss",
@@ -9104,6 +9208,7 @@
    "bg": "#481a12",
    "block": "blocks/giant_plank.png",
    "tall": "shots/w10_view_tall.jpg",
+   "banner": null,
    "wide": "shots/w10_view.jpg",
    "boss": {
     "id": "the_unfinished",

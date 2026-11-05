@@ -4,6 +4,7 @@ import { asset, getData, href, otherLang, SHARED } from "@/lib/data";
 import type { Lang } from "@/lib/types";
 import { Icon } from "./Bits";
 import { Sprite, Vine } from "./Ornament";
+import { StickyHeader } from "./Islands";
 
 const LEFT = ["worlds", "bestiary"] as const;
 const RIGHT = ["bosses", "systems"] as const;
@@ -25,6 +26,7 @@ export function Shell({ lang, path, section, children }: { lang: Lang; path: str
     <>
       <Sprite />
       <a className="skip" href="#main">{ui.skip}</a>
+      <StickyHeader />
       <header className="top">
         <div className="wrap top-in">
           <a className="lang" href={asset((other === "fr" ? "fr/" : "") + path)} hrefLang={other} lang={other}>{ui.other}</a>
@@ -68,9 +70,10 @@ export function Shell({ lang, path, section, children }: { lang: Lang; path: str
   );
 }
 
-export function PageHead({ title, lead, children }: { title: string; lead: string; children?: ReactNode }) {
+export function PageHead({ title, lead, img, children }: { title: string; lead: string; img?: string | null; children?: ReactNode }) {
   return (
-    <section className="phead">
+    <section className={`phead${img ? " phead-art" : ""}`}>
+      {img && <img className="phead-img" src={asset(img)} alt="" width={1920} height={720} fetchPriority="high" />}
       <div className="wrap">
         <h1>{title}</h1>
         <p className="lead">{lead}</p>

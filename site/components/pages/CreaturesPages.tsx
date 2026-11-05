@@ -19,7 +19,7 @@ export function BestiaryPage({ lang }: { lang: Lang }) {
   const worlds = d.worlds.slice(1).map((w) => ({ n: w.n, name: w.name, rule: w.rule, light: w.light }));
   return (
     <Shell lang={lang} path="bestiary/" section="bestiary">
-      <PageHead title={c.h} lead={c.lead}><p className="lead-note">{c.nesting}</p></PageHead>
+      <PageHead title={c.h} lead={c.lead} img={c.headImg}><p className="lead-note">{c.nesting}</p></PageHead>
       <Vine className="vine-sep" />
       <div className="wrap">
         <BestiaryTable lang={lang} mobs={d.mobs} worlds={worlds} ui={ui} viewer={viewerLabels(ui)} />
@@ -47,7 +47,7 @@ export function BossesPage({ lang }: { lang: Lang }) {
   const vl = viewerLabels(ui);
   return (
     <Shell lang={lang} path="bosses/" section="bosses">
-      <PageHead title={c.h} lead={c.lead} />
+      <PageHead title={c.h} lead={c.lead} img={c.headImg} />
       <div className="wrap rules-tables">
         <div>
           <h2 className="h-plate">{ui.timings}</h2>

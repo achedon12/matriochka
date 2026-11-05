@@ -13,7 +13,7 @@ export interface Drop { id: string; tex: string | null; name: string; chance?: s
 
 export interface World {
   n: number; name: string; short: string; long: string; nums: { v: string; l: string }[];
-  doll: DollColours; light: string; bg: string; block: string; tall: string | null; wide: string | null;
+  doll: DollColours; light: string; bg: string; block: string; tall: string | null; wide: string | null; banner?: string | null;
   boss: { id: string; name: string; hp: string; core: string; coreTex: string | null; coreName: string };
   mobs: { id: string; name: string; elite: boolean; tex: string | null }[];
   rule: string | null; tier: string; bossNote: string;

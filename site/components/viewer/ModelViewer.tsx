@@ -65,7 +65,7 @@ export default function ModelViewer({ id, name, anims, labels, tex, auto = true,
       <div className={`stage${ready ? " is-ready" : ""}${failed ? " is-failed" : ""}`} ref={stage}>
         {(!ready || failed) && (
           <div className="stage-fallback">
-            {tex && <img className="px" src={asset(tex)} alt="" width="128" height="128" loading="lazy" />}
+            <img className="stage-portrait" src={asset(`portraits/${id}.png`)} alt="" width="512" height="512" loading="lazy" />
             {failed ? <p>{labels.no3d}</p> : mounted ? <p className="stage-wait">{labels.loading3d}</p> : (
               <button type="button" className="btn btn-small" onClick={() => setMounted(true)}>{labels.view3d}</button>
             )}

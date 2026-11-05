@@ -62,7 +62,7 @@ export default function WorldsPage({ lang }: { lang: Lang }) {
   const ui = d.copy.ui;
   return (
     <Shell lang={lang} path="worlds/" section="worlds">
-      <PageHead title={c.h} lead={c.lead}>
+      <PageHead title={c.h} lead={c.lead} img={c.headImg}>
         <nav className="doll-index" aria-label={c.h}>
           <DollRow worlds={d.worlds} lang={lang} title={c.h} animated={false} className="dolls dolls-index" />
         </nav>
