@@ -4,6 +4,7 @@ import type { Lang } from "@/lib/types";
 import { Icon, Ingredients, Inlay, Shot } from "../Bits";
 import { Lacquer, Vine } from "../Ornament";
 import { PageHead, Shell } from "../Shell";
+import SystemsTabs from "../SystemsTabs";
 
 const NUMERIC = /^[+−×-]?[\d.,\u202f\u00a0 ]+%?$/;
 
@@ -39,80 +40,9 @@ export function SystemsPage({ lang }: { lang: Lang }) {
   const s = getData(lang).copy.systems;
   return (
     <Shell lang={lang} path="systems/" section="systems">
-      <PageHead title={s.h} lead={s.lead} img={s.headImg}>
-        <nav className="subnav" aria-label={s.onPage}>
-          <ul>{s.toc.map(([id, l]: [string, string]) => <li key={id}><a href={`#${id}`}>{l}</a></li>)}</ul>
-        </nav>
-      </PageHead>
-      <Vine className="vine-sep" />
-      <div className="wrap longform">
-        <Lacquer>
-          <section id="survival" className="sect">
-            <h2>{s.survivalH}</h2>
-            <div className="cols">
-              <div>
-                <Feature f={s.lifeDoll} />
-                <h3>{s.deathH}</h3>
-                <ol className="numbered">{s.death.map((x: string) => <li key={x}>{x}</li>)}</ol>
-              </div>
-              <div>{s.features.map((f: any) => <Feature key={f.h} f={f} />)}</div>
-            </div>
-          </section>
-          <hr className="orn-rule" />
-          <section id="souls" className="sect">
-            <h2>{s.soulsH}</h2>
-            <p className="sect-lead">{s.soulsLead}</p>
-            <div className="cols">
-              <div>
-                <Table cols={s.rarCols} rows={s.rarity.map((r: any) => [r.k, r.v])} />
-                <p className="small">{s.karmaNote}</p>
-                <Shot src={s.altarShot.src} caption={s.altarShot.caption} />
-              </div>
-              <div>
-                <h3>{s.karmaH}</h3>
-                <ul className="karma">{s.karma.map((k: any) => <li key={k.v}><span className="num">{k.v}</span><p>{k.p}</p></li>)}</ul>
-                <p className="small">{s.karmaEnd}</p>
-              </div>
-            </div>
-          </section>
-          <hr className="orn-rule" />
-          <section id="classes" className="sect">
-            <h2>{s.classesH}</h2>
-            <p className="sect-lead">{s.classesLead}</p>
-            <Table cols={s.clsCols} rows={s.classes.map((c: any) => [c.name, c.bonus, c.slot])} />
-            <div className="cols">
-              <div><h3>{s.upH}</h3><Table cols={s.upCols} rows={s.up.map((u: any) => [u.lv, u.bonus, u.souls])} /><p className="small">{s.upNote}</p></div>
-              <div><h3>{s.capH}</h3><Table cols={s.capCols} rows={s.cap.map((c: any) => [c.k, c.v])} /></div>
-            </div>
-            <div className="cols">
-              <Feature f={s.chance} />
-              <Shot src={s.classShot.src} caption={s.classShot.caption} />
-            </div>
-          </section>
-          <hr className="orn-rule" />
-          <section id="nesting" className="sect">
-            <h2>{s.nestingH}</h2>
-            <p className="sect-lead">{s.nestingLead}</p>
-            <Table cols={s.nestCols} rows={s.nest.map((n: any) => [n.a, n.b, n.c])} />
-            <h3>{s.gatesH}</h3>
-            <ul className="plain">{s.gates.map((g: string) => <li key={g}>{g}</li>)}</ul>
-          </section>
-          <hr className="orn-rule" />
-          <section id="groups" className="sect">
-            <h2>{s.groupsH}</h2>
-            <p className="sect-lead">{s.groupsLead}</p>
-            <div className="tbl"><table><tbody>{s.cmds.map((c: any) => <tr key={c.c}><th scope="row"><code>{c.c}</code></th><td>{c.d}</td></tr>)}</tbody></table></div>
-            <p className="small">{s.serverNote}</p>
-          </section>
-          <hr className="orn-rule" />
-          <section id="journal" className="sect">
-            <h2>{s.journalH}</h2>
-            <p className="sect-lead">{s.journalLead}</p>
-            <div className="cols">{s.journalShots.map((j: any) => <Shot key={j.src} src={j.src} caption={j.caption} />)}</div>
-            <h3>{s.titlesH}</h3>
-            <ul className="titles">{s.titles.map((x: string) => <li key={x}>{x}</li>)}</ul>
-          </section>
-        </Lacquer>
+      <PageHead title={s.h} lead={s.lead} img={s.headImg} />
+      <div className="mx-auto w-full max-w-[1240px] px-4 py-12 md:px-8">
+        <SystemsTabs s={s} />
       </div>
     </Shell>
   );

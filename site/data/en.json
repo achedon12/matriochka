@@ -448,6 +448,44 @@
    "desc": "The eleven bosses of Matriochka: health, attacks, phases, timings and rewards."
   },
   "systems": {
+   "tiles": [
+    {
+     "id": "survival",
+     "icon": "heart",
+     "stat": "3 layers",
+     "line": "A doll that breaks so you don't, and ways back in."
+    },
+    {
+     "id": "souls",
+     "icon": "sparkles",
+     "stat": "-100 to +100",
+     "line": "Souls are the currency; karma decides how people treat you."
+    },
+    {
+     "id": "classes",
+     "icon": "swords",
+     "stat": "6 classes, level 5",
+     "line": "Every crafted weapon and armour is born with a class."
+    },
+    {
+     "id": "nesting",
+     "icon": "layers",
+     "stat": "Inside everything",
+     "line": "Chests in chests, creatures in creatures, worlds in worlds."
+    },
+    {
+     "id": "groups",
+     "icon": "users",
+     "stat": "Up to 8 players",
+     "line": "Share worlds and bosses with your friends."
+    },
+    {
+     "id": "journal",
+     "icon": "book-open",
+     "stat": "64 quests",
+     "line": "Objectives, quests, achievements and titles."
+    }
+   ],
    "h": "Systems",
    "headImg": "shots/head_systems_banner.jpg",
    "lead": "What keeps you alive, what you trade for power, and how your gear grows. Everything here works the same in solo and on a server.",

@@ -448,6 +448,44 @@
    "desc": "Les onze boss de Matriochka : vie, attaques, phases, timings et récompenses."
   },
   "systems": {
+   "tiles": [
+    {
+     "id": "survival",
+     "icon": "heart",
+     "stat": "3 couches",
+     "line": "Une poupée qui se brise à ta place, et des moyens de revenir."
+    },
+    {
+     "id": "souls",
+     "icon": "sparkles",
+     "stat": "-100 à +100",
+     "line": "Les âmes sont la monnaie ; le karma décide comment on te traite."
+    },
+    {
+     "id": "classes",
+     "icon": "swords",
+     "stat": "6 classes, niveau 5",
+     "line": "Chaque arme et armure fabriquée naît avec une classe."
+    },
+    {
+     "id": "nesting",
+     "icon": "layers",
+     "stat": "Partout dedans",
+     "line": "Des coffres dans des coffres, des créatures dans des créatures, des mondes dans des mondes."
+    },
+    {
+     "id": "groups",
+     "icon": "users",
+     "stat": "Jusqu'à 8 joueurs",
+     "line": "Partage mondes et boss avec tes amis."
+    },
+    {
+     "id": "journal",
+     "icon": "book-open",
+     "stat": "64 quêtes",
+     "line": "Objectifs, quêtes, succès et titres."
+    }
+   ],
    "h": "Systèmes",
    "headImg": "shots/head_systems_banner.jpg",
    "lead": "Ce qui te garde en vie, ce que tu échanges contre de la puissance, et comment ton équipement grandit. Tout fonctionne pareil en solo et sur serveur.",

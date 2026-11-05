@@ -1430,6 +1430,12 @@ def build_systems(d):
     nq = len(C.QUESTS)
     nach = sum(len(v) for v in C.ACH.values())
     return dict(
+        tiles=[dict(id="survival", icon="heart", stat=t("3 layers", "3 couches"), line=t("A doll that breaks so you don't, and ways back in.", "Une poupée qui se brise à ta place, et des moyens de revenir.")),
+               dict(id="souls", icon="sparkles", stat=t("-100 to +100", "-100 à +100"), line=t("Souls are the currency; karma decides how people treat you.", "Les âmes sont la monnaie ; le karma décide comment on te traite.")),
+               dict(id="classes", icon="swords", stat=t("6 classes, level 5", "6 classes, niveau 5"), line=t("Every crafted weapon and armour is born with a class.", "Chaque arme et armure fabriquée naît avec une classe.")),
+               dict(id="nesting", icon="layers", stat=t("Inside everything", "Partout dedans"), line=t("Chests in chests, creatures in creatures, worlds in worlds.", "Des coffres dans des coffres, des créatures dans des créatures, des mondes dans des mondes.")),
+               dict(id="groups", icon="users", stat=t("Up to 8 players", "Jusqu'à 8 joueurs"), line=t("Share worlds and bosses with your friends.", "Partage mondes et boss avec tes amis.")),
+               dict(id="journal", icon="book-open", stat=t("64 quests", "64 quêtes"), line=t("Objectives, quests, achievements and titles.", "Objectifs, quêtes, succès et titres."))],
         h=t("Systems", "Systèmes"), headImg=shot("head_systems_banner"),
         lead=t("What keeps you alive, what you trade for power, and how your gear grows. Everything here works the same in solo and on a server.",
                "Ce qui te garde en vie, ce que tu échanges contre de la puissance, et comment ton équipement grandit. Tout fonctionne pareil en solo et sur serveur."),
