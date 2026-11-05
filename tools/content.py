@@ -119,6 +119,9 @@ item("lockpick_kit", "Lockpick Kit", "Kit de crochetage", 3, "tool", "common", "
 item("portable_trap", "Portable Trap", "Piège portatif", 3, "consumable", "common", "trap", "Immobilizes a mob.", "Immobilise un mob.")
 item("jailer_blade", "Jailer's Blade", "Lame du Geôlier", 3, "weapon", "rare", "sword")
 item("jailer", "", "", 3, "armorset", "rare", "armor", set_en="Jailer", set_fr="de Geôlier")
+item("refuge_doll", "Refuge Doll", "Poupée-refuge", 3, "doll", "legendary", "doll",
+     "A pocket base for your group. Use it to enter, use it again to leave.",
+     "Une base de poche pour ton groupe. Utilise-la pour entrer, puis de nouveau pour sortir.")
 # World 4
 item("ray_membrane", "Ray Membrane", "Membrane de raie", 4, "resource", "common", "membrane", "Glider cloth.", "Toile du planeur.")
 item("storm_essence", "Storm Essence", "Essence de tempête", 4, "resource", "rare", "orb", "Energy of the Lightning Forge.", "Énergie de la Forge à foudre.")

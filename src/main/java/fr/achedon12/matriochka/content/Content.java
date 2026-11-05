@@ -59,6 +59,7 @@ public final class Content {
 		new Defs.ItemDef("jailer_chestplate", 3, "armor", "rare", "chestplate", "jailer"),
 		new Defs.ItemDef("jailer_leggings", 3, "armor", "rare", "leggings", "jailer"),
 		new Defs.ItemDef("jailer_boots", 3, "armor", "rare", "boots", "jailer"),
+		new Defs.ItemDef("refuge_doll", 3, "doll", "legendary", "", ""),
 		new Defs.ItemDef("ray_membrane", 4, "resource", "common", "", ""),
 		new Defs.ItemDef("storm_essence", 4, "resource", "rare", "", ""),
 		new Defs.ItemDef("celestial_crystal", 4, "gem", "rare", "", ""),

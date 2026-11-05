@@ -51,6 +51,7 @@ public final class Recipes {
 		r(W, "class_table", 1, 0, "minecraft:smithing_table", 1, "minecraft:iron_ingot", 6);
 		r(W, "soul_altar", 1, 0, "minecraft:crying_obsidian", 4, "minecraft:gold_ingot", 4);
 		r(W, "nesting_chest", 1, 2, "minecraft:chest", 2, "ash_ingot", 2);
+		r(W, "refuge_doll", 1, 3, "painted_wood", 8, "sealed_fragment", 4, "minecraft:gold_ingot", 2);
 		r(W, "painted_wood", 8, -1, "minecraft:oak_planks", 8, "minecraft:red_dye", 1);
 		r(W, "lacquer_block", 4, -1, "painted_wood", 4, "minecraft:honeycomb", 1);
 		r(W, "spore_vat", 1, 0, "minecraft:cauldron", 1, "minecraft:iron_ingot", 4);

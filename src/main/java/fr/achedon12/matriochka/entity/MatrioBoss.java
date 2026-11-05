@@ -536,6 +536,11 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			if (w == 1 || w == 5 || w == 8) max = Math.min(3, max + 1);
 			ps.setDoll(ps.dollLayers() + 1, max);
 			ps.set("boss_" + w, true);
+			if (w == 3 && !ps.has("refuge_doll_given")) {
+				ps.set("refuge_doll_given", true);
+				ItemStack refuge = new ItemStack(ModContent.item("refuge_doll"));
+				if (!p.getInventory().add(refuge)) spawnAtLocation(level, refuge);
+			}
 			p.sendSystemMessage(Component.translatable("message.matriochka.boss_down." + w).withStyle(ChatFormatting.GOLD));
 			if (w == 0) {
 				for (int i = 0; i < p.getInventory().getContainerSize(); i++) {

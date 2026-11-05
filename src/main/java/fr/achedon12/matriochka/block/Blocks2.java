@@ -280,7 +280,10 @@ public final class Blocks2 {
 
 		@Override
 		protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-			if (player instanceof ServerPlayer sp) Travel.leave(sp);
+			if (player instanceof ServerPlayer sp) {
+				if (fr.achedon12.matriochka.world.Refuge.inRefuge(level)) fr.achedon12.matriochka.world.Refuge.leave(sp);
+				else Travel.leave(sp);
+			}
 			return InteractionResult.SUCCESS;
 		}
 
