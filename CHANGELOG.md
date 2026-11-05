@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Creatures now fight with movesets: nine moves (Flurry, Lunge, Sweep, Ground slam, Bolt, Roar, Blink, Whirl, Grab), three or four per creature, each with its own wind-up animation, range and cooldown. Bolts and roars carry the affliction of the creature's world.
+- Every creature now has its own signature attacks: 160 in all, three per creature and four per elite, none shared. Each has its own wind-up animation, numbers, afflictions, particles and sound, drawn from what the creature is.
 - The eleven bosses are rebuilt as full rigs with joints, secondary motion and glowing eyes and cores.
 - Texture generation is reproducible; the build no longer needs a local copy of Minecraft data.
 - New releases are announced automatically in the Discord changelog channel.
