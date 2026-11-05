@@ -125,10 +125,29 @@ public class MatrioBoss extends Monster implements GeoEntity {
 
 	@Override
 	protected void registerGoals() {
-		goalSelector.addGoal(0, new FloatGoal(this));
+		// the Leviathan lives under water: it must not float up like a land boss caught in the sea
+		Defs.BossDef d = def != null ? def : lookup(getType());
+		if (d == null || !d.aquatic()) goalSelector.addGoal(0, new FloatGoal(this));
 		goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 24f));
 		targetSelector.addGoal(1, new HurtByTargetGoal(this));
 		targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false));
+	}
+
+	/** The definition of a boss type (registerGoals runs in the super constructor, before {@link #def} is set). */
+	private static Defs.BossDef lookup(EntityType<?> type) {
+		String id = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(type).getPath();
+		for (Defs.BossDef b : fr.achedon12.matriochka.content.Content.BOSSES) if (b.id().equals(id)) return b;
+		return null;
+	}
+
+	@Override
+	public boolean canBreatheUnderwater() {
+		return (def != null && def.aquatic()) || super.canBreatheUnderwater();
+	}
+
+	@Override
+	public boolean isPushedByFluid() {
+		return (def == null || !def.aquatic()) && super.isPushedByFluid();
 	}
 
 	@Override
