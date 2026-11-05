@@ -133,7 +133,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 			{l + 20, t + imageHeight - 3}, {l + 236, t + imageHeight - 3}, {l + 22, t + 141}, {l + 234, t + 141}}, 1500, world * 97L);
 		boolean ready = menu.sync.get(0) == 1;
 		if (hasSlot()) {
-			altar(g, l, t);
+			altar(g, l, t, mx, my);
 		} else {
 			drawers(g, l, t, mx, my, dt);
 			niche(g, l, t, ready, dt, mx, my);
@@ -141,7 +141,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		motion.pop(g);
 	}
 
-	private void altar(GuiGraphicsExtractor g, int l, int t) {
+	private void altar(GuiGraphicsExtractor g, int l, int t, int mx, int my) {
 		Ui.paper(g, l + 12, t + 22, 128, 100);
 		g.textWithWordWrap(font, Component.translatable("station.matriochka." + menu.data.station() + ".help"), l + 18, t + 28, 96, Ui.INK, false);
 		Ui.sprite(g, "slot", l + 119, t + 69, 18, 18);
@@ -150,9 +150,35 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		Ui.sprite(g, "glow", l + 116, t + 66, 24, 24, Ui.white(pulse));
 		// the souls the altar and the class table work with
 		int souls = MatrioClient.state.getIntOr("souls", 0);
-		Ui.sprite(g, "lantern", l + 160, t + 100, 9, 13);
-		JournalScreen.lanternFlame(g, l + 160, t + 100, 1f);
-		Ui.embossed(g, font, Component.translatable("hud.matriochka.souls", souls), l + 174, t + 103, Ui.GOLD);
+		int soulsY = menu.data.station().equals("soul_altar") ? t + 113 : t + 103;
+		Ui.sprite(g, "lantern", l + 160, soulsY - 3, 9, 13);
+		JournalScreen.lanternFlame(g, l + 160, soulsY - 3, 1f);
+		Ui.embossed(g, font, Component.translatable("hud.matriochka.souls", souls), l + 174, soulsY, Ui.GOLD);
+		if (menu.data.station().equals("soul_altar")) rechargeCost(g, l + 150, t + 94, souls, mx, my);
+	}
+
+	/** Under the Doll of Life button: what a layer costs, souls and the rare resources of the current world, red when short. */
+	private void rechargeCost(GuiGraphicsExtractor g, int x, int y, int souls, int mx, int my) {
+		int w = Stations.rechargeWorld(MatrioClient.state.getIntOr("here", 0), MatrioClient.state.getIntOr("done", 0));
+		List<net.minecraft.world.item.Item> rares = Stations.rareResources(w);
+		int have = Stations.countRares(minecraft.player.getInventory(), w);
+		Component sc = Component.literal(String.valueOf(Stations.RECHARGE_SOULS));
+		Ui.embossed(g, font, sc, x + 2, y + 4, souls >= Stations.RECHARGE_SOULS ? Ui.GOLD : Ui.WARN);
+		int ix = x + 4 + font.width(sc);
+		Component plus = Component.literal("+ " + Stations.RECHARGE_RARES);
+		Ui.embossed(g, font, plus, ix, y + 4, have >= Stations.RECHARGE_RARES ? Ui.LIGHT : Ui.WARN);
+		ix += font.width(plus) + 2;
+		// the rare resources take turns in one socket when there are more than fit
+		int shown = Math.min(rares.size(), 3);
+		int first = rares.size() > 3 ? (int) ((Ui.now() / 1200) % rares.size()) : 0;
+		for (int i = 0; i < shown; i++) g.item(new ItemStack(rares.get((first + i) % rares.size())), ix + i * 15, y);
+		if (mx >= x && mx < x + 92 && my >= y - 20 && my < y + 16) {
+			List<Component> tip = new java.util.ArrayList<>();
+			tip.add(Component.translatable("station.matriochka.recharge.tip", Stations.RECHARGE_SOULS, Stations.RECHARGE_RARES, Component.translatable("world.matriochka." + w)));
+			for (net.minecraft.world.item.Item it : rares) tip.add(Component.literal("  ").append(new ItemStack(it).getHoverName()).withStyle(net.minecraft.ChatFormatting.GRAY));
+			tip.add(Component.translatable("station.matriochka.recharge.have", have, souls).withStyle(have >= Stations.RECHARGE_RARES && souls >= Stations.RECHARGE_SOULS ? net.minecraft.ChatFormatting.GREEN : net.minecraft.ChatFormatting.RED));
+			g.setComponentTooltipForNextFrame(font, tip, mx, my);
+		}
 	}
 
 	private void drawers(GuiGraphicsExtractor g, int l, int t, int mx, int my, float dt) {

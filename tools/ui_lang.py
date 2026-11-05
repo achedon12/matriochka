@@ -30,9 +30,9 @@ U = {
  "journal.matriochka.karma.dark2": ("Some villages turn hostile. Pact quests and forbidden loot await.", "Certains villages deviennent hostiles. Quêtes de pacte et butins interdits t'attendent."),
  "station.matriochka.ready": ("Ready", "Prête"), "station.matriochka.not_ready": ("Not ready", "Pas prête"),
  "station.matriochka.purify": ("Purify (+karma)", "Purifier (+karma)"), "station.matriochka.devour": ("Devour (-karma)", "Dévorer (-karma)"),
- "station.matriochka.recharge": ("Doll layer: 50", "Couche de poupée : 50"),
+ "station.matriochka.recharge": ("Rebuild a layer", "Refaire une couche"),
  "station.matriochka.upgrade": ("Upgrade class", "Améliorer la classe"), "station.matriochka.reroll": ("Reroll (Chance Doll)", "Relancer (Poupée du hasard)"),
- "station.matriochka.soul_altar.help": ("Place an item. Purify it to free its soul and gain karma, or devour it to absorb its soul and lose karma. Both choices are final.", "Pose un objet. Purifie-le pour libérer son âme et gagner du karma, ou dévore-le pour absorber son âme et perdre du karma. Les deux choix sont définitifs."),
+ "station.matriochka.soul_altar.help": ("Place an item. Purify it to free its soul and gain karma, or devour it to absorb its soul and lose karma. Both choices are final. A Doll of Life layer costs 50 souls and 4 rare resources of the current world.", "Pose un objet. Purifie-le pour libérer son âme et gagner du karma, ou dévore-le pour absorber son âme et perdre du karma. Les deux choix sont définitifs. Une couche de Poupée de vie coûte 50 âmes et 4 ressources rares du monde en cours."),
  "station.matriochka.class_table.help": ("Place a weapon, tool or armor piece. Level 2: 10 souls, 3: 30, 4: 90, 5: 270, and 1, 1, 2, 2 Shell Shards. Your progression caps the level. Armor takes Lacquer Layers.", "Pose une arme, un outil ou une pièce d'armure. Niveau 2 : 10 âmes, 3 : 30, 4 : 90, 5 : 270, et 1, 1, 2, 2 Éclats d'enveloppe. Ta progression limite le niveau. L'armure reçoit des Couches laquées."),
  "station.matriochka.layer": ("Add a layer", "Ajouter une couche"),
  "tooltip.matriochka.layers": ("Layers: %s / %s (outer %s%%)", "Couches : %s / %s (extérieure %s %%)"),
@@ -207,6 +207,10 @@ U = {
  "message.matriochka.link.calm": ("Anchors around your World Block hold the ground still for 5 minutes.", "Des ancres autour de ton bloc-monde tiennent le sol immobile pendant 5 minutes."),
  "message.matriochka.link.quake": ("Your World Block was moved: the whole world quakes!", "Ton bloc-monde a été déplacé : le monde entier tremble !"),
  "message.matriochka.link.boss": ("Your World Block shakes and cracks: a boss fight rages inside.", "Ton bloc-monde tremble et se fissure : un combat de boss fait rage à l'intérieur."),
+ # Doll of Life rebuilt at the Soul Altar
+ "station.matriochka.recharge.tip": ("Rebuilds one Doll of Life layer for %s souls and %s rare resources of %s, in any mix:", "Refait une couche de la Poupée de vie pour %s âmes et %s ressources rares de %s, dans n'importe quel mélange :"),
+ "station.matriochka.recharge.have": ("You carry %s of them and %s souls.", "Tu en portes %s et %s âmes."),
+ "message.matriochka.altar.no_rares": ("A layer also costs %s rare resources of %s.", "Une couche coûte aussi %s ressources rares de %s."),
 }
 cond = {"ash_foundry": ("The foundry needs 1 to 3 heat sources around it (lava, magma, fire).", "La fonderie demande 1 à 3 sources de chaleur autour d'elle (lave, magma, feu)."),
         "lightning_forge": ("The forge has no charge. Wait for lightning under open sky, or feed it Storm Essence.", "La forge n'a pas de charge. Attends la foudre à ciel ouvert, ou nourris-la d'Essence de tempête."),

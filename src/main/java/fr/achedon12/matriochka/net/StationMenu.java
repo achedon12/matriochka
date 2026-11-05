@@ -101,7 +101,7 @@ public class StationMenu extends AbstractContainerMenu {
 		} else if (id == 220) {
 			err = Stations.invert(sp, slot.getItem(0), slot.getItem(1));
 		}
-		if (err != null) sp.sendSystemMessage(Component.translatable(err));
+		if (err != null && !err.isEmpty()) sp.sendSystemMessage(Component.translatable(err));
 		broadcastChanges();
 		return true;
 	}

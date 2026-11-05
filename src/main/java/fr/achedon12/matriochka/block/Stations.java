@@ -149,7 +149,7 @@ public final class Stations {
 		return false;
 	}
 
-	/** Attempts to craft recipe #index. Returns a message key on failure, null on success. */
+	/** Attempts to craft recipe #index. Returns a message key on failure (empty when the message was already sent), null on success. */
 	public static String craft(ServerPlayer player, ServerLevel level, BlockPos pos, String station, DataBlockEntity be, int index) {
 		var list = Recipes.of(station);
 		if (index < 0 || index >= list.size()) return "message.matriochka.station.unknown";
@@ -303,12 +303,66 @@ public final class Stations {
 		return null;
 	}
 
-	/** Soul altar: recharge one life-doll layer for 50 souls. */
+	/** What rebuilding one Doll of Life layer at the Soul Altar costs: souls and rare resources of the current world. */
+	public static final int RECHARGE_SOULS = 50, RECHARGE_RARES = 4;
+	private static final java.util.Set<String> RARE_KINDS = java.util.Set.of("resource", "gem", "ingot", "dust", "thread");
+
+	/**
+	 * The world whose rare resources a layer costs: the world the player stands in, or on the Surface the newest world
+	 * the group has opened (the one after its highest boss beaten). Shared with the client, which knows the same two values.
+	 */
+	public static int rechargeWorld(int here, int doneBits) {
+		if (here >= 1 && here <= 10) return here;
+		int best = -1;
+		for (int i = 0; i <= 10; i++) if ((doneBits & (1 << i)) != 0) best = i;
+		return Math.max(1, Math.min(10, best + 1));
+	}
+
+	public static int rechargeWorld(ServerPlayer player) {
+		MatrioData data = MatrioData.get(player.level().getServer());
+		return rechargeWorld(fr.achedon12.matriochka.world.Worlds.number(player.level()), data.group(data.groupOf(player.getUUID())).getIntOr("done", 0));
+	}
+
+	/** The rare resources of a world (resources, gems, ingots, dusts and threads of rare rarity), in table order. */
+	public static java.util.List<Item> rareResources(int world) {
+		java.util.List<Item> out = new java.util.ArrayList<>();
+		for (Defs.ItemDef d : fr.achedon12.matriochka.content.Content.ITEMS) {
+			if (d.world() == world && "rare".equals(d.rarity()) && RARE_KINDS.contains(d.kind())) out.add(ModContent.item(d.id()));
+		}
+		return out;
+	}
+
+	/** How many rare resources of that world the inventory holds, all kinds together. */
+	public static int countRares(Inventory inv, int world) {
+		int n = 0;
+		for (Item i : rareResources(world)) n += count(inv, i);
+		return n;
+	}
+
+	/** Soul altar: rebuild one life-doll layer for 50 souls and 4 rare resources of the current world (the most plentiful first). */
 	public static String rechargeDoll(ServerPlayer player) {
 		PlayerState ps = PlayerState.of(player);
 		if (ps.dollMax() == 0) return "message.matriochka.altar.no_doll";
 		if (ps.dollLayers() >= ps.dollMax()) return "message.matriochka.altar.doll_full";
-		if (!ps.spendSouls(50)) return "message.matriochka.altar.no_souls";
+		int world = rechargeWorld(player);
+		Inventory inv = player.getInventory();
+		if (!player.isCreative()) {
+			if (ps.souls() < RECHARGE_SOULS) return "message.matriochka.altar.no_souls";
+			if (countRares(inv, world) < RECHARGE_RARES) {
+				player.sendSystemMessage(Component.translatable("message.matriochka.altar.no_rares", RECHARGE_RARES, Component.translatable("world.matriochka." + world)));
+				return "";
+			}
+			ps.spendSouls(RECHARGE_SOULS);
+			int left = RECHARGE_RARES;
+			java.util.List<Item> rares = new java.util.ArrayList<>(rareResources(world));
+			rares.sort((a, b) -> Integer.compare(count(inv, b), count(inv, a)));
+			for (Item i : rares) {
+				int k = Math.min(left, count(inv, i));
+				take(inv, i, k);
+				left -= k;
+				if (left <= 0) break;
+			}
+		}
 		ps.setDoll(ps.dollLayers() + 1, ps.dollMax());
 		player.level().playSound(null, player.blockPosition(), fr.achedon12.matriochka.content.Sounds.DOLL_CLOSE, SoundSource.PLAYERS, 1f, 1.1f);
 		return null;
