@@ -909,6 +909,7 @@
   "item.matriochka.wreath_of_seasons.desc": "Tenue à l'autel d'arène, elle réveille le Maître des saisons.",
   "itemGroup.matriochka.main": "Matriochka",
   "itemGroup.matriochka.worlds": "Matriochka — Mondes",
+  "jei.matriochka.requires": "Débloquée après %s",
   "journal.matriochka.betray": "Trahir",
   "journal.matriochka.cycle": "Cycle %s",
   "journal.matriochka.doll": "Poupée de vie : %s / %s couches",

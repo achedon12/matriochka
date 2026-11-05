@@ -136,6 +136,7 @@ U = {
  "tooltip.matriochka.drill.fuel": ("Fuel: %s / %s squares (1 Blazing Rock fills it)", "Combustible : %s / %s carrés (1 Roche ardente le remplit)"),
  "tooltip.matriochka.drill.sneak": ("Sneak to mine a single block.", "Accroupis-toi pour miner un seul bloc."),
  "station.matriochka.invert": ("Invert", "Inverser"),
+ "jei.matriochka.requires": ("Opens after %s", "Débloquée après %s"),
  "station.matriochka.inverter.help": ("Two pieces of the same kind trade class, level and enchantments. Each loses a quarter of its durability.", "Deux pièces du même type échangent classe, niveau et enchantements. Chacune perd un quart de sa durabilité."),
  "station.matriochka.ferment.fresh": ("Fresh", "Jeune"), "station.matriochka.ferment.ripe": ("Ripe", "Mûre"), "station.matriochka.ferment.aged": ("Aged", "Vieillie"),
  "message.matriochka.station.vat_bonus": ("The brew had time to ferment: %s more.", "La cuvée a eu le temps de fermenter : %s de plus."),

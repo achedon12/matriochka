@@ -909,6 +909,7 @@
   "item.matriochka.wreath_of_seasons.desc": "Held at the arena altar, it wakes the Master of Seasons.",
   "itemGroup.matriochka.main": "Matriochka",
   "itemGroup.matriochka.worlds": "Matriochka — Worlds",
+  "jei.matriochka.requires": "Opens after %s",
   "journal.matriochka.betray": "Betray",
   "journal.matriochka.cycle": "Cycle %s",
   "journal.matriochka.doll": "Doll of Life: %s / %s layers",

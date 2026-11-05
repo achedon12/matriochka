@@ -142,6 +142,7 @@
  "tooltip.matriochka.drill.fuel": "Combustible : %s / %s carrés (1 Roche ardente le remplit)",
  "tooltip.matriochka.drill.sneak": "Accroupis-toi pour miner un seul bloc.",
  "station.matriochka.invert": "Inverser",
+ "jei.matriochka.requires": "Débloquée après %s",
  "station.matriochka.inverter.help": "Deux pièces du même type échangent classe, niveau et enchantements. Chacune perd un quart de sa durabilité.",
  "station.matriochka.ferment.fresh": "Jeune",
  "station.matriochka.ferment.ripe": "Mûre",
