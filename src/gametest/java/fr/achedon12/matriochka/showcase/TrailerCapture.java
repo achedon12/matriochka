@@ -59,15 +59,21 @@ public class TrailerCapture implements FabricClientGameTest {
 				// the mod's own boss arena, built 26 blocks ahead: lit, open and the same stage in every world
 				net.minecraft.core.BlockPos arena = sp.getServer().computeOnServer(server -> {
 					var p = server.getPlayerList().getPlayers().get(0);
-					var c = p.blockPosition().offset(0, 0, 26);
-					fr.achedon12.matriochka.world.Arenas.buildArena((net.minecraft.server.level.ServerLevel) p.level(), world, c);
-					return c;
+					var c = p.blockPosition().offset(0, 0, 60);
+					var level = (net.minecraft.server.level.ServerLevel) p.level();
+					if (world == 0) {
+						fr.achedon12.matriochka.world.Arenas.buildArena(level, world, c);
+						return c;
+					}
+					fr.achedon12.matriochka.world.Arenas.build(level, world, c);
+					return fr.achedon12.matriochka.content.ModContent.bossForWorld(world).lair() ? fr.achedon12.matriochka.world.Lairs.heart(world, c) : c;
 				});
 				// the Endless Dungeon rearranges its halls: rebuild the stage before each take there
 				Runnable rebuild = () -> {
 					if (world != 3) return;
 					sp.getServer().runOnServer(server -> fr.achedon12.matriochka.world.Arenas.buildArena(
 						(net.minecraft.server.level.ServerLevel) server.getPlayerList().getPlayers().get(0).level(), world, arena));
+					// (world 3 is an altar world: its stage is the plain arena)
 				};
 				if (w == 7) s.runCommand("effect give @a conduit_power infinite 0 true");
 				if (w == 2) {
@@ -132,12 +138,12 @@ public class TrailerCapture implements FabricClientGameTest {
 				// F: two creatures come for the player, seen through the player's eyes
 				if (w > 0) {
 					s.runCommand("gamemode adventure @a");
-					s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~ ~ ~-10 0 6");
+					s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~ ~ ~-16 0 6");
 					ctx.waitTicks(20);
 					int n = 0;
 					for (Defs.MobDef m : Content.MOBS) {
 						if (m.world() != w || n >= 2 || m.behavior().equals("statue") || m.behavior().equals("mimic") || m.behavior().equals("ambush_root")) continue;
-						s.runCommand("execute at @e[tag=arena,limit=1] run summon matriochka:" + m.id() + " ~" + (n * 4 - 2) + " ~ ~-2");
+						s.runCommand("execute at @e[tag=arena,limit=1] run summon matriochka:" + m.id() + " ~" + (n * 4 - 2) + " ~ ~-9");
 						n++;
 					}
 					for (int f = 0; f < 120; f++) {
@@ -153,9 +159,18 @@ public class TrailerCapture implements FabricClientGameTest {
 				if (takes.contains("c")) {
 				// C: the boss, awake, fighting the player
 				s.runCommand("gamemode adventure @a");
-				s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~ ~ ~-12 0 0");
+				boolean lairBoss = w > 0 && fr.achedon12.matriochka.content.ModContent.bossForWorld(w).lair();
+				s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~ ~ ~-13 0 0");
 				ctx.waitTicks(20);
-				s.runCommand("execute at @e[tag=arena,limit=1] run summon matriochka:" + BOSSES[w] + " ~ ~ ~");
+				if (lairBoss) {
+					// walk into the chamber: the lair heart wakes its boss
+					s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~ ~ ~-8 0 0");
+					ctx.waitTicks(75);
+					s.runCommand("execute at @e[tag=arena,limit=1] unless entity @e[type=matriochka:" + BOSSES[w] + "] run summon matriochka:" + BOSSES[w] + " ~ ~2 ~");
+				} else {
+					s.runCommand("execute at @e[tag=arena,limit=1] run summon matriochka:" + BOSSES[w] + " ~ ~ ~");
+				}
+				s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~ ~ ~-12 0 0");
 				for (int f = 0; f < 150; f++) {
 					if (f % 8 == 0) s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=matriochka:" + BOSSES[w] + ",limit=1] eyes");
 					if (f % 4 == 0) { s.runCommand("effect clear @a minecraft:darkness"); s.runCommand("effect clear @a minecraft:blindness"); s.runCommand("effect clear @a minecraft:nausea"); }
