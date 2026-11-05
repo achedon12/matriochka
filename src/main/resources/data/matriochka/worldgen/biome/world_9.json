@@ -1,7 +1,7 @@
 {
   "attributes": {
-    "minecraft:visual/sky_color": "#a86a5a",
-    "minecraft:visual/fog_color": "#7a4a3a",
+    "minecraft:visual/sky_color": "#b07a62",
+    "minecraft:visual/fog_color": "#8a5440",
     "minecraft:visual/water_fog_color": "#6a4a3a",
     "minecraft:gameplay/natural_mob_spawns": {
       "argument": {
@@ -84,7 +84,26 @@
         "min_delay": 3600,
         "max_delay": 12000
       }
-    }
+    },
+    "minecraft:visual/fog_start_distance": 6.0,
+    "minecraft:visual/fog_end_distance": 110.0,
+    "minecraft:visual/cloud_color": "#ccc09080",
+    "minecraft:visual/sky_light_color": "#ffd8c0",
+    "minecraft:visual/sunrise_sunset_color": "#99ff7040",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:rust_mote"
+        },
+        "probability": 0.005
+      },
+      {
+        "particle": {
+          "type": "matriochka:grit"
+        },
+        "probability": 0.0008
+      }
+    ]
   },
   "carvers": [
     "minecraft:cave",

@@ -24,7 +24,19 @@
         "min_delay": 3600,
         "max_delay": 12000
       }
-    }
+    },
+    "minecraft:visual/fog_start_distance": 4.0,
+    "minecraft:visual/fog_end_distance": 48.0,
+    "minecraft:visual/block_light_tint": "#ffb060",
+    "minecraft:visual/ambient_light_color": "#2a0c06",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:gold_mote"
+        },
+        "probability": 0.002
+      }
+    ]
   },
   "carvers": [
     "minecraft:nether_cave"

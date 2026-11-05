@@ -12,6 +12,7 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from content import *  # noqa
 from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx, paint_snorkel_item, paint_snorkel_layer
+import atmosphere
 import craft
 import particles
 import models
@@ -513,7 +514,10 @@ def gen_worldgen():
             if "clock" in moon:
                 moon["clock"] = f"{NS}:hastened"
             w(os.path.join(D, "timeline/hastened_moon.json"), moon)
-            w(os.path.join(D, "tags/timeline/in_hastened.json"), {"values": ["#minecraft:universal", f"{NS}:hastened_day", f"{NS}:hastened_moon"]})
+            # the seasons tint the light and change the floating particles (tools/atmosphere.py)
+            w(os.path.join(D, "world_clock/seasons.json"), {})
+            w(os.path.join(D, "timeline/seasons.json"), atmosphere.season_timeline())
+            w(os.path.join(D, "tags/timeline/in_hastened.json"), {"values": ["#minecraft:universal", f"{NS}:hastened_day", f"{NS}:hastened_moon", f"{NS}:seasons"]})
         w(os.path.join(D, f"dimension_type/{key}.json"), dt)
 
         # biome
@@ -589,6 +593,7 @@ def gen_worldgen():
         bio["temperature"] = {1: 0.95, 2: 2.0, 4: 0.5, 7: 0.5}.get(n, 0.8)
         bio["downfall"] = 0.9 if n in (1, 4) else 0.3
         bio["attributes"].update(sound.biome_audio(n))
+        bio["attributes"].update(atmosphere.biome(n))
         w(os.path.join(D, f"worldgen/biome/{key}.json"), bio)
         lang(f"biome.{NS}.{key}", f"World {n}", f"Monde {n}")
 
@@ -707,6 +712,7 @@ def gen_world_zero():
     bio["temperature"] = 0.8
     bio["downfall"] = 0.0
     bio["attributes"].update(sound.biome_audio(0))
+    bio["attributes"].update(atmosphere.biome(wd["n"]))
     w(os.path.join(D, f"worldgen/biome/{key}.json"), bio)
     w(os.path.join(D, f"dimension/{key}.json"), {"type": f"{NS}:{key}", "generator": {
         "type": "minecraft:noise", "biome_source": {"type": "minecraft:fixed", "biome": f"{NS}:{key}"}, "settings": f"{NS}:{key}"}})
