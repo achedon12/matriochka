@@ -145,6 +145,13 @@ code { font: 0.86em/1.4 ui-monospace, "DejaVu Sans Mono", monospace; color: var(
   .ribbon { width: 58px; font-size: 12px; padding-top: 9px; right: 10px; }
 }
 @media (max-width: 520px) {
+  .top-in { padding-block: 8px 0; }
+  .cur { display: none; }
+  .nav a { padding: 7px 0 5px; border-bottom: 2px solid transparent; }
+  .nav a[aria-current] { border-bottom-color: var(--gold); }
+  .medal { width: 52px; height: 52px; }
+  .medal img { width: 44px; height: 44px; }
+  .nav ul { gap: 2px 20px; }
   .nav { grid-template-columns: 1fr; justify-items: center; gap: 4px; }
   .brand { order: -1; margin-bottom: 4px; }
   .word { display: none; }
@@ -578,3 +585,16 @@ tr.is-sel { background: rgba(23, 16, 13, 0.42); }
 .moves dt { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font: 400 22px/1.1 var(--f-d); color: var(--gold-b); margin-bottom: 6px; }
 .moves dt .num { font-size: 16px; color: var(--paper-dim); white-space: nowrap; }
 .moves dd { margin: 0; font-size: 16px; line-height: 1.5; }
+
+/* ------------------------------------------------------------------ small screens */
+@media (max-width: 560px) {
+  table.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.stack, table.stack tbody, table.stack tr, table.stack th, table.stack td { display: block; width: 100%; }
+  table.stack tr { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  table.stack th[scope="row"] { padding: 0 0 4px; }
+  table.stack td { display: flex; justify-content: space-between; gap: 12px; padding: 2px 0; border: 0; }
+  table.stack td::before { content: attr(data-label); font-family: var(--f-b); font-size: 15px; color: var(--paper-dim); }
+}
+@media (max-width: 719px) {
+  .moves dt { flex-direction: column; align-items: flex-start; gap: 2px; }
+}

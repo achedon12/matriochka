@@ -52,11 +52,11 @@ export function BossesPage({ lang }: { lang: Lang }) {
         <div>
           <h2 className="h-plate">{ui.timings}</h2>
           <div className="tbl">
-            <table>
+            <table className="stack">
               <thead><tr>{c.tierCols.map((x: string) => <th scope="col" key={x}>{x}</th>)}</tr></thead>
               <tbody>
                 {c.tiers.map((r: { tier: string; warn: string; sig: string; opening: string }) => (
-                  <tr key={r.tier}><th scope="row">{r.tier}</th><td className="num">{r.warn}</td><td className="num">{r.sig}</td><td className="num">{r.opening}</td></tr>
+                  <tr key={r.tier}><th scope="row">{r.tier}</th><td className="num" data-label={c.tierCols[1]}>{r.warn}</td><td className="num" data-label={c.tierCols[2]}>{r.sig}</td><td className="num" data-label={c.tierCols[3]}>{r.opening}</td></tr>
                 ))}
               </tbody>
             </table>
