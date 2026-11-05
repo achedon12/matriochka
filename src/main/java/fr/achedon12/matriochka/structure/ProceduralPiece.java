@@ -127,6 +127,7 @@ public class ProceduralPiece extends StructurePiece {
 			case "wreck" -> Depths.wreck(k);
 			case "bell" -> Depths.bell(k);
 			case "prop_spool", "prop_nail", "prop_pin", "prop_button", "prop_thimble", "prop_offcut", "prop_scissors", "prop_pencil" -> Workshop.prop(k);
+			case "bastion", "circle", "outpost", "caravan" -> Outposts.build(k);
 			default -> Settlements.ruin(k);
 		}
 	}
