@@ -12,7 +12,28 @@
       0
      ]
     },
-    "ring": {
+    "ring0": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "ring1": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "debris0": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "debris1": {
      "rotation": [
       "0",
       "query.anim_time*45",
@@ -32,7 +53,28 @@
       0
      ]
     },
-    "ring": {
+    "ring0": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "ring1": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "debris0": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "debris1": {
      "rotation": [
       "0",
       "query.anim_time*45",
