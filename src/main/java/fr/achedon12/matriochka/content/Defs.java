@@ -70,6 +70,11 @@ public final class Defs {
 		return 1f + 0.6f * (Math.max(1, players) - 1);
 	}
 
+	/** Attack speed of a boss fought by this many players: 1 + 0.05 x (players - 1). */
+	public static float bossAttackSpeedPlayers(int players) {
+		return 1f + 0.05f * (Math.max(1, players) - 1);
+	}
+
 	/** Telegraph and opening windows, in ticks, per tier. */
 	public static int telegraphTicks(int world) {
 		if (world <= 3) return 30;

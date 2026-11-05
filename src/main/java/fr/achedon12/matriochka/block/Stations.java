@@ -132,12 +132,29 @@ public final class Stations {
 		return r.requiresDefeated() < 0 || MatrioData.get(player.level().getServer()).defeated(player, r.requiresDefeated()) || player.isCreative();
 	}
 
+	/**
+	 * Multiplayer rule: the gear of the group's newest world is only for those who took part in its last boss. Older
+	 * tiers stay open to everyone; a player who missed the fight can join the next one (lairs re-arm, offerings can be
+	 * made again).
+	 */
+	public static boolean tookPart(ServerPlayer player, Recipes.Recipe r) {
+		Defs.ItemDef d = ModContent.def(r.output());
+		if (d == null || !(d.kind().equals("weapon") || d.kind().equals("armor")) || player.isCreative()) return true;
+		int boss = d.world() - 1;
+		MatrioData data = MatrioData.get(player.level().getServer());
+		if (boss != data.highestDefeated(data.groupOf(player.getUUID()))) return true;
+		PlayerState ps = PlayerState.of(player);
+		for (int w = boss; w <= 10; w++) if (ps.has("boss_" + w)) return true;
+		return false;
+	}
+
 	/** Attempts to craft recipe #index. Returns a message key on failure, null on success. */
 	public static String craft(ServerPlayer player, ServerLevel level, BlockPos pos, String station, DataBlockEntity be, int index) {
 		var list = Recipes.of(station);
 		if (index < 0 || index >= list.size()) return "message.matriochka.station.unknown";
 		Recipes.Recipe r = list.get(index);
 		if (!canSeeRecipe(player, r)) return "message.matriochka.station.locked";
+		if (!tookPart(player, r)) return "message.matriochka.station.take_part";
 		// no lightning yet: a Storm Essence the player carries charges the forge instead
 		if (station.equals("lightning_forge") && be.data().getIntOr("charge", 0) <= 0 && !player.isCreative()) feedEssence(player, level, pos, be);
 		if (condition(level, pos, station, be) == 0 && !player.isCreative()) return "message.matriochka.station.condition." + station;

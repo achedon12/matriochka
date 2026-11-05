@@ -940,6 +940,7 @@
   "message.matriochka.station.forge_fed": "The essence crackles into the forge. Charge: %s.",
   "message.matriochka.station.locked": "Defeat the previous boss to unlock this recipe.",
   "message.matriochka.station.missing": "Missing ingredients.",
+  "message.matriochka.station.take_part": "Your group beat this world's boss without you. Take part in its next fight to earn this gear.",
   "message.matriochka.station.unknown": "Unknown recipe.",
   "message.matriochka.station.vat_bonus": "The brew had time to ferment: %s more.",
   "message.matriochka.world_exists": "Your group already has a World Block for world %s: break it first.",

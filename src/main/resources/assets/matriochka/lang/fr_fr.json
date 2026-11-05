@@ -940,6 +940,7 @@
   "message.matriochka.station.forge_fed": "L'essence crépite dans la forge. Charge : %s.",
   "message.matriochka.station.locked": "Bats le boss précédent pour débloquer cette recette.",
   "message.matriochka.station.missing": "Ingrédients manquants.",
+  "message.matriochka.station.take_part": "Ton groupe a vaincu le boss de ce monde sans toi. Participe à son prochain combat pour mériter cet équipement.",
   "message.matriochka.station.unknown": "Recette inconnue.",
   "message.matriochka.station.vat_bonus": "La cuvée a eu le temps de fermenter : %s de plus.",
   "message.matriochka.world_exists": "Ton groupe a déjà un Bloc-monde pour le monde %s : casse-le d'abord.",

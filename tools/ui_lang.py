@@ -131,6 +131,7 @@ U = {
  "journal.matriochka.locked_help": ("Opens at karma +50: the peoples ask for your help.", "S'ouvre à karma +50 : les peuples te demandent de l'aide."),
  "journal.matriochka.locked_pact": ("Opens at karma -50: someone in the dark offers a pact.", "S'ouvre à karma -50 : quelqu'un dans l'ombre te propose un pacte."),
  "message.matriochka.black_market": ("Under the counter, other goods wait for you.", "Sous le comptoir, d'autres marchandises t'attendent."),
+ "message.matriochka.station.take_part": ("Your group beat this world's boss without you. Take part in its next fight to earn this gear.", "Ton groupe a vaincu le boss de ce monde sans toi. Participe à son prochain combat pour mériter cet équipement."),
  "command.matriochka.group.info": ("Group: %s member(s), defeated bosses: %s", "Groupe : %s membre(s), boss vaincus : %s"),
  "command.matriochka.group.invited": ("%s invites you to their group. /matriochka group join", "%s t'invite dans son groupe. /matriochka group join"),
  "command.matriochka.group.invite_sent": ("Invitation sent to %s.", "Invitation envoyée à %s."),

@@ -141,6 +141,7 @@
  "journal.matriochka.locked_help": "S'ouvre à karma +50 : les peuples te demandent de l'aide.",
  "journal.matriochka.locked_pact": "S'ouvre à karma -50 : quelqu'un dans l'ombre te propose un pacte.",
  "message.matriochka.black_market": "Sous le comptoir, d'autres marchandises t'attendent.",
+ "message.matriochka.station.take_part": "Ton groupe a vaincu le boss de ce monde sans toi. Participe à son prochain combat pour mériter cet équipement.",
  "command.matriochka.group.info": "Groupe : %s membre(s), boss vaincus : %s",
  "command.matriochka.group.invited": "%s t'invite dans son groupe. /matriochka group join",
  "command.matriochka.group.invite_sent": "Invitation envoyée à %s.",
