@@ -299,6 +299,92 @@ titles = {"painted_cape": ("Painted Cape", "Cape peinte"), "iron_lungs": ("Iron 
           "out_of_time": ("Out of Time", "Hors du temps"), "untethered": ("Untethered", "Sans attache"), "apprentice": ("Apprentice", "Apprenti"), "seamless": ("Seamless", "Sans couture")}
 for k, v in titles.items():
     U[f"title.matriochka.{k}"] = v
+# ------------------------------------------------------------------ server limits, comfort, cinematics, adaptive music
+U["message.matriochka.server_full"] = ("The server holds as many worlds as it allows. This Seed waits until another group frees its parcel.",
+                                       "Le serveur contient autant de mondes qu'il le permet. Cette Graine attend qu'un autre groupe libère sa parcelle.")
+comfort = {
+    "title": ("Comfort", "Confort"),
+    "open": ("Comfort", "Confort"),
+    "defaults": ("Defaults", "Par défaut"),
+    "on": ("On", "Oui"), "off": ("Off", "Non"),
+    "page.screen": ("Screen", "Écran"),
+    "page.hud": ("HUD and music", "Interface et musique"),
+    "shake": ("Screen shake", "Tremblements"),
+    "shake.desc": ("How much heavy blows, quakes and trembling World Blocks shake the camera. 0% turns it off.",
+                   "À quel point les coups lourds, les séismes et les bloc-mondes qui tremblent secouent la caméra. 0 % les coupe."),
+    "flashes": ("Flashes", "Flashs"),
+    "flashes.desc": ("The white flash of a boss phase break and the red glow before a signature attack. Off, a soft darkening stands in.",
+                     "Le flash blanc d'un changement de phase et la lueur rouge avant une attaque signature. Désactivés, un léger assombrissement les remplace."),
+    "soft_effects": ("Soft effects", "Effets adoucis"),
+    "soft_effects.desc": ("No Nausea and no Darkness pulses: the server skips them for you and a gentle tint shows how long they would have lasted.",
+                          "Ni Nausée ni pulsations d'Obscurité : le serveur te les épargne et une teinte douce montre combien de temps elles auraient duré."),
+    "cinematics": ("Cinematics", "Cinématiques"),
+    "cinematics.desc": ("Boss introductions (bars, title card, the camera turning to the boss), world title cards and the phase freeze-frame.",
+                        "Présentations des boss (bandes, carton-titre, caméra tournée vers le boss), cartons des mondes et arrêt sur image des phases."),
+    "subtitles": ("Attack subtitles", "Sous-titres d'attaque"),
+    "subtitles.desc": ("Names the attack a boss winds up in large letters, with the time left before it lands.",
+                       "Nomme en grandes lettres l'attaque qu'un boss prépare, avec le temps restant avant l'impact."),
+    "particles": ("Fewer particles", "Moins de particules"),
+    "particles.desc": ("Skips two particles out of three inside the worlds and during boss fights.",
+                       "Retire deux particules sur trois dans les mondes et pendant les combats de boss."),
+    "patterns": ("Gauge patterns", "Motifs des jauges"),
+    "patterns.desc": ("Gauges carry stripes past half and crosshatching in danger, so you can read them without the colours.",
+                      "Les jauges portent des rayures passé la moitié et des hachures en danger, lisibles sans les couleurs."),
+    "hud_scale": ("Plaque size", "Taille du cartouche"),
+    "hud_scale.desc": ("Size of the plaque with the world's gauge, the Doll of Life and the souls.",
+                       "Taille du cartouche de la jauge du monde, de la Poupée de vie et des âmes."),
+    "hud_corner": ("Plaque corner", "Coin du cartouche"),
+    "hud_corner.desc": ("The corner of the screen the plaque sits in.", "Le coin de l'écran où se place le cartouche."),
+    "corner.top_left": ("Top left", "Haut gauche"), "corner.top_right": ("Top right", "Haut droite"),
+    "corner.bottom_left": ("Bottom left", "Bas gauche"), "corner.bottom_right": ("Bottom right", "Bas droite"),
+    "music_explore": ("World themes", "Thèmes des mondes"),
+    "music_explore.desc": ("Volume of each world's theme while you explore, as a share of the game's music slider.",
+                           "Volume du thème de chaque monde pendant l'exploration, en part du curseur de musique du jeu."),
+    "music_danger": ("Danger", "Danger"),
+    "music_danger.desc": ("Volume of the tense theme that takes over while creatures hunt you.",
+                          "Volume du thème tendu qui prend le relais quand des créatures te traquent."),
+    "music_boss": ("Boss fights", "Combats de boss"),
+    "music_boss.desc": ("Volume of the boss themes.", "Volume des thèmes de boss."),
+    "music_layers": ("Heartbeat", "Battements"),
+    "music_layers.desc": ("Volume of the heartbeat that rises when your health or your breath runs low.",
+                          "Volume des battements de cœur qui montent quand ta santé ou ton souffle baisse."),
+    "music_stings": ("Stings", "Ponctuations"),
+    "music_stings.desc": ("Volume of the short phrases that mark a place found, a Journal page or a quest done.",
+                          "Volume des courtes phrases qui marquent un lieu trouvé, une page du Journal ou une quête accomplie."),
+}
+for k, v in comfort.items():
+    U[f"comfort.matriochka.{k}"] = v
+boss_titles = {
+    "block_guardian": ("Keeper of the First Doll", "Gardien de la première poupée"),
+    "spore_queen": ("Mother of the Rot", "Mère de la pourriture"),
+    "ash_titan": ("The Forge That Walks", "La forge qui marche"),
+    "grand_jailer": ("Warden of Every Lock", "Gardien de toutes les serrures"),
+    "storm_king": ("Crowned by Lightning", "Couronné par la foudre"),
+    "light_eater": ("Hunger in the Dark", "La faim dans le noir"),
+    "your_double": ("Everything You Carry", "Tout ce que tu portes"),
+    "pressure_leviathan": ("The Weight of the Deep", "Le poids des profondeurs"),
+    "seasons_master": ("Who Turns the Year", "Celui qui tourne l'année"),
+    "terrain_heart_boss": ("The Ground's Own Pulse", "Le pouls même du sol"),
+    "the_unfinished": ("Shell upon Shell", "Enveloppe sur enveloppe"),
+    "artisan_shadow": ("What the Artisan Left Behind", "Ce que l'Artisan a laissé"),
+}
+for k, v in boss_titles.items():
+    U[f"cine.matriochka.boss.{k}"] = v
+world_lines = {
+    1: ("The air is spores: keep the Toxin low.", "L'air n'est que spores : garde la Toxine basse."),
+    2: ("The rock is hot: mind the Heat.", "La roche est brûlante : surveille la Chaleur."),
+    3: ("Every way is locked: find the keys.", "Chaque passage est verrouillé : trouve les clés."),
+    4: ("The wind never rests: crouch when it gusts.", "Le vent ne se repose jamais : accroupis-toi quand il souffle."),
+    5: ("No light lasts: every sound is heard.", "Aucune lumière ne dure : chaque bruit s'entend."),
+    6: ("Up and down trade places.", "Le haut et le bas échangent leur place."),
+    7: ("The sea presses down: watch your breath.", "La mer pèse : surveille ton souffle."),
+    8: ("The days fly by, and the seasons with them.", "Les jours filent, et les saisons avec eux."),
+    9: ("The ground walks, and carries you.", "Le sol marche, et il t'emporte."),
+    10: ("Every law at once, at doll scale.", "Toutes les lois à la fois, à l'échelle d'une poupée."),
+    11: ("Nothing moves here. Do not stay still.", "Rien ne bouge ici. Ne reste pas immobile."),
+}
+for k, v in world_lines.items():
+    U[f"cine.matriochka.world.{k}"] = v
 en = {k: v[0] for k, v in U.items()}
 fr = {k: v[1] for k, v in U.items()}
 d = os.path.join(os.path.dirname(__file__), "lang")

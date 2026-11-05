@@ -380,6 +380,7 @@ public final class ScaleLinks {
 			if (!active(data, data.groupOf(p.getUUID()), w, "quake", now)) continue;
 			ServerLevel level = (ServerLevel) p.level();
 			RandomSource r = level.getRandom();
+			fr.achedon12.matriochka.net.Cues.shake(p, 0.45f, 12);
 			if (p.onGround()) {
 				p.push((r.nextDouble() - 0.5) * 0.35, 0.18, (r.nextDouble() - 0.5) * 0.35);
 				p.needsSync = true;

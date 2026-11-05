@@ -18,6 +18,13 @@
 - Every quest checks what its description says. Deliveries are handed to the world's people (Hard Harvest, The Miners' Pay, A Life in a Day by day, A Warm Hearth); places are reached (Read the Plan, Last Message, The Impossible Stair, The Wreck's Crew, The Ground Plan, The Surveyor, Looking Down); stations are used (The Vat with a ripe brew, Under Control, Catch the Lightning, Double Meaning, Compress, The Workshop); kills ask for their condition (No Filter, Bare Hands, The Night Light, Lost Reflection, All at Once); and Read Between the Lines, Fingers in the Doll, First Flight, Light the Lighthouse, Hear the Danger, The Signs, The Silent Station, Four Seasons, The Archives, The Drifting Fort, The Apprentices and Every Tool watch the real action. Several descriptions say more precisely what to do. Many Hands only counts the peoples of the worlds.
 - The Unfinished now fights on the shortest timing tier on every shell, as the final fight of the design.
 - New check run: `./gradlew runClientGameTest -Pautomation`.
+- Comfort options, opened from the Journal (Comfort button) and saved in `config/matriochka-client.json`: screen shake strength, flashes, soft effects (no Nausea or Darkness, a gentle tint instead; the server skips the effects for that player), cinematics, large boss attack subtitles, fewer particles, colour-blind gauge patterns, HUD plaque size and corner, and a volume per kind of music.
+- Boss introductions: letterbox bars, the camera turning toward the boss with a slow push-in, and a framed title card with the boss's name and title.
+- A title card the first time you enter each world, with its rule medallion and a line about its law.
+- Boss phase breaks freeze-frame with a flash and the shell's number; heavy boss blows, World 9's moving ground, a moved World Block's quake and a trembling World Block nearby shake the camera.
+- The endings' crawl is framed by letterbox bars.
+- Adaptive music: a danger theme while creatures hunt you, the boss themes during fights, a heartbeat at low health or breath, and stings for a structure, a Journal page or a quest; themes fade into one another and the world theme comes back soon after.
+- Server options in `config/matriochka.json`: `karma` (on or off), `soulGainMultiplier`, `maxActiveGroups` and `maxParcels`.
 
 ## 0.3.0 (alpha)
 

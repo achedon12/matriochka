@@ -12,6 +12,9 @@ import net.fabricmc.loader.api.FabricLoader;
  * difficulty: "story" (creatures deal 70% damage, the inventory is kept on death), "normal", "nightmare" (130% damage,
  * Soul Cradles hold one charge), "hardcore" (as nightmare, the Doll of Life never saves you, death is permanent and a
  * broken World Block deletes its world for the group).
+ * karma: false freezes every karma change (the Journal still shows the value). soulGainMultiplier scales every soul gain.
+ * maxActiveGroups and maxParcels (0 = no limit) cap how many groups may hold worlds and how many parcels may be handed
+ * out on the server: a Seed whose group would go over a limit waits, unhatched, until room is made.
  */
 public final class Config {
 	public static class Values {
@@ -20,6 +23,10 @@ public final class Config {
 		public float mobDamageMultiplier = 1f;
 		public int maxGroupSize = 8;
 		public String difficulty = "normal";
+		public boolean karma = true;
+		public float soulGainMultiplier = 1f;
+		public int maxActiveGroups = 0;
+		public int maxParcels = 0;
 	}
 
 	private static Values values = new Values();
@@ -79,6 +86,29 @@ public final class Config {
 
 	public static int maxGroupSize() {
 		return Math.max(1, values.maxGroupSize);
+	}
+
+	/** False when the server turned karma off: no action moves it. */
+	public static boolean karma() {
+		return values.karma;
+	}
+
+	/** Souls actually gained for a gain of n (never negative, at least 1 for a positive gain unless the multiplier is 0). */
+	public static int souls(int n) {
+		if (n <= 0) return n;
+		float m = Math.max(0f, values.soulGainMultiplier);
+		if (m == 0f) return 0;
+		return Math.max(1, Math.round(n * m));
+	}
+
+	/** Largest number of groups holding at least one world at once, or 0 for no limit. */
+	public static int maxActiveGroups() {
+		return Math.max(0, values.maxActiveGroups);
+	}
+
+	/** Largest number of parcels handed out on the server, or 0 for no limit. */
+	public static int maxParcels() {
+		return Math.max(0, values.maxParcels);
 	}
 
 	public static Values get() {

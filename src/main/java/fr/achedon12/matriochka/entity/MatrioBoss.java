@@ -140,6 +140,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		level.addFreshEntity(boss);
 		level.playSound(null, at, fr.achedon12.matriochka.content.Sounds.BOSS_AWAKEN, SoundSource.HOSTILE, 2f, 1f);
 		boss.triggerAnim("action", "phase");
+		fr.achedon12.matriochka.net.Cues.bossIntro(level, boss, id);
 		if (!boss.mutation.isEmpty()) {
 			Component desc = Component.translatable("mutation.matriochka." + boss.mutation + ".desc");
 			for (ServerPlayer p : level.getEntitiesOfClass(ServerPlayer.class, boss.getBoundingBox().inflate(48))) {
@@ -386,6 +387,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 					triggerAnim("action", ownMoves() ? move("windup") : attack == 0 ? "strike" : "charge");
 					level.playSound(null, blockPosition(), telegraphSound(), SoundSource.HOSTILE, 1.4f, 0.7f + 0.1f * attack);
 					announce(level);
+					fr.achedon12.matriochka.net.Cues.telegraph(level, this, def.id(), attack, telegraphTicks());
 				}
 			}
 			case TELEGRAPH -> {
@@ -502,6 +504,8 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			return;
 		}
 		boolean sig = attack == 2;
+		// heavy blows shake the camera of everyone near (client comfort settings decide how much)
+		fr.achedon12.matriochka.net.Cues.impact(level, position(), sig ? 0.85f : 0.4f, sig ? 28 : 16, sig ? 14 : 8);
 		switch (w) {
 			case 0 -> {
 				if (sig) throwBlocks(level, target);
@@ -731,6 +735,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			triggerAnim("action", "phase");
 			level.playSound(null, blockPosition(), fr.achedon12.matriochka.content.Sounds.BOSS_PHASE, SoundSource.HOSTILE, 2f, 1f - phase * 0.04f);
 			bar.setName(barName());
+			fr.achedon12.matriochka.net.Cues.phase(level, this, phase);
 			getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(getAttributeBaseValue(Attributes.MOVEMENT_SPEED) * 1.1);
 			if (def.id().equals("spore_queen") && phase == 2) {
 				summon(level, "chitin_guard", 3);

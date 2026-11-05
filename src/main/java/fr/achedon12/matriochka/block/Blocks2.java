@@ -185,6 +185,16 @@ public final class Blocks2 {
 					}
 					return;
 				}
+				if (!seedGroup.isEmpty() && !md.mayOpen(seedGroup)) {
+					// the server's limit on active groups or parcels is reached: the Seed waits for room
+					be.data().putInt("t", 199);
+					be.setChanged();
+					if (level.getGameTime() % 100 == 0) {
+						var op = level.getServer().getPlayerList().getPlayer(java.util.UUID.fromString(seedOwner));
+						if (op != null) op.sendOverlayMessage(Component.translatable("message.matriochka.server_full"));
+					}
+					return;
+				}
 				level.setBlock(pos.below(), soil.setValue(WorldSoil.TILLED, false), 3);
 				level.setBlock(pos, ModContent.block("world_block").defaultBlockState(), 3);
 				if (level.getBlockEntity(pos) instanceof DataBlockEntity wb) {

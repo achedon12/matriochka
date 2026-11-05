@@ -33,6 +33,7 @@ public class Matriochka implements ModInitializer {
 		ModContent.register();
 		ProceduralStructure.init();
 		Net.init();
+		fr.achedon12.matriochka.net.Cues.init();
 		Events.init();
 		MatrioCommand.init();
 		fr.achedon12.matriochka.rules.MovingWorlds.init();

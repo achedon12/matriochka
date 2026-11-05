@@ -21,3 +21,16 @@ The earlier commands (`progression set`, `world enter`/`leave`, `boss <id>`, `la
 | `normal` | x1 | Death chest in the worlds | |
 | `nightmare` | x1.3 | Death chest | Soul Cradles hold one charge |
 | `hardcore` | x1.3 | Permanent: you come back as a spectator; the Doll of Life never saves you | A broken World Block deletes its world for the group |
+
+## config/matriochka.json: karma, souls and limits
+
+| Key | Default | Effect |
+| --- | --- | --- |
+| `karma` | `true` | `false` freezes karma: no action, quest or command moves it. The Journal still shows the value it had. |
+| `soulGainMultiplier` | `1.0` | Scales every soul gained in play (creatures, bosses, quests, the Soul Altar). A positive gain gives at least 1 soul unless the multiplier is `0`, which turns soul gains off. `/matriochka karma soul` gives the exact amount. |
+| `maxActiveGroups` | `0` | How many groups may hold worlds at once (groups with members and a parcel). `0` = no limit. |
+| `maxParcels` | `0` | How many parcels the server hands out in all, every cycle and reset included. `0` = no limit. |
+
+A group that already holds a parcel is never stopped. When a new group would go over a limit, its Seed stays unhatched and tells its planter every few seconds that the server is full; it hatches on its own once room is made (a group disbanded, a limit raised).
+
+Comfort options (screen shake, flashes, soft effects, subtitles, HUD, music volumes) are per player, on the client: see [Accessibility](Accessibility).

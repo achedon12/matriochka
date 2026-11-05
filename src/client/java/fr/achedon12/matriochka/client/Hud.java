@@ -59,7 +59,15 @@ public class Hud implements HudElement {
 		var font = mc.font;
 		int w = 132, h = here > 0 ? 50 : 26;
 		float slide = Ui.easeBack(Ui.since(shownAt, 450));
-		int x = Math.round(6 - (1 - slide) * (w + 10)), y = 6;
+		// comfort options: the plaque's scale and corner; it slides in from its own side
+		var comfort = Comfort.get();
+		float scale = comfort.hudScale;
+		boolean right = comfort.hudCorner.endsWith("right"), bottom = comfort.hudCorner.startsWith("bottom");
+		float ax = right ? g.guiWidth() - 6 - w * scale : 6, ay = bottom ? g.guiHeight() - 6 - h * scale - (right ? 0 : 40) : 6;
+		g.pose().pushMatrix();
+		g.pose().translate(ax, ay);
+		g.pose().scale(scale, scale);
+		int x = Math.round((right ? 1 : -1) * (1 - slide) * (w + 10)), y = 0;
 		Ui.sprite(g, "hud_plaque", x, y, w, h);
 		int rowY = y + 5;
 		if (here > 0) {
@@ -113,7 +121,9 @@ public class Hud implements HudElement {
 					float pulse = 0.35f + 0.35f * (float) Math.sin(now / 160.0);
 					g.fill(tx - 1, y + 17, tx + w - 37, y + 28, Ui.alpha(0xFFD8402A, pulse * 0.35f));
 				}
-				Ui.vial(g, tx, y + 18, w - 37, 9, gaugeShown, col, flash);
+				// colour-blind friendly: stripes past half, crosshatching in danger, whatever the colour says
+				int pattern = !comfort.patterns ? Ui.PATTERN_NONE : danger ? Ui.PATTERN_CROSS : v > 0.5f && !gauge.equals("season") ? Ui.PATTERN_STRIPES : Ui.PATTERN_NONE;
+				Ui.vial(g, tx, y + 18, w - 37, 9, gaugeShown, col, flash, pattern);
 				if (tank) {
 					breathShown = Ui.approach(breathShown, breath, 5, dt);
 					int bw = w - 37;
@@ -158,5 +168,6 @@ public class Hud implements HudElement {
 		JournalScreen.lanternFlame(g, lx, rowY + 1, 1f + lanternFlare * 1.2f);
 		Component sc = Component.translatable("hud.matriochka.souls", Math.round(soulsShown));
 		Ui.embossed(g, font, sc, lx + 13, rowY + 4, lanternFlare > 0.05f ? 0xFFFFE8A0 : Ui.LIGHT);
+		g.pose().popMatrix();
 	}
 }

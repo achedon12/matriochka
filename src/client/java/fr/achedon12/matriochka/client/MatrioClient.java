@@ -35,13 +35,21 @@ public class MatrioClient implements ClientModInitializer {
 		// the miniature world over every World Block (the renderer skips the other blocks sharing this entity type)
 		net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry.register(ModContent.BE_DATA, WorldBlockRenderer::new);
 		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
+		// comfort options, then the cinematics over the HUD (title cards, letterbox, subtitles, tints)
+		Comfort.init();
+		Cinematics.init();
+		HudElementRegistry.addLast(Matriochka.id("cinematics"), new Cinematics());
 		ClientPlayNetworking.registerGlobalReceiver(Net.StatePayload.TYPE, (p, ctx) -> state = p.tag());
 		// class and armor layers on gear from outside the mod (Matriochka items write their own tooltip)
 		net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback.EVENT.register((stack, ctx, flag, lines) -> {
 			if (!(stack.getItem() instanceof fr.achedon12.matriochka.item.MatrioItem)) fr.achedon12.matriochka.gear.GearClasses.appendTooltip(stack, lines::add);
 		});
 		ClientPlayNetworking.registerGlobalReceiver(Net.OpenJournalPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new JournalScreen(p.scroll())));
-		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(MusicThemes::tick);
+		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(mc -> {
+			MusicThemes.tick(mc);
+			Cinematics.tick(mc);
+		});
+		net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.DISCONNECT.register((h, mc) -> Cinematics.reset());
 		ClientPlayNetworking.registerGlobalReceiver(Net.EndingPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new EndingScreen(p.kind())));
 	}
 

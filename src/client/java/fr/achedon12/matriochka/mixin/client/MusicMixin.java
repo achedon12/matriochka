@@ -8,15 +8,24 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** Plays the boss theme during a Matriochka boss fight, the way the End plays its own during the dragon fight. */
+/**
+ * Hands the music channel to the adaptive music (client/MusicThemes) while it plays a danger or boss theme, and
+ * applies the comfort slider and the quick fade to the world themes the game plays itself.
+ */
 @Mixin(Minecraft.class)
 public abstract class MusicMixin {
 	@Inject(method = "getSituationalMusic", at = @At("RETURN"), cancellable = true)
-	private void matriochka$bossMusic(CallbackInfoReturnable<Music> cir) {
+	private void matriochka$adaptiveMusic(CallbackInfoReturnable<Music> cir) {
 		Minecraft mc = (Minecraft) (Object) this;
 		// a screen's own music (the endings' crawl) wins
 		if (mc.gui.screen() != null && mc.gui.screen().getBackgroundMusic() != null) return;
-		Music boss = MusicThemes.situational(mc);
-		if (boss != null) cir.setReturnValue(boss);
+		if (MusicThemes.holding()) cir.setReturnValue(null);
+	}
+
+	@Inject(method = "getMusicVolume", at = @At("RETURN"), cancellable = true)
+	private void matriochka$exploreVolume(CallbackInfoReturnable<Float> cir) {
+		Minecraft mc = (Minecraft) (Object) this;
+		if (mc.gui.screen() != null && mc.gui.screen().getBackgroundMusic() != null) return;
+		cir.setReturnValue(cir.getReturnValue() * MusicThemes.exploreGain());
 	}
 }

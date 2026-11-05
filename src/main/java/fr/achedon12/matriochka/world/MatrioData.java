@@ -201,6 +201,25 @@ public class MatrioData extends SavedData {
 		return e.contains("parcel") ? e.getIntOr("parcel", 0) : parcel(group);
 	}
 
+	/**
+	 * Whether a group may hatch a new world under the server's limits (config maxActiveGroups, maxParcels). A group that
+	 * already holds a parcel always may; a new one needs room among the active groups (those with members and a parcel)
+	 * and among the parcels handed out.
+	 */
+	public boolean mayOpen(String group) {
+		if (group(group).contains("parcel")) return true;
+		int maxParcels = Config.maxParcels();
+		if (maxParcels > 0 && root.getIntOr("parcel_counter", 0) >= maxParcels) return false;
+		int maxGroups = Config.maxActiveGroups();
+		if (maxGroups <= 0) return true;
+		int active = 0;
+		for (String id : groups()) {
+			CompoundTag g = group(id);
+			if (g.contains("parcel") && !g.getListOrEmpty("members").isEmpty()) active++;
+		}
+		return active < maxGroups;
+	}
+
 	/** A fresh, never used parcel index. */
 	public int newParcel() {
 		int next = root.getIntOr("parcel_counter", 0);

@@ -189,6 +189,13 @@ public final class Ui {
 	 * glass highlights on top, and a flash after the value changes.
 	 */
 	public static void vial(GuiGraphicsExtractor g, int x, int y, int w, int h, float frac, int color, float flash) {
+		vial(g, x, y, w, h, frac, color, flash, PATTERN_NONE);
+	}
+
+	public static final int PATTERN_NONE = 0, PATTERN_STRIPES = 1, PATTERN_CROSS = 2;
+
+	/** A vial whose liquid also carries a pattern (comfort option for colour-blind players): stripes or crosshatching. */
+	public static void vial(GuiGraphicsExtractor g, int x, int y, int w, int h, float frac, int color, float flash, int pattern) {
 		sprite(g, "vial_back", x, y, w, h);
 		int ix = x + 5, iw = w - 10, iy = y + 2, ih = h - 4;
 		int fw = Math.round(iw * clamp01(frac));
@@ -197,6 +204,17 @@ public final class Ui {
 			float wob = (float) Math.sin(now() / 260.0) * 0.5f + 0.5f;
 			g.fill(ix + fw - 1, iy, ix + fw, iy + ih, white(0.45f + 0.3f * wob));
 			if (flash > 0) g.fill(ix, iy, ix + fw, iy + ih, white(0.55f * flash));
+			if (pattern != PATTERN_NONE) {
+				// one-pixel diagonals in dark ink, every 3 pixels (and the other way too for crosshatching)
+				g.enableScissor(ix, iy, ix + fw, iy + ih);
+				for (int d = -ih; d < fw; d += 3) {
+					for (int k = 0; k < ih; k++) {
+						g.fill(ix + d + k, iy + ih - 1 - k, ix + d + k + 1, iy + ih - k, 0x8C1A0C06);
+						if (pattern == PATTERN_CROSS) g.fill(ix + d + k, iy + k, ix + d + k + 1, iy + k + 1, 0x8C1A0C06);
+					}
+				}
+				g.disableScissor();
+			}
 		}
 		for (int k = 1; k < 4; k++) g.fill(ix + iw * k / 4, iy + ih - 2, ix + iw * k / 4 + 1, iy + ih, alpha(0xFFE8C060, 0.7f));
 		sprite(g, "vial_front", x, y, w, h);

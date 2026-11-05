@@ -93,6 +93,10 @@ public final class Sounds {
 	public static final SoundEvent MUSIC_BOSS = register("music.boss");
 	public static final SoundEvent MUSIC_BOSS_FINAL = register("music.boss_final");
 	public static final SoundEvent MUSIC_ENDINGS = register("music.endings");
+	public static final SoundEvent MUSIC_DANGER = register("music.danger");
+	public static final SoundEvent MUSIC_LAYER_HEARTBEAT = register("music.layer_heartbeat");
+	public static final SoundEvent MUSIC_STING_DISCOVERY = register("music.sting_discovery");
+	public static final SoundEvent MUSIC_STING_QUEST = register("music.sting_quest");
 
 	private static SoundEvent register(String id) {
 		var key = Matriochka.id(id);

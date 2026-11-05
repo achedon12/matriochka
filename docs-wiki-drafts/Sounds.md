@@ -27,6 +27,25 @@ Each world plays its own theme every 3 to 10 minutes. The lullaby of World 0 is 
 | Boss, last phase | Once the boss is below a third of its health | Faster (152 bpm), in Phrygian dominant, with bells. |
 | Endings | The Scroll's crawl and credits | The lullaby slowed to a 66 bpm waltz in F major, music box and flute. |
 
+## Adaptive music
+
+The music follows what happens (client/MusicThemes):
+
+| State | When | What plays |
+| --- | --- | --- |
+| Exploring | Nothing hunts you | The world's theme, as above. |
+| Danger | Creatures have you as their target within 24 blocks (held 6 seconds after) | The lullaby at 104 bpm in A Phrygian, tremolo strings over a march drum and a drone, muffled. |
+| Boss | A Matriochka boss bar is shown | The boss theme, fiercer below a third of its health. |
+
+Changing state fades the playing theme out (one second) before the next fades in (one and a half): two themes never play together. When the danger or the fight is over, the world theme comes back after a few seconds instead of the usual minutes of silence.
+
+On top of that:
+
+- **Heartbeat.** Below a third of your health, or short of breath (your air, or World 7's oxygen), a slow heartbeat over a muffled drone swells and the theme ducks under it.
+- **Stings.** A music box run up the lullaby's scale when you find a structure or a Journal page; a plucked cadence and a chord when a quest is done.
+
+Each part has its own volume in the [comfort options](Accessibility). The danger theme, the heartbeat and the stings are rendered like the rest; their recipes live in `tools/cues.py`.
+
 ## Ambience
 
 Each world has a seamless 24-second loop and one-shot sounds that play at random.

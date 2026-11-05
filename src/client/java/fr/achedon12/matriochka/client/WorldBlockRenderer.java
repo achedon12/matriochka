@@ -57,6 +57,8 @@ public class WorldBlockRenderer implements BlockEntityRenderer<DataBlockEntity, 
 		long now = be.getLevel().getGameTime();
 		st.time = (now % 24000L) + partial;
 		st.shaking = be.data().getLongOr("quake", 0L) > now;
+		// standing by a World Block whose world quakes or holds a boss fight, the ground trembles under you too
+		if (st.shaking) Cinematics.tremor(1f - (float) Math.min(1, Vec3.atCenterOf(be.getBlockPos()).distanceTo(camera) / 16.0));
 		// the block itself is opaque: light the island with the air above it
 		st.lightCoords = LightCoordsUtil.getLightCoords(be.getLevel(), be.getBlockPos().above());
 	}
