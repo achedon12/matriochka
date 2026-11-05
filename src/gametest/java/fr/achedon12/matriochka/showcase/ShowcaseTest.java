@@ -1,5 +1,7 @@
 package fr.achedon12.matriochka.showcase;
 
+import fr.achedon12.matriochka.content.Content;
+import fr.achedon12.matriochka.content.Defs;
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
@@ -12,6 +14,48 @@ import net.fabricmc.fabric.api.client.gametest.v1.screenshot.TestScreenshotOptio
 public class ShowcaseTest implements FabricClientGameTest {
 	private static void shot(ClientGameTestContext ctx, String name) {
 		ctx.takeScreenshot(TestScreenshotOptions.of(name).withSize(1920, 1080).disableCounterPrefix());
+	}
+
+	/** Places every structure of every world and photographs it from above, three quarters. Shots: struct_<id>.png */
+	private static void structures(ClientGameTestContext ctx) {
+		String only = System.getProperty("matriochka.worlds", "");
+		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
+			var s = sp.getServer();
+			sp.getConnection().waitForChunksRender();
+			ctx.setScreen(() -> null);
+			ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+			s.runCommand("gamerule advance_time false");
+			s.runCommand("gamerule spawn_monsters false");
+			s.runCommand("time set 6000");
+			s.runCommand("effect give @a night_vision infinite 0 true");
+			s.runCommand("effect give @a conduit_power infinite 0 true");
+			s.runCommand("execute as @p run matriochka progression set 10");
+			for (int w = 1; w <= 10; w++) {
+				if (!only.isEmpty() && !("," + only + ",").contains("," + w + ",")) continue;
+				s.runCommand("execute as @p run matriochka world enter " + w);
+				ctx.setScreen(() -> null);
+				ctx.waitTicks(100);
+				s.runCommand("gamemode spectator @a");
+				s.runCommand("kill @e[type=marker]");
+				s.runCommand("execute as @p at @s run summon marker ~ ~ ~ {Tags:[\"st\"]}");
+				int k = 0;
+				for (Defs.StructureDef d : Content.STRUCTURES) {
+					if (d.world() != w) continue;
+					int x = (k % 5) * 110 - 220, z = 260 + (k / 5) * 140;
+					k++;
+					s.runCommand("execute at @e[tag=st,limit=1] run place structure matriochka:" + d.id() + " ~" + x + " ~ ~" + z);
+					int back = d.size().equals("large") ? 46 : d.size().equals("small") ? 22 : 32;
+					s.runCommand("execute at @e[tag=st,limit=1] positioned ~" + x + " ~ ~" + z + " run tp @p ~" + (back * 6 / 10) + " ~" + (back * 6 / 10) + " ~-" + back + " facing ~ ~2 ~");
+					ctx.waitTicks(60);
+					sp.getConnection().waitForChunksRender();
+					ctx.waitTicks(10);
+					ctx.takeScreenshot(TestScreenshotOptions.of("struct_" + d.id()).withSize(1600, 900).disableCounterPrefix());
+				}
+				s.runCommand("gamemode creative @a");
+				s.runCommand("execute as @p run matriochka world leave");
+				ctx.waitTicks(40);
+			}
+		}
 	}
 
 	/** Lets a few creatures fight a protected survival player and logs every move they start. */
@@ -45,6 +89,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 	public void runTest(ClientGameTestContext ctx) {
 		if ("trailer".equals(System.getProperty("matriochka.capture"))) {
 			new TrailerCapture().runTest(ctx);
+			return;
+		}
+		if ("structures".equals(System.getProperty("matriochka.capture"))) {
+			structures(ctx);
 			return;
 		}
 		if ("moves".equals(System.getProperty("matriochka.capture"))) {

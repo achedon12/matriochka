@@ -27,6 +27,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('trailer')) {
 				vmArgs '-Dmatriochka.capture=trailer', '-Xmx4G', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: ''), '-Dmatriochka.takes=' + (project.findProperty('takes') ?: 'adbfcg')
 			}
+			if (name == 'clientGameTest' && project.hasProperty('structures')) {
+				vmArgs '-Dmatriochka.capture=structures', '-Xmx4G', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: '')
+			}
 			if (name == 'clientGameTest' && project.hasProperty('moves')) {
 				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true'
 			}
