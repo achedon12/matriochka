@@ -70,6 +70,13 @@ public class TrailerCapture implements FabricClientGameTest {
 						(net.minecraft.server.level.ServerLevel) server.getPlayerList().getPlayers().get(0).level(), world, arena));
 				};
 				if (w == 7) s.runCommand("effect give @a conduit_power infinite 0 true");
+				if (w == 2) {
+					// the Giant Veins sit on lava: keep it from flowing onto the stage
+					for (int qx = -1; qx <= 0; qx++) for (int qz = -1; qz <= 0; qz++) {
+						int x0 = arena.getX() + qx * 30, z0 = arena.getZ() + qz * 30;
+						s.runCommand("execute at @p run fill " + x0 + " " + (arena.getY() - 3) + " " + z0 + " " + (x0 + 29) + " " + (arena.getY() + 14) + " " + (z0 + 29) + " minecraft:basalt replace minecraft:lava");
+					}
+				}
 				s.runCommand("kill @e[type=marker,tag=arena]");
 				s.runCommand("execute at @p run summon marker " + arena.getX() + " " + arena.getY() + " " + arena.getZ() + " {Tags:[\"arena\"]}");
 				s.runCommand("gamemode spectator @a");
@@ -135,6 +142,7 @@ public class TrailerCapture implements FabricClientGameTest {
 					}
 					for (int f = 0; f < 120; f++) {
 						if (f % 10 == 0) s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=!player,type=!marker,limit=1,sort=nearest] eyes");
+						if (f % 4 == 0) { s.runCommand("effect clear @a minecraft:darkness"); s.runCommand("effect clear @a minecraft:blindness"); s.runCommand("effect clear @a minecraft:nausea"); }
 						ctx.waitTicks(2);
 						frame(ctx, String.format("seq_%s_f_%04d", tag, f));
 					}
@@ -150,6 +158,7 @@ public class TrailerCapture implements FabricClientGameTest {
 				s.runCommand("execute at @e[tag=arena,limit=1] run summon matriochka:" + BOSSES[w] + " ~ ~ ~");
 				for (int f = 0; f < 150; f++) {
 					if (f % 8 == 0) s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=matriochka:" + BOSSES[w] + ",limit=1] eyes");
+					if (f % 4 == 0) { s.runCommand("effect clear @a minecraft:darkness"); s.runCommand("effect clear @a minecraft:blindness"); s.runCommand("effect clear @a minecraft:nausea"); }
 					ctx.waitTicks(2);
 					frame(ctx, String.format("seq_%s_c_%04d", tag, f));
 				}

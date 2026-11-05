@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { creature, getData, href } from "@/lib/data";
+import { asset, creature, getData, href } from "@/lib/data";
 import type { Boss, CodexEntry, Lang, Mob, World } from "@/lib/types";
 import { Ingredients, Inlay, Recipes, Shot } from "../Bits";
 import WorldBestiary, { type BestiaryEntry } from "../WorldBestiary";
@@ -7,6 +7,7 @@ import { viewerLabels } from "./CreaturesPages";
 import { DollRow, DollWindow } from "../Dolls";
 import { Lacquer, Vine } from "../Ornament";
 import { PageHead, Shell } from "../Shell";
+import { btn, wrap } from "../ui";
 
 function windowAlt(w: World, lang: Lang, noShot: string, inGame: string) {
   if (!w.tall) return noShot;
@@ -67,33 +68,40 @@ export default function WorldsPage({ lang }: { lang: Lang }) {
           <DollRow worlds={d.worlds} lang={lang} title={c.h} animated={false} className="dolls dolls-index" />
         </nav>
       </PageHead>
-      <div className="worlds-seq">
-        {d.worlds.map((w, i) => {
-          const prev = i ? d.worlds[i - 1].bg : w.bg;
-          return (
-            <section key={w.n} id={`world-${w.n}`} className={`world${i % 2 ? " world-flip" : ""}`}
-              style={{ "--wb": w.bg, "--wp": prev, "--wl": w.light } as React.CSSProperties} aria-labelledby={`wh-${w.n}`}>
-              <Vine className="vine-sep" />
-              <div className="wrap world-grid">
-                <figure className="world-window">
-                  <DollWindow world={w} alt={windowAlt(w, lang, c.noShot, c.inGame)} id={`w${w.n}`} />
-                  {!w.tall && <figcaption>{c.noShot}</figcaption>}
-                </figure>
-                <div className="world-copy">
-                  <h2 id={`wh-${w.n}`}><span className="w-n">{w.n}</span>{w.name}</h2>
-                  <WorldSummary w={w} lang={lang} />
-                  {w.n === 0 && w.surface && (
-                    <div className="w-block">
-                      <h3>{ui.madeAt}</h3>
-                      <Recipes recipes={w.surface} />
-                    </div>
-                  )}
-                  {w.n > 0 && <p><Link className="quiet" href={href(lang, `worlds/${w.n}/`)}>{ui.moreAbout}</Link></p>}
+      <div>
+        {d.worlds.map((w, i) => (
+          <section key={w.n} id={`world-${w.n}`} aria-labelledby={`wh-${w.n}`} className="relative isolate overflow-hidden border-t-2 border-gold bg-ink">
+            {(w.banner ?? w.wide) && <img className="absolute inset-0 -z-20 size-full object-cover opacity-50" src={asset((w.banner ?? w.wide)!)} alt="" loading="lazy" width={1920} height={823} />}
+            <span className="absolute inset-0 -z-10" style={{ background: `linear-gradient(${i % 2 ? 270 : 90}deg, ${w.bg} 0%, ${w.bg}e6 38%, ${w.bg}55 75%, transparent 100%)` }} />
+            <div className={`${wrap} grid items-center gap-[clamp(20px,4vw,64px)] py-[clamp(40px,6vw,84px)] md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]`}>
+              <figure className={`m-0 mx-auto w-full max-w-[300px] ${i % 2 ? "md:order-2" : ""}`}>
+                <DollWindow world={w} alt={windowAlt(w, lang, c.noShot, c.inGame)} id={`w${w.n}`} />
+              </figure>
+              <div>
+                <p className="m-0 font-pixel text-[clamp(44px,5vw,64px)] leading-none" style={{ color: w.light }}>{w.n}</p>
+                <h2 id={`wh-${w.n}`} className="m-0 mb-3 font-display text-[clamp(38px,5vw,68px)] leading-[0.95] font-normal text-gold-b [text-shadow:0_5px_0_#17100d]">{w.name}</h2>
+                {w.rule && <p className="m-0 mb-3 inline-block rounded-[3px] border border-gold px-3 py-1 text-sm text-paper">{ui.rule}: <strong>{w.rule}</strong>, {w.tier}</p>}
+                <p className="m-0 mb-5 max-w-[56ch] font-body text-lg leading-snug font-bold text-paper">{w.short}</p>
+                {w.nums.length > 0 && (
+                  <ul className="m-0 mb-6 flex list-none flex-wrap gap-x-8 gap-y-3 p-0">
+                    {w.nums.map((x) => (
+                      <li key={x.l} className="max-w-[200px] border-t-2 border-gold pt-2"><span className="block font-pixel text-[30px] leading-none text-paper">{x.v}</span><span className="text-[13px] text-paper-dim">{x.l}</span></li>
+                    ))}
+                  </ul>
+                )}
+                <div className="mb-6 flex flex-wrap items-end gap-2">
+                  {[...w.mobs.map((m) => ({ id: m.id, name: m.name, boss: false })), { id: w.boss.id, name: w.boss.name, boss: true }].map((m) => (
+                    <Link key={m.id} href={href(lang, `creatures/${m.id}/`)} title={m.name}
+                      className={`group grid place-items-center rounded-[3px] border bg-ink/70 p-1 transition-colors hover:border-gold-b ${m.boss ? "size-24 border-gold" : "size-16 border-rule"}`}>
+                      <img className="size-full object-contain transition-transform duration-200 group-hover:scale-110" src={asset(`portraits/${m.id}.png`)} alt={m.name} width={128} height={128} loading="lazy" />
+                    </Link>
+                  ))}
                 </div>
+                <p className="m-0"><Link className={btn} href={href(lang, `worlds/${w.n}/`)}>{w.n === 0 ? ui.moreAbout : `${ui.explore} ${w.name}`}</Link></p>
               </div>
-            </section>
-          );
-        })}
+            </div>
+          </section>
+        ))}
       </div>
     </Shell>
   );
