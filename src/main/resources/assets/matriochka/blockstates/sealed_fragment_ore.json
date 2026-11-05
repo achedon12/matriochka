@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "matriochka:block/sealed_fragment_ore"
+    }
+  }
+}
