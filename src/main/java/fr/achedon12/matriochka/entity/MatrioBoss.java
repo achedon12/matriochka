@@ -681,6 +681,11 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		super.die(source);
 		bar.removeAllPlayers();
 		if (!(level() instanceof ServerLevel level)) return;
+		// a trial boss grants nothing of the story: the trial keeps its own score
+		if (entityTags().contains(fr.achedon12.matriochka.replay.Trials.TAG)) {
+			fr.achedon12.matriochka.replay.Trials.bossDown(this);
+			return;
+		}
 		// the Shadow of World 0 grants nothing by dying (only by being set down, see WorldZero)
 		if (def.world() == Worlds.ZERO) return;
 		MatrioData data = MatrioData.get(level.getServer());
