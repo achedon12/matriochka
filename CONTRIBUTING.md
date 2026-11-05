@@ -38,7 +38,7 @@ generates the textures, GeckoLib models and animations, lang files, worldgen and
 | `tools/paint.py` | item, block and armor pixel art |
 | `tools/models.py` | creature rigs and animations |
 | `tools/bosses_hd.py` | the eleven hand-rigged bosses |
-| `tools/gui.py` | nine-slice GUI sprites |
+| `tools/gui.py` | GUI art painted at twice its size: lacquer, gold leaf, khokhloma, parchment, dolls |
 | `tools/ui_lang.py` | hand-written UI strings (EN and FR) |
 | `tools/site.py` | data and images for the website in `site/` |
 
