@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_10",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 10,
+  "archetype": "arena",
+  "role": "exploration",
+  "size": "large",
+  "structure_id": "titanic_workbench"
+}

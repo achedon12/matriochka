@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 732009,
+    "separation": 21,
+    "spacing": 64
+  },
+  "structures": [
+    {
+      "structure": "matriochka:creature_throne",
+      "weight": 1
+    }
+  ]
+}
