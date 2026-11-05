@@ -14,6 +14,7 @@ from content import *  # noqa
 from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx
 import models
 import bosses_hd
+import moves
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 RES = os.path.join(ROOT, "src/main/resources")
@@ -169,13 +170,14 @@ ENTITY_DIMS = {}
 
 def gen_entities():
     for m in MOBS:
+        m["moves"] = moves.assign(m)
         mid = m["id"]
         lang(f"entity.{NS}.{mid}", m["en"], m["fr"])
         lang(f"entity.{NS}.{mid}.desc", m["desc_en"], m["desc_fr"])
         p = pal(m["world"])
         wd, ht = models.build(m["body"], p, mid, mk(os.path.join(A, f"geckolib/models/entity/{mid}.geo.json")),
                               mk(os.path.join(A, f"geckolib/animations/entity/{mid}.animation.json")),
-                              mk(os.path.join(A, f"textures/entity/{mid}.png")), mid)
+                              mk(os.path.join(A, f"textures/entity/{mid}.png")), mid, moves=m["moves"])
         ENTITY_DIMS[mid] = (max(0.4, min(wd, 2.5)), max(0.4, ht))
     HD_BOSSES = bosses_hd.build_all()
     for b in BOSSES:
@@ -508,8 +510,9 @@ def gen_java():
     rows = []
     for m in MOBS:
         wd, ht = ENTITY_DIMS[m["id"]]
+        mv = ", ".join(jstr(x) for x in m["moves"])
         rows.append(f"\t\tnew Defs.MobDef({jstr(m['id'])}, {m['world']}, {m['hp']}f, {m['dmg']}f, {jstr(m['behavior'])}, {m['size']}f, {wd:.2f}f, {ht:.2f}f, "
-                    f"{jstr(m['drop'])}, {jstr(m['rare_drop'] or '')}, {str(m['elite']).lower()}, {str(m['nesting']).lower()}, {str(m['flying']).lower()}, {str(m['aquatic']).lower()})")
+                    f"{jstr(m['drop'])}, {jstr(m['rare_drop'] or '')}, {str(m['elite']).lower()}, {str(m['nesting']).lower()}, {str(m['flying']).lower()}, {str(m['aquatic']).lower()}, List.of({mv}))")
     L.append(",\n".join(rows))
     L.append("\t);")
     L.append("\tpublic static final List<Defs.BossDef> BOSSES = List.of(")

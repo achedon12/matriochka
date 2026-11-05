@@ -11,7 +11,8 @@ public final class Defs {
 	public record BlockDef(String id, int world, String kind, String style, String drop) {}
 
 	public record MobDef(String id, int world, float hp, float damage, String behavior, float scale, float width, float height,
-						 String drop, String rareDrop, boolean elite, boolean nesting, boolean flying, boolean aquatic) {}
+						 String drop, String rareDrop, boolean elite, boolean nesting, boolean flying, boolean aquatic,
+						 java.util.List<String> moves) {}
 
 	public record BossDef(String id, int world, float hp, float damage, float scale, float width, float height, String core,
 						  float[] phases, boolean flying, boolean aquatic) {}
