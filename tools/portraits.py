@@ -41,12 +41,14 @@ def render(geo, tex, glow, yaw=35, pitch=-18, size=1024):
             for corners, uv, n in faces_of(c):
                 pts, nn = list(corners), n
                 if "rotation" in c:
-                    m = rot_m(*c["rotation"]); pv = c.get("pivot", b["pivot"])
+                    rx, ry, rz = c["rotation"]
+                    m = rot_m(-rx, -ry, rz); pv = c.get("pivot", b["pivot"])
                     pts = [[a + q for a, q in zip(apply(m, [p[i] - pv[i] for i in range(3)]), pv)] for p in pts]
                     nn = apply(m, nn)
                 for bb in chain(b["name"]):
                     if any(bb.get("rotation", [0, 0, 0])):
-                        m = rot_m(*bb["rotation"]); pv = bb["pivot"]
+                        rx, ry, rz = bb["rotation"]
+                        m = rot_m(-rx, -ry, rz); pv = bb["pivot"]  # GeckoLib turns X and Y the other way
                         pts = [[a + q for a, q in zip(apply(m, [p[i] - pv[i] for i in range(3)]), pv)] for p in pts]
                         nn = apply(m, nn)
                 cp = [apply(cam, p) for p in pts]
