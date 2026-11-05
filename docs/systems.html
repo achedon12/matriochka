@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Systems | Matriochka</title>
+<meta name="description" content="Doll of Life, death and respawn, souls and karma, gear classes, groups and quests in Matriochka.">
+<meta name="author" content="achedon12">
+<meta name="theme-color" content="#141210">
+<meta property="og:title" content="Systems | Matriochka">
+<meta property="og:description" content="Doll of Life, death and respawn, souls and karma, gear classes, groups and quests in Matriochka.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://achedon12.github.io/matriochka/assets/icon.png">
+<link rel="alternate" hreflang="en" href="https://achedon12.github.io/matriochka/systems.html">
+<link rel="alternate" hreflang="fr" href="https://achedon12.github.io/matriochka/fr/systems.html">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=Yeseva+One&amp;display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="page-systems">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html"><img class="px" src="assets/icon.png" width="28" height="28" alt=""><span>Matriochka</span></a>
+    <nav class="nav" aria-label="Main"><ul><li><a href="index.html">Home</a></li><li><a href="worlds.html">Worlds</a></li><li><a href="bestiary.html">Bestiary</a></li><li><a href="bosses.html">Bosses</a></li><li><a href="systems.html" aria-current="page">Systems</a></li><li><a href="download.html">Download</a></li></ul></nav>
+    <div class="top-tools">
+      <a class="lang" href="fr/systems.html" hreflang="fr" lang="fr"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 8 6 6"/> <path d="m4 14 6-6 2-3"/> <path d="M2 5h12"/> <path d="M7 2h1"/> <path d="m22 22-5-10-5 10"/> <path d="M14 18h6"/></svg><span>Français</span></a>
+      <a class="gh" href="https://github.com/achedon12/matriochka" aria-label="Source code on GitHub"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/> <path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="phead"><div class="wrap"><h1>Systems</h1><p class="lead">What keeps you alive, what you trade for power, and how your gear grows. Everything here works the same in solo and on a server.</p></div></section>
+<div class="wrap sys-page">
+  <nav class="subnav" aria-label="On this page"><ul>
+    <li><a href="#survival">Survival</a></li><li><a href="#souls">Souls and karma</a></li>
+    <li><a href="#classes">Classes</a></li><li><a href="#nesting">Nesting</a></li>
+    <li><a href="#groups">Groups</a></li><li><a href="#journal">Journal</a></li>
+  </ul></nav>
+
+  <section class="panel sect" id="survival" style="--accent:#d8402f">
+    <h2><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Survival</h2>
+    <div class="world-cols">
+      <div>
+        <div class="feature"><img class="px" src="assets/items/life_doll.png" width="48" height="48" alt="" loading="lazy"><div><h3>Life Doll</h3>
+        <p>You carry a doll made of layers. It gets its first layer when the Spore Queen falls, a second after the Light Eater and a third after the Master of Seasons. Every boss you beat restores one layer, and the Soul Altar rebuilds one for 50 souls.</p></div></div>
+        <h3>When you die</h3>
+        <ol class="numbered"><li>If your Doll of Life has a layer left, it breaks and you get back up on the spot. A doll can save you at most once a minute.</li><li>Otherwise you die, and a death chest keeps your inventory where you fell. It never despawns; inside a boss arena it waits at the entrance.</li><li>If you placed a charged Soul Cradle in that world, you wake up next to it.</li><li>If not, you are sent back outside, to your usual spawn point.</li></ol>
+      </div>
+      <div>
+        <div class="feature"><img class="px" src="assets/blocks/soul_cradle.png" width="48" height="48" alt="" loading="lazy"><div><h3>Soul Cradle</h3>
+        <p>A small painted cradle that lets you respawn inside a world. It holds 3 charges; feed it one resource from that world and 5 souls to add another. One active cradle per player and per world.</p>
+        <ul class="ings"><li class="ing"><span class="px px-vanilla" style="width:24px;height:24px" aria-hidden="true"></span><span class="ing-n">4</span><span class="ing-name">Oak Planks</span></li><li class="ing"><img class="px" src="assets/items/wool_thread.png" width="24" height="24" alt="" loading="lazy"><span class="ing-n">1</span><span class="ing-name">Wool Thread</span></li><li class="ing"><img class="px" src="assets/items/roots.png" width="24" height="24" alt="" loading="lazy"><span class="ing-n">2</span><span class="ing-name">Roots</span></li></ul></div></div>
+        <div class="feature"><img class="px" src="assets/items/return_thread.png" width="48" height="48" alt="" loading="lazy"><div><h3>Return Thread</h3>
+        <p>Pulls you back to the World Block. You can also simply walk back onto the Threshold where you arrived.</p>
+        <ul class="ings"><li class="ing"><img class="px" src="assets/items/wool_thread.png" width="24" height="24" alt="" loading="lazy"><span class="ing-n">2</span><span class="ing-name">Wool Thread</span></li><li class="ing"><span class="px px-vanilla" style="width:24px;height:24px" aria-hidden="true"></span><span class="ing-n">1</span><span class="ing-name">Ender Pearl</span></li></ul></div></div>
+        <div class="feature"><img class="px" src="assets/items/cracked_doll.png" width="48" height="48" alt="" loading="lazy"><div><h3>A broken World Block</h3>
+        <p>Break a World Block and everyone inside is pushed out safely. The block becomes a Cracked Doll tied to that exact world: set it down again and the world comes back with its bases and chests, unstable for 20 minutes. It is also how you move a world.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel sect" id="souls" style="--accent:#D9A441">
+    <h2><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/> <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/> <path d="M7 21h10"/> <path d="M12 3v18"/> <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>Souls and karma</h2>
+    <p class="sect-lead">Every item carries a soul whose weight depends on its rarity. Put it on the Soul Altar and choose, for good: purify it to free the soul and gain karma, or devour it to absorb the soul and lose karma. Either way you keep the souls, which pay for class upgrades, cradle charges and doll layers.</p>
+    <div class="world-cols">
+      <div>
+        <div class="tbl"><table><thead><tr><th scope="col">Rarity</th><th scope="col">Souls</th></tr></thead><tbody><tr><th scope="row">Common</th><td>1</td></tr><tr><th scope="row">Rare</th><td>10</td></tr><tr><th scope="row">Epic</th><td>30</td></tr><tr><th scope="row">Legendary</th><td>100</td></tr><tr><th scope="row">Any boss</th><td>100</td></tr></tbody></table></div>
+        <p class="muted">Karma runs from −100 to +100. An item gives one point of karma per 10 souls, and less each time you repeat the same offering. Quests with a choice move it by 5 or 10.</p>
+        <figure class="shot shot-gui"><img src="assets/shots/gui_station_soul_altar.png" width="514" height="446" alt="The Soul Altar" loading="lazy"><figcaption>The Soul Altar</figcaption></figure>
+      </div>
+      <div>
+        <h3>What karma changes</h3>
+        <ul class="karma"><li class="k k-light2"><span class="kv">+50</span><p>The peoples welcome you. Mutual-help quests open up and the brighter world variants answer you.</p></li><li class="k k-light1"><span class="kv">+25</span><p>Prices are 10% lower. People trust you.</p></li><li class="k k-neutral"><span class="kv">0</span><p>Neither saint nor devourer. Every choice still counts.</p></li><li class="k k-dark1"><span class="kv">−25</span><p>Prices are 10% higher, but the first black market opens to you.</p></li><li class="k k-dark2"><span class="kv">−50</span><p>Some villages turn hostile. Pact quests and forbidden loot await.</p></li></ul>
+        <p class="muted">At ±100, karma also tilts the variants of the worlds you open, and it decides between two of the three endings: seal the creature away, or absorb its power.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel sect" id="classes" style="--accent:#7fd3ff">
+    <h2><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Gear classes</h2>
+    <p class="sect-lead">Every weapon, tool and armour piece gets a random class when it is crafted. The Class Table raises its level with souls; your progression caps how far you can go.</p>
+    <div class="tbl"><table><thead><tr><th scope="col">Class</th><th scope="col">Bonuses</th><th scope="col">Found on</th></tr></thead><tbody><tr><th scope="row">Guardian</th><td>Armor, knockback resistance</td><td>Armour</td></tr><tr><th scope="row">Berserker</th><td>Damage, attack speed</td><td>Weapons, armour</td></tr><tr><th scope="row">Prowler</th><td>Movement speed, dodge</td><td>Armour, light weapons</td></tr><tr><th scope="row">Reaper</th><td>Life steal, soul gain</td><td>Weapons, armour</td></tr><tr><th scope="row">Survivor</th><td>World effect resistance, recovery</td><td>Weapons, armour</td></tr><tr><th scope="row">Prospector</th><td>Mining speed, ore luck</td><td>Tools</td></tr></tbody></table></div>
+    <div class="world-cols">
+      <div><h3>Upgrading</h3>
+        <div class="tbl"><table><thead><tr><th scope="col">Level</th><th scope="col">Total bonus</th><th scope="col">Souls</th></tr></thead><tbody><tr><th scope="row">2</th><td>+10%</td><td>10</td></tr><tr><th scope="row">3</th><td>+20%</td><td>30</td></tr><tr><th scope="row">4</th><td>+35%</td><td>90</td></tr><tr><th scope="row">5</th><td>+50%</td><td>270</td></tr></tbody></table></div>
+        <p class="muted">Level 1 to 5 costs 400 souls per piece.</p></div>
+      <div><h3>Level cap</h3>
+        <div class="tbl"><table><thead><tr><th scope="col">Progression</th><th scope="col">Max level</th></tr></thead><tbody><tr><th scope="row">World 2 done</th><td>2</td></tr><tr><th scope="row">World 4 done</th><td>3</td></tr><tr><th scope="row">World 6 done</th><td>4</td></tr><tr><th scope="row">World 8 done</th><td>5</td></tr></tbody></table></div></div>
+    </div>
+    <div class="feature"><img class="px" src="assets/items/chance_doll.png" width="48" height="48" alt="" loading="lazy"><div><h3>Chance Doll</h3>
+      <p>Rerolls an item into a different class it can hold, and keeps its level. The first reroll costs 20 souls, and the price doubles each time on the same item: 20, 40, 80, 160.</p>
+      <ul class="ings"><li class="ing"><span class="px px-vanilla" style="width:24px;height:24px" aria-hidden="true"></span><span class="ing-n">2</span><span class="ing-name">Oak Planks</span></li><li class="ing"><span class="px px-vanilla" style="width:24px;height:24px" aria-hidden="true"></span><span class="ing-n">1</span><span class="ing-name">Red Dye</span></li><li class="ing"><span class="px px-vanilla" style="width:24px;height:24px" aria-hidden="true"></span><span class="ing-n">2</span><span class="ing-name">Gold Ingot</span></li></ul></div></div>
+    <figure class="shot shot-gui"><img src="assets/shots/gui_station_class_table.png" width="514" height="446" alt="The Class Table" loading="lazy"><figcaption>The Class Table</figcaption></figure>
+  </section>
+
+  <section class="panel sect" id="nesting" style="--accent:#B3261E">
+    <h2><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/> <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/> <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>Things inside things</h2>
+    <p class="sect-lead">The name is the rule: something can always hold something else. These systems unlock as the story goes on.</p>
+    <div class="tbl"><table><thead><tr><th scope="col">System</th><th scope="col">Effect</th><th scope="col">Unlocked</th></tr></thead><tbody><tr><th scope="row">Doll of Life</th><td>Each layer survives one death</td><td>Worlds 1, 5, 8</td></tr><tr><th scope="row">Nesting chests</th><td>A chest that holds a smaller one</td><td>World 2</td></tr><tr><th scope="row">Nesting creatures</th><td>A defeated mob releases a smaller one</td><td>World 2</td></tr><tr><th scope="row">Refuge doll</th><td>A pocket base you carry</td><td>World 3</td></tr><tr><th scope="row">Layered armour</th><td>One layer protects the next</td><td>World 4</td></tr><tr><th scope="row">The final boss</th><td>Ten shells, one per world</td><td>World 10</td></tr></tbody></table></div>
+    <h3>Gates</h3>
+    <ul class="plain">
+      <li>Enchanting, anvils and the Nether open after World 2.</li>
+      <li>Diamonds come back in World 5: four Diamond Fragments make one at the Dark Altar.</li>
+      <li>Elytra stay grounded in Worlds 4, 6 and 9 until World 8 is done.</li>
+      <li>The End opens after World 8.</li>
+    </ul>
+  </section>
+
+  <section class="panel sect" id="groups" style="--accent:#9af0ff">
+    <h2><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/> <circle cx="9" cy="7" r="4"/> <path d="M22 21v-2a4 4 0 0 0-3-3.87"/> <path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Groups and servers</h2>
+    <p class="sect-lead">A player alone is a group of one. Worlds, progression and permissions belong to the group: up to eight players by default. Each group gets its own 3,000 by 3,000 block parcel in every world, walled off from the others, and a World Block can only be used by its group.</p>
+    <div class="tbl"><table><tbody><tr><th scope="row"><code>/matriochka group info</code></th><td>Your group, its members and defeated bosses</td></tr><tr><th scope="row"><code>/matriochka group invite &lt;player&gt;</code></th><td>Invite a player into your group</td></tr><tr><th scope="row"><code>/matriochka group join</code></th><td>Accept the pending invitation</td></tr><tr><th scope="row"><code>/matriochka group leave</code></th><td>Leave your group</td></tr><tr><th scope="row"><code>/matriochka karma show</code></th><td>Your karma and souls</td></tr></tbody></table></div>
+    <p class="muted">The mod runs on the server and on every client. All rules, damage and rewards are decided by the server; nothing needs an online account or service.</p>
+  </section>
+
+  <section class="panel sect" id="journal" style="--accent:#E8D2A6">
+    <h2><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7v14"/> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>The Journal, quests and achievements</h2>
+    <p class="sect-lead">The Artisan&#x27;s Scroll arrives on your first login and turns into the Journal when the Guardian falls. Its tabs track your objective, quests, karma and worlds. There are 64 optional quests (4 on the Surface, 6 per world) and 100 achievements, 10 per world, two of them hidden. Fifty Journal pages and ten hidden dolls are scattered through the worlds; nest the dolls in order and something smaller opens.</p>
+    <div class="world-cols">
+      <figure class="shot shot-gui"><img src="assets/shots/gui_journal_0.png" width="682" height="430" alt="The Journal&#x27;s objective tab" loading="lazy"><figcaption>The Journal&#x27;s objective tab</figcaption></figure>
+      <figure class="shot shot-gui"><img src="assets/shots/gui_journal_1.png" width="682" height="430" alt="Quests" loading="lazy"><figcaption>Quests</figcaption></figure>
+    </div>
+    <h3>Titles you can earn</h3>
+    <ul class="chips"><li>Apprentice</li><li>Ash Skin</li><li>Closed Eyes</li><li>Cold Blood</li><li>Glow</li><li>Head Down</li><li>Iron Lungs</li><li>Out of Time</li><li>Painted Cape</li><li>Seamless</li><li>Untethered</li><li>Wall Walker</li><li>Child of the Wind</li></ul>
+  </section>
+</div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="foot-brand"><img class="px" src="assets/icon.png" width="40" height="40" alt=""><div><strong>Matriochka</strong><p>A Fabric mod by achedon12, for Minecraft 26.3. Released under the MIT licence.</p></div></div>
+    <ul class="foot-links">
+      <li><a href="https://github.com/achedon12/matriochka/releases"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/> <polyline points="7 10 12 15 17 10"/> <line x1="12" x2="12" y1="15" y2="3"/></svg>Releases</a></li>
+      <li><a href="https://github.com/achedon12/matriochka/wiki"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7v14"/> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Wiki</a></li>
+      <li><a href="https://github.com/achedon12/matriochka"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/> <path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</a></li>
+      <li><a href="https://github.com/achedon12/matriochka/issues"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m8 2 1.88 1.88"/> <path d="M14.12 3.88 16 2"/> <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/> <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/> <path d="M12 20v-9"/> <path d="M6.53 9C4.6 8.8 3 7.1 3 5"/> <path d="M6 13H2"/> <path d="M3 21c0-2.1 1.7-3.9 3.8-4"/> <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/> <path d="M22 13h-4"/> <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg>Report a bug</a></li>
+    </ul>
+    <p class="foot-note">Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+  </div>
+</footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
