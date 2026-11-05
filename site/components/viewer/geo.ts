@@ -72,10 +72,11 @@ function faceGeometry(from: V3, to: V3, uv: [number, number], size: V3, tw: numb
 const mx = (p: V3): V3 => [-p[0], p[1], p[2]];
 const rotOf = (r?: V3) => new THREE.Euler(-(r?.[0] ?? 0) * D2R, -(r?.[1] ?? 0) * D2R, (r?.[2] ?? 0) * D2R, "ZYX");
 
-export function buildRig(file: GeoFile, texture: THREE.Texture): Rig {
+export function buildRig(file: GeoFile, texture: THREE.Texture, glow?: THREE.Texture): Rig {
   const geo = file["minecraft:geometry"][0];
   const { texture_width: tw, texture_height: th } = geo.description;
-  const material = new THREE.MeshStandardMaterial({ map: texture, transparent: true, alphaTest: 0.1, roughness: 0.62, metalness: 0.04, side: THREE.DoubleSide });
+  const material = new THREE.MeshStandardMaterial({ map: texture, transparent: true, alphaTest: 0.1, roughness: 0.62, metalness: 0.04, side: THREE.DoubleSide,
+    ...(glow ? { emissiveMap: glow, emissive: new THREE.Color(0xffffff), emissiveIntensity: 1.1 } : {}) });
   const root = new THREE.Group();
   const bones: Rig["bones"] = new Map();
   const pivots = new Map<string, V3>();

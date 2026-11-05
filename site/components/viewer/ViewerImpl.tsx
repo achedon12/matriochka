@@ -151,7 +151,17 @@ export default function ViewerImpl({ id, play, rotate, still, onEnd, onReady, on
         texture.minFilter = THREE.NearestFilter;
         texture.generateMipmaps = false;
         texture.colorSpace = THREE.SRGBColorSpace;
-        rig = buildRig(geo, texture);
+        let glow: THREE.Texture | undefined;
+        try {
+          glow = await new THREE.TextureLoader().loadAsync(asset(`entities/${id}_glowmask.png`));
+          glow.magFilter = THREE.NearestFilter;
+          glow.minFilter = THREE.NearestFilter;
+          glow.generateMipmaps = false;
+          glow.colorSpace = THREE.SRGBColorSpace;
+        } catch {
+          glow = undefined;
+        }
+        rig = buildRig(geo, texture, glow);
         state.current.clips = parseAnimations(anim);
         const s = 1 / 16;
         rig.root.scale.setScalar(s);
