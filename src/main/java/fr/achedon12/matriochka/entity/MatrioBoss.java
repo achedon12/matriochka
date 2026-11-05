@@ -76,6 +76,10 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	private int calmUntil;
 	/** Attack pace from the number of players in the fight (see Defs.bossAttackSpeedPlayers). */
 	private float pace = 1f;
+	/** The mutation it woke with ("" for none), see {@link #mutationTick} and world/Variants. */
+	private String mutation = "";
+	private boolean frenzied;
+	private int echoAt = -1;
 
 	public MatrioBoss(EntityType<? extends Monster> type, Level level, Defs.BossDef def) {
 		super(type, level);
@@ -120,14 +124,115 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		boss.getAttribute(Attributes.MAX_HEALTH).setBaseValue(hp);
 		boss.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(boss.def.damage() * fr.achedon12.matriochka.world.Config.damageMult()
 			* fr.achedon12.matriochka.world.Cycles.damageFactor(cycle));
+		// the variant of the parcel: its danger, and from World 6 its mutation
+		Defs.VariantDef variant = fr.achedon12.matriochka.world.Variants.at(level, at);
+		hp *= variant.danger();
+		boss.getAttribute(Attributes.MAX_HEALTH).setBaseValue(hp);
+		boss.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(boss.getAttributeBaseValue(Attributes.ATTACK_DAMAGE) * variant.danger());
 		boss.setHealth(hp);
 		boss.pace = Defs.bossAttackSpeedPlayers(players);
+		boss.mutate(fr.achedon12.matriochka.world.Variants.mutation(variant.id(), boss.def.world()));
 		boss.setPos(Vec3.atBottomCenterOf(at));
 		boss.setTarget(by);
 		level.addFreshEntity(boss);
 		level.playSound(null, at, SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 0.8f, 0.8f + boss.def.world() * 0.03f);
 		boss.triggerAnim("action", "phase");
+		if (!boss.mutation.isEmpty()) {
+			Component desc = Component.translatable("mutation.matriochka." + boss.mutation + ".desc");
+			for (ServerPlayer p : level.getEntitiesOfClass(ServerPlayer.class, boss.getBoundingBox().inflate(48))) {
+				p.sendSystemMessage(Component.translatable("message.matriochka.mutation.woke", desc).withStyle(ChatFormatting.LIGHT_PURPLE));
+			}
+		}
 		return boss;
+	}
+
+	// ---------------------------------------------------------------- mutations
+	public String mutation() {
+		return mutation;
+	}
+
+	/** Sets the mutation ("" removes it) and names it in the boss bar. */
+	public void mutate(String m) {
+		mutation = m == null ? "" : m;
+		bar.setName(barName());
+	}
+
+	private Component barName() {
+		Component name = Component.translatable("entity.matriochka." + def.id());
+		if (phase > 0) name = name.copy().append(" — " + "I".repeat(Math.min(phase + 1, 3)));
+		if (mutation.isEmpty()) return name;
+		return Component.translatable("boss.matriochka.mutated", name, Component.translatable("mutation.matriochka." + mutation));
+	}
+
+	/** What a mutation adds every tick: a delayed echo, a light pulse, creatures out of its shell, a frenzy. */
+	private void mutationTick(ServerLevel level, LivingEntity target) {
+		boolean fighting = target != null && target.isAlive();
+		switch (mutation) {
+			case "echoing" -> {
+				if (tickCount == echoAt) {
+					level.sendParticles(ParticleTypes.SONIC_BOOM, getX(), getY() + 1, getZ(), 1, 0, 0, 0, 0);
+					shockwave(level, 9, dmg(0.5f));
+				}
+			}
+			case "radiant" -> {
+				if (fighting && tickCount % 300 == 0) {
+					level.sendParticles(ParticleTypes.END_ROD, getX(), getY() + getBbHeight() / 2, getZ(), 80, 2, 2, 2, 0.4);
+					level.playSound(null, blockPosition(), SoundEvents.BEACON_ACTIVATE, SoundSource.HOSTILE, 1.5f, 1.6f);
+					for (LivingEntity e : victims(level, position(), 12)) {
+						e.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0));
+						e.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 1));
+						e.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 0));
+					}
+				}
+			}
+			case "hollow" -> {
+				if (fighting && tickCount % 400 == 200) {
+					var pool = Content.MOBS.stream().filter(m -> m.world() == def.world() && !m.elite()).toList();
+					if (!pool.isEmpty()) summon(level, pool.get(random.nextInt(pool.size())).id(), 2);
+					level.playSound(null, blockPosition(), SoundEvents.TURTLE_EGG_HATCH, SoundSource.HOSTILE, 1.5f, 0.5f);
+				}
+			}
+			case "frenzied" -> {
+				if (!frenzied && getHealth() < getMaxHealth() * 0.5f && isAlive()) {
+					frenzied = true;
+					heal(getMaxHealth() * 0.05f);
+					pace *= 1.3f;
+					getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(getAttributeBaseValue(Attributes.MOVEMENT_SPEED) * 1.25);
+					level.sendParticles(ParticleTypes.ANGRY_VILLAGER, getX(), getY() + getBbHeight(), getZ(), 12, 1, 0.5, 1, 0);
+					level.playSound(null, blockPosition(), SoundEvents.RAVAGER_ROAR, SoundSource.HOSTILE, 2f, 0.6f);
+					triggerAnim("action", "phase");
+				}
+			}
+			default -> {}
+		}
+	}
+
+	/** What a mutation adds once an attack has landed. */
+	private void mutationAfter(ServerLevel level, boolean signature) {
+		switch (mutation) {
+			case "searing" -> {
+				for (LivingEntity e : victims(level, position(), 6)) e.igniteForSeconds(4);
+				if (signature) ringOfFire(level, 5);
+			}
+			case "echoing" -> {
+				if (signature) echoAt = tickCount + 30;
+			}
+			default -> {}
+		}
+	}
+
+	@Override
+	protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput out) {
+		super.addAdditionalSaveData(out);
+		out.putString("mutation", mutation);
+		out.putBoolean("frenzied", frenzied);
+	}
+
+	@Override
+	protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput in) {
+		super.readAdditionalSaveData(in);
+		frenzied = in.getBooleanOr("frenzied", false);
+		mutate(in.getStringOr("mutation", ""));
 	}
 
 	@Override
@@ -187,8 +292,11 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		super.customServerAiStep(level);
 		bar.setProgress(getHealth() / getMaxHealth());
 		if (tickCount % 10 == 0) feats.watch(this, level);
-		if (tickCount % 100 == 0) pace = Defs.bossAttackSpeedPlayers(fighters(level));
+		if (tickCount % 100 == 0) pace = Defs.bossAttackSpeedPlayers(fighters(level)) * (frenzied ? 1.3f : 1f);
 		LivingEntity target = getTarget();
+		if (!mutation.isEmpty()) mutationTick(level, target);
+		// a fight inside shakes the World Block on the Surface
+		if (target != null && tickCount % 20 == 0) fr.achedon12.matriochka.world.ScaleLinks.bossFighting(level, blockPosition());
 		stateTicks++;
 		if (tickCount < calmUntil) {
 			getNavigation().stop();
@@ -237,6 +345,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 				telegraphParticles(level);
 				if (stateTicks >= tele) {
 					execute(level, target);
+					if (!mutation.isEmpty()) mutationAfter(level, attack == 2);
 					lastUse[attack] = level.getGameTime();
 					state = attack == 0 ? State.CHASE : State.OPENING;
 					if (state == State.OPENING) triggerAnim("action", "rest");
@@ -557,7 +666,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			stateTicks = 0;
 			triggerAnim("action", "phase");
 			level.playSound(null, blockPosition(), SoundEvents.ENDER_DRAGON_GROWL, SoundSource.HOSTILE, 1.5f, 0.8f + phase * 0.05f);
-			bar.setName(Component.translatable("entity.matriochka." + def.id()).append(" — " + "I".repeat(Math.min(phase + 1, 3))));
+			bar.setName(barName());
 			getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(getAttributeBaseValue(Attributes.MOVEMENT_SPEED) * 1.1);
 			if (def.id().equals("spore_queen") && phase == 2) {
 				summon(level, "chitin_guard", 3);
@@ -620,6 +729,12 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			if (w == 10) fr.achedon12.matriochka.world.Endings.afterUnfinished(p);
 		}
 		spawnAtLocation(level, new ItemStack(ModContent.item(def.core())));
+		// a mutated boss sheds a bonus
+		if (!mutation.isEmpty()) {
+			spawnAtLocation(level, new ItemStack(ModContent.item("mutated_scale"), 1 + random.nextInt(2)));
+			spawnAtLocation(level, new ItemStack(ModContent.item("shell_shard"), 2));
+			for (ServerPlayer p : present) p.sendSystemMessage(Component.translatable("message.matriochka.mutation.bonus").withStyle(ChatFormatting.LIGHT_PURPLE));
+		}
 		if (w == 0) {
 			spawnAtLocation(level, new ItemStack(ModContent.item("matrix_workbench")));
 			spawnAtLocation(level, new ItemStack(ModContent.item("world_soil_0"), 4));
