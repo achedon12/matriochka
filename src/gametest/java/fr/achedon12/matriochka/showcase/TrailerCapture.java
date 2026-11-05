@@ -16,8 +16,41 @@ public class TrailerCapture implements FabricClientGameTest {
 	private static final String[] BOSSES = {"block_guardian", "spore_queen", "ash_titan", "grand_jailer", "storm_king", "light_eater", "your_double",
 		"pressure_leviathan", "seasons_master", "terrain_heart_boss", "the_unfinished"};
 
+	/** Turns the camera a little toward its target each frame (at most 4 degrees), so it never snaps round. */
+	private static void ease(net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext sp, String type) {
+		sp.getServer().runOnServer(server -> {
+			var p = server.getPlayerList().getPlayers().get(0);
+			var lvl = (net.minecraft.server.level.ServerLevel) p.level();
+			net.minecraft.world.entity.Entity best = null;
+			double bd = 1e9;
+			for (var e : lvl.getEntities((net.minecraft.world.entity.Entity) null, p.getBoundingBox().inflate(48), e -> e != p && e.isAlive()
+				&& !(e instanceof net.minecraft.world.entity.Marker) && (type == null || net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(e.getType()).getPath().equals(type))
+				&& e instanceof net.minecraft.world.entity.LivingEntity)) {
+				double d = e.distanceToSqr(p);
+				if (d < bd) { bd = d; best = e; }
+			}
+			if (best == null) return;
+			var to = best.getBoundingBox().getCenter().subtract(p.getEyePosition());
+			float yaw = (float) (Math.toDegrees(Math.atan2(-to.x, to.z)));
+			float pitch = (float) (-Math.toDegrees(Math.atan2(to.y, Math.sqrt(to.x * to.x + to.z * to.z))));
+			float dy = net.minecraft.util.Mth.wrapDegrees(yaw - p.getYRot());
+			float ny = p.getYRot() + net.minecraft.util.Mth.clamp(dy, -4f, 4f);
+			float np = p.getXRot() + net.minecraft.util.Mth.clamp(pitch - p.getXRot(), -3f, 3f);
+			p.teleportTo(lvl, p.getX(), p.getY(), p.getZ(), java.util.Set.of(), ny, np, false);
+		});
+	}
+
+	/** Waits for the chunks around the camera, but never longer than a few seconds: a far view may keep loading. */
+	private static void chunks(ClientGameTestContext ctx, net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext sp) {
+		try {
+			sp.getConnection().waitForChunksRender();
+		} catch (AssertionError e) {
+			ctx.waitTicks(40);
+		}
+	}
+
 	private static void frame(ClientGameTestContext ctx, String name) {
-		ctx.takeScreenshot(TestScreenshotOptions.of(name).withSize(1920, 1080).disableCounterPrefix());
+		ctx.takeScreenshot(TestScreenshotOptions.of(name).withSize(2560, 1440).disableCounterPrefix());
 	}
 
 	private static void third(ClientGameTestContext ctx, boolean on) {
@@ -29,9 +62,20 @@ public class TrailerCapture implements FabricClientGameTest {
 		if (!"trailer".equals(System.getProperty("matriochka.capture"))) return;
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			chunks(ctx, sp);
 			ctx.setScreen(() -> null);
 			ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+			// the best picture the game can give: far view, smooth biome blends, no bobbing
+			ctx.runOnClient(mc -> {
+				var o = mc.options;
+				o.renderDistance().set(16);
+				o.simulationDistance().set(12);
+				o.biomeBlendRadius().set(7);
+				o.entityDistanceScaling().set(2.0);
+				o.bobView().set(false);
+				o.cloudRange().set(128);
+				o.framerateLimit().set(260);
+			});
 			s.runCommand("gamerule advance_time false");
 			s.runCommand("gamerule spawn_monsters false");
 			s.runCommand("time set 6000");
@@ -50,7 +94,7 @@ public class TrailerCapture implements FabricClientGameTest {
 					s.runCommand("execute as @p run matriochka world enter " + w);
 					ctx.setScreen(() -> null);
 					ctx.waitTicks(100);
-					sp.getConnection().waitForChunksRender();
+					chunks(ctx, sp);
 				}
 				s.runCommand("kill @e[type=marker]");
 				s.runCommand("execute as @p at @s run summon marker ~ ~ ~ {Tags:[\"home\"]}");
@@ -94,7 +138,7 @@ public class TrailerCapture implements FabricClientGameTest {
 					s.runCommand("execute at @e[tag=home,limit=1] run tp @p ~ ~" + (w == 2 ? 8 : 24) + " ~ 200 " + (w == 2 ? 14 : 28));
 				}
 				ctx.waitTicks(50);
-				sp.getConnection().waitForChunksRender();
+				chunks(ctx, sp);
 				for (int f = 0; f < 120; f++) {
 					s.runCommand(under ? "execute as @p at @s run tp @s ^0.05 ^0.01 ^0.1 ~0.5 ~"
 						: "execute as @p at @s run tp @s ^ ^-0.04 ^0.55 ~0.25 ~-0.06");
@@ -107,7 +151,7 @@ public class TrailerCapture implements FabricClientGameTest {
 				// D: low sweep across the arena floor and its pillars
 				s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~-11 ~2.2 ~-11 -45 8");
 				ctx.waitTicks(50);
-				sp.getConnection().waitForChunksRender();
+				chunks(ctx, sp);
 				for (int f = 0; f < 72; f++) {
 					s.runCommand("execute as @p at @s run tp @s ^0.06 ^0.02 ^0.26 ~-0.35 ~");
 					ctx.waitTick();
@@ -147,7 +191,7 @@ public class TrailerCapture implements FabricClientGameTest {
 						n++;
 					}
 					for (int f = 0; f < 120; f++) {
-						if (f % 10 == 0) s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=!player,type=!marker,limit=1,sort=nearest] eyes");
+						ease(sp, null);
 						if (f % 4 == 0) { s.runCommand("effect clear @a minecraft:darkness"); s.runCommand("effect clear @a minecraft:blindness"); s.runCommand("effect clear @a minecraft:nausea"); }
 						ctx.waitTicks(2);
 						frame(ctx, String.format("seq_%s_f_%04d", tag, f));
@@ -172,7 +216,7 @@ public class TrailerCapture implements FabricClientGameTest {
 				}
 				s.runCommand("execute at @e[tag=arena,limit=1] run tp @p ~ ~ ~-12 0 0");
 				for (int f = 0; f < 150; f++) {
-					if (f % 8 == 0) s.runCommand("execute as @p at @s run tp @s ~ ~ ~ facing entity @e[type=matriochka:" + BOSSES[w] + ",limit=1] eyes");
+					ease(sp, BOSSES[w]);
 					if (f % 4 == 0) { s.runCommand("effect clear @a minecraft:darkness"); s.runCommand("effect clear @a minecraft:blindness"); s.runCommand("effect clear @a minecraft:nausea"); }
 					ctx.waitTicks(2);
 					frame(ctx, String.format("seq_%s_c_%04d", tag, f));
