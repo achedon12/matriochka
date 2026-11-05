@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_6",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 6,
+  "archetype": "village",
+  "role": "utility",
+  "size": "medium",
+  "structure_id": "reflection_refuge"
+}
