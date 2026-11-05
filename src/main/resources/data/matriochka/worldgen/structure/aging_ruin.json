@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_8",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 8,
+  "archetype": "ruin",
+  "role": "combat",
+  "size": "medium",
+  "structure_id": "aging_ruin"
+}

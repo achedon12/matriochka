@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731803,
+    "separation": 6,
+    "spacing": 18
+  },
+  "structures": [
+    {
+      "structure": "matriochka:season_greenhouse",
+      "weight": 1
+    }
+  ]
+}

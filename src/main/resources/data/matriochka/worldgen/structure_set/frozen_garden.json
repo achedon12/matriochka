@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731804,
+    "separation": 6,
+    "spacing": 18
+  },
+  "structures": [
+    {
+      "structure": "matriochka:frozen_garden",
+      "weight": 1
+    }
+  ]
+}

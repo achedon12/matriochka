@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731807,
+    "separation": 24,
+    "spacing": 72
+  },
+  "structures": [
+    {
+      "structure": "matriochka:library_of_ages",
+      "weight": 1
+    }
+  ]
+}

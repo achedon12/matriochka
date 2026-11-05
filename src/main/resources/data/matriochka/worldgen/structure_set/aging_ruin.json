@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731801,
+    "separation": 6,
+    "spacing": 18
+  },
+  "structures": [
+    {
+      "structure": "matriochka:aging_ruin",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731806,
+    "separation": 21,
+    "spacing": 64
+  },
+  "structures": [
+    {
+      "structure": "matriochka:solar_observatory",
+      "weight": 1
+    }
+  ]
+}
