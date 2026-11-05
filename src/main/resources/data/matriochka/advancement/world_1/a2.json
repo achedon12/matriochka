@@ -1,0 +1,33 @@
+{
+  "parent": "matriochka:world_1/a1",
+  "display": {
+    "icon": {
+      "id": "matriochka:seed_1"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w1.a2.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w1.a2.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "matriochka:spore_queen"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}
