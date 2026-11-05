@@ -229,7 +229,7 @@ public final class GearClasses {
 			Gear g = e.getItemBySlot(slot).get(GEAR);
 			if (g != null && g.cls().equals("reaper")) s += 0.05f * (1 + bonus(g.level()));
 		}
-		return Math.min(1f, s);
+		return Math.min(1f, s + fr.achedon12.matriochka.replay.Talents.sum(e, "souls"));
 	}
 
 	/**
@@ -261,7 +261,8 @@ public final class GearClasses {
 			Gear g = e.getItemBySlot(slot).get(GEAR);
 			if (g != null && g.cls().equals("survivor")) s += 0.06f * (1 + bonus(g.level()));
 		}
-		return Math.min(0.6f, s);
+		// Survivor talents add their share on top of the gear's, up to 85% in all
+		return Math.min(0.6f, s) + Math.min(0.25f, fr.achedon12.matriochka.replay.Talents.sum(e, "resist"));
 	}
 
 	public static void appendTooltip(ItemStack stack, Consumer<Component> out) {
