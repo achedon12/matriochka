@@ -64,6 +64,7 @@ public class MatrioItem extends Item {
 			out.accept(rarity);
 		}
 		if (def.world() > 0) out.accept(Component.translatable("tooltip.matriochka.world", def.world()).withStyle(ChatFormatting.DARK_GRAY));
+		if (def.id().equals("drill")) Drill.appendTooltip(stack, out);
 		GearClasses.appendTooltip(stack, out);
 	}
 
