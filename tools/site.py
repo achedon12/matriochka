@@ -8,7 +8,6 @@ models and animations, the logo in branding/ and the in-game screenshots (build/
 optional), then writes site/data/{en,fr,shared}.json and copies everything the pages show into site/public.
 Pillow is used to crop screenshots and make icons; without it, the files already in site/public are kept.
 """
-import moves as MOVESET
 import html
 import json
 import os
@@ -20,6 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
 sys.path.insert(0, HERE)
 import content as C  # noqa: E402
+import attacks as ATK  # noqa: E402
 
 RES = os.path.join(ROOT, "src/main/resources/assets/matriochka")
 TEX = os.path.join(RES, "textures")
@@ -794,14 +794,15 @@ def anim_names(eid):
 ANIM_LABEL = {"misc.idle": ("Idle", "Repos"), "move.walk": ("Walk", "Marche"), "attack.strike": ("Attack", "Attaque"),
               "attack.charge": ("Charge", "Charge"), "attack.slam": ("Slam", "Frappe au sol"), "attack.cast": ("Cast", "Incantation"),
               "misc.phase": ("Phase change", "Changement de phase"), "misc.rest": ("Opening", "Ouverture")}
-ANIM_LABEL.update({f"attack.{k}": (v[0], v[1]) for k, v in MOVESET.MOVES.items() if f"attack.{k}" not in ANIM_LABEL})
+
 
 
 def anims(eid):
+    labels = {f"attack.{a['slug']}": (a["en"], a["fr"]) for a in ATK.full(eid)} if eid in ATK.A else {}
     out = []
     for full in anim_names(eid):
         short = full.split(".", 1)[1] if full.startswith("animation.") else full
-        lab = ANIM_LABEL.get(short)
+        lab = labels.get(short) or ANIM_LABEL.get(short)
         out.append(dict(key=full, label=t(*lab) if lab else short))
     return out
 
@@ -849,8 +850,8 @@ def build_mobs():
                 speedMult="×" + fmt(round(mult, 2)), attackEvery=secs(interval / 20) if melee else None, attackTicks=interval if melee else None,
                 moveSpeed=fmt(spd),
                 behaviour=t(*BEHAVIOUR[beh]), facts=facts, drops=drops,
-                moves=[dict(key=f"attack.{x}", name=t(MOVESET.MOVES[x][0], MOVESET.MOVES[x][1]), desc=t(MOVESET.MOVES[x][2], MOVESET.MOVES[x][3]),
-                            cooldown=secs(MOVESET.MOVES[x][6] / 20 / mult)) for x in MOVESET.assign(m)],
+                moves=[dict(key=f"attack.{a['slug']}", name=t(a["en"], a["fr"]), desc=t(ATK.describe(a, "en"), ATK.describe(a, "fr")),
+                            cooldown=secs(a["cd"] / mult)) for a in ATK.full(m["id"])],
                 spawn=None if not sp else dict(weight=sp["weight"], share=pct(round(100 * sp["weight"] / sp["total"])), min=sp["min"], max=sp["max"]),
                 quests=quest_list(m["id"]), ach=ach,
                 tex=f"entities/{m['id']}.png" if m["id"] in ENTITY_TEX else None,
@@ -952,7 +953,7 @@ def build_copy():
         animations=t("Animations", "Animations"), autoRotate=t("Turn slowly", "Tourner lentement"),
         role=t("Role", "Rôle"), attackSpeed=t("Attack speed", "Vitesse d'attaque"), attackEvery=t("one hit every", "un coup toutes les"),
         noMelee=t("no melee attack", "aucune attaque au corps à corps"), moveSpeed=t("Movement speed", "Vitesse de déplacement"),
-        behaviour=t("How it fights", "Comment il combat"), moves=t("Moveset", "Attaques"), movesLead=t("On top of its basic strike, it picks among these, never the same one twice in a row. Each has a wind-up you can read before it lands.", "En plus de son coup de base, elle choisit parmi celles-ci, jamais deux fois la même d'affilée. Chacune a une préparation lisible avant de frapper."), recharge=t("Recharge", "Recharge"), drops=t("Drops", "Butin"), chance=t("Chance", "Chance"), count=t("Count", "Quantité"),
+        behaviour=t("How it fights", "Comment il combat"), moves=t("Moveset", "Attaques"), movesLead=t("Its own attacks, shared with no other creature. It picks among them, never the same one twice in a row, and each has a wind-up you can read before it lands.", "Ses attaques à elle, qu'aucune autre créature ne partage. Elle choisit parmi elles, jamais deux fois la même d'affilée, et chacune a une préparation lisible avant de frapper."), recharge=t("Recharge", "Recharge"), drops=t("Drops", "Butin"), chance=t("Chance", "Chance"), count=t("Count", "Quantité"),
         spawns=t("Where it spawns", "Où il apparaît"), spawnWeight=t("spawn weight", "poids d'apparition"),
         spawnShare=t("of the creatures that spawn in its world", "des créatures qui apparaissent dans son monde"),
         group=t("per group", "par groupe"), quests=t("Quests", "Quêtes"), achievements=t("Achievements", "Succès"),
