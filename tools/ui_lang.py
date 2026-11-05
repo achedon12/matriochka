@@ -264,6 +264,54 @@ titles = {"painted_cape": ("Painted Cape", "Cape peinte"), "iron_lungs": ("Iron 
           "out_of_time": ("Out of Time", "Hors du temps"), "untethered": ("Untethered", "Sans attache"), "apprentice": ("Apprentice", "Apprenti"), "seamless": ("Seamless", "Sans couture")}
 for k, v in titles.items():
     U[f"title.matriochka.{k}"] = v
+# the first-steps guide: one HUD card per step of the first half hour (world/Tutorial, client/TutorialCard)
+tutorial = {
+    "read": (("Read the Artisan's Scroll", "Use the Scroll and turn to the page \"Your objective\"."),
+             ("Lis le Parchemin de l'artisan", "Utilise le Parchemin et tourne jusqu'à la page « Ton objectif ».")),
+    "sanctuary": (("Find the Guardian's Sanctuary", "Follow the needle to a temple of runed stone."),
+                  ("Trouve le Sanctuaire du Gardien", "Suis l'aiguille jusqu'à un temple de pierre runique.")),
+    "wake": (("Wake the Guardian", "Use the altar at the heart of the sanctuary."),
+             ("Réveille le Gardien", "Active l'autel au cœur du sanctuaire.")),
+    "defeat": (("Defeat the Guardian", "Its strong blows glow first: step aside, then strike."),
+               ("Bats le Gardien", "Ses coups forts s'illuminent d'abord : écarte-toi, puis frappe.")),
+    "workbench": (("Place the Matrix Workbench", "The Guardian left it with its core. Set it down anywhere."),
+                  ("Pose l'Établi matriciel", "Le Gardien l'a laissé avec son noyau. Pose-le où tu veux.")),
+    "seed": (("Craft the World 1 Seed", "At the Workbench: the Guardian's core, 16 iron ingots and 16 oak logs."),
+             ("Fabrique la Graine du monde 1", "À l'Établi : le noyau du Gardien, 16 lingots de fer et 16 bûches de chêne.")),
+    "till": (("Till World Soil", "Place a World Soil from the Guardian, then use a hoe on it."),
+             ("Bêche une Terre de monde", "Pose une Terre de monde du Gardien, puis utilise une houe dessus.")),
+    "plant": (("Plant the Seed by water", "Plant it on the tilled soil, with water within four blocks."),
+              ("Plante la Graine près de l'eau", "Plante-la sur la terre bêchée, avec de l'eau à moins de quatre blocs.")),
+    "hatch": (("Wait for it to hatch", "Stay close: the Seed grows into a World Block in a few seconds."),
+              ("Attends l'éclosion", "Reste près d'elle : la Graine devient un Bloc-monde en quelques secondes.")),
+    "enter": (("Enter World 1", "Use the World Block to step inside the Toxic Jungle."),
+              ("Entre dans le monde 1", "Utilise le Bloc-monde pour entrer dans la Jungle toxique.")),
+}
+for k, ((te, he), (tf, hf)) in tutorial.items():
+    U[f"tutorial.matriochka.{k}"] = (te, tf)
+    U[f"tutorial.matriochka.{k}.hint"] = (he, hf)
+U.update({
+    "tutorial.matriochka.header": ("First steps %s / %s", "Premiers pas %s / %s"),
+    "tutorial.matriochka.distance": ("%s blocks", "%s blocs"),
+    "tutorial.matriochka.surface": ("Back to the Surface first.", "Reviens d'abord à la Surface."),
+    "tutorial.matriochka.lost": ("No sanctuary found nearby: explore the Surface.", "Aucun sanctuaire à proximité : explore la Surface."),
+    "tutorial.matriochka.done": ("The first doll is open", "La première poupée est ouverte"),
+    "tutorial.matriochka.done.hint": ("The Journal shows every next step from here.", "Le Journal t'indique chaque étape à partir d'ici."),
+    "tutorial.matriochka.toggle": ("Guide", "Guide"),
+    "tutorial.matriochka.toggle.tip": ("Show or hide the first-steps card", "Afficher ou masquer la carte des premiers pas"),
+    # Mod Menu entry and the info screen it opens
+    "modmenu.summaryTranslation.matriochka": ("Every block can hold a world.", "Chaque bloc peut contenir un monde."),
+    "modmenu.descriptionTranslation.matriochka": ("Every block can hold a world. Ten nested worlds, ten bosses, one Artisan.",
+                                                  "Chaque bloc peut contenir un monde. Dix mondes gigognes, dix boss, un artisan."),
+    "screen.matriochka.info.title": ("Matriochka", "Matriochka"),
+    "screen.matriochka.info.version": ("Version %s", "Version %s"),
+    "screen.matriochka.info.body": ("Ten nested worlds, one inside the other. Find the Guardian's Sanctuary, take its core and plant the first Seed. The Artisan's Scroll and its first-steps card guide you through the first half hour; the Journal takes over after.",
+                                    "Dix mondes gigognes, l'un dans l'autre. Trouve le Sanctuaire du Gardien, prends son noyau et plante la première Graine. Le Parchemin de l'artisan et sa carte des premiers pas te guident pendant la première demi-heure ; le Journal prend le relais ensuite."),
+    "screen.matriochka.info.config": ("Server rules live in config/matriochka.json.", "Les règles du serveur se trouvent dans config/matriochka.json."),
+    "screen.matriochka.info.wiki": ("Wiki", "Wiki"),
+    "screen.matriochka.info.site": ("Website", "Site"),
+    "screen.matriochka.info.done": ("Done", "Terminé"),
+})
 en = {k: v[0] for k, v in U.items()}
 fr = {k: v[1] for k, v in U.items()}
 d = os.path.join(os.path.dirname(__file__), "lang")
