@@ -1569,11 +1569,11 @@ def build_download():
         cfgCols=[t("Key", "Clé"), t("Default", "Défaut"), t("What it does", "Rôle")],
         cfg=[dict(k=k, v=v, d=dd) for k, v, dd in [
             ("progressionGates", "true", t("Lock enchanting, the Nether, the End and elytra behind progression", "Verrouille enchantements, Nether, End et élytres derrière la progression")),
-            ("mobHealthMultiplier", "1.0", t("Scales the health of every creature", "Ajuste la vie de toutes les créatures")),
-            ("mobDamageMultiplier", "1.0", t("Scales the damage of every creature", "Ajuste les dégâts de toutes les créatures")),
+            ("mobHealthMultiplier", "1.0", t("Scales the health of every creature and boss", "Ajuste la vie de toutes les créatures et des boss")),
+            ("mobDamageMultiplier", "1.0", t("Scales the damage of every creature and boss", "Ajuste les dégâts de toutes les créatures et des boss")),
             ("maxGroupSize", "8", t("Players per group", "Joueurs par groupe")),
-            ("screenShake", "true", t("Camera shake during big hits", "Tremblements de caméra lors des gros coups")),
-            ("difficulty", '"normal"', t("Overall difficulty preset", "Préréglage général de difficulté"))]],
+            ("difficulty", '"normal"', t("story (70% damage), normal, nightmare (130% damage, one charge per Soul Cradle) or hardcore (as nightmare, and the Doll of Life never saves you)",
+                                         "story (70 % des dégâts), normal, nightmare (130 % des dégâts, une charge par Berceau d'âme) ou hardcore (comme nightmare, et la Poupée de vie ne te sauve plus)"))]],
     )
 
 

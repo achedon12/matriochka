@@ -222,10 +222,10 @@ FOODS = [
     ("cloud_fruit", "Cloud Fruit", "Fruit de nuage", 4, "Slow falling for 3 minutes.", "Chutes réduites pendant 3 minutes."),
     ("mute_mushroom", "Mute Mushroom", "Champignon muet", 5, "Noise reduced for 5 minutes.", "Bruit réduit pendant 5 minutes."),
     ("flipped_apple", "Flipped Apple", "Pomme retournée", 6, "Stability for 30 seconds.", "Stabilité pendant 30 secondes."),
-    ("apnea_kelp", "Apnea Kelp", "Algue d'apnée", 7, "Oxygen +1 minute.", "Oxygène prolongé d'1 minute."),
-    ("season_jam", "Season Jam", "Conserve de saison sucrée", 8, "Protection from the season.", "Protège de la saison en cours."),
-    ("anchor_bread", "Anchor Bread", "Pain d'ancrage", 9, "Less knockback for 5 minutes.", "Moins de recul pendant 5 minutes."),
-    ("workshop_feast", "Workshop Feast", "Festin de l'atelier", 10, "Two effects of your choice.", "Regroupe deux effets."),
+    ("apnea_kelp", "Apnea Kelp", "Algue d'apnée", 7, "Oxygen lasts twice as long for 5 minutes.", "L'oxygène dure deux fois plus longtemps pendant 5 minutes."),
+    ("season_jam", "Season Jam", "Conserve de saison sucrée", 8, "Protection from the season for 3 minutes.", "Protège de la saison pendant 3 minutes."),
+    ("anchor_bread", "Anchor Bread", "Pain d'ancrage", 9, "Steady footing for 5 minutes.", "Pied ferme pendant 5 minutes."),
+    ("workshop_feast", "Workshop Feast", "Festin de l'atelier", 10, "Every dish's effect for 2 minutes.", "Les effets de tous les plats pendant 2 minutes."),
 ]
 for fid, en, fr, w, een, efr in FOODS:
     item(fid, en, fr, w, "food", "common", "food", een, efr)
@@ -744,7 +744,7 @@ ACH = {
         ("explore", "Wet Paper", "Papier mouillé", "Find the 5 Journal pages.", "Trouver les 5 pages du Journal.", ("pages", 7)),
         ("combat", "School Scattered", "Banc dispersé", "Kill 5 Blade Schools.", "Éliminer un banc de lames entier.", ("kill", "blade_school")),
         ("combat", "Last Breath", "Dernier souffle", "Beat the Leviathan with under 5% oxygen.", "Battre le Léviathan avec moins de 5 % d'oxygène.", ("custom", "levi_low_o2")),
-        ("hidden", "Forgotten Plate", "Plaque oubliée", "Repair the old submarine.", "Réparer l'ancien sous-marin.", ("custom", "submarine")),
+        ("hidden", "Forgotten Plate", "Plaque oubliée", "Search a sunken wreck.", "Fouiller une épave engloutie.", ("structure", "wreck")),
         ("hidden", "Drowned Doll", "Poupée noyée", "Find the hidden doll of the world.", "Trouver la poupée cachée du monde.", ("item", "hidden_doll_7"))],
     8: [("progress", "Counted Time", "Temps compté", "Open World 8.", "Ouvrir le monde 8.", ("enter", 8)),
         ("progress", "Suspended Instant", "Instant suspendu", "Use an hourglass.", "Utiliser un sablier.", ("custom", "hourglass")),
@@ -769,13 +769,13 @@ ACH = {
     10: [("progress", "All the Way Up", "Tout en haut", "Open World 10.", "Ouvrir le monde 10.", ("enter", 10)),
          ("progress", "Final Loom", "Métier final", "Craft an item at the Final Loom.", "Fabriquer un objet au Métier final.", ("item", "artisan_blade")),
          ("progress", "Last Thread", "Dernier fil", "Defeat the Unfinished.", "Vaincre l'Inachevée.", ("kill", "the_unfinished")),
-         ("explore", "A Crumb", "Une miette", "Find your base, seen from the giant world.", "Trouver sa base, vue du monde géant.", ("custom", "see_base")),
+         ("explore", "A Crumb", "Une miette", "Climb onto the Titanic Workbench.", "Grimper sur l'Établi titanesque.", ("structure", "titanic_workbench")),
          ("explore", "Full Workshop", "Atelier complet", "Visit the 10 structure types.", "Visiter les 10 types de structures.", ("structures", 10)),
          ("explore", "Last Letter", "Dernière lettre", "Find the 5 Journal pages.", "Trouver les 5 pages du Journal.", ("pages", 10)),
          ("combat", "Ten Shells", "Dix enveloppes", "Break the 10 shells in one attempt.", "Briser les 10 enveloppes en un seul essai.", ("custom", "ten_shells")),
          ("combat", "All the Way", "Tout le chemin", "Use gear from every world against the Unfinished.", "Utiliser un équipement de chaque monde contre l'Inachevée.", ("custom", "all_gear")),
          ("hidden", "Every Doll", "Toutes les poupées", "Gather the 10 hidden dolls.", "Réunir les 10 poupées cachées.", ("custom", "all_dolls")),
-         ("hidden", "Set Down the Tools", "Poser les outils", "Reach the third ending.", "Obtenir la troisième fin.", ("custom", "third_end"))],
+         ("hidden", "Set Down the Tools", "Poser les outils", "Defeat the Unfinished with the 10 hidden dolls on you.", "Vaincre l'Inachevée avec les 10 poupées cachées sur soi.", ("custom", "third_end"))],
 }
 
 # ---------------------------------------------------------------- classes
