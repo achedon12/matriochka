@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Every boss attack has its own hand-made animation: the boss shows what is coming during the warning (the Guardian heaves a torn block overhead, the Queen's egg sac swells, the Titan lifts its hammer, the Jailer spreads its arms like walls, the Light Eater sinks low to stalk...), strikes, then stays open and spent for exactly as long as it takes extra damage. Each boss also has its own phase change (the Guardian rebuilds itself, the Queen folds into her cocoon, the Jailer turns its key, the Unfinished paints a new face) and its own fall, which now plays out for two seconds instead of the vanilla tip-over.
+- The Unfinished and the Artisan's Shadow keep their animations in step with the world whose timing they borrow.
+- `tools/anim_preview.py` renders contact sheets of the boss animations (`docs-wiki-drafts/boss-anims/`).
+
 ## 0.3.0 (alpha)
 
 The story is complete: the Artisan's Journal, the hidden dolls, World 0, three endings and the New Cycle. World 7 is now entirely under water, worlds 3, 5, 6, 9 and 10 have their full mechanics, and the mod has its own music and sounds. Trailer: [matriochka-trailer.mp4](https://github.com/achedon12/matriochka/releases/download/v0.3.0/matriochka-trailer.mp4).
