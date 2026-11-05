@@ -78,6 +78,7 @@ public final class Blocks2 {
 					if (level.getBlockEntity(pos.above()) instanceof DataBlockEntity be) {
 						be.data().putInt("world", world);
 						be.data().putString("owner", sp.getUUID().toString());
+						be.data().putInt("karma", PlayerState.of(sp).karma());
 						be.changed();
 					}
 					stack.consume(1, sp);
@@ -132,6 +133,19 @@ public final class Blocks2 {
 			return level.isClientSide() ? null : (l, p, s, be) -> tickSeed((ServerLevel) l, p, (DataBlockEntity) be);
 		}
 
+		/** Feeding a hatching Seed leans its world calm or wild (see Variants). */
+		@Override
+		protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+			if (level instanceof ServerLevel sl && player instanceof ServerPlayer sp && level.getBlockEntity(pos) instanceof DataBlockEntity be) {
+				if (fr.achedon12.matriochka.world.Variants.feed(sl, pos, be.data(), stack, sp)) {
+					be.setChanged();
+					return InteractionResult.SUCCESS;
+				}
+				return InteractionResult.TRY_WITH_EMPTY_HAND;
+			}
+			return InteractionResult.SUCCESS;
+		}
+
 		/** A seed needs its world's condition (water, heat, redstone...) nearby, then hatches after a short ritual. */
 		static void tickSeed(ServerLevel level, BlockPos pos, DataBlockEntity be) {
 			int world = be.data().getIntOr("world", 1);
@@ -171,8 +185,12 @@ public final class Blocks2 {
 					wb.data().putInt("world", world);
 					wb.data().putString("owner", seedOwner);
 					if (!seedGroup.isEmpty()) wb.data().putInt("cycle", fr.achedon12.matriochka.world.Cycles.of(md, seedGroup));
+					// the variant is chosen now, from what the Seed was fed, its surroundings and the planter's karma
+					wb.data().putString("variant", fr.achedon12.matriochka.world.Variants.hatch(level, pos, be.data(), seedGroup, world, seedOwner));
 					wb.changed();
 					if (!seedGroup.isEmpty()) md.setWorldBlock(seedGroup, world, level, pos);
+					// the last Seed opens the Giant Workshop: the base around it is captured for the scale model
+					if (world == 10 && !seedGroup.isEmpty()) fr.achedon12.matriochka.world.BaseModel.capture(level, pos, md, seedGroup);
 				}
 				level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 60, 0.5, 0.5, 0.5, 0.4);
 				level.playSound(null, pos, SoundEvents.CHEST_OPEN, SoundSource.BLOCKS, 1.2f, 0.5f);
@@ -338,6 +356,7 @@ public final class Blocks2 {
 			be.data().putInt("world", world);
 			be.data().putString("owner", owner);
 			be.data().putInt("cycle", cycle);
+			be.data().putString("variant", fr.achedon12.matriochka.world.Variants.of(md, group, world));
 			be.changed();
 		}
 		md.setWorldBlock(group, world, level, at);

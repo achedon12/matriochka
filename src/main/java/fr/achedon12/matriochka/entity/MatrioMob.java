@@ -205,6 +205,10 @@ public class MatrioMob extends Monster implements GeoEntity {
 			int cycle = fr.achedon12.matriochka.world.Cycles.at(level, blockPosition());
 			hm *= fr.achedon12.matriochka.world.Cycles.healthFactor(cycle);
 			dm *= fr.achedon12.matriochka.world.Cycles.damageFactor(cycle);
+			// the world's variant: calm worlds breed weaker creatures, wild and cursed ones stronger
+			float danger = fr.achedon12.matriochka.world.Variants.at(level, blockPosition()).danger();
+			hm *= danger;
+			dm *= danger;
 			if (fr.achedon12.matriochka.world.Worlds.number(level) == fr.achedon12.matriochka.world.Worlds.ZERO) {
 				// the guards of every prison come back at least as strong as the colossi of the Giant Workshop
 				hm *= Math.max(1.5f, 900f / def().hp());
@@ -469,6 +473,11 @@ public class MatrioMob extends Monster implements GeoEntity {
 			int dark = l.getSkyDarken();
 			if (dark < 3 || dark > 9) return false;
 		}
+		// a calm world lets fewer creatures in (a spawn rate under 1, see Variants)
+		if (reason == EntitySpawnReason.NATURAL && level instanceof ServerLevel sl) {
+			float rate = fr.achedon12.matriochka.world.Variants.at(sl, blockPosition()).spawn();
+			if (rate < 1f && random.nextFloat() > rate) return false;
+		}
 		return super.checkSpawnRules(level, reason);
 	}
 
@@ -527,6 +536,15 @@ public class MatrioMob extends Monster implements GeoEntity {
 			if (item != null) spawnAtLocation(level, new ItemStack(item));
 		}
 		if (def().world() == 1 && random.nextFloat() < 0.25f) spawnAtLocation(level, new ItemStack(ModContent.item("roots")));
+		// wild, hallowed and cursed worlds drop more: a second roll of the common drop, and a better chance at the rare one
+		float loot = fr.achedon12.matriochka.world.Variants.at(level, blockPosition()).loot();
+		if (loot > 0 && killedByPlayer) {
+			if (random.nextFloat() < loot) spawnAtLocation(level, new ItemStack(ModContent.item(def().drop())));
+			if (!def().rareDrop().isEmpty() && !def().rareDrop().equals("terrain_heart") && random.nextFloat() < 0.15f * loot) {
+				var item = ModContent.itemOrNull(def().rareDrop());
+				if (item != null) spawnAtLocation(level, new ItemStack(item));
+			}
+		}
 	}
 
 	@Override
