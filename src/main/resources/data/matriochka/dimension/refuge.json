@@ -1,0 +1,13 @@
+{
+  "type": "matriochka:refuge",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "matriochka:refuge",
+      "layers": [],
+      "lakes": false,
+      "features": false,
+      "structure_overrides": []
+    }
+  }
+}
