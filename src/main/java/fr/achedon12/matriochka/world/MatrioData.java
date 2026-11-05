@@ -222,9 +222,14 @@ public class MatrioData extends SavedData {
 	/** The single World Block of a group for a world, as dimension and position; empty when there is none. */
 	public void setWorldBlock(String group, int world, net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos) {
 		CompoundTag e = worldEntry(group, world);
+		String where = level.dimension().identifier() + "@" + pos.asLong();
+		String was = e.getStringOr("last_block", "");
 		e.putString("block_dim", level.dimension().identifier().toString());
 		e.putLong("block_pos", pos.asLong());
+		e.putString("last_block", where);
 		setDirty();
+		// set down somewhere else than before: the world inside quakes
+		if (!was.isEmpty() && !was.equals(where) && level instanceof net.minecraft.server.level.ServerLevel sl) ScaleLinks.moved(sl.getServer(), group, world);
 	}
 
 	public void clearWorldBlock(String group, int world, net.minecraft.core.BlockPos pos) {

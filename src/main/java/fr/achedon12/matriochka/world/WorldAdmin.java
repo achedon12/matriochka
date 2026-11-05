@@ -131,6 +131,7 @@ public final class WorldAdmin {
 		if (to.getBlockEntity(pos) instanceof DataBlockEntity be) {
 			be.data().putInt("world", world);
 			be.data().putString("owner", owner);
+			be.data().putString("variant", Variants.of(data, group, world));
 			be.changed();
 		}
 		data.setWorldBlock(group, world, to, pos);

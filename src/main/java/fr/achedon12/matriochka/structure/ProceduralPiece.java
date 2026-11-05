@@ -87,7 +87,7 @@ public class ProceduralPiece extends StructurePiece {
 		}
 		build(k);
 		// the Guardian's sanctuary keeps no chest: its reward is the boss behind the altar
-		if (!archetype.equals("sanctuary")) Rewards.apply(k);
+		if (!archetype.equals("sanctuary") && !role.equals("decor")) Rewards.apply(k);
 		k.finish();
 	}
 
@@ -126,6 +126,7 @@ public class ProceduralPiece extends StructurePiece {
 			case "cocoon" -> Depths.cocoon(k);
 			case "wreck" -> Depths.wreck(k);
 			case "bell" -> Depths.bell(k);
+			case "prop_spool", "prop_nail", "prop_pin", "prop_button", "prop_thimble", "prop_offcut", "prop_scissors", "prop_pencil" -> Workshop.prop(k);
 			default -> Settlements.ruin(k);
 		}
 	}

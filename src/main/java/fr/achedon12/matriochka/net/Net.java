@@ -105,6 +105,7 @@ public final class Net {
 		t.putInt("members", data.members(group).size());
 		t.putInt("here", Worlds.number(player.level()));
 		t.putInt("cycle", fr.achedon12.matriochka.world.Cycles.of(data, group));
+		t.put("variants", fr.achedon12.matriochka.world.Variants.summary(data, group));
 		ServerPlayNetworking.send(player, new StatePayload(t));
 	}
 

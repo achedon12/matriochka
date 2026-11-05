@@ -272,6 +272,19 @@ public final class Blocks3 {
 			super(p);
 		}
 
+		/** While a redstone signal reaches the World Block outside, sealed doors open by hand (see ScaleLinks). */
+		@Override
+		protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+			if (level instanceof ServerLevel sl && fr.achedon12.matriochka.world.ScaleLinks.activeAt(sl, pos, "unlocked")) {
+				for (BlockPos p : BlockPos.betweenClosed(pos.offset(-2, -3, -2), pos.offset(2, 3, 2))) {
+					if (level.getBlockState(p).is(this)) level.setBlock(p, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 3);
+				}
+				level.playSound(null, pos, SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS, 1f, 0.7f);
+				return InteractionResult.SUCCESS;
+			}
+			return super.useWithoutItem(state, level, pos, player, hit);
+		}
+
 		@Override
 		protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 			if (!(player instanceof ServerPlayer sp)) return InteractionResult.SUCCESS;

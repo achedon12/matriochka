@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_10",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 10,
+  "archetype": "prop_nail",
+  "role": "decor",
+  "size": "large",
+  "structure_id": "giant_nail"
+}

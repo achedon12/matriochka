@@ -536,7 +536,27 @@ public class JournalScreen extends Screen {
 			Ui.sprite(g, beaten ? "doll_small_full" : "doll_small_empty", x, ry - 1, 8, 11);
 			if (i > 0) g.fill(x + w - 4, ry + 2, x + w, ry + 6, open ? Ui.worldColor(i) : 0x60605048);
 			g.text(font, i == 0 ? name : Component.literal(i + "  ").append(name), x + 12, ry + 1, beaten ? Ui.GREEN : open ? Ui.INK : 0xFF9A8A6E, false);
+			String variant = i == 0 ? "" : MatrioClient.state.getCompoundOrEmpty("variants").getStringOr(Integer.toString(i), "");
+			if (!variant.isEmpty()) {
+				// a little wax seal before the colour chip: green for the gentler variants, red lacquer for the harsher
+				boolean kind = variant.equals("calm") || variant.equals("blessed");
+				int sx = x + w - 11, sy = ry + 1;
+				g.fill(sx, sy + 1, sx + 5, sy + 6, kind ? 0xFF3F6E2C : Ui.RED_INK);
+				g.fill(sx + 1, sy, sx + 4, sy + 7, kind ? 0xFF3F6E2C : Ui.RED_INK);
+				g.fill(sx + 1, sy + 2, sx + 2, sy + 3, Ui.GOLD);
+				if (mx >= x - 3 && mx < x + w + 2 && my >= ry - 2 && my < ry + 12) {
+					Component tip = Component.translatable("journal.matriochka.variant", Component.translatable(variantKey(variant, i)))
+						.append("\n").append(Component.translatable("variant.matriochka." + variant + ".desc"));
+					g.setTooltipForNextFrame(font, font.split(tip, 170), mx, my);
+				}
+			}
 		}
+	}
+
+	/** The name of a variant in a world: calm and wild have their own name in every world (as in world/Variants). */
+	private static String variantKey(String variant, int world) {
+		if (variant.equals("calm") || variant.equals("wild")) return "variant.matriochka." + world + "." + variant;
+		return "variant.matriochka." + variant;
 	}
 
 	/** The nested dolls, one more for every page or world reached, standing in a row that fits maxW. */

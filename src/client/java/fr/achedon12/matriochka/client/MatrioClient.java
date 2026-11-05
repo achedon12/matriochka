@@ -30,6 +30,8 @@ public class MatrioClient implements ClientModInitializer {
 		for (Defs.CritterDef d : Content.CRITTERS) registerBoss(d.id(), 1f);
 		for (Defs.NpcDef d : Content.PEOPLES) register(d.id(), 1f);
 		MenuScreens.register(ModContent.STATION_MENU, StationScreen::new);
+		// the miniature world over every World Block (the renderer skips the other blocks sharing this entity type)
+		net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry.register(ModContent.BE_DATA, WorldBlockRenderer::new);
 		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
 		ClientPlayNetworking.registerGlobalReceiver(Net.StatePayload.TYPE, (p, ctx) -> state = p.tag());
 		// class and armor layers on gear from outside the mod (Matriochka items write their own tooltip)

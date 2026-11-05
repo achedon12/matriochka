@@ -72,25 +72,40 @@ public final class Events {
 			if (w <= 0 || p.isSpectator() || !(p.level() instanceof ServerLevel level)) continue;
 			if (data.worldEntry(data.groupOf(p.getUUID()), w).getLongOr("unstable_until", 0L) <= level.getGameTime()) continue;
 			if (level.getRandom().nextInt(2) != 0) continue;
-			var pool = Content.MOBS.stream().filter(m -> m.world() == w && !m.elite() && m.aquatic() == (w == 7)).toList();
-			if (pool.isEmpty()) continue;
-			var def = pool.get(level.getRandom().nextInt(pool.size()));
-			if (level.getEntitiesOfClass(fr.achedon12.matriochka.entity.MatrioMob.class, p.getBoundingBox().inflate(32)).size() > 12) continue;
-			double a = level.getRandom().nextDouble() * Math.PI * 2, r = 14 + level.getRandom().nextInt(10);
-			BlockPos at = BlockPos.containing(p.getX() + Math.cos(a) * r, p.getY(), p.getZ() + Math.sin(a) * r);
-			// find a free spot near the player's height
-			BlockPos spot = null;
-			for (int dy = 4; dy >= -6 && spot == null; dy--) {
-				BlockPos q = at.above(dy);
-				if (level.getBlockState(q.below()).isSolid() && level.getBlockState(q).isAir() && level.getBlockState(q.above()).isAir()) spot = q;
-			}
-			if (spot == null && w == 7 && level.getFluidState(at).isSource()) spot = at;
-			if (spot == null) continue;
-			var e = ModContent.entity(def.id()).create(level, net.minecraft.world.entity.EntitySpawnReason.EVENT);
-			if (e == null) continue;
-			e.setPos(spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5);
-			level.addFreshEntity(e);
+			spawnNear(level, p, w);
 		}
+	}
+
+	/** Wild and cursed worlds call more creatures around their players (a spawn rate above 1, see Variants). */
+	private static void variantSpawns(net.minecraft.server.MinecraftServer server) {
+		for (ServerPlayer p : server.getPlayerList().getPlayers()) {
+			int w = Worlds.number(p.level());
+			if (w <= 0 || w > 10 || p.isSpectator() || !(p.level() instanceof ServerLevel level)) continue;
+			float extra = Variants.of(p).spawn() - 1f;
+			if (extra > 0 && level.getRandom().nextFloat() < extra) spawnNear(level, p, w);
+		}
+	}
+
+	/** One creature of the world, 14 to 24 blocks from a player, unless there are already many around. */
+	private static void spawnNear(ServerLevel level, ServerPlayer p, int w) {
+		var pool = Content.MOBS.stream().filter(m -> m.world() == w && !m.elite() && m.aquatic() == (w == 7)).toList();
+		if (pool.isEmpty()) return;
+		var def = pool.get(level.getRandom().nextInt(pool.size()));
+		if (level.getEntitiesOfClass(fr.achedon12.matriochka.entity.MatrioMob.class, p.getBoundingBox().inflate(32)).size() > 12) return;
+		double a = level.getRandom().nextDouble() * Math.PI * 2, r = 14 + level.getRandom().nextInt(10);
+		BlockPos at = BlockPos.containing(p.getX() + Math.cos(a) * r, p.getY(), p.getZ() + Math.sin(a) * r);
+		// find a free spot near the player's height
+		BlockPos spot = null;
+		for (int dy = 4; dy >= -6 && spot == null; dy--) {
+			BlockPos q = at.above(dy);
+			if (level.getBlockState(q.below()).isSolid() && level.getBlockState(q).isAir() && level.getBlockState(q.above()).isAir()) spot = q;
+		}
+		if (spot == null && w == 7 && level.getFluidState(at).isSource()) spot = at;
+		if (spot == null) return;
+		var e = ModContent.entity(def.id()).create(level, net.minecraft.world.entity.EntitySpawnReason.EVENT);
+		if (e == null) return;
+		e.setPos(spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5);
+		level.addFreshEntity(e);
 	}
 
 	public static void init() {
@@ -102,6 +117,8 @@ public final class Events {
 			if (server.overworld().getGameTime() % 100 == 0) for (ServerPlayer p : server.getPlayerList().getPlayers()) scanInventory(p);
 			if (server.overworld().getGameTime() % 4800 == 2400) peddler(server.overworld());
 			if (server.overworld().getGameTime() % 200 == 100) unstable(server);
+			if (server.overworld().getGameTime() % 200 == 150) variantSpawns(server);
+			ScaleLinks.tick(server);
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> Rituals.clear());
