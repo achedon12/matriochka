@@ -24,8 +24,21 @@ public final class Quests {
 		return Math.min(q.objCount(), ps.counter(kind + ":" + q.objTarget()));
 	}
 
-	/** A quest is available once its world has been opened (or always on the surface). */
+	/** Chapter of the karma-path quests (mutual help and pacts), after the ten worlds. */
+	public static final int KARMA_CHAPTER = 11;
+
+	/** Whether a karma-path quest is open at this karma: help from +50, pacts from -50. Other quests always are. */
+	public static boolean karmaOpen(Defs.QuestDef q, int karma) {
+		return switch (q.type()) {
+			case "help" -> karma >= Karma.TIER2;
+			case "pact" -> karma <= -Karma.TIER2;
+			default -> true;
+		};
+	}
+
+	/** A quest is available once its world has been opened (or always on the surface); karma paths need their karma. */
 	public static boolean available(ServerPlayer p, Defs.QuestDef q) {
+		if (q.world() == KARMA_CHAPTER) return karmaOpen(q, PlayerState.of(p).karma());
 		if (q.world() == 0) return true;
 		return MatrioData.get(p.level().getServer()).defeated(p, q.world() - 1);
 	}
@@ -49,6 +62,8 @@ public final class Quests {
 			ps.addKarma(choice >= 0 ? q.objCount() : -q.objCount());
 			if (choice < 0) ps.addSouls(q.rewardCount());
 		}
+		if (q.type().equals("help")) ps.addKarma(3);
+		if (q.type().equals("pact")) ps.addKarma(-3);
 		switch (q.rewardKind()) {
 			case "souls" -> { if (!q.objKind().equals("choice") || choice >= 0) ps.addSouls(q.rewardCount()); }
 			case "item" -> {

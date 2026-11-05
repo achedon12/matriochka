@@ -612,8 +612,8 @@ STRUCTURES = {
          ("creature_throne", "Throne of the Creature", "Trône de la créature", "secret", "medium", "unique", "throne")],
 }
 
-# ---------------------------------------------------------------- quests (64)
-# type: guide | npc | karma | challenge ; obj: (kind, target, count)
+# ---------------------------------------------------------------- quests (64, plus the karma paths)
+# type: guide | npc | karma | challenge | help | pact ; obj: (kind, target, count)
 QUESTS = [
     # Surface
     ("read_between_lines", 0, "guide", ("read", "artisan_scroll", 5), "Read Between the Lines", "Lire entre les lignes", "Read the 5 pages of the Scroll.", "Lire les 5 pages du Parchemin.", ("item", "return_thread", 5)),
@@ -686,6 +686,20 @@ _Q = {
 for w, lst in _Q.items():
     for (qid, t, obj, en, fr, den, dfr, rew) in lst:
         QUESTS.append((qid, w, t, obj, en, fr, den, dfr, rew))
+
+# Karma paths: a chapter of its own (world 11 in the table). Mutual-help quests open at karma +50, pact quests at -50;
+# each one completed moves the karma a little further along its path.
+KARMA_CHAPTER = 11
+_KARMA_PATHS = [
+    ("light_for_others", "help", ("purify", "souls", 100), "A Light for Others", "Une lumière pour les autres", "Free 100 souls at the Soul Altar.", "Libérer 100 âmes à l'Autel des âmes.", ("item", "chance_doll", 1)),
+    ("many_hands", "help", ("trade", "any", 10), "Many Hands", "Mille mains", "Trade 10 times with the peoples of the worlds.", "Commercer 10 fois avec les peuples des mondes.", ("souls", "", 40)),
+    ("warm_hearth", "help", ("deliver", "wool_thread", 16), "A Warm Hearth", "Un foyer chaud", "Gather 16 wool threads for the cradles of the lost.", "Réunir 16 fils de laine pour les berceaux des égarés.", ("item", "soul_cradle", 1)),
+    ("hunger", "pact", ("devour", "souls", 100), "Hunger", "La faim", "Absorb 100 souls at the Soul Altar.", "Absorber 100 âmes à l'Autel des âmes.", ("souls", "", 60)),
+    ("price_of_silence", "pact", ("contraband", "any", 3), "The Price of Silence", "Le prix du silence", "Buy 3 goods on a black market.", "Acheter 3 marchandises au marché clandestin.", ("item", "shell_shard", 2)),
+    ("no_witnesses", "pact", ("kill", "innocent", 3), "No Witnesses", "Pas de témoins", "Silence 3 innocents, on the Surface or in the worlds.", "Faire taire 3 innocents, sur la Surface ou dans les mondes.", ("item", "diamond_fragment", 2)),
+]
+for (qid, t, obj, en, fr, den, dfr, rew) in _KARMA_PATHS:
+    QUESTS.append((qid, KARMA_CHAPTER, t, obj, en, fr, den, dfr, rew))
 
 # ---------------------------------------------------------------- achievements (100)
 # type: progress | explore | combat | hidden; trigger: (kind, arg) evaluated by gen / java

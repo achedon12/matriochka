@@ -255,6 +255,7 @@ public final class Stations {
 		if (value >= 10 && karma == 0 && repeats < 4) karma = 1;
 		ps.addSouls(value);
 		ps.addKarma(purify ? karma : -karma);
+		ps.progress(purify ? "purify" : "devour", "souls", value);
 		stack.setCount(0);
 		player.level().playSound(null, player.blockPosition(), purify ? SoundEvents.AMETHYST_BLOCK_RESONATE : SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.PLAYERS, 0.8f, purify ? 1.4f : 0.6f);
 		player.sendSystemMessage(Component.translatable(purify ? "message.matriochka.altar.purified" : "message.matriochka.altar.devoured", value, ps.karma()));

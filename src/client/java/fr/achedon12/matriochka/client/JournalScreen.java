@@ -65,11 +65,11 @@ public class JournalScreen extends Screen {
 		}
 		if (!scroll && tab == 1) {
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> { questWorld = Math.max(0, questWorld - 1); pageAt = Ui.now(); turnDir = -1; rebuild(); }, () -> questWorld > 0);
-			buttons.add(l + BW - 40, t + BH - 30, 18, 16, Component.literal(">"), () -> { questWorld = Math.min(10, questWorld + 1); pageAt = Ui.now(); turnDir = 1; rebuild(); }, () -> questWorld < 10);
+			buttons.add(l + BW - 40, t + BH - 30, 18, 16, Component.literal(">"), () -> { questWorld = Math.min(KARMA_CHAPTER, questWorld + 1); pageAt = Ui.now(); turnDir = 1; rebuild(); }, () -> questWorld < KARMA_CHAPTER);
 			int y = t + 30;
 			for (Defs.QuestDef q : Content.QUESTS) {
 				if (q.world() != questWorld) continue;
-				if (q.objKind().equals("choice") && !done(q) && unlocked(q.world())) {
+				if (q.objKind().equals("choice") && !done(q) && open(q)) {
 					buttons.add(l + BW - 98, y + 18, 36, 14, Component.translatable("journal.matriochka.help"), () -> send(q.id(), 1));
 					buttons.add(l + BW - 60, y + 18, 36, 14, Component.translatable("journal.matriochka.betray"), () -> send(q.id(), -1));
 				}
@@ -114,6 +114,23 @@ public class JournalScreen extends Screen {
 	private void send(String quest, int choice) {
 		ClientPlayNetworking.send(new Net.ChoicePayload(quest, choice));
 		onClose();
+	}
+
+	/** The karma-path chapter comes after the ten worlds. */
+	private static final int KARMA_CHAPTER = 11;
+
+	/** A quest is open once its world is; a karma-path quest once the karma reaches its path. */
+	private static boolean open(Defs.QuestDef q) {
+		if (q.world() == KARMA_CHAPTER) {
+			int k = MatrioClient.state.getIntOr("karma", 0);
+			return q.type().equals("help") ? k >= 50 : q.type().equals("pact") ? k <= -50 : true;
+		}
+		return unlocked(q.world());
+	}
+
+	private static Component lockedText(Defs.QuestDef q) {
+		if (q.world() == KARMA_CHAPTER) return Component.translatable("journal.matriochka.locked_" + q.type());
+		return Component.translatable("journal.matriochka.locked");
 	}
 
 	private static boolean unlocked(int world) {
@@ -297,21 +314,22 @@ public class JournalScreen extends Screen {
 	}
 
 	private void quests(GuiGraphicsExtractor g, int x, int y, int w, int mx, int my) {
-		Component place = questWorld == 0 ? Component.translatable("journal.matriochka.surface") : Component.translatable("hud.matriochka.world", questWorld);
+		Component place = questWorld == 0 ? Component.translatable("journal.matriochka.surface")
+			: questWorld == KARMA_CHAPTER ? Component.translatable("journal.matriochka.karma_paths") : Component.translatable("hud.matriochka.world", questWorld);
 		g.text(font, place, x + 70 - font.width(place) / 2, top() + BH - 26, Ui.INK, false);
 		int yy = y + 6;
 		// full descriptions when they fit on the page, one line each otherwise (the full text shows on hover)
 		int need = 0;
 		for (Defs.QuestDef q : Content.QUESTS) {
 			if (q.world() != questWorld) continue;
-			Component d = unlocked(q.world()) ? Component.translatable("quest.matriochka." + q.id() + ".desc") : Component.translatable("journal.matriochka.locked");
+			Component d = open(q) ? Component.translatable("quest.matriochka." + q.id() + ".desc") : lockedText(q);
 			need += 18 + Math.max(1, font.split(d, w - 9).size()) * 9;
 		}
 		boolean wrap = need <= top() + BH - 34 - yy;
 		for (Defs.QuestDef q : Content.QUESTS) {
 			if (q.world() != questWorld) continue;
-			boolean done = done(q), open = unlocked(q.world());
-			Component sub = open ? Component.translatable("quest.matriochka." + q.id() + ".desc") : Component.translatable("journal.matriochka.locked");
+			boolean done = done(q), open = open(q);
+			Component sub = open ? Component.translatable("quest.matriochka." + q.id() + ".desc") : lockedText(q);
 			int lines = wrap ? Math.max(1, font.split(sub, w - 9).size()) : 1;
 			int rowH = 12 + lines * 9;
 			if (mx >= x - 3 && mx < x + w + 2 && my >= yy - 2 && my < yy + rowH) {

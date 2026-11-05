@@ -494,7 +494,13 @@ public final class Content {
 		new Defs.QuestDef("the_apprentices", 10, "npc", "deliver", "artisan_thread", 16, "title", "apprentice", 1),
 		new Defs.QuestDef("every_tool", 10, "npc", "kill", "colossus_prowler", 1, "item", "journal_page", 1),
 		new Defs.QuestDef("last_pardon", 10, "karma", "choice", "", 10, "souls", "", 100),
-		new Defs.QuestDef("all_at_once", 10, "challenge", "kill", "the_unfinished", 1, "title", "seamless", 1)
+		new Defs.QuestDef("all_at_once", 10, "challenge", "kill", "the_unfinished", 1, "title", "seamless", 1),
+		new Defs.QuestDef("light_for_others", 11, "help", "purify", "souls", 100, "item", "chance_doll", 1),
+		new Defs.QuestDef("many_hands", 11, "help", "trade", "any", 10, "souls", "", 40),
+		new Defs.QuestDef("warm_hearth", 11, "help", "deliver", "wool_thread", 16, "item", "soul_cradle", 1),
+		new Defs.QuestDef("hunger", 11, "pact", "devour", "souls", 100, "souls", "", 60),
+		new Defs.QuestDef("price_of_silence", 11, "pact", "contraband", "any", 3, "item", "shell_shard", 2),
+		new Defs.QuestDef("no_witnesses", 11, "pact", "kill", "innocent", 3, "item", "diamond_fragment", 2)
 	);
 	public static final List<Defs.AchDef> ACHIEVEMENTS = List.of(
 		new Defs.AchDef("world_1/a0", 1, "progress", "enter", "1"),
