@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731402,
+    "separation": 11,
+    "spacing": 34
+  },
+  "structures": [
+    {
+      "structure": "matriochka:flying_wreck",
+      "weight": 1
+    }
+  ]
+}

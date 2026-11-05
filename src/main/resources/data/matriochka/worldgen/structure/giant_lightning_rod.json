@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_4",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 4,
+  "archetype": "tower",
+  "role": "combat",
+  "size": "large",
+  "structure_id": "giant_lightning_rod"
+}

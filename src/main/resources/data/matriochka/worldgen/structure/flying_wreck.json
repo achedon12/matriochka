@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_4",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 4,
+  "archetype": "wreck",
+  "role": "combat",
+  "size": "medium",
+  "structure_id": "flying_wreck"
+}
