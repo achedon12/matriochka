@@ -110,7 +110,7 @@
    "facts": "Minecraft 26.3 on Fabric, version 0.1.0. Solo and multiplayer.",
    "dollsTitle": "A set of eleven nesting dolls, just opened: the Surface, then worlds 1 to 10, from the largest to the smallest",
    "dollsCaption": "The Surface, then the ten worlds it holds. Pick a doll to open its world.",
-   "trailerH": "The trailer, 21 seconds",
+   "trailerH": "The trailer",
    "trailerFallback": "Download the trailer (MP4)",
    "loopH": "How a world opens",
    "loopP": "One loop, ten times over. Each pass asks you to unlearn the last world.",
@@ -990,6 +990,7 @@
    "block": "blocks/painted_wood.png",
    "tall": "shots/w00_view_tall.jpg",
    "banner": "shots/w00_view_banner.jpg",
+   "hud": null,
    "wide": null,
    "boss": {
     "id": "block_guardian",
@@ -1592,6 +1593,7 @@
    "block": "blocks/spore_moss.png",
    "tall": "shots/w01_view_tall.jpg",
    "banner": "shots/w01_view_banner.jpg",
+   "hud": null,
    "wide": "shots/w01_view.jpg",
    "boss": {
     "id": "spore_queen",
@@ -1667,6 +1669,7 @@
     "tex": "blocks/spore_vat.png",
     "name": "Spore Vat",
     "note": "Result depends on fermentation time.",
+    "shot": "shots/gui_station_spore_vat.png",
     "make": [
      {
       "id": "minecraft:cauldron",
@@ -2679,6 +2682,7 @@
    "block": "blocks/ashrock.png",
    "tall": "shots/w02_view_tall.jpg",
    "banner": "shots/w02_view_banner.jpg",
+   "hud": "shots/gui_hud_w2.png",
    "wide": "shots/w02_view.jpg",
    "boss": {
     "id": "ash_titan",
@@ -2754,6 +2758,7 @@
     "tex": "blocks/ash_foundry.png",
     "name": "Ash Foundry",
     "note": "Keep the temperature in the green.",
+    "shot": "shots/gui_station_ash_foundry.png",
     "make": [
      {
       "id": "minecraft:blast_furnace",
@@ -3813,6 +3818,7 @@
    "block": "blocks/dungeon_brick.png",
    "tall": "shots/w03_view_tall.jpg",
    "banner": "shots/w03_view_banner.jpg",
+   "hud": null,
    "wide": "shots/w03_view.jpg",
    "boss": {
     "id": "grand_jailer",
@@ -3888,6 +3894,7 @@
     "tex": "blocks/jailer_table.png",
     "name": "Jailer's Table",
     "note": "Reproduce the lock pattern.",
+    "shot": "shots/gui_station_jailer_table.png",
     "make": [
      {
       "id": "minecraft:smithing_table",
@@ -4993,6 +5000,7 @@
    "block": "blocks/cloudstone.png",
    "tall": "shots/w04_view_tall.jpg",
    "banner": "shots/w04_view_banner.jpg",
+   "hud": "shots/gui_hud_w4.png",
    "wide": "shots/w04_view.jpg",
    "boss": {
     "id": "storm_king",
@@ -5068,6 +5076,7 @@
     "tex": "blocks/lightning_forge.png",
     "name": "Lightning Forge",
     "note": "Needs a lightning strike or storm essence.",
+    "shot": "shots/gui_station_lightning_forge.png",
     "make": [
      {
       "id": "minecraft:lightning_rod",
@@ -6147,6 +6156,7 @@
    "block": "blocks/umbral_stone.png",
    "tall": "shots/w05_view_tall.jpg",
    "banner": "shots/w05_view_banner.jpg",
+   "hud": null,
    "wide": "shots/w05_view.jpg",
    "boss": {
     "id": "light_eater",
@@ -6222,6 +6232,7 @@
     "tex": "blocks/dark_altar.png",
     "name": "Dark Altar",
     "note": "Works only in complete darkness.",
+    "shot": "shots/gui_station_dark_altar.png",
     "make": [
      {
       "id": "minecraft:obsidian",
@@ -7258,6 +7269,7 @@
    "block": "blocks/inverted_stone.png",
    "tall": "shots/w06_view_tall.jpg",
    "banner": "shots/w06_view_banner.jpg",
+   "hud": null,
    "wide": "shots/w06_view.jpg",
    "boss": {
     "id": "your_double",
@@ -7333,6 +7345,7 @@
     "tex": "blocks/inverter.png",
     "name": "Inverter",
     "note": "Every gain comes with a flaw.",
+    "shot": "shots/gui_station_inverter.png",
     "make": [
      {
       "id": "minecraft:observer",
@@ -8289,6 +8302,7 @@
    "block": "blocks/trench_rock.png",
    "tall": "shots/w07_view_tall.jpg",
    "banner": "shots/w07_view_banner.jpg",
+   "hud": "shots/gui_hud_w7.png",
    "wide": "shots/w07_view.jpg",
    "boss": {
     "id": "pressure_leviathan",
@@ -8364,6 +8378,7 @@
     "tex": "blocks/abyssal_press.png",
     "name": "Abyssal Press",
     "note": "Must be deep underwater.",
+    "shot": "shots/gui_station_abyssal_press.png",
     "make": [
      {
       "id": "minecraft:piston",
@@ -9365,6 +9380,7 @@
    "block": "blocks/hourstone.png",
    "tall": "shots/w08_view_tall.jpg",
    "banner": "shots/w08_view_banner.jpg",
+   "hud": "shots/gui_hud_w8.png",
    "wide": "shots/w08_view.jpg",
    "boss": {
     "id": "seasons_master",
@@ -9440,6 +9456,7 @@
     "tex": "blocks/time_workshop.png",
     "name": "Time Workshop",
     "note": "Accepts recipes at dawn and dusk.",
+    "shot": "shots/gui_station_time_workshop.png",
     "make": [
      {
       "id": "minecraft:clock",
@@ -10483,6 +10500,7 @@
    "block": "blocks/living_rock.png",
    "tall": "shots/w09_view_tall.jpg",
    "banner": "shots/w09_view_banner.jpg",
+   "hud": null,
    "wide": "shots/w09_view.jpg",
    "boss": {
     "id": "terrain_heart_boss",
@@ -10558,6 +10576,7 @@
     "tex": "blocks/terrain_anchor.png",
     "name": "Terrain Anchor",
     "note": "Stabilizes the ground (radius 16).",
+    "shot": "shots/gui_station_terrain_anchor.png",
     "make": [
      {
       "id": "minecraft:anvil",
@@ -11536,6 +11555,7 @@
    "block": "blocks/giant_plank.png",
    "tall": "shots/w10_view_tall.jpg",
    "banner": "shots/w10_view_banner.jpg",
+   "hud": null,
    "wide": "shots/w10_view.jpg",
    "boss": {
     "id": "the_unfinished",
@@ -11611,6 +11631,7 @@
     "tex": "blocks/final_loom.png",
     "name": "Final Loom",
     "note": "Weaves materials from every world.",
+    "shot": "shots/gui_station_final_loom.png",
     "make": [
      {
       "id": "minecraft:loom",

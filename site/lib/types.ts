@@ -13,12 +13,12 @@ export interface Drop { id: string; tex: string | null; name: string; chance?: s
 
 export interface World {
   n: number; name: string; short: string; long: string; nums: { v: string; l: string }[];
-  doll: DollColours; light: string; bg: string; block: string; tall: string | null; wide: string | null; banner?: string | null;
+  doll: DollColours; light: string; bg: string; block: string; tall: string | null; wide: string | null; banner?: string | null; hud?: string | null;
   boss: { id: string; name: string; hp: string; core: string; coreTex: string | null; coreName: string };
   mobs: { id: string; name: string; elite: boolean; tex: string | null }[];
   rule: string | null; tier: string; bossNote: string;
   seed: { id: string; tex: string | null; name: string; soil: string; cond: string; inputs: Ing[] } | null;
-  station: { id: string; tex: string | null; name: string; note: string; make: Ing[]; recipes: Recipe[] } | null;
+  station: { id: string; tex: string | null; name: string; note: string; shot?: string | null; make: Ing[]; recipes: Recipe[] } | null;
   surface?: Recipe[];
   items: Item[];
   armor: { pieces: { tex: string | null; name: string }[]; text: string } | null;

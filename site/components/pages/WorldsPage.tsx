@@ -236,6 +236,7 @@ export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
             <p className="crumbs"><Link href={href(lang, "worlds/")}>{ui.backWorlds}</Link></p>
             <h1><span className="w-n">{w.n}</span>{w.name}</h1>
             <WorldSummary w={w} lang={lang} />
+            {w.hud && <img className="mt-4 block h-auto w-full max-w-[435px] border border-rule [image-rendering:pixelated]" src={asset(w.hud)} alt="" loading="lazy" width={870} height={315} />}
           </div>
         </div>
         {w.gallery && w.gallery.length > 0 && (
@@ -263,6 +264,7 @@ export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
               <section className="col">
                 <h2 className="h-plate"><Inlay src={w.station.tex} />{w.station.name}</h2>
                 <p>{w.station.note}</p>
+                {w.station.shot && <div className="my-4 border-2 border-gold bg-black shadow-frame"><img className="block h-auto w-full [image-rendering:pixelated]" src={asset(w.station.shot)} alt={w.station.name} loading="lazy" width={1708} height={960} /></div>}
                 {w.station.make.length > 0 && <div className="st-make"><p className="small">{ui.builtFrom}</p><Ingredients inputs={w.station.make} /></div>}
                 <Recipes recipes={w.station.recipes} />
               </section>

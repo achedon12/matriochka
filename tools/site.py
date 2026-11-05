@@ -23,7 +23,7 @@ import attacks as ATK  # noqa: E402
 
 RES = os.path.join(ROOT, "src/main/resources/assets/matriochka")
 TEX = os.path.join(RES, "textures")
-SHOTS_SRC = os.path.join(ROOT, "build/run/clientGameTest/screenshots")
+SHOTS_SRC = os.path.join(ROOT, "media/gui")
 RECIPES_JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Recipes.java")
 
 REPO = "https://github.com/achedon12/matriochka"
@@ -193,7 +193,8 @@ GEO = os.path.join(RES, "geckolib/models/entity")
 ANIM = os.path.join(RES, "geckolib/animations/entity")
 BIOMES = os.path.join(ROOT, "src/main/resources/data/matriochka/worldgen/biome")
 BRANDING = os.path.join(ROOT, "branding")
-TRAILER_SRC = os.path.join(ROOT, "media/brag-output/brag.mp4")
+TRAILER_SRC = os.path.join(ROOT, "media/trailer/matriochka-trailer-web.mp4")
+REEL_SRC = os.path.join(ROOT, "media/trailer/reel.mp4")
 TRAILER_POSTER = os.path.join(ROOT, "media/brag-output/brag.jpg")
 
 try:
@@ -227,9 +228,13 @@ def copy_assets():
     process_frames(os.path.join(PUBLIC, "shots"))
     if os.path.exists(TRAILER_SRC):
         shutil.copy2(TRAILER_SRC, os.path.join(PUBLIC, "trailer.mp4"))
-        if Image is not None:
-            Image.open(TRAILER_POSTER).convert("RGB").resize((1280, 720), Image.LANCZOS).save(
+        poster = os.path.join(ROOT, "media/trailer/poster.jpg")
+        if Image is not None and os.path.exists(poster):
+            Image.open(poster).convert("RGB").resize((1280, 720), Image.LANCZOS).save(
                 os.path.join(PUBLIC, "trailer.jpg"), quality=84, optimize=True, progressive=True)
+    if os.path.exists(REEL_SRC):
+        shutil.copy2(REEL_SRC, os.path.join(PUBLIC, "reel.mp4"))
+        shutil.copy2(REEL_SRC.replace(".mp4", ".jpg"), os.path.join(PUBLIC, "reel.jpg"))
     branding()
 
 
@@ -331,7 +336,10 @@ def process_shots(dst):
         except OSError:
             continue
         if key.startswith("gui_"):
-            g = img.crop(_gui_bbox(img)).convert("RGB")
+            # the whole 854x480 interface area, doubled pixel for pixel so the art stays crisp
+            box = (0, 0, 290, 105) if key.startswith("gui_hud") else (0, 0, min(854, img.width), min(480, img.height))
+            g = img.crop(box).convert("RGB")
+            g = g.resize((g.width * (3 if key.startswith("gui_hud") else 2), g.height * (3 if key.startswith("gui_hud") else 2)), Image.NEAREST)
             g.save(os.path.join(dst, key + ".png"), optimize=True)
             SHOTS[key] = key + ".png"
             continue
@@ -403,6 +411,17 @@ def process_frames(dst):
                 SHOTS[key] = key + ".jpg"
     if Image is None or not os.path.isdir(FRAMES):
         return
+    # worlds whose structure photos failed (caves and ceilings): ten different frames of that world instead
+    for w in (2, 3, 5):
+        takes = ([("d", 0, 71), ("b", 0, 71), ("c", 0, 20)] if w == 2 else [("a", 0, 119), ("d", 0, 71), ("b", 0, 71), ("c", 0, 20)])
+        for k, (sid, *_rest) in enumerate(C.STRUCTURES[w]):
+            seq, lo, hi = takes[k % len(takes)]
+            n = lo + (k // len(takes)) * 25 + 10
+            src = os.path.join(FRAMES, f"seq_w{w:02d}_{seq}_{min(n, hi):04d}.png")
+            if os.path.exists(src):
+                Image.open(src).convert("RGB").resize((800, 450), Image.LANCZOS).save(
+                    os.path.join(dst, f"st_{sid}.jpg"), quality=80, optimize=True, progressive=True)
+                SHOTS[f"st_{sid}"] = f"st_{sid}.jpg"
     for key, (seq, n) in FRAME_PICKS.items():
         src = os.path.join(FRAMES, f"seq_{seq}_{n:04d}.png")
         if os.path.exists(src):
@@ -797,7 +816,7 @@ def build_worlds():
                  nums=[dict(v=(a if LANG == "en" else b), l=(c if LANG == "en" else dd)) for a, b, c, dd in RULE_NUMS[n]],
                  doll=doll(n), light=light(n), bg=world_bg(n), block=f"blocks/{WORLD_BLOCK[n]}.png",
                  tall=shot(f"w{n:02d}_view_tall"),
-                 banner=shot(f"w{n:02d}_view_banner"),
+                 banner=shot(f"w{n:02d}_view_banner"), hud=shot(f"gui_hud_w{n}"),
                  wide=None if n == 0 else shot(f"w{n:02d}_view"),
                  boss=dict(id=boss["id"], name=boss[LANG], hp=fmt(boss["hp"]), core=boss["core"], coreTex=tex(boss["core"]), coreName=name(boss["core"])),
                  mobs=[dict(id=m["id"], name=name(m["id"]), elite=m["elite"], tex=tex(m["drop"])) for m in MOBS_OF.get(n, [])])
@@ -833,7 +852,7 @@ def build_worlds():
                            soil=t(f"Plant on tilled World Soil {n - 1}.", f"Se plante sur une Terre de monde {n - 1} bêchée."),
                            cond=LANGS[LANG].get(f"message.matriochka.seed_planted.{n}", ""),
                            inputs=ing(seed["inputs"]) if seed else []),
-                 station=dict(id=station, tex=tex(station), name=name(station), note=t(*STATION_NOTE[station]),
+                 station=dict(id=station, tex=tex(station), name=name(station), note=t(*STATION_NOTE[station]), shot=shot(f"gui_station_{station}"),
                               make=ing(st_make["inputs"]) if st_make else [],
                               recipes=[rec(r) for r in RECIPES.get(station, [])]),
                  items=item_list, armor=armor_d,
@@ -1240,7 +1259,7 @@ def build_copy():
         dollsTitle=t("A set of eleven nesting dolls, just opened: the Surface, then worlds 1 to 10, from the largest to the smallest",
                      "Un jeu de onze poupées gigognes qu'on vient d'ouvrir : la Surface, puis les mondes 1 à 10, de la plus grande à la plus petite"),
         dollsCaption=t("The Surface, then the ten worlds it holds. Pick a doll to open its world.", "La Surface, puis les dix mondes qu'elle contient. Choisis une poupée pour ouvrir son monde."),
-        trailerH=t("The trailer, 21 seconds", "La bande-annonce, 21 secondes"),
+        trailerH=t("The trailer", "La bande-annonce"),
         trailerFallback=t("Download the trailer (MP4)", "Télécharger la bande-annonce (MP4)"),
         loopH=t("How a world opens", "Comment s'ouvre un monde"),
         loopP=t("One loop, ten times over. Each pass asks you to unlearn the last world.", "Une seule boucle, dix fois de suite. Chaque tour te demande d'oublier le monde d'avant."),
