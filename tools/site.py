@@ -357,7 +357,11 @@ STRUCT_ART = {"hero": "collapsed_doll", "head_worlds": "impossible_stair", "head
               "head_systems": "solar_observatory", "head_download": "root_temple", "verb_survive": "hanging_ruin", "verb_fight": "stable_sanctuary"}
 # Frames picked by eye from the trailer capture (media/trailer/frames): key -> (sequence, frame).
 FRAMES = os.path.join(ROOT, "media/trailer/frames")
-FRAME_PICKS = {}
+FRAME_PICKS = {
+    "w00_view": ("w00_a", 30), "w02_view": ("w02_d", 40), "w03_view": ("w03_a", 30), "w05_view": ("w05_d", 40),
+    "w00_boss": ("w00_c", 100), "w01_boss": ("w01_c", 40), "w02_boss": ("w02_c", 10), "w03_boss": ("w03_c", 10),
+    "w04_boss": ("w04_c", 40), "w05_boss": ("w05_c", 40), "w06_boss": ("w06_c", 125), "w07_boss": ("w07_c", 10),
+}
 
 
 def _views(img, key, dst):
@@ -401,22 +405,8 @@ def process_frames(dst):
         return
     for key, (seq, n) in FRAME_PICKS.items():
         src = os.path.join(FRAMES, f"seq_{seq}_{n:04d}.png")
-        if not os.path.exists(src):
-            continue
-        img = Image.open(src).convert("RGB")
-        W, H = img.size
-        bh = int(W * 9 / 21)
-        img.crop((0, (H - bh) // 2, W, (H + bh) // 2)).resize((1920, 823), Image.LANCZOS).save(
-            os.path.join(dst, key + "_banner.jpg"), quality=80, optimize=True, progressive=True)
-        SHOTS[key + "_banner"] = key + "_banner.jpg"
-        cw = H * 4 // 3
-        img.crop(((W - cw) // 2, 0, (W + cw) // 2, H)).resize((960, 720), Image.LANCZOS).save(
-            os.path.join(dst, key + ".jpg"), quality=82, optimize=True, progressive=True)
-        SHOTS[key] = key + ".jpg"
-        tw = H * 2 // 3
-        img.crop(((W - tw) // 2, 0, (W + tw) // 2, H)).resize((480, 720), Image.LANCZOS).save(
-            os.path.join(dst, key + "_tall.jpg"), quality=82, optimize=True, progressive=True)
-        SHOTS[key + "_tall"] = key + "_tall.jpg"
+        if os.path.exists(src):
+            _views(Image.open(src).convert("RGB"), key, dst)
 
 
 def shot(key):
@@ -1193,7 +1183,7 @@ def build_bosses():
             mp=[dict(p=p, mult="×" + fmt(round(1 + 0.6 * (p - 1), 1)), hp=fmt(int(round(b["hp"] * (1 + 0.6 * (p - 1)))))) for p in (1, 2, 4, 8)],
             drops=drops, souls=t("100 souls for every player within 64 blocks", "100 âmes pour chaque joueur à moins de 64 blocs"),
             unlocks=unlocks, special=special, story=LANGS[LANG].get(f"message.matriochka.boss_down.{w}", ""),
-            shot=shot(f"w{w:02d}_boss") if w else None, block=f"blocks/{WORLD_BLOCK[w]}.png",
+            shot=shot(f"w{w:02d}_boss"), block=f"blocks/{WORLD_BLOCK[w]}.png",
             coreTex=tex(b["core"]), tex=f"entities/{b['id']}.png" if b["id"] in ENTITY_TEX else None,
             anims=anims(b["id"]), quests=quest_list(b["id"]), ach=ach,
             prev=order[i - 1]["id"] if i > 0 else None, next=order[i + 1]["id"] if i + 1 < len(order) else None,
