@@ -1,0 +1,160 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.the_unfinished",
+    "texture_width": 128,
+    "texture_height": 128,
+    "visible_bounds_width": 6,
+    "visible_bounds_height": 3.25,
+    "visible_bounds_offset": [
+     0,
+     1.125,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "parent": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -10,
+        0,
+        -10
+       ],
+       "size": [
+        20,
+        22,
+        20
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -9,
+        4,
+        -10.5
+       ],
+       "size": [
+        18,
+        10,
+        1
+       ],
+       "uv": [
+        80,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "parent": "body",
+     "pivot": [
+      0,
+      22,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -7,
+        22,
+        -7
+       ],
+       "size": [
+        14,
+        14,
+        14
+       ],
+       "uv": [
+        0,
+        42
+       ]
+      },
+      {
+       "origin": [
+        -5,
+        24,
+        -7.5
+       ],
+       "size": [
+        10,
+        9,
+        1
+       ],
+       "uv": [
+        56,
+        42
+       ]
+      }
+     ]
+    },
+    {
+     "name": "shell",
+     "parent": "body",
+     "pivot": [
+      0,
+      18,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -12,
+        0,
+        -12
+       ],
+       "size": [
+        24,
+        4,
+        24
+       ],
+       "uv": [
+        0,
+        70
+       ],
+       "inflate": 0.2
+      },
+      {
+       "origin": [
+        -12,
+        34,
+        -12
+       ],
+       "size": [
+        24,
+        2,
+        24
+       ],
+       "uv": [
+        0,
+        98
+       ],
+       "inflate": 0.2
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
