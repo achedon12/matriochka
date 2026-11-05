@@ -89,11 +89,12 @@ public final class Content {
 		new Defs.ItemDef("mirror_leggings", 6, "armor", "epic", "leggings", "mirror"),
 		new Defs.ItemDef("mirror_boots", 6, "armor", "epic", "boots", "mirror"),
 		new Defs.ItemDef("abyssal_salt", 7, "dust", "rare", "", ""),
+		new Defs.ItemDef("nacre", 7, "gem", "rare", "", ""),
+		new Defs.ItemDef("abyssal_cobalt", 7, "ingot", "rare", "", ""),
 		new Defs.ItemDef("pressure_pearl", 7, "gem", "epic", "", ""),
 		new Defs.ItemDef("oxygen_capsule", 7, "consumable", "common", "", ""),
 		new Defs.ItemDef("thruster", 7, "thruster", "epic", "", ""),
 		new Defs.ItemDef("trench_trident", 7, "weapon", "epic", "", ""),
-		new Defs.ItemDef("diving_helmet", 7, "armor", "epic", "helmet", "diving"),
 		new Defs.ItemDef("diving_chestplate", 7, "armor", "epic", "chestplate", "diving"),
 		new Defs.ItemDef("diving_leggings", 7, "armor", "epic", "leggings", "diving"),
 		new Defs.ItemDef("diving_boots", 7, "armor", "epic", "boots", "diving"),
@@ -166,7 +167,11 @@ public final class Content {
 		new Defs.ItemDef("apnea_kelp", 7, "food", "common", "", ""),
 		new Defs.ItemDef("season_jam", 8, "food", "common", "", ""),
 		new Defs.ItemDef("anchor_bread", 9, "food", "common", "", ""),
-		new Defs.ItemDef("workshop_feast", 10, "food", "common", "", "")
+		new Defs.ItemDef("workshop_feast", 10, "food", "common", "", ""),
+		new Defs.ItemDef("salt_snorkel", 7, "snorkel", "rare", "", ""),
+		new Defs.ItemDef("nacre_snorkel", 7, "snorkel", "rare", "", ""),
+		new Defs.ItemDef("cobalt_snorkel", 7, "snorkel", "epic", "", ""),
+		new Defs.ItemDef("pearl_snorkel", 7, "snorkel", "epic", "", "")
 	);
 	public static final List<Defs.BlockDef> BLOCKS = List.of(
 		new Defs.BlockDef("world_soil_0", 0, "soil", "soil", ""),
@@ -232,6 +237,9 @@ public final class Content {
 		new Defs.BlockDef("trench_rock", 7, "terrain", "stone", ""),
 		new Defs.BlockDef("pressure_coral", 7, "terrain", "glow", ""),
 		new Defs.BlockDef("abyssal_salt_ore", 7, "terrain", "ore", "abyssal_salt"),
+		new Defs.BlockDef("nacre_ore", 7, "terrain", "ore", "nacre"),
+		new Defs.BlockDef("abyssal_cobalt_ore", 7, "terrain", "ore", "abyssal_cobalt"),
+		new Defs.BlockDef("pearl_bed", 7, "terrain", "ore", "pressure_pearl"),
 		new Defs.BlockDef("chrono_grass", 8, "terrain", "moss", ""),
 		new Defs.BlockDef("hourstone", 8, "terrain", "stone", ""),
 		new Defs.BlockDef("temporal_sand_block", 8, "terrain", "sand", ""),
@@ -243,7 +251,8 @@ public final class Content {
 		new Defs.BlockDef("giant_plank", 10, "terrain", "wood", ""),
 		new Defs.BlockDef("workshop_felt", 10, "terrain", "moss", ""),
 		new Defs.BlockDef("lacquer_glow", 10, "terrain", "glow", ""),
-		new Defs.BlockDef("artisan_thread_ore", 10, "terrain", "ore", "artisan_thread")
+		new Defs.BlockDef("artisan_thread_ore", 10, "terrain", "ore", "artisan_thread"),
+		new Defs.BlockDef("air_vent", 7, "vent", "vent", "")
 	);
 	public static final List<Defs.MobDef> MOBS = List.of(
 		new Defs.MobDef("sporeling", 1, 16f, 3f, "swarm_toxin", 0.6f, 0.47f, 1.44f, "spores", "", false, false, false, false, List.of(new Defs.AttackDef("nip", "melee", 0.6f, 3.0f, 2, 4, 0f, 0f, 8, 14, 80, 0f, 3.2f, 40, 100, 0, 0f, 1, "", "", "toxin:3", "", "spore_blossom_air", "entity.fox.bite"), new Defs.AttackDef("pop", "ring", 0.6f, 2.5f, 1, 4, 0f, 0.2f, 10, 16, 110, 0f, 4f, 40, 100, 0, 0f, 1, "", "", "toxin:8", "", "falling_spore_blossom", "entity.puffer_fish.blow_up"), new Defs.AttackDef("scatter", "leap", 0.9f, 0f, 1, 4, 0f, 0.55f, 9, 24, 90, 2f, 7f, 40, 100, 0, 0f, 1, "", "", "", "", "spore_blossom_air", "entity.slime.jump"))),
@@ -279,7 +288,7 @@ public final class Content {
 		new Defs.MobDef("abyssal_hunter", 7, 157f, 20.9f, "swimmer", 1.5f, 0.62f, 1.01f, "abyssal_salt", "", false, false, false, true, List.of(new Defs.AttackDef("lunge", "leap", 1.3f, 0f, 1, 4, 0f, 0.0f, 9, 24, 90, 3f, 12f, 40, 100, 0, 0f, 1, "", "", "", "", "bubble", "entity.guardian.attack"), new Defs.AttackDef("jaws", "melee", 1.2f, 3.0f, 1, 4, 0f, 0f, 8, 14, 80, 0f, 3.2f, 40, 100, 0, 0f, 1, "", "", "oxygen:-4", "", "bubble_pop", "entity.drowned.hurt_water"), new Defs.AttackDef("wake", "spin", 0.4f, 2.6f, 3, 4, 0f, 0f, 4, 22, 100, 0f, 2.6f, 40, 100, 0, 0f, 1, "", "", "oxygen:-2", "", "bubble", "entity.dolphin.swim"))),
 		new Defs.MobDef("blade_school", 7, 73f, 11.9f, "swimmer_oxygen", 0.6f, 0.86f, 0.44f, "abyssal_salt", "", false, false, false, true, List.of(new Defs.AttackDef("swarm", "spin", 0.3f, 2.4f, 5, 3, 0f, 0f, 4, 22, 100, 0f, 2.6f, 40, 100, 0, 0f, 1, "", "", "", "", "bubble", "entity.tropical_fish.flop"), new Defs.AttackDef("pierce", "dash", 0.9f, 0f, 1, 4, 0.3f, 0f, 10, 22, 110, 3f, 12f, 40, 100, 0, 0f, 1, "", "", "oxygen:-2", "", "bubble_pop", "entity.player.attack.strong"), new Defs.AttackDef("scatter", "bolt", 0.25f, 16f, 4, 2, 0f, 0f, 12, 18, 80, 3.5f, 16f, 40, 100, 0, 0f, 1, "", "", "", "", "bubble", "entity.fish.swim"))),
 		new Defs.MobDef("pressure_jelly", 7, 121f, 14.9f, "pressure_aura", 1.2f, 1.03f, 1.65f, "pressure_pearl", "", false, false, false, true, List.of(new Defs.AttackDef("sting", "melee", 0.8f, 3.0f, 1, 4, 0f, 0f, 8, 14, 80, 0f, 3.2f, 40, 100, 0, 0f, 1, "", "poison:60:1", "oxygen:-2", "", "glow", "entity.glow_squid.hurt"), new Defs.AttackDef("drift", "ring", 0.5f, 3.5f, 1, 4, 0f, 0.5f, 14, 22, 110, 0f, 4f, 40, 100, 0, 0f, 1, "", "mining_fatigue:80:1", "oxygen:-3", "", "bubble_pop", "block.conduit.ambient.short"), new Defs.AttackDef("veil", "trail", 0f, 2.5f, 1, 4, 0f, 0f, 6, 12, 160, 0f, 10f, 40, 120, 0, 0f, 1, "", "poison:40:0", "", "", "glow", "entity.glow_squid.squirt"))),
-		new Defs.MobDef("bell_crab", 7, 242f, 17.9f, "melee", 1.4f, 1.48f, 1.26f, "pressure_pearl", "", false, true, false, false, List.of(new Defs.AttackDef("clang", "ring", 0.6f, 3.5f, 1, 4, 0f, 0.5f, 14, 22, 110, 0f, 4f, 40, 100, 0, 0f, 1, "", "nausea:60:0", "", "", "note", "block.bell.use"), new Defs.AttackDef("snip", "melee", 0.7f, 3.0f, 2, 4, 0f, 0f, 8, 14, 80, 0f, 3.2f, 40, 100, 0, 0f, 1, "", "", "", "", "crit", "entity.player.attack.crit"), new Defs.AttackDef("scuttle", "dash", 0.8f, 0f, 1, 4, 1.2f, 0f, 10, 22, 110, 3f, 12f, 40, 100, 0, 0f, 1, "", "", "", "", "bubble", "entity.turtle.shamble"))),
+		new Defs.MobDef("bell_crab", 7, 242f, 17.9f, "melee", 1.4f, 1.48f, 1.26f, "pressure_pearl", "", false, true, false, true, List.of(new Defs.AttackDef("clang", "ring", 0.6f, 3.5f, 1, 4, 0f, 0.5f, 14, 22, 110, 0f, 4f, 40, 100, 0, 0f, 1, "", "nausea:60:0", "", "", "note", "block.bell.use"), new Defs.AttackDef("snip", "melee", 0.7f, 3.0f, 2, 4, 0f, 0f, 8, 14, 80, 0f, 3.2f, 40, 100, 0, 0f, 1, "", "", "", "", "crit", "entity.player.attack.crit"), new Defs.AttackDef("scuttle", "dash", 0.8f, 0f, 1, 4, 1.2f, 0f, 10, 22, 110, 3f, 12f, 40, 100, 0, 0f, 1, "", "", "", "", "bubble", "entity.turtle.shamble"))),
 		new Defs.MobDef("trench_eel", 7, 182f, 23.9f, "grabber", 1.6f, 0.66f, 0.51f, "pressure_pearl", "", true, false, false, true, List.of(new Defs.AttackDef("coil", "grab", 0.6f, 2.4f, 1, 4, 0f, 0f, 8, 16, 120, 0f, 2.6f, 60, 100, 0, 0f, 1, "", "", "oxygen:-4", "", "bubble", "entity.guardian.flop"), new Defs.AttackDef("shock", "ring", 0.8f, 4.0f, 1, 4, 0f, 0.5f, 14, 22, 110, 0f, 4f, 40, 100, 0, 0f, 1, "", "slowness:40:2", "", "", "electric_spark", "entity.guardian.attack"), new Defs.AttackDef("strike", "leap", 1.2f, 0f, 1, 4, 0f, 0.0f, 9, 24, 90, 3f, 10f, 40, 100, 0, 0f, 1, "", "", "", "", "bubble_pop", "entity.drowned.shoot"), new Defs.AttackDef("current", "pull", 0.4f, 12f, 1, 4, 1.3f, 0f, 10, 18, 100, 3f, 12f, 40, 100, 0, 0f, 1, "", "", "oxygen:-3", "", "bubble", "block.bubble_column.whirlpool_inside"))),
 		new Defs.MobDef("seasonal_creature", 8, 180f, 21.5f, "seasonal", 1.2f, 0.57f, 1.70f, "season_fragment", "", false, false, false, false, List.of(new Defs.AttackDef("thaw", "trail", 0f, 2.5f, 1, 4, 0f, 0f, 6, 12, 160, 0f, 10f, 40, 100, 0, 0f, 1, "", "poison:40:0", "", "", "happy_villager", "block.azalea_leaves.break"), new Defs.AttackDef("heat", "dash", 1.0f, 0f, 1, 4, 0.8f, 0f, 10, 22, 110, 3f, 12f, 40, 100, 3, 0f, 1, "", "", "", "", "small_flame", "entity.ravager.step"), new Defs.AttackDef("fall", "rain", 1.0f, 3.0f, 1, 4, 0f, 0f, 24, 30, 140, 2f, 14f, 40, 100, 0, 0f, 1, "", "weakness:60:0", "", "", "cherry_leaves", "block.cherry_leaves.break"))),
 		new Defs.MobDef("hourglass_elder", 8, 245f, 17.9f, "slowing_aura", 1.1f, 1.00f, 1.93f, "temporal_sand", "", false, false, false, false, List.of(new Defs.AttackDef("sand", "beam", 0.2f, 10f, 8, 4, 0f, 0f, 10, 36, 140, 2f, 12f, 40, 100, 0, 0f, 1, "", "slowness:40:1", "", "", "white_ash", "block.sand.fall"), new Defs.AttackDef("stop", "roar", 0f, 7f, 1, 4, 0f, 0f, 12, 24, 220, 0f, 10f, 40, 100, 0, 0f, 1, "", "slowness:60:4,mining_fatigue:60:2", "", "", "end_rod", "block.amethyst_block.chime"), new Defs.AttackDef("turn", "ward", 0f, 0f, 1, 4, 0f, 0f, 10, 18, 240, 0f, 16f, 40, 100, 0, 0.15f, 1, "", "", "", "regeneration:80:1", "white_ash", "block.respawn_anchor.set_spawn"))),
@@ -322,6 +331,16 @@ public final class Content {
 		new Defs.NpcDef("ephemeral", 8),
 		new Defs.NpcDef("anchored", 9),
 		new Defs.NpcDef("old_apprentice", 10)
+	);
+	public static final List<Defs.CritterDef> CRITTERS = List.of(
+		new Defs.CritterDef("lantern_shoal", 7, 6f, "shoal", 0.40f, 0.44f),
+		new Defs.CritterDef("glow_jelly", 7, 8f, "drift", 0.40f, 0.66f)
+	);
+	public static final List<Defs.SnorkelDef> SNORKELS = List.of(
+		new Defs.SnorkelDef("salt_snorkel", "abyssal_salt", 1, 180, 4, 2, 0.0f, 0.5f, 0),
+		new Defs.SnorkelDef("nacre_snorkel", "nacre", 2, 300, 6, 3, 1.0f, 0.35f, 6),
+		new Defs.SnorkelDef("cobalt_snorkel", "abyssal_cobalt", 3, 480, 10, 3, 2.0f, 0.25f, 12),
+		new Defs.SnorkelDef("pearl_snorkel", "pressure_pearl", 4, 720, 14, 4, 3.0f, 0.15f, 18)
 	);
 	public static final List<Defs.StructureDef> STRUCTURES = List.of(
 		new Defs.StructureDef("spore_hive", 1, "combat", "medium", "common", "hive"),
@@ -466,7 +485,7 @@ public final class Content {
 		new Defs.QuestDef("impossible_stair", 6, "npc", "deliver", "inverted_crystal", 2, "item", "journal_page", 1),
 		new Defs.QuestDef("who_is_real", 6, "karma", "choice", "", 5, "souls", "", 50),
 		new Defs.QuestDef("upside_down", 6, "challenge", "kill", "broken_mirror", 1, "title", "head_down", 1),
-		new Defs.QuestDef("under_pressure", 7, "guide", "craft", "diving_chestplate", 1, "item", "oxygen_capsule", 8),
+		new Defs.QuestDef("under_pressure", 7, "guide", "craft", "salt_snorkel", 1, "item", "oxygen_capsule", 8),
 		new Defs.QuestDef("compress", 7, "guide", "craft", "pressure_pearl", 1, "souls", "", 40),
 		new Defs.QuestDef("silent_station", 7, "npc", "deliver", "abyssal_salt", 6, "item", "thruster", 1),
 		new Defs.QuestDef("wreck_crew", 7, "npc", "kill", "blade_school", 10, "souls", "", 40),
@@ -553,7 +572,7 @@ public final class Content {
 		new Defs.AchDef("world_6/a8", 6, "hidden", "custom", "fall_up"),
 		new Defs.AchDef("world_6/a9", 6, "hidden", "item", "hidden_doll_6"),
 		new Defs.AchDef("world_7/a0", 7, "progress", "enter", "7"),
-		new Defs.AchDef("world_7/a1", 7, "progress", "item", "diving_helmet"),
+		new Defs.AchDef("world_7/a1", 7, "progress", "custom", "snorkel"),
 		new Defs.AchDef("world_7/a2", 7, "progress", "kill", "pressure_leviathan"),
 		new Defs.AchDef("world_7/a3", 7, "explore", "custom", "deep_dive"),
 		new Defs.AchDef("world_7/a4", 7, "explore", "structures", "7"),

@@ -603,7 +603,66 @@ def paint_block(style, pal, seed, path, variant=0):
                 c.set(x, y, shade(DOLL_RED, 1.0 + r.random() * 0.2))
         for t in range(0, 360, 45):
             c.set(round(7.5 + 6.6 * math.cos(math.radians(t))), round(7.5 + 6.6 * math.sin(math.radians(t))), GOLD)
+    elif style == "vent":
+        # a vent of trench rock: a dark throat ringed with pale crust, bubbles rising out of it
+        for x in range(16):
+            for y in range(16):
+                c.set(x, y, shade(p, 0.7 + r.random() * 0.25))
+        for (x, y) in disc(7.5, 7.5, 5.2):
+            c.set(x, y, shade(a, 0.75 + r.random() * 0.3))
+        for (x, y) in disc(7.5, 7.5, 3.4):
+            dd = math.hypot(x - 7.5, y - 7.5)
+            c.set(x, y, shade(d, 0.6 + dd / 6))
+        for (x, y) in ((6, 6), (9, 7), (7, 9), (8, 5)):
+            c.set(x, y, (230, 250, 255))
     c.save(path)
+
+
+def paint_snorkel_item(pal, seed, path):
+    """Inventory icon of a snorkel helmet: a round diving helmet with a glass visor and a breathing tube."""
+    p, s, a, d = [hx(x) for x in pal]
+    c = Canvas()
+    dome = disc(7.5, 8, 5.6) - rect(0, 14, 15, 15)
+    c.fill_mask(dome, p, seed=seed)
+    visor = disc(7.5, 8.5, 3.0)
+    for (x, y) in visor:
+        c.set(x, y, shade(hx("6ad8f0"), 0.8 + 0.08 * (y - 5)))
+    for (x, y) in ((6, 7), (7, 6)):
+        c.set(x, y, (240, 255, 255))
+    for (x, y) in disc(7.5, 8.5, 3.6) - visor:
+        c.set(x, y, shade(a, 1.15))
+    for x in range(3, 13):
+        c.set(x, 13, shade(d, 1.2))
+    tube = line(12, 9, 14, 6, 1) | line(14, 6, 14, 1, 1)
+    for (x, y) in tube:
+        c.set(x, y, shade(s, 1.0 if y % 2 else 0.75))
+    c.set(14, 0, shade(a, 1.2))
+    c.save(path)
+
+
+def paint_snorkel_layer(pal, seed, path):
+    """64x32 humanoid layer that only covers the head: metal helmet, a glass visor in front, the tube on the right."""
+    p, s, a, d = [hx(x) for x in pal]
+    img = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
+    r = rng(seed)
+    faces = {"top": (8, 0), "bottom": (16, 0), "right": (0, 8), "front": (8, 8), "left": (16, 8), "back": (24, 8)}
+    for face, (u, v) in faces.items():
+        for x in range(8):
+            for y in range(8):
+                edge = x in (0, 7) or y in (0, 7)
+                col = shade(p, 0.55 if edge else 0.85 + 0.25 * r.random())
+                if face == "front" and 1 <= x <= 6 and 2 <= y <= 5:
+                    col = shade(hx("6ad8f0"), 0.75 + 0.06 * y)
+                    if (x, y) in ((2, 2), (3, 2)):
+                        col = (240, 255, 255)
+                elif face == "front" and (x in (0, 7) or y in (1, 6)):
+                    col = shade(a, 1.1)
+                elif face == "right" and x in (3, 4):
+                    col = shade(s, 1.0 if y % 2 else 0.7)
+                elif face == "top" and x in (0, 1) and y in (3, 4):
+                    col = shade(s, 1.0)
+                img.putpixel((u + x, v + y), col + (255,))
+    img.save(path)
 
 
 def paint_station_top(pal, seed, path):

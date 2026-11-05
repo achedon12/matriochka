@@ -142,13 +142,18 @@ item("gravity_boots", "Gravity Boots", "Bottes de gravité", 6, "boots", "epic",
 item("stabilizer", "Stabilizer", "Stabilisateur", 6, "consumable", "common", "orb_small", "Cancels an inversion.", "Annule une inversion.")
 item("mirror_blade", "Mirror Blade", "Lame miroir", 6, "weapon", "epic", "sword")
 item("mirror", "", "", 6, "armorset", "epic", "armor", set_en="Mirror", set_fr="miroir")
-# World 7
-item("abyssal_salt", "Abyssal Salt", "Sel des profondeurs", 7, "dust", "rare", "dust", "Protects gear from pressure.", "Protège de la pression.")
-item("pressure_pearl", "Pressure Pearl", "Perle de pression", 7, "gem", "epic", "pearl", "Diving suit and World 8 Seed.", "Scaphandre et Graine du monde 8.")
-item("oxygen_capsule", "Oxygen Capsule", "Capsule d'oxygène", 7, "consumable", "common", "capsule", "Refills oxygen.", "Rend de l'oxygène.")
+# World 7: everything happens under water. The four ores each give one tier of snorkel helmet (see SNORKELS).
+item("abyssal_salt", "Abyssal Salt", "Sel des profondeurs", 7, "dust", "rare", "dust", "Salt Snorkel Helmet and World 8 Seed.", "Casque-tuba de sel et Graine du monde 8.")
+item("nacre", "Nacre", "Nacre", 7, "gem", "rare", "shard", "Mined from reef veins. Nacre Snorkel Helmet.", "Extraite des filons des récifs. Casque-tuba de nacre.",
+     pal=("e8d0e0", "a8e0e0", "f4e4ee", "6a5a70"))
+item("abyssal_cobalt", "Abyssal Cobalt", "Cobalt abyssal", 7, "ingot", "rare", "ingot", "Cobalt Snorkel Helmet and the diving suit.", "Casque-tuba de cobalt et scaphandre.",
+     pal=("1a3a8a", "3a7ae0", "4a7ae8", "0a1438"))
+item("pressure_pearl", "Pressure Pearl", "Perle de pression", 7, "gem", "epic", "pearl", "Pearl Snorkel Helmet and World 8 Seed.", "Casque-tuba de perle et Graine du monde 8.")
+item("oxygen_capsule", "Oxygen Capsule", "Capsule d'oxygène", 7, "consumable", "common", "capsule", "Refills half of a snorkel helmet's tank, or your breath.", "Remplit à moitié la réserve d'un casque-tuba, ou ton souffle.")
 item("thruster", "Thruster", "Propulseur", 7, "thruster", "epic", "thruster", "Speeds you up underwater.", "Accélère sous l'eau.")
 item("trench_trident", "Trench Trident", "Trident des fosses", 7, "weapon", "epic", "trident")
-item("diving", "", "", 7, "armorset", "epic", "armor", set_en="Diving", set_fr="de plongée", effect_en="Resists pressure.", effect_fr="Résiste à la pression.")
+item("diving", "", "", 7, "armorset", "epic", "armor", set_en="Diving", set_fr="de plongée", pieces=("chestplate", "leggings", "boots"),
+     effect_en="Resists pressure. Wear it with a snorkel helmet.", effect_fr="Résiste à la pression. Se porte avec un casque-tuba.")
 # World 8
 item("temporal_sand", "Temporal Sand", "Sable temporel", 8, "dust", "rare", "dust", "Base of World 8 gear.", "Base de l'équipement du monde 8.")
 item("season_fragment", "Season Fragment", "Fragment de saison", 8, "gem", "epic", "leaf", "World 9 Seed.", "Graine du monde 9.")
@@ -230,6 +235,26 @@ FOODS = [
 for fid, en, fr, w, een, efr in FOODS:
     item(fid, en, fr, w, "food", "common", "food", een, efr)
 
+# Snorkel helmets (World 7): head armor that works as a mask and a snorkel. You breathe from its tank while it holds
+# oxygen; it drains under water and refills in air pockets, bubble columns, over air vents, at the Abyssal Press or
+# with an Oxygen Capsule. They break easily: every hit wears them a little more, and the depths grind them down.
+# (id, en, fr, ore item, tier, tank in seconds, durability multiplier (x11), armor, toughness, extra wear per damage
+#  point, depth bonus in blocks, rarity, palette)
+SNORKELS = [
+    ("salt_snorkel", "Salt Snorkel Helmet", "Casque-tuba de sel", "abyssal_salt", 1, 180, 4, 2, 0.0, 0.5, 0, "rare",
+     ("d8dcd4", "9ab0b4", "eef2ea", "4a5458")),
+    ("nacre_snorkel", "Nacre Snorkel Helmet", "Casque-tuba de nacre", "nacre", 2, 300, 6, 3, 1.0, 0.35, 6, "rare",
+     ("e8d0e0", "a8e0e0", "f4e4ee", "6a5a70")),
+    ("cobalt_snorkel", "Cobalt Snorkel Helmet", "Casque-tuba de cobalt", "abyssal_cobalt", 3, 480, 10, 3, 2.0, 0.25, 12, "epic",
+     ("1a3a8a", "3a7ae0", "2a5ac8", "0a1438")),
+    ("pearl_snorkel", "Pearl Snorkel Helmet", "Casque-tuba de perle", "pressure_pearl", 4, 720, 14, 4, 3.0, 0.15, 18, "epic",
+     ("9af0ff", "1ab0b0", "c8f8ff", "0a3a5a")),
+]
+for sid, en, fr, ore, tier, tank, dur, arm, tough, wear, depth, rar, _pal in SNORKELS:
+    item(sid, en, fr, 7, "snorkel", rar, "snorkel",
+         "Breathe under water while its tank holds air (%d min). Fragile: hits wear it fast." % (tank // 60),
+         "Permet de respirer sous l'eau tant que sa réserve tient (%d min). Fragile : les coups l'usent vite." % (tank // 60))
+
 # ---------------------------------------------------------------- blocks
 # style drives the procedural texture: soil, stone, ore, moss, brick, crystal, wood, glass, lacquer,
 # station, special.
@@ -268,7 +293,7 @@ STATIONS = [
     ("lightning_forge", "Lightning Forge", "Forge à foudre", 4, "Needs a lightning strike or storm essence.", "Demande un éclair ou de l'essence de tempête."),
     ("dark_altar", "Dark Altar", "Autel obscur", 5, "Works only in complete darkness.", "Fonctionne seulement dans le noir complet."),
     ("inverter", "Inverter", "Inverseur", 6, "Every gain comes with a flaw.", "Chaque gain s'accompagne d'un défaut."),
-    ("abyssal_press", "Abyssal Press", "Presse abyssale", 7, "Must be deep underwater.", "Doit être sous l'eau profonde."),
+    ("abyssal_press", "Abyssal Press", "Presse abyssale", 7, "Must be deep underwater. Also refills a snorkel helmet.", "Doit être sous l'eau profonde. Remplit aussi un casque-tuba."),
     ("time_workshop", "Time Workshop", "Atelier du temps", 8, "Accepts recipes at dawn and dusk.", "Accepte les recettes à l'aube et au crépuscule."),
     ("terrain_anchor", "Terrain Anchor", "Ancre de terrain", 9, "Stabilizes the ground (radius 16).", "Stabilise le sol (rayon 16)."),
     ("final_loom", "Final Loom", "Métier final", 10, "Weaves materials from every world.", "Tisse les matériaux de tous les mondes."),
@@ -291,7 +316,9 @@ TERRAIN = {
     6: [("inverted_stone", "Inverted Stone", "Pierre inversée", "stone"), ("mirror_glass", "Mirror Glass", "Verre miroir", "glass"),
         ("prism_moss", "Prism Moss", "Mousse prismatique", "moss"), ("unstable_alloy_ore", "Unstable Alloy Ore", "Minerai d'alliage instable", "ore")],
     7: [("abyssal_sand", "Abyssal Sand", "Sable abyssal", "sand"), ("trench_rock", "Trench Rock", "Roche des fosses", "stone"),
-        ("pressure_coral", "Pressure Coral", "Corail de pression", "glow"), ("abyssal_salt_ore", "Abyssal Salt Ore", "Minerai de sel", "ore")],
+        ("pressure_coral", "Pressure Coral", "Corail de pression", "glow"), ("abyssal_salt_ore", "Abyssal Salt Ore", "Minerai de sel", "ore"),
+        ("nacre_ore", "Nacre Vein", "Filon de nacre", "ore"), ("abyssal_cobalt_ore", "Abyssal Cobalt Ore", "Minerai de cobalt abyssal", "ore"),
+        ("pearl_bed", "Pearl Bed", "Banc de perles", "ore")],
     8: [("chrono_grass", "Chrono Grass", "Herbe chrono", "moss"), ("hourstone", "Hourstone", "Pierre des heures", "stone"),
         ("temporal_sand_block", "Temporal Sand Block", "Bloc de sable temporel", "sand"), ("season_ore", "Season Ore", "Minerai de saison", "ore")],
     9: [("living_rock", "Living Rock", "Roche vivante", "stone"), ("flesh_stone", "Flesh Stone", "Pierre de chair", "moss"),
@@ -303,10 +330,27 @@ ORE_DROPS = {"sporite_ore": "sporite", "blazing_rock_ore": "blazing_rock", "gian
              "sealed_fragment_ore": "sealed_fragment", "celestial_crystal_ore": "celestial_crystal",
              "diamond_fragment_ore": "diamond_fragment", "unstable_alloy_ore": "unstable_alloy",
              "abyssal_salt_ore": "abyssal_salt", "season_ore": "season_fragment", "terrain_ore": "terrain_fragment",
-             "artisan_thread_ore": "artisan_thread"}
+             "artisan_thread_ore": "artisan_thread", "nacre_ore": "nacre", "abyssal_cobalt_ore": "abyssal_cobalt",
+             "pearl_bed": "pressure_pearl"}
+# Ore placement when it differs from the default (size 9, 14 per chunk, the whole height, in the world's stone):
+# (vein size, veins per chunk, lowest y, highest y, extra blocks it can replace)
+ORE_PAL = {  # ores painted in their own colors rather than the world's accent: (stone, -, flecks, -)
+    "nacre_ore": ("0a3a5a", "a8e0e0", "f4dcee", "021018"),
+    "abyssal_cobalt_ore": ("0a3a5a", "3a7ae0", "3a64e8", "021018"),
+    "pearl_bed": ("0a3a5a", "1ab0b0", "fbfdff", "021018"),
+}
+ORE_GEN = {
+    "abyssal_salt_ore": (9, 14, -50, 200, ()),
+    "nacre_ore": (7, 10, 110, 220, ()),
+    "abyssal_cobalt_ore": (8, 9, -20, 110, ()),
+    "pearl_bed": (4, 5, -50, 60, ("abyssal_sand",)),
+}
 for w, lst in TERRAIN.items():
     for (bid, en, fr, style) in lst:
         block(bid, en, fr, w, "terrain", style)
+# World 7: a crack in the sea floor breathing out air; it refills snorkel helmets swimming over it
+block("air_vent", "Air Vent", "Évent d'air", 7, "vent", "vent",
+      note_en="Breathes out air. Swim over it to refill a snorkel helmet.", note_fr="Souffle de l'air. Nage au-dessus pour remplir un casque-tuba.")
 
 # ---------------------------------------------------------------- mobs
 # behavior keys are implemented in Java (MobBehavior). body = model plan for gen.
@@ -392,7 +436,7 @@ mob("blade_school", "Blade School", "Banc de lames", 7, 73, 11.9, "swimmer_oxyge
     desc_en="Fast swarm, drains oxygen.", desc_fr="Essaim rapide, consomme l'oxygène.")
 mob("pressure_jelly", "Pressure Jelly", "Méduse de pression", 7, 121, 14.9, "pressure_aura", "jelly", 1.2, "pressure_pearl", aquatic=True,
     desc_en="Raises pressure around it.", desc_fr="Augmente la pression autour d'elle.")
-mob("bell_crab", "Bell Crab", "Crabe-cloche", 7, 242, 17.9, "melee", "crab", 1.4, "pressure_pearl", nesting=True,
+mob("bell_crab", "Bell Crab", "Crabe-cloche", 7, 242, 17.9, "melee", "crab", 1.4, "pressure_pearl", nesting=True, aquatic=True,
     desc_en="Nesting: shelters smaller crabs.", desc_fr="Gigogne, abrite des crabes plus petits.")
 mob("trench_eel", "Trench Eel", "Murène des fosses", 7, 182, 23.9, "grabber", "eel", 1.6, "pressure_pearl", elite=True, aquatic=True,
     desc_en="Elite. Bursts from walls and grabs you.", desc_fr="Élite, surgit des parois et saisit le joueur.")
@@ -438,6 +482,17 @@ PEOPLES = [
     ("silent_one", "Silent One", "Silencieux", 5), ("free_reflection", "Free Reflection", "Reflet libre", 6),
     ("diver", "Diver", "Plongeur", 7), ("ephemeral", "Ephemeral", "Éphémère", 8),
     ("anchored", "Anchored", "Ancré", 9), ("old_apprentice", "Old Apprentice", "Ancien apprenti", 10),
+]
+
+# Harmless wildlife: no attacks, it only fills the world. behavior: "shoal" (a darting school that flees players),
+# "drift" (a slow glowing drifter). Models come from tools/mobs_hd like the creatures'.
+CRITTERS = [
+    dict(id="lantern_shoal", en="Lantern Shoal", fr="Banc de lanternes", world=7, hp=6, behavior="shoal", drop="minecraft:cod",
+         desc_en="A school of tiny glowing fish. Harmless, it darts away from swimmers.",
+         desc_fr="Un banc de petits poissons lumineux. Inoffensif, il file devant les nageurs."),
+    dict(id="glow_jelly", en="Glow Jelly", fr="Méduse lumineuse", world=7, hp=8, behavior="drift", drop="minecraft:glow_ink_sac",
+         desc_en="A small jellyfish that lights the deep as it drifts. Harmless.",
+         desc_fr="Une petite méduse qui éclaire les profondeurs en dérivant. Inoffensive."),
 ]
 
 # ---------------------------------------------------------------- bosses
@@ -644,7 +699,7 @@ _Q = {
         ("impossible_stair", "npc", ("deliver", "inverted_crystal", 2), "The Impossible Stair", "L'escalier impossible", "Reach the top of the stair.", "Atteindre le sommet de l'escalier.", ("item", "journal_page", 1)),
         ("who_is_real", "karma", ("choice", "", 5), "Who Is Real?", "Qui est le vrai ?", "Free the Reflection (+5) or take its place (-5).", "Libérer le Reflet (+5) ou prendre sa place (-5).", ("souls", "", 50)),
         ("upside_down", "challenge", ("kill", "broken_mirror", 1), "Upside Down", "Sens dessus dessous", "Defeat a Broken Mirror.", "Vaincre un Miroir brisé.", ("title", "head_down", 1))],
-    7: [("under_pressure", "guide", ("craft", "diving_chestplate", 1), "Under Pressure", "Sous pression", "Craft a diving suit.", "Fabriquer un scaphandre.", ("item", "oxygen_capsule", 8)),
+    7: [("under_pressure", "guide", ("craft", "salt_snorkel", 1), "Under Pressure", "Sous pression", "Craft a Salt Snorkel Helmet at the Abyssal Press.", "Fabriquer un casque-tuba de sel à la Presse abyssale.", ("item", "oxygen_capsule", 8)),
         ("compress", "guide", ("craft", "pressure_pearl", 1), "Compress", "Comprimer", "Press something at the Abyssal Press.", "Comprimer à la Presse abyssale.", ("souls", "", 40)),
         ("silent_station", "npc", ("deliver", "abyssal_salt", 6), "The Silent Station", "La station se tait", "Repair 3 station cables.", "Réparer 3 câbles de la station.", ("item", "thruster", 1)),
         ("wreck_crew", "npc", ("kill", "blade_school", 10), "The Wreck's Crew", "L'équipage de l'épave", "Recover 3 crew plates.", "Remonter 3 plaques d'équipage.", ("souls", "", 40)),
@@ -737,13 +792,13 @@ ACH = {
         ("hidden", "Vertigo", "Vertige", "Fall upward for 10 seconds.", "Tomber vers le haut pendant 10 secondes.", ("custom", "fall_up")),
         ("hidden", "Flipped Doll", "Poupée retournée", "Find the hidden doll of the world.", "Trouver la poupée cachée du monde.", ("item", "hidden_doll_6"))],
     7: [("progress", "Great Depth", "Grande profondeur", "Open World 7.", "Ouvrir le monde 7.", ("enter", 7)),
-        ("progress", "Pressurized", "Sous pression", "Craft a diving helmet.", "Fabriquer un scaphandre.", ("item", "diving_helmet")),
+        ("progress", "Pressurized", "Sous pression", "Breathe through a snorkel helmet.", "Respirer par un casque-tuba.", ("custom", "snorkel")),
         ("progress", "Silence of the Trenches", "Le silence des fosses", "Defeat the Leviathan.", "Vaincre le Léviathan.", ("kill", "pressure_leviathan")),
         ("explore", "Extreme Dive", "Plongée extrême", "Reach the deepest trench.", "Atteindre la fosse la plus profonde.", ("custom", "deep_dive")),
         ("explore", "Open Sea", "Grand large", "Visit the 10 structure types.", "Visiter les 10 types de structures.", ("structures", 7)),
         ("explore", "Wet Paper", "Papier mouillé", "Find the 5 Journal pages.", "Trouver les 5 pages du Journal.", ("pages", 7)),
         ("combat", "School Scattered", "Banc dispersé", "Kill 5 Blade Schools.", "Éliminer un banc de lames entier.", ("kill", "blade_school")),
-        ("combat", "Last Breath", "Dernier souffle", "Beat the Leviathan with under 5% oxygen.", "Battre le Léviathan avec moins de 5 % d'oxygène.", ("custom", "levi_low_o2")),
+        ("combat", "Last Breath", "Dernier souffle", "Beat the Leviathan with under 5% oxygen left in your helmet or your lungs.", "Battre le Léviathan avec moins de 5 % d'oxygène dans ton casque ou tes poumons.", ("custom", "levi_low_o2")),
         ("hidden", "Forgotten Plate", "Plaque oubliée", "Search a sunken wreck.", "Fouiller une épave engloutie.", ("structure", "wreck")),
         ("hidden", "Drowned Doll", "Poupée noyée", "Find the hidden doll of the world.", "Trouver la poupée cachée du monde.", ("item", "hidden_doll_7"))],
     8: [("progress", "Counted Time", "Temps compté", "Open World 8.", "Ouvrir le monde 8.", ("enter", 8)),

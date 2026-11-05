@@ -38,12 +38,16 @@
     "matriochka:trench_rock",
     "matriochka:pressure_coral",
     "matriochka:abyssal_salt_ore",
+    "matriochka:nacre_ore",
+    "matriochka:abyssal_cobalt_ore",
+    "matriochka:pearl_bed",
     "matriochka:hourstone",
     "matriochka:season_ore",
     "matriochka:living_rock",
     "matriochka:pulse_vein",
     "matriochka:terrain_ore",
     "matriochka:lacquer_glow",
-    "matriochka:artisan_thread_ore"
+    "matriochka:artisan_thread_ore",
+    "matriochka:air_vent"
   ]
 }

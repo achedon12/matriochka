@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "matriochka:item/diving_helmet"
+    "layer0": "matriochka:item/nacre_snorkel"
   }
 }

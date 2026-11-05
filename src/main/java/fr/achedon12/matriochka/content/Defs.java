@@ -29,6 +29,15 @@ public final class Defs {
 
 	public record NpcDef(String id, int world) {}
 
+	/** Harmless wildlife (World 7 shoals and jellies). behavior: "shoal" or "drift". */
+	public record CritterDef(String id, int world, float hp, String behavior, float width, float height) {}
+
+	/**
+	 * A snorkel helmet tier: the ore it is made of, its tank (seconds of air), durability multiplier (x11 points), armor,
+	 * toughness, extra wear per point of damage taken, and how many blocks deeper it lets you dive.
+	 */
+	public record SnorkelDef(String id, String ore, int tier, int tank, int durability, int armor, float toughness, float wear, int depth) {}
+
 	public record StructureDef(String id, int world, String role, String size, String rarity, String archetype) {}
 
 	public record QuestDef(String id, int world, String type, String objKind, String objTarget, int objCount,
