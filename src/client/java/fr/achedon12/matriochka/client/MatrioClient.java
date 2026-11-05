@@ -27,6 +27,7 @@ public class MatrioClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		for (Defs.MobDef d : Content.MOBS) registerBoss(d.id(), d.scale());
 		for (Defs.BossDef d : Content.BOSSES) registerBoss(d.id(), d.scale());
+		for (Defs.CritterDef d : Content.CRITTERS) registerBoss(d.id(), 1f);
 		for (Defs.NpcDef d : Content.PEOPLES) register(d.id(), 1f);
 		MenuScreens.register(ModContent.STATION_MENU, StationScreen::new);
 		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
