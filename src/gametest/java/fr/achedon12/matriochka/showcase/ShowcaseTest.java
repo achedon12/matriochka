@@ -13,7 +13,14 @@ import net.fabricmc.fabric.api.client.gametest.v1.screenshot.TestScreenshotOptio
  */
 public class ShowcaseTest implements FabricClientGameTest {
 	private static void shot(ClientGameTestContext ctx, String name) {
+		// no advancement toasts or chat lines over the interface: screens are shot with the HUD layer hidden,
+		// HUD shots wait for the toasts and the chat to fade
+		boolean hud = name.startsWith("gui_hud");
+		if (hud) ctx.waitTicks(220);
+		else ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		ctx.waitTick();
 		ctx.takeScreenshot(TestScreenshotOptions.of(name).withSize(1920, 1080).disableCounterPrefix());
+		if (!hud) ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
 	}
 
 	/** Places every structure of every world and photographs it from above, three quarters. Shots: struct_<id>.png */
@@ -84,6 +91,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 			var server = sp.getServer();
 			sp.getConnection().waitForChunksRender();
 			server.runCommand("gamerule advance_time false");
+			server.runCommand("gamerule announce_advancements false");
 			server.runCommand("time set 6000");
 			server.runCommand("difficulty normal");
 			server.runCommand("execute as @p at @s run spreadplayers ~ ~ 0 1 false @s");
@@ -121,6 +129,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 			var server = sp.getServer();
 			sp.getConnection().waitForChunksRender();
 			server.runCommand("gamerule advance_time false");
+			server.runCommand("gamerule announce_advancements false");
 			server.runCommand("time set 6000");
 			server.runCommand("gamemode creative @a");
 			server.runCommand("effect give @a night_vision infinite 0 true");
@@ -203,6 +212,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 			var server = sp.getServer();
 			sp.getConnection().waitForChunksRender();
 			server.runCommand("gamerule advance_time false");
+			server.runCommand("gamerule announce_advancements false");
 			server.runCommand("time set 6000");
 			server.runCommand("gamemode creative @a");
 			server.runCommand("effect give @a night_vision infinite 0 true");

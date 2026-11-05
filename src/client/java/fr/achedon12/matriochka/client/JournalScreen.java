@@ -300,25 +300,41 @@ public class JournalScreen extends Screen {
 		Component place = questWorld == 0 ? Component.translatable("journal.matriochka.surface") : Component.translatable("hud.matriochka.world", questWorld);
 		g.text(font, place, x + 70 - font.width(place) / 2, top() + BH - 26, Ui.INK, false);
 		int yy = y + 6;
+		// full descriptions when they fit on the page, one line each otherwise (the full text shows on hover)
+		int need = 0;
+		for (Defs.QuestDef q : Content.QUESTS) {
+			if (q.world() != questWorld) continue;
+			Component d = unlocked(q.world()) ? Component.translatable("quest.matriochka." + q.id() + ".desc") : Component.translatable("journal.matriochka.locked");
+			need += 18 + Math.max(1, font.split(d, w - 9).size()) * 9;
+		}
+		boolean wrap = need <= top() + BH - 34 - yy;
 		for (Defs.QuestDef q : Content.QUESTS) {
 			if (q.world() != questWorld) continue;
 			boolean done = done(q), open = unlocked(q.world());
-			if (mx >= x - 3 && mx < x + w + 2 && my >= yy - 2 && my < yy + 20) {
-				g.fill(x - 3, yy - 2, x + w + 2, yy + 20, 0x1E8A2018);
-				g.fill(x - 3, yy - 2, x - 2, yy + 20, 0xFFB0782A);
+			Component sub = open ? Component.translatable("quest.matriochka." + q.id() + ".desc") : Component.translatable("journal.matriochka.locked");
+			int lines = wrap ? Math.max(1, font.split(sub, w - 9).size()) : 1;
+			int rowH = 12 + lines * 9;
+			if (mx >= x - 3 && mx < x + w + 2 && my >= yy - 2 && my < yy + rowH) {
+				g.fill(x - 3, yy - 2, x + w + 2, yy + rowH, 0x1E8A2018);
+				g.fill(x - 3, yy - 2, x - 2, yy + rowH, 0xFFB0782A);
 			}
 			int col = done ? Ui.GREEN : open ? Ui.INK : 0xFF9A8A6E;
 			Ui.sprite(g, done ? "pip_done" : open ? "pip_open" : "pip_locked", x - 1, yy, 7, 7);
-			g.text(font, Component.translatable("quest.matriochka." + q.id()), x + 9, yy, col, false);
 			String kind = q.objKind().equals("deliver") ? "obtain" : q.objKind();
 			int prog = Math.min(q.objCount(), MatrioClient.state.getIntOr("c_" + kind + ":" + q.objTarget(), 0));
-			if (!q.objKind().equals("choice") && open && !done) {
-				Component p = Component.literal(prog + "/" + q.objCount());
-				g.text(font, p, x + w - font.width(p), yy, Ui.RED_INK, false);
+			Component p = Component.literal(prog + "/" + q.objCount());
+			boolean showProg = !q.objKind().equals("choice") && open && !done;
+			int titleW = w - 9 - (showProg ? font.width(p) + 4 : 0);
+			Component name = Component.translatable("quest.matriochka." + q.id());
+			g.text(font, font.width(name) > titleW ? font.substrByWidth(name, titleW - font.width("...")).getString() + "..." : name.getString(), x + 9, yy, col, false);
+			if (showProg) g.text(font, p, x + w - font.width(p), yy, Ui.RED_INK, false);
+			if (wrap) g.textWithWordWrap(font, sub, x + 9, yy + 10, w - 9, Ui.INK_SOFT, false);
+			else {
+				boolean cut = font.width(sub) > w - 9;
+				g.text(font, cut ? font.substrByWidth(sub, w - 9 - font.width("...")).getString() + "..." : sub.getString(), x + 9, yy + 10, Ui.INK_SOFT, false);
+				if (cut && mx >= x - 3 && mx < x + w + 2 && my >= yy - 2 && my < yy + rowH) g.setTooltipForNextFrame(font, font.split(sub, 200), mx, my);
 			}
-			Component sub = open ? Component.translatable("quest.matriochka." + q.id() + ".desc") : Component.translatable("journal.matriochka.locked");
-			g.text(font, font.substrByWidth(sub, w - 9).getString(), x + 9, yy + 10, Ui.INK_SOFT, false);
-			yy += 26;
+			yy += rowH + 6;
 		}
 	}
 
