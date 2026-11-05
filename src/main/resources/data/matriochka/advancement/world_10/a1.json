@@ -1,0 +1,31 @@
+{
+  "parent": "matriochka:world_10/a0",
+  "display": {
+    "icon": {
+      "id": "matriochka:artisan_blade"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w10.a1.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w10.a1.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:artisan_blade"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}

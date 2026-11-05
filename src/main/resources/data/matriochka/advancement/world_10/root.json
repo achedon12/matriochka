@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "matriochka:seed_10"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w10.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w10.desc"
+    },
+    "background": "matriochka:block/workshop_felt",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "seed": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:seed_10"
+          }
+        ]
+      }
+    },
+    "enter": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "matriochka:world_10"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "seed",
+      "enter"
+    ]
+  ]
+}
