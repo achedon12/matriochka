@@ -40,7 +40,7 @@ jobs:
               fields.append({"name": "Download", "value": f"[{jar['name']}]({jar['browser_download_url']})", "inline": True})
           fields.append({"name": "Requires", "value": "Minecraft 26.3, Fabric Loader, Fabric API, GeckoLib", "inline": True})
           embed = {
-              "title": f"Matriochka {r['name'] or r['tag_name']}" + (" (pre-release)" if r.get("prerelease") else ""),
+              "title": (lambda n: n if n.lower().startswith("matriochka") else f"Matriochka {n}")(r["name"] or r["tag_name"]) + (" (pre-release)" if r.get("prerelease") else ""),
               "url": r["html_url"],
               "description": body or "A new version is out.",
               "color": 0xD9A441,
