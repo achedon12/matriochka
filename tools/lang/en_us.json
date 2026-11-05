@@ -88,6 +88,7 @@
  "message.matriochka.class.no_class": "This item cannot hold a class.",
  "message.matriochka.class.max": "Maximum level reached.",
  "message.matriochka.class.progress": "Your progression does not allow a higher level yet.",
+ "message.matriochka.class.single": "Tools have a single class; there is nothing to reroll.",
  "message.matriochka.class.need_doll": "You need a Chance Doll.",
  "command.matriochka.group.info": "Group: %s member(s), defeated bosses: %s",
  "command.matriochka.group.invited": "%s invites you to their group. /matriochka group join",

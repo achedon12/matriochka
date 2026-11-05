@@ -211,6 +211,7 @@ public final class Stations {
 
 	public static String reroll(ServerPlayer player, ItemStack stack) {
 		if (!stack.has(GearClasses.GEAR)) return "message.matriochka.class.no_class";
+		if (GearClasses.pool(GearClasses.kind(stack)).length < 2) return "message.matriochka.class.single";
 		Item doll = ModContent.item("chance_doll");
 		if (count(player.getInventory(), doll) < 1 && !player.isCreative()) return "message.matriochka.class.need_doll";
 		int cost = GearClasses.rerollCost(stack);

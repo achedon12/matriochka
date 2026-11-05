@@ -80,6 +80,7 @@ U = {
  "message.matriochka.class.no_class": ("This item cannot hold a class.", "Cet objet ne peut pas recevoir de classe."),
  "message.matriochka.class.max": ("Maximum level reached.", "Niveau maximal atteint."),
  "message.matriochka.class.progress": ("Your progression does not allow a higher level yet.", "Ta progression ne permet pas encore un niveau supérieur."),
+ "message.matriochka.class.single": ("Tools have a single class; there is nothing to reroll.", "Les outils n'ont qu'une classe : rien à relancer."),
  "message.matriochka.class.need_doll": ("You need a Chance Doll.", "Il te faut une Poupée du hasard."),
  "command.matriochka.group.info": ("Group: %s member(s), defeated bosses: %s", "Groupe : %s membre(s), boss vaincus : %s"),
  "command.matriochka.group.invited": ("%s invites you to their group. /matriochka group join", "%s t'invite dans son groupe. /matriochka group join"),
