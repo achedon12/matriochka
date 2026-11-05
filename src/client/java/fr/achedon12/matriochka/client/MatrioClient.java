@@ -2,6 +2,7 @@ package fr.achedon12.matriochka.client;
 
 import com.geckolib.model.DefaultedEntityGeoModel;
 import com.geckolib.renderer.GeoEntityRenderer;
+import com.geckolib.renderer.base.GeoRenderState;
 import com.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer;
 import fr.achedon12.matriochka.Matriochka;
 import fr.achedon12.matriochka.content.Content;
@@ -25,9 +26,9 @@ public class MatrioClient implements ClientModInitializer {
 	@Override
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void onInitializeClient() {
-		for (Defs.MobDef d : Content.MOBS) registerBoss(d.id(), d.scale());
-		for (Defs.BossDef d : Content.BOSSES) registerBoss(d.id(), d.scale());
-		for (Defs.CritterDef d : Content.CRITTERS) registerBoss(d.id(), 1f);
+		for (Defs.MobDef d : Content.MOBS) registerBoss(d.id(), d.scale(), false);
+		for (Defs.BossDef d : Content.BOSSES) registerBoss(d.id(), d.scale(), true);
+		for (Defs.CritterDef d : Content.CRITTERS) registerBoss(d.id(), 1f, false);
 		for (Defs.NpcDef d : Content.PEOPLES) register(d.id(), 1f);
 		MenuScreens.register(ModContent.STATION_MENU, StationScreen::new);
 		// the miniature world over every World Block (the renderer skips the other blocks sharing this entity type)
@@ -50,10 +51,17 @@ public class MatrioClient implements ClientModInitializer {
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	private static void registerBoss(String id, float scale) {
+	private static void registerBoss(String id, float scale, boolean boss) {
 		EntityType type = ModContent.entity(id);
 		EntityRendererRegistry.register(type, ctx -> {
-			GeoEntityRenderer r = new GeoEntityRenderer(ctx, new DefaultedEntityGeoModel(Matriochka.id(id))).withScale(scale);
+			DefaultedEntityGeoModel model = new DefaultedEntityGeoModel(Matriochka.id(id));
+			// a boss plays its own fall (misc.<boss>.death) instead of the vanilla tip-over
+			GeoEntityRenderer r = (boss ? new GeoEntityRenderer(ctx, model) {
+				@Override
+				protected float getDeathMaxRotation(GeoRenderState state) {
+					return 0f;
+				}
+			} : new GeoEntityRenderer(ctx, model)).withScale(scale);
 			r.withRenderLayer(new AutoGlowingGeoLayer(r));
 			return r;
 		});
