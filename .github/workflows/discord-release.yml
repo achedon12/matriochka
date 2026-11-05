@@ -1,0 +1,57 @@
+name: Announce release on Discord
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to announce again
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch release
+        id: rel
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          gh api "repos/${{ github.repository }}/releases/tags/$TAG" > release.json
+      - name: Post to #changelog
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_RELEASES_WEBHOOK }}
+          REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re, urllib.request
+          r = json.load(open("release.json"))
+          body = re.sub(r"\r", "", r.get("body") or "").strip()
+          if len(body) > 3500:
+              body = body[:3500].rsplit("\n", 1)[0] + "\n..."
+          jar = next((a for a in r.get("assets", []) if a["name"].endswith(".jar") and "sources" not in a["name"]), None)
+          fields = []
+          if jar:
+              fields.append({"name": "Download", "value": f"[{jar['name']}]({jar['browser_download_url']})", "inline": True})
+          fields.append({"name": "Requires", "value": "Minecraft 26.3, Fabric Loader, Fabric API, GeckoLib", "inline": True})
+          embed = {
+              "title": f"Matriochka {r['name'] or r['tag_name']}" + (" (pre-release)" if r.get("prerelease") else ""),
+              "url": r["html_url"],
+              "description": body or "A new version is out.",
+              "color": 0xD9A441,
+              "fields": fields,
+              "thumbnail": {"url": f"https://raw.githubusercontent.com/{os.environ['REPO']}/main/branding/logo-256.png"},
+              "footer": {"text": "Full notes and files on GitHub"},
+              "timestamp": r.get("published_at"),
+          }
+          data = json.dumps({"username": "Matriochka Releases",
+                             "avatar_url": f"https://raw.githubusercontent.com/{os.environ['REPO']}/main/branding/logo-256.png",
+                             "embeds": [embed], "allowed_mentions": {"parse": []}}).encode()
+          req = urllib.request.Request(os.environ["WEBHOOK"], data=data, headers={"Content-Type": "application/json", "User-Agent": "matriochka-release-bot"})
+          print(urllib.request.urlopen(req).status)
+          PY
