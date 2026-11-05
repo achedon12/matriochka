@@ -95,6 +95,16 @@ def load_lang(code):
 LANGS = {"en": load_lang("en_us"), "fr": load_lang("fr_fr")}
 
 VANILLA = {
+    "arrow": ("Arrow", "Flèche"), "baked_potato": ("Baked Potato", "Pomme de terre cuite"), "blaze_powder": ("Blaze Powder", "Poudre de blaze"),
+    "chorus_fruit": ("Chorus Fruit", "Chorus"), "cooked_cod": ("Cooked Cod", "Morue cuite"), "cookie": ("Cookie", "Cookie"),
+    "copper_ingot": ("Copper Ingot", "Lingot de cuivre"), "echo_shard": ("Echo Shard", "Éclat d'écho"), "emerald": ("Emerald", "Émeraude"),
+    "enchanted_book": ("Enchanted Book", "Livre enchanté"), "experience_bottle": ("Bottle o' Enchanting", "Fiole d'expérience"),
+    "glow_berries": ("Glow Berries", "Baies lumineuses"), "glowstone_dust": ("Glowstone Dust", "Poudre lumineuse"), "gold_block": ("Block of Gold", "Bloc d'or"),
+    "golden_apple": ("Golden Apple", "Pomme dorée"), "golden_carrot": ("Golden Carrot", "Carotte dorée"), "heart_of_the_sea": ("Heart of the Sea", "Cœur de la mer"),
+    "lead": ("Lead", "Laisse"), "mushroom_stew": ("Mushroom Stew", "Ragoût de champignons"), "name_tag": ("Name Tag", "Étiquette"),
+    "netherite_scrap": ("Netherite Scrap", "Fragment de netherite"), "prismarine_shard": ("Prismarine Shard", "Éclat de prismarine"),
+    "pumpkin_pie": ("Pumpkin Pie", "Tarte à la citrouille"), "shulker_shell": ("Shulker Shell", "Carapace de shulker"), "spyglass": ("Spyglass", "Longue-vue"),
+    "torch": ("Torch", "Torche"), "totem_of_undying": ("Totem of Undying", "Totem d'immortalité"),
     "iron_ingot": ("Iron Ingot", "Lingot de fer"), "oak_log": ("Oak Log", "Bûche de chêne"),
     "oak_planks": ("Oak Planks", "Planches de chêne"), "white_wool": ("White Wool", "Laine blanche"),
     "ender_pearl": ("Ender Pearl", "Perle de l'Ender"), "red_dye": ("Red Dye", "Teinture rouge"),
@@ -344,7 +354,15 @@ FRAME_PICKS = {}
 
 
 def process_frames(dst):
-    """Each picked frame becomes a 21:9 banner, a 4:3 card and a tall doll-window crop."""
+    """Each picked frame becomes a 21:9 banner, a 4:3 card and a tall doll-window crop; structure photos become cards."""
+    st_dir = os.path.join(ROOT, "media/structures")
+    if Image is not None and os.path.isdir(st_dir):
+        for f in sorted(os.listdir(st_dir)):
+            if f.startswith("struct_") and f.endswith(".png"):
+                key = "st_" + f[7:-4]
+                Image.open(os.path.join(st_dir, f)).convert("RGB").resize((800, 450), Image.LANCZOS).save(
+                    os.path.join(dst, key + ".jpg"), quality=80, optimize=True, progressive=True)
+                SHOTS[key] = key + ".jpg"
     if Image is None or not os.path.isdir(FRAMES):
         return
     for key, (seq, n) in FRAME_PICKS.items():
@@ -796,7 +814,8 @@ def build_worlds():
                               recipes=[rec(r) for r in RECIPES.get(station, [])]),
                  items=item_list, armor=armor_d,
                  structures=[dict(role=t(*ROLE[r]), names=structs[r]) for r in ROLE if r in structs],
-                 bossNote=t(f"It drops the {name(boss['core'])}.", f"Il laisse le {name(boss['core'])}."), codex=codex(n))
+                 bossNote=t(f"It drops the {name(boss['core'])}.", f"Il laisse le {name(boss['core'])}."), codex=codex(n),
+                 sites=structures_of(n), loot=loot(n))
         out.append(d)
     return out
 
@@ -857,6 +876,99 @@ def codex(n):
                   "hidden": t("Hidden", "Caché")}[a[0]], hidden=a[0] == "hidden", name=a[1] if LANG == "en" else a[2], desc=a[3] if LANG == "en" else a[4])
         for a in C.ACH.get(n, [])]
     return dict(items=items, blocks=blocks, quests=quests, ach=ach)
+
+
+ARCH = {
+    "tower": ("A tower with a spiral stair and a different room on every floor.", "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage."),
+    "lighthouse": ("A striped lighthouse with a gallery, a glazed lantern room and the keeper's cottage.", "Un phare rayé avec galerie, lanterne vitrée et maison du gardien."),
+    "clock": ("A square clock tower with four faces, a pendulum and a belfry over a gear-paved court.", "Une tour d'horloge carrée à quatre cadrans, balancier et beffroi sur une cour pavée d'engrenages."),
+    "temple": ("A stepped temple with a grand stair, a summit shrine and a pillared inner hall.", "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes."),
+    "cathedral": ("A cathedral with nave, transept, buttresses, twin towers, a rose window and a guarded crypt.", "Une cathédrale avec nef, transept, arcs-boutants, tours jumelles, rosace et crypte gardée."),
+    "throne": ("A pillared throne hall; the carpet before the throne hides a hatch to the treasure room.", "Une salle du trône à colonnes ; le tapis devant le trône cache une trappe vers la salle au trésor."),
+    "library": ("A two-level library with book walls, a mezzanine and reading tables.", "Une bibliothèque sur deux niveaux, murs de livres, mezzanine et tables de lecture."),
+    "lab": ("A laboratory of strange instruments, its upper floor furnished on the ceiling.", "Un laboratoire aux instruments étranges, son étage meublé au plafond."),
+    "shrine": ("A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.", "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre."),
+    "sanctuary": ("The Guardian's Sanctuary: three tiers, eight great pillars with braziers, the altar at the top.", "Le Sanctuaire du Gardien : trois niveaux, huit grands piliers à braseros, l'autel au sommet."),
+    "village": ("Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.", "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi."),
+    "camp": ("A fire ring with log benches, tents, a cooking corner and a lookout post.", "Un foyer entouré de bancs, des tentes, un coin cuisine et un poste de guet."),
+    "market": ("Two rows of awninged stalls under lantern strings, a covered hall and an entrance arch.", "Deux rangées d'étals à auvents sous des guirlandes de lanternes, une halle et une arche d'entrée."),
+    "city": ("A walled city with corner towers, gates, avenues, houses and a guarded keep.", "Une cité fortifiée avec tours d'angle, portes, avenues, maisons et un donjon gardé."),
+    "fort": ("A fort with curtain walls, four towers, a gatehouse with portcullis and a three-floor keep.", "Un fort avec courtines, quatre tours, châtelet à herse et donjon de trois étages."),
+    "arena": ("A sunken arena with tiered seats, gates, a champion's box and beast pens.", "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes."),
+    "garden": ("A glass greenhouse with planters and a fountain.", "Une serre de verre avec jardinières et fontaine."),
+    "ruin": ("Broken walls, a colonnade, a fallen column, a standing arch and a vaulted cellar.", "Des murs brisés, une colonnade, une colonne tombée, une arche debout et une cave voûtée."),
+    "bridge": ("An arched bridge on piers with lamps, a broken gap, gate towers and a room inside a pier.", "Un pont en arches sur piles, avec lampes, une brèche, tours de garde et une salle dans une pile."),
+    "rail": ("A trestle line with a broken end, a roofed station and a signal post.", "Une voie sur tréteaux à l'extrémité brisée, une gare couverte et un poteau de signal."),
+    "stair": ("A looping stair whose last flight runs upside down, around a reading pavilion.", "Un escalier en boucle dont la dernière volée est à l'envers, autour d'un pavillon de lecture."),
+    "vault": ("A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.", "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal."),
+    "crypt": ("A graveyard and mausoleum over a crypt of burial niches, sarcophagi and an ossuary.", "Un cimetière et un mausolée au-dessus d'une crypte de niches, de sarcophages et d'un ossuaire."),
+    "cell": ("A two-storey prison with galleries, barred cells, the warden's office and a watchtower.", "Une prison sur deux étages avec coursives, cellules à barreaux, bureau du gardien et tour de guet."),
+    "maze": ("A generated labyrinth with a central chamber, barred windows and, in the large ones, pit traps.", "Un labyrinthe généré avec chambre centrale, fenêtres à barreaux et, dans les grands, des fosses piégées."),
+    "mine": ("A headframe with its wheel, a shaft with ladder, timbered galleries with rails and ore veins.", "Un chevalement et sa roue, un puits à échelle, des galeries boisées avec rails et filons."),
+    "forge": ("A forge hall around a stepped furnace and chimney, with a lava channel and a barred vault.", "Une forge autour d'un fourneau à degrés et sa cheminée, avec canal de lave et chambre forte."),
+    "well": ("A pavilion over a shaft with niches, down to a domed chamber with a pool and pillars.", "Un pavillon sur un puits à niches, jusqu'à une salle en coupole avec bassin et piliers."),
+    "chasm": ("A jagged rift crossed by an arch bridge, with ledges, scaffolding and a grotto at the bottom.", "Une faille déchiquetée franchie par un pont, avec corniches, échafaudages et grotte au fond."),
+    "nest": ("A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.", "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières."),
+    "hive": ("Lumpy domes with comb terraces, spore blossoms and a queen chamber.", "Des dômes bosselés aux terrasses d'alvéoles, fleurs à spores et chambre de la reine."),
+    "cocoon": ("A great cocoon or crystal core with egg sacs around it.", "Un grand cocon ou un cœur de cristal entouré de poches d'œufs."),
+    "wreck": ("A wrecked hull with a sterncastle cabin, a hold, masts and torn sails.", "Une coque échouée avec cabine de poupe, cale, mâts et voiles déchirées."),
+    "bell": ("A copper diving bell with portholes, a chain up to a buoy, crates and an anchor.", "Une cloche de plongée en cuivre à hublots, une chaîne vers une bouée, des caisses et une ancre."),
+}
+INSIDE = {
+    "combat": ("A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+               "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs."),
+    "exploration": ("Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+                    "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes."),
+    "story": ("A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+              "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal."),
+    "utility": ("The people of the world live here and trade with you, beside a common chest.",
+                "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun."),
+    "secret": ("A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+               "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal."),
+}
+ROLE_LABEL = {"combat": ("Combat", "Combat"), "exploration": ("Exploration", "Exploration"), "story": ("Story", "Histoire"),
+              "utility": ("People", "Peuple"), "secret": ("Secret", "Secret")}
+SIZE_LABEL = {"small": ("Small", "Petite"), "medium": ("Medium", "Moyenne"), "large": ("Large", "Grande")}
+RARITY_S = {"common": ("Common", "Courante"), "rare": ("Rare", "Rare"), "epic": ("Very rare", "Très rare"), "legendary": ("Unique", "Unique")}
+VAN_FOOD = {1: "glow_berries", 2: "baked_potato", 3: "bread", 4: "apple", 5: "mushroom_stew", 6: "chorus_fruit", 7: "cooked_cod", 8: "pumpkin_pie", 9: "cooked_beef", 10: "cookie", 0: "bread"}
+VAN_FLAV = {1: ("sweet_berries", "emerald"), 2: ("blaze_powder", "netherite_scrap"), 3: ("arrow", "name_tag"), 4: ("copper_ingot", "spyglass"), 5: ("glowstone_dust", "echo_shard"),
+            6: ("ender_pearl", "shulker_shell"), 7: ("prismarine_crystals", "heart_of_the_sea"), 8: ("honey_bottle", "clock"), 9: ("lead", "totem_of_undying"), 10: ("gold_nugget", "gold_block"), 0: ("iron_ingot", "iron_ingot")}
+
+
+def _van(i):
+    return dict(id="minecraft:" + i, tex=None, name=t(*VANILLA[i]) if i in VANILLA else i.replace("_", " ").capitalize())
+
+
+def loot(n):
+    """What each chest tier of a world can hold, read from structure/Rewards.java."""
+    def mods(kinds, rare):
+        return [dict(id=it["id"], tex=tex(it["id"]), name=name(it["id"])) for it in C.ITEMS
+                if it["world"] == n and it["kind"] in kinds and ((it["rarity"] not in ("common", "none")) if rare else it["rarity"] == "common")]
+    common = mods({"resource", "food", "consumable"}, False) + [_van(VAN_FOOD[n]), _van("iron_nugget"), _van("prismarine_shard" if n == 7 else "torch"), _van("arrow"), _van("iron_ingot")]
+    rare = mods({"resource", "gem", "ingot", "dust", "consumable", "key", "tool", "thread"}, True) + [_van(x) for x in ("iron_ingot", "gold_ingot", "emerald", "enchanted_book", "experience_bottle", "golden_carrot")] + [_van(VAN_FLAV[n][0])]
+    vault = [_van(x) for x in ("diamond", "gold_ingot", "emerald", "enchanted_book", "golden_apple", "experience_bottle")] + [_van(VAN_FLAV[n][1])]
+    gear = [dict(id=it["id"], tex=tex(it["id"]), name=name(it["id"])) for it in C.ITEMS if it["world"] == n and it["kind"] in
+            {"weapon", "armor", "boots", "mask", "glider", "hook", "lantern", "sonar", "drill", "thruster", "anchor", "hourglass"} and it["rarity"] != "legendary"]
+    seen = set()
+    def uniq(lst):
+        out = []
+        for x in lst:
+            if x["id"] not in seen:
+                seen.add(x["id"]); out.append(x)
+        return out
+    tiers = [dict(tier=t("Common chest", "Coffre commun"), note=t("3 to 5 stacks", "3 à 5 piles"), items=uniq(common)),
+             dict(tier=t("Rare chest", "Coffre rare"), note=t("often an enchanted book", "souvent un livre enchanté"), items=uniq(rare)),
+             dict(tier=t("Vault chest", "Coffre au trésor"), note=t("rare items too, and a 30% chance of one piece of the world's gear", "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde")
+                  + (t(", 8% of an enchanted golden apple", ", 8 % d'une pomme dorée enchantée") if n >= 7 else ""), items=uniq(vault) + uniq(gear))]
+    return tiers
+
+
+def structures_of(n):
+    out = []
+    for (sid, en, fr, role, size, rarity, arch) in C.STRUCTURES[n]:
+        out.append(dict(id=sid, name=en if LANG == "en" else fr, role=t(*ROLE_LABEL[role]), roleKey=role, size=t(*SIZE_LABEL[size]), rarity=t(*RARITY_S.get(rarity, ("", ""))),
+                        desc=t(*ARCH.get(arch, ("", ""))), inside=t(*INSIDE[role]), img=shot(f"st_{sid}")))
+    return out
 
 
 def role_tags(m):
@@ -1228,7 +1340,10 @@ def build_copy():
                  "Chaque objet et chaque bloc, comment le fabriquer ou le trouver, et ce que le monde attend de toi."),
         cItems=t("Items", "Objets"), cBlocks=t("Blocks", "Blocs"), cQuests=t("Quests", "Quêtes"), cAch=t("Achievements", "Succès"),
         cMade=t("Made at", "Fabriqué à"), cFound=t("Found on", "Obtenu sur"), cGives=t("Mined, it gives", "Miné, il donne"),
-        cMakes=t("makes", "donne"), cHidden=t("Hidden until you earn it", "Caché jusqu'à ce que tu l'obtiennes"),
+        cMakes=t("makes", "donne"), sitesH=t("Structures and their loot", "Structures et leur butin"),
+        sitesP=t("Ten structures generate across every world, each with its own purpose. Here is where to look, what waits inside, and what the chests can hold.",
+                 "Dix structures apparaissent dans chaque monde, chacune avec son rôle. Voici où chercher, ce qui t'attend dedans et ce que les coffres peuvent contenir."),
+        lootH=t("What the chests can hold", "Ce que les coffres peuvent contenir"), cHidden=t("Hidden until you earn it", "Caché jusqu'à ce que tu l'obtiennes"),
         h=t("The ten worlds", "Les dix mondes"),
         lead=t("Each world is planted inside the one before it, and each one bends a rule you thought you knew. Numbers below come straight from the mod's code.",
                "Chaque monde est planté dans le précédent, et chacun tord une règle que tu croyais connaître. Les chiffres ci-dessous viennent directement du code du mod."),

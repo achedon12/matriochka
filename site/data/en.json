@@ -313,6 +313,9 @@
    "cFound": "Found on",
    "cGives": "Mined, it gives",
    "cMakes": "makes",
+   "sitesH": "Structures and their loot",
+   "sitesP": "Ten structures generate across every world, each with its own purpose. Here is where to look, what waits inside, and what the chests can hold.",
+   "lootH": "What the chests can hold",
    "cHidden": "Hidden until you earn it",
    "h": "The ten worlds",
    "lead": "Each world is planted inside the one before it, and each one bends a rule you thought you knew. Numbers below come straight from the mod's code.",
@@ -2383,7 +2386,244 @@
       "desc": "Find the hidden doll of the world."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "spore_hive",
+     "name": "Spore Hive",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "Lumpy domes with comb terraces, spore blossoms and a queen chamber.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "sporeling_nest",
+     "name": "Sporeling Nest",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Small",
+     "rarity": "Common",
+     "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "toxin_well",
+     "name": "Toxin Well",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A pavilion over a shaft with niches, down to a domed chamber with a pool and pillars.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "hollow_tree",
+     "name": "Hollow Tree",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Small",
+     "rarity": "Common",
+     "desc": "A tower with a spiral stair and a different room on every floor.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "abandoned_greenhouse",
+     "name": "Abandoned Greenhouse",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A glass greenhouse with planters and a fountain.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "giant_cocoon",
+     "name": "Giant Cocoon",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A great cocoon or crystal core with egg sacs around it.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "root_temple",
+     "name": "Root Temple",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Large",
+     "rarity": "",
+     "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "purified_clearing",
+     "name": "Purified Clearing",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "gatherer_village",
+     "name": "Gatherer Village",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "artisan_sanctuary",
+     "name": "Artisan's Sanctuary",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Small",
+     "rarity": "",
+     "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "spores",
+       "tex": "items/spores.png",
+       "name": "Spores"
+      },
+      {
+       "id": "roots",
+       "tex": "items/roots.png",
+       "name": "Roots"
+      },
+      {
+       "id": "antidote",
+       "tex": "items/antidote.png",
+       "name": "Antidote"
+      },
+      {
+       "id": "root_broth",
+       "tex": "items/root_broth.png",
+       "name": "Root Broth"
+      },
+      {
+       "id": "minecraft:glow_berries",
+       "tex": null,
+       "name": "Glow Berries"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torch"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "sporite",
+       "tex": "items/sporite.png",
+       "name": "Sporite"
+      },
+      {
+       "id": "chitin",
+       "tex": "items/chitin.png",
+       "name": "Chitin"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      },
+      {
+       "id": "minecraft:sweet_berries",
+       "tex": null,
+       "name": "Sweet Berries"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "filter_mask",
+       "tex": "items/filter_mask.png",
+       "name": "Filter Mask"
+      },
+      {
+       "id": "sporite_sword",
+       "tex": "items/sporite_sword.png",
+       "name": "Sporite Sword"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 2,
@@ -3284,7 +3524,244 @@
       "desc": "Find the hidden doll of the world."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "salamander_cavern",
+     "name": "Salamander Cavern",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "giant_furnace",
+     "name": "Giant Furnace",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A forge hall around a stepped furnace and chimney, with a lava channel and a barred vault.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "lava_well",
+     "name": "Lava Well",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A pavilion over a shaft with niches, down to a domed chamber with a pool and pillars.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "collapsed_mine",
+     "name": "Collapsed Mine",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A headframe with its wheel, a shaft with ladder, timbered galleries with rails and ore veins.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "hanging_rail",
+     "name": "Hanging Rail",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A trestle line with a broken end, a roofed station and a signal post.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "crystal_works",
+     "name": "Crystal Works",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A glass greenhouse with planters and a fountain.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "abandoned_forge",
+     "name": "Abandoned Forge",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A forge hall around a stepped furnace and chimney, with a lava channel and a barred vault.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "vein_sanctuary",
+     "name": "Vein Sanctuary",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Large",
+     "rarity": "",
+     "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "miner_camp",
+     "name": "Miners' Camp",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A fire ring with log benches, tents, a cooking corner and a lookout post.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "artisan_workshop",
+     "name": "Artisan's Workshop",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Small",
+     "rarity": "",
+     "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "blazing_rock",
+       "tex": "items/blazing_rock.png",
+       "name": "Blazing Rock"
+      },
+      {
+       "id": "cooling_water",
+       "tex": "items/cooling_water.png",
+       "name": "Cooling Water"
+      },
+      {
+       "id": "ice_bread",
+       "tex": "items/ice_bread.png",
+       "name": "Ice Bread"
+      },
+      {
+       "id": "minecraft:baked_potato",
+       "tex": null,
+       "name": "Baked Potato"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torch"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "giant_ore",
+       "tex": "items/giant_ore.png",
+       "name": "Giant Ore"
+      },
+      {
+       "id": "ash_ingot",
+       "tex": "items/ash_ingot.png",
+       "name": "Ash Ingot"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      },
+      {
+       "id": "minecraft:blaze_powder",
+       "tex": null,
+       "name": "Blaze Powder"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "minecraft:netherite_scrap",
+       "tex": null,
+       "name": "Netherite Scrap"
+      },
+      {
+       "id": "drill",
+       "tex": "items/drill.png",
+       "name": "Drill"
+      },
+      {
+       "id": "ash_hammer",
+       "tex": "items/ash_hammer.png",
+       "name": "Ash Hammer"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 3,
@@ -4238,7 +4715,229 @@
       "desc": "Find the hidden doll of the world."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "arena",
+     "name": "Arena",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "jailer_court",
+     "name": "Jailers' Court",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "moving_hall",
+     "name": "Moving Hall",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A generated labyrinth with a central chamber, barred windows and, in the large ones, pit traps.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "trap_maze",
+     "name": "Trap Labyrinth",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A generated labyrinth with a central chamber, barred windows and, in the large ones, pit traps.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "treasury",
+     "name": "Treasury",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "crypt",
+     "name": "Crypt",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A graveyard and mausoleum over a crypt of burial niches, sarcophagi and an ossuary.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "sealed_library",
+     "name": "Sealed Library",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A two-level library with book walls, a mezzanine and reading tables.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "key_hall",
+     "name": "Hall of Keys",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "prison",
+     "name": "Prison",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A two-storey prison with galleries, barred cells, the warden's office and a watchtower.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "artisan_cell",
+     "name": "Artisan's Cell",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Small",
+     "rarity": "",
+     "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "portable_trap",
+       "tex": "items/portable_trap.png",
+       "name": "Portable Trap"
+      },
+      {
+       "id": "cell_ration",
+       "tex": "items/cell_ration.png",
+       "name": "Cell Ration"
+      },
+      {
+       "id": "minecraft:bread",
+       "tex": null,
+       "name": "Bread"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torch"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "dungeon_key",
+       "tex": "items/dungeon_key.png",
+       "name": "Dungeon Key"
+      },
+      {
+       "id": "sealed_fragment",
+       "tex": "items/sealed_fragment.png",
+       "name": "Sealed Fragment"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "minecraft:name_tag",
+       "tex": null,
+       "name": "Name Tag"
+      },
+      {
+       "id": "jailer_blade",
+       "tex": "items/jailer_blade.png",
+       "name": "Jailer's Blade"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 4,
@@ -5155,7 +5854,244 @@
       "desc": "Find the hidden doll of the world."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "ray_nest",
+     "name": "Ray Nest",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "giant_lightning_rod",
+     "name": "Giant Lightning Rod",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A tower with a spiral stair and a different room on every floor.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "flying_wreck",
+     "name": "Flying Wreck",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A wrecked hull with a sterncastle cabin, a hold, masts and torn sails.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "hanging_ruin",
+     "name": "Hanging Ruin",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "Broken walls, a colonnade, a fallen column, a standing arch and a vaulted cellar.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "broken_bridge",
+     "name": "Broken Bridge",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Large",
+     "rarity": "Common",
+     "desc": "An arched bridge on piers with lamps, a broken gap, gate towers and a room inside a pier.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "storm_lighthouse",
+     "name": "Storm Lighthouse",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A striped lighthouse with a gallery, a glazed lantern room and the keeper's cottage.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "celestial_temple",
+     "name": "Celestial Temple",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Large",
+     "rarity": "",
+     "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "observatory",
+     "name": "Observatory",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A tower with a spiral stair and a different room on every floor.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "floating_village",
+     "name": "Floating Village",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "cloud_garden",
+     "name": "Cloud Garden",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Small",
+     "rarity": "",
+     "desc": "A glass greenhouse with planters and a fountain.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "ray_membrane",
+       "tex": "items/ray_membrane.png",
+       "name": "Ray Membrane"
+      },
+      {
+       "id": "cloud_fruit",
+       "tex": "items/cloud_fruit.png",
+       "name": "Cloud Fruit"
+      },
+      {
+       "id": "minecraft:apple",
+       "tex": null,
+       "name": "Apple"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torch"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "storm_essence",
+       "tex": "items/storm_essence.png",
+       "name": "Storm Essence"
+      },
+      {
+       "id": "celestial_crystal",
+       "tex": "items/celestial_crystal.png",
+       "name": "Celestial Crystal"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      },
+      {
+       "id": "minecraft:copper_ingot",
+       "tex": null,
+       "name": "Copper Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "minecraft:spyglass",
+       "tex": null,
+       "name": "Spyglass"
+      },
+      {
+       "id": "glider",
+       "tex": "items/glider.png",
+       "name": "Glider"
+      },
+      {
+       "id": "grappling_hook",
+       "tex": "items/grappling_hook.png",
+       "name": "Grappling Hook"
+      },
+      {
+       "id": "lightning_lance",
+       "tex": "items/lightning_lance.png",
+       "name": "Lightning Lance"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 5,
@@ -6029,7 +6965,244 @@
       "desc": "Find the hidden doll of the world."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "prowler_nest",
+     "name": "Prowler Nest",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "echo_cemetery",
+     "name": "Echo Cemetery",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A graveyard and mausoleum over a crypt of burial niches, sarcophagi and an ossuary.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "black_cathedral",
+     "name": "Black Cathedral",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A cathedral with nave, transept, buttresses, twin towers, a rose window and a guarded crypt.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "dark_tower",
+     "name": "Dark Tower",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A tower with a spiral stair and a different room on every floor.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "bottomless_mine",
+     "name": "Bottomless Mine",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A headframe with its wheel, a shaft with ladder, timbered galleries with rails and ore veins.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "light_well",
+     "name": "Light Well",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A pavilion over a shaft with niches, down to a domed chamber with a pool and pillars.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "blind_sanctuary",
+     "name": "Blind Sanctuary",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "fresco_gallery",
+     "name": "Fresco Gallery",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A two-level library with book walls, a mezzanine and reading tables.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "silent_village",
+     "name": "Silent Village",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "artisan_shelter",
+     "name": "Artisan's Shelter",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Small",
+     "rarity": "",
+     "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "silence_balm",
+       "tex": "items/silence_balm.png",
+       "name": "Silence Balm"
+      },
+      {
+       "id": "mute_mushroom",
+       "tex": "items/mute_mushroom.png",
+       "name": "Mute Mushroom"
+      },
+      {
+       "id": "minecraft:mushroom_stew",
+       "tex": null,
+       "name": "Mushroom Stew"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torch"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "shadow_shard",
+       "tex": "items/shadow_shard.png",
+       "name": "Shadow Shard"
+      },
+      {
+       "id": "diamond_fragment",
+       "tex": "items/diamond_fragment.png",
+       "name": "Diamond Fragment"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      },
+      {
+       "id": "minecraft:glowstone_dust",
+       "tex": null,
+       "name": "Glowstone Dust"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "minecraft:echo_shard",
+       "tex": null,
+       "name": "Echo Shard"
+      },
+      {
+       "id": "solar_lantern",
+       "tex": "items/solar_lantern.png",
+       "name": "Solar Lantern"
+      },
+      {
+       "id": "sonar",
+       "tex": "items/sonar.png",
+       "name": "Sonar"
+      },
+      {
+       "id": "shadow_blade",
+       "tex": "items/shadow_blade.png",
+       "name": "Shadow Blade"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 6,
@@ -6828,7 +8001,239 @@
       "desc": "Find the hidden doll of the world."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "mirror_hall",
+     "name": "Hall of Mirrors",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "hanging_cage",
+     "name": "Hanging Cage",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Small",
+     "rarity": "Common",
+     "desc": "A two-storey prison with galleries, barred cells, the warden's office and a watchtower.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "unstable_core",
+     "name": "Unstable Core",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A great cocoon or crystal core with egg sacs around it.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "inverted_tower",
+     "name": "Inverted Tower",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A tower with a spiral stair and a different room on every floor.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "ceiling_city",
+     "name": "Ceiling City",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A walled city with corner towers, gates, avenues, houses and a guarded keep.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "upturned_pool",
+     "name": "Upturned Pool",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A pavilion over a shaft with niches, down to a domed chamber with a pool and pillars.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "gravity_lab",
+     "name": "Gravity Lab",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A laboratory of strange instruments, its upper floor furnished on the ceiling.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "impossible_stair",
+     "name": "Impossible Stair",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A looping stair whose last flight runs upside down, around a reading pavilion.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "reflection_refuge",
+     "name": "Reflection Refuge",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "floating_garden",
+     "name": "Floating Garden",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Small",
+     "rarity": "",
+     "desc": "A glass greenhouse with planters and a fountain.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "stabilizer",
+       "tex": "items/stabilizer.png",
+       "name": "Stabilizer"
+      },
+      {
+       "id": "flipped_apple",
+       "tex": "items/flipped_apple.png",
+       "name": "Flipped Apple"
+      },
+      {
+       "id": "minecraft:chorus_fruit",
+       "tex": null,
+       "name": "Chorus Fruit"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torch"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "unstable_alloy",
+       "tex": "items/unstable_alloy.png",
+       "name": "Unstable Alloy"
+      },
+      {
+       "id": "inverted_crystal",
+       "tex": "items/inverted_crystal.png",
+       "name": "Inverted Crystal"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      },
+      {
+       "id": "minecraft:ender_pearl",
+       "tex": null,
+       "name": "Ender Pearl"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "minecraft:shulker_shell",
+       "tex": null,
+       "name": "Shulker Shell"
+      },
+      {
+       "id": "gravity_boots",
+       "tex": "items/gravity_boots.png",
+       "name": "Gravity Boots"
+      },
+      {
+       "id": "mirror_blade",
+       "tex": "items/mirror_blade.png",
+       "name": "Mirror Blade"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 7,
@@ -7672,7 +9077,239 @@
       "desc": "Find the hidden doll of the world."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "hunter_trench",
+     "name": "Hunters' Trench",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Common",
+     "desc": "A jagged rift crossed by an arch bridge, with ledges, scaffolding and a grotto at the bottom.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "dead_reef",
+     "name": "Dead Reef",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "Broken walls, a colonnade, a fallen column, a standing arch and a vaulted cellar.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "sunken_city",
+     "name": "Sunken City",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A walled city with corner towers, gates, avenues, houses and a guarded keep.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "wreck",
+     "name": "Wreck",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A wrecked hull with a sterncastle cabin, a hold, masts and torn sails.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "diving_bell",
+     "name": "Diving Bell",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Small",
+     "rarity": "Common",
+     "desc": "A copper diving bell with portholes, a chain up to a buoy, crates and an anchor.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "air_grotto",
+     "name": "Air Grotto",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A great cocoon or crystal core with egg sacs around it.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "abyssal_temple",
+     "name": "Abyssal Temple",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Large",
+     "rarity": "",
+     "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "sunken_lighthouse",
+     "name": "Sunken Lighthouse",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A striped lighthouse with a gallery, a glazed lantern room and the keeper's cottage.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "pressure_station",
+     "name": "Pressure Station",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A laboratory of strange instruments, its upper floor furnished on the ceiling.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "deep_vault",
+     "name": "Vault of the Deep",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Small",
+     "rarity": "",
+     "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "oxygen_capsule",
+       "tex": "items/oxygen_capsule.png",
+       "name": "Oxygen Capsule"
+      },
+      {
+       "id": "apnea_kelp",
+       "tex": "items/apnea_kelp.png",
+       "name": "Apnea Kelp"
+      },
+      {
+       "id": "minecraft:cooked_cod",
+       "tex": null,
+       "name": "Cooked Cod"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:prismarine_shard",
+       "tex": null,
+       "name": "Prismarine Shard"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "abyssal_salt",
+       "tex": "items/abyssal_salt.png",
+       "name": "Abyssal Salt"
+      },
+      {
+       "id": "pressure_pearl",
+       "tex": "items/pressure_pearl.png",
+       "name": "Pressure Pearl"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      },
+      {
+       "id": "minecraft:prismarine_crystals",
+       "tex": null,
+       "name": "Prismarine Crystals"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear, 8% of an enchanted golden apple",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "minecraft:heart_of_the_sea",
+       "tex": null,
+       "name": "Heart of the Sea"
+      },
+      {
+       "id": "thruster",
+       "tex": "items/thruster.png",
+       "name": "Thruster"
+      },
+      {
+       "id": "trench_trident",
+       "tex": "items/trench_trident.png",
+       "name": "Trench Trident"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 8,
@@ -8558,7 +10195,239 @@
       "desc": "Find the hidden doll of the world."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "hastened_town",
+     "name": "Hastened Town",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A walled city with corner towers, gates, avenues, houses and a guarded keep.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "aging_ruin",
+     "name": "Aging Ruin",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "Broken walls, a colonnade, a fallen column, a standing arch and a vaulted cellar.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "giant_clock",
+     "name": "Giant Clock",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A square clock tower with four faces, a pendulum and a belfry over a gear-paved court.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "season_greenhouse",
+     "name": "Greenhouse of Seasons",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A glass greenhouse with planters and a fountain.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "frozen_garden",
+     "name": "Frozen Garden",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "ephemeral_camp",
+     "name": "Ephemeral Camp",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Small",
+     "rarity": "Common",
+     "desc": "A fire ring with log benches, tents, a cooking corner and a lookout post.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "solar_observatory",
+     "name": "Solar Observatory",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A tower with a spiral stair and a different room on every floor.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "library_of_ages",
+     "name": "Library of Ages",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Large",
+     "rarity": "",
+     "desc": "A two-level library with book walls, a mezzanine and reading tables.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "dusk_market",
+     "name": "Dusk Market",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "Two rows of awninged stalls under lantern strings, a covered hall and an entrance arch.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "time_tomb",
+     "name": "Time Tomb",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Small",
+     "rarity": "",
+     "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "season_preserve",
+       "tex": "items/season_preserve.png",
+       "name": "Season Preserve"
+      },
+      {
+       "id": "season_jam",
+       "tex": "items/season_jam.png",
+       "name": "Season Jam"
+      },
+      {
+       "id": "minecraft:pumpkin_pie",
+       "tex": null,
+       "name": "Pumpkin Pie"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torch"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "temporal_sand",
+       "tex": "items/temporal_sand.png",
+       "name": "Temporal Sand"
+      },
+      {
+       "id": "season_fragment",
+       "tex": "items/season_fragment.png",
+       "name": "Season Fragment"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      },
+      {
+       "id": "minecraft:honey_bottle",
+       "tex": null,
+       "name": "Honey Bottle"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear, 8% of an enchanted golden apple",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "minecraft:clock",
+       "tex": null,
+       "name": "Clock"
+      },
+      {
+       "id": "hourglass",
+       "tex": "items/hourglass.png",
+       "name": "Hourglass"
+      },
+      {
+       "id": "season_scythe",
+       "tex": "items/season_scythe.png",
+       "name": "Scythe of Seasons"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 9,
@@ -9388,7 +11257,234 @@
       "desc": "Find the hidden doll of the world."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "walking_tower",
+     "name": "Walking Tower",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A tower with a spiral stair and a different room on every floor.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "mobile_fortress",
+     "name": "Mobile Fortress",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A fort with curtain walls, four towers, a gatehouse with portcullis and a three-floor keep.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "terrain_arena",
+     "name": "Terrain Arena",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "moving_ruin",
+     "name": "Moving Ruin",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "Broken walls, a colonnade, a fallen column, a standing arch and a vaulted cellar.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "living_chasm",
+     "name": "Living Chasm",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A jagged rift crossed by an arch bridge, with ledges, scaffolding and a grotto at the bottom.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "mimic_nest",
+     "name": "Mimic Nest",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "buried_village",
+     "name": "Buried Village",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "beating_vein",
+     "name": "Beating Vein",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "anchored_fort",
+     "name": "Anchored Fort",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A fort with curtain walls, four towers, a gatehouse with portcullis and a three-floor keep.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "stable_sanctuary",
+     "name": "Stable Sanctuary",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Small",
+     "rarity": "",
+     "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "anchor_bread",
+       "tex": "items/anchor_bread.png",
+       "name": "Anchor Bread"
+      },
+      {
+       "id": "minecraft:cooked_beef",
+       "tex": null,
+       "name": "Steak"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torch"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "terrain_fragment",
+       "tex": "items/terrain_fragment.png",
+       "name": "Terrain Fragment"
+      },
+      {
+       "id": "terrain_heart",
+       "tex": "items/terrain_heart.png",
+       "name": "Terrain Heart"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      },
+      {
+       "id": "minecraft:lead",
+       "tex": null,
+       "name": "Lead"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear, 8% of an enchanted golden apple",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "minecraft:totem_of_undying",
+       "tex": null,
+       "name": "Totem of Undying"
+      },
+      {
+       "id": "anchor",
+       "tex": "items/anchor.png",
+       "name": "Anchor"
+      },
+      {
+       "id": "grip_boots",
+       "tex": "items/grip_boots.png",
+       "name": "Grip Boots"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 10,
@@ -10228,7 +12324,224 @@
       "desc": "Reach the third ending."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "needle_tower",
+     "name": "Needle Tower",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A tower with a spiral stair and a different room on every floor.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "colossal_forge",
+     "name": "Colossal Forge",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A forge hall around a stepped furnace and chimney, with a lava channel and a barred vault.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "collapsed_doll",
+     "name": "Collapsed Doll",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A great cocoon or crystal core with egg sacs around it.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
+    },
+    {
+     "id": "giant_chest",
+     "name": "Giant Chest",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "colossal_library",
+     "name": "Colossal Library",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Large",
+     "rarity": "",
+     "desc": "A two-level library with book walls, a mezzanine and reading tables.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "titanic_workbench",
+     "name": "Titanic Workbench",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Large",
+     "rarity": "",
+     "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
+     "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
+     "img": null
+    },
+    {
+     "id": "artisan_giant_workshop",
+     "name": "Artisan's Giant Workshop",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Large",
+     "rarity": "",
+     "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "block_gate",
+     "name": "Block Gate",
+     "role": "Story",
+     "roleKey": "story",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
+     "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
+     "img": null
+    },
+    {
+     "id": "city_of_giants",
+     "name": "City of Giants",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A walled city with corner towers, gates, avenues, houses and a guarded keep.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
+    },
+    {
+     "id": "creature_throne",
+     "name": "Throne of the Creature",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Medium",
+     "rarity": "",
+     "desc": "A pillared throne hall; the carpet before the throne hides a hatch to the treasure room.",
+     "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Common chest",
+     "note": "3 to 5 stacks",
+     "items": [
+      {
+       "id": "workshop_feast",
+       "tex": "items/workshop_feast.png",
+       "name": "Workshop Feast"
+      },
+      {
+       "id": "minecraft:cookie",
+       "tex": null,
+       "name": "Cookie"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Iron Nugget"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torch"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Arrow"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tier": "Rare chest",
+     "note": "often an enchanted book",
+     "items": [
+      {
+       "id": "artisan_thread",
+       "tex": "items/artisan_thread.png",
+       "name": "Artisan's Thread"
+      },
+      {
+       "id": "artisan_shard",
+       "tex": "items/artisan_shard.png",
+       "name": "Artisan's Shard"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Gold Ingot"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Emerald"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Enchanted Book"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Bottle o' Enchanting"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Golden Carrot"
+      },
+      {
+       "id": "minecraft:gold_nugget",
+       "tex": null,
+       "name": "Gold Nugget"
+      }
+     ]
+    },
+    {
+     "tier": "Vault chest",
+     "note": "rare items too, and a 30% chance of one piece of the world's gear, 8% of an enchanted golden apple",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamond"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Golden Apple"
+      },
+      {
+       "id": "minecraft:gold_block",
+       "tex": null,
+       "name": "Block of Gold"
+      }
+     ]
+    }
+   ]
   }
  ],
  "mobs": [

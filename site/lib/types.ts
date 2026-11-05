@@ -25,6 +25,8 @@ export interface World {
   structures: { role: string; names: string[] }[];
   gallery?: { src: string; caption: string }[];
   codex: Codex;
+  sites?: { id: string; name: string; role: string; roleKey: string; size: string; rarity: string; desc: string; inside: string; img: string | null }[];
+  loot?: { tier: string; note: string; items: { id: string; tex: string | null; name: string }[] }[];
 }
 
 export interface CodexEntry {

@@ -313,6 +313,9 @@
    "cFound": "Obtenu sur",
    "cGives": "Miné, il donne",
    "cMakes": "donne",
+   "sitesH": "Structures et leur butin",
+   "sitesP": "Dix structures apparaissent dans chaque monde, chacune avec son rôle. Voici où chercher, ce qui t'attend dedans et ce que les coffres peuvent contenir.",
+   "lootH": "Ce que les coffres peuvent contenir",
    "cHidden": "Caché jusqu'à ce que tu l'obtiennes",
    "h": "Les dix mondes",
    "lead": "Chaque monde est planté dans le précédent, et chacun tord une règle que tu croyais connaître. Les chiffres ci-dessous viennent directement du code du mod.",
@@ -2383,7 +2386,244 @@
       "desc": "Trouver la poupée cachée du monde."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "spore_hive",
+     "name": "Ruche de spores",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Des dômes bosselés aux terrasses d'alvéoles, fleurs à spores et chambre de la reine.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "sporeling_nest",
+     "name": "Nid de Sporelins",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Petite",
+     "rarity": "Courante",
+     "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "toxin_well",
+     "name": "Puits de toxine",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Un pavillon sur un puits à niches, jusqu'à une salle en coupole avec bassin et piliers.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "hollow_tree",
+     "name": "Arbre creux",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Petite",
+     "rarity": "Courante",
+     "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "abandoned_greenhouse",
+     "name": "Serre abandonnée",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Une serre de verre avec jardinières et fontaine.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "giant_cocoon",
+     "name": "Cocon géant",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Un grand cocon ou un cœur de cristal entouré de poches d'œufs.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "root_temple",
+     "name": "Temple racinaire",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "purified_clearing",
+     "name": "Clairière purifiée",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "gatherer_village",
+     "name": "Village de cueilleurs",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "artisan_sanctuary",
+     "name": "Sanctuaire de l'artisan",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Petite",
+     "rarity": "",
+     "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "spores",
+       "tex": "items/spores.png",
+       "name": "Spores"
+      },
+      {
+       "id": "roots",
+       "tex": "items/roots.png",
+       "name": "Racines"
+      },
+      {
+       "id": "antidote",
+       "tex": "items/antidote.png",
+       "name": "Antidote"
+      },
+      {
+       "id": "root_broth",
+       "tex": "items/root_broth.png",
+       "name": "Bouillie de racines"
+      },
+      {
+       "id": "minecraft:glow_berries",
+       "tex": null,
+       "name": "Baies lumineuses"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torche"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "sporite",
+       "tex": "items/sporite.png",
+       "name": "Sporite"
+      },
+      {
+       "id": "chitin",
+       "tex": "items/chitin.png",
+       "name": "Chitine"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      },
+      {
+       "id": "minecraft:sweet_berries",
+       "tex": null,
+       "name": "Baies sucrées"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "filter_mask",
+       "tex": "items/filter_mask.png",
+       "name": "Masque filtrant"
+      },
+      {
+       "id": "sporite_sword",
+       "tex": "items/sporite_sword.png",
+       "name": "Épée de sporite"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 2,
@@ -3284,7 +3524,244 @@
       "desc": "Trouver la poupée cachée du monde."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "salamander_cavern",
+     "name": "Caverne de salamandres",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "giant_furnace",
+     "name": "Fournaise géante",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une forge autour d'un fourneau à degrés et sa cheminée, avec canal de lave et chambre forte.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "lava_well",
+     "name": "Puits de lave",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un pavillon sur un puits à niches, jusqu'à une salle en coupole avec bassin et piliers.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "collapsed_mine",
+     "name": "Mine effondrée",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un chevalement et sa roue, un puits à échelle, des galeries boisées avec rails et filons.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "hanging_rail",
+     "name": "Rail suspendu",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Une voie sur tréteaux à l'extrémité brisée, une gare couverte et un poteau de signal.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "crystal_works",
+     "name": "Cristallerie",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Une serre de verre avec jardinières et fontaine.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "abandoned_forge",
+     "name": "Forge abandonnée",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Une forge autour d'un fourneau à degrés et sa cheminée, avec canal de lave et chambre forte.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "vein_sanctuary",
+     "name": "Sanctuaire du filon",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "miner_camp",
+     "name": "Camp de mineurs",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Un foyer entouré de bancs, des tentes, un coin cuisine et un poste de guet.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "artisan_workshop",
+     "name": "Atelier de l'artisan",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Petite",
+     "rarity": "",
+     "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "blazing_rock",
+       "tex": "items/blazing_rock.png",
+       "name": "Roche ardente"
+      },
+      {
+       "id": "cooling_water",
+       "tex": "items/cooling_water.png",
+       "name": "Eau de refroidissement"
+      },
+      {
+       "id": "ice_bread",
+       "tex": "items/ice_bread.png",
+       "name": "Pain de glace"
+      },
+      {
+       "id": "minecraft:baked_potato",
+       "tex": null,
+       "name": "Pomme de terre cuite"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torche"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "giant_ore",
+       "tex": "items/giant_ore.png",
+       "name": "Minerai géant"
+      },
+      {
+       "id": "ash_ingot",
+       "tex": "items/ash_ingot.png",
+       "name": "Lingot de cendre"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      },
+      {
+       "id": "minecraft:blaze_powder",
+       "tex": null,
+       "name": "Poudre de blaze"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "minecraft:netherite_scrap",
+       "tex": null,
+       "name": "Fragment de netherite"
+      },
+      {
+       "id": "drill",
+       "tex": "items/drill.png",
+       "name": "Foreuse"
+      },
+      {
+       "id": "ash_hammer",
+       "tex": "items/ash_hammer.png",
+       "name": "Marteau de cendre"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 3,
@@ -4238,7 +4715,229 @@
       "desc": "Trouver la poupée cachée du monde."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "arena",
+     "name": "Arène",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "jailer_court",
+     "name": "Cour des Geôliers",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "moving_hall",
+     "name": "Salle mobile",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un labyrinthe généré avec chambre centrale, fenêtres à barreaux et, dans les grands, des fosses piégées.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "trap_maze",
+     "name": "Labyrinthe de pièges",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Un labyrinthe généré avec chambre centrale, fenêtres à barreaux et, dans les grands, des fosses piégées.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "treasury",
+     "name": "Trésorerie",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "crypt",
+     "name": "Crypte",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un cimetière et un mausolée au-dessus d'une crypte de niches, de sarcophages et d'un ossuaire.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "sealed_library",
+     "name": "Bibliothèque scellée",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Une bibliothèque sur deux niveaux, murs de livres, mezzanine et tables de lecture.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "key_hall",
+     "name": "Salle des clés",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "prison",
+     "name": "Prison",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une prison sur deux étages avec coursives, cellules à barreaux, bureau du gardien et tour de guet.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "artisan_cell",
+     "name": "Cellule de l'artisan",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Petite",
+     "rarity": "",
+     "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "portable_trap",
+       "tex": "items/portable_trap.png",
+       "name": "Piège portatif"
+      },
+      {
+       "id": "cell_ration",
+       "tex": "items/cell_ration.png",
+       "name": "Ration de cellule"
+      },
+      {
+       "id": "minecraft:bread",
+       "tex": null,
+       "name": "Pain"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torche"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "dungeon_key",
+       "tex": "items/dungeon_key.png",
+       "name": "Clé de donjon"
+      },
+      {
+       "id": "sealed_fragment",
+       "tex": "items/sealed_fragment.png",
+       "name": "Fragment scellé"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "minecraft:name_tag",
+       "tex": null,
+       "name": "Étiquette"
+      },
+      {
+       "id": "jailer_blade",
+       "tex": "items/jailer_blade.png",
+       "name": "Lame du Geôlier"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 4,
@@ -5155,7 +5854,244 @@
       "desc": "Trouver la poupée cachée du monde."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "ray_nest",
+     "name": "Nid de raies",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "giant_lightning_rod",
+     "name": "Paratonnerre géant",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "flying_wreck",
+     "name": "Épave volante",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Une coque échouée avec cabine de poupe, cale, mâts et voiles déchirées.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "hanging_ruin",
+     "name": "Ruine suspendue",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Des murs brisés, une colonnade, une colonne tombée, une arche debout et une cave voûtée.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "broken_bridge",
+     "name": "Pont brisé",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Grande",
+     "rarity": "Courante",
+     "desc": "Un pont en arches sur piles, avec lampes, une brèche, tours de garde et une salle dans une pile.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "storm_lighthouse",
+     "name": "Phare des tempêtes",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un phare rayé avec galerie, lanterne vitrée et maison du gardien.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "celestial_temple",
+     "name": "Temple céleste",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "observatory",
+     "name": "Observatoire",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "floating_village",
+     "name": "Village flottant",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "cloud_garden",
+     "name": "Jardin des nuages",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Petite",
+     "rarity": "",
+     "desc": "Une serre de verre avec jardinières et fontaine.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "ray_membrane",
+       "tex": "items/ray_membrane.png",
+       "name": "Membrane de raie"
+      },
+      {
+       "id": "cloud_fruit",
+       "tex": "items/cloud_fruit.png",
+       "name": "Fruit de nuage"
+      },
+      {
+       "id": "minecraft:apple",
+       "tex": null,
+       "name": "Pomme"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torche"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "storm_essence",
+       "tex": "items/storm_essence.png",
+       "name": "Essence de tempête"
+      },
+      {
+       "id": "celestial_crystal",
+       "tex": "items/celestial_crystal.png",
+       "name": "Cristal céleste"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      },
+      {
+       "id": "minecraft:copper_ingot",
+       "tex": null,
+       "name": "Lingot de cuivre"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "minecraft:spyglass",
+       "tex": null,
+       "name": "Longue-vue"
+      },
+      {
+       "id": "glider",
+       "tex": "items/glider.png",
+       "name": "Planeur"
+      },
+      {
+       "id": "grappling_hook",
+       "tex": "items/grappling_hook.png",
+       "name": "Grappin"
+      },
+      {
+       "id": "lightning_lance",
+       "tex": "items/lightning_lance.png",
+       "name": "Lance de foudre"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 5,
@@ -6029,7 +6965,244 @@
       "desc": "Trouver la poupée cachée du monde."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "prowler_nest",
+     "name": "Nid de rôdeurs",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "echo_cemetery",
+     "name": "Cimetière d'échos",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un cimetière et un mausolée au-dessus d'une crypte de niches, de sarcophages et d'un ossuaire.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "black_cathedral",
+     "name": "Cathédrale noire",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une cathédrale avec nef, transept, arcs-boutants, tours jumelles, rosace et crypte gardée.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "dark_tower",
+     "name": "Tour éteinte",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "bottomless_mine",
+     "name": "Mine sans fond",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Un chevalement et sa roue, un puits à échelle, des galeries boisées avec rails et filons.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "light_well",
+     "name": "Puits de lumière",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Un pavillon sur un puits à niches, jusqu'à une salle en coupole avec bassin et piliers.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "blind_sanctuary",
+     "name": "Sanctuaire aveugle",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "fresco_gallery",
+     "name": "Galerie de fresques",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Une bibliothèque sur deux niveaux, murs de livres, mezzanine et tables de lecture.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "silent_village",
+     "name": "Village silencieux",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "artisan_shelter",
+     "name": "Abri de l'artisan",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Petite",
+     "rarity": "",
+     "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "silence_balm",
+       "tex": "items/silence_balm.png",
+       "name": "Baume de silence"
+      },
+      {
+       "id": "mute_mushroom",
+       "tex": "items/mute_mushroom.png",
+       "name": "Champignon muet"
+      },
+      {
+       "id": "minecraft:mushroom_stew",
+       "tex": null,
+       "name": "Ragoût de champignons"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torche"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "shadow_shard",
+       "tex": "items/shadow_shard.png",
+       "name": "Éclat d'ombre"
+      },
+      {
+       "id": "diamond_fragment",
+       "tex": "items/diamond_fragment.png",
+       "name": "Fragment de diamant"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      },
+      {
+       "id": "minecraft:glowstone_dust",
+       "tex": null,
+       "name": "Poudre lumineuse"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "minecraft:echo_shard",
+       "tex": null,
+       "name": "Éclat d'écho"
+      },
+      {
+       "id": "solar_lantern",
+       "tex": "items/solar_lantern.png",
+       "name": "Lanterne solaire"
+      },
+      {
+       "id": "sonar",
+       "tex": "items/sonar.png",
+       "name": "Sonar"
+      },
+      {
+       "id": "shadow_blade",
+       "tex": "items/shadow_blade.png",
+       "name": "Lame d'ombre"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 6,
@@ -6828,7 +8001,239 @@
       "desc": "Trouver la poupée cachée du monde."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "mirror_hall",
+     "name": "Salle des miroirs",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "hanging_cage",
+     "name": "Cage suspendue",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Petite",
+     "rarity": "Courante",
+     "desc": "Une prison sur deux étages avec coursives, cellules à barreaux, bureau du gardien et tour de guet.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "unstable_core",
+     "name": "Noyau instable",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Un grand cocon ou un cœur de cristal entouré de poches d'œufs.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "inverted_tower",
+     "name": "Tour inversée",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "ceiling_city",
+     "name": "Cité au plafond",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une cité fortifiée avec tours d'angle, portes, avenues, maisons et un donjon gardé.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "upturned_pool",
+     "name": "Bassin renversé",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un pavillon sur un puits à niches, jusqu'à une salle en coupole avec bassin et piliers.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "gravity_lab",
+     "name": "Laboratoire de gravité",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Un laboratoire aux instruments étranges, son étage meublé au plafond.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "impossible_stair",
+     "name": "Escalier impossible",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Un escalier en boucle dont la dernière volée est à l'envers, autour d'un pavillon de lecture.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "reflection_refuge",
+     "name": "Refuge des Reflets",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "floating_garden",
+     "name": "Jardin flottant",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Petite",
+     "rarity": "",
+     "desc": "Une serre de verre avec jardinières et fontaine.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "stabilizer",
+       "tex": "items/stabilizer.png",
+       "name": "Stabilisateur"
+      },
+      {
+       "id": "flipped_apple",
+       "tex": "items/flipped_apple.png",
+       "name": "Pomme retournée"
+      },
+      {
+       "id": "minecraft:chorus_fruit",
+       "tex": null,
+       "name": "Chorus"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torche"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "unstable_alloy",
+       "tex": "items/unstable_alloy.png",
+       "name": "Alliage instable"
+      },
+      {
+       "id": "inverted_crystal",
+       "tex": "items/inverted_crystal.png",
+       "name": "Cristal inversé"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      },
+      {
+       "id": "minecraft:ender_pearl",
+       "tex": null,
+       "name": "Perle de l'Ender"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "minecraft:shulker_shell",
+       "tex": null,
+       "name": "Carapace de shulker"
+      },
+      {
+       "id": "gravity_boots",
+       "tex": "items/gravity_boots.png",
+       "name": "Bottes de gravité"
+      },
+      {
+       "id": "mirror_blade",
+       "tex": "items/mirror_blade.png",
+       "name": "Lame miroir"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 7,
@@ -7672,7 +9077,239 @@
       "desc": "Trouver la poupée cachée du monde."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "hunter_trench",
+     "name": "Fosse des chasseurs",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Courante",
+     "desc": "Une faille déchiquetée franchie par un pont, avec corniches, échafaudages et grotte au fond.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "dead_reef",
+     "name": "Récif mort",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Des murs brisés, une colonnade, une colonne tombée, une arche debout et une cave voûtée.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "sunken_city",
+     "name": "Cité engloutie",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une cité fortifiée avec tours d'angle, portes, avenues, maisons et un donjon gardé.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "wreck",
+     "name": "Épave",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Une coque échouée avec cabine de poupe, cale, mâts et voiles déchirées.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "diving_bell",
+     "name": "Cloche de plongée",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Petite",
+     "rarity": "Courante",
+     "desc": "Une cloche de plongée en cuivre à hublots, une chaîne vers une bouée, des caisses et une ancre.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "air_grotto",
+     "name": "Grotte à air",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un grand cocon ou un cœur de cristal entouré de poches d'œufs.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "abyssal_temple",
+     "name": "Temple abyssal",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "sunken_lighthouse",
+     "name": "Phare sous-marin",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Un phare rayé avec galerie, lanterne vitrée et maison du gardien.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "pressure_station",
+     "name": "Station de pression",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Un laboratoire aux instruments étranges, son étage meublé au plafond.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "deep_vault",
+     "name": "Coffre-fort des profondeurs",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Petite",
+     "rarity": "",
+     "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "oxygen_capsule",
+       "tex": "items/oxygen_capsule.png",
+       "name": "Capsule d'oxygène"
+      },
+      {
+       "id": "apnea_kelp",
+       "tex": "items/apnea_kelp.png",
+       "name": "Algue d'apnée"
+      },
+      {
+       "id": "minecraft:cooked_cod",
+       "tex": null,
+       "name": "Morue cuite"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:prismarine_shard",
+       "tex": null,
+       "name": "Éclat de prismarine"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "abyssal_salt",
+       "tex": "items/abyssal_salt.png",
+       "name": "Sel des profondeurs"
+      },
+      {
+       "id": "pressure_pearl",
+       "tex": "items/pressure_pearl.png",
+       "name": "Perle de pression"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      },
+      {
+       "id": "minecraft:prismarine_crystals",
+       "tex": null,
+       "name": "Cristaux de prismarine"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde, 8 % d'une pomme dorée enchantée",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "minecraft:heart_of_the_sea",
+       "tex": null,
+       "name": "Cœur de la mer"
+      },
+      {
+       "id": "thruster",
+       "tex": "items/thruster.png",
+       "name": "Propulseur"
+      },
+      {
+       "id": "trench_trident",
+       "tex": "items/trench_trident.png",
+       "name": "Trident des fosses"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 8,
@@ -8558,7 +10195,239 @@
       "desc": "Trouver la poupée cachée du monde."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "hastened_town",
+     "name": "Ville accélérée",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une cité fortifiée avec tours d'angle, portes, avenues, maisons et un donjon gardé.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "aging_ruin",
+     "name": "Ruine vieillissante",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Des murs brisés, une colonnade, une colonne tombée, une arche debout et une cave voûtée.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "giant_clock",
+     "name": "Horloge géante",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une tour d'horloge carrée à quatre cadrans, balancier et beffroi sur une cour pavée d'engrenages.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "season_greenhouse",
+     "name": "Serre des saisons",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Une serre de verre avec jardinières et fontaine.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "frozen_garden",
+     "name": "Jardin figé",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "ephemeral_camp",
+     "name": "Camp éphémère",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Petite",
+     "rarity": "Courante",
+     "desc": "Un foyer entouré de bancs, des tentes, un coin cuisine et un poste de guet.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "solar_observatory",
+     "name": "Observatoire solaire",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "library_of_ages",
+     "name": "Bibliothèque des siècles",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "Une bibliothèque sur deux niveaux, murs de livres, mezzanine et tables de lecture.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "dusk_market",
+     "name": "Marché du crépuscule",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Deux rangées d'étals à auvents sous des guirlandes de lanternes, une halle et une arche d'entrée.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "time_tomb",
+     "name": "Tombeau temporel",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Petite",
+     "rarity": "",
+     "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "season_preserve",
+       "tex": "items/season_preserve.png",
+       "name": "Conserve de saison"
+      },
+      {
+       "id": "season_jam",
+       "tex": "items/season_jam.png",
+       "name": "Conserve de saison sucrée"
+      },
+      {
+       "id": "minecraft:pumpkin_pie",
+       "tex": null,
+       "name": "Tarte à la citrouille"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torche"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "temporal_sand",
+       "tex": "items/temporal_sand.png",
+       "name": "Sable temporel"
+      },
+      {
+       "id": "season_fragment",
+       "tex": "items/season_fragment.png",
+       "name": "Fragment de saison"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      },
+      {
+       "id": "minecraft:honey_bottle",
+       "tex": null,
+       "name": "Fiole de miel"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde, 8 % d'une pomme dorée enchantée",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "minecraft:clock",
+       "tex": null,
+       "name": "Horloge"
+      },
+      {
+       "id": "hourglass",
+       "tex": "items/hourglass.png",
+       "name": "Sablier"
+      },
+      {
+       "id": "season_scythe",
+       "tex": "items/season_scythe.png",
+       "name": "Faux des saisons"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 9,
@@ -9388,7 +11257,234 @@
       "desc": "Trouver la poupée cachée du monde."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "walking_tower",
+     "name": "Tour qui marche",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "mobile_fortress",
+     "name": "Forteresse mobile",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Un fort avec courtines, quatre tours, châtelet à herse et donjon de trois étages.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "terrain_arena",
+     "name": "Arène de terrain",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "moving_ruin",
+     "name": "Ruine mouvante",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Des murs brisés, une colonnade, une colonne tombée, une arche debout et une cave voûtée.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "living_chasm",
+     "name": "Gouffre vivant",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une faille déchiquetée franchie par un pont, avec corniches, échafaudages et grotte au fond.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "mimic_nest",
+     "name": "Nid de mimiques",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "buried_village",
+     "name": "Village enseveli",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "beating_vein",
+     "name": "Veine battante",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "anchored_fort",
+     "name": "Fort ancré",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Un fort avec courtines, quatre tours, châtelet à herse et donjon de trois étages.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "stable_sanctuary",
+     "name": "Sanctuaire stable",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Petite",
+     "rarity": "",
+     "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "anchor_bread",
+       "tex": "items/anchor_bread.png",
+       "name": "Pain d'ancrage"
+      },
+      {
+       "id": "minecraft:cooked_beef",
+       "tex": null,
+       "name": "Steak"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torche"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "terrain_fragment",
+       "tex": "items/terrain_fragment.png",
+       "name": "Fragment de terrain"
+      },
+      {
+       "id": "terrain_heart",
+       "tex": "items/terrain_heart.png",
+       "name": "Cœur de terrain"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      },
+      {
+       "id": "minecraft:lead",
+       "tex": null,
+       "name": "Laisse"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde, 8 % d'une pomme dorée enchantée",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "minecraft:totem_of_undying",
+       "tex": null,
+       "name": "Totem d'immortalité"
+      },
+      {
+       "id": "anchor",
+       "tex": "items/anchor.png",
+       "name": "Ancre"
+      },
+      {
+       "id": "grip_boots",
+       "tex": "items/grip_boots.png",
+       "name": "Bottes d'accroche"
+      }
+     ]
+    }
+   ]
   },
   {
    "n": 10,
@@ -10228,7 +12324,224 @@
       "desc": "Obtenir la troisième fin."
      }
     ]
-   }
+   },
+   "sites": [
+    {
+     "id": "needle_tower",
+     "name": "Tour d'aiguilles",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "colossal_forge",
+     "name": "Forge colossale",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une forge autour d'un fourneau à degrés et sa cheminée, avec canal de lave et chambre forte.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "collapsed_doll",
+     "name": "Poupée effondrée",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Un grand cocon ou un cœur de cristal entouré de poches d'œufs.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
+    },
+    {
+     "id": "giant_chest",
+     "name": "Coffre géant",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "colossal_library",
+     "name": "Bibliothèque colossale",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "Une bibliothèque sur deux niveaux, murs de livres, mezzanine et tables de lecture.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "titanic_workbench",
+     "name": "Établi titanesque",
+     "role": "Exploration",
+     "roleKey": "exploration",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
+     "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
+     "img": null
+    },
+    {
+     "id": "artisan_giant_workshop",
+     "name": "Atelier géant de l'artisan",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "block_gate",
+     "name": "Porte de bloc",
+     "role": "Histoire",
+     "roleKey": "story",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
+     "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
+     "img": null
+    },
+    {
+     "id": "city_of_giants",
+     "name": "Cité des géants",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une cité fortifiée avec tours d'angle, portes, avenues, maisons et un donjon gardé.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
+    },
+    {
+     "id": "creature_throne",
+     "name": "Trône de la créature",
+     "role": "Secret",
+     "roleKey": "secret",
+     "size": "Moyenne",
+     "rarity": "",
+     "desc": "Une salle du trône à colonnes ; le tapis devant le trône cache une trappe vers la salle au trésor.",
+     "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
+     "img": null
+    }
+   ],
+   "loot": [
+    {
+     "tier": "Coffre commun",
+     "note": "3 à 5 piles",
+     "items": [
+      {
+       "id": "workshop_feast",
+       "tex": "items/workshop_feast.png",
+       "name": "Festin de l'atelier"
+      },
+      {
+       "id": "minecraft:cookie",
+       "tex": null,
+       "name": "Cookie"
+      },
+      {
+       "id": "minecraft:iron_nugget",
+       "tex": null,
+       "name": "Pépite de fer"
+      },
+      {
+       "id": "minecraft:torch",
+       "tex": null,
+       "name": "Torche"
+      },
+      {
+       "id": "minecraft:arrow",
+       "tex": null,
+       "name": "Flèche"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre rare",
+     "note": "souvent un livre enchanté",
+     "items": [
+      {
+       "id": "artisan_thread",
+       "tex": "items/artisan_thread.png",
+       "name": "Fil d'Artisan"
+      },
+      {
+       "id": "artisan_shard",
+       "tex": "items/artisan_shard.png",
+       "name": "Éclat d'Artisan"
+      },
+      {
+       "id": "minecraft:gold_ingot",
+       "tex": null,
+       "name": "Lingot d'or"
+      },
+      {
+       "id": "minecraft:emerald",
+       "tex": null,
+       "name": "Émeraude"
+      },
+      {
+       "id": "minecraft:enchanted_book",
+       "tex": null,
+       "name": "Livre enchanté"
+      },
+      {
+       "id": "minecraft:experience_bottle",
+       "tex": null,
+       "name": "Fiole d'expérience"
+      },
+      {
+       "id": "minecraft:golden_carrot",
+       "tex": null,
+       "name": "Carotte dorée"
+      },
+      {
+       "id": "minecraft:gold_nugget",
+       "tex": null,
+       "name": "Pépite d'or"
+      }
+     ]
+    },
+    {
+     "tier": "Coffre au trésor",
+     "note": "les objets rares aussi, et 30 % de chances d'une pièce d'équipement du monde, 8 % d'une pomme dorée enchantée",
+     "items": [
+      {
+       "id": "minecraft:diamond",
+       "tex": null,
+       "name": "Diamant"
+      },
+      {
+       "id": "minecraft:golden_apple",
+       "tex": null,
+       "name": "Pomme dorée"
+      },
+      {
+       "id": "minecraft:gold_block",
+       "tex": null,
+       "name": "Bloc d'or"
+      }
+     ]
+    }
+   ]
   }
  ],
  "mobs": [

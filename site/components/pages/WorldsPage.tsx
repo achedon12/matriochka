@@ -125,6 +125,54 @@ function CodexCard({ e, c }: { e: CodexEntry; c: Record<string, string> }) {
   );
 }
 
+const ROLE_TONE: Record<string, string> = { combat: "bg-berry text-paper", exploration: "bg-gold-b text-ink", story: "bg-paper text-ink", utility: "bg-[#4a7a3a] text-paper", secret: "bg-ink text-gold-b ring-1 ring-gold" };
+
+function Sites({ w, lang }: { w: World; lang: Lang }) {
+  const c = getData(lang).copy.worlds;
+  if (!w.sites?.length) return null;
+  return (
+    <section className={`${wrap} py-12`} aria-labelledby="sites-h">
+      <h2 id="sites-h" className="reveal m-0 mb-3 font-display text-[clamp(34px,4.6vw,60px)] leading-none font-normal text-gold-b">{c.sitesH}</h2>
+      <p className="m-0 mb-8 max-w-[62ch] text-paper-dim">{c.sitesP}</p>
+      <ul className="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-4 p-0">
+        {w.sites.map((st) => (
+          <li key={st.id} className="reveal flex flex-col overflow-hidden border border-rule bg-ink/70">
+            <div className="relative aspect-[16/9] bg-black">
+              {st.img ? <img className="size-full object-cover" src={asset(st.img)} alt="" loading="lazy" width={800} height={450} />
+                : <span className="absolute inset-0 bg-[length:48px] opacity-40 [image-rendering:pixelated]" style={{ backgroundImage: `url(${asset(w.block)})` }} />}
+              <span className={`absolute top-2 left-2 rounded-[2px] px-2 py-0.5 text-[12px] font-bold ${ROLE_TONE[st.roleKey] ?? ""}`}>{st.role}</span>
+            </div>
+            <div className="grid gap-2 p-4">
+              <h3 className="m-0 font-display text-[22px] leading-tight font-normal text-gold-b">{st.name}</h3>
+              <p className="m-0 text-[13px] text-paper-dim">{st.size}{st.rarity ? `, ${st.rarity.toLowerCase()}` : ""}</p>
+              <p className="m-0 text-[15px] leading-snug text-paper">{st.desc}</p>
+              <p className="m-0 border-t border-dotted border-rule pt-2 text-[14px] leading-snug text-paper-dim">{st.inside}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      {w.loot && (
+        <>
+          <h3 className="mt-12 mb-4 border-b-2 border-gold pb-2 font-display text-[28px] font-normal text-gold-b">{c.lootH}</h3>
+          <div className="grid gap-4 md:grid-cols-3">
+            {w.loot.map((t) => (
+              <div key={t.tier} className="border-2 border-gold bg-ink/80 p-4">
+                <h4 className="m-0 font-display text-xl font-normal text-paper">{t.tier}</h4>
+                <p className="m-0 mb-3 text-[13px] text-paper-dim">{t.note}</p>
+                <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+                  {t.items.map((it) => (
+                    <li key={it.id} className="flex items-center gap-1.5 rounded-[2px] bg-black/30 py-1 pr-2 pl-1 text-[13px] text-paper"><Inlay src={it.tex} size={20} />{it.name}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </section>
+  );
+}
+
 function Codex({ w, lang }: { w: World; lang: Lang }) {
   const c = getData(lang).copy.worlds;
   const x = w.codex;
@@ -201,6 +249,8 @@ export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
         {(() => { const b = creature(lang, w.boss.id) as Boss | undefined; return b ? (
           <section className={`${wrap} pb-10`}><MeetBoss meet={b.meet} title={`${ui.howMeet}: ${b.name}`} offeringLabel={ui.offering} /></section>
         ) : null; })()}
+        <Vine className="vine-sep" />
+        <Sites w={w} lang={lang} />
         <Vine className="vine-sep" />
         <Codex w={w} lang={lang} />
         <Vine className="vine-sep" />
