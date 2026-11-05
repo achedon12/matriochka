@@ -156,7 +156,20 @@ public final class BaseModel {
 		BlockPos origin = origin(start.getPieces().getFirst().getBoundingBox());
 		CompoundTag e = data.worldEntry(group, 10);
 		if (e.getLongOr("model_at", Long.MIN_VALUE) == origin.asLong()) return;
-		if (!e.contains("model")) e.put("model", fallback(p, data, group));
+		if (!e.contains("model")) {
+			// never sample a visitor's base for another group's workbench: use an online member of the owning group
+			ServerPlayer owner = data.groupOf(p.getUUID()).equals(group) ? p : null;
+			if (owner == null) for (java.util.UUID id : data.members(group)) {
+				ServerPlayer m = level.getServer().getPlayerList().getPlayer(id);
+				if (m != null) {
+					owner = m;
+					break;
+				}
+			}
+			// nobody of the owning group is online: wait until one visits
+			if (owner == null) return;
+			e.put("model", fallback(owner, data, group));
+		}
 		if (build(level, origin, e.getCompoundOrEmpty("model")) > 0) {
 			p.sendSystemMessage(Component.translatable("message.matriochka.maquette"));
 		}
