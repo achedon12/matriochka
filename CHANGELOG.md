@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- The Matriochka Pack: a Modrinth modpack (`.mrpack`) with the mod, Fabric API, GeckoLib, Just Enough Items (optional) and client performance mods (Sodium, Lithium, FerriteCore, Entity Culling, ImmediatelyFast, Dynamic FPS, Krypton, Mod Menu, Iris as an option), in a normal and a hard (nightmare) version. Built by `tools/modpack.py` and attached to every GitHub release. See [Modpack](docs-wiki-drafts/Modpack.md).
+- Balance pass, checked by the new `tools/balance.py` against the design's targets (report: [Balance](docs-wiki-drafts/Balance.md)):
+  - Berserker weapons add 8% of their damage plus the whole bonus of their level (up to +58% at level 5, was at most +12%), so the reference creature again takes about 5 hits in World 10, as the design plans.
+  - Bosses leave 3 Shell Shards instead of 2: enough to bring each world's weapon to the class cap.
+  - Dungeon Rat 18 -> 22 health; Executioner 11.5 -> 10.1 damage; Sky Harpooner 59 -> 111 health and 8.6 -> 10.4 damage (it was weaker than the Island Warden); Unstable Sphere 19.9 -> 17.4, Earth Hand 34.4 -> 30.1 and Titan Ray 41.3 -> 36.1 damage (regular creatures that hit like elites).
+- A playthrough test (`./gradlew runClientGameTest -Pplaythrough`) plays the whole game in real ticks, from the Guardian through the ten worlds to World 0 and the third ending, and checks every step.
+
 ## 0.3.0 (alpha)
 
 The story is complete: the Artisan's Journal, the hidden dolls, World 0, three endings and the New Cycle. World 7 is now entirely under water, worlds 3, 5, 6, 9 and 10 have their full mechanics, and the mod has its own music and sounds. Trailer: [matriochka-trailer.mp4](https://github.com/achedon12/matriochka/releases/download/v0.3.0/matriochka-trailer.mp4).
