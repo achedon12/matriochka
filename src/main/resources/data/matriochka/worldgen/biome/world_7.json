@@ -60,6 +60,26 @@
               "count": 1,
               "weight": 2
             }
+          ],
+          "water_ambient": [
+            {
+              "type": "matriochka:lantern_shoal",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 5
+              },
+              "weight": 30
+            },
+            {
+              "type": "matriochka:glow_jelly",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 20
+            }
           ]
         }
       },
@@ -85,14 +105,23 @@
     [],
     [
       "matriochka:abyssal_salt_ore",
+      "matriochka:nacre_ore",
+      "matriochka:abyssal_cobalt_ore",
+      "matriochka:pearl_bed",
       "matriochka:pressure_coral_patch"
     ],
-    [],
+    [
+      "matriochka:pressure_coral_bed"
+    ],
     [],
     [
-      "minecraft:seagrass_deep",
+      "minecraft:warm_ocean_vegetation",
+      "minecraft:seagrass_deep_warm",
+      "minecraft:kelp_warm",
       "minecraft:kelp_cold",
-      "minecraft:sea_pickle"
+      "minecraft:sea_pickle",
+      "matriochka:pressure_coral_spire",
+      "matriochka:air_vent"
     ],
     []
   ],
