@@ -145,7 +145,7 @@ public final class WorldZero {
 		MatrioData data = MatrioData.get(server);
 		BlockPos o = origin(data, data.groupOf(p.getUUID()), level);
 		p.teleport(new TeleportTransition(level, Vec3.atBottomCenterOf(o.offset(0, 0, 5)), Vec3.ZERO, 0f, 0f, Set.of(), TeleportTransition.PLAY_PORTAL_SOUND));
-		level.playSound(null, o, SoundEvents.CHEST_OPEN, SoundSource.PLAYERS, 1f, 0.4f);
+		level.playSound(null, o, fr.achedon12.matriochka.content.Sounds.DOLL_OPEN, SoundSource.PLAYERS, 1.2f, 0.6f);
 		p.sendSystemMessage(Component.translatable("message.matriochka.zero.enter").withStyle(ChatFormatting.GOLD));
 		p.sendSystemMessage(Component.translatable("message.matriochka.entered", Component.translatable(Worlds.dimensionKey(Worlds.ZERO))));
 		Achievements.grantId(p, "endings/world_zero");

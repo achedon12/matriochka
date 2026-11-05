@@ -354,7 +354,7 @@ public final class ShiftingGround {
 			int y = level.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
 			level.sendParticles(dust, x + 0.5, y + 0.2, z + 0.5, 12, 0.6, 0.2, 0.6, 0.1);
 		}
-		level.playSound(null, new BlockPos(x0 + 8, top, z0 + 8), SoundEvents.WARDEN_EMERGE, SoundSource.AMBIENT, 1f, 0.6f);
+		level.playSound(null, new BlockPos(x0 + 8, top, z0 + 8), fr.achedon12.matriochka.content.Sounds.WORLD_QUAKE, SoundSource.AMBIENT, 1.5f, 1f);
 	}
 
 	/** During the warning: the ground around the player cracks and puffs dust. */
@@ -367,7 +367,7 @@ public final class ShiftingGround {
 			int y = level.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
 			level.sendParticles(p, dust, false, false, x + 0.5, y + 0.1, z + 0.5, 10, 0.8, 0.1, 0.8, 0.05);
 		}
-		level.playSound(null, p.blockPosition(), SoundEvents.BASALT_BREAK, SoundSource.AMBIENT, 0.7f, 0.5f);
+		level.playSound(null, p.blockPosition(), fr.achedon12.matriochka.content.Sounds.WORLD_RUMBLE, SoundSource.AMBIENT, 0.8f, 0.9f + level.getRandom().nextFloat() * 0.2f);
 	}
 
 	public static void clearAll() {

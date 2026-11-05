@@ -176,7 +176,7 @@ public final class NestingChests {
 		SimpleContainer c = OPEN.computeIfAbsent(be, k -> container(level, be, rows));
 		MenuType<ChestMenu> type = rows == 1 ? MenuType.GENERIC_9x1 : rows == 2 ? MenuType.GENERIC_9x2 : MenuType.GENERIC_9x3;
 		player.openMenu(new SimpleMenuProvider((id, inv, p) -> new Menu(type, id, inv, c, rows), be.getBlockState().getBlock().getName()));
-		level.playSound(null, be.getBlockPos(), SoundEvents.CHEST_OPEN, SoundSource.BLOCKS, 0.8f, 1.1f + (3 - rows) * 0.15f);
+		level.playSound(null, be.getBlockPos(), fr.achedon12.matriochka.content.Sounds.DOLL_OPEN, SoundSource.BLOCKS, 0.9f, 0.9f + (3 - rows) * 0.12f);
 	}
 
 	private static SimpleContainer container(ServerLevel level, DataBlockEntity be, int rows) {
@@ -241,7 +241,7 @@ public final class NestingChests {
 		else be.data().putString("sort", next);
 		be.changed();
 		player.sendOverlayMessage(Component.translatable("message.matriochka.nesting.rule", Component.translatable("nesting.matriochka.rule." + next)).withStyle(ChatFormatting.GOLD));
-		player.level().playSound(null, be.getBlockPos(), SoundEvents.WOODEN_BUTTON_CLICK_ON, SoundSource.BLOCKS, 0.8f, 1.2f);
+		player.level().playSound(null, be.getBlockPos(), fr.achedon12.matriochka.content.Sounds.DOLL_CLICK, SoundSource.BLOCKS, 0.9f, 1f);
 	}
 
 	public static void appendTooltip(ItemStack stack, Consumer<Component> out) {

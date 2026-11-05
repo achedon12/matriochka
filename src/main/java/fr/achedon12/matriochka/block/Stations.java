@@ -189,7 +189,7 @@ public final class Stations {
 			default -> {}
 		}
 		be.setChanged();
-		level.playSound(null, pos, SoundEvents.SMITHING_TABLE_USE, SoundSource.BLOCKS, 0.8f, 1.1f);
+		level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.station(station), SoundSource.BLOCKS, 1f, 0.95f + level.getRandom().nextFloat() * 0.1f);
 		PlayerState.of(player).progress("craft", r.output(), made);
 		return null;
 	}
@@ -212,7 +212,7 @@ public final class Stations {
 		if (Snorkel.fraction(helmet) >= 1f) return "message.matriochka.snorkel.full";
 		Snorkel.setTank(helmet, Snorkel.capacity(helmet));
 		level.playSound(null, pos, SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.BLOCKS, 1f, 0.8f);
-		level.playSound(null, pos, SoundEvents.PISTON_EXTEND, SoundSource.BLOCKS, 0.6f, 0.6f);
+		level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.STATION_ABYSSAL_PRESS, SoundSource.BLOCKS, 0.9f, 1f);
 		player.sendOverlayMessage(Component.translatable("message.matriochka.snorkel.refilled").withStyle(net.minecraft.ChatFormatting.AQUA));
 		return null;
 	}
@@ -239,7 +239,7 @@ public final class Stations {
 		for (ItemStack s : new ItemStack[]{a, b}) {
 			if (s.isDamageableItem()) s.setDamageValue(Math.min(s.getMaxDamage() - 1, s.getDamageValue() + s.getMaxDamage() / 4));
 		}
-		player.level().playSound(null, player.blockPosition(), SoundEvents.ILLUSIONER_MIRROR_MOVE, SoundSource.PLAYERS, 0.9f, 1f);
+		player.level().playSound(null, player.blockPosition(), fr.achedon12.matriochka.content.Sounds.STATION_INVERTER, SoundSource.PLAYERS, 1f, 1f);
 		player.sendSystemMessage(Component.translatable(lost > 0 ? "message.matriochka.inverter.done_lost" : "message.matriochka.inverter.done", lost));
 		PlayerState.of(player).progress("use", "inverter", 1);
 		return null;
@@ -263,7 +263,7 @@ public final class Stations {
 		if (entered >= 3) return;
 		if (be.data().getIntOr("code" + entered, -1) == pin) {
 			be.data().putInt("entered", entered + 1);
-			level.playSound(null, be.getBlockPos(), SoundEvents.TRIPWIRE_CLICK_ON, SoundSource.BLOCKS, 1f, 1.2f + entered * 0.2f);
+			level.playSound(null, be.getBlockPos(), fr.achedon12.matriochka.content.Sounds.STATION_JAILER_TABLE_PIN, SoundSource.BLOCKS, 1f, 1f + entered * 0.12f);
 		} else {
 			be.data().putInt("entered", 0);
 			level.playSound(null, be.getBlockPos(), SoundEvents.CHAIN_BREAK, SoundSource.BLOCKS, 1f, 0.7f);
@@ -298,7 +298,7 @@ public final class Stations {
 		ps.addKarma(purify ? karma : -karma);
 		ps.progress(purify ? "purify" : "devour", "souls", value);
 		stack.setCount(0);
-		player.level().playSound(null, player.blockPosition(), purify ? SoundEvents.AMETHYST_BLOCK_RESONATE : SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.PLAYERS, 0.8f, purify ? 1.4f : 0.6f);
+		player.level().playSound(null, player.blockPosition(), purify ? fr.achedon12.matriochka.content.Sounds.STATION_SOUL_ALTAR : fr.achedon12.matriochka.content.Sounds.STATION_SOUL_ALTAR_DEVOUR, SoundSource.PLAYERS, 1f, 1f);
 		player.sendSystemMessage(Component.translatable(purify ? "message.matriochka.altar.purified" : "message.matriochka.altar.devoured", value, ps.karma()));
 		return null;
 	}
@@ -310,6 +310,7 @@ public final class Stations {
 		if (ps.dollLayers() >= ps.dollMax()) return "message.matriochka.altar.doll_full";
 		if (!ps.spendSouls(50)) return "message.matriochka.altar.no_souls";
 		ps.setDoll(ps.dollLayers() + 1, ps.dollMax());
+		player.level().playSound(null, player.blockPosition(), fr.achedon12.matriochka.content.Sounds.DOLL_CLOSE, SoundSource.PLAYERS, 1f, 1.1f);
 		return null;
 	}
 
@@ -336,7 +337,7 @@ public final class Stations {
 			take(player.getInventory(), shard, shards);
 		}
 		GearClasses.apply(stack, new GearClasses.Gear(g.cls(), next, g.changes()));
-		player.level().playSound(null, player.blockPosition(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 0.7f, 1.3f);
+		player.level().playSound(null, player.blockPosition(), fr.achedon12.matriochka.content.Sounds.STATION_CLASS_TABLE, SoundSource.PLAYERS, 1f, 1f);
 		return null;
 	}
 
@@ -361,7 +362,7 @@ public final class Stations {
 		if (!PlayerState.of(player).spendSouls(cost) && !player.isCreative()) return "message.matriochka.altar.no_souls";
 		if (!player.isCreative()) take(player.getInventory(), doll, 1);
 		GearClasses.reroll(stack, player.getRandom());
-		player.level().playSound(null, player.blockPosition(), SoundEvents.CHEST_OPEN, SoundSource.PLAYERS, 0.7f, 1.6f);
+		player.level().playSound(null, player.blockPosition(), fr.achedon12.matriochka.content.Sounds.DOLL_RATTLE, SoundSource.PLAYERS, 0.9f, 1f);
 		return null;
 	}
 }

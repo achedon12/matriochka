@@ -120,7 +120,7 @@ public final class Refuge {
 		ret.putFloat("yaw", player.getYRot());
 		PlayerState.of(player).tag().put("refuge_return", ret);
 		player.teleport(new TeleportTransition(level, Vec3.atBottomCenterOf(spawn), Vec3.ZERO, 180f, 0f, Set.of(), TeleportTransition.PLAY_PORTAL_SOUND));
-		level.playSound(null, spawn, SoundEvents.CHEST_OPEN, SoundSource.PLAYERS, 1f, 0.7f);
+		level.playSound(null, spawn, fr.achedon12.matriochka.content.Sounds.DOLL_OPEN, SoundSource.PLAYERS, 1f, 0.8f);
 		player.sendOverlayMessage(Component.translatable("message.matriochka.refuge.entered").withStyle(ChatFormatting.GOLD));
 		if (before > 0 && builtTier(data, group) > before) player.sendSystemMessage(Component.translatable("message.matriochka.refuge.grown").withStyle(ChatFormatting.GOLD));
 		return true;
@@ -144,7 +144,7 @@ public final class Refuge {
 		}
 		PlayerState.of(player).tag().remove("refuge_return");
 		player.teleport(new TeleportTransition(target, at, Vec3.ZERO, yaw, player.getXRot(), Set.of(), TeleportTransition.PLAY_PORTAL_SOUND));
-		target.playSound(null, BlockPos.containing(at), SoundEvents.CHEST_CLOSE, SoundSource.PLAYERS, 1f, 0.7f);
+		target.playSound(null, BlockPos.containing(at), fr.achedon12.matriochka.content.Sounds.DOLL_CLOSE, SoundSource.PLAYERS, 1f, 0.8f);
 	}
 
 	/** Sends out every online member of a group standing in that group's room (after a kick or a disband). */

@@ -131,7 +131,7 @@ public final class Events {
 				player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
 				ServerLevel l = (ServerLevel) player.level();
 				l.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1, player.getZ(), 60, 0.5, 1, 0.5, 0.4);
-				l.playSound(null, player.blockPosition(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1f, 1.3f);
+				l.playSound(null, player.blockPosition(), fr.achedon12.matriochka.content.Sounds.DOLL_OF_LIFE_BREAK, SoundSource.PLAYERS, 1.2f, 1f);
 				player.sendOverlayMessage(Component.translatable("message.matriochka.doll_broke", ps.dollLayers()).withStyle(ChatFormatting.GOLD));
 				return false;
 			}
