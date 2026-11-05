@@ -60,13 +60,13 @@ public class TrailerCapture implements FabricClientGameTest {
 				net.minecraft.core.BlockPos arena = sp.getServer().computeOnServer(server -> {
 					var p = server.getPlayerList().getPlayers().get(0);
 					var c = p.blockPosition().offset(0, 0, 26);
-					fr.achedon12.matriochka.world.Arenas.build((net.minecraft.server.level.ServerLevel) p.level(), world, c);
+					fr.achedon12.matriochka.world.Arenas.buildArena((net.minecraft.server.level.ServerLevel) p.level(), world, c);
 					return c;
 				});
 				// the Endless Dungeon rearranges its halls: rebuild the stage before each take there
 				Runnable rebuild = () -> {
 					if (world != 3) return;
-					sp.getServer().runOnServer(server -> fr.achedon12.matriochka.world.Arenas.build(
+					sp.getServer().runOnServer(server -> fr.achedon12.matriochka.world.Arenas.buildArena(
 						(net.minecraft.server.level.ServerLevel) server.getPlayerList().getPlayers().get(0).level(), world, arena));
 				};
 				if (w == 7) s.runCommand("effect give @a conduit_power infinite 0 true");
