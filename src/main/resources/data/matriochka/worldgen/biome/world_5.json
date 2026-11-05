@@ -1,0 +1,96 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/fog_color": "#05050a",
+    "minecraft:visual/water_fog_color": "#0a0f2a",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "matriochka:blind_prowler",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:glow_devourer",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:echo",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:eyeless_watcher",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:shadow_mother",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 10
+            }
+          ],
+          "creature": [
+            {
+              "type": "matriochka:silent_one",
+              "count": 1,
+              "weight": 2
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    }
+  },
+  "carvers": [
+    "minecraft:nether_cave"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#0a0f2a",
+    "grass_color": "#15151f",
+    "foliage_color": "#15151f"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:diamond_fragment_ore",
+      "matriochka:faint_glow_patch"
+    ],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.8
+}
