@@ -1,0 +1,11 @@
+{
+  "type": "matriochka:world_7",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "matriochka:world_7"
+    },
+    "settings": "matriochka:world_7"
+  }
+}
