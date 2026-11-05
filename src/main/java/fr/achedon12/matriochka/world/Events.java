@@ -109,12 +109,13 @@ public final class Events {
 
 		// Gates: enchanting and anvils before world 2, cracked doll placement.
 		UseBlockCallback.EVENT.register((player, level, hand, hit) -> {
-			if (!(player instanceof ServerPlayer sp) || !Config.gates()) return InteractionResult.PASS;
+			if (!(player instanceof ServerPlayer sp)) return InteractionResult.PASS;
 			var state = level.getBlockState(hit.getBlockPos());
 			ItemStack held = player.getItemInHand(hand);
 			if (held.is(ModContent.item("cracked_doll"))) {
 				return fr.achedon12.matriochka.block.Blocks2.placeCrackedDoll(sp, held, hit.getBlockPos().relative(hit.getDirection())) ? InteractionResult.SUCCESS : InteractionResult.FAIL;
 			}
+			if (!Config.gates()) return InteractionResult.PASS;
 			boolean enchant = state.is(Blocks.ENCHANTING_TABLE) || state.is(Blocks.ANVIL) || state.is(Blocks.CHIPPED_ANVIL) || state.is(Blocks.DAMAGED_ANVIL);
 			if (enchant && !MatrioData.get(sp.level().getServer()).defeated(sp, 2) && !sp.isCreative()) {
 				sp.sendOverlayMessage(Component.translatable("message.matriochka.gate.enchant").withStyle(ChatFormatting.RED));
