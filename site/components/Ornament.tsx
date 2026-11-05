@@ -2,8 +2,8 @@
 // once per page as SVG symbols and patterns (Sprite), then reused as borders, frame corners and dolls.
 import type { ReactNode } from "react";
 
-export const RED = "#A8231A";
-export const RED_B = "#C8342A";
+export const RED = "#8E2A21";
+export const RED_B = "#B0412E";
 export const BLACK = "#17100D";
 export const GOLD = "#D9A441";
 export const GOLD_B = "#F0C960";

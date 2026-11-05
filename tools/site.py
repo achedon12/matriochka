@@ -491,7 +491,7 @@ NAV = {"index": ("Home", "Accueil"), "worlds": ("Worlds", "Mondes"), "bestiary":
 
 
 # ---------------------------------------------------------------- palette (lacquer, gold leaf, the doll's face)
-RED, RED_B, BLACK, GOLD, GOLD_B, PAPER = "#A8231A", "#C8342A", "#17100D", "#D9A441", "#F0C960", "#F3E2C2"
+RED, RED_B, BLACK, GOLD, GOLD_B, PAPER = "#5E1E1A", "#A33A2A", "#17100D", "#D9A441", "#F0C960", "#F3E2C2"
 
 
 def light(n):

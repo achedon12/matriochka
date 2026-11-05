@@ -822,12 +822,12 @@
     }
    ],
    "doll": {
-    "body": "#C8342A",
+    "body": "#A33A2A",
     "scarf": "#17100D",
-    "orn": "#C8342A"
+    "orn": "#A33A2A"
    },
    "light": "#D9A441",
-   "bg": "#A8231A",
+   "bg": "#5E1E1A",
    "block": "blocks/painted_wood.png",
    "tall": "shots/00_surface_tall.jpg",
    "wide": null,
@@ -1008,7 +1008,7 @@
     "orn": "#b7e04a"
    },
    "light": "#b7e04a",
-   "bg": "#6d2617",
+   "bg": "#422317",
    "block": "blocks/spore_moss.png",
    "tall": "shots/w01_view_tall.jpg",
    "wide": "shots/w01_view.jpg",
@@ -1380,7 +1380,7 @@
     "orn": "#2b2220"
    },
    "light": "#ffb347",
-   "bg": "#691913",
+   "bg": "#3e1613",
    "block": "blocks/ashrock.png",
    "tall": "shots/w02_view_tall.jpg",
    "wide": "shots/w02_view.jpg",
@@ -1768,7 +1768,7 @@
     "orn": "#7fd3ff"
    },
    "light": "#7fd3ff",
-   "bg": "#6e211e",
+   "bg": "#431e1e",
    "block": "blocks/dungeon_brick.png",
    "tall": null,
    "wide": null,
@@ -2168,7 +2168,7 @@
     "orn": "#ffe14a"
    },
    "light": "#ffe14a",
-   "bg": "#732d35",
+   "bg": "#482a35",
    "block": "blocks/cloudstone.png",
    "tall": "shots/w04_view_tall.jpg",
    "wide": "shots/w04_view.jpg",
@@ -2546,7 +2546,7 @@
     "orn": "#6a8aff"
    },
    "light": "#6a8aff",
-   "bg": "#641613",
+   "bg": "#391413",
    "block": "blocks/umbral_stone.png",
    "tall": null,
    "wide": null,
@@ -2938,7 +2938,7 @@
     "orn": "#4ad8c8"
    },
    "light": "#c84ad8",
-   "bg": "#731827",
+   "bg": "#481627",
    "block": "blocks/inverted_stone.png",
    "tall": "shots/w06_view_tall.jpg",
    "wide": "shots/w06_view.jpg",
@@ -3292,7 +3292,7 @@
     "orn": "#1ab0b0"
    },
    "light": "#9af0ff",
-   "bg": "#621b19",
+   "bg": "#371819",
    "block": "blocks/trench_rock.png",
    "tall": "shots/w07_view_tall.jpg",
    "wide": "shots/w07_view.jpg",
@@ -3672,7 +3672,7 @@
     "orn": "#c8a040"
    },
    "light": "#f0f0ff",
-   "bg": "#7a2617",
+   "bg": "#4f2317",
    "block": "blocks/hourstone.png",
    "tall": "shots/w08_view_tall.jpg",
    "wide": "shots/w08_view.jpg",
@@ -4038,7 +4038,7 @@
     "orn": "#6a3a2a"
    },
    "light": "#e8a070",
-   "bg": "#731d15",
+   "bg": "#481a15",
    "block": "blocks/living_rock.png",
    "tall": "shots/w09_view_tall.jpg",
    "wide": "shots/w09_view.jpg",
@@ -4400,7 +4400,7 @@
     "orn": "#e8c070"
    },
    "light": "#e8c070",
-   "bg": "#731d12",
+   "bg": "#481a12",
    "block": "blocks/giant_plank.png",
    "tall": "shots/w10_view_tall.jpg",
    "wide": "shots/w10_view.jpg",
@@ -4736,7 +4736,7 @@
    "world": 1,
    "worldName": "Jungle toxique",
    "light": "#b7e04a",
-   "bg": "#6d2617",
+   "bg": "#422317",
    "doll": {
     "body": "#3f6b2a",
     "scarf": "#1c2a14",
@@ -4822,7 +4822,7 @@
    "world": 1,
    "worldName": "Jungle toxique",
    "light": "#b7e04a",
-   "bg": "#6d2617",
+   "bg": "#422317",
    "doll": {
     "body": "#3f6b2a",
     "scarf": "#1c2a14",
@@ -4901,7 +4901,7 @@
    "world": 1,
    "worldName": "Jungle toxique",
    "light": "#b7e04a",
-   "bg": "#6d2617",
+   "bg": "#422317",
    "doll": {
     "body": "#3f6b2a",
     "scarf": "#1c2a14",
@@ -4995,7 +4995,7 @@
    "world": 1,
    "worldName": "Jungle toxique",
    "light": "#b7e04a",
-   "bg": "#6d2617",
+   "bg": "#422317",
    "doll": {
     "body": "#3f6b2a",
     "scarf": "#1c2a14",
@@ -5074,7 +5074,7 @@
    "world": 1,
    "worldName": "Jungle toxique",
    "light": "#b7e04a",
-   "bg": "#6d2617",
+   "bg": "#422317",
    "doll": {
     "body": "#3f6b2a",
     "scarf": "#1c2a14",
@@ -5169,7 +5169,7 @@
    "world": 2,
    "worldName": "Filons géants",
    "light": "#ffb347",
-   "bg": "#691913",
+   "bg": "#3e1613",
    "doll": {
     "body": "#e0661c",
     "scarf": "#120c0a",
@@ -5241,7 +5241,7 @@
    "world": 2,
    "worldName": "Filons géants",
    "light": "#ffb347",
-   "bg": "#691913",
+   "bg": "#3e1613",
    "doll": {
     "body": "#e0661c",
     "scarf": "#120c0a",
@@ -5314,7 +5314,7 @@
    "world": 2,
    "worldName": "Filons géants",
    "light": "#ffb347",
-   "bg": "#691913",
+   "bg": "#3e1613",
    "doll": {
     "body": "#e0661c",
     "scarf": "#120c0a",
@@ -5392,7 +5392,7 @@
    "world": 2,
    "worldName": "Filons géants",
    "light": "#ffb347",
-   "bg": "#691913",
+   "bg": "#3e1613",
    "doll": {
     "body": "#e0661c",
     "scarf": "#120c0a",
@@ -5464,7 +5464,7 @@
    "world": 2,
    "worldName": "Filons géants",
    "light": "#ffb347",
-   "bg": "#691913",
+   "bg": "#3e1613",
    "doll": {
     "body": "#e0661c",
     "scarf": "#120c0a",
@@ -5552,7 +5552,7 @@
    "world": 3,
    "worldName": "Donjon sans fin",
    "light": "#7fd3ff",
-   "bg": "#6e211e",
+   "bg": "#431e1e",
    "doll": {
     "body": "#5a5a62",
     "scarf": "#1e1e24",
@@ -5623,7 +5623,7 @@
    "world": 3,
    "worldName": "Donjon sans fin",
    "light": "#7fd3ff",
-   "bg": "#6e211e",
+   "bg": "#431e1e",
    "doll": {
     "body": "#5a5a62",
     "scarf": "#1e1e24",
@@ -5694,7 +5694,7 @@
    "world": 3,
    "worldName": "Donjon sans fin",
    "light": "#7fd3ff",
-   "bg": "#6e211e",
+   "bg": "#431e1e",
    "doll": {
     "body": "#5a5a62",
     "scarf": "#1e1e24",
@@ -5780,7 +5780,7 @@
    "world": 3,
    "worldName": "Donjon sans fin",
    "light": "#7fd3ff",
-   "bg": "#6e211e",
+   "bg": "#431e1e",
    "doll": {
     "body": "#5a5a62",
     "scarf": "#1e1e24",
@@ -5851,7 +5851,7 @@
    "world": 3,
    "worldName": "Donjon sans fin",
    "light": "#7fd3ff",
-   "bg": "#6e211e",
+   "bg": "#431e1e",
    "doll": {
     "body": "#5a5a62",
     "scarf": "#1e1e24",
@@ -5938,7 +5938,7 @@
    "world": 4,
    "worldName": "Archipel des tempêtes",
    "light": "#ffe14a",
-   "bg": "#732d35",
+   "bg": "#482a35",
    "doll": {
     "body": "#3a7ac8",
     "scarf": "#2a3a5a",
@@ -6017,7 +6017,7 @@
    "world": 4,
    "worldName": "Archipel des tempêtes",
    "light": "#ffe14a",
-   "bg": "#732d35",
+   "bg": "#482a35",
    "doll": {
     "body": "#3a7ac8",
     "scarf": "#2a3a5a",
@@ -6089,7 +6089,7 @@
    "world": 4,
    "worldName": "Archipel des tempêtes",
    "light": "#ffe14a",
-   "bg": "#732d35",
+   "bg": "#482a35",
    "doll": {
     "body": "#3a7ac8",
     "scarf": "#2a3a5a",
@@ -6160,7 +6160,7 @@
    "world": 4,
    "worldName": "Archipel des tempêtes",
    "light": "#ffe14a",
-   "bg": "#732d35",
+   "bg": "#482a35",
    "doll": {
     "body": "#3a7ac8",
     "scarf": "#2a3a5a",
@@ -6232,7 +6232,7 @@
    "world": 4,
    "worldName": "Archipel des tempêtes",
    "light": "#ffe14a",
-   "bg": "#732d35",
+   "bg": "#482a35",
    "doll": {
     "body": "#3a7ac8",
     "scarf": "#2a3a5a",
@@ -6311,7 +6311,7 @@
    "world": 5,
    "worldName": "Profondeur sans lumière",
    "light": "#6a8aff",
-   "bg": "#641613",
+   "bg": "#391413",
    "doll": {
     "body": "#1f2a4a",
     "scarf": "#05050a",
@@ -6382,7 +6382,7 @@
    "world": 5,
    "worldName": "Profondeur sans lumière",
    "light": "#6a8aff",
-   "bg": "#641613",
+   "bg": "#391413",
    "doll": {
     "body": "#1f2a4a",
     "scarf": "#05050a",
@@ -6460,7 +6460,7 @@
    "world": 5,
    "worldName": "Profondeur sans lumière",
    "light": "#6a8aff",
-   "bg": "#641613",
+   "bg": "#391413",
    "doll": {
     "body": "#1f2a4a",
     "scarf": "#05050a",
@@ -6539,7 +6539,7 @@
    "world": 5,
    "worldName": "Profondeur sans lumière",
    "light": "#6a8aff",
-   "bg": "#641613",
+   "bg": "#391413",
    "doll": {
     "body": "#1f2a4a",
     "scarf": "#05050a",
@@ -6610,7 +6610,7 @@
    "world": 5,
    "worldName": "Profondeur sans lumière",
    "light": "#6a8aff",
-   "bg": "#641613",
+   "bg": "#391413",
    "doll": {
     "body": "#1f2a4a",
     "scarf": "#05050a",
@@ -6691,7 +6691,7 @@
    "world": 6,
    "worldName": "Royaume inversé",
    "light": "#c84ad8",
-   "bg": "#731827",
+   "bg": "#481627",
    "doll": {
     "body": "#c84ad8",
     "scarf": "#2a0a3a",
@@ -6777,7 +6777,7 @@
    "world": 6,
    "worldName": "Royaume inversé",
    "light": "#c84ad8",
-   "bg": "#731827",
+   "bg": "#481627",
    "doll": {
     "body": "#c84ad8",
     "scarf": "#2a0a3a",
@@ -6848,7 +6848,7 @@
    "world": 6,
    "worldName": "Royaume inversé",
    "light": "#c84ad8",
-   "bg": "#731827",
+   "bg": "#481627",
    "doll": {
     "body": "#c84ad8",
     "scarf": "#2a0a3a",
@@ -6928,7 +6928,7 @@
    "world": 6,
    "worldName": "Royaume inversé",
    "light": "#c84ad8",
-   "bg": "#731827",
+   "bg": "#481627",
    "doll": {
     "body": "#c84ad8",
     "scarf": "#2a0a3a",
@@ -6999,7 +6999,7 @@
    "world": 6,
    "worldName": "Royaume inversé",
    "light": "#c84ad8",
-   "bg": "#731827",
+   "bg": "#481627",
    "doll": {
     "body": "#c84ad8",
     "scarf": "#2a0a3a",
@@ -7080,7 +7080,7 @@
    "world": 7,
    "worldName": "Océan sous pression",
    "light": "#9af0ff",
-   "bg": "#621b19",
+   "bg": "#371819",
    "doll": {
     "body": "#0a3a5a",
     "scarf": "#021018",
@@ -7151,7 +7151,7 @@
    "world": 7,
    "worldName": "Océan sous pression",
    "light": "#9af0ff",
-   "bg": "#621b19",
+   "bg": "#371819",
    "doll": {
     "body": "#0a3a5a",
     "scarf": "#021018",
@@ -7237,7 +7237,7 @@
    "world": 7,
    "worldName": "Océan sous pression",
    "light": "#9af0ff",
-   "bg": "#621b19",
+   "bg": "#371819",
    "doll": {
     "body": "#0a3a5a",
     "scarf": "#021018",
@@ -7308,7 +7308,7 @@
    "world": 7,
    "worldName": "Océan sous pression",
    "light": "#9af0ff",
-   "bg": "#621b19",
+   "bg": "#371819",
    "doll": {
     "body": "#0a3a5a",
     "scarf": "#021018",
@@ -7380,7 +7380,7 @@
    "world": 7,
    "worldName": "Océan sous pression",
    "light": "#9af0ff",
-   "bg": "#621b19",
+   "bg": "#371819",
    "doll": {
     "body": "#0a3a5a",
     "scarf": "#021018",
@@ -7460,7 +7460,7 @@
    "world": 8,
    "worldName": "Saisons accélérées",
    "light": "#f0f0ff",
-   "bg": "#7a2617",
+   "bg": "#4f2317",
    "doll": {
     "body": "#d86a2a",
     "scarf": "#3a2a14",
@@ -7531,7 +7531,7 @@
    "world": 8,
    "worldName": "Saisons accélérées",
    "light": "#f0f0ff",
-   "bg": "#7a2617",
+   "bg": "#4f2317",
    "doll": {
     "body": "#d86a2a",
     "scarf": "#3a2a14",
@@ -7602,7 +7602,7 @@
    "world": 8,
    "worldName": "Saisons accélérées",
    "light": "#f0f0ff",
-   "bg": "#7a2617",
+   "bg": "#4f2317",
    "doll": {
     "body": "#d86a2a",
     "scarf": "#3a2a14",
@@ -7673,7 +7673,7 @@
    "world": 8,
    "worldName": "Saisons accélérées",
    "light": "#f0f0ff",
-   "bg": "#7a2617",
+   "bg": "#4f2317",
    "doll": {
     "body": "#d86a2a",
     "scarf": "#3a2a14",
@@ -7752,7 +7752,7 @@
    "world": 8,
    "worldName": "Saisons accélérées",
    "light": "#f0f0ff",
-   "bg": "#7a2617",
+   "bg": "#4f2317",
    "doll": {
     "body": "#d86a2a",
     "scarf": "#3a2a14",
@@ -7839,7 +7839,7 @@
    "world": 9,
    "worldName": "Terre agitée",
    "light": "#e8a070",
-   "bg": "#731d15",
+   "bg": "#481a15",
    "doll": {
     "body": "#a84a3a",
     "scarf": "#2a140e",
@@ -7910,7 +7910,7 @@
    "world": 9,
    "worldName": "Terre agitée",
    "light": "#e8a070",
-   "bg": "#731d15",
+   "bg": "#481a15",
    "doll": {
     "body": "#a84a3a",
     "scarf": "#2a140e",
@@ -7989,7 +7989,7 @@
    "world": 9,
    "worldName": "Terre agitée",
    "light": "#e8a070",
-   "bg": "#731d15",
+   "bg": "#481a15",
    "doll": {
     "body": "#a84a3a",
     "scarf": "#2a140e",
@@ -8067,7 +8067,7 @@
    "world": 9,
    "worldName": "Terre agitée",
    "light": "#e8a070",
-   "bg": "#731d15",
+   "bg": "#481a15",
    "doll": {
     "body": "#a84a3a",
     "scarf": "#2a140e",
@@ -8138,7 +8138,7 @@
    "world": 9,
    "worldName": "Terre agitée",
    "light": "#e8a070",
-   "bg": "#731d15",
+   "bg": "#481a15",
    "doll": {
     "body": "#a84a3a",
     "scarf": "#2a140e",
@@ -8226,7 +8226,7 @@
    "world": 10,
    "worldName": "L'Atelier géant",
    "light": "#e8c070",
-   "bg": "#731d12",
+   "bg": "#481a12",
    "doll": {
     "body": "#3a6ab8",
     "scarf": "#2a1408",
@@ -8297,7 +8297,7 @@
    "world": 10,
    "worldName": "L'Atelier géant",
    "light": "#e8c070",
-   "bg": "#731d12",
+   "bg": "#481a12",
    "doll": {
     "body": "#3a6ab8",
     "scarf": "#2a1408",
@@ -8368,7 +8368,7 @@
    "world": 10,
    "worldName": "L'Atelier géant",
    "light": "#e8c070",
-   "bg": "#731d12",
+   "bg": "#481a12",
    "doll": {
     "body": "#3a6ab8",
     "scarf": "#2a1408",
@@ -8439,7 +8439,7 @@
    "world": 10,
    "worldName": "L'Atelier géant",
    "light": "#e8c070",
-   "bg": "#731d12",
+   "bg": "#481a12",
    "doll": {
     "body": "#3a6ab8",
     "scarf": "#2a1408",
@@ -8511,7 +8511,7 @@
    "world": 10,
    "worldName": "L'Atelier géant",
    "light": "#e8c070",
-   "bg": "#731d12",
+   "bg": "#481a12",
    "doll": {
     "body": "#3a6ab8",
     "scarf": "#2a1408",
@@ -8592,11 +8592,11 @@
    "world": 0,
    "worldName": "La Surface",
    "light": "#D9A441",
-   "bg": "#A8231A",
+   "bg": "#5E1E1A",
    "doll": {
-    "body": "#C8342A",
+    "body": "#A33A2A",
     "scarf": "#17100D",
-    "orn": "#C8342A"
+    "orn": "#A33A2A"
    },
    "hp": "300",
    "dmg": "12",
@@ -8763,7 +8763,7 @@
    "world": 1,
    "worldName": "Jungle toxique",
    "light": "#b7e04a",
-   "bg": "#6d2617",
+   "bg": "#422317",
    "doll": {
     "body": "#3f6b2a",
     "scarf": "#1c2a14",
@@ -8935,7 +8935,7 @@
    "world": 2,
    "worldName": "Filons géants",
    "light": "#ffb347",
-   "bg": "#691913",
+   "bg": "#3e1613",
    "doll": {
     "body": "#e0661c",
     "scarf": "#120c0a",
@@ -9108,7 +9108,7 @@
    "world": 3,
    "worldName": "Donjon sans fin",
    "light": "#7fd3ff",
-   "bg": "#6e211e",
+   "bg": "#431e1e",
    "doll": {
     "body": "#5a5a62",
     "scarf": "#1e1e24",
@@ -9271,7 +9271,7 @@
    "world": 4,
    "worldName": "Archipel des tempêtes",
    "light": "#ffe14a",
-   "bg": "#732d35",
+   "bg": "#482a35",
    "doll": {
     "body": "#3a7ac8",
     "scarf": "#2a3a5a",
@@ -9441,7 +9441,7 @@
    "world": 5,
    "worldName": "Profondeur sans lumière",
    "light": "#6a8aff",
-   "bg": "#641613",
+   "bg": "#391413",
    "doll": {
     "body": "#1f2a4a",
     "scarf": "#05050a",
@@ -9611,7 +9611,7 @@
    "world": 6,
    "worldName": "Royaume inversé",
    "light": "#c84ad8",
-   "bg": "#731827",
+   "bg": "#481627",
    "doll": {
     "body": "#c84ad8",
     "scarf": "#2a0a3a",
@@ -9781,7 +9781,7 @@
    "world": 7,
    "worldName": "Océan sous pression",
    "light": "#9af0ff",
-   "bg": "#621b19",
+   "bg": "#371819",
    "doll": {
     "body": "#0a3a5a",
     "scarf": "#021018",
@@ -9951,7 +9951,7 @@
    "world": 8,
    "worldName": "Saisons accélérées",
    "light": "#f0f0ff",
-   "bg": "#7a2617",
+   "bg": "#4f2317",
    "doll": {
     "body": "#d86a2a",
     "scarf": "#3a2a14",
@@ -10122,7 +10122,7 @@
    "world": 9,
    "worldName": "Terre agitée",
    "light": "#e8a070",
-   "bg": "#731d15",
+   "bg": "#481a15",
    "doll": {
     "body": "#a84a3a",
     "scarf": "#2a140e",
@@ -10298,7 +10298,7 @@
    "world": 10,
    "worldName": "L'Atelier géant",
    "light": "#e8c070",
-   "bg": "#731d12",
+   "bg": "#481a12",
    "doll": {
     "body": "#3a6ab8",
     "scarf": "#2a1408",
