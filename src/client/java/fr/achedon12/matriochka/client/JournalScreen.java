@@ -95,6 +95,10 @@ public class JournalScreen extends Screen {
 				onClose();
 			});
 		}
+		// the Trials open once an ending is seen, from the Objective page
+		if (!scroll && tab == 0 && JournalPages.endingsSeen() > 0) {
+			buttons.add(l + 20 + (PW - 18) / 2 - 38, t + BH - 30, 76, 16, Component.translatable("trials.matriochka.title"), () -> minecraft.gui.setScreen(new TrialsScreen(this)));
+		}
 		if (!scroll && tab == 1) {
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> { questWorld = Math.max(0, questWorld - 1); pageAt = Ui.now(); turnDir = -1; rebuild(); }, () -> questWorld > 0);
 			buttons.add(l + BW - 40, t + BH - 30, 18, 16, Component.literal(">"), () -> { questWorld = Math.min(KARMA_CHAPTER, questWorld + 1); pageAt = Ui.now(); turnDir = 1; rebuild(); }, () -> questWorld < KARMA_CHAPTER);
