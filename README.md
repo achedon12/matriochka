@@ -81,12 +81,12 @@ src/main/java     server and common logic (worlds, rules, bosses, stations, karm
 src/client/java   renderers, HUD, Journal and station screens
 src/gametest/java showcase test that visits every world
 design/           original design notes
-docs/             website (GitHub Pages)
+site/             website (Next.js, GitHub Pages)
 ```
 
 ## Status
 
-Matriochka is in alpha. All ten worlds, their rules, mobs, bosses, stations and progression are playable. Models and textures are generated placeholders made to be replaced with hand-made Blockbench art. See the [roadmap](https://github.com/achedon12/matriochka/wiki/Roadmap) for what comes next.
+Matriochka is in alpha. All ten worlds, their rules, mobs, bosses, stations and progression are playable. Every creature and boss has its own hand-built GeckoLib model, animations and attacks. See the [roadmap](https://github.com/achedon12/matriochka/wiki/Roadmap) for what comes next.
 
 ## Contributing
 
