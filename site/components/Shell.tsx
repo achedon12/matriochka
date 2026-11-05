@@ -72,11 +72,16 @@ export function Shell({ lang, path, section, children }: { lang: Lang; path: str
 
 export function PageHead({ title, lead, img, children }: { title: string; lead: string; img?: string | null; children?: ReactNode }) {
   return (
-    <section className={`phead${img ? " phead-art" : ""}`}>
-      {img && <img className="phead-img" src={asset(img)} alt="" width={1920} height={720} fetchPriority="high" />}
-      <div className="wrap">
-        <h1>{title}</h1>
-        <p className="lead">{lead}</p>
+    <section className={`relative isolate overflow-hidden ${img ? "bg-black pt-[clamp(110px,15vw,210px)] pb-[clamp(36px,5vw,60px)]" : "pt-10 pb-9"}`}>
+      {img && (
+        <>
+          <img className="kenburns absolute inset-0 -z-20 !h-full w-full object-cover" src={asset(img)} alt="" width={1920} height={823} fetchPriority="high" />
+          <span className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(14,8,6,.96)_0%,rgba(14,8,6,.6)_50%,rgba(14,8,6,.15)_100%)]" />
+        </>
+      )}
+      <div className="mx-auto w-full max-w-[1240px] px-4 md:px-8">
+        <h1 className="m-0 mb-4 font-display text-[clamp(46px,9vw,124px)] leading-[0.9] font-normal text-gold-b [text-shadow:0_5px_0_#17100d]">{title}</h1>
+        <p className="m-0 max-w-[62ch] text-[clamp(18px,1.6vw,22px)] leading-relaxed text-paper [text-shadow:0_2px_8px_rgba(0,0,0,.6)]">{lead}</p>
         {children}
       </div>
     </section>

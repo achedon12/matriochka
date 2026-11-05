@@ -181,7 +181,7 @@
    "reelWatch": "Watch the trailer",
    "heroGenre": "A Minecraft mod of ten worlds, each sealed inside a block of the one before.",
    "heroStatus": "alpha, out now for Minecraft 26.3 on Fabric. Free and open source.",
-   "heroImg": "shots/00_surface.jpg",
+   "heroImg": "shots/hero_banner.jpg",
    "surfaceLabel": "The Surface",
    "openWorld": "Open",
    "verbsH": "What you do in Matriochka",
@@ -196,13 +196,13 @@
     {
      "verb": "Survive its rule",
      "p": "Toxic air, rising heat, total darkness, upside-down gravity: each world bends one rule.",
-     "img": "shots/w04_view.jpg",
+     "img": "shots/verb_survive.jpg",
      "href": "worlds/"
     },
     {
      "verb": "Fight what lives there",
      "p": "Fifty creatures with their own attacks, and a boss that guards the core of the next world.",
-     "img": "shots/w02_boss.jpg",
+     "img": "shots/verb_fight.jpg",
      "href": "bestiary/"
     },
     {
@@ -279,20 +279,7 @@
    ],
    "galleryH": "Inside the blocks",
    "galleryP": "Captures from the mod running in Minecraft 26.3.",
-   "gallery": [
-    {
-     "src": "shots/w04_view.jpg",
-     "caption": "World 4, the Storm Archipelago, seen from its Threshold"
-    },
-    {
-     "src": "shots/gui_scroll.png",
-     "caption": "The Artisan's Scroll, first page"
-    },
-    {
-     "src": "shots/gui_station_matrix_workbench.png",
-     "caption": "The Matrix Workbench and its Seed recipes"
-    }
-   ],
+   "gallery": [],
    "ctaH": "Ready to shrink?",
    "ctaP": "Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25.",
    "ctaBtn": "Get version 0.1.0",
@@ -300,7 +287,7 @@
    "desc": "Matriochka, a Fabric mod for Minecraft 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss."
   },
   "worlds": {
-   "headImg": null,
+   "headImg": "shots/head_worlds_banner.jpg",
    "lifeH": "Who lives here",
    "lifeP": "Pick a creature to watch it move and use its own attacks. The boss guards the core that opens the next world.",
    "codexH": "Everything in this world",
@@ -324,7 +311,7 @@
    "inGame": "in game"
   },
   "bestiary": {
-   "headImg": null,
+   "headImg": "shots/head_bestiary_banner.jpg",
    "h": "Bestiary",
    "lead": "Fifty creatures, five per world. Health and damage already include the world's multiplier: health grows by 35% and damage by 20% with every world you go down.",
    "nesting": "Nesting creatures split open when they die and release a smaller, faster one. Elites guard the world's best drops.",
@@ -402,7 +389,7 @@
    "rare": "rare"
   },
   "bosses": {
-   "headImg": null,
+   "headImg": "shots/head_bosses_banner.jpg",
    "h": "Bosses",
    "lead": "Eleven fights, each built the same way: an announcement you can read, a fast and dangerous attack, then an opening. Hit a boss during its opening and it takes 1.5 times the damage; outside of it, only three quarters.",
    "tiers": [
@@ -462,7 +449,7 @@
   },
   "systems": {
    "h": "Systems",
-   "headImg": null,
+   "headImg": "shots/head_systems_banner.jpg",
    "lead": "What keeps you alive, what you trade for power, and how your gear grows. Everything here works the same in solo and on a server.",
    "desc": "Doll of Life, death and respawn, souls and karma, gear classes, groups and quests in Matriochka.",
    "onPage": "On this page",
@@ -836,7 +823,7 @@
   },
   "download": {
    "h": "Download",
-   "headImg": null,
+   "headImg": "shots/head_download_banner.jpg",
    "lead": "Version 0.1.0 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
    "desc": "Download Matriochka for Minecraft 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
    "sources": [
@@ -963,7 +950,7 @@
    "light": "#D9A441",
    "bg": "#5E1E1A",
    "block": "blocks/painted_wood.png",
-   "tall": "shots/00_surface_tall.jpg",
+   "tall": null,
    "banner": null,
    "wide": null,
    "boss": {
@@ -1566,7 +1553,7 @@
    "bg": "#422317",
    "block": "blocks/spore_moss.png",
    "tall": "shots/w01_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w01_view_banner.jpg",
    "wide": "shots/w01_view.jpg",
    "boss": {
     "id": "spore_queen",
@@ -2397,7 +2384,7 @@
      "rarity": "Common",
      "desc": "Lumpy domes with comb terraces, spore blossoms and a queen chamber.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_spore_hive.jpg"
     },
     {
      "id": "sporeling_nest",
@@ -2408,7 +2395,7 @@
      "rarity": "Common",
      "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_sporeling_nest.jpg"
     },
     {
      "id": "toxin_well",
@@ -2419,7 +2406,7 @@
      "rarity": "Rare",
      "desc": "A pavilion over a shaft with niches, down to a domed chamber with a pool and pillars.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_toxin_well.jpg"
     },
     {
      "id": "hollow_tree",
@@ -2430,7 +2417,7 @@
      "rarity": "Common",
      "desc": "A tower with a spiral stair and a different room on every floor.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_hollow_tree.jpg"
     },
     {
      "id": "abandoned_greenhouse",
@@ -2441,7 +2428,7 @@
      "rarity": "Rare",
      "desc": "A glass greenhouse with planters and a fountain.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_abandoned_greenhouse.jpg"
     },
     {
      "id": "giant_cocoon",
@@ -2452,7 +2439,7 @@
      "rarity": "Rare",
      "desc": "A great cocoon or crystal core with egg sacs around it.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_giant_cocoon.jpg"
     },
     {
      "id": "root_temple",
@@ -2463,7 +2450,7 @@
      "rarity": "",
      "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_root_temple.jpg"
     },
     {
      "id": "purified_clearing",
@@ -2474,7 +2461,7 @@
      "rarity": "",
      "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_purified_clearing.jpg"
     },
     {
      "id": "gatherer_village",
@@ -2485,7 +2472,7 @@
      "rarity": "Rare",
      "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_gatherer_village.jpg"
     },
     {
      "id": "artisan_sanctuary",
@@ -2496,7 +2483,7 @@
      "rarity": "",
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_artisan_sanctuary.jpg"
     }
    ],
    "loot": [
@@ -2652,9 +2639,9 @@
    "light": "#ffb347",
    "bg": "#3e1613",
    "block": "blocks/ashrock.png",
-   "tall": "shots/w02_view_tall.jpg",
+   "tall": null,
    "banner": null,
-   "wide": "shots/w02_view.jpg",
+   "wide": null,
    "boss": {
     "id": "ash_titan",
     "name": "Ash Titan",
@@ -3535,7 +3522,7 @@
      "rarity": "Common",
      "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_salamander_cavern.jpg"
     },
     {
      "id": "giant_furnace",
@@ -3546,7 +3533,7 @@
      "rarity": "Rare",
      "desc": "A forge hall around a stepped furnace and chimney, with a lava channel and a barred vault.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_giant_furnace.jpg"
     },
     {
      "id": "lava_well",
@@ -3557,7 +3544,7 @@
      "rarity": "Common",
      "desc": "A pavilion over a shaft with niches, down to a domed chamber with a pool and pillars.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_lava_well.jpg"
     },
     {
      "id": "collapsed_mine",
@@ -3568,7 +3555,7 @@
      "rarity": "Common",
      "desc": "A headframe with its wheel, a shaft with ladder, timbered galleries with rails and ore veins.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_collapsed_mine.jpg"
     },
     {
      "id": "hanging_rail",
@@ -3579,7 +3566,7 @@
      "rarity": "Common",
      "desc": "A trestle line with a broken end, a roofed station and a signal post.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_hanging_rail.jpg"
     },
     {
      "id": "crystal_works",
@@ -3590,7 +3577,7 @@
      "rarity": "Rare",
      "desc": "A glass greenhouse with planters and a fountain.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_crystal_works.jpg"
     },
     {
      "id": "abandoned_forge",
@@ -3601,7 +3588,7 @@
      "rarity": "Rare",
      "desc": "A forge hall around a stepped furnace and chimney, with a lava channel and a barred vault.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_abandoned_forge.jpg"
     },
     {
      "id": "vein_sanctuary",
@@ -3612,7 +3599,7 @@
      "rarity": "",
      "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_vein_sanctuary.jpg"
     },
     {
      "id": "miner_camp",
@@ -3623,7 +3610,7 @@
      "rarity": "Rare",
      "desc": "A fire ring with log benches, tents, a cooking corner and a lookout post.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_miner_camp.jpg"
     },
     {
      "id": "artisan_workshop",
@@ -3634,7 +3621,7 @@
      "rarity": "",
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_artisan_workshop.jpg"
     }
    ],
    "loot": [
@@ -4726,7 +4713,7 @@
      "rarity": "Common",
      "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_arena.jpg"
     },
     {
      "id": "jailer_court",
@@ -4737,7 +4724,7 @@
      "rarity": "Common",
      "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_jailer_court.jpg"
     },
     {
      "id": "moving_hall",
@@ -4748,7 +4735,7 @@
      "rarity": "Common",
      "desc": "A generated labyrinth with a central chamber, barred windows and, in the large ones, pit traps.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_moving_hall.jpg"
     },
     {
      "id": "trap_maze",
@@ -4759,7 +4746,7 @@
      "rarity": "Rare",
      "desc": "A generated labyrinth with a central chamber, barred windows and, in the large ones, pit traps.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_trap_maze.jpg"
     },
     {
      "id": "treasury",
@@ -4770,7 +4757,7 @@
      "rarity": "Rare",
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_treasury.jpg"
     },
     {
      "id": "crypt",
@@ -4781,7 +4768,7 @@
      "rarity": "Common",
      "desc": "A graveyard and mausoleum over a crypt of burial niches, sarcophagi and an ossuary.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_crypt.jpg"
     },
     {
      "id": "sealed_library",
@@ -4792,7 +4779,7 @@
      "rarity": "",
      "desc": "A two-level library with book walls, a mezzanine and reading tables.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_sealed_library.jpg"
     },
     {
      "id": "key_hall",
@@ -4803,7 +4790,7 @@
      "rarity": "",
      "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_key_hall.jpg"
     },
     {
      "id": "prison",
@@ -4814,7 +4801,7 @@
      "rarity": "Rare",
      "desc": "A two-storey prison with galleries, barred cells, the warden's office and a watchtower.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_prison.jpg"
     },
     {
      "id": "artisan_cell",
@@ -4825,7 +4812,7 @@
      "rarity": "",
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_artisan_cell.jpg"
     }
    ],
    "loot": [
@@ -4967,7 +4954,7 @@
    "bg": "#482a35",
    "block": "blocks/cloudstone.png",
    "tall": "shots/w04_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w04_view_banner.jpg",
    "wide": "shots/w04_view.jpg",
    "boss": {
     "id": "storm_king",
@@ -5865,7 +5852,7 @@
      "rarity": "Common",
      "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_ray_nest.jpg"
     },
     {
      "id": "giant_lightning_rod",
@@ -5876,7 +5863,7 @@
      "rarity": "Rare",
      "desc": "A tower with a spiral stair and a different room on every floor.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_giant_lightning_rod.jpg"
     },
     {
      "id": "flying_wreck",
@@ -5887,7 +5874,7 @@
      "rarity": "Rare",
      "desc": "A wrecked hull with a sterncastle cabin, a hold, masts and torn sails.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_flying_wreck.jpg"
     },
     {
      "id": "hanging_ruin",
@@ -5898,7 +5885,7 @@
      "rarity": "Common",
      "desc": "Broken walls, a colonnade, a fallen column, a standing arch and a vaulted cellar.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_hanging_ruin.jpg"
     },
     {
      "id": "broken_bridge",
@@ -5909,7 +5896,7 @@
      "rarity": "Common",
      "desc": "An arched bridge on piers with lamps, a broken gap, gate towers and a room inside a pier.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_broken_bridge.jpg"
     },
     {
      "id": "storm_lighthouse",
@@ -5920,7 +5907,7 @@
      "rarity": "Common",
      "desc": "A striped lighthouse with a gallery, a glazed lantern room and the keeper's cottage.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_storm_lighthouse.jpg"
     },
     {
      "id": "celestial_temple",
@@ -5931,7 +5918,7 @@
      "rarity": "",
      "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_celestial_temple.jpg"
     },
     {
      "id": "observatory",
@@ -5942,7 +5929,7 @@
      "rarity": "Rare",
      "desc": "A tower with a spiral stair and a different room on every floor.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_observatory.jpg"
     },
     {
      "id": "floating_village",
@@ -5953,7 +5940,7 @@
      "rarity": "Rare",
      "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_floating_village.jpg"
     },
     {
      "id": "cloud_garden",
@@ -5964,7 +5951,7 @@
      "rarity": "",
      "desc": "A glass greenhouse with planters and a fountain.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_cloud_garden.jpg"
     }
    ],
    "loot": [
@@ -6976,7 +6963,7 @@
      "rarity": "Common",
      "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_prowler_nest.jpg"
     },
     {
      "id": "echo_cemetery",
@@ -6987,7 +6974,7 @@
      "rarity": "Common",
      "desc": "A graveyard and mausoleum over a crypt of burial niches, sarcophagi and an ossuary.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_echo_cemetery.jpg"
     },
     {
      "id": "black_cathedral",
@@ -6998,7 +6985,7 @@
      "rarity": "Rare",
      "desc": "A cathedral with nave, transept, buttresses, twin towers, a rose window and a guarded crypt.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_black_cathedral.jpg"
     },
     {
      "id": "dark_tower",
@@ -7009,7 +6996,7 @@
      "rarity": "Common",
      "desc": "A tower with a spiral stair and a different room on every floor.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_dark_tower.jpg"
     },
     {
      "id": "bottomless_mine",
@@ -7020,7 +7007,7 @@
      "rarity": "Rare",
      "desc": "A headframe with its wheel, a shaft with ladder, timbered galleries with rails and ore veins.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_bottomless_mine.jpg"
     },
     {
      "id": "light_well",
@@ -7031,7 +7018,7 @@
      "rarity": "Rare",
      "desc": "A pavilion over a shaft with niches, down to a domed chamber with a pool and pillars.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_light_well.jpg"
     },
     {
      "id": "blind_sanctuary",
@@ -7042,7 +7029,7 @@
      "rarity": "",
      "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_blind_sanctuary.jpg"
     },
     {
      "id": "fresco_gallery",
@@ -7053,7 +7040,7 @@
      "rarity": "",
      "desc": "A two-level library with book walls, a mezzanine and reading tables.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_fresco_gallery.jpg"
     },
     {
      "id": "silent_village",
@@ -7064,7 +7051,7 @@
      "rarity": "Rare",
      "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_silent_village.jpg"
     },
     {
      "id": "artisan_shelter",
@@ -7075,7 +7062,7 @@
      "rarity": "",
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_artisan_shelter.jpg"
     }
    ],
    "loot": [
@@ -7232,7 +7219,7 @@
    "bg": "#481627",
    "block": "blocks/inverted_stone.png",
    "tall": "shots/w06_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w06_view_banner.jpg",
    "wide": "shots/w06_view.jpg",
    "boss": {
     "id": "your_double",
@@ -8012,7 +7999,7 @@
      "rarity": "Common",
      "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_mirror_hall.jpg"
     },
     {
      "id": "hanging_cage",
@@ -8023,7 +8010,7 @@
      "rarity": "Common",
      "desc": "A two-storey prison with galleries, barred cells, the warden's office and a watchtower.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_hanging_cage.jpg"
     },
     {
      "id": "unstable_core",
@@ -8034,7 +8021,7 @@
      "rarity": "Rare",
      "desc": "A great cocoon or crystal core with egg sacs around it.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_unstable_core.jpg"
     },
     {
      "id": "inverted_tower",
@@ -8045,7 +8032,7 @@
      "rarity": "Rare",
      "desc": "A tower with a spiral stair and a different room on every floor.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_inverted_tower.jpg"
     },
     {
      "id": "ceiling_city",
@@ -8056,7 +8043,7 @@
      "rarity": "Rare",
      "desc": "A walled city with corner towers, gates, avenues, houses and a guarded keep.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_ceiling_city.jpg"
     },
     {
      "id": "upturned_pool",
@@ -8067,7 +8054,7 @@
      "rarity": "Common",
      "desc": "A pavilion over a shaft with niches, down to a domed chamber with a pool and pillars.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_upturned_pool.jpg"
     },
     {
      "id": "gravity_lab",
@@ -8078,7 +8065,7 @@
      "rarity": "",
      "desc": "A laboratory of strange instruments, its upper floor furnished on the ceiling.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_gravity_lab.jpg"
     },
     {
      "id": "impossible_stair",
@@ -8089,7 +8076,7 @@
      "rarity": "",
      "desc": "A looping stair whose last flight runs upside down, around a reading pavilion.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_impossible_stair.jpg"
     },
     {
      "id": "reflection_refuge",
@@ -8100,7 +8087,7 @@
      "rarity": "Rare",
      "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_reflection_refuge.jpg"
     },
     {
      "id": "floating_garden",
@@ -8111,7 +8098,7 @@
      "rarity": "",
      "desc": "A glass greenhouse with planters and a fountain.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_floating_garden.jpg"
     }
    ],
    "loot": [
@@ -8263,7 +8250,7 @@
    "bg": "#371819",
    "block": "blocks/trench_rock.png",
    "tall": "shots/w07_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w07_view_banner.jpg",
    "wide": "shots/w07_view.jpg",
    "boss": {
     "id": "pressure_leviathan",
@@ -9088,7 +9075,7 @@
      "rarity": "Common",
      "desc": "A jagged rift crossed by an arch bridge, with ledges, scaffolding and a grotto at the bottom.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_hunter_trench.jpg"
     },
     {
      "id": "dead_reef",
@@ -9099,7 +9086,7 @@
      "rarity": "Common",
      "desc": "Broken walls, a colonnade, a fallen column, a standing arch and a vaulted cellar.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_dead_reef.jpg"
     },
     {
      "id": "sunken_city",
@@ -9110,7 +9097,7 @@
      "rarity": "Rare",
      "desc": "A walled city with corner towers, gates, avenues, houses and a guarded keep.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_sunken_city.jpg"
     },
     {
      "id": "wreck",
@@ -9121,7 +9108,7 @@
      "rarity": "Common",
      "desc": "A wrecked hull with a sterncastle cabin, a hold, masts and torn sails.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_wreck.jpg"
     },
     {
      "id": "diving_bell",
@@ -9132,7 +9119,7 @@
      "rarity": "Common",
      "desc": "A copper diving bell with portholes, a chain up to a buoy, crates and an anchor.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_diving_bell.jpg"
     },
     {
      "id": "air_grotto",
@@ -9143,7 +9130,7 @@
      "rarity": "Common",
      "desc": "A great cocoon or crystal core with egg sacs around it.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_air_grotto.jpg"
     },
     {
      "id": "abyssal_temple",
@@ -9154,7 +9141,7 @@
      "rarity": "",
      "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_abyssal_temple.jpg"
     },
     {
      "id": "sunken_lighthouse",
@@ -9165,7 +9152,7 @@
      "rarity": "",
      "desc": "A striped lighthouse with a gallery, a glazed lantern room and the keeper's cottage.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_sunken_lighthouse.jpg"
     },
     {
      "id": "pressure_station",
@@ -9176,7 +9163,7 @@
      "rarity": "Rare",
      "desc": "A laboratory of strange instruments, its upper floor furnished on the ceiling.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_pressure_station.jpg"
     },
     {
      "id": "deep_vault",
@@ -9187,7 +9174,7 @@
      "rarity": "",
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_deep_vault.jpg"
     }
    ],
    "loot": [
@@ -9339,7 +9326,7 @@
    "bg": "#4f2317",
    "block": "blocks/hourstone.png",
    "tall": "shots/w08_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w08_view_banner.jpg",
    "wide": "shots/w08_view.jpg",
    "boss": {
     "id": "seasons_master",
@@ -10206,7 +10193,7 @@
      "rarity": "Rare",
      "desc": "A walled city with corner towers, gates, avenues, houses and a guarded keep.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_hastened_town.jpg"
     },
     {
      "id": "aging_ruin",
@@ -10217,7 +10204,7 @@
      "rarity": "Common",
      "desc": "Broken walls, a colonnade, a fallen column, a standing arch and a vaulted cellar.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_aging_ruin.jpg"
     },
     {
      "id": "giant_clock",
@@ -10228,7 +10215,7 @@
      "rarity": "Rare",
      "desc": "A square clock tower with four faces, a pendulum and a belfry over a gear-paved court.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_giant_clock.jpg"
     },
     {
      "id": "season_greenhouse",
@@ -10239,7 +10226,7 @@
      "rarity": "Common",
      "desc": "A glass greenhouse with planters and a fountain.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_season_greenhouse.jpg"
     },
     {
      "id": "frozen_garden",
@@ -10250,7 +10237,7 @@
      "rarity": "Common",
      "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_frozen_garden.jpg"
     },
     {
      "id": "ephemeral_camp",
@@ -10261,7 +10248,7 @@
      "rarity": "Common",
      "desc": "A fire ring with log benches, tents, a cooking corner and a lookout post.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_ephemeral_camp.jpg"
     },
     {
      "id": "solar_observatory",
@@ -10272,7 +10259,7 @@
      "rarity": "",
      "desc": "A tower with a spiral stair and a different room on every floor.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_solar_observatory.jpg"
     },
     {
      "id": "library_of_ages",
@@ -10283,7 +10270,7 @@
      "rarity": "",
      "desc": "A two-level library with book walls, a mezzanine and reading tables.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_library_of_ages.jpg"
     },
     {
      "id": "dusk_market",
@@ -10294,7 +10281,7 @@
      "rarity": "Rare",
      "desc": "Two rows of awninged stalls under lantern strings, a covered hall and an entrance arch.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_dusk_market.jpg"
     },
     {
      "id": "time_tomb",
@@ -10305,7 +10292,7 @@
      "rarity": "",
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_time_tomb.jpg"
     }
    ],
    "loot": [
@@ -10457,7 +10444,7 @@
    "bg": "#481a15",
    "block": "blocks/living_rock.png",
    "tall": "shots/w09_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w09_view_banner.jpg",
    "wide": "shots/w09_view.jpg",
    "boss": {
     "id": "terrain_heart_boss",
@@ -11268,7 +11255,7 @@
      "rarity": "Rare",
      "desc": "A tower with a spiral stair and a different room on every floor.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_walking_tower.jpg"
     },
     {
      "id": "mobile_fortress",
@@ -11279,7 +11266,7 @@
      "rarity": "Rare",
      "desc": "A fort with curtain walls, four towers, a gatehouse with portcullis and a three-floor keep.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_mobile_fortress.jpg"
     },
     {
      "id": "terrain_arena",
@@ -11290,7 +11277,7 @@
      "rarity": "Common",
      "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_terrain_arena.jpg"
     },
     {
      "id": "moving_ruin",
@@ -11301,7 +11288,7 @@
      "rarity": "Common",
      "desc": "Broken walls, a colonnade, a fallen column, a standing arch and a vaulted cellar.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_moving_ruin.jpg"
     },
     {
      "id": "living_chasm",
@@ -11312,7 +11299,7 @@
      "rarity": "Rare",
      "desc": "A jagged rift crossed by an arch bridge, with ledges, scaffolding and a grotto at the bottom.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_living_chasm.jpg"
     },
     {
      "id": "mimic_nest",
@@ -11323,7 +11310,7 @@
      "rarity": "Common",
      "desc": "A crater with a lined bowl, eggs, bone ribs and burrows ending in dens.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_mimic_nest.jpg"
     },
     {
      "id": "buried_village",
@@ -11334,7 +11321,7 @@
      "rarity": "",
      "desc": "Houses around a fountain plaza, with paths, garden plots, lamps and a belfry.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_buried_village.jpg"
     },
     {
      "id": "beating_vein",
@@ -11345,7 +11332,7 @@
      "rarity": "",
      "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_beating_vein.jpg"
     },
     {
      "id": "anchored_fort",
@@ -11356,7 +11343,7 @@
      "rarity": "Rare",
      "desc": "A fort with curtain walls, four towers, a gatehouse with portcullis and a three-floor keep.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_anchored_fort.jpg"
     },
     {
      "id": "stable_sanctuary",
@@ -11367,7 +11354,7 @@
      "rarity": "",
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_stable_sanctuary.jpg"
     }
    ],
    "loot": [
@@ -11510,7 +11497,7 @@
    "bg": "#481a12",
    "block": "blocks/giant_plank.png",
    "tall": "shots/w10_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w10_view_banner.jpg",
    "wide": "shots/w10_view.jpg",
    "boss": {
     "id": "the_unfinished",
@@ -12335,7 +12322,7 @@
      "rarity": "Rare",
      "desc": "A tower with a spiral stair and a different room on every floor.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_needle_tower.jpg"
     },
     {
      "id": "colossal_forge",
@@ -12346,7 +12333,7 @@
      "rarity": "Rare",
      "desc": "A forge hall around a stepped furnace and chimney, with a lava channel and a barred vault.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_colossal_forge.jpg"
     },
     {
      "id": "collapsed_doll",
@@ -12357,7 +12344,7 @@
      "rarity": "Rare",
      "desc": "A great cocoon or crystal core with egg sacs around it.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
-     "img": null
+     "img": "shots/st_collapsed_doll.jpg"
     },
     {
      "id": "giant_chest",
@@ -12368,7 +12355,7 @@
      "rarity": "Rare",
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_giant_chest.jpg"
     },
     {
      "id": "colossal_library",
@@ -12379,7 +12366,7 @@
      "rarity": "",
      "desc": "A two-level library with book walls, a mezzanine and reading tables.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_colossal_library.jpg"
     },
     {
      "id": "titanic_workbench",
@@ -12390,7 +12377,7 @@
      "rarity": "",
      "desc": "A sunken arena with tiered seats, gates, a champion's box and beast pens.",
      "inside": "Two to four chests hidden around: under tables, behind bookshelves, in cellars, in dead ends. The first is rare in medium and large ones.",
-     "img": null
+     "img": "shots/st_titanic_workbench.jpg"
     },
     {
      "id": "artisan_giant_workshop",
@@ -12401,7 +12388,7 @@
      "rarity": "",
      "desc": "A stepped temple with a grand stair, a summit shrine and a pillared inner hall.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_artisan_giant_workshop.jpg"
     },
     {
      "id": "block_gate",
@@ -12412,7 +12399,7 @@
      "rarity": "",
      "desc": "A shrine on a stepped platform, with a pavilion, an altar, a gate and stone lanterns.",
      "inside": "A reading nook with a lectern and candles around a rare chest holding a page of the Journal.",
-     "img": null
+     "img": "shots/st_block_gate.jpg"
     },
     {
      "id": "city_of_giants",
@@ -12423,7 +12410,7 @@
      "rarity": "Rare",
      "desc": "A walled city with corner towers, gates, avenues, houses and a guarded keep.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
-     "img": null
+     "img": "shots/st_city_of_giants.jpg"
     },
     {
      "id": "creature_throne",
@@ -12434,7 +12421,7 @@
      "rarity": "",
      "desc": "A pillared throne hall; the carpet before the throne hides a hatch to the treasure room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
-     "img": null
+     "img": "shots/st_creature_throne.jpg"
     }
    ],
    "loot": [

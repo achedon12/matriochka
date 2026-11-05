@@ -297,7 +297,7 @@ def _sources():
         return out
     files = sorted(os.listdir(SHOTS_SRC))
     for f in files:
-        m = re.match(r"(w\d\d_(?:view|boss)|00_surface|gui_[\w]+)\.png$", f)
+        m = re.match(r"(w\d\d_boss|gui_[\w]+)\.png$", f)
         if m and m.group(1) not in SKIP_SHOTS:
             out[m.group(1)] = (os.path.join(SHOTS_SRC, f), False)
     seqs = {}
@@ -348,15 +348,49 @@ def process_shots(dst):
         SHOTS[key] = key + ".jpg"
 
 
+# World views picked by eye among the structure photos (media/structures): world -> structure id.
+# Worlds missing here wait for frames of the trailer capture (FRAME_PICKS) and show their own block meanwhile.
+STRUCT_VIEW = {1: "gatherer_village", 4: "cloud_garden", 6: "reflection_refuge", 7: "diving_bell", 8: "frozen_garden",
+               9: "anchored_fort", 10: "city_of_giants"}
+# Other pictures of the site, each used once: key -> structure photo.
+STRUCT_ART = {"hero": "collapsed_doll", "head_worlds": "impossible_stair", "head_bestiary": "ray_nest", "head_bosses": "creature_throne",
+              "head_systems": "solar_observatory", "head_download": "root_temple", "verb_survive": "hanging_ruin", "verb_fight": "stable_sanctuary"}
 # Frames picked by eye from the trailer capture (media/trailer/frames): key -> (sequence, frame).
 FRAMES = os.path.join(ROOT, "media/trailer/frames")
 FRAME_PICKS = {}
 
 
+def _views(img, key, dst):
+    """A 21:9 banner, a 4:3 card and a tall doll-window crop of one picture."""
+    W, H = img.size
+    bh = int(W * 9 / 21)
+    img.crop((0, (H - bh) // 2, W, (H + bh) // 2)).resize((1920, 823), Image.LANCZOS).save(os.path.join(dst, key + "_banner.jpg"), quality=80, optimize=True, progressive=True)
+    SHOTS[key + "_banner"] = key + "_banner.jpg"
+    cw = H * 4 // 3
+    img.crop(((W - cw) // 2, 0, (W + cw) // 2, H)).resize((960, 720), Image.LANCZOS).save(os.path.join(dst, key + ".jpg"), quality=82, optimize=True, progressive=True)
+    SHOTS[key] = key + ".jpg"
+    tw = H * 2 // 3
+    img.crop(((W - tw) // 2, 0, (W + tw) // 2, H)).resize((480, 720), Image.LANCZOS).save(os.path.join(dst, key + "_tall.jpg"), quality=82, optimize=True, progressive=True)
+    SHOTS[key + "_tall"] = key + "_tall.jpg"
+
+
 def process_frames(dst):
     """Each picked frame becomes a 21:9 banner, a 4:3 card and a tall doll-window crop; structure photos become cards."""
     st_dir = os.path.join(ROOT, "media/structures")
+    # world views are rebuilt from scratch each run: no stale or doubled capture survives
+    for f in os.listdir(dst):
+        if re.match(r"(w\d\d_view|00_surface)", f):
+            os.remove(os.path.join(dst, f))
+            SHOTS.pop(f.rsplit(".", 1)[0], None)
     if Image is not None and os.path.isdir(st_dir):
+        for n, sid in STRUCT_VIEW.items():
+            src = os.path.join(st_dir, f"struct_{sid}.png")
+            if os.path.exists(src):
+                _views(Image.open(src).convert("RGB"), f"w{n:02d}_view", dst)
+        for key, sid in STRUCT_ART.items():
+            src = os.path.join(st_dir, f"struct_{sid}.png")
+            if os.path.exists(src):
+                _views(Image.open(src).convert("RGB"), key, dst)
         for f in sorted(os.listdir(st_dir)):
             if f.startswith("struct_") and f.endswith(".png"):
                 key = "st_" + f[7:-4]
@@ -772,7 +806,7 @@ def build_worlds():
         d = dict(n=n, name=world_name(n), short=t(*RULE_SHORT[n]), long=t(*RULE_LONG[n]),
                  nums=[dict(v=(a if LANG == "en" else b), l=(c if LANG == "en" else dd)) for a, b, c, dd in RULE_NUMS[n]],
                  doll=doll(n), light=light(n), bg=world_bg(n), block=f"blocks/{WORLD_BLOCK[n]}.png",
-                 tall=shot(f"w{n:02d}_view_tall") or (shot("00_surface_tall") if n == 0 else None),
+                 tall=shot(f"w{n:02d}_view_tall"),
                  banner=shot(f"w{n:02d}_view_banner"),
                  wide=None if n == 0 else shot(f"w{n:02d}_view"),
                  boss=dict(id=boss["id"], name=boss[LANG], hp=fmt(boss["hp"]), core=boss["core"], coreTex=tex(boss["core"]), coreName=name(boss["core"])),
@@ -1265,7 +1299,7 @@ def build_copy():
                     "Un mod Minecraft de dix mondes, chacun scellé dans un bloc du précédent."),
         heroStatus=t("alpha, out now for Minecraft 26.3 on Fabric. Free and open source.",
                      "alpha, disponible pour Minecraft 26.3 sur Fabric. Gratuit et open source."),
-        heroImg=shot("w00_view_banner") or shot("00_surface"),
+        heroImg=shot("hero_banner"),
         surfaceLabel=t("The Surface", "La Surface"),
         openWorld=t("Open", "Ouvrir"),
         verbsH=t("What you do in Matriochka", "Ce que tu fais dans Matriochka"),
@@ -1275,10 +1309,10 @@ def build_copy():
                     img=shot("gui_station_matrix_workbench"), href="systems/"),
                dict(verb=t("Survive its rule", "Survis à sa règle"), p=t("Toxic air, rising heat, total darkness, upside-down gravity: each world bends one rule.",
                                                                          "Air toxique, chaleur, obscurité totale, gravité inversée : chaque monde tord une règle."),
-                    img=shot("w04_view"), href="worlds/"),
+                    img=shot("verb_survive"), href="worlds/"),
                dict(verb=t("Fight what lives there", "Affronte ce qui y vit"), p=t("Fifty creatures with their own attacks, and a boss that guards the core of the next world.",
                                                                                  "Cinquante créatures aux attaques propres, et un boss qui garde le noyau du monde suivant."),
-                    img=shot("w03_fight") or shot("w02_boss"), href="bestiary/"),
+                    img=shot("verb_fight"), href="bestiary/"),
                dict(verb=t("Craft what it gives", "Fabrique ce qu'il donne"), p=t("Each world has its station, its armour and its tools, the ones you need for the world below.",
                                                                                   "Chaque monde a sa station, son armure et ses outils, ceux qu'il te faut pour le monde suivant."),
                     img=shot("gui_station_spore_vat"), href="worlds/1/")],
@@ -1319,10 +1353,7 @@ def build_copy():
         lifePicks=["executioner", "sky_harpooner", "shadow_mother", "hour_keeper", "mimic", "trench_eel"],
         galleryH=t("Inside the blocks", "Dans les blocs"),
         galleryP=t("Captures from the mod running in Minecraft 26.3.", "Captures du mod en jeu, sous Minecraft 26.3."),
-        gallery=[dict(src=shot(k), caption=c) for k, c in (
-            ("w04_view", t("World 4, the Storm Archipelago, seen from its Threshold", "Monde 4, l'Archipel des tempêtes, vu depuis son Seuil")),
-            ("gui_scroll", t("The Artisan's Scroll, first page", "Le Parchemin de l'artisan, première page")),
-            ("gui_station_matrix_workbench", t("The Matrix Workbench and its Seed recipes", "L'Établi matriciel et ses recettes de Graines"))) if shot(k)],
+        gallery=[],
         ctaH=t("Ready to shrink?", "Prêt à rétrécir ?"),
         ctaP=t("Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25.", "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25."),
         ctaBtn=t(f"Get version {VERSION}", f"Obtenir la version {VERSION}"),
@@ -1331,7 +1362,7 @@ def build_copy():
                "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."),
     )
     worlds = dict(
-        headImg=shot("w04_view_banner"),
+        headImg=shot("head_worlds_banner"),
         lifeH=t("Who lives here", "Qui vit ici"),
         lifeP=t("Pick a creature to watch it move and use its own attacks. The boss guards the core that opens the next world.",
                 "Choisis une créature pour la voir bouger et lancer ses propres attaques. Le boss garde le noyau qui ouvre le monde suivant."),
@@ -1353,7 +1384,7 @@ def build_copy():
         inGame=t("in game", "en jeu"),
     )
     bestiary = dict(
-        headImg=shot("w05_fight_banner") or shot("w03_fight_banner"),
+        headImg=shot("head_bestiary_banner"),
         h=t("Bestiary", "Bestiaire"),
         lead=t("Fifty creatures, five per world. Health and damage already include the world's multiplier: health grows by 35% and damage by 20% with every world you go down.",
                "Cinquante créatures, cinq par monde. La vie et les dégâts incluent déjà le multiplicateur du monde : la vie augmente de 35 % et les dégâts de 20 % à chaque monde franchi."),
@@ -1368,7 +1399,7 @@ def build_copy():
         rare=t("rare", "rare"),
     )
     bosses = dict(
-        headImg=shot("w02_boss_banner") or shot("w10_boss_banner"),
+        headImg=shot("head_bosses_banner"),
         h=t("Bosses", "Boss"),
         lead=t("Eleven fights, each built the same way: an announcement you can read, a fast and dangerous attack, then an opening. Hit a boss during its opening and it takes 1.5 times the damage; outside of it, only three quarters.",
                "Onze combats, tous construits pareil : une annonce lisible, une attaque rapide et dangereuse, puis une ouverture. Frappé pendant son ouverture, un boss subit 1,5 fois les dégâts ; en dehors, seulement les trois quarts."),
@@ -1399,7 +1430,7 @@ def build_systems(d):
     nq = len(C.QUESTS)
     nach = sum(len(v) for v in C.ACH.values())
     return dict(
-        h=t("Systems", "Systèmes"), headImg=shot("w08_view_banner"),
+        h=t("Systems", "Systèmes"), headImg=shot("head_systems_banner"),
         lead=t("What keeps you alive, what you trade for power, and how your gear grows. Everything here works the same in solo and on a server.",
                "Ce qui te garde en vie, ce que tu échanges contre de la puissance, et comment ton équipement grandit. Tout fonctionne pareil en solo et sur serveur."),
         desc=t("Doll of Life, death and respawn, souls and karma, gear classes, groups and quests in Matriochka.",
@@ -1488,7 +1519,7 @@ def build_systems(d):
 
 def build_download():
     return dict(
-        h=t("Download", "Télécharger"), headImg=shot("w00_view_banner"),
+        h=t("Download", "Télécharger"), headImg=shot("head_download_banner"),
         lead=t(f"Version {VERSION} for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
                f"Version {VERSION} pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble."),
         desc=t("Download Matriochka for Minecraft 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",

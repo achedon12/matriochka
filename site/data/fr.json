@@ -181,7 +181,7 @@
    "reelWatch": "Voir la bande-annonce",
    "heroGenre": "Un mod Minecraft de dix mondes, chacun scellé dans un bloc du précédent.",
    "heroStatus": "alpha, disponible pour Minecraft 26.3 sur Fabric. Gratuit et open source.",
-   "heroImg": "shots/00_surface.jpg",
+   "heroImg": "shots/hero_banner.jpg",
    "surfaceLabel": "La Surface",
    "openWorld": "Ouvrir",
    "verbsH": "Ce que tu fais dans Matriochka",
@@ -196,13 +196,13 @@
     {
      "verb": "Survis à sa règle",
      "p": "Air toxique, chaleur, obscurité totale, gravité inversée : chaque monde tord une règle.",
-     "img": "shots/w04_view.jpg",
+     "img": "shots/verb_survive.jpg",
      "href": "worlds/"
     },
     {
      "verb": "Affronte ce qui y vit",
      "p": "Cinquante créatures aux attaques propres, et un boss qui garde le noyau du monde suivant.",
-     "img": "shots/w02_boss.jpg",
+     "img": "shots/verb_fight.jpg",
      "href": "bestiary/"
     },
     {
@@ -279,20 +279,7 @@
    ],
    "galleryH": "Dans les blocs",
    "galleryP": "Captures du mod en jeu, sous Minecraft 26.3.",
-   "gallery": [
-    {
-     "src": "shots/w04_view.jpg",
-     "caption": "Monde 4, l'Archipel des tempêtes, vu depuis son Seuil"
-    },
-    {
-     "src": "shots/gui_scroll.png",
-     "caption": "Le Parchemin de l'artisan, première page"
-    },
-    {
-     "src": "shots/gui_station_matrix_workbench.png",
-     "caption": "L'Établi matriciel et ses recettes de Graines"
-    }
-   ],
+   "gallery": [],
    "ctaH": "Prêt à rétrécir ?",
    "ctaP": "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25.",
    "ctaBtn": "Obtenir la version 0.1.0",
@@ -300,7 +287,7 @@
    "desc": "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
   },
   "worlds": {
-   "headImg": null,
+   "headImg": "shots/head_worlds_banner.jpg",
    "lifeH": "Qui vit ici",
    "lifeP": "Choisis une créature pour la voir bouger et lancer ses propres attaques. Le boss garde le noyau qui ouvre le monde suivant.",
    "codexH": "Tout ce que contient ce monde",
@@ -324,7 +311,7 @@
    "inGame": "en jeu"
   },
   "bestiary": {
-   "headImg": null,
+   "headImg": "shots/head_bestiary_banner.jpg",
    "h": "Bestiaire",
    "lead": "Cinquante créatures, cinq par monde. La vie et les dégâts incluent déjà le multiplicateur du monde : la vie augmente de 35 % et les dégâts de 20 % à chaque monde franchi.",
    "nesting": "Les créatures gigognes s'ouvrent à leur mort et libèrent une version plus petite et plus rapide. Les élites gardent les meilleurs butins du monde.",
@@ -402,7 +389,7 @@
    "rare": "rare"
   },
   "bosses": {
-   "headImg": null,
+   "headImg": "shots/head_bosses_banner.jpg",
    "h": "Boss",
    "lead": "Onze combats, tous construits pareil : une annonce lisible, une attaque rapide et dangereuse, puis une ouverture. Frappé pendant son ouverture, un boss subit 1,5 fois les dégâts ; en dehors, seulement les trois quarts.",
    "tiers": [
@@ -462,7 +449,7 @@
   },
   "systems": {
    "h": "Systèmes",
-   "headImg": null,
+   "headImg": "shots/head_systems_banner.jpg",
    "lead": "Ce qui te garde en vie, ce que tu échanges contre de la puissance, et comment ton équipement grandit. Tout fonctionne pareil en solo et sur serveur.",
    "desc": "Poupée de vie, mort et réapparition, âmes et karma, classes d'équipement, groupes et quêtes dans Matriochka.",
    "onPage": "Sur cette page",
@@ -836,7 +823,7 @@
   },
   "download": {
    "h": "Télécharger",
-   "headImg": null,
+   "headImg": "shots/head_download_banner.jpg",
    "lead": "Version 0.1.0 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
    "desc": "Télécharger Matriochka pour Minecraft 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur.",
    "sources": [
@@ -963,7 +950,7 @@
    "light": "#D9A441",
    "bg": "#5E1E1A",
    "block": "blocks/painted_wood.png",
-   "tall": "shots/00_surface_tall.jpg",
+   "tall": null,
    "banner": null,
    "wide": null,
    "boss": {
@@ -1566,7 +1553,7 @@
    "bg": "#422317",
    "block": "blocks/spore_moss.png",
    "tall": "shots/w01_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w01_view_banner.jpg",
    "wide": "shots/w01_view.jpg",
    "boss": {
     "id": "spore_queen",
@@ -2397,7 +2384,7 @@
      "rarity": "Courante",
      "desc": "Des dômes bosselés aux terrasses d'alvéoles, fleurs à spores et chambre de la reine.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_spore_hive.jpg"
     },
     {
      "id": "sporeling_nest",
@@ -2408,7 +2395,7 @@
      "rarity": "Courante",
      "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_sporeling_nest.jpg"
     },
     {
      "id": "toxin_well",
@@ -2419,7 +2406,7 @@
      "rarity": "Rare",
      "desc": "Un pavillon sur un puits à niches, jusqu'à une salle en coupole avec bassin et piliers.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_toxin_well.jpg"
     },
     {
      "id": "hollow_tree",
@@ -2430,7 +2417,7 @@
      "rarity": "Courante",
      "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_hollow_tree.jpg"
     },
     {
      "id": "abandoned_greenhouse",
@@ -2441,7 +2428,7 @@
      "rarity": "Rare",
      "desc": "Une serre de verre avec jardinières et fontaine.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_abandoned_greenhouse.jpg"
     },
     {
      "id": "giant_cocoon",
@@ -2452,7 +2439,7 @@
      "rarity": "Rare",
      "desc": "Un grand cocon ou un cœur de cristal entouré de poches d'œufs.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_giant_cocoon.jpg"
     },
     {
      "id": "root_temple",
@@ -2463,7 +2450,7 @@
      "rarity": "",
      "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_root_temple.jpg"
     },
     {
      "id": "purified_clearing",
@@ -2474,7 +2461,7 @@
      "rarity": "",
      "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_purified_clearing.jpg"
     },
     {
      "id": "gatherer_village",
@@ -2485,7 +2472,7 @@
      "rarity": "Rare",
      "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_gatherer_village.jpg"
     },
     {
      "id": "artisan_sanctuary",
@@ -2496,7 +2483,7 @@
      "rarity": "",
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_artisan_sanctuary.jpg"
     }
    ],
    "loot": [
@@ -2652,9 +2639,9 @@
    "light": "#ffb347",
    "bg": "#3e1613",
    "block": "blocks/ashrock.png",
-   "tall": "shots/w02_view_tall.jpg",
+   "tall": null,
    "banner": null,
-   "wide": "shots/w02_view.jpg",
+   "wide": null,
    "boss": {
     "id": "ash_titan",
     "name": "Titan de cendre",
@@ -3535,7 +3522,7 @@
      "rarity": "Courante",
      "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_salamander_cavern.jpg"
     },
     {
      "id": "giant_furnace",
@@ -3546,7 +3533,7 @@
      "rarity": "Rare",
      "desc": "Une forge autour d'un fourneau à degrés et sa cheminée, avec canal de lave et chambre forte.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_giant_furnace.jpg"
     },
     {
      "id": "lava_well",
@@ -3557,7 +3544,7 @@
      "rarity": "Courante",
      "desc": "Un pavillon sur un puits à niches, jusqu'à une salle en coupole avec bassin et piliers.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_lava_well.jpg"
     },
     {
      "id": "collapsed_mine",
@@ -3568,7 +3555,7 @@
      "rarity": "Courante",
      "desc": "Un chevalement et sa roue, un puits à échelle, des galeries boisées avec rails et filons.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_collapsed_mine.jpg"
     },
     {
      "id": "hanging_rail",
@@ -3579,7 +3566,7 @@
      "rarity": "Courante",
      "desc": "Une voie sur tréteaux à l'extrémité brisée, une gare couverte et un poteau de signal.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_hanging_rail.jpg"
     },
     {
      "id": "crystal_works",
@@ -3590,7 +3577,7 @@
      "rarity": "Rare",
      "desc": "Une serre de verre avec jardinières et fontaine.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_crystal_works.jpg"
     },
     {
      "id": "abandoned_forge",
@@ -3601,7 +3588,7 @@
      "rarity": "Rare",
      "desc": "Une forge autour d'un fourneau à degrés et sa cheminée, avec canal de lave et chambre forte.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_abandoned_forge.jpg"
     },
     {
      "id": "vein_sanctuary",
@@ -3612,7 +3599,7 @@
      "rarity": "",
      "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_vein_sanctuary.jpg"
     },
     {
      "id": "miner_camp",
@@ -3623,7 +3610,7 @@
      "rarity": "Rare",
      "desc": "Un foyer entouré de bancs, des tentes, un coin cuisine et un poste de guet.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_miner_camp.jpg"
     },
     {
      "id": "artisan_workshop",
@@ -3634,7 +3621,7 @@
      "rarity": "",
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_artisan_workshop.jpg"
     }
    ],
    "loot": [
@@ -4726,7 +4713,7 @@
      "rarity": "Courante",
      "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_arena.jpg"
     },
     {
      "id": "jailer_court",
@@ -4737,7 +4724,7 @@
      "rarity": "Courante",
      "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_jailer_court.jpg"
     },
     {
      "id": "moving_hall",
@@ -4748,7 +4735,7 @@
      "rarity": "Courante",
      "desc": "Un labyrinthe généré avec chambre centrale, fenêtres à barreaux et, dans les grands, des fosses piégées.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_moving_hall.jpg"
     },
     {
      "id": "trap_maze",
@@ -4759,7 +4746,7 @@
      "rarity": "Rare",
      "desc": "Un labyrinthe généré avec chambre centrale, fenêtres à barreaux et, dans les grands, des fosses piégées.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_trap_maze.jpg"
     },
     {
      "id": "treasury",
@@ -4770,7 +4757,7 @@
      "rarity": "Rare",
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_treasury.jpg"
     },
     {
      "id": "crypt",
@@ -4781,7 +4768,7 @@
      "rarity": "Courante",
      "desc": "Un cimetière et un mausolée au-dessus d'une crypte de niches, de sarcophages et d'un ossuaire.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_crypt.jpg"
     },
     {
      "id": "sealed_library",
@@ -4792,7 +4779,7 @@
      "rarity": "",
      "desc": "Une bibliothèque sur deux niveaux, murs de livres, mezzanine et tables de lecture.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_sealed_library.jpg"
     },
     {
      "id": "key_hall",
@@ -4803,7 +4790,7 @@
      "rarity": "",
      "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_key_hall.jpg"
     },
     {
      "id": "prison",
@@ -4814,7 +4801,7 @@
      "rarity": "Rare",
      "desc": "Une prison sur deux étages avec coursives, cellules à barreaux, bureau du gardien et tour de guet.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_prison.jpg"
     },
     {
      "id": "artisan_cell",
@@ -4825,7 +4812,7 @@
      "rarity": "",
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_artisan_cell.jpg"
     }
    ],
    "loot": [
@@ -4967,7 +4954,7 @@
    "bg": "#482a35",
    "block": "blocks/cloudstone.png",
    "tall": "shots/w04_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w04_view_banner.jpg",
    "wide": "shots/w04_view.jpg",
    "boss": {
     "id": "storm_king",
@@ -5865,7 +5852,7 @@
      "rarity": "Courante",
      "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_ray_nest.jpg"
     },
     {
      "id": "giant_lightning_rod",
@@ -5876,7 +5863,7 @@
      "rarity": "Rare",
      "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_giant_lightning_rod.jpg"
     },
     {
      "id": "flying_wreck",
@@ -5887,7 +5874,7 @@
      "rarity": "Rare",
      "desc": "Une coque échouée avec cabine de poupe, cale, mâts et voiles déchirées.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_flying_wreck.jpg"
     },
     {
      "id": "hanging_ruin",
@@ -5898,7 +5885,7 @@
      "rarity": "Courante",
      "desc": "Des murs brisés, une colonnade, une colonne tombée, une arche debout et une cave voûtée.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_hanging_ruin.jpg"
     },
     {
      "id": "broken_bridge",
@@ -5909,7 +5896,7 @@
      "rarity": "Courante",
      "desc": "Un pont en arches sur piles, avec lampes, une brèche, tours de garde et une salle dans une pile.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_broken_bridge.jpg"
     },
     {
      "id": "storm_lighthouse",
@@ -5920,7 +5907,7 @@
      "rarity": "Courante",
      "desc": "Un phare rayé avec galerie, lanterne vitrée et maison du gardien.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_storm_lighthouse.jpg"
     },
     {
      "id": "celestial_temple",
@@ -5931,7 +5918,7 @@
      "rarity": "",
      "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_celestial_temple.jpg"
     },
     {
      "id": "observatory",
@@ -5942,7 +5929,7 @@
      "rarity": "Rare",
      "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_observatory.jpg"
     },
     {
      "id": "floating_village",
@@ -5953,7 +5940,7 @@
      "rarity": "Rare",
      "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_floating_village.jpg"
     },
     {
      "id": "cloud_garden",
@@ -5964,7 +5951,7 @@
      "rarity": "",
      "desc": "Une serre de verre avec jardinières et fontaine.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_cloud_garden.jpg"
     }
    ],
    "loot": [
@@ -6976,7 +6963,7 @@
      "rarity": "Courante",
      "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_prowler_nest.jpg"
     },
     {
      "id": "echo_cemetery",
@@ -6987,7 +6974,7 @@
      "rarity": "Courante",
      "desc": "Un cimetière et un mausolée au-dessus d'une crypte de niches, de sarcophages et d'un ossuaire.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_echo_cemetery.jpg"
     },
     {
      "id": "black_cathedral",
@@ -6998,7 +6985,7 @@
      "rarity": "Rare",
      "desc": "Une cathédrale avec nef, transept, arcs-boutants, tours jumelles, rosace et crypte gardée.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_black_cathedral.jpg"
     },
     {
      "id": "dark_tower",
@@ -7009,7 +6996,7 @@
      "rarity": "Courante",
      "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_dark_tower.jpg"
     },
     {
      "id": "bottomless_mine",
@@ -7020,7 +7007,7 @@
      "rarity": "Rare",
      "desc": "Un chevalement et sa roue, un puits à échelle, des galeries boisées avec rails et filons.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_bottomless_mine.jpg"
     },
     {
      "id": "light_well",
@@ -7031,7 +7018,7 @@
      "rarity": "Rare",
      "desc": "Un pavillon sur un puits à niches, jusqu'à une salle en coupole avec bassin et piliers.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_light_well.jpg"
     },
     {
      "id": "blind_sanctuary",
@@ -7042,7 +7029,7 @@
      "rarity": "",
      "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_blind_sanctuary.jpg"
     },
     {
      "id": "fresco_gallery",
@@ -7053,7 +7040,7 @@
      "rarity": "",
      "desc": "Une bibliothèque sur deux niveaux, murs de livres, mezzanine et tables de lecture.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_fresco_gallery.jpg"
     },
     {
      "id": "silent_village",
@@ -7064,7 +7051,7 @@
      "rarity": "Rare",
      "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_silent_village.jpg"
     },
     {
      "id": "artisan_shelter",
@@ -7075,7 +7062,7 @@
      "rarity": "",
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_artisan_shelter.jpg"
     }
    ],
    "loot": [
@@ -7232,7 +7219,7 @@
    "bg": "#481627",
    "block": "blocks/inverted_stone.png",
    "tall": "shots/w06_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w06_view_banner.jpg",
    "wide": "shots/w06_view.jpg",
    "boss": {
     "id": "your_double",
@@ -8012,7 +7999,7 @@
      "rarity": "Courante",
      "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_mirror_hall.jpg"
     },
     {
      "id": "hanging_cage",
@@ -8023,7 +8010,7 @@
      "rarity": "Courante",
      "desc": "Une prison sur deux étages avec coursives, cellules à barreaux, bureau du gardien et tour de guet.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_hanging_cage.jpg"
     },
     {
      "id": "unstable_core",
@@ -8034,7 +8021,7 @@
      "rarity": "Rare",
      "desc": "Un grand cocon ou un cœur de cristal entouré de poches d'œufs.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_unstable_core.jpg"
     },
     {
      "id": "inverted_tower",
@@ -8045,7 +8032,7 @@
      "rarity": "Rare",
      "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_inverted_tower.jpg"
     },
     {
      "id": "ceiling_city",
@@ -8056,7 +8043,7 @@
      "rarity": "Rare",
      "desc": "Une cité fortifiée avec tours d'angle, portes, avenues, maisons et un donjon gardé.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_ceiling_city.jpg"
     },
     {
      "id": "upturned_pool",
@@ -8067,7 +8054,7 @@
      "rarity": "Courante",
      "desc": "Un pavillon sur un puits à niches, jusqu'à une salle en coupole avec bassin et piliers.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_upturned_pool.jpg"
     },
     {
      "id": "gravity_lab",
@@ -8078,7 +8065,7 @@
      "rarity": "",
      "desc": "Un laboratoire aux instruments étranges, son étage meublé au plafond.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_gravity_lab.jpg"
     },
     {
      "id": "impossible_stair",
@@ -8089,7 +8076,7 @@
      "rarity": "",
      "desc": "Un escalier en boucle dont la dernière volée est à l'envers, autour d'un pavillon de lecture.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_impossible_stair.jpg"
     },
     {
      "id": "reflection_refuge",
@@ -8100,7 +8087,7 @@
      "rarity": "Rare",
      "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_reflection_refuge.jpg"
     },
     {
      "id": "floating_garden",
@@ -8111,7 +8098,7 @@
      "rarity": "",
      "desc": "Une serre de verre avec jardinières et fontaine.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_floating_garden.jpg"
     }
    ],
    "loot": [
@@ -8263,7 +8250,7 @@
    "bg": "#371819",
    "block": "blocks/trench_rock.png",
    "tall": "shots/w07_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w07_view_banner.jpg",
    "wide": "shots/w07_view.jpg",
    "boss": {
     "id": "pressure_leviathan",
@@ -9088,7 +9075,7 @@
      "rarity": "Courante",
      "desc": "Une faille déchiquetée franchie par un pont, avec corniches, échafaudages et grotte au fond.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_hunter_trench.jpg"
     },
     {
      "id": "dead_reef",
@@ -9099,7 +9086,7 @@
      "rarity": "Courante",
      "desc": "Des murs brisés, une colonnade, une colonne tombée, une arche debout et une cave voûtée.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_dead_reef.jpg"
     },
     {
      "id": "sunken_city",
@@ -9110,7 +9097,7 @@
      "rarity": "Rare",
      "desc": "Une cité fortifiée avec tours d'angle, portes, avenues, maisons et un donjon gardé.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_sunken_city.jpg"
     },
     {
      "id": "wreck",
@@ -9121,7 +9108,7 @@
      "rarity": "Courante",
      "desc": "Une coque échouée avec cabine de poupe, cale, mâts et voiles déchirées.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_wreck.jpg"
     },
     {
      "id": "diving_bell",
@@ -9132,7 +9119,7 @@
      "rarity": "Courante",
      "desc": "Une cloche de plongée en cuivre à hublots, une chaîne vers une bouée, des caisses et une ancre.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_diving_bell.jpg"
     },
     {
      "id": "air_grotto",
@@ -9143,7 +9130,7 @@
      "rarity": "Courante",
      "desc": "Un grand cocon ou un cœur de cristal entouré de poches d'œufs.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_air_grotto.jpg"
     },
     {
      "id": "abyssal_temple",
@@ -9154,7 +9141,7 @@
      "rarity": "",
      "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_abyssal_temple.jpg"
     },
     {
      "id": "sunken_lighthouse",
@@ -9165,7 +9152,7 @@
      "rarity": "",
      "desc": "Un phare rayé avec galerie, lanterne vitrée et maison du gardien.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_sunken_lighthouse.jpg"
     },
     {
      "id": "pressure_station",
@@ -9176,7 +9163,7 @@
      "rarity": "Rare",
      "desc": "Un laboratoire aux instruments étranges, son étage meublé au plafond.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_pressure_station.jpg"
     },
     {
      "id": "deep_vault",
@@ -9187,7 +9174,7 @@
      "rarity": "",
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_deep_vault.jpg"
     }
    ],
    "loot": [
@@ -9339,7 +9326,7 @@
    "bg": "#4f2317",
    "block": "blocks/hourstone.png",
    "tall": "shots/w08_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w08_view_banner.jpg",
    "wide": "shots/w08_view.jpg",
    "boss": {
     "id": "seasons_master",
@@ -10206,7 +10193,7 @@
      "rarity": "Rare",
      "desc": "Une cité fortifiée avec tours d'angle, portes, avenues, maisons et un donjon gardé.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_hastened_town.jpg"
     },
     {
      "id": "aging_ruin",
@@ -10217,7 +10204,7 @@
      "rarity": "Courante",
      "desc": "Des murs brisés, une colonnade, une colonne tombée, une arche debout et une cave voûtée.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_aging_ruin.jpg"
     },
     {
      "id": "giant_clock",
@@ -10228,7 +10215,7 @@
      "rarity": "Rare",
      "desc": "Une tour d'horloge carrée à quatre cadrans, balancier et beffroi sur une cour pavée d'engrenages.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_giant_clock.jpg"
     },
     {
      "id": "season_greenhouse",
@@ -10239,7 +10226,7 @@
      "rarity": "Courante",
      "desc": "Une serre de verre avec jardinières et fontaine.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_season_greenhouse.jpg"
     },
     {
      "id": "frozen_garden",
@@ -10250,7 +10237,7 @@
      "rarity": "Courante",
      "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_frozen_garden.jpg"
     },
     {
      "id": "ephemeral_camp",
@@ -10261,7 +10248,7 @@
      "rarity": "Courante",
      "desc": "Un foyer entouré de bancs, des tentes, un coin cuisine et un poste de guet.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_ephemeral_camp.jpg"
     },
     {
      "id": "solar_observatory",
@@ -10272,7 +10259,7 @@
      "rarity": "",
      "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_solar_observatory.jpg"
     },
     {
      "id": "library_of_ages",
@@ -10283,7 +10270,7 @@
      "rarity": "",
      "desc": "Une bibliothèque sur deux niveaux, murs de livres, mezzanine et tables de lecture.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_library_of_ages.jpg"
     },
     {
      "id": "dusk_market",
@@ -10294,7 +10281,7 @@
      "rarity": "Rare",
      "desc": "Deux rangées d'étals à auvents sous des guirlandes de lanternes, une halle et une arche d'entrée.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_dusk_market.jpg"
     },
     {
      "id": "time_tomb",
@@ -10305,7 +10292,7 @@
      "rarity": "",
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_time_tomb.jpg"
     }
    ],
    "loot": [
@@ -10457,7 +10444,7 @@
    "bg": "#481a15",
    "block": "blocks/living_rock.png",
    "tall": "shots/w09_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w09_view_banner.jpg",
    "wide": "shots/w09_view.jpg",
    "boss": {
     "id": "terrain_heart_boss",
@@ -11268,7 +11255,7 @@
      "rarity": "Rare",
      "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_walking_tower.jpg"
     },
     {
      "id": "mobile_fortress",
@@ -11279,7 +11266,7 @@
      "rarity": "Rare",
      "desc": "Un fort avec courtines, quatre tours, châtelet à herse et donjon de trois étages.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_mobile_fortress.jpg"
     },
     {
      "id": "terrain_arena",
@@ -11290,7 +11277,7 @@
      "rarity": "Courante",
      "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_terrain_arena.jpg"
     },
     {
      "id": "moving_ruin",
@@ -11301,7 +11288,7 @@
      "rarity": "Courante",
      "desc": "Des murs brisés, une colonnade, une colonne tombée, une arche debout et une cave voûtée.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_moving_ruin.jpg"
     },
     {
      "id": "living_chasm",
@@ -11312,7 +11299,7 @@
      "rarity": "Rare",
      "desc": "Une faille déchiquetée franchie par un pont, avec corniches, échafaudages et grotte au fond.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_living_chasm.jpg"
     },
     {
      "id": "mimic_nest",
@@ -11323,7 +11310,7 @@
      "rarity": "Courante",
      "desc": "Un cratère au nid tapissé, avec œufs, côtes d'os et terriers menant à des tanières.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_mimic_nest.jpg"
     },
     {
      "id": "buried_village",
@@ -11334,7 +11321,7 @@
      "rarity": "",
      "desc": "Des maisons autour d'une place à fontaine, avec allées, potagers, lampadaires et beffroi.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_buried_village.jpg"
     },
     {
      "id": "beating_vein",
@@ -11345,7 +11332,7 @@
      "rarity": "",
      "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_beating_vein.jpg"
     },
     {
      "id": "anchored_fort",
@@ -11356,7 +11343,7 @@
      "rarity": "Rare",
      "desc": "Un fort avec courtines, quatre tours, châtelet à herse et donjon de trois étages.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_anchored_fort.jpg"
     },
     {
      "id": "stable_sanctuary",
@@ -11367,7 +11354,7 @@
      "rarity": "",
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_stable_sanctuary.jpg"
     }
    ],
    "loot": [
@@ -11510,7 +11497,7 @@
    "bg": "#481a12",
    "block": "blocks/giant_plank.png",
    "tall": "shots/w10_view_tall.jpg",
-   "banner": null,
+   "banner": "shots/w10_view_banner.jpg",
    "wide": "shots/w10_view.jpg",
    "boss": {
     "id": "the_unfinished",
@@ -12335,7 +12322,7 @@
      "rarity": "Rare",
      "desc": "Une tour à escalier en colimaçon, avec une pièce différente à chaque étage.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_needle_tower.jpg"
     },
     {
      "id": "colossal_forge",
@@ -12346,7 +12333,7 @@
      "rarity": "Rare",
      "desc": "Une forge autour d'un fourneau à degrés et sa cheminée, avec canal de lave et chambre forte.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_colossal_forge.jpg"
     },
     {
      "id": "collapsed_doll",
@@ -12357,7 +12344,7 @@
      "rarity": "Rare",
      "desc": "Un grand cocon ou un cœur de cristal entouré de poches d'œufs.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
-     "img": null
+     "img": "shots/st_collapsed_doll.jpg"
     },
     {
      "id": "giant_chest",
@@ -12368,7 +12355,7 @@
      "rarity": "Rare",
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_giant_chest.jpg"
     },
     {
      "id": "colossal_library",
@@ -12379,7 +12366,7 @@
      "rarity": "",
      "desc": "Une bibliothèque sur deux niveaux, murs de livres, mezzanine et tables de lecture.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_colossal_library.jpg"
     },
     {
      "id": "titanic_workbench",
@@ -12390,7 +12377,7 @@
      "rarity": "",
      "desc": "Une arène enterrée avec gradins, portes, loge du champion et enclos à bêtes.",
      "inside": "Deux à quatre coffres cachés : sous les tables, derrière les bibliothèques, dans les caves, au fond des impasses. Le premier est rare dans les moyennes et grandes.",
-     "img": null
+     "img": "shots/st_titanic_workbench.jpg"
     },
     {
      "id": "artisan_giant_workshop",
@@ -12401,7 +12388,7 @@
      "rarity": "",
      "desc": "Un temple à degrés avec grand escalier, sanctuaire au sommet et salle à colonnes.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_artisan_giant_workshop.jpg"
     },
     {
      "id": "block_gate",
@@ -12412,7 +12399,7 @@
      "rarity": "",
      "desc": "Un sanctuaire sur une plateforme à degrés, avec pavillon, autel, portail et lanternes de pierre.",
      "inside": "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal.",
-     "img": null
+     "img": "shots/st_block_gate.jpg"
     },
     {
      "id": "city_of_giants",
@@ -12423,7 +12410,7 @@
      "rarity": "Rare",
      "desc": "Une cité fortifiée avec tours d'angle, portes, avenues, maisons et un donjon gardé.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
-     "img": null
+     "img": "shots/st_city_of_giants.jpg"
     },
     {
      "id": "creature_throne",
@@ -12434,7 +12421,7 @@
      "rarity": "",
      "desc": "Une salle du trône à colonnes ; le tapis devant le trône cache une trappe vers la salle au trésor.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
-     "img": null
+     "img": "shots/st_creature_throne.jpg"
     }
    ],
    "loot": [
