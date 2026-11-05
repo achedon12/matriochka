@@ -340,9 +340,10 @@ public class ProceduralPiece extends StructurePiece {
 			ItemStack pg = new ItemStack(ModContent.item("journal_page"));
 			CompoundTag t = new CompoundTag();
 			t.putInt("world", world);
-			t.putInt("index", Math.floorMod(id.hashCode(), 5));
+			int idx = Math.floorMod((int) (seed ^ (seed >>> 32)), 5);
+			t.putInt("index", idx);
 			pg.set(DataComponents.CUSTOM_DATA, CustomData.of(t));
-			pg.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.translatable("item.matriochka.journal_page.n", world, Math.floorMod(id.hashCode(), 5) + 1));
+			pg.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.translatable("item.matriochka.journal_page.n", world, idx + 1));
 			chest.setItem(13, pg);
 		}
 		if (doll && world > 0) chest.setItem(22, new ItemStack(ModContent.item("hidden_doll_" + world)));
