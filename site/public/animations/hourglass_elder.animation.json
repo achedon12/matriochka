@@ -18,6 +18,27 @@
       "math.sin(query.anim_time*60)*6",
       "0"
      ]
+    },
+    "sand0": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "sand1": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "sand2": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
     }
    }
   },
@@ -36,6 +57,27 @@
      "rotation": [
       "math.sin(query.anim_time*90)*3",
       "math.sin(query.anim_time*60)*6",
+      "0"
+     ]
+    },
+    "sand0": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "sand1": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
+    },
+    "sand2": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
       "0"
      ]
     },

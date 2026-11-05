@@ -18,6 +18,13 @@
       "math.sin(query.anim_time*60)*6",
       "0"
      ]
+    },
+    "key": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
+      "0"
+     ]
     }
    }
   },
@@ -36,6 +43,13 @@
      "rotation": [
       "math.sin(query.anim_time*90)*3",
       "math.sin(query.anim_time*60)*6",
+      "0"
+     ]
+    },
+    "key": {
+     "rotation": [
+      "0",
+      "query.anim_time*45",
       "0"
      ]
     },
