@@ -1,0 +1,31 @@
+{
+  "parent": "matriochka:world_2/a2",
+  "display": {
+    "icon": {
+      "id": "matriochka:giant_ore"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w2.a3.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w2.a3.desc"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:giant_ore"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/explore"
+  }
+}

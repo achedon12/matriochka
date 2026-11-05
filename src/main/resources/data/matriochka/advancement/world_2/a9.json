@@ -1,0 +1,31 @@
+{
+  "parent": "matriochka:world_2/root",
+  "display": {
+    "icon": {
+      "id": "matriochka:hidden_doll_2"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w2.a9.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w2.a9.desc"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:hidden_doll_2"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/hidden"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "parent": "matriochka:world_2/a0",
+  "display": {
+    "icon": {
+      "id": "matriochka:ash_ingot"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w2.a1.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w2.a1.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:ash_ingot"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}

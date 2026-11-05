@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "matriochka:seed_2"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w2.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w2.desc"
+    },
+    "background": "matriochka:block/ashrock",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "seed": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:seed_2"
+          }
+        ]
+      }
+    },
+    "enter": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "matriochka:world_2"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "seed",
+      "enter"
+    ]
+  ]
+}
