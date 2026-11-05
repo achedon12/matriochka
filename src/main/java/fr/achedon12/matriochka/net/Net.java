@@ -73,6 +73,17 @@ public final class Net {
 		}
 	}
 
+	/** The first-steps guide: "read" (the Scroll reached its objective page), "hide" or "show" the card. */
+	public record TutorialPayload(String action) implements CustomPacketPayload {
+		public static final Type<TutorialPayload> TYPE = new Type<>(Matriochka.id("tutorial"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, TutorialPayload> CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, TutorialPayload::action, TutorialPayload::new);
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
 	private Net() {}
 
 	public static void init() {
@@ -81,6 +92,8 @@ public final class Net {
 		PayloadTypeRegistry.clientboundPlay().register(EndingPayload.TYPE, EndingPayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(ChoicePayload.TYPE, ChoicePayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(CyclePayload.TYPE, CyclePayload.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(TutorialPayload.TYPE, TutorialPayload.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(TutorialPayload.TYPE, (payload, ctx) -> fr.achedon12.matriochka.world.Tutorial.action(ctx.player(), payload.action()));
 		ServerPlayNetworking.registerGlobalReceiver(CyclePayload.TYPE, (payload, ctx) -> {
 			if (payload.confirm()) fr.achedon12.matriochka.world.Cycles.begin(ctx.player());
 		});
