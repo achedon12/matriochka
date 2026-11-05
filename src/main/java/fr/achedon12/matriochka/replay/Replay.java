@@ -35,10 +35,8 @@ public final class Replay {
 			WorldEvents.tick(server);
 			Talents.tick(server);
 		});
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
-			Trials.stopAll();
-			WorldEvents.stopAll();
-		});
+		ServerLifecycleEvents.SERVER_STOPPING.register(Trials::stopAll);
+		ServerLifecycleEvents.SERVER_STOPPED.register(server -> WorldEvents.stopAll());
 		// a blow that would kill someone in a trial carries them out instead, before the Doll of Life is spent
 		Identifier early = Matriochka.id("trials_first");
 		ServerPlayerEvents.ALLOW_DEATH.addPhaseOrdering(early, net.fabricmc.fabric.api.event.Event.DEFAULT_PHASE);

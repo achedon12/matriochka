@@ -127,6 +127,7 @@ public final class WorldEvents {
 	}
 
 	private static void roll(MinecraftServer server, long t) {
+		strays(server);
 		if (!Config.worldEvents()) return;
 		Map<String, List<ServerPlayer>> byParcel = new HashMap<>();
 		for (ServerPlayer p : server.getPlayerList().getPlayers()) {
@@ -146,6 +147,19 @@ public final class WorldEvents {
 			int pick = server.overworld().getRandom().nextInt(total);
 			String kind = pick < Math.max(0, v.invasionWeight) ? INVASION : pick < Math.max(0, v.invasionWeight) + Math.max(0, v.surgeWeight) ? SURGE : MERCHANT;
 			start(focus, kind);
+		}
+	}
+
+	/** Merchants whose event is gone (the server stopped while they were there) move on. */
+	private static void strays(MinecraftServer server) {
+		Set<UUID> kept = new java.util.HashSet<>();
+		for (Event e : ACTIVE.values()) if (e.merchant != null) kept.add(e.merchant);
+		for (int w = 1; w <= 10; w++) {
+			ServerLevel level = server.getLevel(Worlds.key(w));
+			if (level == null || level.players().isEmpty()) continue;
+			for (Entity e : level.getAllEntities()) {
+				if (e instanceof MatrioNpc && e.entityTags().contains(MERCHANT_TAG) && !kept.contains(e.getUUID())) e.discard();
+			}
 		}
 	}
 

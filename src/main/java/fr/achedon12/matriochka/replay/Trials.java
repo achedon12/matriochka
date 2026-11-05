@@ -365,6 +365,8 @@ public final class Trials {
 	}
 
 	private static void tag(Run run, Entity e) {
+		// every foe glows, so a Mimic in disguise or a buried Root Creeper can always be found
+		if (e instanceof net.minecraft.world.entity.LivingEntity le) le.addEffect(new MobEffectInstance(MobEffects.GLOWING, 20 * 1800, 0, false, false));
 		e.addTag(TAG);
 		e.addTag(TAG + "_" + run.slot);
 		run.foes.add(e.getUUID());
@@ -524,8 +526,18 @@ public final class Trials {
 		if (PlayerState.of(p).tag().contains("trial_return") && !inTrial(p)) sendHome(p);
 	}
 
-	/** Every run ends with the server. */
-	static void stopAll() {
+	/**
+	 * Every run ends with the server: its stage is emptied and its chunks released (the players are sent home when they
+	 * next join, see {@link #onJoin}).
+	 */
+	static void stopAll(MinecraftServer server) {
+		ServerLevel level = server.getLevel(Worlds.REFUGE);
+		if (level != null) {
+			for (Run run : RUNS.values()) {
+				clearFoes(level, run, true);
+				forceChunks(level, run.center(), false);
+			}
+		}
 		RUNS.clear();
 	}
 

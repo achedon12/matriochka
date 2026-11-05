@@ -298,7 +298,7 @@ public final class ReplayGear {
 		level.sendParticles(ParticleTypes.EXPLOSION, at.getX() + 0.5, at.getY() + 1, at.getZ() + 0.5, 6, 2, 0.1, 2, 0);
 		level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, at.getX() + 0.5, at.getY() + 1, at.getZ() + 0.5, 30, 3, 0.1, 3, 0.01);
 		level.playSound(null, at, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 0.8f, 0.5f);
-		for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(6), e -> e != player && !(e instanceof Player) && e.onGround())) {
+		for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(6), e -> e != player && !(e instanceof Player))) {
 			e.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 2));
 			e.hurtServer(level, player instanceof ServerPlayer sp ? level.damageSources().playerAttack(sp) : level.damageSources().generic(), 4f);
 			if (!(e instanceof MatrioBoss)) {

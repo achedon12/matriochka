@@ -72,27 +72,27 @@ final class Outposts {
 		for (int x = -2; x <= 2; x++) k.set(x, 4, -S, p.bars);
 		k.set(-2, 5, -S, p.chain);
 		k.set(2, 5, -S, p.chain);
-		k.runner(-1, -S + 2, 1, -2, 1);
+		k.runner(-1, -S + 2, 1, -S + 3, 1);
 		// the keep at the back: a hall with a banquet table and chandeliers under a hip roof
-		int kz0 = S - 9, kz1 = S - 1;
-		k.room(-6, kz0, 6, kz1, 0, 6, 3, 2, p.plank);
-		k.hip(-6, kz0, 6, kz1, 6, 1);
+		int kw = k.large() ? 6 : 5, kz0 = S - (k.large() ? 9 : 6), kz1 = S - 1;
+		k.room(-kw, kz0, kw, kz1, 0, 6, 3, 2, p.plank);
+		k.hip(-kw, kz0, kw, kz1, 6, 1);
 		k.doorway(0, 1, kz0, Direction.NORTH, 3, 3);
-		k.banquet(0, 1, (kz0 + kz1) / 2 + 1, 6, true);
-		k.chandelier(-3, 5, (kz0 + kz1) / 2, 1);
-		k.chandelier(3, 5, (kz0 + kz1) / 2, 1);
-		k.banner(-5, 4, kz1 - 1, Direction.SOUTH, p.colB);
-		k.banner(5, 4, kz1 - 1, Direction.SOUTH, p.colB);
+		k.banquet(0, 1, (kz0 + kz1) / 2 + 1, kw, true);
+		k.chandelier(-kw / 2 - 1, 5, (kz0 + kz1) / 2, 1);
+		k.chandelier(kw / 2 + 1, 5, (kz0 + kz1) / 2, 1);
+		k.banner(-kw + 1, 4, kz1 - 1, Direction.SOUTH, p.colB);
+		k.banner(kw - 1, 4, kz1 - 1, Direction.SOUTH, p.colB);
 		k.mark("guard", 0, 1, kz1 - 1, Direction.NORTH);
-		k.mark("hidden", -5, 1, kz0 + 1, Direction.EAST);
+		k.mark("hidden", -kw + 1, 1, kz0 + 1, Direction.EAST);
 		// the courtyard: a well, lamp posts, a smithy corner and supplies
-		Parts.fountain(k, 0, 1, -2, 2);
-		for (int[] l : new int[][]{{-S + 3, -S + 4}, {S - 3, -S + 4}, {-S + 3, 0}, {S - 3, 0}}) k.lampPost(l[0], 1, l[1], 2);
+		Parts.fountain(k, 0, 1, -3, k.large() ? 2 : 1);
+		for (int[] l : new int[][]{{-S + 3, -S + 4}, {S - 3, -S + 4}, {-S + 3, kz0 - 2}, {S - 3, kz0 - 2}}) k.lampPost(l[0], 1, l[1], 2);
 		k.crates(-S + 2, 1, -2);
-		k.crates(S - 3, 1, 2);
+		k.crates(S - 3, 1, kz0 - 4);
 		k.barrel(S - 2, 1, -5, Direction.UP);
-		k.set(-S + 2, 1, 3, Blocks.ANVIL.defaultBlockState());
-		k.set(-S + 2, 1, 4, Kit.facing(Blocks.BLAST_FURNACE.defaultBlockState(), Direction.EAST));
+		k.set(-S + 2, 1, kz0 - 3, Blocks.ANVIL.defaultBlockState());
+		k.set(-S + 2, 1, kz0 - 2, Kit.facing(Blocks.BLAST_FURNACE.defaultBlockState(), Direction.EAST));
 		k.mark("hidden", S - 2, 1, -6, Direction.WEST);
 		if (k.world == 3) {
 			// the gaolers keep a cell by the gate, its keys on a hook
@@ -100,7 +100,7 @@ final class Outposts {
 			k.air(S - 4, 1, -S + 2, S - 2, 3, -S + 3);
 			k.set(S - 3, 1, -S + 3, Kit.facing(Blocks.CHEST.defaultBlockState(), Direction.NORTH));
 			k.hang(S - 3, 4, -S + 2, 1);
-			k.set(-S + 4, 1, -S + 2, ModContent.block("sealed_door").defaultBlockState());
+			for (int y = 1; y <= 2; y++) k.set(S - 5, y, -S + 2, p.fill);
 		}
 		k.decay(-R, 1, -R, R, 12, R, k.world == 7 ? 0.45 : 0.15);
 	}
@@ -221,7 +221,9 @@ final class Outposts {
 			k.doorway(0, 1, -tr, Direction.NORTH, 3, 3);
 			k.mark("spawner", 3, 1, 2, Direction.NORTH);
 			k.mark("spawner", -3, 1, 2, Direction.NORTH);
-			k.mark("hidden", 0, 1, tr - 2, Direction.NORTH);
+			k.mark("hidden", 2, 1, tr - 2, Direction.NORTH);
+			// a ladder up the inside of the cup to a hole in its top
+			for (int y = 1; y <= deck; y++) k.set(0, y, tr - 1, Kit.ladderFacing(Direction.NORTH));
 		} else {
 			// four log legs braced with fences, a supply yard underneath
 			for (int[] c : new int[][]{{-4, -4}, {4, -4}, {-4, 4}, {4, 4}}) {
@@ -237,14 +239,15 @@ final class Outposts {
 			k.barrel(2, 1, -2, Direction.UP);
 			k.mark("spawner", 0, 1, 0, Direction.NORTH);
 			k.mark("hidden", -2, 1, 2, Direction.EAST);
-			for (int y = 1; y <= deck; y++) k.set(0, y, -5, Kit.ladderFacing(Direction.NORTH));
 		}
 		// the deck, its railing and the lookout hut
 		k.box(-5, deck, -5, 5, deck, 5, p.plank);
 		for (int x = -5; x <= 5; x++)
-			for (int z = -5; z <= 5; z++) if ((Math.abs(x) == 5 || Math.abs(z) == 5) && !(x == 0 && z == -5)) k.set(x, deck + 1, z, p.fence);
+			for (int z = -5; z <= 5; z++) if ((Math.abs(x) == 5 || Math.abs(z) == 5) && !(x == -4 && z == -5)) k.set(x, deck + 1, z, p.fence);
+		// on stilts, a ladder runs up the front leg and through the deck
+		if (k.world != 10) for (int y = 1; y <= deck; y++) k.set(-4, y, -5, Kit.ladderFacing(Direction.NORTH));
 		k.room(-3, -1, 3, 4, deck, 4, 3, 2, p.plank);
-		k.gable(-3, -1, 3, 4, deck + 4, true, p.plank);
+		int ridge = k.gable(-3, -1, 3, 4, deck + 4, true, p.plank);
 		k.doorway(0, deck + 1, -1, Direction.NORTH, 1, 2);
 		k.set(-2, deck + 1, 3, Kit.facing(Blocks.LECTERN.defaultBlockState(), Direction.NORTH));
 		k.bed(2, deck + 1, 2, Direction.SOUTH, p.colA);
@@ -256,7 +259,7 @@ final class Outposts {
 		k.standingBanner(-4, deck + 1, -4, p.colB);
 		k.standingBanner(4, deck + 1, 4, p.colA);
 		switch (k.world) {
-			case 4 -> k.set(0, deck + 7, 1, Blocks.LIGHTNING_ROD.waxed().unaffected().defaultBlockState());
+			case 4 -> k.set(0, ridge + 1, 1, Blocks.LIGHTNING_ROD.waxed().unaffected().defaultBlockState());
 			case 6 -> {
 				// chains dangle from the hanging deck, crystals caught in them
 				for (int[] c : new int[][]{{-5, -3}, {5, 3}, {-3, 5}, {3, -5}}) {
@@ -265,9 +268,9 @@ final class Outposts {
 				}
 			}
 			case 10 -> {
-				// a giant pin stuck through the hut's roof, as if the thimble was set down in a sewing box
-				for (int y = deck + 4; y <= deck + 12; y++) k.set(-4, y, 3, Blocks.IRON_BARS.defaultBlockState());
-				k.set(-4, deck + 13, 3, Blocks.WOOL.pick(DyeColor.RED).defaultBlockState());
+				// a giant pin stuck through the eave of the hut, as if the thimble lay in a sewing box
+				for (int y = deck + 1; y <= ridge + 5; y++) k.set(-4, y, 3, Blocks.IRON_BARS.defaultBlockState());
+				k.set(-4, ridge + 6, 3, Blocks.WOOL.pick(DyeColor.RED).defaultBlockState());
 			}
 			default -> {}
 		}
@@ -297,7 +300,7 @@ final class Outposts {
 		k.set(6, 1, -5, Blocks.HAY_BLOCK.defaultBlockState());
 		k.set(5, 2, -5, Blocks.HAY_BLOCK.defaultBlockState());
 		k.set(7, 1, -5, Blocks.WATER_CAULDRON.defaultBlockState());
-		for (int[] l : new int[][]{{-3, -3}, {3, -3}}) k.lampPost(l[0], 1, l[1], 2);
+		for (int[] l : new int[][]{{-2, -8}, {2, -8}}) k.lampPost(l[0], 1, l[1], 2);
 		k.mark("npc", 2, 1, -2, Direction.NORTH);
 		k.mark("hidden", 0, 1, 9, Direction.NORTH);
 		if (k.world == 1) {

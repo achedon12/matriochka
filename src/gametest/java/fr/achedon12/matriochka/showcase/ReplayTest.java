@@ -549,14 +549,17 @@ final class ReplayTest {
 			ServerPlayer p = player(server);
 			ServerLevel level = (ServerLevel) p.level();
 			int withChest = 0;
+			// the ceiling worlds' structures sit in the rock below the surface: look through the whole height
 			for (BlockPos at : PLACED) {
 				boolean chest = false;
-				for (BlockPos q : BlockPos.betweenClosed(at.offset(-26, -18, -26), at.offset(26, 22, 26))) {
-					if (level.getBlockEntity(q) instanceof ChestBlockEntity) {
-						chest = true;
-						break;
-					}
-				}
+				for (int cx = (at.getX() - 26) >> 4; cx <= (at.getX() + 26) >> 4 && !chest; cx++)
+					for (int cz = (at.getZ() - 26) >> 4; cz <= (at.getZ() + 26) >> 4 && !chest; cz++)
+						for (var be : level.getChunk(cx, cz).getBlockEntities().values()) {
+							if (be instanceof ChestBlockEntity && Math.abs(be.getBlockPos().getX() - at.getX()) <= 26 && Math.abs(be.getBlockPos().getZ() - at.getZ()) <= 26) {
+								chest = true;
+								break;
+							}
+						}
 				if (chest) withChest++;
 			}
 			check(withChest == PLACED.size(), "every new structure holds loot (" + withChest + "/" + PLACED.size() + ")");
