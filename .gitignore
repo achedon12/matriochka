@@ -7,3 +7,6 @@ out/
 __pycache__/
 *.pyc
 wiki/
+site/node_modules/
+site/.next/
+site/out/
