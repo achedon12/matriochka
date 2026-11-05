@@ -1,0 +1,27 @@
+{
+  "parent": "matriochka:world_5/root",
+  "display": {
+    "icon": {
+      "id": "matriochka:seed_5"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w5.a0.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w5.a0.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "matriochka:world_5"
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}

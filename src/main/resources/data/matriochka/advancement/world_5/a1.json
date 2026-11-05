@@ -1,0 +1,31 @@
+{
+  "parent": "matriochka:world_5/a0",
+  "display": {
+    "icon": {
+      "id": "matriochka:solar_lantern"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w5.a1.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w5.a1.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "matriochka:solar_lantern"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}
