@@ -152,7 +152,7 @@ public final class WorldRules {
 					p.push(Math.cos(a) * s, 0.25, Math.sin(a) * s);
 					p.needsSync = true;
 					level.sendParticles(ParticleTypes.GUST, p.getX(), p.getY() + 1, p.getZ(), 4, 1, 0.5, 1, 0);
-					level.playSound(null, p.blockPosition(), SoundEvents.BREEZE_WIND_CHARGE_BURST.value(), SoundSource.WEATHER, 0.8f, 0.6f);
+					level.playSound(null, p.blockPosition(), fr.achedon12.matriochka.content.Sounds.WORLD_GUST, SoundSource.WEATHER, 1f, 0.9f + level.getRandom().nextFloat() * 0.2f);
 				}
 				if (exposed && t % 900 == 840) {
 					BlockPos at = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, p.blockPosition().offset(level.getRandom().nextInt(9) - 4, 0, level.getRandom().nextInt(9) - 4));

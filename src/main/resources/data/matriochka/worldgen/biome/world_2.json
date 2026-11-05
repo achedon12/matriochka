@@ -64,6 +64,26 @@
         }
       },
       "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w2.hammer",
+          "tick_chance": 0.004
+        },
+        {
+          "sound": "matriochka:ambient.w2.crackle",
+          "tick_chance": 0.008
+        }
+      ],
+      "loop": "matriochka:ambient.w2.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_2",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
     }
   },
   "carvers": [

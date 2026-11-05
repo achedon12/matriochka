@@ -81,7 +81,7 @@ public final class Nesting {
 		off.shrink(1);
 		main.shrink(1);
 		p.setItemInHand(InteractionHand.MAIN_HAND, nested(next));
-		level.playSound(null, p.blockPosition(), SoundEvents.CHEST_CLOSE, SoundSource.PLAYERS, 0.8f, 1.8f - next * 0.08f);
+		level.playSound(null, p.blockPosition(), fr.achedon12.matriochka.content.Sounds.DOLL_CLOSE, SoundSource.PLAYERS, 1f, 1.5f - next * 0.06f);
 		level.sendParticles(ParticleTypes.WAX_ON, p.getX(), p.getY() + 1.2, p.getZ(), 10, 0.3, 0.3, 0.3, 0.05);
 		if (next >= 10) {
 			p.sendSystemMessage(Component.translatable("message.matriochka.nest.whole").withStyle(ChatFormatting.GOLD));
@@ -94,7 +94,7 @@ public final class Nesting {
 
 	private static void rattle(ServerPlayer p, ServerLevel level) {
 		p.sendOverlayMessage(Component.translatable("message.matriochka.nest.rattle").withStyle(ChatFormatting.RED));
-		for (int i = 0; i < 3; i++) level.playSound(null, p.blockPosition(), SoundEvents.CHAIN_PLACE, SoundSource.PLAYERS, 0.6f, 1.6f + i * 0.2f);
+		level.playSound(null, p.blockPosition(), fr.achedon12.matriochka.content.Sounds.DOLL_RATTLE, SoundSource.PLAYERS, 1f, 1.1f);
 		p.getCooldowns().addCooldown(p.getMainHandItem(), 20);
 	}
 

@@ -149,7 +149,7 @@ public final class Blocks2 {
 			be.data().putInt("t", t);
 			if (t % 10 == 0) {
 				level.sendParticles(ParticleTypes.ENCHANT, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, 12, 0.4, 0.4, 0.4, 0.3);
-				level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 0.6f, 0.5f + t / 200f);
+				level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.SEED_PULSE, SoundSource.BLOCKS, 0.5f, 0.6f + t / 250f);
 			}
 			if (t >= 200) {
 				String seedOwner = be.data().getStringOr("owner", "");
@@ -175,8 +175,7 @@ public final class Blocks2 {
 					if (!seedGroup.isEmpty()) md.setWorldBlock(seedGroup, world, level, pos);
 				}
 				level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 60, 0.5, 0.5, 0.5, 0.4);
-				level.playSound(null, pos, SoundEvents.CHEST_OPEN, SoundSource.BLOCKS, 1.2f, 0.5f);
-				level.playSound(null, pos, SoundEvents.TOTEM_USE, SoundSource.BLOCKS, 0.5f, 1.5f);
+				level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.WORLD_BLOCK_FORM, SoundSource.BLOCKS, 1.5f, 1f);
 			} else {
 				be.setChanged();
 			}
@@ -266,7 +265,7 @@ public final class Blocks2 {
 					for (ServerPlayer p : sl.getServer().getPlayerList().getPlayers()) {
 						if (data.groupOf(p.getUUID()).equals(group)) p.sendSystemMessage(Component.translatable("message.matriochka.world_deleted", world));
 					}
-					level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1f, 0.4f);
+					level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.WORLD_BLOCK_CRACK, SoundSource.BLOCKS, 1.2f, 0.7f);
 					return super.playerWillDestroy(level, pos, state, player);
 				}
 				ItemStack doll = new ItemStack(ModContent.item("cracked_doll"));
@@ -278,7 +277,7 @@ public final class Blocks2 {
 				Block.popResource(level, pos, doll);
 				data.worldEntry(group, world).putLong("unstable_until", sl.getGameTime() + 20 * 60 * 20);
 				data.changed();
-				level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1f, 0.6f);
+				level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.WORLD_BLOCK_CRACK, SoundSource.BLOCKS, 1.2f, 1f);
 			}
 			return super.playerWillDestroy(level, pos, state, player);
 		}
@@ -342,7 +341,7 @@ public final class Blocks2 {
 		}
 		md.setWorldBlock(group, world, level, at);
 		stack.consume(1, player);
-		level.playSound(null, at, SoundEvents.CHEST_CLOSE, SoundSource.BLOCKS, 1f, 0.6f);
+		level.playSound(null, at, fr.achedon12.matriochka.content.Sounds.DOLL_CLOSE, SoundSource.BLOCKS, 1f, 0.8f);
 		PlayerState.of(player).sync();
 		return true;
 	}

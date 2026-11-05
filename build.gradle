@@ -13,6 +13,11 @@ repositories {
 		forRepository { maven { name = 'Modrinth'; url = 'https://api.modrinth.com/maven' } }
 		filter { includeGroup 'maven.modrinth' }
 	}
+	// Just Enough Items: optional, only compiled against (the plugin loads only when JEI is installed)
+	exclusiveContent {
+		forRepository { maven { name = 'BlameJared'; url = 'https://maven.blamejared.com' } }
+		filter { includeGroup 'mezz.jei' }
+	}
 }
 
 loom {
@@ -79,6 +84,10 @@ dependencies {
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	implementation "maven.modrinth:geckolib:${project.geckolib_version}"
+	clientCompileOnly "mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}"
+	clientCompileOnly "mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}"
+	// ./gradlew runClient -Pjei to try the recipe pages in a dev client
+	if (project.hasProperty('jei')) localRuntime "mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}"
 }
 
 processResources {

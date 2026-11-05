@@ -37,6 +37,7 @@ public class MatrioClient implements ClientModInitializer {
 			if (!(stack.getItem() instanceof fr.achedon12.matriochka.item.MatrioItem)) fr.achedon12.matriochka.gear.GearClasses.appendTooltip(stack, lines::add);
 		});
 		ClientPlayNetworking.registerGlobalReceiver(Net.OpenJournalPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new JournalScreen(p.scroll())));
+		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(MusicThemes::tick);
 		ClientPlayNetworking.registerGlobalReceiver(Net.EndingPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new EndingScreen(p.kind())));
 	}
 

@@ -353,7 +353,8 @@ public final class MobMoves {
 	}
 
 	private void sound(ServerLevel level, Defs.AttackDef a, float volume) {
-		SoundEvent s = BuiltInRegistries.SOUND_EVENT.getValue(Identifier.withDefaultNamespace(a.sound()));
+		// "entity.fox.bite" is a vanilla sound, "matriochka:doll.rattle" one of the mod's own
+		SoundEvent s = BuiltInRegistries.SOUND_EVENT.getValue(a.sound().contains(":") ? Identifier.parse(a.sound()) : Identifier.withDefaultNamespace(a.sound()));
 		if (s == null) s = SoundEvents.PLAYER_ATTACK_SWEEP;
 		level.playSound(null, mob.blockPosition(), s, SoundSource.HOSTILE, volume, 0.85f + mob.getRandom().nextFloat() * 0.3f);
 	}

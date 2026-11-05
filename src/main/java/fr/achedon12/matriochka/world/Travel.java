@@ -40,7 +40,7 @@ public final class Travel {
 		BlockPos seuil = threshold(data, group, world, target);
 		player.teleport(new TeleportTransition(target, Vec3.atBottomCenterOf(seuil.above()), Vec3.ZERO, player.getYRot(), player.getXRot(),
 			Set.of(), TeleportTransition.PLAY_PORTAL_SOUND));
-		target.playSound(null, seuil, SoundEvents.CHEST_OPEN, SoundSource.PLAYERS, 1f, 0.6f);
+		target.playSound(null, seuil, fr.achedon12.matriochka.content.Sounds.WORLD_BLOCK_ENTER, SoundSource.PLAYERS, 1f, 1f);
 		player.sendSystemMessage(Component.translatable("message.matriochka.entered", Component.translatable("dimension.matriochka.world_" + world)));
 	}
 

@@ -64,6 +64,38 @@
         }
       },
       "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w1.insects",
+          "tick_chance": 0.002
+        },
+        {
+          "sound": "matriochka:ambient.w4.whistle",
+          "tick_chance": 0.002
+        },
+        {
+          "sound": "matriochka:ambient.w7.drip",
+          "tick_chance": 0.003
+        },
+        {
+          "sound": "matriochka:ambient.w8.chime",
+          "tick_chance": 0.001
+        },
+        {
+          "sound": "matriochka:ambient.w9.grind",
+          "tick_chance": 0.002
+        }
+      ],
+      "loop": "matriochka:ambient.w10.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_10",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
     }
   },
   "carvers": [

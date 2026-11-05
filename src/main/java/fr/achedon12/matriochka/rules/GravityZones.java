@@ -127,7 +127,7 @@ public final class GravityZones {
 			tickPlayer(level, p, t);
 			if (t % PERIOD == PERIOD - WARN) {
 				p.sendOverlayMessage(Component.translatable("message.matriochka.rule.gravity").withStyle(ChatFormatting.LIGHT_PURPLE));
-				level.playSound(null, p.blockPosition(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT, 0.6f, 0.5f);
+				level.playSound(null, p.blockPosition(), fr.achedon12.matriochka.content.Sounds.WORLD_GRAVITY_SHIFT, SoundSource.AMBIENT, 0.8f, 1f);
 			}
 			items(level, p, t, pushed);
 			if (mobs) {

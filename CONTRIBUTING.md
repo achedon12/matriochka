@@ -40,6 +40,8 @@ generates the textures, GeckoLib models and animations, lang files, worldgen and
 | `tools/bosses_hd.py` | the eleven hand-rigged bosses |
 | `tools/gui.py` | GUI art painted at twice its size: lacquer, gold leaf, khokhloma, parchment, dolls |
 | `tools/ui_lang.py` | hand-written UI strings (EN and FR) |
+| `tools/sound.py` | the sound table: ids, subtitles, biome music and ambience |
+| `tools/sfx.py`, `tools/music.py`, `tools/synth.py` | sound recipes, the folk composer and the synthesizer |
 | `tools/site.py` | data and images for the website in `site/` |
 
 Hand-written Java lives in `src/main/java` (game logic) and `src/client/java` (screens, HUD, renderers).
@@ -59,7 +61,7 @@ Lang files are generated. Add or fix strings in `tools/content.py` (content name
 ## Code style
 
 - Java: tabs, Mojang mappings names, no wildcard imports. Keep game rules in `rules/` and world logic in `world/`.
-- Python: standard library plus Pillow only, four-space indent.
+- Python: standard library plus Pillow only, four-space indent. The sound tools also need numpy and ffmpeg (libvorbis), but only to render a sound whose recipe changed: `tools/sounds.lock.json` keeps a hash of each recipe, so `gen.py` runs with Pillow alone otherwise.
 - The `.editorconfig` covers whitespace for every file type.
 
 ## Licensing of contributions

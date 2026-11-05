@@ -142,6 +142,7 @@
  "tooltip.matriochka.drill.fuel": "Fuel: %s / %s squares (1 Blazing Rock fills it)",
  "tooltip.matriochka.drill.sneak": "Sneak to mine a single block.",
  "station.matriochka.invert": "Invert",
+ "jei.matriochka.requires": "Opens after %s",
  "station.matriochka.inverter.help": "Two pieces of the same kind trade class, level and enchantments. Each loses a quarter of its durability.",
  "station.matriochka.ferment.fresh": "Fresh",
  "station.matriochka.ferment.ripe": "Ripe",

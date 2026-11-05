@@ -1,0 +1,845 @@
+{
+  "doll.open": {
+    "sounds": [
+      {
+        "name": "matriochka:doll/open_1"
+      },
+      {
+        "name": "matriochka:doll/open_2"
+      },
+      {
+        "name": "matriochka:doll/open_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.doll.open"
+  },
+  "doll.close": {
+    "sounds": [
+      {
+        "name": "matriochka:doll/close_1"
+      },
+      {
+        "name": "matriochka:doll/close_2"
+      },
+      {
+        "name": "matriochka:doll/close_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.doll.close"
+  },
+  "doll.click": {
+    "sounds": [
+      {
+        "name": "matriochka:doll/click_1"
+      },
+      {
+        "name": "matriochka:doll/click_2"
+      },
+      {
+        "name": "matriochka:doll/click_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.doll.click"
+  },
+  "doll.rattle": {
+    "sounds": [
+      {
+        "name": "matriochka:doll/rattle_1"
+      },
+      {
+        "name": "matriochka:doll/rattle_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.doll.rattle"
+  },
+  "doll_of_life.break": {
+    "sounds": [
+      {
+        "name": "matriochka:doll_of_life/break"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.doll_of_life.break"
+  },
+  "world_block.enter": {
+    "sounds": [
+      {
+        "name": "matriochka:world_block/enter"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.world_block.enter"
+  },
+  "world_block.form": {
+    "sounds": [
+      {
+        "name": "matriochka:world_block/form"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.world_block.form"
+  },
+  "world_block.crack": {
+    "sounds": [
+      {
+        "name": "matriochka:world_block/crack_1"
+      },
+      {
+        "name": "matriochka:world_block/crack_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.world_block.crack"
+  },
+  "seed.pulse": {
+    "sounds": [
+      {
+        "name": "matriochka:seed/pulse"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.seed.pulse"
+  },
+  "station.matrix_workbench": {
+    "sounds": [
+      {
+        "name": "matriochka:station/matrix_workbench_1"
+      },
+      {
+        "name": "matriochka:station/matrix_workbench_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.matrix_workbench"
+  },
+  "station.class_table": {
+    "sounds": [
+      {
+        "name": "matriochka:station/class_table_1"
+      },
+      {
+        "name": "matriochka:station/class_table_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.class_table"
+  },
+  "station.soul_altar": {
+    "sounds": [
+      {
+        "name": "matriochka:station/soul_altar_1"
+      },
+      {
+        "name": "matriochka:station/soul_altar_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.soul_altar"
+  },
+  "station.spore_vat": {
+    "sounds": [
+      {
+        "name": "matriochka:station/spore_vat_1"
+      },
+      {
+        "name": "matriochka:station/spore_vat_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.spore_vat"
+  },
+  "station.ash_foundry": {
+    "sounds": [
+      {
+        "name": "matriochka:station/ash_foundry_1"
+      },
+      {
+        "name": "matriochka:station/ash_foundry_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.ash_foundry"
+  },
+  "station.jailer_table": {
+    "sounds": [
+      {
+        "name": "matriochka:station/jailer_table_1"
+      },
+      {
+        "name": "matriochka:station/jailer_table_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.jailer_table"
+  },
+  "station.lightning_forge": {
+    "sounds": [
+      {
+        "name": "matriochka:station/lightning_forge_1"
+      },
+      {
+        "name": "matriochka:station/lightning_forge_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.lightning_forge"
+  },
+  "station.dark_altar": {
+    "sounds": [
+      {
+        "name": "matriochka:station/dark_altar_1"
+      },
+      {
+        "name": "matriochka:station/dark_altar_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.dark_altar"
+  },
+  "station.inverter": {
+    "sounds": [
+      {
+        "name": "matriochka:station/inverter_1"
+      },
+      {
+        "name": "matriochka:station/inverter_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.inverter"
+  },
+  "station.abyssal_press": {
+    "sounds": [
+      {
+        "name": "matriochka:station/abyssal_press_1"
+      },
+      {
+        "name": "matriochka:station/abyssal_press_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.abyssal_press"
+  },
+  "station.time_workshop": {
+    "sounds": [
+      {
+        "name": "matriochka:station/time_workshop_1"
+      },
+      {
+        "name": "matriochka:station/time_workshop_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.time_workshop"
+  },
+  "station.terrain_anchor": {
+    "sounds": [
+      {
+        "name": "matriochka:station/terrain_anchor_1"
+      },
+      {
+        "name": "matriochka:station/terrain_anchor_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.terrain_anchor"
+  },
+  "station.final_loom": {
+    "sounds": [
+      {
+        "name": "matriochka:station/final_loom_1"
+      },
+      {
+        "name": "matriochka:station/final_loom_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.final_loom"
+  },
+  "station.soul_altar.devour": {
+    "sounds": [
+      {
+        "name": "matriochka:station/soul_altar_devour"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.soul_altar.devour"
+  },
+  "station.jailer_table.pin": {
+    "sounds": [
+      {
+        "name": "matriochka:station/jailer_table_pin_1"
+      },
+      {
+        "name": "matriochka:station/jailer_table_pin_2"
+      },
+      {
+        "name": "matriochka:station/jailer_table_pin_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.jailer_table.pin"
+  },
+  "boss.awaken": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/awaken"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.awaken"
+  },
+  "boss.phase": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/phase"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.phase"
+  },
+  "boss.defeat": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/defeat"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.defeat"
+  },
+  "boss.telegraph.w0": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w0_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w0_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w0"
+  },
+  "boss.telegraph.w1": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w1_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w1_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w1"
+  },
+  "boss.telegraph.w2": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w2_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w2_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w2"
+  },
+  "boss.telegraph.w3": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w3_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w3_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w3"
+  },
+  "boss.telegraph.w4": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w4_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w4_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w4"
+  },
+  "boss.telegraph.w5": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w5_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w5_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w5"
+  },
+  "boss.telegraph.w6": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w6_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w6_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w6"
+  },
+  "boss.telegraph.w7": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w7_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w7_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w7"
+  },
+  "boss.telegraph.w8": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w8_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w8_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w8"
+  },
+  "boss.telegraph.w9": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w9_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w9_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w9"
+  },
+  "boss.telegraph.w10": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/telegraph_w10_1"
+      },
+      {
+        "name": "matriochka:boss/telegraph_w10_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.telegraph.w10"
+  },
+  "world.gust": {
+    "sounds": [
+      {
+        "name": "matriochka:world/gust_1"
+      },
+      {
+        "name": "matriochka:world/gust_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.world.gust"
+  },
+  "world.gravity_shift": {
+    "sounds": [
+      {
+        "name": "matriochka:world/gravity_shift"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.world.gravity_shift"
+  },
+  "world.quake": {
+    "sounds": [
+      {
+        "name": "matriochka:world/quake"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.world.quake"
+  },
+  "world.rumble": {
+    "sounds": [
+      {
+        "name": "matriochka:world/rumble_1"
+      },
+      {
+        "name": "matriochka:world/rumble_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.world.rumble"
+  },
+  "ambient.w1.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w1_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w2.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w2_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w3.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w3_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w4.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w4_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w5.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w5_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w6.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w6_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w7.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w7_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w8.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w8_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w9.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w9_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w10.loop": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w10_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.w0.creak": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w0_creak_1"
+      },
+      {
+        "name": "matriochka:ambient/w0_creak_2"
+      },
+      {
+        "name": "matriochka:ambient/w0_creak_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w0.creak"
+  },
+  "ambient.w1.insects": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w1_insects_1"
+      },
+      {
+        "name": "matriochka:ambient/w1_insects_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w1.insects"
+  },
+  "ambient.w1.spore": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w1_spore_1"
+      },
+      {
+        "name": "matriochka:ambient/w1_spore_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w1.spore"
+  },
+  "ambient.w2.hammer": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w2_hammer_1"
+      },
+      {
+        "name": "matriochka:ambient/w2_hammer_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w2.hammer"
+  },
+  "ambient.w2.crackle": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w2_crackle_1"
+      },
+      {
+        "name": "matriochka:ambient/w2_crackle_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w2.crackle"
+  },
+  "ambient.w3.chains": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w3_chains_1"
+      },
+      {
+        "name": "matriochka:ambient/w3_chains_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w3.chains"
+  },
+  "ambient.w3.door": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w3_door_1"
+      },
+      {
+        "name": "matriochka:ambient/w3_door_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w3.door"
+  },
+  "ambient.w4.whistle": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w4_whistle_1"
+      },
+      {
+        "name": "matriochka:ambient/w4_whistle_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w4.whistle"
+  },
+  "ambient.w4.thunder": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w4_thunder_1"
+      },
+      {
+        "name": "matriochka:ambient/w4_thunder_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w4.thunder"
+  },
+  "ambient.w5.breath": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w5_breath_1"
+      },
+      {
+        "name": "matriochka:ambient/w5_breath_2"
+      },
+      {
+        "name": "matriochka:ambient/w5_breath_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w5.breath"
+  },
+  "ambient.w5.steps": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w5_steps_1"
+      },
+      {
+        "name": "matriochka:ambient/w5_steps_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w5.steps"
+  },
+  "ambient.w6.reverse": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w6_reverse_1"
+      },
+      {
+        "name": "matriochka:ambient/w6_reverse_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w6.reverse"
+  },
+  "ambient.w7.drip": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w7_drip_1"
+      },
+      {
+        "name": "matriochka:ambient/w7_drip_2"
+      },
+      {
+        "name": "matriochka:ambient/w7_drip_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w7.drip"
+  },
+  "ambient.w7.groan": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w7_groan_1"
+      },
+      {
+        "name": "matriochka:ambient/w7_groan_2"
+      },
+      {
+        "name": "matriochka:ambient/w7_groan_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w7.groan"
+  },
+  "ambient.w8.chime": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w8_chime_1"
+      },
+      {
+        "name": "matriochka:ambient/w8_chime_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w8.chime"
+  },
+  "ambient.w8.cuckoo": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w8_cuckoo"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w8.cuckoo"
+  },
+  "ambient.w9.heartbeat": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w9_heartbeat_1"
+      },
+      {
+        "name": "matriochka:ambient/w9_heartbeat_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w9.heartbeat"
+  },
+  "ambient.w9.grind": {
+    "sounds": [
+      {
+        "name": "matriochka:ambient/w9_grind_1"
+      },
+      {
+        "name": "matriochka:ambient/w9_grind_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.ambient.w9.grind"
+  },
+  "music.world_0": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_0",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_1": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_1",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_2": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_2",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_3": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_3",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_4": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_4",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_5": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_5",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_6": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_6",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_7": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_7",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_8": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_8",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_9": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_9",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_10": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_10",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_final": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_final",
+        "stream": true
+      }
+    ]
+  },
+  "music.endings": {
+    "sounds": [
+      {
+        "name": "matriochka:music/endings",
+        "stream": true
+      }
+    ]
+  }
+}
