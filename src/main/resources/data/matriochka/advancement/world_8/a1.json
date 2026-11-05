@@ -1,0 +1,24 @@
+{
+  "parent": "matriochka:world_8/a0",
+  "display": {
+    "icon": {
+      "id": "matriochka:seed_8"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w8.a1.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w8.a1.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "matriochka:world_8/a2",
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_sword"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w8.a6.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w8.a6.desc"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "matriochka:hour_keeper"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/combat"
+  }
+}
