@@ -293,17 +293,17 @@ public final class Content {
 		new Defs.MobDef("colossus_prowler", 10, 745f, 41.3f, "sound_hunter", 2.6f, 2.38f, 1.38f, "artisan_shard", "", true, false, false, false)
 	);
 	public static final List<Defs.BossDef> BOSSES = List.of(
-		new Defs.BossDef("block_guardian", 0, 300f, 12f, 2.2f, 2.88f, 2.88f, "guardian_core", new float[]{0.5f}, false, false),
-		new Defs.BossDef("spore_queen", 1, 500f, 12f, 2.4f, 3.00f, 1.88f, "queen_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("ash_titan", 2, 675f, 14.4f, 3.0f, 2.25f, 2.75f, "titan_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("grand_jailer", 3, 911f, 17.3f, 2.6f, 1.25f, 1.94f, "jailer_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("storm_king", 4, 1230f, 20.7f, 2.6f, 2.62f, 2.19f, "storm_king_core", new float[]{0.66f, 0.33f}, true, false),
-		new Defs.BossDef("light_eater", 5, 1661f, 24.9f, 2.6f, 3.00f, 1.38f, "light_eater_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("your_double", 6, 2242f, 29.9f, 1.0f, 1.00f, 2.00f, "double_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("pressure_leviathan", 7, 3027f, 35.8f, 3.2f, 3.00f, 0.94f, "leviathan_core", new float[]{0.66f, 0.33f}, false, true),
-		new Defs.BossDef("seasons_master", 8, 4086f, 43f, 2.8f, 3.00f, 3.50f, "seasons_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("terrain_heart_boss", 9, 5516f, 51.6f, 3.0f, 2.25f, 2.62f, "terrain_core", new float[]{0.66f, 0.33f}, false, false),
-		new Defs.BossDef("the_unfinished", 10, 14894f, 61.9f, 3.4f, 1.50f, 2.25f, "unfinished_core", new float[]{0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f, 0.3f, 0.2f, 0.1f}, false, false)
+		new Defs.BossDef("block_guardian", 0, 300f, 12f, 2.2f, 3.00f, 3.20f, "guardian_core", new float[]{0.5f}, false, false),
+		new Defs.BossDef("spore_queen", 1, 500f, 12f, 2.4f, 3.00f, 2.12f, "queen_core", new float[]{0.66f, 0.33f}, false, false),
+		new Defs.BossDef("ash_titan", 2, 675f, 14.4f, 3.0f, 2.75f, 3.84f, "titan_core", new float[]{0.66f, 0.33f}, false, false),
+		new Defs.BossDef("grand_jailer", 3, 911f, 17.3f, 2.6f, 1.88f, 2.75f, "jailer_core", new float[]{0.66f, 0.33f}, false, false),
+		new Defs.BossDef("storm_king", 4, 1230f, 20.7f, 2.6f, 3.00f, 3.43f, "storm_king_core", new float[]{0.66f, 0.33f}, true, false),
+		new Defs.BossDef("light_eater", 5, 1661f, 24.9f, 2.6f, 3.00f, 1.62f, "light_eater_core", new float[]{0.66f, 0.33f}, false, false),
+		new Defs.BossDef("your_double", 6, 2242f, 29.9f, 1.0f, 1.62f, 2.56f, "double_core", new float[]{0.66f, 0.33f}, false, false),
+		new Defs.BossDef("pressure_leviathan", 7, 3027f, 35.8f, 3.2f, 3.00f, 1.28f, "leviathan_core", new float[]{0.66f, 0.33f}, false, true),
+		new Defs.BossDef("seasons_master", 8, 4086f, 43f, 2.8f, 3.00f, 4.30f, "seasons_core", new float[]{0.66f, 0.33f}, false, false),
+		new Defs.BossDef("terrain_heart_boss", 9, 5516f, 51.6f, 3.0f, 2.88f, 2.69f, "terrain_core", new float[]{0.66f, 0.33f}, false, false),
+		new Defs.BossDef("the_unfinished", 10, 14894f, 61.9f, 3.4f, 2.56f, 2.44f, "unfinished_core", new float[]{0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f, 0.3f, 0.2f, 0.1f}, false, false)
 	);
 	public static final List<Defs.NpcDef> PEOPLES = List.of(
 		new Defs.NpcDef("doll_peddler", 0),
