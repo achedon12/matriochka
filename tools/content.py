@@ -1018,7 +1018,7 @@ TALENT_EFFECTS = {
     "wither": ("Your blows wither the foe for %s seconds", "Tes coups flétrissent l'ennemi pendant %s secondes"),
     "resist": ("World gauges rise %s%% slower", "Les jauges des mondes montent %s %% moins vite"),
     "orebonus": ("%s%% chance to mine an ore twice", "%s %% de chances de miner un minerai deux fois"),
-    "haste": ("Haste %s while you hold a tool", "Célérité %s tant que tu tiens un outil"),
+    "haste": ("Haste while you hold a tool", "Célérité tant que tu tiens un outil"),
 }
 TALENT_PERCENT = {"knockback", "damage", "attack_speed", "speed", "break_speed", "jump", "burn", "submerged", "laststand", "thorns",
                   "rage", "boss", "crit", "execute", "dodge", "sneak", "souls", "shards", "lifesteal", "resist", "orebonus"}

@@ -61,7 +61,8 @@ def gen(lang, write, root):
                 full = f"{cls}_{tid}"
                 ten, tfr = TALENT_EFFECTS[effect]
                 lang(f"talent.{NS}.{full}", en, fr)
-                lang(f"talent.{NS}.{full}.desc", ten % _shown(effect, value), tfr % _shown(effect, value))
+                fmt = lambda text: text % _shown(effect, value) if "%s" in text else text.replace("%%", "%")
+                lang(f"talent.{NS}.{full}.desc", fmt(ten), fmt(tfr))
                 souls, shards, gate = TALENT_TIERS[tier]
                 rows.append(f"\t\tnew TalentDef({jstr(full)}, {jstr(cls)}, {jstr(bid)}, {tier}, {jstr(effect)}, {value}f, {souls}, {shards}, {gate})")
     for key, (en, fr) in TRIAL_NAMES.items():
