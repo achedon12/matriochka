@@ -107,7 +107,7 @@ public final class WorldRules {
 		ServerLevel level = (ServerLevel) p.level();
 		float resist = 1f - GearClasses.survivorResistance(p);
 		// the world's variant makes its rule gentler or harsher
-		float strength = fr.achedon12.matriochka.world.Variants.of(p).rule();
+		float strength = fr.achedon12.matriochka.world.Variants.of(p).rule() * fr.achedon12.matriochka.replay.WorldEvents.surge(p);
 		switch (rule) {
 			case 1 -> {
 				float gain = p.isInWaterOrRain() ? -2f : 1f;
