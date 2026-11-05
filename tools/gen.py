@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from content import *  # noqa
 from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx
 import models
+import bosses_hd
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 RES = os.path.join(ROOT, "src/main/resources")
@@ -176,15 +177,13 @@ def gen_entities():
                               mk(os.path.join(A, f"geckolib/animations/entity/{mid}.animation.json")),
                               mk(os.path.join(A, f"textures/entity/{mid}.png")), mid)
         ENTITY_DIMS[mid] = (max(0.4, min(wd, 2.5)), max(0.4, ht))
+    HD_BOSSES = bosses_hd.build_all()
     for b in BOSSES:
         bid = b["id"]
         lang(f"entity.{NS}.{bid}", b["en"], b["fr"])
         for i, (en, fr) in enumerate(b["atk"]):
             lang(f"boss.{NS}.{bid}.attack{i}", en, fr)
-        p = pal(b["world"])
-        wd, ht = models.build(b["body"], p, bid, mk(os.path.join(A, f"geckolib/models/entity/{bid}.geo.json")),
-                              mk(os.path.join(A, f"geckolib/animations/entity/{bid}.animation.json")),
-                              mk(os.path.join(A, f"textures/entity/{bid}.png")), bid, boss=True)
+        wd, ht = HD_BOSSES[bid]
         ENTITY_DIMS[bid] = (max(0.6, min(wd, 3.0)), max(0.8, ht))
     for (pid, en, fr, wd) in PEOPLES:
         lang(f"entity.{NS}.{pid}", en, fr)
