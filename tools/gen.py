@@ -12,6 +12,7 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from content import *  # noqa
 from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx, paint_snorkel_item, paint_snorkel_layer
+import craft
 import models
 import bosses_hd
 import attacks
@@ -92,7 +93,10 @@ def gen_items():
             lang(f"item.{NS}.{iid}.desc", it["effect_en"], it["effect_fr"])
         p = it.get("pal") or pal(it["world"])
         tpath = os.path.join(A, f"textures/item/{iid}.png")
-        if it["kind"] == "armor":
+        hand = craft.crafted_item(it)
+        if hand is not None:
+            hand.image().save(tpath)
+        elif it["kind"] == "armor":
             paint_armor_item(it["piece"], p, iid, tpath)
         elif it["kind"] == "snorkel":
             paint_snorkel_item(SNORKEL_PAL[iid], iid, tpath)
@@ -122,6 +126,25 @@ def gen_items():
 
 
 # ------------------------------------------------------------------ blocks
+def emissive_cube(tex, glow):
+    """A full cube (up/down/side textures) with an emissive overlay on the faces that have a glow texture: the overlay
+    is a second, coplanar element with light_emission 15, as vanilla does for the firefly bush and the eyeblossom, so
+    the lit parts stay bright in the dark and with shader packs that respect vanilla block light."""
+    faces = {"north": "side", "south": "side", "east": "side", "west": "side", "up": "up", "down": "down"}
+    textures = {"particle": tex["side"]}
+    for key in ("up", "down", "side"):
+        textures[key] = tex[key]
+        if glow.get(key):
+            textures[key + "_glow"] = glow[key]
+    base = {"from": [0, 0, 0], "to": [16, 16, 16],
+            "faces": {f: {"uv": [0, 0, 16, 16], "texture": "#" + k, "cullface": f} for f, k in faces.items()}}
+    elements = [base]
+    lit = {f: {"uv": [0, 0, 16, 16], "texture": "#" + k + "_glow", "cullface": f} for f, k in faces.items() if glow.get(k)}
+    if lit:
+        elements.append({"from": [0, 0, 0], "to": [16, 16, 16], "light_emission": 15, "faces": lit})
+    return {"parent": "minecraft:block/block", "textures": textures, "elements": elements}
+
+
 def gen_blocks():
     for b in BLOCKS:
         bid = b["id"]
@@ -130,16 +153,31 @@ def gen_blocks():
             lang(f"block.{NS}.{bid}.desc", b["note_en"], b["note_fr"])
         p = ORE_PAL.get(b["id"]) or pal(b["world"])
         tpath = mk(os.path.join(A, f"textures/block/{bid}.png"))
-        paint_block(b["style"], p, bid, tpath)
+        hand = craft.crafted_block(bid)
+        glows = {}
+        if hand is not None:
+            for suffix, spr in hand.items():
+                spr.image().save(os.path.join(A, f"textures/block/{bid}{suffix}.png"))
+                if spr.glow:
+                    spr.glow_image().save(os.path.join(A, f"textures/block/{bid}{suffix}_glow.png"))
+                    glows[suffix] = f"{NS}:block/{bid}{suffix}_glow"
+        else:
+            paint_block(b["style"], p, bid, tpath)
         if b["kind"] == "station":
-            paint_station_top(p, bid + "t", os.path.join(A, f"textures/block/{bid}_top.png"))
-            model = {"parent": "minecraft:block/cube_bottom_top",
-                     "textures": {"top": f"{NS}:block/{bid}_top", "bottom": f"{NS}:block/painted_wood", "side": f"{NS}:block/{bid}"}}
+            if hand is None:
+                paint_station_top(p, bid + "t", os.path.join(A, f"textures/block/{bid}_top.png"))
+            bottom = f"{NS}:block/{bid}_bottom" if hand is not None else f"{NS}:block/painted_wood"
+            model = emissive_cube({"up": f"{NS}:block/{bid}_top", "down": bottom, "side": f"{NS}:block/{bid}"},
+                                  {"up": glows.get("_top"), "down": glows.get("_bottom"), "side": glows.get("")})
         elif b["kind"] == "soil":
-            paint_block("soil", p, bid + "f", os.path.join(A, f"textures/block/{bid}_tilled.png"))
+            if hand is None:
+                paint_block("soil", p, bid + "f", os.path.join(A, f"textures/block/{bid}_tilled.png"))
             model = {"parent": "minecraft:block/cube_all", "textures": {"all": f"{NS}:block/{bid}"}}
             w(os.path.join(A, f"models/block/{bid}_tilled.json"),
               {"parent": "minecraft:block/template_cube_bottom_top_indented", "textures": {"bottom": f"{NS}:block/{bid}", "side": f"{NS}:block/{bid}", "top": f"{NS}:block/{bid}_tilled"}})
+        elif glows:
+            model = emissive_cube({"up": f"{NS}:block/{bid}", "down": f"{NS}:block/{bid}", "side": f"{NS}:block/{bid}"},
+                                  {"up": glows.get(""), "down": glows.get(""), "side": glows.get("")})
         elif b["kind"] == "planted_seed":
             model = {"parent": "minecraft:block/cross", "textures": {"cross": f"{NS}:block/planted_seed_cross"}}
             paint_item("seed", p, "seed_block", os.path.join(A, "textures/block/planted_seed_cross.png"))
