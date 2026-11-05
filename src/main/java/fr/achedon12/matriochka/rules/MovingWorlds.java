@@ -15,6 +15,7 @@ public final class MovingWorlds {
 		PlacedBlocks.init();
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
 			DungeonShift.clearAll();
+			ShiftingGround.clearAll();
 			GravityZones.clearAll();
 			Burnout.clearAll();
 		});
@@ -22,6 +23,7 @@ public final class MovingWorlds {
 
 	static void tick(MinecraftServer server, long t) {
 		DungeonShift.tick(server);
+		ShiftingGround.tick(server);
 		GravityZones.tick(server, p -> WorldRules.rule(p) == 6);
 		if (t % 4 == 0) Burnout.tickGlows(server, p -> WorldRules.rule(p) == 5);
 	}

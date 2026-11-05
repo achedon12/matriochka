@@ -22,7 +22,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
@@ -213,22 +212,13 @@ public final class WorldRules {
 				ps.setGauge("season", season * 33.3f);
 			}
 			case 9 -> {
-				long phase = t % 1200;
-				if (phase == 1140) p.sendOverlayMessage(Component.translatable("message.matriochka.rule.tremor").withStyle(ChatFormatting.GOLD));
-				ps.setGauge("tremor", phase / 12f);
-				if (phase == 0 && !anchored(level, p, ps, t)) {
-					p.push(level.getRandom().nextGaussian() * 0.5, 0.4, level.getRandom().nextGaussian() * 0.5);
-					p.needsSync = true;
-					p.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 100, 0, true, false));
-					level.playSound(null, p.blockPosition(), SoundEvents.WARDEN_EMERGE, SoundSource.AMBIENT, 1f, 0.6f);
-					for (int i = 0; i < 4; i++) {
-						BlockPos q = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, p.blockPosition().offset(level.getRandom().nextInt(13) - 6, 0, level.getRandom().nextInt(13) - 6)).below();
-						var st = level.getBlockState(q);
-						if (!st.isAir() && st.getDestroySpeed(level, q) >= 0 && st.getDestroySpeed(level, q) < 4 && !(st.getBlock() instanceof net.minecraft.world.level.block.EntityBlock)) {
-							FallingBlockEntity.fall(level, q, st);
-							Achievements.grant(p, "base_moved");
-						}
-					}
+				long phase = t % ShiftingGround.PERIOD;
+				if (phase == ShiftingGround.PERIOD - ShiftingGround.WARN) p.sendOverlayMessage(Component.translatable("message.matriochka.rule.tremor").withStyle(ChatFormatting.GOLD));
+				if (phase >= ShiftingGround.PERIOD - ShiftingGround.WARN) ShiftingGround.rumble(level, p);
+				ps.setGauge("tremor", phase / (ShiftingGround.PERIOD / 100f));
+				if (phase == 0) {
+					if (anchored(level, p, ps, t)) p.sendOverlayMessage(Component.translatable("message.matriochka.rule.ground_held").withStyle(ChatFormatting.GOLD));
+					ShiftingGround.heave(level, p);
 				}
 			}
 			default -> {}
