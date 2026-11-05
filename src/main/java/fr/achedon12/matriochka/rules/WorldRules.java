@@ -168,17 +168,7 @@ public final class WorldRules {
 				if (dark && !ps.flagActive("lantern", t) && !p.hasEffect(MobEffects.NIGHT_VISION) && t % 200 == 0) p.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 60, 0, true, false));
 			}
 			case 6 -> {
-				long phase = t % 1800;
-				if (phase == 1700) p.sendOverlayMessage(Component.translatable("message.matriochka.rule.gravity").withStyle(ChatFormatting.LIGHT_PURPLE));
-				if (phase == 0) {
-					boolean safe = wearing(p, "gravity_boots") || ps.flagActive("stable", t) || ps.flagActive("flipped_apple", t);
-					if (!safe) {
-						p.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20 * 6, 1, true, false));
-						p.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 20 * 12, 0, true, false));
-						Achievements.grant(p, "flipped");
-						Achievements.grant(p, "fall_up");
-					}
-				}
+				// gravity columns, their warning and their sparks run every tick in GravityZones
 			}
 			case 7 -> {
 				boolean under = p.isUnderWater();
