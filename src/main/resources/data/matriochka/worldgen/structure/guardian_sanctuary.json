@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "#minecraft:is_overworld",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 0,
+  "archetype": "sanctuary",
+  "role": "story",
+  "size": "medium",
+  "structure_id": "guardian_sanctuary"
+}

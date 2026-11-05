@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 7310001,
+    "spacing": 24,
+    "separation": 10
+  },
+  "structures": [
+    {
+      "structure": "matriochka:guardian_sanctuary",
+      "weight": 1
+    }
+  ]
+}
