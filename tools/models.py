@@ -5,6 +5,7 @@ builder (leg_l, leg_r, arm_l, arm_r, head, body, tail, wing_l, wing_r, seg, orbi
 jaw, extra). The output files open in Blockbench as regular GeckoLib entity models.
 """
 import json
+from moves import move_anims
 import math
 from PIL import Image
 from paint import hx, shade, mix, rng
@@ -288,7 +289,7 @@ def box_uv_size(s):
     return 2 * (d + w), d + h, (w, h, d)
 
 
-def build(body, pal, seed, out_geo, out_anim, out_tex, ident, boss=False):
+def build(body, pal, seed, out_geo, out_anim, out_tex, ident, boss=False, moves=()):
     bones = plan(body)
     # pack cubes
     cubes = [(b, c) for b in bones for c in b.cubes]
@@ -375,7 +376,13 @@ def build(body, pal, seed, out_geo, out_anim, out_tex, ident, boss=False):
                         "visible_bounds_width": 6, "visible_bounds_height": max(3, height + 1), "visible_bounds_offset": [0, height / 2, 0]},
         "bones": geo_bones}]}
     json.dump(geo, open(out_geo, "w"), indent=1)
-    json.dump(animations(bones, boss), open(out_anim, "w"), indent=1)
+    an = animations(bones, boss)
+    if moves:
+        roles = {}
+        for b in bones:
+            roles.setdefault(b.role, []).append(b.name)
+        an["animations"].update(move_anims(roles, moves))
+    json.dump(an, open(out_anim, "w"), indent=1)
     xs = [abs(c["o"][0]) for b in bones for c in b.cubes] + [abs(c["o"][0] + c["s"][0]) for b in bones for c in b.cubes]
     zs = [abs(c["o"][2]) for b in bones for c in b.cubes] + [abs(c["o"][2] + c["s"][2]) for b in bones for c in b.cubes]
     width = min(max(max(xs), max(zs)) * 2 / 16, 3.0)
