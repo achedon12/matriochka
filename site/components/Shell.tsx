@@ -5,39 +5,43 @@ import type { Lang } from "@/lib/types";
 import { Icon } from "./Bits";
 import { Sprite, Vine } from "./Ornament";
 
-const PAGES = ["worlds", "bestiary", "bosses", "systems", "download"] as const;
+const LEFT = ["worlds", "bestiary"] as const;
+const RIGHT = ["bosses", "systems"] as const;
 
 /** Header, ornament and footer around every page. `path` is the page path without language, e.g. "worlds/3/". */
 export function Shell({ lang, path, section, children }: { lang: Lang; path: string; section?: string; children: ReactNode }) {
   const { copy } = getData(lang);
   const ui = copy.ui;
   const other = otherLang(lang);
+  const item = (p: (typeof LEFT)[number] | (typeof RIGHT)[number]) => (
+    <li key={p}>
+      <Link href={href(lang, `${p}/`)} aria-current={section === p ? (path === `${p}/` ? "page" : "true") : undefined}>
+        <svg className="cur" viewBox="0 0 100 170" aria-hidden="true"><use href="#doll" /></svg>
+        {copy.nav[p]}
+      </Link>
+    </li>
+  );
   return (
     <>
       <Sprite />
       <a className="skip" href="#main">{ui.skip}</a>
       <header className="top">
         <div className="wrap top-in">
-          <Link className="brand" href={href(lang)} aria-current={path === "" ? "page" : undefined}>
-            <img src={asset("logo-128.png")} width="40" height="40" alt="" />
-            <span>Matriochka</span>
-          </Link>
+          <a className="lang" href={asset((other === "fr" ? "fr/" : "") + path)} hrefLang={other} lang={other}>{ui.other}</a>
           <nav className="nav" aria-label={ui.main}>
-            <ul>
-              {PAGES.map((p) => (
-                <li key={p}>
-                  <Link href={href(lang, `${p}/`)} aria-current={section === p ? (path === `${p}/` ? "page" : "true") : undefined}>
-                    {copy.nav[p === "worlds" ? "worlds" : p]}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <ul className="nav-l">{LEFT.map((p) => item(p))}</ul>
+            <Link className="brand" href={href(lang)} aria-current={path === "" ? "page" : undefined}>
+              <span className="medal"><img src={asset("logo-128.png")} width="72" height="72" alt="" /></span>
+              <span className="word">Matriochka</span>
+            </Link>
+            <ul className="nav-r">{RIGHT.map((p) => item(p))}<li className="nav-dl"><Link href={href(lang, "download/")}>{copy.nav.download}</Link></li></ul>
           </nav>
-          <div className="top-tools">
-            <a className="lang" href={asset((other === "fr" ? "fr/" : "") + path)} hrefLang={other} lang={other}>{ui.other}</a>
-            <a className="gh" href={SHARED.repo} aria-label={ui.github}><Icon name="github" /></a>
-          </div>
+          <a className="gh" href={SHARED.repo} aria-label={ui.github}><Icon name="github" /></a>
         </div>
+        <Link className="ribbon" href={href(lang, "download/")} aria-current={section === "download" ? "page" : undefined}>
+          <Icon name="download" />
+          <span>{copy.nav.download}</span>
+        </Link>
       </header>
       <Vine kind="black" className="vine-top" />
       <main id="main">{children}</main>
