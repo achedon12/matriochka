@@ -35,7 +35,7 @@ public final class Variants {
 	public static final String PLAIN = "plain";
 	/** Parcel owners per world, rebuilt every few seconds: spawn checks ask for them very often. */
 	private static final Map<Long, String> OWNERS = new HashMap<>();
-	private static long ownersAt = Long.MIN_VALUE;
+	private static long ownersAt = Long.MIN_VALUE, missedAt = Long.MIN_VALUE;
 
 	public static Defs.VariantDef def(String id) {
 		for (Defs.VariantDef v : Content.VARIANTS) if (v.id().equals(id)) return v;
@@ -59,17 +59,31 @@ public final class Variants {
 		if (world <= 0 || world > 10) return null;
 		MinecraftServer server = level.getServer();
 		long now = server.overworld().getGameTime();
-		if (now - ownersAt > 100 || now < ownersAt) {
-			OWNERS.clear();
-			ownersAt = now;
-			MatrioData data = MatrioData.get(server);
-			for (String g : data.groups()) {
-				CompoundTag grp = data.group(g);
-				if (!grp.contains("parcel")) continue;
-				for (int w = 1; w <= 10; w++) OWNERS.put(key(w, data.parcel(g, w)), g);
-			}
+		if (now - ownersAt > 100 || now < ownersAt) owners(server, now);
+		String g = OWNERS.get(key(world, Worlds.parcelOf(pos)));
+		// a parcel handed out since the last pass: look again, at most once a tick
+		if (g == null && missedAt != now && ownersAt != now) {
+			missedAt = now;
+			owners(server, now);
+			g = OWNERS.get(key(world, Worlds.parcelOf(pos)));
 		}
-		return OWNERS.get(key(world, Worlds.parcelOf(pos)));
+		return g;
+	}
+
+	private static void owners(MinecraftServer server, long now) {
+		OWNERS.clear();
+		ownersAt = now;
+		MatrioData data = MatrioData.get(server);
+		for (String g : data.groups()) {
+			CompoundTag grp = data.group(g);
+			if (!grp.contains("parcel")) continue;
+			for (int w = 1; w <= 10; w++) OWNERS.put(key(w, data.parcel(g, w)), g);
+		}
+	}
+
+	/** Forgets the parcel owners (after a parcel changed hands). */
+	public static void forget() {
+		ownersAt = Long.MIN_VALUE;
 	}
 
 	private static long key(int world, int parcel) {
