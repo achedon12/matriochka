@@ -139,11 +139,11 @@ public final class Kit {
 	public BlockState orient(BlockState s) {
 		if (rot != Rotation.NONE) s = s.rotate(rot);
 		if (flip) s = flipState(s);
-		return wet(s);
+		return s;
 	}
 
+	/** Kept for callers that prepare a state before {@link #put}; waterlogging itself is decided in put. */
 	BlockState wet(BlockState s) {
-		if (p.underwater && s.hasProperty(BlockStateProperties.WATERLOGGED)) s = s.setValue(BlockStateProperties.WATERLOGGED, true);
 		return s;
 	}
 
@@ -182,6 +182,9 @@ public final class Kit {
 	/** Places an already oriented state at a world position. */
 	public boolean put(BlockPos pos, BlockState s) {
 		if (!inside(pos)) return false;
+		// under water, shaped blocks take the water they replace, so dry pockets (domes, bells, grottoes) stay dry
+		if (p.underwater && s.hasProperty(BlockStateProperties.WATERLOGGED))
+			s = s.setValue(BlockStateProperties.WATERLOGGED, lvl.getFluidState(pos).is(net.minecraft.tags.FluidTags.WATER));
 		lvl.setBlock(pos, s, 2);
 		Block b = s.getBlock();
 		if (b instanceof CrossCollisionBlock || b instanceof WallBlock || b instanceof StairBlock) shapes.add(pos.immutable());
@@ -616,8 +619,8 @@ public final class Kit {
 			int i = Math.floorMod(y - y0, 8);
 			int[] c = cells[i];
 			stair(cx + c[0], y, cz + c[1], p.stair, dirs[i], false);
-			int j = Math.floorMod(i - 1, 8);
-			slab(cx + cells[j][0], y, cz + cells[j][1], p.slab, false);
+			// a top slab under every step closes the underside without stealing headroom
+			if (y > y0) slab(cx + c[0], y - 1, cz + c[1], p.slab, true);
 		}
 	}
 
@@ -835,6 +838,33 @@ public final class Kit {
 			}
 	}
 
+	/** Clears the space above a footprint without touching the ground (untransformed coordinates). */
+	public void siteClear(int rad, int top) {
+		for (int x = -rad - 1; x <= rad + 1; x++)
+			for (int z = -rad - 1; z <= rad + 1; z++) {
+				if (x * x + z * z > (rad + 1.2) * (rad + 1.2)) continue;
+				for (int y = 1; y <= top; y++) {
+					BlockPos pos = o.offset(x, y, z);
+					if (!inside(pos)) continue;
+					BlockState s = lvl.getBlockState(pos);
+					if (!s.isAir() && !s.equals(p.fill)) lvl.setBlock(pos, p.fill, 2);
+				}
+			}
+	}
+
+	/** Small floating island (local coordinates): soil top at y, a rocky cone under it. */
+	public void island(int cx, int y, int cz, double rad, int depth) {
+		int ir = (int) Math.ceil(rad);
+		for (int x = -ir; x <= ir; x++)
+			for (int z = -ir; z <= ir; z++) {
+				double d = Math.sqrt(x * x + z * z);
+				if (d > rad + 0.3) continue;
+				int dep = (int) ((rad + 0.5 - d) / (rad + 0.5) * depth) + 1 + hi(cx + x, y, cz + z, 61, 2);
+				set(cx + x, y, cz + z, p.soil);
+				for (int k = 1; k <= dep; k++) set(cx + x, y - k, cz + z, k < 3 ? p.base : p.found);
+			}
+	}
+
 	// ---------------------------------------------------------------- decay
 	/**
 	 * Ages a volume: cracked and mossy variants, missing blocks along the top edges, cobwebs in corners and the
@@ -891,11 +921,11 @@ public final class Kit {
 		Block g = p.growth.getBlock();
 		if (g == Blocks.AIR) return;
 		if (g == Blocks.HANGING_ROOTS) {
-			if (roofed) lvl.setBlock(pos, wet(p.growth), 2);
+			if (roofed) put(pos, p.growth);
 			return;
 		}
 		if (g == Blocks.COBWEB) {
-			if (roofed && !p.underwater) lvl.setBlock(pos, p.growth, 2);
+			if (roofed && !p.underwater) put(pos, p.growth);
 			return;
 		}
 		for (Direction d : Direction.Plane.HORIZONTAL) {
@@ -908,10 +938,10 @@ public final class Kit {
 			else if (g instanceof AmethystClusterBlock) s = p.growth.setValue(AmethystClusterBlock.FACING, wd.getOpposite());
 			else if (p.underwater) s = b(Blocks.TUBE_CORAL_WALL_FAN).setValue(BlockStateProperties.HORIZONTAL_FACING, wd.getOpposite());
 			else return;
-			lvl.setBlock(pos, wet(s), 2);
+			put(pos, s);
 			return;
 		}
-		if (roofed && !p.underwater && hc(x, y, z, 43, 0.3)) lvl.setBlock(pos, b(Blocks.COBWEB), 2);
+		if (roofed && !p.underwater && hc(x, y, z, 43, 0.3)) put(pos, b(Blocks.COBWEB));
 	}
 
 	/** Scatter of rubble (slabs, stairs, broken blocks) on the ground of a zone. */

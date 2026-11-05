@@ -185,7 +185,7 @@ public final class Rewards {
 	static void chest(Kit k, BlockPos p, Direction f, boolean flipped, int tier, boolean page, boolean doll) {
 		if (!k.inside(p)) return;
 		BlockState st = Kit.facing(Blocks.CHEST.defaultBlockState(), f);
-		k.lvl.setBlock(p, k.wet(st), 2);
+		k.put(p, st);
 		if (!(k.lvl.getBlockEntity(p) instanceof ChestBlockEntity chest)) return;
 		RandomSource r = RandomSource.create(k.hash(p.getX(), p.getY(), p.getZ(), 97));
 		fill(k, chest, tier, r);
