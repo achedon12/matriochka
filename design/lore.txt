@@ -1,0 +1,195 @@
+Lore
+
+
+
+
+  Lore
+  L'Artisan a bâti dix prisons emboîtées pour enfermer une créature, puis a effacé sa propre
+  mémoire pour que personne ne puisse les rouvrir. Le joueur est cet Artisan, et chaque
+  boss vaincu brise une partie de son œuvre. Tous les noms restent provisoires.
+
+
+
+  Histoire complète
+       1. Avant les mondes : une créature appelée l'Inachevée dévore tout ce qui existe, parce
+          qu'elle n'a pas de limite.
+       2. La première poupée : l'Artisan découvre qu'une chose enfermée dans une forme peut
+          être contenue.
+       3. Les dix prisons : il fabrique dix mondes, chacun avec une loi différente, pour affaiblir
+          la créature.
+       4. Les Gardiens : ses dix apprentis acceptent de se lier aux mondes. Ils deviennent, au fil
+          des siècles, les boss.
+       5. Les peuples : des habitants s'installent dans les mondes, sans savoir qu'ils vivent dans
+          une prison.
+       6. Le regret : l'Artisan comprend que l'Inachevée se nourrit de son désir de tout
+          terminer.
+       7. L'oubli : il scelle sa mémoire dans la plus petite poupée et laisse un Parchemin à lui-
+          même.
+       8. Le cycle : à chaque réveil, il croit être un simple voyageur et recommence l'ouverture
+          des mondes.
+       9. Aujourd'hui : le joueur se réveille sur la Surface, avec le Parchemin dans les mains.
+
+  Le Parchemin n'est donc pas un simple tutoriel. Son écriture est celle du joueur, ce que le
+  monde 9 lui fait comprendre.
+
+
+  Personnages clés
+
+       Personnage      Rôle                       Vérité
+
+       Le joueur       Voyageur sans mémoire      C'est l'Artisan, pris dans un cycle
+
+       L'Artisan       Auteur du Journal          Il écrit pour son futur lui-même
+
+
+
+
+                                                                                                  Page 1 of 4
+Lore
+
+
+
+
+       Personnage        Rôle                      Vérité
+
+       L'Inachevée       Créature enfermée         Elle grandit à chaque prison ouverte
+
+       Les Gardiens      Boss des mondes           Anciens apprentis, liés à leur monde
+
+       Le Double         Boss du monde 6           Le souvenir de l'Artisan à l'intérieur de sa prison
+
+       Le Colporteur     Marchand de la Surface    Dernier témoin du cycle précédent
+
+
+
+
+  Histoire des mondes
+
+       Monde       Pourquoi il existe              Peuple             Histoire du boss
+
+       Surface     Couche extérieure, ou prison    Villageois         Le Gardien du bloc teste ceux
+                   la plus visible                                    qui veulent entrer
+
+       1           Une forêt vivante étouffe la    Cueilleurs         La Reine des spores était la
+                   créature                                           jardinière de l'Artisan
+
+       2           Une forge géante alimente       Mineurs libres     Le Titan de cendre était son
+                   toutes les prisons                                 maître forgeron
+
+       3           Un système de verrous retient   Prisonniers        Le Grand Geôlier a oublié qui il
+                   les âmes                                           devait garder
+
+       4           Le vent empêche toute chose     Gens du phare      Le Roi des tempêtes était le
+                   de se fixer                                        messager entre les mondes
+
+       5           La créature se nourrissait de   Silencieux         Le Mangeur de lumière a tout
+                   la lumière                                         avalé pour la priver
+
+       6           Une prison inversée renvoie     Reflets libres     Ton Double garde les
+                   chaque geste                                       souvenirs de l'Artisan
+
+       7           La pression écrase ce qui       Plongeurs          Le Léviathan de pression était
+                   cherche à grandir                                  un plongeur transformé
+
+       8           Le temps use la créature sans   Éphémères          Le Maître des saisons a vu
+                   repos                                              passer tous les cycles
+
+       9           Le terrain déplace              Ancrés             Le Cœur du terrain est le
+                   constamment le dernier                             corps même du verrou
+                   verrou
+
+
+
+
+                                                                                                   Page 2 of 4
+Lore
+
+
+
+
+       Monde      Pourquoi il existe                  Peuple              Histoire du boss
+
+       10         Atelier de l'Artisan, préservé à    Anciens             Le boss gigogne est
+                  taille géante                       apprentis           l'Inachevée, vêtue des dix
+                                                                          prisons
+
+
+
+
+  Progression des révélations
+
+       Moment         Ce que croit le joueur              Indice
+
+       Mondes 1 à     Il explore d'anciennes ruines       Fresques et plans de l'Artisan
+       3
+
+       Mondes 4 à     Il découvre un danger               L'Artisan a tenté d'arrêter le voyageur, et le
+       6                                                  Double connaît son passé
+
+       Mondes 7 à     Il comprend qu'il libère une        Les noyaux servent de verrous
+       8              créature
+
+       Monde 9        Il découvre sa propre identité      L'écriture du Journal est la sienne
+
+       Monde 10       Il doit choisir                     L'Inachevée propose de cesser le cycle
+
+
+
+
+  Monde 0 et troisième fin
+  Le monde 0 se trouve dans la plus petite poupée, celle que l'Artisan a cachée dans les dix
+  mondes. Il contient sa chambre, intacte, avec le premier Parchemin et une poupée vide à
+  taille humaine.
+
+  Le joueur y apprend que l'Inachevée n'existait pas avant lui : elle est la partie de l'Artisan
+  qui refusait de finir son œuvre. La troisième fin consiste à poser les outils, à laisser une
+  œuvre inachevée et à rompre le cycle.
+
+
+  Fins
+
+       Fin             Scène                                      Conséquence
+
+       Sceller         Le joueur referme les dix mondes           La paix revient, mais il se réveillera un
+                       sur l'Inachevée                            jour avec un nouveau Parchemin
+
+
+
+                                                                                                        Page 3 of 4
+Lore
+
+
+
+
+       Fin            Scène                                   Conséquence
+
+       Absorber       Il absorbe la créature                  Il devient le monstre suivant, et les
+                                                              mondes deviennent les siens
+
+       Poser les      Il accepte de ne pas finir              Le cycle s'arrête et le Parchemin final
+       outils                                                 est blanc
+
+
+
+
+  Pages du Journal
+  Chaque monde contient 5 pages, soit 50 au total, réparties dans ses structures.
+
+
+       Page   Type                     Fonction
+
+       1      Note de chantier         Explique le but du monde
+
+       2      Portrait d'un apprenti   Raconte qui était le boss
+
+       3      Observation              Donne un conseil de combat ou de survie
+
+       4      Page codée               Contient une partie du chemin vers le monde 0
+
+       5      Lettre au voyageur       Fait progresser la révélation principale
+
+
+
+
+                                                                                                      Page 4 of 4
+

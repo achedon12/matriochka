@@ -1,0 +1,455 @@
+Règles détaillées
+
+
+
+
+  Règles détaillées
+  Cet onglet fixe les règles validées pour commencer le développement. Leurs valeurs
+  seront ajustées pendant les tests et resteront configurables.
+
+
+  Règle propre à chaque monde
+
+     Monde          Système      Fonctionnement         Seuils ou rythme        Réponse du joueur
+
+     1              Toxine 0 à   +1 par seconde en      50 : lenteur, 75 :      Masque (gain divisé
+                    100          zone toxique, +5 par   faiblesse, 100 : 1 PV   par 2), antidote
+                                 coup empoisonné, -2    perdu par seconde
+                                 par seconde hors
+                                 zone
+
+     2              Chaleur 0    +1 toutes les 2        50 : faim doublée,      Combinaison (gain
+                    à 100        secondes en            75 : minage ralenti,    divisé par 2), eau de
+                                 profondeur, +1 par     100 : 1 PV perdu        refroidissement
+                                 seconde près de la     par seconde
+                                 lave, -2 par seconde
+                                 au frais
+
+     3              Verrous      Les murs sont          Salles mobiles          Cartes, crochetage,
+                                 incassables, une clé   toutes les 5            pièges
+                                 s'utilise une fois     minutes,
+                                                        annoncées 10
+                                                        secondes avant
+
+     4              Vent et      Les rafales poussent   Rafale toutes les       Planeur, grappin,
+                    foudre       le joueur de 3 à 8     30 secondes,            zones abritées
+                                 blocs                  annonce de 2
+                                                        secondes, foudre
+                                                        annoncée 3
+                                                        secondes avant
+
+     5              Lumière et   Les lumières           Bruit 0 à 100 : les     Lanterne de 20
+                    bruit        normales durent 60     mobs viennent à         minutes, sonar,
+                                 secondes, chaque       partir de 50            baume
+                                 action bruyante
+                                 augmente le bruit
+
+
+
+
+                                                                                                    Page 1 of 9
+Règles détaillées
+
+
+
+
+     Monde          Système        Fonctionnement              Seuils ou rythme      Réponse du joueur
+
+     6              Gravité        La direction de la          Changement            Bottes pendant 30
+                                   gravité change selon        toutes les 90         secondes,
+                                   la zone                     secondes,             stabilisateur
+                                                               annonce de 5
+                                                               secondes
+
+     7              Oxygène        La pression dépend          Oxygène de 5          Scaphandre, capsule,
+                    et             de la profondeur            minutes en            grotte à air
+                    pression                                   scaphandre,
+                                                               dégâts au-delà de
+                                                               la profondeur
+                                                               autorisée
+
+     8              Temps          Jour et nuit durent 8       Mobs et               Sablier, conserves,
+                    accéléré       minutes, chaque             ressources            préparation
+                                   saison 2 minutes            changent selon la
+                                                               saison
+
+     9              Sol            Des zones de 16 × 16        Toutes les 60         Ancre (rayon 4, 10
+                    mouvant        blocs se déplacent ou       secondes,             minutes), Ancre de
+                                   se referment                annonce de 3          terrain (rayon 16,
+                                                               secondes              permanente)
+
+     10             Synthèse       9 zones reprennent          Selon la zone         Ancien équipement
+                                   chacune une règle                                 de chaque monde
+                                   des mondes 1 à 9
+
+
+
+
+  Effets entre les échelles
+  Les effets touchent un rayon de 8 blocs autour du bloc-monde. Quand personne n'est à
+  l'intérieur, ils sont calculés à partir de l'état enregistré, sans charger le monde.
+
+
+     Monde          De l'intérieur vers l'extérieur               De l'extérieur vers l'intérieur
+
+     1              Nuages de spores, plantes qui poussent        L'eau autour réduit la toxine pendant 5
+                    plus vite                                     minutes
+
+     2              Chaleur, risque de feu, four voisin plus      La glace autour réduit la chaleur
+                    rapide                                        pendant 5 minutes
+
+
+
+
+                                                                                                       Page 2 of 9
+Règles détaillées
+
+
+
+
+     Monde          De l'intérieur vers l'extérieur              De l'extérieur vers l'intérieur
+
+     3              Grincements, portes voisines qui se          Un signal de redstone ouvre une zone
+                    verrouillent                                 verrouillée pendant 1 minute
+
+     4              Vent qui pousse les entités, charge d'un     La météo extérieure modifie les
+                    paratonnerre                                 tempêtes intérieures
+
+     5              Lumières proches aspirées                    Des lumières autour du bloc prolongent
+                                                                 la lanterne de 5 minutes
+
+     6              Objets au sol qui flottent                   Tourner le bloc change l'orientation
+                                                                 d'une zone
+
+     7              Fuite d'eau, bulles                          Assecher la zone autour réduit la
+                                                                 pression pendant 5 minutes
+
+     8              Cultures proches accélérées,                 Un cycle de redstone choisit la
+                    nourriture qui périt plus vite               prochaine saison
+
+     9              Sol voisin qui tremble et se fissure         Des blocs ancrés autour calment une
+                                                                 zone pendant 5 minutes
+
+     10             Aucun : le joueur est dehors, dans le        Aucun
+                    monde géant
+
+
+
+
+  Blocages de progression
+  Les blocages sont actifs par défaut dans le mod, et une option de configuration peut les
+  retirer. Le modpack ajoutera seulement des réglages plus difficiles.
+
+
+     Élément                   Règle sur la Surface            Levier                Déblocage
+
+     Diamant                   Minerai retiré de la            Modificateur de       Monde 5, puis
+                               génération                      biomes                fragments à
+                                                                                     assembler
+
+     Coffres de                Diamants remplacés par          Modificateur de       Après le monde 5
+     Minecraft                 du fer                          butin
+
+     Villageois                Offres en diamant               Modification des      Après le monde 5
+                               retirées                        échanges
+
+
+
+
+                                                                                                        Page 3 of 9
+Règles détaillées
+
+
+
+
+     Élément                   Règle sur la Surface          Levier               Déblocage
+
+     Enchantements             Table et enclume inactives    Blocage par          Après le monde 2
+                                                             progression
+
+     Nether                    Portail inactif               Blocage par          Après le monde 2
+                                                             progression
+
+     Netherite                 Dépend naturellement          Aucun blocage        Après le monde 5
+                               d'une pioche en diamant       ajouté
+
+     End                       Portail inactif               Blocage par          Après le monde 8
+                                                             progression
+
+     Élytres                   Inutilisables dans les        Règle de             Après le monde 8
+                               mondes 4, 6 et 9              dimension
+
+     Lits                      Inutilisables dans les        Règle de             Remplacés par le
+                               mondes                        dimension            Berceau d'âme
+
+
+
+
+  Butin et apparition
+
+     Source                      Butin
+
+     Mob normal                  Ressource commune 60 %, ressource rare 15 %
+
+     Mob élite                   Ressource rare 100 %, ressource épique 25 %, 5
+                                 âmes
+
+     Colonne marcheuse           Cœur de terrain 5 %, en plus du butin normal
+                                 d'élite
+
+     Coffre de structure         2 à 4 ressources, 10 âmes
+
+     Boss                        Noyau, 100 âmes, ressource du monde
+
+
+          Mobs normaux : 12 mobs hostiles au maximum dans un rayon de 32 blocs autour d'un
+          joueur.
+          Mobs élites : une apparition toutes les 5 minutes au plus par zone, jamais à moins de
+          32 blocs du Seuil.
+          Coffres : un coffre vidé ne se remplit plus, pour limiter le farm.
+
+
+
+
+                                                                                                     Page 4 of 9
+Règles détaillées
+
+
+
+
+  Sources d'âme
+  L'objectif de 300 âmes par monde se répartit ainsi.
+
+
+     Source                              Calcul       Âmes
+
+     Boss                                1 × 100      100
+
+     Coffres de structures               10 × 10      100
+
+     Mobs élites                         10 × 5       50
+
+     Objets rares purifiés ou dévorés    5 × 10       50
+
+     Total                                            300
+
+
+  Seules les âmes obtenues à l'Autel modifient le karma. Les boss, coffres et élites donnent
+  des âmes neutres.
+
+
+  Poupée de vie
+          Revie : le joueur revient avec 50 % de ses PV et 5 secondes d'invulnérabilité.
+          Limite : une seule revie toutes les 60 secondes, pour éviter d'enchaîner les couches.
+          Recharge gratuite : une couche revient à chaque boss vaincu.
+          Recharge à l'Autel : une couche coûte 50 âmes et 4 ressources rares du monde en
+          cours.
+
+
+
+  Recettes
+  Une Graine demande son noyau et ses ressources, et se fabrique à l'Établi matriciel.
+
+
+     Graine         Noyau      Ressources                                Terre de plantation
+
+     Monde 1        Gardien    16 fer, 16 bûches                         Terre donnée par le
+                                                                         Gardien
+
+     Monde 2        Reine      8 sporite, 16 spores                      Terre du monde 1
+
+     Monde 3        Titan      8 lingots de cendre, 16 roches ardentes   Terre du monde 2
+
+     Monde 4        Geôlier    8 clés, 8 fragments scellés               Terre du monde 3
+
+
+
+
+                                                                                               Page 5 of 9
+Règles détaillées
+
+
+
+
+     Graine           Noyau           Ressources                                   Terre de plantation
+
+     Monde 5          Roi             8 essences de tempête, 8 cristaux            Terre du monde 4
+                                      célestes
+
+     Monde 6          Mangeur         8 éclats d'ombre, 4 fragments de             Terre du monde 5
+                                      diamant
+
+     Monde 7          Double          8 alliages instables, 4 cristaux inversés    Terre du monde 6
+
+     Monde 8          Léviathan       4 perles de pression, 8 sels des             Terre du monde 7
+                                      profondeurs
+
+     Monde 9          Maître          8 sables temporels, 4 fragments de           Terre du monde 8
+                                      saison
+
+     Monde            Terrain         1 cœur de terrain, Clé de la dernière        Terre du monde 9
+     10                               poupée
+
+
+  Pour l'équipement, une arme demande 8 ressources de base, un outil 6, et une armure
+  complète 24. La fabrication se fait à la station du monde.
+
+
+     Monde          Ressource de base                               Station
+
+     1              Sporite pour l'arme, chitine pour l'armure      Cuve de spores
+
+     2              Lingot de cendre                                Fonderie de cendre
+
+     3              Fragment scellé                                 Table du Geôlier
+
+     4              Cristal céleste                                 Forge à foudre
+
+     5              Éclat d'ombre                                   Autel obscur
+
+     6              Alliage instable                                Inverseur
+
+     7              Perle de pression                               Presse abyssale
+
+     8              Sable temporel                                  Atelier du temps
+
+     9              Fragment de terrain                             Ancre de terrain
+
+     10             Fil d'Artisan                                   Métier final
+
+
+
+
+                                                                                                         Page 6 of 9
+Règles détaillées
+
+
+
+
+  Nourriture
+  Chaque monde propose un plat qui aide contre sa règle.
+
+
+     Monde          Plat                  Effet
+
+     1              Bouillie de racines   Toxine ralentie pendant 5 minutes
+
+     2              Pain de glace         Chaleur ralentie pendant 5 minutes
+
+     3              Ration de cellule     Satité durable
+
+     4              Fruit de nuage        Chutes réduites pendant 3 minutes
+
+     5              Champignon muet       Bruit réduit pendant 5 minutes
+
+     6              Pomme retournée       Stabilité pendant 30 secondes
+
+     7              Algue d'apnée         Oxygène prolongé de 1 minute
+
+     8              Conserve de saison    Protège de la saison en cours
+
+     9              Pain d'ancrage        Moins de recul pendant 5 minutes
+
+     10             Festin de l'atelier   Regroupe deux effets au choix
+
+
+
+
+  Modes de difficulté
+  Le mode se choisit à la création du monde, et le mode Normal reste la référence
+  d'équilibrage.
+
+
+     Mode                  Dégâts          Mort                   Autres règles
+                           adverses
+
+     Histoire              ×0,7            Inventaire             Pour découvrir le contenu
+                                           conservé
+
+     Normal                ×1              Coffre de mort         Règles du document
+
+     Cauchemar             ×1,3            Coffre de mort         Une seule charge par Berceau
+                                                                  d'âme
+
+     Hardcore              ×1,3            Mort définitive        Un monde cassé est supprimé
+
+
+
+
+                                                                                                 Page 7 of 9
+Règles détaillées
+
+
+
+
+  Nouveau Cycle
+  Après une fin, le joueur peut relancer un Nouveau Cycle, ce qui prolonge le jeu et
+  correspond au lore.
+
+          Conservé : base, équipement, classes, succès et Journal.
+          Réinitialisé : boss, quêtes et karma.
+          Ennemis : vie ×2 et dégâts ×1,5, avec une mutation par boss.
+          Récompenses : titres, cosmétiques et numéro de Cycle.
+
+
+  Accessibilité
+          Tremblements, flashs et ralentis peuvent être désactivés.
+          Les sons importants, surtout au monde 5, ont un indicateur visuel optionnel.
+          Les couleurs de danger gardent aussi une forme ou une icône.
+          La taille du texte du Journal est réglable.
+
+
+  Langues
+  Le mod sort en français et en anglais. Tous les textes passent par des fichiers de
+  traduction dès le P0, pour ajouter facilement d'autres langues.
+
+
+  Commandes d'administration
+
+     Commande                         Effet
+
+      /matriochka groupe              Gère les groupes
+
+      /matriochka progression         Affiche ou modifie la progression
+
+      /matriochka monde               Liste, répare, déplace ou réinitialise un monde
+
+      /matriochka boss                Réinitialise ou invoque un boss pour les tests
+
+      /matriochka karma               Affiche ou modifie le karma
+
+      /matriochka debug               Affiche les parcelles, règles et performances
+
+
+
+
+                                                                                         Page 8 of 9
+Règles détaillées
+
+
+
+
+  Publication
+          Plateformes : Modrinth et CurseForge en version Fabric, avec un test de chaque
+          version sur Lunar Client, une bande-annonce, un wiki et un Discord.
+          Parcours : alpha privée sur les mondes 1 à 3, bêta fermée jusqu'au monde 10, puis
+          version publique 1.0 avec les 10 mondes.
+          Nom : aucune recherche n'a trouvé de mod appelé Matriochka, mais une vérification
+          formelle reste nécessaire.
+          Licence recommandée : code sous licence MIT, modèles, textures et sons tous droits
+          réservés.
+
+
+  Sources vérifiées
+          Versions de Minecraft Java, consultée le 5 novembre 2026.
+          Fiche de compatibilité GeckoLib, consultée le 5 novembre 2026.
+          DynamicDimensions, bibliothèque de dimensions à la volée écartée, car la branche
+          visible vise Minecraft 1.21.
+          Mods CurseForge sur Lunar Client, consultée le 5 novembre 2026.
+          Modpacks Modrinth sur Lunar Client, consultée le 5 novembre 2026.
+
+
+
+
+                                                                                              Page 9 of 9
+

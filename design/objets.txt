@@ -1,0 +1,431 @@
+Objets
+
+
+
+
+  Objets
+  Chaque monde apporte ses ressources, son équipement et son noyau. Les statistiques
+  d'armes et d'armures reprennent la table d'équilibrage du joueur, et les noms restent
+  provisoires.
+
+
+
+  Règles générales
+         Âme : Commun 1, Rare 10, Épique 30, Légendaire 100.
+         Noyaux : ils ne peuvent être ni purifiés, ni dévorés, ni perdus dans la lave.
+         Armes, outils et armures : ils reçoivent une classe aléatoire au craft, modifiable avec
+         une Poupée du hasard.
+         Armures : les statistiques indiquées sont celles de l'ensemble complet.
+         PV : les PV indiqués s'ajoutent aux 20 PV de base du joueur.
+
+
+  Surface et objets communs
+
+     Objet            Type              Rareté        Effet                      Obtention
+
+     Parchemin de     Guide             Sans âme      Explique le mod et         Première
+     l'artisan                                        devient le Journal         connexion
+
+     Journal de       Guide             Sans âme      Regroupe histoire,         Gardien du bloc
+     l'artisan                                        objectifs et quêtes
+
+     Noyau du         Noyau             Légendaire    Ouvre la Graine du         Gardien du bloc
+     Gardien                                          monde 1
+
+     Poupée de        Protection        Légendaire    Offre 1 à 3 revies selon   Reine des spores
+     vie                                              la progression
+
+     Berceau          Bloc              Rare          Réapparition dans un       Établi matriciel
+     d'âme                                            monde, 3 charges
+
+     Fil de retour    Consommable       Commun        Ramène au bloc-monde       Établi matriciel
+
+     Poupée fêlée     Bloc              Sans âme      Conserve l'accès à un      Bloc-monde
+                                                      monde cassé                cassé
+
+
+
+
+                                                                                                Page 1 of 8
+Objets
+
+
+
+
+     Objet         Type          Rareté       Effet                     Obtention
+
+     Terre de      Bloc          Commun       Se bêche pour planter     Gardien du bloc,
+     monde                                    la Graine du monde        puis chaque
+                                              suivant                   monde
+
+     Poupée du     Consommable   Rare         Change aléatoirement      Établi matriciel
+     hasard                                   la classe d'un objet
+
+
+
+
+  Monde 1
+
+     Objet         Type          Rareté       Effet                     Obtention
+
+     Spores        Ressource     Commun       Base des antidotes        Sporelins, Porte-
+                                                                        spores
+
+     Racines       Ressource     Commun       Bois vivant, base des     Rampeurs de
+                                              recettes du monde         racines
+
+     Sporite       Minerai       Rare         Nouveau minerai du        Filons des
+                                              monde 1                   grottes humides
+
+     Chitine       Ressource     Rare         Armure du monde           Gardien de
+                                                                        chitine
+
+     Antidote      Consommable   Commun       Réduit la toxine          Cuve de spores
+
+     Masque        Équipement    Rare         Ralentit la montée de     Cuve de spores
+     filtrant                                 toxine
+
+     Épée de       Arme          Rare         7 dégâts                  Sporite
+     sporite
+
+     Armure de     Armure        Rare         Armure 16, robustesse 1   Chitine
+     chitine
+
+     Noyau de la   Noyau         Légendaire   Ouvre la Graine du        Reine des spores
+     Reine                                    monde 2
+
+
+
+
+                                                                                       Page 2 of 8
+Objets
+
+
+
+
+  Monde 2
+
+     Objet                 Type           Rareté       Effet                    Obtention
+
+     Roche ardente         Ressource      Commun       Combustible              Salamandres,
+                                                       puissant                 Golems
+
+     Minerais géants       Ressource      Rare         Blocs d'un seul filon    Filons vivants
+                                                       à grande valeur
+
+     Lingot de cendre      Ressource      Rare         Base de                  Fonderie de
+                                                       l'équipement du          cendre
+                                                       monde
+
+     Eau de                Consommable    Commun       Réduit la chaleur        Fonderie de
+     refroidissement                                                            cendre
+
+     Foreuse               Outil          Épique       Mine une zone et         Fonderie de
+                                                       consomme du              cendre
+                                                       combustible
+
+     Marteau de            Arme           Rare         9 dégâts                 Fonderie de
+     cendre                                                                     cendre
+
+     Combinaison           Armure         Rare         Armure 17,               Fonderie de
+     thermique                                         robustesse 2,            cendre
+                                                       ralentit la chaleur
+
+     Noyau du Titan        Noyau          Légendaire   Ouvre la Graine du       Titan de
+                                                       monde 3                  cendre
+
+
+
+
+  Monde 3
+
+     Objet              Type           Rareté      Effet                       Obtention
+
+     Clé de donjon      Ressource      Rare        Ouvre une zone et sert      Geôliers,
+                                                   à la Graine du monde 4      serrures
+                                                                               vivantes
+
+     Fragment           Ressource      Rare        Sert aux pièges et à        Sentinelles,
+     scellé                                        l'équipement                Bourreaux
+
+
+
+
+                                                                                              Page 3 of 8
+Objets
+
+
+
+
+     Objet             Type          Rareté       Effet                      Obtention
+
+     Carte du          Outil         Commun       Montre une partie du       Table du Geôlier
+     labyrinthe                                   niveau actuel
+
+     Kit de            Outil         Commun       Ouvre une serrure          Table du Geôlier
+     crochetage                                   ordinaire
+
+     Piège portatif    Consommable   Commun       Immobilise un mob          Table du Geôlier
+
+     Lame du           Arme          Rare         11 dégâts                  Table du Geôlier
+     Geôlier
+
+     Armure de         Armure        Rare         Armure 18, robustesse      Table du Geôlier
+     Geôlier                                      3, +2 PV
+
+     Noyau du          Noyau         Légendaire   Ouvre la Graine du         Grand Geôlier
+     Geôlier                                      monde 4
+
+
+
+
+  Monde 4
+
+     Objet             Type        Rareté     Effet                         Obtention
+
+     Membrane de       Ressource   Commun     Toile du planeur              Raies du vent
+     raie
+
+     Essence de        Ressource   Rare       Énergie de la Forge à         Tempêtes,
+     tempête                                  foudre                        Oiseaux-tempête
+
+     Cristal céleste   Minerai     Rare       Sert à l'équipement et à la   Îles hautes
+                                              Graine du monde 5
+
+     Planeur           Outil       Épique     Permet de planer entre        Forge à foudre
+                                              les îles
+
+     Grappin           Outil       Rare       Tire le joueur vers une       Forge à foudre
+                                              surface
+
+     Lance de          Arme        Rare       13 dégâts                     Forge à foudre
+     foudre
+
+     Armure            Armure      Rare       Armure 19, robustesse 4,      Forge à foudre
+     céleste                                  +4 PV
+
+
+
+
+                                                                                            Page 4 of 8
+Objets
+
+
+
+
+     Objet           Type          Rareté         Effet                         Obtention
+
+     Noyau du Roi    Noyau         Légendaire     Ouvre la Graine du monde      Roi des tempêtes
+                                                  5
+
+
+
+
+  Monde 5
+
+     Objet           Type            Rareté         Effet                          Obtention
+
+     Éclat d'ombre   Ressource       Rare           Base de l'équipement du        Rôdeurs,
+                                                    monde                          Dévoreurs
+
+     Fragment de     Minerai         Épique         Premier accès au diamant,      Grottes
+     diamant                                        4 fragments donnent 1          profondes
+                                                    diamant
+
+     Lanterne        Outil           Épique         Lumière durable,               Autel obscur
+     solaire                                        alimentée par l'essence de
+                                                    tempête
+
+     Sonar           Outil           Rare           Indique les sons proches       Autel obscur
+
+     Baume de        Consommable     Commun         Réduit le bruit du joueur      Autel obscur
+     silence
+
+     Lame            Arme            Épique         16 dégâts                      Autel obscur
+     d'ombre
+
+     Armure          Armure          Épique         Armure 20, robustesse 6,       Autel obscur
+     nocturne                                       +6 PV
+
+     Noyau du        Noyau           Légendaire     Ouvre la Graine du monde       Mangeur de
+     Mangeur                                        6                              lumière
+
+
+
+
+  Monde 6
+
+     Objet           Type             Rareté         Effet                        Obtention
+
+     Alliage         Ressource        Rare           Base de l'équipement du      Marcheurs,
+     instable                                        monde                        sphères
+
+
+
+
+                                                                                               Page 5 of 8
+Objets
+
+
+
+
+     Objet             Type          Rareté       Effet                        Obtention
+
+     Cristal inversé   Ressource     Épique       Sert à l'Inverseur et à la   Reflets,
+                                                  Graine du monde 7            miroirs
+
+     Bottes de         Équipement    Épique       Stabilise la gravité         Inverseur
+     gravité                                      pendant un temps limité
+
+     Stabilisateur     Consommable   Commun       Annule une inversion         Inverseur
+
+     Lame miroir       Arme          Épique       19 dégâts                    Inverseur
+
+     Armure miroir     Armure        Épique       Armure 22, robustesse 8,     Inverseur
+                                                  +8 PV
+
+     Noyau du          Noyau         Légendaire   Ouvre la Graine du           Ton Double
+     Double                                       monde 7
+
+
+
+
+  Monde 7
+
+     Objet             Type          Rareté       Effet                        Obtention
+
+     Sel des           Ressource     Rare         Protège l'équipement de      Chasseurs,
+     profondeurs                                  la pression                  bancs de lames
+
+     Perle de          Ressource     Épique       Sert au scaphandre et à      Méduses,
+     pression                                     la Graine du monde 8         crabes-cloches
+
+     Capsule           Consommable   Commun       Rend de l'oxygène            Presse
+     d'oxygène                                                                 abyssale
+
+     Propulseur        Outil         Épique       Accélère les                 Presse
+                                                  déplacements sous l'eau      abyssale
+
+     Trident des       Arme          Épique       23 dégâts                    Presse
+     fosses                                                                    abyssale
+
+     Scaphandre        Armure        Épique       Armure 24, robustesse        Presse
+                                                  10, +12 PV, résiste à la     abyssale
+                                                  pression
+
+     Noyau du          Noyau         Légendaire   Ouvre la Graine du           Léviathan de
+     Léviathan                                    monde 8                      pression
+
+
+
+
+                                                                                            Page 6 of 8
+Objets
+
+
+
+
+  Monde 8
+
+     Objet         Type           Rareté        Effet                      Obtention
+
+     Sable         Ressource      Rare          Base de l'équipement du    Vieillards,
+     temporel                                   monde                      Ombres
+
+     Fragment de   Ressource      Épique        Sert à la Graine du        Créatures
+     saison                                     monde 9                    saisonnières
+
+     Sablier       Outil          Épique        Ralentit le cycle du       Atelier du
+                                                monde pendant un           temps
+                                                temps limité
+
+     Conserve de   Consommable    Commun        Protège contre la saison   Atelier du
+     saison                                     en cours                   temps
+
+     Faux des      Arme           Épique        28 dégâts                  Atelier du
+     saisons                                                               temps
+
+     Armure        Armure         Épique        Armure 26, robustesse      Atelier du
+     saisonnière                                12, +16 PV                 temps
+
+     Noyau du      Noyau          Légendaire    Ouvre la Graine du         Maître des
+     Maître                                     monde 9                    saisons
+
+
+
+
+  Monde 9
+
+     Objet          Type           Rareté        Effet                     Obtention
+
+     Fragment de    Ressource      Rare          Base de l'équipement      Mobs du
+     terrain                                     du monde                  monde
+
+     Cœur de        Ressource      Légendaire    Sert à la Graine du       Colonnes
+     terrain                                     monde 10                  marcheuses
+
+     Ancre          Consommable    Rare          Stabilise un petit        Ancre de
+                                                 groupe de blocs           terrain
+
+     Bottes         Équipement     Épique        Empêchent les chutes      Ancre de
+     d'accroche                                  dues au sol mouvant       terrain
+
+
+
+
+                                                                                          Page 7 of 8
+Objets
+
+
+
+
+     Objet             Type           Rareté        Effet                      Obtention
+
+     Masse             Arme           Légendaire    33 dégâts                  Ancre de
+     sismique                                                                  terrain
+
+     Armure de         Armure         Légendaire    Armure 28, robustesse      Ancre de
+     roche vivante                                  14, +20 PV                 terrain
+
+     Clé de la         Clé            Sans âme      Sert à la Graine du        Cœur du
+     dernière                                       monde 10                   terrain
+     poupée
+
+     Noyau du          Noyau          Légendaire    Ouvre la Graine du         Cœur du
+     Terrain                                        monde 10                   terrain
+
+
+
+
+  Monde 10
+
+     Objet             Type        Rareté        Effet                          Obtention
+
+     Fil d'Artisan     Ressource   Rare          Base de l'équipement final     Mobs du
+                                                                                monde
+
+     Éclat d'Artisan   Ressource   Légendaire    Améliore l'équipement final    Rôdeur-
+                                                                                colosse
+
+     Lame de           Arme        Légendaire    40 dégâts                      Métier final
+     l'Artisan
+
+     Armure de         Armure      Légendaire    Armure 30, robustesse 16,      Métier final
+     l'Artisan                                   +24 PV
+
+     Poupées           Secret      Sans âme      Emboîtées, elles ouvrent le    Une par
+     cachées                                     monde 0                        monde
+
+
+
+
+  Parcours des objets
+  Chaque monde prépare le suivant : le masque filtrant apprend à gérer une jauge, la
+  combinaison thermique prépare les profondeurs, et le grappin prépare la gravité instable.
+  Le monde 10 demande de ressortir ces objets au moins une fois.
+
+
+
+
+                                                                                            Page 8 of 8
+

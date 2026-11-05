@@ -1,0 +1,415 @@
+Bestiaire
+
+
+
+
+  Bestiaire
+  Le mod compte 50 mobs, soit 5 par monde, et 11 boss. Les PV et dégâts ci-dessous sont les
+  valeurs finales en jeu, après multiplicateurs, et serviront de base à l'équilibrage. Les noms
+  restent provisoires.
+
+
+
+  Lecture des tableaux
+            Vitesse : chaque titre de monde indique le multiplicateur de vitesse d'attaque.
+            Élite : le dernier mob de chaque monde est rare et demande une vraie préparation.
+            Gigogne : à sa mort, le mob libère une version plus petite, plus rapide et plus faible.
+            Butin : les ressources sont décrites dans l'onglet Objets.
+
+
+
+
+                                                                                                  Page 1 of 9
+Bestiaire
+
+
+
+
+  Boss
+
+    Monde   Boss                 PV       Coup        Signature               Récompenses
+                                          fort
+
+    Surface Gardien du bloc      300      12          Blocs arrachés au sol   Noyau, plans de l'Établi matriciel,
+                                                                              première Terre de monde
+
+    1       Reine des spores     500      12          Cocon protégé par       Noyau, couche de poupée de vie
+                                                      des nœuds
+
+    2       Titan de cendre      675      14,4        Armure qui fond         Noyau, plans des coffres
+                                                                              gigognes
+
+    3       Grand Geôlier        911      17,3        Arène qui se referme    Noyau, poupée-refuge
+
+    4       Roi des tempêtes     1 230    20,7        Îlots détruits          Noyau, plans des armures à
+                                                                              couches
+
+    5       Mangeur de           1 661    24,9        Combat dans le noir     Noyau, couche de poupée de vie
+            lumière
+
+    6       Ton Double           2 242    29,9        Copie ton               Noyau, mutations de boss
+                                                      équipement
+
+    7       Léviathan de         3 027    35,8        Aspiration vers les     Noyau, agrandissement du refuge
+            pression                                  profondeurs
+
+    8       Maître des saisons   4 086    43          Saisons superposées     Noyau, couche de poupée de vie
+
+    9       Cœur du terrain      5 516    51,6        Sol qui disparaît       Noyau, Clé de la dernière poupée
+
+    10      L'Inachevée, boss    14       61,9        10 enveloppes de 1      Choix de la fin
+            gigogne              894                  489 PV
+
+
+
+  Rythme des combats
+  Chaque attaque garde la structure annonce, exécution et ouverture. Plus le monde est
+  avancé, plus l'annonce et l'ouverture sont courtes.
+
+
+     Mondes                      Annonce         Ouverture
+
+     Surface et mondes 1 à 3     1,5 s           3s
+
+     Mondes 4 à 6                1s              2,5 s
+
+     Mondes 7 à 9                0,75 s          2s
+
+     Monde 10                    0,6 s           1,5 s
+
+
+
+
+                                                                                                             Page 2 of 9
+Bestiaire
+
+
+
+
+  La même attaque revient au plus tôt après 4 secondes pour une attaque légère, 8
+  secondes pour une attaque moyenne et 20 secondes pour une signature.
+
+
+  Fiches d'attaques
+  Les boss changent de phase à 66 % et 33 % de leurs PV. Le Gardien du bloc change à 50
+  %, et le boss final à chaque enveloppe.
+
+
+     Boss            Attaque légère   Attaque          Signature         Dernier
+                                      moyenne                            changement
+
+     Gardien du      Coup de poing    Onde de choc     Bloc arraché et   Se reconstruit
+     bloc                                              lancé             avec l'arène
+
+     Reine des       Racine sous      Nuage toxique    Appel de          Cocon à briser par
+     spores          les pieds                         Sporelins         ses nœuds
+
+     Titan de        Coup de          Projection de    Lave montante     Armure fondue,
+     cendre          marteau          cendre                             cœur exposé
+
+     Grand Geôlier   Chaîne tirée     Cage au sol      Murs mobiles      L'arène devient
+                                                                         une cellule
+
+     Roi des         Bourrasque       Éclair annoncé   Îlot détruit      Combat sur des
+     tempêtes                                                            débris
+
+     Mangeur de      Griffe dans le   Extinction de    Charge            Repérage au son
+     lumière         noir             lumières         silencieuse       seulement
+
+     Ton Double      Copie de ton     Copie de ton     Inversion de      Il adopte ton style
+                     coup             arme             gravité           de jeu
+
+     Léviathan de    Coup de          Charge           Aspiration        Profondeur et
+     pression        queue                                               oxygène aggravés
+
+     Maître des      Coup             Terrain          Changement de     Saisons
+     saisons         saisonnier       saisonnier       saison            superposées
+
+     Cœur du         Vague de sol     Mur vivant       Gouffre           Le sol disparaît par
+     terrain                                                             sections
+
+     L'Inachevée     Attaque de       Attaque de       Attaque de        Dernière forme
+                     l'enveloppe      l'enveloppe      l'enveloppe       minuscule
+
+
+
+
+                                                                                           Page 3 of 9
+Bestiaire
+
+
+
+
+  Monde 1
+  Vitesse d'attaque ×1.
+
+
+     Mob                PV        Dégâts       Comportement                           Butin
+
+     Sporelin           16        3            Attaque en groupe et ajoute de la      Spores
+                                               toxine
+
+     Rampeur de         24        4            Attend sous terre, puis immobilise     Racines
+     racines                                   le joueur
+
+     Fleur-piège        30        5            Immobile, tire le joueur vers elle     Spores, graines
+                                                                                      rares
+
+     Porte-spores       20        3            Fuit et laisse des nuages toxiques     Spores
+
+     Gardien de         40        6            Élite, garde un bouclier à briser de   Chitine
+     chitine                                   dos
+
+
+
+
+  Monde 2
+  Vitesse d'attaque ×1,06.
+
+
+     Mob                     PV       Dégâts     Comportement                          Butin
+
+     Mineur de cendre        30       6          Creuse pour rejoindre le joueur       Lingot de
+                                                                                       cendre
+
+     Filon vivant            49       6          Gigogne, se fend en éclats            Minerais
+                                                                                       géants
+
+     Salamandre de           27       7,2        Traverse la lave et augmente la       Roche ardente
+     roche                                       chaleur
+
+     Forgeron éteint         40       7,2        Chauffe son marteau avant de          Lingot de
+                                                 frapper                               cendre
+
+     Golem de scories        61       8,4        Élite, durcit quand il refroidit      Roche ardente
+
+
+
+
+                                                                                                   Page 4 of 9
+Bestiaire
+
+
+
+
+  Monde 3
+  Vitesse d'attaque ×1,12.
+
+
+     Mob              PV        Dégâts        Comportement                              Butin
+
+     Geôlier          51        7,2           Appelle ses alliés et ferme les           Clé de donjon
+                                              portes
+
+     Sentinelle       55        7,2           Tire des chaînes depuis les               Fragment scellé
+                                              hauteurs
+
+     Serrure          44        5,8           Imite une porte verrouillée               Clé de donjon
+     vivante
+
+     Rat de cachot    18        4,3           Passe sous les grilles, attaque en        Fragment scellé,
+                                              nuée                                      rarement
+
+     Bourreau         82        11,5          Élite, charge et enferme le joueur        Fragment scellé
+
+
+
+
+  Monde 4
+  Vitesse d'attaque ×1,18.
+
+
+     Mob                   PV          Dégâts    Comportement                               Butin
+
+     Raie du vent          44          8,6       Plane et repousse le joueur hors           Membrane de
+                                                 des îles                                   raie
+
+     Oiseau-tempête        39          8,6       Plonge pendant les orages                  Essence de
+                                                                                            tempête
+
+     Gardien d'île         98          10,4      Protège un cristal et frappe en            Cristal céleste
+                                                 zone
+
+     Nuage-mine            34          12,1      Flotte puis explose près du                Essence de
+                                                 joueur                                     tempête
+
+     Harponneur            59          8,6       Élite, attire le joueur vers le vide       Cristal céleste
+     céleste
+
+
+
+
+                                                                                                              Page 5 of 9
+Bestiaire
+
+
+
+
+  Monde 5
+  Vitesse d'attaque ×1,24.
+
+
+     Mob               PV         Dégâts       Comportement                           Butin
+
+     Rôdeur            86         14,5         Chasse au son                          Éclat d'ombre
+     aveugle
+
+     Dévoreur de       73         8,3          Éteint les lumières du joueur          Éclat d'ombre
+     lueur
+
+     Écho              53         10,4         Imite les sons pour attirer le         Fragment de diamant,
+                                               joueur                                 rarement
+
+     Veilleur sans     100        12,4         Reste immobile tant que le joueur      Fragment de diamant
+     yeux                                      est silencieux
+
+     Mère des          146        14,5         Élite, gigogne, libère plusieurs       Éclat d'ombre
+     ombres                                    ombres
+
+
+
+
+  Monde 6
+  Vitesse d'attaque ×1,3.
+
+
+     Mob                    PV          Dégâts    Comportement                                Butin
+
+     Reflet                 90          14,9      Copie la dernière attaque du joueur         Cristal
+                                                                                              inversé
+
+     Marcheur de            117         12,4      Se déplace sur toutes les surfaces          Alliage
+     plafond                                                                                  instable
+
+     Sphère instable        63          19,9      Inverse la gravité autour d'elle à sa       Alliage
+                                                  mort                                        instable
+
+     Arpenteur              135         14,9      Combat la tête en bas et frappe à           Cristal
+     inversé                                      travers les plateformes                     inversé
+
+     Miroir brisé           179         17,4      Élite, gigogne, renvoie une partie des      Cristal
+                                                  dégâts                                      inversé
+
+
+
+
+                                                                                                         Page 6 of 9
+Bestiaire
+
+
+
+
+  Monde 7
+  Vitesse d'attaque ×1,36.
+
+
+     Mob                    PV     Dégâts    Comportement                            Butin
+
+     Chasseur abyssal       157    20,9      Encercle, puis charge par le bas        Sel des
+                                                                                     profondeurs
+
+     Banc de lames          73     11,9      Essaim rapide, consomme                 Sel des
+                                             l'oxygène                               profondeurs
+
+     Méduse de              121    14,9      Augmente la pression autour             Perle de pression
+     pression                                d'elle
+
+     Crabe-cloche           242    17,9      Gigogne, abrite des crabes plus         Perle de pression
+                                             petits
+
+     Murène des             182    23,9      Élite, surgit des parois et saisit le   Perle de pression
+     fosses                                  joueur
+
+
+
+
+  Monde 8
+  Vitesse d'attaque ×1,42.
+
+
+     Mob                     PV     Dégâts    Comportement                            Butin
+
+     Créature                180    21,5      Change d'attaques selon la saison       Fragment de
+     saisonnière                                                                      saison
+
+     Vieillard du sablier    245    17,9      Ralentit les actions autour de lui      Sable temporel
+
+     Ombre du                196    25,1      N'apparaît qu'au changement jour        Sable temporel
+     crépuscule                               et nuit
+
+     Enfant des              114    14,3      Grandit et se renforce pendant le       Fragment de
+     minutes                                  combat                                  saison
+
+     Gardien de l'heure      368    28,7      Élite, répète ses coups selon un        Sable temporel
+                                              cycle
+
+
+
+
+                                                                                                    Page 7 of 9
+Bestiaire
+
+
+
+
+  Monde 9
+  Vitesse d'attaque ×1,48.
+
+
+     Mob                PV    Dégâts   Comportement                          Butin
+
+     Bloc rampant       331   25,8     Se déguise en terrain et se           Fragment de
+                                       déplace                               terrain
+
+     Mimique            287   30,1     Imite un coffre, un minerai ou        Fragment de
+                                       une porte                             terrain
+
+     Dévoreur de        309   21,5     Mange les blocs non ancrés            Fragment de
+     fondations                                                              terrain
+
+     Main de terre      265   34,4     Surgit du sol et attrape le           Fragment de
+                                       joueur                                terrain
+
+     Colonne            496   34,4     Élite, gigogne, tombe et crée         Cœur de terrain,
+     marcheuse                         des gouffres                          rarement
+
+
+
+
+  Monde 10
+  Vitesse d'attaque ×1,54.
+
+
+     Mob                PV    Dégâts   Comportement                                  Butin
+
+     Sporelin géant     447   36,1     Se sépare en groupes de Sporelins             Fil d'Artisan
+
+     Titanide de        536   31       Fait monter la chaleur de la zone             Fil d'Artisan
+     cendre
+
+     Geôlier colossal   596   36,1     Ferme des pans entiers de l'atelier           Fil d'Artisan
+
+     Raie-titan         417   41,3     Pousse le joueur par de grandes               Fil d'Artisan
+                                       rafales
+
+     Rôdeur-colosse     745   41,3     Élite, chasse au son dans le noir             Éclat
+                                                                                     d'Artisan
+
+
+
+
+                                                                                                 Page 8 of 9
+Bestiaire
+
+
+
+
+  Mobs de la Surface
+  Les mobs de Minecraft restent inchangés sur la Surface. Cela préserve les repères du
+  joueur avant le premier monde.
+
+
+
+
+                                                                                         Page 9 of 9
+

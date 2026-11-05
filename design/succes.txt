@@ -1,0 +1,359 @@
+Succès
+
+
+
+
+  Succès
+  Chaque monde possède un onglet de 10 succès, soit 100 au total : 3 de progression, 3
+  d'exploration, 2 de combat ou de défi et 2 cachés. Les noms restent provisoires.
+
+
+  Récompenses
+
+    Type             Récompense
+
+    Progression      5 âmes
+
+    Exploration      10 âmes
+
+    Combat ou défi   Titre
+
+    Caché            Cosmétique
+
+
+  Les succès cachés n'affichent ni leur nom ni leur condition avant d'être obtenus.
+  Compléter les 10 succès d'un monde débloque un bandeau décoratif pour le Journal.
+
+
+
+
+                                                                                         Page 1 of 7
+Succès
+
+
+
+
+  Monde 1
+
+    Type          Succès                 Condition
+
+    Progression   Première Graine        Ouvrir le monde 1
+
+    Progression   Respirer malgré tout   Fabriquer un masque filtrant
+
+    Progression   Reine déchue           Vaincre la Reine des spores
+
+    Exploration   Fresques vivantes      Trouver toutes les fresques du monde
+
+    Exploration   Botaniste              Visiter les 10 types de structures
+
+    Exploration   Toutes les pages       Trouver les 5 pages du Journal
+
+    Combat        Bouclier brisé         Vaincre un Gardien de chitine de dos
+
+    Combat        Le souffle court       Battre la Reine sans masque
+
+    Caché         Ami des fleurs         Se faire attraper par 10 fleurs-pièges
+
+    Caché         Première poupée        Trouver la poupée cachée du monde
+
+
+
+
+  Monde 2
+
+    Type          Succès                 Condition
+
+    Progression   Chaleur tournante      Ouvrir le monde 2
+
+    Progression   Le bon feu             Fondre un lingot de cendre
+
+    Progression   Titan éteint           Vaincre le Titan de cendre
+
+    Exploration   Mineur de fond         Atteindre le filon le plus profond
+
+    Exploration   Prospection totale     Visiter les 10 types de structures
+
+    Exploration   Carnets de chantier    Trouver les 5 pages du Journal
+
+    Combat        Sans refroidir         Vaincre un Golem de scories pendant qu'il chauffe
+
+    Combat        Armure fondue          Battre le Titan sans recevoir de coup de lave
+
+    Caché         Trop gourmand          Faire exploser une Fonderie par surchauffe
+
+
+
+
+                                                                                             Page 2 of 7
+Succès
+
+
+
+
+    Type          Succès                Condition
+
+    Caché         Poupée de cendre      Trouver la poupée cachée du monde
+
+
+
+
+  Monde 3
+
+    Type          Succès             Condition
+
+    Progression   Sous les verrous   Ouvrir le monde 3
+
+    Progression   La bonne clé       Ouvrir une première zone
+
+    Progression   Cellule vide       Vaincre le Grand Geôlier
+
+    Exploration   Plan complet       Compléter une carte du labyrinthe
+
+    Exploration   Visite guidée      Visiter les 10 types de structures
+
+    Exploration   Registre d'écrou   Trouver les 5 pages du Journal
+
+    Combat        Piège retourné     Tuer un mob avec un piège du donjon
+
+    Combat        Cellule ouverte    Battre le Geôlier sans être enfermé
+
+    Caché         Ça ouvre pas       Essayer d'ouvrir une serrure vivante avec une clé
+
+    Caché         Poupée captive     Trouver la poupée cachée du monde
+
+
+
+
+  Monde 4
+
+    Type          Succès                   Condition
+
+    Progression   Le ciel ouvert           Ouvrir le monde 4
+
+    Progression   Sans filet               Faire un premier vol en planeur
+
+    Progression   Roi tombé                Vaincre le Roi des tempêtes
+
+    Exploration   Cartographe des vents    Découvrir les grandes îles
+
+    Exploration   Vue d'en haut            Visiter les 10 types de structures
+
+    Exploration   Papier volé              Trouver les 5 pages du Journal
+
+
+
+
+                                                                                         Page 3 of 7
+Succès
+
+
+
+
+    Type          Succès                     Condition
+
+    Combat        Mal placé                  Envoyer un mob dans le vide au grappin
+
+    Combat        Sous la foudre             Battre le Roi sans être foudroyé
+
+    Caché         Aller simple               Tomber de l'île la plus haute
+
+    Caché         Poupée de nuage            Trouver la poupée cachée du monde
+
+
+
+
+  Monde 5
+
+    Type          Succès               Condition
+
+    Progression   Le noir complet      Ouvrir le monde 5
+
+    Progression   Une lueur            Fabriquer une lanterne solaire
+
+    Progression   Fin du festin        Vaincre le Mangeur de lumière
+
+    Exploration   Première lueur       Trouver un fragment de diamant
+
+    Exploration   À tâtons             Visiter les 10 types de structures
+
+    Exploration   Écrit dans le noir   Trouver les 5 pages du Journal
+
+    Combat        Silence total        Tuer un Rôdeur aveugle sans être repéré
+
+    Combat        Sans flamme          Battre le Mangeur sans lumière artificielle
+
+    Caché         C'était toi          Être attiré par un Écho imitant ta voix
+
+    Caché         Poupée d'ombre       Trouver la poupée cachée du monde
+
+
+
+
+  Monde 6
+
+    Type          Succès                    Condition
+
+    Progression   L'envers                  Ouvrir le monde 6
+
+    Progression   Pieds sur terre           Fabriquer les bottes de gravité
+
+    Progression   Face à toi                Vaincre Ton Double
+
+
+
+
+                                                                                      Page 4 of 7
+Succès
+
+
+
+
+    Type          Succès                  Condition
+
+    Exploration   Marcher au plafond      Traverser une zone inversée
+
+    Exploration   Géométrie impossible    Visiter les 10 types de structures
+
+    Exploration   Lire à l'envers         Trouver les 5 pages du Journal
+
+    Combat        Renvoi                  Tuer un Reflet avec sa propre attaque
+
+    Combat        Sans copie              Battre le Double avec un équipement différent à
+                                          chaque phase
+
+    Caché         Vertige                 Tomber vers le haut pendant 10 secondes
+
+    Caché         Poupée retournée        Trouver la poupée cachée du monde
+
+
+
+
+  Monde 7
+
+    Type          Succès                  Condition
+
+    Progression   Grande profondeur       Ouvrir le monde 7
+
+    Progression   Sous pression           Fabriquer un scaphandre
+
+    Progression   Le silence des fosses   Vaincre le Léviathan
+
+    Exploration   Plongée extrême         Atteindre la fosse la plus profonde
+
+    Exploration   Grand large             Visiter les 10 types de structures
+
+    Exploration   Papier mouillé          Trouver les 5 pages du Journal
+
+    Combat        Banc dispersé           Éliminer un banc de lames entier
+
+    Combat        Dernier souffle         Battre le Léviathan avec moins de 5 % d'oxygène
+
+    Caché         Plaque oubliée          Réparer l'ancien sous-marin
+
+    Caché         Poupée noyée            Trouver la poupée cachée du monde
+
+
+
+
+                                                                                            Page 5 of 7
+Succès
+
+
+
+
+  Monde 8
+
+    Type          Succès                     Condition
+
+    Progression   Temps compté               Ouvrir le monde 8
+
+    Progression   Instant suspendu           Utiliser un sablier
+
+    Progression   Fin de saison              Vaincre le Maître des saisons
+
+    Exploration   Toutes les saisons         Voir les 4 saisons
+
+    Exploration   Heures perdues             Visiter les 10 types de structures
+
+    Exploration   Vieux papiers              Trouver les 5 pages du Journal
+
+    Combat        Pile à l'heure             Vaincre un Gardien de l'heure sur un seul cycle
+
+    Combat        Quatre fois vainqueur      Battre le Maître en le frappant à chaque saison
+
+    Caché         Grand-père                 Voir un Enfant des minutes vieillir complètement
+
+    Caché         Poupée fanée               Trouver la poupée cachée du monde
+
+
+
+
+  Monde 9
+
+    Type          Succès                     Condition
+
+    Progression   Terrain glissant           Ouvrir le monde 9
+
+    Progression   Point fixe                 Fabriquer une Ancre de terrain
+
+    Progression   Ce voyageur, c'était toi   Vaincre le Cœur du terrain
+
+    Exploration   Géomètre                   Découvrir tout le terrain mobile
+
+    Exploration   Sol instable               Visiter les 10 types de structures
+
+    Exploration   Page déplacée              Trouver les 5 pages du Journal
+
+    Combat        Mimique démasquée          Repérer 5 mimiques avant leur attaque
+
+    Combat        Sans ancre                 Battre le Cœur sans poser d'ancre
+
+    Caché         Ma base marche             Voir une construction déplacée par le terrain
+
+
+
+
+                                                                                                Page 6 of 7
+Succès
+
+
+
+
+    Type          Succès                  Condition
+
+    Caché         Poupée mouvante         Trouver la poupée cachée du monde
+
+
+
+
+  Monde 10
+
+    Type          Succès               Condition
+
+    Progression   Tout en haut         Ouvrir le monde 10
+
+    Progression   Métier final         Fabriquer un objet au Métier final
+
+    Progression   Dernier fil          Vaincre l'Inachevée
+
+    Exploration   Une miette           Trouver sa base, vue du monde géant
+
+    Exploration   Atelier complet      Visiter les 10 types de structures
+
+    Exploration   Dernière lettre      Trouver les 5 pages du Journal
+
+    Combat        Dix enveloppes       Briser les 10 enveloppes en un seul essai
+
+    Combat        Tout le chemin       Utiliser un équipement de chaque monde contre
+                                       l'Inachevée
+
+    Caché         Toutes les poupées   Réunir les 10 poupées cachées
+
+    Caché         Poser les outils     Obtenir la troisième fin
+
+
+
+
+                                                                                       Page 7 of 7
+

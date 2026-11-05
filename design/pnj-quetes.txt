@@ -1,0 +1,398 @@
+PNJ et quêtes
+
+
+
+
+  PNJ et quêtes
+  Les PNJ regroupent les villageois de Minecraft et 10 nouveaux peuples, un par monde. Le
+  livre de quêtes propose 64 quêtes totalement facultatives, sur le modèle des quêtes de
+  RLCraft. Les noms restent provisoires.
+
+
+
+  Peuples
+
+     Lieu       Peuple           Habitat              Rôles               Ce qu'ils offrent
+
+     Surface    Villageois       Villages de          Métiers habituels   Échanges
+                                 Minecraft                                classiques, prix liés
+                                                                          au karma
+
+     Surface    Colporteur de    Itinérant            Marchand unique     Objets rares,
+                poupées                                                   rumeurs
+
+     1          Cueilleurs       Village de           Herboriste,         Antidotes, conseils
+                                 cueilleurs           éclaireur,          sur la toxine
+                                                      ancienne
+
+     2          Mineurs libres   Camp de mineurs      Contremaître,       Combustibles, plans
+                                                      forgeron            de foreuse
+
+     3          Prisonniers      Prison, cellules     Serrurier,          Clés, cartes, indices
+                                                      condamné
+
+     4          Gens du          Village flottant     Gardien du phare,   Trajets sûrs,
+                phare                                 cartographe         membranes
+
+     5          Silencieux       Village silencieux   Guide, veilleuse    Baumes, signes à
+                                                                          déchiffrer
+
+     6          Reflets libres   Refuge des           Miroitier, double   Échanges inversés,
+                                 Reflets              amical              stabilisateurs
+
+     7          Plongeurs        Station de           Chef de station,    Capsules, plans de
+                                 pression             mécanicien          propulseur
+
+     8          Éphémères        Camp éphémère,       Vendeur d'heures,   Conserves, objets
+                                 marché du            archiviste          saisonniers
+                                 crépuscule
+
+
+
+
+                                                                                              Page 1 of 8
+PNJ et quêtes
+
+
+
+
+     Lieu        Peuple            Habitat                  Rôles               Ce qu'ils offrent
+
+     9           Ancrés            Fort ancré               Ancreur,            Ancres, cartes du
+                                                            géomètre            terrain
+
+     10          Anciens           Cité des géants          Couturier,          Fil d'Artisan,
+                 apprentis                                  archiviste          souvenirs
+
+
+
+
+  Réaction au karma
+
+     Karma            Attitude                       Prix           Quêtes
+
+     +50 et plus      Très accueillante              -10 %          Quêtes d'entraide
+                                                                    supplémentaires
+
+     +25 à +49        Amicale                        -10 %          Toutes les quêtes normales
+
+     -24 à +24        Neutre                         Normaux        Toutes les quêtes normales
+
+     -49 à -25        Méfiante                       +10 %          Marchés clandestins ouverts
+
+     -50 et           Hostile dans certains          +10 %          Quêtes de pacte supplémentaires
+     moins            villages
+
+
+  Les PNJ ne doivent jamais bloquer une progression obligatoire, même avec un karma très
+  négatif.
+
+
+  Fonctionnement du livre de quêtes
+          Accès : il s'ouvre dans un onglet du Journal après le Gardien du bloc.
+          Présentation : un chapitre par monde, avec des quêtes reliées entre elles.
+          Facultatif : le joueur peut tout ignorer sans jamais être bloqué.
+          Récompenses : elles se récupèrent dans le Journal et restent secondaires.
+          Types : Guide, PNJ, Karma et Défi.
+
+
+
+
+                                                                                                    Page 2 of 8
+PNJ et quêtes
+
+
+
+
+  Surface
+
+     Quête                   Type       Objectif                                  Récompense
+
+     Lire entre les lignes   Guide      Lire les 5 pages du Parchemin             5 Fils de retour
+
+     Le premier Gardien      Guide      Vaincre le Gardien du bloc                10 âmes
+
+     Les doigts dans la      Guide      Fabriquer l'Établi matriciel et une       Berceau d'âme
+     poupée                             Graine
+
+     Le Colporteur           PNJ        Trouver le Colporteur et lui              Cosmétique de cape
+                                        vendre une poupée                         peinte
+
+
+
+
+  Monde 1
+
+     Quête                   Type       Objectif                                     Récompense
+
+     Respirer pour           Guide      Fabriquer un masque filtrant                 3 antidotes
+     commencer
+
+     La Cuve                 Guide      Fermenter une première recette               10 âmes
+
+     Récolte difficile       PNJ        Rapporter 16 spores à l'herboriste           5 antidotes
+
+     Les éclaireurs          PNJ        Retrouver 3 éclaireurs dans la jungle        Carte de la jungle
+     perdus
+
+     La clairière            Karma      Purifier la clairière (+5) ou la brûler      20 âmes ou butin
+                                        pour son butin (-5)                          rare
+
+     Sans filtre             Défi       Tuer un Gardien de chitine sans              Titre « Poumons de
+                                        masque                                       fer »
+
+
+
+
+  Monde 2
+
+     Quête                Type      Objectif                                      Récompense
+
+     Sous contrôle        Guide     Maintenir la Fonderie à la bonne              16 roches ardentes
+                                    température
+
+
+
+
+                                                                                                       Page 3 of 8
+PNJ et quêtes
+
+
+
+
+     Quête               Type     Objectif                                   Récompense
+
+     Le premier filon    Guide    Extraire un minerai géant entier           Foreuse
+
+     La paie des         PNJ      Rapporter 8 lingots de cendre au           20 âmes
+     mineurs                      contremaître
+
+     Puits inondé de     PNJ      Secourir une équipe bloquée                Plans de
+     lave                                                                    refroidissement
+
+     La grève            Karma    Soutenir les mineurs (+5) ou vendre        Prix réduits ou 30
+                                  leurs plans (-5)                           âmes
+
+     Mains nues          Défi     Tuer un Golem de scories sans armure       Titre « Peau de cendre
+                                                                             »
+
+
+
+
+  Monde 3
+
+     Quête              Type     Objectif                                  Récompense
+
+     Tourner la clé     Guide    Ouvrir 3 zones avec des clés              5 kits de crochetage
+
+     Lire le plan       Guide    Compléter une carte du labyrinthe         20 âmes
+
+     Le serrurier       PNJ      Rapporter 5 serrures vivantes             Table du Geôlier
+                                 vaincues                                  améliorée
+
+     Dernier            PNJ      Porter une lettre de cellule en cellule   Page de Journal
+     message                                                               indiquée
+
+     L'évasion          Karma    Libérer les prisonniers (+10) ou          Alliés temporaires ou 40
+                                 réclamer la prime (-10)                   âmes
+
+     Sans clé           Défi     Terminer une salle mobile sans utiliser   Titre « Passe-muraille »
+                                 de clé
+
+
+
+
+  Monde 4
+
+     Quête                      Type     Objectif                                Récompense
+
+     Le premier vol             Guide    Traverser trois îles en planeur         16 membranes
+
+
+
+
+                                                                                                  Page 4 of 8
+PNJ et quêtes
+
+
+
+
+     Quête                       Type        Objectif                               Récompense
+
+     Attraper la foudre          Guide       Charger un objet à la Forge            30 âmes
+
+     Allumer le phare            PNJ         Rallumer 3 phares                      Carte des vents
+
+     La route du                 PNJ         Relever 5 îles                         Boussole des îles
+     cartographe
+
+     L'épave                     Karma       Rendre la cargaison (+5) ou la         Plans ou butin
+                                             garder (-5)                            rare
+
+     Tempête parfaite            Défi        Traverser une tempête sans toucher     Titre « Fils du vent
+                                             le sol                                 »
+
+
+
+
+  Monde 5
+
+     Quête                Type          Objectif                                  Récompense
+
+     Une lumière qui      Guide         Fabriquer une lanterne solaire            16 baumes de
+     dure                                                                         silence
+
+     Entendre le          Guide         Repérer 3 mobs avec le sonar              30 âmes
+     danger
+
+     Les signes           PNJ           Apprendre 5 signes des Silencieux         Traduction des
+                                                                                  fresques
+
+     La veilleuse         PNJ           Accompagner la veilleuse jusqu'au         Cosmétique de
+                                        puits de lumière                          lueur
+
+     Le dernier feu       Karma         Rallumer le village (+5) ou voler sa      Alliés ou 50 âmes
+                                        flamme (-5)
+
+     Noir complet         Défi          Vaincre une Mère des ombres sans          Titre « Yeux fermés »
+                                        lumière
+
+
+
+
+                                                                                                      Page 5 of 8
+PNJ et quêtes
+
+
+
+
+  Monde 6
+
+     Quête                Type    Objectif                                Récompense
+
+     Tomber vers le       Guide   Fabriquer les bottes de gravité         8 stabilisateurs
+     haut
+
+     Le double sens       Guide   Utiliser l'Inverseur                    30 âmes
+
+     Reflet perdu         PNJ     Ramener le double d'un PNJ              Armure miroir teintée
+
+     L'escalier           PNJ     Atteindre le sommet de l'escalier       Page de Journal
+     impossible                                                           indiquée
+
+     Qui est le vrai ?    Karma   Libérer le Reflet (+5) ou prendre sa    Allié ou 50 âmes
+                                  place (-5)
+
+     Sens dessus          Défi    Tuer 5 mobs pendant que la gravité      Titre « Tête en bas »
+     dessous                      est inversée
+
+
+
+
+  Monde 7
+
+     Quête                Type    Objectif                               Récompense
+
+     Sous pression        Guide   Atteindre la première fosse en         8 capsules d'oxygène
+                                  scaphandre
+
+     Comprimer            Guide   Fabriquer une perle comprimée à la     40 âmes
+                                  Presse
+
+     La station se tait   PNJ     Réparer 3 câbles de la station         Propulseur amélioré
+
+     L'équipage de        PNJ     Remonter 3 plaques d'équipage          Cloche de plongée
+     l'épave                                                             décorative
+
+     Le signal            Karma   Secourir les naufragés (+10) ou        Alliés ou 60 âmes
+                                  détourner leur oxygène (-10)
+
+     Un souffle           Défi    Tuer une Murène avec une seule         Titre « Sang-froid »
+                                  capsule
+
+
+
+
+                                                                                                Page 6 of 8
+PNJ et quêtes
+
+
+
+
+  Monde 8
+
+     Quête               Type      Objectif                                  Récompense
+
+     Quatre saisons      Guide     Traverser un cycle complet                8 conserves de saison
+
+     Arrêter l'instant   Guide     Utiliser un sablier                       40 âmes
+
+     Une vie en un       PNJ       Aider un Éphémère avant la nuit           Fragment de saison
+     jour
+
+     Les archives        PNJ       Retrouver 5 livres de la bibliothèque     Page de Journal
+                                                                             indiquée
+
+     Le vendeur          Karma     Rendre son temps à un Éphémère            Cadeau du marché ou
+     d'heures                      (+5) ou le lui acheter (-5)               sablier
+
+     Hors saison         Défi      Battre un Gardien de l'heure en hiver     Titre « Hors du temps »
+
+
+
+
+  Monde 9
+
+     Quête            Type      Objectif                                   Récompense
+
+     Garder pied      Guide     Fabriquer une Ancre de terrain             16 ancres
+
+     Le plan du       Guide     Découvrir 5 zones                          50 âmes
+     sol
+
+     Le fort          PNJ       Stabiliser 3 murs du fort                  Bottes d'accroche
+     dérive                                                                améliorées
+
+     Le géomètre      PNJ       Mesurer un gouffre vivant                  Carte du terrain
+
+     La veine         Karma     Soigner la veine battante (+10) ou la      Terrain plus calme ou 80
+                                vider (-10)                                âmes
+
+     Sans ancre       Défi      Survivre 10 minutes sans utiliser          Titre « Sans attache »
+                                d'ancre
+
+
+
+
+                                                                                                    Page 7 of 8
+PNJ et quêtes
+
+
+
+
+  Monde 10
+
+     Quête             Type    Objectif                                Récompense
+
+     Le regard d'en    Guide   Trouver sa base, devenue un simple      50 âmes
+     bas                       objet
+
+     L'atelier         Guide   Fabriquer au Métier final               Éclat d'Artisan
+
+     Les apprentis     PNJ     Retrouver 5 anciens apprentis           Cosmétique
+                                                                       d'apprenti
+
+     Tous les outils   PNJ     Utiliser un outil de chaque monde       Page de Journal
+                                                                       indiquée
+
+     Le dernier        Karma   Épargner un apprenti (+10) ou prendre   Souvenir final ou 100
+     pardon                    son noyau (-10)                         âmes
+
+     Tout d'un coup    Défi    Vaincre l'Inachevée sans perdre de      Titre « Sans couture »
+                               couche de poupée
+
+
+
+
+                                                                                          Page 8 of 8
+

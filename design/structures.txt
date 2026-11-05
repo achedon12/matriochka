@@ -1,0 +1,451 @@
+Structures
+
+
+
+
+  Structures
+  Le mod compte 100 types de structures, soit 10 par monde : 3 de combat, 3 d'exploration, 2
+  d'histoire, 1 d'utilité et 1 secrète. Les arènes de boss sont à part. Les noms restent
+  provisoires.
+
+
+
+  Lecture des tableaux
+
+     Taille      Dimensions
+
+     Petite      Jusqu'à 16 blocs de large
+
+     Moyenne     Jusqu'à 48 blocs de large
+
+     Grande      Jusqu'à 128 blocs de large
+
+
+
+     Rareté       Fréquence dans une parcelle
+
+     Commune      Plusieurs exemplaires
+
+     Rare         1 à 3 exemplaires
+
+     Unique       1 exemplaire
+
+
+  Chaque type secret contient la poupée cachée du monde. Les 5 pages du Journal se
+  trouvent dans les structures d'histoire, d'exploration ou secrètes. Chaque type utilise au
+  moins 3 variantes.
+
+
+  Monde 1
+
+     Structure            Rôle            Taille    Rareté     Contenu
+
+     Ruche de spores      Combat          Moyenne   Commune    Vagues de Sporelins, reine
+                                                               miniature
+
+     Nid de Sporelins     Combat          Petite    Commune    Groupe de Sporelins, coffre
+                                                               central
+
+     Puits de toxine      Combat          Moyenne   Rare       Descente toxique, Gardien de
+                                                               chitine
+
+
+
+                                                                                            Page 1 of 9
+Structures
+
+
+
+
+     Structure            Rôle           Taille     Rareté    Contenu
+
+     Arbre creux          Exploration    Petite     Commune   Escalade, coffre de
+                                                              ressources
+
+     Serre abandonnée     Exploration    Moyenne    Rare      Fleurs-pièges, recettes de la
+                                                              Cuve
+
+     Cocon géant          Exploration    Moyenne    Rare      Intérieur à découper, butin
+                                                              rare
+
+     Temple racinaire     Histoire       Grande     Unique    Fresques des apprentis, page
+                                                              du Journal
+
+     Clairière purifiée   Histoire       Moyenne    Unique    Quête de karma, souvenir de
+                                                              la jardinière
+
+     Village de           Utilité        Grande     Rare      PNJ, marchands, quêtes
+     cueilleurs
+
+     Sanctuaire de        Secret         Petite     Unique    Poupée cachée, salle
+     l'artisan                                                dissimulée
+
+
+
+
+  Monde 2
+
+     Structure             Rôle           Taille    Rareté    Contenu
+
+     Caverne de            Combat         Moyenne   Commune   Salamandres, lave montante
+     salamandres
+
+     Fournaise géante      Combat         Grande    Rare      Golem de scories, chaleur
+                                                              extrême
+
+     Puits de lave         Combat         Moyenne   Commune   Descente, plateformes,
+                                                              Forgerons éteints
+
+     Mine effondrée        Exploration    Moyenne   Commune   Galeries, minerais, coffres
+
+     Rail suspendu         Exploration    Moyenne   Commune   Parcours en wagonnet, butin
+                                                              de fin
+
+     Cristallerie          Exploration    Moyenne   Rare      Puzzle de chaleur, ressources
+
+
+
+
+                                                                                            Page 2 of 9
+Structures
+
+
+
+
+     Structure              Rôle          Taille    Rareté    Contenu
+
+     Forge abandonnée       Histoire      Moyenne   Rare      Recettes, souvenir du maître
+                                                              forgeron
+
+     Sanctuaire du filon    Histoire      Grande    Unique    Fresque du filon, page du
+                                                              Journal
+
+     Camp de mineurs        Utilité       Moyenne   Rare      PNJ, marchands, quêtes
+
+     Atelier de l'artisan   Secret        Petite    Unique    Poupée cachée, plans
+                                                              anciens
+
+
+
+
+  Monde 3
+
+     Structure              Rôle          Taille    Rareté    Contenu
+
+     Arène                  Combat        Moyenne   Commune   Vagues de mobs, clé en
+                                                              récompense
+
+     Cour des Geôliers      Combat        Moyenne   Commune   Patrouilles, alarme
+
+     Salle mobile           Combat        Moyenne   Commune   Murs qui bougent,
+                                                              embuscades
+
+     Labyrinthe de          Exploration   Grande    Rare      Pièges, coffre central
+     pièges
+
+     Trésorerie             Exploration   Moyenne   Rare      Serrures multiples, butin rare
+
+     Crypte                 Exploration   Moyenne   Commune   Cercueils, Rats de cachot
+
+     Bibliothèque           Histoire      Moyenne   Unique    Registres, page du Journal
+     scellée
+
+     Salle des clés         Histoire      Moyenne   Unique    Murale du système de verrous
+
+     Prison                 Utilité       Grande    Rare      Prisonniers, marchands,
+                                                              quêtes
+
+     Cellule de l'artisan   Secret        Petite    Unique    Poupée cachée, inscriptions
+
+
+
+
+                                                                                           Page 3 of 9
+Structures
+
+
+
+
+  Monde 4
+
+     Structure           Rôle           Taille     Rareté     Contenu
+
+     Nid de raies        Combat         Moyenne    Commune    Raies du vent, œufs à défendre
+
+     Paratonnerre        Combat         Grande     Rare       Foudre fréquente, Harponneur
+     géant                                                    céleste
+
+     Épave volante       Combat         Moyenne    Rare       Abordage, butin, quête de
+                                                              karma
+
+     Ruine suspendue     Exploration    Moyenne    Commune    Plateformes, coffres
+
+     Pont brisé          Exploration    Grande     Commune    Traverser en planeur
+
+     Phare des           Exploration    Moyenne    Commune    Allumage, abri, vue d'ensemble
+     tempêtes
+
+     Temple céleste      Histoire       Grande     Unique     Fresques du messager, page
+                                                              du Journal
+
+     Observatoire        Histoire       Moyenne    Rare       Carte des vents, tentatives de
+                                                              l'Artisan
+
+     Village flottant    Utilité        Grande     Rare       Gens du phare, marchands,
+                                                              quêtes
+
+     Jardin des          Secret         Petite     Unique     Poupée cachée, accès au
+     nuages                                                   grappin
+
+
+
+
+  Monde 5
+
+     Structure          Rôle           Taille     Rareté     Contenu
+
+     Nid de rôdeurs     Combat         Moyenne    Commune    Combat silencieux
+
+     Cimetière          Combat         Moyenne    Commune    Échos, faux appels
+     d'échos
+
+     Cathédrale         Combat         Grande     Rare       Mère des ombres, orgue qui
+     noire                                                   attire les mobs
+
+     Tour éteinte       Exploration    Moyenne    Commune    Rallumer les étages
+
+
+
+                                                                                          Page 4 of 9
+Structures
+
+
+
+
+     Structure           Rôle          Taille    Rareté   Contenu
+
+     Mine sans fond      Exploration   Grande    Rare     Fragments de diamant, chute
+
+     Puits de lumière    Exploration   Moyenne   Rare     Recharge de lumière, quête
+
+     Sanctuaire          Histoire      Moyenne   Unique   Reliefs à lire au toucher, page du
+     aveugle                                              Journal
+
+     Galerie de          Histoire      Moyenne   Unique   Histoire du Mangeur
+     fresques
+
+     Village             Utilité       Grande    Rare     Silencieux, marchands, quêtes
+     silencieux
+
+     Abri de l'artisan   Secret        Petite    Unique   Poupée cachée, dernière lettre
+                                                          lisible
+
+
+
+
+                                                                                        Page 5 of 9
+Structures
+
+
+
+
+  Monde 6
+
+     Structure             Rôle          Taille      Rareté     Contenu
+
+     Salle des miroirs     Combat        Moyenne     Commune    Reflets, vrai adversaire à
+                                                                trouver
+
+     Cage suspendue        Combat        Petite      Commune    Combat en gravité changeante
+
+     Noyau instable        Combat        Grande      Rare       Sphères instables, Miroir brisé
+
+     Tour inversée         Exploration   Grande      Rare       Monter en descendant
+
+     Cité au plafond       Exploration   Grande      Rare       Rues à l'envers, coffres
+
+     Bassin renversé       Exploration   Moyenne     Commune    Eau suspendue, nage verticale
+
+     Laboratoire de        Histoire      Moyenne     Unique     Expériences de l'Artisan, page
+     gravité                                                    du Journal
+
+     Escalier              Histoire      Moyenne     Unique     Parcours de mémoire
+     impossible
+
+     Refuge des            Utilité       Moyenne     Rare       Reflets libres, échanges
+     Reflets                                                    inversés
+
+     Jardin flottant       Secret        Petite      Unique     Poupée cachée, gravité nulle
+
+
+
+
+  Monde 7
+
+     Structure                Rôle          Taille     Rareté      Contenu
+
+     Fosse des chasseurs      Combat        Grande     Commune     Chasseurs, cages à ouvrir
+
+     Récif mort               Combat        Moyenne    Commune     Bancs de lames,
+                                                                   couverture
+
+     Cité engloutie           Combat        Grande     Rare        Rues, Murènes, trésor
+
+     Épave                    Exploration   Moyenne    Commune     Cale, butin, oxygène limité
+
+     Cloche de plongée        Exploration   Petite     Commune     Abri d'air, coffre
+
+     Grotte à air             Exploration   Moyenne    Commune     Repos, récolte, passage
+
+
+
+
+                                                                                             Page 6 of 9
+Structures
+
+
+
+
+     Structure              Rôle           Taille     Rareté    Contenu
+
+     Temple abyssal         Histoire       Grande     Unique    Fresques du Léviathan,
+                                                                page du Journal
+
+     Phare sous-marin       Histoire       Moyenne    Unique    Message des plongeurs
+
+     Station de pression    Utilité        Grande     Rare      Plongeurs, marchands,
+                                                                quêtes
+
+     Coffre-fort des        Secret         Petite     Unique    Poupée cachée, verrou de
+     profondeurs                                                pression
+
+
+
+
+  Monde 8
+
+     Structure             Rôle          Taille      Rareté    Contenu
+
+     Ville accélérée       Combat        Grande      Rare      Bâtiments qui s'usent
+                                                               pendant le combat
+
+     Ruine vieillissante   Combat        Moyenne     Commune   Combat limité par le temps
+
+     Horloge géante        Combat        Grande      Rare      Gardien de l'heure,
+                                                               mécanismes
+
+     Serre des saisons     Exploration   Moyenne     Commune   Ressource selon la saison
+
+     Jardin figé           Exploration   Moyenne     Commune   Temps suspendu, coffres
+
+     Camp éphémère         Exploration   Petite      Commune   Disparaît au cycle suivant
+
+     Observatoire          Histoire      Moyenne     Unique    Calendrier des cycles, page
+     solaire                                                   du Journal
+
+     Bibliothèque des      Histoire      Grande      Unique    Traces du voyageur
+     siècles
+
+     Marché du             Utilité       Grande      Rare      Ouvert au crépuscule, PNJ et
+     crépuscule                                                marchands
+
+     Tombeau temporel      Secret        Petite      Unique    Poupée cachée, ouverte une
+                                                               seule saison
+
+
+
+
+                                                                                            Page 7 of 9
+Structures
+
+
+
+
+  Monde 9
+
+     Structure          Rôle          Taille        Rareté      Contenu
+
+     Tour qui marche    Combat        Grande        Rare        Monter pendant qu'elle se
+                                                                déplace
+
+     Forteresse         Combat        Grande        Rare        Assaut, Colonne marcheuse
+     mobile
+
+     Arène de terrain   Combat        Moyenne       Commune     Sol qui change pendant le
+                                                                combat
+
+     Ruine mouvante     Exploration   Moyenne       Commune     Pièces qui changent de place
+
+     Gouffre vivant     Exploration   Grande        Rare        Descente, ressources, quête
+
+     Nid de mimiques    Exploration   Moyenne       Commune     Vrai et faux butin
+
+     Village enseveli   Histoire      Moyenne       Unique      Habitants disparus, page du
+                                                                Journal
+
+     Veine battante     Histoire      Moyenne       Unique      Quête de karma, verrou vivant
+
+     Fort ancré         Utilité       Grande        Rare        Ancrés, marchands, quêtes
+
+     Sanctuaire         Secret        Petite        Unique      Poupée cachée, seule zone
+     stable                                                     immobile
+
+
+
+
+  Monde 10
+
+     Structure              Rôle           Taille      Rareté    Contenu
+
+     Tour d'aiguilles       Combat         Grande      Rare      Monter un outil géant, mobs
+                                                                 géants
+
+     Forge colossale        Combat         Grande      Rare      Zone de chaleur, Titanide de
+                                                                 cendre
+
+     Poupée effondrée       Combat         Grande      Rare      Intérieur en couches, Rôdeur-
+                                                                 colosse
+
+     Coffre géant           Exploration    Grande      Rare      Intérieur à explorer, tiroirs
+
+
+
+
+                                                                                                 Page 8 of 9
+Structures
+
+
+
+
+     Structure              Rôle          Taille    Rareté    Contenu
+
+     Bibliothèque           Exploration   Grande    Unique    Livres géants, pages finales
+     colossale
+
+     Établi titanesque      Exploration   Grande    Unique    Maquette de la base, outils
+                                                              géants
+
+     Atelier géant de       Histoire      Grande    Unique    Dernier chantier, page du
+     l'artisan                                                Journal
+
+     Porte de bloc          Histoire      Moyenne   Unique    Révélation sur le premier bloc
+
+     Cité des géants        Utilité       Grande    Rare      Anciens apprentis, marchands,
+                                                              quêtes
+
+     Trône de la créature   Secret        Moyenne   Unique    Poupée cachée, accès à l'arène
+                                                              finale
+
+
+
+
+  Arènes de boss
+  Chaque boss possède une arène unique, placée au centre ou au point le plus profond de la
+  parcelle. Le Journal indique sa direction après la Graine ouverte, afin que le joueur ne se
+  perde pas.
+
+
+
+
+                                                                                             Page 9 of 9
+
