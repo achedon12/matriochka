@@ -6,6 +6,10 @@ import java.util.List;
 public final class Content {
 	private Content() {}
 
+	/** Worlds of the hidden dolls, from the smallest (innermost) to the largest: the order they nest in. */
+	public static final int[] NEST_ORDER = {6, 3, 9, 1, 5, 8, 2, 10, 4, 7};
+	/** Index of the coded page of every world in the Artisan's Journal. */
+	public static final int JOURNAL_CODED = 3;
 	public static final List<Defs.WorldDef> WORLDS = List.of(
 		new Defs.WorldDef(1, "toxin", "learning", 0x3f6b2a, 0xb7e04a, false),
 		new Defs.WorldDef(2, "heat", "learning", 0x2b2220, 0xffb347, false),
@@ -154,6 +158,9 @@ public final class Content {
 		new Defs.ItemDef("hidden_doll_8", 8, "secret", "none", "", ""),
 		new Defs.ItemDef("hidden_doll_9", 9, "secret", "none", "", ""),
 		new Defs.ItemDef("hidden_doll_10", 10, "secret", "none", "", ""),
+		new Defs.ItemDef("nested_dolls", 0, "secret", "none", "", ""),
+		new Defs.ItemDef("whole_matryoshka", 0, "secret", "legendary", "", ""),
+		new Defs.ItemDef("blank_scroll", 0, "secret", "none", "", ""),
 		new Defs.ItemDef("sealed_shackle", 3, "offering", "epic", "", ""),
 		new Defs.ItemDef("storm_censer", 4, "offering", "epic", "", ""),
 		new Defs.ItemDef("wreath_of_seasons", 8, "offering", "epic", "", ""),
@@ -318,7 +325,8 @@ public final class Content {
 		new Defs.BossDef("pressure_leviathan", 7, 3027f, 35.8f, 3.2f, 2.20f, 1.57f, "leviathan_core", new float[]{0.66f, 0.33f}, false, true, "lair", ""),
 		new Defs.BossDef("seasons_master", 8, 4086f, 43f, 2.8f, 2.20f, 4.66f, "seasons_core", new float[]{0.66f, 0.33f}, false, false, "altar", "wreath_of_seasons"),
 		new Defs.BossDef("terrain_heart_boss", 9, 5516f, 51.6f, 3.0f, 2.20f, 3.15f, "terrain_core", new float[]{0.66f, 0.33f}, false, false, "lair", ""),
-		new Defs.BossDef("the_unfinished", 10, 14894f, 61.9f, 3.4f, 2.20f, 3.04f, "unfinished_core", new float[]{0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f, 0.3f, 0.2f, 0.1f}, false, false, "altar", "unfinished_effigy")
+		new Defs.BossDef("the_unfinished", 10, 14894f, 61.9f, 3.4f, 2.20f, 3.04f, "unfinished_core", new float[]{0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f, 0.3f, 0.2f, 0.1f}, false, false, "altar", "unfinished_effigy"),
+		new Defs.BossDef("artisan_shadow", 11, 9000f, 55f, 1.25f, 2.20f, 2.74f, "", new float[]{0.66f, 0.33f}, false, false, "world_zero", "")
 	);
 	public static final List<Defs.NpcDef> PEOPLES = List.of(
 		new Defs.NpcDef("doll_peddler", 0),

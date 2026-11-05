@@ -151,6 +151,21 @@ public class ShowcaseTest implements FabricClientGameTest {
 				ctx.waitTicks(12);
 				shot(ctx, "gui_journal_" + t);
 			}
+			// the Pages tab, with a handful of pages found (one of them still coded), and an ending's crawl
+			server.runOnServer(srv -> {
+				var ps = fr.achedon12.matriochka.rules.PlayerState.of(srv.getPlayerList().getPlayers().get(0));
+				ps.tag().putInt("pages_1", 0b11111);
+				ps.tag().putInt("pages_4", 0b01011);
+				ps.tag().putInt("pages_9", 0b10000);
+				ps.sync();
+			});
+			ctx.waitTicks(5);
+			ctx.setScreen(() -> new fr.achedon12.matriochka.client.JournalScreen(false).tab(5));
+			ctx.waitTicks(12);
+			shot(ctx, "gui_journal_5");
+			ctx.setScreen(() -> new fr.achedon12.matriochka.client.EndingScreen("tools"));
+			ctx.waitTicks(100);
+			shot(ctx, "gui_ending");
 			ctx.setScreen(() -> new fr.achedon12.matriochka.client.JournalScreen(false).tab(0));
 			ctx.waitTicks(12);
 			ctx.runOnClient(mc -> ((fr.achedon12.matriochka.client.JournalScreen) mc.gui.screen()).turnTo(2));
@@ -218,6 +233,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 		}
 		if ("ocean".equals(System.getProperty("matriochka.capture"))) {
 			OceanTest.run(ctx);
+			return;
+		}
+		if ("story".equals(System.getProperty("matriochka.capture"))) {
+			StoryTest.run(ctx);
 			return;
 		}
 		if ("moves".equals(System.getProperty("matriochka.capture"))) {

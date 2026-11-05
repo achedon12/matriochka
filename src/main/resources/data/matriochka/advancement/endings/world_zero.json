@@ -1,0 +1,24 @@
+{
+  "parent": "matriochka:endings/root",
+  "display": {
+    "icon": {
+      "id": "matriochka:whole_matryoshka"
+    },
+    "title": {
+      "translate": "advancement.matriochka.endings.world_zero.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.endings.world_zero.desc"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/hidden"
+  }
+}

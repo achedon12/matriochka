@@ -27,6 +27,8 @@ MC = os.environ.get("MC_DATA", os.path.join(os.path.dirname(os.path.abspath(__fi
 NS = "matriochka"
 
 EN, FR = {}, {}
+# every boss the mod registers: the ten worlds and the Surface, plus the hidden encounter of World 0
+ALL_BOSSES = BOSSES + [WORLD_ZERO_BOSS]
 
 
 def w(path, obj):
@@ -200,7 +202,7 @@ def gen_entities():
         _t = _I.open(os.path.join(A, f"textures/entity/{mid}.png"))
         _I.new("RGBA", _t.size).save(os.path.join(A, f"textures/entity/{mid}_glowmask.png"))
     HD_BOSSES = bosses_hd.build_all()
-    for b in BOSSES:
+    for b in ALL_BOSSES:
         bid = b["id"]
         lang(f"entity.{NS}.{bid}", b["en"], b["fr"])
         for i, (en, fr) in enumerate(b["atk"]):
@@ -584,7 +586,110 @@ def gen_worldgen():
         "structures": [{"structure": f"{NS}:guardian_sanctuary", "weight": 1}]})
 
 
+# ------------------------------------------------------------------ World 0
+def gen_world_zero():
+    """The smallest doll: a sealed hollow of painted wood and lacquer (the Nether noise turned inside a doll),
+    no sky, warm lantern light, no natural spawns. Its rooms are built by the mod on first entry (WorldZero.java)."""
+    wd = WORLD_ZERO
+    key = wd["key"]
+    lang(f"world.{NS}.{wd['n']}", wd["en"], wd["fr"])
+    lang(f"dimension.{NS}.{key}", f"World 0 — {wd['en']}", f"Monde 0 — {wd['fr']}")
+    lang(f"biome.{NS}.{key}", "World 0", "Monde 0")
+    top, stone, deep = f"{NS}:workshop_felt", f"{NS}:painted_wood", f"{NS}:lacquer_block"
+    txt = open(os.path.join(MC, "worldgen/noise_settings/nether.json")).read()
+    for old, new in (("minecraft:netherrack", stone), ("minecraft:soul_sand", top), ("minecraft:soul_soil", top),
+                     ("minecraft:gravel", top), ("minecraft:basalt", deep), ("minecraft:blackstone", deep),
+                     ("minecraft:crimson_nylium", top), ("minecraft:warped_nylium", top),
+                     ("minecraft:warped_wart_block", deep), ("minecraft:nether_wart_block", deep), ("minecraft:lava", "minecraft:air")):
+        txt = txt.replace(f'"{old}"', f'"{new}"')
+    ns = json.loads(txt)
+    ns["default_fluid"] = "minecraft:air"
+    ns["sea_level"] = 0
+    ns["disable_mob_generation"] = True
+    w(os.path.join(D, f"worldgen/noise_settings/{key}.json"), ns)
+    dt = jl("dimension_type/the_nether.json")
+    for k in ("minecraft:gameplay/piglins_zombify", "minecraft:gameplay/fast_lava", "minecraft:gameplay/water_evaporates",
+              "minecraft:visual/default_dripstone_particle", "minecraft:gameplay/snow_golem_melts", "minecraft:gameplay/straw_bed_rule"):
+        dt["attributes"].pop(k, None)
+    dt["coordinate_scale"] = 1.0
+    dt["ambient_light"] = 0.12
+    dt["attributes"]["minecraft:visual/fog_end_distance"] = 56.0
+    dt["attributes"]["minecraft:visual/fog_start_distance"] = 6.0
+    dt["attributes"]["minecraft:visual/ambient_light_color"] = "#3a1a10"
+    dt["attributes"]["minecraft:visual/fog_color"] = "#" + wd["fog"]
+    dt["attributes"]["minecraft:visual/sky_light_color"] = "#" + wd["sky"]
+    dt["attributes"]["minecraft:gameplay/respawn_anchor_works"] = False
+    dt["attributes"]["minecraft:gameplay/nether_portal_spawns_piglin"] = False
+    dt["attributes"]["minecraft:gameplay/bed_rule"] = {"can_set_spawn": "never", "can_sleep": "never", "explodes": False,
+                                                       "error_message": {"translate": f"message.{NS}.no_beds"}}
+    dt["infiniburn"] = "#minecraft:infiniburn_overworld"
+    dt["timelines"] = "#minecraft:in_overworld"
+    dt.pop("has_fixed_time", None)
+    dt["default_clock"] = "minecraft:overworld"
+    noise = ns["noise"]
+    dt["min_y"], dt["height"], dt["logical_height"] = noise["min_y"], noise["height"], noise["height"]
+    w(os.path.join(D, f"dimension_type/{key}.json"), dt)
+    bio = jl("worldgen/biome/plains.json")
+    pl = copy.deepcopy(bio["attributes"]["minecraft:gameplay/natural_mob_spawns"])
+    if isinstance(pl, dict) and "argument" in pl:
+        pl["argument"]["spawns_by_category"] = {}
+        pl["argument"]["spawn_costs"] = {}
+    else:
+        pl = {"spawns_by_category": {}}
+    bio["attributes"] = {"minecraft:visual/sky_color": "#" + wd["sky"], "minecraft:visual/fog_color": "#" + wd["fog"],
+                         "minecraft:visual/water_fog_color": "#" + wd["water"], "minecraft:gameplay/natural_mob_spawns": pl}
+    bio["effects"] = {"water_color": "#" + wd["water"], "grass_color": "#" + wd["pal"][0], "foliage_color": "#" + wd["pal"][0]}
+    bio["features"] = [[] for _ in range(11)]
+    bio["carvers"] = ["minecraft:nether_cave"]
+    bio["has_precipitation"] = False
+    bio["temperature"] = 0.8
+    bio["downfall"] = 0.0
+    w(os.path.join(D, f"worldgen/biome/{key}.json"), bio)
+    w(os.path.join(D, f"dimension/{key}.json"), {"type": f"{NS}:{key}", "generator": {
+        "type": "minecraft:noise", "biome_source": {"type": "minecraft:fixed", "biome": f"{NS}:{key}"}, "settings": f"{NS}:{key}"}})
+
+
+# ------------------------------------------------------------------ story texts
+def gen_lang_story():
+    for wn, pages in JOURNAL.items():
+        for i, (te, be, tf, bf) in enumerate(pages):
+            lang(f"journal.{NS}.page.{wn}.{i}.title", te, tf)
+            lang(f"journal.{NS}.page.{wn}.{i}", be, bf)
+    for wn, (en, fr) in DOLL_LINES.items():
+        lang(f"message.{NS}.doll_line.{wn}", en, fr)
+    for kind, e in ENDINGS.items():
+        lang(f"ending.{NS}.{kind}", e["en"], e["fr"])
+        for i, (en, fr) in enumerate(e["lines"]):
+            lang(f"ending.{NS}.{kind}.{i}", en, fr)
+        lang(f"ending.{NS}.{kind}.lasting", *e["lasting"])
+    for i, (en, fr) in enumerate(CREDITS):
+        lang(f"ending.{NS}.credits.{i}", en, fr)
+    for k, (en, fr) in STORY_UI.items():
+        lang(k, en, fr)
+
+
 # ------------------------------------------------------------------ advancements
+def gen_endings_tab():
+    """The Endings tab: its root appears once the Unfinished has fallen; the entries are granted by the mod."""
+    w(os.path.join(D, "advancement/endings/root.json"), {
+        "display": {"icon": {"id": f"{NS}:whole_matryoshka"}, "title": {"translate": f"advancement.{NS}.endings.title"},
+                    "description": {"translate": f"advancement.{NS}.endings.desc"}, "background": f"{NS}:block/lacquer_glow",
+                    "show_toast": False, "announce_to_chat": False},
+        "criteria": {"done": {"trigger": "minecraft:player_killed_entity", "conditions": {"entity": {"type": "minecraft:entity_properties",
+                     "entity": "this", "predicate": {"minecraft:entity_type": f"{NS}:the_unfinished"}}}}}})
+    lang(f"advancement.{NS}.endings.title", "The Last Doll", "La dernière poupée")
+    lang(f"advancement.{NS}.endings.desc", "Every ending of the cycle.", "Toutes les fins du cycle.")
+    for (aid, icon, te, tf, de, df) in ENDING_ADVANCEMENTS:
+        w(os.path.join(D, f"advancement/endings/{aid}.json"), {
+            "parent": f"{NS}:endings/root",
+            "display": {"icon": {"id": f"{NS}:{icon}"}, "title": {"translate": f"advancement.{NS}.endings.{aid}.title"},
+                        "description": {"translate": f"advancement.{NS}.endings.{aid}.desc"}, "frame": "challenge", "hidden": aid == "world_zero"},
+            "criteria": {"done": {"trigger": "minecraft:impossible"}},
+            "rewards": {"function": f"{NS}:reward/hidden"}})
+        lang(f"advancement.{NS}.endings.{aid}.title", te, tf)
+        lang(f"advancement.{NS}.endings.{aid}.desc", de, df)
+
+
 def gen_advancements():
     # root tab per world
     roots = {}
@@ -680,6 +785,10 @@ def gen_java():
     L = ["package fr.achedon12.matriochka.content;", "", "import java.util.List;", "",
          "/** GENERATED by tools/gen.py from tools/content.py. Do not edit by hand. */",
          "public final class Content {", "\tprivate Content() {}", ""]
+    L.append("\t/** Worlds of the hidden dolls, from the smallest (innermost) to the largest: the order they nest in. */")
+    L.append("\tpublic static final int[] NEST_ORDER = {" + ", ".join(str(n) for n in NEST_ORDER) + "};")
+    L.append("\t/** Index of the coded page of every world in the Artisan's Journal. */")
+    L.append(f"\tpublic static final int JOURNAL_CODED = {JOURNAL_CODED};")
     L.append("\tpublic static final List<Defs.WorldDef> WORLDS = List.of(")
     L.append(",\n".join(f"\t\tnew Defs.WorldDef({wd['n']}, {jstr(wd['rule'])}, {jstr(wd['tier'])}, 0x{wd['pal'][0]}, 0x{wd['pal'][2]}, {str(wd['ceiling']).lower()})" for wd in WORLDS))
     L.append("\t);")
@@ -703,7 +812,7 @@ def gen_java():
     L.append("\t);")
     L.append("\tpublic static final List<Defs.BossDef> BOSSES = List.of(")
     rows = []
-    for b in BOSSES:
+    for b in ALL_BOSSES:
         wd, ht = ENTITY_DIMS[b["id"]]
         ph = ", ".join(f"{p}f" for p in b["phases"])
         rows.append(f"\t\tnew Defs.BossDef({jstr(b['id'])}, {b['world']}, {b['hp']}f, {b['dmg']}f, {b['size']}f, {wd:.2f}f, {ht:.2f}f, {jstr(b['core'])}, new float[]{{{ph}}}, "
@@ -751,8 +860,11 @@ def main():
     gen_blocks()
     gen_entities()
     gen_worldgen()
+    gen_world_zero()
     gen_advancements()
+    gen_endings_tab()
     gen_lang_misc()
+    gen_lang_story()
     gen_java()
     # merge hand-written lang (ui strings)
     for code, table in (("en_us", EN), ("fr_fr", FR)):

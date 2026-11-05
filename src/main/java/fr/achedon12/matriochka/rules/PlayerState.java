@@ -46,6 +46,8 @@ public final class PlayerState {
 	}
 
 	public void addKarma(int delta) {
+		// the Absorb ending: whoever took the creature's hunger can no longer climb back
+		if (delta > 0 && has("end_absorb")) return;
 		tag.putInt("karma", Math.max(-100, Math.min(100, karma() + delta)));
 		save();
 		sync();

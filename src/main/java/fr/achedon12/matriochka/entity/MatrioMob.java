@@ -201,6 +201,15 @@ public class MatrioMob extends Monster implements GeoEntity {
 			// the config multipliers apply once, the first time the creature thinks
 			addTag("cfg_scaled");
 			float hm = fr.achedon12.matriochka.world.Config.healthMult(), dm = fr.achedon12.matriochka.world.Config.damageMult();
+			// the New Cycle makes every creature stronger, and World 0 is the most dangerous of all
+			int cycle = fr.achedon12.matriochka.world.Cycles.at(level, blockPosition());
+			hm *= fr.achedon12.matriochka.world.Cycles.healthFactor(cycle);
+			dm *= fr.achedon12.matriochka.world.Cycles.damageFactor(cycle);
+			if (fr.achedon12.matriochka.world.Worlds.number(level) == fr.achedon12.matriochka.world.Worlds.ZERO) {
+				// the guards of every prison come back at least as strong as the colossi of the Giant Workshop
+				hm *= Math.max(1.5f, 900f / def().hp());
+				dm *= Math.max(1.3f, 45f / def().damage());
+			}
 			if (hm != 1f) {
 				float frac = getHealth() / getMaxHealth();
 				getAttribute(Attributes.MAX_HEALTH).setBaseValue(getAttributeBaseValue(Attributes.MAX_HEALTH) * hm);
