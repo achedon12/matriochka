@@ -25,6 +25,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.ItemStack;
 import fr.achedon12.matriochka.world.Ocean;
+import fr.achedon12.matriochka.world.ScaleLinks;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
@@ -48,7 +49,10 @@ public final class WorldRules {
 				border(p);
 				int rule = world == 10 ? synthesisZone(p) : world;
 				apply(p, ps, rule, t);
-				if (t % 100 == 0) StructureTracker.tick(p);
+				if (t % 100 == 0) {
+					StructureTracker.tick(p);
+					fr.achedon12.matriochka.world.BaseModel.tick(p);
+				}
 				if (p.isFallFlying() && (world == 4 || world == 6 || world == 9) && !MatrioData.get(server).defeated(p, 8)) p.stopFallFlying();
 			} else {
 				for (String g : new String[]{"toxin", "heat", "noise"}) if (ps.gauge(g) > 0) ps.setGauge(g, ps.gauge(g) - 5);
@@ -99,11 +103,16 @@ public final class WorldRules {
 	private static void apply(ServerPlayer p, PlayerState ps, int rule, long t) {
 		ServerLevel level = (ServerLevel) p.level();
 		float resist = 1f - GearClasses.survivorResistance(p);
+		// the world's variant makes its rule gentler or harsher
+		float strength = fr.achedon12.matriochka.world.Variants.of(p).rule();
 		switch (rule) {
 			case 1 -> {
 				float gain = p.isInWaterOrRain() ? -2f : 1f;
 				if (gain > 0 && wearing(p, "filter_mask")) gain *= 0.5f;
 				if (gain > 0 && ps.flagActive("root_broth", t)) gain *= 0.5f;
+				// water around the World Block soaks the jungle
+				if (gain > 0 && ScaleLinks.active(p, "damp")) gain *= 0.5f;
+				if (gain > 0) gain *= strength;
 				ps.addGauge("toxin", gain * resist);
 				float v = ps.gauge("toxin");
 				if (v >= 50) p.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 0, true, false));
@@ -122,6 +131,9 @@ public final class WorldRules {
 				}
 				if (gain > 0) gain *= 1f - 0.125f * setCount(p, "thermal");
 				if (gain > 0 && ps.flagActive("ice_bread", t)) gain *= 0.5f;
+				// ice around the World Block cools the veins
+				if (gain > 0 && ScaleLinks.active(p, "cool")) gain *= 0.5f;
+				if (gain > 0) gain *= strength;
 				ps.addGauge("heat", gain * resist);
 				float v = ps.gauge("heat");
 				if (v >= 50) p.addEffect(new MobEffectInstance(MobEffects.HUNGER, 40, 1, true, false));
@@ -145,7 +157,9 @@ public final class WorldRules {
 				if (phase == 560) p.sendOverlayMessage(Component.translatable("message.matriochka.rule.gust").withStyle(ChatFormatting.AQUA));
 				if (phase == 0 && exposed && !p.isShiftKeyDown()) {
 					double a = (t / 600 * 1.7) % (Math.PI * 2);
-					double s = 0.6 + level.getRandom().nextDouble() * 0.8;
+					double s = (0.6 + level.getRandom().nextDouble() * 0.8) * strength;
+					// a storm over the World Block strengthens the gusts inside
+					if (ScaleLinks.active(p, "storm")) s *= 1.5;
 					p.push(Math.cos(a) * s, 0.25, Math.sin(a) * s);
 					p.needsSync = true;
 					level.sendParticles(ParticleTypes.GUST, p.getX(), p.getY() + 1, p.getZ(), 4, 1, 0.5, 1, 0);
@@ -169,6 +183,7 @@ public final class WorldRules {
 			case 5 -> {
 				float gain = p.isSprinting() ? 4f : (p.isShiftKeyDown() ? -3f : (p.getDeltaMovement().horizontalDistanceSqr() > 0.001 ? 0.6f : -1.5f));
 				if (ps.flagActive("mute", t)) gain = Math.min(gain, 0);
+				if (gain > 0) gain *= strength;
 				ps.addGauge("noise", gain * resist);
 				if (ps.gauge("noise") >= 50) {
 					for (MatrioMob m : level.getEntitiesOfClass(MatrioMob.class, p.getBoundingBox().inflate(28))) if (m.getTarget() == null) m.setTarget(p);
@@ -185,7 +200,7 @@ public final class WorldRules {
 				// Oxygen: the gauge is your breath. Under water it runs out in about half a minute, unless a snorkel
 				// helmet feeds you from its tank; the helmet refills in air, in bubble columns and over air vents.
 				ItemStack helmet = Snorkel.worn(p);
-				float mult = (ps.flagActive("apnea", t) ? 0.5f : 1f) * resist;
+				float mult = (ps.flagActive("apnea", t) ? 0.5f : 1f) * resist * strength;
 				if (p.isUnderWater()) {
 					if (Snorkel.atAirSource(level, p)) {
 						if (!helmet.isEmpty()) Snorkel.refill(helmet, Snorkel.VENT_RATE);
@@ -201,6 +216,8 @@ public final class WorldRules {
 					if (ps.gauge("oxygen") <= 0) p.hurtServer(level, level.damageSources().drown(), 2f);
 					// pressure: each diving piece and the helmet's tier let you go deeper
 					int limit = Ocean.PRESSURE_Y - Ocean.PER_DIVING_PIECE * setCount(p, "diving") - Snorkel.depthBonus(helmet);
+					// dry ground around the World Block eases the pressure
+					if (ScaleLinks.active(p, "dry")) limit -= 16;
 					if (p.getY() < limit) {
 						p.hurtServer(level, level.damageSources().cramming(), 1.5f);
 						p.sendOverlayMessage(Component.translatable("message.matriochka.rule.pressure").withStyle(ChatFormatting.DARK_AQUA));
@@ -248,6 +265,8 @@ public final class WorldRules {
 
 	private static boolean anchored(ServerLevel level, ServerPlayer p, PlayerState ps, long t) {
 		if (ps.flagActive("anchor", t) || wearing(p, "grip_boots")) return true;
+		// Terrain Anchors around the World Block hold the ground
+		if (ScaleLinks.active(p, "calm")) return true;
 		for (BlockPos q : BlockPos.betweenClosed(p.blockPosition().offset(-16, -6, -16), p.blockPosition().offset(16, 6, 16))) {
 			if (level.getBlockState(q).is(ModContent.block("terrain_anchor"))) return true;
 		}
