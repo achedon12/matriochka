@@ -1294,7 +1294,8 @@ def rod():
 
 
 RIBBONS = [("objective", RED), ("quests", BLACK), ("karma", GOLD[1:]), ("worlds", [(12, 36, 22), (24, 62, 38), (40, 96, 58), (66, 132, 80), (110, 176, 120)]),
-           ("scroll", [(14, 18, 44), (26, 36, 84), (44, 62, 128), (74, 96, 170), (130, 150, 210)])]
+           ("scroll", [(14, 18, 44), (26, 36, 84), (44, 62, 128), (74, 96, 170), (130, 150, 210)]),
+           ("pages", [(58, 32, 12), (104, 62, 28), (152, 100, 48), (198, 148, 82), (234, 200, 140)])]
 
 
 def ribbons():
@@ -1718,6 +1719,12 @@ def medallion(rule, w):
         crack = [(m - 1, m - 6), (m + 1, m - 2), (m - 2, m + 1), (m + 2, m + 5), (m, m + 8)]
         stroke(e, crack, 1.0, 0.5, OUTLINE)
         stroke(e, [(x + 1, y) for x, y in crack], 0.4, 0.3, (232, 160, 112))
+    elif rule == "stillness":
+        # World 0: an empty doll standing, a hammer laid down at its feet
+        doll(e, m - 8, m - 14, 16, 22, state="empty", seed=5, apron=False)
+        stroke(e, [(m - 12, m + 11), (m + 4, m + 11)], 1.2, 1.2, WOOD[4])
+        e.rect(m + 3, m + 8, m + 10, m + 14, (170, 176, 190))
+        e.rect(m + 3, m + 13, m + 10, m + 14, OUTLINE)
     elif rule == "synthesis":
         spindle(e, m, m, 18)
         stroke(e, bez((m, m + 2), (m + 10, m + 6), (m - 10, m + 8), (m + 6, m + 10), 30), 0.6, 0.5, (80, 120, 200))
@@ -1828,6 +1835,7 @@ def build():
         plate("plate_%d" % w, world_style(w))
     for rule, w in zip(RULE_EMBLEMS, range(1, 11)):
         medallion(rule, w)
+    medallion("stillness", 0)
     for sid, _en, _fr, w, *_ in STATIONS:
         station_panel(sid, w, sid in ("soul_altar", "class_table"))
     keep = {n + ".png" for n in SAVED} | {n + ".png.mcmeta" for n in SAVED}
