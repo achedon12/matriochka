@@ -62,6 +62,17 @@ public final class Net {
 		}
 	}
 
+	/** The Scroll page the player is reading, for the quest that asks to read all five. */
+	public record ReadPayload(int page) implements CustomPacketPayload {
+		public static final Type<ReadPayload> TYPE = new Type<>(Matriochka.id("read_page"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, ReadPayload> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, ReadPayload::page, ReadPayload::new);
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
 	/** The Journal's "New Cycle" button. */
 	public record CyclePayload(boolean confirm) implements CustomPacketPayload {
 		public static final Type<CyclePayload> TYPE = new Type<>(Matriochka.id("new_cycle"));
@@ -81,6 +92,8 @@ public final class Net {
 		PayloadTypeRegistry.clientboundPlay().register(EndingPayload.TYPE, EndingPayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(ChoicePayload.TYPE, ChoicePayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(CyclePayload.TYPE, CyclePayload.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(ReadPayload.TYPE, ReadPayload.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(ReadPayload.TYPE, (payload, ctx) -> fr.achedon12.matriochka.world.QuestHooks.read(ctx.player(), payload.page()));
 		ServerPlayNetworking.registerGlobalReceiver(CyclePayload.TYPE, (payload, ctx) -> {
 			if (payload.confirm()) fr.achedon12.matriochka.world.Cycles.begin(ctx.player());
 		});
@@ -118,9 +131,6 @@ public final class Net {
 		PlayerState ps = PlayerState.of(player);
 		syncState(player, ps);
 		ServerPlayNetworking.send(player, new OpenJournalPayload(scroll));
-		if (scroll) {
-			if (ps.counter("read:artisan_scroll") < 5) ps.progress("read", "artisan_scroll", 5);
-		}
 	}
 
 	static FriendlyByteBuf unused() {

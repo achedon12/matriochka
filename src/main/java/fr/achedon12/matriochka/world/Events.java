@@ -143,6 +143,7 @@ public final class Events {
 			if (!Config.hardcore() && ps.dollLayers() > 0 && now - ps.tag().getLongOr("last_revive", -10000) >= 1200) {
 				ps.setDoll(ps.dollLayers() - 1, ps.dollMax());
 				ps.tag().putLong("last_revive", now);
+				fr.achedon12.matriochka.entity.BossFeats.markNear(player, "layer");
 				player.setHealth(player.getMaxHealth() * 0.5f);
 				player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 100, 4));
 				player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
@@ -280,7 +281,8 @@ public final class Events {
 		PlayerState ps = PlayerState.of(p);
 		var inv = p.getInventory();
 		for (Defs.QuestDef q : Content.QUESTS) {
-			if (!(q.objKind().equals("obtain") || q.objKind().equals("deliver")) || Quests.done(ps, q)) continue;
+			// deliveries are handed to the peoples (QuestHooks.deliver), only "obtain" quests count what you carry
+			if (!q.objKind().equals("obtain") || Quests.done(ps, q)) continue;
 			var item = ModContent.itemOrNull(q.objTarget());
 			if (item == null) continue;
 			int n = fr.achedon12.matriochka.block.Stations.count(inv, item);

@@ -207,6 +207,13 @@ U = {
  "message.matriochka.link.calm": ("Anchors around your World Block hold the ground still for 5 minutes.", "Des ancres autour de ton bloc-monde tiennent le sol immobile pendant 5 minutes."),
  "message.matriochka.link.quake": ("Your World Block was moved: the whole world quakes!", "Ton bloc-monde a été déplacé : le monde entier tremble !"),
  "message.matriochka.link.boss": ("Your World Block shakes and cracks: a boss fight rages inside.", "Ton bloc-monde tremble et se fissure : un combat de boss fait rage à l'intérieur."),
+ # quest steps
+ "message.matriochka.quest.step": ("%s: %s / %s", "%s : %s / %s"),
+ "message.matriochka.quest.handed": ("You hand %s %s to %s.", "Tu remets %s %s à %s."),
+ "message.matriochka.quest.too_late": ("Night is falling. It is too late for today.", "La nuit tombe. C'est trop tard pour aujourd'hui."),
+ "message.matriochka.quest.already": ("You already did it here. Find another one.", "Tu l'as déjà fait ici. Trouves-en un autre."),
+ "message.matriochka.quest.book": ("You find one of the library's books.", "Tu retrouves un des livres de la bibliothèque."),
+ "message.matriochka.quest.found.wreck_crew": ("Among the wreckage, a crew plate. You bring it up with you.", "Parmi les débris, une plaque d'équipage. Tu la remontes avec toi."),
  # station automation
  "station.matriochka.auto.pick": ("Automate this recipe", "Automatiser cette recette"),
  "station.matriochka.auto.on": ("Automated: click to stop", "Automatisée : clique pour arrêter"),

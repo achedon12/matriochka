@@ -11,7 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 
-/** Optional quest book: 64 quests, tracked through PlayerState counters. */
+/** Optional quest book: 70 quests, tracked through PlayerState counters (see QuestHooks for what each kind watches). */
 public final class Quests {
 	private Quests() {}
 
@@ -20,8 +20,7 @@ public final class Quests {
 	}
 
 	public static int progress(PlayerState ps, Defs.QuestDef q) {
-		String kind = q.objKind().equals("deliver") ? "obtain" : q.objKind();
-		return Math.min(q.objCount(), ps.counter(kind + ":" + q.objTarget()));
+		return Math.min(q.objCount(), ps.counter(q.objKind() + ":" + q.objTarget()));
 	}
 
 	/** Chapter of the karma-path quests (mutual help and pacts), after the ten worlds. */
@@ -47,8 +46,15 @@ public final class Quests {
 		PlayerState ps = PlayerState.of(player);
 		for (Defs.QuestDef q : Content.QUESTS) {
 			if (done(ps, q) || q.objKind().equals("choice")) continue;
-			String qk = q.objKind().equals("deliver") ? "obtain" : q.objKind();
-			if (!qk.equals(kind) || !q.objTarget().equals(target)) continue;
+			if (!q.objKind().equals(kind)) continue;
+			if (!q.objTarget().equals(target)) {
+				// a "+" target needs every part once: its counter is the number of parts done
+				if (!q.objTarget().contains("+") || !java.util.List.of(q.objTarget().split("\\+")).contains(target)) continue;
+				int n = 0;
+				for (String part : q.objTarget().split("\\+")) if (ps.counter(kind + ":" + part) > 0) n++;
+				String key = kind + ":" + q.objTarget();
+				ps.addCounter(key, n - ps.counter(key));
+			}
 			if (!available(player, q)) continue;
 			if (progress(ps, q) >= q.objCount()) complete(player, ps, q, 0);
 		}
