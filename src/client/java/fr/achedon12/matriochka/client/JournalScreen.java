@@ -272,9 +272,15 @@ public class JournalScreen extends Screen {
 			Ui.sprite(g, on ? "ribbon_" + i + "_on" : "ribbon_" + i, rx, top, 54, 48);
 			Component label = Component.translatable("journal.matriochka.tab." + TABS[i]);
 			int col = i == 2 ? 0xFF2A1408 : on ? 0xFFFFF4D8 : Ui.LIGHT;
-			int lx = rx + 27 - font.width(label) / 2;
-			if (i == 2) g.text(font, label, lx, top + 5, col, false);
-			else Ui.embossed(g, font, label, lx, top + 5, col);
+			int lw = font.width(label);
+			// a label longer than the ribbon (other languages) shrinks to fit it
+			float fit = Math.min(1f, 48f / lw);
+			g.pose().pushMatrix();
+			g.pose().translate(rx + 27, top + 5 + (1 - fit) * 4);
+			g.pose().scale(fit, fit);
+			if (i == 2) g.text(font, label, -lw / 2, 0, col, false);
+			else Ui.embossed(g, font, label, -lw / 2, 0, col);
+			g.pose().popMatrix();
 		}
 		Ui.sprite(g, "book", l, t, BW, BH);
 		Ui.wanderingGlint(g, new int[][]{{l + 4, t + 4}, {l + BW - 4, t + 4}, {l + 4, t + BH - 4}, {l + BW - 4, t + BH - 4}, {l + BW / 2, t + 6}, {l + BW / 2, t + BH - 6}}, 1700, 11);
