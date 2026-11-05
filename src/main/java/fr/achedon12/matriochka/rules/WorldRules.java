@@ -126,7 +126,15 @@ public final class WorldRules {
 				if (v >= 100) p.hurtServer(level, level.damageSources().onFire(), 1f);
 			}
 			case 3 -> {
-				if (t % (20 * 300) == 20 * 290) p.sendOverlayMessage(Component.translatable("message.matriochka.rule.halls").withStyle(ChatFormatting.AQUA));
+				// the halls only physically move in World 3 itself; the synthesis zone keeps the warning
+				long phase = t % DungeonShift.PERIOD;
+				boolean halls = Worlds.number(level) == 3;
+				if (phase == DungeonShift.PERIOD - DungeonShift.WARN) {
+					p.sendOverlayMessage(Component.translatable("message.matriochka.rule.halls").withStyle(ChatFormatting.AQUA));
+					if (halls) DungeonShift.plan(level, p);
+				}
+				if (halls && phase > DungeonShift.PERIOD - DungeonShift.WARN) DungeonShift.rumble(level, p);
+				if (halls && phase == 0) DungeonShift.shift(level, p);
 			}
 			case 4 -> {
 				long phase = t % 600;

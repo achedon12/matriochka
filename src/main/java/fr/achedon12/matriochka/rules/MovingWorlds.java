@@ -14,12 +14,14 @@ public final class MovingWorlds {
 	public static void init() {
 		PlacedBlocks.init();
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+			DungeonShift.clearAll();
 			GravityZones.clearAll();
 			Burnout.clearAll();
 		});
 	}
 
 	static void tick(MinecraftServer server, long t) {
+		DungeonShift.tick(server);
 		GravityZones.tick(server, p -> WorldRules.rule(p) == 6);
 		if (t % 4 == 0) Burnout.tickGlows(server, p -> WorldRules.rule(p) == 5);
 	}
