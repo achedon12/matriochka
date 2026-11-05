@@ -36,6 +36,12 @@
 - Villager trades involving diamonds wait until World 5.
 - Difficulty modes: story keeps the inventory on death; hardcore makes death permanent and a broken World Block deletes its world.
 - Gear class levels read from item components are bounded.
+- World variants: a Seed now hatches into a variant of its world. Feeding the planted Seed (flowers, honey, berries, moss lean it calm; gunpowder, blaze powder, rotten flesh, bones, spider eyes, magma cream lean it wild) and the blocks within 3 of it decide; at karma +100 the world is Hallowed, at -100 Cursed. Calm worlds have fewer, weaker creatures and a gentler rule; wild and cursed ones more and stronger creatures, a harsher rule and richer drops. Each world names its calm and wild variants; the Journal's Worlds tab marks them with a seal and explains them on hover. Only the planter's group can feed its Seed.
+- Boss mutations: from World 6, the boss of a wild, hallowed or cursed world wakes mutated (Searing, Frenzied, Echoing, Radiant or Hollow), named in its boss bar. A mutated boss drops a Mutated Scale and two more Shell Shards.
+- Effects between the scales: a World Block now leaks its world within 8 blocks (spores and growth, heat for furnaces and sparks, slammed doors, gusts and charged lightning rods, snuffed candles, floating items, soaked farmland, hastened crops and spoiled food, cracking stone) and shakes while a boss fight rages inside. In return, water, ice, redstone, storms, lights, dry ground or Terrain Anchors around it soften or strengthen the rule inside, and moving a World Block makes its world quake.
+- Every World Block shows a small turning island of its world above it, tinted by its variant.
+- World 10 at doll scale: giant spools, nails, pins, buttons, thimbles, scissors, pencils and wood offcuts lie on the workshop floor, and the Titanic Workbench is now a towering bench whose top holds the Maquette: a quarter-scale model of your base, captured when the World 10 Seed hatches and built with real blocks on your first visit.
+- New in-game check of all this: `./gradlew runClientGameTest -Pscale`.
 
 ## 0.2.0 (alpha)
 
