@@ -36,6 +36,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('fixes')) {
 				vmArgs '-Dmatriochka.capture=fixes'
 			}
+			if (name == 'clientGameTest' && project.hasProperty('ocean')) {
+				vmArgs '-Dmatriochka.capture=ocean'
+			}
 			if (name == 'clientGameTest' && project.hasProperty('moves')) {
 				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true'
 			}
