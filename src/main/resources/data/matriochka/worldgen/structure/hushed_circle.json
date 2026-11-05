@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_5",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "world": 5,
+  "archetype": "circle",
+  "role": "combat",
+  "size": "medium",
+  "structure_id": "hushed_circle"
+}

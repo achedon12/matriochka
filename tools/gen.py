@@ -20,6 +20,7 @@ import bosses_hd
 import attacks
 import sound
 import translations
+import gen_replay
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "mobs_hd"))
 import registry as mobs_registry  # noqa: E402
 
@@ -97,6 +98,9 @@ def gen_items():
             lang(f"item.{NS}.{iid}.desc", it["effect_en"], it["effect_fr"])
         p = it.get("pal") or pal(it["world"])
         tpath = os.path.join(A, f"textures/item/{iid}.png")
+        # the replay gear paints itself and writes its own models (tools/gen_replay.py)
+        if gen_replay.item_assets(it, p, tpath, w, A):
+            continue
         hand = craft.crafted_item(it)
         if hand is not None:
             hand.image().save(tpath)
@@ -964,6 +968,7 @@ def main():
     gen_lang_story()
     gen_java()
     particles.gen(A, PARTICLES_JAVA)
+    gen_replay.gen(lang, w, ROOT)
     rendered = sound.gen(A, SOUNDS_JAVA, lang, w)
     # merge hand-written lang (ui strings)
     for code, table in (("en_us", EN), ("fr_fr", FR)):

@@ -232,6 +232,8 @@ public final class ModContent {
 			default -> {}
 		}
 		if (d.id().equals("cracked_doll") || d.id().equals("last_doll_key")) p.fireResistant();
+		Item replay = fr.achedon12.matriochka.item.ReplayGear.make(d, p);
+		if (replay != null) return replay;
 		return new MatrioItem(d, p);
 	}
 

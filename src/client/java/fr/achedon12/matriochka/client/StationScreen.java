@@ -73,6 +73,11 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 				buttons.add(l + 150, t + 38, 92, 18, Component.translatable("station.matriochka.upgrade"), () -> click(210));
 				buttons.add(l + 150, t + 60, 92, 18, Component.translatable("station.matriochka.reroll"), () -> click(211));
 				buttons.add(l + 150, t + 82, 92, 18, Component.translatable("station.matriochka.layer"), () -> click(212));
+				// the talent trees open in their own cabinet
+				buttons.add(l + 150, t + 117, 92, 16, Component.translatable("talents.matriochka.open"), () -> {
+					minecraft.player.closeContainer();
+					minecraft.gui.setScreen(new TalentScreen());
+				});
 			}
 			case "abyssal_press" -> buttons.add(l + 199, t + 113, 46, 16, Component.translatable("station.matriochka.refill"), () -> click(220));
 			case "inverter" -> buttons.add(l + 199, t + 52, 46, 16, Component.translatable("station.matriochka.invert"), () -> click(220));

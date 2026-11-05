@@ -27,6 +27,14 @@ public final class Config {
 		public float soulGainMultiplier = 1f;
 		public int maxActiveGroups = 0;
 		public int maxParcels = 0;
+		/** World events (invasions, surges, travelling merchants): on or off, and how often (see worldEventChance). */
+		public boolean worldEvents = true;
+		/** Chance that an event starts around a player in a world, rolled once a minute. */
+		public float worldEventChance = 0.06f;
+		/** Minutes of quiet after an event before the next one can start in the same world. */
+		public int worldEventCooldown = 10;
+		/** Relative weights of the three events. */
+		public int invasionWeight = 3, surgeWeight = 3, merchantWeight = 2;
 	}
 
 	private static Values values = new Values();
@@ -109,6 +117,20 @@ public final class Config {
 	/** Largest number of parcels handed out on the server, or 0 for no limit. */
 	public static int maxParcels() {
 		return Math.max(0, values.maxParcels);
+	}
+
+	/** Whether world events may happen at all (never in peaceful: see world/WorldEvents). */
+	public static boolean worldEvents() {
+		return values.worldEvents && values.worldEventChance > 0;
+	}
+
+	public static float worldEventChance() {
+		return Math.max(0f, Math.min(1f, values.worldEventChance));
+	}
+
+	/** Ticks of quiet after an event. */
+	public static int worldEventCooldown() {
+		return Math.max(0, values.worldEventCooldown) * 1200;
 	}
 
 	public static Values get() {

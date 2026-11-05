@@ -31,6 +31,8 @@ The earlier commands (`progression set`, `world enter`/`leave`, `boss <id>`, `la
 | `maxActiveGroups` | `0` | How many groups may hold worlds at once (groups with members and a parcel). `0` = no limit. |
 | `maxParcels` | `0` | How many parcels the server hands out in all, every cycle and reset included. `0` = no limit. |
 
+World events have their own keys (`worldEvents`, `worldEventChance`, `worldEventCooldown` and the event weights): see [World events](World-Events).
+
 A group that already holds a parcel is never stopped. When a new group would go over a limit, its Seed stays unhatched and tells its planter every few seconds that the server is full; it hatches on its own once room is made (a group disbanded, a limit raised).
 
 Comfort options (screen shake, flashes, soft effects, subtitles, HUD, music volumes) are per player, on the client: see [Accessibility](Accessibility).

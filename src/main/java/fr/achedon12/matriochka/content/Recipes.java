@@ -139,6 +139,15 @@ public final class Recipes {
 		r("final_loom", "artisan_boots", 1, -1, "artisan_thread", 4, "gravity_boots", 1);
 		r("final_loom", "unfinished_effigy", 1, -1, "artisan_thread", 6, "artisan_shard", 1, "wool_thread", 4);
 		r("final_loom", "workshop_feast", 1, -1, "root_broth", 1, "ice_bread", 1, "cloud_fruit", 1, "season_jam", 1);
+		// the replay gear and the Trial Altar (tools/content.py REPLAY_GEAR)
+		for (ReplayContent.GearRecipe g : ReplayContent.RECIPES) {
+			Object[] in = new Object[g.inputs().size() * 2];
+			for (int i = 0; i < g.inputs().size(); i++) {
+				in[i * 2] = g.inputs().get(i);
+				in[i * 2 + 1] = g.counts().get(i);
+			}
+			r(g.station(), g.output(), 1, g.requires(), in);
+		}
 	}
 
 	public static List<Recipe> of(String station) {

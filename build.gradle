@@ -74,6 +74,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('onboarding')) {
 				vmArgs '-Dmatriochka.capture=onboarding'
 			}
+			if (name == 'clientGameTest' && project.hasProperty('replay')) {
+				vmArgs '-Dmatriochka.capture=replay'
+			}
 			if (name == 'clientGameTest' && project.hasProperty('moves')) {
 				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true'
 			}

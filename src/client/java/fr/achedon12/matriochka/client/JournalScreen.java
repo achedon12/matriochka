@@ -107,6 +107,11 @@ public class JournalScreen extends Screen {
 				onClose();
 			});
 		}
+		// the Trials open once an ending is seen, from the Objective page, next to the Comfort button (and clear of the
+		// Guide toggle and the New Cycle on the right page)
+		if (!scroll && tab == 0 && JournalPages.endingsSeen() > 0) {
+			buttons.add(l + 94, t + BH - 30, 76, 16, Component.translatable("trials.matriochka.title"), () -> minecraft.gui.setScreen(new TrialsScreen(this)));
+		}
 		if (!scroll && tab == 1) {
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> { questWorld = Math.max(0, questWorld - 1); pageAt = Ui.now(); turnDir = -1; rebuild(); }, () -> questWorld > 0);
 			buttons.add(l + BW - 40, t + BH - 30, 18, 16, Component.literal(">"), () -> { questWorld = Math.min(KARMA_CHAPTER, questWorld + 1); pageAt = Ui.now(); turnDir = 1; rebuild(); }, () -> questWorld < KARMA_CHAPTER);

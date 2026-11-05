@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_9",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 9,
+  "archetype": "circle",
+  "role": "combat",
+  "size": "medium",
+  "structure_id": "restless_circle"
+}

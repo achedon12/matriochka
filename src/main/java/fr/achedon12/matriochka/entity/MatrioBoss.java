@@ -121,6 +121,14 @@ public class MatrioBoss extends Monster implements GeoEntity {
 
 	/** Spawns a boss, scaling health with the number of players near it. */
 	public static MatrioBoss summon(ServerLevel level, String id, BlockPos at, ServerPlayer by) {
+		return summon(level, id, at, by, true);
+	}
+
+	/**
+	 * Spawns a boss; without its introduction (bars, title card, the camera turning to it) when {@code intro} is false,
+	 * as in the Trials, where the clock is running.
+	 */
+	public static MatrioBoss summon(ServerLevel level, String id, BlockPos at, ServerPlayer by, boolean intro) {
 		Entity e = ModContent.entity(id).create(level, EntitySpawnReason.EVENT);
 		if (!(e instanceof MatrioBoss boss)) return null;
 		int players = Math.max(1, level.getEntitiesOfClass(Player.class, new net.minecraft.world.phys.AABB(at).inflate(48)).size());
@@ -143,7 +151,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		level.addFreshEntity(boss);
 		level.playSound(null, at, fr.achedon12.matriochka.content.Sounds.BOSS_AWAKEN, SoundSource.HOSTILE, 2f, 1f);
 		boss.triggerAnim("action", "phase");
-		fr.achedon12.matriochka.net.Cues.bossIntro(level, boss, id);
+		if (intro) fr.achedon12.matriochka.net.Cues.bossIntro(level, boss, id);
 		if (!boss.mutation.isEmpty()) {
 			Component desc = Component.translatable("mutation.matriochka." + boss.mutation + ".desc");
 			for (ServerPlayer p : level.getEntitiesOfClass(ServerPlayer.class, boss.getBoundingBox().inflate(48))) {
@@ -762,6 +770,11 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		super.die(source);
 		bar.removeAllPlayers();
 		if (!(level() instanceof ServerLevel level)) return;
+		// a trial boss grants nothing of the story: the trial keeps its own score
+		if (entityTags().contains(fr.achedon12.matriochka.replay.Trials.TAG)) {
+			fr.achedon12.matriochka.replay.Trials.bossDown(this);
+			return;
+		}
 		// the Shadow of World 0 grants nothing by dying (only by being set down, see WorldZero)
 		if (def.world() == Worlds.ZERO) return;
 		MatrioData data = MatrioData.get(level.getServer());

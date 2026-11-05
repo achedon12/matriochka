@@ -53,6 +53,7 @@ public class MatrioClient implements ClientModInitializer {
 		});
 		net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.DISCONNECT.register((h, mc) -> Cinematics.reset());
 		ClientPlayNetworking.registerGlobalReceiver(Net.EndingPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new EndingScreen(p.kind())));
+		ReplayClient.init();
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})

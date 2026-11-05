@@ -989,6 +989,224 @@ CLASSES = [
     ("prospector", "Prospector", "Prospecteur", "tool", "Mining speed, ore luck", "Vitesse de minage, chance de minerai"),
 ]
 
+# ---------------------------------------------------------------- talents (bought at the Class Table)
+# Each class has three branches of four talents, learnt in order with souls and, for the last two, Shell Shards.
+# A class's talents act while you wear or hold at least one item of that class (any tool counts for the Prospector).
+# Talent tier: (souls, Shell Shards, highest boss your group must have beaten: 0 is the Block Guardian)
+TALENT_TIERS = [(20, 0, 0), (50, 0, 2), (120, 1, 5), (250, 2, 8)]
+# Unlearning every talent gives back this share of the souls spent (never the shards).
+TALENT_REFUND = 0.5
+# What each effect does, as shown in its tooltip ("%s" is the shown value). Percent effects show value x 100.
+TALENT_EFFECTS = {
+    "armor": ("+%s armor", "+%s d'armure"),
+    "toughness": ("+%s armor toughness", "+%s de robustesse"),
+    "knockback": ("+%s%% knockback resistance", "+%s %% de résistance au recul"),
+    "max_health": ("+%s max health", "+%s de vie max"),
+    "damage": ("+%s%% attack damage", "+%s %% de dégâts"),
+    "attack_speed": ("+%s%% attack speed", "+%s %% de vitesse d'attaque"),
+    "speed": ("+%s%% movement speed", "+%s %% de vitesse de déplacement"),
+    "luck": ("+%s luck", "+%s de chance"),
+    "mining": ("+%s mining efficiency", "+%s d'efficacité de minage"),
+    "break_speed": ("+%s%% block breaking speed", "+%s %% de vitesse de cassage"),
+    "reach": ("+%s blocks of reach", "+%s blocs de portée"),
+    "step": ("Step up %s block higher", "Enjambe %s bloc de plus"),
+    "safe_fall": ("Fall %s blocks more without harm", "Tombe de %s blocs de plus sans dommage"),
+    "jump": ("+%s%% jump strength", "+%s %% de force de saut"),
+    "oxygen": ("+%s oxygen bonus: your breath lasts longer", "+%s de bonus d'oxygène : ton souffle dure plus"),
+    "burn": ("Burn %s%% shorter", "Brûle %s %% moins longtemps"),
+    "submerged": ("+%s%% mining speed under water", "+%s %% de vitesse de minage sous l'eau"),
+    "laststand": ("Below 30%% health, take %s%% less damage", "Sous 30 %% de vie, subis %s %% de dégâts en moins"),
+    "thorns": ("Return %s%% of the damage you take to the attacker", "Renvoie %s %% des dégâts subis à l'attaquant"),
+    "regen": ("Out of combat, regain %s health every 2 seconds", "Hors combat, regagne %s de vie toutes les 2 secondes"),
+    "absorb": ("Every 30 seconds, gain %s absorption health", "Toutes les 30 secondes, gagne %s de vie d'absorption"),
+    "rage": ("Below half health, deal %s%% more damage", "Sous la moitié de ta vie, inflige %s %% de dégâts en plus"),
+    "killspeed": ("A kill gives Speed for %s seconds", "Une mise à mort donne Vitesse pendant %s secondes"),
+    "boss": ("Deal %s%% more damage to bosses", "Inflige %s %% de dégâts en plus aux boss"),
+    "crit": ("Your first blow on a creature deals %s%% more", "Ton premier coup sur une créature inflige %s %% de plus"),
+    "execute": ("Deal %s%% more to foes below a quarter of their health", "Inflige %s %% de plus aux ennemis sous le quart de leur vie"),
+    "dodge": ("+%s%% chance to dodge a blow", "+%s %% de chances d'esquiver un coup"),
+    "ghost": ("A kill turns you invisible for %s seconds", "Une mise à mort te rend invisible pendant %s secondes"),
+    "sneak": ("Blows struck while sneaking deal %s%% more", "Les coups portés accroupi infligent %s %% de plus"),
+    "souls": ("+%s%% souls from every kill", "+%s %% d'âmes à chaque mise à mort"),
+    "shards": ("%s%% chance of one more Shell Shard from a boss", "%s %% de chances d'un Éclat d'enveloppe de plus sur un boss"),
+    "lifesteal": ("Heal %s%% of the damage you deal", "Soigne %s %% des dégâts infligés"),
+    "killheal": ("A kill heals %s health", "Une mise à mort soigne %s de vie"),
+    "wither": ("Your blows wither the foe for %s seconds", "Tes coups flétrissent l'ennemi pendant %s secondes"),
+    "resist": ("World gauges rise %s%% slower", "Les jauges des mondes montent %s %% moins vite"),
+    "orebonus": ("%s%% chance to mine an ore twice", "%s %% de chances de miner un minerai deux fois"),
+    "haste": ("Haste while you hold a tool", "Célérité tant que tu tiens un outil"),
+}
+TALENT_PERCENT = {"knockback", "damage", "attack_speed", "speed", "break_speed", "jump", "burn", "submerged", "laststand", "thorns",
+                  "rage", "boss", "crit", "execute", "dodge", "sneak", "souls", "shards", "lifesteal", "resist", "orebonus"}
+# class: [(branch id, en, fr, [(talent id, en, fr, effect, value) x 4])]
+TALENTS = {
+    "guardian": [
+        ("bulwark", "Bulwark", "Rempart", [("stout", "Stout", "Trapu", "armor", 1), ("plated", "Plated", "Blindé", "armor", 2),
+                                           ("unbroken", "Unbroken", "Inébranlable", "toughness", 2), ("last_wall", "Last Wall", "Dernier rempart", "laststand", 0.25)]),
+        ("rooted", "Rooted", "Enraciné", [("planted", "Planted Feet", "Pieds plantés", "knockback", 0.1), ("broad", "Broad Back", "Large dos", "max_health", 2),
+                                          ("immovable", "Immovable", "Inamovible", "knockback", 0.2), ("thornshell", "Thornshell", "Carapace d'épines", "thorns", 0.2)]),
+        ("warden", "Warden", "Veilleur", [("hardy", "Hardy", "Endurci", "resist", 0.05), ("mending", "Slow Mending", "Lente guérison", "regen", 1),
+                                          ("hearty", "Hearty", "Robuste", "max_health", 4), ("lacquer_skin", "Lacquer Skin", "Peau de laque", "absorb", 4)]),
+    ],
+    "berserker": [
+        ("fury", "Fury", "Furie", [("heavy_hand", "Heavy Hand", "Main lourde", "damage", 0.03), ("bloodied", "Bloodied", "Ensanglanté", "rage", 0.15),
+                                   ("cleaver", "Cleaver", "Fendoir", "damage", 0.05), ("red_mist", "Red Mist", "Brume rouge", "rage", 0.25)]),
+        ("frenzy", "Frenzy", "Frénésie", [("quick_arm", "Quick Arm", "Bras vif", "attack_speed", 0.05), ("momentum", "Momentum", "Élan", "killspeed", 4),
+                                          ("flurry", "Flurry", "Rafale", "attack_speed", 0.1), ("rampage", "Rampage", "Saccage", "killheal", 3)]),
+        ("shellbreaker", "Shellbreaker", "Brise-coque", [("opener", "Opener", "Ouverture", "crit", 0.2), ("giantkiller", "Giantkiller", "Tueur de géants", "boss", 0.06),
+                                                         ("finisher", "Finisher", "Achèvement", "execute", 0.2), ("shell_splitter", "Shell Splitter", "Fend-coquille", "boss", 0.12)]),
+    ],
+    "prowler": [
+        ("shadowstep", "Shadowstep", "Pas d'ombre", [("light_foot", "Light Foot", "Pied léger", "speed", 0.03), ("slip", "Slip Away", "Faux-fuyant", "dodge", 0.03),
+                                                     ("fleet", "Fleet", "Prompt", "speed", 0.05), ("phantom", "Phantom", "Fantôme", "dodge", 0.06)]),
+        ("featherfoot", "Featherfoot", "Pied de plume", [("soft_landing", "Soft Landing", "Réception douce", "safe_fall", 2), ("climber", "Climber", "Grimpeur", "step", 0.5),
+                                                         ("springheel", "Springheel", "Talon-ressort", "jump", 0.1), ("cats_fall", "Cat's Fall", "Chute de chat", "safe_fall", 5)]),
+        ("ambush", "Ambush", "Embuscade", [("first_cut", "First Cut", "Premier sang", "crit", 0.15), ("stalker", "Stalker", "Traqueur", "sneak", 0.2),
+                                           ("vanish", "Vanish", "Disparition", "ghost", 3), ("assassin", "Assassin", "Assassin", "sneak", 0.4)]),
+    ],
+    "reaper": [
+        ("harvest", "Harvest", "Moisson", [("gleaner", "Gleaner", "Glaneur", "souls", 0.05), ("thresher", "Thresher", "Batteur", "souls", 0.08),
+                                           ("shell_gatherer", "Shell Gatherer", "Ramasse-coquilles", "shards", 0.25), ("great_reaping", "Great Reaping", "Grande moisson", "souls", 0.15)]),
+        ("leech", "Leech", "Sangsue", [("thirst", "Thirst", "Soif", "lifesteal", 0.02), ("feast", "Feast", "Festin", "killheal", 2),
+                                       ("bloodletter", "Bloodletter", "Saigneur", "lifesteal", 0.04), ("gorge", "Gorge", "Ripaille", "killheal", 4)]),
+        ("omen", "Omen", "Présage", [("lucky_coin", "Lucky Coin", "Pièce porte-bonheur", "luck", 0.5), ("blight", "Blight", "Flétrissure", "wither", 2),
+                                     ("fortune", "Fortune", "Fortune", "luck", 1), ("doom", "Doom", "Funeste", "wither", 4)]),
+    ],
+    "survivor": [
+        ("endurance", "Endurance", "Endurance", [("tough_lungs", "Tough Lungs", "Poumons solides", "resist", 0.05), ("weathered", "Weathered", "Aguerri", "resist", 0.08),
+                                                 ("thick_skin", "Thick Skin", "Peau épaisse", "max_health", 2), ("unbowed", "Unbowed", "Insoumis", "resist", 0.12)]),
+        ("recovery", "Recovery", "Récupération", [("second_wind", "Second Wind", "Second souffle", "regen", 1), ("scavenger", "Scavenger", "Charognard", "killheal", 1),
+                                                  ("rally", "Rally", "Ralliement", "regen", 2), ("iron_heart", "Iron Heart", "Cœur de fer", "max_health", 4)]),
+        ("grit", "Grit", "Cran", [("stubborn", "Stubborn", "Têtu", "laststand", 0.15), ("deep_breath", "Deep Breath", "Grande inspiration", "oxygen", 1),
+                                  ("ember_proof", "Ember-Proof", "Ignifugé", "burn", 0.5), ("never_down", "Never Down", "Jamais à terre", "laststand", 0.3)]),
+    ],
+    "prospector": [
+        ("delver", "Delver", "Fouilleur", [("keen_edge", "Keen Edge", "Fil aiguisé", "mining", 2), ("swift_pick", "Swift Pick", "Pioche vive", "break_speed", 0.1),
+                                           ("deep_cut", "Deep Cut", "Taille profonde", "mining", 4), ("gold_fever", "Gold Fever", "Fièvre de l'or", "haste", 1)]),
+        ("lode", "Lode", "Filon", [("ore_nose", "Ore Nose", "Flair du filon", "orebonus", 0.05), ("lucky_strike", "Lucky Strike", "Coup de chance", "luck", 0.5),
+                                   ("rich_vein", "Rich Vein", "Filon riche", "orebonus", 0.1), ("motherlode", "Motherlode", "Filon-mère", "orebonus", 0.2)]),
+        ("tunneler", "Tunneler", "Tunnelier", [("long_arm", "Long Arm", "Bras long", "reach", 0.5), ("wet_pick", "Wet Pick", "Pioche mouillée", "submerged", 0.5),
+                                               ("longer_arm", "Longer Arm", "Bras plus long", "reach", 1.0), ("mole", "Mole", "Taupe", "break_speed", 0.2)]),
+    ],
+}
+
+# ---------------------------------------------------------------- trials (after an ending)
+# Once a player has seen an ending, the Journal and the Trial Altar open the Trials, fought on a lacquered stage inside
+# the Refuge doll. A world trial: two waves of the world's creatures (the second led by its elites), then its boss. The
+# Gauntlet: the eleven bosses, one after the other, each on a stage painted for its world. Trial bosses are stronger
+# and always wake with a mutation. Best times are kept per player, per group and on a server-wide board.
+TRIAL_SCALE = dict(health=1.6, damage=1.35, gauntlet_health=1.2, gauntlet_damage=1.15, wave=4, elites=2)
+# the mutation each boss is forced to wake with in a trial
+TRIAL_MUTATION = {0: "radiant", 1: "hollow", 2: "searing", 3: "echoing", 4: "radiant", 5: "hollow",
+                  6: "echoing", 7: "frenzied", 8: "searing", 9: "echoing", 10: "frenzied"}
+# (key, world (0 for the Gauntlet), par time in seconds: finish under it for the Swift Hand title)
+TRIALS = [(f"w{w}", w, 150 + 15 * w) for w in range(1, 10)] + [("w10", 10, 480), ("gauntlet", 0, 1800)]
+# souls every clear gives, and the reward of a first clear: a trophy doll and a title
+TRIAL_SOULS = 25
+TRIAL_TITLES = {
+    "w1": ("hive_breaker", "Hive Breaker", "Briseur de ruche"), "w2": ("ember_walker", "Ember Walker", "Marche-braise"),
+    "w3": ("gaol_breaker", "Gaol Breaker", "Brise-geôle"), "w4": ("storm_rider", "Storm Rider", "Chevaucheur d'orage"),
+    "w5": ("lightbringer", "Lightbringer", "Porte-lumière"), "w6": ("mirror_breaker", "Mirror Breaker", "Brise-miroir"),
+    "w7": ("abyss_diver", "Abyss Diver", "Plongeur des abysses"), "w8": ("timekeeper", "Timekeeper", "Gardien du temps"),
+    "w9": ("groundshaker", "Groundshaker", "Ébranleur"), "w10": ("unmaker", "Unmaker", "Défaiseur"),
+    "gauntlet": ("gauntlet_champion", "Gauntlet Champion", "Champion de l'Épreuve"), "swift": ("swift_hand", "Swift Hand", "Main preste"),
+}
+TRIAL_NAMES = {"gauntlet": ("The Gauntlet", "L'Épreuve des onze")}
+for _w in range(1, 11):
+    _b = next(b for b in BOSSES if b["world"] == _w)
+    TRIAL_NAMES[f"w{_w}"] = (f"Trial: {_b['en']}", f"Épreuve : {_b['fr']}")
+    item(f"trophy_doll_{_w}", f"{_b['en']} Trophy", f"Trophée : {_b['fr']}", _w, "trophy", "epic", "trophy",
+         "A painted doll of the boss, won in its trial.", "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.")
+item("trophy_doll_gauntlet", "Gauntlet Trophy", "Trophée de l'Épreuve des onze", 0, "trophy", "legendary", "trophy",
+     "Eleven dolls in one, won by finishing the Gauntlet.", "Onze poupées en une, gagnées au bout de l'Épreuve des onze.")
+block("trial_altar", "Trial Altar", "Autel des épreuves", 0, "trial_altar", "stone_rune",
+      note_en="Opens the Trials once you have seen an ending.", note_fr="Ouvre les Épreuves une fois une fin vue.")
+
+# ---------------------------------------------------------------- world events
+# While players are in a world, now and then something happens around them (frequency in world/Config.java, never in
+# peaceful): an invasion (waves of the world's creatures, the last led by an elite warlord, a chest at the end), a
+# surge of the world's rule (twice as strong for two minutes) or a travelling merchant with special trades.
+INVASION = dict(warning=10, waves=3, base=3, per_player=2, warlord_health=3.0, warlord_damage=1.5, time=240)
+SURGE = dict(warning=10, duration=120, strength=2.0, souls=15)
+MERCHANT = dict(stay=6000)
+# world: (id, en, fr, what it does en, fr)
+SURGES = {
+    1: ("spore_bloom", "Spore Bloom", "Floraison de spores", "The jungle exhales: toxin rises twice as fast and spore clouds drift by.", "La jungle expire : la toxine monte deux fois plus vite et des nuages de spores dérivent."),
+    2: ("magma_surge", "Magma Surge", "Poussée de magma", "The veins boil: heat rises twice as fast and the ground spits flame.", "Les filons bouillonnent : la chaleur monte deux fois plus vite et le sol crache des flammes."),
+    3: ("lockdown", "Lockdown", "Bouclage", "Every lock bites: the halls grind, your limbs grow heavy.", "Chaque verrou mord : les salles grincent, tes membres s'alourdissent."),
+    4: ("tempest", "Tempest", "Tempête", "Gusts every few seconds and lightning all around.", "Des bourrasques toutes les quelques secondes et la foudre tout autour."),
+    5: ("blackout", "Blackout", "Extinction", "The Deep drinks every light: noise rises twice as fast, darkness pulses.", "La Profondeur boit chaque lumière : le bruit monte deux fois plus vite, le noir pulse."),
+    6: ("gravity_storm", "Gravity Storm", "Orage de gravité", "Gravity jolts at random: you are thrown up and caught again.", "La gravité tressaute au hasard : tu es projeté en l'air puis rattrapé."),
+    7: ("crushing_current", "Crushing Current", "Courant écrasant", "A deep current drags you and drinks your air twice as fast.", "Un courant profond t'entraîne et boit ton air deux fois plus vite."),
+    8: ("season_rush", "Season Rush", "Course des saisons", "Every season at once: hunger, frost and weakness come and go.", "Toutes les saisons à la fois : faim, gel et faiblesse vont et viennent."),
+    9: ("great_quake", "Great Quake", "Grand séisme", "The ground never settles: tremors stagger you every few seconds.", "Le sol ne se calme plus : des secousses te font chanceler toutes les quelques secondes."),
+    10: ("unravelling", "Unravelling", "Effilochage", "The Workshop's seams give way: every zone's rule bites twice as hard.", "Les coutures de l'Atelier cèdent : la règle de chaque zone mord deux fois plus fort."),
+}
+# The travelling merchant of each world: its name and its special trades (cost, count, result, count).
+MERCHANTS = {
+    1: (("Wandering Gatherer", "Cueilleur vagabond"), [("spores", 24, "spore_bow", 1), ("sporite", 6, "shell_shard", 1), ("minecraft:emerald", 6, "chance_doll", 1)]),
+    2: (("Wandering Free Miner", "Mineur libre vagabond"), [("ash_ingot", 8, "magma_flail", 1), ("giant_ore", 4, "shell_shard", 1), ("blazing_rock", 16, "drill", 1)]),
+    3: (("Escaped Prisoner", "Prisonnier évadé"), [("sealed_fragment", 10, "key_chain_whip", 1), ("dungeon_key", 3, "shell_shard", 1), ("sealed_fragment", 6, "sealed_shackle", 1)]),
+    4: (("Drifting Lighthouse Keeper", "Gardien de phare à la dérive"), [("celestial_crystal", 6, "storm_javelin", 1), ("storm_essence", 4, "armor_layer", 2), ("ray_membrane", 10, "storm_censer", 1)]),
+    5: (("Silent Pedlar", "Colporteur silencieux"), [("shadow_shard", 8, "lantern_shield", 1), ("diamond_fragment", 6, "shell_shard", 1), ("shadow_shard", 4, "solar_lantern", 1)]),
+    6: (("Stray Reflection", "Reflet errant"), [("unstable_alloy", 6, "shell_shard", 1), ("inverted_crystal", 2, "mutated_scale", 1), ("unstable_alloy", 4, "gravity_boots", 1)]),
+    7: (("Drifting Diver", "Plongeur à la dérive"), [("abyssal_cobalt", 6, "tide_harpoon", 1), ("pressure_pearl", 2, "shell_shard", 1), ("nacre", 6, "nacre_snorkel", 1)]),
+    8: (("Passing Ephemeral", "Éphémère voyageur"), [("temporal_sand", 10, "hourglass", 1), ("season_fragment", 2, "shell_shard", 1), ("temporal_sand", 8, "wreath_of_seasons", 1)]),
+    9: (("Uprooted Anchored", "Ancré déraciné"), [("terrain_fragment", 10, "quake_pick", 1), ("terrain_fragment", 6, "shell_shard", 1), ("terrain_fragment", 4, "grip_boots", 1)]),
+    10: (("Wandering Apprentice", "Apprenti vagabond"), [("artisan_thread", 8, "shell_shard", 2), ("artisan_thread", 12, "artisan_shard", 1), ("artisan_thread", 6, "mutated_scale", 1)]),
+}
+
+# ---------------------------------------------------------------- new gear (one new weapon or tool per two worlds, and more)
+# (id, en, fr, world, kind, rarity, shape, effect en, effect fr, station, ingredients). Behaviour in item/ReplayGear.java.
+REPLAY_GEAR = [
+    ("spore_bow", "Spore Bow", "Arc à spores", 1, "bow", "rare", "spore_bow",
+     "Its arrows burst into a cloud of toxic spores where they strike.", "Ses flèches éclatent en un nuage de spores toxiques là où elles frappent.",
+     "spore_vat", [("roots", 4), ("spores", 12), ("minecraft:string", 3), ("chitin", 1)]),
+    ("magma_flail", "Magma Flail", "Fléau de magma", 2, "weapon", "rare", "magma_flail",
+     "Sets foes ablaze; every third blow bursts into a ring of flame. Swinging it warms you in the Veins.",
+     "Embrase l'ennemi ; un coup sur trois éclate en un cercle de flammes. Le manier te réchauffe dans les Filons.",
+     "ash_foundry", [("ash_ingot", 5), ("blazing_rock", 4), ("minecraft:iron_chain", 2)]),
+    ("key_chain_whip", "Key Chain Whip", "Fouet à clés", 3, "weapon", "rare", "key_chain_whip",
+     "Long reach. Every lash drags the foe toward you and slows it.", "Longue portée. Chaque coup tire l'ennemi vers toi et le ralentit.",
+     "jailer_table", [("sealed_fragment", 5), ("dungeon_key", 1), ("minecraft:iron_chain", 3)]),
+    ("storm_javelin", "Storm Javelin", "Javelot d'orage", 4, "weapon", "epic", "storm_javelin",
+     "Use it to throw: lightning falls where it strikes, then it flies back to your hand.", "Utilise-le pour le lancer : la foudre tombe où il frappe, puis il revient dans ta main.",
+     "lightning_forge", [("celestial_crystal", 3), ("storm_essence", 3), ("minecraft:stick", 2)]),
+    ("lantern_shield", "Lantern Shield", "Bouclier-lanterne", 5, "ward", "epic", "lantern_shield",
+     "Blocks like a shield. Each blocked blow flares: the attacker is blinded, thrown back and marked.",
+     "Pare comme un bouclier. Chaque coup paré jette un éclair : l'attaquant est aveuglé, repoussé et marqué.",
+     "dark_altar", [("shadow_shard", 5), ("minecraft:lantern", 1), ("minecraft:iron_ingot", 4)]),
+    ("tide_harpoon", "Tide Harpoon", "Harpon des marées", 7, "weapon", "epic", "tide_harpoon",
+     "Use it to throw: it drags what it hits back to you, farther under water. Its line brings it home.",
+     "Utilise-le pour le lancer : il ramène à toi ce qu'il touche, plus loin sous l'eau. Sa ligne le ramène.",
+     "abyssal_press", [("abyssal_cobalt", 4), ("nacre", 2), ("minecraft:string", 4)]),
+    ("quake_pick", "Quake Pick", "Pioche sismique", 9, "tool", "epic", "quake_pick",
+     "Mines a column of three. Use it on the ground: a tremor that staggers the creatures around you.",
+     "Mine une colonne de trois. Utilise-la sur le sol : une secousse qui ébranle les créatures autour de toi.",
+     "terrain_anchor", [("terrain_fragment", 6), ("minecraft:iron_pickaxe", 1)]),
+]
+for _g in REPLAY_GEAR:
+    item(_g[0], _g[1], _g[2], _g[3], _g[4], _g[5], _g[6], _g[7], _g[8])
+# The Trial Altar is carved at the Matrix Workbench once the Unfinished has fallen.
+TRIAL_ALTAR_RECIPE = ("matrix_workbench", 10,[("lacquer_block", 4), ("minecraft:gold_block", 1), ("shell_shard", 2)])
+
+# ---------------------------------------------------------------- new structures (one more per world)
+# Appended after each world's ten, so the Journal pages keep their structures. Builders in structure/Outposts.java.
+REPLAY_STRUCTURES = {
+    1: ("gatherer_caravan", "Gatherers' Caravan", "Caravane des cueilleurs", "utility", "medium", "rare", "caravan"),
+    2: ("ember_circle", "Ember Circle", "Cercle de braises", "combat", "medium", "common", "circle"),
+    3: ("gaolers_gatehouse", "Gaolers' Gatehouse", "Corps de garde des geôliers", "combat", "medium", "rare", "bastion"),
+    4: ("sky_outpost", "Sky Outpost", "Avant-poste céleste", "combat", "medium", "common", "outpost"),
+    5: ("hushed_circle", "Hushed Circle", "Cercle feutré", "combat", "medium", "common", "circle"),
+    6: ("hanging_outpost", "Hanging Outpost", "Avant-poste suspendu", "combat", "medium", "rare", "outpost"),
+    7: ("drowned_bastion", "Drowned Bastion", "Bastion noyé", "combat", "large", "rare", "bastion"),
+    8: ("ephemeral_caravan", "Ephemeral Caravan", "Caravane éphémère", "utility", "medium", "rare", "caravan"),
+    9: ("restless_circle", "Restless Circle", "Cercle sans repos", "combat", "medium", "common", "circle"),
+    10: ("thimble_outpost", "Thimble Outpost", "Avant-poste du dé", "combat", "large", "rare", "outpost"),
+}
+for _n, _s in REPLAY_STRUCTURES.items():
+    STRUCTURES[_n].append(_s)
+
 # ---------------------------------------------------------------- the Artisan's Journal (50 pages)
 # Five pages per world, as in design/lore.txt: 1 site note (why the world exists), 2 portrait of the apprentice who
 # became its boss, 3 observation (a survival or combat tip), 4 coded page (a piece of the way to World 0, written

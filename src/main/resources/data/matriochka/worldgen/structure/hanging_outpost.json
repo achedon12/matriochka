@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_6",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 6,
+  "archetype": "outpost",
+  "role": "combat",
+  "size": "medium",
+  "structure_id": "hanging_outpost"
+}

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 732010,
+    "separation": 14,
+    "spacing": 42
+  },
+  "structures": [
+    {
+      "structure": "matriochka:thimble_outpost",
+      "weight": 1
+    }
+  ]
+}
