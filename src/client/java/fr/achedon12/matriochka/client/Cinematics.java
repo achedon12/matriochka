@@ -56,6 +56,8 @@ public final class Cinematics implements HudElement {
 	}
 
 	public static void cue(Cues.CuePayload p) {
+		// the numbers come from the server: keep them finite and in range before anything draws with them
+		if (!Float.isFinite(p.strength()) || p.ticks() < 0 || p.ticks() > 20 * 60) return;
 		switch (p.kind()) {
 			case "intro" -> startIntro(p.text(), p.entity());
 			case "phase" -> startPhase((int) p.strength());
@@ -100,7 +102,7 @@ public final class Cinematics implements HudElement {
 	}
 
 	public static void startPhase(int phase) {
-		phaseNumber = phase;
+		phaseNumber = Math.max(0, Math.min(9, phase));
 		phaseAt = Ui.now();
 		shake(0.6f, 10);
 	}
@@ -116,7 +118,7 @@ public final class Cinematics implements HudElement {
 		long now = Ui.now();
 		float left = currentShake(now);
 		if (strength >= left) {
-			shakeStrength = Math.min(1.5f, strength);
+			shakeStrength = Math.max(0, Math.min(1.5f, strength));
 			shakeAt = now;
 			shakeUntil = now + Math.max(100, ticks * 50L);
 		}
