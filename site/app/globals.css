@@ -482,7 +482,9 @@ tr.is-sel { background: rgba(23, 16, 13, 0.42); }
 /* ------------------------------------------------------------------ technical sheet */
 .sheet { background: linear-gradient(var(--red), var(--wb) 320px); padding-bottom: 56px; }
 .sheet-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 28px 56px; align-items: center; padding-block: 10px 36px; }
-.sheet-title h1 { font: 400 clamp(40px, 6.6vw, 92px) / 0.94 var(--f-d); color: var(--gold-b); text-shadow: 0 5px 0 var(--black); margin: 4px 0 10px; overflow-wrap: anywhere; }
+.sheet-title { container-type: inline-size; }
+/* The longest word always fits on one line: the display face runs about 0.8em per letter. */
+.sheet-title h1 { font: 400 min(92px, 6.6vw + 14px, calc(100cqi / (var(--longest, 8) * 0.8))) / 0.94 var(--f-d); color: var(--gold-b); text-shadow: 0 5px 0 var(--black); margin: 4px 0 10px; overflow-wrap: break-word; }
 .sheet-title > .small { margin: 0; font-style: italic; }
 .sheet-other { font-style: italic; font-size: 20px; color: var(--paper-dim); }
 .sheet-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
@@ -569,3 +571,10 @@ tr.is-sel { background: rgba(23, 16, 13, 0.42); }
 @media (max-width: 599px) { .stats, .stats-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .drop-table thead th { white-space: normal; }
 @media (max-width: 459px) { .drop-table th, .drop-table td { padding: 8px 6px; } }
+
+/* ------------------------------------------------------------------ creature moveset */
+.moves { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px; margin: 14px 0 28px; }
+.moves > div { background: rgba(0, 0, 0, 0.22); border-left: 3px solid var(--gold); padding: 12px 16px 14px; }
+.moves dt { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font: 400 22px/1.1 var(--f-d); color: var(--gold-b); margin-bottom: 6px; }
+.moves dt .num { font-size: 16px; color: var(--paper-dim); white-space: nowrap; }
+.moves dd { margin: 0; font-size: 16px; line-height: 1.5; }
