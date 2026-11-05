@@ -66,9 +66,18 @@ public final class Cinematics implements HudElement {
 				tintUntil = Math.max(tintUntil, Ui.now() + p.ticks() * 50L);
 			}
 			case "danger" -> danger = (int) p.strength();
-			case "world" -> pendingWorld = (int) p.strength();
+			case "world" -> {
+				// never trust the number: a bad one would index past the world table
+				int w = (int) p.strength();
+				if (validWorld(w)) pendingWorld = w;
+			}
 			default -> {}
 		}
+	}
+
+	/** World 0 (Worlds.ZERO) or one of the worlds of the content table. */
+	private static boolean validWorld(int w) {
+		return w == Worlds.ZERO || (w >= 1 && w <= Content.WORLDS.size());
 	}
 
 	// ---------------------------------------------------------------- starting effects
@@ -82,8 +91,9 @@ public final class Cinematics implements HudElement {
 	}
 
 	public static void startWorldCard(int world) {
-		worldCards++;
 		pendingWorld = -1;
+		if (!validWorld(world)) return;
+		worldCards++;
 		if (!Comfort.cinematics()) return;
 		cardWorld = world;
 		cardAt = Ui.now();
@@ -247,6 +257,10 @@ public final class Cinematics implements HudElement {
 		float t = (now - cardAt) / (float) CARD_MS;
 		float a = Math.min(Ui.easeBack(t / 0.12f), 1 - Ui.easeIn((t - 0.8f) / 0.2f));
 		if (a <= 0.02f) return;
+		if (!validWorld(cardWorld)) {
+			cardAt = -1;
+			return;
+		}
 		boolean zero = cardWorld == Worlds.ZERO;
 		Component name = Component.translatable("world.matriochka." + cardWorld);
 		Component rule = Component.translatable("cine.matriochka.world." + cardWorld);
