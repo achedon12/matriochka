@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Trials, open once you have seen an ending: a rush per world (two waves of its creatures, the second led by its elites, then its boss) and the Gauntlet of the eleven bosses, fought against the clock on a lacquered stage inside the Refuge doll, painted for each world. Trial bosses have more health and damage and always wake mutated, and grant nothing of the story. Open them from the Journal's Objective page, a new Trial Altar or `/matriochka trials start`. Falling carries you out instead of killing you.
+- A trial clock on the HUD (green under par), best times per player and per group, and a server-wide board of the ten best groups per trial, in the new Trials book and with `/matriochka trials top`. The first win of each trial gives its Trophy Doll and a title; finishing under par gives Swift Hand. Titles can be worn from the Trials book, quest titles included.
+- World events while you are in a world: invasions (three waves, the last led by a glowing warlord, a reward chest at the end), a surge of each world's rule (twice as strong for two minutes, with its own effect and particles: Spore Bloom, Magma Surge, Lockdown, Tempest, Blackout, Gravity Storm, Crushing Current, Season Rush, Great Quake, Unravelling) and a travelling merchant per world with special trades. A boss bar follows each event. Never in peaceful; frequency and weights in `config/matriochka.json` (`worldEvents`, `worldEventChance`, `worldEventCooldown`, the three weights). Operators can start one with `/matriochka event`.
+- Talent trees at the Class Table: three branches of four talents per class, bought with souls and, for the last two of a branch, Shell Shards, opened by your group's progression. A class's talents act while you wear or hold its gear. A new cabinet screen with the six trees, tooltips for every talent and a Forget button that gives back half the souls.
+- New gear with its own behaviour: the Spore Bow (World 1), Magma Flail (2), Key Chain Whip (3), Storm Javelin (4, thrown, calls lightning and comes back), Lantern Shield (5, a blocked blow blinds and throws back), Tide Harpoon (7, thrown, drags its catch back) and Quake Pick (9, mines three blocks, a tremor on the ground). Each is crafted at its world's station and has hand-drawn pixel art; the bow has its drawing frames.
+- One more structure per world: the Gatherers' and Ephemeral Caravans, the Ember, Hushed and Restless Circles, the Gaolers' Gatehouse and the Drowned Bastion, the Sky, Hanging and Thimble Outposts, each decorated in its world's materials, with its loot.
+
 ## 0.3.0 (alpha)
 
 The story is complete: the Artisan's Journal, the hidden dolls, World 0, three endings and the New Cycle. World 7 is now entirely under water, worlds 3, 5, 6, 9 and 10 have their full mechanics, and the mod has its own music and sounds. Trailer: [matriochka-trailer.mp4](https://github.com/achedon12/matriochka/releases/download/v0.3.0/matriochka-trailer.mp4).
