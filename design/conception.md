@@ -338,11 +338,11 @@ Chaque monde contient au minimum une règle unique, 5 mobs, un minerai ou une re
 
 ### Monde 7
 
-- **Spécificité :** un océan immense, profond et sous pression.
-- **Règle :** l'oxygène et la pression limitent chaque expédition.
-- **Mobs :** chasseurs abyssaux, bancs de lames, méduses de pression.
-- **Ressources :** perle de pression, sel des profondeurs.
-- **Équipement :** scaphandre, propulseur.
+- **Spécificité :** un monde entièrement sous l'eau, sans terre ferme : la mer va du fond jusqu'au sommet du monde, la vie et les monstres sont sous l'eau. On arrive dans une cloche de plongée posée sur le fond.
+- **Règle :** l'oxygène et la pression limitent chaque expédition. Sans casque, le souffle tient une demi-minute ; seul un casque-tuba permet de respirer longtemps, tant que sa réserve tient. Elle se recharge dans les poches d'air, les colonnes de bulles, au-dessus des évents, à la Presse abyssale ou avec une capsule.
+- **Mobs :** chasseurs abyssaux, bancs de lames, méduses de pression, crabes-cloches, murènes ; faune paisible (bancs de lanternes, méduses lumineuses).
+- **Ressources :** sel des profondeurs, nacre, cobalt abyssal, perle de pression (un minerai par rang de casque).
+- **Équipement :** casques-tuba (un par minerai, fragiles, à recharger), scaphandre sans casque, propulseur.
 - **Station :** Presse abyssale, qui comprime des matériaux sous l'eau profonde.
 - **Boss :** Léviathan de pression.
 - **Déblocage :** agrandissement de la poupée-refuge.
