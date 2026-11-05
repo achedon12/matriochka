@@ -85,8 +85,88 @@ public class ShowcaseTest implements FabricClientGameTest {
 		}
 	}
 
+	/** Moves the cursor to a point given in GUI coordinates. */
+	private static void cursor(ClientGameTestContext ctx, double gx, double gy) {
+		double scale = ctx.computeOnClient(mc -> mc.getWindow().getGuiScale());
+		ctx.getInput().setCursorPos(gx * scale, gy * scale);
+	}
+
+	/**
+	 * Every interface, at rest and in motion: the scroll unrolling, each Journal tab, a page mid-turn, every
+	 * station (one caught while its drawers slide in, one with a drawer pulled out) and the HUD in a few worlds.
+	 * Run with ./gradlew runClientGameTest -Pgui. Shots: gui_*.png
+	 */
+	private static void gui(ClientGameTestContext ctx) {
+		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
+			var server = sp.getServer();
+			sp.getConnection().waitForChunksRender();
+			server.runCommand("gamerule advance_time false");
+			server.runCommand("time set 6000");
+			server.runCommand("gamemode creative @a");
+			server.runCommand("effect give @a night_vision infinite 0 true");
+			server.runCommand("execute as @p run matriochka progression set 3");
+			server.runCommand("execute as @p run matriochka karma soul @p 420");
+			server.runOnServer(srv -> fr.achedon12.matriochka.rules.PlayerState.of(srv.getPlayerList().getPlayers().get(0)).setDoll(2, 3));
+			server.runCommand("give @p minecraft:iron_ingot 16");
+			server.runCommand("give @p minecraft:oak_log 16");
+			ctx.waitTicks(30);
+			cursor(ctx, 2, 2);
+			ctx.setScreen(() -> new fr.achedon12.matriochka.client.JournalScreen(true));
+			ctx.waitTicks(4);
+			shot(ctx, "gui_scroll_opening");
+			ctx.waitTicks(16);
+			shot(ctx, "gui_scroll");
+			for (int t = 0; t < 5; t++) {
+				int tab = t;
+				ctx.setScreen(() -> new fr.achedon12.matriochka.client.JournalScreen(false).tab(tab));
+				ctx.waitTicks(12);
+				shot(ctx, "gui_journal_" + t);
+			}
+			ctx.setScreen(() -> new fr.achedon12.matriochka.client.JournalScreen(false).tab(0));
+			ctx.waitTicks(12);
+			ctx.runOnClient(mc -> ((fr.achedon12.matriochka.client.JournalScreen) mc.gui.screen()).turnTo(2));
+			ctx.waitTicks(3);
+			shot(ctx, "gui_journal_turn");
+			ctx.setScreen(() -> null);
+			ctx.waitTicks(5);
+			boolean firstStation = true;
+			for (String st : new String[]{"matrix_workbench", "class_table", "soul_altar", "spore_vat", "ash_foundry", "jailer_table", "lightning_forge",
+				"dark_altar", "inverter", "abyssal_press", "time_workshop", "terrain_anchor", "final_loom"}) {
+				server.runCommand("execute as @p at @s run matriochka station " + st);
+				if (firstStation) {
+					ctx.waitTicks(4);
+					shot(ctx, "gui_station_opening");
+					firstStation = false;
+				}
+				ctx.waitTicks(16);
+				shot(ctx, "gui_station_" + st);
+				if (st.equals("matrix_workbench")) {
+					int[] pos = ctx.computeOnClient(mc -> new int[]{mc.gui.screen().width / 2 - 70, mc.gui.screen().height / 2 - 111 + 22 + 10});
+					cursor(ctx, pos[0], pos[1]);
+					ctx.waitTicks(8);
+					shot(ctx, "gui_station_hover");
+					cursor(ctx, 2, 2);
+				}
+				ctx.setScreen(() -> null);
+				ctx.waitTicks(5);
+			}
+			for (int w : new int[]{2, 7, 8, 4}) {
+				server.runCommand("execute as @p run matriochka world enter " + w);
+				ctx.setScreen(() -> null);
+				ctx.waitTicks(100);
+				shot(ctx, "gui_hud_w" + w);
+				server.runCommand("execute as @p run matriochka world leave");
+				ctx.waitTicks(40);
+			}
+		}
+	}
+
 	@Override
 	public void runTest(ClientGameTestContext ctx) {
+		if ("gui".equals(System.getProperty("matriochka.capture"))) {
+			gui(ctx);
+			return;
+		}
 		if ("trailer".equals(System.getProperty("matriochka.capture"))) {
 			new TrailerCapture().runTest(ctx);
 			return;
