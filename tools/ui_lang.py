@@ -311,6 +311,9 @@ U.update({
     "screen.matriochka.info.wiki": ("Wiki", "Wiki"),
     "screen.matriochka.info.site": ("Website", "Site"),
     "screen.matriochka.info.done": ("Done", "Terminé"),
+    # map mods (compat/MapCompat): World 5 turns off a map's cave view and radar
+    "message.matriochka.maps.dark": ("In the Lightless Deep, your map sees no further than you do.", "Dans la Profondeur sans lumière, ta carte ne voit pas plus loin que toi."),
+    "message.matriochka.maps.clear": ("Your map can see in the dark again.", "Ta carte voit de nouveau dans le noir."),
 })
 en = {k: v[0] for k, v in U.items()}
 fr = {k: v[1] for k, v in U.items()}

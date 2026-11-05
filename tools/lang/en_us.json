@@ -298,5 +298,7 @@
  "screen.matriochka.info.config": "Server rules live in config/matriochka.json.",
  "screen.matriochka.info.wiki": "Wiki",
  "screen.matriochka.info.site": "Website",
- "screen.matriochka.info.done": "Done"
+ "screen.matriochka.info.done": "Done",
+ "message.matriochka.maps.dark": "In the Lightless Deep, your map sees no further than you do.",
+ "message.matriochka.maps.clear": "Your map can see in the dark again."
 }

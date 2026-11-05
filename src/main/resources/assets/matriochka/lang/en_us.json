@@ -1145,6 +1145,8 @@
   "message.matriochka.link.unlocked": "A redstone signal reaches your World Block: sealed doors open by hand for 1 minute.",
   "message.matriochka.map.found": "%s, %s blocks to the %s.",
   "message.matriochka.map.none": "No unexplored structure nearby.",
+  "message.matriochka.maps.clear": "Your map can see in the dark again.",
+  "message.matriochka.maps.dark": "In the Lightless Deep, your map sees no further than you do.",
   "message.matriochka.maquette": "On the Titanic Workbench stands a scale model of your own base. Here, it is only a toy.",
   "message.matriochka.mutation.bonus": "The mutated boss sheds a Mutated Scale.",
   "message.matriochka.mutation.woke": "It wakes mutated. %s",

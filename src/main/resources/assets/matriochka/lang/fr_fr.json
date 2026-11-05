@@ -1145,6 +1145,8 @@
   "message.matriochka.link.unlocked": "Un signal de redstone atteint ton bloc-monde : les portes scellées s'ouvrent à la main pendant 1 minute.",
   "message.matriochka.map.found": "%s, à %s blocs vers %s.",
   "message.matriochka.map.none": "Aucune structure inexplorée à proximité.",
+  "message.matriochka.maps.clear": "Ta carte voit de nouveau dans le noir.",
+  "message.matriochka.maps.dark": "Dans la Profondeur sans lumière, ta carte ne voit pas plus loin que toi.",
   "message.matriochka.maquette": "Sur l'Établi titanesque se dresse une maquette de ta propre base. Ici, ce n'est qu'un jouet.",
   "message.matriochka.mutation.bonus": "Le boss muté laisse une Écaille mutée.",
   "message.matriochka.mutation.woke": "Il s'éveille muté. %s",

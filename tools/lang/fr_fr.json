@@ -298,5 +298,7 @@
  "screen.matriochka.info.config": "Les règles du serveur se trouvent dans config/matriochka.json.",
  "screen.matriochka.info.wiki": "Wiki",
  "screen.matriochka.info.site": "Site",
- "screen.matriochka.info.done": "Terminé"
+ "screen.matriochka.info.done": "Terminé",
+ "message.matriochka.maps.dark": "Dans la Profondeur sans lumière, ta carte ne voit pas plus loin que toi.",
+ "message.matriochka.maps.clear": "Ta carte voit de nouveau dans le noir."
 }
