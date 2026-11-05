@@ -1,0 +1,49 @@
+name: Bug report
+description: Something does not work as described.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for the report. The more precise it is, the faster it gets fixed.
+  - type: input
+    id: version
+    attributes:
+      label: Mod version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: side
+    attributes:
+      label: Where does it happen?
+      options: [Singleplayer, Multiplayer server, Both]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Enter world 3
+        2. Open the Jail Forge
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or crash report
+      description: Paste latest.log or the crash report, or a link to it (mclo.gs works well).
+      render: text
+  - type: textarea
+    id: mods
+    attributes:
+      label: Other mods installed
+      description: Fabric API and GeckoLib versions, plus anything else in your mods folder.
