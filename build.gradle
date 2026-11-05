@@ -33,6 +33,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('gui')) {
 				vmArgs '-Dmatriochka.capture=gui'
 			}
+			if (name == 'clientGameTest' && project.hasProperty('epic')) {
+				vmArgs '-Dmatriochka.capture=epic', '-Xmx6G', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: ''), '-Dmatriochka.takes=' + (project.findProperty('takes') ?: 'atkor')
+			}
 			if (name == 'clientGameTest' && project.hasProperty('fixes')) {
 				vmArgs '-Dmatriochka.capture=fixes'
 			}
