@@ -1,6 +1,7 @@
 """Procedural pixel-art painter for Matriochka item, block and entity textures."""
 import math
 import random
+import zlib
 from PIL import Image
 
 
@@ -20,7 +21,7 @@ def shade(c, f):
 
 
 def rng(seed):
-    return random.Random(hash(seed) & 0xFFFFFFFF)
+    return random.Random(zlib.crc32(str(seed).encode()))
 
 
 class Canvas:
