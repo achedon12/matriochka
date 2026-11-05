@@ -1,0 +1,116 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.cloud_mine",
+    "texture_width": 128,
+    "texture_height": 128,
+    "visible_bounds_width": 6,
+    "visible_bounds_height": 3,
+    "visible_bounds_offset": [
+     0,
+     0.53125,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "parent": "root",
+     "pivot": [
+      0,
+      12,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -5,
+        7,
+        -5
+       ],
+       "size": [
+        10,
+        10,
+        10
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -3,
+        9,
+        -6
+       ],
+       "size": [
+        6,
+        6,
+        12
+       ],
+       "uv": [
+        40,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -6,
+        9,
+        -3
+       ],
+       "size": [
+        12,
+        6,
+        6
+       ],
+       "uv": [
+        76,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "ring",
+     "parent": "body",
+     "pivot": [
+      0,
+      12,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -8,
+        11.5,
+        -8
+       ],
+       "size": [
+        16,
+        1,
+        16
+       ],
+       "uv": [
+        0,
+        20
+       ],
+       "inflate": -0.2
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
