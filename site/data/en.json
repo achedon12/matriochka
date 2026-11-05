@@ -45,6 +45,9 @@
    "noMelee": "no melee attack",
    "moveSpeed": "Movement speed",
    "behaviour": "How it fights",
+   "moves": "Moveset",
+   "movesLead": "On top of its basic strike, it picks among these, never the same one twice in a row. Each has a wind-up you can read before it lands.",
+   "recharge": "Recharge",
    "drops": "Drops",
    "chance": "Chance",
    "count": "Count",
@@ -4777,6 +4780,26 @@
      "bonus": "dropped by every World 1 creature"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "3.5 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "6.5 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "11 s"
+    }
+   ],
    "spawn": {
     "weight": 60,
     "share": "32%",
@@ -4806,6 +4829,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
     }
    ],
    "prev": null,
@@ -4863,6 +4898,26 @@
      "bonus": "dropped by every World 1 creature"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "5 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "11 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "6.5 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21%",
@@ -4885,6 +4940,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
     }
    ],
    "prev": "sporeling",
@@ -4949,6 +5016,26 @@
      "bonus": "dropped by every World 1 creature"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "5.5 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "11 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "5 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21%",
@@ -4979,6 +5066,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
     }
    ],
    "prev": "root_creeper",
@@ -5036,6 +5135,26 @@
      "bonus": "dropped by every World 1 creature"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "4 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "6.5 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "5 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21%",
@@ -5058,6 +5177,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
     }
    ],
    "prev": "snare_flower",
@@ -5116,6 +5247,32 @@
      "bonus": "dropped by every World 1 creature"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "4 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "11 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "4.5 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "5 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "5%",
@@ -5153,6 +5310,22 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
     }
    ],
    "prev": "spore_bearer",
@@ -5203,6 +5376,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "5.19 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "10.38 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.77 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -5225,6 +5418,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
     }
    ],
    "prev": null,
@@ -5276,6 +5481,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.77 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "5.19 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "4.25 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -5298,6 +5523,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
     }
    ],
    "prev": "ash_miner",
@@ -5347,6 +5584,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "4.25 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.77 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "3.3 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -5376,6 +5633,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
     }
    ],
    "prev": "living_vein",
@@ -5426,6 +5695,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "3.3 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "5.19 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.77 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -5448,6 +5737,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
     }
    ],
    "prev": "rock_salamander",
@@ -5499,6 +5800,32 @@
      "note": "1 or 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.77 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "4.25 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "3.3 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.77 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6%",
@@ -5536,6 +5863,22 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
     }
    ],
    "prev": "dead_smith",
@@ -5585,6 +5928,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "9.82 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "3.12 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.57 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21%",
@@ -5607,6 +5970,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
     }
    ],
    "prev": null,
@@ -5656,6 +6031,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "4.46 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "4.91 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "9.82 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21%",
@@ -5678,6 +6073,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
     }
    ],
    "prev": "jailer_mob",
@@ -5727,6 +6134,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "5.8 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.57 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "4.46 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21%",
@@ -5764,6 +6191,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
     }
    ],
    "prev": "sentinel",
@@ -5813,6 +6252,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "3.12 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "4.02 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.57 s"
+    }
+   ],
    "spawn": {
     "weight": 60,
     "share": "32%",
@@ -5835,6 +6294,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
     }
    ],
    "prev": "living_lock",
@@ -5885,6 +6356,32 @@
      "note": "1 or 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "4.91 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "3.12 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "9.82 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.57 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "5%",
@@ -5922,6 +6419,22 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
     }
    ],
    "prev": "dungeon_rat",
@@ -5972,6 +6485,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "4.24 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.39 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.39 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6001,6 +6534,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
     }
    ],
    "prev": null,
@@ -6051,6 +6596,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.81 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.39 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "4.24 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6073,6 +6638,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
     }
    ],
    "prev": "wind_ray",
@@ -6122,6 +6699,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.39 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.97 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.81 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6144,6 +6741,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
     }
    ],
    "prev": "storm_bird",
@@ -6194,6 +6803,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "9.32 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.39 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "5.51 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6216,6 +6845,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
     }
    ],
    "prev": "island_warden",
@@ -6266,6 +6907,32 @@
      "note": "1 or 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.39 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.39 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "9.32 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.81 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6%",
@@ -6295,6 +6962,22 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
     }
    ],
    "prev": "cloud_mine",
@@ -6344,6 +7027,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "8.87 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "5.24 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "4.03 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6366,6 +7069,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
     }
    ],
    "prev": null,
@@ -6415,6 +7130,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.23 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "4.03 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "5.24 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6444,6 +7179,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
     }
    ],
    "prev": "blind_prowler",
@@ -6493,6 +7240,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "5.24 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "4.03 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "8.87 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6523,6 +7290,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
     }
    ],
    "prev": "glow_devourer",
@@ -6572,6 +7351,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.23 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "8.87 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.23 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6594,6 +7393,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
     }
    ],
    "prev": "echo",
@@ -6646,6 +7457,32 @@
      "note": "1 or 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.82 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.63 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.23 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "5.24 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6%",
@@ -6675,6 +7512,22 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
     }
    ],
    "prev": "eyeless_watcher",
@@ -6724,6 +7577,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.69 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "4.23 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.08 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6761,6 +7634,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
     }
    ],
    "prev": null,
@@ -6810,6 +7695,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.46 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "8.46 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.69 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6832,6 +7737,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
     }
    ],
    "prev": "reflection",
@@ -6882,6 +7799,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.08 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.85 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "5 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6912,6 +7849,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
     }
    ],
    "prev": "ceiling_walker",
@@ -6961,6 +7910,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "3.08 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "8.46 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.69 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -6983,6 +7952,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
     }
    ],
    "prev": "unstable_sphere",
@@ -7035,6 +8016,32 @@
      "note": "1 or 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.85 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "3.08 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "5 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "4.23 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6%",
@@ -7064,6 +8071,22 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
     }
    ],
    "prev": "inverted_strider",
@@ -7113,6 +8136,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.31 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.57 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.68 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7135,6 +8178,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
     }
    ],
    "prev": null,
@@ -7184,6 +8239,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.57 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.31 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.68 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7221,6 +8296,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
     }
    ],
    "prev": "abyssal_hunter",
@@ -7270,6 +8357,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.68 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "4.04 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "8.09 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7292,6 +8399,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
     }
    ],
    "prev": "blade_school",
@@ -7342,6 +8461,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.57 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "2.94 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.31 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7364,6 +8503,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
     }
    ],
    "prev": "pressure_jelly",
@@ -7415,6 +8566,26 @@
      "note": "1 or 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.57 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.31 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.68 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6%",
@@ -7444,6 +8615,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
     }
    ],
    "prev": "bell_crab",
@@ -7493,6 +8676,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.52 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.46 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "7.75 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7515,6 +8718,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
     }
    ],
    "prev": null,
@@ -7564,6 +8779,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "2.82 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "7.75 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "3.87 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7586,6 +8821,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
     }
    ],
    "prev": "seasonal_creature",
@@ -7635,6 +8882,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "2.82 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "4.58 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "3.87 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7657,6 +8924,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
     }
    ],
    "prev": "hourglass_elder",
@@ -7706,6 +8985,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "2.82 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.17 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.46 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7736,6 +9035,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
     }
    ],
    "prev": "dusk_shade",
@@ -7786,6 +9097,32 @@
      "note": "1 or 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "2.82 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "2.82 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.17 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.46 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6%",
@@ -7823,6 +9160,22 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
     }
    ],
    "prev": "minute_child",
@@ -7872,6 +9225,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.38 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "3.72 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "4.39 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7894,6 +9267,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
     }
    ],
    "prev": null,
@@ -7943,6 +9328,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.38 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "4.39 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "3.72 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -7973,6 +9378,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
     }
    ],
    "prev": "crawling_block",
@@ -8022,6 +9439,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.grab",
+     "name": "Grab",
+     "desc": "Seizes you at arm's reach: you are held in place for 2 seconds and take 50% damage.",
+     "cooldown": "4.05 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.04 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "3.72 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -8051,6 +9488,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.grab",
+     "label": "Grab"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
     }
    ],
    "prev": "mimic",
@@ -8100,6 +9549,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.04 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "4.39 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "3.72 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -8122,6 +9591,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
     }
    ],
    "prev": "foundation_eater",
@@ -8181,6 +9662,32 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "2.7 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.36 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "3.04 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "2.7 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6%",
@@ -8210,6 +9717,22 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
     }
    ],
    "prev": "earth_hand",
@@ -8259,6 +9782,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.25 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "4.22 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "7.14 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -8281,6 +9824,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
     }
    ],
    "prev": null,
@@ -8330,6 +9885,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "2.6 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "2.6 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "2.92 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -8352,6 +9927,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
     }
    ],
    "prev": "giant_sporeling",
@@ -8401,6 +9988,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "7.14 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Ground slam",
+     "desc": "Rears up, then strikes the ground: 110% damage to everything within 3.5 blocks, thrown upward.",
+     "cooldown": "3.57 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Bolt",
+     "desc": "Fires a bolt in a straight line up to 16 blocks: 80% damage and the world's affliction. Breaking line of sight dodges it.",
+     "cooldown": "2.6 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -8423,6 +10030,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Slam"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Bolt"
     }
    ],
    "prev": "ash_titanid",
@@ -8473,6 +10092,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.25 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Sweep",
+     "desc": "A wide swing that hits everything in front of it within 3 blocks and throws it back.",
+     "cooldown": "2.6 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Lunge",
+     "desc": "Crouches, then leaps at you from 3 to 9 blocks away: 120% damage on contact.",
+     "cooldown": "2.92 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24%",
@@ -8495,6 +10134,18 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Sweep"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Lunge"
     }
    ],
    "prev": "colossal_jailer",
@@ -8545,6 +10196,32 @@
      "note": "1 or 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Roar",
+     "desc": "Lets out a cry: players within 8 blocks suffer the world's affliction, nearby creatures speed up and hit harder for 5 seconds.",
+     "cooldown": "7.14 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Whirl",
+     "desc": "Spins for a second, hitting everything within 2 blocks four times at 40% damage.",
+     "cooldown": "3.25 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Blink",
+     "desc": "Vanishes in a puff and reappears behind you, then strikes at once.",
+     "cooldown": "4.22 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Flurry",
+     "desc": "Three quick hits in a row at close range, 60% damage each.",
+     "cooldown": "2.27 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6%",
@@ -8574,6 +10251,22 @@
     {
      "key": "attack.strike",
      "label": "Attack"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Roar"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Whirl"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Blink"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Flurry"
     }
    ],
    "prev": "titan_ray",

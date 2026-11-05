@@ -45,6 +45,9 @@
    "noMelee": "aucune attaque au corps à corps",
    "moveSpeed": "Vitesse de déplacement",
    "behaviour": "Comment il combat",
+   "moves": "Attaques",
+   "movesLead": "En plus de son coup de base, elle choisit parmi celles-ci, jamais deux fois la même d'affilée. Chacune a une préparation lisible avant de frapper.",
+   "recharge": "Recharge",
    "drops": "Butin",
    "chance": "Chance",
    "count": "Quantité",
@@ -4777,6 +4780,26 @@
      "bonus": "laissées par toute créature du monde 1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "3,5 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "6,5 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "11 s"
+    }
+   ],
    "spawn": {
     "weight": 60,
     "share": "32 %",
@@ -4806,6 +4829,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
     }
    ],
    "prev": null,
@@ -4863,6 +4898,26 @@
      "bonus": "laissées par toute créature du monde 1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "5 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "11 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "6,5 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21 %",
@@ -4885,6 +4940,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
     }
    ],
    "prev": "sporeling",
@@ -4949,6 +5016,26 @@
      "bonus": "laissées par toute créature du monde 1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "5,5 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "11 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "5 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21 %",
@@ -4979,6 +5066,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
     }
    ],
    "prev": "root_creeper",
@@ -5036,6 +5135,26 @@
      "bonus": "laissées par toute créature du monde 1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "4 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "6,5 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "5 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21 %",
@@ -5058,6 +5177,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
     }
    ],
    "prev": "snare_flower",
@@ -5116,6 +5247,32 @@
      "bonus": "laissées par toute créature du monde 1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "4 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "11 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "4,5 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "5 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "5 %",
@@ -5153,6 +5310,22 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
     }
    ],
    "prev": "spore_bearer",
@@ -5203,6 +5376,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "5,19 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "10,38 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,77 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -5225,6 +5418,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
     }
    ],
    "prev": null,
@@ -5276,6 +5481,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,77 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "5,19 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "4,25 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -5298,6 +5523,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
     }
    ],
    "prev": "ash_miner",
@@ -5347,6 +5584,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "4,25 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,77 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "3,3 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -5376,6 +5633,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
     }
    ],
    "prev": "living_vein",
@@ -5426,6 +5695,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "3,3 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "5,19 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,77 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -5448,6 +5737,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
     }
    ],
    "prev": "rock_salamander",
@@ -5499,6 +5800,32 @@
      "note": "1 ou 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,77 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "4,25 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "3,3 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,77 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6 %",
@@ -5536,6 +5863,22 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
     }
    ],
    "prev": "dead_smith",
@@ -5585,6 +5928,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "9,82 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "3,12 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,57 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21 %",
@@ -5607,6 +5970,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
     }
    ],
    "prev": null,
@@ -5656,6 +6031,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "4,46 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "4,91 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "9,82 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21 %",
@@ -5678,6 +6073,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
     }
    ],
    "prev": "jailer_mob",
@@ -5727,6 +6134,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "5,8 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,57 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "4,46 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "21 %",
@@ -5764,6 +6191,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
     }
    ],
    "prev": "sentinel",
@@ -5813,6 +6252,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "3,12 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "4,02 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,57 s"
+    }
+   ],
    "spawn": {
     "weight": 60,
     "share": "32 %",
@@ -5835,6 +6294,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
     }
    ],
    "prev": "living_lock",
@@ -5885,6 +6356,32 @@
      "note": "1 ou 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "4,91 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "3,12 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "9,82 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,57 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "5 %",
@@ -5922,6 +6419,22 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
     }
    ],
    "prev": "dungeon_rat",
@@ -5972,6 +6485,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "4,24 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,39 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,39 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6001,6 +6534,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
     }
    ],
    "prev": null,
@@ -6051,6 +6596,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,81 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,39 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "4,24 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6073,6 +6638,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
     }
    ],
    "prev": "wind_ray",
@@ -6122,6 +6699,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,39 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,97 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,81 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6144,6 +6741,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
     }
    ],
    "prev": "storm_bird",
@@ -6194,6 +6803,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "9,32 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,39 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "5,51 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6216,6 +6845,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
     }
    ],
    "prev": "island_warden",
@@ -6266,6 +6907,32 @@
      "note": "1 ou 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,39 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,39 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "9,32 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,81 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6 %",
@@ -6295,6 +6962,22 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
     }
    ],
    "prev": "cloud_mine",
@@ -6344,6 +7027,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "8,87 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "5,24 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "4,03 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6366,6 +7069,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
     }
    ],
    "prev": null,
@@ -6415,6 +7130,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,23 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "4,03 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "5,24 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6444,6 +7179,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
     }
    ],
    "prev": "blind_prowler",
@@ -6493,6 +7240,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "5,24 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "4,03 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "8,87 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6523,6 +7290,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
     }
    ],
    "prev": "glow_devourer",
@@ -6572,6 +7351,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,23 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "8,87 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,23 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6594,6 +7393,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
     }
    ],
    "prev": "echo",
@@ -6646,6 +7457,32 @@
      "note": "1 ou 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,82 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,63 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,23 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "5,24 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6 %",
@@ -6675,6 +7512,22 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
     }
    ],
    "prev": "eyeless_watcher",
@@ -6724,6 +7577,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,69 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "4,23 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,08 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6761,6 +7634,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
     }
    ],
    "prev": null,
@@ -6810,6 +7695,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,46 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "8,46 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,69 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6832,6 +7737,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
     }
    ],
    "prev": "reflection",
@@ -6882,6 +7799,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,08 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,85 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "5 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6912,6 +7849,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
     }
    ],
    "prev": "ceiling_walker",
@@ -6961,6 +7910,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "3,08 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "8,46 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,69 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -6983,6 +7952,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
     }
    ],
    "prev": "unstable_sphere",
@@ -7035,6 +8016,32 @@
      "note": "1 ou 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,85 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "3,08 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "5 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "4,23 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6 %",
@@ -7064,6 +8071,22 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
     }
    ],
    "prev": "inverted_strider",
@@ -7113,6 +8136,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,31 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,57 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,68 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7135,6 +8178,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
     }
    ],
    "prev": null,
@@ -7184,6 +8239,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,57 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,31 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,68 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7221,6 +8296,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
     }
    ],
    "prev": "abyssal_hunter",
@@ -7270,6 +8357,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,68 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "4,04 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "8,09 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7292,6 +8399,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
     }
    ],
    "prev": "blade_school",
@@ -7342,6 +8461,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,57 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "2,94 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,31 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7364,6 +8503,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
     }
    ],
    "prev": "pressure_jelly",
@@ -7415,6 +8566,26 @@
      "note": "1 ou 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,57 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,31 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,68 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6 %",
@@ -7444,6 +8615,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
     }
    ],
    "prev": "bell_crab",
@@ -7493,6 +8676,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,52 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,46 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "7,75 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7515,6 +8718,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
     }
    ],
    "prev": null,
@@ -7564,6 +8779,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "2,82 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "7,75 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "3,87 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7586,6 +8821,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
     }
    ],
    "prev": "seasonal_creature",
@@ -7635,6 +8882,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "2,82 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "4,58 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "3,87 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7657,6 +8924,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
     }
    ],
    "prev": "hourglass_elder",
@@ -7706,6 +8985,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "2,82 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,17 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,46 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7736,6 +9035,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
     }
    ],
    "prev": "dusk_shade",
@@ -7786,6 +9097,32 @@
      "note": "1 ou 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "2,82 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "2,82 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,17 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,46 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6 %",
@@ -7823,6 +9160,22 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
     }
    ],
    "prev": "minute_child",
@@ -7872,6 +9225,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,38 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "3,72 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "4,39 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7894,6 +9267,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
     }
    ],
    "prev": null,
@@ -7943,6 +9328,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,38 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "4,39 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "3,72 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -7973,6 +9378,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
     }
    ],
    "prev": "crawling_block",
@@ -8022,6 +9439,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.grab",
+     "name": "Étreinte",
+     "desc": "T'attrape à portée de bras : tu es immobilisé 2 secondes et tu subis 50 % des dégâts.",
+     "cooldown": "4,05 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,04 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "3,72 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -8051,6 +9488,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.grab",
+     "label": "Étreinte"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
     }
    ],
    "prev": "mimic",
@@ -8100,6 +9549,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,04 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "4,39 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "3,72 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -8122,6 +9591,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
     }
    ],
    "prev": "foundation_eater",
@@ -8181,6 +9662,32 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "2,7 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,36 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "3,04 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "2,7 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6 %",
@@ -8210,6 +9717,22 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
     }
    ],
    "prev": "earth_hand",
@@ -8259,6 +9782,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,25 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "4,22 s"
+    },
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "7,14 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -8281,6 +9824,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
     }
    ],
    "prev": null,
@@ -8330,6 +9885,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "2,6 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "2,6 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "2,92 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -8352,6 +9927,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
     }
    ],
    "prev": "giant_sporeling",
@@ -8401,6 +9988,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "7,14 s"
+    },
+    {
+     "key": "attack.slam",
+     "name": "Frappe au sol",
+     "desc": "Se dresse puis frappe le sol : 110 % des dégâts à tout ce qui est à 3,5 blocs, projeté en l'air.",
+     "cooldown": "3,57 s"
+    },
+    {
+     "key": "attack.spit",
+     "name": "Trait",
+     "desc": "Lance un trait en ligne droite jusqu'à 16 blocs : 80 % des dégâts et le mal du monde. Couper la ligne de vue l'esquive.",
+     "cooldown": "2,6 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -8423,6 +10030,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.slam",
+     "label": "Frappe au sol"
+    },
+    {
+     "key": "attack.spit",
+     "label": "Trait"
     }
    ],
    "prev": "ash_titanid",
@@ -8473,6 +10092,26 @@
      "note": "1"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,25 s"
+    },
+    {
+     "key": "attack.sweep",
+     "name": "Balayage",
+     "desc": "Un large revers qui touche tout ce qui est devant lui à 3 blocs et le repousse.",
+     "cooldown": "2,6 s"
+    },
+    {
+     "key": "attack.lunge",
+     "name": "Bond",
+     "desc": "S'accroupit puis bondit sur toi de 3 à 9 blocs : 120 % des dégâts au contact.",
+     "cooldown": "2,92 s"
+    }
+   ],
    "spawn": {
     "weight": 40,
     "share": "24 %",
@@ -8495,6 +10134,18 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.sweep",
+     "label": "Balayage"
+    },
+    {
+     "key": "attack.lunge",
+     "label": "Bond"
     }
    ],
    "prev": "colossal_jailer",
@@ -8545,6 +10196,32 @@
      "note": "1 ou 2"
     }
    ],
+   "moves": [
+    {
+     "key": "attack.roar",
+     "name": "Cri",
+     "desc": "Pousse un cri : les joueurs à 8 blocs subissent le mal du monde, les créatures proches accélèrent et frappent plus fort pendant 5 secondes.",
+     "cooldown": "7,14 s"
+    },
+    {
+     "key": "attack.spin",
+     "name": "Tourbillon",
+     "desc": "Tourne sur lui-même une seconde et touche quatre fois tout ce qui est à 2 blocs, à 40 % des dégâts.",
+     "cooldown": "3,25 s"
+    },
+    {
+     "key": "attack.blink",
+     "name": "Éclipse",
+     "desc": "Disparaît dans un nuage et réapparaît derrière toi, puis frappe aussitôt.",
+     "cooldown": "4,22 s"
+    },
+    {
+     "key": "attack.combo",
+     "name": "Rafale",
+     "desc": "Trois coups rapides d'affilée au corps à corps, 60 % des dégâts chacun.",
+     "cooldown": "2,27 s"
+    }
+   ],
    "spawn": {
     "weight": 10,
     "share": "6 %",
@@ -8574,6 +10251,22 @@
     {
      "key": "attack.strike",
      "label": "Attaque"
+    },
+    {
+     "key": "attack.roar",
+     "label": "Cri"
+    },
+    {
+     "key": "attack.spin",
+     "label": "Tourbillon"
+    },
+    {
+     "key": "attack.blink",
+     "label": "Éclipse"
+    },
+    {
+     "key": "attack.combo",
+     "label": "Rafale"
     }
    ],
    "prev": "titan_ray",

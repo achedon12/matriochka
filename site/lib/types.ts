@@ -34,7 +34,7 @@ interface CreatureBase {
 export interface Mob extends CreatureBase {
   kind: "mob"; desc: string; tags: string[]; elite: boolean; hpRaw: number; dmgRaw: number;
   speedMult: string; attackEvery: string | null; attackTicks: number | null; moveSpeed: string;
-  behaviour: string; facts: string[]; drops: Drop[]; dropTex: string | null;
+  behaviour: string; facts: string[]; moves: { key: string; name: string; desc: string; cooldown: string }[]; drops: Drop[]; dropTex: string | null;
   spawn: { weight: number; share: string; min: number; max: number } | null;
 }
 

@@ -8,6 +8,7 @@ models and animations, the logo in branding/ and the in-game screenshots (build/
 optional), then writes site/data/{en,fr,shared}.json and copies everything the pages show into site/public.
 Pillow is used to crop screenshots and make icons; without it, the files already in site/public are kept.
 """
+import moves as MOVESET
 import html
 import json
 import os
@@ -793,6 +794,7 @@ def anim_names(eid):
 ANIM_LABEL = {"misc.idle": ("Idle", "Repos"), "move.walk": ("Walk", "Marche"), "attack.strike": ("Attack", "Attaque"),
               "attack.charge": ("Charge", "Charge"), "attack.slam": ("Slam", "Frappe au sol"), "attack.cast": ("Cast", "Incantation"),
               "misc.phase": ("Phase change", "Changement de phase"), "misc.rest": ("Opening", "Ouverture")}
+ANIM_LABEL.update({f"attack.{k}": (v[0], v[1]) for k, v in MOVESET.MOVES.items() if f"attack.{k}" not in ANIM_LABEL})
 
 
 def anims(eid):
@@ -847,6 +849,8 @@ def build_mobs():
                 speedMult="×" + fmt(round(mult, 2)), attackEvery=secs(interval / 20) if melee else None, attackTicks=interval if melee else None,
                 moveSpeed=fmt(spd),
                 behaviour=t(*BEHAVIOUR[beh]), facts=facts, drops=drops,
+                moves=[dict(key=f"attack.{x}", name=t(MOVESET.MOVES[x][0], MOVESET.MOVES[x][1]), desc=t(MOVESET.MOVES[x][2], MOVESET.MOVES[x][3]),
+                            cooldown=secs(MOVESET.MOVES[x][6] / 20 / mult)) for x in MOVESET.assign(m)],
                 spawn=None if not sp else dict(weight=sp["weight"], share=pct(round(100 * sp["weight"] / sp["total"])), min=sp["min"], max=sp["max"]),
                 quests=quest_list(m["id"]), ach=ach,
                 tex=f"entities/{m['id']}.png" if m["id"] in ENTITY_TEX else None,
@@ -948,7 +952,7 @@ def build_copy():
         animations=t("Animations", "Animations"), autoRotate=t("Turn slowly", "Tourner lentement"),
         role=t("Role", "Rôle"), attackSpeed=t("Attack speed", "Vitesse d'attaque"), attackEvery=t("one hit every", "un coup toutes les"),
         noMelee=t("no melee attack", "aucune attaque au corps à corps"), moveSpeed=t("Movement speed", "Vitesse de déplacement"),
-        behaviour=t("How it fights", "Comment il combat"), drops=t("Drops", "Butin"), chance=t("Chance", "Chance"), count=t("Count", "Quantité"),
+        behaviour=t("How it fights", "Comment il combat"), moves=t("Moveset", "Attaques"), movesLead=t("On top of its basic strike, it picks among these, never the same one twice in a row. Each has a wind-up you can read before it lands.", "En plus de son coup de base, elle choisit parmi celles-ci, jamais deux fois la même d'affilée. Chacune a une préparation lisible avant de frapper."), recharge=t("Recharge", "Recharge"), drops=t("Drops", "Butin"), chance=t("Chance", "Chance"), count=t("Count", "Quantité"),
         spawns=t("Where it spawns", "Où il apparaît"), spawnWeight=t("spawn weight", "poids d'apparition"),
         spawnShare=t("of the creatures that spawn in its world", "des créatures qui apparaissent dans son monde"),
         group=t("per group", "par groupe"), quests=t("Quests", "Quêtes"), achievements=t("Achievements", "Succès"),

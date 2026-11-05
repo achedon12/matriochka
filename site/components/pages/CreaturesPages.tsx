@@ -150,6 +150,20 @@ function MobSheet({ lang, m }: { lang: Lang; m: Mob }) {
       <h2 className="h-plate">{ui.behaviour}</h2>
       <p className="sheet-lead">{m.behaviour}</p>
       <ul className="facts">{m.facts.map((f) => <li key={f}>{f}</li>)}</ul>
+      {m.moves.length > 0 && (
+        <>
+          <h2 className="h-plate">{ui.moves}</h2>
+          <p className="small">{ui.movesLead}</p>
+          <dl className="moves">
+            {m.moves.map((mv) => (
+              <div key={mv.key}>
+                <dt>{mv.name}<span className="num">{ui.recharge} {mv.cooldown}</span></dt>
+                <dd>{mv.desc}</dd>
+              </div>
+            ))}
+          </dl>
+        </>
+      )}
       <div className="sheet-cols">
         <section>
           <h2 className="h-plate">{ui.drops}</h2>
@@ -244,7 +258,7 @@ export function CreaturePage({ lang, id }: { lang: Lang; id: string }) {
         <div className="wrap sheet-head">
           <div className="sheet-title">
             <p className="small">{ui.sheet}</p>
-            <h1>{c.name}</h1>
+            <h1 style={{ "--longest": Math.max(...c.name.split(" ").map((w) => w.length)) } as React.CSSProperties}>{c.name}</h1>
             <p className="sheet-other" lang={lang === "en" ? "fr" : "en"}>{otherName}</p>
             <p className="sheet-meta">
               <Link href={href(lang, c.world ? `worlds/${c.world}/` : "worlds/#world-0")}>{c.world ? `${ui.world} ${c.world}, ${c.worldName}` : c.worldName}</Link>
