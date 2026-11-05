@@ -36,6 +36,7 @@ public final class WorldRules {
 		// World 8: hastened time (day and night in 8 minutes) on its own clock
 		ServerLevel w8 = server.getLevel(Worlds.key(8));
 		if (w8 != null) HastenedClock.tick(w8);
+		MovingWorlds.tick(server, t);
 		if (t % 20 != 0) return;
 		for (ServerPlayer p : server.getPlayerList().getPlayers()) {
 			if (p.isSpectator()) continue;
@@ -53,6 +54,12 @@ public final class WorldRules {
 			}
 			ps.sync();
 		}
+	}
+
+	/** The rule a player lives under: their world's, or in World 10 the one of their zone (0 on the Surface). */
+	public static int rule(ServerPlayer p) {
+		int world = Worlds.number(p.level());
+		return world == 10 ? synthesisZone(p) : world;
 	}
 
 	/** World 10: nine zones, each replaying the rule of worlds 1 to 9. */
@@ -73,7 +80,7 @@ public final class WorldRules {
 		}
 	}
 
-	private static boolean wearing(ServerPlayer p, String id) {
+	static boolean wearing(ServerPlayer p, String id) {
 		for (EquipmentSlot s : EquipmentSlot.values()) if (p.getItemBySlot(s).is(ModContent.item(id))) return true;
 		return false;
 	}
@@ -155,7 +162,10 @@ public final class WorldRules {
 				if (ps.gauge("noise") >= 50) {
 					for (MatrioMob m : level.getEntitiesOfClass(MatrioMob.class, p.getBoundingBox().inflate(28))) if (m.getTarget() == null) m.setTarget(p);
 				}
-				if (!ps.flagActive("lantern", t) && !p.hasEffect(MobEffects.NIGHT_VISION) && t % 200 == 0) p.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 60, 0, true, false));
+				Burnout.scan(level, p, level.getGameTime());
+				// the dark itself presses on whoever stands in it
+				boolean dark = level.getBrightness(net.minecraft.world.level.LightLayer.BLOCK, p.blockPosition()) < 4;
+				if (dark && !ps.flagActive("lantern", t) && !p.hasEffect(MobEffects.NIGHT_VISION) && t % 200 == 0) p.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 60, 0, true, false));
 			}
 			case 6 -> {
 				long phase = t % 1800;
