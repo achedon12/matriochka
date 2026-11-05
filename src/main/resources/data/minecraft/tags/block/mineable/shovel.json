@@ -1,0 +1,23 @@
+{
+  "values": [
+    "matriochka:world_soil_0",
+    "matriochka:world_soil_1",
+    "matriochka:world_soil_2",
+    "matriochka:world_soil_3",
+    "matriochka:world_soil_4",
+    "matriochka:world_soil_5",
+    "matriochka:world_soil_6",
+    "matriochka:world_soil_7",
+    "matriochka:world_soil_8",
+    "matriochka:world_soil_9",
+    "matriochka:spore_moss",
+    "matriochka:skygrass",
+    "matriochka:umbral_moss",
+    "matriochka:prism_moss",
+    "matriochka:abyssal_sand",
+    "matriochka:chrono_grass",
+    "matriochka:temporal_sand_block",
+    "matriochka:flesh_stone",
+    "matriochka:workshop_felt"
+  ]
+}
