@@ -63,6 +63,7 @@ public class MatrioItem extends Item {
 		} else {
 			out.accept(rarity);
 		}
+		fr.achedon12.matriochka.rules.Snorkel.appendTooltip(stack, out);
 		if (def.world() > 0) out.accept(Component.translatable("tooltip.matriochka.world", def.world()).withStyle(ChatFormatting.DARK_GRAY));
 		GearClasses.appendTooltip(stack, out);
 	}
@@ -107,7 +108,13 @@ public class MatrioItem extends Item {
 			case "antidote" -> { ps.addGauge("toxin", -50); consume = true; }
 			case "cooling_water" -> { ps.addGauge("heat", -50); consume = true; }
 			case "silence_balm" -> { ps.addGauge("noise", -100); consume = true; }
-			case "oxygen_capsule" -> { ps.addGauge("oxygen", 60); consume = true; }
+			case "oxygen_capsule" -> {
+				// a capsule fills half of a worn snorkel helmet's tank; without one it gives you breath
+				ItemStack helmet = fr.achedon12.matriochka.rules.Snorkel.worn(sp);
+				if (!helmet.isEmpty()) fr.achedon12.matriochka.rules.Snorkel.refill(helmet, fr.achedon12.matriochka.rules.Snorkel.capacity(helmet) * 0.5f);
+				else ps.addGauge("oxygen", 60);
+				consume = true;
+			}
 			case "stabilizer" -> { ps.setFlagTime("stable", sl.getGameTime() + 20 * 30); consume = true; }
 			case "season_preserve" -> { ps.setFlagTime("preserve", sl.getGameTime() + 20 * 120); consume = true; }
 			case "silence", "anchor" -> { ps.setFlagTime("anchor", sl.getGameTime() + 20 * 600); consume = true; }

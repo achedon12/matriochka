@@ -87,7 +87,7 @@ public final class BossFeats {
 					for (String s : l) if (s == null || !seen.add(s)) distinct = false;
 					if (distinct) Achievements.grant(p, "double_swap");
 				}
-				case "pressure_leviathan" -> { if (PlayerState.of(p).gauge("oxygen") < 5f) Achievements.grant(p, "levi_low_o2"); }
+				case "pressure_leviathan" -> { if (fr.achedon12.matriochka.rules.Snorkel.airPercent(p) < 5f) Achievements.grant(p, "levi_low_o2"); }
 				case "seasons_master" -> { if (seasons.getOrDefault(p.getUUID(), 0) == 0b1111) Achievements.grant(p, "master_four"); }
 				case "terrain_heart_boss" -> { if (!f.contains("anchor")) Achievements.grant(p, "heart_no_anchor"); }
 				case "the_unfinished" -> {

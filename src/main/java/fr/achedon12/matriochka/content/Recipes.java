@@ -108,7 +108,13 @@ public final class Recipes {
 		r("abyssal_press", "thruster", 1, -1, "pressure_pearl", 2, "unstable_alloy", 4);
 		r("abyssal_press", "pressure_pearl", 1, -1, "abyssal_salt", 6, "minecraft:prismarine_crystals", 2);
 		r("abyssal_press", "apnea_kelp", 3, -1, "minecraft:dried_kelp", 3, "abyssal_salt", 1);
-		gear("abyssal_press", 7, "trench_trident", "diving", "abyssal_salt");
+		// one snorkel helmet per ore of the world; each comes out of the press with a full tank
+		for (Defs.SnorkelDef s : Content.SNORKELS) r("abyssal_press", s.id(), 1, -1, s.ore(), 5, "minecraft:glass_pane", 2, "minecraft:kelp", 2);
+		r("abyssal_press", "trench_trident", 1, -1, "abyssal_salt", 8, "minecraft:stick", 1);
+		// the diving suit (no helmet: the snorkel takes the head) holds back the pressure
+		r("abyssal_press", "diving_chestplate", 1, -1, "abyssal_cobalt", 8);
+		r("abyssal_press", "diving_leggings", 1, -1, "abyssal_cobalt", 7);
+		r("abyssal_press", "diving_boots", 1, -1, "abyssal_cobalt", 4);
 		// World 8
 		r("time_workshop", "hourglass", 1, -1, "temporal_sand", 6, "minecraft:glass", 2, "season_fragment", 1);
 		r("time_workshop", "season_preserve", 3, -1, "season_fragment", 1, "minecraft:glass_bottle", 3);
