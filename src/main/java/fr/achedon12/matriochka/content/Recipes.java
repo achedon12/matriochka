@@ -90,6 +90,7 @@ public final class Recipes {
 		r("lightning_forge", "glider", 1, -1, "ray_membrane", 8, "minecraft:stick", 4, "storm_essence", 2);
 		r("lightning_forge", "grappling_hook", 1, -1, "celestial_crystal", 2, "minecraft:string", 8, "minecraft:iron_ingot", 3);
 		r("lightning_forge", "cloud_fruit", 2, -1, "minecraft:apple", 2, "storm_essence", 1);
+		r("lightning_forge", "armor_layer", 2, -1, "celestial_crystal", 1, "storm_essence", 1, "minecraft:honeycomb", 2);
 		gear("lightning_forge", 4, "lightning_lance", "celestial", "celestial_crystal");
 		r("lightning_forge", "storm_censer", 1, -1, "storm_essence", 4, "celestial_crystal", 2, "ray_membrane", 2);
 		// World 5

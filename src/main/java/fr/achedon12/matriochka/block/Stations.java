@@ -203,9 +203,29 @@ public final class Stations {
 		if (g.level() >= 5) return "message.matriochka.class.max";
 		if (g.level() >= max && !player.isCreative()) return "message.matriochka.class.progress";
 		int cost = GearClasses.UPGRADE_COST[g.level() + 1];
-		if (!PlayerState.of(player).spendSouls(cost)) return "message.matriochka.altar.no_souls";
+		// every upgrade also asks for a boss material: Shell Shards, left by fallen bosses
+		int shards = GearClasses.SHARD_COST[g.level() + 1];
+		Item shard = ModContent.item("shell_shard");
+		if (!player.isCreative() && count(player.getInventory(), shard) < shards) return "message.matriochka.class.need_shard";
+		if (PlayerState.of(player).souls() < cost && !player.isCreative()) return "message.matriochka.altar.no_souls";
+		if (!player.isCreative()) {
+			PlayerState.of(player).spendSouls(cost);
+			take(player.getInventory(), shard, shards);
+		}
 		GearClasses.apply(stack, new GearClasses.Gear(g.cls(), g.level() + 1, g.changes()));
 		player.level().playSound(null, player.blockPosition(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 0.7f, 1.3f);
+		return null;
+	}
+
+	/** Class table: lays a Lacquer Layer on the armor piece in the slot. */
+	public static String addLayer(ServerPlayer player, ItemStack stack) {
+		if (stack.isEmpty()) return "message.matriochka.altar.empty";
+		Item layer = ModContent.item("armor_layer");
+		if (count(player.getInventory(), layer) < 1 && !player.isCreative()) return "message.matriochka.layer.need";
+		String err = fr.achedon12.matriochka.gear.ArmorLayers.add(stack);
+		if (err != null) return err;
+		if (!player.isCreative()) take(player.getInventory(), layer, 1);
+		player.level().playSound(null, player.blockPosition(), SoundEvents.HONEYCOMB_WAX_ON, SoundSource.PLAYERS, 0.9f, 0.9f);
 		return null;
 	}
 

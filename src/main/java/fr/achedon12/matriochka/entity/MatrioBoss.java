@@ -529,7 +529,9 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			String group = data.groupOf(p.getUUID());
 			data.markDefeated(group, w);
 			PlayerState ps = PlayerState.of(p);
-			ps.addSouls(100);
+			ps.addSouls(fr.achedon12.matriochka.gear.GearClasses.reapSouls(p, 100, p.getRandom()));
+			ItemStack shards = new ItemStack(ModContent.item("shell_shard"), 2);
+			if (!p.getInventory().add(shards)) spawnAtLocation(level, shards);
 			ps.progress("kill", def.id(), 1);
 			// doll of life: one layer after worlds 1, 5 and 8; every boss refills one layer
 			int max = ps.dollMax();

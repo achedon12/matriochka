@@ -93,6 +93,8 @@ item("journal_page", "Journal Page", "Page du Journal", 0, "page", "none", "page
      "A lost page of the Artisan's Journal.", "Une page perdue du Journal de l'artisan.")
 item("wool_thread", "Wool Thread", "Fil de laine", 0, "resource", "common", "thread",
      "Used for cradles and threads.", "Sert aux berceaux et aux fils.")
+item("shell_shard", "Shell Shard", "Éclat d'enveloppe", 0, "resource", "epic", "shard",
+     "Left by a fallen boss. Every class upgrade needs some.", "Laissé par un boss vaincu. Chaque amélioration de classe en demande.")
 
 # World 1
 item("spores", "Spores", "Spores", 1, "resource", "common", "dust", "Base of antidotes.", "Base des antidotes.")
@@ -130,6 +132,9 @@ item("glider", "Glider", "Planeur", 4, "glider", "epic", "glider", "Glide betwee
 item("grappling_hook", "Grappling Hook", "Grappin", 4, "hook", "rare", "hook", "Pulls you toward a surface.", "Te tire vers une surface.")
 item("lightning_lance", "Lightning Lance", "Lance de foudre", 4, "weapon", "rare", "spear")
 item("celestial", "", "", 4, "armorset", "rare", "armor", set_en="Celestial", set_fr="céleste")
+item("armor_layer", "Lacquer Layer", "Couche laquée", 4, "layer", "rare", "plate",
+     "Laid on armor at the Class Table. When the outer layer breaks, the next takes over.",
+     "Se pose sur une armure à la Table de classe. Quand la couche extérieure casse, la suivante prend le relais.")
 # World 5
 item("shadow_shard", "Shadow Shard", "Éclat d'ombre", 5, "resource", "rare", "shard", "Base of World 5 gear.", "Base de l'équipement du monde 5.")
 item("diamond_fragment", "Diamond Fragment", "Fragment de diamant", 5, "gem", "epic", "fragment", "4 fragments make 1 diamond.", "4 fragments donnent 1 diamant.")

@@ -72,6 +72,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 			case "class_table" -> {
 				buttons.add(l + 150, t + 38, 92, 18, Component.translatable("station.matriochka.upgrade"), () -> click(210));
 				buttons.add(l + 150, t + 60, 92, 18, Component.translatable("station.matriochka.reroll"), () -> click(211));
+				buttons.add(l + 150, t + 82, 92, 18, Component.translatable("station.matriochka.layer"), () -> click(212));
 			}
 			case "jailer_table" -> {
 				for (int i = 0; i < 4; i++) {

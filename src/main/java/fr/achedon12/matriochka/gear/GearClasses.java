@@ -49,11 +49,34 @@ public final class GearClasses {
 	public static final String[] TOOL = {"prospector"};
 	public static final float[] BONUS = {0f, 0f, 0.10f, 0.20f, 0.35f, 0.50f};
 	public static final int[] UPGRADE_COST = {0, 0, 10, 30, 90, 270};
+	/** Shell Shards (boss material) needed for each target level, on top of the souls. */
+	public static final int[] SHARD_COST = {0, 0, 1, 1, 2, 2};
 	private static final Identifier MOD_ID = Matriochka.id("class_bonus");
+	private static final Identifier LAYER_ID = Matriochka.id("armor_layers");
 
 	private GearClasses() {}
 
-	public static void init() {}
+	public static void init() {
+		ArmorLayers.init();
+		// Prowler gear: a chance to slip out of the way of a blow
+		net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
+			if (!(entity instanceof net.minecraft.server.level.ServerPlayer p) || source.getEntity() == null || source.getEntity() == p) return true;
+			if (source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) return true;
+			float chance = dodgeChance(p);
+			if (chance <= 0 || p.getRandom().nextFloat() >= chance) return true;
+			dodged(p);
+			return false;
+		});
+	}
+
+	/** Dodge feedback: a puff of air, a swish and a word over the hotbar. */
+	private static void dodged(net.minecraft.server.level.ServerPlayer p) {
+		if (p.level() instanceof net.minecraft.server.level.ServerLevel l) {
+			l.sendParticles(net.minecraft.core.particles.ParticleTypes.CLOUD, p.getX(), p.getY() + 0.8, p.getZ(), 8, 0.3, 0.4, 0.3, 0.02);
+			l.playSound(null, p.blockPosition(), net.minecraft.sounds.SoundEvents.PLAYER_ATTACK_SWEEP, net.minecraft.sounds.SoundSource.PLAYERS, 0.6f, 1.8f);
+		}
+		p.sendOverlayMessage(Component.translatable("message.matriochka.dodge").withStyle(ChatFormatting.AQUA));
+	}
 
 	public enum Kind { ARMOR, WEAPON, TOOL, NONE }
 
@@ -105,16 +128,25 @@ public final class GearClasses {
 
 	public static void apply(ItemStack stack, Gear gear) {
 		stack.set(GEAR, gear);
+		refresh(stack);
+	}
+
+	/** Rebuilds the stack's attribute modifiers from its item, its class and its armor layers. */
+	public static void refresh(ItemStack stack) {
 		ItemAttributeModifiers base = stack.getItem().components().getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
 		Equippable eq = stack.get(DataComponents.EQUIPPABLE);
 		EquipmentSlotGroup group = eq != null ? EquipmentSlotGroup.bySlot(eq.slot()) : EquipmentSlotGroup.MAINHAND;
-		float mult = 1f + BONUS[Math.max(1, Math.min(5, gear.level()))];
-		List<Bonus> bonuses = bonuses(gear.cls(), kind(stack), mult, base);
 		ItemAttributeModifiers mods = base;
-		int i = 0;
-		for (Bonus b : bonuses) {
-			mods = mods.withModifierAdded(b.attr, new AttributeModifier(MOD_ID.withSuffix("_" + i++), b.amount, b.op), group);
+		Gear gear = stack.get(GEAR);
+		if (gear != null) {
+			float mult = 1f + BONUS[Math.max(1, Math.min(5, gear.level()))];
+			int i = 0;
+			for (Bonus b : bonuses(gear.cls(), kind(stack), mult, base)) {
+				mods = mods.withModifierAdded(b.attr, new AttributeModifier(MOD_ID.withSuffix("_" + i++), b.amount, b.op), group);
+			}
 		}
+		int layers = ArmorLayers.count(stack);
+		if (layers > 0) mods = mods.withModifierAdded(Attributes.ARMOR, new AttributeModifier(LAYER_ID, layers, AttributeModifier.Operation.ADD_VALUE), group);
 		stack.set(DataComponents.ATTRIBUTE_MODIFIERS, mods);
 	}
 
@@ -167,6 +199,38 @@ public final class GearClasses {
 		return s;
 	}
 
+	/** Extra share of souls a player harvests from creatures and bosses, from Reaper gear (0..1). */
+	public static float soulGain(net.minecraft.world.entity.LivingEntity e) {
+		float s = 0;
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			Gear g = e.getItemBySlot(slot).get(GEAR);
+			if (g != null && g.cls().equals("reaper")) s += 0.05f * (1 + BONUS[g.level()]);
+		}
+		return Math.min(1f, s);
+	}
+
+	/**
+	 * Souls a Reaper earns for a kill worth base souls: the bonus share is added, its fraction paid by chance, so even a
+	 * creature worth nothing may yield a soul.
+	 */
+	public static int reapSouls(net.minecraft.world.entity.LivingEntity e, int base, RandomSource random) {
+		float gain = soulGain(e);
+		if (gain <= 0) return base;
+		float extra = Math.max(base, 1) * gain;
+		int whole = (int) extra;
+		return base + whole + (random.nextFloat() < extra - whole ? 1 : 0);
+	}
+
+	/** Chance to dodge an attack, from Prowler gear (0..0.3). */
+	public static float dodgeChance(net.minecraft.world.entity.LivingEntity e) {
+		float s = 0;
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			Gear g = e.getItemBySlot(slot).get(GEAR);
+			if (g != null && g.cls().equals("prowler")) s += 0.025f * (1 + BONUS[g.level()]);
+		}
+		return Math.min(0.3f, s);
+	}
+
 	/** Gauge reduction from survivor gear (0..0.6). */
 	public static float survivorResistance(net.minecraft.world.entity.LivingEntity e) {
 		float s = 0;
@@ -178,6 +242,7 @@ public final class GearClasses {
 	}
 
 	public static void appendTooltip(ItemStack stack, Consumer<Component> out) {
+		ArmorLayers.appendTooltip(stack, out);
 		Gear g = stack.get(GEAR);
 		if (g == null) return;
 		out.accept(Component.translatable("tooltip.matriochka.class", Component.translatable("class.matriochka." + g.cls()), g.level())
