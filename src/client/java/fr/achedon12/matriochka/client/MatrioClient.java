@@ -2,6 +2,7 @@ package fr.achedon12.matriochka.client;
 
 import com.geckolib.model.DefaultedEntityGeoModel;
 import com.geckolib.renderer.GeoEntityRenderer;
+import com.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer;
 import fr.achedon12.matriochka.Matriochka;
 import fr.achedon12.matriochka.content.Content;
 import fr.achedon12.matriochka.content.Defs;
@@ -25,7 +26,7 @@ public class MatrioClient implements ClientModInitializer {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void onInitializeClient() {
 		for (Defs.MobDef d : Content.MOBS) register(d.id(), d.scale());
-		for (Defs.BossDef d : Content.BOSSES) register(d.id(), d.scale());
+		for (Defs.BossDef d : Content.BOSSES) registerBoss(d.id(), d.scale());
 		for (Defs.NpcDef d : Content.PEOPLES) register(d.id(), 1f);
 		MenuScreens.register(ModContent.STATION_MENU, StationScreen::new);
 		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
@@ -37,6 +38,16 @@ public class MatrioClient implements ClientModInitializer {
 	private static void register(String id, float scale) {
 		EntityType type = ModContent.entity(id);
 		EntityRendererRegistry.register(type, ctx -> new GeoEntityRenderer(ctx, new DefaultedEntityGeoModel(Matriochka.id(id))).withScale(scale));
+	}
+
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	private static void registerBoss(String id, float scale) {
+		EntityType type = ModContent.entity(id);
+		EntityRendererRegistry.register(type, ctx -> {
+			GeoEntityRenderer r = new GeoEntityRenderer(ctx, new DefaultedEntityGeoModel(Matriochka.id(id))).withScale(scale);
+			r.withRenderLayer(new AutoGlowingGeoLayer(r));
+			return r;
+		});
 	}
 
 	static Entity unused() {
