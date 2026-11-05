@@ -6,7 +6,8 @@ name: release
 #   2. create the tag and the GitHub release, with the notes from CHANGELOG.md ("## <version>" section)
 #   3. upload the jar to CurseForge (needs the CURSEFORGE_TOKEN secret and the CURSEFORGE_PROJECT_ID variable)
 #   4. upload the jar to Modrinth (needs the MODRINTH_TOKEN secret and the MODRINTH_PROJECT_ID variable)
-#   5. announce it in the Discord changelog channel (needs the DISCORD_RELEASES_WEBHOOK secret)
+#   5. build the Matriochka Pack (.mrpack, normal and hard) with tools/modpack.py and attach it to the GitHub release
+#   6. announce it in the Discord changelog channel (needs the DISCORD_RELEASES_WEBHOOK secret)
 # Run it by hand from the Actions tab to upload an existing version again.
 on:
   push:
@@ -154,6 +155,19 @@ jobs:
           curl -sS --fail-with-body -H "Authorization: $TOKEN" -H "User-Agent: achedon12/matriochka release workflow" \
             --form-string "data=$data" -F "file=@$JAR" \
             https://api.modrinth.com/v2/version
+
+      # The pack points at the jar of the GitHub release (or at Modrinth's copy once it is public). It is only
+      # attached to the release: publishing it on Modrinth needs a modpack project of its own (see Modpack.md).
+      - name: Modpack
+        if: steps.v.outputs.publish == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.v.outputs.tag }}
+        run: |
+          python3 tools/modpack.py --jar "$JAR" --out build/modpack
+          python3 tools/modpack.py --jar "$JAR" --out build/modpack --hard
+          gh release upload "$TAG" build/modpack/*.mrpack --clobber
 
       - name: Discord
         if: steps.v.outputs.exists == 'false'
