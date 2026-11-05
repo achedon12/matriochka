@@ -348,7 +348,7 @@ public final class MobMoves {
 	}
 
 	private static ParticleOptions particle(Defs.AttackDef a) {
-		var type = BuiltInRegistries.PARTICLE_TYPE.getValue(Identifier.withDefaultNamespace(a.particle()));
+		var type = BuiltInRegistries.PARTICLE_TYPE.getValue(Identifier.parse(a.particle()));
 		return type instanceof SimpleParticleType s ? s : ParticleTypes.CRIT;
 	}
 

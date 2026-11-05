@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from content import *  # noqa
 from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx, paint_snorkel_item, paint_snorkel_layer
 import craft
+import particles
 import models
 import bosses_hd
 import attacks
@@ -26,6 +27,7 @@ A = os.path.join(RES, "assets/matriochka")
 D = os.path.join(RES, "data/matriochka")
 JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Content.java")
 SOUNDS_JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Sounds.java")
+PARTICLES_JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Particles.java")
 MC = os.environ.get("MC_DATA", os.path.join(os.path.dirname(os.path.abspath(__file__)), "vanilla"))
 NS = "matriochka"
 
@@ -954,6 +956,7 @@ def main():
     gen_lang_misc()
     gen_lang_story()
     gen_java()
+    particles.gen(A, PARTICLES_JAVA)
     rendered = sound.gen(A, SOUNDS_JAVA, lang, w)
     # merge hand-written lang (ui strings)
     for code, table in (("en_us", EN), ("fr_fr", FR)):

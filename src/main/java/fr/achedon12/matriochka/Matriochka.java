@@ -26,6 +26,7 @@ public class Matriochka implements ModInitializer {
 	public void onInitialize() {
 		Config.load();
 		fr.achedon12.matriochka.content.Sounds.init();
+		fr.achedon12.matriochka.content.Particles.init();
 		GearClasses.init();
 		fr.achedon12.matriochka.rules.Snorkel.init();
 		PlayerState.init();
