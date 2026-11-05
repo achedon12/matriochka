@@ -30,7 +30,8 @@ REPO = "https://github.com/achedon12/matriochka"
 RELEASES = REPO + "/releases"
 WIKI = REPO + "/wiki"
 SITE = "https://achedon12.github.io/matriochka/"
-VERSION = "0.1.0"
+# the version shown on the site follows gradle.properties
+VERSION = next(l.split("=", 1)[1].strip() for l in open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "gradle.properties")) if l.startswith("mod_version="))
 
 # Lucide icons (lucide-static 0.460.0, ISC licence), inner SVG markup only.
 ICONS = {
@@ -1554,7 +1555,7 @@ def build_download():
             ("Java", "25", t("Bundled with the official launcher", "Fourni avec le launcher officiel"))]],
         installH=t("Installing", "Installation"),
         steps=[t("Install Fabric Loader for Minecraft 26.3.", "Installe Fabric Loader pour Minecraft 26.3."),
-               t(f"Download matriochka-{VERSION}.jar from the GitHub releases.", f"Télécharge matriochka-{VERSION}.jar depuis les versions GitHub."),
+               t(f"Download matriochka-{VERSION}+26.3.jar from the GitHub releases.", f"Télécharge matriochka-{VERSION}+26.3.jar depuis les versions GitHub."),
                t("Put it in your mods folder with Fabric API and GeckoLib.", "Place-le dans ton dossier mods avec Fabric API et GeckoLib."),
                t("Launch the Fabric profile and create a new world. The Artisan's Scroll is waiting in your inventory.", "Lance le profil Fabric et crée un nouveau monde. Le Parchemin de l'artisan t'attend dans l'inventaire.")],
         lunarH="Lunar Client",
