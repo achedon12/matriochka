@@ -9,6 +9,21 @@
         "spawns_by_category": {}
       },
       "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w0.creak",
+          "tick_chance": 0.004
+        }
+      ]
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_0",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
     }
   },
   "carvers": [

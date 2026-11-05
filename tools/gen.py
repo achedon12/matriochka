@@ -15,6 +15,7 @@ from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, 
 import models
 import bosses_hd
 import attacks
+import sound
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "mobs_hd"))
 import registry as mobs_registry  # noqa: E402
 
@@ -23,6 +24,7 @@ RES = os.path.join(ROOT, "src/main/resources")
 A = os.path.join(RES, "assets/matriochka")
 D = os.path.join(RES, "data/matriochka")
 JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Content.java")
+SOUNDS_JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Sounds.java")
 MC = os.environ.get("MC_DATA", os.path.join(os.path.dirname(os.path.abspath(__file__)), "vanilla"))
 NS = "matriochka"
 
@@ -546,6 +548,7 @@ def gen_worldgen():
         bio["has_precipitation"] = n in (1, 4, 8)
         bio["temperature"] = {1: 0.95, 2: 2.0, 4: 0.5, 7: 0.5}.get(n, 0.8)
         bio["downfall"] = 0.9 if n in (1, 4) else 0.3
+        bio["attributes"].update(sound.biome_audio(n))
         w(os.path.join(D, f"worldgen/biome/{key}.json"), bio)
         lang(f"biome.{NS}.{key}", f"World {n}", f"Monde {n}")
 
@@ -578,6 +581,7 @@ def gen_worldgen():
     rb["features"] = [[] for _ in range(11)]
     rb["carvers"] = []
     rb["attributes"] = {"minecraft:visual/sky_color": "#c8342a"}
+    rb["attributes"]["minecraft:audio/background_music"] = sound.biome_audio(0)["minecraft:audio/background_music"]
     pl = copy.deepcopy(jl("worldgen/biome/plains.json")["attributes"]["minecraft:gameplay/natural_mob_spawns"])
     if isinstance(pl, dict) and "argument" in pl:
         pl["argument"]["spawns_by_category"] = {}
@@ -652,6 +656,7 @@ def gen_world_zero():
     bio["has_precipitation"] = False
     bio["temperature"] = 0.8
     bio["downfall"] = 0.0
+    bio["attributes"].update(sound.biome_audio(0))
     w(os.path.join(D, f"worldgen/biome/{key}.json"), bio)
     w(os.path.join(D, f"dimension/{key}.json"), {"type": f"{NS}:{key}", "generator": {
         "type": "minecraft:noise", "biome_source": {"type": "minecraft:fixed", "biome": f"{NS}:{key}"}, "settings": f"{NS}:{key}"}})
@@ -874,6 +879,7 @@ def main():
     gen_lang_misc()
     gen_lang_story()
     gen_java()
+    rendered = sound.gen(A, SOUNDS_JAVA, lang, w)
     # merge hand-written lang (ui strings)
     for code, table in (("en_us", EN), ("fr_fr", FR)):
         extra = os.path.join(ROOT, f"tools/lang/{code}.json")
@@ -881,7 +887,8 @@ def main():
             table.update(json.load(open(extra, encoding="utf-8")))
         w(os.path.join(A, f"lang/{code}.json"), dict(sorted(table.items())))
     print(f"items={len(ALL_ITEMS)} blocks={len(BLOCKS)} mobs={len(MOBS)} bosses={len(BOSSES)} "
-          f"structures={sum(len(v) for v in STRUCTURES.values())} quests={len(QUESTS)} achievements={sum(len(v) for v in ACH.values())} lang={len(EN)}")
+          f"structures={sum(len(v) for v in STRUCTURES.values())} quests={len(QUESTS)} achievements={sum(len(v) for v in ACH.values())} lang={len(EN)} "
+          f"sounds={len(sound.SOUNDS)} rendered={rendered}")
 
 
 if __name__ == "__main__":

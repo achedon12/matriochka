@@ -64,6 +64,26 @@
         }
       },
       "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w3.chains",
+          "tick_chance": 0.004
+        },
+        {
+          "sound": "matriochka:ambient.w3.door",
+          "tick_chance": 0.002
+        }
+      ],
+      "loop": "matriochka:ambient.w3.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_3",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
     }
   },
   "carvers": [

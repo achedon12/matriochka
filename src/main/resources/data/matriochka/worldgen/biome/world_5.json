@@ -64,6 +64,26 @@
         }
       },
       "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w5.breath",
+          "tick_chance": 0.003
+        },
+        {
+          "sound": "matriochka:ambient.w5.steps",
+          "tick_chance": 0.002
+        }
+      ],
+      "loop": "matriochka:ambient.w5.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_5",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
     }
   },
   "carvers": [
