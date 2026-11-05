@@ -338,6 +338,7 @@ public final class ShiftingGround {
 			}
 			if (riders.contains(p)) {
 				p.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 60, 0, true, false));
+				fr.achedon12.matriochka.net.Cues.shake(p, 0.7f, 24);
 				p.sendOverlayMessage(Component.translatable("message.matriochka.rule.ground_moved").withStyle(ChatFormatting.GOLD));
 			}
 			if (buildMoved && p.distanceToSqr(x0 + 8, p.getY(), z0 + 8) < 64 * 64) Achievements.grant(p, "base_moved");

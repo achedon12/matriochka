@@ -42,6 +42,7 @@ public final class Travel {
 			Set.of(), TeleportTransition.PLAY_PORTAL_SOUND));
 		target.playSound(null, seuil, fr.achedon12.matriochka.content.Sounds.WORLD_BLOCK_ENTER, SoundSource.PLAYERS, 1f, 1f);
 		player.sendSystemMessage(Component.translatable("message.matriochka.entered", Component.translatable("dimension.matriochka.world_" + world)));
+		fr.achedon12.matriochka.net.Cues.worldEntered(player, world);
 	}
 
 	/** Builds (once) and returns the threshold platform of a group's parcel. */
