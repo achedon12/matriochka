@@ -48,6 +48,7 @@ public final class PlayerState {
 	public void addKarma(int delta) {
 		// the Absorb ending: whoever took the creature's hunger can no longer climb back
 		if (delta > 0 && has("end_absorb")) return;
+		if (!fr.achedon12.matriochka.world.Config.karma()) return;
 		tag.putInt("karma", Math.max(-100, Math.min(100, karma() + delta)));
 		save();
 		sync();
@@ -65,8 +66,14 @@ public final class PlayerState {
 		return true;
 	}
 
+	/** A soul gain from play: scaled by the server's soulGainMultiplier. */
 	public void addSouls(int n) {
-		tag.putInt("souls", Math.max(0, souls() + n));
+		setSouls(souls() + fr.achedon12.matriochka.world.Config.souls(n));
+	}
+
+	/** Sets the souls as given, unscaled (administrator command). */
+	public void setSouls(int n) {
+		tag.putInt("souls", Math.max(0, n));
 		save();
 		sync();
 	}

@@ -1193,6 +1193,7 @@
   "message.matriochka.seed_planted.7": "The seed wants water nearby.",
   "message.matriochka.seed_planted.8": "The seed hatches at dawn or dusk.",
   "message.matriochka.seed_planted.9": "The seed wants a redstone signal.",
+  "message.matriochka.server_full": "The server holds as many worlds as it allows. This Seed waits until another group frees its parcel.",
   "message.matriochka.shell": "Shell %s breaks: it wears the face of %s.",
   "message.matriochka.snorkel.cracked": "Your snorkel helmet is cracking.",
   "message.matriochka.snorkel.empty": "Your helmet's tank is empty. Hold your breath and find air.",

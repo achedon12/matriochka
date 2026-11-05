@@ -261,5 +261,6 @@
  "title.matriochka.out_of_time": "Out of Time",
  "title.matriochka.untethered": "Untethered",
  "title.matriochka.apprentice": "Apprentice",
- "title.matriochka.seamless": "Seamless"
+ "title.matriochka.seamless": "Seamless",
+ "message.matriochka.server_full": "The server holds as many worlds as it allows. This Seed waits until another group frees its parcel."
 }

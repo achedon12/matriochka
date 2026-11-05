@@ -264,6 +264,9 @@ titles = {"painted_cape": ("Painted Cape", "Cape peinte"), "iron_lungs": ("Iron 
           "out_of_time": ("Out of Time", "Hors du temps"), "untethered": ("Untethered", "Sans attache"), "apprentice": ("Apprentice", "Apprenti"), "seamless": ("Seamless", "Sans couture")}
 for k, v in titles.items():
     U[f"title.matriochka.{k}"] = v
+# ------------------------------------------------------------------ server limits, comfort, cinematics, adaptive music
+U["message.matriochka.server_full"] = ("The server holds as many worlds as it allows. This Seed waits until another group frees its parcel.",
+                                       "Le serveur contient autant de mondes qu'il le permet. Cette Graine attend qu'un autre groupe libère sa parcelle.")
 en = {k: v[0] for k, v in U.items()}
 fr = {k: v[1] for k, v in U.items()}
 d = os.path.join(os.path.dirname(__file__), "lang")

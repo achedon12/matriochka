@@ -261,5 +261,6 @@
  "title.matriochka.out_of_time": "Hors du temps",
  "title.matriochka.untethered": "Sans attache",
  "title.matriochka.apprentice": "Apprenti",
- "title.matriochka.seamless": "Sans couture"
+ "title.matriochka.seamless": "Sans couture",
+ "message.matriochka.server_full": "Le serveur contient autant de mondes qu'il le permet. Cette Graine attend qu'un autre groupe libère sa parcelle."
 }

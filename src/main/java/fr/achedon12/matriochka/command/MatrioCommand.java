@@ -236,7 +236,8 @@ public final class MatrioCommand {
 					}))))
 				.then(Commands.literal("soul").requires(op).then(Commands.argument("player", EntityArgument.player())
 					.then(Commands.argument("amount", IntegerArgumentType.integer(0, 100000)).executes(c -> {
-						PlayerState.of(EntityArgument.getPlayer(c, "player")).addSouls(IntegerArgumentType.getInteger(c, "amount"));
+						PlayerState ps = PlayerState.of(EntityArgument.getPlayer(c, "player"));
+						ps.setSouls(ps.souls() + IntegerArgumentType.getInteger(c, "amount"));
 						return 1;
 					})))))
 			.then(Commands.literal("station").requires(op).then(Commands.argument("id", StringArgumentType.word()).executes(c -> {

@@ -1193,6 +1193,7 @@
   "message.matriochka.seed_planted.7": "La graine réclame de l'eau à proximité.",
   "message.matriochka.seed_planted.8": "La graine éclot à l'aube ou au crépuscule.",
   "message.matriochka.seed_planted.9": "La graine réclame un signal de redstone.",
+  "message.matriochka.server_full": "Le serveur contient autant de mondes qu'il le permet. Cette Graine attend qu'un autre groupe libère sa parcelle.",
   "message.matriochka.shell": "L'enveloppe %s se brise : elle prend le visage de %s.",
   "message.matriochka.snorkel.cracked": "Ton casque-tuba se fissure.",
   "message.matriochka.snorkel.empty": "La réserve de ton casque est vide. Retiens ton souffle et trouve de l'air.",
