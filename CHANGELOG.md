@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 (alpha)
 
 - Every creature now has its own signature attacks: 160 in all, three per creature and four per elite, none shared. Each has its own wind-up animation, numbers, afflictions, particles and sound, drawn from what the creature is.
 - Two ways to meet a boss. The Grand Jailer, the Storm King, the Master of Seasons and the Unfinished are woken at the arena altar with an offering crafted at their world's station (Sealed Shackle, Storm Censer, Wreath of Seasons, Unfinished Effigy), through a three-second ritual; every fight costs one offering. The six other bosses sleep in their own lairs (a hive, a forge-hall, a lightless pit, a hall of mirrors, a sunken trench temple and a cavern of living rock), woken by the lair heart and guarding a treasure alcove that opens when they fall.
