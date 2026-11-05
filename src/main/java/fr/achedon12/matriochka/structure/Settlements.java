@@ -309,7 +309,10 @@ final class Settlements {
 			k.air(-1, 1, s * hw, 1, giant ? 7 : 4, s * hw);
 			k.set(-2, giant ? 8 : 5, s * hw, p.trim);
 		}
-		for (int[] c : new int[][] {{-hw, -hw}, {hw, -hw}, {-hw, hw}, {hw, hw}}) Parts.roundTower(k, c[0], c[1], 2, 0, wh + 4, true);
+		for (int[] c : new int[][] {{-hw, -hw}, {hw, -hw}, {-hw, hw}, {hw, hw}}) {
+			Parts.roundTower(k, c[0], c[1], 2, 0, wh + 4, true);
+			k.air(c[0] - 2 * Integer.signum(c[0]), 1, c[1] - Integer.signum(c[1]), c[0] - 2 * Integer.signum(c[0]), 2, c[1] - Integer.signum(c[1]));
+		}
 		// quarters: houses, a keep, a tower
 		int[][] lots = {{-11, -11}, {5, -11}, {-11, 5}, {5, 5}};
 		for (int i = 0; i < 4; i++) {
@@ -387,7 +390,12 @@ final class Settlements {
 			}
 		for (int y = 1; y <= wh; y++) k.set(hw - 1, y, 0, Kit.ladderFacing(Direction.WEST));
 		// corner towers
-		for (int[] c : new int[][] {{-hw, -hw}, {hw, -hw}, {-hw, hw}, {hw, hw}}) Parts.roundTower(k, c[0], c[1], 3, 0, wh + 5, true);
+		for (int[] c : new int[][] {{-hw, -hw}, {hw, -hw}, {-hw, hw}, {hw, hw}}) {
+			Parts.roundTower(k, c[0], c[1], 3, 0, wh + 5, true);
+			int sx = Integer.signum(c[0]), sz = Integer.signum(c[1]);
+			k.air(c[0] - 2 * sx, 1, c[1] - 2 * sz, c[0] - 2 * sx, 2, c[1] - 2 * sz);
+			k.air(c[0] - 2 * sx, wh + 1, c[1] - 2 * sz, c[0] - 2 * sx, wh + 2, c[1] - 2 * sz);
+		}
 		// gatehouse with portcullis
 		k.room(-4, -hw - 1, 4, -hw + 3, 0, wh + 3, 4, 1, p.plank);
 		k.hip(-4, -hw - 1, 4, -hw + 3, wh + 4, 1);

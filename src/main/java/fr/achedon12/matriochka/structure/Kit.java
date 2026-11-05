@@ -827,8 +827,18 @@ public final class Kit {
 					BlockState s = lvl.getBlockState(g);
 					if (s.isAir() || !s.getFluidState().isEmpty() || s.canBeReplaced()) lvl.setBlock(g, p.soil, 2);
 				}
+				// the restless ground swallowed the structure: it sits in a hollow as deep as it sank, rim sloping
+				int hollow = sink > 0 && d < rad + 0.5 ? (d < rad - 1.5 ? sink : Math.max(0, sink - (int) Math.ceil(d - (rad - 1.5)))) : 0;
+				if (hollow > 0) {
+					for (int y = 1 - hollow; y <= 0; y++) {
+						BlockPos q = o.offset(x, y, z);
+						if (inside(q)) lvl.setBlock(q, p.fill, 2);
+					}
+					BlockPos f = o.offset(x, -hollow, z);
+					if (inside(f)) lvl.setBlock(f, p.soil, 2);
+				}
 				int depth = world == 4 ? (int) ((rad + 1.5 - d) * 0.9) + 2 + hi(x, 0, z, 23, 3) : 11;
-				for (int y = -1; y >= -Math.min(13, depth); y--) {
+				for (int y = -1 - hollow; y >= -Math.min(13, depth + hollow); y--) {
 					BlockPos pos = o.offset(x, y, z);
 					if (!inside(pos)) continue;
 					BlockState s = lvl.getBlockState(pos);
