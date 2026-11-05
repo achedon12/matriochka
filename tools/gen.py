@@ -109,9 +109,12 @@ def gen_items():
     for eq, wd in (("filter_mask", 1), ("gravity_boots", 6), ("grip_boots", 9)):
         paint_armor_layer(pal(wd), eq, mk(os.path.join(A, f"textures/entity/equipment/humanoid/{eq}.png")))
         w(os.path.join(A, f"equipment/{eq}.json"), {"layers": {"humanoid": [{"texture": f"{NS}:{eq}"}]}})
-    for sid, palette in SNORKEL_PAL.items():
+    for s in SNORKELS:
+        sid, ore, palette = s[0], s[3], s[-1]
         paint_snorkel_layer(palette, sid, mk(os.path.join(A, f"textures/entity/equipment/humanoid/{sid}.png")))
         w(os.path.join(A, f"equipment/{sid}.json"), {"layers": {"humanoid": [{"texture": f"{NS}:{sid}"}]}})
+        # a cracked helmet is mended at the anvil with its own ore
+        w(os.path.join(D, f"tags/item/repairs/{sid}.json"), {"values": [f"{NS}:{ore}"]})
 
 
 # ------------------------------------------------------------------ blocks
