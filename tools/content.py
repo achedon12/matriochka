@@ -97,6 +97,14 @@ item("shell_shard", "Shell Shard", "Éclat d'enveloppe", 0, "resource", "epic", 
      "Left by a fallen boss. Every class upgrade needs some.", "Laissé par un boss vaincu. Chaque amélioration de classe en demande.")
 item("mutated_scale", "Mutated Scale", "Écaille mutée", 0, "gem", "epic", "gem",
      "Shed by a mutated boss. Rich in soul.", "Perdue par un boss muté. Riche en âme.", pal=("6a2a8a", "c84ad8", "f0c050", "1a0a24"))
+# Souls kept in structure chests (the design budgets about 100 souls per world from them): use one to free its
+# souls, sneak to free the whole stack. Neutral souls: they do not move karma. Values in item/SoulVessels.java.
+item("soul_shard", "Soul Shard", "Éclat d'âme", 0, "soul", "common", "shard",
+     "Holds 5 souls. Use it to free them (sneak: the whole stack).", "Contient 5 âmes. Utilise-le pour les libérer (accroupi : toute la pile).",
+     pal=("4a8ad8", "9ad0ff", "e8f6ff", "142a4a"))
+item("soul_vessel", "Soul Vessel", "Fiole d'âme", 0, "soul", "rare", "potion",
+     "Holds 20 souls. Use it to free them (sneak: the whole stack).", "Contient 20 âmes. Utilise-la pour les libérer (accroupi : toute la pile).",
+     pal=("4a8ad8", "9ad0ff", "7ac8ff", "142a4a"))
 
 # World 1
 item("spores", "Spores", "Spores", 1, "resource", "common", "dust", "Base of antidotes.", "Base des antidotes.")

@@ -278,6 +278,8 @@ public final class Stations {
 		int value;
 		if (def != null) {
 			if (def.kind().equals("core") || def.kind().equals("secret")) return "message.matriochka.altar.refuse";
+			// chest souls are freed by using them, not at the altar: they would move karma the design keeps them out of
+			if (def.kind().equals("soul")) return "message.matriochka.altar.soul_item";
 			value = Defs.soulValue(def.rarity());
 		} else {
 			value = switch (stack.getRarity()) {

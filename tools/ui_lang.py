@@ -210,6 +210,9 @@ U = {
  # Doll of Life rebuilt at the Soul Altar
  "station.matriochka.recharge.tip": ("Rebuilds one Doll of Life layer for %s souls and %s rare resources of %s, in any mix:", "Refait une couche de la Poupée de vie pour %s âmes et %s ressources rares de %s, dans n'importe quel mélange :"),
  "station.matriochka.recharge.have": ("You carry %s of them and %s souls.", "Tu en portes %s et %s âmes."),
+ "tooltip.matriochka.holds_souls": ("%s · holds %s souls", "%s · contient %s âmes"),
+ "message.matriochka.souls_freed": ("%s souls freed (%s in all).", "%s âmes libérées (%s en tout)."),
+ "message.matriochka.altar.soul_item": ("Use it instead: its souls are freed without moving your karma.", "Utilise-le plutôt : ses âmes se libèrent sans toucher à ton karma."),
  "message.matriochka.altar.no_rares": ("A layer also costs %s rare resources of %s.", "Une couche coûte aussi %s ressources rares de %s."),
 }
 cond = {"ash_foundry": ("The foundry needs 1 to 3 heat sources around it (lava, magma, fire).", "La fonderie demande 1 à 3 sources de chaleur autour d'elle (lave, magma, feu)."),

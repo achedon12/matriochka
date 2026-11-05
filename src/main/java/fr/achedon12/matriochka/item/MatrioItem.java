@@ -58,7 +58,9 @@ public class MatrioItem extends Item {
 			default -> ChatFormatting.WHITE;
 		};
 		Component rarity = Component.translatable("rarity.matriochka." + def.rarity()).withStyle(color);
-		if (soul > 0 && !"core".equals(def.kind())) {
+		if ("soul".equals(def.kind())) {
+			out.accept(Component.translatable("tooltip.matriochka.holds_souls", rarity, SoulVessels.souls(stack)).withStyle(ChatFormatting.DARK_GRAY));
+		} else if (soul > 0 && !"core".equals(def.kind())) {
 			out.accept(Component.translatable("tooltip.matriochka.soul", rarity, soul).withStyle(ChatFormatting.DARK_GRAY));
 		} else {
 			out.accept(rarity);
@@ -186,6 +188,10 @@ public class MatrioItem extends Item {
 				Nesting.use(sp, hand);
 				return InteractionResult.SUCCESS;
 			}
+			case "soul_shard", "soul_vessel" -> {
+				SoulVessels.release(sp, stack);
+				return InteractionResult.SUCCESS;
+			}
 			case "blank_scroll" -> {
 				sp.sendOverlayMessage(Component.translatable("message.matriochka.blank_scroll").withStyle(ChatFormatting.GOLD));
 				sl.playSound(null, sp.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS, 0.8f, 0.7f);
@@ -211,7 +217,7 @@ public class MatrioItem extends Item {
 		return switch (id) {
 			case "antidote", "cooling_water", "silence_balm", "oxygen_capsule", "stabilizer", "season_preserve", "anchor", "return_thread", "refuge_doll",
 				 "solar_lantern", "sonar", "hourglass", "grappling_hook", "thruster", "labyrinth_map", "artisan_scroll", "artisan_journal",
-				 "nested_dolls", "whole_matryoshka", "blank_scroll" -> true;
+				 "nested_dolls", "whole_matryoshka", "blank_scroll", "soul_shard", "soul_vessel" -> true;
 			default -> id.startsWith("hidden_doll_");
 		};
 	}
