@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- The Artisan's Journal is written: fifty pages in English and French, five per world (a site note, the portrait of the apprentice who became the boss, an observation, a coded page and a letter to the traveller), telling the story world by world. A new Pages tab of the Journal lists the pages found and reads them; the coded page of each world stays in the Artisan's cipher until you carry that world's core or your group beats its boss.
+- The ten hidden dolls nest: hold the smallest in your main hand and the next one in the other hand, then use it. A doll that does not belong rattles and is refused. The order is hinted by the notches under each doll, the coded pages, the Carver's Note left beside every hidden doll and what each world's people say when you show them their doll. The ten closed together make the Whole Matryoshka.
+- World 0, the smallest doll, opens with the Whole Matryoshka once the Unfinished has fallen: a sealed place of painted wood with three chambers of elite guards from every prison and the Artisan's own room. Its rule, Obsession, feeds on every tool you hold and every blow you strike; only empty hands calm it. Its encounter cannot be won by fighting.
+- Three endings. After the Unfinished, your karma decides: Sealed (two more hearts) or Absorbed (stronger strikes, but your karma can never rise again). World 0 holds the third, Set Down the Tools, and the Blank Scroll. Each ending plays a crawl on the Scroll, then the credits, and has its advancement in a new Endings tab. The hidden achievement Set Down the Tools now belongs to the third ending.
+- New Cycle: after an ending, the Journal can begin the next cycle. Your group starts over from the Guardian in fresh worlds where creatures and bosses have 50% more health and 25% more damage per cycle. You keep your souls, karma, pages, quests, endings and gear; the cores, Seeds, World Soils, offerings and keys of the old cycle are taken back, and its World Blocks crumble.
+- New commands for operators: `/matriochka world zero`, `/matriochka ending <seal|absorb|tools>`, `/matriochka cycle show|begin`.
+- An in-game check of all this: `./gradlew runClientGameTest -Pstory`.
+
 ## 0.2.0 (alpha)
 
 - Every creature now has its own signature attacks: 160 in all, three per creature and four per elite, none shared. Each has its own wind-up animation, numbers, afflictions, particles and sound, drawn from what the creature is.
