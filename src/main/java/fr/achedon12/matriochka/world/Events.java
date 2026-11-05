@@ -16,6 +16,7 @@ import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityLevelChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.ChatFormatting;
@@ -47,8 +48,11 @@ public final class Events {
 	public static void init() {
 		ServerTickEvents.END_SERVER_TICK.register(server -> {
 			WorldRules.serverTick(server);
+			Rituals.tick(server);
 			if (server.overworld().getGameTime() % 100 == 0) for (ServerPlayer p : server.getPlayerList().getPlayers()) scanInventory(p);
 		});
+
+		ServerLifecycleEvents.SERVER_STOPPED.register(server -> Rituals.clear());
 
 		ServerPlayerEvents.JOIN.register(player -> {
 			PlayerState ps = PlayerState.of(player);
@@ -151,7 +155,7 @@ public final class Events {
 		BlockPos pos = player.blockPosition();
 		if (fr.achedon12.matriochka.entity.MatrioBoss.inArena(level, pos)) {
 			BlockPos c = Worlds.parcelCenter(Worlds.parcelOf(pos));
-			pos = new BlockPos(pos.getX(), pos.getY(), c.getZ() + Worlds.ARENA_OFFSET - 22);
+			pos = new BlockPos(pos.getX(), pos.getY(), c.getZ() + fr.achedon12.matriochka.entity.MatrioBoss.stageExitZ(level));
 		}
 		pos = Travel.findSafe(level, pos);
 		NonNullList<ItemStack> items = NonNullList.withSize(54, ItemStack.EMPTY);

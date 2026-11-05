@@ -546,6 +546,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			spawnAtLocation(level, new ItemStack(ModContent.item("world_soil_" + w), 4));
 			if (w == 9) spawnAtLocation(level, new ItemStack(ModContent.item("last_doll_key")));
 		}
+		fr.achedon12.matriochka.world.Lairs.onBossDeath(level, this);
 		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, getX(), getY() + 2, getZ(), 120, 1.5, 2, 1.5, 0.5);
 		level.playSound(null, blockPosition(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.HOSTILE, 1.5f, 1f);
 		data.changed();
@@ -588,7 +589,16 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		return Content.BOSSES.getFirst();
 	}
 
+	/** Inside the boss stage of a parcel: the arena, or the whole lair with its hall and alcove. */
 	public static boolean inArena(Level level, BlockPos p) {
-		return Worlds.isModWorld(level) && Math.abs(p.getZ() - Worlds.ARENA_OFFSET) < 24;
+		if (!Worlds.isModWorld(level)) return false;
+		int dz = p.getZ() - Worlds.ARENA_OFFSET;
+		if (byWorld(Worlds.number(level)).lair()) return dz > -fr.achedon12.matriochka.world.Lairs.GATE - 8 && dz < fr.achedon12.matriochka.world.Lairs.R + 11;
+		return Math.abs(dz) < 24;
+	}
+
+	/** Where a death chest goes for someone who died in the boss stage: just outside it, toward the Threshold. */
+	public static int stageExitZ(Level level) {
+		return Worlds.ARENA_OFFSET - (byWorld(Worlds.number(level)).lair() ? fr.achedon12.matriochka.world.Lairs.GATE + 4 : 22);
 	}
 }

@@ -1,10 +1,13 @@
 package fr.achedon12.matriochka.block;
 
+import fr.achedon12.matriochka.content.Defs;
 import fr.achedon12.matriochka.content.ModContent;
 import fr.achedon12.matriochka.entity.MatrioBoss;
 import fr.achedon12.matriochka.rules.PlayerState;
 import fr.achedon12.matriochka.world.Achievements;
+import fr.achedon12.matriochka.world.Lairs;
 import fr.achedon12.matriochka.world.MatrioData;
+import fr.achedon12.matriochka.world.Rituals;
 import fr.achedon12.matriochka.world.Worlds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -26,12 +29,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.Nullable;
 
-/** Cradle, death chest, nesting chest, boss altars and sealed doors. */
+/** Cradle, death chest, nesting chest, boss altars, lair hearts and sealed doors. */
 public final class Blocks3 {
 	private Blocks3() {}
 
@@ -157,6 +162,11 @@ public final class Blocks3 {
 	}
 
 	// ---------------------------------------------------------------- Boss altars
+	/**
+	 * The Guardian's altar (Surface) wakes it directly. The arena altar of a world wakes its altar boss: holding that world's
+	 * offering consumes it and starts a short ritual ({@link Rituals}); without it, the altar names the offering it wants.
+	 * Lair bosses have no altar; an arena altar left from an older parcel still wakes them directly.
+	 */
 	public static class BossAltar extends Block {
 		public BossAltar(BlockBehaviour.Properties p) {
 			super(p);
@@ -167,20 +177,67 @@ public final class Blocks3 {
 			if (!(player instanceof ServerPlayer sp)) return InteractionResult.SUCCESS;
 			ServerLevel sl = (ServerLevel) level;
 			int world = Worlds.number(level);
-			String bossId = world == 0 ? "block_guardian" : ModContent.bossForWorld(world).id();
+			Defs.BossDef boss = world == 0 ? ModContent.bossForWorld(0) : ModContent.bossForWorld(world);
 			if (!sl.getEntitiesOfClass(MatrioBoss.class, sp.getBoundingBox().inflate(48)).isEmpty()) {
 				sp.sendSystemMessage(Component.translatable("message.matriochka.boss_already"));
 				return InteractionResult.SUCCESS;
 			}
 			MatrioData data = MatrioData.get(sl.getServer());
 			String group = data.groupOf(sp.getUUID());
-			if (world == 0 && data.defeated(group, 0) && !sp.isCreative() && !sp.isShiftKeyDown()) {
-				sp.sendSystemMessage(Component.translatable("message.matriochka.guardian_done"));
+			if (world == 0) {
+				if (data.defeated(group, 0) && !sp.isCreative() && !sp.isShiftKeyDown()) {
+					sp.sendSystemMessage(Component.translatable("message.matriochka.guardian_done"));
+					return InteractionResult.SUCCESS;
+				}
+				MatrioBoss.summon(sl, boss.id(), pos.above(2), sp);
+				sl.sendParticles(ParticleTypes.EXPLOSION_EMITTER, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 1, 0, 0, 0, 0);
 				return InteractionResult.SUCCESS;
 			}
-			MatrioBoss.summon(sl, bossId, pos.above(2), sp);
-			sl.sendParticles(ParticleTypes.EXPLOSION_EMITTER, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 1, 0, 0, 0, 0);
+			if (boss.lair() || boss.offering().isEmpty()) {
+				MatrioBoss.summon(sl, boss.id(), pos.above(2), sp);
+				sl.sendParticles(ParticleTypes.EXPLOSION_EMITTER, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 1, 0, 0, 0, 0);
+				return InteractionResult.SUCCESS;
+			}
+			if (Rituals.busy(sl, pos)) {
+				sp.sendSystemMessage(Component.translatable("message.matriochka.offering.busy"));
+				return InteractionResult.SUCCESS;
+			}
+			Component offering = Component.translatable("item.matriochka." + boss.offering());
+			ItemStack held = null;
+			for (InteractionHand hand : InteractionHand.values()) {
+				ItemStack s = sp.getItemInHand(hand);
+				if (!s.isEmpty() && ModContent.idOf(s.getItem()).equals(boss.offering())) {
+					held = s;
+					break;
+				}
+			}
+			if (held == null) {
+				sp.sendSystemMessage(Component.translatable("message.matriochka.offering.needed",
+					Component.translatable("entity.matriochka." + boss.id()), offering).withStyle(net.minecraft.ChatFormatting.GRAY));
+				level.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_DEPLETE.value(), SoundSource.BLOCKS, 0.6f, 1.4f);
+				return InteractionResult.SUCCESS;
+			}
+			held.consume(1, sp);
+			sp.sendSystemMessage(Component.translatable("message.matriochka.offering.accepted", offering).withStyle(net.minecraft.ChatFormatting.GOLD));
+			Rituals.start(sl, pos, boss, sp);
 			return InteractionResult.SUCCESS;
+		}
+	}
+
+	// ---------------------------------------------------------------- Lair heart: wakes the lair boss when a player comes close
+	public static class LairHeart extends Block implements EntityBlock {
+		public LairHeart(BlockBehaviour.Properties p) {
+			super(p);
+		}
+
+		@Override
+		public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new DataBlockEntity(ModContent.BE_DATA, pos, state);
+		}
+
+		@Override
+		public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+			return level.isClientSide() ? null : (l, p, s, be) -> Lairs.tick((ServerLevel) l, p, (DataBlockEntity) be);
 		}
 	}
 

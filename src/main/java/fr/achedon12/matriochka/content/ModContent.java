@@ -123,6 +123,7 @@ public final class ModContent {
 			case "death_chest" -> new Blocks3.DeathChest(p.strength(-1f, 3600000f).sound(SoundType.WOOD).noLootTable());
 			case "nesting_chest" -> new Blocks3.NestingChest(p.strength(2f).sound(SoundType.WOOD));
 			case "boss_altar" -> new Blocks3.BossAltar(p.strength(-1f, 3600000f).lightLevel(s -> 10).noLootTable());
+			case "lair_heart" -> new Blocks3.LairHeart(p.strength(-1f, 3600000f).sound(SoundType.SCULK_CATALYST).lightLevel(s -> 5).noLootTable());
 			case "sealed_door" -> new Blocks3.SealedDoor(p.strength(-1f, 3600000f).sound(SoundType.STONE));
 			case "station" -> new StationBlock(d.id(), p.strength(2.5f).sound(SoundType.WOOD).lightLevel(s -> 4));
 			default -> {
@@ -206,6 +207,7 @@ public final class ModContent {
 				.setAsset(ResourceKey.create(EquipmentAssets.ROOT_ID, Matriochka.id(d.id()))).setEquipSound(SoundEvents.ARMOR_EQUIP_IRON).build());
 			case "food" -> p.food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).alwaysEdible().build());
 			case "core" -> p.stacksTo(1).fireResistant();
+			case "offering" -> p.stacksTo(16).fireResistant();
 			case "seed" -> p.stacksTo(16).fireResistant();
 			case "doll", "guide", "secret", "glider", "hook", "lantern", "sonar", "hourglass", "thruster", "tool" -> p.stacksTo(1);
 			case "consumable", "anchor" -> p.stacksTo(16);

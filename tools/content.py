@@ -200,6 +200,20 @@ for w in range(1, 11):
     item(f"hidden_doll_{w}", f"Hidden Doll {w}", f"Poupée cachée {w}", w, "secret", "none", "doll_small",
          "Nest the ten dolls in order...", "Emboîte les dix poupées dans l'ordre...")
 
+# Boss offerings: held at the arena altar, they start the ritual that wakes an altar boss (one per fight)
+OFFERINGS = [
+    ("sealed_shackle", "Sealed Shackle", "Entrave scellée", 3, "shackle", "grand_jailer",
+     "Held at the arena altar, it wakes the Grand Jailer.", "Tenue à l'autel d'arène, elle réveille le Grand Geôlier."),
+    ("storm_censer", "Storm Censer", "Encensoir d'orage", 4, "censer", "storm_king",
+     "Held at the arena altar, it wakes the Storm King.", "Tenu à l'autel d'arène, il réveille le Roi des tempêtes."),
+    ("wreath_of_seasons", "Wreath of Seasons", "Couronne des saisons", 8, "wreath", "seasons_master",
+     "Held at the arena altar, it wakes the Master of Seasons.", "Tenue à l'autel d'arène, elle réveille le Maître des saisons."),
+    ("unfinished_effigy", "Unfinished Effigy", "Effigie inachevée", 10, "effigy", "the_unfinished",
+     "Held at the arena altar, it wakes the Unfinished.", "Tenue à l'autel d'arène, elle réveille l'Inachevée."),
+]
+for oid, en, fr, w, shape, _boss, een, efr in OFFERINGS:
+    item(oid, en, fr, w, "offering", "epic", shape, een, efr)
+
 # Foods (one dish per world)
 FOODS = [
     ("root_broth", "Root Broth", "Bouillie de racines", 1, "Slows toxin for 5 minutes.", "Toxine ralentie pendant 5 minutes."),
@@ -237,6 +251,8 @@ block("death_chest", "Death Chest", "Coffre de mort", 0, "death_chest", "wood")
 block("nesting_chest", "Nesting Chest", "Coffre gigogne", 2, "nesting_chest", "wood")
 block("sanctuary_altar", "Guardian's Altar", "Autel du Gardien", 0, "boss_altar", "stone_rune", boss="block_guardian")
 block("arena_altar", "Arena Altar", "Autel d'arène", 0, "boss_altar", "stone_rune")
+block("lair_heart", "Lair Heart", "Cœur d'antre", 0, "lair_heart", "lair_heart",
+      note_en="Wakes the boss of its lair when someone comes close.", note_fr="Réveille le boss de son antre quand on s'approche.")
 block("sealed_door", "Sealed Door", "Porte scellée", 3, "sealed_door", "brick")
 block("painted_wood", "Painted Wood", "Bois peint", 0, "deco", "wood")
 block("lacquer_block", "Lacquer Block", "Bloc laqué", 0, "deco", "lacquer")
@@ -426,38 +442,51 @@ PEOPLES = [
 
 # ---------------------------------------------------------------- bosses
 # attacks: light, medium, signature, final phase
+# meet: "altar" (woken at the arena altar with its offering; the Guardian needs none) or "lair" (woken by the
+# lair heart at the centre of its lair). wake: the chat line of the lair awakening.
 BOSSES = [
-    dict(id="block_guardian", en="Block Guardian", fr="Gardien du bloc", world=0, hp=300, dmg=12, body="guardian", size=2.2,
+    dict(id="block_guardian", meet="altar", offering="",
+         en="Block Guardian", fr="Gardien du bloc", world=0, hp=300, dmg=12, body="guardian", size=2.2,
          core="guardian_core", phases=(0.5,),
          atk=[("Punch", "Coup de poing"), ("Shockwave", "Onde de choc"), ("Torn Block", "Bloc arraché et lancé"), ("Rebuilds itself from the arena", "Se reconstruit avec l'arène")]),
-    dict(id="spore_queen", en="Spore Queen", fr="Reine des spores", world=1, hp=500, dmg=12, body="queen", size=2.4,
+    dict(id="spore_queen", meet="lair", wake=("The cocoons split and the hive hums: the Spore Queen awakens.", "Les cocons se fendent et la ruche bourdonne : la Reine des spores s'éveille."),
+         en="Spore Queen", fr="Reine des spores", world=1, hp=500, dmg=12, body="queen", size=2.4,
          core="queen_core", phases=(0.66, 0.33),
          atk=[("Root Snare", "Racine sous les pieds"), ("Toxic Cloud", "Nuage toxique"), ("Call of Sporelings", "Appel de Sporelins"), ("Cocoon guarded by nodes", "Cocon à briser par ses nœuds")]),
-    dict(id="ash_titan", en="Ash Titan", fr="Titan de cendre", world=2, hp=675, dmg=14.4, body="titan", size=3.0,
+    dict(id="ash_titan", meet="lair", wake=("The great furnace roars back to life: the Ash Titan rises from the embers.", "La grande fournaise reprend vie : le Titan de cendre se relève des braises."),
+         en="Ash Titan", fr="Titan de cendre", world=2, hp=675, dmg=14.4, body="titan", size=3.0,
          core="titan_core", phases=(0.66, 0.33),
          atk=[("Hammer Blow", "Coup de marteau"), ("Ash Spray", "Projection de cendre"), ("Rising Lava", "Lave montante"), ("Molten armor, exposed heart", "Armure fondue, cœur exposé")]),
-    dict(id="grand_jailer", en="Grand Jailer", fr="Grand Geôlier", world=3, hp=911, dmg=17.3, body="jailer", size=2.6,
+    dict(id="grand_jailer", meet="altar", offering="sealed_shackle",
+         en="Grand Jailer", fr="Grand Geôlier", world=3, hp=911, dmg=17.3, body="jailer", size=2.6,
          core="jailer_core", phases=(0.66, 0.33),
          atk=[("Chain Pull", "Chaîne tirée"), ("Floor Cage", "Cage au sol"), ("Moving Walls", "Murs mobiles"), ("The arena becomes a cell", "L'arène devient une cellule")]),
-    dict(id="storm_king", en="Storm King", fr="Roi des tempêtes", world=4, hp=1230, dmg=20.7, body="storm_king", size=2.6,
+    dict(id="storm_king", meet="altar", offering="storm_censer",
+         en="Storm King", fr="Roi des tempêtes", world=4, hp=1230, dmg=20.7, body="storm_king", size=2.6,
          core="storm_king_core", phases=(0.66, 0.33), flying=True,
          atk=[("Gust", "Bourrasque"), ("Called Lightning", "Éclair annoncé"), ("Shattered Islet", "Îlot détruit"), ("Fight on drifting debris", "Combat sur des débris")]),
-    dict(id="light_eater", en="Light Eater", fr="Mangeur de lumière", world=5, hp=1661, dmg=24.9, body="light_eater", size=2.6,
+    dict(id="light_eater", meet="lair", wake=("The last glimmer goes out. Something at the bottom of the pit was waiting: the Light Eater wakes.", "La dernière lueur s'éteint. Quelque chose attendait au fond du puits : le Mangeur de lumière s'éveille."),
+         en="Light Eater", fr="Mangeur de lumière", world=5, hp=1661, dmg=24.9, body="light_eater", size=2.6,
          core="light_eater_core", phases=(0.66, 0.33),
          atk=[("Claw in the Dark", "Griffe dans le noir"), ("Lights Out", "Extinction de lumières"), ("Silent Charge", "Charge silencieuse"), ("Track it by sound only", "Repérage au son seulement")]),
-    dict(id="your_double", en="Your Double", fr="Ton Double", world=6, hp=2242, dmg=29.9, body="double", size=1.0,
+    dict(id="your_double", meet="lair", wake=("Every mirror cracks at once and one reflection steps out: Your Double.", "Tous les miroirs se fêlent d'un coup et un reflet en sort : Ton Double."),
+         en="Your Double", fr="Ton Double", world=6, hp=2242, dmg=29.9, body="double", size=1.0,
          core="double_core", phases=(0.66, 0.33),
          atk=[("Copied Strike", "Copie de ton coup"), ("Copied Weapon", "Copie de ton arme"), ("Gravity Flip", "Inversion de gravité"), ("It adopts your play style", "Il adopte ton style de jeu")]),
-    dict(id="pressure_leviathan", en="Pressure Leviathan", fr="Léviathan de pression", world=7, hp=3027, dmg=35.8, body="leviathan", size=3.2,
+    dict(id="pressure_leviathan", meet="lair", wake=("The trench groans under the weight of the sea: the Pressure Leviathan uncoils.", "La fosse gémit sous le poids de la mer : le Léviathan de pression se déroule."),
+         en="Pressure Leviathan", fr="Léviathan de pression", world=7, hp=3027, dmg=35.8, body="leviathan", size=3.2,
          core="leviathan_core", phases=(0.66, 0.33), aquatic=True,
          atk=[("Tail Lash", "Coup de queue"), ("Charge", "Charge"), ("Abyssal Pull", "Aspiration"), ("Depth and oxygen worsen", "Profondeur et oxygène aggravés")]),
-    dict(id="seasons_master", en="Master of Seasons", fr="Maître des saisons", world=8, hp=4086, dmg=43, body="seasons", size=2.8,
+    dict(id="seasons_master", meet="altar", offering="wreath_of_seasons",
+         en="Master of Seasons", fr="Maître des saisons", world=8, hp=4086, dmg=43, body="seasons", size=2.8,
          core="seasons_core", phases=(0.66, 0.33),
          atk=[("Seasonal Strike", "Coup saisonnier"), ("Seasonal Ground", "Terrain saisonnier"), ("Season Shift", "Changement de saison"), ("Overlapping seasons", "Saisons superposées")]),
-    dict(id="terrain_heart_boss", en="Heart of the Terrain", fr="Cœur du terrain", world=9, hp=5516, dmg=51.6, body="heart", size=3.0,
+    dict(id="terrain_heart_boss", meet="lair", wake=("The veins of the cavern start to beat: the Heart of the Terrain awakens.", "Les veines de la caverne se mettent à battre : le Cœur du terrain s'éveille."),
+         en="Heart of the Terrain", fr="Cœur du terrain", world=9, hp=5516, dmg=51.6, body="heart", size=3.0,
          core="terrain_core", phases=(0.66, 0.33),
          atk=[("Ground Wave", "Vague de sol"), ("Living Wall", "Mur vivant"), ("Chasm", "Gouffre"), ("The floor vanishes in sections", "Le sol disparaît par sections")]),
-    dict(id="the_unfinished", en="The Unfinished", fr="L'Inachevée", world=10, hp=14894, dmg=61.9, body="unfinished", size=3.4,
+    dict(id="the_unfinished", meet="altar", offering="unfinished_effigy",
+         en="The Unfinished", fr="L'Inachevée", world=10, hp=14894, dmg=61.9, body="unfinished", size=3.4,
          core="unfinished_core", phases=tuple(round(1 - i / 10, 2) for i in range(1, 10)),
          atk=[("Shell Attack", "Attaque de l'enveloppe"), ("Shell Attack", "Attaque de l'enveloppe"), ("Shell Attack", "Attaque de l'enveloppe"), ("A tiny final form", "Dernière forme minuscule")]),
 ]

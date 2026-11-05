@@ -20,7 +20,12 @@ public final class Defs {
 							int count, String summon, String effects, String gauges, String self, String particle, String sound) {}
 
 	public record BossDef(String id, int world, float hp, float damage, float scale, float width, float height, String core,
-						  float[] phases, boolean flying, boolean aquatic) {}
+						  float[] phases, boolean flying, boolean aquatic, String meet, String offering) {
+		/** True for a boss that sleeps in its lair (woken by the lair heart) rather than at the arena altar. */
+		public boolean lair() {
+			return "lair".equals(meet);
+		}
+	}
 
 	public record NpcDef(String id, int world) {}
 

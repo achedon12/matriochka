@@ -392,6 +392,57 @@ def paint_item(shape, pal, seed, path, rarity="common"):
             c.set(x, y, shade(a, 0.9 + 0.2 * ((x + y) % 2)))
     elif shape == "armor":
         pass
+    elif shape == "shackle":
+        # an open iron cuff on a short chain, its lock glowing with the world's light
+        cuff = disc(6, 6, 4.2) - disc(6, 6, 2.2)
+        c.fill_mask(cuff, IRON, seed=seed)
+        for i, (x, y) in enumerate(((9, 9), (10, 10), (11, 11), (12, 12))):
+            c.set(x, y, shade(IRON, 0.7 if i % 2 else 1.1))
+        for (x, y) in disc(13, 13, 1.6):
+            c.set(x, y, shade(IRON, 0.9))
+        for (x, y) in rect(5, 1, 7, 2):
+            c.set(x, y, shade(s, 0.8))
+        c.set(6, 6, a)
+        c.set(6, 9, shade(a, 1.2))
+        c.set(3, 6, shade(a, 1.1))
+    elif shape == "censer":
+        # a hanging brass censer, storm light leaking through its vents
+        m = ellipse(8, 10, 4.5, 3.8) | rect(6, 5, 10, 6) | rect(7, 13, 9, 14)
+        c.fill_mask(m, GOLD, seed=seed)
+        for (x, y) in line(8, 0, 8, 4, 1):
+            c.set(x, y, shade(IRON, 0.8 + 0.3 * (y % 2)))
+        for x in (6, 8, 10):
+            c.set(x, 10, shade(a, 1.3))
+            c.set(x, 9, shade(s, 1.1))
+        for (x, y) in ((4, 4), (12, 3), (11, 6)):
+            c.set(x, y, shade(a, 1.2), 200)
+    elif shape == "wreath":
+        # a ring of leaves turning through the four seasons
+        ring = disc(8, 8, 6.2) - disc(8, 8, 3.4)
+        seasons = (hx("6ab04a"), hx("e8c040"), hx("d8602a"), hx("e8f0ff"))
+        for (x, y) in ring:
+            q = (0 if x >= 8 else 1) + (0 if y < 8 else 2)
+            col = seasons[q]
+            c.set(x, y, shade(col, 0.8 + 0.35 * ((x * 5 + y * 3) % 4) / 4))
+        c.outline(ring, shade(d, 0.6))
+        for (x, y) in ((8, 2), (14, 8), (8, 14), (2, 8)):
+            c.set(x, y, GOLD)
+    elif shape == "effigy":
+        # a doll left half-carved: painted on one side, bare wood and thread on the other
+        m = doll_mask(0.95)
+        c.fill_mask(m, WOOD, seed=seed, noise=0.08)
+        for (x, y) in m:
+            if x <= 8:
+                c.set(x, y, shade(DOLL_RED, 0.85 + 0.2 * ((x + y) % 3) / 3))
+        for (x, y) in disc(7, 5, 1.6):
+            c.set(x, y, hx("f0d0b0"))
+        c.set(7, 5, (20, 20, 20))
+        for y in range(4, 15, 2):
+            c.set(10, y, shade(a, 1.1))
+            c.set(11, y + 1, shade(p, 1.2))
+        for (x, y) in line(9, 2, 12, 15, 1):
+            if (x + y) % 3 == 0:
+                c.set(x, y, hx("e8e0d0"))
     else:
         m = disc(8, 8, 5)
         c.fill_mask(m, a, seed=seed)
@@ -537,6 +588,21 @@ def paint_block(style, pal, seed, path, variant=0):
     elif style == "stone_rune":
         for (x, y) in diamond(8, 8, 5) - diamond(8, 8, 3):
             c.set(x, y, hx("7fd3ff"))
+    elif style == "lair_heart":
+        # a dark lacquered shell cracked open on a beating red core
+        for x in range(16):
+            for y in range(16):
+                c.set(x, y, shade(hx("2a1418"), 0.8 + r.random() * 0.35))
+        for (x, y) in disc(7.5, 7.5, 4.6):
+            dd = math.hypot(x - 7.5, y - 7.5)
+            c.set(x, y, shade(DOLL_RED, 1.35 - dd / 7 + r.random() * 0.08))
+        for (x, y) in disc(7.5, 7.5, 1.6):
+            c.set(x, y, hx("ffd0a0"))
+        for (x0, y0, x1, y1) in ((7, 3, 2, 0), (11, 6, 15, 3), (10, 11, 14, 15), (4, 10, 0, 13), (8, 12, 7, 15)):
+            for (x, y) in line(x0, y0, x1, y1, 1):
+                c.set(x, y, shade(DOLL_RED, 1.0 + r.random() * 0.2))
+        for t in range(0, 360, 45):
+            c.set(round(7.5 + 6.6 * math.cos(math.radians(t))), round(7.5 + 6.6 * math.sin(math.radians(t))), GOLD)
     c.save(path)
 
 
