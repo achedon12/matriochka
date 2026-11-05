@@ -88,6 +88,8 @@ public final class ReplayContent {
 		new TalentDef("prospector_longer_arm", "prospector", "tunneler", 2, "reach", 1.0f, 120, 1, 5),
 		new TalentDef("prospector_mole", "prospector", "tunneler", 3, "break_speed", 0.2f, 250, 2, 8)
 	);
+	/** The classes in the order of their talent trees. */
+	public static final String[] CLASSES = {"guardian", "berserker", "prowler", "reaper", "survivor", "prospector"};
 	public static final float TALENT_REFUND = 0.5f;
 	public static final float TRIAL_HEALTH = 1.6f, TRIAL_DAMAGE = 1.35f, GAUNTLET_HEALTH = 1.2f, GAUNTLET_DAMAGE = 1.15f;
 	public static final int TRIAL_WAVE = 4, TRIAL_ELITES = 2, TRIAL_SOULS = 25;
@@ -135,7 +137,7 @@ public final class ReplayContent {
 		new GearRecipe("dark_altar", "lantern_shield", -1, List.of("shadow_shard", "minecraft:lantern", "minecraft:iron_ingot"), List.of(5, 1, 4)),
 		new GearRecipe("abyssal_press", "tide_harpoon", -1, List.of("abyssal_cobalt", "nacre", "minecraft:string"), List.of(4, 2, 4)),
 		new GearRecipe("terrain_anchor", "quake_pick", -1, List.of("terrain_fragment", "minecraft:iron_pickaxe"), List.of(6, 1)),
-		new GearRecipe("matrix_workbench", "trial_altar", 11, List.of("lacquer_block", "minecraft:gold_block", "shell_shard"), List.of(4, 1, 2))
+		new GearRecipe("matrix_workbench", "trial_altar", 10, List.of("lacquer_block", "minecraft:gold_block", "shell_shard"), List.of(4, 1, 2))
 	);
 	/** Ids of the replay gear, whose behaviour lives in item/ReplayGear. */
 	public static final List<String> GEAR = List.of("spore_bow", "magma_flail", "key_chain_whip", "storm_javelin", "lantern_shield", "tide_harpoon", "quake_pick");

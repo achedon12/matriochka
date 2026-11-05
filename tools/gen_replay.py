@@ -85,6 +85,8 @@ def gen(lang, write, root):
          "\tpublic record GearRecipe(String station, String output, int requires, List<String> inputs, List<Integer> counts) {}",
          "\tpublic record Trade(String cost, int costCount, String result, int resultCount) {}", ""]
     L.append("\tpublic static final List<TalentDef> TALENTS = List.of(\n" + ",\n".join(rows) + "\n\t);")
+    L.append("\t/** The classes in the order of their talent trees. */")
+    L.append("\tpublic static final String[] CLASSES = {" + ", ".join(jstr(c) for c in TALENTS) + "};")
     L.append(f"\tpublic static final float TALENT_REFUND = {TALENT_REFUND}f;")
     s = TRIAL_SCALE
     L.append(f"\tpublic static final float TRIAL_HEALTH = {s['health']}f, TRIAL_DAMAGE = {s['damage']}f, GAUNTLET_HEALTH = {s['gauntlet_health']}f, GAUNTLET_DAMAGE = {s['gauntlet_damage']}f;")

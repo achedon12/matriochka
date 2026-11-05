@@ -1135,7 +1135,7 @@ MERCHANTS = {
     5: (("Silent Pedlar", "Colporteur silencieux"), [("shadow_shard", 8, "lantern_shield", 1), ("diamond_fragment", 6, "shell_shard", 1), ("shadow_shard", 4, "solar_lantern", 1)]),
     6: (("Stray Reflection", "Reflet errant"), [("unstable_alloy", 6, "shell_shard", 1), ("inverted_crystal", 2, "mutated_scale", 1), ("unstable_alloy", 4, "gravity_boots", 1)]),
     7: (("Drifting Diver", "Plongeur à la dérive"), [("abyssal_cobalt", 6, "tide_harpoon", 1), ("pressure_pearl", 2, "shell_shard", 1), ("nacre", 6, "nacre_snorkel", 1)]),
-    8: (("Passing Ephemeral", "Éphémère de passage"), [("temporal_sand", 10, "hourglass", 1), ("season_fragment", 2, "shell_shard", 1), ("temporal_sand", 8, "wreath_of_seasons", 1)]),
+    8: (("Passing Ephemeral", "Éphémère voyageur"), [("temporal_sand", 10, "hourglass", 1), ("season_fragment", 2, "shell_shard", 1), ("temporal_sand", 8, "wreath_of_seasons", 1)]),
     9: (("Uprooted Anchored", "Ancré déraciné"), [("terrain_fragment", 10, "quake_pick", 1), ("terrain_fragment", 6, "shell_shard", 1), ("terrain_fragment", 4, "grip_boots", 1)]),
     10: (("Wandering Apprentice", "Apprenti vagabond"), [("artisan_thread", 8, "shell_shard", 2), ("artisan_thread", 12, "artisan_shard", 1), ("artisan_thread", 6, "mutated_scale", 1)]),
 }
@@ -1172,7 +1172,7 @@ REPLAY_GEAR = [
 for _g in REPLAY_GEAR:
     item(_g[0], _g[1], _g[2], _g[3], _g[4], _g[5], _g[6], _g[7], _g[8])
 # The Trial Altar is carved at the Matrix Workbench once the Unfinished has fallen.
-TRIAL_ALTAR_RECIPE = ("matrix_workbench", 11, [("lacquer_block", 4), ("minecraft:gold_block", 1), ("shell_shard", 2)])
+TRIAL_ALTAR_RECIPE = ("matrix_workbench", 10,[("lacquer_block", 4), ("minecraft:gold_block", 1), ("shell_shard", 2)])
 
 # ---------------------------------------------------------------- new structures (one more per world)
 # Appended after each world's ten, so the Journal pages keep their structures. Builders in structure/Outposts.java.
