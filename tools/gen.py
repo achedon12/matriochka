@@ -20,7 +20,7 @@ RES = os.path.join(ROOT, "src/main/resources")
 A = os.path.join(RES, "assets/matriochka")
 D = os.path.join(RES, "data/matriochka")
 JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Content.java")
-MC = os.environ.get("MC_DATA", os.path.expanduser("~/mcsrc/res/data/minecraft"))
+MC = os.environ.get("MC_DATA", os.path.join(os.path.dirname(os.path.abspath(__file__)), "vanilla"))
 NS = "matriochka"
 
 EN, FR = {}, {}
