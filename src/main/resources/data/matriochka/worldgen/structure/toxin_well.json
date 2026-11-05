@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "matriochka:world_1",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 1,
+  "archetype": "well",
+  "role": "combat",
+  "size": "medium",
+  "structure_id": "toxin_well"
+}
