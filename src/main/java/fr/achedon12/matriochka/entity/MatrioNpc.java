@@ -117,6 +117,13 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 	}
 
 	@Override
+	public void tick() {
+		super.tick();
+		// a wandering Peddler moves on after two days
+		if (!level().isClientSide() && tickCount > 48000 && entityTags().contains("wanderer")) discard();
+	}
+
+	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(DefaultAnimations.genericWalkIdleController());
 	}

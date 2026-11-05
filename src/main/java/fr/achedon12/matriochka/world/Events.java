@@ -45,11 +45,61 @@ import net.minecraft.world.phys.Vec3;
 public final class Events {
 	private Events() {}
 
+	/** The Doll Peddler wanders the Surface like a trader: now and then he turns up near a player, and leaves two days later. */
+	public static void peddler(ServerLevel level) {
+		var type = ModContent.entity("doll_peddler");
+		for (ServerPlayer p : level.players()) {
+			if (p.isSpectator() || level.getRandom().nextInt(4) != 0) continue;
+			if (!level.getEntitiesOfClass(fr.achedon12.matriochka.entity.MatrioNpc.class, p.getBoundingBox().inflate(128), e -> e.getType() == type).isEmpty()) continue;
+			double a = level.getRandom().nextDouble() * Math.PI * 2, r = 24 + level.getRandom().nextInt(16);
+			BlockPos at = level.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				BlockPos.containing(p.getX() + Math.cos(a) * r, p.getY(), p.getZ() + Math.sin(a) * r));
+			if (!level.getFluidState(at.below()).isEmpty() || !level.getBlockState(at.below()).isSolid()) continue;
+			var e = type.create(level, net.minecraft.world.entity.EntitySpawnReason.EVENT);
+			if (e == null) continue;
+			e.setPos(at.getX() + 0.5, at.getY(), at.getZ() + 0.5);
+			e.addTag("wanderer");
+			level.addFreshEntity(e);
+			return;
+		}
+	}
+
+	/** A world whose block was broken stays unstable for 20 minutes: half as many creatures again roam around its players. */
+	private static void unstable(net.minecraft.server.MinecraftServer server) {
+		MatrioData data = MatrioData.get(server);
+		for (ServerPlayer p : server.getPlayerList().getPlayers()) {
+			int w = Worlds.number(p.level());
+			if (w <= 0 || p.isSpectator() || !(p.level() instanceof ServerLevel level)) continue;
+			if (data.worldEntry(data.groupOf(p.getUUID()), w).getLongOr("unstable_until", 0L) <= level.getGameTime()) continue;
+			if (level.getRandom().nextInt(2) != 0) continue;
+			var pool = Content.MOBS.stream().filter(m -> m.world() == w && !m.elite() && m.aquatic() == (w == 7)).toList();
+			if (pool.isEmpty()) continue;
+			var def = pool.get(level.getRandom().nextInt(pool.size()));
+			if (level.getEntitiesOfClass(fr.achedon12.matriochka.entity.MatrioMob.class, p.getBoundingBox().inflate(32)).size() > 12) continue;
+			double a = level.getRandom().nextDouble() * Math.PI * 2, r = 14 + level.getRandom().nextInt(10);
+			BlockPos at = BlockPos.containing(p.getX() + Math.cos(a) * r, p.getY(), p.getZ() + Math.sin(a) * r);
+			// find a free spot near the player's height
+			BlockPos spot = null;
+			for (int dy = 4; dy >= -6 && spot == null; dy--) {
+				BlockPos q = at.above(dy);
+				if (level.getBlockState(q.below()).isSolid() && level.getBlockState(q).isAir() && level.getBlockState(q.above()).isAir()) spot = q;
+			}
+			if (spot == null && w == 7 && level.getFluidState(at).isSource()) spot = at;
+			if (spot == null) continue;
+			var e = ModContent.entity(def.id()).create(level, net.minecraft.world.entity.EntitySpawnReason.EVENT);
+			if (e == null) continue;
+			e.setPos(spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5);
+			level.addFreshEntity(e);
+		}
+	}
+
 	public static void init() {
 		ServerTickEvents.END_SERVER_TICK.register(server -> {
 			WorldRules.serverTick(server);
 			Rituals.tick(server);
 			if (server.overworld().getGameTime() % 100 == 0) for (ServerPlayer p : server.getPlayerList().getPlayers()) scanInventory(p);
+			if (server.overworld().getGameTime() % 4800 == 2400) peddler(server.overworld());
+			if (server.overworld().getGameTime() % 200 == 100) unstable(server);
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> Rituals.clear());
@@ -69,7 +119,7 @@ public final class Events {
 		ServerPlayerEvents.ALLOW_DEATH.register((player, source, amount) -> {
 			PlayerState ps = PlayerState.of(player);
 			long now = player.level().getGameTime();
-			if (ps.dollLayers() > 0 && now - ps.tag().getLongOr("last_revive", -10000) >= 1200) {
+			if (!Config.hardcore() && ps.dollLayers() > 0 && now - ps.tag().getLongOr("last_revive", -10000) >= 1200) {
 				ps.setDoll(ps.dollLayers() - 1, ps.dollMax());
 				ps.tag().putLong("last_revive", now);
 				player.setHealth(player.getMaxHealth() * 0.5f);
@@ -85,6 +135,7 @@ public final class Events {
 				deathChest(player);
 			}
 			ps.tag().putInt("died_in", Worlds.number(player.level()));
+			fr.achedon12.matriochka.entity.BossFeats.markNear(player, "died");
 			return true;
 		});
 
@@ -96,6 +147,10 @@ public final class Events {
 			ServerLevel level = player.level().getServer().getLevel(Worlds.key(w));
 			if (level == null || !c.contains("x")) return;
 			BlockPos pos = new BlockPos(c.getIntOr("x", 0), c.getIntOr("y", 0), c.getIntOr("z", 0));
+			if (!level.getEntitiesOfClass(fr.achedon12.matriochka.entity.MatrioBoss.class, new net.minecraft.world.phys.AABB(pos).inflate(48)).isEmpty()) {
+				player.sendSystemMessage(Component.translatable("message.matriochka.cradle_boss"));
+				return;
+			}
 			if (level.getBlockEntity(pos) instanceof DataBlockEntity be && be.data().getIntOr("charges", 0) > 0) {
 				be.data().putInt("charges", be.data().getIntOr("charges", 0) - 1);
 				be.changed();
@@ -105,10 +160,20 @@ public final class Events {
 		});
 
 		ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, base, taken, blocked) -> {
+			if (entity instanceof ServerPlayer hurt && source.is(net.minecraft.tags.DamageTypeTags.IS_LIGHTNING)) {
+				fr.achedon12.matriochka.entity.BossFeats.markNear(hurt, "bolt");
+			}
 			if (source.getEntity() instanceof ServerPlayer p) {
 				float steal = GearClasses.lifeSteal(p);
 				if (steal > 0) p.heal(taken * steal);
 			}
+		});
+
+		// A creature hooked into the void.
+		ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
+			if (!source.is(net.minecraft.world.damagesource.DamageTypes.FELL_OUT_OF_WORLD) || !(entity.level() instanceof ServerLevel l)) return;
+			java.util.UUID by = fr.achedon12.matriochka.item.Hooked.by(entity, l.getGameTime());
+			if (by != null && l.getServer().getPlayerList().getPlayer(by) instanceof ServerPlayer hooker) Achievements.grant(hooker, "hook_void");
 		});
 
 		// Gates: enchanting and anvils before world 2, cracked doll placement.
@@ -140,6 +205,15 @@ public final class Events {
 				player.teleport(new TeleportTransition(back, Vec3.atBottomCenterOf(Travel.findSafe(back, back.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, spawn))),
 					Vec3.ZERO, 0, 0, Set.of(), TeleportTransition.DO_NOTHING));
 			}
+		});
+
+		// Diamonds only from world 5: none in the loot chests of vanilla structures either.
+		net.fabricmc.fabric.api.loot.v3.LootTableEvents.MODIFY_DROPS.register((table, context, drops) -> {
+			var key = table.unwrapKey();
+			if (key.isEmpty()) return;
+			var id = key.get().identifier();
+			if (!id.getNamespace().equals("minecraft") || !id.getPath().startsWith("chests/")) return;
+			drops.removeIf(st -> st.is(net.minecraft.world.item.Items.DIAMOND) || st.is(net.minecraft.world.item.Items.DIAMOND_BLOCK));
 		});
 
 		// Diamonds only from world 5: remove diamond ores from the surface.

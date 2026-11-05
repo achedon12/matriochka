@@ -55,6 +55,9 @@ public class MatrioMob extends Monster implements GeoEntity {
 	private MobMoves moves;
 	private boolean revealed;
 
+	/** Players this creature has hunted: a kill by anyone else is a kill unseen. */
+	private final java.util.Set<java.util.UUID> spottedBy = new java.util.HashSet<>();
+
 	public MatrioMob(EntityType<? extends Monster> type, Level level, Defs.MobDef def) {
 		super(type, level);
 		this.def = def;
@@ -127,6 +130,18 @@ public class MatrioMob extends Monster implements GeoEntity {
 	@Override
 	protected void customServerAiStep(ServerLevel level) {
 		super.customServerAiStep(level);
+		if (getTarget() instanceof net.minecraft.server.level.ServerPlayer sp) spottedBy.add(sp.getUUID());
+		if (!entityTags().contains("cfg_scaled")) {
+			// the config multipliers apply once, the first time the creature thinks
+			addTag("cfg_scaled");
+			float hm = fr.achedon12.matriochka.world.Config.healthMult(), dm = fr.achedon12.matriochka.world.Config.damageMult();
+			if (hm != 1f) {
+				float frac = getHealth() / getMaxHealth();
+				getAttribute(Attributes.MAX_HEALTH).setBaseValue(getAttributeBaseValue(Attributes.MAX_HEALTH) * hm);
+				setHealth(getMaxHealth() * frac);
+			}
+			if (dm != 1f) getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(getAttributeBaseValue(Attributes.ATTACK_DAMAGE) * dm);
+		}
 		special++;
 		LivingEntity target = getTarget();
 		if (!revealed) {
@@ -138,6 +153,8 @@ public class MatrioMob extends Monster implements GeoEntity {
 				level.playSound(null, blockPosition(), SoundEvents.CHEST_LOCKED, SoundSource.HOSTILE, 1f, 0.5f);
 				if (behavior("ambush_root")) p.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 5));
 				if (behavior("mimic") && p instanceof ServerPlayer sp && def().world() == 3) Achievements.grant(sp, "key_on_lock");
+				// once unmasked, a mimic gives chase: the Crawling Block drags itself, the others hop after you
+				if (behavior("mimic")) getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(def().id().equals("crawling_block") ? 0.17 : 0.24);
 			} else {
 				getNavigation().stop();
 				return;
@@ -370,10 +387,23 @@ public class MatrioMob extends Monster implements GeoEntity {
 		return super.hurtServer(level, source, amount);
 	}
 
+	/** The Dusk Shade only comes out in the half-light between day and night. */
+	@Override
+	public boolean checkSpawnRules(net.minecraft.world.level.LevelAccessor level, EntitySpawnReason reason) {
+		if (reason == EntitySpawnReason.NATURAL && def().id().equals("dusk_shade") && level instanceof net.minecraft.world.level.Level l) {
+			int dark = l.getSkyDarken();
+			if (dark < 3 || dark > 9) return false;
+		}
+		return super.checkSpawnRules(level, reason);
+	}
+
 	@Override
 	public void die(DamageSource source) {
 		super.die(source);
 		if (!(level() instanceof ServerLevel level)) return;
+		if (def().id().equals("blind_prowler") && source.getEntity() instanceof net.minecraft.server.level.ServerPlayer killer && !spottedBy.contains(killer.getUUID())) {
+			fr.achedon12.matriochka.world.Achievements.grant(killer, "silent_kill");
+		}
 		boolean child = entityTags().contains("matrio_child");
 		if ((def().nesting() || behavior("splitter")) && !child) {
 			int n = behavior("splitter") ? 3 : 2;
