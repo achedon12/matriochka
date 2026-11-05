@@ -27,6 +27,10 @@ Matriochka is a progression mod for Minecraft Java 26.3 (Fabric). Ten worlds are
 | 100 structures | 10 types per world, generated procedurally, with journal pages and one hidden doll per world |
 | 64 quests, 100 achievements | Optional quest book in the Artisan's Journal and one advancement tab per world |
 
+<!-- gui -->
+<p align="center"><img src="https://achedon12.github.io/matriochka/shots/gui_journal_1.png" alt="The Journal, quests tab" width="49%"> <img src="https://achedon12.github.io/matriochka/shots/gui_station_spore_vat.png" alt="The Spore Vat, World 1 station" width="49%"><br><img src="https://achedon12.github.io/matriochka/shots/gui_scroll.png" alt="The Artisan's Scroll" width="49%"> <img src="https://achedon12.github.io/matriochka/shots/gui_station_lightning_forge.png" alt="The Lightning Forge, World 4 station" width="49%"></p>
+<!-- /gui -->
+
 ## Requirements
 
 - Minecraft Java Edition 26.3
