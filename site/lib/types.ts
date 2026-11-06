@@ -6,7 +6,10 @@ export interface Ing { id: string; tex: string | null; n: number; name: string }
 export interface Recipe { out: string; tex: string | null; name: string; count: number; inputs: Ing[] }
 export interface DollColours { body: string; scarf: string; orn: string }
 export interface Item { id: string; tex: string | null; name: string; effect: string }
-export interface Anim { key: string; label: string }
+/** One button of the creature viewer. `seq` chains several clips (a boss attack: windup, strike, recover);
+ * `slug` lets a link preselect it (#anim-<slug>). */
+export interface Anim { key: string; label: string; seq?: string[]; slug?: string }
+export interface BossMove { slug: string; anim: string; name: string; label: string; warn: string; windup: string | null; strike: string | null }
 export interface Ach { world: number; cat: string; hidden: boolean; name: string; desc: string }
 export interface Quest { world: number; name: string; desc: string; count: number }
 export interface Drop { id: string; tex: string | null; name: string; chance?: string; note: string; bonus?: string }
@@ -53,7 +56,7 @@ export interface Mob extends CreatureBase {
 
 export interface Boss extends CreatureBase {
   meet: import("../components/MeetBoss").Meet;
-  kind: "boss"; phases: string; atks: { label: string; name: string }[]; timings: { label: string; v: string }[];
+  kind: "boss"; phases: string; atks: { label: string; name: string }[]; moves: BossMove[]; passive: { label: string; name: string }[]; timings: { label: string; v: string }[];
   cooldown: string[]; mp: { p: number; mult: string; hp: string }[]; drops: Drop[]; souls: string;
   unlocks: string[]; special: string[]; story: string; shot: string | null; block: string; coreTex: string | null;
 }

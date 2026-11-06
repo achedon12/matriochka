@@ -38,6 +38,11 @@
    "no3d": "This browser cannot draw the 3D model. Here is its texture, as the game paints it.",
    "dragHint": "Drag to turn it, scroll or pinch to zoom.",
    "animations": "Animations",
+   "see3d": "See it in 3D",
+   "windup": "Wind-up",
+   "strike": "Strike",
+   "warning": "warning",
+   "inGame": "In game",
    "autoRotate": "Turn slowly",
    "role": "Role",
    "attackSpeed": "Attack speed",
@@ -1442,7 +1447,7 @@
        "id": "minecraft:iron_pickaxe",
        "tex": null,
        "n": 1,
-       "name": "Iron pickaxe"
+       "name": "Iron Pickaxe"
       }
      ]
     }
@@ -20038,6 +20043,41 @@
      "name": "Rebuilds itself from the arena"
     }
    ],
+   "moves": [
+    {
+     "slug": "punch",
+     "anim": "attack.block_guardian.punch",
+     "name": "Punch",
+     "label": "Light",
+     "warn": "0.75 s",
+     "windup": "shots/moves/block_guardian_punch_windup.webp",
+     "strike": "shots/moves/block_guardian_punch_strike.webp"
+    },
+    {
+     "slug": "shockwave",
+     "anim": "attack.block_guardian.shockwave",
+     "name": "Shockwave",
+     "label": "Medium",
+     "warn": "1.5 s",
+     "windup": "shots/moves/block_guardian_shockwave_windup.webp",
+     "strike": "shots/moves/block_guardian_shockwave_strike.webp"
+    },
+    {
+     "slug": "torn_block",
+     "anim": "attack.block_guardian.torn_block",
+     "name": "Torn Block",
+     "label": "Signature",
+     "warn": "3 s",
+     "windup": "shots/moves/block_guardian_torn_block_windup.webp",
+     "strike": "shots/moves/block_guardian_torn_block_strike.webp"
+    }
+   ],
+   "passive": [
+    {
+     "label": "Final phase",
+     "name": "Rebuilds itself from the arena"
+    }
+   ],
    "timings": [
     {
      "label": "Light attack, warning",
@@ -20135,72 +20175,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.block_guardian.punch",
+     "label": "Punch",
+     "seq": [
+      "attack.block_guardian.punch.windup",
+      "attack.block_guardian.punch.strike",
+      "attack.block_guardian.punch.recover"
+     ],
+     "slug": "punch"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.block_guardian.shockwave",
+     "label": "Shockwave",
+     "seq": [
+      "attack.block_guardian.shockwave.windup",
+      "attack.block_guardian.shockwave.strike",
+      "attack.block_guardian.shockwave.recover"
+     ],
+     "slug": "shockwave"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.block_guardian.punch.windup",
-     "label": "attack.block_guardian.punch.windup"
-    },
-    {
-     "key": "attack.block_guardian.punch.strike",
-     "label": "attack.block_guardian.punch.strike"
-    },
-    {
-     "key": "attack.block_guardian.punch.recover",
-     "label": "attack.block_guardian.punch.recover"
-    },
-    {
-     "key": "attack.block_guardian.shockwave.windup",
-     "label": "attack.block_guardian.shockwave.windup"
-    },
-    {
-     "key": "attack.block_guardian.shockwave.strike",
-     "label": "attack.block_guardian.shockwave.strike"
-    },
-    {
-     "key": "attack.block_guardian.shockwave.recover",
-     "label": "attack.block_guardian.shockwave.recover"
-    },
-    {
-     "key": "attack.block_guardian.torn_block.windup",
-     "label": "attack.block_guardian.torn_block.windup"
-    },
-    {
-     "key": "attack.block_guardian.torn_block.strike",
-     "label": "attack.block_guardian.torn_block.strike"
-    },
-    {
-     "key": "attack.block_guardian.torn_block.recover",
-     "label": "attack.block_guardian.torn_block.recover"
+     "key": "attack.block_guardian.torn_block",
+     "label": "Torn Block",
+     "seq": [
+      "attack.block_guardian.torn_block.windup",
+      "attack.block_guardian.torn_block.strike",
+      "attack.block_guardian.torn_block.recover"
+     ],
+     "slug": "torn_block"
     },
     {
      "key": "misc.block_guardian.phase",
-     "label": "misc.block_guardian.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.block_guardian.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.block_guardian.death",
-     "label": "misc.block_guardian.death"
+     "label": "Fall",
+     "seq": [
+      "misc.block_guardian.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [
@@ -20261,6 +20279,41 @@
      "label": "Signature",
      "name": "Call of Sporelings"
     },
+    {
+     "label": "Final phase",
+     "name": "Cocoon guarded by nodes"
+    }
+   ],
+   "moves": [
+    {
+     "slug": "root_snare",
+     "anim": "attack.spore_queen.root_snare",
+     "name": "Root Snare",
+     "label": "Light",
+     "warn": "0.75 s",
+     "windup": "shots/moves/spore_queen_root_snare_windup.webp",
+     "strike": "shots/moves/spore_queen_root_snare_strike.webp"
+    },
+    {
+     "slug": "toxic_cloud",
+     "anim": "attack.spore_queen.toxic_cloud",
+     "name": "Toxic Cloud",
+     "label": "Medium",
+     "warn": "1.5 s",
+     "windup": "shots/moves/spore_queen_toxic_cloud_windup.webp",
+     "strike": "shots/moves/spore_queen_toxic_cloud_strike.webp"
+    },
+    {
+     "slug": "call_of_sporelings",
+     "anim": "attack.spore_queen.call_of_sporelings",
+     "name": "Call of Sporelings",
+     "label": "Signature",
+     "warn": "3 s",
+     "windup": "shots/moves/spore_queen_call_of_sporelings_windup.webp",
+     "strike": "shots/moves/spore_queen_call_of_sporelings_strike.webp"
+    }
+   ],
+   "passive": [
     {
      "label": "Final phase",
      "name": "Cocoon guarded by nodes"
@@ -20357,72 +20410,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.spore_queen.root_snare",
+     "label": "Root Snare",
+     "seq": [
+      "attack.spore_queen.root_snare.windup",
+      "attack.spore_queen.root_snare.strike",
+      "attack.spore_queen.root_snare.recover"
+     ],
+     "slug": "root_snare"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.spore_queen.toxic_cloud",
+     "label": "Toxic Cloud",
+     "seq": [
+      "attack.spore_queen.toxic_cloud.windup",
+      "attack.spore_queen.toxic_cloud.strike",
+      "attack.spore_queen.toxic_cloud.recover"
+     ],
+     "slug": "toxic_cloud"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.spore_queen.root_snare.windup",
-     "label": "attack.spore_queen.root_snare.windup"
-    },
-    {
-     "key": "attack.spore_queen.root_snare.strike",
-     "label": "attack.spore_queen.root_snare.strike"
-    },
-    {
-     "key": "attack.spore_queen.root_snare.recover",
-     "label": "attack.spore_queen.root_snare.recover"
-    },
-    {
-     "key": "attack.spore_queen.toxic_cloud.windup",
-     "label": "attack.spore_queen.toxic_cloud.windup"
-    },
-    {
-     "key": "attack.spore_queen.toxic_cloud.strike",
-     "label": "attack.spore_queen.toxic_cloud.strike"
-    },
-    {
-     "key": "attack.spore_queen.toxic_cloud.recover",
-     "label": "attack.spore_queen.toxic_cloud.recover"
-    },
-    {
-     "key": "attack.spore_queen.call_of_sporelings.windup",
-     "label": "attack.spore_queen.call_of_sporelings.windup"
-    },
-    {
-     "key": "attack.spore_queen.call_of_sporelings.strike",
-     "label": "attack.spore_queen.call_of_sporelings.strike"
-    },
-    {
-     "key": "attack.spore_queen.call_of_sporelings.recover",
-     "label": "attack.spore_queen.call_of_sporelings.recover"
+     "key": "attack.spore_queen.call_of_sporelings",
+     "label": "Call of Sporelings",
+     "seq": [
+      "attack.spore_queen.call_of_sporelings.windup",
+      "attack.spore_queen.call_of_sporelings.strike",
+      "attack.spore_queen.call_of_sporelings.recover"
+     ],
+     "slug": "call_of_sporelings"
     },
     {
      "key": "misc.spore_queen.phase",
-     "label": "misc.spore_queen.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.spore_queen.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.spore_queen.death",
-     "label": "misc.spore_queen.death"
+     "label": "Fall",
+     "seq": [
+      "misc.spore_queen.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],
@@ -20491,6 +20522,41 @@
      "label": "Signature",
      "name": "Rising Lava"
     },
+    {
+     "label": "Final phase",
+     "name": "Molten armor, exposed heart"
+    }
+   ],
+   "moves": [
+    {
+     "slug": "hammer_blow",
+     "anim": "attack.ash_titan.hammer_blow",
+     "name": "Hammer Blow",
+     "label": "Light",
+     "warn": "0.75 s",
+     "windup": "shots/moves/ash_titan_hammer_blow_windup.webp",
+     "strike": "shots/moves/ash_titan_hammer_blow_strike.webp"
+    },
+    {
+     "slug": "ash_spray",
+     "anim": "attack.ash_titan.ash_spray",
+     "name": "Ash Spray",
+     "label": "Medium",
+     "warn": "1.5 s",
+     "windup": "shots/moves/ash_titan_ash_spray_windup.webp",
+     "strike": "shots/moves/ash_titan_ash_spray_strike.webp"
+    },
+    {
+     "slug": "rising_lava",
+     "anim": "attack.ash_titan.rising_lava",
+     "name": "Rising Lava",
+     "label": "Signature",
+     "warn": "3 s",
+     "windup": "shots/moves/ash_titan_rising_lava_windup.webp",
+     "strike": "shots/moves/ash_titan_rising_lava_strike.webp"
+    }
+   ],
+   "passive": [
     {
      "label": "Final phase",
      "name": "Molten armor, exposed heart"
@@ -20588,72 +20654,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.ash_titan.hammer_blow",
+     "label": "Hammer Blow",
+     "seq": [
+      "attack.ash_titan.hammer_blow.windup",
+      "attack.ash_titan.hammer_blow.strike",
+      "attack.ash_titan.hammer_blow.recover"
+     ],
+     "slug": "hammer_blow"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.ash_titan.ash_spray",
+     "label": "Ash Spray",
+     "seq": [
+      "attack.ash_titan.ash_spray.windup",
+      "attack.ash_titan.ash_spray.strike",
+      "attack.ash_titan.ash_spray.recover"
+     ],
+     "slug": "ash_spray"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.ash_titan.hammer_blow.windup",
-     "label": "attack.ash_titan.hammer_blow.windup"
-    },
-    {
-     "key": "attack.ash_titan.hammer_blow.strike",
-     "label": "attack.ash_titan.hammer_blow.strike"
-    },
-    {
-     "key": "attack.ash_titan.hammer_blow.recover",
-     "label": "attack.ash_titan.hammer_blow.recover"
-    },
-    {
-     "key": "attack.ash_titan.ash_spray.windup",
-     "label": "attack.ash_titan.ash_spray.windup"
-    },
-    {
-     "key": "attack.ash_titan.ash_spray.strike",
-     "label": "attack.ash_titan.ash_spray.strike"
-    },
-    {
-     "key": "attack.ash_titan.ash_spray.recover",
-     "label": "attack.ash_titan.ash_spray.recover"
-    },
-    {
-     "key": "attack.ash_titan.rising_lava.windup",
-     "label": "attack.ash_titan.rising_lava.windup"
-    },
-    {
-     "key": "attack.ash_titan.rising_lava.strike",
-     "label": "attack.ash_titan.rising_lava.strike"
-    },
-    {
-     "key": "attack.ash_titan.rising_lava.recover",
-     "label": "attack.ash_titan.rising_lava.recover"
+     "key": "attack.ash_titan.rising_lava",
+     "label": "Rising Lava",
+     "seq": [
+      "attack.ash_titan.rising_lava.windup",
+      "attack.ash_titan.rising_lava.strike",
+      "attack.ash_titan.rising_lava.recover"
+     ],
+     "slug": "rising_lava"
     },
     {
      "key": "misc.ash_titan.phase",
-     "label": "misc.ash_titan.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.ash_titan.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.ash_titan.death",
-     "label": "misc.ash_titan.death"
+     "label": "Fall",
+     "seq": [
+      "misc.ash_titan.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],
@@ -20751,6 +20795,41 @@
      "name": "The arena becomes a cell"
     }
    ],
+   "moves": [
+    {
+     "slug": "chain_pull",
+     "anim": "attack.grand_jailer.chain_pull",
+     "name": "Chain Pull",
+     "label": "Light",
+     "warn": "0.75 s",
+     "windup": "shots/moves/grand_jailer_chain_pull_windup.webp",
+     "strike": "shots/moves/grand_jailer_chain_pull_strike.webp"
+    },
+    {
+     "slug": "floor_cage",
+     "anim": "attack.grand_jailer.floor_cage",
+     "name": "Floor Cage",
+     "label": "Medium",
+     "warn": "1.5 s",
+     "windup": "shots/moves/grand_jailer_floor_cage_windup.webp",
+     "strike": "shots/moves/grand_jailer_floor_cage_strike.webp"
+    },
+    {
+     "slug": "moving_walls",
+     "anim": "attack.grand_jailer.moving_walls",
+     "name": "Moving Walls",
+     "label": "Signature",
+     "warn": "3 s",
+     "windup": "shots/moves/grand_jailer_moving_walls_windup.webp",
+     "strike": "shots/moves/grand_jailer_moving_walls_strike.webp"
+    }
+   ],
+   "passive": [
+    {
+     "label": "Final phase",
+     "name": "The arena becomes a cell"
+    }
+   ],
    "timings": [
     {
      "label": "Light attack, warning",
@@ -20841,72 +20920,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.grand_jailer.chain_pull",
+     "label": "Chain Pull",
+     "seq": [
+      "attack.grand_jailer.chain_pull.windup",
+      "attack.grand_jailer.chain_pull.strike",
+      "attack.grand_jailer.chain_pull.recover"
+     ],
+     "slug": "chain_pull"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.grand_jailer.floor_cage",
+     "label": "Floor Cage",
+     "seq": [
+      "attack.grand_jailer.floor_cage.windup",
+      "attack.grand_jailer.floor_cage.strike",
+      "attack.grand_jailer.floor_cage.recover"
+     ],
+     "slug": "floor_cage"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.grand_jailer.chain_pull.windup",
-     "label": "attack.grand_jailer.chain_pull.windup"
-    },
-    {
-     "key": "attack.grand_jailer.chain_pull.strike",
-     "label": "attack.grand_jailer.chain_pull.strike"
-    },
-    {
-     "key": "attack.grand_jailer.chain_pull.recover",
-     "label": "attack.grand_jailer.chain_pull.recover"
-    },
-    {
-     "key": "attack.grand_jailer.floor_cage.windup",
-     "label": "attack.grand_jailer.floor_cage.windup"
-    },
-    {
-     "key": "attack.grand_jailer.floor_cage.strike",
-     "label": "attack.grand_jailer.floor_cage.strike"
-    },
-    {
-     "key": "attack.grand_jailer.floor_cage.recover",
-     "label": "attack.grand_jailer.floor_cage.recover"
-    },
-    {
-     "key": "attack.grand_jailer.moving_walls.windup",
-     "label": "attack.grand_jailer.moving_walls.windup"
-    },
-    {
-     "key": "attack.grand_jailer.moving_walls.strike",
-     "label": "attack.grand_jailer.moving_walls.strike"
-    },
-    {
-     "key": "attack.grand_jailer.moving_walls.recover",
-     "label": "attack.grand_jailer.moving_walls.recover"
+     "key": "attack.grand_jailer.moving_walls",
+     "label": "Moving Walls",
+     "seq": [
+      "attack.grand_jailer.moving_walls.windup",
+      "attack.grand_jailer.moving_walls.strike",
+      "attack.grand_jailer.moving_walls.recover"
+     ],
+     "slug": "moving_walls"
     },
     {
      "key": "misc.grand_jailer.phase",
-     "label": "misc.grand_jailer.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.grand_jailer.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.grand_jailer.death",
-     "label": "misc.grand_jailer.death"
+     "label": "Fall",
+     "seq": [
+      "misc.grand_jailer.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],
@@ -20992,6 +21049,41 @@
      "label": "Signature",
      "name": "Shattered Islet"
     },
+    {
+     "label": "Final phase",
+     "name": "Fight on drifting debris"
+    }
+   ],
+   "moves": [
+    {
+     "slug": "gust",
+     "anim": "attack.storm_king.gust",
+     "name": "Gust",
+     "label": "Light",
+     "warn": "0.5 s",
+     "windup": "shots/moves/storm_king_gust_windup.webp",
+     "strike": "shots/moves/storm_king_gust_strike.webp"
+    },
+    {
+     "slug": "called_lightning",
+     "anim": "attack.storm_king.called_lightning",
+     "name": "Called Lightning",
+     "label": "Medium",
+     "warn": "1 s",
+     "windup": "shots/moves/storm_king_called_lightning_windup.webp",
+     "strike": "shots/moves/storm_king_called_lightning_strike.webp"
+    },
+    {
+     "slug": "shattered_islet",
+     "anim": "attack.storm_king.shattered_islet",
+     "name": "Shattered Islet",
+     "label": "Signature",
+     "warn": "2 s",
+     "windup": "shots/moves/storm_king_shattered_islet_windup.webp",
+     "strike": "shots/moves/storm_king_shattered_islet_strike.webp"
+    }
+   ],
+   "passive": [
     {
      "label": "Final phase",
      "name": "Fight on drifting debris"
@@ -21087,72 +21179,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.storm_king.gust",
+     "label": "Gust",
+     "seq": [
+      "attack.storm_king.gust.windup",
+      "attack.storm_king.gust.strike",
+      "attack.storm_king.gust.recover"
+     ],
+     "slug": "gust"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.storm_king.called_lightning",
+     "label": "Called Lightning",
+     "seq": [
+      "attack.storm_king.called_lightning.windup",
+      "attack.storm_king.called_lightning.strike",
+      "attack.storm_king.called_lightning.recover"
+     ],
+     "slug": "called_lightning"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.storm_king.gust.windup",
-     "label": "attack.storm_king.gust.windup"
-    },
-    {
-     "key": "attack.storm_king.gust.strike",
-     "label": "attack.storm_king.gust.strike"
-    },
-    {
-     "key": "attack.storm_king.gust.recover",
-     "label": "attack.storm_king.gust.recover"
-    },
-    {
-     "key": "attack.storm_king.called_lightning.windup",
-     "label": "attack.storm_king.called_lightning.windup"
-    },
-    {
-     "key": "attack.storm_king.called_lightning.strike",
-     "label": "attack.storm_king.called_lightning.strike"
-    },
-    {
-     "key": "attack.storm_king.called_lightning.recover",
-     "label": "attack.storm_king.called_lightning.recover"
-    },
-    {
-     "key": "attack.storm_king.shattered_islet.windup",
-     "label": "attack.storm_king.shattered_islet.windup"
-    },
-    {
-     "key": "attack.storm_king.shattered_islet.strike",
-     "label": "attack.storm_king.shattered_islet.strike"
-    },
-    {
-     "key": "attack.storm_king.shattered_islet.recover",
-     "label": "attack.storm_king.shattered_islet.recover"
+     "key": "attack.storm_king.shattered_islet",
+     "label": "Shattered Islet",
+     "seq": [
+      "attack.storm_king.shattered_islet.windup",
+      "attack.storm_king.shattered_islet.strike",
+      "attack.storm_king.shattered_islet.recover"
+     ],
+     "slug": "shattered_islet"
     },
     {
      "key": "misc.storm_king.phase",
-     "label": "misc.storm_king.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.storm_king.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.storm_king.death",
-     "label": "misc.storm_king.death"
+     "label": "Fall",
+     "seq": [
+      "misc.storm_king.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],
@@ -21221,6 +21291,41 @@
      "label": "Signature",
      "name": "Silent Charge"
     },
+    {
+     "label": "Final phase",
+     "name": "Track it by sound only"
+    }
+   ],
+   "moves": [
+    {
+     "slug": "claw_in_the_dark",
+     "anim": "attack.light_eater.claw_in_the_dark",
+     "name": "Claw in the Dark",
+     "label": "Light",
+     "warn": "0.5 s",
+     "windup": "shots/moves/light_eater_claw_in_the_dark_windup.webp",
+     "strike": "shots/moves/light_eater_claw_in_the_dark_strike.webp"
+    },
+    {
+     "slug": "lights_out",
+     "anim": "attack.light_eater.lights_out",
+     "name": "Lights Out",
+     "label": "Medium",
+     "warn": "1 s",
+     "windup": "shots/moves/light_eater_lights_out_windup.webp",
+     "strike": "shots/moves/light_eater_lights_out_strike.webp"
+    },
+    {
+     "slug": "silent_charge",
+     "anim": "attack.light_eater.silent_charge",
+     "name": "Silent Charge",
+     "label": "Signature",
+     "warn": "2 s",
+     "windup": "shots/moves/light_eater_silent_charge_windup.webp",
+     "strike": "shots/moves/light_eater_silent_charge_strike.webp"
+    }
+   ],
+   "passive": [
     {
      "label": "Final phase",
      "name": "Track it by sound only"
@@ -21316,72 +21421,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.light_eater.claw_in_the_dark",
+     "label": "Claw in the Dark",
+     "seq": [
+      "attack.light_eater.claw_in_the_dark.windup",
+      "attack.light_eater.claw_in_the_dark.strike",
+      "attack.light_eater.claw_in_the_dark.recover"
+     ],
+     "slug": "claw_in_the_dark"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.light_eater.lights_out",
+     "label": "Lights Out",
+     "seq": [
+      "attack.light_eater.lights_out.windup",
+      "attack.light_eater.lights_out.strike",
+      "attack.light_eater.lights_out.recover"
+     ],
+     "slug": "lights_out"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.light_eater.claw_in_the_dark.windup",
-     "label": "attack.light_eater.claw_in_the_dark.windup"
-    },
-    {
-     "key": "attack.light_eater.claw_in_the_dark.strike",
-     "label": "attack.light_eater.claw_in_the_dark.strike"
-    },
-    {
-     "key": "attack.light_eater.claw_in_the_dark.recover",
-     "label": "attack.light_eater.claw_in_the_dark.recover"
-    },
-    {
-     "key": "attack.light_eater.lights_out.windup",
-     "label": "attack.light_eater.lights_out.windup"
-    },
-    {
-     "key": "attack.light_eater.lights_out.strike",
-     "label": "attack.light_eater.lights_out.strike"
-    },
-    {
-     "key": "attack.light_eater.lights_out.recover",
-     "label": "attack.light_eater.lights_out.recover"
-    },
-    {
-     "key": "attack.light_eater.silent_charge.windup",
-     "label": "attack.light_eater.silent_charge.windup"
-    },
-    {
-     "key": "attack.light_eater.silent_charge.strike",
-     "label": "attack.light_eater.silent_charge.strike"
-    },
-    {
-     "key": "attack.light_eater.silent_charge.recover",
-     "label": "attack.light_eater.silent_charge.recover"
+     "key": "attack.light_eater.silent_charge",
+     "label": "Silent Charge",
+     "seq": [
+      "attack.light_eater.silent_charge.windup",
+      "attack.light_eater.silent_charge.strike",
+      "attack.light_eater.silent_charge.recover"
+     ],
+     "slug": "silent_charge"
     },
     {
      "key": "misc.light_eater.phase",
-     "label": "misc.light_eater.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.light_eater.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.light_eater.death",
-     "label": "misc.light_eater.death"
+     "label": "Fall",
+     "seq": [
+      "misc.light_eater.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],
@@ -21450,6 +21533,41 @@
      "label": "Signature",
      "name": "Gravity Flip"
     },
+    {
+     "label": "Final phase",
+     "name": "It adopts your play style"
+    }
+   ],
+   "moves": [
+    {
+     "slug": "copied_strike",
+     "anim": "attack.your_double.copied_strike",
+     "name": "Copied Strike",
+     "label": "Light",
+     "warn": "0.5 s",
+     "windup": "shots/moves/your_double_copied_strike_windup.webp",
+     "strike": "shots/moves/your_double_copied_strike_strike.webp"
+    },
+    {
+     "slug": "copied_weapon",
+     "anim": "attack.your_double.copied_weapon",
+     "name": "Copied Weapon",
+     "label": "Medium",
+     "warn": "1 s",
+     "windup": "shots/moves/your_double_copied_weapon_windup.webp",
+     "strike": "shots/moves/your_double_copied_weapon_strike.webp"
+    },
+    {
+     "slug": "gravity_flip",
+     "anim": "attack.your_double.gravity_flip",
+     "name": "Gravity Flip",
+     "label": "Signature",
+     "warn": "2 s",
+     "windup": "shots/moves/your_double_gravity_flip_windup.webp",
+     "strike": "shots/moves/your_double_gravity_flip_strike.webp"
+    }
+   ],
+   "passive": [
     {
      "label": "Final phase",
      "name": "It adopts your play style"
@@ -21545,72 +21663,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.your_double.copied_strike",
+     "label": "Copied Strike",
+     "seq": [
+      "attack.your_double.copied_strike.windup",
+      "attack.your_double.copied_strike.strike",
+      "attack.your_double.copied_strike.recover"
+     ],
+     "slug": "copied_strike"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.your_double.copied_weapon",
+     "label": "Copied Weapon",
+     "seq": [
+      "attack.your_double.copied_weapon.windup",
+      "attack.your_double.copied_weapon.strike",
+      "attack.your_double.copied_weapon.recover"
+     ],
+     "slug": "copied_weapon"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.your_double.copied_strike.windup",
-     "label": "attack.your_double.copied_strike.windup"
-    },
-    {
-     "key": "attack.your_double.copied_strike.strike",
-     "label": "attack.your_double.copied_strike.strike"
-    },
-    {
-     "key": "attack.your_double.copied_strike.recover",
-     "label": "attack.your_double.copied_strike.recover"
-    },
-    {
-     "key": "attack.your_double.copied_weapon.windup",
-     "label": "attack.your_double.copied_weapon.windup"
-    },
-    {
-     "key": "attack.your_double.copied_weapon.strike",
-     "label": "attack.your_double.copied_weapon.strike"
-    },
-    {
-     "key": "attack.your_double.copied_weapon.recover",
-     "label": "attack.your_double.copied_weapon.recover"
-    },
-    {
-     "key": "attack.your_double.gravity_flip.windup",
-     "label": "attack.your_double.gravity_flip.windup"
-    },
-    {
-     "key": "attack.your_double.gravity_flip.strike",
-     "label": "attack.your_double.gravity_flip.strike"
-    },
-    {
-     "key": "attack.your_double.gravity_flip.recover",
-     "label": "attack.your_double.gravity_flip.recover"
+     "key": "attack.your_double.gravity_flip",
+     "label": "Gravity Flip",
+     "seq": [
+      "attack.your_double.gravity_flip.windup",
+      "attack.your_double.gravity_flip.strike",
+      "attack.your_double.gravity_flip.recover"
+     ],
+     "slug": "gravity_flip"
     },
     {
      "key": "misc.your_double.phase",
-     "label": "misc.your_double.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.your_double.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.your_double.death",
-     "label": "misc.your_double.death"
+     "label": "Fall",
+     "seq": [
+      "misc.your_double.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],
@@ -21679,6 +21775,41 @@
      "label": "Signature",
      "name": "Abyssal Pull"
     },
+    {
+     "label": "Final phase",
+     "name": "Depth and oxygen worsen"
+    }
+   ],
+   "moves": [
+    {
+     "slug": "tail_lash",
+     "anim": "attack.pressure_leviathan.tail_lash",
+     "name": "Tail Lash",
+     "label": "Light",
+     "warn": "0.35 s",
+     "windup": "shots/moves/pressure_leviathan_tail_lash_windup.webp",
+     "strike": "shots/moves/pressure_leviathan_tail_lash_strike.webp"
+    },
+    {
+     "slug": "charge",
+     "anim": "attack.pressure_leviathan.charge",
+     "name": "Charge",
+     "label": "Medium",
+     "warn": "0.75 s",
+     "windup": "shots/moves/pressure_leviathan_charge_windup.webp",
+     "strike": "shots/moves/pressure_leviathan_charge_strike.webp"
+    },
+    {
+     "slug": "abyssal_pull",
+     "anim": "attack.pressure_leviathan.abyssal_pull",
+     "name": "Abyssal Pull",
+     "label": "Signature",
+     "warn": "1.5 s",
+     "windup": "shots/moves/pressure_leviathan_abyssal_pull_windup.webp",
+     "strike": "shots/moves/pressure_leviathan_abyssal_pull_strike.webp"
+    }
+   ],
+   "passive": [
     {
      "label": "Final phase",
      "name": "Depth and oxygen worsen"
@@ -21774,72 +21905,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.pressure_leviathan.tail_lash",
+     "label": "Tail Lash",
+     "seq": [
+      "attack.pressure_leviathan.tail_lash.windup",
+      "attack.pressure_leviathan.tail_lash.strike",
+      "attack.pressure_leviathan.tail_lash.recover"
+     ],
+     "slug": "tail_lash"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.pressure_leviathan.charge",
+     "label": "Charge",
+     "seq": [
+      "attack.pressure_leviathan.charge.windup",
+      "attack.pressure_leviathan.charge.strike",
+      "attack.pressure_leviathan.charge.recover"
+     ],
+     "slug": "charge"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.pressure_leviathan.tail_lash.windup",
-     "label": "attack.pressure_leviathan.tail_lash.windup"
-    },
-    {
-     "key": "attack.pressure_leviathan.tail_lash.strike",
-     "label": "attack.pressure_leviathan.tail_lash.strike"
-    },
-    {
-     "key": "attack.pressure_leviathan.tail_lash.recover",
-     "label": "attack.pressure_leviathan.tail_lash.recover"
-    },
-    {
-     "key": "attack.pressure_leviathan.charge.windup",
-     "label": "attack.pressure_leviathan.charge.windup"
-    },
-    {
-     "key": "attack.pressure_leviathan.charge.strike",
-     "label": "attack.pressure_leviathan.charge.strike"
-    },
-    {
-     "key": "attack.pressure_leviathan.charge.recover",
-     "label": "attack.pressure_leviathan.charge.recover"
-    },
-    {
-     "key": "attack.pressure_leviathan.abyssal_pull.windup",
-     "label": "attack.pressure_leviathan.abyssal_pull.windup"
-    },
-    {
-     "key": "attack.pressure_leviathan.abyssal_pull.strike",
-     "label": "attack.pressure_leviathan.abyssal_pull.strike"
-    },
-    {
-     "key": "attack.pressure_leviathan.abyssal_pull.recover",
-     "label": "attack.pressure_leviathan.abyssal_pull.recover"
+     "key": "attack.pressure_leviathan.abyssal_pull",
+     "label": "Abyssal Pull",
+     "seq": [
+      "attack.pressure_leviathan.abyssal_pull.windup",
+      "attack.pressure_leviathan.abyssal_pull.strike",
+      "attack.pressure_leviathan.abyssal_pull.recover"
+     ],
+     "slug": "abyssal_pull"
     },
     {
      "key": "misc.pressure_leviathan.phase",
-     "label": "misc.pressure_leviathan.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.pressure_leviathan.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.pressure_leviathan.death",
-     "label": "misc.pressure_leviathan.death"
+     "label": "Fall",
+     "seq": [
+      "misc.pressure_leviathan.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],
@@ -21937,6 +22046,41 @@
      "name": "Overlapping seasons"
     }
    ],
+   "moves": [
+    {
+     "slug": "seasonal_strike",
+     "anim": "attack.seasons_master.seasonal_strike",
+     "name": "Seasonal Strike",
+     "label": "Light",
+     "warn": "0.35 s",
+     "windup": "shots/moves/seasons_master_seasonal_strike_windup.webp",
+     "strike": "shots/moves/seasons_master_seasonal_strike_strike.webp"
+    },
+    {
+     "slug": "seasonal_ground",
+     "anim": "attack.seasons_master.seasonal_ground",
+     "name": "Seasonal Ground",
+     "label": "Medium",
+     "warn": "0.75 s",
+     "windup": "shots/moves/seasons_master_seasonal_ground_windup.webp",
+     "strike": "shots/moves/seasons_master_seasonal_ground_strike.webp"
+    },
+    {
+     "slug": "season_shift",
+     "anim": "attack.seasons_master.season_shift",
+     "name": "Season Shift",
+     "label": "Signature",
+     "warn": "1.5 s",
+     "windup": "shots/moves/seasons_master_season_shift_windup.webp",
+     "strike": "shots/moves/seasons_master_season_shift_strike.webp"
+    }
+   ],
+   "passive": [
+    {
+     "label": "Final phase",
+     "name": "Overlapping seasons"
+    }
+   ],
    "timings": [
     {
      "label": "Light attack, warning",
@@ -22028,72 +22172,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.seasons_master.seasonal_strike",
+     "label": "Seasonal Strike",
+     "seq": [
+      "attack.seasons_master.seasonal_strike.windup",
+      "attack.seasons_master.seasonal_strike.strike",
+      "attack.seasons_master.seasonal_strike.recover"
+     ],
+     "slug": "seasonal_strike"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.seasons_master.seasonal_ground",
+     "label": "Seasonal Ground",
+     "seq": [
+      "attack.seasons_master.seasonal_ground.windup",
+      "attack.seasons_master.seasonal_ground.strike",
+      "attack.seasons_master.seasonal_ground.recover"
+     ],
+     "slug": "seasonal_ground"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.seasons_master.seasonal_strike.windup",
-     "label": "attack.seasons_master.seasonal_strike.windup"
-    },
-    {
-     "key": "attack.seasons_master.seasonal_strike.strike",
-     "label": "attack.seasons_master.seasonal_strike.strike"
-    },
-    {
-     "key": "attack.seasons_master.seasonal_strike.recover",
-     "label": "attack.seasons_master.seasonal_strike.recover"
-    },
-    {
-     "key": "attack.seasons_master.seasonal_ground.windup",
-     "label": "attack.seasons_master.seasonal_ground.windup"
-    },
-    {
-     "key": "attack.seasons_master.seasonal_ground.strike",
-     "label": "attack.seasons_master.seasonal_ground.strike"
-    },
-    {
-     "key": "attack.seasons_master.seasonal_ground.recover",
-     "label": "attack.seasons_master.seasonal_ground.recover"
-    },
-    {
-     "key": "attack.seasons_master.season_shift.windup",
-     "label": "attack.seasons_master.season_shift.windup"
-    },
-    {
-     "key": "attack.seasons_master.season_shift.strike",
-     "label": "attack.seasons_master.season_shift.strike"
-    },
-    {
-     "key": "attack.seasons_master.season_shift.recover",
-     "label": "attack.seasons_master.season_shift.recover"
+     "key": "attack.seasons_master.season_shift",
+     "label": "Season Shift",
+     "seq": [
+      "attack.seasons_master.season_shift.windup",
+      "attack.seasons_master.season_shift.strike",
+      "attack.seasons_master.season_shift.recover"
+     ],
+     "slug": "season_shift"
     },
     {
      "key": "misc.seasons_master.phase",
-     "label": "misc.seasons_master.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.seasons_master.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.seasons_master.death",
-     "label": "misc.seasons_master.death"
+     "label": "Fall",
+     "seq": [
+      "misc.seasons_master.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],
@@ -22162,6 +22284,41 @@
      "label": "Signature",
      "name": "Chasm"
     },
+    {
+     "label": "Final phase",
+     "name": "The floor vanishes in sections"
+    }
+   ],
+   "moves": [
+    {
+     "slug": "ground_wave",
+     "anim": "attack.terrain_heart_boss.ground_wave",
+     "name": "Ground Wave",
+     "label": "Light",
+     "warn": "0.35 s",
+     "windup": "shots/moves/terrain_heart_boss_ground_wave_windup.webp",
+     "strike": "shots/moves/terrain_heart_boss_ground_wave_strike.webp"
+    },
+    {
+     "slug": "living_wall",
+     "anim": "attack.terrain_heart_boss.living_wall",
+     "name": "Living Wall",
+     "label": "Medium",
+     "warn": "0.75 s",
+     "windup": "shots/moves/terrain_heart_boss_living_wall_windup.webp",
+     "strike": "shots/moves/terrain_heart_boss_living_wall_strike.webp"
+    },
+    {
+     "slug": "chasm",
+     "anim": "attack.terrain_heart_boss.chasm",
+     "name": "Chasm",
+     "label": "Signature",
+     "warn": "1.5 s",
+     "windup": "shots/moves/terrain_heart_boss_chasm_windup.webp",
+     "strike": "shots/moves/terrain_heart_boss_chasm_strike.webp"
+    }
+   ],
+   "passive": [
     {
      "label": "Final phase",
      "name": "The floor vanishes in sections"
@@ -22263,72 +22420,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.terrain_heart_boss.ground_wave",
+     "label": "Ground Wave",
+     "seq": [
+      "attack.terrain_heart_boss.ground_wave.windup",
+      "attack.terrain_heart_boss.ground_wave.strike",
+      "attack.terrain_heart_boss.ground_wave.recover"
+     ],
+     "slug": "ground_wave"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.terrain_heart_boss.living_wall",
+     "label": "Living Wall",
+     "seq": [
+      "attack.terrain_heart_boss.living_wall.windup",
+      "attack.terrain_heart_boss.living_wall.strike",
+      "attack.terrain_heart_boss.living_wall.recover"
+     ],
+     "slug": "living_wall"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.terrain_heart_boss.ground_wave.windup",
-     "label": "attack.terrain_heart_boss.ground_wave.windup"
-    },
-    {
-     "key": "attack.terrain_heart_boss.ground_wave.strike",
-     "label": "attack.terrain_heart_boss.ground_wave.strike"
-    },
-    {
-     "key": "attack.terrain_heart_boss.ground_wave.recover",
-     "label": "attack.terrain_heart_boss.ground_wave.recover"
-    },
-    {
-     "key": "attack.terrain_heart_boss.living_wall.windup",
-     "label": "attack.terrain_heart_boss.living_wall.windup"
-    },
-    {
-     "key": "attack.terrain_heart_boss.living_wall.strike",
-     "label": "attack.terrain_heart_boss.living_wall.strike"
-    },
-    {
-     "key": "attack.terrain_heart_boss.living_wall.recover",
-     "label": "attack.terrain_heart_boss.living_wall.recover"
-    },
-    {
-     "key": "attack.terrain_heart_boss.chasm.windup",
-     "label": "attack.terrain_heart_boss.chasm.windup"
-    },
-    {
-     "key": "attack.terrain_heart_boss.chasm.strike",
-     "label": "attack.terrain_heart_boss.chasm.strike"
-    },
-    {
-     "key": "attack.terrain_heart_boss.chasm.recover",
-     "label": "attack.terrain_heart_boss.chasm.recover"
+     "key": "attack.terrain_heart_boss.chasm",
+     "label": "Chasm",
+     "seq": [
+      "attack.terrain_heart_boss.chasm.windup",
+      "attack.terrain_heart_boss.chasm.strike",
+      "attack.terrain_heart_boss.chasm.recover"
+     ],
+     "slug": "chasm"
     },
     {
      "key": "misc.terrain_heart_boss.phase",
-     "label": "misc.terrain_heart_boss.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.terrain_heart_boss.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.terrain_heart_boss.death",
-     "label": "misc.terrain_heart_boss.death"
+     "label": "Fall",
+     "seq": [
+      "misc.terrain_heart_boss.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],
@@ -22409,6 +22544,45 @@
    "dmg": "61.9",
    "phases": "Ten shells, one every 10% of its health",
    "atks": [
+    {
+     "label": "Shells 1 to 9",
+     "name": "Each broken shell takes the face of an earlier world and replays its attacks."
+    },
+    {
+     "label": "Final phase",
+     "name": "A tiny final form"
+    }
+   ],
+   "moves": [
+    {
+     "slug": "shell_stroke",
+     "anim": "attack.the_unfinished.shell_stroke",
+     "name": "Shell Stroke",
+     "label": "Light",
+     "warn": "0.3 s",
+     "windup": "shots/moves/the_unfinished_shell_stroke_windup.webp",
+     "strike": "shots/moves/the_unfinished_shell_stroke_strike.webp"
+    },
+    {
+     "slug": "shell_lift",
+     "anim": "attack.the_unfinished.shell_lift",
+     "name": "Shell Lift",
+     "label": "Medium",
+     "warn": "0.6 s",
+     "windup": "shots/moves/the_unfinished_shell_lift_windup.webp",
+     "strike": "shots/moves/the_unfinished_shell_lift_strike.webp"
+    },
+    {
+     "slug": "shell_burst",
+     "anim": "attack.the_unfinished.shell_burst",
+     "name": "Shell Burst",
+     "label": "Signature",
+     "warn": "1.2 s",
+     "windup": "shots/moves/the_unfinished_shell_burst_windup.webp",
+     "strike": "shots/moves/the_unfinished_shell_burst_strike.webp"
+    }
+   ],
+   "passive": [
     {
      "label": "Shells 1 to 9",
      "name": "Each broken shell takes the face of an earlier world and replays its attacks."
@@ -22501,72 +22675,50 @@
      "label": "Walk"
     },
     {
-     "key": "attack.strike",
-     "label": "Attack"
+     "key": "attack.the_unfinished.shell_stroke",
+     "label": "Shell Stroke",
+     "seq": [
+      "attack.the_unfinished.shell_stroke.windup",
+      "attack.the_unfinished.shell_stroke.strike",
+      "attack.the_unfinished.shell_stroke.recover"
+     ],
+     "slug": "shell_stroke"
     },
     {
-     "key": "attack.charge",
-     "label": "Charge"
+     "key": "attack.the_unfinished.shell_lift",
+     "label": "Shell Lift",
+     "seq": [
+      "attack.the_unfinished.shell_lift.windup",
+      "attack.the_unfinished.shell_lift.strike",
+      "attack.the_unfinished.shell_lift.recover"
+     ],
+     "slug": "shell_lift"
     },
     {
-     "key": "attack.slam",
-     "label": "Slam"
-    },
-    {
-     "key": "attack.cast",
-     "label": "Cast"
-    },
-    {
-     "key": "misc.phase",
-     "label": "Phase change"
-    },
-    {
-     "key": "misc.rest",
-     "label": "Opening"
-    },
-    {
-     "key": "attack.the_unfinished.shell_stroke.windup",
-     "label": "attack.the_unfinished.shell_stroke.windup"
-    },
-    {
-     "key": "attack.the_unfinished.shell_stroke.strike",
-     "label": "attack.the_unfinished.shell_stroke.strike"
-    },
-    {
-     "key": "attack.the_unfinished.shell_stroke.recover",
-     "label": "attack.the_unfinished.shell_stroke.recover"
-    },
-    {
-     "key": "attack.the_unfinished.shell_lift.windup",
-     "label": "attack.the_unfinished.shell_lift.windup"
-    },
-    {
-     "key": "attack.the_unfinished.shell_lift.strike",
-     "label": "attack.the_unfinished.shell_lift.strike"
-    },
-    {
-     "key": "attack.the_unfinished.shell_lift.recover",
-     "label": "attack.the_unfinished.shell_lift.recover"
-    },
-    {
-     "key": "attack.the_unfinished.shell_burst.windup",
-     "label": "attack.the_unfinished.shell_burst.windup"
-    },
-    {
-     "key": "attack.the_unfinished.shell_burst.strike",
-     "label": "attack.the_unfinished.shell_burst.strike"
-    },
-    {
-     "key": "attack.the_unfinished.shell_burst.recover",
-     "label": "attack.the_unfinished.shell_burst.recover"
+     "key": "attack.the_unfinished.shell_burst",
+     "label": "Shell Burst",
+     "seq": [
+      "attack.the_unfinished.shell_burst.windup",
+      "attack.the_unfinished.shell_burst.strike",
+      "attack.the_unfinished.shell_burst.recover"
+     ],
+     "slug": "shell_burst"
     },
     {
      "key": "misc.the_unfinished.phase",
-     "label": "misc.the_unfinished.phase"
+     "label": "Phase change",
+     "seq": [
+      "misc.the_unfinished.phase"
+     ],
+     "slug": "phase"
     },
     {
      "key": "misc.the_unfinished.death",
-     "label": "misc.the_unfinished.death"
+     "label": "Fall",
+     "seq": [
+      "misc.the_unfinished.death"
+     ],
+     "slug": "death"
     }
    ],
    "quests": [],

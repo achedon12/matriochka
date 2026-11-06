@@ -7,6 +7,8 @@ import { Lacquer, Vine } from "../Ornament";
 import { PageHead, Shell } from "../Shell";
 import { btn, wrap } from "../ui";
 import MeetBoss from "../MeetBoss";
+import AttackStrip from "../AttackStrip";
+import { BASE } from "@/lib/config";
 import ModelViewer, { type ViewerLabels } from "../viewer/ModelViewer";
 
 export function viewerLabels(ui: Record<string, string>): ViewerLabels {
@@ -80,14 +82,18 @@ export function BossesPage({ lang }: { lang: Lang }) {
                   <div key={l} className="border-t-2 border-gold pt-2"><dt className="text-[13px] text-paper-dim">{l}</dt><dd className="m-0 font-pixel text-[28px] leading-none text-paper">{v}</dd></div>
                 ))}
               </dl>
-              <ol className="m-0 mb-5 grid list-none gap-2 p-0">
-                {b.atks.map((a, k) => (
-                  <li key={a.label} className="grid grid-cols-[34px_minmax(0,1fr)] items-baseline gap-3 border-b border-rule py-2">
-                    <span className="font-pixel text-xl text-gold-b">{k + 1}</span>
-                    <span><strong className="block font-display text-xl font-normal text-paper">{a.name}</strong><small className="text-sm text-paper-dim">{a.label}</small></span>
+              <h3 className="m-0 mb-3 font-body text-[13px] font-bold tracking-[0.14em] text-paper-dim uppercase">{ui.attacks}</h3>
+              <AttackStrip moves={b.moves} href={`${BASE}${href(lang, `creatures/${b.id}/`)}`}
+                labels={{ windup: ui.windup, strike: ui.strike, warning: ui.warning, see3d: ui.see3d }} />
+              <ul className="m-0 mt-4 mb-5 grid list-none gap-0 p-0">
+                {b.passive.map((a) => (
+                  <li key={a.label} className="grid grid-cols-[minmax(0,1fr)] gap-0.5 border-b border-rule py-2 min-[640px]:grid-cols-[150px_minmax(0,1fr)] min-[640px]:items-baseline min-[640px]:gap-3">
+                    <small className="text-sm text-paper-dim">{a.label}</small>
+                    {/* a long rule reads better in the body face than in the poster capitals */}
+                    <strong className={a.name.length > 40 ? "font-body text-base font-normal text-paper" : "font-display text-lg font-normal text-paper"}>{a.name}</strong>
                   </li>
                 ))}
-              </ol>
+              </ul>
               <p className="m-0 mb-3 text-base text-paper"><strong className="text-gold-b">{ui.phases}.</strong> {b.phases}.</p>
               <p className="m-0 mb-5 flex items-center gap-2 text-base text-paper"><Inlay src={b.coreTex} /><span><strong>{b.drops[0].name}</strong> {c.rewardNote}</span></p>
               <div className="mb-5"><MeetBoss meet={b.meet} title={ui.howMeet} offeringLabel={ui.offering} compact /></div>
