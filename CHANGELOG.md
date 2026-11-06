@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Matriochka Pack
+
+- A CurseForge version of the pack: `tools/modpack.py --curseforge` writes the CurseForge modpack (`manifest.json`, `modlist.html`, the same configs), normal and hard, from the same files as the Modrinth pack, each matched to its CurseForge file by its bytes and checked against the CurseForge CDN. Mods with no such file are left out with what needs them: for 0.4.0, Mod Menu and its library Placeholder API (no 26.3 file on CurseForge), and JEI until its file is approved.
+- The pack is published on its own Modrinth and CurseForge projects: the release workflow uploads the hard then the normal pack once the `MODRINTH_PACK_PROJECT_ID` and `CURSEFORGE_PACK_PROJECT_ID` variables are set (the CurseForge export needs a `CURSEFORGE_API_KEY` secret), without ever failing the mod's release, and a new `modpack` workflow does the same for a version already released.
+- Listing material for both sites in `branding/modpack/`: an icon of its own (three dolls tied with a gold ribbon), descriptions, summaries, categories and a gallery.
+
 ## 0.4.0 (alpha)
 
 Trials, world events and talents to replay the worlds, a unique animation for every boss attack, a new look for each world, the design's rules for automation, souls and quests, comfort options, cinematics and adaptive music, a guided start, and three new languages.
