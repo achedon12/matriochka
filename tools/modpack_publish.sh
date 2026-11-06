@@ -60,7 +60,7 @@ modrinth() {
 		data=$(jq -n \
 			--arg project "$PROJECT" --arg name "$name" --arg number "$number" --arg mc "$MC" --arg changelog "$notes" \
 			'{project_id: $project, name: $name, version_number: $number, changelog: $changelog,
-			  game_versions: [$mc], loaders: ["fabric"], version_type: "alpha", featured: true,
+			  game_versions: [$mc], loaders: ["fabric"], version_type: "alpha", featured: true, environment: "client_only_server_optional",
 			  dependencies: [], file_parts: ["file"], primary_file: "file"}')
 		if [ "$DRY_RUN" = 1 ]; then
 			echo "dry run: POST $api/version with $(basename "$file") ($(stat -c %s "$file") bytes)"
