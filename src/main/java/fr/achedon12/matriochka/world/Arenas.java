@@ -105,9 +105,10 @@ public final class Arenas {
 	/** A trail from the Threshold to the stage: lantern posts on open ground, a gallery in the Lightless Deep, sunken lights at sea. */
 	private static void path(ServerLevel level, int world, BlockPos center, int stop) {
 		BlockState pillar = ModContent.block("painted_wood").defaultBlockState();
-		if (world == 5) {
-			// a gallery dug from the Threshold to the lair's forecourt; no light in the Lightless Deep
-			BlockState stone = ModContent.block("umbral_stone").defaultBlockState();
+		if (world == 5 || Travel.roofed(world)) {
+			// a gallery dug from the Threshold to the lair's forecourt, under the rock; no light in the Lightless Deep,
+			// embers set in the walls under World 2's roof
+			BlockState stone = world == 5 ? ModContent.block("umbral_stone").defaultBlockState() : floorFor(world);
 			for (int z = 4 - Worlds.ARENA_OFFSET; z <= -stop; z++) {
 				for (int dx = -2; dx <= 2; dx++) {
 					for (int dy = 0; dy <= 4; dy++) {
@@ -117,7 +118,11 @@ public final class Arenas {
 						if (!level.getBlockState(p).isAir()) level.setBlock(p, Blocks.AIR.defaultBlockState(), 2);
 					}
 					BlockPos f = center.offset(dx, -1, z);
-					if (level.getBlockState(f).isAir()) level.setBlock(f, stone, 2);
+					if (level.getBlockState(f).isAir() || world != 5 && !level.getBlockState(f).getFluidState().isEmpty()) level.setBlock(f, stone, 2);
+				}
+				if (world != 5 && Math.floorMod(z, 12) == 0) {
+					level.setBlock(center.offset(-3, 2, z), accentFor(world), 2);
+					level.setBlock(center.offset(3, 2, z), accentFor(world), 2);
 				}
 			}
 			return;

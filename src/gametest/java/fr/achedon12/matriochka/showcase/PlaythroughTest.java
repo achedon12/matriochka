@@ -208,8 +208,17 @@ final class PlaythroughTest {
 	/** Empties the main hand into the inventory. */
 	private static void emptyHand(ServerPlayer p) {
 		ItemStack s = p.getMainHandItem().copy();
+		if (s.isEmpty()) return;
 		p.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-		if (!s.isEmpty() && !p.getInventory().add(s)) net.minecraft.world.level.block.Block.popResource(p.level(), p.blockPosition(), s);
+		// into another free slot: Inventory.add fills the first free slot, which can be the hand just emptied
+		var inv = p.getInventory();
+		for (int i = 0; i < inv.getNonEquipmentItems().size(); i++) {
+			if (i != inv.getSelectedSlot() && inv.getItem(i).isEmpty()) {
+				inv.setItem(i, s);
+				return;
+			}
+		}
+		net.minecraft.world.level.block.Block.popResource(p.level(), p.blockPosition(), s);
 	}
 
 	/** Right-click on a block face with the main hand, through the server's own interaction path. */
@@ -243,6 +252,10 @@ final class PlaythroughTest {
 	}
 
 	private static void arm(ServerPlayer p, float health) {
+		// the last fight's sword is the test's own tool: swapped for this one's, not hoarded (eleven of them, with what
+		// the fights knock loose, filled the inventory before the hidden dolls)
+		var inv = p.getInventory();
+		for (int i = 0; i < inv.getContainerSize(); i++) if (inv.getItem(i).is(Items.NETHERITE_SWORD)) inv.setItem(i, ItemStack.EMPTY);
 		emptyHand(p);
 		p.setItemInHand(InteractionHand.MAIN_HAND, sword(health));
 	}
@@ -382,7 +395,10 @@ final class PlaythroughTest {
 		step(ctx, server, "guardian sanctuary", () -> server.computeOnServer(s -> {
 			ServerPlayer p = player(s);
 			ServerLevel level = (ServerLevel) p.level();
-			BlockPos at = base.offset(0, 0, -48);
+			// the sanctuary sits on the ground 48 blocks north, which can be far below or above the base on a hilly
+			// spawn: search and land around that ground, not around the base's height
+			BlockPos north = base.offset(0, 0, -48);
+			BlockPos at = north.atY(level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, north.getX(), north.getZ()));
 			tp(p, at.offset(0, 4, 8));
 			var src = s.createCommandSourceStack().withLevel(level).withPosition(Vec3.atCenterOf(at)).withSuppressedOutput();
 			int placed;
@@ -427,6 +443,8 @@ final class PlaythroughTest {
 	private static void world(ClientGameTestContext ctx, TestServerContext server, int w) {
 		Defs.BossDef boss = ModContent.bossForWorld(w);
 		step(ctx, server, "W" + w + " craft the Seed", () -> server.computeOnServer(s -> craftSeed(s, w)));
+		// a player tick sends the inventory change that opens the world's advancement tab, before the Seed is planted
+		ctx.waitTicks(2);
 		step(ctx, server, "W" + w + " plant the Seed", () -> server.computeOnServer(s -> plant(s, w)));
 		step(ctx, server, "W" + w + " hatch", () -> {
 			boolean formed = false;
@@ -712,6 +730,17 @@ final class PlaythroughTest {
 			return checks(shadow, "the Shadow wakes in the Artisan's room", stitched, "brought near death, it stitches itself back");
 		});
 		step(ctx, server, "set down the tools", () -> {
+			// the kneeling calms the Shadow, not the creatures it called in with the attacks it borrows from the worlds
+			// (sporelings, Shadow Mothers...): their blows knocked the kneeling player off the carpet. The fight against
+			// them is not what this step checks, so they are cleared from the room first
+			int minions = server.computeOnServer(s -> {
+				ServerPlayer p = player(s);
+				BlockPos o = WorldZero.origin(MatrioData.get(s), group(p), (ServerLevel) p.level());
+				List<MatrioMob> l = p.level().getEntitiesOfClass(MatrioMob.class, new AABB(WorldZero.kneelSpot(o)).inflate(48));
+				l.forEach(m -> m.discard());
+				return l.size();
+			});
+			OUT.add("info " + minions + " creature(s) of the Shadow cleared before kneeling");
 			server.runOnServer(s -> {
 				ServerPlayer p = player(s);
 				BlockPos o = WorldZero.origin(MatrioData.get(s), group(p), (ServerLevel) p.level());

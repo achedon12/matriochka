@@ -48,7 +48,8 @@ public final class Travel {
 	/** Builds (once) and returns the threshold platform of a group's parcel. */
 	public static BlockPos threshold(MatrioData data, String group, int world, ServerLevel level) {
 		CompoundTag entry = data.worldEntry(group, world);
-		if (entry.contains("seuil_y")) {
+		// a Threshold stored above the top of the world was never built (World 2's rock roof, before caveFloor): build it again
+		if (entry.contains("seuil_y") && entry.getIntOr("seuil_y", 64) <= level.getMaxY()) {
 			return new BlockPos(entry.getIntOr("seuil_x", 0), entry.getIntOr("seuil_y", 64), entry.getIntOr("seuil_z", 0));
 		}
 		BlockPos c = Worlds.parcelCenter(data.parcel(group, world));
@@ -62,6 +63,9 @@ public final class Travel {
 		} else {
 			y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, c.getX(), c.getZ());
 			if (world == 4 && y <= level.getMinY() + 2) y = 120;
+			// a roofed cave world (World 2): the heightmap stops on the rock roof, at the very top of the world, where
+			// nothing can be built; the Threshold and the lair go on a cave floor under the roof instead
+			if (roofed(world) && y > level.getMaxY() - HEADROOM) y = caveFloor(level, c);
 		}
 		BlockPos base = new BlockPos(c.getX(), y, c.getZ());
 		if (world == Ocean.WORLD) {
@@ -76,6 +80,28 @@ public final class Travel {
 		data.changed();
 		Arenas.build(level, world, base.offset(0, 0, Worlds.ARENA_OFFSET));
 		return base;
+	}
+
+	/** Room kept over a Threshold for the stage 160 blocks south of it: a lair's dome rises 22 blocks over its floor. */
+	private static final int HEADROOM = 26;
+
+	/** True when a world is a cave under a rock roof that reaches the top of the world (World 2). */
+	public static boolean roofed(int world) {
+		return world == 2;
+	}
+
+	/** The highest open cave floor of a column that leaves room for a lair over it, above the lava sea; y 48 if none. */
+	static int caveFloor(ServerLevel level, BlockPos c) {
+		int floor = Math.max(level.getMinY() + 8, level.getSeaLevel() + 4);
+		for (int y = level.getMaxY() - HEADROOM; y > floor; y--) {
+			BlockPos p = new BlockPos(c.getX(), y, c.getZ());
+			BlockState below = level.getBlockState(p.below());
+			if (!below.isFaceSturdy(level, p.below(), net.minecraft.core.Direction.UP) || !below.getFluidState().isEmpty()) continue;
+			boolean open = true;
+			for (int dy = 0; dy <= 3 && open; dy++) open = level.getBlockState(p.above(dy)).isAir();
+			if (open) return y;
+		}
+		return 48;
 	}
 
 	public static void buildPlatform(ServerLevel level, BlockPos base, int world) {

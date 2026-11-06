@@ -123,6 +123,19 @@ final class ComfortTest {
 			ctx.waitTicks(5);
 
 			// ------------------------------------------------------------ danger
+			// the spawn point is spread at random over a hilly spot: on a slope ~4 ~ ~4 can be inside the hill, where the
+			// zombie never sees the player; a small open pad at the player's feet keeps it in the open, in sight
+			server.runOnServer(s -> {
+				ServerPlayer p = s.getPlayerList().getPlayers().get(0);
+				var level = p.level();
+				var feet = p.blockPosition();
+				for (int dx = -6; dx <= 6; dx++) {
+					for (int dz = -6; dz <= 6; dz++) {
+						level.setBlockAndUpdate(feet.offset(dx, -1, dz), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+						for (int dy = 0; dy <= 3; dy++) level.setBlockAndUpdate(feet.offset(dx, dy, dz), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+					}
+				}
+			});
 			server.runCommand("execute as @p at @s run summon minecraft:zombie ~4 ~ ~4");
 			ctx.waitTicks(60);
 			int danger = ctx.computeOnClient(mc -> Cinematics.danger());

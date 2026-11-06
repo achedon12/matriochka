@@ -331,7 +331,10 @@ final class AutomationTest {
 			npc.setPos(p.getX() + 1.5, p.getY(), p.getZ());
 			level.addFreshEntity(npc);
 			npc.mobInteract(p, InteractionHand.MAIN_HAND);
-			check(out, done(p, "hard_harvest") && p.getMainHandItem().isEmpty(), "handing 16 spores to a Gatherer finishes Hard Harvest");
+			// the spores leave the inventory; the 5 Antidotes of the reward land in the first free slot, the emptied hand
+			int sporesLeft = p.getInventory().countItem(ModContent.item("spores"));
+			int antidotes = p.getInventory().countItem(ModContent.item("antidote"));
+			check(out, done(p, "hard_harvest") && sporesLeft == 0 && antidotes == 5, "handing 16 spores to a Gatherer finishes Hard Harvest (spores left " + sporesLeft + ", antidotes " + antidotes + ")");
 			npc.discard();
 			// No Filter: with a mask the kill does not count, without one it does
 			p.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 200, 9));

@@ -34,6 +34,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
@@ -195,18 +196,6 @@ public final class ReplayGear {
 
 		ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, base, taken, blocked) -> {
 			if (busy || !(entity.level() instanceof ServerLevel level)) return;
-			// the Lantern Shield flares when it stops a blow
-			if (blocked && entity instanceof ServerPlayer p && p.getUseItem().is(ModContent.item("lantern_shield")) && source.getEntity() instanceof LivingEntity attacker) {
-				attacker.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0));
-				attacker.addEffect(new MobEffectInstance(MobEffects.GLOWING, 120, 0));
-				attacker.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 1));
-				if (!(attacker instanceof MatrioBoss)) {
-					attacker.setDeltaMovement(attacker.position().subtract(p.position()).normalize().scale(1.1).add(0, 0.35, 0));
-					attacker.needsSync = true;
-				}
-				level.sendParticles(ParticleTypes.END_ROD, p.getX(), p.getY() + 1.2, p.getZ(), 24, 0.6, 0.6, 0.6, 0.15);
-				level.playSound(null, p.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 0.8f, 1.8f);
-			}
 			// spore arrows burst on what they hit
 			if (source.getDirectEntity() instanceof AbstractArrow arrow && arrow.entityTags().contains("matriochka_spore")) {
 				spores(level, entity.position(), arrow.getOwner());
@@ -261,6 +250,23 @@ public final class ReplayGear {
 				return a.tickCount > 600;
 			});
 		});
+	}
+
+	/**
+	 * The Lantern Shield flares when it stops a blow: the attacker is blinded, marked and thrown back. Called from the
+	 * blocking itself (ShieldBlockMixin): a blow the shield stops whole never reaches AFTER_DAMAGE.
+	 */
+	public static void blocked(ServerLevel level, ServerPlayer p, DamageSource source) {
+		if (busy || !p.getUseItem().is(ModContent.item("lantern_shield")) || !(source.getEntity() instanceof LivingEntity attacker) || attacker == p) return;
+		attacker.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0));
+		attacker.addEffect(new MobEffectInstance(MobEffects.GLOWING, 120, 0));
+		attacker.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 1));
+		if (!(attacker instanceof MatrioBoss)) {
+			attacker.setDeltaMovement(attacker.position().subtract(p.position()).normalize().scale(1.1).add(0, 0.35, 0));
+			attacker.needsSync = true;
+		}
+		level.sendParticles(ParticleTypes.END_ROD, p.getX(), p.getY() + 1.2, p.getZ(), 24, 0.6, 0.6, 0.6, 0.15);
+		level.playSound(null, p.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 0.8f, 1.8f);
 	}
 
 	private static void spores(ServerLevel level, net.minecraft.world.phys.Vec3 at, Entity owner) {

@@ -56,6 +56,9 @@ final class ReplayTest {
 			var server = sp.getServer();
 			sp.getConnection().waitForChunksRender();
 			server.runCommand("gamerule advance_time false");
+			server.runCommand("gamerule advance_weather false");
+			// rain puts out the fire the javelin's lightning lights, which the check reads once the bolt is gone
+			server.runCommand("weather clear");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamerule announce_advancements false");
 			server.runCommand("gamemode survival @a");
@@ -67,6 +70,12 @@ final class ReplayTest {
 			ctx.waitTicks(30);
 			server.runOnServer(ReplayTest::talentsApplied);
 			server.runOnServer(ReplayTest::meleeGear);
+			// a struck creature shrugs off blows for half a second: the flail's three blows come a real swing apart
+			for (int blow = 1; blow < 3; blow++) {
+				ctx.waitTicks(12);
+				server.runOnServer(ReplayTest::flailBlow);
+			}
+			server.runOnServer(ReplayTest::whipBlow);
 			ctx.waitTicks(4);
 			server.runOnServer(ReplayTest::meleeChecked);
 			server.runOnServer(ReplayTest::throwJavelin);
@@ -116,6 +125,9 @@ final class ReplayTest {
 			server.runOnServer(ReplayTest::startMerchant);
 			ctx.waitTicks(40);
 			server.runOnServer(ReplayTest::merchantGone);
+			// "place structure" wants every chunk under the structure loaded: hold the sites loaded first
+			server.runOnServer(ReplayTest::loadStructureSites);
+			ctx.waitTicks(40);
 			server.runOnServer(ReplayTest::placeStructures);
 			ctx.waitTicks(20);
 			server.runOnServer(ReplayTest::structuresBuilt);
@@ -144,11 +156,16 @@ final class ReplayTest {
 		}
 	}
 
-	/** A still zombie at an offset from the player, on the ground. */
+	/**
+	 * A still zombie at an offset from the player, on the ground at the player's level (the clearing's floor): the
+	 * column's top can be a tree trunk or a ledge high over the clearing, out of reach of what is checked.
+	 */
 	private static Husk dummy(ServerPlayer p, double dx, double dz) {
 		ServerLevel level = (ServerLevel) p.level();
 		Husk z = net.minecraft.world.entity.EntityTypes.HUSK.create(level, EntitySpawnReason.COMMAND);
-		BlockPos at = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlockPos.containing(p.getX() + dx, p.getY(), p.getZ() + dz));
+		BlockPos at = BlockPos.containing(p.getX() + dx, p.getY(), p.getZ() + dz);
+		while (!level.getBlockState(at).isAir() && at.getY() < level.getMaxY()) at = at.above();
+		while (level.getBlockState(at.below()).isAir() && at.getY() > level.getMinY()) at = at.below();
 		z.setPos(at.getX() + 0.5, at.getY(), at.getZ() + 0.5);
 		z.setNoAi(true);
 		z.setPersistenceRequired();
@@ -211,15 +228,27 @@ final class ReplayTest {
 	private static void meleeGear(MinecraftServer server) {
 		section("melee gear", () -> {
 			ServerPlayer p = player(server);
-			ServerLevel level = (ServerLevel) p.level();
 			flailA = dummy(p, 0, 2);
 			flailB = dummy(p, 1.2, 2.5);
 			p.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModContent.item("magma_flail")));
-			for (int i = 0; i < 3; i++) {
-				flailA.setInvulnerableTime(0);
-				flailA.setHealth(flailA.getMaxHealth());
-				flailA.hurtServer(level, level.damageSources().playerAttack(p), 2f);
-			}
+			flailBlow(server);
+		});
+	}
+
+	/** One blow of the Magma Flail on the first dummy, kept alive for the next. */
+	private static void flailBlow(MinecraftServer server) {
+		section("flail blow", () -> {
+			ServerPlayer p = player(server);
+			ServerLevel level = (ServerLevel) p.level();
+			flailA.setHealth(flailA.getMaxHealth());
+			check(flailA.hurtServer(level, level.damageSources().playerAttack(p), 2f), "a Magma Flail blow lands");
+		});
+	}
+
+	private static void whipBlow(MinecraftServer server) {
+		section("whip", () -> {
+			ServerPlayer p = player(server);
+			ServerLevel level = (ServerLevel) p.level();
 			whipped = dummy(p, -6, 0);
 			p.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModContent.item("key_chain_whip")));
 			whipped.hurtServer(level, level.damageSources().playerAttack(p), 1f);
@@ -246,6 +275,9 @@ final class ReplayTest {
 		section("javelin", () -> {
 			ServerPlayer p = player(server);
 			ServerLevel level = (ServerLevel) p.level();
+			// the melee dummies stand between the player and the target: out of the way first
+			for (Entity e : SPAWNED) e.discard();
+			SPAWNED.clear();
 			javelinTarget = dummy(p, 0, 7);
 			p.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES, javelinTarget.position().add(0, 1, 0));
 			p.getInventory().clearContent();
@@ -518,6 +550,26 @@ final class ReplayTest {
 
 	// ---------------------------------------------------------------- structures
 	private static final List<BlockPos> PLACED = new ArrayList<>();
+	private static final List<net.minecraft.world.level.ChunkPos> FORCED = new ArrayList<>();
+
+	/** Where each new structure goes: ten sites, south of the player in World 1. */
+	private static List<BlockPos> sites(ServerPlayer p) {
+		List<BlockPos> out = new ArrayList<>();
+		for (int i = 0; i < 10; i++) out.add(new BlockPos(p.getBlockX() + (i % 4 - 2) * 40 + 20, 0, p.getBlockZ() + (i / 4 - 1) * 48 + 60));
+		return out;
+	}
+
+	private static void loadStructureSites(MinecraftServer server) {
+		section("structure sites", () -> {
+			ServerLevel level = (ServerLevel) player(server).level();
+			for (BlockPos at : sites(player(server))) {
+				for (int cx = (at.getX() >> 4) - 2; cx <= (at.getX() >> 4) + 2; cx++)
+					for (int cz = (at.getZ() >> 4) - 2; cz <= (at.getZ() >> 4) + 2; cz++) {
+						if (level.setChunkForced(cx, cz, true)) FORCED.add(new net.minecraft.world.level.ChunkPos(cx, cz));
+					}
+			}
+		});
+	}
 
 	private static void placeStructures(MinecraftServer server) {
 		section("structures", () -> {
@@ -526,7 +578,7 @@ final class ReplayTest {
 			int i = 0;
 			for (var s : fr.achedon12.matriochka.content.Content.STRUCTURES) {
 				if (!List.of("caravan", "circle", "outpost", "bastion").contains(s.archetype())) continue;
-				int x = p.getBlockX() + (i % 4 - 2) * 40 + 20, z = p.getBlockZ() + (i / 4 - 1) * 48 + 60;
+				int x = sites(p).get(i).getX(), z = sites(p).get(i).getZ();
 				int y = level.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
 				var src = server.createCommandSourceStack().withLevel(level).withPosition(new Vec3(x, y, z)).withSuppressedOutput();
 				int r;
@@ -563,6 +615,8 @@ final class ReplayTest {
 				if (chest) withChest++;
 			}
 			check(withChest == PLACED.size(), "every new structure holds loot (" + withChest + "/" + PLACED.size() + ")");
+			for (var c : FORCED) level.setChunkForced(c.x(), c.z(), false);
+			FORCED.clear();
 		});
 	}
 }

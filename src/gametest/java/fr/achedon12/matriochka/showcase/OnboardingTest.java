@@ -149,7 +149,7 @@ final class OnboardingTest {
 						p.getInventory().add(new ItemStack(ModContent.item(id), id.equals("world_soil_0") ? 4 : 1));
 					}
 				}
-				pad = buildPad(p);
+				pad = buildPad(p, altar);
 				return out;
 			});
 			check(picked.isEmpty(), "the Guardian's workbench, core and soil were picked up (missing: " + picked + ")");
@@ -398,14 +398,18 @@ final class OnboardingTest {
 	 * A flat stone pad around the player (who stands on its centre), clear of the sanctuary, with water two blocks
 	 * from where the soil goes. Returns the centre at the player's feet.
 	 */
-	private static BlockPos buildPad(ServerPlayer p) {
+	private static BlockPos buildPad(ServerPlayer p, BlockPos altar) {
 		ServerLevel level = (ServerLevel) p.level();
-		BlockPos c = p.blockPosition().offset(0, 0, 24);
-		for (int dx = -5; dx <= 5; dx++) {
-			for (int dz = -5; dz <= 5; dz++) {
+		// south of the altar at its height, not where the fight left the player: after the fight the player stood
+		// below sea level (y 56), and the water around flowed into the open pad, over the soil, so the Seed could not go in
+		BlockPos c = altar.offset(0, 0, 24);
+		for (int dx = -6; dx <= 6; dx++) {
+			for (int dz = -6; dz <= 6; dz++) {
+				boolean rim = Math.abs(dx) == 6 || Math.abs(dz) == 6;
 				level.setBlock(c.offset(dx, -2, dz), Blocks.STONE.defaultBlockState(), 3);
 				level.setBlock(c.offset(dx, -1, dz), Blocks.STONE.defaultBlockState(), 3);
-				for (int dy = 0; dy <= 4; dy++) level.setBlock(c.offset(dx, dy, dz), Blocks.AIR.defaultBlockState(), 3);
+				// a low stone rim keeps the water and sand around out of the pad
+				for (int dy = 0; dy <= 4; dy++) level.setBlock(c.offset(dx, dy, dz), (rim ? Blocks.STONE : Blocks.AIR).defaultBlockState(), 3);
 			}
 		}
 		// the soil goes on the floor at (-2, -1, 0): its block replaces nothing, so dig its place out first

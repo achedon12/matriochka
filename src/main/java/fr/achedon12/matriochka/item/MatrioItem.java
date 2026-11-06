@@ -194,7 +194,9 @@ public class MatrioItem extends Item {
 			}
 			case "nested_dolls", "whole_matryoshka" -> {
 				Nesting.use(sp, hand);
-				return InteractionResult.SUCCESS;
+				// the hand now holds what the nesting made: hand it back as the use's result, or the used (emptied)
+				// stack would be put back in the hand over it
+				return InteractionResult.SUCCESS.heldItemTransformedTo(sp.getItemInHand(hand));
 			}
 			case "soul_shard", "soul_vessel" -> {
 				SoulVessels.release(sp, stack);
@@ -209,7 +211,7 @@ public class MatrioItem extends Item {
 				if (fr.achedon12.matriochka.world.QuestHooks.useIn(sp, stack, def.id(), true)) return InteractionResult.SUCCESS;
 				if (def.id().startsWith("hidden_doll_")) {
 					Nesting.use(sp, hand);
-					return InteractionResult.SUCCESS;
+					return InteractionResult.SUCCESS.heldItemTransformedTo(sp.getItemInHand(hand));
 				}
 				return InteractionResult.PASS;
 			}
