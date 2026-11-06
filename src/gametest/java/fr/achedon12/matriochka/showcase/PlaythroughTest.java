@@ -730,17 +730,26 @@ final class PlaythroughTest {
 			return checks(shadow, "the Shadow wakes in the Artisan's room", stitched, "brought near death, it stitches itself back");
 		});
 		step(ctx, server, "set down the tools", () -> {
-			// the kneeling calms the Shadow, not the creatures it called in with the attacks it borrows from the worlds
-			// (sporelings, Shadow Mothers...): their blows knocked the kneeling player off the carpet. The fight against
-			// them is not what this step checks, so they are cleared from the room first
+			// the creatures the Shadow called in with the attacks it borrows from the worlds stay in the room: kneeling
+			// must still them too, or their blows knock the player off the carpet. Two more are set on the player, so the
+			// check always has some to calm
 			int minions = server.computeOnServer(s -> {
 				ServerPlayer p = player(s);
-				BlockPos o = WorldZero.origin(MatrioData.get(s), group(p), (ServerLevel) p.level());
-				List<MatrioMob> l = p.level().getEntitiesOfClass(MatrioMob.class, new AABB(WorldZero.kneelSpot(o)).inflate(48));
-				l.forEach(m -> m.discard());
-				return l.size();
+				ServerLevel level = (ServerLevel) p.level();
+				BlockPos o = WorldZero.origin(MatrioData.get(s), group(p), level);
+				BlockPos k = WorldZero.kneelSpot(o);
+				for (int i = 0; i < 2; i++) {
+					var e = fr.achedon12.matriochka.content.ModContent.entity("sporeling").create(level, net.minecraft.world.entity.EntitySpawnReason.MOB_SUMMONED);
+					if (e instanceof MatrioMob m) {
+						m.setPos(k.getX() + 0.5 + (i == 0 ? 3 : -3), k.getY(), k.getZ() + 0.5);
+						m.setTarget(p);
+						m.addTag("matrio_child");
+						level.addFreshEntity(m);
+					}
+				}
+				return level.getEntitiesOfClass(MatrioMob.class, new AABB(k).inflate(48), MatrioMob::isAlive).size();
 			});
-			OUT.add("info " + minions + " creature(s) of the Shadow cleared before kneeling");
+			OUT.add("info " + minions + " creature(s) of the Shadow in the room before kneeling");
 			server.runOnServer(s -> {
 				ServerPlayer p = player(s);
 				BlockPos o = WorldZero.origin(MatrioData.get(s), group(p), (ServerLevel) p.level());
@@ -750,12 +759,18 @@ final class PlaythroughTest {
 			});
 			ctx.runOnClient(mc -> mc.options.keyShift.setDown(true));
 			boolean done = false;
+			int[] knocked = {0};
 			for (int t = 0; t < 600 && !done; t += 20) {
 				ctx.waitTicks(20);
+				final int second = t / 20;
 				done = server.computeOnServer(s -> {
 					ServerPlayer p = player(s);
 					BlockPos o = WorldZero.origin(MatrioData.get(s), group(p), (ServerLevel) p.level());
-					if (p.position().distanceTo(Vec3.atBottomCenterOf(WorldZero.kneelSpot(o))) > 1) tp(p, WorldZero.kneelSpot(o));
+					if (p.position().distanceTo(Vec3.atBottomCenterOf(WorldZero.kneelSpot(o))) > 1) {
+						// once the kneel has stilled the room (its first second), nothing may push the player off the carpet
+						if (second >= 2) knocked[0]++;
+						tp(p, WorldZero.kneelSpot(o));
+					}
 					p.setShiftKeyDown(true);
 					return PlayerState.of(p).has("end_tools");
 				});
@@ -766,7 +781,11 @@ final class PlaythroughTest {
 			return server.computeOnServer(s -> {
 				ServerPlayer p = player(s);
 				PlayerState ps = PlayerState.of(p);
-				return checks(ps.has("end_tools"), "kneeling empty-handed sets the tools down",
+				BlockPos o = WorldZero.origin(MatrioData.get(s), group(p), (ServerLevel) p.level());
+				int left = p.level().getEntitiesOfClass(MatrioMob.class, new AABB(WorldZero.kneelSpot(o)).inflate(48), MatrioMob::isAlive).size();
+				return checks(minions >= 2 && left == 0, "kneeling stills the Shadow's creatures and they unravel (" + minions + " before, " + left + " after)",
+					knocked[0] == 0, "nothing knocks the kneeling player off the carpet (" + knocked[0] + ")",
+					ps.has("end_tools"), "kneeling empty-handed sets the tools down",
 					customAchieved(p, "third_end"), "Set Down the Tools is granted",
 					count(p, "blank_scroll") >= 1, "the Blank Scroll is given",
 					achieved(p, ps.has("end_seal") ? "endings/seal" : "endings/absorb"), "the Unfinished's ending advancement is granted");

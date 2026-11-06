@@ -24,6 +24,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CandleBlock;
@@ -50,7 +51,7 @@ import net.minecraft.world.phys.Vec3;
  * <p>
  * Encounter: the Artisan's Shadow wakes in the room. It cannot be finished: brought near death it stitches itself
  * back. Once it has, kneeling (sneaking) empty-handed on the carpet before the bench for ten seconds calms it and
- * plays the third ending, Set Down the Tools.
+ * plays the third ending, Set Down the Tools; the kneel stills the creatures it called in too, which unravel.
  */
 public final class WorldZero {
 	/** Height of the floor of every room. */
@@ -395,6 +396,8 @@ public final class WorldZero {
 			if (shadow != null) p.sendSystemMessage(Component.translatable("message.matriochka.zero.wake").withStyle(ChatFormatting.DARK_RED));
 			return;
 		}
+		// the creatures a kneel froze a second ago fall back into thread, whether the player still kneels or not
+		quiet(level, o, false);
 		// setting down the tools: kneel empty-handed on the carpet, once the Shadow has shown it cannot be finished
 		boolean kneels = e.getBooleanOr("stitched", false) && p.isShiftKeyDown() && p.getMainHandItem().isEmpty() && p.getOffhandItem().isEmpty()
 			&& p.position().distanceTo(Vec3.atBottomCenterOf(o.offset(0, 0, KNEEL_Z))) < 2.2 && rz >= ROOM_Z0;
@@ -404,9 +407,59 @@ public final class WorldZero {
 		}
 		ps.addCounter("zero_kneel", 1);
 		shadow.calm(40);
+		calmRoom(level, o);
 		level.sendParticles(ParticleTypes.ENCHANT, p.getX(), p.getY() + 1, p.getZ(), 20, 0.6, 0.6, 0.6, 0.5);
 		if (ps.counter("zero_kneel") == 1) p.sendSystemMessage(Component.translatable("message.matriochka.zero.kneel").withStyle(ChatFormatting.GOLD));
 		if (ps.counter("zero_kneel") >= KNEEL_SECONDS) finish(level, data, e, o, shadow);
+	}
+
+	/** Tag of the creatures a kneeling player has stilled; they unravel on the next second. */
+	private static final String STILLED = "zero_stilled";
+
+	/**
+	 * Kneeling quiets the whole room, not only the Shadow: the creatures it called in with the attacks it borrows from
+	 * the worlds (sporelings, Shadow Mothers...) let go of the player and freeze where they stand, in a ring of loose
+	 * thread, and the blows already thrown at the player (arrows, fireballs, toxic clouds) fade.
+	 */
+	private static void calmRoom(ServerLevel level, BlockPos o) {
+		for (Mob m : level.getEntitiesOfClass(Mob.class, complex(o), WorldZero::shadowCreature)) {
+			if (m.entityTags().contains(STILLED)) continue;
+			m.addTag(STILLED);
+			m.setTarget(null);
+			m.setAggressive(false);
+			m.getNavigation().stop();
+			m.setDeltaMovement(Vec3.ZERO);
+			m.setNoAi(true);
+			double h = m.getBbHeight();
+			level.sendParticles(fr.achedon12.matriochka.content.Particles.THREAD_SCRAP, m.getX(), m.getY() + h * 0.5, m.getZ(), 14, m.getBbWidth() * 0.6, h * 0.4, m.getBbWidth() * 0.6, 0.01);
+			level.sendParticles(ParticleTypes.ENCHANT, m.getX(), m.getY() + h + 0.3, m.getZ(), 12, 0.3, 0.2, 0.3, 0.6);
+			level.playSound(null, m.blockPosition(), SoundEvents.WOOL_BREAK, SoundSource.HOSTILE, 0.7f, 0.6f);
+		}
+		for (net.minecraft.world.entity.Entity e : level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class, complex(o),
+			e -> (e instanceof net.minecraft.world.entity.projectile.Projectile pr && !(pr.getOwner() instanceof ServerPlayer))
+				|| (e instanceof net.minecraft.world.entity.AreaEffectCloud c && !(c.getOwner() instanceof ServerPlayer)))) {
+			level.sendParticles(fr.achedon12.matriochka.content.Particles.GOLD_MOTE, e.getX(), e.getY() + 0.2, e.getZ(), 6, 0.2, 0.2, 0.2, 0.01);
+			e.discard();
+		}
+	}
+
+	/**
+	 * The stilled creatures unravel: they come apart into thread scraps and gold dust and are gone (all of them and every
+	 * creature of the room once the tools are set down).
+	 */
+	private static void quiet(ServerLevel level, BlockPos o, boolean all) {
+		for (Mob m : level.getEntitiesOfClass(Mob.class, complex(o), m -> shadowCreature(m) && (all || m.entityTags().contains(STILLED)))) {
+			double h = m.getBbHeight(), w = m.getBbWidth();
+			level.sendParticles(fr.achedon12.matriochka.content.Particles.THREAD_SCRAP, m.getX(), m.getY() + h * 0.5, m.getZ(), 26, w * 0.5, h * 0.45, w * 0.5, 0.03);
+			level.sendParticles(fr.achedon12.matriochka.content.Particles.GOLD_MOTE, m.getX(), m.getY() + h * 0.5, m.getZ(), 18, w * 0.5, h * 0.45, w * 0.5, 0.02);
+			level.playSound(null, m.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.HOSTILE, 0.6f, 1.4f);
+			m.discard();
+		}
+	}
+
+	/** A creature of the room the Shadow could set on the player: every Matriochka creature or hostile mob, not the Shadow. */
+	private static boolean shadowCreature(Mob m) {
+		return m.isAlive() && !(m instanceof MatrioBoss) && (m instanceof MatrioMob || m instanceof net.minecraft.world.entity.monster.Enemy);
 	}
 
 	private static void spawnGuards(ServerLevel level, BlockPos o, int k, ServerPlayer target) {
@@ -459,6 +512,7 @@ public final class WorldZero {
 		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, shadow.getX(), shadow.getY() + 1.5, shadow.getZ(), 120, 1, 1.5, 1, 0.4);
 		level.playSound(null, shadow.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, 1.5f, 0.6f);
 		shadow.discard();
+		quiet(level, o, true);
 		set(level, o, 3, 0, KNEEL_Z - 3, b("threshold"));
 		for (ServerPlayer p : level.getEntitiesOfClass(ServerPlayer.class, complex(o))) {
 			PlayerState.of(p).setGauge("obsession", 0);
