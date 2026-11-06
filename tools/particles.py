@@ -61,7 +61,8 @@ def paint(pid, frame, res=8):
         _soft(s, 8, 8, 2.6 - f * 0.8, g, 160)
         s.dot(7.0, 7.0, (255, 240, 200))
     elif pid == "cold_dust":
-        s.fill(s.disc(8, 8, 2.4 - f * 0.6), hramp("aab8c8")[3 - f])
+        # big enough to read as a mote (two pixels across at 8 x 8), not a stray pixel
+        _soft(s, 8, 8, 3.0 - f * 0.8, hramp("aab8c8", n=5), 110)
     elif pid == "chain_glint":
         rows = ([".......", "...#...", "..#o#..", "...#..."], ["...#...", "...#...", ".##o##.", "...#...", "...#..."],
                 ["........", "...#....", "..#o#...", "...#...."])[f]
@@ -76,23 +77,24 @@ def paint(pid, frame, res=8):
             if i <= 2 - f or i == 0:
                 s.fill(s.disc(x + f, y, r - f * 0.6), d[2 - min(i, 2)], a=200 - f * 50)
     elif pid == "deep_mote":
-        _soft(s, 8, 8, 2.0 - f * 0.6, hramp("6a8aff", n=5), 110)
+        _soft(s, 8, 8, 2.8 - f * 0.7, hramp("6a8aff", n=5), 110)
     elif pid == "mirror_shard":
         tris = ([(3, 13), (13, 9), (7, 2)], [(4, 4), (13, 6), (6, 14)], [(2, 8), (12, 3), (11, 14)])[f]
         m = s.poly(tris)
         s.shade(m, hramp("e8c8f4"), n_flat(-0.3, -0.4), rim=hramp("4ac8c0")[1], lo=2, hi=5)
         s.outline()
     elif pid == "bubble":
-        r = 4.6 - f * 1.2
-        s.fill(s.ring(8, 8, r - 1.4, r), hramp("9af0ff")[4], a=230)
-        s.fill(s.disc(8, 8, r - 1.4), hramp("9af0ff")[2], a=60)
+        # radii picked to land on whole pixels at 8 x 8 (a 4.6 ring broke up into four corner dots)
+        r, w = ((6.0, 1.8), (3.4, 1.4))[f]
+        s.fill(s.ring(8, 8, r - w, r), hramp("9af0ff")[4], a=230)
+        s.fill(s.disc(8, 8, r - w), hramp("9af0ff")[2], a=60)
         s.dot(5.6, 5.4, (255, 255, 255))
     elif pid == "petal":
         m = s.ell(8, 8, 4.6, 2.8) if f == 0 else s.ell(8, 8, 2.8, 4.4)
         s.shade(m, hramp("f0b4c8", sat=0.12), n_sphere(7, 7, 5), lo=2, hi=5)
         s.outline()
     elif pid == "pollen":
-        _soft(s, 8, 8, 1.8 - f * 0.4, hramp("ffe070", n=5), 100)
+        _soft(s, 8, 8, 2.6 - f * 0.6, hramp("ffe070", n=5), 100)
     elif pid == "autumn_leaf":
         m = s.poly([(2, 12), (6, 4), (13, 2), (12, 9), (5, 13)]) if f == 0 else s.poly([(3, 3), (11, 4), (14, 12), (6, 13), (2, 8)])
         s.shade(m, hramp("d8602a"), n_flat(-0.3, -0.3), lo=2, hi=4)
@@ -107,7 +109,7 @@ def paint(pid, frame, res=8):
         s.shade(m, hramp("7a5040"), n_flat(-0.3, -0.3), lo=2, hi=4)
         s.outline()
     elif pid == "rust_mote":
-        s.fill(s.disc(8, 8, 2.4 - f * 0.6), hramp("b85a3e")[3 - f], a=220)
+        _soft(s, 8, 8, 3.0 - f * 0.8, hramp("b85a3e", n=5), 120)
     elif pid == "thread_scrap":
         col = (RED, hramp("3a6ab8"), GOLD)[f]
         m = s.path([(2, 11), (6, 6), (10, 9), (14, 4)], 1.1)

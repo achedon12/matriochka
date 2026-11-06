@@ -1,7 +1,7 @@
 {
   "attributes": {
     "minecraft:visual/sky_color": "#2a2a33",
-    "minecraft:visual/fog_color": "#262a36",
+    "minecraft:visual/fog_color": "#1a1d26",
     "minecraft:visual/water_fog_color": "#3a4a5a",
     "minecraft:gameplay/natural_mob_spawns": {
       "argument": {
@@ -85,10 +85,10 @@
         "max_delay": 12000
       }
     },
-    "minecraft:visual/fog_start_distance": 4.0,
-    "minecraft:visual/fog_end_distance": 60.0,
+    "minecraft:visual/fog_start_distance": 12.0,
+    "minecraft:visual/fog_end_distance": 110.0,
     "minecraft:visual/block_light_tint": "#c4dcff",
-    "minecraft:visual/ambient_light_color": "#141a26",
+    "minecraft:visual/ambient_light_color": "#4a5468",
     "minecraft:visual/ambient_particles": [
       {
         "particle": {

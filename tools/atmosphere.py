@@ -29,15 +29,17 @@ WORLD = {
     2: {"fog_color": "#6a2c14", "fog_start_distance": 2.0, "fog_end_distance": 64.0, "sky_color": "#8a3a1a",
         "sky_light_color": "#ffc89a", "block_light_tint": "#ffa050", "ambient_light_color": "#2a1006",
         "ambient_particles": [_p("ember", 0.004), _p("minecraft:ash", 0.006)]},
-    # cold stone: blue-grey fog, cold dust settling, lamps burn white-blue, chains glint in the dark
-    3: {"fog_color": "#262a36", "fog_start_distance": 4.0, "fog_end_distance": 60.0, "block_light_tint": "#c4dcff",
-        "ambient_light_color": "#141a26", "ambient_particles": [_p("cold_dust", 0.004), _p("chain_glint", 0.0003)]},
+    # cold stone: blue-grey fog, cold dust settling, lamps burn white-blue, chains glint in the dark; murky, but the
+    # stone carries a cold light of its own and the fog is darker than it, so the halls read at a corridor's length
+    3: {"fog_color": "#1a1d26", "fog_start_distance": 12.0, "fog_end_distance": 110.0, "block_light_tint": "#c4dcff",
+        "ambient_light_color": "#4a5468", "ambient_particles": [_p("cold_dust", 0.004), _p("chain_glint", 0.0003)]},
     # the storm: slate sky, low dark clouds, a grey-blue light, sparks crackling in the air
     4: {"fog_color": "#8a9ab4", "fog_start_distance": 8.0, "fog_end_distance": 150.0, "sky_color": "#5a6a8c",
         "cloud_color": "#f04a5268", "cloud_height": 150.0, "sky_light_color": "#c0cce4", "sky_light_factor": 0.85,
         "sunrise_sunset_color": "#66ffe14a", "ambient_particles": [_p("storm_spark", 0.0006), _p("minecraft:white_ash", 0.002)]},
-    # near black: the fog swallows everything past 18 blocks, lights look cold, rare motes and wisps
-    5: {"fog_color": "#04040a", "fog_start_distance": 0.0, "fog_end_distance": 18.0, "block_light_tint": "#9aaaff",
+    # near black: no light of its own, and the fog swallows everything past a stone's throw; a lantern still reads
+    # across a cavern (the fog only closes in from 4 blocks, gone by 30), its light running cold, rare motes and wisps
+    5: {"fog_color": "#05050c", "fog_start_distance": 4.0, "fog_end_distance": 30.0, "block_light_tint": "#b4c0ff",
         "ambient_light_color": "#000000", "ambient_particles": [_p("deep_mote", 0.001), _p("shadow_wisp", 0.0005)]},
     # inverted pastel: a mint sky over pink fog, lilac clouds, mirror shards falling upward
     6: {"fog_color": "#f2cdee", "fog_start_distance": 10.0, "fog_end_distance": 180.0, "sky_color": "#aef0e6",
@@ -57,9 +59,11 @@ WORLD = {
     10: {"fog_color": "#d8b884", "fog_start_distance": 16.0, "fog_end_distance": 170.0, "sky_color": "#ecd4a4",
          "cloud_color": "#ccfff0d0", "sky_light_color": "#fff0d0", "block_light_tint": "#ffc070", "ambient_light_color": "#1a1008",
          "ambient_particles": [_p("fluff", 0.004), _p("thread_scrap", 0.0006)]},
-    # World 0, the smallest doll: lantern light on red lacquer, gold dust in the air
-    11: {"fog_color": "#3a140c", "fog_start_distance": 4.0, "fog_end_distance": 48.0, "block_light_tint": "#ffb060",
-         "ambient_light_color": "#2a0c06", "ambient_particles": [_p("gold_mote", 0.002)]},
+    # World 0, the smallest doll: lantern light on red lacquer, gold dust in the air. A warm red dusk, never a wall:
+    # the lacquer glows on its own (well above the Nether's ambient, or it sinks into the haze) and the haze closes in
+    # from 12 blocks to 112, so the inside of the doll reads at a normal distance
+    11: {"fog_color": "#2c0e08", "fog_start_distance": 12.0, "fog_end_distance": 112.0, "block_light_tint": "#ffb060",
+         "ambient_light_color": "#b8805a", "ambient_particles": [_p("gold_mote", 0.002)]},
 }
 
 

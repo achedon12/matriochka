@@ -684,10 +684,12 @@ def gen_world_zero():
               "minecraft:visual/default_dripstone_particle", "minecraft:gameplay/snow_golem_melts", "minecraft:gameplay/straw_bed_rule"):
         dt["attributes"].pop(k, None)
     dt["coordinate_scale"] = 1.0
-    dt["ambient_light"] = 0.12
-    dt["attributes"]["minecraft:visual/fog_end_distance"] = 56.0
-    dt["attributes"]["minecraft:visual/fog_start_distance"] = 6.0
-    dt["attributes"]["minecraft:visual/ambient_light_color"] = "#3a1a10"
+    # no sky inside the smallest doll: the lacquer itself must carry some light, or the whole world sinks into its red
+    # haze (the biome's atmosphere, tools/atmosphere.py, sets the fog and the warm ambient tint over this)
+    dt["ambient_light"] = 0.3
+    dt["attributes"]["minecraft:visual/fog_end_distance"] = 112.0
+    dt["attributes"]["minecraft:visual/fog_start_distance"] = 12.0
+    dt["attributes"]["minecraft:visual/ambient_light_color"] = "#b8805a"
     dt["attributes"]["minecraft:visual/fog_color"] = "#" + wd["fog"]
     dt["attributes"]["minecraft:visual/sky_light_color"] = "#" + wd["sky"]
     dt["attributes"]["minecraft:gameplay/respawn_anchor_works"] = False

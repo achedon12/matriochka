@@ -267,6 +267,22 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		return null;
 	}
 
+	/** The lightning a boss calls down (the Storm King, a borrowed World 4 law) strikes around it, never the boss itself. */
+	@Override
+	public void thunderHit(ServerLevel level, LightningBolt bolt) {
+		if (!bolt.entityTags().contains(OWN_BOLT)) super.thunderHit(level, bolt);
+	}
+
+	/** The tag of the bolts a boss calls down itself (a player's lightning still strikes it). */
+	private static final String OWN_BOLT = "matriochka_boss_bolt";
+
+	/** The boss's own clouds (the Spore Queen's toxin, a borrowed World 1 law) settle around its target, not on itself. */
+	@Override
+	public boolean addEffect(MobEffectInstance effect, @org.jspecify.annotations.Nullable Entity source) {
+		if (source instanceof AreaEffectCloud cloud && cloud.getOwner() == this) return false;
+		return super.addEffect(effect, source);
+	}
+
 	@Override
 	public boolean canBreatheUnderwater() {
 		return (def != null && def.aquatic()) || super.canBreatheUnderwater();
@@ -340,6 +356,22 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	/** Opening after the current attack, in ticks. */
 	public int openingTicks() {
 		return Defs.openingTicks(timingWorld()) * (attack == 2 ? 1 : 2) / 2;
+	}
+
+	/**
+	 * Starts one given attack (0 light, 1 medium, 2 signature) against a target right away, exactly as the fight would
+	 * once it picked it: the telegraph, then the release and the opening. Used by the in-game checks (-Pmoves) to
+	 * photograph every move of every boss.
+	 */
+	public void rehearse(int pick, LivingEntity target) {
+		calmUntil = 0;
+		setTarget(target);
+		attack = Math.max(0, Math.min(2, pick));
+		aim = target.position();
+		state = State.TELEGRAPH;
+		stateTicks = 0;
+		getNavigation().stop();
+		triggerAnim("action", ownMoves() ? move("windup") : attack == 0 ? "strike" : "charge");
 	}
 
 	/** Holds the boss still, without attacking, for a number of ticks (the Shadow before a kneeling player). */
@@ -635,7 +667,8 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	}
 
 	private void cageAll(ServerLevel level) {
-		for (ServerPlayer p : level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(16))) {
+		// only the fighters: a spectator or a creative player watching the fight is not locked in
+		for (ServerPlayer p : level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(16), p -> !p.isSpectator() && !p.isCreative())) {
 			BlockPos at = p.blockPosition();
 			for (int dx = -1; dx <= 1; dx++)
 				for (int dz = -1; dz <= 1; dz++)
@@ -667,6 +700,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		LightningBolt bolt = net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
 		if (bolt != null) {
 			bolt.setPos(at);
+			bolt.addTag(OWN_BOLT);
 			level.addFreshEntity(bolt);
 		}
 	}
