@@ -51,7 +51,7 @@ The mod keeps the vanilla air bar full and uses its own gauge instead: your **br
 - Blade Schools (-3 per second), Pressure Jellies (-2 per second) and the Leviathan's attacks (-5 or -15) take breath; the helmet pays them back from its tank.
 - **Pressure:** under water below y 110 you take 1.5 damage per second. Each Diving piece lowers that limit by 22 blocks and the helmet's tier by 0 to 18 more: with the three Diving pieces and a Pearl Snorkel Helmet the limit is y 26.
 
-The HUD shows the tank in the oxygen vial when you wear a snorkel helmet, with your breath as a thin line under it.
+Your breath is the row of brass portholes above the hunger bar (above the vanilla air bubbles when your head is under water, which the mod keeps full). With a snorkel helmet on, the row shows the helmet's tank instead, as small air tanks, and your own breath comes back above it as soon as it drops.
 
 ## Snorkel helmets
 

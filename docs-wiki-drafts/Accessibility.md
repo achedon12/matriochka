@@ -12,13 +12,13 @@ Every screen effect of Matriochka can be softened or turned off. Open the **Arti
 | Cinematics | On | Boss introductions, the title card of a world entered for the first time, and the phase freeze-frame. |
 | Attack subtitles | On | While a boss winds up an attack, its name in large letters on a lacquer cartouche, red for a signature attack, with a gilt line that shrinks until it lands. |
 | Fewer particles | Off | Two particles out of three sent by the server are skipped inside the worlds and during boss fights. The game's own Particles setting still applies on top. |
-| Gauge patterns | Off | The world's gauge on the HUD also carries a pattern: diagonal stripes past half, crosshatching in danger, so it reads without the colours. |
+| Gauge patterns | Off | The icons of the world's rule meter (the row above the hunger bar) also carry a pattern: diagonal stripes past half, crosshatching in danger, so the level reads without the colours. In danger the icons also shake, whatever the option. |
 
 ## HUD and music
 
 | Option | Default | What it changes |
 | --- | --- | --- |
-| Plaque size | x1 | The HUD plaque (world gauge, Doll of Life, souls) from x0.5 to x2, in steps of a quarter. |
+| Plaque size | x1 | The HUD plaque (world and rule, Doll of Life, souls) from x0.5 to x2, in steps of a quarter. The rule meter above the hunger bar follows the game's GUI scale, like the vanilla rows. |
 | Plaque corner | Top left | Top left, top right, bottom left (above the chat) or bottom right. |
 | World themes | 100% | The world themes while exploring. |
 | Danger | 100% | The tense theme that takes over while creatures hunt you. |

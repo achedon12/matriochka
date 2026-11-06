@@ -48,6 +48,9 @@ public final class WorldRules {
 			if (world > 0) {
 				border(p);
 				int rule = world == 10 ? synthesisZone(p) : world;
+				// the client draws the meter of the rule you live under: in World 10, your zone's
+				if (world == 10) ps.tag().putInt("zone", rule);
+				else ps.tag().remove("zone");
 				apply(p, ps, rule, t);
 				if (t % 100 == 0) {
 					StructureTracker.tick(p);
@@ -146,6 +149,8 @@ public final class WorldRules {
 			case 3 -> {
 				// the halls only physically move in World 3 itself; the synthesis zone keeps the warning
 				long phase = t % DungeonShift.PERIOD;
+				// the hourglass meter: how far along the halls are toward their next move
+				ps.setGauge("shift", phase * 100f / DungeonShift.PERIOD);
 				boolean halls = Worlds.number(level) == 3;
 				if (phase == DungeonShift.PERIOD - DungeonShift.WARN) {
 					p.sendOverlayMessage(Component.translatable("message.matriochka.rule.halls").withStyle(ChatFormatting.AQUA));
@@ -156,6 +161,8 @@ public final class WorldRules {
 			}
 			case 4 -> {
 				long phase = t % 600;
+				// the storm meter charges up to the next gust
+				ps.setGauge("storm", phase / 6f);
 				boolean exposed = level.canSeeSky(p.blockPosition().above());
 				if (phase == 560) p.sendOverlayMessage(Component.translatable("message.matriochka.rule.gust").withStyle(ChatFormatting.AQUA));
 				if (phase == 0 && exposed && !p.isShiftKeyDown()) {
@@ -197,7 +204,9 @@ public final class WorldRules {
 				if (dark && !ps.flagActive("lantern", t) && !p.hasEffect(MobEffects.NIGHT_VISION) && t % 200 == 0) p.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 60, 0, true, false));
 			}
 			case 6 -> {
-				// gravity columns, their warning and their sparks run every tick in GravityZones
+				// gravity columns, their warning and their sparks run every tick in GravityZones; the feather meter
+				// shows how far along the columns are toward turning over
+				ps.setGauge("flip", (t % GravityZones.PERIOD) * 100f / GravityZones.PERIOD);
 			}
 			case 7 -> {
 				// Oxygen: the gauge is your breath. Under water it runs out in about half a minute, unless a snorkel
@@ -246,6 +255,8 @@ public final class WorldRules {
 					}
 				}
 				ps.setGauge("season", season * 33.3f);
+				// the leaf meter: how far the current season has turned (a season lasts 2400 ticks)
+				ps.setGauge("season_turn", (level.getGameTime() % 2400) / 24f);
 			}
 			case 9 -> {
 				long phase = t % ShiftingGround.PERIOD;

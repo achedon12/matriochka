@@ -228,6 +228,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 			VisualsTest.run(ctx);
 			return;
 		}
+		if ("hud".equals(System.getProperty("matriochka.capture"))) {
+			HudTest.run(ctx);
+			return;
+		}
 		if ("comfort".equals(System.getProperty("matriochka.capture"))) {
 			ComfortTest.run(ctx);
 			return;

@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+### Interface
+
+- Each world's rule meter is now a vanilla status row instead of a gauge bar in the plaque: ten 9 x 9 pixel-art icons right above the hunger bar, filling in halves like the shanks (5% a half icon). A drop that fills with poison (World 1), a flame (2), an hourglass toward the halls' next move (3), a lightning bolt charging up to the next gust (4), a bell for noise (5), a feather toward the columns' next turn (6), brass portholes of breath and, with a snorkel helmet, small air tanks (7), a leaf in the season's colours as the season turns (8), a cracked stone toward the next tremor (9), the zone's own meter in World 10 and an eye for Obsession (World 0). The containers flash white when the meter jumps, the icons tremble when it climbs fast, and near the threshold they shake like low hearts and pulse in their danger colours (steady with Flashes off).
+- The row is a Fabric status bar: it stacks above the air bubbles under water and above a mount's hearts, other mods' bars stack around it, and it hides with the vanilla bars (F1, creative, spectator).
+- The plaque keeps the world's medallion, its name and its rule, the Doll of Life and the souls; the Gauge patterns option now draws its stripes and crosshatching on the row's icons.
+
+### Systems
+
+- The server syncs the progress of the timed rules (the halls' move, the gusts, the gravity columns, the season and the zone a player stands in within World 10) so the client can draw their meters.
+
+### Checks
+
+- `./gradlew runClientGameTest -Phud` photographs the row in every world at 0, 35, 55 and 90% at GUI scales 2 and 3, under water with the air bubbles, with a snorkel's tank and breath, with full armor and absorption hearts, riding a horse, with the patterns, with F1 and in creative, the plaque with the first-steps card and a trial.
+
 ## 0.4.2 (alpha)
 
 The mod's traders get a painted market stall, and every ending now closes on a recap of the cycle.

@@ -173,7 +173,7 @@ final class ComfortTest {
 			ctx.waitTicks(30);
 			shot(ctx, "comfort_world_card", true);
 			ctx.waitTicks(120);
-			// the HUD plaque bigger, in the top right corner, with its gauge patterned
+			// the HUD plaque bigger, in the top right corner, and the toxin row above the hunger bar patterned
 			ctx.runOnClient(mc -> {
 				Comfort.get().hudScale = 1.5f;
 				Comfort.get().hudCorner = "top_right";

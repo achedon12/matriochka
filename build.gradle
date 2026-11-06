@@ -68,6 +68,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('visuals')) {
 				vmArgs '-Dmatriochka.capture=visuals', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: '')
 			}
+			if (name == 'clientGameTest' && project.hasProperty('hud')) {
+				vmArgs '-Dmatriochka.capture=hud'
+			}
 			if (name == 'clientGameTest' && project.hasProperty('comfort')) {
 				vmArgs '-Dmatriochka.capture=comfort'
 			}

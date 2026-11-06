@@ -25,6 +25,26 @@ Until you enter World 1, a small lacquered card under the HUD plaque (top left) 
 - **Hide or show it:** the **Guide** button on the Scroll (bottom left) and on the Journal's Objective page. Its pip is gold while the card shows. The choice is kept per player.
 - The card sits under the HUD plaque and follows it.
 
+## The HUD
+
+- **The plaque** (top left by default, see [Accessibility](Accessibility) for its size and corner): the world's medallion, its name and its rule, the Doll of Life as three small dolls and your souls beside a lantern. In World 8 the medallion is the season dial.
+- **The rule meter**: inside a world, a row of ten icons right above the hunger bar, drawn like the vanilla hearts and shanks. Each icon is 10% of the meter and fills in halves (5%). It sits with the vanilla status bars: above the air bubbles when they show, above a mount's hearts when you ride, and it hides with them (F1, creative, spectator).
+- The containers flash white when the meter jumps, the icons tremble when it climbs fast, and near the threshold they shake and pulse in their danger colours (steady colours with Flashes off).
+
+| World | Meter | Icon | Danger from |
+| --- | --- | --- | --- |
+| 1 | Toxin | a drop that fills with green poison | 75% (Weakness) |
+| 2 | Heat | a flame with a white-hot core | 75% (Mining Fatigue) |
+| 3 | The halls' next move | an hourglass whose sand runs | 90% (the move is near) |
+| 4 | The next gust | a lightning bolt charging up | 90% |
+| 5 | Noise | a bell | 50% (creatures come for you) |
+| 6 | The columns' next turn | a feather | 90% |
+| 7 | Breath (or the snorkel's tank) | a brass porthole of air (a small air tank) | 25% left |
+| 8 | The season turning | a leaf in the season's colours | 90%, before summer and winter only |
+| 9 | The next tremor | a cracked stone whose crack glows | 90% |
+| 10 | The meter of the zone you stand in | the zone's icon | as in that world |
+| 0 | Obsession | an eye | 75% (Weakness) |
+
 ## After World 1
 
 From here the Journal's Objective page always names the next Seed. See [The Artisan's Journal](Artisans-Journal) for its tabs, and the world pages for each world's rules.

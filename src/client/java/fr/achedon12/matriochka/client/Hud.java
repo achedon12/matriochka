@@ -1,9 +1,6 @@
 package fr.achedon12.matriochka.client;
 
 import fr.achedon12.matriochka.content.Content;
-import fr.achedon12.matriochka.rules.Snorkel;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -11,14 +8,14 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 
 /**
- * A small lacquered plaque in the corner: the world's rule as a gilt medallion with its vial (or the season dial),
- * the Doll of Life as three nested dolls, and the souls beside a flickering lantern. Every value eases toward its
- * new state; a gauge flashes when it rises, a doll shakes and empties when a layer is lost, the lantern flares
- * when souls come in.
+ * A small lacquered plaque in the corner: the world's rule as a gilt medallion (the season dial in World 8) with
+ * its name, the Doll of Life as three nested dolls, and the souls beside a flickering lantern. The rule's meter is
+ * not here but a vanilla status row above the hunger bar (MeterHud). Every value eases toward its new state; a doll
+ * shakes and empties when a layer is lost, the lantern flares when souls come in.
  */
 public class Hud implements HudElement {
 	private static final int[] LIFE_W = {12, 10, 8}, LIFE_H = {17, 14, 11};
-	private float gaugeShown = -1, flash, soulsShown = -1, lanternFlare, seasonAngle, breathShown = 1;
+	private float soulsShown = -1, lanternFlare, seasonAngle;
 	private int lastHere = -1, lastLayers = -1, lastSouls = -1;
 	private long shownAt = Ui.now(), layerChangeAt = -1, lastFrame = Ui.now();
 	private int changedLayer = -1;
@@ -44,7 +41,6 @@ public class Hud implements HudElement {
 		lastFrame = now;
 		if (here != lastHere) {
 			shownAt = now;
-			gaugeShown = -1;
 			lastHere = here;
 		}
 		if (lastLayers >= 0 && layers != lastLayers) {
@@ -82,10 +78,6 @@ public class Hud implements HudElement {
 			// World 0 (internal number 11) has its own rule, Obsession
 			boolean zero = here == fr.achedon12.matriochka.world.Worlds.ZERO;
 			String rule = zero ? "stillness" : Content.WORLDS.get(here - 1).rule();
-			String gauge = switch (rule) {
-				case "toxin", "synthesis" -> "toxin"; case "heat" -> "heat"; case "darkness" -> "noise"; case "pressure" -> "oxygen";
-				case "time" -> "season"; case "ground" -> "tremor"; case "stillness" -> "obsession"; default -> "";
-			};
 			int mxp = x + 5, myp = y + 4;
 			// the medallion turns in when the world changes; wind keeps swaying, gravity keeps bobbing
 			float spin = (1 - Ui.easeOut(Ui.since(shownAt + 150, 600))) * (float) Math.PI;
@@ -110,37 +102,8 @@ public class Hud implements HudElement {
 
 			int tx = x + 31;
 			Ui.embossed(g, font, Component.translatable("hud.matriochka.world", zero ? 0 : here), tx, y + 6, Ui.GOLD);
-			Component label = Component.translatable("rule.matriochka." + rule);
-			// with a snorkel helmet on, the vial shows the helmet's tank and a thin line under it your own breath
-			ItemStack helmet = mc.player.getItemBySlot(EquipmentSlot.HEAD);
-			boolean tank = gauge.equals("oxygen") && Snorkel.is(helmet);
-			float breath = s.getFloatOr("g_oxygen", 100f) / 100f;
-			if (tank) label = Component.translatable("hud.matriochka.tank");
-			if (!gauge.isEmpty()) {
-				g.text(font, label, x + w - 7 - font.width(label), y + 6, Ui.MUTED, false);
-				float v = tank ? Snorkel.fraction(helmet) : s.getFloatOr("g_" + gauge, gauge.equals("oxygen") ? 100f : 0f) / 100f;
-				if (gaugeShown < 0) gaugeShown = 0;
-				if (v > gaugeShown + 0.03f) flash = 1;
-				gaugeShown = Ui.approach(gaugeShown, v * Ui.easeOut(Ui.since(shownAt + 200, 500)), 5, dt);
-				flash = Ui.approach(flash, 0, 3, dt);
-				boolean danger = gauge.equals("oxygen") ? v < 0.25f : v > 0.75f && !gauge.equals("season") && !gauge.equals("tremor");
-				int col = gauge.equals("oxygen") ? (danger ? 0xFFD8402A : 0xFF4AA8E0) : danger ? 0xFFD8402A : v > 0.5f && !gauge.equals("season") ? 0xFFE0902A : Ui.worldColor(here);
-				if (danger) {
-					float pulse = 0.35f + 0.35f * (float) Math.sin(now / 160.0);
-					g.fill(tx - 1, y + 17, tx + w - 37, y + 28, Ui.alpha(0xFFD8402A, pulse * 0.35f));
-				}
-				// colour-blind friendly: stripes past half, crosshatching in danger, whatever the colour says
-				int pattern = !comfort.patterns ? Ui.PATTERN_NONE : danger ? Ui.PATTERN_CROSS : v > 0.5f && !gauge.equals("season") ? Ui.PATTERN_STRIPES : Ui.PATTERN_NONE;
-				Ui.vial(g, tx, y + 18, w - 37, 9, gaugeShown, col, flash, pattern);
-				if (tank) {
-					breathShown = Ui.approach(breathShown, breath, 5, dt);
-					int bw = w - 37;
-					g.fill(tx + 1, y + 28, tx + bw - 1, y + 30, 0xFF2A1408);
-					g.fill(tx + 1, y + 28, tx + 1 + Math.round((bw - 2) * Ui.clamp01(breathShown)), y + 29, breath < 0.25f ? 0xFFD8402A : 0xFFBFE8F8);
-				}
-			} else {
-				Ui.embossed(g, font, label, tx, y + 18, Ui.MUTED);
-			}
+			// the rule's name under the world's; its meter is a status row above the hunger bar (MeterHud)
+			Ui.embossed(g, font, Component.translatable("rule.matriochka." + rule), tx, y + 18, Ui.MUTED);
 			// a thin gilt rule between the rule row and the doll row
 			g.fill(x + 6, y + 31, x + w - 6, y + 32, 0xFFB0782A);
 			g.fill(x + 6, y + 32, x + w - 6, y + 33, 0xFF2A1408);

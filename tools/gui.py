@@ -17,6 +17,7 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import WORLDS, STATIONS  # noqa: E402
+import hud_icons  # noqa: E402
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 OUT = os.path.join(ROOT, "src/main/resources/assets/matriochka/textures/gui/sprites")
@@ -2111,6 +2112,8 @@ def build():
         stall_panel(w)
     recap_panel()
     recap_dolls()
+    # the rule meters' vanilla-style status icons, at their true 9 x 9 size
+    hud_icons.build(save)
     keep = {n + ".png" for n in SAVED} | {n + ".png.mcmeta" for n in SAVED}
     for f in os.listdir(OUT):
         if f not in keep:

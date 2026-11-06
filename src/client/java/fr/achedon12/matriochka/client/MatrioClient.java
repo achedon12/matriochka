@@ -35,6 +35,8 @@ public class MatrioClient implements ClientModInitializer {
 		// the miniature world over every World Block (the renderer skips the other blocks sharing this entity type)
 		net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry.register(ModContent.BE_DATA, WorldBlockRenderer::new);
 		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
+		// the world's rule meter: a vanilla status row above the hunger bar
+		MeterHud.register();
 		// comfort options, then the cinematics over the HUD (title cards, letterbox, subtitles, tints)
 		Comfort.init();
 		Cinematics.init();
