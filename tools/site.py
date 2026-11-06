@@ -24,6 +24,8 @@ import attacks as ATK  # noqa: E402
 RES = os.path.join(ROOT, "src/main/resources/assets/matriochka")
 TEX = os.path.join(RES, "textures")
 SHOTS_SRC = os.path.join(ROOT, "media/gui")
+# In-game stills of every boss attack, moves_<boss>_<slug>_<windup|strike>.png (optional, not in the repo)
+MOVES_SRC = os.environ.get("MATRIOCHKA_MOVES", os.path.join(ROOT, "media/moves"))
 RECIPES_JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Recipes.java")
 
 REPO = "https://github.com/achedon12/matriochka"
@@ -73,6 +75,7 @@ ICONS = {
     'wind': '<path d="M12.8 19.6A2 2 0 1 0 14 16H2"/> <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/> <path d="M9.8 4.4A2 2 0 1 1 11 8H2"/>',
     'x': '<path d="M18 6 6 18"/> <path d="m6 6 12 12"/>',
     'play': '<polygon points="6 3 20 12 6 21 6 3"/>',
+    'rotate-3d': '<path d="M16.466 7.5C15.643 4.237 13.952 2 12 2 9.239 2 7 6.477 7 12s2.239 10 5 10c.342 0 .677-.069 1-.2"/> <path d="m15.194 13.707 3.814 1.86-1.86 3.814"/> <path d="M19 15.57c-1.804.885-4.274 1.43-7 1.43-5.523 0-10-2.239-10-5s4.477-5 10-5c4.838 0 8.873 1.718 9.8 4"/>',
 }
 
 
@@ -230,6 +233,7 @@ def copy_assets():
     _copy_dir(GEO, os.path.join(PUBLIC, "models"), ".geo.json")
     _copy_dir(ANIM, os.path.join(PUBLIC, "animations"), ".animation.json")
     process_shots(os.path.join(PUBLIC, "shots"))
+    process_moves(os.path.join(PUBLIC, "shots", "moves"))
     process_frames(os.path.join(PUBLIC, "shots"))
     if os.path.exists(TRAILER_SRC):
         shutil.copy2(TRAILER_SRC, os.path.join(PUBLIC, "trailer.mp4"))
@@ -331,7 +335,8 @@ def process_shots(dst):
     os.makedirs(dst, exist_ok=True)
     # keep what earlier runs produced: CI has no game captures, and the capture folder gets cleared
     for f in os.listdir(dst):
-        SHOTS[f.rsplit(".", 1)[0]] = f
+        if os.path.isfile(os.path.join(dst, f)):
+            SHOTS[f.rsplit(".", 1)[0]] = f
     if Image is None:
         return
     for key, (src, clean) in sorted(_sources().items()):
@@ -359,6 +364,120 @@ def process_shots(dst):
         rgb.crop(wide).resize((960, 720), Image.LANCZOS).save(
             os.path.join(dst, key + ".jpg"), quality=82, optimize=True, progressive=True)
         SHOTS[key] = key + ".jpg"
+
+
+# ---------------------------------------------------------------- boss attack stills
+MOVES = set()  # "<boss>_<slug>_<windup|strike>" present in site/public/shots/moves
+
+
+def _body_box(img, S=4):
+    """Box of the boss in a test capture (sky and stone floor are left out; sparse particles do not count)."""
+    sm = img.convert("RGB").resize((480, 270), Image.NEAREST)
+    px = sm.load()
+    gw, gh = -(-480 // S), -(-270 // S)
+    fill = [[0] * gw for _ in range(gh)]
+    for y in range(270):
+        for x in range(480):
+            r, g, b = px[x, y]
+            sky = b > r + 15 and b > 150 and g > r
+            grey = max(r, g, b) - min(r, g, b) < 16 and max(r, g, b) > 70
+            if not (sky or grey):
+                fill[y // S][x // S] += 1
+    on = {(x, y) for y in range(gh) for x in range(gw) if fill[y][x] >= S * S // 2}
+    comps, seen = [], set()
+    for c in on:
+        if c in seen:
+            continue
+        stack, comp = [c], []
+        seen.add(c)
+        while stack:
+            x, y = stack.pop()
+            comp.append((x, y))
+            for dx in (-1, 0, 1):
+                for dy in (-1, 0, 1):
+                    n = (x + dx, y + dy)
+                    if n in on and n not in seen:
+                        seen.add(n)
+                        stack.append(n)
+        comps.append(comp)
+    if not comps:
+        return None
+    comps.sort(key=len, reverse=True)
+    keep = [p for c in comps if len(c) >= len(comps[0]) * 0.15 for p in c]
+    k = img.width / 480
+    xs, ys = [p[0] for p in keep], [p[1] for p in keep]
+    return (min(xs) * S * k, min(ys) * S * k, (max(xs) + 1) * S * k, (max(ys) + 1) * S * k)
+
+
+def process_moves(dst):
+    """Wind-up and strike of each attack of the bosses on the site, cropped around the boss (same box for both
+    frames, so the swap does not jump), 360x270 WebP. Without the captures (CI) the committed files are kept:
+    nothing here ever deletes a file."""
+    os.makedirs(dst, exist_ok=True)
+    for f in os.listdir(dst):
+        if f.endswith(".webp"):
+            MOVES.add(f[:-5])
+    if Image is None or not os.path.isdir(MOVES_SRC):
+        return
+    for b in C.BOSSES:
+        for slug, _seq in boss_moves(b["id"]):
+            src = [os.path.join(MOVES_SRC, f"moves_{b['id']}_{slug}_{ph}.png") for ph in ("windup", "strike")]
+            if not all(os.path.exists(p) for p in src):
+                continue
+            ims = [Image.open(p).convert("RGB") for p in src]
+            boxes = [x for x in (_body_box(im) for im in ims) if x]
+            if not boxes:
+                continue
+            x0, y0 = min(x[0] for x in boxes), min(x[1] for x in boxes)
+            x1, y1 = max(x[2] for x in boxes), max(x[3] for x in boxes)
+            W, H = ims[0].size
+            h = min(H, max((y1 - y0) * 1.16, (x1 - x0) * 1.16 * 3 / 4, H * 0.3))
+            w = h * 4 / 3
+            left = min(max(0, (x0 + x1 - w) / 2), W - w)
+            top = min(max(0, (y0 + y1 - h) / 2), H - h)
+            box = tuple(int(round(v)) for v in (left, top, left + w, top + h))
+            for im, ph in zip(ims, ("windup", "strike")):
+                key = f"{b['id']}_{slug}_{ph}"
+                night = _lacquer_sky(im.crop(box).resize((720, 540), Image.BOX))
+                night.resize((360, 270), Image.LANCZOS).save(os.path.join(dst, key + ".webp"), quality=72, method=6)
+                MOVES.add(key)
+
+
+def _lacquer_sky(img):
+    """The pale test sky, filled from the top edge (so a blue part of a boss is never touched), becomes the
+    dark lacquer of the posters, a little warmer toward the horizon."""
+    px = img.load()
+    W, H = img.size
+
+    def sky(p):
+        r, g, b = p
+        return b > r + 12 and b > 130 and g >= r
+
+    seen = bytearray(W * H)
+    stack = []
+    for x in range(W):
+        if sky(px[x, 0]):
+            seen[x] = 1
+            stack.append((x, 0))
+    while stack:
+        x, y = stack.pop()
+        for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+            if 0 <= nx < W and 0 <= ny < H and not seen[ny * W + nx] and sky(px[nx, ny]):
+                seen[ny * W + nx] = 1
+                stack.append((nx, ny))
+    for y in range(H):
+        k = y / H
+        c = (int(30 + 46 * k), int(17 + 12 * k), int(13 + 8 * k))
+        row = y * W
+        for x in range(W):
+            if seen[row + x]:
+                px[x, y] = c
+    return img
+
+
+def move_shot(boss, slug, ph):
+    key = f"{boss}_{slug}_{ph}"
+    return f"shots/moves/{key}.webp" if key in MOVES else None
 
 
 # World views picked by eye among the structure photos (media/structures): world -> structure id.
@@ -1083,13 +1202,70 @@ ANIM_LABEL = {"misc.idle": ("Idle", "Repos"), "move.walk": ("Walk", "Marche"), "
 
 
 def anims(eid):
+    if eid in BOSS_IDS:
+        return boss_anims(eid)
     labels = {f"attack.{a['slug']}": (a["en"], a["fr"]) for a in ATK.full(eid)} if eid in ATK.A else {}
     out = []
     for full in anim_names(eid):
         short = full.split(".", 1)[1] if full.startswith("animation.") else full
         lab = labels.get(short) or ANIM_LABEL.get(short)
-        out.append(dict(key=full, label=t(*lab) if lab else short))
+        if not lab:
+            raise SystemExit(f"site.py: no label for the animation {full} of {eid}")
+        out.append(dict(key=full, label=t(*lab)))
     return out
+
+
+# ---------------------------------------------------------------- boss moves (tools/boss_moves*.py)
+ALL_BOSSES = C.BOSSES + [C.WORLD_ZERO_BOSS]
+BOSS_IDS = {b["id"] for b in ALL_BOSSES}
+# The Unfinished replays "Shell Attack" three times in content.py; its three cuts have their own names
+MOVE_NAMES = {"the_unfinished": [("Shell Stroke", "Trait d'enveloppe"), ("Shell Lift", "Envol d'enveloppe"), ("Shell Burst", "Éclat d'enveloppe")]}
+MOVE_SUFFIX = {"artisan_shadow": ".w1"}  # one cut per timing tier; the site shows the first
+
+
+def boss_moves(eid):
+    """[(slug, [windup, strike, recover])] in the order of the animation file (light, medium, signature)."""
+    names = anim_names(eid)
+    sfx = MOVE_SUFFIX.get(eid, "")
+    slugs = []
+    for n in names:
+        m = re.fullmatch(rf"attack\.{eid}\.(\w+)\.windup" + re.escape(sfx), n)
+        if m:
+            slugs.append(m.group(1))
+    out = []
+    for slug in slugs:
+        seq = [f"attack.{eid}.{slug}.{part}{sfx}" for part in ("windup", "strike", "recover")]
+        missing = [k for k in seq if k not in names]
+        if missing:
+            raise SystemExit(f"site.py: {eid} misses {', '.join(missing)}")
+        out.append((slug, seq))
+    return out
+
+
+def move_names(b):
+    return MOVE_NAMES.get(b["id"]) or [tuple(a) for a in b["atk"][:3]]
+
+
+def boss_anims(eid):
+    b = next(x for x in ALL_BOSSES if x["id"] == eid)
+    names = anim_names(eid)
+    out = [dict(key="misc.idle", label=t("Idle", "Repos")), dict(key="move.walk", label=t("Walk", "Marche"))]
+    for (slug, seq), nm in zip(boss_moves(eid), move_names(b)):
+        out.append(dict(key=f"attack.{eid}.{slug}", label=t(*nm), seq=seq, slug=slug))
+    for part, lab in (("phase", ("Phase change", "Changement de phase")), ("death", ("Fall", "Chute"))):
+        k = f"misc.{eid}.{part}"
+        if k not in names:
+            raise SystemExit(f"site.py: {eid} misses {k}")
+        out.append(dict(key=k, label=t(*lab), seq=[k], slug=part))
+    return out
+
+
+def check_boss_anims():
+    for b in ALL_BOSSES:
+        moves = boss_moves(b["id"])
+        if len(moves) != 3:
+            raise SystemExit(f"site.py: {b['id']} has {len(moves)} attack animations, not 3")
+        boss_anims(b["id"])
 
 
 def build_mobs():
@@ -1204,6 +1380,10 @@ def build_bosses():
         cooldown = [t("Signature attack at most every 20 seconds, 1 second sooner per phase.", "Attaque signature au plus toutes les 20 secondes, 1 seconde plus tôt par phase."),
                     t("Medium attack at most every 8 seconds, light attack every 4 seconds when you are close; both come a little sooner each phase.", "Attaque moyenne au plus toutes les 8 secondes, attaque légère toutes les 4 secondes quand tu es proche ; les deux reviennent un peu plus vite à chaque phase."),
                     t("Each phase makes it 10% faster.", "Chaque phase le rend 10 % plus rapide.")]
+        moves = [dict(slug=slug, anim=f"attack.{b['id']}.{slug}", name=t(*nm), label=labels[k], warn=timings[k]["v"],
+                      windup=move_shot(b["id"], slug, "windup"), strike=move_shot(b["id"], slug, "strike"))
+                 for k, ((slug, _seq), nm) in enumerate(zip(boss_moves(b["id"]), move_names(b)))]
+        passive = atks if b["id"] == "the_unfinished" else atks[3:]
         drops = [dict(id=b["core"], tex=tex(b["core"]), name=name(b["core"]), note="1")]
         if w == 0:
             drops += [dict(id="matrix_workbench", tex=tex("matrix_workbench"), name=name("matrix_workbench"), note="1"),
@@ -1241,7 +1421,7 @@ def build_bosses():
         ach = ach_list(lambda a, b=b: a[5] == ("kill", b["id"]) or (a[5][0] == "custom" and a[5][1] in BOSS_ACH.get(b["id"], [])))
         out.append(dict(
             meet=meet(b), id=b["id"], kind="boss", name=b[LANG], en=b["en"], fr=b["fr"], world=w, worldName=world_name(w), light=light(w), bg=world_bg(w), doll=doll(w),
-            hp=fmt(b["hp"]), dmg=fmt(b["dmg"]), phases=phases, atks=atks, timings=timings, cooldown=cooldown,
+            hp=fmt(b["hp"]), dmg=fmt(b["dmg"]), phases=phases, atks=atks, moves=moves, passive=passive, timings=timings, cooldown=cooldown,
             mp=[dict(p=p, mult="×" + fmt(round(1 + 0.6 * (p - 1), 1)), hp=fmt(int(round(b["hp"] * (1 + 0.6 * (p - 1)))))) for p in (1, 2, 4, 8)],
             drops=drops, souls=t("100 souls for every player within 64 blocks", "100 âmes pour chaque joueur à moins de 64 blocs"),
             unlocks=unlocks, special=special, story=LANGS[LANG].get(f"message.matriochka.boss_down.{w}", ""),
@@ -1273,7 +1453,8 @@ def build_copy():
         view3d=t("View in 3D", "Voir en 3D"), loading3d=t("Opening the model", "Ouverture du modèle"),
         no3d=t("This browser cannot draw the 3D model. Here is its texture, as the game paints it.", "Ce navigateur ne peut pas afficher le modèle 3D. Voici sa texture, telle que le jeu la peint."),
         dragHint=t("Drag to turn it, scroll or pinch to zoom.", "Fais glisser pour le tourner, molette ou pincement pour zoomer."),
-        animations=t("Animations", "Animations"), autoRotate=t("Turn slowly", "Tourner lentement"),
+        animations=t("Animations", "Animations"), see3d=t("See it in 3D", "Voir en 3D"), windup=t("Wind-up", "Annonce"), strike=t("Strike", "Frappe"),
+        warning=t("warning", "d'annonce"), inGame=t("In game", "En jeu"), autoRotate=t("Turn slowly", "Tourner lentement"),
         role=t("Role", "Rôle"), attackSpeed=t("Attack speed", "Vitesse d'attaque"), attackEvery=t("one hit every", "un coup toutes les"),
         noMelee=t("no melee attack", "aucune attaque au corps à corps"), moveSpeed=t("Movement speed", "Vitesse de déplacement"),
         behaviour=t("How it fights", "Comment il combat"), moves=t("Attacks", "Attaques"), openSheet=t("Open its technical sheet", "Ouvrir sa fiche technique"), howMeet=t("How to meet it", "Comment le rencontrer"), offering=t("Offering", "Offrande"), explore=t("Explore", "Explorer"), pause=t("Pause the worlds", "Mettre les mondes en pause"), play=t("Play the worlds", "Faire défiler les mondes"),
@@ -1787,6 +1968,7 @@ def main():
     global LANG
     os.makedirs(PUBLIC, exist_ok=True)
     os.makedirs(DATA, exist_ok=True)
+    check_boss_anims()
     copy_assets()
     shared = dict(version=VERSION, discord=DISCORD, repo=REPO, releases=RELEASES, wiki=WIKI, site=SITE, icons=ICONS,
                   hasTrailer=os.path.exists(os.path.join(PUBLIC, "trailer.mp4")),
