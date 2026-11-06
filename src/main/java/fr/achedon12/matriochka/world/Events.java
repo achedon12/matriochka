@@ -142,6 +142,7 @@ public final class Events {
 			long now = player.level().getGameTime();
 			if (!Config.hardcore() && ps.dollLayers() > 0 && now - ps.tag().getLongOr("last_revive", -10000) >= 1200) {
 				ps.setDoll(ps.dollLayers() - 1, ps.dollMax());
+				CycleStats.add(player, "lost", 1);
 				ps.tag().putLong("last_revive", now);
 				fr.achedon12.matriochka.entity.BossFeats.markNear(player, "layer");
 				player.setHealth(player.getMaxHealth() * 0.5f);
@@ -310,6 +311,7 @@ public final class Events {
 			ItemStack s = inv.getItem(i);
 			if (s.is(ModContent.item("nested_dolls")) || s.is(ModContent.item("whole_matryoshka"))) dolls += fr.achedon12.matriochka.item.Nesting.depth(s);
 		}
+		CycleStats.max(p, "dolls", dolls);
 		if (dolls >= 10) Achievements.grant(p, "all_dolls");
 		if (p.isFallFlying() || (p.getY() > 220 && Worlds.number(p.level()) == 4)) Achievements.grant(p, "high_fall");
 		if (Worlds.number(p.level()) == 10) {

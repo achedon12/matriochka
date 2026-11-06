@@ -64,6 +64,7 @@ public final class Quests {
 	public static void complete(ServerPlayer player, PlayerState ps, Defs.QuestDef q, int choice) {
 		if (done(ps, q)) return;
 		ps.set("quest_" + q.id(), true);
+		CycleStats.add(player, "quests", 1);
 		if (q.objKind().equals("choice")) {
 			ps.addKarma(choice >= 0 ? q.objCount() : -q.objCount());
 			if (choice < 0) ps.addSouls(q.rewardCount());

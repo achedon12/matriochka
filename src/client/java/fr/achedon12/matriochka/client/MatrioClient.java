@@ -52,6 +52,8 @@ public class MatrioClient implements ClientModInitializer {
 			Cinematics.tick(mc);
 		});
 		net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.DISCONNECT.register((h, mc) -> Cinematics.reset());
+		// the mod's peoples trade at their own stall (the mixin on MenuScreens opens it)
+		ClientPlayNetworking.registerGlobalReceiver(Net.MerchantInfoPayload.TYPE, (p, ctx) -> StallScreen.receive(p));
 		ClientPlayNetworking.registerGlobalReceiver(Net.EndingPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new EndingScreen(p.kind())));
 		ReplayClient.init();
 	}

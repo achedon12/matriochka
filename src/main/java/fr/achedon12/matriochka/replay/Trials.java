@@ -407,6 +407,7 @@ public final class Trials {
 			String best = "trial_best_" + run.def.key();
 			boolean personal = ps.tag().getIntOr(best, 0) == 0 || ticks < ps.tag().getIntOr(best, 0);
 			if (personal) ps.tag().putInt(best, (int) ticks);
+			fr.achedon12.matriochka.world.CycleStats.trial(m, run.def.key(), (int) ticks);
 			ps.addCounter("trial_clears_" + run.def.key(), 1);
 			ps.addSouls(ReplayContent.TRIAL_SOULS * Math.max(1, run.gauntlet() ? 12 : run.def.world()));
 			m.sendSystemMessage(Component.translatable("message.matriochka.trial.done", Component.translatable("trial.matriochka." + run.def.key()), time).withStyle(ChatFormatting.GOLD));

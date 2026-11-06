@@ -562,6 +562,12 @@ public final class WorldEvents {
 		return true;
 	}
 
+	/** The ticks before a travelling merchant moves on, or -1 when the entity is not one. */
+	public static int merchantTicksLeft(Entity npc) {
+		for (Event e : ACTIVE.values()) if (npc.getUUID().equals(e.merchant)) return Math.max(0, e.length - e.ticks);
+		return -1;
+	}
+
 	private static void merchantStep(Event e) {
 		Entity npc = e.merchant == null ? null : e.level.getEntity(e.merchant);
 		e.bar.setProgress(1f - Math.min(1f, e.ticks / (float) e.length));

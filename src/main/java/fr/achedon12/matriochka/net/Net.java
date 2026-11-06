@@ -95,12 +95,32 @@ public final class Net {
 		}
 	}
 
+	/**
+	 * Sent just before one of the mod's peoples opens its trades, so the client shows the Matriochka stall instead of
+	 * the villager screen: the trader's world, what kind of trader it is ("people", "peddler" or "travelling"), how many
+	 * of the last offers are black-market goods, the karma the prices were set with, and for a travelling merchant
+	 * the ticks before it moves on (-1 otherwise).
+	 */
+	public record MerchantInfoPayload(int entity, int world, String kind, int contraband, int karma, int ticksLeft) implements CustomPacketPayload {
+		public static final Type<MerchantInfoPayload> TYPE = new Type<>(Matriochka.id("merchant_info"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, MerchantInfoPayload> CODEC = StreamCodec.composite(
+			ByteBufCodecs.VAR_INT, MerchantInfoPayload::entity, ByteBufCodecs.VAR_INT, MerchantInfoPayload::world, ByteBufCodecs.STRING_UTF8, MerchantInfoPayload::kind,
+			ByteBufCodecs.VAR_INT, MerchantInfoPayload::contraband, ByteBufCodecs.INT, MerchantInfoPayload::karma, ByteBufCodecs.INT, MerchantInfoPayload::ticksLeft,
+			MerchantInfoPayload::new);
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
 	private Net() {}
 
 	public static void init() {
 		PayloadTypeRegistry.clientboundPlay().register(StatePayload.TYPE, StatePayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(OpenJournalPayload.TYPE, OpenJournalPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(EndingPayload.TYPE, EndingPayload.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(MerchantInfoPayload.TYPE, MerchantInfoPayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(ChoicePayload.TYPE, ChoicePayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(CyclePayload.TYPE, CyclePayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(ReadPayload.TYPE, ReadPayload.CODEC);
@@ -138,6 +158,12 @@ public final class Net {
 	public static void playEnding(ServerPlayer player, String kind) {
 		if (player.connection == null) return;
 		ServerPlayNetworking.send(player, new EndingPayload(kind));
+	}
+
+	/** Tells the client which of the mod's traders is about to open its trades; nothing for a client without the mod. */
+	public static void merchantInfo(ServerPlayer player, MerchantInfoPayload info) {
+		if (player.connection == null || !ServerPlayNetworking.canSend(player, MerchantInfoPayload.TYPE)) return;
+		ServerPlayNetworking.send(player, info);
 	}
 
 	public static void openJournal(ServerPlayer player, boolean scroll) {

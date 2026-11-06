@@ -43,6 +43,7 @@ public final class Travel {
 		target.playSound(null, seuil, fr.achedon12.matriochka.content.Sounds.WORLD_BLOCK_ENTER, SoundSource.PLAYERS, 1f, 1f);
 		player.sendSystemMessage(Component.translatable("message.matriochka.entered", Component.translatable("dimension.matriochka.world_" + world)));
 		fr.achedon12.matriochka.net.Cues.worldEntered(player, world);
+		CycleStats.bit(player, "worlds", world);
 	}
 
 	/** Builds (once) and returns the threshold platform of a group's parcel. */

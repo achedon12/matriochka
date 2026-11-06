@@ -818,7 +818,10 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		// everyone who fought it took part, even if they fell before the end: that is what the next world's gear asks for
 		for (java.util.UUID id : feats.participants()) {
 			ServerPlayer fighter = level.getServer().getPlayerList().getPlayer(id);
-			if (fighter != null && !present.contains(fighter)) PlayerState.of(fighter).set("boss_" + w, true);
+			if (fighter != null && !present.contains(fighter)) {
+				PlayerState.of(fighter).set("boss_" + w, true);
+				fr.achedon12.matriochka.world.CycleStats.bit(fighter, "bosses", w);
+			}
 		}
 		for (ServerPlayer p : present) {
 			String group = data.groupOf(p.getUUID());
@@ -833,6 +836,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			if (w == 1 || w == 5 || w == 8) max = Math.min(3, max + 1);
 			ps.setDoll(ps.dollLayers() + 1, max);
 			ps.set("boss_" + w, true);
+			fr.achedon12.matriochka.world.CycleStats.bit(p, "bosses", w);
 			if (w == 3 && !ps.has("refuge_doll_given")) {
 				ps.set("refuge_doll_given", true);
 				ItemStack refuge = new ItemStack(ModContent.item("refuge_doll"));

@@ -1803,6 +1803,275 @@ def frames():
     nine_lacquer("frame", 64, 64, 10, BLACK, 10, 91, rivets=True, accent=(160, 32, 24))
     paper_sprite("paper", 48, 48, 6, 13)
 
+# =================================================================== the market stall and the cycle recap
+STALL_W, STALL_H = 316, 206
+
+
+def awning(cv, x0, y0, x1, y1, st, seed):
+    """A market stall's awning under a gilt rod: lacquered stripes in the world's colour and cream, each bellied
+    out a little, the hem cut in scallops edged with gold leaf. The hem hangs below y1 by half a stripe."""
+    sw = 8 * S
+    r = sw / 2
+    total = x1 - x0
+    n = int(math.ceil(total / sw))
+    off = x0 + (total - n * sw) / 2
+    acc = [scale_c(c, 0.9) for c in st["berry"]]
+    cream = PAPER[1:]
+    bottom = int(y1 + r)
+
+    def inside(x, y):
+        if x < x0 or x >= x1 or y < y0:
+            return False
+        if y < y1:
+            return True
+        k = int((x + .5 - off) // sw)
+        cxs = off + k * sw + sw / 2
+        return (x + .5 - cxs) ** 2 + (y + .5 - y1) ** 2 <= r * r
+
+    for y in range(y0, bottom + 1):
+        for x in range(x0, x1):
+            if not inside(x, y):
+                continue
+            k = int((x + .5 - off) // sw)
+            u = ((x + .5 - off) % sw) / sw
+            v = (y - y0) / max(1, bottom - y0)
+            belly = math.sin(math.pi * u)
+            t = 0.30 + 0.40 * belly + 0.12 * v - 0.30 * (1 - v) ** 4 + (fbm(x / 7, y / 1.5, seed, 2) - 0.5) * 0.08
+            cols = acc if k % 2 == 0 else cream
+            c = ramp(cols, clamp(t))
+            # the seam between two stripes
+            if u < 0.06 or u > 0.94:
+                c = scale_c(c, 0.72)
+            cv.put(x, y, c)
+    for y in range(y0, bottom + 2):
+        for x in range(x0, x1):
+            if not inside(x, y):
+                continue
+            if not inside(x, y + 1) or not inside(x - 1, y) and y >= y1 or not inside(x + 1, y) and y >= y1:
+                cv.put(x, y, OUTLINE)
+            elif not inside(x, y + 3) and y >= y1 - 3:
+                cv.put(x, y, gold_tone(x, y, 0.62 + 0.25 * ((x // 2) % 2), 13, False))
+    # the rod it hangs from, with a bead at each end
+    for x in range(x0, x1):
+        for k, t in enumerate((0.25, 0.8, 0.95, 0.6, 0.3)):
+            cv.put(x, y0 + k, gold_tone(x, y0 + k, t, 17, False))
+        cv.put(x, y0 + 5, OUTLINE, 0.6)
+    for bx in (x0 + 4, x1 - 5):
+        rivet(cv, bx, y0 + 2.5, 3.0)
+
+
+def stall_panel(w):
+    """The trades of a world's people, 316x206: a cabinet under a striped awning, the ledger page with its leather
+    spine on the left, the trader's niche and counter top right (the menu's slots land on the plank), the
+    inventory tray below. The vanilla merchant slots sit where client/StallScreen expects them (OX 36, OY 34)."""
+    st = world_style(w)
+    W, H = STALL_W * S, STALL_H * S
+    cv = Cv(W, H)
+    lacquer(cv, 0, 0, W, H, BLACK, 5 + w, 0.45, 0.09)
+    acc, en = st["accent"], st["enamel"]
+    if w:
+        for y in range(H):
+            for x in range(W):
+                cv.tint(x, y, scale_c(en, 1.2), 0.22)
+    deep = [scale_c(en, 0.25), scale_c(en, 0.5), scale_c(en, 0.8), scale_c(en, 1.1), scale_c(en, 1.5)]
+    bw = 12
+    for x in range(bw + 3, W - bw - 3):
+        for y in (bw + 3, H - bw - 4):
+            cv.put(x, y, acc, 0.75)
+    for y in range(bw + 3, H - bw - 3):
+        for x in (bw + 3, W - bw - 4):
+            cv.put(x, y, acc, 0.75)
+
+    def recess(x0, y0, x1, y1):
+        X0, Y0, X1, Y1 = x0 * S, y0 * S, x1 * S, y1 * S
+        lacquer(cv, X0, Y0, X1, Y1, deep, 23 + y0 + w, 0.35, 0.06)
+        inner_shadow(cv, X0, Y0, X1, Y1, 10, 0.65)
+        for x in range(X0 - 1, X1 + 1):
+            cv.put(x, Y0 - 2, OUTLINE)
+        thin_gilt(cv, X0 - 1, Y0 - 1, X1 + 1, Y1 + 1, inset=True)
+
+    # the ledger: a page block, the parchment, a red leather spine stitched in gold
+    LX0, LY0, LX1, LY1 = 9 * S, 26 * S, 137 * S, 198 * S
+    for k in range(3, 0, -1):
+        cv.rect(LX0 + k * 2, LY0 + k * 2, LX1 + k * 2, LY1 + k, mix((200, 170, 120), (110, 76, 46), k / 3))
+    paper(cv, LX0, LY0, LX1, LY1, 60 + w, aged=0.7)
+    sp = 7 * S
+    lacquer(cv, LX0, LY0, LX0 + sp, LY1, RED, 71 + w, 0.3, 0.12)
+    for y in range(LY0, LY1):
+        cv.put(LX0 + sp, y, OUTLINE)
+        for k in range(1, 7):
+            cv.mul(LX0 + sp + k, y, 1 - 0.3 * (1 - k / 7) ** 1.5)
+        cv.put(LX0 + 1, y, scale_c(RED[4], 1.0), 0.6)
+    # cross-stitches of gold thread down the spine
+    for y in range(LY0 + 6, LY1 - 6, 12):
+        for k in range(-3, 4):
+            cv.put(LX0 + sp / 2 + k, y + k, GOLD[5] if k < 0 else GOLD[3])
+            cv.put(LX0 + sp / 2 + k, y - k, GOLD[4] if k < 0 else GOLD[2])
+        cv.put(LX0 + sp / 2, y, GOLD[6])
+    for x in range(LX0, LX1):
+        cv.put(x, LY0, OUTLINE, 0.7)
+        cv.put(x, LY1 - 1, OUTLINE, 0.8)
+    for y in range(LY0, LY1):
+        cv.put(LX1 - 1, y, OUTLINE, 0.8)
+        cv.put(LX0, y, OUTLINE)
+    for (cx, cy) in ((LX1 - 6, LY0 + 6), (LX1 - 6, LY1 - 7)):
+        berry(cv, cx, cy, 2.4)
+    # the trader's niche, with the counter: a painted plank, gilt at the edges, a gold arrow from price to wares
+    recess(141, 26, 307, 110)
+    PX0, PY0, PX1, PY1 = 145 * S, 61 * S, 303 * S, 97 * S
+    for x in range(PX0 + 2, PX1 + 2):
+        for k in range(1, 5):
+            cv.mul(x, PY1 + k, 1 - 0.45 * (1 - k / 5))
+    lacquer(cv, PX0, PY0, PX1, PY1, WOOD, 91 + w, 0.55, 0.10)
+    thin_gilt(cv, PX0, PY0, PX1, PY1)
+    for x in range(PX0, PX1):
+        cv.put(x, PY0 - 1, OUTLINE)
+        cv.put(x, PY1, OUTLINE)
+    for y in range(PY0, PY1):
+        cv.put(PX0 - 1, y, OUTLINE)
+        cv.put(PX1, y, OUTLINE)
+    # the price and the wares sockets get a dark bed on the plank
+    for (sx, sy) in ((172, 71), (198, 71), (256, 71)):
+        for y in range((sy - 3) * S, (sy + 19) * S):
+            for x in range((sx - 3) * S, (sx + 19) * S):
+                d = min(x - (sx - 3) * S, y - (sy - 3) * S, (sx + 19) * S - 1 - x, (sy + 19) * S - 1 - y)
+                if d < 3:
+                    cv.mul(x, y, 0.78)
+    arrow = [(219 * S + t, 79 * S + math.sin(t / 9.0) * 1.2) for t in range(0, 26 * S)]
+    tube(cv, arrow, 1.6, 1.4, GOLD[1:6])
+    head = Cv(16 * S, 12 * S)
+    shape(head, lambda x, y: x >= 2 and abs(y - 12) <= (30 - x) * 0.39, (0, 0, 16 * S, 12 * S),
+          lambda x, y: gold_tone(x, y, 0.8 - abs(y - 12) / 26, 9, False), OUTLINE)
+    cv.layer(head, 238 * S, 73 * S)
+    cv.p = cv.im.load()
+    for side, x in ((1, 150 * S), (-1, 298 * S)):
+        lay = Cv(20 * S, 30 * S)
+        sprig(lay, 10 * S if side > 0 else 10 * S, lay.h - 6, 40, -math.pi / 2 + side * 0.35, 3 + w + side, st["leaf"] if w else GOLD[2:6], st["berry"], side, True, 0.75, leaf_dark=not w)
+        cv.layer(lay, x - (0 if side > 0 else lay.w), 64 * S)
+        cv.p = cv.im.load()
+    # the inventory tray
+    recess(141, 114, 307, 198)
+    # the awning's shadow on the cabinet, then the awning
+    for y in range(19 * S, 27 * S):
+        for x in range(bw, W - bw):
+            k = int((x + .5 - (bw - 4)) // (8 * S))
+            cxs = (bw - 4) + k * 8 * S + 4 * S
+            d = y - 19 * S - math.sqrt(max(0, (4 * S) ** 2 - (x + .5 - cxs) ** 2))
+            if 0 <= d < 7:
+                cv.mul(x, y, 0.55 + 0.45 * d / 7)
+    awning(cv, bw - 4, 6 * S, W - bw + 4, 19 * S, st, 33 + w)
+    cv.p = cv.im.load()
+    gilt_frame(cv, 0, 0, W, H, bw, 31)
+    for (x, y) in ((6, 6), (W - 7, 6), (6, H - 7), (W - 7, H - 7)):
+        rivet(cv, x, y, 4.2)
+    for x in range(40, W - 40, 72):
+        rivet(cv, x, H - 6, 2.4)
+    save("stall_%d" % w, cv)
+
+
+RECAP_W, RECAP_H = 312, 180
+
+
+def recap_panel():
+    """The end-of-cycle board, 312x180: black lacquer in a gilded frame, a khokhloma vine along the top and bottom
+    bands (the doll's halves stand over their middle), the parchment of the recap inset with the Journal's printed
+    double rule."""
+    W, H = RECAP_W * S, RECAP_H * S
+    cv = Cv(W, H)
+    lacquer(cv, 0, 0, W, H, BLACK, 113, 0.45, 0.10)
+    bw = 12
+    for x in range(bw + 3, W - bw - 3):
+        for y in (bw + 3, H - bw - 4):
+            cv.put(x, y, RED[3], 0.8)
+    for y in range(bw + 3, H - bw - 3):
+        for x in (bw + 3, W - bw - 4):
+            cv.put(x, y, RED[3], 0.8)
+    st0 = world_style(0)
+    frieze(cv, bw + 8, bw + 6, W - bw - 8, 20 * S - 4, st0, 5)
+    frieze(cv, bw + 8, H - 20 * S + 4, W - bw - 8, H - bw - 6, st0, 6)
+    cv.p = cv.im.load()
+    X0, Y0, X1, Y1 = 12 * S, 20 * S, W - 12 * S, H - 20 * S
+    for k in range(3, 0, -1):
+        cv.rect(X0 + k, Y0 + k * 2, X1 + k, Y1 + k * 2, (12, 6, 4), 0.35)
+    paper(cv, X0, Y0, X1, Y1, 117, aged=0.75)
+    rx0, ry0, rx1, ry1 = X0 + 8, Y0 + 8, X1 - 9, Y1 - 9
+    for x in range(rx0, rx1 + 1):
+        cv.put(x, ry0, (170, 40, 30), 0.7)
+        cv.put(x, ry1, (170, 40, 30), 0.7)
+        cv.put(x, ry0 + 3, (190, 140, 60), 0.6)
+        cv.put(x, ry1 - 3, (190, 140, 60), 0.6)
+    for y in range(ry0, ry1 + 1):
+        cv.put(rx0, y, (170, 40, 30), 0.7)
+        cv.put(rx1, y, (170, 40, 30), 0.7)
+        cv.put(rx0 + 3, y, (190, 140, 60), 0.6)
+        cv.put(rx1 - 3, y, (190, 140, 60), 0.6)
+    for (cx, cy) in ((rx0, ry0), (rx1, ry0), (rx0, ry1), (rx1, ry1)):
+        berry(cv, cx, cy, 2.6)
+    for x in range(X0, X1):
+        cv.put(x, Y0, OUTLINE)
+        cv.put(x, Y1 - 1, OUTLINE)
+    for y in range(Y0, Y1):
+        cv.put(X0, y, OUTLINE)
+        cv.put(X1 - 1, y, OUTLINE)
+    gilt_frame(cv, 0, 0, W, H, bw, 41)
+    for (x, y) in ((6, 6), (W - 7, 6), (6, H - 7), (W - 7, H - 7)):
+        rivet(cv, x, y, 4.2)
+    for x in range(40, W - 40, 72):
+        rivet(cv, x, H - 6, 2.4)
+        rivet(cv, x, 5, 2.4)
+    save("recap_panel", cv)
+
+
+RECAP_DOLLS = {"seal": (RED, None), "absorb": (BLACK, [(40, 10, 50), (70, 20, 90), (110, 40, 130), (150, 80, 170), (190, 130, 210), (230, 190, 240)]),
+               "tools": (WOOD[1:], None)}
+
+
+def recap_dolls():
+    """The doll opened in two halves around the recap, one per ending (red and gold for Sealed, black and plum for
+    Absorbed, bare wood for Set Down the Tools): the top half ends on its gilt fillet, the bottom half shows the
+    hollow it held."""
+    lw, lh = 56, 84
+    for kind, (body, scarf) in RECAP_DOLLS.items():
+        W, H = lw * S, lh * S
+        full = Cv(W, H)
+        doll(full, 1, 1, W - 2, H - 2, body, scarf, "full", 7)
+        oy, h = 1, H - 2
+        joint = int(oy + h * 0.52)
+        top_h = joint + 2 + (joint % 2)
+        top = Cv(W, top_h)
+        top.im.alpha_composite(full.im.crop((0, 0, W, joint + 2)), (0, 0))
+        top.p = top.im.load()
+        for x in range(W):
+            if top.alpha(x, joint + 1) > 0:
+                top.put(x, joint + 1, OUTLINE)
+            if top.alpha(x, joint) > 0:
+                top.put(x, joint, GOLD[2])
+        save("recap_%s_top" % kind, top)
+        # the bottom half: the body below the joint, and the hollow seen from just above
+        cx = W / 2.0
+        by, br_x, br_y = oy + h * 0.69, (W - 2) * 0.5, h * 0.37
+        half = br_x * math.sqrt(max(0.0, 1 - ((joint - by) / br_y) ** 2))
+        ry = 3.2 * S
+        pad = int(math.ceil(ry)) + 1
+        pad += (H - joint + pad) % 2
+        bot = Cv(W, H - joint + pad)
+        bot.im.alpha_composite(full.im.crop((0, joint, W, H)), (0, pad))
+        bot.p = bot.im.load()
+        jy = pad
+        rim_out = lambda x, y: ((x + .5 - cx) / half) ** 2 + ((y + .5 - jy) / ry) ** 2 <= 1
+        rim_in = lambda x, y: ((x + .5 - cx) / (half - 2.2)) ** 2 + ((y + .5 - jy) / (ry - 1.6)) ** 2 <= 1
+        for y in range(0, jy + int(ry) + 2):
+            for x in range(W):
+                if rim_in(x, y):
+                    t = clamp((y - (jy - ry)) / (2 * ry))
+                    bot.put(x, y, mix((14, 8, 5), (58, 32, 16), t * 0.8))
+                elif rim_out(x, y):
+                    lit = (x + .5 - cx) < 0
+                    bot.put(x, y, mix(WOOD[4], WOOD[2], 0.25 if lit else 0.6) if y < jy else GOLD[3])
+                elif y < jy and any(rim_out(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+                    bot.put(x, y, OUTLINE)
+        save("recap_%s_bottom" % kind, bot)
+
 
 BODY = None
 
@@ -1838,6 +2107,10 @@ def build():
     medallion("stillness", 0)
     for sid, _en, _fr, w, *_ in STATIONS:
         station_panel(sid, w, sid in ("soul_altar", "class_table"))
+    for w in range(0, 11):
+        stall_panel(w)
+    recap_panel()
+    recap_dolls()
     keep = {n + ".png" for n in SAVED} | {n + ".png.mcmeta" for n in SAVED}
     for f in os.listdir(OUT):
         if f not in keep:

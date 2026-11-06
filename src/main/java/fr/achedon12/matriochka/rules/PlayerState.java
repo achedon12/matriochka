@@ -68,7 +68,9 @@ public final class PlayerState {
 
 	/** A soul gain from play: scaled by the server's soulGainMultiplier. */
 	public void addSouls(int n) {
-		setSouls(souls() + fr.achedon12.matriochka.world.Config.souls(n));
+		int gain = fr.achedon12.matriochka.world.Config.souls(n);
+		if (gain > 0) fr.achedon12.matriochka.world.CycleStats.add(player, "souls", gain);
+		setSouls(souls() + gain);
 	}
 
 	/** Sets the souls as given, unscaled (administrator command). */
@@ -115,7 +117,10 @@ public final class PlayerState {
 	}
 
 	public void setDoll(int layers, int max) {
-		tag.putInt("doll_layers", Math.max(0, Math.min(max, layers)));
+		int now = Math.max(0, Math.min(max, layers));
+		// a layer put back (Soul Altar, a fallen boss) counts in the cycle's recap
+		if (now > dollLayers()) fr.achedon12.matriochka.world.CycleStats.add(player, "rebuilt", now - dollLayers());
+		tag.putInt("doll_layers", now);
 		tag.putInt("doll_max", max);
 		save();
 		sync();
@@ -154,6 +159,7 @@ public final class PlayerState {
 		int bits = tag.getIntOr("pages_" + world, 0);
 		if ((bits & (1 << index)) != 0) return false;
 		tag.putInt("pages_" + world, bits | (1 << index));
+		fr.achedon12.matriochka.world.CycleStats.add(player, "pages", 1);
 		save();
 		return true;
 	}

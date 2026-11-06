@@ -103,6 +103,7 @@ public final class Cycles {
 		}
 		ps.tag().remove("return");
 		ps.tag().putInt("cycle", cycle);
+		CycleStats.reset(ps);
 		Achievements.grantId(p, "endings/new_cycle");
 		p.sendSystemMessage(Component.translatable("message.matriochka.cycle.begun", cycle + 1).withStyle(ChatFormatting.GOLD));
 		ps.sync();

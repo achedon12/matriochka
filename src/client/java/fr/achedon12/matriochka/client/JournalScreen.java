@@ -112,6 +112,10 @@ public class JournalScreen extends Screen {
 		if (!scroll && tab == 0 && JournalPages.endingsSeen() > 0) {
 			buttons.add(l + 94, t + BH - 30, 76, 16, Component.translatable("trials.matriochka.title"), () -> minecraft.gui.setScreen(new TrialsScreen(this)));
 		}
+		// the recap of the last cycle an ending closed, under the chapter's heading on the left page
+		if (!scroll && tab == 0 && RecapScreen.available()) {
+			buttons.add(l + 20 + (PW - 18) / 2 - 40, t + 46, 80, 16, Component.translatable("journal.matriochka.last_cycle"), () -> minecraft.gui.setScreen(new RecapScreen(this)));
+		}
 		if (!scroll && tab == 1) {
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> { questWorld = Math.max(0, questWorld - 1); pageAt = Ui.now(); turnDir = -1; rebuild(); }, () -> questWorld > 0);
 			buttons.add(l + BW - 40, t + BH - 30, 18, 16, Component.literal(">"), () -> { questWorld = Math.min(KARMA_CHAPTER, questWorld + 1); pageAt = Ui.now(); turnDir = 1; rebuild(); }, () -> questWorld < KARMA_CHAPTER);

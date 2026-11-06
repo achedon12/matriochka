@@ -184,10 +184,16 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 			}
 			// a dark reputation opens the black market
 			hideContraband();
+			int under = 0;
 			if (karma <= -fr.achedon12.matriochka.world.Karma.TIER1) {
 				getOffers().addAll(contraband());
+				under = contraband().size();
 				sp.sendOverlayMessage(Component.translatable("message.matriochka.black_market").withStyle(net.minecraft.ChatFormatting.DARK_PURPLE));
 			}
+			// the client shows its own stall for the mod's traders (the menu and its packets stay vanilla)
+			int left = fr.achedon12.matriochka.replay.WorldEvents.merchantTicksLeft(this);
+			String kind = left >= 0 || entityTags().contains(fr.achedon12.matriochka.replay.WorldEvents.MERCHANT_TAG) ? "travelling" : def.world() == 0 ? "peddler" : "people";
+			fr.achedon12.matriochka.net.Net.merchantInfo(sp, new fr.achedon12.matriochka.net.Net.MerchantInfoPayload(getId(), def.world(), kind, under, karma, left));
 			setTradingPlayer(sp);
 			openTradingScreen(sp, getDisplayName(), 1);
 			PlayerState.of(sp).progress("trade", def.id(), 1);

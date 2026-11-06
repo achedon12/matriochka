@@ -41,6 +41,8 @@ public final class Endings {
 	public static void play(ServerPlayer p, String kind) {
 		PlayerState ps = PlayerState.of(p);
 		boolean first = !seen(ps, kind);
+		// the recap of the cycle, with the karma it reached (before the ending's own consequences)
+		CycleStats.snapshot(p, kind, first);
 		ps.set("end_" + kind, true);
 		switch (kind) {
 			case SEAL -> Achievements.grantId(p, "endings/seal");
