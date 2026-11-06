@@ -866,19 +866,19 @@
        "talents": [
         {
          "name": "Stout",
-         "eff": "+1 armor"
+         "eff": "+1 max health"
         },
         {
          "name": "Plated",
-         "eff": "+2 armor"
+         "eff": "+0.5 armor toughness"
         },
         {
          "name": "Unbroken",
-         "eff": "+2 armor toughness"
+         "eff": "+0.5 armor toughness"
         },
         {
          "name": "Last Wall",
-         "eff": "Below 30% health, take 25% less damage"
+         "eff": "Below 30% health, take 10% less damage"
         }
        ]
       },
@@ -891,7 +891,7 @@
         },
         {
          "name": "Broad Back",
-         "eff": "+2 max health"
+         "eff": "+1 max health"
         },
         {
          "name": "Immovable",
@@ -916,11 +916,11 @@
         },
         {
          "name": "Hearty",
-         "eff": "+4 max health"
+         "eff": "+1 max health"
         },
         {
          "name": "Lacquer Skin",
-         "eff": "Every 30 seconds, gain 4 absorption health"
+         "eff": "Every 30 seconds, gain 2 absorption health"
         }
        ]
       }
@@ -938,15 +938,15 @@
         },
         {
          "name": "Bloodied",
-         "eff": "Below half health, deal 15% more damage"
+         "eff": "Below half health, deal 10% more damage"
         },
         {
          "name": "Cleaver",
-         "eff": "+5% attack damage"
+         "eff": "+4% attack damage"
         },
         {
          "name": "Red Mist",
-         "eff": "Below half health, deal 25% more damage"
+         "eff": "Below half health, deal 12% more damage"
         }
        ]
       },
@@ -955,7 +955,7 @@
        "talents": [
         {
          "name": "Quick Arm",
-         "eff": "+5% attack speed"
+         "eff": "+3% attack speed"
         },
         {
          "name": "Momentum",
@@ -963,7 +963,7 @@
         },
         {
          "name": "Flurry",
-         "eff": "+10% attack speed"
+         "eff": "+4% attack speed"
         },
         {
          "name": "Rampage",
@@ -976,19 +976,19 @@
        "talents": [
         {
          "name": "Opener",
-         "eff": "Your first blow on a creature deals 20% more"
+         "eff": "Your first blow on a creature deals 10% more"
         },
         {
          "name": "Giantkiller",
-         "eff": "Deal 6% more damage to bosses"
+         "eff": "Deal 3% more damage to bosses"
         },
         {
          "name": "Finisher",
-         "eff": "Deal 20% more to foes below a quarter of their health"
+         "eff": "Deal 10% more to foes below a quarter of their health"
         },
         {
          "name": "Shell Splitter",
-         "eff": "Deal 12% more damage to bosses"
+         "eff": "Deal 5% more damage to bosses"
         }
        ]
       }
@@ -1044,11 +1044,11 @@
        "talents": [
         {
          "name": "First Cut",
-         "eff": "Your first blow on a creature deals 15% more"
+         "eff": "Your first blow on a creature deals 10% more"
         },
         {
          "name": "Stalker",
-         "eff": "Blows struck while sneaking deal 20% more"
+         "eff": "Blows struck while sneaking deal 10% more"
         },
         {
          "name": "Vanish",
@@ -1056,7 +1056,7 @@
         },
         {
          "name": "Assassin",
-         "eff": "Blows struck while sneaking deal 40% more"
+         "eff": "Blows struck while sneaking deal 20% more"
         }
        ]
       }
@@ -1146,7 +1146,7 @@
         },
         {
          "name": "Thick Skin",
-         "eff": "+2 max health"
+         "eff": "+1 max health"
         },
         {
          "name": "Unbowed",
@@ -1171,7 +1171,7 @@
         },
         {
          "name": "Iron Heart",
-         "eff": "+4 max health"
+         "eff": "+2 max health"
         }
        ]
       },
@@ -1180,7 +1180,7 @@
        "talents": [
         {
          "name": "Stubborn",
-         "eff": "Below 30% health, take 15% less damage"
+         "eff": "Below 30% health, take 10% less damage"
         },
         {
          "name": "Deep Breath",
@@ -1192,7 +1192,7 @@
         },
         {
          "name": "Never Down",
-         "eff": "Below 30% health, take 30% less damage"
+         "eff": "Below 30% health, take 15% less damage"
         }
        ]
       }

@@ -4,7 +4,7 @@ Every class has a small talent tree, learnt at the **Class Table**: its **Talent
 
 ## How a tree works
 
-- Each class has **three branches of four talents**. A branch is learnt from the top down: a talent needs the one above it. Talents of a branch add up (Stout and Plated give 3 armor).
+- Each class has **three branches of four talents**. A branch is learnt from the top down: a talent needs the one above it. Talents of a branch add up (Plated and Unbroken give 1 armor toughness).
 - A talent costs souls, and the last two of a branch also cost **Shell Shards**. Each tier also waits for your group's progression:
 
 | Tier | Souls | Shell Shards | Opens once your group has beaten |
@@ -27,28 +27,28 @@ Attribute talents (armor, health, speed, reach and so on) become modifiers on th
 
 | Tier | Bulwark | Rooted | Warden |
 | --- | --- | --- | --- |
-| 1 | **Stout**: +1 armor | **Planted Feet**: +10% knockback resistance | **Hardy**: World gauges rise 5% slower |
-| 2 | **Plated**: +2 armor | **Broad Back**: +2 max health | **Slow Mending**: Out of combat, regain 1 health every 2 seconds |
-| 3 | **Unbroken**: +2 armor toughness | **Immovable**: +20% knockback resistance | **Hearty**: +4 max health |
-| 4 | **Last Wall**: Below 30% health, take 25% less damage | **Thornshell**: Return 20% of the damage you take to the attacker | **Lacquer Skin**: Every 30 seconds, gain 4 absorption health |
+| 1 | **Stout**: +1 max health | **Planted Feet**: +10% knockback resistance | **Hardy**: World gauges rise 5% slower |
+| 2 | **Plated**: +0.5 armor toughness | **Broad Back**: +1 max health | **Slow Mending**: Out of combat, regain 1 health every 2 seconds |
+| 3 | **Unbroken**: +0.5 armor toughness | **Immovable**: +20% knockback resistance | **Hearty**: +1 max health |
+| 4 | **Last Wall**: Below 30% health, take 10% less damage | **Thornshell**: Return 20% of the damage you take to the attacker | **Lacquer Skin**: Every 30 seconds, gain 2 absorption health |
 
 ### Berserker
 
 | Tier | Fury | Frenzy | Shellbreaker |
 | --- | --- | --- | --- |
-| 1 | **Heavy Hand**: +3% attack damage | **Quick Arm**: +5% attack speed | **Opener**: Your first blow on a creature deals 20% more |
-| 2 | **Bloodied**: Below half health, deal 15% more damage | **Momentum**: A kill gives Speed for 4 seconds | **Giantkiller**: Deal 6% more damage to bosses |
-| 3 | **Cleaver**: +5% attack damage | **Flurry**: +10% attack speed | **Finisher**: Deal 20% more to foes below a quarter of their health |
-| 4 | **Red Mist**: Below half health, deal 25% more damage | **Rampage**: A kill heals 3 health | **Shell Splitter**: Deal 12% more damage to bosses |
+| 1 | **Heavy Hand**: +3% attack damage | **Quick Arm**: +3% attack speed | **Opener**: Your first blow on a creature deals 10% more |
+| 2 | **Bloodied**: Below half health, deal 10% more damage | **Momentum**: A kill gives Speed for 4 seconds | **Giantkiller**: Deal 3% more damage to bosses |
+| 3 | **Cleaver**: +4% attack damage | **Flurry**: +4% attack speed | **Finisher**: Deal 10% more to foes below a quarter of their health |
+| 4 | **Red Mist**: Below half health, deal 12% more damage | **Rampage**: A kill heals 3 health | **Shell Splitter**: Deal 5% more damage to bosses |
 
 ### Prowler
 
 | Tier | Shadowstep | Featherfoot | Ambush |
 | --- | --- | --- | --- |
-| 1 | **Light Foot**: +3% movement speed | **Soft Landing**: Fall 2 blocks more without harm | **First Cut**: Your first blow on a creature deals 15% more |
-| 2 | **Slip Away**: +3% chance to dodge a blow | **Climber**: Step up 0.5 block higher | **Stalker**: Blows struck while sneaking deal 20% more |
+| 1 | **Light Foot**: +3% movement speed | **Soft Landing**: Fall 2 blocks more without harm | **First Cut**: Your first blow on a creature deals 10% more |
+| 2 | **Slip Away**: +3% chance to dodge a blow | **Climber**: Step up 0.5 block higher | **Stalker**: Blows struck while sneaking deal 10% more |
 | 3 | **Fleet**: +5% movement speed | **Springheel**: +10% jump strength | **Vanish**: A kill turns you invisible for 3 seconds |
-| 4 | **Phantom**: +6% chance to dodge a blow | **Cat's Fall**: Fall 5 blocks more without harm | **Assassin**: Blows struck while sneaking deal 40% more |
+| 4 | **Phantom**: +6% chance to dodge a blow | **Cat's Fall**: Fall 5 blocks more without harm | **Assassin**: Blows struck while sneaking deal 20% more |
 
 ### Reaper
 
@@ -63,10 +63,10 @@ Attribute talents (armor, health, speed, reach and so on) become modifiers on th
 
 | Tier | Endurance | Recovery | Grit |
 | --- | --- | --- | --- |
-| 1 | **Tough Lungs**: World gauges rise 5% slower | **Second Wind**: Out of combat, regain 1 health every 2 seconds | **Stubborn**: Below 30% health, take 15% less damage |
+| 1 | **Tough Lungs**: World gauges rise 5% slower | **Second Wind**: Out of combat, regain 1 health every 2 seconds | **Stubborn**: Below 30% health, take 10% less damage |
 | 2 | **Weathered**: World gauges rise 8% slower | **Scavenger**: A kill heals 1 health | **Deep Breath**: +1 oxygen bonus: your breath lasts longer |
-| 3 | **Thick Skin**: +2 max health | **Rally**: Out of combat, regain 2 health every 2 seconds | **Ember-Proof**: Burn 50% shorter |
-| 4 | **Unbowed**: World gauges rise 12% slower | **Iron Heart**: +4 max health | **Never Down**: Below 30% health, take 30% less damage |
+| 3 | **Thick Skin**: +1 max health | **Rally**: Out of combat, regain 2 health every 2 seconds | **Ember-Proof**: Burn 50% shorter |
+| 4 | **Unbowed**: World gauges rise 12% slower | **Iron Heart**: +2 max health | **Never Down**: Below 30% health, take 15% less damage |
 
 ### Prospector
 
@@ -74,10 +74,12 @@ Attribute talents (armor, health, speed, reach and so on) become modifiers on th
 | --- | --- | --- | --- |
 | 1 | **Keen Edge**: +2 mining efficiency | **Ore Nose**: 5% chance to mine an ore twice | **Long Arm**: +0.5 blocks of reach |
 | 2 | **Swift Pick**: +10% block breaking speed | **Lucky Strike**: +0.5 luck | **Wet Pick**: +50% mining speed under water |
-| 3 | **Deep Cut**: +4 mining efficiency | **Rich Vein**: 10% chance to mine an ore twice | **Longer Arm**: +1 block of reach |
+| 3 | **Deep Cut**: +4 mining efficiency | **Rich Vein**: 10% chance to mine an ore twice | **Longer Arm**: +1 blocks of reach |
 | 4 | **Gold Fever**: Haste while you hold a tool | **Motherlode**: 20% chance to mine an ore twice | **Mole**: +20% block breaking speed |
 
 ## Details
+
+- The values are checked by `tools/balance.py` (see [Balance](Balance)): a class's whole tree may move the hits to kill a creature, the hits you survive and the length of a solo boss fight by a quarter at most.
 
 - "Out of combat" means no blow taken or struck for 5 seconds.
 - "First blow on a creature" is the first player blow that creature takes, from anyone.

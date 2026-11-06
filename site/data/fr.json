@@ -866,19 +866,19 @@
        "talents": [
         {
          "name": "Trapu",
-         "eff": "+1 d'armure"
+         "eff": "+1 de vie max"
         },
         {
          "name": "Blindé",
-         "eff": "+2 d'armure"
+         "eff": "+0,5 de robustesse"
         },
         {
          "name": "Inébranlable",
-         "eff": "+2 de robustesse"
+         "eff": "+0,5 de robustesse"
         },
         {
          "name": "Dernier rempart",
-         "eff": "Sous 30 % de vie, subis 25 % de dégâts en moins"
+         "eff": "Sous 30 % de vie, subis 10 % de dégâts en moins"
         }
        ]
       },
@@ -891,7 +891,7 @@
         },
         {
          "name": "Large dos",
-         "eff": "+2 de vie max"
+         "eff": "+1 de vie max"
         },
         {
          "name": "Inamovible",
@@ -916,11 +916,11 @@
         },
         {
          "name": "Robuste",
-         "eff": "+4 de vie max"
+         "eff": "+1 de vie max"
         },
         {
          "name": "Peau de laque",
-         "eff": "Toutes les 30 secondes, gagne 4 de vie d'absorption"
+         "eff": "Toutes les 30 secondes, gagne 2 de vie d'absorption"
         }
        ]
       }
@@ -938,15 +938,15 @@
         },
         {
          "name": "Ensanglanté",
-         "eff": "Sous la moitié de ta vie, inflige 15 % de dégâts en plus"
+         "eff": "Sous la moitié de ta vie, inflige 10 % de dégâts en plus"
         },
         {
          "name": "Fendoir",
-         "eff": "+5 % de dégâts"
+         "eff": "+4 % de dégâts"
         },
         {
          "name": "Brume rouge",
-         "eff": "Sous la moitié de ta vie, inflige 25 % de dégâts en plus"
+         "eff": "Sous la moitié de ta vie, inflige 12 % de dégâts en plus"
         }
        ]
       },
@@ -955,7 +955,7 @@
        "talents": [
         {
          "name": "Bras vif",
-         "eff": "+5 % de vitesse d'attaque"
+         "eff": "+3 % de vitesse d'attaque"
         },
         {
          "name": "Élan",
@@ -963,7 +963,7 @@
         },
         {
          "name": "Rafale",
-         "eff": "+10 % de vitesse d'attaque"
+         "eff": "+4 % de vitesse d'attaque"
         },
         {
          "name": "Saccage",
@@ -976,19 +976,19 @@
        "talents": [
         {
          "name": "Ouverture",
-         "eff": "Ton premier coup sur une créature inflige 20 % de plus"
+         "eff": "Ton premier coup sur une créature inflige 10 % de plus"
         },
         {
          "name": "Tueur de géants",
-         "eff": "Inflige 6 % de dégâts en plus aux boss"
+         "eff": "Inflige 3 % de dégâts en plus aux boss"
         },
         {
          "name": "Achèvement",
-         "eff": "Inflige 20 % de plus aux ennemis sous le quart de leur vie"
+         "eff": "Inflige 10 % de plus aux ennemis sous le quart de leur vie"
         },
         {
          "name": "Fend-coquille",
-         "eff": "Inflige 12 % de dégâts en plus aux boss"
+         "eff": "Inflige 5 % de dégâts en plus aux boss"
         }
        ]
       }
@@ -1044,11 +1044,11 @@
        "talents": [
         {
          "name": "Premier sang",
-         "eff": "Ton premier coup sur une créature inflige 15 % de plus"
+         "eff": "Ton premier coup sur une créature inflige 10 % de plus"
         },
         {
          "name": "Traqueur",
-         "eff": "Les coups portés accroupi infligent 20 % de plus"
+         "eff": "Les coups portés accroupi infligent 10 % de plus"
         },
         {
          "name": "Disparition",
@@ -1056,7 +1056,7 @@
         },
         {
          "name": "Assassin",
-         "eff": "Les coups portés accroupi infligent 40 % de plus"
+         "eff": "Les coups portés accroupi infligent 20 % de plus"
         }
        ]
       }
@@ -1146,7 +1146,7 @@
         },
         {
          "name": "Peau épaisse",
-         "eff": "+2 de vie max"
+         "eff": "+1 de vie max"
         },
         {
          "name": "Insoumis",
@@ -1171,7 +1171,7 @@
         },
         {
          "name": "Cœur de fer",
-         "eff": "+4 de vie max"
+         "eff": "+2 de vie max"
         }
        ]
       },
@@ -1180,7 +1180,7 @@
        "talents": [
         {
          "name": "Têtu",
-         "eff": "Sous 30 % de vie, subis 15 % de dégâts en moins"
+         "eff": "Sous 30 % de vie, subis 10 % de dégâts en moins"
         },
         {
          "name": "Grande inspiration",
@@ -1192,7 +1192,7 @@
         },
         {
          "name": "Jamais à terre",
-         "eff": "Sous 30 % de vie, subis 30 % de dégâts en moins"
+         "eff": "Sous 30 % de vie, subis 15 % de dégâts en moins"
         }
        ]
       }

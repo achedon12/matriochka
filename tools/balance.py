@@ -67,6 +67,11 @@ SHARDS_PER_BOSS = None                  # mirrors MatrioBoss.SHELL_SHARDS (read 
 ELITE_SOULS = 5                         # mirrors MatrioMob.die
 PLAYER_ATTACK_SPEED = 4 - 2.4           # mirrors ModContent.makeItem: p.sword(..., -2.4f)
 UPTIME = 0.6                            # share of the chase a solo player spends hitting (the rest dodging)
+# talents (tools/content.py TALENTS, applied by replay/Talents.java)
+LOW_HEALTH_SHARE = 0.25                 # share of the blows struck below half health (Berserker rage)
+SNEAK_SHARE = 0.5                       # share of a Prowler's blows struck sneaking
+DODGE_CAP, LASTSTAND_CAP = 0.3, 0.6     # mirrors Talents: dodge chance and the share of a blow healed back below 30%
+TALENT_FIGHT_CUT = 0.25                 # talents may shorten a boss fight by this much at most (the design's tolerance)
 
 
 def class_level(world):
@@ -245,10 +250,13 @@ def fight(boss, p, players, extra_hp=0.0):
                 next_swing[i] += swing
                 if state == "phase":
                     continue
-                if state == "opening":
-                    hp -= hit * 1.5
-                else:
-                    hp -= hit * 0.75 * UPTIME
+                mult = 1.5 if state == "opening" else 0.75
+                taken = hit * mult
+                # talents: a second blow of a share of what this one dealt, through the boss's multiplier and armor again
+                extra = p.get("extra", 0) + p.get("boss", 0) + (p.get("execute", 0) if hp - taken < total * 0.25 else 0)
+                if extra > 0:
+                    taken += after_armor(taken * extra * mult, BOSS_ARMOR, 0)
+                hp -= taken * (1 if state == "opening" else UPTIME)
         if phase < len(phases) and hp / total <= phases[phase]:
             phase += 1
             state, st = "phase", 0
@@ -317,6 +325,89 @@ def combat_minutes(content, mobs, boss, w):
     return dict(kills=kills, minutes=seconds / 60 + boss["t1"])
 
 
+
+# ---------------------------------------------------------------- talents
+def talents_at(content, cls, world):
+    """The summed effects of every talent of a class open on arrival in a world (mirrors Talents.compute and the gates
+    of TALENT_TIERS: the highest boss beaten is the previous world's), with what they cost."""
+    sums, souls, shards = {}, 0, 0
+    for _bid, _en, _fr, talents in getattr(content, "TALENTS", {}).get(cls, []):
+        for tier, t in enumerate(talents):
+            cost, sh, gate = content.TALENT_TIERS[tier]
+            if gate > world - 1:
+                break
+            sums[t[3]] = sums.get(t[3], 0) + t[4]
+            souls += cost
+            shards += sh
+    return sums, souls, shards
+
+
+def with_talents(p, sums):
+    """The design player with a class's talents: attribute talents change the stats (mirrors Talents.ATTRS), the others
+    become extra blows (mirrors Talents.strike) and a share of the damage taken back."""
+    q = dict(p)
+    q["dmg"] = p["dmg"] * (1 + sums.get("damage", 0))
+    q["swing"] = p["swing"] / (1 + sums.get("attack_speed", 0))
+    q["hp"] = p["hp"] + sums.get("max_health", 0)
+    q["absorb"] = sums.get("absorb", 0)
+    q["armor"] = p["armor"] + sums.get("armor", 0)
+    q["tough"] = p["tough"] + sums.get("toughness", 0)
+    q["dodge"] = min(DODGE_CAP, sums.get("dodge", 0))
+    q["laststand"] = min(LASTSTAND_CAP, sums.get("laststand", 0))
+    # extra damage on top of a blow, as a share of what the blow dealt
+    q["extra"] = sums.get("rage", 0) * LOW_HEALTH_SHARE + sums.get("sneak", 0) * SNEAK_SHARE
+    q["crit"], q["execute"], q["boss"] = sums.get("crit", 0), sums.get("execute", 0), sums.get("boss", 0)
+    return q
+
+
+def blows(hp, p, armor, boss=False):
+    """Blows to bring down hp: the first one carries the crit talents, those that leave it under a quarter the execute
+    ones; each extra is a second blow through the armor again (mirrors Talents.strike)."""
+    left, n, first = hp, 0, True
+    while n < 10000:
+        taken = after_armor(p["dmg"], armor, 0)
+        extra = p.get("extra", 0) + (p.get("boss", 0) if boss else 0) + (p.get("crit", 0) if first else 0)
+        if left - taken < hp * 0.25:
+            extra += p.get("execute", 0)
+        dealt = taken + (after_armor(taken * extra, armor, 0) if extra > 0 else 0)
+        if dealt >= left:
+            return n + left / dealt
+        left, n, first = left - dealt, n + 1, False
+    return n
+
+
+def survives(p, taken):
+    """Blows of a given damage a player takes before death: absorption first, then the health, less what the last
+    stand heals back under 30%, more with the dodge chance."""
+    hp = p["hp"] + p.get("absorb", 0)
+    high = (hp - 0.3 * p["hp"]) / taken
+    low = 0.3 * p["hp"] / (taken * (1 - p.get("laststand", 0)))
+    return (high + low) / (1 - p.get("dodge", 0))
+
+
+def talent_rows(content, java, bosses):
+    """Per class and world: the reference creature and boss measures with the class's open talents."""
+    rows = []
+    by_world = {b["world"]: b for b in bosses}
+    for cls in getattr(content, "TALENTS", {}):
+        for w in range(1, 11):
+            sums, souls, shards = talents_at(content, cls, w)
+            base = player(content, java, w)
+            p = with_talents(base, sums)
+            ref_hp, ref_dmg = REF_MOB_HP * 1.35 ** (w - 1), REF_MOB_DMG * 1.20 ** (w - 1)
+            b = next(x for x in content.BOSSES if x["world"] == w)
+            extra = 3 * next(m for m in content.MOBS if m["id"] == "chitin_guard")["hp"] if b["id"] == "spore_queen" else 0.0
+            t1 = fight(b, p, 1, extra) / 20 / 60
+            # the nominal class bonus against a boss: the weapon's level, its damage talents and its boss talents
+            nominal = 0.08 + BONUS[base["level"]]
+            rows.append(dict(cls=cls, world=w, sums=sums, souls=souls, shards=shards,
+                             hits_to_kill=blows(ref_hp, p, 0), hits_to_die=survives(p, after_armor(ref_dmg, p["armor"], p["tough"])),
+                             strong_hits=survives(p, after_armor(b["dmg"], p["armor"], p["tough"])),
+                             t1=t1, base_t1=by_world[w]["t1"], cut=1 - t1 / by_world[w]["t1"],
+                             boss_bonus=(1 + nominal) * (1 + sums.get("damage", 0)) * (1 + sums.get("boss", 0)) - 1,
+                             speed=sums.get("attack_speed", 0)))
+    return rows
+
 # ---------------------------------------------------------------- report
 def analyse(ref=None):
     content, attacks, java = load_modules(ref)
@@ -329,7 +420,12 @@ def analyse(ref=None):
         tier = next((x["tier"] for x in content.WORLDS if x["n"] == w), "learning")
         worlds.append(dict(world=w, tier=tier, player=p, ref=ref_mob(content, java, w) if w else None, boss=b,
                            souls=souls(content, java, w), combat=combat_minutes(content, mobs, b, w) if w else None))
-    return dict(mobs=mobs, bosses=bosses, worlds=worlds)
+    for w in worlds[1:]:
+        # the Reaper's soul talents: their share of the souls of the kills (the boss and the elites)
+        share = talents_at(content, "reaper", w["world"])[0].get("souls", 0)
+        w["souls"]["reaper"] = round(share * (SOUL_PLAN["boss"] + SOUL_PLAN["elites"]))
+        w["souls"]["tree"] = talents_at(content, "berserker", w["world"])[1:]
+    return dict(mobs=mobs, bosses=bosses, worlds=worlds, talents=talent_rows(content, java, bosses))
 
 
 def flags(a):
@@ -372,6 +468,21 @@ def flags(a):
                        f"the bosses gave {s['have_shards']}")
         if s["need_souls"] > s["have_souls"]:
             out.append(f"World {w['world']}: the weapons so far need {s['need_souls']} souls, {s['have_souls']} earned")
+    # talents: on top of the design player, a class's open talents may move each measure by the tolerance at most, and
+    # the hits to kill the reference creature (the design's own Berserker measure) stay in its band
+    for r in a.get("talents", []):
+        n, cls = r["world"], r["cls"].capitalize()
+        ref = next(w for w in a["worlds"] if w["world"] == n)
+        for key, now, was, label in (("kill", r["hits_to_kill"], ref["ref"]["hits_to_kill"], "hits to kill the reference creature"),
+                                     ("die", r["hits_to_die"], ref["ref"]["hits_to_die"], "reference creature hits before death"),
+                                     ("strong", r["strong_hits"], ref["boss"]["strong_hits"], "strong boss hits before death")):
+            if abs(now / was - 1) > TOLERANCE:
+                out.append(f"World {n}: {cls} talents move the {label} from {was:.1f} to {now:.1f} ({now / was - 1:+.0%}, at most {TOLERANCE:.0%})")
+        t = interp(TARGET_HITS_TO_KILL, n)
+        if abs(r["hits_to_kill"] / t - 1) > TOLERANCE:
+            out.append(f"World {n}: {cls} talents: hits to kill the reference creature {r['hits_to_kill']:.1f}, design {t:.1f}")
+        if r["cut"] > TALENT_FIGHT_CUT:
+            out.append(f"World {n}: {cls} talents cut the solo {ref['boss']['id']} fight by {r['cut']:.0%} (at most {TALENT_FIGHT_CUT:.0%})")
     return out
 
 
@@ -386,21 +497,31 @@ def snorkels(a):
 
 
 CHANGES = [
-    "Berserker weapons now add 8% of their damage plus the whole bonus of their level (+10% at level 2 up to +50% at "
-    "level 5), as the design's \"Bonus de classe max\" column reads. They added 8% x (1 + bonus), so 8% to 12%, and the "
-    "reference creature took 6 hits in World 9 and 6.7 in World 10 instead of 4.7 and 5 (GearClasses.java).",
-    "Bosses leave 3 Shell Shards instead of 2. With 2, bringing only the weapon of each world to the class cap needed "
-    "20 shards by World 9 and 26 by World 10, more than the 18 and 20 the bosses give (MatrioBoss.SHELL_SHARDS).",
-    "Dungeon Rat 18 -> 22 health: half the reference creature of World 3, barely more than a World 1 Sporeling.",
-    "Executioner 11.5 -> 10.1 damage (x1.6 -> x1.4): the learning tier asks for forgiving deaths, and it hit as hard, "
-    "relative to its world, as the expertise elites.",
-    "Sky Harpooner 59 -> 111 health, 8.6 -> 10.4 damage: an elite that was weaker than the Island Warden of its own "
-    "world, now in line with the other elites (x2.25 health, x1.2 damage).",
-    "Unstable Sphere 19.9 -> 17.4, Earth Hand 34.4 -> 30.1, Titan Ray 41.3 -> 36.1 damage (x1.6 -> x1.4): regular "
-    "creatures that hit as hard as the elites of their world.",
+    "The talents are now part of the check: for every class and world, the talents open on arrival (the gates of "
+    "TALENT_TIERS), applied as Talents.java applies them, on top of the design player.",
+    "Berserker: the boss talents Giantkiller and Shell Splitter 6% + 12% -> 3% + 5%, Heavy Hand and Cleaver 3% + 5% -> "
+    "3% + 4% damage, Bloodied and Red Mist 15% + 25% -> 10% + 12% below half health, Opener 20% -> 10%, Finisher "
+    "20% -> 10%, Quick Arm and Flurry 5% + 10% -> 3% + 4% attack speed. With the weapon's +58% at level 5, the whole "
+    "tree cut the solo boss fights of Worlds 9 and 10 by 40% and brought the reference creature of World 9 to 3.2 hits "
+    "(design 4.7); now 23% to 24% and 3.5 hits.",
+    "Guardian: the bulwark gives health and toughness instead of armor (Stout +1 armor -> +1 max health, Plated +2 armor "
+    "-> +0.5 toughness, Unbroken +2 -> +0.5 toughness, Last Wall 25% -> 10%), Broad Back and Hearty +2 and +4 -> +1 and "
+    "+1 max health, Lacquer Skin 4 -> 2 absorption. Near the armor formula's cap every armor point takes about a fifth "
+    "of the damage away: the tree made a World 9 player survive 5.3 strong boss blows instead of 3 (+74%), now +24%.",
+    "Survivor: Thick Skin and Iron Heart +2 and +4 -> +1 and +2 max health, Stubborn and Never Down 15% + 30% -> 10% + "
+    "15% (+43% strong boss hits in World 9, now +18%).",
+    "Prowler: First Cut 15% -> 10%, Stalker and Assassin 20% + 40% -> 10% + 20% while sneaking (the reference creature "
+    "of World 9 fell in 3.2 hits, now 3.6).",
+    "Reaper and Prospector talents move none of these measures; the Reaper's +28% souls from kills is shown in the "
+    "soul table.",
 ]
 
 OPEN = [
+    "Talents cost Shell Shards (1 and 2 for the last two of a branch, 9 for a whole tree) from the same bosses that pay "
+    "for the weapons' class levels: bringing every world's weapon to the cap leaves 4 shards by World 10, so a whole tree "
+    "means leaving some weapons below the cap. A choice for the player, left as it is.",
+    "Talents of two classes add up when gear of both is worn (a Berserker weapon and Prowler boots): the check takes "
+    "one class at a time.",
     "Boss fights are short: with the reference boss health (500 x 1.35^(n-1)) and the design's gear, a solo fight lasts "
     "1 to 2 minutes up to World 9 and about 3.5 minutes for the Unfinished. The design gives no length; the expertise "
     "tier asks for long fights. Longer fights would need more boss health than the formula, or a smaller damage "
@@ -505,6 +626,32 @@ def markdown(before, after, ref, git_ref=None):
         L += [f"### World {n}", "", table(rows, ["Creature", "Health", "Damage", "vs reference", "Hits to kill", "Early",
                                                   "Seconds to kill", "Hits to die", "Seconds to die", "Strongest move"]), ""]
 
+    L += ["## Talents", "",
+          "Each class's talents open on arrival in a world (tier gates: the Guardian, then the bosses of Worlds 2, 5 and 8), "
+          "bought and active on top of the design player. Attribute talents change the stats; the others are second blows "
+          f"of a share of the damage dealt, through the armor again (Talents.strike): the crit talents on a foe's first blow, "
+          f"the execute ones under a quarter of its health, rage on {LOW_HEALTH_SHARE:.0%} of the blows (below half health), "
+          f"sneak on {SNEAK_SHARE:.0%} of a Prowler's blows. Last stand heals back its share of a blow under 30% health "
+          f"(at most {LASTSTAND_CAP:.0%}), dodge is capped at {DODGE_CAP:.0%}. The check: each measure within "
+          f"{TOLERANCE:.0%} of the design player without talents, a solo boss fight shortened by {TALENT_FIGHT_CUT:.0%} at "
+          "most, and the reference creature's hits to kill in the design's band. \"Boss bonus\" is what the tooltips add up "
+          "against a boss: the weapon's class level (Berserker), then the damage and boss talents.", ""]
+    bt = {(r["cls"], r["world"]): r for r in before.get("talents", [])} if before else {}
+    for cls in dict.fromkeys(r["cls"] for r in after.get("talents", [])):
+        rows = []
+        for r in (x for x in after["talents"] if x["cls"] == cls):
+            o = bt.get((cls, r["world"]))
+            w = next(x for x in after["worlds"] if x["world"] == r["world"])
+            rows.append([r["world"], f"{r['souls']} / {r['shards']}",
+                         ba(g(o, "hits_to_kill"), r["hits_to_kill"]) + f" ({w['ref']['hits_to_kill']:.1f})",
+                         ba(g(o, "hits_to_die"), r["hits_to_die"]) + f" ({w['ref']['hits_to_die']:.1f})",
+                         ba(g(o, "strong_hits"), r["strong_hits"]) + f" ({w['boss']['strong_hits']:.1f})",
+                         ba(g(o, "t1"), r["t1"]) + f" ({w['boss']['t1']:.1f})",
+                         ba(g(o, "cut"), r["cut"], "{:.0%}"), ba(g(o, "boss_bonus"), r["boss_bonus"], "{:+.0%}")])
+        L += [f"### {cls.capitalize()}", "", table(rows, ["World", "Open talents cost (souls / shards)", "Hits to kill (without)",
+                                                          "Hits to die (without)", "Strong boss hits (without)",
+                                                          "Solo boss fight, min (without)", "Fight cut", "Boss bonus"]), ""]
+
     L += ["## Souls, Shell Shards and time", "",
           "Gear is new in every world, so its class starts again at level 1. The class cap of the world, what a Berserker "
           "weapon costs from level 1 to that cap (a full set with armor is five times as much), the souls and Shell Shards "
@@ -516,9 +663,11 @@ def markdown(before, after, ref, git_ref=None):
         o = bw.get(w["world"])
         rows.append([w["world"], s["quests"], s["total"], s["level"], f"{s['weapon']} / {s['shards']}", s["set"],
                      f"{s['have_souls']} / {s['need_souls']}", ba(g(o, "souls", "have_shards"), s["have_shards"], "{:.0f}") + f" / {s['need_shards']}",
+                     "{} / {}".format(*s["tree"]), ba(g(o, "souls", "reaper"), s["reaper"], "+{:.0f}"),
                      ba(g(o, "combat", "minutes"), w["combat"]["minutes"], "{:.0f}")])
     L += [table(rows, ["World", "Quest souls", "World income", "Class cap", "Weapon to cap (souls / shards)", "Set to cap (souls)",
-                       "Souls on arrival / needed so far", "Shards on arrival / needed so far", "Combat minutes"]), ""]
+                       "Souls on arrival / needed so far", "Shards on arrival / needed so far", "One class's open talents (souls / shards)",
+                       "Reaper soul talents", "Combat minutes"]), ""]
     if SNORKEL_NOTE:
         L += [SNORKEL_NOTE.format(**snorkels(after)), ""]
 
@@ -549,6 +698,11 @@ def main():
         c = w["combat"]["minutes"] if w["combat"] else 0
         print(f"{w['world']:>5} {p['hp']:>3.0f} {p['armor']:>4.0f}/{p['tough']:<4.1f} {p['dmg']:>5.1f} {r['hits_to_kill']:>8.1f} {r['hits_to_die']:>7.1f} "
               f"{b['strong_hits']:>9.1f}  {b['t1']:>5.1f} {b['t2']:>5.1f} {b['t4']:>5.1f}  {s['total']:>11} {c:>6.0f}")
+    print("\ntalents  world  hits to kill  hits to die  strong hits  solo fight cut  boss bonus")
+    for r in after["talents"]:
+        if r["world"] in (5, 9, 10):
+            print(f"{r['cls']:<11} {r['world']:>3} {r['hits_to_kill']:>12.1f} {r['hits_to_die']:>12.1f} {r['strong_hits']:>12.1f} "
+                  f"{r['cut']:>14.0%} {r['boss_bonus']:>+11.0%}")
     fl = flags(after)
     print(f"\n{len(fl)} outlier(s)")
     for f in fl:
