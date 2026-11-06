@@ -61,7 +61,8 @@ public class ShowcaseTest implements FabricClientGameTest {
 						var lvl = (net.minecraft.server.level.ServerLevel) p.level();
 						int x = p.getBlockX(), z = p.getBlockZ() + back;
 						boolean ceiling = fr.achedon12.matriochka.world.Worlds.ceiling(world);
-						int y = ceiling ? 30 + Math.floorMod((x >> 4) * 31 + (z >> 4) * 17, 40) : lvl.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, x, z);
+						// World 2's heightmap stops on its rock roof, out of the world: the structure finds its cave floor itself
+						int y = ceiling ? 30 + Math.floorMod((x >> 4) * 31 + (z >> 4) * 17, 40) : world == 2 ? 64 : lvl.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, x, z);
 						var src = server.createCommandSourceStack().withLevel(lvl).withPosition(new net.minecraft.world.phys.Vec3(x, y, z)).withSuppressedOutput();
 						try {
 							int r = server.getCommands().getDispatcher().execute("place structure matriochka:" + d.id() + " " + x + " " + y + " " + z, src);
@@ -241,6 +242,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 		}
 		if ("replay".equals(System.getProperty("matriochka.capture"))) {
 			ReplayTest.run(ctx);
+			return;
+		}
+		if ("replayshots".equals(System.getProperty("matriochka.capture"))) {
+			ReplayShots.run(ctx);
 			return;
 		}
 		if ("moves".equals(System.getProperty("matriochka.capture"))) {

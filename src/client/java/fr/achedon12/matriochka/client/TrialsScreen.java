@@ -194,16 +194,18 @@ public class TrialsScreen extends Screen {
 	/** Right page: the chosen trial, its times and the board. */
 	private void detail(GuiGraphicsExtractor g, int x, int y, int w) {
 		ReplayContent.TrialDef d = trial();
-		int yy = y + g.textWithWordWrap(font, Component.translatable("trial.matriochka." + d.key()), x, y, w, Ui.RED_INK, false);
+		int yy = y + Ui.wrap(g, font, Component.translatable("trial.matriochka." + d.key()), x, y, w, Ui.RED_INK);
 		g.fill(x, yy + 1, x + Math.min(w, 60), yy + 2, 0xFFB0782A);
 		yy += 6;
 		if (!unlocked()) {
-			g.textWithWordWrap(font, Component.translatable("trials.matriochka.locked"), x, yy, w, Ui.INK_SOFT, false);
+			Ui.wrap(g, font, Component.translatable("trials.matriochka.locked"), x, yy, w, Ui.INK_SOFT);
 			return;
 		}
 		Component desc = d.world() == 0 ? Component.translatable("trials.matriochka.desc.gauntlet")
 			: Component.translatable("trials.matriochka.desc.world", Component.translatable("world.matriochka." + d.world()));
-		yy += g.textWithWordWrap(font, desc, x, yy, w, Ui.INK_SOFT, false) + 5;
+		// the page ends above the Begin button; the description gives way first in a longer language
+		int bottom = top() + BH - 34;
+		yy += Ui.block(g, font, List.of(new Ui.Para(desc, Ui.INK_SOFT, 0)), x, yy, w, Math.max(18, bottom - yy - 70)) + 5;
 		CompoundTag b = boardOf(d.key());
 		yy = line(g, x, yy, w, "trials.matriochka.par", d.par() * 20);
 		yy = line(g, x, yy, w, "trials.matriochka.mine", b.getIntOr("mine", 0));
@@ -213,7 +215,7 @@ public class TrialsScreen extends Screen {
 		yy += 11;
 		int rank = 1;
 		for (Tag tag : b.getListOrEmpty("top")) {
-			if (!(tag instanceof CompoundTag row) || rank > 5) break;
+			if (!(tag instanceof CompoundTag row) || rank > 5 || yy + 9 > bottom) break;
 			Component r = Component.literal(rank + ".  " + ReplayHud.clock(row.getIntOr("ticks", 0)));
 			g.text(font, r, x, yy, rank == 1 ? Ui.RED_INK : Ui.INK, false);
 			String names = row.getStringOr("names", "");
@@ -223,7 +225,7 @@ public class TrialsScreen extends Screen {
 			yy += 10;
 			rank++;
 		}
-		if (rank == 1) g.text(font, Component.translatable("trials.matriochka.board.empty"), x, yy, 0xFF9A8A6E, false);
+		if (rank == 1) Ui.wrap(g, font, Component.translatable("trials.matriochka.board.empty"), x, yy, w, 0xFF9A8A6E);
 	}
 
 	private int line(GuiGraphicsExtractor g, int x, int y, int w, String key, int ticks) {
@@ -240,7 +242,7 @@ public class TrialsScreen extends Screen {
 		g.fill(x, y + 11, x + 60, y + 12, 0xFFB0782A);
 		List<String> owned = ownedTitles();
 		if (owned.isEmpty()) {
-			g.textWithWordWrap(font, Component.translatable("trials.matriochka.titles.none"), x, y + 18, w, Ui.INK_SOFT, false);
+			Ui.wrap(g, font, Component.translatable("trials.matriochka.titles.none"), x, y + 18, w, Ui.INK_SOFT);
 			return;
 		}
 		String worn = MatrioClient.state.getStringOr("title", "");

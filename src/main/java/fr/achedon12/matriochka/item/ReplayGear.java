@@ -265,7 +265,11 @@ public final class ReplayGear {
 			attacker.setDeltaMovement(attacker.position().subtract(p.position()).normalize().scale(1.1).add(0, 0.35, 0));
 			attacker.needsSync = true;
 		}
-		level.sendParticles(ParticleTypes.END_ROD, p.getX(), p.getY() + 1.2, p.getZ(), 24, 0.6, 0.6, 0.6, 0.15);
+		// the lantern on the shield's face flares: gold sparks burst from in front of the bearer, toward the attacker
+		net.minecraft.world.phys.Vec3 face = p.getEyePosition().add(0, -0.4, 0).add(p.getLookAngle().scale(1.0));
+		net.minecraft.world.phys.Vec3 far = p.getEyePosition().add(0, -0.3, 0).add(p.getLookAngle().scale(1.8));
+		level.sendParticles(fr.achedon12.matriochka.content.Particles.GOLD_MOTE, face.x, face.y, face.z, 26, 0.25, 0.25, 0.25, 0.09);
+		level.sendParticles(ParticleTypes.END_ROD, far.x, far.y, far.z, 6, 0.35, 0.3, 0.35, 0.05);
 		level.playSound(null, p.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 0.8f, 1.8f);
 	}
 
@@ -301,8 +305,16 @@ public final class ReplayGear {
 
 	/** The Quake Pick's tremor: creatures around stagger, slowed, lifted and hurt. */
 	public static void tremor(ServerLevel level, Player player, BlockPos at) {
-		level.sendParticles(ParticleTypes.EXPLOSION, at.getX() + 0.5, at.getY() + 1, at.getZ() + 0.5, 6, 2, 0.1, 2, 0);
-		level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, at.getX() + 0.5, at.getY() + 1, at.getZ() + 0.5, 30, 3, 0.1, 3, 0.01);
+		// the ground cracks in rings around the blow: crumbs of the struck block and grit thrown up
+		var crumbs = new net.minecraft.core.particles.BlockParticleOption(ParticleTypes.BLOCK, level.getBlockState(at));
+		for (int r = 2; r <= 4; r += 2) {
+			int n = 10 + r * 4;
+			for (int i = 0; i < n; i++) {
+				double a = i * Math.PI * 2 / n + r * 0.4;
+				level.sendParticles(crumbs, at.getX() + 0.5 + Math.cos(a) * r, at.getY() + 1.05, at.getZ() + 0.5 + Math.sin(a) * r, 1, 0.05, 0.02, 0.05, 0.12);
+			}
+		}
+		level.sendParticles(fr.achedon12.matriochka.content.Particles.GRIT, at.getX() + 0.5, at.getY() + 1.2, at.getZ() + 0.5, 40, 2.5, 0.2, 2.5, 0.05);
 		level.playSound(null, at, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 0.8f, 0.5f);
 		for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(6), e -> e != player && !(e instanceof Player))) {
 			e.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 2));

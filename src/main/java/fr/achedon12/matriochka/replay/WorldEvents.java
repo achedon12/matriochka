@@ -300,7 +300,7 @@ public final class WorldEvents {
 		e.bar.setName(title(e));
 		e.bar.setProgress(1f);
 		Component msg = Component.translatable(last ? "message.matriochka.event.invasion.warlord" : "message.matriochka.event.invasion.next", e.wave, ReplayContent.INVASION_WAVES);
-		for (ServerPlayer p : near) p.sendOverlayMessage(msg.copy().withStyle(last ? ChatFormatting.DARK_RED : ChatFormatting.RED));
+		for (ServerPlayer p : near) p.sendOverlayMessage(msg.copy().withStyle(last ? ChatFormatting.GOLD : ChatFormatting.RED));
 		sound(e, SoundEvents.RAID_HORN.value(), 0.8f, last ? 0.6f : 1f);
 	}
 
@@ -317,7 +317,7 @@ public final class WorldEvents {
 			mob.getAttribute(Attributes.MAX_HEALTH).setBaseValue(mob.getAttributeBaseValue(Attributes.MAX_HEALTH) * ReplayContent.WARLORD_HEALTH);
 			mob.setHealth(mob.getMaxHealth());
 			mob.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(mob.getAttributeBaseValue(Attributes.ATTACK_DAMAGE) * ReplayContent.WARLORD_DAMAGE);
-			mob.setCustomName(Component.translatable("event.matriochka.warlord", Component.translatable("entity.matriochka." + def.id())).withStyle(ChatFormatting.DARK_RED));
+			mob.setCustomName(Component.translatable("event.matriochka.warlord", Component.translatable("entity.matriochka." + def.id())).withStyle(ChatFormatting.GOLD));
 			mob.setCustomNameVisible(true);
 			mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 20 * 600, 0, false, false));
 			mob.addTag(TAG + "_warlord");
@@ -419,21 +419,34 @@ public final class WorldEvents {
 		}
 	}
 
-	/** The look of a surge around a player: its world's particles, thick in the air. */
+	/**
+	 * The look of a surge around a player: its world's own particles (those of the world's atmosphere, ten times as
+	 * thick), with a vanilla accent for the rule's danger.
+	 */
 	private static void cue(ServerLevel level, ServerPlayer p, int rule, int n) {
-		ParticleOptions part = switch (rule) {
+		ParticleOptions own = switch (rule) {
+			case 1 -> fr.achedon12.matriochka.content.Particles.SPORE;
+			case 2 -> fr.achedon12.matriochka.content.Particles.EMBER;
+			case 3 -> fr.achedon12.matriochka.content.Particles.COLD_DUST;
+			case 4 -> fr.achedon12.matriochka.content.Particles.STORM_SPARK;
+			case 5 -> fr.achedon12.matriochka.content.Particles.SHADOW_WISP;
+			case 6 -> fr.achedon12.matriochka.content.Particles.MIRROR_SHARD;
+			case 7 -> fr.achedon12.matriochka.content.Particles.BUBBLE;
+			case 8 -> fr.achedon12.matriochka.content.Particles.PETAL;
+			case 9 -> fr.achedon12.matriochka.content.Particles.GRIT;
+			default -> fr.achedon12.matriochka.content.Particles.THREAD_SCRAP;
+		};
+		ParticleOptions accent = switch (rule) {
 			case 1 -> ParticleTypes.SPORE_BLOSSOM_AIR;
 			case 2 -> ParticleTypes.LAVA;
-			case 3 -> ParticleTypes.ASH;
 			case 4 -> ParticleTypes.ELECTRIC_SPARK;
-			case 5 -> ParticleTypes.SQUID_INK;
 			case 6 -> ParticleTypes.REVERSE_PORTAL;
 			case 7 -> ParticleTypes.BUBBLE_COLUMN_UP;
-			case 8 -> ParticleTypes.CHERRY_LEAVES;
-			case 9 -> ParticleTypes.CAMPFIRE_COSY_SMOKE;
-			default -> ParticleTypes.ENCHANT;
+			case 9 -> fr.achedon12.matriochka.content.Particles.RUST_MOTE;
+			default -> null;
 		};
-		level.sendParticles(part, p.getX(), p.getY() + 1.5, p.getZ(), n, 4, 2, 4, 0.02);
+		level.sendParticles(own, p.getX(), p.getY() + 1.5, p.getZ(), n * 2, 5, 2.5, 5, 0.01);
+		if (accent != null) level.sendParticles(accent, p.getX(), p.getY() + 1.5, p.getZ(), Math.max(1, n / 4), 4, 2, 4, 0.02);
 	}
 
 	/** What a surge does to a player on top of its stronger rule, every second. */

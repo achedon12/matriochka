@@ -34,6 +34,22 @@ def item_assets(it, pal, tpath, write, assets):
             "on_true": {"type": "minecraft:range_dispatch", "property": "minecraft:use_duration", "scale": 0.05,
                         "entries": [{"threshold": 0.65, "model": frame(1)}, {"threshold": 0.9, "model": frame(2)}], "fallback": frame(0)}}})
         return True
+    if iid == "lantern_shield":
+        # a flat shield held like a shield: its face to the front at rest, raised across the body while it blocks
+        # (vanilla's own shield is a 3D model with its own blocking model)
+        def shield(name, fp, tp):
+            write(os.path.join(assets, f"models/item/{name}.json"), {
+                "parent": "minecraft:item/generated", "textures": {"layer0": f"{NS}:item/{iid}"},
+                "display": {"firstperson_righthand": fp, "firstperson_lefthand": fp, "thirdperson_righthand": tp, "thirdperson_lefthand": tp}})
+        shield(iid, dict(rotation=[0, -18, 4], translation=[0.5, 2.6, -1.5], scale=[0.9, 0.9, 0.9]),
+               dict(rotation=[0, 90, 0], translation=[0, 3, 1.5], scale=[0.7, 0.7, 0.7]))
+        shield(f"{iid}_blocking", dict(rotation=[0, 4, 0], translation=[-5.5, 4.2, -2.5], scale=[1.05, 1.05, 1.05]),
+               dict(rotation=[-10, 75, 0], translation=[1.5, 4.5, 1], scale=[0.75, 0.75, 0.75]))
+        write(os.path.join(assets, f"items/{iid}.json"), {"model": {
+            "type": "minecraft:condition", "property": "minecraft:using_item",
+            "on_false": {"type": "minecraft:model", "model": f"{NS}:item/{iid}"},
+            "on_true": {"type": "minecraft:model", "model": f"{NS}:item/{iid}_blocking"}}})
+        return True
     held = it["kind"] in ("weapon", "tool")
     model(iid, "minecraft:item/handheld" if held else "minecraft:item/generated", iid)
     write(os.path.join(assets, f"items/{iid}.json"), {"model": {"type": "minecraft:model", "model": f"{NS}:item/{iid}"}})

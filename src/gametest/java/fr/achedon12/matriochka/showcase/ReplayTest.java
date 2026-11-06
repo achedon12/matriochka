@@ -212,8 +212,8 @@ final class ReplayTest {
 	private static void talentsApplied(MinecraftServer server) {
 		section("talents applied", () -> {
 			ServerPlayer p = player(server);
-			var armor = p.getAttribute(Attributes.ARMOR).getModifier(Matriochka.id("talent_armor"));
-			check(armor != null && armor.amount() == 1.0, "Stout adds one armor while Guardian gear is worn (" + (armor == null ? "none" : armor.amount()) + ")");
+			var health = p.getAttribute(Attributes.MAX_HEALTH).getModifier(Matriochka.id("talent_max_health"));
+			check(health != null && health.amount() == 1.0, "Stout adds one max health while Guardian gear is worn (" + (health == null ? "none" : health.amount()) + ")");
 			check(p.getAttribute(Attributes.ATTACK_DAMAGE).getModifier(Matriochka.id("talent_damage")) == null, "Heavy Hand sleeps without Berserker gear");
 			PlayerState ps = PlayerState.of(p);
 			int souls = ps.souls();
@@ -552,11 +552,31 @@ final class ReplayTest {
 	private static final List<BlockPos> PLACED = new ArrayList<>();
 	private static final List<net.minecraft.world.level.ChunkPos> FORCED = new ArrayList<>();
 
-	/** Where each new structure goes: ten sites, south of the player in World 1. */
+	private static final List<BlockPos> SITES = new ArrayList<>();
+
+	/**
+	 * Where each new structure goes: ten sites south of the player in World 1, each moved east until it stands on dry
+	 * land (the land camps refuse a site under water).
+	 */
 	private static List<BlockPos> sites(ServerPlayer p) {
-		List<BlockPos> out = new ArrayList<>();
-		for (int i = 0; i < 10; i++) out.add(new BlockPos(p.getBlockX() + (i % 4 - 2) * 40 + 20, 0, p.getBlockZ() + (i / 4 - 1) * 48 + 60));
-		return out;
+		if (!SITES.isEmpty()) return SITES;
+		ServerLevel level = (ServerLevel) p.level();
+		for (int i = 0; i < 10; i++) {
+			int x = p.getBlockX() + (i % 4 - 2) * 40 + 20, z = p.getBlockZ() + (i / 4 - 1) * 48 + 60;
+			for (int tries = 0; tries < 24 && wet(level, (x >> 4 << 4) + 8, (z >> 4 << 4) + 8); tries++) x += 32;
+			SITES.add(new BlockPos(x, 0, z));
+		}
+		return SITES;
+	}
+
+	/** True when a column or one 10 blocks around it is under water (loads the chunks it reads). */
+	static boolean wet(ServerLevel level, int x, int z) {
+		for (int[] d : new int[][]{{0, 0}, {10, 0}, {-10, 0}, {0, 10}, {0, -10}}) {
+			level.getChunk((x + d[0]) >> 4, (z + d[1]) >> 4);
+			int top = level.getHeight(Heightmap.Types.WORLD_SURFACE, x + d[0], z + d[1]);
+			if (!level.getFluidState(new BlockPos(x + d[0], top - 1, z + d[1])).isEmpty()) return true;
+		}
+		return false;
 	}
 
 	private static void loadStructureSites(MinecraftServer server) {

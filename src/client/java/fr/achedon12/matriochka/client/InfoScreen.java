@@ -52,7 +52,7 @@ public class InfoScreen extends Screen {
 		int y = t + 30;
 		g.text(font, Component.translatable("screen.matriochka.info.version", version()), l + 16, y, Ui.RED_INK, false);
 		y += 13;
-		y += g.textWithWordWrap(font, Component.translatable("screen.matriochka.info.body"), l + 16, y, W - 32, Ui.INK, false) + 6;
+		y += Ui.wrap(g, font, Component.translatable("screen.matriochka.info.body"), l + 16, y, W - 32, Ui.INK) + 6;
 		g.textWithWordWrap(font, Component.translatable("screen.matriochka.info.config"), l + 16, y, W - 32, Ui.INK_SOFT, false);
 		buttons.draw(g, font, mx, my);
 		motion.pop(g);

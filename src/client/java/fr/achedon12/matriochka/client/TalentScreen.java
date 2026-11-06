@@ -124,7 +124,7 @@ public class TalentScreen extends Screen {
 			learntId = picked;
 			learntAt = Ui.now();
 		}, () -> picked != null && blocker(def(picked)) == null);
-		buttons.add(l + 172, t + 198, 34, 13, Component.translatable("talents.matriochka.reset"), () -> ClientPlayNetworking.send(new ReplayNet.LearnTalent("reset")));
+		buttons.add(l + 98, t + 193, 60, 15, Component.translatable("talents.matriochka.reset"), () -> ClientPlayNetworking.send(new ReplayNet.LearnTalent("reset")));
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public class TalentScreen extends Screen {
 		String hover = treeAt(mx, my);
 		drawTree(g, l, t, hover, dt);
 		String shown = hover != null ? hover : picked;
-		detail(g, l + 152, t + 24, 92, shown);
+		detail(g, l + 150, t + 24, 92, shown);
 		classes(g, l, t, mx, my);
 		niches(g, l, t);
 		buttons.draw(g, font, mx, my);
@@ -177,7 +177,8 @@ public class TalentScreen extends Screen {
 	}
 
 	private int nodeX(int branch) {
-		return left() + TREE_X + 6 + branch * BR_W + BR_W / 2 - 8;
+		// three columns centred on the wooden panel (x 10 to 142)
+		return left() + TREE_X + branch * BR_W + BR_W / 2 - 8;
 	}
 
 	private int nodeY(int tier) {
@@ -192,9 +193,7 @@ public class TalentScreen extends Screen {
 		List<String> br = branches();
 		for (int b = 0; b < br.size(); b++) {
 			Component bn = Component.translatable("talent.matriochka.branch." + className() + "." + br.get(b));
-			int bx = nodeX(b) + 8;
-			String s = font.plainSubstrByWidth(bn.getString(), BR_W - 2);
-			g.text(font, Component.literal(s), bx - font.width(s) / 2, t + 35, Ui.LIGHT, false);
+			Ui.fitted(g, font, bn, nodeX(b) + 8, t + 35, BR_W - 2, Ui.LIGHT, false);
 		}
 		int i = 0;
 		for (ReplayContent.TalentDef d : tree()) {
@@ -232,24 +231,33 @@ public class TalentScreen extends Screen {
 		return null;
 	}
 
-	/** The red panel: the talent's name, what it does, what it costs and whether it can be learnt. */
+	/**
+	 * The red panel: the talent's name on the plaque between the two gilt sprigs, then what it does, what it costs and
+	 * whether it can be learnt, shrunk together when a language needs more room than the panel has.
+	 */
 	private void detail(GuiGraphicsExtractor g, int x, int y, int w, String id) {
+		// the sprigs fill the panel's top corners down to y + 14, the Learn button starts at y + 78
+		int bodyY = y + 16, bodyH = 60;
 		if (id == null) {
-			g.textWithWordWrap(font, Component.translatable("talents.matriochka.help", Component.translatable("class.matriochka." + className())), x, y, w, Ui.MUTED, false);
+			Ui.fitted(g, font, Component.translatable("class.matriochka." + className()), x + w / 2f, y + 3, 52, Ui.GOLD, true);
+			g.fill(x + w / 2 - 20, y + 13, x + w / 2 + 20, y + 14, 0xFFB0782A);
+			Ui.block(g, font, List.of(new Ui.Para(Component.translatable("talents.matriochka.help", Component.translatable("class.matriochka." + className())), Ui.MUTED, 0)),
+				x, bodyY, w, bodyH);
 			return;
 		}
 		ReplayContent.TalentDef d = def(id);
-		int yy = y + g.textWithWordWrap(font, Component.translatable("talent.matriochka." + id), x, y, w, Ui.GOLD, false);
-		g.fill(x, yy + 1, x + Math.min(w, 50), yy + 2, 0xFFB0782A);
-		yy += 5;
-		yy += g.textWithWordWrap(font, Component.translatable("talent.matriochka." + id + ".desc"), x, yy, w, Ui.LIGHT, false) + 3;
+		Ui.fitted(g, font, Component.translatable("talent.matriochka." + id), x + w / 2f, y + 3, 52, Ui.GOLD, true);
+		g.fill(x + w / 2 - 20, y + 13, x + w / 2 + 20, y + 14, 0xFFB0782A);
+		List<Ui.Para> paras = new ArrayList<>();
+		paras.add(new Ui.Para(Component.translatable("talent.matriochka." + id + ".desc"), Ui.LIGHT, 4));
 		Component cost = d.shards() > 0 ? Component.translatable("talents.matriochka.cost_shards", d.souls(), d.shards()) : Component.translatable("talents.matriochka.cost", d.souls());
-		yy += g.textWithWordWrap(font, cost, x, yy, w, Ui.MUTED, false) + 2;
+		paras.add(new Ui.Para(cost, Ui.MUTED, 3));
 		String block = blocker(d);
 		if (block != null) {
 			Component why = block.equals("talents.matriochka.need_boss") ? Component.translatable(block, bossName(d.gate())) : Component.translatable(block);
-			g.textWithWordWrap(font, why, x, yy, w, block.equals("talents.matriochka.learnt") ? Ui.OK : Ui.WARN, false);
+			paras.add(new Ui.Para(why, block.equals("talents.matriochka.learnt") ? Ui.OK : Ui.WARN, 0));
 		}
+		Ui.block(g, font, paras, x, bodyY, w, bodyH);
 	}
 
 	private static Component bossName(int world) {
@@ -279,17 +287,12 @@ public class TalentScreen extends Screen {
 			boolean sel = i == cls, over = mx >= px && mx < px + 50 && my >= py && my < py + 20;
 			if (on.contains(c)) Ui.sprite(g, "glow", px + 5, py - 10, 40, 40, Ui.white(0.35f + 0.1f * (float) Math.sin(Ui.now() / 500.0 + i)));
 			Ui.sprite(g, sel ? "btn_pressed" : over ? "btn_hover" : "btn", px, py, 50, 20);
-			Component name = Component.translatable("class.matriochka." + c);
-			String s = font.plainSubstrByWidth(name.getString(), 46);
-			Ui.embossed(g, font, Component.literal(s), px + 25 - font.width(s) / 2, py + 3, sel ? 0xFFFFF4D8 : Ui.LIGHT);
+			Ui.fitted(g, font, Component.translatable("class.matriochka." + c), px + 25, py + 3, 45, sel ? 0xFFFFF4D8 : Ui.LIGHT, true);
 			int n = 0;
 			for (ReplayContent.TalentDef d : ReplayContent.TALENTS) if (d.cls().equals(c) && learnt(d.id())) n++;
 			Component count = Component.literal(n + "/12");
 			g.text(font, count, px + 25 - font.width(count) / 2, py + 12, n > 0 ? Ui.GOLD : Ui.MUTED, false);
 		}
-		Component rule = Component.translatable("talents.matriochka.active_rule", Component.translatable("class.matriochka." + className()));
-		String s = font.plainSubstrByWidth(rule.getString(), 118);
-		g.text(font, Component.literal(s), l + 50, t + 200, Ui.MUTED, false);
 	}
 
 	/** The niches: souls by a lantern on the left, Shell Shards on the right. */

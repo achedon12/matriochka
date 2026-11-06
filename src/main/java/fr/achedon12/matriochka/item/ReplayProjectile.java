@@ -54,7 +54,13 @@ public class ReplayProjectile extends ThrowableItemProjectile {
 	public void tick() {
 		super.tick();
 		if (level() instanceof ServerLevel sl) {
-			sl.sendParticles(harpoon() ? ParticleTypes.BUBBLE : ParticleTypes.ELECTRIC_SPARK, getX(), getY(), getZ(), 2, 0.05, 0.05, 0.05, 0);
+			// the trail starts a little way out, not in the thrower's face
+			if (tickCount > 2) {
+				if (!harpoon()) sl.sendParticles(ParticleTypes.ELECTRIC_SPARK, getX(), getY(), getZ(), 2, 0.05, 0.05, 0.05, 0);
+				else if (isInWater()) sl.sendParticles(ParticleTypes.BUBBLE, getX(), getY(), getZ(), 2, 0.05, 0.05, 0.05, 0);
+				else sl.sendParticles(ParticleTypes.SPLASH, getX(), getY(), getZ(), 2, 0.05, 0.05, 0.05, 0);
+			}
+			if (harpoon() && tickCount % 2 == 0 && getOwner() != null) line(sl, getOwner(), position(), 0.7);
 			// lost in the void or flown too far: it comes back anyway
 			if (tickCount > 200 || getY() < level().getMinY()) home(sl, position());
 		}
@@ -75,6 +81,7 @@ public class ReplayProjectile extends ThrowableItemProjectile {
 				le.needsSync = true;
 				if (owner instanceof ServerPlayer sp) Hooked.mark(le, sp, sl.getGameTime());
 			}
+			if (owner != null) line(sl, owner, target.position().add(0, target.getBbHeight() * 0.6, 0), 0.4);
 			sl.playSound(null, blockPosition(), SoundEvents.FISHING_BOBBER_RETRIEVE, SoundSource.PLAYERS, 1f, 0.7f);
 		} else {
 			bolt(sl, target.position());
@@ -91,6 +98,20 @@ public class ReplayProjectile extends ThrowableItemProjectile {
 	protected void onHit(HitResult hit) {
 		super.onHit(hit);
 		if (level() instanceof ServerLevel sl && hit.getType() != HitResult.Type.MISS) home(sl, hit.getLocation());
+	}
+
+	/** The harpoon's line: pale cord from the thrower's hand to a point, one fleck every step blocks. */
+	private static void line(ServerLevel level, Entity owner, Vec3 to, double step) {
+		Vec3 from = owner.getEyePosition().add(0, -0.45, 0).add(owner.getLookAngle().scale(0.6));
+		Vec3 d = to.subtract(from);
+		double len = d.length();
+		if (len < 1.2) return;
+		var cord = new net.minecraft.core.particles.DustParticleOptions(0xD9CBA3, 0.55f);
+		// the first stretch stays clear of the thrower's view
+		for (double k = 1.0; k < len; k += step) {
+			Vec3 at = from.add(d.scale(k / len));
+			level.sendParticles(cord, at.x, at.y, at.z, 1, 0, 0, 0, 0);
+		}
 	}
 
 	private void bolt(ServerLevel level, Vec3 at) {

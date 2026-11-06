@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "matriochka:item/lantern_shield"
+  },
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        4,
+        0
+      ],
+      "translation": [
+        -5.5,
+        4.2,
+        -2.5
+      ],
+      "scale": [
+        1.05,
+        1.05,
+        1.05
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        4,
+        0
+      ],
+      "translation": [
+        -5.5,
+        4.2,
+        -2.5
+      ],
+      "scale": [
+        1.05,
+        1.05,
+        1.05
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        -10,
+        75,
+        0
+      ],
+      "translation": [
+        1.5,
+        4.5,
+        1
+      ],
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -10,
+        75,
+        0
+      ],
+      "translation": [
+        1.5,
+        4.5,
+        1
+      ],
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ]
+    }
+  }
+}

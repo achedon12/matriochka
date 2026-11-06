@@ -203,6 +203,8 @@ public final class Trials {
 		if (run.builtWorld == world) return;
 		clearFoes(level, run, true);
 		TrialStage.build(level, run.center(), world);
+		// wiping the previous stage pops its carpets, banners and lanterns: they are not loot
+		for (Entity e : level.getEntitiesOfClass(ItemEntity.class, AABB.of(TrialStage.box(run.center())).inflate(4))) e.discard();
 		run.builtWorld = world;
 	}
 
@@ -255,9 +257,10 @@ public final class Trials {
 			case COUNTDOWN -> {
 				if (run.ticks % 20 == 0 && run.ticks < COUNTDOWN) {
 					int left = (COUNTDOWN - run.ticks) / 20;
+					// the clock plaque draws the count large in the middle of the screen (ReplayHud): sent right away
 					for (ServerPlayer m : players(server, run)) {
-						m.sendOverlayMessage(Component.literal(Integer.toString(left)).withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD));
 						level.playSound(null, m.blockPosition(), SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 1f, 0.8f + 0.1f * (5 - left));
+						PlayerState.of(m).sync();
 					}
 				}
 				if (run.ticks >= COUNTDOWN) {
@@ -552,6 +555,7 @@ public final class Trials {
 			t.putInt("stages", run.stages.size());
 			t.putLong("elapsed", run.phase == Phase.COUNTDOWN ? 0 : run.elapsed);
 			t.putString("phase", run.phase.name().toLowerCase(java.util.Locale.ROOT));
+			if (run.phase == Phase.COUNTDOWN) t.putInt("left", Math.max(1, (COUNTDOWN - run.ticks + 19) / 20));
 			t.putInt("par", run.def.par());
 			t.putInt("best", PlayerState.of(m).tag().getIntOr("trial_best_" + run.def.key(), 0));
 			PlayerState.of(m).tag().put("trial", t);

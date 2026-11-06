@@ -449,14 +449,14 @@ public class JournalScreen extends Screen {
 			return;
 		}
 		String base = "journal.matriochka.page." + pageWorld + "." + pageIndex;
-		int yy = y + 13 + g.textWithWordWrap(font, Component.translatable(base + ".title"), x, y + 13, w, Ui.RED_INK, false);
+		int yy = y + 13 + Ui.wrap(g, font, Component.translatable(base + ".title"), x, y + 13, w, Ui.RED_INK);
 		g.fill(x, yy + 1, x + Math.min(w, 60), yy + 2, 0xFFB0782A);
 		yy += 7;
 		boolean coded = JournalPages.coded(pageIndex);
 		boolean readable = JournalPages.readable(pageWorld, pageIndex);
 		Component body = Component.translatable(base);
 		if (coded && !readable) body = Component.literal(JournalPages.cipher(body.getString(), pageWorld));
-		int bodyH = g.textWithWordWrap(font, body, x, yy, w, readable ? Ui.INK : 0xFF5A3A5A, false);
+		int bodyH = Ui.wrap(g, font, body, x, yy, w, readable ? Ui.INK : 0xFF5A3A5A);
 		if (coded) {
 			Component note = Component.translatable(readable ? "journal.matriochka.pages.decoded" : "journal.matriochka.pages.coded");
 			g.textWithWordWrap(font, note, x, yy + bodyH + 6, w, readable ? Ui.GREEN : Ui.RED_INK, false);
@@ -478,7 +478,7 @@ public class JournalScreen extends Screen {
 		int h = highest();
 		String key = h < 0 ? "journal.matriochka.objective.guardian" : h >= 10 ? "journal.matriochka.objective.end" : "journal.matriochka.objective.next";
 		if (h >= 10 && JournalPages.carries("whole_matryoshka") && !MatrioClient.state.getBooleanOr("f_end_tools", false)) key = "journal.matriochka.objective.zero";
-		int yy = y + g.textWithWordWrap(font, Component.translatable(key, h + 1), x, y, w, Ui.INK, false) + 10;
+		int yy = y + Ui.wrap(g, font, Component.translatable(key, h + 1), x, y, w, Ui.INK) + 10;
 		var s = MatrioClient.state;
 		int max = s.getIntOr("doll_max", 0), layers = s.getIntOr("doll_layers", 0);
 		int dx = x;

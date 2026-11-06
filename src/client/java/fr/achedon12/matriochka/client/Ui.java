@@ -125,6 +125,51 @@ public final class Ui {
 		g.text(font, text, x, y, color, false);
 	}
 
+	/**
+	 * Word-wrapped text; returns the height it takes. Never use the value textWithWordWrap returns as a height: it is
+	 * where the text ends on screen, not how tall it is.
+	 */
+	public static int wrap(GuiGraphicsExtractor g, Font font, Component text, int x, int y, int w, int color) {
+		g.textWithWordWrap(font, text, x, y, w, color, false);
+		return font.split(text, w).size() * font.lineHeight;
+	}
+
+	/** One line centred on cx, shrunk (never below 60%) when it is wider than maxW, embossed or plain. */
+	public static void fitted(GuiGraphicsExtractor g, Font font, Component text, float cx, int y, int maxW, int color, boolean emboss) {
+		int tw = font.width(text);
+		float sc = tw > maxW ? Math.max(0.6f, maxW / (float) tw) : 1f;
+		g.pose().pushMatrix();
+		g.pose().translate(cx, y + 4);
+		g.pose().scale(sc, sc);
+		if (emboss) embossed(g, font, text, -tw / 2, -4, color);
+		else g.text(font, text, -tw / 2, -4, color, false);
+		g.pose().popMatrix();
+	}
+
+	/** A paragraph of a block: its text, its colour and the space left under it. */
+	public record Para(Component text, int color, int gap) {}
+
+	/**
+	 * Paragraphs wrapped into a box, all scaled down together (to 87%, 75%, then 62%) until they fit its height, so a
+	 * longer language never runs out of the panel. Returns the height used.
+	 */
+	public static int block(GuiGraphicsExtractor g, Font font, List<Para> paras, int x, int y, int w, int maxH) {
+		float sc = 1f;
+		for (float s : new float[]{1f, 0.875f, 0.75f, 0.625f}) {
+			sc = s;
+			int h = 0;
+			for (Para p : paras) h += font.split(p.text(), (int) (w / s)).size() * font.lineHeight + p.gap();
+			if (h * s <= maxH) break;
+		}
+		g.pose().pushMatrix();
+		g.pose().translate(x, y);
+		g.pose().scale(sc, sc);
+		int yy = 0, lw = (int) (w / sc);
+		for (Para p : paras) yy += wrap(g, font, p.text(), 0, yy, lw, p.color()) + p.gap();
+		g.pose().popMatrix();
+		return Math.round(yy * sc);
+	}
+
 	/** A title in the lacquer band, centred, scaled 1.25x with a gold drop. */
 	public static void title(GuiGraphicsExtractor g, Font font, Component text, int cx, int y) {
 		g.pose().pushMatrix();

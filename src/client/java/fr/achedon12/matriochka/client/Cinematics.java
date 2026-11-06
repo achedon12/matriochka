@@ -345,7 +345,8 @@ public final class Cinematics implements HudElement {
 		float in = Ui.easeBack((now - teleAt) / 180f);
 		float left = 1 - Ui.clamp01((now - teleAt) / (float) (teleUntil - teleAt));
 		int tw = font.width(teleText) * 2 + 36, th = 32;
-		int x = w / 2 - tw / 2, y = Math.round(h * 0.2f);
+		// below the trial clock when one runs
+		int x = w / 2 - tw / 2, y = Math.max(Math.round(h * 0.2f), ReplayHud.bottom + 4);
 		g.pose().pushMatrix();
 		g.pose().translate(w / 2f, y + th / 2f);
 		g.pose().scale(0.85f + 0.15f * in, 0.85f + 0.15f * in);

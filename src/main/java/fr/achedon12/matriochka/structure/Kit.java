@@ -805,11 +805,12 @@ public final class Kit {
 	// ---------------------------------------------------------------- site
 	/**
 	 * Prepares the ground under and above a footprint of radius rad: fills holes under it with the world's
-	 * foundation, clears the space above up to {@code top}, carves a cavern in the ceiling worlds and grows a floating
+	 * foundation, clears the space above up to {@code top}, carves a cavern in the cave worlds and grows a floating
 	 * island under the Storm Archipelago structures. Works in untransformed coordinates.
 	 */
 	public void site(int rad, int top) {
-		boolean cave = world == 3 || world == 5;
+		// the ceiling worlds, and World 2 whose structures stand on cave floors under its roof
+		boolean cave = world == 2 || world == 3 || world == 5;
 		for (int x = -rad - 1; x <= rad + 1; x++)
 			for (int z = -rad - 1; z <= rad + 1; z++) {
 				double d = Math.sqrt(x * x + z * z);
