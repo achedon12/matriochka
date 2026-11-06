@@ -1,51 +1,82 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 (alpha)
 
-- New hand-painted textures for the items and blocks you see most, in the vanilla style (outlines, three to four tones lit from the top left, warm highlights and cool shadows): the ten hidden dolls, the Nested Dolls, the Whole Matryoshka and the other dolls, the eleven cores, the ten Seeds, every armor piece and world weapon, the four snorkel helmets, the Scroll, Journal and pages, the four boss offerings, the World Soils, the World Block, the Threshold and every face of the thirteen stations. Each world's objects share its palette and glyph.
-- The lit parts of the stations and the Threshold's doorway glow in the dark (emissive faces, as vanilla does for the firefly bush).
-- Every world has its own light and fog: spore haze in World 1, heat and falling embers in World 2, cold dust in World 3, a storm sky in World 4, near-black fog in World 5, an inverted pastel sky in World 6, deep blue water fog in World 7, light tinted by the season in World 8 (petals, pollen, leaves or snow), rust haze in World 9, warm workshop light with floating fluff in World 10, and lantern light with gold dust in World 0.
-- World 0 reads as a warm red dusk, not a wall of fog: the lacquer carries its own light and the haze opens from 12 to 112 blocks. World 3's cold fog is darker than its stone, so its halls read at a corridor's length; World 5 stays black, but a lantern now reads across a cavern (its fog closes in from 4 to 30 blocks).
-- Bosses no longer poison themselves in their own toxic cloud, nor get struck by the lightning they call down (a player's lightning still hits them). The Jailer's floor cage only closes on the fighters, not on spectators or creative players watching.
-- The bubble, cold dust, deep mote, pollen and rust particles are redrawn so they read at their size (the bubble's first frame had broken into four corner dots).
-- Eighteen new particles (spores, embers, cold dust, chain glints, lightning sparks, shadow wisps, deep motes, mirror shards, bubbles, petals, pollen, leaves, snowflakes, grit, rust, thread scraps, fluff, gold dust). Boss attacks spray their world's particles where they land and around their warning ring, and many creature attacks use them.
-- Matriochka HD: an optional resource pack with the same textures at 32 x 32, attached to each release.
-- Works with Iris shader packs through vanilla light only (emissive faces, full-bright particles); see the Visuals page of the wiki.
-- Every boss attack has its own hand-made animation: the boss shows what is coming during the warning (the Guardian heaves a torn block overhead, the Queen's egg sac swells, the Titan lifts its hammer, the Jailer spreads its arms like walls, the Light Eater sinks low to stalk...), strikes, then stays open and spent for exactly as long as it takes extra damage. Each boss also has its own phase change (the Guardian rebuilds itself, the Queen folds into her cocoon, the Jailer turns its key, the Unfinished paints a new face) and its own fall, which now plays out for two seconds instead of the vanilla tip-over.
-- The Artisan's Shadow keeps its animations in step with the world whose timing it borrows; the Unfinished's are cut for the final, shortest tier it now fights on.
-- `tools/anim_preview.py` renders contact sheets of the boss animations (`docs-wiki-drafts/boss-anims/`).
-- Station automation: every station with recipes now works with hoppers. A station keeps one recipe, the last one crafted there by hand or the one picked with the new gilded funnel on its drawer. Ingredients go in from the top and the sides (each ingredient has its own slots, anything else is refused), the result comes out from below, and a comparator reads how full the station is. Each station keeps its condition: heat for the Ash Foundry, a charge for the Lightning Forge (lightning, or Storm Essence fed into its fuel slot), darkness, deep water, dawn and dusk; the Spore Vat waits for a ripe brew and the Jailer's Table makes one batch per lock pattern entered. The Soul Altar and the Class Table stay manual. Breaking a station drops its buffer.
-- Shake a World Block on purpose: a player of the owning group outside can sneak and use it with empty hands to help those inside (creatures stunned and thrown off their feet for 3 seconds, a boss staggered and open), or strike it with the new Doll Mallet to hinder them (the world quakes and loose blocks fall over their heads). One shake per world every 30 seconds; other groups cannot.
-- Rebuilding a Doll of Life layer at the Soul Altar now also costs 4 rare resources of the current world, as the design asks. The cost is shown under the button, with a tooltip listing the resources that count.
-- Structure chests now keep souls: Soul Shards (5 souls) and Soul Vessels (20), about 10 souls per chest and 100 per world, a little more in the deeper worlds. Use them to free their souls (sneak for the whole stack); they do not move karma. Chests generated before keep their loot.
-- Every quest checks what its description says. Deliveries are handed to the world's people (Hard Harvest, The Miners' Pay, A Life in a Day by day, A Warm Hearth); places are reached (Read the Plan, Last Message, The Impossible Stair, The Wreck's Crew, The Ground Plan, The Surveyor, Looking Down); stations are used (The Vat with a ripe brew, Under Control, Catch the Lightning, Double Meaning, Compress, The Workshop); kills ask for their condition (No Filter, Bare Hands, The Night Light, Lost Reflection, All at Once); and Read Between the Lines, Fingers in the Doll, First Flight, Light the Lighthouse, Hear the Danger, The Signs, The Silent Station, Four Seasons, The Archives, The Drifting Fort, The Apprentices and Every Tool watch the real action. Several descriptions say more precisely what to do. Many Hands only counts the peoples of the worlds.
-- The Unfinished now fights on the shortest timing tier on every shell, as the final fight of the design.
-- New check run: `./gradlew runClientGameTest -Pautomation`.
-- Comfort options, opened from the Journal (Comfort button) and saved in `config/matriochka-client.json`: screen shake strength, flashes, soft effects (no Nausea or Darkness, a gentle tint instead; the server skips the effects for that player), cinematics, large boss attack subtitles, fewer particles, colour-blind gauge patterns, HUD plaque size and corner, and a volume per kind of music.
-- Boss introductions: letterbox bars, the camera turning toward the boss with a slow push-in, and a framed title card with the boss's name and title.
-- A title card the first time you enter each world, with its rule medallion and a line about its law.
-- Boss phase breaks freeze-frame with a flash and the shell's number; heavy boss blows, World 9's moving ground, a moved World Block's quake and a trembling World Block nearby shake the camera.
-- The endings' crawl is framed by letterbox bars.
-- Adaptive music: a danger theme while creatures hunt you, the boss themes during fights, a heartbeat at low health or breath, and stings for a structure, a Journal page or a quest; themes fade into one another and the world theme comes back soon after.
-- Server options in `config/matriochka.json`: `karma` (on or off), `soulGainMultiplier`, `maxActiveGroups` and `maxParcels`.
-- The Matriochka Pack: a Modrinth modpack (`.mrpack`) with the mod, Fabric API, GeckoLib, Just Enough Items (optional) and client performance mods (Sodium, Lithium, FerriteCore, Entity Culling, ImmediatelyFast, Dynamic FPS, Krypton, Mod Menu, Iris as an option), in a normal and a hard (nightmare) version. Built by `tools/modpack.py` and attached to every GitHub release. See [Modpack](docs-wiki-drafts/Modpack.md).
-- Balance pass, checked by the new `tools/balance.py` against the design's targets (report: [Balance](docs-wiki-drafts/Balance.md)):
-  - Berserker weapons add 8% of their damage plus the whole bonus of their level (up to +58% at level 5, was at most +12%), so the reference creature again takes about 5 hits in World 10, as the design plans.
-  - Bosses leave 3 Shell Shards instead of 2: enough to bring each world's weapon to the class cap.
-  - Dungeon Rat 18 -> 22 health; Executioner 11.5 -> 10.1 damage; Sky Harpooner 59 -> 111 health and 8.6 -> 10.4 damage (it was weaker than the Island Warden); Unstable Sphere 19.9 -> 17.4, Earth Hand 34.4 -> 30.1 and Titan Ray 41.3 -> 36.1 damage (regular creatures that hit like elites).
-- A playthrough test (`./gradlew runClientGameTest -Pplaythrough`) plays the whole game in real ticks, from the Guardian through the ten worlds to World 0 and the third ending, and checks every step.
-- First steps: until you enter World 1, a small lacquered card under the HUD plaque shows the next of ten steps (read the Scroll, find the Guardian's Sanctuary, wake and defeat the Guardian, place the Matrix Workbench, craft the World 1 Seed, till World Soil, plant it by water, wait for it to hatch, enter), with the step's item, a short hint and a compass needle toward the nearest sanctuary with its distance. Every step is detected from what you really do, a later step done first skips ahead, and progress is kept per player. Hide it or bring it back with the Guide button on the Scroll and on the Journal's Objective page.
-- Matriochka is translated into Spanish, German and Brazilian Portuguese: every name, the interface, quests, achievements, the Scroll, the fifty Journal pages, endings, credits and subtitles. A string missing from a language shows in English.
-- Button and ribbon labels shrink to fit when a language makes them longer.
-- Mod Menu (optional): Matriochka's entry has its summary, links to the wiki, the Discord and the issues, and a small info screen with a Comfort button that opens the comfort options.
-- Xaero's Minimap and World Map: their cave view and entity radar are turned off in the Lightless Deep (World 5), where they would show what the darkness hides, and back on when you leave.
-- Checked with Sodium, Iris, Xaero's maps, JourneyMap, VoxelMap and Traveler's Backpack for 26.3: no conflict found, and no backpack way around the progression (see the Compatibility page).
+Trials, world events and talents to replay the worlds, a unique animation for every boss attack, a new look for each world, the design's rules for automation, souls and quests, comfort options, cinematics and adaptive music, a guided start, and three new languages.
+
+### Replay value
+
 - Trials, open once you have seen an ending: a rush per world (two waves of its creatures, the second led by its elites, then its boss) and the Gauntlet of the eleven bosses, fought against the clock on a lacquered stage inside the Refuge doll, painted for each world. Trial bosses have more health and damage and always wake mutated, without their introduction cinematic, and grant nothing of the story. Open them from the Journal's Objective page, a new Trial Altar or `/matriochka trials start`. Falling carries you out instead of killing you.
 - A trial clock on the HUD (green under par), best times per player and per group, and a server-wide board of the ten best groups per trial, in the new Trials book and with `/matriochka trials top`. The first win of each trial gives its Trophy Doll and a title; finishing under par gives Swift Hand. Titles can be worn from the Trials book, quest titles included.
 - World events while you are in a world: invasions (three waves, the last led by a glowing warlord, a reward chest at the end), a surge of each world's rule (twice as strong for two minutes, with its own effect and particles: Spore Bloom, Magma Surge, Lockdown, Tempest, Blackout, Gravity Storm, Crushing Current, Season Rush, Great Quake, Unravelling) and a travelling merchant per world with special trades. A boss bar follows each event. Never in peaceful; frequency and weights in `config/matriochka.json` (`worldEvents`, `worldEventChance`, `worldEventCooldown`, the three weights). Operators can start one with `/matriochka event`.
 - Talent trees at the Class Table: three branches of four talents per class, bought with souls and, for the last two of a branch, Shell Shards, opened by your group's progression. A class's talents act while you wear or hold its gear. A new cabinet screen with the six trees, tooltips for every talent and a Forget button that gives back half the souls.
 - New gear with its own behaviour: the Spore Bow (World 1), Magma Flail (2), Key Chain Whip (3), Storm Javelin (4, thrown, calls lightning and comes back), Lantern Shield (5, a blocked blow blinds and throws back), Tide Harpoon (7, thrown, drags its catch back) and Quake Pick (9, mines three blocks, a tremor on the ground). Each is crafted at its world's station and has hand-drawn pixel art; the bow has its drawing frames.
 - One more structure per world: the Gatherers' and Ephemeral Caravans, the Ember, Hushed and Restless Circles, the Gaolers' Gatehouse and the Drowned Bastion, the Sky, Hanging and Thimble Outposts, each decorated in its world's materials, with its loot.
+
+### Bosses
+
+- Every boss attack has its own hand-made animation: the boss shows what is coming during the warning (the Guardian heaves a torn block overhead, the Queen's egg sac swells, the Titan lifts its hammer, the Jailer spreads its arms like walls, the Light Eater sinks low to stalk...), strikes, then stays open and spent for exactly as long as it takes extra damage. Each boss also has its own phase change (the Guardian rebuilds itself, the Queen folds into her cocoon, the Jailer turns its key, the Unfinished paints a new face) and its own fall, which now plays out for two seconds instead of the vanilla tip-over.
+- The Artisan's Shadow keeps its animations in step with the world whose timing it borrows; the Unfinished's are cut for the final, shortest tier it now fights on.
+- The Unfinished now fights on the shortest timing tier on every shell, as the final fight of the design.
+- Bosses no longer poison themselves in their own toxic cloud, nor get struck by the lightning they call down (a player's lightning still hits them). The Jailer's floor cage only closes on the fighters, not on spectators or creative players watching.
+
+### Look and atmosphere
+
+- New hand-painted textures for the items and blocks you see most, in the vanilla style (outlines, three to four tones lit from the top left, warm highlights and cool shadows): the ten hidden dolls, the Nested Dolls, the Whole Matryoshka and the other dolls, the eleven cores, the ten Seeds, every armor piece and world weapon, the four snorkel helmets, the Scroll, Journal and pages, the four boss offerings, the World Soils, the World Block, the Threshold and every face of the thirteen stations. Each world's objects share its palette and glyph.
+- The lit parts of the stations and the Threshold's doorway glow in the dark (emissive faces, as vanilla does for the firefly bush).
+- Every world has its own light and fog: spore haze in World 1, heat and falling embers in World 2, cold dust in World 3, a storm sky in World 4, near-black fog in World 5, an inverted pastel sky in World 6, deep blue water fog in World 7, light tinted by the season in World 8 (petals, pollen, leaves or snow), rust haze in World 9, warm workshop light with floating fluff in World 10, and lantern light with gold dust in World 0.
+- World 0 reads as a warm red dusk, not a wall of fog: the lacquer carries its own light and the haze opens from 12 to 112 blocks. World 3's cold fog is darker than its stone, so its halls read at a corridor's length; World 5 stays black, but a lantern now reads across a cavern (its fog closes in from 4 to 30 blocks).
+- Eighteen new particles (spores, embers, cold dust, chain glints, lightning sparks, shadow wisps, deep motes, mirror shards, bubbles, petals, pollen, leaves, snowflakes, grit, rust, thread scraps, fluff, gold dust). Boss attacks spray their world's particles where they land and around their warning ring, and many creature attacks use them.
+- The bubble, cold dust, deep mote, pollen and rust particles are redrawn so they read at their size (the bubble's first frame had broken into four corner dots).
+- Matriochka HD: an optional resource pack with the same textures at 32 x 32, attached to each release.
+- Works with Iris shader packs through vanilla light only (emissive faces, full-bright particles); see the Visuals page of the wiki.
+
+### Game rules from the design
+
+- Station automation: every station with recipes now works with hoppers. A station keeps one recipe, the last one crafted there by hand or the one picked with the new gilded funnel on its drawer. Ingredients go in from the top and the sides (each ingredient has its own slots, anything else is refused), the result comes out from below, and a comparator reads how full the station is. Each station keeps its condition: heat for the Ash Foundry, a charge for the Lightning Forge (lightning, or Storm Essence fed into its fuel slot), darkness, deep water, dawn and dusk; the Spore Vat waits for a ripe brew and the Jailer's Table makes one batch per lock pattern entered. The Soul Altar and the Class Table stay manual. Breaking a station drops its buffer.
+- Shake a World Block on purpose: a player of the owning group outside can sneak and use it with empty hands to help those inside (creatures stunned and thrown off their feet for 3 seconds, a boss staggered and open), or strike it with the new Doll Mallet to hinder them (the world quakes and loose blocks fall over their heads). One shake per world every 30 seconds; other groups cannot.
+- Rebuilding a Doll of Life layer at the Soul Altar now also costs 4 rare resources of the current world, as the design asks. The cost is shown under the button, with a tooltip listing the resources that count.
+- Structure chests now keep souls: Soul Shards (5 souls) and Soul Vessels (20), about 10 souls per chest and 100 per world, a little more in the deeper worlds. Use them to free their souls (sneak for the whole stack); they do not move karma. Chests generated before keep their loot.
+- Every quest checks what its description says. Deliveries are handed to the world's people (Hard Harvest, The Miners' Pay, A Life in a Day by day, A Warm Hearth); places are reached (Read the Plan, Last Message, The Impossible Stair, The Wreck's Crew, The Ground Plan, The Surveyor, Looking Down); stations are used (The Vat with a ripe brew, Under Control, Catch the Lightning, Double Meaning, Compress, The Workshop); kills ask for their condition (No Filter, Bare Hands, The Night Light, Lost Reflection, All at Once); and Read Between the Lines, Fingers in the Doll, First Flight, Light the Lighthouse, Hear the Danger, The Signs, The Silent Station, Four Seasons, The Archives, The Drifting Fort, The Apprentices and Every Tool watch the real action. Several descriptions say more precisely what to do. Many Hands only counts the peoples of the worlds.
+
+### Comfort, cinematics and music
+
+- Comfort options, opened from the Journal (Comfort button) and saved in `config/matriochka-client.json`: screen shake strength, flashes, soft effects (no Nausea or Darkness, a gentle tint instead; the server skips the effects for that player), cinematics, large boss attack subtitles, fewer particles, colour-blind gauge patterns, HUD plaque size and corner, and a volume per kind of music.
+- Boss introductions: letterbox bars, the camera turning toward the boss with a slow push-in, and a framed title card with the boss's name and title.
+- A title card the first time you enter each world, with its rule medallion and a line about its law.
+- Boss phase breaks freeze-frame with a flash and the shell's number; heavy boss blows, World 9's moving ground, a moved World Block's quake and a trembling World Block nearby shake the camera.
+- The endings' crawl is framed by letterbox bars.
+- Adaptive music: a danger theme while creatures hunt you, the boss themes during fights, a heartbeat at low health or breath, and stings for a structure, a Journal page or a quest; themes fade into one another and the world theme comes back soon after.
+
+### First steps, languages and compatibility
+
+- First steps: until you enter World 1, a small lacquered card under the HUD plaque shows the next of ten steps (read the Scroll, find the Guardian's Sanctuary, wake and defeat the Guardian, place the Matrix Workbench, craft the World 1 Seed, till World Soil, plant it by water, wait for it to hatch, enter), with the step's item, a short hint and a compass needle toward the nearest sanctuary with its distance. Every step is detected from what you really do, a later step done first skips ahead, and progress is kept per player. Hide it or bring it back with the Guide button on the Scroll and on the Journal's Objective page.
+- Matriochka is translated into Spanish, German and Brazilian Portuguese: every name, the interface, quests, achievements, the Scroll, the fifty Journal pages, endings, credits and subtitles. A string missing from a language shows in English.
+- Button and ribbon labels shrink to fit when a language makes them longer.
+- Mod Menu (optional): Matriochka's entry has its summary, links to the wiki, the Discord and the issues, and a small info screen with a Comfort button that opens the comfort options.
+- Xaero's Minimap and World Map: their cave view and entity radar are turned off in the Lightless Deep (World 5), where they would show what the darkness hides, and back on when you leave.
+- Checked with Sodium, Iris, Xaero's maps, JourneyMap, VoxelMap and Traveler's Backpack for 26.3: no conflict found, and no backpack way around the progression (see the Compatibility page).
+
+### Balance, servers and modpack
+
+- Balance pass, checked by the new `tools/balance.py` against the design's targets (report: [Balance](docs-wiki-drafts/Balance.md)):
+  - Berserker weapons add 8% of their damage plus the whole bonus of their level (up to +58% at level 5, was at most +12%), so the reference creature again takes about 5 hits in World 10, as the design plans.
+  - Bosses leave 3 Shell Shards instead of 2: enough to bring each world's weapon to the class cap.
+  - Dungeon Rat 18 -> 22 health; Executioner 11.5 -> 10.1 damage; Sky Harpooner 59 -> 111 health and 8.6 -> 10.4 damage (it was weaker than the Island Warden); Unstable Sphere 19.9 -> 17.4, Earth Hand 34.4 -> 30.1 and Titan Ray 41.3 -> 36.1 damage (regular creatures that hit like elites).
+- Server options in `config/matriochka.json`: `karma` (on or off), `soulGainMultiplier`, `maxActiveGroups` and `maxParcels`.
+- The Matriochka Pack: a Modrinth modpack (`.mrpack`) with the mod, Fabric API, GeckoLib, Just Enough Items (optional) and client performance mods (Sodium, Lithium, FerriteCore, Entity Culling, ImmediatelyFast, Dynamic FPS, Krypton, Mod Menu, Iris as an option), in a normal and a hard (nightmare) version. Built by `tools/modpack.py` and attached to every GitHub release. See [Modpack](docs-wiki-drafts/Modpack.md).
+
+### Tools and checks
+
+- `tools/anim_preview.py` renders contact sheets of the boss animations (`docs-wiki-drafts/boss-anims/`).
+- New check run: `./gradlew runClientGameTest -Pautomation`.
+- A playthrough test (`./gradlew runClientGameTest -Pplaythrough`) plays the whole game in real ticks, from the Guardian through the ten worlds to World 0 and the third ending, and checks every step.
+
+### Fixes
+
+- World 2's Threshold and the Ash Titan's lair were placed above the build limit, over the rock roof, so nothing was built and travellers landed on the roof: they now stand on a cave floor under the roof, with a lit gallery to the lair, and a Threshold saved too high is rebuilt.
+- Nesting two dolls no longer loses both: the Nested Dolls stay in your hand.
+- A blow the Lantern Shield blocks completely now makes it flare.
 
 ## 0.3.0 (alpha)
 
