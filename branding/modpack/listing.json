@@ -1,0 +1,69 @@
+{
+  "name": "Matriochka Pack",
+  "slug": "matriochka-pack",
+  "project_type": "modpack",
+  "summary_file": "summary.txt",
+  "description_file": "description.md",
+  "icon": "icon.png",
+  "categories": ["adventure", "challenging", "quests"],
+  "additional_categories": ["optimization", "lightweight"],
+  "client_side": "required",
+  "server_side": "optional",
+  "license": {"id": "MIT", "url": "https://github.com/achedon12/matriochka/blob/main/LICENSE"},
+  "game_versions": ["26.3"],
+  "loaders": ["fabric"],
+  "links": {
+    "source": "https://github.com/achedon12/matriochka",
+    "issues": "https://github.com/achedon12/matriochka/issues",
+    "wiki": "https://github.com/achedon12/matriochka/wiki/Modpack",
+    "discord": "https://discord.gg/SPVCf5hRuh",
+    "website": "https://achedon12.github.io/matriochka/"
+  },
+  "versions": {
+    "how": "uploaded by the release workflow (tools/modpack_publish.sh) once the repository variable MODRINTH_PACK_PROJECT_ID is set; for 0.4.0 run the modpack workflow with tag v0.4.0",
+    "normal": {"version_number": "0.4.0", "name": "Matriochka Pack 0.4.0", "file": "matriochka-pack-0.4.0+26.3.mrpack"},
+    "hard": {"version_number": "0.4.0-hard", "name": "Matriochka Pack 0.4.0 (Hard)", "file": "matriochka-pack-0.4.0-hard+26.3.mrpack"},
+    "version_type": "alpha"
+  },
+  "gallery": [
+    {
+      "file": "gallery/01-the-unfinished.jpg",
+      "title": "The Unfinished",
+      "description": "The boss of World 10, the Giant Workshop, fought on its lacquered stage. Every attack is announced, struck, then leaves an opening.",
+      "featured": true
+    },
+    {
+      "file": "gallery/02-workshop-creatures.jpg",
+      "title": "The Giant Workshop",
+      "description": "World 10's creatures, the last world before the smallest doll: a synthesis of the nine rules before it."
+    },
+    {
+      "file": "gallery/03-light-eater.jpg",
+      "title": "The Light Eater",
+      "description": "Boss of World 5, the Lightless Deep, where noise is the rule. The pack leaves out dynamic lights so the dark stays dark."
+    },
+    {
+      "file": "gallery/04-giant-veins.jpg",
+      "title": "World 2, Giant Veins",
+      "description": "Heat is the rule here. Each of the ten worlds has its own creatures, station, structures and boss."
+    },
+    {
+      "file": "gallery/05-hud.jpg",
+      "title": "The world plaque",
+      "description": "The HUD shows the world you are in, its rule gauge (toxin in World 1) and your souls. Its size and corner are comfort options."
+    },
+    {
+      "file": "gallery/06-journal.jpg",
+      "title": "The Artisan's Journal",
+      "description": "Objective, quests, karma, worlds, the Scroll and the pages you found, in one book. Its Comfort button holds the accessibility options."
+    }
+  ],
+  "gallery_sources": {
+    "01-the-unfinished.jpg": "build/run/clientGameTest/screenshots/seq_w10_k_0000.png (-Pepic capture, 2560x1440)",
+    "02-workshop-creatures.jpg": "build/run/clientGameTest/screenshots/seq_w10_t_0034.png (-Pepic capture)",
+    "03-light-eater.jpg": "shots2/plain/w05_boss.png",
+    "04-giant-veins.jpg": "shots2/plain/w02_view.png",
+    "05-hud.jpg": "shots2/comfort/comfort_hud.png (-Pcomfort capture)",
+    "06-journal.jpg": "shots2/plain/gui_journal_1.png, cropped to the Journal"
+  }
+}
