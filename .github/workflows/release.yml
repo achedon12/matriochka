@@ -205,7 +205,8 @@ jobs:
 
       - name: CurseForge modpack
         id: cfpack
-        if: steps.v.outputs.publish == 'true'
+        # only once the CurseForge pack project exists (it needs the CURSEFORGE_API_KEY secret)
+        if: steps.v.outputs.publish == 'true' && vars.CURSEFORGE_PACK_PROJECT_ID != ''
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}

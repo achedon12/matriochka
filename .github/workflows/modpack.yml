@@ -85,6 +85,7 @@ jobs:
 
       - name: CurseForge pack
         id: cfpack
+        if: inputs.target != 'modrinth'
         continue-on-error: true
         env:
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
@@ -124,7 +125,7 @@ jobs:
           CFPACK: ${{ steps.cfpack.outcome }}
         run: |
           echo "Modrinth pack: $PACK, CurseForge pack: $CFPACK"
-          if [ "$PACK" != success ] || [ "$CFPACK" != success ]; then
+          if [ "$PACK" != success ] || { [ "$CFPACK" != success ] && [ "$CFPACK" != skipped ]; }; then
             echo "::error::a pack could not be built, see its step"
             exit 1
           fi
