@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+### Interface
+
+- The mod's peoples trade at a painted market stall instead of the villager screen (the people of each world, the Doll Peddler, the travelling merchants and the black market): a ledger of every offer on parchment with its stock and the karma's discount or markup, a plum "under the counter" section for the black market's goods, sold-out lines stamped, the trader's plaque with its world's medallion, the kind of trader, a travelling merchant's time left and the karma, the counter with the selected trade and the inventory tray. The menu, its slots and its packets stay vanilla's: shift-click, the wheel, tooltips and the delivery quests work as before, and vanilla villagers keep their screen (see [Trading Stall and Cycle Recap](docs-wiki-drafts/Trading-Stall-and-Cycle-Recap.md)).
+- The recap of a cycle after an ending's crawl: the great doll opens in two halves on the ending, the cycle, the eleven bosses' cores, worlds opened, deaths, Doll of Life layers lost and rebuilt, souls gathered, time played, hidden dolls, Journal pages and quests, karma, class and the best Trial. F1 hides the buttons for a picture to share; the Journal's Objective page reopens it (**Last cycle**).
+
+### Systems
+
+- The player's state counts each cycle (time played, deaths, layers lost and rebuilt, souls, pages, quests, hidden dolls, worlds entered, bosses beaten, Trial times), saved and synced with the rest, written into the recap at each ending and started again at each New Cycle.
+
+### Checks
+
+- `./gradlew runClientGameTest -Pscreens` opens the stall for the Peddler, a people with many wares (scrolled), the black market, a travelling merchant and a sold-out line, trades through it by click and shift-click and checks the stock and the karma's prices; then counts a real death, a boss kill and a page found, reaches the three endings in two cycles, checks the recap's numbers and the Journal's button, and photographs both screens at GUI scales 2, 3 and 4, in a 640x480 window, in English, German and French.
+- Test runs and captures play no sound (OpenAL Soft's null output); `-Psound` for a capture that needs audio.
+
 ## 0.4.1 (alpha)
 
 The kneel at the end calms the whole room, the Trials and talent screens and the new structures are fixed after a look at every one of them, talents are balanced against the design, and the Matriochka Pack has its own Modrinth project.
