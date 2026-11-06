@@ -47,6 +47,7 @@ generates the textures, GeckoLib models and animations, lang files, worldgen and
 | `tools/sound.py` | the sound table: ids, subtitles, biome music and ambience |
 | `tools/sfx.py`, `tools/music.py`, `tools/synth.py` | sound recipes, the folk composer and the synthesizer |
 | `tools/site.py` | data and images for the website in `site/` |
+| `tools/modpack.py`, `tools/modpack_publish.sh`, `tools/pack_icon.py` | the Matriochka Pack for Modrinth and CurseForge, its upload and its icon (see the wiki's Modpack page) |
 
 Hand-written Java lives in `src/main/java` (game logic) and `src/client/java` (screens, HUD, renderers).
 

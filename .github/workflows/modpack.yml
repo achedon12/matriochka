@@ -1,0 +1,131 @@
+name: modpack
+
+# Builds the Matriochka Pack for a version that is already released and uploads it, without touching the mod:
+#   1. download the mod jar from the GitHub release of the tag (the exact bytes the packs point at)
+#   2. build the Modrinth (.mrpack) and CurseForge (.zip) packs, normal and hard, with the tag's gradle.properties
+#   3. attach them to that GitHub release
+#   4. upload them to the pack's Modrinth project (MODRINTH_TOKEN secret, MODRINTH_PACK_PROJECT_ID variable) and
+#      CurseForge project (CURSEFORGE_TOKEN secret, CURSEFORGE_PACK_PROJECT_ID variable); each is skipped with a
+#      warning when it is not configured. A version already on Modrinth is not uploaded twice.
+# The release workflow does the same on every new release; this one is for the first upload of a version that came
+# out before the pack's projects existed (0.4.0), or to upload a version again.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag, e.g. v0.4.0"
+        required: true
+      target:
+        description: "Where to upload the pack"
+        type: choice
+        options: [both, modrinth, curseforge, none]
+        default: both
+      cf_file:
+        description: "CurseForge file id of the mod jar (empty: looked up by fingerprint)"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  modpack:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ inputs.tag }}
+      TARGET: ${{ inputs.target }}
+      CF_FILE: ${{ inputs.cf_file }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Read the tagged version
+        id: v
+        run: |
+          case "$TAG" in v[0-9]*) ;; *) echo "::error::'$TAG' is not a release tag (vX.Y.Z)"; exit 1 ;; esac
+          git rev-parse --verify --quiet "refs/tags/$TAG" >/dev/null || { echo "::error::no tag $TAG"; exit 1; }
+          # the tools come from this branch, the versions from the tag
+          git show "$TAG:gradle.properties" > tag.properties
+          version=$(grep '^mod_version=' tag.properties | cut -d= -f2)
+          mc=$(grep '^minecraft_version=' tag.properties | cut -d= -f2)
+          [ "v$version" = "$TAG" ] || { echo "::error::$TAG declares mod_version $version"; exit 1; }
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "mc=$mc" >> "$GITHUB_OUTPUT"
+          git show "$TAG:CHANGELOG.md" | awk -v v="$version" '
+            index($0, "## " v) == 1 || index($0, "## [" v "]") == 1 {on=1; next}
+            on && /^## / {exit}
+            on {print}
+          ' > notes.md
+          [ -s notes.md ] || echo "::warning::CHANGELOG.md has no section for $version at $TAG"
+
+      - name: Download the mod jar
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
+          MC: ${{ steps.v.outputs.mc }}
+        run: |
+          gh release download "$TAG" --pattern "matriochka-$VERSION+$MC.jar" --dir dl
+          echo "JAR=dl/matriochka-$VERSION+$MC.jar" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Modrinth pack
+        id: pack
+        continue-on-error: true
+        run: |
+          python3 tools/modpack.py --properties tag.properties --jar "$JAR" --out build/modpack
+          python3 tools/modpack.py --properties tag.properties --jar "$JAR" --out build/modpack --hard
+          gh release upload "$TAG" build/modpack/*.mrpack --clobber
+
+      - name: CurseForge pack
+        id: cfpack
+        if: inputs.target != 'modrinth'
+        continue-on-error: true
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+        run: |
+          file=()
+          case "$CF_FILE" in
+            "") ;;
+            *[!0-9]*) echo "::error::cf_file must be a number"; exit 1 ;;
+            *) file=(--cf-mod-file "$CF_FILE") ;;
+          esac
+          python3 tools/modpack.py --properties tag.properties --jar "$JAR" --out build/modpack --curseforge "${file[@]}"
+          python3 tools/modpack.py --properties tag.properties --jar "$JAR" --out build/modpack --curseforge --hard "${file[@]}"
+          gh release upload "$TAG" build/modpack/*-curseforge.zip --clobber
+
+      - name: Upload to Modrinth
+        if: steps.pack.outcome == 'success' && (inputs.target == 'both' || inputs.target == 'modrinth')
+        env:
+          TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          PROJECT: ${{ vars.MODRINTH_PACK_PROJECT_ID }}
+          MC: ${{ steps.v.outputs.mc }}
+          VERSION: ${{ steps.v.outputs.version }}
+        run: tools/modpack_publish.sh modrinth
+
+      - name: Upload to CurseForge
+        if: ${{ !cancelled() && steps.cfpack.outcome == 'success' && (inputs.target == 'both' || inputs.target == 'curseforge') }}
+        env:
+          TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          PROJECT: ${{ vars.CURSEFORGE_PACK_PROJECT_ID }}
+          MC: ${{ steps.v.outputs.mc }}
+          VERSION: ${{ steps.v.outputs.version }}
+        run: tools/modpack_publish.sh curseforge
+
+      - name: Report
+        if: always()
+        env:
+          PACK: ${{ steps.pack.outcome }}
+          CFPACK: ${{ steps.cfpack.outcome }}
+        run: |
+          echo "Modrinth pack: $PACK, CurseForge pack: $CFPACK"
+          if [ "$PACK" != success ] || { [ "$CFPACK" != success ] && [ "$CFPACK" != skipped ]; }; then
+            echo "::error::a pack could not be built, see its step"
+            exit 1
+          fi

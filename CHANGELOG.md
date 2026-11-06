@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.4.1 (alpha)
+
+The kneel at the end calms the whole room, the Trials and talent screens and the new structures are fixed after a look at every one of them, talents are balanced against the design, and the Matriochka Pack has its own Modrinth project.
 
 ### Balance
 
@@ -20,11 +22,19 @@
 - The Trials book and the Journal no longer overlap wrapped text with what follows it; the Trials board's empty line wraps on the page.
 - Rebuilding a Gauntlet stage no longer drops the previous stage's carpets and banners at the players' feet.
 - Surges use their world's own particles (spores, embers, cold dust, storm sparks, shadow wisps, mirror shards, bubbles, petals, grit, thread), the warlord's name and its wave's warning are written in gold instead of an unreadable dark red, the harpoon draws its line to its catch, and the Quake Pick's tremor cracks the ground in rings of crumbs and grit.
+- The harpoon line is only drawn while its thrower is in the same world and within 48 blocks.
+- A first-steps guide that jumps to its end (progression given by command, a group ahead, an ending already seen) no longer shows its goodbye card, and the card never draws during a trial.
 
 ### Checks
 
 - `./gradlew runClientGameTest -Preplayshots` photographs the Trials, their stages in ten worlds, the HUD clock, the Trials and Talent screens in English and German, the new gear in hand and in use, the world events and the ten new structures (`-Ptakes=gtues` for parts).
 - The playthrough test keeps the Shadow's creatures in the room while kneeling and checks that they are stilled and that nothing knocks the player off the carpet.
+
+### Matriochka Pack
+
+- A CurseForge version of the pack: `tools/modpack.py --curseforge` writes the CurseForge modpack (`manifest.json`, `modlist.html`, the same configs), normal and hard, from the same files as the Modrinth pack, each matched to its CurseForge file by its bytes and checked against the CurseForge CDN. Mods with no such file are left out with what needs them: for 0.4.0, Mod Menu and its library Placeholder API (no 26.3 file on CurseForge), and JEI until its file is approved.
+- The pack is published on its own Modrinth and CurseForge projects: the release workflow uploads the hard then the normal pack once the `MODRINTH_PACK_PROJECT_ID` and `CURSEFORGE_PACK_PROJECT_ID` variables are set (the CurseForge export needs a `CURSEFORGE_API_KEY` secret), without ever failing the mod's release, and a new `modpack` workflow does the same for a version already released.
+- Listing material for both sites in `branding/modpack/`: an icon of its own (three dolls tied with a gold ribbon), descriptions, summaries, categories and a gallery.
 
 ## 0.4.0 (alpha)
 

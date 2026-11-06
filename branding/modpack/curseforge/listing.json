@@ -1,0 +1,33 @@
+{
+  "name": "Matriochka Pack",
+  "project_type": "Modpacks",
+  "summary_file": "summary.txt",
+  "description_file": "description.md",
+  "description_editor": "Markdown (the author console offers WYSIWYG or Markdown: choose Markdown and paste description.md)",
+  "avatar": "../icon.png",
+  "main_category": {"id": 4475, "name": "Adventure and RPG"},
+  "additional_categories": [
+    {"id": 4478, "name": "Quests"},
+    {"id": 4476, "name": "Exploration"},
+    {"id": 4481, "name": "Small / Light"}
+  ],
+  "game_version": "26.3",
+  "mod_loader": "Fabric",
+  "license": "MIT License",
+  "links": {
+    "source": "https://github.com/achedon12/matriochka",
+    "issues": "https://github.com/achedon12/matriochka/issues",
+    "wiki": "https://github.com/achedon12/matriochka/wiki/Modpack",
+    "discord": "https://discord.gg/SPVCf5hRuh",
+    "website": "https://achedon12.github.io/matriochka/"
+  },
+  "files": {
+    "how": "uploaded by the release workflow (tools/modpack_publish.sh curseforge) once the repository variable CURSEFORGE_PACK_PROJECT_ID and the secret CURSEFORGE_API_KEY are set; for 0.4.0 run the modpack workflow with tag v0.4.0",
+    "normal": {"display_name": "Matriochka Pack 0.4.0", "file": "matriochka-pack-0.4.0+26.3-curseforge.zip"},
+    "hard": {"display_name": "Matriochka Pack 0.4.0 (Hard)", "file": "matriochka-pack-0.4.0-hard+26.3-curseforge.zip"},
+    "release_type": "alpha",
+    "game_versions": ["26.3"]
+  },
+  "gallery": "same images, titles and descriptions as ../listing.json (gallery/*.jpg, 1920x1080)",
+  "categories_source": "https://api.curse.tools/v1/categories?gameId=432&classId=4471 (CurseForge modpack categories, November 2026)"
+}
