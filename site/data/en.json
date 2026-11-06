@@ -112,7 +112,7 @@
   "home": {
    "tagline": "Every block can hold a world.",
    "intro": "A Fabric mod for Minecraft 26.3. Ten worlds, each sealed inside a single block and nested in the one before it. Every world has its own rule, its own creatures, its own station, and a boss guarding the core that opens the next.",
-   "facts": "Minecraft 26.3 on Fabric, version 0.4.1. Solo and multiplayer.",
+   "facts": "Minecraft 26.3 on Fabric, version 0.4.2. Solo and multiplayer.",
    "dollsTitle": "A set of eleven nesting dolls, just opened: the Surface, then worlds 1 to 10, from the largest to the smallest",
    "dollsCaption": "The Surface, then the ten worlds it holds. Pick a doll to open its world.",
    "trailerH": "The trailer",
@@ -234,7 +234,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.4.1, changelog and source",
+     "note": "Version 0.4.2, changelog and source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -321,8 +321,8 @@
    "gallery": [],
    "ctaH": "Ready to shrink?",
    "ctaP": "Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25. In English, French, Spanish, German and Brazilian Portuguese.",
-   "ctaBtn": "Get version 0.4.1",
-   "download": "Download 0.4.1",
+   "ctaBtn": "Get version 0.4.2",
+   "download": "Download 0.4.2",
    "desc": "Matriochka, a Fabric mod for Minecraft 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss."
   },
   "worlds": {
@@ -1814,7 +1814,7 @@
   "download": {
    "h": "Download",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.4.1 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
+   "lead": "Version 0.4.2 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
    "desc": "Download Matriochka for Minecraft 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
    "sources": [
     {
@@ -1884,7 +1884,7 @@
    "installH": "Installing",
    "steps": [
     "Install Fabric Loader for Minecraft 26.3.",
-    "Download matriochka-0.4.1+26.3.jar from the GitHub releases.",
+    "Download matriochka-0.4.2+26.3.jar from the GitHub releases.",
     "Put it in your mods folder with Fabric API and GeckoLib.",
     "Launch the Fabric profile and create a new world. The Artisan's Scroll is waiting in your inventory."
    ],

@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.4.2 (alpha)
+
+The mod's traders get a painted market stall, and every ending now closes on a recap of the cycle.
 
 ### Interface
 
@@ -10,6 +12,11 @@
 ### Systems
 
 - The player's state counts each cycle (time played, deaths, layers lost and rebuilt, souls, pages, quests, hidden dolls, worlds entered, bosses beaten, Trial times), saved and synced with the rest, written into the recap at each ending and started again at each New Cycle.
+
+### Website
+
+- Each boss's 3D viewer plays its real attacks, named in English and French, as one move (wind-up, strike, recover), plus its phase change and fall; the bosses page shows every attack's wind-up and strike in game, with a link to the attack in 3D.
+- The French site no longer shows English animation names, nor "Iron pickaxe".
 
 ### Checks
 
