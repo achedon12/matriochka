@@ -81,6 +81,8 @@ final class TiktokCapture {
 			ctx.waitTick();
 			Ui.frameClock += 50;
 		}
+		// no toast in a promo frame (advancements, recipes, tutorials): they show test state
+		ctx.runOnClient(mc -> mc.gui.toastManager().clear());
 	}
 
 	private static TestServerContext SERVER;
@@ -186,6 +188,9 @@ final class TiktokCapture {
 				o.framerateLimit().set(260);
 				o.fov().set(75);
 				o.guiScale().set(3);
+				// the chat stays hidden: command feedback, game mode changes and the test player's name never show
+				o.chatVisibility().set(net.minecraft.world.entity.player.ChatVisiblity.HIDDEN);
+				mc.gui.hud.getChat().clearMessages(true);
 				mc.resizeGui();
 			});
 			int[] win = ctx.computeOnClient(mc -> new int[]{mc.getWindow().getWidth(), mc.getWindow().getHeight(), mc.getWindow().getGuiScaledWidth()});
@@ -197,6 +202,8 @@ final class TiktokCapture {
 			s.runCommand("gamerule spawn_monsters false");
 			s.runCommand("gamerule announce_advancements false");
 			s.runCommand("gamerule show_death_messages false");
+			s.runCommand("gamerule send_command_feedback false");
+			s.runCommand("gamerule log_admin_commands false");
 			s.runCommand("gamerule fire_spread_radius_around_player 0");
 			s.runCommand("time set 11200");
 			s.runCommand("difficulty normal");
