@@ -107,7 +107,7 @@
   "home": {
    "tagline": "Chaque bloc peut contenir un monde.",
    "intro": "Un mod Fabric pour Minecraft 26.3. Dix mondes, chacun scellé dans un seul bloc et emboîté dans le précédent. Chaque monde a sa règle, ses créatures, sa station, et un boss qui garde le noyau ouvrant le suivant.",
-   "facts": "Minecraft 26.3 sous Fabric, version 0.4.0. Solo et multijoueur.",
+   "facts": "Minecraft 26.3 sous Fabric, version 0.4.1. Solo et multijoueur.",
    "dollsTitle": "Un jeu de onze poupées gigognes qu'on vient d'ouvrir : la Surface, puis les mondes 1 à 10, de la plus grande à la plus petite",
    "dollsCaption": "La Surface, puis les dix mondes qu'elle contient. Choisis une poupée pour ouvrir son monde.",
    "trailerH": "La bande-annonce",
@@ -229,7 +229,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.4.0, journal des changements et code source",
+     "note": "Version 0.4.1, journal des changements et code source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -316,8 +316,8 @@
    "gallery": [],
    "ctaH": "Prêt à rétrécir ?",
    "ctaP": "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25. En anglais, français, espagnol, allemand et portugais du Brésil.",
-   "ctaBtn": "Obtenir la version 0.4.0",
-   "download": "Télécharger la 0.4.0",
+   "ctaBtn": "Obtenir la version 0.4.1",
+   "download": "Télécharger la 0.4.1",
    "desc": "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
   },
   "worlds": {
@@ -1809,7 +1809,7 @@
   "download": {
    "h": "Télécharger",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.4.0 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
+   "lead": "Version 0.4.1 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
    "desc": "Télécharger Matriochka pour Minecraft 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur.",
    "sources": [
     {
@@ -1879,7 +1879,7 @@
    "installH": "Installation",
    "steps": [
     "Installe Fabric Loader pour Minecraft 26.3.",
-    "Télécharge matriochka-0.4.0+26.3.jar depuis les versions GitHub.",
+    "Télécharge matriochka-0.4.1+26.3.jar depuis les versions GitHub.",
     "Place-le dans ton dossier mods avec Fabric API et GeckoLib.",
     "Lance le profil Fabric et crée un nouveau monde. Le Parchemin de l'artisan t'attend dans l'inventaire."
    ],
