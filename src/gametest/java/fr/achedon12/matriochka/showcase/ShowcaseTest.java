@@ -85,34 +85,6 @@ public class ShowcaseTest implements FabricClientGameTest {
 		}
 	}
 
-	/** Lets a few creatures fight a protected survival player and logs every move they start. */
-	private static void moves(ClientGameTestContext ctx) {
-		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
-			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
-			server.runCommand("gamerule advance_time false");
-			server.runCommand("gamerule announce_advancements false");
-			server.runCommand("time set 6000");
-			server.runCommand("difficulty normal");
-			server.runCommand("execute as @p at @s run spreadplayers ~ ~ 0 1 false @s");
-			server.runCommand("gamemode survival @a");
-			server.runCommand("effect give @a resistance infinite 4 true");
-			server.runCommand("effect give @a regeneration infinite 4 true");
-			server.runCommand("effect give @a saturation infinite 4 true");
-			ctx.setScreen(() -> null);
-			ctx.waitTicks(40);
-			String[] mobs = {"executioner", "blind_prowler", "dead_smith", "sentinel", "storm_bird", "bell_crab"};
-			for (int i = 0; i < mobs.length; i++) {
-				server.runCommand("execute as @p at @s run summon matriochka:" + mobs[i] + " ~" + (i % 3 * 3 - 3) + " ~2 ~" + (6 + i / 3 * 3));
-			}
-			server.runCommand("execute as @p at @s run tp @s ~ ~ ~ 0 20");
-			for (int i = 0; i < 12; i++) {
-				ctx.waitTicks(50);
-				shot(ctx, String.format("moves_%02d", i));
-			}
-		}
-	}
-
 	/** Moves the cursor to a point given in GUI coordinates. */
 	private static void cursor(ClientGameTestContext ctx, double gx, double gy) {
 		double scale = ctx.computeOnClient(mc -> mc.getWindow().getGuiScale());
@@ -272,7 +244,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 			return;
 		}
 		if ("moves".equals(System.getProperty("matriochka.capture"))) {
-			moves(ctx);
+			MovesTest.run(ctx);
 			return;
 		}
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {

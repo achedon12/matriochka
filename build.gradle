@@ -63,7 +63,7 @@ loom {
 				vmArgs '-Dmatriochka.capture=scale'
 			}
 			if (name == 'clientGameTest' && project.hasProperty('visuals')) {
-				vmArgs '-Dmatriochka.capture=visuals'
+				vmArgs '-Dmatriochka.capture=visuals', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: '')
 			}
 			if (name == 'clientGameTest' && project.hasProperty('comfort')) {
 				vmArgs '-Dmatriochka.capture=comfort'
@@ -78,7 +78,7 @@ loom {
 				vmArgs '-Dmatriochka.capture=replay'
 			}
 			if (name == 'clientGameTest' && project.hasProperty('moves')) {
-				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true'
+				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true', '-Dmatriochka.bosses=' + (project.findProperty('bosses') ?: '')
 			}
 		}
 	}
