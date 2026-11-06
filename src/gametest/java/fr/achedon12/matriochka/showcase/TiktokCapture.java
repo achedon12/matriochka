@@ -690,6 +690,9 @@ final class TiktokCapture {
 			BlockPos a = arena(s, w);
 			String id = BOSSES[w];
 			boolean lair = w > 0 && ModContent.bossForWorld(w).lair();
+			// -Pfull=...: the worlds that also get the boss's introduction and attacks (all when empty)
+			String fullList = System.getProperty("matriochka.full", "");
+			boolean full = fullList.isEmpty() || ("," + fullList + ",").contains("," + w + ",");
 
 			if (take('g') && w == 10) giant(ctx, sp);
 			if (take('d') && w == 5) dark(ctx, sp, a);
@@ -705,7 +708,7 @@ final class TiktokCapture {
 				chunks(ctx, sp);
 				camera(ctx, CameraType.FIRST_PERSON);
 				boolean exists = s.computeOnServer(srv -> boss(srv, id) != null);
-				if (take('i') && !exists) {
+				if (take('i') && full && !exists) {
 					hud(ctx, true);
 					s.runOnServer(srv -> MatrioBoss.summon((ServerLevel) player(srv).level(), id, a, player(srv), true));
 					for (int k = 0; k < 96; k++) {
@@ -747,7 +750,7 @@ final class TiktokCapture {
 			}
 
 			// B: the signature attacks, the boss alone against an invisible target, seen from low in front
-			if (take('b')) {
+			if (take('b') && full) {
 				s.runCommand("gamemode creative @a");
 				fly(s);
 				int[] picks = MOVES[w];
