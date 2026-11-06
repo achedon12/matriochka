@@ -28,6 +28,11 @@ public class TutorialCard implements HudElement {
 	private int lastStep = -1;
 	private long changedAt = Ui.now(), doneAt = -1;
 
+	private static boolean endingSeen() {
+		var s = MatrioClient.state;
+		return s.getBooleanOr("f_end_seal", false) || s.getBooleanOr("f_end_absorb", false) || s.getBooleanOr("f_end_tools", false);
+	}
+
 	/** Whether the card is hidden by the player's choice. */
 	static boolean hidden() {
 		return MatrioClient.state.getBooleanOr("f_tut_hide", false);
@@ -73,10 +78,16 @@ public class TutorialCard implements HudElement {
 		long now = Ui.now();
 		if (step != lastStep) {
 			// a step done in this session: slide in again; the last one gets a farewell card
+			// The farewell is only for a guide finished by playing it (from the Seed's hatching or the entry into
+			// World 1). A guide that jumps to its end (progression given by command, a player who has already seen an
+			// ending, a group that has gone ahead) just goes away, with no card over whatever the player is doing.
 			if (lastStep >= 0 && step > lastStep) {
-				changedAt = now;
-				Ui.sound(SoundEvents.BOOK_PAGE_TURN, 1.3f, 0.8f);
-				if (step >= Tutorial.DONE) {
+				boolean played = step < Tutorial.DONE || (lastStep >= Tutorial.DONE - 2 && !endingSeen());
+				if (played) {
+					changedAt = now;
+					Ui.sound(SoundEvents.BOOK_PAGE_TURN, 1.3f, 0.8f);
+				}
+				if (step >= Tutorial.DONE && played) {
 					doneAt = now;
 					Ui.sound(SoundEvents.PLAYER_LEVELUP, 1.6f, 0.35f);
 				}
@@ -86,6 +97,8 @@ public class TutorialCard implements HudElement {
 		if (hidden()) return;
 		boolean done = step >= Tutorial.DONE;
 		if (done && (doneAt < 0 || now - doneAt > FAREWELL_MS)) return;
+		// never over a trial, whose clock owns the top of the screen
+		if (MatrioClient.state.getCompoundOrEmpty("trial").contains("key")) return;
 		draw(g, mc, step, done, now);
 	}
 
