@@ -29,6 +29,9 @@ loom {
 			vmArgs '-Xmx3G'
 		}
 		configureEach {
+			// no sound reaches the speakers during runs and captures: OpenAL Soft plays to its null output, the game's
+			// sound logic (music state, cues) still runs. -Psound for a capture that needs real audio.
+			if (!project.hasProperty('sound')) environmentVariable 'ALSOFT_DRIVERS', 'null'
 			if (name == 'clientGameTest' && project.hasProperty('trailer')) {
 				vmArgs '-Dmatriochka.capture=trailer', '-Xmx6G', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: ''), '-Dmatriochka.takes=' + (project.findProperty('takes') ?: 'adbfcg')
 			}
@@ -79,6 +82,9 @@ loom {
 			}
 			if (name == 'clientGameTest' && project.hasProperty('replayshots')) {
 				vmArgs '-Dmatriochka.capture=replayshots', '-Xmx4G', '-Dmatriochka.takes=' + (project.findProperty('takes') ?: ''), '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: '')
+			}
+			if (name == 'clientGameTest' && project.hasProperty('screens')) {
+				vmArgs '-Dmatriochka.capture=screens'
 			}
 			if (name == 'clientGameTest' && project.hasProperty('moves')) {
 				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true', '-Dmatriochka.bosses=' + (project.findProperty('bosses') ?: '')
