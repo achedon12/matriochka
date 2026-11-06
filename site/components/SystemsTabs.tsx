@@ -1,5 +1,5 @@
 "use client";
-// The six systems as tiles; one panel open at a time, so the page stays short. The open panel follows the URL hash.
+// The systems as tiles; one panel open at a time, so the page stays short. The open panel follows the URL hash.
 import { useEffect, useState } from "react";
 import { asset } from "@/lib/data";
 import type { Ing } from "@/lib/types";
@@ -19,6 +19,26 @@ function Feature({ f }: { f: { tex: string | null; h: string; p: string; inputs?
 }
 
 const panel = "grid gap-6";
+
+function Photo({ src, caption, pixel = false }: { src: string | null; caption: string; pixel?: boolean }) {
+  if (!src) return null;
+  return (
+    <figure className="m-0">
+      <div className="border-2 border-gold bg-black shadow-frame">
+        <img className={`block h-auto w-full ${pixel ? "[image-rendering:pixelated]" : ""}`} src={asset(src)} alt={caption} loading="lazy" decoding="async" />
+      </div>
+      <figcaption className="mt-1.5 text-[13px] text-paper-dim">{caption}</figcaption>
+    </figure>
+  );
+}
+
+function Bullets({ items }: { items: string[] }) {
+  return (
+    <ul className="m-0 grid list-none content-start gap-2 p-0">
+      {items.map((x) => <li key={x} className="border-l-4 border-gold bg-ink/50 px-3 py-2 text-[15px] leading-snug text-paper">{x}</li>)}
+    </ul>
+  );
+}
 const h3 = "m-0 mb-3 font-display text-[26px] font-normal text-gold-b";
 
 function Survival({ s }: { s: S }) {
@@ -123,6 +143,130 @@ function Classes({ s }: { s: S }) {
           <div className="mt-4"><Feature f={s.chance} /></div>
         </div>
       </div>
+      <div>
+        <h3 className={h3}>{s.talentsH}</h3>
+        <p className="m-0 mb-4 max-w-[70ch] text-paper">{s.talentsLead}</p>
+        <div className="tbl mb-4"><table>
+          <thead><tr>{s.talentCols.map((c: string) => <th scope="col" key={c}>{c}</th>)}</tr></thead>
+          <tbody>{s.talentTiers.map((r: any) => <tr key={r.lv}><th scope="row">{r.lv}</th><td className="num">{r.souls}</td><td className="num">{r.shards}</td><td>{r.gate}</td></tr>)}</tbody>
+        </table></div>
+        <ul className="m-0 grid list-none gap-3 p-0 md:grid-cols-2 lg:grid-cols-3">
+          {s.talentTree.map((c: any) => (
+            <li key={c.cls} className="border-2 border-gold bg-ink/80 p-4">
+              <h4 className="m-0 mb-2 font-display text-2xl font-normal text-gold-b">{c.cls}</h4>
+              {c.branches.map((b: any) => (
+                <div key={b.name} className="mb-2 last:mb-0">
+                  <p className="m-0 font-body text-[15px] font-bold text-paper">{b.name}</p>
+                  <ol className="m-0 list-none p-0">
+                    {b.talents.map((x: any, i: number) => (
+                      <li key={x.name} className="text-[13px] leading-snug text-paper-dim"><span className="font-pixel text-gold-b">{i + 1}</span> {x.name}: {x.eff}</li>
+                    ))}
+                  </ol>
+                </div>
+              ))}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-[14px] text-paper-dim">{s.talentNote}</p>
+      </div>
+    </div>
+  );
+}
+
+function Workshop({ s }: { s: S }) {
+  return (
+    <div className={panel}>
+      <p className="m-0 max-w-[70ch] text-paper">{s.gearLead}</p>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{s.gear.map((f: any) => <Feature key={f.h} f={f} />)}</div>
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <h3 className={h3}>{s.autoH}</h3>
+          <Bullets items={s.auto} />
+        </div>
+        <div className="grid content-start gap-4">
+          <Photo src={s.autoShot.src} caption={s.autoShot.caption} />
+          <Feature f={s.shake} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Trials({ s }: { s: S }) {
+  return (
+    <div className={panel}>
+      <p className="m-0 max-w-[70ch] text-paper">{s.trialsLead}</p>
+      <ul className="m-0 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
+        {s.trialFacts.map((f: any) => (
+          <li key={f.k} className="border-2 border-gold bg-ink/80 px-4 py-3">
+            <span className="block text-[13px] text-paper-dim">{f.k}</span>
+            <span className="block font-pixel text-2xl leading-tight text-gold-b">{f.v}</span>
+            <span className="block text-[13px] leading-snug text-paper">{f.d}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="tbl"><table>
+          <thead><tr>{s.trialCols.map((c: string) => <th scope="col" key={c}>{c}</th>)}</tr></thead>
+          <tbody>{s.trialList.map((r: any) => <tr key={r.name}><th scope="row"><span className="inline-flex items-center gap-2"><Inlay src={r.tex} size={24} />{r.name}</span></th><td className="num">{r.par}</td></tr>)}</tbody>
+        </table></div>
+        <div>
+          <h3 className={h3}>{s.boardH}</h3>
+          <p className="m-0 text-[15px] text-paper">{s.board}</p>
+        </div>
+      </div>
+      <div>
+        <h3 className={h3}>{s.eventsH}</h3>
+        <p className="m-0 mb-4 max-w-[70ch] text-paper">{s.eventsLead}</p>
+        <ul className="m-0 mb-4 grid list-none gap-3 p-0 md:grid-cols-3">
+          {s.events.map((e: any) => (
+            <li key={e.h} className="border-2 border-gold bg-ink/80 p-4">
+              <h4 className="m-0 mb-1 flex items-center gap-2 font-display text-2xl font-normal text-gold-b"><Icon name={e.icon} className="size-6" />{e.h}</h4>
+              <p className="m-0 text-[15px] leading-snug text-paper">{e.p}</p>
+            </li>
+          ))}
+        </ul>
+        <ul className="m-0 grid list-none gap-2 p-0 sm:grid-cols-2">
+          {s.surges.map((x: any) => (
+            <li key={x.w} className="grid grid-cols-[36px_minmax(0,1fr)] items-baseline gap-2 border border-rule bg-ink/60 p-3">
+              <span className="font-pixel text-xl text-gold-b">{x.w}</span>
+              <span className="text-[14px] leading-snug text-paper"><strong className="text-paper">{x.name}</strong> <span className="text-paper-dim">{x.p}</span></span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-[14px] text-paper-dim">{s.eventsNote}</p>
+      </div>
+    </div>
+  );
+}
+
+function Comfort({ s }: { s: S }) {
+  return (
+    <div className={panel}>
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <h3 className={h3}>{s.comfortH}</h3>
+          <p className="m-0 mb-3 text-[15px] text-paper-dim">{s.comfortLead}</p>
+          <Bullets items={s.comfort} />
+        </div>
+        <Photo src={s.comfortShot.src} caption={s.comfortShot.caption} pixel />
+      </div>
+      <div>
+        <h3 className={h3}>{s.cineH}</h3>
+        <div className="grid gap-6 md:grid-cols-2">
+          <Bullets items={s.cine} />
+          <div className="grid content-start gap-4">{s.cineShots.map((j: any) => <Photo key={j.src} src={j.src} caption={j.caption} />)}</div>
+        </div>
+      </div>
+      <div>
+        <h3 className={h3}>{s.atmosH}</h3>
+        <p className="m-0 mb-4 max-w-[70ch] text-paper">{s.atmos}</p>
+        <div className="grid gap-4 md:grid-cols-2">{s.atmosShots.map((j: any) => <Photo key={j.src} src={j.src} caption={j.caption} />)}</div>
+      </div>
+      <div>
+        <h3 className={h3}>{s.langH}</h3>
+        <p className="m-0 max-w-[70ch] text-paper">{s.lang}</p>
+      </div>
     </div>
   );
 }
@@ -179,17 +323,19 @@ function Journal({ s }: { s: S }) {
           <div key={j.src} className="border-2 border-gold bg-black shadow-frame"><img className="block h-auto w-full [image-rendering:pixelated]" src={asset(j.src)} alt={j.caption} loading="lazy" /></div>
         ))}
       </div>
+      <Feature f={s.firstSteps} />
       <div>
         <h3 className={h3}>{s.titlesH}</h3>
         <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
           {s.titles.map((x: string) => <li key={x} className="rounded-[2px] border border-gold px-3 py-1 text-[14px] text-paper">{x}</li>)}
         </ul>
+        <p className="mt-3 text-[14px] text-paper-dim">{s.titlesNote}</p>
       </div>
     </div>
   );
 }
 
-const PANELS: Record<string, (p: { s: S }) => React.ReactElement> = { survival: Survival, souls: Souls, classes: Classes, nesting: Nesting, groups: Groups, journal: Journal };
+const PANELS: Record<string, (p: { s: S }) => React.ReactElement> = { survival: Survival, souls: Souls, classes: Classes, workshop: Workshop, nesting: Nesting, groups: Groups, journal: Journal, trials: Trials, comfort: Comfort };
 
 export default function SystemsTabs({ s }: { s: S }) {
   const ids: string[] = s.tiles.map((t: any) => t.id);

@@ -33,6 +33,8 @@ SITE = "https://achedon12.github.io/matriochka/"
 DISCORD = "https://discord.gg/SPVCf5hRuh"
 # the version shown on the site follows gradle.properties
 VERSION = next(l.split("=", 1)[1].strip() for l in open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "gradle.properties")) if l.startswith("mod_version="))
+# Shell Shards every boss leaves to each fighter (entity/MatrioBoss.java)
+SHELL_SHARDS = int(re.search(r"SHELL_SHARDS = (\d+);", open(os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/entity/MatrioBoss.java"), encoding="utf-8").read()).group(1))
 
 # Lucide icons (lucide-static 0.460.0, ISC licence), inner SVG markup only.
 ICONS = {
@@ -44,6 +46,7 @@ ICONS = {
     'cpu': '<rect width="16" height="16" x="4" y="4" rx="2"/> <rect width="6" height="6" x="9" y="9" rx="1"/> <path d="M15 2v2"/> <path d="M15 20v2"/> <path d="M2 15h2"/> <path d="M2 9h2"/> <path d="M20 15h2"/> <path d="M20 9h2"/> <path d="M9 2v2"/> <path d="M9 20v2"/>',
     'download': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/> <polyline points="7 10 12 15 17 10"/> <line x1="12" x2="12" y1="15" y2="3"/>',
     'droplets': '<path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/>',
+    'eye': '<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/> <circle cx="12" cy="12" r="3"/>',
     'external-link': '<path d="M15 3h6v6"/> <path d="M10 14 21 3"/> <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
     'flame': '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
     'gem': '<path d="M6 3h12l4 6-10 13L2 9Z"/> <path d="M11 3 8 9l4 13 4-13-3-6"/> <path d="M2 9h20"/>',
@@ -988,6 +991,10 @@ ARCH = {
     "hive": ("Lumpy domes with comb terraces, spore blossoms and a queen chamber.", "Des dômes bosselés aux terrasses d'alvéoles, fleurs à spores et chambre de la reine."),
     "cocoon": ("A great cocoon or crystal core with egg sacs around it.", "Un grand cocon ou un cœur de cristal entouré de poches d'œufs."),
     "wreck": ("A wrecked hull with a sterncastle cabin, a hold, masts and torn sails.", "Une coque échouée avec cabine de poupe, cale, mâts et voiles déchirées."),
+    "bastion": ("A walled courtyard with corner towers, a gatehouse with its portcullis and a keep at the back.", "Une cour fortifiée avec tours d'angle, un châtelet à herse et un donjon au fond."),
+    "circle": ("A ring of standing stones and lintels around a sunken altar where the guarded chest waits.", "Un cercle de pierres levées et de linteaux autour d'un autel enfoncé où attend le coffre gardé."),
+    "outpost": ("A lookout hut on stilts over a supply yard, with a signal fire on its deck.", "Une cabane de guet sur pilotis au-dessus d'une cour de ravitaillement, un feu de signal sur sa plateforme."),
+    "caravan": ("Covered wagons drawn up around a fire, with a stall and a hitching rail.", "Des chariots bâchés en cercle autour d'un feu, avec un étal et une barre d'attache."),
     "bell": ("A copper diving bell with portholes, a chain up to a buoy, crates and an anchor.", "Une cloche de plongée en cuivre à hublots, une chaîne vers une bouée, des caisses et une ancre."),
 }
 INSIDE = {
@@ -1258,7 +1265,7 @@ def build_copy():
         world=t("World", "Monde"), health=t("Health", "Vie"), damage=t("Damage", "Dégâts"), boss=t("Boss", "Boss"),
         creatures=t("Creatures", "Créatures"), rule=t("Rule", "Règle"), stage=t("Stage", "Palier"),
         seed=t("Opening it", "L'ouvrir"), station=t("Station", "Station"), builtFrom=t("Built at the Matrix Workbench from", "Se fabrique à l'Établi matriciel avec"),
-        carry=t("What you'll carry", "Ce que tu emporteras"), structures=t("Ten structures", "Dix structures"), armour=t("Armour set", "Armure"),
+        carry=t("What you'll carry", "Ce que tu emporteras"), structures=t("Eleven structures", "Onze structures"), armour=t("Armour set", "Armure"),
         madeAt=t("Made at the Matrix Workbench", "Fabriqué à l'Établi matriciel"), moreAbout=t("Everything about this world", "Tout sur ce monde"),
         allWorlds=t("All worlds", "Tous les mondes"), back=t("Back to the bestiary", "Retour au bestiaire"), backBosses=t("Back to the bosses", "Retour aux boss"),
         backWorlds=t("Back to the ten worlds", "Retour aux dix mondes"),
@@ -1338,7 +1345,13 @@ def build_copy():
                "Chaque arme, outil ou pièce d'armure naît avec l'une des six classes. Monte-la au niveau 5 avec des âmes, ou tente ta chance avec une Poupée du hasard.")),
             ("return_thread", t("Play as a group", "Joue en groupe"),
              t("Up to eight players share a group, its worlds and its defeated bosses. Bosses grow tougher with every player who joins the fight.",
-               "Jusqu'à huit joueurs partagent un groupe, ses mondes et ses boss vaincus. Les boss se renforcent à chaque joueur qui rejoint le combat."))]],
+               "Jusqu'à huit joueurs partagent un groupe, ses mondes et ses boss vaincus. Les boss se renforcent à chaque joueur qui rejoint le combat.")),
+            ("class_table", t("Talents", "Talents"),
+             t("Each class has three branches of four talents at the Class Table, bought with souls and Shell Shards and opened as your group goes deeper.",
+               "Chaque classe a trois branches de quatre talents à la Table de classe, achetés avec des âmes et des Éclats d'enveloppe, et ouverts à mesure que ton groupe descend.")),
+            ("trophy_doll_gauntlet", t("Trials and world events", "Épreuves et événements"),
+             t("After an ending, race each world's trial or the Gauntlet of the eleven bosses for the server's board. In the worlds, invasions, surges of the rule and travelling merchants come and go.",
+               "Après une fin, cours l'épreuve de chaque monde ou l'Épreuve des onze boss pour le tableau du serveur. Dans les mondes, invasions, poussées de la règle et marchands itinérants vont et viennent."))]],
         reelWatch=t("Watch the trailer", "Voir la bande-annonce"),
         heroGenre=t("A Minecraft mod of ten worlds, each sealed inside a block of the one before.",
                     "Un mod Minecraft de dix mondes, chacun scellé dans un bloc du précédent."),
@@ -1369,6 +1382,7 @@ def build_copy():
         platforms=[dict(name="GitHub", note=t(f"Version {VERSION}, changelog and source", f"Version {VERSION}, journal des changements et code source"), href=RELEASES, icon="github"),
                    dict(name="Modrinth", note=t("In review, coming soon", "En cours de validation, bientôt"), href=None, icon="package"),
                    dict(name="CurseForge", note=t("In review, coming soon", "En cours de validation, bientôt"), href=None, icon="package"),
+                   dict(name="Matriochka Pack", note=t("A ready modpack (.mrpack), normal or hard, on every release", "Un modpack prêt (.mrpack), normal ou difficile, à chaque version"), href=RELEASES, icon="package"),
                    dict(name="Discord", note=t("News, help and screenshots", "Nouvelles, aide et captures"), href=DISCORD, icon="users")],
         faqH=t("Questions", "Questions"),
         faq=[dict(q=t("Where do I start?", "Par où commencer ?"),
@@ -1385,6 +1399,15 @@ def build_copy():
                       "Oui, avec le mod sur le serveur et sur chaque client. Jusqu'à huit joueurs partagent un groupe, ses mondes et ses boss.")),
              dict(q=t("Does it work on Lunar Client?", "Ça marche sur Lunar Client ?"),
                   a=t("Through Lunar Client's Fabric profile for 26.3, with Fabric API and GeckoLib.", "Via le profil Fabric de Lunar Client pour la 26.3, avec Fabric API et GeckoLib.")),
+             dict(q=t("Does it work with Sodium, Iris and minimaps?", "Ça marche avec Sodium, Iris et les minicartes ?"),
+                  a=t("Yes. It was checked with Sodium, Iris, Xaero's Minimap and World Map, JourneyMap, VoxelMap and Traveler's Backpack. Xaero's cave view and radar switch off in the Lightless Deep, where they would show what the dark hides.",
+                      "Oui. Il a été vérifié avec Sodium, Iris, Xaero's Minimap et World Map, JourneyMap, VoxelMap et Traveler's Backpack. La vue des grottes et le radar de Xaero s'éteignent dans la Profondeur sans lumière, où ils montreraient ce que le noir cache.")),
+             dict(q=t("Is there a modpack?", "Y a-t-il un modpack ?"),
+                  a=t("The Matriochka Pack, a Modrinth .mrpack with the mod, its libraries, Just Enough Items and client performance mods, in a normal and a hard version. It is attached to every GitHub release, with the optional Matriochka HD resource pack.",
+                      "Le Matriochka Pack, un .mrpack Modrinth avec le mod, ses bibliothèques, Just Enough Items et des mods de performance, en version normale et difficile. Il est joint à chaque version GitHub, avec le pack de ressources facultatif Matriochka HD.")),
+             dict(q=t("Which languages does it speak?", "Dans quelles langues ?"),
+                  a=t("English, French, Spanish, German and Brazilian Portuguese: names, interface, quests, the Scroll, the fifty Journal pages, endings and subtitles.",
+                      "Anglais, français, espagnol, allemand et portugais du Brésil : noms, interface, quêtes, Parchemin, les cinquante pages du Journal, fins et sous-titres.")),
              dict(q=t("Can I fight a boss again?", "Je peux refaire un boss ?"),
                   a=t("Yes. Its altar wakes it again, and it drops its core, soil and souls again.", "Oui. Son autel le réveille à nouveau, et il laisse encore son noyau, sa terre et ses âmes."))],
         stripH=t("Ten worlds, one inside the other", "Dix mondes, l'un dans l'autre"),
@@ -1401,7 +1424,7 @@ def build_copy():
         galleryP=t("Captures from the mod running in Minecraft 26.3.", "Captures du mod en jeu, sous Minecraft 26.3."),
         gallery=[],
         ctaH=t("Ready to shrink?", "Prêt à rétrécir ?"),
-        ctaP=t("Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25.", "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25."),
+        ctaP=t("Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25. In English, French, Spanish, German and Brazilian Portuguese.", "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25. En anglais, français, espagnol, allemand et portugais du Brésil."),
         ctaBtn=t(f"Get version {VERSION}", f"Obtenir la version {VERSION}"),
         download=t(f"Download {VERSION}", f"Télécharger la {VERSION}"),
         desc=t("Matriochka, a Fabric mod for Minecraft 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss.",
@@ -1418,8 +1441,8 @@ def build_copy():
         cItems=t("Items", "Objets"), cBlocks=t("Blocks", "Blocs"), cQuests=t("Quests", "Quêtes"), cAch=t("Achievements", "Succès"),
         cMade=t("Made at", "Fabriqué à"), cFound=t("Found on", "Obtenu sur"), cGives=t("Mined, it gives", "Miné, il donne"),
         cMakes=t("makes", "donne"), sitesH=t("Structures and their loot", "Structures et leur butin"),
-        sitesP=t("Ten structures generate across every world, each with its own purpose. Here is where to look, what waits inside, and what the chests can hold.",
-                 "Dix structures apparaissent dans chaque monde, chacune avec son rôle. Voici où chercher, ce qui t'attend dedans et ce que les coffres peuvent contenir."),
+        sitesP=t("Eleven structures generate across every world, each with its own purpose. Here is where to look, what waits inside, and what the chests can hold.",
+                 "Onze structures apparaissent dans chaque monde, chacune avec son rôle. Voici où chercher, ce qui t'attend dedans et ce que les coffres peuvent contenir."),
         lootH=t("What the chests can hold", "Ce que les coffres peuvent contenir"), cHidden=t("Hidden until you earn it", "Caché jusqu'à ce que tu l'obtiennes"),
         h=t("The ten worlds", "Les dix mondes"),
         lead=t("Each world is planted inside the one before it, and each one bends a rule you thought you knew. Numbers below come straight from the mod's code.",
@@ -1447,8 +1470,8 @@ def build_copy():
     bosses = dict(
         headImg=shot("head_bosses_banner"),
         h=t("Bosses", "Boss"),
-        lead=t("Eleven fights, each built the same way: an announcement you can read, a fast and dangerous attack, then an opening. Hit a boss during its opening and it takes 1.5 times the damage; outside of it, only three quarters.",
-               "Onze combats, tous construits pareil : une annonce lisible, une attaque rapide et dangereuse, puis une ouverture. Frappé pendant son ouverture, un boss subit 1,5 fois les dégâts ; en dehors, seulement les trois quarts."),
+        lead=t("Eleven fights, each built the same way: an announcement you can read, a fast and dangerous attack, then an opening. Hit a boss during its opening and it takes 1.5 times the damage; outside of it, only three quarters. Every attack has its own animation: the boss shows the blow coming during the warning, strikes, then stays open and spent for exactly as long as the opening lasts. Each fight opens on a short cinematic: letterbox bars, the camera turning to the boss, its title card.",
+               "Onze combats, tous construits pareil : une annonce lisible, une attaque rapide et dangereuse, puis une ouverture. Frappé pendant son ouverture, un boss subit 1,5 fois les dégâts ; en dehors, seulement les trois quarts. Chaque attaque a son animation : le boss montre le coup qui vient pendant l'annonce, frappe, puis reste ouvert et épuisé exactement le temps de l'ouverture. Chaque combat s'ouvre sur une courte cinématique : bandes noires, la caméra qui se tourne vers le boss, sa carte-titre."),
         tiers=[dict(tier=tr, warn=secs(tier_ticks(wn)[0] / 20), sig=secs(tier_ticks(wn)[0] * 2 / 20), opening=secs(tier_ticks(wn)[1] / 20))
                for tr, wn in ((t("Surface to World 3", "Surface au monde 3"), 0), (t("Worlds 4 to 6", "Mondes 4 à 6"), 4),
                               (t("Worlds 7 to 9", "Mondes 7 à 9"), 7), (t("World 10", "Monde 10"), 10))],
@@ -1456,7 +1479,7 @@ def build_copy():
         tierNote=t("Bosses never take damage while changing phase. The Spore Queen's cocoon holds until its nodes are broken.", "Un boss ne prend aucun dégât pendant un changement de phase. Le cocon de la Reine des spores tient tant que ses nœuds ne sont pas brisés."),
         mp=[dict(p=p, mult="×" + fmt(round(1 + 0.6 * (p - 1), 1))) for p in (1, 2, 4, 8)],
         mpNote=t("Counted within 48 blocks when the boss wakes. Its attacks also come 5% faster per extra player, recounted during the fight. Everyone within 64 blocks at its death shares the victory.", "Compté dans un rayon de 48 blocs au réveil du boss. Ses attaques viennent aussi 5 % plus vite par joueur en plus, recompté pendant le combat. Tous ceux à moins de 64 blocs à sa mort partagent la victoire."),
-        rewardNote=t("plus 100 souls and 2 Shell Shards for every player in the fight", "et 100 âmes et 2 Éclats d'enveloppe pour chaque joueur présent au combat"),
+        rewardNote=t(f"plus 100 souls and {SHELL_SHARDS} Shell Shards for every player in the fight", f"et 100 âmes et {SHELL_SHARDS} Éclats d'enveloppe pour chaque joueur présent au combat"),
         desc=t("The eleven bosses of Matriochka: health, attacks, phases, timings and rewards.", "Les onze boss de Matriochka : vie, attaques, phases, timings et récompenses."),
     )
     return dict(ui=ui, nav=nav, home=home, worlds=worlds, bestiary=bestiary, bosses=bosses, systems=build_systems(d), download=build_download())
@@ -1467,6 +1490,42 @@ def slot_label(slot):
             "armor_weapon": t("Armour, light weapons", "Armures, armes légères"), "tool": t("Tools", "Outils")}[slot]
 
 
+def talent_effect(effect, value):
+    tmpl = C.TALENT_EFFECTS[effect][0 if LANG == "en" else 1]
+    if "%s" not in tmpl:
+        return tmpl.replace("%%", "%")
+    v = round(value * 100, 1) if effect in C.TALENT_PERCENT else value
+    return tmpl % fmt(float(v))
+
+
+def boss_name(w):
+    b = BOSS_OF.get(w) or next(b for b in C.BOSSES if b["world"] == 0)
+    return b["en"] if LANG == "en" else b["fr"]
+
+
+def mmss(secs_):
+    return f"{secs_ // 60}:{secs_ % 60:02d}"
+
+
+def build_talents():
+    names = {cid: (en if LANG == "en" else fr) for (cid, en, fr, *_rest) in C.CLASSES}
+    tree = [dict(cls=names[cid], branches=[dict(name=ben if LANG == "en" else bfr,
+                                                talents=[dict(name=ten if LANG == "en" else tfr, eff=talent_effect(eff, val)) for (_tid, ten, tfr, eff, val) in tal])
+                                           for (_bid, ben, bfr, tal) in branches])
+            for cid, branches in C.TALENTS.items()]
+    tiers = [dict(lv=str(i + 1), souls=str(so), shards=str(sh), gate=boss_name(g)) for i, (so, sh, g) in enumerate(C.TALENT_TIERS)]
+    return tree, tiers
+
+
+def build_gear():
+    out = []
+    for (gid, en, fr, w, kind, rarity, shape, een, efr, st, inputs) in C.REPLAY_GEAR:
+        out.append(dict(tex=tex(gid), h=en if LANG == "en" else fr,
+                        p=(een if LANG == "en" else efr) + " " + t(f"World {w}, made at the {name(st)}.", f"Monde {w}, fabriqué à : {name(st)}."),
+                        inputs=ing(inputs)))
+    return out
+
+
 def build_systems(d):
     _, cradle = recipe_for("soul_cradle")
     _, chance = recipe_for("chance_doll")
@@ -1475,24 +1534,32 @@ def build_systems(d):
     karma = [("+50", "light2"), ("+25", "light1"), ("0", "neutral"), ("−25", "dark1"), ("−50", "dark2")]
     nq = len(C.QUESTS)
     nach = sum(len(v) for v in C.ACH.values())
+    tree, ttiers = build_talents()
+    ntal = sum(len(b[3]) for v in C.TALENTS.values() for b in v)
+    ts = C.TRIAL_SCALE
+    inv = C.INVASION
     return dict(
         tiles=[dict(id="survival", icon="heart", stat=t("3 layers", "3 couches"), line=t("A doll that breaks so you don't, and ways back in.", "Une poupée qui se brise à ta place, et des moyens de revenir.")),
                dict(id="souls", icon="sparkles", stat=t("-100 to +100", "-100 à +100"), line=t("Souls are the currency; karma decides how people treat you.", "Les âmes sont la monnaie ; le karma décide comment on te traite.")),
-               dict(id="classes", icon="swords", stat=t("6 classes, level 5", "6 classes, niveau 5"), line=t("Every crafted weapon and armour is born with a class.", "Chaque arme et armure fabriquée naît avec une classe.")),
+               dict(id="classes", icon="swords", stat=t(f"6 classes, {ntal} talents", f"6 classes, {ntal} talents"), line=t("Every crafted weapon and armour is born with a class; talents shape how you play it.", "Chaque arme et armure fabriquée naît avec une classe ; les talents décident de ta façon de la jouer.")),
+               dict(id="workshop", icon="hammer", stat=t(f"{len(C.REPLAY_GEAR)} new pieces", f"{len(C.REPLAY_GEAR)} nouvelles pièces"), line=t("Weapons that behave like their world, and stations that run on hoppers.", "Des armes qui se comportent comme leur monde, et des stations qui tournent avec des entonnoirs.")),
                dict(id="nesting", icon="layers", stat=t("Inside everything", "Partout dedans"), line=t("Chests in chests, creatures in creatures, worlds in worlds.", "Des coffres dans des coffres, des créatures dans des créatures, des mondes dans des mondes.")),
                dict(id="groups", icon="users", stat=t("Up to 8 players", "Jusqu'à 8 joueurs"), line=t("Share worlds and bosses with your friends.", "Partage mondes et boss avec tes amis.")),
-               dict(id="journal", icon="book-open", stat=t(f"{nq} quests", f"{nq} quêtes"), line=t("Objectives, quests, achievements and titles.", "Objectifs, quêtes, succès et titres."))],
+               dict(id="journal", icon="book-open", stat=t(f"{nq} quests", f"{nq} quêtes"), line=t("Objectives, quests, achievements and titles.", "Objectifs, quêtes, succès et titres.")),
+               dict(id="trials", icon="hourglass", stat=t(f"{len(C.TRIALS)} trials", f"{len(C.TRIALS)} épreuves"), line=t("Races against the clock after the story, and events in the worlds.", "Des courses contre la montre après l'histoire, et des événements dans les mondes.")),
+               dict(id="comfort", icon="eye", stat=t("5 languages", "5 langues"), line=t("Comfort options, cinematics, music that follows the fight, a light per world.", "Options de confort, cinématiques, une musique qui suit le combat, une lumière par monde."))],
         h=t("Systems", "Systèmes"), headImg=shot("head_systems_banner"),
-        lead=t("What keeps you alive, what you trade for power, and how your gear grows. Everything here works the same in solo and on a server.",
-               "Ce qui te garde en vie, ce que tu échanges contre de la puissance, et comment ton équipement grandit. Tout fonctionne pareil en solo et sur serveur."),
-        desc=t("Doll of Life, death and respawn, souls and karma, gear classes, groups and quests in Matriochka.",
-               "Poupée de vie, mort et réapparition, âmes et karma, classes d'équipement, groupes et quêtes dans Matriochka."),
+        lead=t("What keeps you alive, what you trade for power, how your gear grows, and what waits after the story. Everything here works the same in solo and on a server.",
+               "Ce qui te garde en vie, ce que tu échanges contre de la puissance, comment ton équipement grandit, et ce qui t'attend après l'histoire. Tout fonctionne pareil en solo et sur serveur."),
+        desc=t("Doll of Life, death and respawn, souls and karma, gear classes and talents, new gear and station automation, groups, quests, trials, world events and comfort options in Matriochka.",
+               "Poupée de vie, mort et réapparition, âmes et karma, classes et talents, nouvel équipement et automatisation des stations, groupes, quêtes, épreuves, événements des mondes et options de confort dans Matriochka."),
         onPage=t("On this page", "Sur cette page"),
-        toc=[("survival", t("Survival", "Survie")), ("souls", t("Souls and karma", "Âmes et karma")), ("classes", t("Classes", "Classes")),
-             ("nesting", t("Nesting", "Gigogne")), ("groups", t("Groups", "Groupes")), ("journal", t("Journal", "Journal"))],
+        toc=[("survival", t("Survival", "Survie")), ("souls", t("Souls and karma", "Âmes et karma")), ("classes", t("Classes and talents", "Classes et talents")),
+             ("workshop", t("Gear and stations", "Équipement et stations")), ("nesting", t("Nesting", "Gigogne")), ("groups", t("Groups", "Groupes")),
+             ("journal", t("Journal", "Journal")), ("trials", t("Trials and events", "Épreuves et événements")), ("comfort", t("Comfort and atmosphere", "Confort et ambiance"))],
         survivalH=t("Survival", "Survie"),
-        lifeDoll=dict(tex=tex("life_doll"), h=name("life_doll"), p=t("You carry a doll made of layers. It gets its first layer when the Spore Queen falls, a second after the Light Eater and a third after the Master of Seasons. Every boss you beat restores one layer, and the Soul Altar rebuilds one for 50 souls.",
-                                                                    "Tu portes une poupée faite de couches. Elle reçoit sa première couche à la chute de la Reine des spores, une deuxième après le Mangeur de lumière et une troisième après le Maître des saisons. Chaque boss vaincu restaure une couche, et l'Autel des âmes en reconstruit une pour 50 âmes.")),
+        lifeDoll=dict(tex=tex("life_doll"), h=name("life_doll"), p=t("You carry a doll made of layers. It gets its first layer when the Spore Queen falls, a second after the Light Eater and a third after the Master of Seasons. Every boss you beat restores one layer, and the Soul Altar rebuilds one for 50 souls and 4 rare resources of the world you are in.",
+                                                                    "Tu portes une poupée faite de couches. Elle reçoit sa première couche à la chute de la Reine des spores, une deuxième après le Mangeur de lumière et une troisième après le Maître des saisons. Chaque boss vaincu restaure une couche, et l'Autel des âmes en reconstruit une pour 50 âmes et 4 ressources rares du monde où tu es.")),
         deathH=t("When you die", "Quand tu meurs"),
         death=[t("If your Doll of Life has a layer left, it breaks and you get back up on the spot. A doll can save you at most once a minute.",
                  "Si ta Poupée de vie a encore une couche, elle se brise et tu te relèves sur place. Une poupée peut te sauver au plus une fois par minute."),
@@ -1509,8 +1576,8 @@ def build_systems(d):
             dict(tex=tex("cracked_doll"), h=t("A broken World Block", "Un Bloc-monde cassé"), p=t("Break a World Block and everyone inside is pushed out safely. The block becomes a Cracked Doll tied to that exact world: set it down again and the world comes back with its bases and chests, unstable for 20 minutes. It is also how you move a world.",
                                                                                                "Casse un Bloc-monde et tous ceux qui sont dedans sont expulsés sans dommage. Le bloc devient une Poupée fêlée liée à ce monde précis : repose-la et le monde revient avec ses bases et ses coffres, instable pendant 20 minutes. C'est aussi comme ça qu'on déplace un monde."), inputs=[])],
         soulsH=t("Souls and karma", "Âmes et karma"),
-        soulsLead=t("Every item carries a soul whose weight depends on its rarity. Put it on the Soul Altar and choose, for good: purify it to free the soul and gain karma, or devour it to absorb the soul and lose karma. Either way you keep the souls, which pay for class upgrades, cradle charges and doll layers.",
-                    "Chaque objet porte une âme dont le poids dépend de sa rareté. Pose-le sur l'Autel des âmes et choisis, définitivement : purifie-le pour libérer l'âme et gagner du karma, ou dévore-le pour absorber l'âme et perdre du karma. Dans les deux cas tu gardes les âmes, qui paient les améliorations de classe, les charges de berceau et les couches de poupée."),
+        soulsLead=t("Every item carries a soul whose weight depends on its rarity. Put it on the Soul Altar and choose, for good: purify it to free the soul and gain karma, or devour it to absorb the soul and lose karma. Either way you keep the souls, which pay for class upgrades, talents, cradle charges and doll layers. Structure chests also keep Soul Shards (5 souls) and Soul Vessels (20), about 10 souls a chest.",
+                    "Chaque objet porte une âme dont le poids dépend de sa rareté. Pose-le sur l'Autel des âmes et choisis, définitivement : purifie-le pour libérer l'âme et gagner du karma, ou dévore-le pour absorber l'âme et perdre du karma. Dans les deux cas tu gardes les âmes, qui paient les améliorations de classe, les talents, les charges de berceau et les couches de poupée. Les coffres des structures gardent aussi des Éclats d'âme (5 âmes) et des Vaisseaux d'âme (20), environ 10 âmes par coffre."),
         rarCols=[t("Rarity", "Rareté"), t("Souls", "Âmes")],
         rarity=[dict(k=l, v=str(C.RARITY_SOUL[k])) for k, l in rar] + [dict(k=t("Any boss", "Un boss"), v="100")],
         karmaNote=t("Karma runs from −100 to +100. An item gives one point of karma per 10 souls, and less each time you repeat the same offering. Quests with a choice move it by 5 or 10.",
@@ -1527,14 +1594,39 @@ def build_systems(d):
         classes=[dict(name=en if LANG == "en" else fr, bonus=den if LANG == "en" else dfr, slot=slot_label(slot)) for (cid, en, fr, slot, den, dfr) in C.CLASSES],
         upH=t("Upgrading", "Améliorer"), upCols=[t("Level", "Niveau"), t("Total bonus", "Bonus total"), t("Souls", "Âmes")],
         up=[dict(lv=str(lv), bonus="+" + pct(b), souls=str(c)) for lv, b, c in ((2, 10, 10), (3, 20, 30), (4, 35, 90), (5, 50, 270))],
-        upNote=t("Level 1 to 5 costs 400 souls and 6 Shell Shards per piece (1, 1, 2, 2). Every boss leaves 2 Shell Shards to each player who fought it.",
-                 "Du niveau 1 au niveau 5 : 400 âmes et 6 Éclats d'enveloppe par pièce (1, 1, 2, 2). Chaque boss laisse 2 Éclats d'enveloppe à chaque joueur qui l'a combattu."),
+        upNote=t(f"Level 1 to 5 costs 400 souls and 6 Shell Shards per piece (1, 1, 2, 2). Every boss leaves {SHELL_SHARDS} Shell Shards to each player who fought it: enough to bring its world's weapon to the cap.",
+                 f"Du niveau 1 au niveau 5 : 400 âmes et 6 Éclats d'enveloppe par pièce (1, 1, 2, 2). Chaque boss laisse {SHELL_SHARDS} Éclats d'enveloppe à chaque joueur qui l'a combattu : de quoi monter l'arme de son monde au plafond."),
         capH=t("Level cap", "Niveau maximal"), capCols=[t("Progression", "Progression"), t("Max level", "Niveau max")],
         cap=[dict(k=t(f"World {w} done", f"Monde {w} terminé"), v=str(lv)) for w, lv in ((2, 2), (4, 3), (6, 4), (8, 5))],
         chance=dict(tex=tex("chance_doll"), h=name("chance_doll"), p=t("Rerolls an item into a different class it can hold, and keeps its level. The first reroll costs 20 souls, and the price doubles each time on the same item: 20, 40, 80, 160.",
                                                                        "Relance un objet vers une autre classe compatible, en gardant son niveau. Le premier changement coûte 20 âmes, et le prix double à chaque fois sur le même objet : 20, 40, 80, 160."),
                     inputs=ing(chance["inputs"]) if chance else []),
         classShot=dict(src=shot("gui_station_class_table"), caption=t("The Class Table", "La Table de classe")),
+        talentsH=t("Talents", "Talents"),
+        talentsLead=t(f"The Class Table also holds a cabinet of talent trees: three branches of four talents for each of the six classes, {ntal} in all. A branch is learnt in order; the first two talents cost souls, the last two souls and Shell Shards, and each tier opens as your group beats deeper bosses. A class's talents act while you wear or hold its gear (any tool counts for the Prospector).",
+                      f"La Table de classe abrite aussi un cabinet d'arbres de talents : trois branches de quatre talents pour chacune des six classes, {ntal} en tout. Une branche s'apprend dans l'ordre ; les deux premiers talents coûtent des âmes, les deux derniers des âmes et des Éclats d'enveloppe, et chaque palier s'ouvre quand ton groupe bat des boss plus profonds. Les talents d'une classe agissent tant que tu portes ou tiens son équipement (n'importe quel outil compte pour le Prospecteur)."),
+        talentCols=[t("Tier", "Rang"), t("Souls", "Âmes"), t("Shell Shards", "Éclats d'enveloppe"), t("Opens after", "S'ouvre après")],
+        talentTiers=ttiers,
+        talentTree=tree,
+        talentNote=t(f"The Forget button unlearns every talent and gives back {int(C.TALENT_REFUND * 100)}% of the souls spent, never the shards.",
+                     f"Le bouton Oublier désapprend tous les talents et rend {int(C.TALENT_REFUND * 100)} % des âmes dépensées, jamais les éclats."),
+        gearH=t("New gear", "Nouvel équipement"),
+        gearLead=t(f"{len(C.REPLAY_GEAR)} weapons and tools that behave like the world they come from, each crafted at its world's station and drawn by hand. They are born with a class like any other gear.",
+                   f"{len(C.REPLAY_GEAR)} armes et outils qui se comportent comme le monde d'où ils viennent, chacun fabriqué à la station de son monde et dessiné à la main. Ils naissent avec une classe comme tout autre équipement."),
+        gear=build_gear(),
+        autoH=t("Stations on hoppers", "Des stations sur entonnoirs"),
+        auto=[t("Every station with recipes works with hoppers. It keeps one recipe: the last one crafted there by hand, or the one picked with the small gilded funnel on its drawer.",
+                "Chaque station à recettes fonctionne avec des entonnoirs. Elle garde une recette : la dernière fabriquée à la main, ou celle choisie avec le petit entonnoir doré de son tiroir."),
+              t("Ingredients go in from the top and the sides, each into its own slots; anything else is refused. The result comes out from below, and a comparator reads how full the station is.",
+                "Les ingrédients entrent par le dessus et les côtés, chacun dans ses cases ; tout le reste est refusé. Le résultat sort par le dessous, et un comparateur lit le remplissage de la station."),
+              t("Each station keeps its condition: heat for the Ash Foundry, a charge for the Lightning Forge (lightning, or Storm Essence in its fuel slot), darkness, deep water, dawn and dusk. The Spore Vat waits for a ripe brew, and the Jailer's Table makes one batch per lock pattern entered.",
+                "Chaque station garde sa condition : la chaleur pour la Fonderie de cendre, une charge pour la Forge-éclair (la foudre, ou de l'Essence d'orage dans sa case de combustible), l'obscurité, l'eau profonde, l'aube et le crépuscule. La Cuve à spores attend une infusion mûre, et la Table du geôlier fait une fournée par motif de serrure entré."),
+              t("The Soul Altar and the Class Table stay manual. Breaking a station drops its buffer.", "L'Autel des âmes et la Table de classe restent manuels. Casser une station fait tomber sa réserve.")],
+        autoShot=dict(src=shot("sys_stations_night"), caption=t("The stations' lit faces glow in the dark", "Les faces allumées des stations luisent dans le noir")),
+        shake=dict(tex=tex("doll_mallet"), h=t("Shake a World Block", "Secouer un Bloc-monde"),
+                   p=t("From outside, a player of the owning group can sneak and use the World Block with empty hands to help those inside: creatures stunned and thrown off their feet for 3 seconds, a boss staggered and open. Strike it with the Doll Mallet instead and the world quakes, loose blocks falling over their heads. One shake per world every 30 seconds.",
+                       "De dehors, un joueur du groupe propriétaire peut s'accroupir et utiliser le Bloc-monde à mains nues pour aider ceux qui sont dedans : créatures étourdies et jetées à terre pendant 3 secondes, boss ébranlé et ouvert. Frappe-le plutôt au Maillet de poupée et le monde tremble, des blocs tombant sur leurs têtes. Une secousse par monde toutes les 30 secondes."),
+                   inputs=[]),
         nestingH=t("Things inside things", "Des choses dans des choses"),
         nestingLead=t("The name is the rule: something can always hold something else. These systems unlock as the story goes on.", "Le nom est la règle : une chose peut toujours en contenir une autre. Ces systèmes se débloquent au fil de l'histoire."),
         nestCols=[t("System", "Système"), t("Effect", "Effet"), t("Unlocked", "Déblocage")],
@@ -1569,8 +1661,62 @@ def build_systems(d):
         journalLead=t(f"The Artisan's Scroll arrives on your first login and turns into the Journal when the Guardian falls. Its tabs track your objective, quests, karma and worlds. There are {nq} optional quests (4 on the Surface, 6 per world and 6 on the paths of karma) and {nach} achievements, 10 per world, two of them hidden. Fifty Journal pages, read in the Pages tab, and ten hidden dolls are scattered through the worlds; nest the dolls in order and something smaller opens. After the last boss, your karma chooses your ending, and a New Cycle starts the worlds over, stronger.",
                       f"Le Parchemin de l'artisan arrive à ta première connexion et devient le Journal quand le Gardien tombe. Ses onglets suivent ton objectif, tes quêtes, ton karma et tes mondes. Il y a {nq} quêtes facultatives (4 sur la Surface, 6 par monde et 6 sur les chemins du karma) et {nach} succès, 10 par monde dont deux cachés. Cinquante pages du Journal, à lire dans l'onglet Pages, et dix poupées cachées sont dispersées dans les mondes ; emboîte les poupées dans l'ordre et quelque chose de plus petit s'ouvre. Après le dernier boss, ton karma choisit ta fin, et un Nouveau Cycle rouvre les mondes, plus forts."),
         journalShots=[dict(src=shot(k), caption=c) for k, c in (("gui_journal_0", t("The Journal's objective tab", "L'onglet objectif du Journal")), ("gui_journal_1", t("Quests", "Les quêtes"))) if shot(k)],
+        firstSteps=dict(tex=tex("artisan_scroll") or tex("journal"), h=t("First steps", "Premiers pas"),
+                        p=t("Until you enter World 1, a small lacquered card under the HUD plaque shows the next of ten steps, from reading the Scroll to planting the first Seed, with its item, a short hint and a compass needle toward the nearest Guardian's Sanctuary. Each step is detected from what you really do, and the Guide button on the Scroll or the Journal hides it.",
+                            "Jusqu'à ton entrée dans le monde 1, une petite carte laquée sous la plaque du HUD montre la prochaine des dix étapes, de la lecture du Parchemin à la plantation de la première Graine, avec son objet, un court indice et une aiguille de boussole vers le Sanctuaire du Gardien le plus proche. Chaque étape est détectée d'après ce que tu fais vraiment, et le bouton Guide du Parchemin ou du Journal la masque."),
+                        inputs=[]),
         titlesH=t("Titles you can earn", "Titres à gagner"),
         titles=[v for k, v in d.items() if k.startswith("title.matriochka.")],
+        titlesNote=t("Titles are worn from the Trials book, quest titles included.", "Les titres se portent depuis le livre des Épreuves, titres de quêtes compris."),
+        trialsH=t("Trials", "Épreuves"),
+        trialsLead=t("Once you have seen an ending, the Trials open: a rush per world (two waves of its creatures, the second led by its elites, then its boss) and the Gauntlet of the eleven bosses, fought against the clock on a lacquered stage inside the Refuge doll, painted for each world. Open them from the Journal's Objective page, a Trial Altar or /matriochka trials start. Falling carries you out instead of killing you.",
+                     "Une fois une fin vue, les Épreuves s'ouvrent : une course par monde (deux vagues de ses créatures, la seconde menée par ses élites, puis son boss) et l'Épreuve des onze boss, combattues contre la montre sur une scène laquée dans la poupée-refuge, peinte pour chaque monde. Ouvre-les depuis la page Objectif du Journal, un Autel des épreuves ou /matriochka trials start. Une chute te ramène dehors au lieu de te tuer."),
+        trialFacts=[dict(k=t("Trial bosses", "Boss d'épreuve"), v=f"×{fmt(ts['health'])} / ×{fmt(ts['damage'])}", d=t(f"health and damage, ×{fmt(ts['gauntlet_health'])} / ×{fmt(ts['gauntlet_damage'])} in the Gauntlet; always mutated, no introduction, no story reward", f"vie et dégâts, ×{fmt(ts['gauntlet_health'])} / ×{fmt(ts['gauntlet_damage'])} dans l'Épreuve des onze ; toujours mutés, sans introduction ni récompense d'histoire")),
+                    dict(k=t("Every clear", "Chaque victoire"), v=str(C.TRIAL_SOULS), d=t("souls", "âmes")),
+                    dict(k=t("First win", "Première victoire"), v=t("Trophy", "Trophée"), d=t("its Trophy Doll and a title", "sa Poupée-trophée et un titre")),
+                    dict(k=t("Under par", "Sous le temps de référence"), v=t("Swift Hand", "Main preste"), d=t("a title for beating the par time", "un titre pour battre le temps de référence"))],
+        trialCols=[t("Trial", "Épreuve"), t("Par time", "Temps de référence")],
+        trialList=[dict(name=t(*C.TRIAL_NAMES[k]), tex=tex(f"trophy_doll_{k if k == 'gauntlet' else w}"), par=mmss(par)) for k, w, par in C.TRIALS],
+        boardH=t("The board", "Le tableau"),
+        board=t("A clock on the HUD runs green while you are under par. Best times are kept per player and per group, and the server keeps a board of the ten best groups for every trial, in the Trials book and with /matriochka trials top.",
+                "Une horloge sur le HUD reste verte tant que tu es sous le temps de référence. Les meilleurs temps sont gardés par joueur et par groupe, et le serveur tient un tableau des dix meilleurs groupes pour chaque épreuve, dans le livre des Épreuves et avec /matriochka trials top."),
+        eventsH=t("World events", "Événements des mondes"),
+        eventsLead=t("While you are in a world, now and then something happens around you. A boss bar follows each event. Never in peaceful; operators can start one with /matriochka event.",
+                     "Pendant que tu es dans un monde, il se passe de temps en temps quelque chose autour de toi. Une barre de boss suit chaque événement. Jamais en paisible ; les opérateurs peuvent en lancer un avec /matriochka event."),
+        events=[dict(icon="swords", h=t("Invasion", "Invasion"), p=t(f"{inv['waves']} waves of the world's creatures, more for every player nearby; the last is led by a glowing warlord. A reward chest waits at the end.",
+                                                                   f"{inv['waves']} vagues de créatures du monde, plus nombreuses pour chaque joueur proche ; la dernière est menée par un seigneur de guerre luisant. Un coffre de récompense attend à la fin.")),
+                dict(icon="flame", h=t("Surge", "Poussée"), p=t(f"The world's rule grows {'twice' if C.SURGE['strength'] == 2 else fmt(C.SURGE['strength']) + ' times'} as strong for {C.SURGE['duration'] // 60} minutes, with its own effect and particles. Ride it out for {C.SURGE['souls']} souls.",
+                                                              f"La règle du monde devient {fmt(C.SURGE['strength'])} fois plus forte pendant {C.SURGE['duration'] // 60} minutes, avec son effet et ses particules. Tiens bon pour {C.SURGE['souls']} âmes.")),
+                dict(icon="package", h=t("Travelling merchant", "Marchand itinérant"), p=t("A wanderer of the world's people sets up for a while, with special trades: its world's new gear, Shell Shards, rare pieces.",
+                                                                                           "Un vagabond du peuple du monde s'installe un moment, avec des échanges spéciaux : le nouvel équipement de son monde, des Éclats d'enveloppe, des pièces rares."))],
+        surges=[dict(w=w, name=en if LANG == "en" else fr, p=pen if LANG == "en" else pfr) for w, (_sid, en, fr, pen, pfr) in sorted(C.SURGES.items())],
+        eventsNote=t("Frequency and weights live in config/matriochka.json: worldEvents, worldEventChance, worldEventCooldown and the three weights.",
+                     "La fréquence et les poids se règlent dans config/matriochka.json : worldEvents, worldEventChance, worldEventCooldown et les trois poids."),
+        comfortLead=t("Opened from the Journal's Comfort button (or from Mod Menu), saved per player in config/matriochka-client.json.",
+                      "Ouvertes depuis le bouton Confort du Journal (ou depuis Mod Menu), enregistrées par joueur dans config/matriochka-client.json."),
+        comfortH=t("Comfort options", "Options de confort"),
+        comfort=[t("Screen shake strength and flashes", "Force des secousses d'écran et des flashs"),
+                 t("Soft effects: no Nausea or Darkness, a gentle tint instead; the server skips those effects for you", "Effets doux : ni Nausée ni Obscurité, une teinte légère à la place ; le serveur te les épargne"),
+                 t("Cinematics on or off", "Cinématiques activées ou non"),
+                 t("Large subtitles for boss attacks", "Grands sous-titres pour les attaques de boss"),
+                 t("Fewer particles", "Moins de particules"),
+                 t("Colour-blind patterns on the world gauges", "Motifs pour daltoniens sur les jauges des mondes"),
+                 t("HUD plaque size and corner", "Taille et coin de la plaque du HUD"),
+                 t("A volume per kind of music", "Un volume par type de musique")],
+        comfortShot=dict(src=shot("sys_comfort"), caption=t("The comfort options", "Les options de confort")),
+        cineH=t("Cinematics and music", "Cinématiques et musique"),
+        cine=[t("Boss introductions: letterbox bars, the camera turning toward the boss with a slow push-in, and a framed title card.", "Introductions de boss : bandes noires, la caméra qui se tourne vers le boss en avançant lentement, et une carte-titre encadrée."),
+              t("A title card the first time you enter each world, with its rule medallion and a line about its law.", "Une carte-titre à ta première entrée dans chaque monde, avec le médaillon de sa règle et une ligne sur sa loi."),
+              t("Phase breaks freeze the frame with a flash and the shell's number; heavy blows and moving ground shake the camera.", "Les changements de phase figent l'image avec un flash et le numéro de l'enveloppe ; les coups lourds et le sol qui bouge secouent la caméra."),
+              t("Adaptive music: a danger theme while creatures hunt you, boss themes, a heartbeat at low health or breath, and stings for a structure, a Journal page or a quest. Themes fade into one another.", "Musique adaptative : un thème de danger quand des créatures te traquent, les thèmes de boss, un battement de cœur à faible vie ou souffle, et des ponctuations pour une structure, une page du Journal ou une quête. Les thèmes se fondent l'un dans l'autre.")],
+        cineShots=[dict(src=shot(k), caption=c) for k, c in (("sys_boss_intro", t("A boss introduction", "Une introduction de boss")), ("sys_world_card", t("Entering World 1", "L'entrée dans le monde 1"))) if shot(k)],
+        atmosH=t("A light for every world", "Une lumière pour chaque monde"),
+        atmos=t("Every world has its own light, fog and particles: spore haze, falling embers, cold dust, a storm sky, near-black fog where a lantern reads across a cavern, an inverted pastel sky, deep blue water, light tinted by the season, rust haze, warm workshop light, and World 0's red lacquer dusk. Items, blocks and stations are hand-painted in the vanilla style, and their lit faces glow in the dark. Matriochka HD, an optional 32 x 32 resource pack, is attached to every release; Iris shader packs work through vanilla light.",
+                "Chaque monde a sa lumière, son brouillard et ses particules : brume de spores, braises qui tombent, poussière froide, ciel d'orage, brouillard presque noir où une lanterne porte à travers une caverne, ciel pastel inversé, eau d'un bleu profond, lumière teintée par la saison, brume de rouille, lumière chaude de l'atelier, et le crépuscule de laque rouge du monde 0. Objets, blocs et stations sont peints à la main dans le style vanilla, et leurs faces allumées luisent dans le noir. Matriochka HD, un pack de ressources facultatif en 32 x 32, est joint à chaque version ; les shaders Iris fonctionnent avec la lumière vanilla."),
+        atmosShots=[dict(src=shot(k), caption=c) for k, c in (("sys_atmos_w2", world_name(2)), ("sys_atmos_w8", t(f"Autumn in {world_name(8)}", f"L'automne : {world_name(8)}"))) if shot(k)],
+        langH=t("Five languages", "Cinq langues"),
+        lang=t("English, French, Spanish, German and Brazilian Portuguese: every name, the interface, quests, achievements, the Scroll, the fifty Journal pages, endings, credits and subtitles. A string missing from a language shows in English, and labels shrink to fit when a language runs longer.",
+               "Anglais, français, espagnol, allemand et portugais du Brésil : chaque nom, l'interface, les quêtes, les succès, le Parchemin, les cinquante pages du Journal, les fins, le générique et les sous-titres. Un texte manquant dans une langue s'affiche en anglais, et les libellés rétrécissent quand une langue est plus longue."),
     )
 
 
@@ -1582,6 +1728,8 @@ def build_download():
         desc=t("Download Matriochka for Minecraft 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
                "Télécharger Matriochka pour Minecraft 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur."),
         sources=[dict(name="GitHub", note=t("Releases, changelog and source", "Versions, changements et code source"), href=RELEASES),
+                 dict(name="Matriochka Pack", note=t("Modrinth modpack (.mrpack), normal and hard, attached to each release", "Modpack Modrinth (.mrpack), normal et difficile, joint à chaque version"), href=RELEASES),
+                 dict(name="Matriochka HD", note=t("Optional 32 x 32 resource pack, attached to each release", "Pack de ressources facultatif en 32 x 32, joint à chaque version"), href=RELEASES),
                  dict(name="Modrinth", note=t("Coming soon", "Bientôt disponible"), href=None),
                  dict(name="CurseForge", note=t("Coming soon", "Bientôt disponible"), href=None)],
         reqH=t("Requirements", "Prérequis"),
@@ -1591,7 +1739,8 @@ def build_download():
             ("Fabric API", "0.165.2+", t("Built for 26.3, goes in the mods folder", "Pour la 26.3, dans le dossier mods")),
             ("GeckoLib", "5.5.7", t("Animated models of bosses and creatures", "Modèles animés des boss et créatures")),
             ("Java", "25", t("Bundled with the official launcher", "Fourni avec le launcher officiel")),
-            ("Just Enough Items", t("optional", "facultatif"), t("Recipe pages for every station", "Pages de recettes pour chaque station"))]],
+            ("Just Enough Items", t("optional", "facultatif"), t("Recipe pages for every station", "Pages de recettes pour chaque station")),
+            ("Mod Menu", t("optional", "facultatif"), t("Summary, links and a shortcut to the comfort options", "Résumé, liens et accès direct aux options de confort"))]],
         installH=t("Installing", "Installation"),
         steps=[t("Install Fabric Loader for Minecraft 26.3.", "Installe Fabric Loader pour Minecraft 26.3."),
                t(f"Download matriochka-{VERSION}+26.3.jar from the GitHub releases.", f"Télécharge matriochka-{VERSION}+26.3.jar depuis les versions GitHub."),
@@ -1600,6 +1749,14 @@ def build_download():
         lunarH="Lunar Client",
         lunar=t("Matriochka is built on Fabric so that it can run on Lunar Client, whose mod loading relies on Fabric. Support for Minecraft 26.3 together with GeckoLib is still being confirmed there: if the mod does not load, play it with the official launcher or Prism Launcher on a Fabric profile in the meantime.",
                 "Matriochka repose sur Fabric pour pouvoir tourner sur Lunar Client, dont le chargement de mods s'appuie sur Fabric. La prise en charge de Minecraft 26.3 avec GeckoLib y est encore en cours de vérification : si le mod ne se charge pas, joue en attendant avec le launcher officiel ou Prism Launcher sur un profil Fabric."),
+        packH=t("The Matriochka Pack", "Le Matriochka Pack"),
+        pack=t("Rather not gather the mods yourself? Every GitHub release carries a Modrinth modpack (.mrpack) for Prism Launcher, the Modrinth App or any launcher that reads the format: the mod, Fabric API, GeckoLib, Just Enough Items (optional) and client performance mods (Sodium, Lithium, FerriteCore, Entity Culling, ImmediatelyFast, Dynamic FPS, Krypton, Mod Menu, Iris as an option), in a normal and a hard (nightmare) version.",
+               "Pas envie de rassembler les mods toi-même ? Chaque version GitHub contient un modpack Modrinth (.mrpack) pour Prism Launcher, l'application Modrinth ou tout launcher qui lit ce format : le mod, Fabric API, GeckoLib, Just Enough Items (facultatif) et des mods de performance (Sodium, Lithium, FerriteCore, Entity Culling, ImmediatelyFast, Dynamic FPS, Krypton, Mod Menu, Iris en option), en version normale et difficile (nightmare)."),
+        compatH=t("Works with", "Compatible avec"),
+        compat=t("Checked with Sodium, Iris (through vanilla light: emissive faces, full-bright particles), Xaero's Minimap and World Map, JourneyMap, VoxelMap and Traveler's Backpack for 26.3: no conflict found, and no backpack way around the progression. Xaero's cave view and entity radar switch off in the Lightless Deep, where they would show what the darkness hides, and come back when you leave.",
+                 "Vérifié avec Sodium, Iris (par la lumière vanilla : faces émissives, particules pleinement lumineuses), Xaero's Minimap et World Map, JourneyMap, VoxelMap et Traveler's Backpack pour la 26.3 : aucun conflit, et aucun moyen de contourner la progression avec un sac à dos. La vue des grottes et le radar de Xaero s'éteignent dans la Profondeur sans lumière, où ils montreraient ce que l'obscurité cache, et reviennent quand tu en sors."),
+        langsH=t("Languages", "Langues"),
+        langs=t("English, French, Spanish, German and Brazilian Portuguese, following the game's language setting.", "Anglais, français, espagnol, allemand et portugais du Brésil, selon la langue choisie dans le jeu."),
         wikiH=t("Wiki", "Wiki"), wiki=t("Recipes, step-by-step guides and answers to common questions live on the GitHub wiki.", "Recettes, guides pas à pas et réponses aux questions courantes sont sur le wiki GitHub."),
         wikiBtn=t("Open the wiki", "Ouvrir le wiki"),
         earlyH=t("Early version", "Version précoce"),
@@ -1613,7 +1770,15 @@ def build_download():
             ("mobDamageMultiplier", "1.0", t("Scales the damage of every creature and boss", "Ajuste les dégâts de toutes les créatures et des boss")),
             ("maxGroupSize", "8", t("Players per group", "Joueurs par groupe")),
             ("difficulty", '"normal"', t("story (70% damage, nothing lost on death), normal, nightmare (130% damage, one charge per Soul Cradle) or hardcore (as nightmare, death is permanent, the Doll of Life never saves you and a broken World Block deletes its world)",
-                                         "story (70 % des dégâts, rien n'est perdu à la mort), normal, nightmare (130 % des dégâts, une charge par Berceau d'âme) ou hardcore (comme nightmare, la mort est définitive, la Poupée de vie ne te sauve plus et un Bloc-monde cassé efface son monde)"))]],
+                                         "story (70 % des dégâts, rien n'est perdu à la mort), normal, nightmare (130 % des dégâts, une charge par Berceau d'âme) ou hardcore (comme nightmare, la mort est définitive, la Poupée de vie ne te sauve plus et un Bloc-monde cassé efface son monde)")),
+            ("karma", "true", t("false freezes every karma change (the Journal still shows the value)", "false fige tout changement de karma (le Journal affiche toujours la valeur)")),
+            ("soulGainMultiplier", "1.0", t("Scales every soul gain", "Ajuste tous les gains d'âmes")),
+            ("maxActiveGroups", "0", t("How many groups may hold worlds (0: no limit); a Seed over the limit waits, unhatched", "Combien de groupes peuvent avoir des mondes (0 : sans limite) ; une Graine au-delà attend sans éclore")),
+            ("maxParcels", "0", t("How many parcels the server may hand out (0: no limit)", "Combien de parcelles le serveur peut attribuer (0 : sans limite)")),
+            ("worldEvents", "true", t("Invasions, surges and travelling merchants in the worlds", "Invasions, poussées et marchands itinérants dans les mondes")),
+            ("worldEventChance", "0.06", t("Chance that an event starts around a player, rolled once a minute", "Chance qu'un événement démarre autour d'un joueur, tirée chaque minute")),
+            ("worldEventCooldown", "10", t("Minutes of quiet in a world after an event", "Minutes de calme dans un monde après un événement")),
+            ("invasionWeight, surgeWeight, merchantWeight", "3, 3, 2", t("Relative weights of the three events", "Poids relatifs des trois événements"))]],
     )
 
 

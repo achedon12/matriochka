@@ -22,7 +22,7 @@
    "station": "Station",
    "builtFrom": "Built at the Matrix Workbench from",
    "carry": "What you'll carry",
-   "structures": "Ten structures",
+   "structures": "Eleven structures",
    "armour": "Armour set",
    "madeAt": "Made at the Matrix Workbench",
    "moreAbout": "Everything about this world",
@@ -107,7 +107,7 @@
   "home": {
    "tagline": "Every block can hold a world.",
    "intro": "A Fabric mod for Minecraft 26.3. Ten worlds, each sealed inside a single block and nested in the one before it. Every world has its own rule, its own creatures, its own station, and a boss guarding the core that opens the next.",
-   "facts": "Minecraft 26.3 on Fabric, version 0.3.0. Solo and multiplayer.",
+   "facts": "Minecraft 26.3 on Fabric, version 0.4.0. Solo and multiplayer.",
    "dollsTitle": "A set of eleven nesting dolls, just opened: the Surface, then worlds 1 to 10, from the largest to the smallest",
    "dollsCaption": "The Surface, then the ten worlds it holds. Pick a doll to open its world.",
    "trailerH": "The trailer",
@@ -176,6 +176,16 @@
      "tex": "items/return_thread.png",
      "h": "Play as a group",
      "p": "Up to eight players share a group, its worlds and its defeated bosses. Bosses grow tougher with every player who joins the fight."
+    },
+    {
+     "tex": "blocks/class_table.png",
+     "h": "Talents",
+     "p": "Each class has three branches of four talents at the Class Table, bought with souls and Shell Shards and opened as your group goes deeper."
+    },
+    {
+     "tex": "items/trophy_doll_gauntlet.png",
+     "h": "Trials and world events",
+     "p": "After an ending, race each world's trial or the Gauntlet of the eleven bosses for the server's board. In the worlds, invasions, surges of the rule and travelling merchants come and go."
     }
    ],
    "reelWatch": "Watch the trailer",
@@ -219,7 +229,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.3.0, changelog and source",
+     "note": "Version 0.4.0, changelog and source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -233,6 +243,12 @@
      "name": "CurseForge",
      "note": "In review, coming soon",
      "href": null,
+     "icon": "package"
+    },
+    {
+     "name": "Matriochka Pack",
+     "note": "A ready modpack (.mrpack), normal or hard, on every release",
+     "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "package"
     },
     {
@@ -265,6 +281,18 @@
      "a": "Through Lunar Client's Fabric profile for 26.3, with Fabric API and GeckoLib."
     },
     {
+     "q": "Does it work with Sodium, Iris and minimaps?",
+     "a": "Yes. It was checked with Sodium, Iris, Xaero's Minimap and World Map, JourneyMap, VoxelMap and Traveler's Backpack. Xaero's cave view and radar switch off in the Lightless Deep, where they would show what the dark hides."
+    },
+    {
+     "q": "Is there a modpack?",
+     "a": "The Matriochka Pack, a Modrinth .mrpack with the mod, its libraries, Just Enough Items and client performance mods, in a normal and a hard version. It is attached to every GitHub release, with the optional Matriochka HD resource pack."
+    },
+    {
+     "q": "Which languages does it speak?",
+     "a": "English, French, Spanish, German and Brazilian Portuguese: names, interface, quests, the Scroll, the fifty Journal pages, endings and subtitles."
+    },
+    {
      "q": "Can I fight a boss again?",
      "a": "Yes. Its altar wakes it again, and it drops its core, soil and souls again."
     }
@@ -287,9 +315,9 @@
    "galleryP": "Captures from the mod running in Minecraft 26.3.",
    "gallery": [],
    "ctaH": "Ready to shrink?",
-   "ctaP": "Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25.",
-   "ctaBtn": "Get version 0.3.0",
-   "download": "Download 0.3.0",
+   "ctaP": "Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25. In English, French, Spanish, German and Brazilian Portuguese.",
+   "ctaBtn": "Get version 0.4.0",
+   "download": "Download 0.4.0",
    "desc": "Matriochka, a Fabric mod for Minecraft 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss."
   },
   "worlds": {
@@ -307,7 +335,7 @@
    "cGives": "Mined, it gives",
    "cMakes": "makes",
    "sitesH": "Structures and their loot",
-   "sitesP": "Ten structures generate across every world, each with its own purpose. Here is where to look, what waits inside, and what the chests can hold.",
+   "sitesP": "Eleven structures generate across every world, each with its own purpose. Here is where to look, what waits inside, and what the chests can hold.",
    "lootH": "What the chests can hold",
    "cHidden": "Hidden until you earn it",
    "h": "The ten worlds",
@@ -397,7 +425,7 @@
   "bosses": {
    "headImg": "shots/head_bosses_banner.jpg",
    "h": "Bosses",
-   "lead": "Eleven fights, each built the same way: an announcement you can read, a fast and dangerous attack, then an opening. Hit a boss during its opening and it takes 1.5 times the damage; outside of it, only three quarters.",
+   "lead": "Eleven fights, each built the same way: an announcement you can read, a fast and dangerous attack, then an opening. Hit a boss during its opening and it takes 1.5 times the damage; outside of it, only three quarters. Every attack has its own animation: the boss shows the blow coming during the warning, strikes, then stays open and spent for exactly as long as the opening lasts. Each fight opens on a short cinematic: letterbox bars, the camera turning to the boss, its title card.",
    "tiers": [
     {
      "tier": "Surface to World 3",
@@ -450,7 +478,7 @@
     }
    ],
    "mpNote": "Counted within 48 blocks when the boss wakes. Its attacks also come 5% faster per extra player, recounted during the fight. Everyone within 64 blocks at its death shares the victory.",
-   "rewardNote": "plus 100 souls and 2 Shell Shards for every player in the fight",
+   "rewardNote": "plus 100 souls and 3 Shell Shards for every player in the fight",
    "desc": "The eleven bosses of Matriochka: health, attacks, phases, timings and rewards."
   },
   "systems": {
@@ -470,8 +498,14 @@
     {
      "id": "classes",
      "icon": "swords",
-     "stat": "6 classes, level 5",
-     "line": "Every crafted weapon and armour is born with a class."
+     "stat": "6 classes, 72 talents",
+     "line": "Every crafted weapon and armour is born with a class; talents shape how you play it."
+    },
+    {
+     "id": "workshop",
+     "icon": "hammer",
+     "stat": "7 new pieces",
+     "line": "Weapons that behave like their world, and stations that run on hoppers."
     },
     {
      "id": "nesting",
@@ -490,12 +524,24 @@
      "icon": "book-open",
      "stat": "70 quests",
      "line": "Objectives, quests, achievements and titles."
+    },
+    {
+     "id": "trials",
+     "icon": "hourglass",
+     "stat": "11 trials",
+     "line": "Races against the clock after the story, and events in the worlds."
+    },
+    {
+     "id": "comfort",
+     "icon": "eye",
+     "stat": "5 languages",
+     "line": "Comfort options, cinematics, music that follows the fight, a light per world."
     }
    ],
    "h": "Systems",
    "headImg": "shots/head_systems_banner.jpg",
-   "lead": "What keeps you alive, what you trade for power, and how your gear grows. Everything here works the same in solo and on a server.",
-   "desc": "Doll of Life, death and respawn, souls and karma, gear classes, groups and quests in Matriochka.",
+   "lead": "What keeps you alive, what you trade for power, how your gear grows, and what waits after the story. Everything here works the same in solo and on a server.",
+   "desc": "Doll of Life, death and respawn, souls and karma, gear classes and talents, new gear and station automation, groups, quests, trials, world events and comfort options in Matriochka.",
    "onPage": "On this page",
    "toc": [
     [
@@ -508,7 +554,11 @@
     ],
     [
      "classes",
-     "Classes"
+     "Classes and talents"
+    ],
+    [
+     "workshop",
+     "Gear and stations"
     ],
     [
      "nesting",
@@ -521,13 +571,21 @@
     [
      "journal",
      "Journal"
+    ],
+    [
+     "trials",
+     "Trials and events"
+    ],
+    [
+     "comfort",
+     "Comfort and atmosphere"
     ]
    ],
    "survivalH": "Survival",
    "lifeDoll": {
     "tex": "items/life_doll.png",
     "h": "Life Doll",
-    "p": "You carry a doll made of layers. It gets its first layer when the Spore Queen falls, a second after the Light Eater and a third after the Master of Seasons. Every boss you beat restores one layer, and the Soul Altar rebuilds one for 50 souls."
+    "p": "You carry a doll made of layers. It gets its first layer when the Spore Queen falls, a second after the Light Eater and a third after the Master of Seasons. Every boss you beat restores one layer, and the Soul Altar rebuilds one for 50 souls and 4 rare resources of the world you are in."
    },
    "deathH": "When you die",
    "death": [
@@ -589,7 +647,7 @@
     }
    ],
    "soulsH": "Souls and karma",
-   "soulsLead": "Every item carries a soul whose weight depends on its rarity. Put it on the Soul Altar and choose, for good: purify it to free the soul and gain karma, or devour it to absorb the soul and lose karma. Either way you keep the souls, which pay for class upgrades, cradle charges and doll layers.",
+   "soulsLead": "Every item carries a soul whose weight depends on its rarity. Put it on the Soul Altar and choose, for good: purify it to free the soul and gain karma, or devour it to absorb the soul and lose karma. Either way you keep the souls, which pay for class upgrades, talents, cradle charges and doll layers. Structure chests also keep Soul Shards (5 souls) and Soul Vessels (20), about 10 souls a chest.",
    "rarCols": [
     "Rarity",
     "Souls"
@@ -712,7 +770,7 @@
      "souls": "270"
     }
    ],
-   "upNote": "Level 1 to 5 costs 400 souls and 6 Shell Shards per piece (1, 1, 2, 2). Every boss leaves 2 Shell Shards to each player who fought it.",
+   "upNote": "Level 1 to 5 costs 400 souls and 6 Shell Shards per piece (1, 1, 2, 2). Every boss leaves 3 Shell Shards to each player who fought it: enough to bring its world's weapon to the cap.",
    "capH": "Level cap",
    "capCols": [
     "Progression",
@@ -764,6 +822,647 @@
    "classShot": {
     "src": "shots/gui_station_class_table.png",
     "caption": "The Class Table"
+   },
+   "talentsH": "Talents",
+   "talentsLead": "The Class Table also holds a cabinet of talent trees: three branches of four talents for each of the six classes, 72 in all. A branch is learnt in order; the first two talents cost souls, the last two souls and Shell Shards, and each tier opens as your group beats deeper bosses. A class's talents act while you wear or hold its gear (any tool counts for the Prospector).",
+   "talentCols": [
+    "Tier",
+    "Souls",
+    "Shell Shards",
+    "Opens after"
+   ],
+   "talentTiers": [
+    {
+     "lv": "1",
+     "souls": "20",
+     "shards": "0",
+     "gate": "Block Guardian"
+    },
+    {
+     "lv": "2",
+     "souls": "50",
+     "shards": "0",
+     "gate": "Ash Titan"
+    },
+    {
+     "lv": "3",
+     "souls": "120",
+     "shards": "1",
+     "gate": "Light Eater"
+    },
+    {
+     "lv": "4",
+     "souls": "250",
+     "shards": "2",
+     "gate": "Master of Seasons"
+    }
+   ],
+   "talentTree": [
+    {
+     "cls": "Guardian",
+     "branches": [
+      {
+       "name": "Bulwark",
+       "talents": [
+        {
+         "name": "Stout",
+         "eff": "+1 armor"
+        },
+        {
+         "name": "Plated",
+         "eff": "+2 armor"
+        },
+        {
+         "name": "Unbroken",
+         "eff": "+2 armor toughness"
+        },
+        {
+         "name": "Last Wall",
+         "eff": "Below 30% health, take 25% less damage"
+        }
+       ]
+      },
+      {
+       "name": "Rooted",
+       "talents": [
+        {
+         "name": "Planted Feet",
+         "eff": "+10% knockback resistance"
+        },
+        {
+         "name": "Broad Back",
+         "eff": "+2 max health"
+        },
+        {
+         "name": "Immovable",
+         "eff": "+20% knockback resistance"
+        },
+        {
+         "name": "Thornshell",
+         "eff": "Return 20% of the damage you take to the attacker"
+        }
+       ]
+      },
+      {
+       "name": "Warden",
+       "talents": [
+        {
+         "name": "Hardy",
+         "eff": "World gauges rise 5% slower"
+        },
+        {
+         "name": "Slow Mending",
+         "eff": "Out of combat, regain 1 health every 2 seconds"
+        },
+        {
+         "name": "Hearty",
+         "eff": "+4 max health"
+        },
+        {
+         "name": "Lacquer Skin",
+         "eff": "Every 30 seconds, gain 4 absorption health"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Berserker",
+     "branches": [
+      {
+       "name": "Fury",
+       "talents": [
+        {
+         "name": "Heavy Hand",
+         "eff": "+3% attack damage"
+        },
+        {
+         "name": "Bloodied",
+         "eff": "Below half health, deal 15% more damage"
+        },
+        {
+         "name": "Cleaver",
+         "eff": "+5% attack damage"
+        },
+        {
+         "name": "Red Mist",
+         "eff": "Below half health, deal 25% more damage"
+        }
+       ]
+      },
+      {
+       "name": "Frenzy",
+       "talents": [
+        {
+         "name": "Quick Arm",
+         "eff": "+5% attack speed"
+        },
+        {
+         "name": "Momentum",
+         "eff": "A kill gives Speed for 4 seconds"
+        },
+        {
+         "name": "Flurry",
+         "eff": "+10% attack speed"
+        },
+        {
+         "name": "Rampage",
+         "eff": "A kill heals 3 health"
+        }
+       ]
+      },
+      {
+       "name": "Shellbreaker",
+       "talents": [
+        {
+         "name": "Opener",
+         "eff": "Your first blow on a creature deals 20% more"
+        },
+        {
+         "name": "Giantkiller",
+         "eff": "Deal 6% more damage to bosses"
+        },
+        {
+         "name": "Finisher",
+         "eff": "Deal 20% more to foes below a quarter of their health"
+        },
+        {
+         "name": "Shell Splitter",
+         "eff": "Deal 12% more damage to bosses"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Prowler",
+     "branches": [
+      {
+       "name": "Shadowstep",
+       "talents": [
+        {
+         "name": "Light Foot",
+         "eff": "+3% movement speed"
+        },
+        {
+         "name": "Slip Away",
+         "eff": "+3% chance to dodge a blow"
+        },
+        {
+         "name": "Fleet",
+         "eff": "+5% movement speed"
+        },
+        {
+         "name": "Phantom",
+         "eff": "+6% chance to dodge a blow"
+        }
+       ]
+      },
+      {
+       "name": "Featherfoot",
+       "talents": [
+        {
+         "name": "Soft Landing",
+         "eff": "Fall 2 blocks more without harm"
+        },
+        {
+         "name": "Climber",
+         "eff": "Step up 0.5 block higher"
+        },
+        {
+         "name": "Springheel",
+         "eff": "+10% jump strength"
+        },
+        {
+         "name": "Cat's Fall",
+         "eff": "Fall 5 blocks more without harm"
+        }
+       ]
+      },
+      {
+       "name": "Ambush",
+       "talents": [
+        {
+         "name": "First Cut",
+         "eff": "Your first blow on a creature deals 15% more"
+        },
+        {
+         "name": "Stalker",
+         "eff": "Blows struck while sneaking deal 20% more"
+        },
+        {
+         "name": "Vanish",
+         "eff": "A kill turns you invisible for 3 seconds"
+        },
+        {
+         "name": "Assassin",
+         "eff": "Blows struck while sneaking deal 40% more"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Reaper",
+     "branches": [
+      {
+       "name": "Harvest",
+       "talents": [
+        {
+         "name": "Gleaner",
+         "eff": "+5% souls from every kill"
+        },
+        {
+         "name": "Thresher",
+         "eff": "+8% souls from every kill"
+        },
+        {
+         "name": "Shell Gatherer",
+         "eff": "25% chance of one more Shell Shard from a boss"
+        },
+        {
+         "name": "Great Reaping",
+         "eff": "+15% souls from every kill"
+        }
+       ]
+      },
+      {
+       "name": "Leech",
+       "talents": [
+        {
+         "name": "Thirst",
+         "eff": "Heal 2% of the damage you deal"
+        },
+        {
+         "name": "Feast",
+         "eff": "A kill heals 2 health"
+        },
+        {
+         "name": "Bloodletter",
+         "eff": "Heal 4% of the damage you deal"
+        },
+        {
+         "name": "Gorge",
+         "eff": "A kill heals 4 health"
+        }
+       ]
+      },
+      {
+       "name": "Omen",
+       "talents": [
+        {
+         "name": "Lucky Coin",
+         "eff": "+0.5 luck"
+        },
+        {
+         "name": "Blight",
+         "eff": "Your blows wither the foe for 2 seconds"
+        },
+        {
+         "name": "Fortune",
+         "eff": "+1 luck"
+        },
+        {
+         "name": "Doom",
+         "eff": "Your blows wither the foe for 4 seconds"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Survivor",
+     "branches": [
+      {
+       "name": "Endurance",
+       "talents": [
+        {
+         "name": "Tough Lungs",
+         "eff": "World gauges rise 5% slower"
+        },
+        {
+         "name": "Weathered",
+         "eff": "World gauges rise 8% slower"
+        },
+        {
+         "name": "Thick Skin",
+         "eff": "+2 max health"
+        },
+        {
+         "name": "Unbowed",
+         "eff": "World gauges rise 12% slower"
+        }
+       ]
+      },
+      {
+       "name": "Recovery",
+       "talents": [
+        {
+         "name": "Second Wind",
+         "eff": "Out of combat, regain 1 health every 2 seconds"
+        },
+        {
+         "name": "Scavenger",
+         "eff": "A kill heals 1 health"
+        },
+        {
+         "name": "Rally",
+         "eff": "Out of combat, regain 2 health every 2 seconds"
+        },
+        {
+         "name": "Iron Heart",
+         "eff": "+4 max health"
+        }
+       ]
+      },
+      {
+       "name": "Grit",
+       "talents": [
+        {
+         "name": "Stubborn",
+         "eff": "Below 30% health, take 15% less damage"
+        },
+        {
+         "name": "Deep Breath",
+         "eff": "+1 oxygen bonus: your breath lasts longer"
+        },
+        {
+         "name": "Ember-Proof",
+         "eff": "Burn 50% shorter"
+        },
+        {
+         "name": "Never Down",
+         "eff": "Below 30% health, take 30% less damage"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Prospector",
+     "branches": [
+      {
+       "name": "Delver",
+       "talents": [
+        {
+         "name": "Keen Edge",
+         "eff": "+2 mining efficiency"
+        },
+        {
+         "name": "Swift Pick",
+         "eff": "+10% block breaking speed"
+        },
+        {
+         "name": "Deep Cut",
+         "eff": "+4 mining efficiency"
+        },
+        {
+         "name": "Gold Fever",
+         "eff": "Haste while you hold a tool"
+        }
+       ]
+      },
+      {
+       "name": "Lode",
+       "talents": [
+        {
+         "name": "Ore Nose",
+         "eff": "5% chance to mine an ore twice"
+        },
+        {
+         "name": "Lucky Strike",
+         "eff": "+0.5 luck"
+        },
+        {
+         "name": "Rich Vein",
+         "eff": "10% chance to mine an ore twice"
+        },
+        {
+         "name": "Motherlode",
+         "eff": "20% chance to mine an ore twice"
+        }
+       ]
+      },
+      {
+       "name": "Tunneler",
+       "talents": [
+        {
+         "name": "Long Arm",
+         "eff": "+0.5 blocks of reach"
+        },
+        {
+         "name": "Wet Pick",
+         "eff": "+50% mining speed under water"
+        },
+        {
+         "name": "Longer Arm",
+         "eff": "+1 blocks of reach"
+        },
+        {
+         "name": "Mole",
+         "eff": "+20% block breaking speed"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "talentNote": "The Forget button unlearns every talent and gives back 50% of the souls spent, never the shards.",
+   "gearH": "New gear",
+   "gearLead": "7 weapons and tools that behave like the world they come from, each crafted at its world's station and drawn by hand. They are born with a class like any other gear.",
+   "gear": [
+    {
+     "tex": "items/spore_bow.png",
+     "h": "Spore Bow",
+     "p": "Its arrows burst into a cloud of toxic spores where they strike. World 1, made at the Spore Vat.",
+     "inputs": [
+      {
+       "id": "roots",
+       "tex": "items/roots.png",
+       "n": 4,
+       "name": "Roots"
+      },
+      {
+       "id": "spores",
+       "tex": "items/spores.png",
+       "n": 12,
+       "name": "Spores"
+      },
+      {
+       "id": "minecraft:string",
+       "tex": null,
+       "n": 3,
+       "name": "String"
+      },
+      {
+       "id": "chitin",
+       "tex": "items/chitin.png",
+       "n": 1,
+       "name": "Chitin"
+      }
+     ]
+    },
+    {
+     "tex": "items/magma_flail.png",
+     "h": "Magma Flail",
+     "p": "Sets foes ablaze; every third blow bursts into a ring of flame. Swinging it warms you in the Veins. World 2, made at the Ash Foundry.",
+     "inputs": [
+      {
+       "id": "ash_ingot",
+       "tex": "items/ash_ingot.png",
+       "n": 5,
+       "name": "Ash Ingot"
+      },
+      {
+       "id": "blazing_rock",
+       "tex": "items/blazing_rock.png",
+       "n": 4,
+       "name": "Blazing Rock"
+      },
+      {
+       "id": "minecraft:iron_chain",
+       "tex": null,
+       "n": 2,
+       "name": "Iron Chain"
+      }
+     ]
+    },
+    {
+     "tex": "items/key_chain_whip.png",
+     "h": "Key Chain Whip",
+     "p": "Long reach. Every lash drags the foe toward you and slows it. World 3, made at the Jailer's Table.",
+     "inputs": [
+      {
+       "id": "sealed_fragment",
+       "tex": "items/sealed_fragment.png",
+       "n": 5,
+       "name": "Sealed Fragment"
+      },
+      {
+       "id": "dungeon_key",
+       "tex": "items/dungeon_key.png",
+       "n": 1,
+       "name": "Dungeon Key"
+      },
+      {
+       "id": "minecraft:iron_chain",
+       "tex": null,
+       "n": 3,
+       "name": "Iron Chain"
+      }
+     ]
+    },
+    {
+     "tex": "items/storm_javelin.png",
+     "h": "Storm Javelin",
+     "p": "Use it to throw: lightning falls where it strikes, then it flies back to your hand. World 4, made at the Lightning Forge.",
+     "inputs": [
+      {
+       "id": "celestial_crystal",
+       "tex": "items/celestial_crystal.png",
+       "n": 3,
+       "name": "Celestial Crystal"
+      },
+      {
+       "id": "storm_essence",
+       "tex": "items/storm_essence.png",
+       "n": 3,
+       "name": "Storm Essence"
+      },
+      {
+       "id": "minecraft:stick",
+       "tex": null,
+       "n": 2,
+       "name": "Stick"
+      }
+     ]
+    },
+    {
+     "tex": "items/lantern_shield.png",
+     "h": "Lantern Shield",
+     "p": "Blocks like a shield. Each blocked blow flares: the attacker is blinded, thrown back and marked. World 5, made at the Dark Altar.",
+     "inputs": [
+      {
+       "id": "shadow_shard",
+       "tex": "items/shadow_shard.png",
+       "n": 5,
+       "name": "Shadow Shard"
+      },
+      {
+       "id": "minecraft:lantern",
+       "tex": null,
+       "n": 1,
+       "name": "Lantern"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "n": 4,
+       "name": "Iron Ingot"
+      }
+     ]
+    },
+    {
+     "tex": "items/tide_harpoon.png",
+     "h": "Tide Harpoon",
+     "p": "Use it to throw: it drags what it hits back to you, farther under water. Its line brings it home. World 7, made at the Abyssal Press.",
+     "inputs": [
+      {
+       "id": "abyssal_cobalt",
+       "tex": "items/abyssal_cobalt.png",
+       "n": 4,
+       "name": "Abyssal Cobalt"
+      },
+      {
+       "id": "nacre",
+       "tex": "items/nacre.png",
+       "n": 2,
+       "name": "Nacre"
+      },
+      {
+       "id": "minecraft:string",
+       "tex": null,
+       "n": 4,
+       "name": "String"
+      }
+     ]
+    },
+    {
+     "tex": "items/quake_pick.png",
+     "h": "Quake Pick",
+     "p": "Mines a column of three. Use it on the ground: a tremor that staggers the creatures around you. World 9, made at the Terrain Anchor.",
+     "inputs": [
+      {
+       "id": "terrain_fragment",
+       "tex": "items/terrain_fragment.png",
+       "n": 6,
+       "name": "Terrain Fragment"
+      },
+      {
+       "id": "minecraft:iron_pickaxe",
+       "tex": null,
+       "n": 1,
+       "name": "Iron pickaxe"
+      }
+     ]
+    }
+   ],
+   "autoH": "Stations on hoppers",
+   "auto": [
+    "Every station with recipes works with hoppers. It keeps one recipe: the last one crafted there by hand, or the one picked with the small gilded funnel on its drawer.",
+    "Ingredients go in from the top and the sides, each into its own slots; anything else is refused. The result comes out from below, and a comparator reads how full the station is.",
+    "Each station keeps its condition: heat for the Ash Foundry, a charge for the Lightning Forge (lightning, or Storm Essence in its fuel slot), darkness, deep water, dawn and dusk. The Spore Vat waits for a ripe brew, and the Jailer's Table makes one batch per lock pattern entered.",
+    "The Soul Altar and the Class Table stay manual. Breaking a station drops its buffer."
+   ],
+   "autoShot": {
+    "src": "shots/sys_stations_night.jpg",
+    "caption": "The stations' lit faces glow in the dark"
+   },
+   "shake": {
+    "tex": "items/doll_mallet.png",
+    "h": "Shake a World Block",
+    "p": "From outside, a player of the owning group can sneak and use the World Block with empty hands to help those inside: creatures stunned and thrown off their feet for 3 seconds, a boss staggered and open. Strike it with the Doll Mallet instead and the world quakes, loose blocks falling over their heads. One shake per world every 30 seconds.",
+    "inputs": []
    },
    "nestingH": "Things inside things",
    "nestingLead": "The name is the rule: something can always hold something else. These systems unlock as the story goes on.",
@@ -865,32 +1564,267 @@
      "caption": "Quests"
     }
    ],
+   "firstSteps": {
+    "tex": "items/artisan_scroll.png",
+    "h": "First steps",
+    "p": "Until you enter World 1, a small lacquered card under the HUD plaque shows the next of ten steps, from reading the Scroll to planting the first Seed, with its item, a short hint and a compass needle toward the nearest Guardian's Sanctuary. Each step is detected from what you really do, and the Guide button on the Scroll or the Journal hides it.",
+    "inputs": []
+   },
    "titlesH": "Titles you can earn",
    "titles": [
+    "Abyss Diver",
     "Apprentice",
     "Ash Skin",
     "Closed Eyes",
     "Cold Blood",
+    "Ember Walker",
+    "Gaol Breaker",
+    "Gauntlet Champion",
     "Glow",
+    "Groundshaker",
     "Head Down",
+    "Hive Breaker",
     "Iron Lungs",
+    "Lightbringer",
+    "Mirror Breaker",
     "Out of Time",
     "Painted Cape",
     "Seamless",
+    "Storm Rider",
+    "Swift Hand",
+    "Timekeeper",
+    "Unmaker",
     "Untethered",
     "Wall Walker",
     "Child of the Wind"
-   ]
+   ],
+   "titlesNote": "Titles are worn from the Trials book, quest titles included.",
+   "trialsH": "Trials",
+   "trialsLead": "Once you have seen an ending, the Trials open: a rush per world (two waves of its creatures, the second led by its elites, then its boss) and the Gauntlet of the eleven bosses, fought against the clock on a lacquered stage inside the Refuge doll, painted for each world. Open them from the Journal's Objective page, a Trial Altar or /matriochka trials start. Falling carries you out instead of killing you.",
+   "trialFacts": [
+    {
+     "k": "Trial bosses",
+     "v": "×1.6 / ×1.35",
+     "d": "health and damage, ×1.2 / ×1.15 in the Gauntlet; always mutated, no introduction, no story reward"
+    },
+    {
+     "k": "Every clear",
+     "v": "25",
+     "d": "souls"
+    },
+    {
+     "k": "First win",
+     "v": "Trophy",
+     "d": "its Trophy Doll and a title"
+    },
+    {
+     "k": "Under par",
+     "v": "Swift Hand",
+     "d": "a title for beating the par time"
+    }
+   ],
+   "trialCols": [
+    "Trial",
+    "Par time"
+   ],
+   "trialList": [
+    {
+     "name": "Trial: Spore Queen",
+     "tex": "items/trophy_doll_1.png",
+     "par": "2:45"
+    },
+    {
+     "name": "Trial: Ash Titan",
+     "tex": "items/trophy_doll_2.png",
+     "par": "3:00"
+    },
+    {
+     "name": "Trial: Grand Jailer",
+     "tex": "items/trophy_doll_3.png",
+     "par": "3:15"
+    },
+    {
+     "name": "Trial: Storm King",
+     "tex": "items/trophy_doll_4.png",
+     "par": "3:30"
+    },
+    {
+     "name": "Trial: Light Eater",
+     "tex": "items/trophy_doll_5.png",
+     "par": "3:45"
+    },
+    {
+     "name": "Trial: Your Double",
+     "tex": "items/trophy_doll_6.png",
+     "par": "4:00"
+    },
+    {
+     "name": "Trial: Pressure Leviathan",
+     "tex": "items/trophy_doll_7.png",
+     "par": "4:15"
+    },
+    {
+     "name": "Trial: Master of Seasons",
+     "tex": "items/trophy_doll_8.png",
+     "par": "4:30"
+    },
+    {
+     "name": "Trial: Heart of the Terrain",
+     "tex": "items/trophy_doll_9.png",
+     "par": "4:45"
+    },
+    {
+     "name": "Trial: The Unfinished",
+     "tex": "items/trophy_doll_10.png",
+     "par": "8:00"
+    },
+    {
+     "name": "The Gauntlet",
+     "tex": "items/trophy_doll_gauntlet.png",
+     "par": "30:00"
+    }
+   ],
+   "boardH": "The board",
+   "board": "A clock on the HUD runs green while you are under par. Best times are kept per player and per group, and the server keeps a board of the ten best groups for every trial, in the Trials book and with /matriochka trials top.",
+   "eventsH": "World events",
+   "eventsLead": "While you are in a world, now and then something happens around you. A boss bar follows each event. Never in peaceful; operators can start one with /matriochka event.",
+   "events": [
+    {
+     "icon": "swords",
+     "h": "Invasion",
+     "p": "3 waves of the world's creatures, more for every player nearby; the last is led by a glowing warlord. A reward chest waits at the end."
+    },
+    {
+     "icon": "flame",
+     "h": "Surge",
+     "p": "The world's rule grows twice as strong for 2 minutes, with its own effect and particles. Ride it out for 15 souls."
+    },
+    {
+     "icon": "package",
+     "h": "Travelling merchant",
+     "p": "A wanderer of the world's people sets up for a while, with special trades: its world's new gear, Shell Shards, rare pieces."
+    }
+   ],
+   "surges": [
+    {
+     "w": 1,
+     "name": "Spore Bloom",
+     "p": "The jungle exhales: toxin rises twice as fast and spore clouds drift by."
+    },
+    {
+     "w": 2,
+     "name": "Magma Surge",
+     "p": "The veins boil: heat rises twice as fast and the ground spits flame."
+    },
+    {
+     "w": 3,
+     "name": "Lockdown",
+     "p": "Every lock bites: the halls grind, your limbs grow heavy."
+    },
+    {
+     "w": 4,
+     "name": "Tempest",
+     "p": "Gusts every few seconds and lightning all around."
+    },
+    {
+     "w": 5,
+     "name": "Blackout",
+     "p": "The Deep drinks every light: noise rises twice as fast, darkness pulses."
+    },
+    {
+     "w": 6,
+     "name": "Gravity Storm",
+     "p": "Gravity jolts at random: you are thrown up and caught again."
+    },
+    {
+     "w": 7,
+     "name": "Crushing Current",
+     "p": "A deep current drags you and drinks your air twice as fast."
+    },
+    {
+     "w": 8,
+     "name": "Season Rush",
+     "p": "Every season at once: hunger, frost and weakness come and go."
+    },
+    {
+     "w": 9,
+     "name": "Great Quake",
+     "p": "The ground never settles: tremors stagger you every few seconds."
+    },
+    {
+     "w": 10,
+     "name": "Unravelling",
+     "p": "The Workshop's seams give way: every zone's rule bites twice as hard."
+    }
+   ],
+   "eventsNote": "Frequency and weights live in config/matriochka.json: worldEvents, worldEventChance, worldEventCooldown and the three weights.",
+   "comfortLead": "Opened from the Journal's Comfort button (or from Mod Menu), saved per player in config/matriochka-client.json.",
+   "comfortH": "Comfort options",
+   "comfort": [
+    "Screen shake strength and flashes",
+    "Soft effects: no Nausea or Darkness, a gentle tint instead; the server skips those effects for you",
+    "Cinematics on or off",
+    "Large subtitles for boss attacks",
+    "Fewer particles",
+    "Colour-blind patterns on the world gauges",
+    "HUD plaque size and corner",
+    "A volume per kind of music"
+   ],
+   "comfortShot": {
+    "src": "shots/sys_comfort.jpg",
+    "caption": "The comfort options"
+   },
+   "cineH": "Cinematics and music",
+   "cine": [
+    "Boss introductions: letterbox bars, the camera turning toward the boss with a slow push-in, and a framed title card.",
+    "A title card the first time you enter each world, with its rule medallion and a line about its law.",
+    "Phase breaks freeze the frame with a flash and the shell's number; heavy blows and moving ground shake the camera.",
+    "Adaptive music: a danger theme while creatures hunt you, boss themes, a heartbeat at low health or breath, and stings for a structure, a Journal page or a quest. Themes fade into one another."
+   ],
+   "cineShots": [
+    {
+     "src": "shots/sys_boss_intro.jpg",
+     "caption": "A boss introduction"
+    },
+    {
+     "src": "shots/sys_world_card.jpg",
+     "caption": "Entering World 1"
+    }
+   ],
+   "atmosH": "A light for every world",
+   "atmos": "Every world has its own light, fog and particles: spore haze, falling embers, cold dust, a storm sky, near-black fog where a lantern reads across a cavern, an inverted pastel sky, deep blue water, light tinted by the season, rust haze, warm workshop light, and World 0's red lacquer dusk. Items, blocks and stations are hand-painted in the vanilla style, and their lit faces glow in the dark. Matriochka HD, an optional 32 x 32 resource pack, is attached to every release; Iris shader packs work through vanilla light.",
+   "atmosShots": [
+    {
+     "src": "shots/sys_atmos_w2.jpg",
+     "caption": "Giant Veins"
+    },
+    {
+     "src": "shots/sys_atmos_w8.jpg",
+     "caption": "Autumn in Hastened Seasons"
+    }
+   ],
+   "langH": "Five languages",
+   "lang": "English, French, Spanish, German and Brazilian Portuguese: every name, the interface, quests, achievements, the Scroll, the fifty Journal pages, endings, credits and subtitles. A string missing from a language shows in English, and labels shrink to fit when a language runs longer."
   },
   "download": {
    "h": "Download",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.3.0 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
+   "lead": "Version 0.4.0 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
    "desc": "Download Matriochka for Minecraft 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
    "sources": [
     {
      "name": "GitHub",
      "note": "Releases, changelog and source",
+     "href": "https://github.com/achedon12/matriochka/releases"
+    },
+    {
+     "name": "Matriochka Pack",
+     "note": "Modrinth modpack (.mrpack), normal and hard, attached to each release",
+     "href": "https://github.com/achedon12/matriochka/releases"
+    },
+    {
+     "name": "Matriochka HD",
+     "note": "Optional 32 x 32 resource pack, attached to each release",
      "href": "https://github.com/achedon12/matriochka/releases"
     },
     {
@@ -935,17 +1869,28 @@
      "n": "Just Enough Items",
      "v": "optional",
      "s": "Recipe pages for every station"
+    },
+    {
+     "n": "Mod Menu",
+     "v": "optional",
+     "s": "Summary, links and a shortcut to the comfort options"
     }
    ],
    "installH": "Installing",
    "steps": [
     "Install Fabric Loader for Minecraft 26.3.",
-    "Download matriochka-0.3.0+26.3.jar from the GitHub releases.",
+    "Download matriochka-0.4.0+26.3.jar from the GitHub releases.",
     "Put it in your mods folder with Fabric API and GeckoLib.",
     "Launch the Fabric profile and create a new world. The Artisan's Scroll is waiting in your inventory."
    ],
    "lunarH": "Lunar Client",
    "lunar": "Matriochka is built on Fabric so that it can run on Lunar Client, whose mod loading relies on Fabric. Support for Minecraft 26.3 together with GeckoLib is still being confirmed there: if the mod does not load, play it with the official launcher or Prism Launcher on a Fabric profile in the meantime.",
+   "packH": "The Matriochka Pack",
+   "pack": "Rather not gather the mods yourself? Every GitHub release carries a Modrinth modpack (.mrpack) for Prism Launcher, the Modrinth App or any launcher that reads the format: the mod, Fabric API, GeckoLib, Just Enough Items (optional) and client performance mods (Sodium, Lithium, FerriteCore, Entity Culling, ImmediatelyFast, Dynamic FPS, Krypton, Mod Menu, Iris as an option), in a normal and a hard (nightmare) version.",
+   "compatH": "Works with",
+   "compat": "Checked with Sodium, Iris (through vanilla light: emissive faces, full-bright particles), Xaero's Minimap and World Map, JourneyMap, VoxelMap and Traveler's Backpack for 26.3: no conflict found, and no backpack way around the progression. Xaero's cave view and entity radar switch off in the Lightless Deep, where they would show what the darkness hides, and come back when you leave.",
+   "langsH": "Languages",
+   "langs": "English, French, Spanish, German and Brazilian Portuguese, following the game's language setting.",
    "wikiH": "Wiki",
    "wiki": "Recipes, step-by-step guides and answers to common questions live on the GitHub wiki.",
    "wikiBtn": "Open the wiki",
@@ -983,6 +1928,46 @@
      "k": "difficulty",
      "v": "\"normal\"",
      "d": "story (70% damage, nothing lost on death), normal, nightmare (130% damage, one charge per Soul Cradle) or hardcore (as nightmare, death is permanent, the Doll of Life never saves you and a broken World Block deletes its world)"
+    },
+    {
+     "k": "karma",
+     "v": "true",
+     "d": "false freezes every karma change (the Journal still shows the value)"
+    },
+    {
+     "k": "soulGainMultiplier",
+     "v": "1.0",
+     "d": "Scales every soul gain"
+    },
+    {
+     "k": "maxActiveGroups",
+     "v": "0",
+     "d": "How many groups may hold worlds (0: no limit); a Seed over the limit waits, unhatched"
+    },
+    {
+     "k": "maxParcels",
+     "v": "0",
+     "d": "How many parcels the server may hand out (0: no limit)"
+    },
+    {
+     "k": "worldEvents",
+     "v": "true",
+     "d": "Invasions, surges and travelling merchants in the worlds"
+    },
+    {
+     "k": "worldEventChance",
+     "v": "0.06",
+     "d": "Chance that an event starts around a player, rolled once a minute"
+    },
+    {
+     "k": "worldEventCooldown",
+     "v": "10",
+     "d": "Minutes of quiet in a world after an event"
+    },
+    {
+     "k": "invasionWeight, surgeWeight, merchantWeight",
+     "v": "3, 3, 2",
+     "d": "Relative weights of the three events"
     }
    ]
   }
@@ -1349,6 +2334,55 @@
       "drops": []
      },
      {
+      "id": "doll_mallet",
+      "tex": "items/doll_mallet.png",
+      "name": "Doll Mallet",
+      "kind": "tool",
+      "rarity": "Rare",
+      "effect": "Strike a World Block of your group with it: the world inside quakes and loose blocks fall on those in it. Sneak and use the block with empty hands to help them instead.",
+      "station": "Matrix Workbench",
+      "inputs": [
+       {
+        "id": "painted_wood",
+        "tex": "blocks/painted_wood.png",
+        "n": 3,
+        "name": "Painted Wood"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 2,
+        "name": "Stick"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "soul_shard",
+      "tex": "items/soul_shard.png",
+      "name": "Soul Shard",
+      "kind": "soul",
+      "rarity": "Common",
+      "effect": "Holds 5 souls. Use it to free them (sneak: the whole stack).",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "soul_vessel",
+      "tex": "items/soul_vessel.png",
+      "name": "Soul Vessel",
+      "kind": "soul",
+      "rarity": "Rare",
+      "effect": "Holds 20 souls. Use it to free them (sneak: the whole stack).",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "nested_dolls",
       "tex": "items/nested_dolls.png",
       "name": "Nested Dolls",
@@ -1379,6 +2413,18 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Nothing is written on it. Nothing is left to finish.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "trophy_doll_gauntlet",
+      "tex": "items/trophy_doll_gauntlet.png",
+      "name": "Gauntlet Trophy",
+      "kind": "trophy",
+      "rarity": "Legendary",
+      "effect": "Eleven dolls in one, won by finishing the Gauntlet.",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -1605,7 +2651,7 @@
       "tex": "blocks/soul_altar.png",
       "name": "Soul Altar",
       "kind": "station",
-      "effect": "Purify or devour an item.",
+      "effect": "Purify or devour an item. Rebuilds a Doll of Life layer for 50 souls and 4 rare resources of the current world.",
       "station": "Matrix Workbench",
       "inputs": [
        {
@@ -1621,6 +2667,18 @@
         "name": "Gold Ingot"
        }
       ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "trial_altar",
+      "tex": "blocks/trial_altar.png",
+      "name": "Trial Altar",
+      "kind": "trial_altar",
+      "effect": "Opens the Trials once you have seen an ending.",
+      "station": null,
+      "inputs": [],
       "count": 1,
       "drops": [],
       "yields": null
@@ -1956,6 +3014,18 @@
      "effect": ""
     },
     {
+     "id": "trophy_doll_1",
+     "tex": "items/trophy_doll_1.png",
+     "name": "Spore Queen Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
+     "id": "spore_bow",
+     "tex": "items/spore_bow.png",
+     "name": "Spore Bow",
+     "effect": "Its arrows burst into a cloud of toxic spores where they strike."
+    },
+    {
      "id": "root_broth",
      "tex": "items/root_broth.png",
      "name": "Root Broth",
@@ -2010,7 +3080,8 @@
     {
      "role": "Utility",
      "names": [
-      "Gatherer Village"
+      "Gatherer Village",
+      "Gatherers' Caravan"
      ]
     },
     {
@@ -2246,6 +3317,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_1",
+      "tex": "items/trophy_doll_1.png",
+      "name": "Spore Queen Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "spore_bow",
+      "tex": "items/spore_bow.png",
+      "name": "Spore Bow",
+      "kind": "bow",
+      "rarity": "Rare",
+      "effect": "Its arrows burst into a cloud of toxic spores where they strike.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "chitin_helmet",
       "tex": "items/chitin_helmet.png",
       "name": "Chitin Helmet",
@@ -2416,11 +3511,11 @@
      },
      {
       "name": "The Vat",
-      "desc": "Ferment a first recipe."
+      "desc": "Ferment a first recipe: brew at the Spore Vat once it is ripe."
      },
      {
       "name": "Hard Harvest",
-      "desc": "Bring 16 spores to the herbalist."
+      "desc": "Bring 16 spores to the herbalist (any Gatherer)."
      },
      {
       "name": "The Lost Scouts",
@@ -2608,6 +3703,17 @@
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_artisan_sanctuary.jpg"
+    },
+    {
+     "id": "gatherer_caravan",
+     "name": "Gatherers' Caravan",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "Covered wagons drawn up around a fire, with a stall and a hitching rail.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
     }
    ],
    "loot": [
@@ -3065,6 +4171,18 @@
      "effect": ""
     },
     {
+     "id": "trophy_doll_2",
+     "tex": "items/trophy_doll_2.png",
+     "name": "Ash Titan Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
+     "id": "magma_flail",
+     "tex": "items/magma_flail.png",
+     "name": "Magma Flail",
+     "effect": "Sets foes ablaze; every third blow bursts into a ring of flame. Swinging it warms you in the Veins."
+    },
+    {
      "id": "ice_bread",
      "tex": "items/ice_bread.png",
      "name": "Ice Bread",
@@ -3098,7 +4216,8 @@
      "names": [
       "Salamander Cavern",
       "Giant Furnace",
-      "Lava Well"
+      "Lava Well",
+      "Ember Circle"
      ]
     },
     {
@@ -3355,6 +4474,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_2",
+      "tex": "items/trophy_doll_2.png",
+      "name": "Ash Titan Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "magma_flail",
+      "tex": "items/magma_flail.png",
+      "name": "Magma Flail",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "Sets foes ablaze; every third blow bursts into a ring of flame. Swinging it warms you in the Veins.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "thermal_helmet",
       "tex": "items/thermal_helmet.png",
       "name": "Thermal Helmet",
@@ -3602,15 +4745,15 @@
     "quests": [
      {
       "name": "Under Control",
-      "desc": "Keep the Foundry at the right temperature."
+      "desc": "Keep the Foundry at the right temperature for 3 smelts."
      },
      {
       "name": "The First Vein",
-      "desc": "Extract a whole giant ore."
+      "desc": "Extract a whole giant ore: mine a Giant Vein."
      },
      {
       "name": "The Miners' Pay",
-      "desc": "Bring 8 ash ingots to the foreman."
+      "desc": "Bring 8 ash ingots to the foreman (any Free Miner)."
      },
      {
       "name": "Flooded Shaft",
@@ -3798,6 +4941,17 @@
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_artisan_workshop.jpg"
+    },
+    {
+     "id": "ember_circle",
+     "name": "Ember Circle",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A ring of standing stones and lintels around a sunken altar where the guarded chest waits.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
     }
    ],
    "loot": [
@@ -3921,6 +5075,11 @@
        "id": "ash_hammer",
        "tex": "items/ash_hammer.png",
        "name": "Ash Hammer"
+      },
+      {
+       "id": "magma_flail",
+       "tex": "items/magma_flail.png",
+       "name": "Magma Flail"
       }
      ]
     }
@@ -4301,6 +5460,18 @@
      "effect": "Held at the arena altar, it wakes the Grand Jailer."
     },
     {
+     "id": "trophy_doll_3",
+     "tex": "items/trophy_doll_3.png",
+     "name": "Grand Jailer Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
+     "id": "key_chain_whip",
+     "tex": "items/key_chain_whip.png",
+     "name": "Key Chain Whip",
+     "effect": "Long reach. Every lash drags the foe toward you and slows it."
+    },
+    {
      "id": "cell_ration",
      "tex": "items/cell_ration.png",
      "name": "Cell Ration",
@@ -4334,7 +5505,8 @@
      "names": [
       "Arena",
       "Jailers' Court",
-      "Moving Hall"
+      "Moving Hall",
+      "Gaolers' Gatehouse"
      ]
     },
     {
@@ -4658,6 +5830,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_3",
+      "tex": "items/trophy_doll_3.png",
+      "name": "Grand Jailer Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "key_chain_whip",
+      "tex": "items/key_chain_whip.png",
+      "name": "Key Chain Whip",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "Long reach. Every lash drags the foe toward you and slows it.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "jailer_helmet",
       "tex": "items/jailer_helmet.png",
       "name": "Jailer Helmet",
@@ -4840,7 +6036,7 @@
      },
      {
       "name": "Read the Plan",
-      "desc": "Complete a labyrinth map."
+      "desc": "Complete a labyrinth map: reach the place it points to."
      },
      {
       "name": "The Locksmith",
@@ -4848,7 +6044,7 @@
      },
      {
       "name": "Last Message",
-      "desc": "Carry a letter from cell to cell."
+      "desc": "Carry a letter (a Journal Page) from cell to cell: into 3 different places of the dungeon."
      },
      {
       "name": "The Escape",
@@ -5032,6 +6228,17 @@
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_artisan_cell.jpg"
+    },
+    {
+     "id": "gaolers_gatehouse",
+     "name": "Gaolers' Gatehouse",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A walled courtyard with corner towers, a gatehouse with its portcullis and a keep at the back.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
     }
    ],
    "loot": [
@@ -5140,6 +6347,11 @@
        "id": "jailer_blade",
        "tex": "items/jailer_blade.png",
        "name": "Jailer's Blade"
+      },
+      {
+       "id": "key_chain_whip",
+       "tex": "items/key_chain_whip.png",
+       "name": "Key Chain Whip"
       }
      ]
     }
@@ -5524,6 +6736,18 @@
      "effect": "Held at the arena altar, it wakes the Storm King."
     },
     {
+     "id": "trophy_doll_4",
+     "tex": "items/trophy_doll_4.png",
+     "name": "Storm King Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
+     "id": "storm_javelin",
+     "tex": "items/storm_javelin.png",
+     "name": "Storm Javelin",
+     "effect": "Use it to throw: lightning falls where it strikes, then it flies back to your hand."
+    },
+    {
      "id": "cloud_fruit",
      "tex": "items/cloud_fruit.png",
      "name": "Cloud Fruit",
@@ -5557,7 +6781,8 @@
      "names": [
       "Ray Nest",
       "Giant Lightning Rod",
-      "Flying Wreck"
+      "Flying Wreck",
+      "Sky Outpost"
      ]
     },
     {
@@ -5868,6 +7093,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_4",
+      "tex": "items/trophy_doll_4.png",
+      "name": "Storm King Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "storm_javelin",
+      "tex": "items/storm_javelin.png",
+      "name": "Storm Javelin",
+      "kind": "weapon",
+      "rarity": "Epic",
+      "effect": "Use it to throw: lightning falls where it strikes, then it flies back to your hand.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "celestial_helmet",
       "tex": "items/celestial_helmet.png",
       "name": "Celestial Helmet",
@@ -6040,7 +7289,7 @@
     "quests": [
      {
       "name": "First Flight",
-      "desc": "Craft a glider and cross three islands."
+      "desc": "Craft a glider and cross three islands (glides of 24 blocks)."
      },
      {
       "name": "Catch the Lightning",
@@ -6048,7 +7297,7 @@
      },
      {
       "name": "Light the Lighthouse",
-      "desc": "Rekindle 3 lighthouses."
+      "desc": "Rekindle 3 lighthouses: use a Storm Essence inside 3 Storm Lighthouses."
      },
      {
       "name": "The Cartographer's Road",
@@ -6236,6 +7485,17 @@
      "desc": "A glass greenhouse with planters and a fountain.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_cloud_garden.jpg"
+    },
+    {
+     "id": "sky_outpost",
+     "name": "Sky Outpost",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A lookout hut on stilts over a supply yard, with a signal fire on its deck.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
     }
    ],
    "loot": [
@@ -6359,6 +7619,11 @@
        "id": "lightning_lance",
        "tex": "items/lightning_lance.png",
        "name": "Lightning Lance"
+      },
+      {
+       "id": "storm_javelin",
+       "tex": "items/storm_javelin.png",
+       "name": "Storm Javelin"
       }
      ]
     }
@@ -6693,6 +7958,18 @@
      "effect": ""
     },
     {
+     "id": "trophy_doll_5",
+     "tex": "items/trophy_doll_5.png",
+     "name": "Light Eater Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
+     "id": "lantern_shield",
+     "tex": "items/lantern_shield.png",
+     "name": "Lantern Shield",
+     "effect": "Blocks like a shield. Each blocked blow flares: the attacker is blinded, thrown back and marked."
+    },
+    {
      "id": "mute_mushroom",
      "tex": "items/mute_mushroom.png",
      "name": "Mute Mushroom",
@@ -6726,7 +8003,8 @@
      "names": [
       "Prowler Nest",
       "Echo Cemetery",
-      "Black Cathedral"
+      "Black Cathedral",
+      "Hushed Circle"
      ]
     },
     {
@@ -6981,6 +8259,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_5",
+      "tex": "items/trophy_doll_5.png",
+      "name": "Light Eater Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "lantern_shield",
+      "tex": "items/lantern_shield.png",
+      "name": "Lantern Shield",
+      "kind": "ward",
+      "rarity": "Epic",
+      "effect": "Blocks like a shield. Each blocked blow flares: the attacker is blinded, thrown back and marked.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "nocturnal_helmet",
       "tex": "items/nocturnal_helmet.png",
       "name": "Nocturnal Helmet",
@@ -7173,11 +8475,11 @@
      },
      {
       "name": "The Signs",
-      "desc": "Learn 5 signs of the Silent Ones."
+      "desc": "Learn the signs of 5 different Silent Ones (talk to them)."
      },
      {
       "name": "The Night Light",
-      "desc": "Escort the keeper (6 Glow Devourers)."
+      "desc": "Escort the keeper: defeat 6 Glow Devourers close to the Silent Ones."
      },
      {
       "name": "The Last Fire",
@@ -7361,6 +8663,17 @@
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_artisan_shelter.jpg"
+    },
+    {
+     "id": "hushed_circle",
+     "name": "Hushed Circle",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A ring of standing stones and lintels around a sunken altar where the guarded chest waits.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
     }
    ],
    "loot": [
@@ -7780,6 +9093,12 @@
      "effect": ""
     },
     {
+     "id": "trophy_doll_6",
+     "tex": "items/trophy_doll_6.png",
+     "name": "Your Double Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
      "id": "flipped_apple",
      "tex": "items/flipped_apple.png",
      "name": "Flipped Apple",
@@ -7813,7 +9132,8 @@
      "names": [
       "Hall of Mirrors",
       "Hanging Cage",
-      "Unstable Core"
+      "Unstable Core",
+      "Hanging Outpost"
      ]
     },
     {
@@ -8037,6 +9357,18 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_6",
+      "tex": "items/trophy_doll_6.png",
+      "name": "Your Double Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "mirror_helmet",
       "tex": "items/mirror_helmet.png",
       "name": "Mirror Helmet",
@@ -8207,15 +9539,15 @@
      },
      {
       "name": "Double Meaning",
-      "desc": "Use the Inverter."
+      "desc": "Use the Inverter: swap two pieces of gear."
      },
      {
       "name": "Lost Reflection",
-      "desc": "Bring back an NPC's double."
+      "desc": "Bring back an NPC's double: defeat a Reflection next to a Free Reflection."
      },
      {
       "name": "The Impossible Stair",
-      "desc": "Reach the top of the stair."
+      "desc": "Reach the top of the Impossible Stair."
      },
      {
       "name": "Who Is Real?",
@@ -8399,6 +9731,17 @@
      "desc": "A glass greenhouse with planters and a fountain.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_floating_garden.jpg"
+    },
+    {
+     "id": "hanging_outpost",
+     "name": "Hanging Outpost",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "A lookout hut on stilts over a supply yard, with a signal fire on its deck.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
     }
    ],
    "loot": [
@@ -8861,6 +10204,18 @@
      "effect": "Breathe under water while its tank holds air (12 min). Fragile: hits wear it fast."
     },
     {
+     "id": "trophy_doll_7",
+     "tex": "items/trophy_doll_7.png",
+     "name": "Pressure Leviathan Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
+     "id": "tide_harpoon",
+     "tex": "items/tide_harpoon.png",
+     "name": "Tide Harpoon",
+     "effect": "Use it to throw: it drags what it hits back to you, farther under water. Its line brings it home."
+    },
+    {
      "id": "apnea_kelp",
      "tex": "items/apnea_kelp.png",
      "name": "Apnea Kelp",
@@ -8890,7 +10245,8 @@
      "names": [
       "Hunters' Trench",
       "Dead Reef",
-      "Sunken City"
+      "Sunken City",
+      "Drowned Bastion"
      ]
     },
     {
@@ -9204,6 +10560,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_7",
+      "tex": "items/trophy_doll_7.png",
+      "name": "Pressure Leviathan Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "tide_harpoon",
+      "tex": "items/tide_harpoon.png",
+      "name": "Tide Harpoon",
+      "kind": "weapon",
+      "rarity": "Epic",
+      "effect": "Use it to throw: it drags what it hits back to you, farther under water. Its line brings it home.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "diving_chestplate",
       "tex": "items/diving_chestplate.png",
       "name": "Diving Chestplate",
@@ -9413,11 +10793,11 @@
      },
      {
       "name": "The Silent Station",
-      "desc": "Repair 3 station cables."
+      "desc": "Repair 3 station cables: use Abyssal Cobalt inside a Pressure Station."
      },
      {
       "name": "The Wreck's Crew",
-      "desc": "Recover 3 crew plates."
+      "desc": "Recover 3 crew plates, one in each of 3 wrecks."
      },
      {
       "name": "The Signal",
@@ -9601,6 +10981,17 @@
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_deep_vault.jpg"
+    },
+    {
+     "id": "drowned_bastion",
+     "name": "Drowned Bastion",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A walled courtyard with corner towers, a gatehouse with its portcullis and a keep at the back.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
     }
    ],
    "loot": [
@@ -9729,6 +11120,11 @@
        "id": "trench_trident",
        "tex": "items/trench_trident.png",
        "name": "Trench Trident"
+      },
+      {
+       "id": "tide_harpoon",
+       "tex": "items/tide_harpoon.png",
+       "name": "Tide Harpoon"
       }
      ]
     }
@@ -10069,6 +11465,12 @@
      "effect": "Held at the arena altar, it wakes the Master of Seasons."
     },
     {
+     "id": "trophy_doll_8",
+     "tex": "items/trophy_doll_8.png",
+     "name": "Master of Seasons Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
      "id": "season_jam",
      "tex": "items/season_jam.png",
      "name": "Season Jam",
@@ -10123,7 +11525,8 @@
     {
      "role": "Utility",
      "names": [
-      "Dusk Market"
+      "Dusk Market",
+      "Ephemeral Caravan"
      ]
     },
     {
@@ -10363,6 +11766,18 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_8",
+      "tex": "items/trophy_doll_8.png",
+      "name": "Master of Seasons Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "seasonal_helmet",
       "tex": "items/seasonal_helmet.png",
       "name": "Seasonal Helmet",
@@ -10535,7 +11950,7 @@
     "quests": [
      {
       "name": "Four Seasons",
-      "desc": "Live through a full cycle."
+      "desc": "Live through a full cycle: see the four seasons here."
      },
      {
       "name": "Stop the Instant",
@@ -10543,11 +11958,11 @@
      },
      {
       "name": "A Life in a Day",
-      "desc": "Help an Ephemeral before nightfall."
+      "desc": "Help an Ephemeral before nightfall: bring one 8 Temporal Sand by day."
      },
      {
       "name": "The Archives",
-      "desc": "Find 5 books of the library."
+      "desc": "Find 5 books of the library: search 5 shelves or lecterns of the Library of Ages."
      },
      {
       "name": "The Hour Seller",
@@ -10731,6 +12146,17 @@
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_time_tomb.jpg"
+    },
+    {
+     "id": "ephemeral_caravan",
+     "name": "Ephemeral Caravan",
+     "role": "People",
+     "roleKey": "utility",
+     "size": "Medium",
+     "rarity": "Rare",
+     "desc": "Covered wagons drawn up around a fire, with a stall and a hitching rail.",
+     "inside": "The people of the world live here and trade with you, beside a common chest.",
+     "img": null
     }
    ],
    "loot": [
@@ -11157,6 +12583,18 @@
      "effect": "World 10 Seed."
     },
     {
+     "id": "trophy_doll_9",
+     "tex": "items/trophy_doll_9.png",
+     "name": "Heart of the Terrain Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
+     "id": "quake_pick",
+     "tex": "items/quake_pick.png",
+     "name": "Quake Pick",
+     "effect": "Mines a column of three. Use it on the ground: a tremor that staggers the creatures around you."
+    },
+    {
      "id": "anchor_bread",
      "tex": "items/anchor_bread.png",
      "name": "Anchor Bread",
@@ -11190,7 +12628,8 @@
      "names": [
       "Walking Tower",
       "Mobile Fortress",
-      "Terrain Arena"
+      "Terrain Arena",
+      "Restless Circle"
      ]
     },
     {
@@ -11427,6 +12866,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_9",
+      "tex": "items/trophy_doll_9.png",
+      "name": "Heart of the Terrain Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "quake_pick",
+      "tex": "items/quake_pick.png",
+      "name": "Quake Pick",
+      "kind": "tool",
+      "rarity": "Epic",
+      "effect": "Mines a column of three. Use it on the ground: a tremor that staggers the creatures around you.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "living_rock_helmet",
       "tex": "items/living_rock_helmet.png",
       "name": "Living Rock Helmet",
@@ -11603,15 +13066,15 @@
      },
      {
       "name": "The Ground Plan",
-      "desc": "Discover 5 zones."
+      "desc": "Discover 5 zones: 5 different places of the Restless Ground."
      },
      {
       "name": "The Drifting Fort",
-      "desc": "Stabilize 3 walls of the fort."
+      "desc": "Stabilize 3 walls of the fort: set 3 Anchors inside the Anchored Fort."
      },
      {
       "name": "The Surveyor",
-      "desc": "Measure a living chasm."
+      "desc": "Measure a living chasm: reach the bottom of a Living Chasm."
      },
      {
       "name": "The Vein",
@@ -11795,6 +13258,17 @@
      "desc": "A kiosk over a spiral stair down to an antechamber; a mural wall hides the way to the pedestal room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_stable_sanctuary.jpg"
+    },
+    {
+     "id": "restless_circle",
+     "name": "Restless Circle",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Medium",
+     "rarity": "Common",
+     "desc": "A ring of standing stones and lintels around a sunken altar where the guarded chest waits.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
     }
    ],
    "loot": [
@@ -11847,6 +13321,11 @@
        "id": "terrain_heart",
        "tex": "items/terrain_heart.png",
        "name": "Terrain Heart"
+      },
+      {
+       "id": "quake_pick",
+       "tex": "items/quake_pick.png",
+       "name": "Quake Pick"
       },
       {
        "id": "minecraft:gold_ingot",
@@ -12228,6 +13707,12 @@
      "effect": "Held at the arena altar, it wakes the Unfinished."
     },
     {
+     "id": "trophy_doll_10",
+     "tex": "items/trophy_doll_10.png",
+     "name": "The Unfinished Trophy",
+     "effect": "A painted doll of the boss, won in its trial."
+    },
+    {
      "id": "workshop_feast",
      "tex": "items/workshop_feast.png",
      "name": "Workshop Feast",
@@ -12261,7 +13746,8 @@
      "names": [
       "Needle Tower",
       "Colossal Forge",
-      "Collapsed Doll"
+      "Collapsed Doll",
+      "Thimble Outpost"
      ]
     },
     {
@@ -12484,6 +13970,18 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_10",
+      "tex": "items/trophy_doll_10.png",
+      "name": "The Unfinished Trophy",
+      "kind": "trophy",
+      "rarity": "Epic",
+      "effect": "A painted doll of the boss, won in its trial.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "artisan_helmet",
       "tex": "items/artisan_helmet.png",
       "name": "Artisan Helmet",
@@ -12668,7 +14166,7 @@
     "quests": [
      {
       "name": "Looking Down",
-      "desc": "Find your base, now a mere object."
+      "desc": "Find your base, now a mere object, on the Titanic Workbench."
      },
      {
       "name": "The Workshop",
@@ -12676,11 +14174,11 @@
      },
      {
       "name": "The Apprentices",
-      "desc": "Find 5 old apprentices."
+      "desc": "Find 5 old apprentices (talk to 5 different ones)."
      },
      {
       "name": "Every Tool",
-      "desc": "Use a tool from every world."
+      "desc": "Use a tool from every world: strike, mine or use with gear of each of the ten worlds."
      },
      {
       "name": "The Last Pardon",
@@ -12864,6 +14362,17 @@
      "desc": "A pillared throne hall; the carpet before the throne hides a hatch to the treasure room.",
      "inside": "A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
      "img": "shots/st_creature_throne.jpg"
+    },
+    {
+     "id": "thimble_outpost",
+     "name": "Thimble Outpost",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Large",
+     "rarity": "Rare",
+     "desc": "A lookout hut on stilts over a supply yard, with a signal fire on its deck.",
+     "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
+     "img": null
     }
    ],
    "loot": [
@@ -13523,14 +15032,7 @@
     "min": 1,
     "max": 1
    },
-   "quests": [
-    {
-     "world": 1,
-     "name": "No Filter",
-     "desc": "Kill a Chitin Guard without a mask.",
-     "count": 1
-    }
-   ],
+   "quests": [],
    "ach": [
     {
      "world": 1,
@@ -14076,14 +15578,7 @@
     "min": 1,
     "max": 1
    },
-   "quests": [
-    {
-     "world": 2,
-     "name": "Bare Hands",
-     "desc": "Kill a Slag Golem without armor.",
-     "count": 1
-    }
-   ],
+   "quests": [],
    "ach": [
     {
      "world": 2,
@@ -14474,9 +15969,9 @@
     "Normal"
    ],
    "elite": false,
-   "hp": "18",
+   "hp": "22",
    "dmg": "4.3",
-   "hpRaw": 18,
+   "hpRaw": 22,
    "dmgRaw": 4.3,
    "speedMult": "×1.12",
    "attackEvery": "0.85 s",
@@ -14578,9 +16073,9 @@
    ],
    "elite": true,
    "hp": "82",
-   "dmg": "11.5",
+   "dmg": "10.1",
    "hpRaw": 82,
-   "dmgRaw": 11.5,
+   "dmgRaw": 10.1,
    "speedMult": "×1.12",
    "attackEvery": "0.85 s",
    "attackTicks": 17,
@@ -15128,10 +16623,10 @@
     "Elite"
    ],
    "elite": true,
-   "hp": "59",
-   "dmg": "8.6",
-   "hpRaw": 59,
-   "dmgRaw": 8.6,
+   "hp": "111",
+   "dmg": "10.4",
+   "hpRaw": 111,
+   "dmgRaw": 10.4,
    "speedMult": "×1.18",
    "attackEvery": "0.8 s",
    "attackTicks": 16,
@@ -15400,14 +16895,7 @@
     "min": 1,
     "max": 3
    },
-   "quests": [
-    {
-     "world": 5,
-     "name": "The Night Light",
-     "desc": "Escort the keeper (6 Glow Devourers).",
-     "count": 6
-    }
-   ],
+   "quests": [],
    "ach": [],
    "tex": "entities/glow_devourer.png",
    "dropTex": "items/shadow_shard.png",
@@ -15847,14 +17335,7 @@
     "min": 1,
     "max": 3
    },
-   "quests": [
-    {
-     "world": 6,
-     "name": "Lost Reflection",
-     "desc": "Bring back an NPC's double.",
-     "count": 5
-    }
-   ],
+   "quests": [],
    "ach": [
     {
      "world": 6,
@@ -16021,9 +17502,9 @@
    ],
    "elite": false,
    "hp": "63",
-   "dmg": "19.9",
+   "dmg": "17.4",
    "hpRaw": 63,
-   "dmgRaw": 19.9,
+   "dmgRaw": 17.4,
    "speedMult": "×1.3",
    "attackEvery": "0.75 s",
    "attackTicks": 15,
@@ -16511,14 +17992,7 @@
     "min": 1,
     "max": 3
    },
-   "quests": [
-    {
-     "world": 7,
-     "name": "The Wreck's Crew",
-     "desc": "Recover 3 crew plates.",
-     "count": 10
-    }
-   ],
+   "quests": [],
    "ach": [
     {
      "world": 7,
@@ -17721,14 +19195,7 @@
     "min": 1,
     "max": 3
    },
-   "quests": [
-    {
-     "world": 9,
-     "name": "The Surveyor",
-     "desc": "Measure a living chasm.",
-     "count": 5
-    }
-   ],
+   "quests": [],
    "ach": [],
    "tex": "entities/foundation_eater.png",
    "dropTex": "items/terrain_fragment.png",
@@ -17784,9 +19251,9 @@
    ],
    "elite": false,
    "hp": "265",
-   "dmg": "34.4",
+   "dmg": "30.1",
    "hpRaw": 265,
-   "dmgRaw": 34.4,
+   "dmgRaw": 30.1,
    "speedMult": "×1.48",
    "attackEvery": "0.65 s",
    "attackTicks": 13,
@@ -18326,9 +19793,9 @@
    ],
    "elite": false,
    "hp": "417",
-   "dmg": "41.3",
+   "dmg": "36.1",
    "hpRaw": 417,
-   "dmgRaw": 41.3,
+   "dmgRaw": 36.1,
    "speedMult": "×1.54",
    "attackEvery": "0.6 s",
    "attackTicks": 12,
@@ -18484,14 +19951,7 @@
     "min": 1,
     "max": 1
    },
-   "quests": [
-    {
-     "world": 10,
-     "name": "Every Tool",
-     "desc": "Use a tool from every world.",
-     "count": 1
-    }
-   ],
+   "quests": [],
    "ach": [],
    "tex": "entities/colossus_prowler.png",
    "dropTex": "items/artisan_shard.png",
@@ -18697,6 +20157,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.block_guardian.punch.windup",
+     "label": "attack.block_guardian.punch.windup"
+    },
+    {
+     "key": "attack.block_guardian.punch.strike",
+     "label": "attack.block_guardian.punch.strike"
+    },
+    {
+     "key": "attack.block_guardian.punch.recover",
+     "label": "attack.block_guardian.punch.recover"
+    },
+    {
+     "key": "attack.block_guardian.shockwave.windup",
+     "label": "attack.block_guardian.shockwave.windup"
+    },
+    {
+     "key": "attack.block_guardian.shockwave.strike",
+     "label": "attack.block_guardian.shockwave.strike"
+    },
+    {
+     "key": "attack.block_guardian.shockwave.recover",
+     "label": "attack.block_guardian.shockwave.recover"
+    },
+    {
+     "key": "attack.block_guardian.torn_block.windup",
+     "label": "attack.block_guardian.torn_block.windup"
+    },
+    {
+     "key": "attack.block_guardian.torn_block.strike",
+     "label": "attack.block_guardian.torn_block.strike"
+    },
+    {
+     "key": "attack.block_guardian.torn_block.recover",
+     "label": "attack.block_guardian.torn_block.recover"
+    },
+    {
+     "key": "misc.block_guardian.phase",
+     "label": "misc.block_guardian.phase"
+    },
+    {
+     "key": "misc.block_guardian.death",
+     "label": "misc.block_guardian.death"
     }
    ],
    "quests": [
@@ -18875,6 +20379,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.spore_queen.root_snare.windup",
+     "label": "attack.spore_queen.root_snare.windup"
+    },
+    {
+     "key": "attack.spore_queen.root_snare.strike",
+     "label": "attack.spore_queen.root_snare.strike"
+    },
+    {
+     "key": "attack.spore_queen.root_snare.recover",
+     "label": "attack.spore_queen.root_snare.recover"
+    },
+    {
+     "key": "attack.spore_queen.toxic_cloud.windup",
+     "label": "attack.spore_queen.toxic_cloud.windup"
+    },
+    {
+     "key": "attack.spore_queen.toxic_cloud.strike",
+     "label": "attack.spore_queen.toxic_cloud.strike"
+    },
+    {
+     "key": "attack.spore_queen.toxic_cloud.recover",
+     "label": "attack.spore_queen.toxic_cloud.recover"
+    },
+    {
+     "key": "attack.spore_queen.call_of_sporelings.windup",
+     "label": "attack.spore_queen.call_of_sporelings.windup"
+    },
+    {
+     "key": "attack.spore_queen.call_of_sporelings.strike",
+     "label": "attack.spore_queen.call_of_sporelings.strike"
+    },
+    {
+     "key": "attack.spore_queen.call_of_sporelings.recover",
+     "label": "attack.spore_queen.call_of_sporelings.recover"
+    },
+    {
+     "key": "misc.spore_queen.phase",
+     "label": "misc.spore_queen.phase"
+    },
+    {
+     "key": "misc.spore_queen.death",
+     "label": "misc.spore_queen.death"
     }
    ],
    "quests": [],
@@ -19062,6 +20610,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.ash_titan.hammer_blow.windup",
+     "label": "attack.ash_titan.hammer_blow.windup"
+    },
+    {
+     "key": "attack.ash_titan.hammer_blow.strike",
+     "label": "attack.ash_titan.hammer_blow.strike"
+    },
+    {
+     "key": "attack.ash_titan.hammer_blow.recover",
+     "label": "attack.ash_titan.hammer_blow.recover"
+    },
+    {
+     "key": "attack.ash_titan.ash_spray.windup",
+     "label": "attack.ash_titan.ash_spray.windup"
+    },
+    {
+     "key": "attack.ash_titan.ash_spray.strike",
+     "label": "attack.ash_titan.ash_spray.strike"
+    },
+    {
+     "key": "attack.ash_titan.ash_spray.recover",
+     "label": "attack.ash_titan.ash_spray.recover"
+    },
+    {
+     "key": "attack.ash_titan.rising_lava.windup",
+     "label": "attack.ash_titan.rising_lava.windup"
+    },
+    {
+     "key": "attack.ash_titan.rising_lava.strike",
+     "label": "attack.ash_titan.rising_lava.strike"
+    },
+    {
+     "key": "attack.ash_titan.rising_lava.recover",
+     "label": "attack.ash_titan.rising_lava.recover"
+    },
+    {
+     "key": "misc.ash_titan.phase",
+     "label": "misc.ash_titan.phase"
+    },
+    {
+     "key": "misc.ash_titan.death",
+     "label": "misc.ash_titan.death"
     }
    ],
    "quests": [],
@@ -19271,6 +20863,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.grand_jailer.chain_pull.windup",
+     "label": "attack.grand_jailer.chain_pull.windup"
+    },
+    {
+     "key": "attack.grand_jailer.chain_pull.strike",
+     "label": "attack.grand_jailer.chain_pull.strike"
+    },
+    {
+     "key": "attack.grand_jailer.chain_pull.recover",
+     "label": "attack.grand_jailer.chain_pull.recover"
+    },
+    {
+     "key": "attack.grand_jailer.floor_cage.windup",
+     "label": "attack.grand_jailer.floor_cage.windup"
+    },
+    {
+     "key": "attack.grand_jailer.floor_cage.strike",
+     "label": "attack.grand_jailer.floor_cage.strike"
+    },
+    {
+     "key": "attack.grand_jailer.floor_cage.recover",
+     "label": "attack.grand_jailer.floor_cage.recover"
+    },
+    {
+     "key": "attack.grand_jailer.moving_walls.windup",
+     "label": "attack.grand_jailer.moving_walls.windup"
+    },
+    {
+     "key": "attack.grand_jailer.moving_walls.strike",
+     "label": "attack.grand_jailer.moving_walls.strike"
+    },
+    {
+     "key": "attack.grand_jailer.moving_walls.recover",
+     "label": "attack.grand_jailer.moving_walls.recover"
+    },
+    {
+     "key": "misc.grand_jailer.phase",
+     "label": "misc.grand_jailer.phase"
+    },
+    {
+     "key": "misc.grand_jailer.death",
+     "label": "misc.grand_jailer.death"
     }
    ],
    "quests": [],
@@ -19473,6 +21109,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.storm_king.gust.windup",
+     "label": "attack.storm_king.gust.windup"
+    },
+    {
+     "key": "attack.storm_king.gust.strike",
+     "label": "attack.storm_king.gust.strike"
+    },
+    {
+     "key": "attack.storm_king.gust.recover",
+     "label": "attack.storm_king.gust.recover"
+    },
+    {
+     "key": "attack.storm_king.called_lightning.windup",
+     "label": "attack.storm_king.called_lightning.windup"
+    },
+    {
+     "key": "attack.storm_king.called_lightning.strike",
+     "label": "attack.storm_king.called_lightning.strike"
+    },
+    {
+     "key": "attack.storm_king.called_lightning.recover",
+     "label": "attack.storm_king.called_lightning.recover"
+    },
+    {
+     "key": "attack.storm_king.shattered_islet.windup",
+     "label": "attack.storm_king.shattered_islet.windup"
+    },
+    {
+     "key": "attack.storm_king.shattered_islet.strike",
+     "label": "attack.storm_king.shattered_islet.strike"
+    },
+    {
+     "key": "attack.storm_king.shattered_islet.recover",
+     "label": "attack.storm_king.shattered_islet.recover"
+    },
+    {
+     "key": "misc.storm_king.phase",
+     "label": "misc.storm_king.phase"
+    },
+    {
+     "key": "misc.storm_king.death",
+     "label": "misc.storm_king.death"
     }
    ],
    "quests": [],
@@ -19658,6 +21338,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.light_eater.claw_in_the_dark.windup",
+     "label": "attack.light_eater.claw_in_the_dark.windup"
+    },
+    {
+     "key": "attack.light_eater.claw_in_the_dark.strike",
+     "label": "attack.light_eater.claw_in_the_dark.strike"
+    },
+    {
+     "key": "attack.light_eater.claw_in_the_dark.recover",
+     "label": "attack.light_eater.claw_in_the_dark.recover"
+    },
+    {
+     "key": "attack.light_eater.lights_out.windup",
+     "label": "attack.light_eater.lights_out.windup"
+    },
+    {
+     "key": "attack.light_eater.lights_out.strike",
+     "label": "attack.light_eater.lights_out.strike"
+    },
+    {
+     "key": "attack.light_eater.lights_out.recover",
+     "label": "attack.light_eater.lights_out.recover"
+    },
+    {
+     "key": "attack.light_eater.silent_charge.windup",
+     "label": "attack.light_eater.silent_charge.windup"
+    },
+    {
+     "key": "attack.light_eater.silent_charge.strike",
+     "label": "attack.light_eater.silent_charge.strike"
+    },
+    {
+     "key": "attack.light_eater.silent_charge.recover",
+     "label": "attack.light_eater.silent_charge.recover"
+    },
+    {
+     "key": "misc.light_eater.phase",
+     "label": "misc.light_eater.phase"
+    },
+    {
+     "key": "misc.light_eater.death",
+     "label": "misc.light_eater.death"
     }
    ],
    "quests": [],
@@ -19843,6 +21567,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.your_double.copied_strike.windup",
+     "label": "attack.your_double.copied_strike.windup"
+    },
+    {
+     "key": "attack.your_double.copied_strike.strike",
+     "label": "attack.your_double.copied_strike.strike"
+    },
+    {
+     "key": "attack.your_double.copied_strike.recover",
+     "label": "attack.your_double.copied_strike.recover"
+    },
+    {
+     "key": "attack.your_double.copied_weapon.windup",
+     "label": "attack.your_double.copied_weapon.windup"
+    },
+    {
+     "key": "attack.your_double.copied_weapon.strike",
+     "label": "attack.your_double.copied_weapon.strike"
+    },
+    {
+     "key": "attack.your_double.copied_weapon.recover",
+     "label": "attack.your_double.copied_weapon.recover"
+    },
+    {
+     "key": "attack.your_double.gravity_flip.windup",
+     "label": "attack.your_double.gravity_flip.windup"
+    },
+    {
+     "key": "attack.your_double.gravity_flip.strike",
+     "label": "attack.your_double.gravity_flip.strike"
+    },
+    {
+     "key": "attack.your_double.gravity_flip.recover",
+     "label": "attack.your_double.gravity_flip.recover"
+    },
+    {
+     "key": "misc.your_double.phase",
+     "label": "misc.your_double.phase"
+    },
+    {
+     "key": "misc.your_double.death",
+     "label": "misc.your_double.death"
     }
    ],
    "quests": [],
@@ -20028,6 +21796,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.pressure_leviathan.tail_lash.windup",
+     "label": "attack.pressure_leviathan.tail_lash.windup"
+    },
+    {
+     "key": "attack.pressure_leviathan.tail_lash.strike",
+     "label": "attack.pressure_leviathan.tail_lash.strike"
+    },
+    {
+     "key": "attack.pressure_leviathan.tail_lash.recover",
+     "label": "attack.pressure_leviathan.tail_lash.recover"
+    },
+    {
+     "key": "attack.pressure_leviathan.charge.windup",
+     "label": "attack.pressure_leviathan.charge.windup"
+    },
+    {
+     "key": "attack.pressure_leviathan.charge.strike",
+     "label": "attack.pressure_leviathan.charge.strike"
+    },
+    {
+     "key": "attack.pressure_leviathan.charge.recover",
+     "label": "attack.pressure_leviathan.charge.recover"
+    },
+    {
+     "key": "attack.pressure_leviathan.abyssal_pull.windup",
+     "label": "attack.pressure_leviathan.abyssal_pull.windup"
+    },
+    {
+     "key": "attack.pressure_leviathan.abyssal_pull.strike",
+     "label": "attack.pressure_leviathan.abyssal_pull.strike"
+    },
+    {
+     "key": "attack.pressure_leviathan.abyssal_pull.recover",
+     "label": "attack.pressure_leviathan.abyssal_pull.recover"
+    },
+    {
+     "key": "misc.pressure_leviathan.phase",
+     "label": "misc.pressure_leviathan.phase"
+    },
+    {
+     "key": "misc.pressure_leviathan.death",
+     "label": "misc.pressure_leviathan.death"
     }
    ],
    "quests": [],
@@ -20238,6 +22050,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_strike.windup",
+     "label": "attack.seasons_master.seasonal_strike.windup"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_strike.strike",
+     "label": "attack.seasons_master.seasonal_strike.strike"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_strike.recover",
+     "label": "attack.seasons_master.seasonal_strike.recover"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_ground.windup",
+     "label": "attack.seasons_master.seasonal_ground.windup"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_ground.strike",
+     "label": "attack.seasons_master.seasonal_ground.strike"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_ground.recover",
+     "label": "attack.seasons_master.seasonal_ground.recover"
+    },
+    {
+     "key": "attack.seasons_master.season_shift.windup",
+     "label": "attack.seasons_master.season_shift.windup"
+    },
+    {
+     "key": "attack.seasons_master.season_shift.strike",
+     "label": "attack.seasons_master.season_shift.strike"
+    },
+    {
+     "key": "attack.seasons_master.season_shift.recover",
+     "label": "attack.seasons_master.season_shift.recover"
+    },
+    {
+     "key": "misc.seasons_master.phase",
+     "label": "misc.seasons_master.phase"
+    },
+    {
+     "key": "misc.seasons_master.death",
+     "label": "misc.seasons_master.death"
     }
    ],
    "quests": [],
@@ -20429,6 +22285,50 @@
     {
      "key": "misc.rest",
      "label": "Opening"
+    },
+    {
+     "key": "attack.terrain_heart_boss.ground_wave.windup",
+     "label": "attack.terrain_heart_boss.ground_wave.windup"
+    },
+    {
+     "key": "attack.terrain_heart_boss.ground_wave.strike",
+     "label": "attack.terrain_heart_boss.ground_wave.strike"
+    },
+    {
+     "key": "attack.terrain_heart_boss.ground_wave.recover",
+     "label": "attack.terrain_heart_boss.ground_wave.recover"
+    },
+    {
+     "key": "attack.terrain_heart_boss.living_wall.windup",
+     "label": "attack.terrain_heart_boss.living_wall.windup"
+    },
+    {
+     "key": "attack.terrain_heart_boss.living_wall.strike",
+     "label": "attack.terrain_heart_boss.living_wall.strike"
+    },
+    {
+     "key": "attack.terrain_heart_boss.living_wall.recover",
+     "label": "attack.terrain_heart_boss.living_wall.recover"
+    },
+    {
+     "key": "attack.terrain_heart_boss.chasm.windup",
+     "label": "attack.terrain_heart_boss.chasm.windup"
+    },
+    {
+     "key": "attack.terrain_heart_boss.chasm.strike",
+     "label": "attack.terrain_heart_boss.chasm.strike"
+    },
+    {
+     "key": "attack.terrain_heart_boss.chasm.recover",
+     "label": "attack.terrain_heart_boss.chasm.recover"
+    },
+    {
+     "key": "misc.terrain_heart_boss.phase",
+     "label": "misc.terrain_heart_boss.phase"
+    },
+    {
+     "key": "misc.terrain_heart_boss.death",
+     "label": "misc.terrain_heart_boss.death"
     }
    ],
    "quests": [],
@@ -20623,16 +22523,53 @@
     {
      "key": "misc.rest",
      "label": "Opening"
-    }
-   ],
-   "quests": [
+    },
     {
-     "world": 10,
-     "name": "All at Once",
-     "desc": "Defeat the Unfinished without losing a layer.",
-     "count": 1
+     "key": "attack.the_unfinished.shell_stroke.windup",
+     "label": "attack.the_unfinished.shell_stroke.windup"
+    },
+    {
+     "key": "attack.the_unfinished.shell_stroke.strike",
+     "label": "attack.the_unfinished.shell_stroke.strike"
+    },
+    {
+     "key": "attack.the_unfinished.shell_stroke.recover",
+     "label": "attack.the_unfinished.shell_stroke.recover"
+    },
+    {
+     "key": "attack.the_unfinished.shell_lift.windup",
+     "label": "attack.the_unfinished.shell_lift.windup"
+    },
+    {
+     "key": "attack.the_unfinished.shell_lift.strike",
+     "label": "attack.the_unfinished.shell_lift.strike"
+    },
+    {
+     "key": "attack.the_unfinished.shell_lift.recover",
+     "label": "attack.the_unfinished.shell_lift.recover"
+    },
+    {
+     "key": "attack.the_unfinished.shell_burst.windup",
+     "label": "attack.the_unfinished.shell_burst.windup"
+    },
+    {
+     "key": "attack.the_unfinished.shell_burst.strike",
+     "label": "attack.the_unfinished.shell_burst.strike"
+    },
+    {
+     "key": "attack.the_unfinished.shell_burst.recover",
+     "label": "attack.the_unfinished.shell_burst.recover"
+    },
+    {
+     "key": "misc.the_unfinished.phase",
+     "label": "misc.the_unfinished.phase"
+    },
+    {
+     "key": "misc.the_unfinished.death",
+     "label": "misc.the_unfinished.death"
     }
    ],
+   "quests": [],
    "ach": [
     {
      "world": 10,

@@ -22,7 +22,7 @@
    "station": "Station",
    "builtFrom": "Se fabrique à l'Établi matriciel avec",
    "carry": "Ce que tu emporteras",
-   "structures": "Dix structures",
+   "structures": "Onze structures",
    "armour": "Armure",
    "madeAt": "Fabriqué à l'Établi matriciel",
    "moreAbout": "Tout sur ce monde",
@@ -107,7 +107,7 @@
   "home": {
    "tagline": "Chaque bloc peut contenir un monde.",
    "intro": "Un mod Fabric pour Minecraft 26.3. Dix mondes, chacun scellé dans un seul bloc et emboîté dans le précédent. Chaque monde a sa règle, ses créatures, sa station, et un boss qui garde le noyau ouvrant le suivant.",
-   "facts": "Minecraft 26.3 sous Fabric, version 0.3.0. Solo et multijoueur.",
+   "facts": "Minecraft 26.3 sous Fabric, version 0.4.0. Solo et multijoueur.",
    "dollsTitle": "Un jeu de onze poupées gigognes qu'on vient d'ouvrir : la Surface, puis les mondes 1 à 10, de la plus grande à la plus petite",
    "dollsCaption": "La Surface, puis les dix mondes qu'elle contient. Choisis une poupée pour ouvrir son monde.",
    "trailerH": "La bande-annonce",
@@ -176,6 +176,16 @@
      "tex": "items/return_thread.png",
      "h": "Joue en groupe",
      "p": "Jusqu'à huit joueurs partagent un groupe, ses mondes et ses boss vaincus. Les boss se renforcent à chaque joueur qui rejoint le combat."
+    },
+    {
+     "tex": "blocks/class_table.png",
+     "h": "Talents",
+     "p": "Chaque classe a trois branches de quatre talents à la Table de classe, achetés avec des âmes et des Éclats d'enveloppe, et ouverts à mesure que ton groupe descend."
+    },
+    {
+     "tex": "items/trophy_doll_gauntlet.png",
+     "h": "Épreuves et événements",
+     "p": "Après une fin, cours l'épreuve de chaque monde ou l'Épreuve des onze boss pour le tableau du serveur. Dans les mondes, invasions, poussées de la règle et marchands itinérants vont et viennent."
     }
    ],
    "reelWatch": "Voir la bande-annonce",
@@ -219,7 +229,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.3.0, journal des changements et code source",
+     "note": "Version 0.4.0, journal des changements et code source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -233,6 +243,12 @@
      "name": "CurseForge",
      "note": "En cours de validation, bientôt",
      "href": null,
+     "icon": "package"
+    },
+    {
+     "name": "Matriochka Pack",
+     "note": "Un modpack prêt (.mrpack), normal ou difficile, à chaque version",
+     "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "package"
     },
     {
@@ -265,6 +281,18 @@
      "a": "Via le profil Fabric de Lunar Client pour la 26.3, avec Fabric API et GeckoLib."
     },
     {
+     "q": "Ça marche avec Sodium, Iris et les minicartes ?",
+     "a": "Oui. Il a été vérifié avec Sodium, Iris, Xaero's Minimap et World Map, JourneyMap, VoxelMap et Traveler's Backpack. La vue des grottes et le radar de Xaero s'éteignent dans la Profondeur sans lumière, où ils montreraient ce que le noir cache."
+    },
+    {
+     "q": "Y a-t-il un modpack ?",
+     "a": "Le Matriochka Pack, un .mrpack Modrinth avec le mod, ses bibliothèques, Just Enough Items et des mods de performance, en version normale et difficile. Il est joint à chaque version GitHub, avec le pack de ressources facultatif Matriochka HD."
+    },
+    {
+     "q": "Dans quelles langues ?",
+     "a": "Anglais, français, espagnol, allemand et portugais du Brésil : noms, interface, quêtes, Parchemin, les cinquante pages du Journal, fins et sous-titres."
+    },
+    {
      "q": "Je peux refaire un boss ?",
      "a": "Oui. Son autel le réveille à nouveau, et il laisse encore son noyau, sa terre et ses âmes."
     }
@@ -287,9 +315,9 @@
    "galleryP": "Captures du mod en jeu, sous Minecraft 26.3.",
    "gallery": [],
    "ctaH": "Prêt à rétrécir ?",
-   "ctaP": "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25.",
-   "ctaBtn": "Obtenir la version 0.3.0",
-   "download": "Télécharger la 0.3.0",
+   "ctaP": "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25. En anglais, français, espagnol, allemand et portugais du Brésil.",
+   "ctaBtn": "Obtenir la version 0.4.0",
+   "download": "Télécharger la 0.4.0",
    "desc": "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
   },
   "worlds": {
@@ -307,7 +335,7 @@
    "cGives": "Miné, il donne",
    "cMakes": "donne",
    "sitesH": "Structures et leur butin",
-   "sitesP": "Dix structures apparaissent dans chaque monde, chacune avec son rôle. Voici où chercher, ce qui t'attend dedans et ce que les coffres peuvent contenir.",
+   "sitesP": "Onze structures apparaissent dans chaque monde, chacune avec son rôle. Voici où chercher, ce qui t'attend dedans et ce que les coffres peuvent contenir.",
    "lootH": "Ce que les coffres peuvent contenir",
    "cHidden": "Caché jusqu'à ce que tu l'obtiennes",
    "h": "Les dix mondes",
@@ -397,7 +425,7 @@
   "bosses": {
    "headImg": "shots/head_bosses_banner.jpg",
    "h": "Boss",
-   "lead": "Onze combats, tous construits pareil : une annonce lisible, une attaque rapide et dangereuse, puis une ouverture. Frappé pendant son ouverture, un boss subit 1,5 fois les dégâts ; en dehors, seulement les trois quarts.",
+   "lead": "Onze combats, tous construits pareil : une annonce lisible, une attaque rapide et dangereuse, puis une ouverture. Frappé pendant son ouverture, un boss subit 1,5 fois les dégâts ; en dehors, seulement les trois quarts. Chaque attaque a son animation : le boss montre le coup qui vient pendant l'annonce, frappe, puis reste ouvert et épuisé exactement le temps de l'ouverture. Chaque combat s'ouvre sur une courte cinématique : bandes noires, la caméra qui se tourne vers le boss, sa carte-titre.",
    "tiers": [
     {
      "tier": "Surface au monde 3",
@@ -450,7 +478,7 @@
     }
    ],
    "mpNote": "Compté dans un rayon de 48 blocs au réveil du boss. Ses attaques viennent aussi 5 % plus vite par joueur en plus, recompté pendant le combat. Tous ceux à moins de 64 blocs à sa mort partagent la victoire.",
-   "rewardNote": "et 100 âmes et 2 Éclats d'enveloppe pour chaque joueur présent au combat",
+   "rewardNote": "et 100 âmes et 3 Éclats d'enveloppe pour chaque joueur présent au combat",
    "desc": "Les onze boss de Matriochka : vie, attaques, phases, timings et récompenses."
   },
   "systems": {
@@ -470,8 +498,14 @@
     {
      "id": "classes",
      "icon": "swords",
-     "stat": "6 classes, niveau 5",
-     "line": "Chaque arme et armure fabriquée naît avec une classe."
+     "stat": "6 classes, 72 talents",
+     "line": "Chaque arme et armure fabriquée naît avec une classe ; les talents décident de ta façon de la jouer."
+    },
+    {
+     "id": "workshop",
+     "icon": "hammer",
+     "stat": "7 nouvelles pièces",
+     "line": "Des armes qui se comportent comme leur monde, et des stations qui tournent avec des entonnoirs."
     },
     {
      "id": "nesting",
@@ -490,12 +524,24 @@
      "icon": "book-open",
      "stat": "70 quêtes",
      "line": "Objectifs, quêtes, succès et titres."
+    },
+    {
+     "id": "trials",
+     "icon": "hourglass",
+     "stat": "11 épreuves",
+     "line": "Des courses contre la montre après l'histoire, et des événements dans les mondes."
+    },
+    {
+     "id": "comfort",
+     "icon": "eye",
+     "stat": "5 langues",
+     "line": "Options de confort, cinématiques, une musique qui suit le combat, une lumière par monde."
     }
    ],
    "h": "Systèmes",
    "headImg": "shots/head_systems_banner.jpg",
-   "lead": "Ce qui te garde en vie, ce que tu échanges contre de la puissance, et comment ton équipement grandit. Tout fonctionne pareil en solo et sur serveur.",
-   "desc": "Poupée de vie, mort et réapparition, âmes et karma, classes d'équipement, groupes et quêtes dans Matriochka.",
+   "lead": "Ce qui te garde en vie, ce que tu échanges contre de la puissance, comment ton équipement grandit, et ce qui t'attend après l'histoire. Tout fonctionne pareil en solo et sur serveur.",
+   "desc": "Poupée de vie, mort et réapparition, âmes et karma, classes et talents, nouvel équipement et automatisation des stations, groupes, quêtes, épreuves, événements des mondes et options de confort dans Matriochka.",
    "onPage": "Sur cette page",
    "toc": [
     [
@@ -508,7 +554,11 @@
     ],
     [
      "classes",
-     "Classes"
+     "Classes et talents"
+    ],
+    [
+     "workshop",
+     "Équipement et stations"
     ],
     [
      "nesting",
@@ -521,13 +571,21 @@
     [
      "journal",
      "Journal"
+    ],
+    [
+     "trials",
+     "Épreuves et événements"
+    ],
+    [
+     "comfort",
+     "Confort et ambiance"
     ]
    ],
    "survivalH": "Survie",
    "lifeDoll": {
     "tex": "items/life_doll.png",
     "h": "Poupée de vie",
-    "p": "Tu portes une poupée faite de couches. Elle reçoit sa première couche à la chute de la Reine des spores, une deuxième après le Mangeur de lumière et une troisième après le Maître des saisons. Chaque boss vaincu restaure une couche, et l'Autel des âmes en reconstruit une pour 50 âmes."
+    "p": "Tu portes une poupée faite de couches. Elle reçoit sa première couche à la chute de la Reine des spores, une deuxième après le Mangeur de lumière et une troisième après le Maître des saisons. Chaque boss vaincu restaure une couche, et l'Autel des âmes en reconstruit une pour 50 âmes et 4 ressources rares du monde où tu es."
    },
    "deathH": "Quand tu meurs",
    "death": [
@@ -589,7 +647,7 @@
     }
    ],
    "soulsH": "Âmes et karma",
-   "soulsLead": "Chaque objet porte une âme dont le poids dépend de sa rareté. Pose-le sur l'Autel des âmes et choisis, définitivement : purifie-le pour libérer l'âme et gagner du karma, ou dévore-le pour absorber l'âme et perdre du karma. Dans les deux cas tu gardes les âmes, qui paient les améliorations de classe, les charges de berceau et les couches de poupée.",
+   "soulsLead": "Chaque objet porte une âme dont le poids dépend de sa rareté. Pose-le sur l'Autel des âmes et choisis, définitivement : purifie-le pour libérer l'âme et gagner du karma, ou dévore-le pour absorber l'âme et perdre du karma. Dans les deux cas tu gardes les âmes, qui paient les améliorations de classe, les talents, les charges de berceau et les couches de poupée. Les coffres des structures gardent aussi des Éclats d'âme (5 âmes) et des Vaisseaux d'âme (20), environ 10 âmes par coffre.",
    "rarCols": [
     "Rareté",
     "Âmes"
@@ -712,7 +770,7 @@
      "souls": "270"
     }
    ],
-   "upNote": "Du niveau 1 au niveau 5 : 400 âmes et 6 Éclats d'enveloppe par pièce (1, 1, 2, 2). Chaque boss laisse 2 Éclats d'enveloppe à chaque joueur qui l'a combattu.",
+   "upNote": "Du niveau 1 au niveau 5 : 400 âmes et 6 Éclats d'enveloppe par pièce (1, 1, 2, 2). Chaque boss laisse 3 Éclats d'enveloppe à chaque joueur qui l'a combattu : de quoi monter l'arme de son monde au plafond.",
    "capH": "Niveau maximal",
    "capCols": [
     "Progression",
@@ -764,6 +822,647 @@
    "classShot": {
     "src": "shots/gui_station_class_table.png",
     "caption": "La Table de classe"
+   },
+   "talentsH": "Talents",
+   "talentsLead": "La Table de classe abrite aussi un cabinet d'arbres de talents : trois branches de quatre talents pour chacune des six classes, 72 en tout. Une branche s'apprend dans l'ordre ; les deux premiers talents coûtent des âmes, les deux derniers des âmes et des Éclats d'enveloppe, et chaque palier s'ouvre quand ton groupe bat des boss plus profonds. Les talents d'une classe agissent tant que tu portes ou tiens son équipement (n'importe quel outil compte pour le Prospecteur).",
+   "talentCols": [
+    "Rang",
+    "Âmes",
+    "Éclats d'enveloppe",
+    "S'ouvre après"
+   ],
+   "talentTiers": [
+    {
+     "lv": "1",
+     "souls": "20",
+     "shards": "0",
+     "gate": "Gardien du bloc"
+    },
+    {
+     "lv": "2",
+     "souls": "50",
+     "shards": "0",
+     "gate": "Titan de cendre"
+    },
+    {
+     "lv": "3",
+     "souls": "120",
+     "shards": "1",
+     "gate": "Mangeur de lumière"
+    },
+    {
+     "lv": "4",
+     "souls": "250",
+     "shards": "2",
+     "gate": "Maître des saisons"
+    }
+   ],
+   "talentTree": [
+    {
+     "cls": "Gardien",
+     "branches": [
+      {
+       "name": "Rempart",
+       "talents": [
+        {
+         "name": "Trapu",
+         "eff": "+1 d'armure"
+        },
+        {
+         "name": "Blindé",
+         "eff": "+2 d'armure"
+        },
+        {
+         "name": "Inébranlable",
+         "eff": "+2 de robustesse"
+        },
+        {
+         "name": "Dernier rempart",
+         "eff": "Sous 30 % de vie, subis 25 % de dégâts en moins"
+        }
+       ]
+      },
+      {
+       "name": "Enraciné",
+       "talents": [
+        {
+         "name": "Pieds plantés",
+         "eff": "+10 % de résistance au recul"
+        },
+        {
+         "name": "Large dos",
+         "eff": "+2 de vie max"
+        },
+        {
+         "name": "Inamovible",
+         "eff": "+20 % de résistance au recul"
+        },
+        {
+         "name": "Carapace d'épines",
+         "eff": "Renvoie 20 % des dégâts subis à l'attaquant"
+        }
+       ]
+      },
+      {
+       "name": "Veilleur",
+       "talents": [
+        {
+         "name": "Endurci",
+         "eff": "Les jauges des mondes montent 5 % moins vite"
+        },
+        {
+         "name": "Lente guérison",
+         "eff": "Hors combat, regagne 1 de vie toutes les 2 secondes"
+        },
+        {
+         "name": "Robuste",
+         "eff": "+4 de vie max"
+        },
+        {
+         "name": "Peau de laque",
+         "eff": "Toutes les 30 secondes, gagne 4 de vie d'absorption"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Berserker",
+     "branches": [
+      {
+       "name": "Furie",
+       "talents": [
+        {
+         "name": "Main lourde",
+         "eff": "+3 % de dégâts"
+        },
+        {
+         "name": "Ensanglanté",
+         "eff": "Sous la moitié de ta vie, inflige 15 % de dégâts en plus"
+        },
+        {
+         "name": "Fendoir",
+         "eff": "+5 % de dégâts"
+        },
+        {
+         "name": "Brume rouge",
+         "eff": "Sous la moitié de ta vie, inflige 25 % de dégâts en plus"
+        }
+       ]
+      },
+      {
+       "name": "Frénésie",
+       "talents": [
+        {
+         "name": "Bras vif",
+         "eff": "+5 % de vitesse d'attaque"
+        },
+        {
+         "name": "Élan",
+         "eff": "Une mise à mort donne Vitesse pendant 4 secondes"
+        },
+        {
+         "name": "Rafale",
+         "eff": "+10 % de vitesse d'attaque"
+        },
+        {
+         "name": "Saccage",
+         "eff": "Une mise à mort soigne 3 de vie"
+        }
+       ]
+      },
+      {
+       "name": "Brise-coque",
+       "talents": [
+        {
+         "name": "Ouverture",
+         "eff": "Ton premier coup sur une créature inflige 20 % de plus"
+        },
+        {
+         "name": "Tueur de géants",
+         "eff": "Inflige 6 % de dégâts en plus aux boss"
+        },
+        {
+         "name": "Achèvement",
+         "eff": "Inflige 20 % de plus aux ennemis sous le quart de leur vie"
+        },
+        {
+         "name": "Fend-coquille",
+         "eff": "Inflige 12 % de dégâts en plus aux boss"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Rôdeur",
+     "branches": [
+      {
+       "name": "Pas d'ombre",
+       "talents": [
+        {
+         "name": "Pied léger",
+         "eff": "+3 % de vitesse de déplacement"
+        },
+        {
+         "name": "Faux-fuyant",
+         "eff": "+3 % de chances d'esquiver un coup"
+        },
+        {
+         "name": "Prompt",
+         "eff": "+5 % de vitesse de déplacement"
+        },
+        {
+         "name": "Fantôme",
+         "eff": "+6 % de chances d'esquiver un coup"
+        }
+       ]
+      },
+      {
+       "name": "Pied de plume",
+       "talents": [
+        {
+         "name": "Réception douce",
+         "eff": "Tombe de 2 blocs de plus sans dommage"
+        },
+        {
+         "name": "Grimpeur",
+         "eff": "Enjambe 0,5 bloc de plus"
+        },
+        {
+         "name": "Talon-ressort",
+         "eff": "+10 % de force de saut"
+        },
+        {
+         "name": "Chute de chat",
+         "eff": "Tombe de 5 blocs de plus sans dommage"
+        }
+       ]
+      },
+      {
+       "name": "Embuscade",
+       "talents": [
+        {
+         "name": "Premier sang",
+         "eff": "Ton premier coup sur une créature inflige 15 % de plus"
+        },
+        {
+         "name": "Traqueur",
+         "eff": "Les coups portés accroupi infligent 20 % de plus"
+        },
+        {
+         "name": "Disparition",
+         "eff": "Une mise à mort te rend invisible pendant 3 secondes"
+        },
+        {
+         "name": "Assassin",
+         "eff": "Les coups portés accroupi infligent 40 % de plus"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Moissonneur",
+     "branches": [
+      {
+       "name": "Moisson",
+       "talents": [
+        {
+         "name": "Glaneur",
+         "eff": "+5 % d'âmes à chaque mise à mort"
+        },
+        {
+         "name": "Batteur",
+         "eff": "+8 % d'âmes à chaque mise à mort"
+        },
+        {
+         "name": "Ramasse-coquilles",
+         "eff": "25 % de chances d'un Éclat d'enveloppe de plus sur un boss"
+        },
+        {
+         "name": "Grande moisson",
+         "eff": "+15 % d'âmes à chaque mise à mort"
+        }
+       ]
+      },
+      {
+       "name": "Sangsue",
+       "talents": [
+        {
+         "name": "Soif",
+         "eff": "Soigne 2 % des dégâts infligés"
+        },
+        {
+         "name": "Festin",
+         "eff": "Une mise à mort soigne 2 de vie"
+        },
+        {
+         "name": "Saigneur",
+         "eff": "Soigne 4 % des dégâts infligés"
+        },
+        {
+         "name": "Ripaille",
+         "eff": "Une mise à mort soigne 4 de vie"
+        }
+       ]
+      },
+      {
+       "name": "Présage",
+       "talents": [
+        {
+         "name": "Pièce porte-bonheur",
+         "eff": "+0,5 de chance"
+        },
+        {
+         "name": "Flétrissure",
+         "eff": "Tes coups flétrissent l'ennemi pendant 2 secondes"
+        },
+        {
+         "name": "Fortune",
+         "eff": "+1 de chance"
+        },
+        {
+         "name": "Funeste",
+         "eff": "Tes coups flétrissent l'ennemi pendant 4 secondes"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Survivant",
+     "branches": [
+      {
+       "name": "Endurance",
+       "talents": [
+        {
+         "name": "Poumons solides",
+         "eff": "Les jauges des mondes montent 5 % moins vite"
+        },
+        {
+         "name": "Aguerri",
+         "eff": "Les jauges des mondes montent 8 % moins vite"
+        },
+        {
+         "name": "Peau épaisse",
+         "eff": "+2 de vie max"
+        },
+        {
+         "name": "Insoumis",
+         "eff": "Les jauges des mondes montent 12 % moins vite"
+        }
+       ]
+      },
+      {
+       "name": "Récupération",
+       "talents": [
+        {
+         "name": "Second souffle",
+         "eff": "Hors combat, regagne 1 de vie toutes les 2 secondes"
+        },
+        {
+         "name": "Charognard",
+         "eff": "Une mise à mort soigne 1 de vie"
+        },
+        {
+         "name": "Ralliement",
+         "eff": "Hors combat, regagne 2 de vie toutes les 2 secondes"
+        },
+        {
+         "name": "Cœur de fer",
+         "eff": "+4 de vie max"
+        }
+       ]
+      },
+      {
+       "name": "Cran",
+       "talents": [
+        {
+         "name": "Têtu",
+         "eff": "Sous 30 % de vie, subis 15 % de dégâts en moins"
+        },
+        {
+         "name": "Grande inspiration",
+         "eff": "+1 de bonus d'oxygène : ton souffle dure plus"
+        },
+        {
+         "name": "Ignifugé",
+         "eff": "Brûle 50 % moins longtemps"
+        },
+        {
+         "name": "Jamais à terre",
+         "eff": "Sous 30 % de vie, subis 30 % de dégâts en moins"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "cls": "Prospecteur",
+     "branches": [
+      {
+       "name": "Fouilleur",
+       "talents": [
+        {
+         "name": "Fil aiguisé",
+         "eff": "+2 d'efficacité de minage"
+        },
+        {
+         "name": "Pioche vive",
+         "eff": "+10 % de vitesse de cassage"
+        },
+        {
+         "name": "Taille profonde",
+         "eff": "+4 d'efficacité de minage"
+        },
+        {
+         "name": "Fièvre de l'or",
+         "eff": "Célérité tant que tu tiens un outil"
+        }
+       ]
+      },
+      {
+       "name": "Filon",
+       "talents": [
+        {
+         "name": "Flair du filon",
+         "eff": "5 % de chances de miner un minerai deux fois"
+        },
+        {
+         "name": "Coup de chance",
+         "eff": "+0,5 de chance"
+        },
+        {
+         "name": "Filon riche",
+         "eff": "10 % de chances de miner un minerai deux fois"
+        },
+        {
+         "name": "Filon-mère",
+         "eff": "20 % de chances de miner un minerai deux fois"
+        }
+       ]
+      },
+      {
+       "name": "Tunnelier",
+       "talents": [
+        {
+         "name": "Bras long",
+         "eff": "+0,5 blocs de portée"
+        },
+        {
+         "name": "Pioche mouillée",
+         "eff": "+50 % de vitesse de minage sous l'eau"
+        },
+        {
+         "name": "Bras plus long",
+         "eff": "+1 blocs de portée"
+        },
+        {
+         "name": "Taupe",
+         "eff": "+20 % de vitesse de cassage"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "talentNote": "Le bouton Oublier désapprend tous les talents et rend 50 % des âmes dépensées, jamais les éclats.",
+   "gearH": "Nouvel équipement",
+   "gearLead": "7 armes et outils qui se comportent comme le monde d'où ils viennent, chacun fabriqué à la station de son monde et dessiné à la main. Ils naissent avec une classe comme tout autre équipement.",
+   "gear": [
+    {
+     "tex": "items/spore_bow.png",
+     "h": "Arc à spores",
+     "p": "Ses flèches éclatent en un nuage de spores toxiques là où elles frappent. Monde 1, fabriqué à : Cuve de spores.",
+     "inputs": [
+      {
+       "id": "roots",
+       "tex": "items/roots.png",
+       "n": 4,
+       "name": "Racines"
+      },
+      {
+       "id": "spores",
+       "tex": "items/spores.png",
+       "n": 12,
+       "name": "Spores"
+      },
+      {
+       "id": "minecraft:string",
+       "tex": null,
+       "n": 3,
+       "name": "Ficelle"
+      },
+      {
+       "id": "chitin",
+       "tex": "items/chitin.png",
+       "n": 1,
+       "name": "Chitine"
+      }
+     ]
+    },
+    {
+     "tex": "items/magma_flail.png",
+     "h": "Fléau de magma",
+     "p": "Embrase l'ennemi ; un coup sur trois éclate en un cercle de flammes. Le manier te réchauffe dans les Filons. Monde 2, fabriqué à : Fonderie de cendre.",
+     "inputs": [
+      {
+       "id": "ash_ingot",
+       "tex": "items/ash_ingot.png",
+       "n": 5,
+       "name": "Lingot de cendre"
+      },
+      {
+       "id": "blazing_rock",
+       "tex": "items/blazing_rock.png",
+       "n": 4,
+       "name": "Roche ardente"
+      },
+      {
+       "id": "minecraft:iron_chain",
+       "tex": null,
+       "n": 2,
+       "name": "Chaîne en fer"
+      }
+     ]
+    },
+    {
+     "tex": "items/key_chain_whip.png",
+     "h": "Fouet à clés",
+     "p": "Longue portée. Chaque coup tire l'ennemi vers toi et le ralentit. Monde 3, fabriqué à : Table du Geôlier.",
+     "inputs": [
+      {
+       "id": "sealed_fragment",
+       "tex": "items/sealed_fragment.png",
+       "n": 5,
+       "name": "Fragment scellé"
+      },
+      {
+       "id": "dungeon_key",
+       "tex": "items/dungeon_key.png",
+       "n": 1,
+       "name": "Clé de donjon"
+      },
+      {
+       "id": "minecraft:iron_chain",
+       "tex": null,
+       "n": 3,
+       "name": "Chaîne en fer"
+      }
+     ]
+    },
+    {
+     "tex": "items/storm_javelin.png",
+     "h": "Javelot d'orage",
+     "p": "Utilise-le pour le lancer : la foudre tombe où il frappe, puis il revient dans ta main. Monde 4, fabriqué à : Forge à foudre.",
+     "inputs": [
+      {
+       "id": "celestial_crystal",
+       "tex": "items/celestial_crystal.png",
+       "n": 3,
+       "name": "Cristal céleste"
+      },
+      {
+       "id": "storm_essence",
+       "tex": "items/storm_essence.png",
+       "n": 3,
+       "name": "Essence de tempête"
+      },
+      {
+       "id": "minecraft:stick",
+       "tex": null,
+       "n": 2,
+       "name": "Bâton"
+      }
+     ]
+    },
+    {
+     "tex": "items/lantern_shield.png",
+     "h": "Bouclier-lanterne",
+     "p": "Pare comme un bouclier. Chaque coup paré jette un éclair : l'attaquant est aveuglé, repoussé et marqué. Monde 5, fabriqué à : Autel obscur.",
+     "inputs": [
+      {
+       "id": "shadow_shard",
+       "tex": "items/shadow_shard.png",
+       "n": 5,
+       "name": "Éclat d'ombre"
+      },
+      {
+       "id": "minecraft:lantern",
+       "tex": null,
+       "n": 1,
+       "name": "Lanterne"
+      },
+      {
+       "id": "minecraft:iron_ingot",
+       "tex": null,
+       "n": 4,
+       "name": "Lingot de fer"
+      }
+     ]
+    },
+    {
+     "tex": "items/tide_harpoon.png",
+     "h": "Harpon des marées",
+     "p": "Utilise-le pour le lancer : il ramène à toi ce qu'il touche, plus loin sous l'eau. Sa ligne le ramène. Monde 7, fabriqué à : Presse abyssale.",
+     "inputs": [
+      {
+       "id": "abyssal_cobalt",
+       "tex": "items/abyssal_cobalt.png",
+       "n": 4,
+       "name": "Cobalt abyssal"
+      },
+      {
+       "id": "nacre",
+       "tex": "items/nacre.png",
+       "n": 2,
+       "name": "Nacre"
+      },
+      {
+       "id": "minecraft:string",
+       "tex": null,
+       "n": 4,
+       "name": "Ficelle"
+      }
+     ]
+    },
+    {
+     "tex": "items/quake_pick.png",
+     "h": "Pioche sismique",
+     "p": "Mine une colonne de trois. Utilise-la sur le sol : une secousse qui ébranle les créatures autour de toi. Monde 9, fabriqué à : Ancre de terrain.",
+     "inputs": [
+      {
+       "id": "terrain_fragment",
+       "tex": "items/terrain_fragment.png",
+       "n": 6,
+       "name": "Fragment de terrain"
+      },
+      {
+       "id": "minecraft:iron_pickaxe",
+       "tex": null,
+       "n": 1,
+       "name": "Iron pickaxe"
+      }
+     ]
+    }
+   ],
+   "autoH": "Des stations sur entonnoirs",
+   "auto": [
+    "Chaque station à recettes fonctionne avec des entonnoirs. Elle garde une recette : la dernière fabriquée à la main, ou celle choisie avec le petit entonnoir doré de son tiroir.",
+    "Les ingrédients entrent par le dessus et les côtés, chacun dans ses cases ; tout le reste est refusé. Le résultat sort par le dessous, et un comparateur lit le remplissage de la station.",
+    "Chaque station garde sa condition : la chaleur pour la Fonderie de cendre, une charge pour la Forge-éclair (la foudre, ou de l'Essence d'orage dans sa case de combustible), l'obscurité, l'eau profonde, l'aube et le crépuscule. La Cuve à spores attend une infusion mûre, et la Table du geôlier fait une fournée par motif de serrure entré.",
+    "L'Autel des âmes et la Table de classe restent manuels. Casser une station fait tomber sa réserve."
+   ],
+   "autoShot": {
+    "src": "shots/sys_stations_night.jpg",
+    "caption": "Les faces allumées des stations luisent dans le noir"
+   },
+   "shake": {
+    "tex": "items/doll_mallet.png",
+    "h": "Secouer un Bloc-monde",
+    "p": "De dehors, un joueur du groupe propriétaire peut s'accroupir et utiliser le Bloc-monde à mains nues pour aider ceux qui sont dedans : créatures étourdies et jetées à terre pendant 3 secondes, boss ébranlé et ouvert. Frappe-le plutôt au Maillet de poupée et le monde tremble, des blocs tombant sur leurs têtes. Une secousse par monde toutes les 30 secondes.",
+    "inputs": []
    },
    "nestingH": "Des choses dans des choses",
    "nestingLead": "Le nom est la règle : une chose peut toujours en contenir une autre. Ces systèmes se débloquent au fil de l'histoire.",
@@ -865,32 +1564,267 @@
      "caption": "Les quêtes"
     }
    ],
+   "firstSteps": {
+    "tex": "items/artisan_scroll.png",
+    "h": "Premiers pas",
+    "p": "Jusqu'à ton entrée dans le monde 1, une petite carte laquée sous la plaque du HUD montre la prochaine des dix étapes, de la lecture du Parchemin à la plantation de la première Graine, avec son objet, un court indice et une aiguille de boussole vers le Sanctuaire du Gardien le plus proche. Chaque étape est détectée d'après ce que tu fais vraiment, et le bouton Guide du Parchemin ou du Journal la masque.",
+    "inputs": []
+   },
    "titlesH": "Titres à gagner",
    "titles": [
+    "Plongeur des abysses",
     "Apprenti",
     "Peau de cendre",
     "Yeux fermés",
     "Sang-froid",
+    "Marche-braise",
+    "Brise-geôle",
+    "Champion de l'Épreuve",
     "Lueur",
+    "Ébranleur",
     "Tête en bas",
+    "Briseur de ruche",
     "Poumons de fer",
+    "Porte-lumière",
+    "Brise-miroir",
     "Hors du temps",
     "Cape peinte",
     "Sans couture",
+    "Chevaucheur d'orage",
+    "Main preste",
+    "Gardien du temps",
+    "Défaiseur",
     "Sans attache",
     "Passe-muraille",
     "Fils du vent"
-   ]
+   ],
+   "titlesNote": "Les titres se portent depuis le livre des Épreuves, titres de quêtes compris.",
+   "trialsH": "Épreuves",
+   "trialsLead": "Une fois une fin vue, les Épreuves s'ouvrent : une course par monde (deux vagues de ses créatures, la seconde menée par ses élites, puis son boss) et l'Épreuve des onze boss, combattues contre la montre sur une scène laquée dans la poupée-refuge, peinte pour chaque monde. Ouvre-les depuis la page Objectif du Journal, un Autel des épreuves ou /matriochka trials start. Une chute te ramène dehors au lieu de te tuer.",
+   "trialFacts": [
+    {
+     "k": "Boss d'épreuve",
+     "v": "×1,6 / ×1,35",
+     "d": "vie et dégâts, ×1,2 / ×1,15 dans l'Épreuve des onze ; toujours mutés, sans introduction ni récompense d'histoire"
+    },
+    {
+     "k": "Chaque victoire",
+     "v": "25",
+     "d": "âmes"
+    },
+    {
+     "k": "Première victoire",
+     "v": "Trophée",
+     "d": "sa Poupée-trophée et un titre"
+    },
+    {
+     "k": "Sous le temps de référence",
+     "v": "Main preste",
+     "d": "un titre pour battre le temps de référence"
+    }
+   ],
+   "trialCols": [
+    "Épreuve",
+    "Temps de référence"
+   ],
+   "trialList": [
+    {
+     "name": "Épreuve : Reine des spores",
+     "tex": "items/trophy_doll_1.png",
+     "par": "2:45"
+    },
+    {
+     "name": "Épreuve : Titan de cendre",
+     "tex": "items/trophy_doll_2.png",
+     "par": "3:00"
+    },
+    {
+     "name": "Épreuve : Grand Geôlier",
+     "tex": "items/trophy_doll_3.png",
+     "par": "3:15"
+    },
+    {
+     "name": "Épreuve : Roi des tempêtes",
+     "tex": "items/trophy_doll_4.png",
+     "par": "3:30"
+    },
+    {
+     "name": "Épreuve : Mangeur de lumière",
+     "tex": "items/trophy_doll_5.png",
+     "par": "3:45"
+    },
+    {
+     "name": "Épreuve : Ton Double",
+     "tex": "items/trophy_doll_6.png",
+     "par": "4:00"
+    },
+    {
+     "name": "Épreuve : Léviathan de pression",
+     "tex": "items/trophy_doll_7.png",
+     "par": "4:15"
+    },
+    {
+     "name": "Épreuve : Maître des saisons",
+     "tex": "items/trophy_doll_8.png",
+     "par": "4:30"
+    },
+    {
+     "name": "Épreuve : Cœur du terrain",
+     "tex": "items/trophy_doll_9.png",
+     "par": "4:45"
+    },
+    {
+     "name": "Épreuve : L'Inachevée",
+     "tex": "items/trophy_doll_10.png",
+     "par": "8:00"
+    },
+    {
+     "name": "L'Épreuve des onze",
+     "tex": "items/trophy_doll_gauntlet.png",
+     "par": "30:00"
+    }
+   ],
+   "boardH": "Le tableau",
+   "board": "Une horloge sur le HUD reste verte tant que tu es sous le temps de référence. Les meilleurs temps sont gardés par joueur et par groupe, et le serveur tient un tableau des dix meilleurs groupes pour chaque épreuve, dans le livre des Épreuves et avec /matriochka trials top.",
+   "eventsH": "Événements des mondes",
+   "eventsLead": "Pendant que tu es dans un monde, il se passe de temps en temps quelque chose autour de toi. Une barre de boss suit chaque événement. Jamais en paisible ; les opérateurs peuvent en lancer un avec /matriochka event.",
+   "events": [
+    {
+     "icon": "swords",
+     "h": "Invasion",
+     "p": "3 vagues de créatures du monde, plus nombreuses pour chaque joueur proche ; la dernière est menée par un seigneur de guerre luisant. Un coffre de récompense attend à la fin."
+    },
+    {
+     "icon": "flame",
+     "h": "Poussée",
+     "p": "La règle du monde devient 2 fois plus forte pendant 2 minutes, avec son effet et ses particules. Tiens bon pour 15 âmes."
+    },
+    {
+     "icon": "package",
+     "h": "Marchand itinérant",
+     "p": "Un vagabond du peuple du monde s'installe un moment, avec des échanges spéciaux : le nouvel équipement de son monde, des Éclats d'enveloppe, des pièces rares."
+    }
+   ],
+   "surges": [
+    {
+     "w": 1,
+     "name": "Floraison de spores",
+     "p": "La jungle expire : la toxine monte deux fois plus vite et des nuages de spores dérivent."
+    },
+    {
+     "w": 2,
+     "name": "Poussée de magma",
+     "p": "Les filons bouillonnent : la chaleur monte deux fois plus vite et le sol crache des flammes."
+    },
+    {
+     "w": 3,
+     "name": "Bouclage",
+     "p": "Chaque verrou mord : les salles grincent, tes membres s'alourdissent."
+    },
+    {
+     "w": 4,
+     "name": "Tempête",
+     "p": "Des bourrasques toutes les quelques secondes et la foudre tout autour."
+    },
+    {
+     "w": 5,
+     "name": "Extinction",
+     "p": "La Profondeur boit chaque lumière : le bruit monte deux fois plus vite, le noir pulse."
+    },
+    {
+     "w": 6,
+     "name": "Orage de gravité",
+     "p": "La gravité tressaute au hasard : tu es projeté en l'air puis rattrapé."
+    },
+    {
+     "w": 7,
+     "name": "Courant écrasant",
+     "p": "Un courant profond t'entraîne et boit ton air deux fois plus vite."
+    },
+    {
+     "w": 8,
+     "name": "Course des saisons",
+     "p": "Toutes les saisons à la fois : faim, gel et faiblesse vont et viennent."
+    },
+    {
+     "w": 9,
+     "name": "Grand séisme",
+     "p": "Le sol ne se calme plus : des secousses te font chanceler toutes les quelques secondes."
+    },
+    {
+     "w": 10,
+     "name": "Effilochage",
+     "p": "Les coutures de l'Atelier cèdent : la règle de chaque zone mord deux fois plus fort."
+    }
+   ],
+   "eventsNote": "La fréquence et les poids se règlent dans config/matriochka.json : worldEvents, worldEventChance, worldEventCooldown et les trois poids.",
+   "comfortLead": "Ouvertes depuis le bouton Confort du Journal (ou depuis Mod Menu), enregistrées par joueur dans config/matriochka-client.json.",
+   "comfortH": "Options de confort",
+   "comfort": [
+    "Force des secousses d'écran et des flashs",
+    "Effets doux : ni Nausée ni Obscurité, une teinte légère à la place ; le serveur te les épargne",
+    "Cinématiques activées ou non",
+    "Grands sous-titres pour les attaques de boss",
+    "Moins de particules",
+    "Motifs pour daltoniens sur les jauges des mondes",
+    "Taille et coin de la plaque du HUD",
+    "Un volume par type de musique"
+   ],
+   "comfortShot": {
+    "src": "shots/sys_comfort.jpg",
+    "caption": "Les options de confort"
+   },
+   "cineH": "Cinématiques et musique",
+   "cine": [
+    "Introductions de boss : bandes noires, la caméra qui se tourne vers le boss en avançant lentement, et une carte-titre encadrée.",
+    "Une carte-titre à ta première entrée dans chaque monde, avec le médaillon de sa règle et une ligne sur sa loi.",
+    "Les changements de phase figent l'image avec un flash et le numéro de l'enveloppe ; les coups lourds et le sol qui bouge secouent la caméra.",
+    "Musique adaptative : un thème de danger quand des créatures te traquent, les thèmes de boss, un battement de cœur à faible vie ou souffle, et des ponctuations pour une structure, une page du Journal ou une quête. Les thèmes se fondent l'un dans l'autre."
+   ],
+   "cineShots": [
+    {
+     "src": "shots/sys_boss_intro.jpg",
+     "caption": "Une introduction de boss"
+    },
+    {
+     "src": "shots/sys_world_card.jpg",
+     "caption": "L'entrée dans le monde 1"
+    }
+   ],
+   "atmosH": "Une lumière pour chaque monde",
+   "atmos": "Chaque monde a sa lumière, son brouillard et ses particules : brume de spores, braises qui tombent, poussière froide, ciel d'orage, brouillard presque noir où une lanterne porte à travers une caverne, ciel pastel inversé, eau d'un bleu profond, lumière teintée par la saison, brume de rouille, lumière chaude de l'atelier, et le crépuscule de laque rouge du monde 0. Objets, blocs et stations sont peints à la main dans le style vanilla, et leurs faces allumées luisent dans le noir. Matriochka HD, un pack de ressources facultatif en 32 x 32, est joint à chaque version ; les shaders Iris fonctionnent avec la lumière vanilla.",
+   "atmosShots": [
+    {
+     "src": "shots/sys_atmos_w2.jpg",
+     "caption": "Filons géants"
+    },
+    {
+     "src": "shots/sys_atmos_w8.jpg",
+     "caption": "L'automne : Saisons accélérées"
+    }
+   ],
+   "langH": "Cinq langues",
+   "lang": "Anglais, français, espagnol, allemand et portugais du Brésil : chaque nom, l'interface, les quêtes, les succès, le Parchemin, les cinquante pages du Journal, les fins, le générique et les sous-titres. Un texte manquant dans une langue s'affiche en anglais, et les libellés rétrécissent quand une langue est plus longue."
   },
   "download": {
    "h": "Télécharger",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.3.0 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
+   "lead": "Version 0.4.0 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
    "desc": "Télécharger Matriochka pour Minecraft 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur.",
    "sources": [
     {
      "name": "GitHub",
      "note": "Versions, changements et code source",
+     "href": "https://github.com/achedon12/matriochka/releases"
+    },
+    {
+     "name": "Matriochka Pack",
+     "note": "Modpack Modrinth (.mrpack), normal et difficile, joint à chaque version",
+     "href": "https://github.com/achedon12/matriochka/releases"
+    },
+    {
+     "name": "Matriochka HD",
+     "note": "Pack de ressources facultatif en 32 x 32, joint à chaque version",
      "href": "https://github.com/achedon12/matriochka/releases"
     },
     {
@@ -935,17 +1869,28 @@
      "n": "Just Enough Items",
      "v": "facultatif",
      "s": "Pages de recettes pour chaque station"
+    },
+    {
+     "n": "Mod Menu",
+     "v": "facultatif",
+     "s": "Résumé, liens et accès direct aux options de confort"
     }
    ],
    "installH": "Installation",
    "steps": [
     "Installe Fabric Loader pour Minecraft 26.3.",
-    "Télécharge matriochka-0.3.0+26.3.jar depuis les versions GitHub.",
+    "Télécharge matriochka-0.4.0+26.3.jar depuis les versions GitHub.",
     "Place-le dans ton dossier mods avec Fabric API et GeckoLib.",
     "Lance le profil Fabric et crée un nouveau monde. Le Parchemin de l'artisan t'attend dans l'inventaire."
    ],
    "lunarH": "Lunar Client",
    "lunar": "Matriochka repose sur Fabric pour pouvoir tourner sur Lunar Client, dont le chargement de mods s'appuie sur Fabric. La prise en charge de Minecraft 26.3 avec GeckoLib y est encore en cours de vérification : si le mod ne se charge pas, joue en attendant avec le launcher officiel ou Prism Launcher sur un profil Fabric.",
+   "packH": "Le Matriochka Pack",
+   "pack": "Pas envie de rassembler les mods toi-même ? Chaque version GitHub contient un modpack Modrinth (.mrpack) pour Prism Launcher, l'application Modrinth ou tout launcher qui lit ce format : le mod, Fabric API, GeckoLib, Just Enough Items (facultatif) et des mods de performance (Sodium, Lithium, FerriteCore, Entity Culling, ImmediatelyFast, Dynamic FPS, Krypton, Mod Menu, Iris en option), en version normale et difficile (nightmare).",
+   "compatH": "Compatible avec",
+   "compat": "Vérifié avec Sodium, Iris (par la lumière vanilla : faces émissives, particules pleinement lumineuses), Xaero's Minimap et World Map, JourneyMap, VoxelMap et Traveler's Backpack pour la 26.3 : aucun conflit, et aucun moyen de contourner la progression avec un sac à dos. La vue des grottes et le radar de Xaero s'éteignent dans la Profondeur sans lumière, où ils montreraient ce que l'obscurité cache, et reviennent quand tu en sors.",
+   "langsH": "Langues",
+   "langs": "Anglais, français, espagnol, allemand et portugais du Brésil, selon la langue choisie dans le jeu.",
    "wikiH": "Wiki",
    "wiki": "Recettes, guides pas à pas et réponses aux questions courantes sont sur le wiki GitHub.",
    "wikiBtn": "Ouvrir le wiki",
@@ -983,6 +1928,46 @@
      "k": "difficulty",
      "v": "\"normal\"",
      "d": "story (70 % des dégâts, rien n'est perdu à la mort), normal, nightmare (130 % des dégâts, une charge par Berceau d'âme) ou hardcore (comme nightmare, la mort est définitive, la Poupée de vie ne te sauve plus et un Bloc-monde cassé efface son monde)"
+    },
+    {
+     "k": "karma",
+     "v": "true",
+     "d": "false fige tout changement de karma (le Journal affiche toujours la valeur)"
+    },
+    {
+     "k": "soulGainMultiplier",
+     "v": "1.0",
+     "d": "Ajuste tous les gains d'âmes"
+    },
+    {
+     "k": "maxActiveGroups",
+     "v": "0",
+     "d": "Combien de groupes peuvent avoir des mondes (0 : sans limite) ; une Graine au-delà attend sans éclore"
+    },
+    {
+     "k": "maxParcels",
+     "v": "0",
+     "d": "Combien de parcelles le serveur peut attribuer (0 : sans limite)"
+    },
+    {
+     "k": "worldEvents",
+     "v": "true",
+     "d": "Invasions, poussées et marchands itinérants dans les mondes"
+    },
+    {
+     "k": "worldEventChance",
+     "v": "0.06",
+     "d": "Chance qu'un événement démarre autour d'un joueur, tirée chaque minute"
+    },
+    {
+     "k": "worldEventCooldown",
+     "v": "10",
+     "d": "Minutes de calme dans un monde après un événement"
+    },
+    {
+     "k": "invasionWeight, surgeWeight, merchantWeight",
+     "v": "3, 3, 2",
+     "d": "Poids relatifs des trois événements"
     }
    ]
   }
@@ -1349,6 +2334,55 @@
       "drops": []
      },
      {
+      "id": "doll_mallet",
+      "tex": "items/doll_mallet.png",
+      "name": "Maillet de poupée",
+      "kind": "tool",
+      "rarity": "Rare",
+      "effect": "Frappe un bloc-monde de ton groupe avec : le monde à l'intérieur tremble et des blocs se détachent sur ceux qui s'y trouvent. Accroupis-toi et utilise le bloc à mains nues pour plutôt les aider.",
+      "station": "Établi matriciel",
+      "inputs": [
+       {
+        "id": "painted_wood",
+        "tex": "blocks/painted_wood.png",
+        "n": 3,
+        "name": "Bois peint"
+       },
+       {
+        "id": "minecraft:stick",
+        "tex": null,
+        "n": 2,
+        "name": "Bâton"
+       }
+      ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "soul_shard",
+      "tex": "items/soul_shard.png",
+      "name": "Éclat d'âme",
+      "kind": "soul",
+      "rarity": "Commun",
+      "effect": "Contient 5 âmes. Utilise-le pour les libérer (accroupi : toute la pile).",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "soul_vessel",
+      "tex": "items/soul_vessel.png",
+      "name": "Fiole d'âme",
+      "kind": "soul",
+      "rarity": "Rare",
+      "effect": "Contient 20 âmes. Utilise-la pour les libérer (accroupi : toute la pile).",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "nested_dolls",
       "tex": "items/nested_dolls.png",
       "name": "Poupées emboîtées",
@@ -1379,6 +2413,18 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Rien n'y est écrit. Il ne reste rien à finir.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "trophy_doll_gauntlet",
+      "tex": "items/trophy_doll_gauntlet.png",
+      "name": "Trophée de l'Épreuve des onze",
+      "kind": "trophy",
+      "rarity": "Légendaire",
+      "effect": "Onze poupées en une, gagnées au bout de l'Épreuve des onze.",
       "station": null,
       "inputs": [],
       "count": 1,
@@ -1605,7 +2651,7 @@
       "tex": "blocks/soul_altar.png",
       "name": "Autel des âmes",
       "kind": "station",
-      "effect": "Purifie ou dévore un objet.",
+      "effect": "Purifie ou dévore un objet. Refait une couche de Poupée de vie pour 50 âmes et 4 ressources rares du monde en cours.",
       "station": "Établi matriciel",
       "inputs": [
        {
@@ -1621,6 +2667,18 @@
         "name": "Lingot d'or"
        }
       ],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "trial_altar",
+      "tex": "blocks/trial_altar.png",
+      "name": "Autel des épreuves",
+      "kind": "trial_altar",
+      "effect": "Ouvre les Épreuves une fois une fin vue.",
+      "station": null,
+      "inputs": [],
       "count": 1,
       "drops": [],
       "yields": null
@@ -1956,6 +3014,18 @@
      "effect": ""
     },
     {
+     "id": "trophy_doll_1",
+     "tex": "items/trophy_doll_1.png",
+     "name": "Trophée : Reine des spores",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
+     "id": "spore_bow",
+     "tex": "items/spore_bow.png",
+     "name": "Arc à spores",
+     "effect": "Ses flèches éclatent en un nuage de spores toxiques là où elles frappent."
+    },
+    {
      "id": "root_broth",
      "tex": "items/root_broth.png",
      "name": "Bouillie de racines",
@@ -2010,7 +3080,8 @@
     {
      "role": "Utilité",
      "names": [
-      "Village de cueilleurs"
+      "Village de cueilleurs",
+      "Caravane des cueilleurs"
      ]
     },
     {
@@ -2246,6 +3317,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_1",
+      "tex": "items/trophy_doll_1.png",
+      "name": "Trophée : Reine des spores",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "spore_bow",
+      "tex": "items/spore_bow.png",
+      "name": "Arc à spores",
+      "kind": "bow",
+      "rarity": "Rare",
+      "effect": "Ses flèches éclatent en un nuage de spores toxiques là où elles frappent.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "chitin_helmet",
       "tex": "items/chitin_helmet.png",
       "name": "Casque de chitine",
@@ -2416,11 +3511,11 @@
      },
      {
       "name": "La Cuve",
-      "desc": "Fermenter une première recette."
+      "desc": "Fermenter une première recette : brasser à la Cuve de spores une fois la cuvée mûre."
      },
      {
       "name": "Récolte difficile",
-      "desc": "Rapporter 16 spores à l'herboriste."
+      "desc": "Rapporter 16 spores à l'herboriste (un Cueilleur)."
      },
      {
       "name": "Les éclaireurs perdus",
@@ -2608,6 +3703,17 @@
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_artisan_sanctuary.jpg"
+    },
+    {
+     "id": "gatherer_caravan",
+     "name": "Caravane des cueilleurs",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Des chariots bâchés en cercle autour d'un feu, avec un étal et une barre d'attache.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
     }
    ],
    "loot": [
@@ -3065,6 +4171,18 @@
      "effect": ""
     },
     {
+     "id": "trophy_doll_2",
+     "tex": "items/trophy_doll_2.png",
+     "name": "Trophée : Titan de cendre",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
+     "id": "magma_flail",
+     "tex": "items/magma_flail.png",
+     "name": "Fléau de magma",
+     "effect": "Embrase l'ennemi ; un coup sur trois éclate en un cercle de flammes. Le manier te réchauffe dans les Filons."
+    },
+    {
      "id": "ice_bread",
      "tex": "items/ice_bread.png",
      "name": "Pain de glace",
@@ -3098,7 +4216,8 @@
      "names": [
       "Caverne de salamandres",
       "Fournaise géante",
-      "Puits de lave"
+      "Puits de lave",
+      "Cercle de braises"
      ]
     },
     {
@@ -3355,6 +4474,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_2",
+      "tex": "items/trophy_doll_2.png",
+      "name": "Trophée : Titan de cendre",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "magma_flail",
+      "tex": "items/magma_flail.png",
+      "name": "Fléau de magma",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "Embrase l'ennemi ; un coup sur trois éclate en un cercle de flammes. Le manier te réchauffe dans les Filons.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "thermal_helmet",
       "tex": "items/thermal_helmet.png",
       "name": "Casque thermique",
@@ -3602,15 +4745,15 @@
     "quests": [
      {
       "name": "Sous contrôle",
-      "desc": "Maintenir la Fonderie à la bonne température."
+      "desc": "Maintenir la Fonderie à la bonne température le temps de 3 fontes."
      },
      {
       "name": "Le premier filon",
-      "desc": "Extraire un minerai géant entier."
+      "desc": "Extraire un minerai géant entier : miner un Filon géant."
      },
      {
       "name": "La paie des mineurs",
-      "desc": "Rapporter 8 lingots de cendre au contremaître."
+      "desc": "Rapporter 8 lingots de cendre au contremaître (un Mineur libre)."
      },
      {
       "name": "Puits inondé de lave",
@@ -3798,6 +4941,17 @@
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_artisan_workshop.jpg"
+    },
+    {
+     "id": "ember_circle",
+     "name": "Cercle de braises",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un cercle de pierres levées et de linteaux autour d'un autel enfoncé où attend le coffre gardé.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
     }
    ],
    "loot": [
@@ -3921,6 +5075,11 @@
        "id": "ash_hammer",
        "tex": "items/ash_hammer.png",
        "name": "Marteau de cendre"
+      },
+      {
+       "id": "magma_flail",
+       "tex": "items/magma_flail.png",
+       "name": "Fléau de magma"
       }
      ]
     }
@@ -4301,6 +5460,18 @@
      "effect": "Tenue à l'autel d'arène, elle réveille le Grand Geôlier."
     },
     {
+     "id": "trophy_doll_3",
+     "tex": "items/trophy_doll_3.png",
+     "name": "Trophée : Grand Geôlier",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
+     "id": "key_chain_whip",
+     "tex": "items/key_chain_whip.png",
+     "name": "Fouet à clés",
+     "effect": "Longue portée. Chaque coup tire l'ennemi vers toi et le ralentit."
+    },
+    {
      "id": "cell_ration",
      "tex": "items/cell_ration.png",
      "name": "Ration de cellule",
@@ -4334,7 +5505,8 @@
      "names": [
       "Arène",
       "Cour des Geôliers",
-      "Salle mobile"
+      "Salle mobile",
+      "Corps de garde des geôliers"
      ]
     },
     {
@@ -4658,6 +5830,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_3",
+      "tex": "items/trophy_doll_3.png",
+      "name": "Trophée : Grand Geôlier",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "key_chain_whip",
+      "tex": "items/key_chain_whip.png",
+      "name": "Fouet à clés",
+      "kind": "weapon",
+      "rarity": "Rare",
+      "effect": "Longue portée. Chaque coup tire l'ennemi vers toi et le ralentit.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "jailer_helmet",
       "tex": "items/jailer_helmet.png",
       "name": "Casque de Geôlier",
@@ -4840,7 +6036,7 @@
      },
      {
       "name": "Lire le plan",
-      "desc": "Compléter une carte du labyrinthe."
+      "desc": "Compléter une carte du labyrinthe : atteindre le lieu qu'elle indique."
      },
      {
       "name": "Le serrurier",
@@ -4848,7 +6044,7 @@
      },
      {
       "name": "Dernier message",
-      "desc": "Porter une lettre de cellule en cellule."
+      "desc": "Porter une lettre (une page du Journal) de cellule en cellule : dans 3 lieux différents du donjon."
      },
      {
       "name": "L'évasion",
@@ -5032,6 +6228,17 @@
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_artisan_cell.jpg"
+    },
+    {
+     "id": "gaolers_gatehouse",
+     "name": "Corps de garde des geôliers",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Une cour fortifiée avec tours d'angle, un châtelet à herse et un donjon au fond.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
     }
    ],
    "loot": [
@@ -5140,6 +6347,11 @@
        "id": "jailer_blade",
        "tex": "items/jailer_blade.png",
        "name": "Lame du Geôlier"
+      },
+      {
+       "id": "key_chain_whip",
+       "tex": "items/key_chain_whip.png",
+       "name": "Fouet à clés"
       }
      ]
     }
@@ -5524,6 +6736,18 @@
      "effect": "Tenu à l'autel d'arène, il réveille le Roi des tempêtes."
     },
     {
+     "id": "trophy_doll_4",
+     "tex": "items/trophy_doll_4.png",
+     "name": "Trophée : Roi des tempêtes",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
+     "id": "storm_javelin",
+     "tex": "items/storm_javelin.png",
+     "name": "Javelot d'orage",
+     "effect": "Utilise-le pour le lancer : la foudre tombe où il frappe, puis il revient dans ta main."
+    },
+    {
      "id": "cloud_fruit",
      "tex": "items/cloud_fruit.png",
      "name": "Fruit de nuage",
@@ -5557,7 +6781,8 @@
      "names": [
       "Nid de raies",
       "Paratonnerre géant",
-      "Épave volante"
+      "Épave volante",
+      "Avant-poste céleste"
      ]
     },
     {
@@ -5868,6 +7093,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_4",
+      "tex": "items/trophy_doll_4.png",
+      "name": "Trophée : Roi des tempêtes",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "storm_javelin",
+      "tex": "items/storm_javelin.png",
+      "name": "Javelot d'orage",
+      "kind": "weapon",
+      "rarity": "Épique",
+      "effect": "Utilise-le pour le lancer : la foudre tombe où il frappe, puis il revient dans ta main.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "celestial_helmet",
       "tex": "items/celestial_helmet.png",
       "name": "Casque céleste",
@@ -6040,7 +7289,7 @@
     "quests": [
      {
       "name": "Le premier vol",
-      "desc": "Fabriquer un planeur et traverser trois îles."
+      "desc": "Fabriquer un planeur et traverser trois îles (vols planés de 24 blocs)."
      },
      {
       "name": "Attraper la foudre",
@@ -6048,7 +7297,7 @@
      },
      {
       "name": "Allumer le phare",
-      "desc": "Rallumer 3 phares."
+      "desc": "Rallumer 3 phares : utiliser une Essence de tempête dans 3 Phares des tempêtes."
      },
      {
       "name": "La route du cartographe",
@@ -6236,6 +7485,17 @@
      "desc": "Une serre de verre avec jardinières et fontaine.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_cloud_garden.jpg"
+    },
+    {
+     "id": "sky_outpost",
+     "name": "Avant-poste céleste",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Une cabane de guet sur pilotis au-dessus d'une cour de ravitaillement, un feu de signal sur sa plateforme.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
     }
    ],
    "loot": [
@@ -6359,6 +7619,11 @@
        "id": "lightning_lance",
        "tex": "items/lightning_lance.png",
        "name": "Lance de foudre"
+      },
+      {
+       "id": "storm_javelin",
+       "tex": "items/storm_javelin.png",
+       "name": "Javelot d'orage"
       }
      ]
     }
@@ -6693,6 +7958,18 @@
      "effect": ""
     },
     {
+     "id": "trophy_doll_5",
+     "tex": "items/trophy_doll_5.png",
+     "name": "Trophée : Mangeur de lumière",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
+     "id": "lantern_shield",
+     "tex": "items/lantern_shield.png",
+     "name": "Bouclier-lanterne",
+     "effect": "Pare comme un bouclier. Chaque coup paré jette un éclair : l'attaquant est aveuglé, repoussé et marqué."
+    },
+    {
      "id": "mute_mushroom",
      "tex": "items/mute_mushroom.png",
      "name": "Champignon muet",
@@ -6726,7 +8003,8 @@
      "names": [
       "Nid de rôdeurs",
       "Cimetière d'échos",
-      "Cathédrale noire"
+      "Cathédrale noire",
+      "Cercle feutré"
      ]
     },
     {
@@ -6981,6 +8259,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_5",
+      "tex": "items/trophy_doll_5.png",
+      "name": "Trophée : Mangeur de lumière",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "lantern_shield",
+      "tex": "items/lantern_shield.png",
+      "name": "Bouclier-lanterne",
+      "kind": "ward",
+      "rarity": "Épique",
+      "effect": "Pare comme un bouclier. Chaque coup paré jette un éclair : l'attaquant est aveuglé, repoussé et marqué.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "nocturnal_helmet",
       "tex": "items/nocturnal_helmet.png",
       "name": "Casque nocturne",
@@ -7173,11 +8475,11 @@
      },
      {
       "name": "Les signes",
-      "desc": "Apprendre 5 signes des Silencieux."
+      "desc": "Apprendre les signes de 5 Silencieux différents (leur parler)."
      },
      {
       "name": "La veilleuse",
-      "desc": "Accompagner la veilleuse (6 Dévoreurs de lueur)."
+      "desc": "Accompagner la veilleuse : vaincre 6 Dévoreurs de lueur près des Silencieux."
      },
      {
       "name": "Le dernier feu",
@@ -7361,6 +8663,17 @@
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_artisan_shelter.jpg"
+    },
+    {
+     "id": "hushed_circle",
+     "name": "Cercle feutré",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un cercle de pierres levées et de linteaux autour d'un autel enfoncé où attend le coffre gardé.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
     }
    ],
    "loot": [
@@ -7780,6 +9093,12 @@
      "effect": ""
     },
     {
+     "id": "trophy_doll_6",
+     "tex": "items/trophy_doll_6.png",
+     "name": "Trophée : Ton Double",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
      "id": "flipped_apple",
      "tex": "items/flipped_apple.png",
      "name": "Pomme retournée",
@@ -7813,7 +9132,8 @@
      "names": [
       "Salle des miroirs",
       "Cage suspendue",
-      "Noyau instable"
+      "Noyau instable",
+      "Avant-poste suspendu"
      ]
     },
     {
@@ -8037,6 +9357,18 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_6",
+      "tex": "items/trophy_doll_6.png",
+      "name": "Trophée : Ton Double",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "mirror_helmet",
       "tex": "items/mirror_helmet.png",
       "name": "Casque miroir",
@@ -8207,15 +9539,15 @@
      },
      {
       "name": "Le double sens",
-      "desc": "Utiliser l'Inverseur."
+      "desc": "Utiliser l'Inverseur : échanger deux pièces d'équipement."
      },
      {
       "name": "Reflet perdu",
-      "desc": "Ramener le double d'un PNJ."
+      "desc": "Ramener le double d'un PNJ : vaincre un Reflet près d'un Reflet libre."
      },
      {
       "name": "L'escalier impossible",
-      "desc": "Atteindre le sommet de l'escalier."
+      "desc": "Atteindre le sommet de l'Escalier impossible."
      },
      {
       "name": "Qui est le vrai ?",
@@ -8399,6 +9731,17 @@
      "desc": "Une serre de verre avec jardinières et fontaine.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_floating_garden.jpg"
+    },
+    {
+     "id": "hanging_outpost",
+     "name": "Avant-poste suspendu",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Une cabane de guet sur pilotis au-dessus d'une cour de ravitaillement, un feu de signal sur sa plateforme.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
     }
    ],
    "loot": [
@@ -8861,6 +10204,18 @@
      "effect": "Permet de respirer sous l'eau tant que sa réserve tient (12 min). Fragile : les coups l'usent vite."
     },
     {
+     "id": "trophy_doll_7",
+     "tex": "items/trophy_doll_7.png",
+     "name": "Trophée : Léviathan de pression",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
+     "id": "tide_harpoon",
+     "tex": "items/tide_harpoon.png",
+     "name": "Harpon des marées",
+     "effect": "Utilise-le pour le lancer : il ramène à toi ce qu'il touche, plus loin sous l'eau. Sa ligne le ramène."
+    },
+    {
      "id": "apnea_kelp",
      "tex": "items/apnea_kelp.png",
      "name": "Algue d'apnée",
@@ -8890,7 +10245,8 @@
      "names": [
       "Fosse des chasseurs",
       "Récif mort",
-      "Cité engloutie"
+      "Cité engloutie",
+      "Bastion noyé"
      ]
     },
     {
@@ -9204,6 +10560,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_7",
+      "tex": "items/trophy_doll_7.png",
+      "name": "Trophée : Léviathan de pression",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "tide_harpoon",
+      "tex": "items/tide_harpoon.png",
+      "name": "Harpon des marées",
+      "kind": "weapon",
+      "rarity": "Épique",
+      "effect": "Utilise-le pour le lancer : il ramène à toi ce qu'il touche, plus loin sous l'eau. Sa ligne le ramène.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "diving_chestplate",
       "tex": "items/diving_chestplate.png",
       "name": "Plastron de plongée",
@@ -9413,11 +10793,11 @@
      },
      {
       "name": "La station se tait",
-      "desc": "Réparer 3 câbles de la station."
+      "desc": "Réparer 3 câbles de la station : utiliser du Cobalt abyssal dans une Station de pression."
      },
      {
       "name": "L'équipage de l'épave",
-      "desc": "Remonter 3 plaques d'équipage."
+      "desc": "Remonter 3 plaques d'équipage, une dans chacune de 3 épaves."
      },
      {
       "name": "Le signal",
@@ -9601,6 +10981,17 @@
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_deep_vault.jpg"
+    },
+    {
+     "id": "drowned_bastion",
+     "name": "Bastion noyé",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une cour fortifiée avec tours d'angle, un châtelet à herse et un donjon au fond.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
     }
    ],
    "loot": [
@@ -9729,6 +11120,11 @@
        "id": "trench_trident",
        "tex": "items/trench_trident.png",
        "name": "Trident des fosses"
+      },
+      {
+       "id": "tide_harpoon",
+       "tex": "items/tide_harpoon.png",
+       "name": "Harpon des marées"
       }
      ]
     }
@@ -10069,6 +11465,12 @@
      "effect": "Tenue à l'autel d'arène, elle réveille le Maître des saisons."
     },
     {
+     "id": "trophy_doll_8",
+     "tex": "items/trophy_doll_8.png",
+     "name": "Trophée : Maître des saisons",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
      "id": "season_jam",
      "tex": "items/season_jam.png",
      "name": "Conserve de saison sucrée",
@@ -10123,7 +11525,8 @@
     {
      "role": "Utilité",
      "names": [
-      "Marché du crépuscule"
+      "Marché du crépuscule",
+      "Caravane éphémère"
      ]
     },
     {
@@ -10363,6 +11766,18 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_8",
+      "tex": "items/trophy_doll_8.png",
+      "name": "Trophée : Maître des saisons",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "seasonal_helmet",
       "tex": "items/seasonal_helmet.png",
       "name": "Casque saisonnière",
@@ -10535,7 +11950,7 @@
     "quests": [
      {
       "name": "Quatre saisons",
-      "desc": "Traverser un cycle complet."
+      "desc": "Traverser un cycle complet : voir passer les quatre saisons ici."
      },
      {
       "name": "Arrêter l'instant",
@@ -10543,11 +11958,11 @@
      },
      {
       "name": "Une vie en un jour",
-      "desc": "Aider un Éphémère avant la nuit."
+      "desc": "Aider un Éphémère avant la nuit : lui apporter 8 sables temporels de jour."
      },
      {
       "name": "Les archives",
-      "desc": "Retrouver 5 livres de la bibliothèque."
+      "desc": "Retrouver 5 livres de la bibliothèque : fouiller 5 étagères ou lutrins de la Bibliothèque des siècles."
      },
      {
       "name": "Le vendeur d'heures",
@@ -10731,6 +12146,17 @@
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_time_tomb.jpg"
+    },
+    {
+     "id": "ephemeral_caravan",
+     "name": "Caravane éphémère",
+     "role": "Peuple",
+     "roleKey": "utility",
+     "size": "Moyenne",
+     "rarity": "Rare",
+     "desc": "Des chariots bâchés en cercle autour d'un feu, avec un étal et une barre d'attache.",
+     "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
+     "img": null
     }
    ],
    "loot": [
@@ -11157,6 +12583,18 @@
      "effect": "Graine du monde 10."
     },
     {
+     "id": "trophy_doll_9",
+     "tex": "items/trophy_doll_9.png",
+     "name": "Trophée : Cœur du terrain",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
+     "id": "quake_pick",
+     "tex": "items/quake_pick.png",
+     "name": "Pioche sismique",
+     "effect": "Mine une colonne de trois. Utilise-la sur le sol : une secousse qui ébranle les créatures autour de toi."
+    },
+    {
      "id": "anchor_bread",
      "tex": "items/anchor_bread.png",
      "name": "Pain d'ancrage",
@@ -11190,7 +12628,8 @@
      "names": [
       "Tour qui marche",
       "Forteresse mobile",
-      "Arène de terrain"
+      "Arène de terrain",
+      "Cercle sans repos"
      ]
     },
     {
@@ -11427,6 +12866,30 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_9",
+      "tex": "items/trophy_doll_9.png",
+      "name": "Trophée : Cœur du terrain",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "quake_pick",
+      "tex": "items/quake_pick.png",
+      "name": "Pioche sismique",
+      "kind": "tool",
+      "rarity": "Épique",
+      "effect": "Mine une colonne de trois. Utilise-la sur le sol : une secousse qui ébranle les créatures autour de toi.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "living_rock_helmet",
       "tex": "items/living_rock_helmet.png",
       "name": "Casque de roche vivante",
@@ -11603,15 +13066,15 @@
      },
      {
       "name": "Le plan du sol",
-      "desc": "Découvrir 5 zones."
+      "desc": "Découvrir 5 zones : 5 lieux différents de la Terre agitée."
      },
      {
       "name": "Le fort dérive",
-      "desc": "Stabiliser 3 murs du fort."
+      "desc": "Stabiliser 3 murs du fort : poser 3 ancres dans le Fort ancré."
      },
      {
       "name": "Le géomètre",
-      "desc": "Mesurer un gouffre vivant."
+      "desc": "Mesurer un gouffre vivant : atteindre le fond d'un Gouffre vivant."
      },
      {
       "name": "La veine",
@@ -11795,6 +13258,17 @@
      "desc": "Un kiosque sur un escalier en spirale vers une antichambre ; un mur peint cache le chemin de la salle du piédestal.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_stable_sanctuary.jpg"
+    },
+    {
+     "id": "restless_circle",
+     "name": "Cercle sans repos",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Moyenne",
+     "rarity": "Courante",
+     "desc": "Un cercle de pierres levées et de linteaux autour d'un autel enfoncé où attend le coffre gardé.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
     }
    ],
    "loot": [
@@ -11847,6 +13321,11 @@
        "id": "terrain_heart",
        "tex": "items/terrain_heart.png",
        "name": "Cœur de terrain"
+      },
+      {
+       "id": "quake_pick",
+       "tex": "items/quake_pick.png",
+       "name": "Pioche sismique"
       },
       {
        "id": "minecraft:gold_ingot",
@@ -12228,6 +13707,12 @@
      "effect": "Tenue à l'autel d'arène, elle réveille l'Inachevée."
     },
     {
+     "id": "trophy_doll_10",
+     "tex": "items/trophy_doll_10.png",
+     "name": "Trophée : L'Inachevée",
+     "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve."
+    },
+    {
      "id": "workshop_feast",
      "tex": "items/workshop_feast.png",
      "name": "Festin de l'atelier",
@@ -12261,7 +13746,8 @@
      "names": [
       "Tour d'aiguilles",
       "Forge colossale",
-      "Poupée effondrée"
+      "Poupée effondrée",
+      "Avant-poste du dé"
      ]
     },
     {
@@ -12484,6 +13970,18 @@
       "drops": []
      },
      {
+      "id": "trophy_doll_10",
+      "tex": "items/trophy_doll_10.png",
+      "name": "Trophée : L'Inachevée",
+      "kind": "trophy",
+      "rarity": "Épique",
+      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
       "id": "artisan_helmet",
       "tex": "items/artisan_helmet.png",
       "name": "Casque de l'Artisan",
@@ -12668,7 +14166,7 @@
     "quests": [
      {
       "name": "Le regard d'en bas",
-      "desc": "Trouver sa base, devenue un simple objet."
+      "desc": "Trouver sa base, devenue un simple objet, sur l'Établi titanesque."
      },
      {
       "name": "L'atelier",
@@ -12676,11 +14174,11 @@
      },
      {
       "name": "Les apprentis",
-      "desc": "Retrouver 5 anciens apprentis."
+      "desc": "Retrouver 5 anciens apprentis (parler à 5 d'entre eux)."
      },
      {
       "name": "Tous les outils",
-      "desc": "Utiliser un outil de chaque monde."
+      "desc": "Utiliser un outil de chaque monde : frapper, miner ou se servir d'un équipement de chacun des dix mondes."
      },
      {
       "name": "Le dernier pardon",
@@ -12864,6 +14362,17 @@
      "desc": "Une salle du trône à colonnes ; le tapis devant le trône cache une trappe vers la salle au trésor.",
      "inside": "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal.",
      "img": "shots/st_creature_throne.jpg"
+    },
+    {
+     "id": "thimble_outpost",
+     "name": "Avant-poste du dé",
+     "role": "Combat",
+     "roleKey": "combat",
+     "size": "Grande",
+     "rarity": "Rare",
+     "desc": "Une cabane de guet sur pilotis au-dessus d'une cour de ravitaillement, un feu de signal sur sa plateforme.",
+     "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
+     "img": null
     }
    ],
    "loot": [
@@ -13523,14 +15032,7 @@
     "min": 1,
     "max": 1
    },
-   "quests": [
-    {
-     "world": 1,
-     "name": "Sans filtre",
-     "desc": "Tuer un Gardien de chitine sans masque.",
-     "count": 1
-    }
-   ],
+   "quests": [],
    "ach": [
     {
      "world": 1,
@@ -14076,14 +15578,7 @@
     "min": 1,
     "max": 1
    },
-   "quests": [
-    {
-     "world": 2,
-     "name": "Mains nues",
-     "desc": "Tuer un Golem de scories sans armure.",
-     "count": 1
-    }
-   ],
+   "quests": [],
    "ach": [
     {
      "world": 2,
@@ -14474,9 +15969,9 @@
     "Normal"
    ],
    "elite": false,
-   "hp": "18",
+   "hp": "22",
    "dmg": "4,3",
-   "hpRaw": 18,
+   "hpRaw": 22,
    "dmgRaw": 4.3,
    "speedMult": "×1,12",
    "attackEvery": "0,85 s",
@@ -14578,9 +16073,9 @@
    ],
    "elite": true,
    "hp": "82",
-   "dmg": "11,5",
+   "dmg": "10,1",
    "hpRaw": 82,
-   "dmgRaw": 11.5,
+   "dmgRaw": 10.1,
    "speedMult": "×1,12",
    "attackEvery": "0,85 s",
    "attackTicks": 17,
@@ -15128,10 +16623,10 @@
     "Élite"
    ],
    "elite": true,
-   "hp": "59",
-   "dmg": "8,6",
-   "hpRaw": 59,
-   "dmgRaw": 8.6,
+   "hp": "111",
+   "dmg": "10,4",
+   "hpRaw": 111,
+   "dmgRaw": 10.4,
    "speedMult": "×1,18",
    "attackEvery": "0,8 s",
    "attackTicks": 16,
@@ -15400,14 +16895,7 @@
     "min": 1,
     "max": 3
    },
-   "quests": [
-    {
-     "world": 5,
-     "name": "La veilleuse",
-     "desc": "Accompagner la veilleuse (6 Dévoreurs de lueur).",
-     "count": 6
-    }
-   ],
+   "quests": [],
    "ach": [],
    "tex": "entities/glow_devourer.png",
    "dropTex": "items/shadow_shard.png",
@@ -15847,14 +17335,7 @@
     "min": 1,
     "max": 3
    },
-   "quests": [
-    {
-     "world": 6,
-     "name": "Reflet perdu",
-     "desc": "Ramener le double d'un PNJ.",
-     "count": 5
-    }
-   ],
+   "quests": [],
    "ach": [
     {
      "world": 6,
@@ -16021,9 +17502,9 @@
    ],
    "elite": false,
    "hp": "63",
-   "dmg": "19,9",
+   "dmg": "17,4",
    "hpRaw": 63,
-   "dmgRaw": 19.9,
+   "dmgRaw": 17.4,
    "speedMult": "×1,3",
    "attackEvery": "0,75 s",
    "attackTicks": 15,
@@ -16511,14 +17992,7 @@
     "min": 1,
     "max": 3
    },
-   "quests": [
-    {
-     "world": 7,
-     "name": "L'équipage de l'épave",
-     "desc": "Remonter 3 plaques d'équipage.",
-     "count": 10
-    }
-   ],
+   "quests": [],
    "ach": [
     {
      "world": 7,
@@ -17721,14 +19195,7 @@
     "min": 1,
     "max": 3
    },
-   "quests": [
-    {
-     "world": 9,
-     "name": "Le géomètre",
-     "desc": "Mesurer un gouffre vivant.",
-     "count": 5
-    }
-   ],
+   "quests": [],
    "ach": [],
    "tex": "entities/foundation_eater.png",
    "dropTex": "items/terrain_fragment.png",
@@ -17784,9 +19251,9 @@
    ],
    "elite": false,
    "hp": "265",
-   "dmg": "34,4",
+   "dmg": "30,1",
    "hpRaw": 265,
-   "dmgRaw": 34.4,
+   "dmgRaw": 30.1,
    "speedMult": "×1,48",
    "attackEvery": "0,65 s",
    "attackTicks": 13,
@@ -18326,9 +19793,9 @@
    ],
    "elite": false,
    "hp": "417",
-   "dmg": "41,3",
+   "dmg": "36,1",
    "hpRaw": 417,
-   "dmgRaw": 41.3,
+   "dmgRaw": 36.1,
    "speedMult": "×1,54",
    "attackEvery": "0,6 s",
    "attackTicks": 12,
@@ -18484,14 +19951,7 @@
     "min": 1,
     "max": 1
    },
-   "quests": [
-    {
-     "world": 10,
-     "name": "Tous les outils",
-     "desc": "Utiliser un outil de chaque monde.",
-     "count": 1
-    }
-   ],
+   "quests": [],
    "ach": [],
    "tex": "entities/colossus_prowler.png",
    "dropTex": "items/artisan_shard.png",
@@ -18697,6 +20157,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.block_guardian.punch.windup",
+     "label": "attack.block_guardian.punch.windup"
+    },
+    {
+     "key": "attack.block_guardian.punch.strike",
+     "label": "attack.block_guardian.punch.strike"
+    },
+    {
+     "key": "attack.block_guardian.punch.recover",
+     "label": "attack.block_guardian.punch.recover"
+    },
+    {
+     "key": "attack.block_guardian.shockwave.windup",
+     "label": "attack.block_guardian.shockwave.windup"
+    },
+    {
+     "key": "attack.block_guardian.shockwave.strike",
+     "label": "attack.block_guardian.shockwave.strike"
+    },
+    {
+     "key": "attack.block_guardian.shockwave.recover",
+     "label": "attack.block_guardian.shockwave.recover"
+    },
+    {
+     "key": "attack.block_guardian.torn_block.windup",
+     "label": "attack.block_guardian.torn_block.windup"
+    },
+    {
+     "key": "attack.block_guardian.torn_block.strike",
+     "label": "attack.block_guardian.torn_block.strike"
+    },
+    {
+     "key": "attack.block_guardian.torn_block.recover",
+     "label": "attack.block_guardian.torn_block.recover"
+    },
+    {
+     "key": "misc.block_guardian.phase",
+     "label": "misc.block_guardian.phase"
+    },
+    {
+     "key": "misc.block_guardian.death",
+     "label": "misc.block_guardian.death"
     }
    ],
    "quests": [
@@ -18875,6 +20379,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.spore_queen.root_snare.windup",
+     "label": "attack.spore_queen.root_snare.windup"
+    },
+    {
+     "key": "attack.spore_queen.root_snare.strike",
+     "label": "attack.spore_queen.root_snare.strike"
+    },
+    {
+     "key": "attack.spore_queen.root_snare.recover",
+     "label": "attack.spore_queen.root_snare.recover"
+    },
+    {
+     "key": "attack.spore_queen.toxic_cloud.windup",
+     "label": "attack.spore_queen.toxic_cloud.windup"
+    },
+    {
+     "key": "attack.spore_queen.toxic_cloud.strike",
+     "label": "attack.spore_queen.toxic_cloud.strike"
+    },
+    {
+     "key": "attack.spore_queen.toxic_cloud.recover",
+     "label": "attack.spore_queen.toxic_cloud.recover"
+    },
+    {
+     "key": "attack.spore_queen.call_of_sporelings.windup",
+     "label": "attack.spore_queen.call_of_sporelings.windup"
+    },
+    {
+     "key": "attack.spore_queen.call_of_sporelings.strike",
+     "label": "attack.spore_queen.call_of_sporelings.strike"
+    },
+    {
+     "key": "attack.spore_queen.call_of_sporelings.recover",
+     "label": "attack.spore_queen.call_of_sporelings.recover"
+    },
+    {
+     "key": "misc.spore_queen.phase",
+     "label": "misc.spore_queen.phase"
+    },
+    {
+     "key": "misc.spore_queen.death",
+     "label": "misc.spore_queen.death"
     }
    ],
    "quests": [],
@@ -19062,6 +20610,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.ash_titan.hammer_blow.windup",
+     "label": "attack.ash_titan.hammer_blow.windup"
+    },
+    {
+     "key": "attack.ash_titan.hammer_blow.strike",
+     "label": "attack.ash_titan.hammer_blow.strike"
+    },
+    {
+     "key": "attack.ash_titan.hammer_blow.recover",
+     "label": "attack.ash_titan.hammer_blow.recover"
+    },
+    {
+     "key": "attack.ash_titan.ash_spray.windup",
+     "label": "attack.ash_titan.ash_spray.windup"
+    },
+    {
+     "key": "attack.ash_titan.ash_spray.strike",
+     "label": "attack.ash_titan.ash_spray.strike"
+    },
+    {
+     "key": "attack.ash_titan.ash_spray.recover",
+     "label": "attack.ash_titan.ash_spray.recover"
+    },
+    {
+     "key": "attack.ash_titan.rising_lava.windup",
+     "label": "attack.ash_titan.rising_lava.windup"
+    },
+    {
+     "key": "attack.ash_titan.rising_lava.strike",
+     "label": "attack.ash_titan.rising_lava.strike"
+    },
+    {
+     "key": "attack.ash_titan.rising_lava.recover",
+     "label": "attack.ash_titan.rising_lava.recover"
+    },
+    {
+     "key": "misc.ash_titan.phase",
+     "label": "misc.ash_titan.phase"
+    },
+    {
+     "key": "misc.ash_titan.death",
+     "label": "misc.ash_titan.death"
     }
    ],
    "quests": [],
@@ -19271,6 +20863,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.grand_jailer.chain_pull.windup",
+     "label": "attack.grand_jailer.chain_pull.windup"
+    },
+    {
+     "key": "attack.grand_jailer.chain_pull.strike",
+     "label": "attack.grand_jailer.chain_pull.strike"
+    },
+    {
+     "key": "attack.grand_jailer.chain_pull.recover",
+     "label": "attack.grand_jailer.chain_pull.recover"
+    },
+    {
+     "key": "attack.grand_jailer.floor_cage.windup",
+     "label": "attack.grand_jailer.floor_cage.windup"
+    },
+    {
+     "key": "attack.grand_jailer.floor_cage.strike",
+     "label": "attack.grand_jailer.floor_cage.strike"
+    },
+    {
+     "key": "attack.grand_jailer.floor_cage.recover",
+     "label": "attack.grand_jailer.floor_cage.recover"
+    },
+    {
+     "key": "attack.grand_jailer.moving_walls.windup",
+     "label": "attack.grand_jailer.moving_walls.windup"
+    },
+    {
+     "key": "attack.grand_jailer.moving_walls.strike",
+     "label": "attack.grand_jailer.moving_walls.strike"
+    },
+    {
+     "key": "attack.grand_jailer.moving_walls.recover",
+     "label": "attack.grand_jailer.moving_walls.recover"
+    },
+    {
+     "key": "misc.grand_jailer.phase",
+     "label": "misc.grand_jailer.phase"
+    },
+    {
+     "key": "misc.grand_jailer.death",
+     "label": "misc.grand_jailer.death"
     }
    ],
    "quests": [],
@@ -19473,6 +21109,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.storm_king.gust.windup",
+     "label": "attack.storm_king.gust.windup"
+    },
+    {
+     "key": "attack.storm_king.gust.strike",
+     "label": "attack.storm_king.gust.strike"
+    },
+    {
+     "key": "attack.storm_king.gust.recover",
+     "label": "attack.storm_king.gust.recover"
+    },
+    {
+     "key": "attack.storm_king.called_lightning.windup",
+     "label": "attack.storm_king.called_lightning.windup"
+    },
+    {
+     "key": "attack.storm_king.called_lightning.strike",
+     "label": "attack.storm_king.called_lightning.strike"
+    },
+    {
+     "key": "attack.storm_king.called_lightning.recover",
+     "label": "attack.storm_king.called_lightning.recover"
+    },
+    {
+     "key": "attack.storm_king.shattered_islet.windup",
+     "label": "attack.storm_king.shattered_islet.windup"
+    },
+    {
+     "key": "attack.storm_king.shattered_islet.strike",
+     "label": "attack.storm_king.shattered_islet.strike"
+    },
+    {
+     "key": "attack.storm_king.shattered_islet.recover",
+     "label": "attack.storm_king.shattered_islet.recover"
+    },
+    {
+     "key": "misc.storm_king.phase",
+     "label": "misc.storm_king.phase"
+    },
+    {
+     "key": "misc.storm_king.death",
+     "label": "misc.storm_king.death"
     }
    ],
    "quests": [],
@@ -19658,6 +21338,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.light_eater.claw_in_the_dark.windup",
+     "label": "attack.light_eater.claw_in_the_dark.windup"
+    },
+    {
+     "key": "attack.light_eater.claw_in_the_dark.strike",
+     "label": "attack.light_eater.claw_in_the_dark.strike"
+    },
+    {
+     "key": "attack.light_eater.claw_in_the_dark.recover",
+     "label": "attack.light_eater.claw_in_the_dark.recover"
+    },
+    {
+     "key": "attack.light_eater.lights_out.windup",
+     "label": "attack.light_eater.lights_out.windup"
+    },
+    {
+     "key": "attack.light_eater.lights_out.strike",
+     "label": "attack.light_eater.lights_out.strike"
+    },
+    {
+     "key": "attack.light_eater.lights_out.recover",
+     "label": "attack.light_eater.lights_out.recover"
+    },
+    {
+     "key": "attack.light_eater.silent_charge.windup",
+     "label": "attack.light_eater.silent_charge.windup"
+    },
+    {
+     "key": "attack.light_eater.silent_charge.strike",
+     "label": "attack.light_eater.silent_charge.strike"
+    },
+    {
+     "key": "attack.light_eater.silent_charge.recover",
+     "label": "attack.light_eater.silent_charge.recover"
+    },
+    {
+     "key": "misc.light_eater.phase",
+     "label": "misc.light_eater.phase"
+    },
+    {
+     "key": "misc.light_eater.death",
+     "label": "misc.light_eater.death"
     }
    ],
    "quests": [],
@@ -19843,6 +21567,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.your_double.copied_strike.windup",
+     "label": "attack.your_double.copied_strike.windup"
+    },
+    {
+     "key": "attack.your_double.copied_strike.strike",
+     "label": "attack.your_double.copied_strike.strike"
+    },
+    {
+     "key": "attack.your_double.copied_strike.recover",
+     "label": "attack.your_double.copied_strike.recover"
+    },
+    {
+     "key": "attack.your_double.copied_weapon.windup",
+     "label": "attack.your_double.copied_weapon.windup"
+    },
+    {
+     "key": "attack.your_double.copied_weapon.strike",
+     "label": "attack.your_double.copied_weapon.strike"
+    },
+    {
+     "key": "attack.your_double.copied_weapon.recover",
+     "label": "attack.your_double.copied_weapon.recover"
+    },
+    {
+     "key": "attack.your_double.gravity_flip.windup",
+     "label": "attack.your_double.gravity_flip.windup"
+    },
+    {
+     "key": "attack.your_double.gravity_flip.strike",
+     "label": "attack.your_double.gravity_flip.strike"
+    },
+    {
+     "key": "attack.your_double.gravity_flip.recover",
+     "label": "attack.your_double.gravity_flip.recover"
+    },
+    {
+     "key": "misc.your_double.phase",
+     "label": "misc.your_double.phase"
+    },
+    {
+     "key": "misc.your_double.death",
+     "label": "misc.your_double.death"
     }
    ],
    "quests": [],
@@ -20028,6 +21796,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.pressure_leviathan.tail_lash.windup",
+     "label": "attack.pressure_leviathan.tail_lash.windup"
+    },
+    {
+     "key": "attack.pressure_leviathan.tail_lash.strike",
+     "label": "attack.pressure_leviathan.tail_lash.strike"
+    },
+    {
+     "key": "attack.pressure_leviathan.tail_lash.recover",
+     "label": "attack.pressure_leviathan.tail_lash.recover"
+    },
+    {
+     "key": "attack.pressure_leviathan.charge.windup",
+     "label": "attack.pressure_leviathan.charge.windup"
+    },
+    {
+     "key": "attack.pressure_leviathan.charge.strike",
+     "label": "attack.pressure_leviathan.charge.strike"
+    },
+    {
+     "key": "attack.pressure_leviathan.charge.recover",
+     "label": "attack.pressure_leviathan.charge.recover"
+    },
+    {
+     "key": "attack.pressure_leviathan.abyssal_pull.windup",
+     "label": "attack.pressure_leviathan.abyssal_pull.windup"
+    },
+    {
+     "key": "attack.pressure_leviathan.abyssal_pull.strike",
+     "label": "attack.pressure_leviathan.abyssal_pull.strike"
+    },
+    {
+     "key": "attack.pressure_leviathan.abyssal_pull.recover",
+     "label": "attack.pressure_leviathan.abyssal_pull.recover"
+    },
+    {
+     "key": "misc.pressure_leviathan.phase",
+     "label": "misc.pressure_leviathan.phase"
+    },
+    {
+     "key": "misc.pressure_leviathan.death",
+     "label": "misc.pressure_leviathan.death"
     }
    ],
    "quests": [],
@@ -20238,6 +22050,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_strike.windup",
+     "label": "attack.seasons_master.seasonal_strike.windup"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_strike.strike",
+     "label": "attack.seasons_master.seasonal_strike.strike"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_strike.recover",
+     "label": "attack.seasons_master.seasonal_strike.recover"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_ground.windup",
+     "label": "attack.seasons_master.seasonal_ground.windup"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_ground.strike",
+     "label": "attack.seasons_master.seasonal_ground.strike"
+    },
+    {
+     "key": "attack.seasons_master.seasonal_ground.recover",
+     "label": "attack.seasons_master.seasonal_ground.recover"
+    },
+    {
+     "key": "attack.seasons_master.season_shift.windup",
+     "label": "attack.seasons_master.season_shift.windup"
+    },
+    {
+     "key": "attack.seasons_master.season_shift.strike",
+     "label": "attack.seasons_master.season_shift.strike"
+    },
+    {
+     "key": "attack.seasons_master.season_shift.recover",
+     "label": "attack.seasons_master.season_shift.recover"
+    },
+    {
+     "key": "misc.seasons_master.phase",
+     "label": "misc.seasons_master.phase"
+    },
+    {
+     "key": "misc.seasons_master.death",
+     "label": "misc.seasons_master.death"
     }
    ],
    "quests": [],
@@ -20429,6 +22285,50 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
+    },
+    {
+     "key": "attack.terrain_heart_boss.ground_wave.windup",
+     "label": "attack.terrain_heart_boss.ground_wave.windup"
+    },
+    {
+     "key": "attack.terrain_heart_boss.ground_wave.strike",
+     "label": "attack.terrain_heart_boss.ground_wave.strike"
+    },
+    {
+     "key": "attack.terrain_heart_boss.ground_wave.recover",
+     "label": "attack.terrain_heart_boss.ground_wave.recover"
+    },
+    {
+     "key": "attack.terrain_heart_boss.living_wall.windup",
+     "label": "attack.terrain_heart_boss.living_wall.windup"
+    },
+    {
+     "key": "attack.terrain_heart_boss.living_wall.strike",
+     "label": "attack.terrain_heart_boss.living_wall.strike"
+    },
+    {
+     "key": "attack.terrain_heart_boss.living_wall.recover",
+     "label": "attack.terrain_heart_boss.living_wall.recover"
+    },
+    {
+     "key": "attack.terrain_heart_boss.chasm.windup",
+     "label": "attack.terrain_heart_boss.chasm.windup"
+    },
+    {
+     "key": "attack.terrain_heart_boss.chasm.strike",
+     "label": "attack.terrain_heart_boss.chasm.strike"
+    },
+    {
+     "key": "attack.terrain_heart_boss.chasm.recover",
+     "label": "attack.terrain_heart_boss.chasm.recover"
+    },
+    {
+     "key": "misc.terrain_heart_boss.phase",
+     "label": "misc.terrain_heart_boss.phase"
+    },
+    {
+     "key": "misc.terrain_heart_boss.death",
+     "label": "misc.terrain_heart_boss.death"
     }
    ],
    "quests": [],
@@ -20623,16 +22523,53 @@
     {
      "key": "misc.rest",
      "label": "Ouverture"
-    }
-   ],
-   "quests": [
+    },
     {
-     "world": 10,
-     "name": "Tout d'un coup",
-     "desc": "Vaincre l'Inachevée sans perdre de couche.",
-     "count": 1
+     "key": "attack.the_unfinished.shell_stroke.windup",
+     "label": "attack.the_unfinished.shell_stroke.windup"
+    },
+    {
+     "key": "attack.the_unfinished.shell_stroke.strike",
+     "label": "attack.the_unfinished.shell_stroke.strike"
+    },
+    {
+     "key": "attack.the_unfinished.shell_stroke.recover",
+     "label": "attack.the_unfinished.shell_stroke.recover"
+    },
+    {
+     "key": "attack.the_unfinished.shell_lift.windup",
+     "label": "attack.the_unfinished.shell_lift.windup"
+    },
+    {
+     "key": "attack.the_unfinished.shell_lift.strike",
+     "label": "attack.the_unfinished.shell_lift.strike"
+    },
+    {
+     "key": "attack.the_unfinished.shell_lift.recover",
+     "label": "attack.the_unfinished.shell_lift.recover"
+    },
+    {
+     "key": "attack.the_unfinished.shell_burst.windup",
+     "label": "attack.the_unfinished.shell_burst.windup"
+    },
+    {
+     "key": "attack.the_unfinished.shell_burst.strike",
+     "label": "attack.the_unfinished.shell_burst.strike"
+    },
+    {
+     "key": "attack.the_unfinished.shell_burst.recover",
+     "label": "attack.the_unfinished.shell_burst.recover"
+    },
+    {
+     "key": "misc.the_unfinished.phase",
+     "label": "misc.the_unfinished.phase"
+    },
+    {
+     "key": "misc.the_unfinished.death",
+     "label": "misc.the_unfinished.death"
     }
    ],
+   "quests": [],
    "ach": [
     {
      "world": 10,

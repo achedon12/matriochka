@@ -85,6 +85,12 @@ export function DownloadPage({ lang }: { lang: Lang }) {
             <section><h3><Icon name="circle-alert" />{s.earlyH}</h3><p>{s.early}</p><p><a className="quiet" href={`${SHARED.repo}/issues`}>{getData(lang).copy.ui.bug}</a></p></section>
           </div>
           <hr className="orn-rule" />
+          <div className="cols cols-3">
+            <section><h3><Icon name="package" />{s.packH}</h3><p>{s.pack}</p></section>
+            <section><h3><Icon name="check" />{s.compatH}</h3><p>{s.compat}</p></section>
+            <section><h3><Icon name="languages" />{s.langsH}</h3><p>{s.langs}</p></section>
+          </div>
+          <hr className="orn-rule" />
           <section>
             <h2>{s.cfgH}</h2>
             <p className="small">{s.cfgNote}</p>
