@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.4.3 (alpha)
+
+Each world's rule meter now reads like the vanilla HUD: a row of ten icons above the hunger bar.
 
 ### Interface
 
