@@ -101,11 +101,15 @@ public class ReplayProjectile extends ThrowableItemProjectile {
 	}
 
 	/** The harpoon's line: pale cord from the thrower's hand to a point, one fleck every step blocks. */
+	private static final double MAX_LINE = 48;
+
 	private static void line(ServerLevel level, Entity owner, Vec3 to, double step) {
+		// the thrower may have changed world or be far away: no line then (bounded work per tick)
+		if (owner.level() != level) return;
 		Vec3 from = owner.getEyePosition().add(0, -0.45, 0).add(owner.getLookAngle().scale(0.6));
 		Vec3 d = to.subtract(from);
 		double len = d.length();
-		if (len < 1.2) return;
+		if (len < 1.2 || len > MAX_LINE) return;
 		var cord = new net.minecraft.core.particles.DustParticleOptions(0xD9CBA3, 0.55f);
 		// the first stretch stays clear of the thrower's view
 		for (double k = 1.0; k < len; k += step) {
