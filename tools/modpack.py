@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Builds the Matriochka Pack, a Modrinth modpack (.mrpack) around the mod.
+"""Builds the Matriochka Pack around the mod: a Modrinth modpack (.mrpack) or a CurseForge modpack (.zip).
 
 Usage (from the repository root, after ./gradlew build):
     python3 tools/modpack.py                       # the jar in build/libs, the normal pack
     python3 tools/modpack.py --hard                # the hard pack (nightmare difficulty)
     python3 tools/modpack.py --jar path/to/matriochka.jar --mod-url https://.../matriochka.jar
+    python3 tools/modpack.py --curseforge [--hard] [--cf-mod-file 9468136]   # the CurseForge pack
 
 The pack holds the mod, its dependencies (Fabric API, GeckoLib), Just Enough Items as an optional client mod and
 the client performance mods that exist for this Minecraft version on Modrinth, plus the files of
@@ -14,12 +15,21 @@ version (a beta only when the mod has no release for it). Required dependencies 
 
 Downloads and hashes come from the Modrinth API. When the API cannot be reached the script stops with an error
 instead of writing an incomplete pack. Standard library only.
+
+The CurseForge pack holds the same files: each jar of the Modrinth pack is downloaded, its CurseForge fingerprint
+(MurmurHash2 of the jar without whitespace bytes) is looked up, and the CurseForge file with exactly those bytes goes
+into manifest.json. A mod with no such approved file for this game version and Fabric is left out, with every mod
+that needs it: CurseForge does not accept jars from elsewhere in a modpack. The lookup uses the official CurseForge
+API when CURSEFORGE_API_KEY is set (a key from console.curseforge.com), else the public read-only mirror
+api.curse.tools, which answers the same requests without a key.
 """
 import argparse
 import hashlib
+import html
 import io
 import json
 import os
+import struct
 import sys
 import urllib.error
 import urllib.parse
@@ -58,6 +68,11 @@ PACK = [
 EXCLUDED = {"lambdynamiclights", "c2me-fabric", "scalablelux"}
 
 PACK_NAME = "Matriochka Pack"
+AUTHOR = "achedon12"
+CF_PROJECT = 1785262  # Matriochka on CurseForge
+CF_GAME = 432  # Minecraft
+CF_API = "https://api.curseforge.com/v1"
+CF_MIRROR = "https://api.curse.tools/v1"
 SUMMARY = "Matriochka with its dependencies, recipe pages and client performance mods, ready to play."
 
 
@@ -84,9 +99,9 @@ def api(path, query=None):
         raise ApiError(f"cannot reach the Modrinth API ({url}): {getattr(e, 'reason', e)}")
 
 
-def properties():
+def properties(path):
     props = {}
-    with open(os.path.join(ROOT, "gradle.properties"), encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line and not line.startswith("#") and "=" in line:
@@ -130,12 +145,13 @@ def side(value):
 
 
 def resolve(mc, props):
-    """Every mod of PACK that exists for this game version, with its required dependencies."""
+    """Every mod of PACK that exists for this game version, with its required dependencies.
+    Each is {slug, id, title, version, needed_by (slugs of the mods that require it), entry (its modrinth.index.json line)}."""
     query = {"game_versions": json.dumps([mc]), "loaders": json.dumps(["fabric"])}
     chosen, seen, report = [], set(), []
-    todo = [(slug, props.get(key) if key else None, c, s, why) for slug, key, c, s, why in PACK]
+    todo = [(slug, props.get(key) if key else None, c, s, why, None) for slug, key, c, s, why in PACK]
     while todo:
-        slug, pin, client, server, why = todo.pop(0)
+        slug, pin, client, server, why, parent = todo.pop(0)
         project = api(f"/project/{slug}")
         if project is None:
             if pin:
@@ -143,6 +159,9 @@ def resolve(mc, props):
             report.append(f"  skip {slug}: not on Modrinth")
             continue
         if project["id"] in seen:
+            for c in chosen:
+                if c["id"] == project["id"] and parent:
+                    c["needed_by"].append(parent)
             continue
         versions = api(f"/project/{project['id']}/version", query) or []
         v = pick(versions, pin)
@@ -153,10 +172,17 @@ def resolve(mc, props):
             continue
         seen.add(project["id"])
         f = primary(v)
-        chosen.append(entry("mods/" + f["filename"], f["hashes"]["sha1"], f["hashes"]["sha512"], f["size"], f["url"], client, server))
+        chosen.append({"slug": project["slug"], "id": project["id"], "title": project["title"], "version": v["version_number"],
+                       "needed_by": [parent] if parent else [],
+                       "entry": entry("mods/" + f["filename"], f["hashes"]["sha1"], f["hashes"]["sha512"], f["size"], f["url"], client, server)})
         report.append(f"  {slug} {v['version_number']} ({v['version_type']}): {why}")
         for d in v.get("dependencies", []):
-            if d.get("dependency_type") != "required" or not d.get("project_id") or d["project_id"] in seen:
+            if d.get("dependency_type") != "required" or not d.get("project_id"):
+                continue
+            if d["project_id"] in seen:
+                for c in chosen:
+                    if c["id"] == d["project_id"]:
+                        c["needed_by"].append(project["slug"])
                 continue
             dep = api(f"/project/{d['project_id']}")
             if dep is None or dep["slug"] in EXCLUDED:
@@ -164,7 +190,7 @@ def resolve(mc, props):
             # a dependency is needed on the sides its parent runs on, as far as it supports them
             dc = client if side(dep.get("client_side")) != NO else NO
             ds = server if side(dep.get("server_side")) != NO else NO
-            todo.append((dep["slug"], d.get("version_id"), dc, ds, f"needed by {slug}"))
+            todo.append((dep["slug"], d.get("version_id"), dc, ds, f"needed by {slug}", project["slug"]))
     return chosen, report
 
 
@@ -208,15 +234,185 @@ def zip_add(z, name, data):
     z.writestr(info, data)
 
 
-def build(args):
-    props = properties()
-    version, mc, loader = props["mod_version"], props["minecraft_version"], props["loader_version"]
-    jar = args.jar or find_jar()
-    if not os.path.isfile(jar):
-        die(f"{jar} does not exist")
+def write_zip(out, first, hard):
+    """The pack file: its manifest files (name -> text) then the overrides, the same for both formats."""
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        for name, text in first:
+            zip_add(z, name, text)
+        for base, dirs, names in os.walk(OVERRIDES):
+            dirs.sort()
+            for n in sorted(names):
+                src = os.path.join(base, n)
+                rel = os.path.relpath(src, OVERRIDES).replace(os.sep, "/")
+                with open(src, "rb") as f:
+                    zip_add(z, "overrides/" + rel, f.read())
+        zip_add(z, "overrides/config/matriochka.json", json.dumps(config(hard), indent=2) + "\n")
+    with open(out, "wb") as f:
+        f.write(buf.getvalue())
+
+
+# --- CurseForge ---------------------------------------------------------------------------------------------------
+
+def cf_fingerprint(data):
+    """CurseForge's file fingerprint: 32-bit MurmurHash2 (seed 1) of the file without tab, LF, CR and space bytes."""
+    data = data.translate(None, b"\t\n\r ")
+    m, n = 0x5BD1E995, len(data)
+    h = (1 ^ n) & 0xFFFFFFFF
+    end = n - n % 4
+    for (k,) in struct.iter_unpack("<I", data[:end]):
+        k = (k * m) & 0xFFFFFFFF
+        k ^= k >> 24
+        k = (k * m) & 0xFFFFFFFF
+        h = ((h * m) & 0xFFFFFFFF) ^ k
+    tail = data[end:]
+    if tail:
+        if len(tail) == 3:
+            h ^= tail[2] << 16
+        if len(tail) >= 2:
+            h ^= tail[1] << 8
+        h ^= tail[0]
+        h = (h * m) & 0xFFFFFFFF
+    h ^= h >> 13
+    h = (h * m) & 0xFFFFFFFF
+    return h ^ (h >> 15)
+
+
+def cf_api(path, body=None):
+    key = os.environ.get("CURSEFORGE_API_KEY", "").strip()
+    url = (CF_API if key else CF_MIRROR) + path
+    headers = {"User-Agent": USER_AGENT, "Accept": "application/json"}
+    if key:
+        headers["x-api-key"] = key
+    data = None
+    if body is not None:
+        data = json.dumps(body).encode()
+        headers["Content-Type"] = "application/json"
+    req = urllib.request.Request(url, data=data, headers=headers)
     try:
-        mod, url = mod_entry(jar, args.mod_url, version)
-        files, report = resolve(mc, props)
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.load(r)["data"]
+    except urllib.error.HTTPError as e:
+        raise ApiError(f"{url} answered HTTP {e.code}")
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError, KeyError) as e:
+        raise ApiError(f"cannot read the CurseForge API ({url}): {getattr(e, 'reason', e)}")
+
+
+def download(url, sha1):
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=120) as r:
+            data = r.read()
+    except (urllib.error.URLError, TimeoutError, OSError) as e:
+        raise ApiError(f"cannot download {url}: {getattr(e, 'reason', e)}")
+    if hashlib.sha1(data).hexdigest() != sha1:
+        raise ApiError(f"{url} does not match its sha1")
+    return data
+
+
+def cf_files(mods, jar, mod_file, mc):
+    """The CurseForge file of each mod (same bytes, approved, this game version, Fabric), and what is left out."""
+    prints = {}
+    for m in mods:
+        prints[cf_fingerprint(download(m["entry"]["downloads"][0], m["entry"]["hashes"]["sha1"]))] = m["slug"]
+    own = cf_fingerprint(open(jar, "rb").read())
+    found = cf_api(f"/fingerprints/{CF_GAME}", {"fingerprints": list(prints) + [own]})
+    by_print = {x["file"]["fileFingerprint"]: x["file"] for x in found.get("exactMatches", [])}
+    f = by_print.get(own)
+    if mod_file is None:
+        if f is None or f["modId"] != CF_PROJECT:
+            die("the mod jar is not on CurseForge yet (no file with its fingerprint): upload it first or pass --cf-mod-file")
+        mod_file = f["id"]
+    if f is not None and f["id"] == mod_file and f.get("fileStatus") != 4:
+        print(f"modpack: warning: the mod's CurseForge file {mod_file} is not approved yet; CurseForge only accepts the pack"
+              " once every file in it is approved", file=sys.stderr)
+    picked, missing = {}, {}
+    for fp, slug in prints.items():
+        f = by_print.get(fp)
+        if f is None:
+            missing[slug] = "not on CurseForge with the same file"
+        elif f.get("fileStatus") != 4 or not f.get("isAvailable", True):
+            missing[slug] = f"its CurseForge file {f['id']} is not approved yet"
+        elif mc not in f.get("gameVersions", []) or "Fabric" not in f.get("gameVersions", []):
+            missing[slug] = f"its CurseForge file {f['id']} is not tagged {mc} Fabric"
+        else:
+            picked[slug] = f
+    # a mod whose required dependency is missing cannot load: leave it out too
+    changed = True
+    while changed:
+        changed = False
+        for m in mods:
+            if m["slug"] in missing:
+                continue
+            needs = [x["slug"] for x in mods if m["slug"] in x["needed_by"] and x["slug"] in missing]
+            if needs:
+                missing[m["slug"]] = f"needs {', '.join(needs)}, which is not on CurseForge"
+                picked.pop(m["slug"], None)
+                changed = True
+    return mod_file, picked, missing
+
+
+def modlist(projects):
+    lines = ["<ul>"]
+    for p in projects:
+        author = ", ".join(a["name"] for a in p.get("authors", [])) or "unknown"
+        lines.append(f'<li><a href="{html.escape(p["links"]["websiteUrl"])}">{html.escape(p["name"])} (by {html.escape(author)})</a></li>')
+    lines.append("</ul>")
+    return "\n".join(lines) + "\n"
+
+
+def build_curseforge(args, props, mods):
+    version, mc, loader = props["mod_version"], props["minecraft_version"], props["loader_version"]
+    mod_file, picked, missing = cf_files(mods, args.jar, args.cf_mod_file, mc)
+    optional = {m["slug"] for m in mods if m["entry"]["env"]["client"] == OPT}
+    files = [{"projectID": CF_PROJECT, "fileID": mod_file, "required": True}]
+    for m in mods:
+        f = picked.get(m["slug"])
+        if f:
+            files.append({"projectID": f["modId"], "fileID": f["id"], "required": m["slug"] not in optional})
+    projects = {p["id"]: p for p in cf_api("/mods", {"modIds": [f["projectID"] for f in files]})}
+    name = PACK_NAME + (" (Hard)" if args.hard else "")
+    pack_version = version + ("-hard" if args.hard else "")
+    manifest = {
+        "minecraft": {"version": mc, "modLoaders": [{"id": f"fabric-{loader}", "primary": True}]},
+        "manifestType": "minecraftModpack",
+        "manifestVersion": 1,
+        "name": name,
+        "version": pack_version,
+        "author": AUTHOR,
+        "files": files,
+        "overrides": "overrides",
+    }
+    os.makedirs(args.out, exist_ok=True)
+    out = os.path.join(args.out, f"matriochka-pack-{pack_version}+{mc}-curseforge.zip")
+    write_zip(out, [("manifest.json", json.dumps(manifest, indent=2) + "\n"),
+                    ("modlist.html", modlist(projects[f["projectID"]] for f in files if f["projectID"] in projects))], args.hard)
+    print(f"{name} {pack_version} (CurseForge) for Minecraft {mc}, Fabric Loader {loader}"
+          f" (lookup: {'CurseForge API' if os.environ.get('CURSEFORGE_API_KEY', '').strip() else 'api.curse.tools mirror'})")
+    print(f"  matriochka {version}: project {CF_PROJECT}, file {mod_file}")
+    for m in mods:
+        f = picked.get(m["slug"])
+        if f:
+            print(f"  {m['slug']} {m['version']}: project {f['modId']}, file {f['id']}" + (" (optional)" if m["slug"] in optional else ""))
+    for slug, why in missing.items():
+        print(f"  left out {slug}: {why}")
+    print(f"wrote {os.path.relpath(out, ROOT)} ({len(files)} mods)")
+    return out
+
+
+# --- Modrinth -----------------------------------------------------------------------------------------------------
+
+def build(args):
+    props = properties(args.properties)
+    version, mc, loader = props["mod_version"], props["minecraft_version"], props["loader_version"]
+    args.jar = args.jar or find_jar()
+    if not os.path.isfile(args.jar):
+        die(f"{args.jar} does not exist")
+    try:
+        mod, url = mod_entry(args.jar, args.mod_url, version)
+        mods, report = resolve(mc, props)
+        if args.curseforge:
+            return build_curseforge(args, props, mods)
     except ApiError as e:
         die(f"{e}. The pack needs the API for download links and hashes; try again once it answers.")
     name = PACK_NAME + (" (Hard)" if args.hard else "")
@@ -227,24 +423,12 @@ def build(args):
         "versionId": pack_version,
         "name": name,
         "summary": SUMMARY + (" Nightmare difficulty: creatures hit 30% harder and Soul Cradles hold one charge." if args.hard else ""),
-        "files": [mod] + files,
+        "files": [mod] + [m["entry"] for m in mods],
         "dependencies": {"minecraft": mc, "fabric-loader": loader},
     }
     os.makedirs(args.out, exist_ok=True)
     out = os.path.join(args.out, f"matriochka-pack-{pack_version}+{mc}.mrpack")
-    buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w") as z:
-        zip_add(z, "modrinth.index.json", json.dumps(index, indent=2, ensure_ascii=False) + "\n")
-        for base, dirs, names in os.walk(OVERRIDES):
-            dirs.sort()
-            for n in sorted(names):
-                src = os.path.join(base, n)
-                rel = os.path.relpath(src, OVERRIDES).replace(os.sep, "/")
-                with open(src, "rb") as f:
-                    zip_add(z, "overrides/" + rel, f.read())
-        zip_add(z, "overrides/config/matriochka.json", json.dumps(config(args.hard), indent=2) + "\n")
-    with open(out, "wb") as f:
-        f.write(buf.getvalue())
+    write_zip(out, [("modrinth.index.json", json.dumps(index, indent=2, ensure_ascii=False) + "\n")], args.hard)
     print(f"{name} {pack_version} for Minecraft {mc}, Fabric Loader {loader}")
     print(f"  matriochka {version}: {url}")
     print("\n".join(report))
@@ -253,11 +437,14 @@ def build(args):
 
 
 def main():
-    p = argparse.ArgumentParser(description="Build the Matriochka Pack (.mrpack).")
+    p = argparse.ArgumentParser(description="Build the Matriochka Pack (.mrpack, or the CurseForge .zip).")
     p.add_argument("--jar", help="the mod jar (default: the one in build/libs)")
     p.add_argument("--mod-url", help="download URL of that jar (default: Modrinth if it serves it, else the GitHub release)")
     p.add_argument("--out", default=os.path.join(ROOT, "build", "modpack"), help="output folder (default: build/modpack)")
     p.add_argument("--hard", action="store_true", help="the hard pack: nightmare difficulty")
+    p.add_argument("--curseforge", action="store_true", help="write the CurseForge modpack (.zip with manifest.json) instead")
+    p.add_argument("--cf-mod-file", type=int, help="CurseForge file id of the mod jar (default: looked up by fingerprint)")
+    p.add_argument("--properties", default=os.path.join(ROOT, "gradle.properties"), help="gradle.properties to read (default: the repository's)")
     build(p.parse_args())
 
 
