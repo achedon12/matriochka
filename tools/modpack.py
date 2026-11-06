@@ -31,6 +31,7 @@ import json
 import os
 import struct
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -73,11 +74,31 @@ CF_PROJECT = 1785262  # Matriochka on CurseForge
 CF_GAME = 432  # Minecraft
 CF_API = "https://api.curseforge.com/v1"
 CF_MIRROR = "https://api.curse.tools/v1"
+# The CurseForge project of each mod of the pack (Modrinth slug -> project id), checked by hand once: a file the API
+# names for a mod must belong to this project. A mod missing here is left out of the CurseForge pack with an error.
+CF_PROJECTS = {
+    "fabric-api": 306612,  # Fabric API
+    "geckolib": 388172,  # GeckoLib
+    "jei": 238222,  # Just Enough Items
+    "mezzconfig": 1689768,  # MezzConfig
+    "sodium": 394468,  # Sodium
+    "lithium": 360438,  # Lithium
+    "ferrite-core": 459857,  # FerriteCore (Fabric)
+    "entityculling": 448233,  # Entity Culling (tr7zw)
+    "immediatelyfast": 686911,  # ImmediatelyFast
+    "dynamic-fps": 335493,  # Dynamic FPS
+    "krypton": 428912,  # Krypton
+    "modmenu": 308702,  # Mod Menu
+    "placeholder-api": 1037459,  # Text Placeholder API
+    "iris": 455508,  # Iris Shaders
+}
 SUMMARY = "Matriochka with its dependencies, recipe pages and client performance mods, ready to play."
 
 
 class ApiError(Exception):
-    pass
+    def __init__(self, msg, code=None):
+        super().__init__(msg)
+        self.code = code
 
 
 def die(msg, code=2):
@@ -293,50 +314,118 @@ def cf_api(path, body=None):
         with urllib.request.urlopen(req, timeout=60) as r:
             return json.load(r)["data"]
     except urllib.error.HTTPError as e:
-        raise ApiError(f"{url} answered HTTP {e.code}")
+        raise ApiError(f"{url} answered HTTP {e.code}", e.code)
     except (urllib.error.URLError, TimeoutError, OSError, ValueError, KeyError) as e:
         raise ApiError(f"cannot read the CurseForge API ({url}): {getattr(e, 'reason', e)}")
 
 
-def download(url, sha1):
+def download(url, sha1=None, tries=1):
+    """The bytes at url; with sha1, they must match it."""
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    try:
-        with urllib.request.urlopen(req, timeout=120) as r:
-            data = r.read()
-    except (urllib.error.URLError, TimeoutError, OSError) as e:
-        raise ApiError(f"cannot download {url}: {getattr(e, 'reason', e)}")
-    if hashlib.sha1(data).hexdigest() != sha1:
+    for attempt in range(tries):
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                data = r.read()
+            break
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            if attempt + 1 == tries:
+                raise ApiError(f"cannot download {url}: {getattr(e, 'reason', e)}")
+            time.sleep(30)
+    if sha1 and hashlib.sha1(data).hexdigest() != sha1:
         raise ApiError(f"{url} does not match its sha1")
     return data
 
 
+def cf_source():
+    """The official API when CURSEFORGE_API_KEY is set. Without it: an error in CI, the keyless mirror locally."""
+    if os.environ.get("CURSEFORGE_API_KEY", "").strip():
+        return "the CurseForge API"
+    if os.environ.get("CI") or os.environ.get("GITHUB_ACTIONS"):
+        die("the CurseForge export needs the CURSEFORGE_API_KEY secret in CI (a key from console.curseforge.com);"
+            " the api.curse.tools mirror is only used for local runs")
+    print("modpack: warning: CURSEFORGE_API_KEY is not set, reading CurseForge through the api.curse.tools mirror;"
+          " every file it names is checked against the CurseForge CDN", file=sys.stderr)
+    return "the api.curse.tools mirror"
+
+
+def cf_edge(file_id, name):
+    """The official CurseForge CDN address of a file, built from its id: what it serves proves what the id is."""
+    return f"https://edge.forgecdn.net/files/{file_id // 1000}/{file_id % 1000}/{urllib.parse.quote(name)}"
+
+
+def cf_verify(f, project, sha1, fingerprint, mc, tries=1, check_versions=True):
+    """Problems with CurseForge file f standing for the jar (sha1, fingerprint) of the given project, or []."""
+    bad = []
+    if f.get("modId") != project:
+        bad.append(f"belongs to project {f.get('modId')}, expected {project}")
+    if f.get("fileFingerprint") != fingerprint:
+        bad.append("fingerprint differs")
+    api_sha1 = next((h["value"] for h in f.get("hashes", []) if h.get("algo") == 1), None)
+    if api_sha1 and api_sha1.lower() != sha1:
+        bad.append(f"sha1 {api_sha1} differs from the pack's {sha1}")
+    if check_versions and (mc not in f.get("gameVersions", []) or "Fabric" not in f.get("gameVersions", [])):
+        bad.append(f"not tagged {mc} Fabric")
+    if not bad:
+        try:
+            data = download(cf_edge(f["id"], f["fileName"]), tries=tries)
+        except ApiError as e:
+            return [str(e)]
+        if hashlib.sha1(data).hexdigest() != sha1 or cf_fingerprint(data) != fingerprint:
+            bad.append("the CurseForge CDN serves other bytes for this file id")
+    return bad
+
+
 def cf_files(mods, jar, mod_file, mc):
-    """The CurseForge file of each mod (same bytes, approved, this game version, Fabric), and what is left out."""
-    prints = {}
+    """The CurseForge file of each mod (same bytes, approved, this game version, Fabric), what is left out, and the
+    mismatches (files the API names that fail verification)."""
+    prints, wanted = {}, {}
     for m in mods:
-        prints[cf_fingerprint(download(m["entry"]["downloads"][0], m["entry"]["hashes"]["sha1"]))] = m["slug"]
-    own = cf_fingerprint(open(jar, "rb").read())
+        e = m["entry"]
+        fp = cf_fingerprint(download(e["downloads"][0], e["hashes"]["sha1"]))
+        prints[fp] = m["slug"]
+        wanted[m["slug"]] = (e["hashes"]["sha1"], fp)
+    own_data = open(jar, "rb").read()
+    own_sha1, own = hashlib.sha1(own_data).hexdigest(), cf_fingerprint(own_data)
     found = cf_api(f"/fingerprints/{CF_GAME}", {"fingerprints": list(prints) + [own]})
-    by_print = {x["file"]["fileFingerprint"]: x["file"] for x in found.get("exactMatches", [])}
+    by_print = {x["file"]["fileFingerprint"]: x["file"] for x in found.get("exactMatches", []) if isinstance(x.get("file"), dict)}
+    picked, missing, wrong = {}, {}, {}
+    # the mod itself: the id given (from the upload) or the file with its fingerprint, checked on the CDN either way
     f = by_print.get(own)
-    if mod_file is None:
-        if f is None or f["modId"] != CF_PROJECT:
-            die("the mod jar is not on CurseForge yet (no file with its fingerprint): upload it first or pass --cf-mod-file")
-        mod_file = f["id"]
-    if f is not None and f["id"] == mod_file and f.get("fileStatus") != 4:
+    if mod_file is not None and (f is None or f.get("id") != mod_file):
+        # just uploaded: not in the fingerprint index yet, ask for the file itself
+        for attempt in range(6):
+            try:
+                f = cf_api(f"/mods/{CF_PROJECT}/files/{mod_file}")
+                break
+            except ApiError as e:
+                if attempt == 5 or e.code in (400, 401, 403):
+                    die(f"cannot read the mod's CurseForge file {mod_file}: {e}")
+                time.sleep(30)
+    if f is None:
+        die("the mod jar is not on CurseForge yet (no file with its fingerprint): upload it first or pass --cf-mod-file")
+    bad = cf_verify(f, CF_PROJECT, own_sha1, own, mc, tries=6, check_versions=mod_file is None)
+    if bad:
+        die(f"CurseForge file {f['id']} is not the mod jar: {'; '.join(bad)}")
+    mod_file = f["id"]
+    if f.get("fileStatus", 4) != 4:
         print(f"modpack: warning: the mod's CurseForge file {mod_file} is not approved yet; CurseForge only accepts the pack"
               " once every file in it is approved", file=sys.stderr)
-    picked, missing = {}, {}
     for fp, slug in prints.items():
         f = by_print.get(fp)
+        project = CF_PROJECTS.get(slug)
         if f is None:
             missing[slug] = "not on CurseForge with the same file"
+        elif project is None:
+            wrong[slug] = f"no CurseForge project is listed for it in CF_PROJECTS (the API names {f.get('modId')})"
         elif f.get("fileStatus") != 4 or not f.get("isAvailable", True):
             missing[slug] = f"its CurseForge file {f['id']} is not approved yet"
-        elif mc not in f.get("gameVersions", []) or "Fabric" not in f.get("gameVersions", []):
-            missing[slug] = f"its CurseForge file {f['id']} is not tagged {mc} Fabric"
         else:
-            picked[slug] = f
+            bad = cf_verify(f, project, *wanted[slug], mc)
+            if bad:
+                wrong[slug] = f"CurseForge file {f.get('id')}: {'; '.join(bad)}"
+            else:
+                picked[slug] = f
+    missing.update(wrong)
     # a mod whose required dependency is missing cannot load: leave it out too
     changed = True
     while changed:
@@ -349,21 +438,42 @@ def cf_files(mods, jar, mod_file, mc):
                 missing[m["slug"]] = f"needs {', '.join(needs)}, which is not on CurseForge"
                 picked.pop(m["slug"], None)
                 changed = True
-    return mod_file, picked, missing
+    return mod_file, picked, missing, wrong
+
+
+def cf_link(url):
+    """url when it is an http(s) page on curseforge.com, else None."""
+    if not isinstance(url, str):
+        return None
+    u = urllib.parse.urlparse(url)
+    host = (u.hostname or "").lower()
+    if u.scheme in ("http", "https") and (host == "curseforge.com" or host.endswith(".curseforge.com")):
+        return url
+    return None
 
 
 def modlist(projects):
     lines = ["<ul>"]
     for p in projects:
-        author = ", ".join(a["name"] for a in p.get("authors", [])) or "unknown"
-        lines.append(f'<li><a href="{html.escape(p["links"]["websiteUrl"])}">{html.escape(p["name"])} (by {html.escape(author)})</a></li>')
+        name = html.escape(str(p.get("name", "")))
+        author = html.escape(", ".join(str(a.get("name", "")) for a in p.get("authors", [])) or "unknown")
+        link = cf_link((p.get("links") or {}).get("websiteUrl"))
+        if link:
+            lines.append(f'<li><a href="{html.escape(link, quote=True)}">{name} (by {author})</a></li>')
+        else:
+            lines.append(f"<li>{name} (by {author})</li>")
     lines.append("</ul>")
     return "\n".join(lines) + "\n"
 
 
 def build_curseforge(args, props, mods):
     version, mc, loader = props["mod_version"], props["minecraft_version"], props["loader_version"]
-    mod_file, picked, missing = cf_files(mods, args.jar, args.cf_mod_file, mc)
+    source = cf_source()
+    mod_file, picked, missing, wrong = cf_files(mods, args.jar, args.cf_mod_file, mc)
+    if wrong:
+        for slug, why in wrong.items():
+            print(f"modpack: error: {slug}: {why}", file=sys.stderr)
+        die("some CurseForge files failed verification: no pack written")
     optional = {m["slug"] for m in mods if m["entry"]["env"]["client"] == OPT}
     files = [{"projectID": CF_PROJECT, "fileID": mod_file, "required": True}]
     for m in mods:
@@ -388,7 +498,7 @@ def build_curseforge(args, props, mods):
     write_zip(out, [("manifest.json", json.dumps(manifest, indent=2) + "\n"),
                     ("modlist.html", modlist(projects[f["projectID"]] for f in files if f["projectID"] in projects))], args.hard)
     print(f"{name} {pack_version} (CurseForge) for Minecraft {mc}, Fabric Loader {loader}"
-          f" (lookup: {'CurseForge API' if os.environ.get('CURSEFORGE_API_KEY', '').strip() else 'api.curse.tools mirror'})")
+          f" (looked up through {source}, every file checked on the CurseForge CDN)")
     print(f"  matriochka {version}: project {CF_PROJECT}, file {mod_file}")
     for m in mods:
         f = picked.get(m["slug"])
