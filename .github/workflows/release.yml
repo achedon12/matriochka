@@ -7,9 +7,12 @@ name: release
 #      and the optional Matriochka HD resource pack (tools/hdpack.py)
 #   3. upload the jar to CurseForge (needs the CURSEFORGE_TOKEN secret and the CURSEFORGE_PROJECT_ID variable)
 #   4. upload the jar to Modrinth (needs the MODRINTH_TOKEN secret and the MODRINTH_PROJECT_ID variable)
-#   5. build the Matriochka Pack (.mrpack, normal and hard) with tools/modpack.py and attach it to the GitHub release
+#   5. build the Matriochka Pack with tools/modpack.py (Modrinth .mrpack and CurseForge .zip, normal and hard),
+#      attach it to the GitHub release and upload it to the pack's own projects with tools/modpack_publish.sh
+#      (needs the MODRINTH_PACK_PROJECT_ID / CURSEFORGE_PACK_PROJECT_ID variables; skipped without them)
 #   6. announce it in the Discord changelog channel (needs the DISCORD_RELEASES_WEBHOOK secret)
-# Run it by hand from the Actions tab to upload an existing version again.
+# Run it by hand from the Actions tab to upload an existing version again. The pack alone, for an existing tag:
+# the modpack workflow (modpack.yml).
 on:
   push:
     branches: [main]
@@ -114,6 +117,7 @@ jobs:
         run: gh release create "$TAG" "$JAR" "$HD" --title "Matriochka $VERSION" --notes-file release-notes.md --target "$GITHUB_SHA"
 
       - name: CurseForge
+        id: cf
         if: steps.v.outputs.publish == 'true'
         env:
           TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
@@ -147,7 +151,10 @@ jobs:
           curl -sS --fail-with-body -H "X-Api-Token: $TOKEN" \
             --form-string "metadata=$metadata" \
             -F "file=@$JAR" \
-            "$api/projects/$PROJECT/upload-file"
+            "$api/projects/$PROJECT/upload-file" -o cf-upload.json
+          cat cf-upload.json
+          # the CurseForge pack points at this file
+          echo "file_id=$(jq -r .id cf-upload.json)" >> "$GITHUB_OUTPUT"
 
       - name: Modrinth
         if: steps.v.outputs.publish == 'true'
@@ -172,9 +179,10 @@ jobs:
             --form-string "data=$data" -F "file=@$JAR" \
             https://api.modrinth.com/v2/version
 
-      # The pack points at the jar of the GitHub release (or at Modrinth's copy once it is public). It is only
-      # attached to the release: publishing it on Modrinth needs a modpack project of its own (see Modpack.md).
+      # The Modrinth pack points at the jar of the GitHub release (or at Modrinth's copy once it is public), the
+      # CurseForge pack at the CurseForge file uploaded above. None of these steps can fail the release.
       - name: Modpack
+        id: pack
         if: steps.v.outputs.publish == 'true'
         continue-on-error: true
         env:
@@ -184,6 +192,42 @@ jobs:
           python3 tools/modpack.py --jar "$JAR" --out build/modpack
           python3 tools/modpack.py --jar "$JAR" --out build/modpack --hard
           gh release upload "$TAG" build/modpack/*.mrpack --clobber
+
+      - name: Modpack on Modrinth
+        if: steps.v.outputs.publish == 'true' && steps.pack.outcome == 'success'
+        continue-on-error: true
+        env:
+          TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          PROJECT: ${{ vars.MODRINTH_PACK_PROJECT_ID }}
+          MC: ${{ steps.v.outputs.mc }}
+          VERSION: ${{ steps.v.outputs.version }}
+        run: tools/modpack_publish.sh modrinth
+
+      - name: CurseForge modpack
+        id: cfpack
+        if: steps.v.outputs.publish == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.v.outputs.tag }}
+          CF_FILE: ${{ steps.cf.outputs.file_id }}
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+        run: |
+          file=()
+          if [ -n "$CF_FILE" ] && [ "$CF_FILE" != null ]; then file=(--cf-mod-file "$CF_FILE"); fi
+          python3 tools/modpack.py --jar "$JAR" --out build/modpack --curseforge "${file[@]}"
+          python3 tools/modpack.py --jar "$JAR" --out build/modpack --curseforge --hard "${file[@]}"
+          gh release upload "$TAG" build/modpack/*-curseforge.zip --clobber
+
+      - name: Modpack on CurseForge
+        if: steps.v.outputs.publish == 'true' && steps.cfpack.outcome == 'success'
+        continue-on-error: true
+        env:
+          TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          PROJECT: ${{ vars.CURSEFORGE_PACK_PROJECT_ID }}
+          MC: ${{ steps.v.outputs.mc }}
+          VERSION: ${{ steps.v.outputs.version }}
+        run: tools/modpack_publish.sh curseforge
 
       - name: Discord
         if: steps.v.outputs.exists == 'false'
