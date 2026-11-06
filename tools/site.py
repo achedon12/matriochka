@@ -120,7 +120,7 @@ VANILLA = {
     "smithing_table": ("Smithing Table", "Table de forge"), "crying_obsidian": ("Crying Obsidian", "Obsidienne pleureuse"),
     "chest": ("Chest", "Coffre"), "honeycomb": ("Honeycomb", "Rayon de miel"), "cauldron": ("Cauldron", "Chaudron"),
     "blast_furnace": ("Blast Furnace", "Haut fourneau"), "lightning_rod": ("Lightning Rod", "Paratonnerre"),
-    "obsidian": ("Obsidian", "Obsidienne"), "observer": ("Observer", "Observateur"), "piston": ("Piston", "Piston"),
+    "obsidian": ("Obsidian", "Obsidienne"), "observer": ("Observer", "Observateur"), "piston": ("Piston", "Piston"), "iron_pickaxe": ("Iron Pickaxe", "Pioche en fer"),
     "clock": ("Clock", "Horloge"), "anvil": ("Anvil", "Enclume"), "loom": ("Loom", "Métier à tisser"),
     "dirt": ("Dirt", "Terre"), "bone_meal": ("Bone Meal", "Poudre d'os"), "glass_bottle": ("Glass Bottle", "Fiole"),
     "string": ("String", "Ficelle"), "bowl": ("Bowl", "Bol"), "stick": ("Stick", "Bâton"), "ice": ("Ice", "Glace"),
@@ -140,6 +140,8 @@ def name(id_):
     """Display name of an item, block or entity id, in the current language."""
     if id_.startswith("minecraft:"):
         v = VANILLA.get(id_[10:])
+        if not v:
+            print(f"site.py: no French name for {id_}, add it to VANILLA", file=sys.stderr)
         return t(*v) if v else id_[10:].replace("_", " ").capitalize()
     d = LANGS[LANG]
     for k in ("item", "block", "entity"):
