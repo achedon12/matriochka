@@ -192,6 +192,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 			structures(ctx);
 			return;
 		}
+		if ("tiktok".equals(System.getProperty("matriochka.capture"))) {
+			TiktokCapture.run(ctx);
+			return;
+		}
 		if ("epic".equals(System.getProperty("matriochka.capture"))) {
 			EpicCapture.run(ctx);
 			return;

@@ -28,8 +28,11 @@ public final class Ui {
 	private Ui() {}
 
 	// ------------------------------------------------------------------ time and easing
+	/** A capture's frame clock: when set (0 or more), every animation reads it instead of the wall clock. */
+	public static volatile long frameClock = -1;
+
 	public static long now() {
-		return Util.getMillis();
+		return frameClock >= 0 ? frameClock : Util.getMillis();
 	}
 
 	public static float clamp01(float v) {
