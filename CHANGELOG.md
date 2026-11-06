@@ -1,5 +1,31 @@
 # Changelog
 
+## Unreleased
+
+### Balance
+
+- `tools/balance.py` now models the talents: for every class and world, the talents open on arrival, applied as the game applies them, on top of the design player. A class's whole tree may move the hits to kill a creature, the hits you survive and the length of a solo boss fight by a quarter at most (report: [Balance](docs-wiki-drafts/Balance.md)).
+- Berserker talents lowered: Giantkiller and Shell Splitter 6% + 12% -> 3% + 5% against bosses, Cleaver 5% -> 4%, Bloodied and Red Mist 15% + 25% -> 10% + 12%, Opener and Finisher 20% -> 10%, Quick Arm and Flurry 5% + 10% -> 3% + 4% attack speed. With the weapon's +58% at level 5, the tree added up to +101% against a boss and cut the solo fights of Worlds 9 and 10 by 40%; now +83% and 24%.
+- Guardian: the bulwark gives health and toughness instead of armor (Stout +1 max health, Plated and Unbroken +0.5 toughness, Last Wall 10%), Broad Back and Hearty +1 max health, Lacquer Skin 2 absorption. Near the armor cap every point counts so much that the tree made a World 9 player survive 5.3 strong boss blows instead of 3; now 3.8.
+- Survivor: Thick Skin and Iron Heart +1 and +2 max health, Stubborn and Never Down 10% and 15%. Prowler: First Cut 10%, Stalker and Assassin 10% and 20% while sneaking.
+
+### Fixes
+
+- The ending's kneel calms the whole room: the creatures the Artisan's Shadow called in let go of the kneeling player, freeze in loose thread and unravel into thread and gold dust a second later, and the blows already thrown fade. They no longer knock the player off the carpet.
+- The new structures of the Ember Veins (World 2) stand on a cave floor under the rock roof; they were placed on the roof, above the build limit, and never built.
+- The caravans, circles, outposts and bastions no longer stand on a pillar of foundation in the middle of a lake or a sea.
+- The Lantern Shield is held like a shield and raised across the body while it blocks (it was held like a flat item); its flare bursts in gold sparks in front of the bearer instead of white rods in the player's face.
+- The trial clock sits under the boss bars instead of over them, scales with the HUD size comfort option, and the boss attack subtitles keep below it. The countdown is drawn large in the middle of the screen, a gilt figure each second.
+- The Talent cabinet: the talent's name sits on the plaque between the sprigs, the description, cost and reason shrink together to fit the red panel in any language, branch and class names shrink instead of being cut, the tree is centred on its panel and the Forget button is a full lacquer button.
+- The Trials book and the Journal no longer overlap wrapped text with what follows it; the Trials board's empty line wraps on the page.
+- Rebuilding a Gauntlet stage no longer drops the previous stage's carpets and banners at the players' feet.
+- Surges use their world's own particles (spores, embers, cold dust, storm sparks, shadow wisps, mirror shards, bubbles, petals, grit, thread), the warlord's name and its wave's warning are written in gold instead of an unreadable dark red, the harpoon draws its line to its catch, and the Quake Pick's tremor cracks the ground in rings of crumbs and grit.
+
+### Checks
+
+- `./gradlew runClientGameTest -Preplayshots` photographs the Trials, their stages in ten worlds, the HUD clock, the Trials and Talent screens in English and German, the new gear in hand and in use, the world events and the ten new structures (`-Ptakes=gtues` for parts).
+- The playthrough test keeps the Shadow's creatures in the room while kneeling and checks that they are stilled and that nothing knocks the player off the carpet.
+
 ## 0.4.0 (alpha)
 
 Trials, world events and talents to replay the worlds, a unique animation for every boss attack, a new look for each world, the design's rules for automation, souls and quests, comfort options, cinematics and adaptive music, a guided start, and three new languages.
