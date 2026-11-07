@@ -854,6 +854,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		super.die(source);
 		bar.removeAllPlayers();
 		if (!(level() instanceof ServerLevel level)) return;
+		fr.achedon12.matriochka.net.Cues.defeat(level, this, def.id());
 		// a trial boss grants nothing of the story: the trial keeps its own score
 		if (entityTags().contains(fr.achedon12.matriochka.replay.Trials.TAG)) {
 			fr.achedon12.matriochka.replay.Trials.bossDown(this);
@@ -902,6 +903,22 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			// the Unfinished has fallen: karma decides between sealing it and absorbing it
 			if (w == 10) fr.achedon12.matriochka.world.Endings.afterUnfinished(p);
 		}
+		// its relics fall once it has folded back into its doll (tickDeath)
+		relicsPending = true;
+		fr.achedon12.matriochka.world.Lairs.onBossDeath(level, this);
+		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, getX(), getY() + 2, getZ(), 40, 1.5, 2, 1.5, 0.3);
+		level.playSound(null, blockPosition(), fr.achedon12.matriochka.content.Sounds.BOSS_DEFEAT, SoundSource.HOSTILE, 2f, 1f);
+		data.changed();
+	}
+
+	/** The relics of a story boss, held back until it has folded into its doll. */
+	private boolean relicsPending;
+
+	/** The core, the mutated scales and the keys, dropped from a column of light where the doll closed. */
+	private void dropRelics(ServerLevel level) {
+		relicsPending = false;
+		int w = def.world();
+		List<ServerPlayer> present = level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(64));
 		spawnAtLocation(level, new ItemStack(ModContent.item(def.core())));
 		// a mutated boss sheds a bonus
 		if (!mutation.isEmpty()) {
@@ -916,10 +933,36 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			// only World 1 grows from soil now (world/Rites.java): the other bosses leave no World Soil
 			spawnAtLocation(level, new ItemStack(ModContent.item("last_doll_key")));
 		}
-		fr.achedon12.matriochka.world.Lairs.onBossDeath(level, this);
-		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, getX(), getY() + 2, getZ(), 120, 1.5, 2, 1.5, 0.5);
-		level.playSound(null, blockPosition(), fr.achedon12.matriochka.content.Sounds.BOSS_DEFEAT, SoundSource.HOSTILE, 2f, 1f);
-		data.changed();
+		double cy = getY() + getBbHeight() * 0.5;
+		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, getX(), cy, getZ(), 90, 0.6, 0.6, 0.6, 0.45);
+		for (int k = 0; k < 24; k++) level.sendParticles(ParticleTypes.END_ROD, getX(), getY() + k * 0.35, getZ(), 2, 0.08, 0.1, 0.08, 0.01);
+		level.playSound(null, blockPosition(), net.minecraft.sounds.SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.HOSTILE, 2f, 0.6f);
+		level.playSound(null, blockPosition(), net.minecraft.sounds.SoundEvents.BELL_RESONATE, SoundSource.HOSTILE, 1.2f, 1.2f);
+	}
+
+	/**
+	 * The doll closing on a fallen boss while its death animation plays: two rings of gold, one rising from its feet
+	 * and one coming down from above its head, tighten and meet at its waist, like the two halves of a matryoshka.
+	 */
+	private void foldIntoDoll(ServerLevel level, int last) {
+		float t = Math.min(1f, deathTime / (float) last);
+		double h = getBbHeight(), r = (getBbWidth() * 0.9 + 1.2) * (1 - 0.85 * t * t);
+		double waist = getY() + h * 0.5, low = getY() + h * 0.5 * t, high = getY() + h * (1.25 - 0.75 * t);
+		int n = 18;
+		for (int k = 0; k < n; k++) {
+			double a = (k + deathTime * 0.35) * Math.PI * 2 / n;
+			double x = getX() + Math.cos(a) * r, z = getZ() + Math.sin(a) * r;
+			level.sendParticles(fr.achedon12.matriochka.content.Particles.GOLD_MOTE, x, low, z, 1, 0, 0, 0, 0);
+			level.sendParticles(fr.achedon12.matriochka.content.Particles.GOLD_MOTE, x, high, z, 1, 0, 0, 0, 0);
+		}
+		if (deathTime % 6 == 0) level.sendParticles(ParticleTypes.ENCHANT, getX(), waist, getZ(), 12, r * 0.5, h * 0.3, r * 0.5, 0.4);
+	}
+
+	/** Removed before its doll closed (unloaded, discarded): its relics are never lost, they fall where it was. */
+	@Override
+	public void remove(Entity.RemovalReason reason) {
+		if (relicsPending && level() instanceof ServerLevel sl) dropRelics(sl);
+		super.remove(reason);
 	}
 
 	/** A fallen boss stays until its death animation (misc.<boss>.death) has played out. */
@@ -927,7 +970,9 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	protected void tickDeath() {
 		deathTime++;
 		int last = ownMoves() ? BossAnims.DEATH_TICKS : 20;
+		if (level() instanceof ServerLevel sl && deathTime < last) foldIntoDoll(sl, last);
 		if (deathTime >= last && !level().isClientSide() && !isRemoved()) {
+			if (relicsPending && level() instanceof ServerLevel sl) dropRelics(sl);
 			level().broadcastEntityEvent(this, (byte) 60);
 			remove(Entity.RemovalReason.KILLED);
 		}

@@ -96,6 +96,11 @@ public final class Cues {
 		for (ServerPlayer p : near(level, boss.position(), 48)) send(p, new CuePayload("intro", boss.getId(), 1f, 70, id));
 	}
 
+	/** A boss falls: everyone near it watches it fold back into its doll. */
+	public static void defeat(ServerLevel level, Entity boss, String id) {
+		for (ServerPlayer p : near(level, boss.position(), 64)) send(p, new CuePayload("defeat", boss.getId(), 1f, 0, id));
+	}
+
 	/** A boss breaks into its next phase. */
 	public static void phase(ServerLevel level, Entity boss, int phase) {
 		for (ServerPlayer p : near(level, boss.position(), 48)) send(p, new CuePayload("phase", boss.getId(), phase, 0, ""));

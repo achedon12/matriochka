@@ -384,7 +384,8 @@ final class PlaythroughTest {
 			return e instanceof MatrioMob m && m.entityTags().contains("boss_node");
 		}, 128, 900);
 		OUT.add("info " + boss.id() + " fell after " + blows + " blows");
-		ctx.waitTicks(10);
+		// its relics fall once it has folded back into its doll, at the end of its death animation
+		ctx.waitTicks(fr.achedon12.matriochka.content.BossAnims.DEATH_TICKS + 10);
 		pickUp(ctx, server, last[0]);
 		return last[0];
 	}

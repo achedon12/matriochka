@@ -372,6 +372,7 @@ boss_titles = {
 }
 for k, v in boss_titles.items():
     U[f"cine.matriochka.boss.{k}"] = v
+U["cine.matriochka.defeat"] = ("Sealed back in its doll", "Refermé dans sa poupée")
 world_lines = {
     1: ("The air is spores: keep the Toxin low.", "L'air n'est que spores : garde la Toxine basse."),
     2: ("The rock is hot: mind the Heat.", "La roche est brûlante : surveille la Chaleur."),

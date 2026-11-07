@@ -119,12 +119,6 @@ def _load(eid):
     return geo, tex, glow
 
 
-def head(eid, size=512):
-    """The boss's head alone, nearly face on: what its boss bar's cameo shows."""
-    geo, tex, glow = _load(eid)
-    return render(geo, tex, glow, yaw=22, pitch=-8, size=size, only="head")
-
-
 def portrait(eid):
     geo = json.load(open(os.path.join(A, f"geckolib/models/entity/{eid}.geo.json")))
     tex = Image.open(os.path.join(A, f"textures/entity/{eid}.png")).convert("RGBA")

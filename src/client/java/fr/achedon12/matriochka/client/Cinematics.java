@@ -41,6 +41,14 @@ public final class Cinematics implements HudElement {
 	private static Object lastDim;
 	private static long cardAt = -1;
 	public static int worldCards;
+	// boss defeat: the boss folds back into its doll while its name is sealed on a card
+	private static final int DEFEAT_MS = 4400;
+	private static long defeatAt = -1;
+	private static String defeatBoss = "";
+	private static int defeatEntity = -1;
+	/** How many defeats were shown (the check run reads it). */
+	public static int defeats;
+
 	// phase break
 	private static long phaseAt = -1;
 	private static int phaseNumber;
@@ -67,6 +75,7 @@ public final class Cinematics implements HudElement {
 		switch (p.kind()) {
 			case "intro" -> startIntro(p.text(), p.entity());
 			case "phase" -> startPhase((int) p.strength());
+			case "defeat" -> startDefeat(p.text(), p.entity());
 			case "telegraph" -> startTelegraph(p.text(), (int) p.strength(), p.ticks());
 			case "shake" -> shake(p.strength(), p.ticks());
 			case "tint" -> {
@@ -103,6 +112,22 @@ public final class Cinematics implements HudElement {
 		if (!Comfort.cinematics()) return;
 		introAt = Ui.now();
 		Ui.sound(net.minecraft.sounds.SoundEvents.BELL_RESONATE, 0.6f, 0.5f);
+	}
+
+	/** A boss falls: a gold flash, the camera on it while it folds back into its doll, then its name sealed. */
+	public static void startDefeat(String boss, int entity) {
+		defeats++;
+		defeatBoss = boss;
+		defeatEntity = entity;
+		introAt = -1;
+		teleUntil = -1;
+		if (!Comfort.cinematics()) return;
+		defeatAt = Ui.now();
+		Ui.sound(net.minecraft.sounds.SoundEvents.BELL_RESONATE, 0.7f, 0.75f);
+	}
+
+	public static boolean defeatPlaying() {
+		return defeatAt >= 0 && Ui.now() - defeatAt < DEFEAT_MS;
 	}
 
 	public static void startWorldCard(int world) {
@@ -174,7 +199,7 @@ public final class Cinematics implements HudElement {
 	public static void reset() {
 		diveAt = -1;
 		openAt = -1;
-		introAt = cardAt = phaseAt = teleAt = teleUntil = tintUntil = shakeUntil = -1;
+		introAt = cardAt = phaseAt = teleAt = teleUntil = tintUntil = shakeUntil = defeatAt = -1;
 		pendingWorld = cardWorld = -1;
 		danger = 0;
 	}
@@ -213,6 +238,11 @@ public final class Cinematics implements HudElement {
 			float t = (now - phaseAt) / (float) PHASE_MS;
 			f *= 1 - 0.07f * (1 - Ui.easeOut(t)) * Math.min(1, t * 8);
 		}
+		// a defeat: the camera leans in on the folding boss, then lets go as its name is sealed
+		if (defeatPlaying()) {
+			float t = (now - defeatAt) / (float) DEFEAT_MS;
+			f *= 1 - 0.1f * (float) Math.sin(Math.PI * Math.min(1, t * 1.3f));
+		}
 		// the dive: the camera plunges toward the doll as it closes, and settles back as the new world opens
 		if (Comfort.cinematics()) {
 			if (diveAt >= 0) f *= 1 - 0.35f * Ui.easeIn(Ui.since(diveAt, DIVE_MS));
@@ -242,8 +272,10 @@ public final class Cinematics implements HudElement {
 			openAt = Ui.now();
 		}
 		if (pendingWorld > 0 && mc.gui.screen() == null) startWorldCard(pendingWorld);
-		if (!introPlaying() || Ui.now() - introAt > 1800) return;
-		Entity boss = mc.level.getEntity(introEntity);
+		boolean intro = introPlaying() && Ui.now() - introAt <= 1800;
+		boolean defeat = defeatPlaying() && Ui.now() - defeatAt <= 1600;
+		if (!intro && !defeat) return;
+		Entity boss = mc.level.getEntity(intro ? introEntity : defeatEntity);
 		if (boss == null || boss.distanceTo(mc.player) > 64) return;
 		Vec3 eye = mc.player.getEyePosition();
 		Vec3 at = boss.position().add(0, boss.getBbHeight() * 0.6, 0).subtract(eye);
@@ -264,7 +296,8 @@ public final class Cinematics implements HudElement {
 		if (tinted()) tint(g, w, h, now);
 		if (teleUntil > now && Comfort.flashes() && teleSignature) edgeGlow(g, w, h, 0xFFD8402A, 0.35f * (float) Math.sin(Math.PI * Ui.clamp01((now - teleAt) / (float) (teleUntil - teleAt))));
 		if (phaseAt >= 0 && now - phaseAt < PHASE_MS) phaseBreak(g, font, w, h, now);
-		if (introPlaying()) intro(g, font, w, h, now);
+		if (defeatPlaying()) defeat(g, font, w, h, now);
+		else if (introPlaying()) intro(g, font, w, h, now);
 		else if (cardPlaying()) worldCard(g, font, w, h, now);
 		if (teleUntil > now && Comfort.get().subtitles && !introPlaying()) subtitle(g, font, w, h, now);
 		if (diveAt >= 0) iris(g, w, h, 1 - Ui.easeOut(Ui.since(diveAt, DIVE_MS)), diveDown ? diveWorld : 0);
@@ -330,6 +363,29 @@ public final class Cinematics implements HudElement {
 		String titleKey = "cine.matriochka.boss." + introBoss;
 		Component title = Language.getInstance().has(titleKey) ? Component.translatable(titleKey) : null;
 		titleCard(g, font, w / 2, Math.round(h * 0.64f), name, title, world, card, introAt + 500);
+	}
+
+	/**
+	 * The defeat: a warm gold flash as the boss breaks (a dark pulse without flashes), the bars close in while the
+	 * camera watches it fold, gold light gathers at the edges of the screen as the doll closes on it, and its name
+	 * comes down on a card sealed with the line "Sealed back in its doll".
+	 */
+	private static void defeat(GuiGraphicsExtractor g, Font font, int w, int h, long now) {
+		float t = (now - defeatAt) / (float) DEFEAT_MS;
+		float flash = 1 - Ui.easeOut(t / 0.14f);
+		if (flash > 0) {
+			if (Comfort.flashes()) g.fill(0, 0, w, h, Ui.alpha(0xFFFFE6B0, 0.5f * flash));
+			else edgeGlow(g, w, h, 0xFF140A06, 0.6f * flash);
+		}
+		float in = Ui.easeOut(t / 0.1f), out = 1 - Ui.easeIn((t - 0.84f) / 0.16f);
+		letterbox(g, w, h, Math.min(in, out));
+		// the doll closing: gold light gathers at the edges, strongest just before the seal
+		float gather = (float) Math.sin(Math.PI * Ui.clamp01((t - 0.08f) / 0.42f));
+		if (gather > 0.01f) edgeGlow(g, w, h, 0xFFE0A040, 0.4f * gather);
+		float card = Math.min(Ui.easeBack((t - 0.4f) / 0.14f), out);
+		if (card <= 0.02f) return;
+		Component name = Component.translatable("entity.matriochka." + defeatBoss);
+		titleCard(g, font, w / 2, Math.round(h * 0.34f), name, Component.translatable("cine.matriochka.defeat"), bossWorld(defeatBoss), card, defeatAt + 1800);
 	}
 
 	private static void worldCard(GuiGraphicsExtractor g, Font font, int w, int h, long now) {
