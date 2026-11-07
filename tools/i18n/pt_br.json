@@ -546,6 +546,8 @@
  "command.matriochka.world.state.disbanded": "desfeito",
  "command.matriochka.world.state.expired": "desfeito há mais de 30 dias, pode ser reiniciado",
  "command.matriochka.world.unknown": "Esse grupo nunca entrou no mundo %s.",
+ "config.jade.plugin_matriochka.seed": "Matriochka: mundo que uma semente abre",
+ "config.jade.plugin_matriochka.world_block": "Matriochka: mundo do bloco-mundo",
  "dimension.matriochka.world_1": "Mundo 1 — Selva Tóxica",
  "dimension.matriochka.world_10": "Mundo 10 — A Oficina Gigante",
  "dimension.matriochka.world_2": "Mundo 2 — Veios Gigantes",

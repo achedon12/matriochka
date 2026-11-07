@@ -546,6 +546,8 @@
  "command.matriochka.world.state.disbanded": "disuelto",
  "command.matriochka.world.state.expired": "disuelto hace más de 30 días, se puede reiniciar",
  "command.matriochka.world.unknown": "Ese grupo nunca ha entrado en el mundo %s.",
+ "config.jade.plugin_matriochka.seed": "Matriochka: mundo que abre una semilla",
+ "config.jade.plugin_matriochka.world_block": "Matriochka: mundo del bloque-mundo",
  "dimension.matriochka.world_1": "Mundo 1 — Jungla tóxica",
  "dimension.matriochka.world_10": "Mundo 10 — El taller gigante",
  "dimension.matriochka.world_2": "Mundo 2 — Vetas gigantes",

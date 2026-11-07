@@ -546,6 +546,8 @@
   "command.matriochka.world.state.disbanded": "disbanded",
   "command.matriochka.world.state.expired": "disbanded over 30 days ago, may be reset",
   "command.matriochka.world.unknown": "That group has never entered world %s.",
+  "config.jade.plugin_matriochka.seed": "Matriochka: world a Seed opens",
+  "config.jade.plugin_matriochka.world_block": "Matriochka: World Block's world",
   "dimension.matriochka.world_1": "World 1 — Toxic Jungle",
   "dimension.matriochka.world_10": "World 10 — The Giant Workshop",
   "dimension.matriochka.world_2": "World 2 — Giant Veins",

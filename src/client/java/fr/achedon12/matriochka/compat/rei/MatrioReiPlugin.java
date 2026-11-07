@@ -70,7 +70,7 @@ public class MatrioReiPlugin implements REIClientPlugin {
 
 		StationDisplay(String station, Recipes.Recipe recipe, int index) {
 			super(inputs(recipe), List.of(EntryIngredients.of(new ItemStack(Stations.resolve(recipe.output()), recipe.count()))),
-				Optional.of(Matriochka.id(station + "/" + index + "_" + recipe.output())));
+				Optional.of(Matriochka.id(station + "/" + index + "_" + recipe.output().replace(':', '_'))));
 			this.station = station;
 			this.recipe = recipe;
 		}

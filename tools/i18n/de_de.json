@@ -546,6 +546,8 @@
  "command.matriochka.world.state.disbanded": "aufgelöst",
  "command.matriochka.world.state.expired": "vor über 30 Tagen aufgelöst, kann zurückgesetzt werden",
  "command.matriochka.world.unknown": "Diese Gruppe hat Welt %s nie betreten.",
+ "config.jade.plugin_matriochka.seed": "Matriochka: Welt, die ein Samen öffnet",
+ "config.jade.plugin_matriochka.world_block": "Matriochka: Welt im Weltblock",
  "dimension.matriochka.world_1": "Welt 1 — Giftdschungel",
  "dimension.matriochka.world_10": "Welt 10 — Die Riesenwerkstatt",
  "dimension.matriochka.world_2": "Welt 2 — Riesenadern",

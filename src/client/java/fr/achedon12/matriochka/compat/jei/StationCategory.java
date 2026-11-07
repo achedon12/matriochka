@@ -62,6 +62,6 @@ public class StationCategory extends AbstractRecipeCategory<Recipes.Recipe> {
 
 	@Override
 	public Identifier getIdentifier(Recipes.Recipe recipe) {
-		return Matriochka.id(station + "/" + Recipes.of(station).indexOf(recipe) + "_" + recipe.output());
+		return Matriochka.id(station + "/" + Recipes.of(station).indexOf(recipe) + "_" + recipe.output().replace(':', '_'));
 	}
 }

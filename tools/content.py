@@ -1620,6 +1620,8 @@ STORY_UI = {
     "command.matriochka.ending.done": ("Ending played: %s", "Fin jouée : %s"),
     "command.matriochka.cycle.show": ("Cycle %s", "Cycle %s"),
     "jade.matriochka.world": ("World %s — %s", "Monde %s — %s"),
+    "config.jade.plugin_matriochka.world_block": ("Matriochka: World Block's world", "Matriochka : monde du bloc-monde"),
+    "config.jade.plugin_matriochka.seed": ("Matriochka: world a Seed opens", "Matriochka : monde qu'ouvre une graine"),
     "jade.matriochka.opens": ("Opens %s", "Ouvre %s"),
     "command.matriochka.difficulty.show": ("Matriochka difficulty: %s (story, normal, nightmare, hardcore)", "Difficulté de Matriochka : %s (story, normal, nightmare, hardcore)"),
     "command.matriochka.difficulty.set": ("Matriochka difficulty set to %s for the whole server", "Difficulté de Matriochka réglée sur %s pour tout le serveur"),

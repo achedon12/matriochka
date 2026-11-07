@@ -546,6 +546,8 @@
  "command.matriochka.world.state.disbanded": "rozwiązana",
  "command.matriochka.world.state.expired": "rozwiązana ponad 30 dni temu, można zresetować",
  "command.matriochka.world.unknown": "Ta grupa nigdy nie weszła do świata %s.",
+ "config.jade.plugin_matriochka.seed": "Matriochka: świat, który otwiera Ziarno",
+ "config.jade.plugin_matriochka.world_block": "Matriochka: świat Bloku Świata",
  "dimension.matriochka.world_1": "Świat 1 — Trująca Dżungla",
  "dimension.matriochka.world_10": "Świat 10 — Gigantyczny Warsztat",
  "dimension.matriochka.world_2": "Świat 2 — Gigantyczne Żyły",

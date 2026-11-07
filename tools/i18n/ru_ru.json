@@ -546,6 +546,8 @@
  "command.matriochka.world.state.disbanded": "распущена",
  "command.matriochka.world.state.expired": "распущена более 30 дней назад, можно сбросить",
  "command.matriochka.world.unknown": "Эта группа ещё ни разу не входила в мир %s.",
+ "config.jade.plugin_matriochka.seed": "Matriochka: мир, который откроет Семя",
+ "config.jade.plugin_matriochka.world_block": "Matriochka: мир в Блоке-мире",
  "dimension.matriochka.world_1": "Мир 1 — Ядовитые джунгли",
  "dimension.matriochka.world_10": "Мир 10 — Исполинская мастерская",
  "dimension.matriochka.world_2": "Мир 2 — Гигантские жилы",

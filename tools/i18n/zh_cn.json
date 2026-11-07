@@ -546,6 +546,8 @@
  "command.matriochka.world.state.disbanded": "已解散",
  "command.matriochka.world.state.expired": "已解散超过30天，可以重置",
  "command.matriochka.world.unknown": "该小队从未进入过世界%s。",
+ "config.jade.plugin_matriochka.seed": "Matriochka：种子开启的世界",
+ "config.jade.plugin_matriochka.world_block": "Matriochka：世界方块中的世界",
  "dimension.matriochka.world_1": "世界1——剧毒丛林",
  "dimension.matriochka.world_10": "世界10——巨型工坊",
  "dimension.matriochka.world_2": "世界2——巨脉",

@@ -546,6 +546,8 @@
  "command.matriochka.world.state.disbanded": "sciolto",
  "command.matriochka.world.state.expired": "sciolto da oltre 30 giorni, può essere reimpostato",
  "command.matriochka.world.unknown": "Quel gruppo non è mai entrato nel mondo %s.",
+ "config.jade.plugin_matriochka.seed": "Matriochka: mondo che apre un Seme",
+ "config.jade.plugin_matriochka.world_block": "Matriochka: mondo del Blocco-mondo",
  "dimension.matriochka.world_1": "Mondo 1 — Giungla Tossica",
  "dimension.matriochka.world_10": "Mondo 10 — L'Officina Gigante",
  "dimension.matriochka.world_2": "Mondo 2 — Filoni Giganti",
