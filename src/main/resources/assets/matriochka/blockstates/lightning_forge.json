@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "matriochka:block/lightning_forge"
+    },
+    "facing=east": {
+      "model": "matriochka:block/lightning_forge",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "matriochka:block/lightning_forge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "matriochka:block/lightning_forge",
+      "y": 270
     }
   }
 }

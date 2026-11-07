@@ -140,7 +140,8 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		if (hasSlot()) {
 			altar(g, l, t, mx, my);
 		} else {
-			drawers(g, l, t, mx, my, dt);
+			if (StationLayouts.has(menu.data.station())) pieces(g, l, t, mx, my, dt);
+			else drawers(g, l, t, mx, my, dt);
 			niche(g, l, t, ready, dt, mx, my);
 		}
 		motion.pop(g);
@@ -148,7 +149,27 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 
 	private void altar(GuiGraphicsExtractor g, int l, int t, int mx, int my) {
 		Ui.paper(g, l + 12, t + 22, 128, 100);
-		g.textWithWordWrap(font, Component.translatable("station.matriochka." + menu.data.station() + ".help"), l + 18, t + 28, 96, Ui.INK, false);
+		// the help fits the parchment: beside the socket the lines stay short, under it they run the full width;
+		// whatever does not fit is in the tooltip
+		Component help = Component.translatable("station.matriochka." + menu.data.station() + ".help");
+		var narrow = font.split(help, 96);
+		int shown = 0, y = t + 28;
+		for (; shown < narrow.size() && y < t + 90; shown++, y += 9) g.text(font, narrow.get(shown), l + 18, y, Ui.INK, false);
+		boolean cut = false;
+		if (shown < narrow.size()) {
+			StringBuilder rest = new StringBuilder();
+			for (int i = shown; i < narrow.size(); i++) {
+				StringBuilder line = new StringBuilder();
+				narrow.get(i).accept((idx, style, cp) -> { line.appendCodePoint(cp); return true; });
+				rest.append(line).append(' ');
+			}
+			var wide = font.split(Component.literal(rest.toString().trim()), 118);
+			for (int i = 0; i < wide.size(); i++, y += 9) {
+				if (y + 9 > t + 120) { cut = true; break; }
+				g.text(font, wide.get(i), l + 18, y, Ui.INK, false);
+			}
+		}
+		if (cut && mx >= l + 12 && mx < l + 140 && my >= t + 22 && my < t + 122) g.setTooltipForNextFrame(font, help, mx, my);
 		Ui.sprite(g, "slot", l + 119, t + 69, 18, 18);
 		// a soft halo pulses round the item socket
 		float pulse = 0.25f + 0.2f * (float) Math.sin(Ui.now() / 420.0);
@@ -186,6 +207,134 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		}
 	}
 
+	/** Index of the recipe piece under the cursor, or -1. */
+	private int pieceAt(double mx, double my) {
+		String st = menu.data.station();
+		int[] sz = StationLayouts.size(st);
+		for (int i = 0; i < recipes.size(); i++) {
+			int[] p = StationLayouts.at(st, i, recipes.size());
+			int x = leftPos + p[0], y = topPos + p[1];
+			if (mx >= x && mx < x + sz[0] && my >= y && my < y + sz[1]) return i;
+		}
+		return -1;
+	}
+
+	/** The automation funnel of a piece: in its top-right corner. */
+	private int[] piecePin(int i) {
+		String st = menu.data.station();
+		int[] sz = StationLayouts.size(st);
+		int[] p = StationLayouts.at(st, i, recipes.size());
+		int px = sz[0] >= 56 ? p[0] + sz[0] - PIN_W - 2 : p[0] + sz[0] - PIN_W + 2;
+		return new int[]{leftPos + px, topPos + p[1] - (sz[0] >= 56 ? -4 : 3)};
+	}
+
+	private boolean overPiecePin(double mx, double my, int i) {
+		int[] q = piecePin(i);
+		return mx >= q[0] - 1 && mx < q[0] + PIN_W + 1 && my >= q[1] - 1 && my < q[1] + PIN_H + 1;
+	}
+
+	private int hoverPiece = -1;
+	private float barShown;
+
+	/**
+	 * The station's own layout: its backdrop, then every recipe as a piece of the station (jar, crucible, key tag,
+	 * plate, rune, porthole, medallion, stratum, banner) that lights when the player carries everything, rises under
+	 * the cursor and sinks when clicked; the bar under them shows the recipe of the piece under the cursor.
+	 */
+	private void pieces(GuiGraphicsExtractor g, int l, int t, int mx, int my, float dt) {
+		String st = menu.data.station();
+		Ui.sprite(g, "decor_" + st, l + StationLayouts.DECOR_X, t + StationLayouts.DECOR_Y, StationLayouts.DECOR_W, StationLayouts.DECOR_H);
+		int[] sz = StationLayouts.size(st);
+		int[] io = StationLayouts.itemAt(st);
+		int hover = motion.closing() ? -1 : pieceAt(mx, my);
+		if (hover >= 0) hoverPiece = hover;
+		else if (hoverPiece < 0 || hoverPiece >= recipes.size()) hoverPiece = Math.max(0, menu.sync.get(7) - 1);
+		for (int i = 0; i < recipes.size(); i++) {
+			Recipes.Recipe r = recipes.get(i);
+			int[] p = StationLayouts.at(st, i, recipes.size());
+			int[] hv = have(r);
+			boolean can = hv[0] >= hv[1];
+			pull[i] = Ui.approach(pull[i], i == hover ? 1 : 0, 14, dt);
+			// the pieces come in one after the other when the cabinet opens
+			float in = Ui.easeOut(Ui.since(motion.openedAt() + 60L + i * 55L, 280));
+			float press = pressed[i] < 0 ? 0 : 1 - Ui.since(pressed[i], 200);
+			int x = l + p[0], y = t + p[1] + Math.round((1 - in) * 10 - pull[i] * 2 + press * 2);
+			float a = in;
+			if (a < 0.02f) continue;
+			if (can) Ui.sprite(g, "glow", x - 6, y - 6, sz[0] + 12, sz[1] + 12, Ui.white((0.18f + 0.1f * (float) Math.sin(Ui.now() / 600.0 + i)) * a));
+			Ui.sprite(g, "tile_" + st + (can ? "_ready" : ""), x, y, sz[0], sz[1], Ui.white(a));
+			if (pull[i] > 0.02f) g.outline(x - 1, y - 1, sz[0] + 2, sz[1] + 2, Ui.alpha(0xFFF4D27A, pull[i] * a));
+			ItemStack out = new ItemStack(Stations.resolve(r.output()), r.count());
+			g.item(out, x + io[0], y + io[1]);
+			g.itemDecorations(font, out, x + io[0], y + io[1]);
+			if (sz[0] >= 56) {
+				// the long pieces (mirrored rows, strata) show the ingredients that fit beside the result
+				int ix = x + io[0] + 22;
+				for (Recipes.Ing ing : r.inputs()) {
+					if (ix + 16 > x + sz[0] - 2) break;
+					ItemStack s = new ItemStack(Stations.resolve(ing.id()), ing.count());
+					g.item(s, ix, y + io[1]);
+					g.itemDecorations(font, s, ix, y + io[1]);
+					if (Stations.count(minecraft.player.getInventory(), Stations.resolve(ing.id())) < ing.count()) g.fill(ix, y + io[1] + 15, ix + 16, y + io[1] + 16, 0xFFD8402A);
+					ix += 18;
+				}
+			}
+			int[] q = piecePin(i);
+			if (i == hover || i == menu.sync.get(7) - 1) funnel(g, q[0], q[1] + Math.round((1 - in) * 10), i == menu.sync.get(7) - 1, i == hover && overPiecePin(mx, my, i), i);
+		}
+		bar(g, l, t, dt);
+		pinTooltipPieces(g, mx, my);
+	}
+
+	/** The bar under the pieces: the recipe under the cursor (or the one the funnel keeps making), in the row material. */
+	private void bar(GuiGraphicsExtractor g, int l, int t, float dt) {
+		if (recipes.isEmpty()) return;
+		int i = Math.min(hoverPiece, recipes.size() - 1);
+		Recipes.Recipe r = recipes.get(i);
+		int[] hv = have(r);
+		boolean can = hv[0] >= hv[1];
+		barShown = Ui.approach(barShown, hv[1] == 0 ? 1 : hv[0] / (float) hv[1], 8, dt);
+		int x = l + StationLayouts.BAR_X, y = t + StationLayouts.BAR_Y;
+		float in = Ui.easeOut(Ui.since(motion.openedAt() + 200L, 300));
+		Ui.sprite(g, rowSprite(can), x, y, 174, 21, Ui.white(in));
+		ItemStack out = new ItemStack(Stations.resolve(r.output()), r.count());
+		g.item(out, x + 9, y + 2);
+		g.itemDecorations(font, out, x + 9, y + 2);
+		int ix = x + 40;
+		for (Recipes.Ing ing : r.inputs()) {
+			ItemStack s = new ItemStack(Stations.resolve(ing.id()), ing.count());
+			g.item(s, ix, y + 2);
+			g.itemDecorations(font, s, ix, y + 2);
+			if (Stations.count(minecraft.player.getInventory(), Stations.resolve(ing.id())) < ing.count()) {
+				g.fill(ix, y + 2, ix + 16, y + 18, 0x9C140A08);
+				g.fill(ix, y + 17, ix + 16, y + 18, 0xFFD8402A);
+			}
+			ix += 21;
+		}
+		// the recipe's name, right of its ingredients, while there is room for it
+		Component name = out.getHoverName();
+		int room = x + 158 - ix;
+		if (room > 30) {
+			var line = font.split(name, room).getFirst();
+			g.text(font, line, ix + 2, y + 6, Ui.LIGHT, true);
+		}
+		int fw = Math.round(124 * Ui.clamp01(barShown));
+		Ui.spritePart(g, "drawer_fill", 124, 2, 0, 0, x + 38, y + 18, fw, 1, 0xFFFFFFFF);
+		if (can) Ui.sheen(g, x + 38, y + 16, 124, 4, 2600, 77L, 0.9f);
+	}
+
+	private void pinTooltipPieces(GuiGraphicsExtractor g, int mx, int my) {
+		int i = pieceAt(mx, my);
+		if (i < 0 || motion.closing() || !overPiecePin(mx, my, i)) return;
+		boolean on = i == menu.sync.get(7) - 1;
+		List<Component> tip = new java.util.ArrayList<>();
+		tip.add(Component.translatable(on ? "station.matriochka.auto.on" : "station.matriochka.auto.pick").withStyle(net.minecraft.ChatFormatting.GOLD));
+		tip.add(Component.translatable("station.matriochka.auto.how").withStyle(net.minecraft.ChatFormatting.GRAY));
+		String cond = "station.matriochka.auto.cond." + menu.data.station();
+		if (net.minecraft.locale.Language.getInstance().has(cond)) tip.add(Component.translatable(cond).withStyle(net.minecraft.ChatFormatting.DARK_AQUA));
+		g.setComponentTooltipForNextFrame(font, tip, mx, my);
+	}
+
 	private void drawers(GuiGraphicsExtractor g, int l, int t, int mx, int my, float dt) {
 		scrollShown = Ui.approach(scrollShown, scroll, 16, dt);
 		int x0 = l + CAB_X, y0 = t + CAB_Y;
@@ -209,7 +358,8 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 			int x = x0 + dx;
 			// the drawer lifts: a shadow under it while pulled out
 			if (pull[i] > 0.02f) g.fill(x + 2, y + 21, x + 176, y + 22, Ui.alpha(0xFF000000, 0.45f * pull[i]));
-			Ui.sprite(g, can ? "drawer_ready" : "drawer", x, y, 174, 21);
+			// each station's rows are made of its own material (row_<station>); the workbench keeps its wooden drawers
+			Ui.sprite(g, rowSprite(can), x, y, 174, 21);
 			if (pull[i] > 0.02f) {
 				g.fill(x + 1, y + 1, x + 173, y + 20, Ui.alpha(0xFFFFE6B0, 0.10f * pull[i]));
 				g.outline(x, y, 174, 21, Ui.alpha(0xFFF4D27A, pull[i]));
@@ -241,6 +391,23 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 			int ty = t + 22 + Math.round((track - th) * scrollShown / Math.max(1, recipes.size() - ROWS));
 			Ui.sprite(g, "thumb", l + 189, ty, 4, th);
 		}
+	}
+
+	private String rowSprite(boolean ready) {
+		String st = menu.data.station();
+		if (st.equals("matrix_workbench")) return ready ? "drawer_ready" : "drawer";
+		return "row_" + st + (ready ? "_ready" : "");
+	}
+
+	/** Share of this station's recipes the player can make right now, 0..1. */
+	private float craftable() {
+		if (recipes.isEmpty()) return 0;
+		int n = 0;
+		for (Recipes.Recipe r : recipes) {
+			int[] hv = have(r);
+			if (hv[0] >= hv[1]) n++;
+		}
+		return n / (float) recipes.size();
 	}
 
 	/** Where the automation funnel sits on a drawer, and its size. */
@@ -318,6 +485,21 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		fillShown = Ui.approach(fillShown, target * Ui.easeOut(Ui.since(motion.openedAt() + 150, 500)), 4, dt);
 		flash = Ui.approach(flash, 0, 3, dt);
 		int vx = l + 202, vy = t + 23, vw = 40, vh = 56;
+		if (StationInstruments.has(menu.data.station())) {
+			// each station has its own instrument; the raw reading is the one the station syncs
+			String st = menu.data.station();
+			int value = switch (st) {
+				case "spore_vat" -> menu.sync.get(6);
+				case "jailer_table" -> menu.sync.get(5);
+				default -> menu.sync.get(1);
+			};
+			long day = minecraft.level == null ? 0 : minecraft.level.getDefaultClockTime();
+			StationInstruments.draw(g, st, world, l + 198, vy, fillShown, ready, value, craftable(), day);
+			if (ready) {
+				float since = readyAt < 0 ? 1 : Ui.since(readyAt, 900);
+				if (since < 1) Ui.sprite(g, "glow", l + 210, vy + 16, 24, 24, Ui.alpha(0xFFFFFFFF, (1 - since) * 0.6f));
+			}
+		} else {
 		Ui.sprite(g, "vessel_back", vx, vy, vw, vh);
 		// liquid: the body of the doll spans rows 8..48 of the sprite; the surface wobbles a little
 		int top = vy + 8, bottom = vy + 48;
@@ -342,6 +524,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 			float since = readyAt < 0 ? 1 : Ui.since(readyAt, 900);
 			Ui.sprite(g, "glow", vx + 8, vy + 10, 24, 24, Ui.alpha(0xFFFFFFFF, 0.25f + 0.2f * (float) Math.sin(Ui.now() / 500.0) + (1 - since) * 0.5f));
 			Ui.glint(g, vx + 13, vy + 18, Math.floorMod(Ui.now(), 2200L) / 900f, 8);
+		}
 		}
 		int sx = l + 198;
 		if (!jailer()) {
@@ -383,6 +566,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 
 	@Override
 	public boolean mouseScrolled(double x, double y, double sx, double sy) {
+		if (StationLayouts.has(menu.data.station())) return true;
 		scroll = Math.max(0, Math.min(Math.max(0, recipes.size() - ROWS), scroll - (int) Math.signum(sy)));
 		return true;
 	}
@@ -397,7 +581,20 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
 		if (motion.closing()) return true;
 		if (buttons.click(event.x(), event.y())) return true;
-		if (!hasSlot()) {
+		if (!hasSlot() && StationLayouts.has(menu.data.station())) {
+			int i = pieceAt(event.x(), event.y());
+			if (i >= 0) {
+				if (overPiecePin(event.x(), event.y(), i)) {
+					Ui.sound(SoundEvents.CHAIN_PLACE, 1.4f, 0.5f);
+					click(i == menu.sync.get(7) - 1 ? 299 : 300 + i);
+				} else {
+					pressed[i] = Ui.now();
+					Ui.sound(SoundEvents.WOODEN_BUTTON_CLICK_ON, 1.0f, 0.6f);
+					click(i);
+				}
+				return true;
+			}
+		} else if (!hasSlot()) {
 			int pin = pinAt(event.x(), event.y());
 			if (pin >= 0) {
 				Ui.sound(SoundEvents.CHAIN_PLACE, 1.4f, 0.5f);

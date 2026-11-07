@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "matriochka:block/matrix_workbench"
+    },
+    "facing=east": {
+      "model": "matriochka:block/matrix_workbench",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "matriochka:block/matrix_workbench",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "matriochka:block/matrix_workbench",
+      "y": 270
     }
   }
 }

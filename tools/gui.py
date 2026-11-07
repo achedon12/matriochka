@@ -1073,7 +1073,10 @@ def station_panel(sid, w, slot_layout):
 
     def recess(x0, y0, x1, y1, kind):
         X0, Y0, X1, Y1 = x0 * S, y0 * S, x1 * S, y1 * S
-        if kind == "wood":
+        if isinstance(kind, list):
+            # the station's own material (gui_stations ramps), darkened so the rows stand out on it
+            lacquer(cv, X0, Y0, X1, Y1, [scale_c(c, 0.45) for c in kind[:5]], 17 + x0, 0.25, 0.04, wood=scale_c(kind[0], 0.6))
+        elif kind == "wood":
             lacquer(cv, X0, Y0, X1, Y1, [(26, 14, 8), (42, 24, 12), (62, 36, 18), (84, 50, 26), (110, 70, 38)], 17 + x0, 0.5, 0.0)
         elif kind == "deep":
             lacquer(cv, X0, Y0, X1, Y1, deep, 23 + y0, 0.35, 0.06)
@@ -1110,7 +1113,8 @@ def station_panel(sid, w, slot_layout):
         for x in (bw + 3, W - bw - 4):
             cv.put(x, y, acc, 0.75)
     if slot_layout:
-        recess(10, 20, 142, 124, "wood")
+        import gui_stations as gs
+        recess(10, 20, 142, 124, gs.STONE if sid == "soul_altar" else "wood")
         recess(146, 20, 246, 124, "deep")
         shelf = Cv(98 * S, 102 * S)
         for side in (-1, 1):
@@ -1120,7 +1124,12 @@ def station_panel(sid, w, slot_layout):
         shelf.im.putalpha(shelf.im.getchannel("A").point(lambda a: int(a * 0.8)))
         cv.layer(shelf, 147 * S, 21 * S)
     else:
-        recess(10, 20, 194, 133, "wood")
+        import gui_stations as gs
+        cab = {"spore_vat": gs.MOSSWOOD, "ash_foundry": gs.IRONS, "jailer_table": gs.IRONS, "lightning_forge": gs.COPPER,
+               "dark_altar": gs.OBSID, "inverter": [(40, 14, 54), (70, 26, 90), (100, 44, 120), (60, 110, 110), (90, 160, 150)],
+               "abyssal_press": [(10, 30, 44), (20, 50, 70), (34, 76, 100), (60, 110, 130), (100, 150, 170)],
+               "time_workshop": gs.BRASS, "terrain_anchor": gs.STONE}.get(sid, "wood")
+        recess(10, 20, 194, 133, cab)
         recess(195, 20, 248, 133, "deep")
         for y in range(22 * S, 130 * S):
             for x in range(189 * S, 192 * S):
@@ -2086,6 +2095,8 @@ def build():
     buttons()
     slot()
     drawers()
+    import gui_stations
+    gui_stations.build(globals())
     thumb()
     divider()
     vessel()

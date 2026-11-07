@@ -14,6 +14,7 @@ import zipfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import craft  # noqa: E402
+import stations3d  # noqa: E402
 import gen  # noqa: E402
 import particles  # noqa: E402
 from content import BLOCKS  # noqa: E402
@@ -51,6 +52,8 @@ def files():
             out[TEX + f"block/{b['id']}{suffix}.png"] = png(spr.image())
             if spr.glow:
                 out[TEX + f"block/{b['id']}{suffix}_glow.png"] = png(spr.glow_image())
+    for name, spr in stations3d.materials(32).items():
+        out[TEX + f"block/station/{name}.png"] = png(spr.image())
     for pid, row in particles.PARTICLES.items():
         for i in range(row[0]):
             out[TEX + f"particle/{pid}_{i}.png"] = png(particles.paint(pid, i, 16).image())

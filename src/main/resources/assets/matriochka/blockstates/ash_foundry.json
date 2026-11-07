@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "matriochka:block/ash_foundry"
+    },
+    "facing=east": {
+      "model": "matriochka:block/ash_foundry",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "matriochka:block/ash_foundry",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "matriochka:block/ash_foundry",
+      "y": 270
     }
   }
 }

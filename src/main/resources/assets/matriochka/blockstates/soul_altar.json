@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "matriochka:block/soul_altar"
+    },
+    "facing=east": {
+      "model": "matriochka:block/soul_altar",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "matriochka:block/soul_altar",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "matriochka:block/soul_altar",
+      "y": 270
     }
   }
 }

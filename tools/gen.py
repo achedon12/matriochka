@@ -16,6 +16,7 @@ import atmosphere
 import craft
 import particles
 import models
+import stations3d
 import bosses_hd
 import attacks
 import sound
@@ -153,7 +154,15 @@ def emissive_cube(tex, glow):
     return {"parent": "minecraft:block/block", "textures": textures, "elements": elements}
 
 
+def gen_station_materials():
+    """The painted materials the sculpted station models share (block/station/*)."""
+    d = mk(os.path.join(A, "textures/block/station/x.png"))
+    for name, spr in stations3d.materials(16).items():
+        spr.image().save(os.path.join(os.path.dirname(d), name + ".png"))
+
+
 def gen_blocks():
+    gen_station_materials()
     for b in BLOCKS:
         bid = b["id"]
         lang(f"block.{NS}.{bid}", b["en"], b["fr"])
@@ -174,9 +183,8 @@ def gen_blocks():
         if b["kind"] == "station":
             if hand is None:
                 paint_station_top(p, bid + "t", os.path.join(A, f"textures/block/{bid}_top.png"))
-            bottom = f"{NS}:block/{bid}_bottom" if hand is not None else f"{NS}:block/painted_wood"
-            model = emissive_cube({"up": f"{NS}:block/{bid}_top", "down": bottom, "side": f"{NS}:block/{bid}"},
-                                  {"up": glows.get("_top"), "down": glows.get("_bottom"), "side": glows.get("")})
+            # a sculpted model per station (tools/stations3d.py); its painted faces become the front plaque and inlay
+            model = stations3d.model(bid)
         elif b["kind"] == "soil":
             if hand is None:
                 paint_block("soil", p, bid + "f", os.path.join(A, f"textures/block/{bid}_tilled.png"))
@@ -206,7 +214,7 @@ def gen_blocks():
             w(os.path.join(A, f"blockstates/{bid}.json"), {"variants": {"tilled=false": {"model": f"{NS}:block/{bid}"},
                                                                         "tilled=true": {"model": f"{NS}:block/{bid}_tilled"}}})
         elif b["kind"] == "station":
-            w(os.path.join(A, f"blockstates/{bid}.json"), {"variants": {"": {"model": f"{NS}:block/{bid}"}}})
+            w(os.path.join(A, f"blockstates/{bid}.json"), stations3d.blockstate(bid))
         else:
             w(os.path.join(A, f"blockstates/{bid}.json"), {"variants": {"": {"model": f"{NS}:block/{bid}"}}})
         if b["kind"] != "planted_seed":

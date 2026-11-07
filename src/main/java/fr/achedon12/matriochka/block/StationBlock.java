@@ -31,9 +31,68 @@ import org.jspecify.annotations.Nullable;
 public class StationBlock extends Block implements EntityBlock, net.minecraft.world.WorldlyContainerHolder {
 	public final String station;
 
+	public static final net.minecraft.world.level.block.state.properties.EnumProperty<net.minecraft.core.Direction> FACING =
+		net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+
+	/** Outer bounds of each sculpted model facing north, in 16ths (tools/stations3d.py bounds()). */
+	private static final java.util.Map<String, int[]> BOUNDS = java.util.Map.ofEntries(
+		java.util.Map.entry("matrix_workbench", new int[]{0, 0, 0, 16, 14, 16}),
+		java.util.Map.entry("class_table", new int[]{1, 0, 1, 15, 14, 15}),
+		java.util.Map.entry("soul_altar", new int[]{0, 0, 0, 16, 13, 16}),
+		java.util.Map.entry("spore_vat", new int[]{1, 0, 0, 15, 15, 15}),
+		java.util.Map.entry("ash_foundry", new int[]{0, 0, 0, 16, 16, 16}),
+		java.util.Map.entry("jailer_table", new int[]{0, 0, 0, 16, 16, 16}),
+		java.util.Map.entry("lightning_forge", new int[]{0, 0, 1, 16, 16, 15}),
+		java.util.Map.entry("dark_altar", new int[]{0, 0, 2, 16, 16, 16}),
+		java.util.Map.entry("inverter", new int[]{1, 0, 1, 15, 16, 15}),
+		java.util.Map.entry("abyssal_press", new int[]{0, 0, 0, 16, 16, 16}),
+		java.util.Map.entry("time_workshop", new int[]{1, 0, 3, 15, 16, 13}),
+		java.util.Map.entry("terrain_anchor", new int[]{0, 0, 0, 16, 16, 16}),
+		java.util.Map.entry("final_loom", new int[]{0, 0, 2, 16, 16, 14}));
+	private final java.util.Map<net.minecraft.core.Direction, net.minecraft.world.phys.shapes.VoxelShape> shapes = new java.util.EnumMap<>(net.minecraft.core.Direction.class);
+
 	public StationBlock(String station, BlockBehaviour.Properties p) {
 		super(p);
 		this.station = station;
+		registerDefaultState(stateDefinition.any().setValue(FACING, net.minecraft.core.Direction.NORTH));
+		int[] b = BOUNDS.getOrDefault(station, new int[]{0, 0, 0, 16, 16, 16});
+		for (net.minecraft.core.Direction d : net.minecraft.core.Direction.Plane.HORIZONTAL) {
+			// turn the north-facing bounds round the block centre, as the blockstate turns the model
+			double x0 = b[0], z0 = b[2], x1 = b[3], z1 = b[5];
+			double[] r = switch (d) {
+				case EAST -> new double[]{16 - z1, x0, 16 - z0, x1};
+				case SOUTH -> new double[]{16 - x1, 16 - z1, 16 - x0, 16 - z0};
+				case WEST -> new double[]{z0, 16 - x1, z1, 16 - x0};
+				default -> new double[]{x0, z0, x1, z1};
+			};
+			shapes.put(d, Block.box(r[0], b[1], r[1], r[2], b[4], r[3]));
+		}
+	}
+
+	@Override
+	protected void createBlockStateDefinition(net.minecraft.world.level.block.state.StateDefinition.Builder<Block, BlockState> b) {
+		b.add(FACING);
+	}
+
+	@Override
+	public BlockState getStateForPlacement(net.minecraft.world.item.context.BlockPlaceContext ctx) {
+		// the station faces the one who sets it down
+		return defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
+	}
+
+	@Override
+	protected BlockState rotate(BlockState state, net.minecraft.world.level.block.Rotation rot) {
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+	}
+
+	@Override
+	protected BlockState mirror(BlockState state, net.minecraft.world.level.block.Mirror mirror) {
+		return state.rotate(mirror.getRotation(state.getValue(FACING)));
+	}
+
+	@Override
+	protected net.minecraft.world.phys.shapes.VoxelShape getShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext ctx) {
+		return shapes.get(state.getValue(FACING));
 	}
 
 	@Override

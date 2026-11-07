@@ -132,7 +132,7 @@ public final class ModContent {
 			case "boss_altar" -> new Blocks3.BossAltar(p.strength(-1f, 3600000f).lightLevel(s -> 10).noLootTable());
 			case "lair_heart" -> new Blocks3.LairHeart(p.strength(-1f, 3600000f).sound(SoundType.SCULK_CATALYST).lightLevel(s -> 5).noLootTable());
 			case "sealed_door" -> new Blocks3.SealedDoor(p.strength(-1f, 3600000f).sound(SoundType.STONE));
-			case "station" -> new StationBlock(d.id(), p.strength(2.5f).sound(SoundType.WOOD).lightLevel(s -> 4));
+			case "station" -> new StationBlock(d.id(), p.strength(2.5f).sound(SoundType.WOOD).lightLevel(s -> 4).noOcclusion());
 			case "vent" -> new fr.achedon12.matriochka.block.AirVent(p.strength(1.8f, 6f).sound(SoundType.BASALT).lightLevel(s -> 6).requiresCorrectToolForDrops());
 			default -> {
 				BlockBehaviour.Properties q = switch (d.style()) {

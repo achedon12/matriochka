@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "matriochka:block/abyssal_press"
+    },
+    "facing=east": {
+      "model": "matriochka:block/abyssal_press",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "matriochka:block/abyssal_press",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "matriochka:block/abyssal_press",
+      "y": 270
     }
   }
 }

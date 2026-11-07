@@ -38,6 +38,10 @@ public class WorldBlockRenderer implements BlockEntityRenderer<DataBlockEntity, 
 		String variant = "plain";
 		float time;
 		boolean shaking;
+		/** The station drawn, or null: its moving parts (see {@link StationParts}). */
+		String station;
+		int stationWorld, value;
+		net.minecraft.core.Direction facing = net.minecraft.core.Direction.NORTH;
 	}
 
 	public WorldBlockRenderer(BlockEntityRendererProvider.Context ctx) {}
@@ -50,6 +54,21 @@ public class WorldBlockRenderer implements BlockEntityRenderer<DataBlockEntity, 
 	@Override
 	public void extractRenderState(DataBlockEntity be, State st, float partial, Vec3 camera, ModelFeatureRenderer.CrumblingOverlay crumbling) {
 		BlockEntityRenderState.extractBase(be, st, crumbling);
+		st.station = null;
+		if (be.getLevel() != null && be.getBlockState().getBlock() instanceof fr.achedon12.matriochka.block.StationBlock sb && StationParts.animated(sb.station)) {
+			st.show = false;
+			st.station = sb.station;
+			st.stationWorld = Ui.stationWorld(sb.station);
+			st.facing = be.getBlockState().getValue(fr.achedon12.matriochka.block.StationBlock.FACING);
+			st.time = (be.getLevel().getGameTime() % 240000L) + partial;
+			st.value = switch (sb.station) {
+				case "lightning_forge" -> be.data().getIntOr("charge", 0);
+				case "spore_vat" -> be.data().getIntOr("ferment", 0);
+				default -> 0;
+			};
+			st.lightCoords = LightCoordsUtil.getLightCoords(be.getLevel(), be.getBlockPos());
+			return;
+		}
 		st.show = be.getLevel() != null && be.getBlockState().is(ModContent.block("world_block"));
 		if (!st.show) return;
 		st.world = Math.max(1, Math.min(10, be.data().getIntOr("world", 1)));
@@ -65,11 +84,16 @@ public class WorldBlockRenderer implements BlockEntityRenderer<DataBlockEntity, 
 
 	@Override
 	public boolean shouldRender(DataBlockEntity be, Vec3 camera) {
-		return be.getBlockState().is(ModContent.block("world_block")) && Vec3.atCenterOf(be.getBlockPos()).closerThan(camera, 24);
+		return (be.getBlockState().is(ModContent.block("world_block")) || be.getBlockState().getBlock() instanceof fr.achedon12.matriochka.block.StationBlock)
+			&& Vec3.atCenterOf(be.getBlockPos()).closerThan(camera, 24);
 	}
 
 	@Override
 	public void submit(State st, PoseStack pose, SubmitNodeCollector out, CameraRenderState camera) {
+		if (st.station != null) {
+			StationParts.submit(st.station, st.stationWorld, st.facing, st.time, st.value, pose, out, st.lightCoords);
+			return;
+		}
 		if (!st.show) return;
 		Defs.WorldDef w = Content.WORLDS.get(st.world - 1);
 		int tint = switch (st.variant) {

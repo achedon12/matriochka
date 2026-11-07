@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "matriochka:block/terrain_anchor"
+    },
+    "facing=east": {
+      "model": "matriochka:block/terrain_anchor",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "matriochka:block/terrain_anchor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "matriochka:block/terrain_anchor",
+      "y": 270
     }
   }
 }

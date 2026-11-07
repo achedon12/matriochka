@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "matriochka:block/final_loom"
+    },
+    "facing=east": {
+      "model": "matriochka:block/final_loom",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "matriochka:block/final_loom",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "matriochka:block/final_loom",
+      "y": 270
     }
   }
 }
