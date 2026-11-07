@@ -192,6 +192,8 @@ public final class Rewards {
 		int world = k.world;
 		long seed = k.seed;
 		if (world == 0) chest.setItem(4, new ItemStack(Items.IRON_INGOT, 3 + r.nextInt(5)));
+		// on the Surface, the reading corners keep one of the Artisan's notes: the first hints of the story
+		if (page && world == 0) chest.setItem(13, artisanNote(r.nextInt(3)));
 		if (page && world > 0) {
 			ItemStack pg = new ItemStack(ModContent.item("journal_page"));
 			CompoundTag t = new CompoundTag();
@@ -214,6 +216,15 @@ public final class Rewards {
 	}
 
 	/** The note left beside every hidden doll: the structure's hint to the nesting order (count the notches). */
+	/** One of the Artisan's notes left on the Surface (0 to 2): where the Guardian sleeps, what the dolls are, why. */
+	public static ItemStack artisanNote(int n) {
+		ItemStack note = new ItemStack(Items.PAPER);
+		note.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.translatable("item.matriochka.artisan_note"));
+		note.set(DataComponents.LORE, new net.minecraft.world.item.component.ItemLore(List.of(
+			net.minecraft.network.chat.Component.translatable("item.matriochka.artisan_note." + n).withStyle(net.minecraft.ChatFormatting.GRAY))));
+		return note;
+	}
+
 	public static ItemStack carverNote() {
 		ItemStack note = new ItemStack(Items.PAPER);
 		note.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.translatable("item.matriochka.carver_note"));
@@ -237,6 +248,18 @@ public final class Rewards {
 			}
 		}
 		return Math.floorMod((int) (seed ^ (seed >>> 32)), 5);
+	}
+
+	/**
+	 * The richest chest an item of the mod can be found in, by the rules of fill(): "common", "rare", "vault" (the
+	 * world's gear), or null when no chest holds it. Read by the Journal's world cards.
+	 */
+	public static String chestTier(Defs.ItemDef i) {
+		boolean common = i.rarity().equals("common"), none = i.rarity().equals("none");
+		if (COMMON_KINDS.contains(i.kind()) && common) return "common";
+		if (RARE_KINDS.contains(i.kind()) && !common && !none) return "rare";
+		if (GEAR_KINDS.contains(i.kind()) && !i.rarity().equals("legendary")) return "vault";
+		return null;
 	}
 
 	private static List<Defs.ItemDef> items(int world, Set<String> kinds, boolean rare) {

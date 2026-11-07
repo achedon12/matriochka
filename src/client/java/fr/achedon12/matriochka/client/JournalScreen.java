@@ -26,6 +26,9 @@ public class JournalScreen extends Screen {
 	private final Ui.Motion motion = new Ui.Motion(320, 170);
 	private final float[] hang = new float[TABS.length];
 	private int tab, page, questWorld;
+	/** The world card open on the Worlds tab (-1: the list), and its page. */
+	private int cardWorld = -1, cardPage;
+	private static final int CARD_ROWS = 7;
 	// the Pages tab: the selected Journal page (world 1..10, index 0..4)
 	private int pageWorld = 1, pageIndex = 0;
 	private boolean cycleConfirm;
@@ -116,6 +119,12 @@ public class JournalScreen extends Screen {
 		if (!scroll && tab == 0 && RecapScreen.available()) {
 			buttons.add(l + 20 + (PW - 18) / 2 - 40, t + 46, 80, 16, Component.translatable("journal.matriochka.last_cycle"), () -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new RecapScreen(this)));
 		}
+		if (!scroll && tab == 3 && cardWorld >= 0) {
+			int cardPages = Math.max(1, (WorldCards.of(cardWorld).size() + CARD_ROWS - 1) / CARD_ROWS);
+			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> { cardPage--; pageAt = Ui.now(); turnDir = -1; rebuild(); }, () -> cardPage > 0);
+			buttons.add(l + BW / 2 + 40, t + BH - 30, 46, 16, Component.translatable("journal.matriochka.card.back"), () -> { cardWorld = -1; pageAt = Ui.now(); turnDir = -1; rebuild(); });
+			buttons.add(l + BW - 40, t + BH - 30, 18, 16, Component.literal(">"), () -> { cardPage++; pageAt = Ui.now(); turnDir = 1; rebuild(); }, () -> cardPage < cardPages - 1);
+		}
 		if (!scroll && tab == 1) {
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> { questWorld = Math.max(0, questWorld - 1); pageAt = Ui.now(); turnDir = -1; rebuild(); }, () -> questWorld > 0);
 			buttons.add(l + BW - 40, t + BH - 30, 18, 16, Component.literal(">"), () -> { questWorld = Math.min(KARMA_CHAPTER, questWorld + 1); pageAt = Ui.now(); turnDir = 1; rebuild(); }, () -> questWorld < KARMA_CHAPTER);
@@ -193,6 +202,7 @@ public class JournalScreen extends Screen {
 		turnDir = i > tab ? 1 : -1;
 		tab = i;
 		page = 0;
+		cardWorld = -1;
 		cycleConfirm = false;
 		turnAt = Ui.now();
 		Ui.pageTurn();
@@ -642,6 +652,10 @@ public class JournalScreen extends Screen {
 	}
 
 	private void worlds(GuiGraphicsExtractor g, int x, int y, int w, int mx, int my) {
+		if (cardWorld >= 0) {
+			worldCard(g, x, y, w, mx, my);
+			return;
+		}
 		int done = MatrioClient.state.getIntOr("done", 0);
 		for (int i = 0; i <= 10; i++) {
 			boolean beaten = (done & (1 << i)) != 0, open = i == 0 || (done & (1 << (i - 1))) != 0;
@@ -682,6 +696,37 @@ public class JournalScreen extends Screen {
 		}
 	}
 
+	/** Opens a world's card (the Worlds tab, from the check run). */
+	public void openCard(int world) {
+		cardWorld = world;
+		cardPage = 0;
+	}
+
+	private int rightX() {
+		return left() + 28 + PW;
+	}
+
+	/** A world card: its items, each with how it is had; the full list of ways on hover (client/WorldCards). */
+	private void worldCard(GuiGraphicsExtractor g, int x, int y, int w, int mx, int my) {
+		Component title = cardWorld == 0 ? Component.translatable("journal.matriochka.surface") : Component.literal(cardWorld + "  ").append(Component.translatable("world.matriochka." + cardWorld));
+		g.text(font, title, x, y, Ui.RED_INK, false);
+		java.util.List<WorldCards.Entry> all = WorldCards.of(cardWorld);
+		int from = cardPage * CARD_ROWS, yy = y + 14;
+		for (int i = from; i < Math.min(all.size(), from + CARD_ROWS); i++) {
+			WorldCards.Entry e = all.get(i);
+			g.item(new net.minecraft.world.item.ItemStack(fr.achedon12.matriochka.content.ModContent.item(e.item().id())), x, yy);
+			Component nm = new net.minecraft.world.item.ItemStack(fr.achedon12.matriochka.content.ModContent.item(e.item().id())).getHoverName();
+			g.text(font, font.plainSubstrByWidth(nm.getString(), w - 20), x + 19, yy, Ui.INK, false);
+			String way = e.ways().getFirst().getString() + (e.ways().size() > 1 ? " +" + (e.ways().size() - 1) : "");
+			g.text(font, font.plainSubstrByWidth(way, w - 20), x + 19, yy + 9, Ui.INK_SOFT, false);
+			if (mx >= x - 2 && mx < x + w && my >= yy - 1 && my < yy + 18) {
+				g.fill(x - 3, yy - 1, x - 2, yy + 17, 0xFFB0782A);
+				g.setTooltipForNextFrame(font, font.split(WorldCards.tooltip(e), 190), mx, my);
+			}
+			yy += 19;
+		}
+	}
+
 	/** What has been gathered of a world, line by line. */
 	private static Component collectionTip(int world) {
 		boolean beaten = (MatrioClient.state.getIntOr("done", 0) & (1 << world)) != 0;
@@ -689,7 +734,8 @@ public class JournalScreen extends Screen {
 		return Component.translatable("journal.matriochka.col.boss." + (beaten ? "beaten" : "standing"))
 			.append("\n").append(Component.translatable("journal.matriochka.col.pages", pages))
 			.append("\n").append(Component.translatable("journal.matriochka.col.doll." + (found(world) ? "found" : "missing")))
-			.append("\n").append(Component.translatable("journal.matriochka.col.rite." + (rite(world) ? "done" : "unknown")));
+			.append("\n").append(Component.translatable("journal.matriochka.col.rite." + (rite(world) ? "done" : "unknown")))
+			.append("\n\n").append(Component.translatable("journal.matriochka.card.hint").withStyle(net.minecraft.ChatFormatting.GRAY));
 	}
 
 	private static String variant(int world) {
@@ -756,6 +802,22 @@ public class JournalScreen extends Screen {
 			if (at != null) {
 				selectPage(at[0], at[1], at[0] * 5 + at[1] > pageWorld * 5 + pageIndex ? 1 : -1);
 				return true;
+			}
+		}
+		// a world's line on the Worlds tab opens its card
+		if (!scroll && tab == 3 && cardWorld < 0) {
+			int x = rightX(), y = top() + 24;
+			for (int i = 0; i <= 10; i++) {
+				int ry = y + i * 14;
+				if (event.x() >= x - 3 && event.x() < x + PW - 16 && event.y() >= ry - 2 && event.y() < ry + 12) {
+					cardWorld = i;
+					cardPage = 0;
+					pageAt = Ui.now();
+					turnDir = 1;
+					Ui.pageTurn();
+					rebuild();
+					return true;
+				}
 			}
 		}
 		if (!scroll) {
