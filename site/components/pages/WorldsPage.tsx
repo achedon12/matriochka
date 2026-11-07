@@ -120,6 +120,7 @@ function CodexCard({ e, c }: { e: CodexEntry; c: Record<string, string> }) {
         <div><h4>{e.name}{e.count > 1 && <span className="num"> ×{e.count}</span>}</h4>{e.rarity && <span className={`cx-rar cx-${e.rarity.toLowerCase()}`}>{e.rarity}</span>}</div>
       </div>
       {e.effect && <p className="cx-eff">{e.effect}</p>}
+      {e.stats && e.stats.length > 0 && <dl className="ic-stats cx-stats">{e.stats.map((x, k) => <div key={k}><dt>{x.k}</dt><dd>{x.v}</dd></div>)}</dl>}
       {e.station && e.inputs.length > 0 && (
         <div className="cx-how"><Craft inputs={e.inputs} grid={e.grid} out={{ tex: e.tex, name: e.name, count: e.count }} station={{ tex: e.stationTex ?? null, name: e.station }} label={`${c.cMade} ${e.station}`} /></div>
       )}

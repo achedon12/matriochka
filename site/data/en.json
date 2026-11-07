@@ -114,7 +114,7 @@
   "home": {
    "tagline": "Every block can hold a world.",
    "intro": "A Fabric mod for Minecraft 26.3. Ten worlds, each sealed inside a single block and nested in the one before it. Every world has its own rule, its own creatures, its own station, and a boss guarding the core that opens the next.",
-   "facts": "Minecraft 26.3 on Fabric, version 0.4.3. Solo and multiplayer.",
+   "facts": "Minecraft 26.3 on Fabric, version 0.5.0. Solo and multiplayer.",
    "dollsTitle": "A set of eleven nesting dolls, just opened: the Surface, then worlds 1 to 10, from the largest to the smallest",
    "dollsCaption": "The Surface, then the ten worlds it holds. Pick a doll to open its world.",
    "trailerH": "The trailer",
@@ -236,7 +236,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.4.3, changelog and source",
+     "note": "Version 0.5.0, changelog and source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -323,8 +323,8 @@
    "gallery": [],
    "ctaH": "Ready to shrink?",
    "ctaP": "Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25. In English, French, Spanish, German and Brazilian Portuguese.",
-   "ctaBtn": "Get version 0.4.3",
-   "download": "Download 0.4.3",
+   "ctaBtn": "Get version 0.5.0",
+   "download": "Download 0.5.0",
    "desc": "Matriochka, a Fabric mod for Minecraft 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss."
   },
   "worlds": {
@@ -508,6 +508,8 @@
    "aBlock": "Block",
    "anItem": "Item",
    "world": "World",
+   "statsH": "Stats",
+   "statsNote": "Base values: the class rolled when it is crafted raises them.",
    "recipeH": "Recipe",
    "usesH": "Used to make",
    "makesH": "What it makes",
@@ -1876,7 +1878,7 @@
   "download": {
    "h": "Download",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.4.3 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
+   "lead": "Version 0.5.0 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
    "desc": "Download Matriochka for Minecraft 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
    "sources": [
     {
@@ -1946,7 +1948,7 @@
    "installH": "Installing",
    "steps": [
     "Install Fabric Loader for Minecraft 26.3.",
-    "Download matriochka-0.4.3+26.3.jar from the GitHub releases.",
+    "Download matriochka-0.5.0+26.3.jar from the GitHub releases.",
     "Put it in your mods folder with Fabric API and GeckoLib.",
     "Launch the Fabric profile and create a new world. The Artisan's Scroll is waiting in your inventory."
    ],
@@ -2227,6 +2229,7 @@
       "kind": "guide",
       "rarity": "",
       "effect": "Explains the mod. Becomes the Journal.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2274,6 +2277,7 @@
       "kind": "guide",
       "rarity": "",
       "effect": "Story, objectives, quests and karma.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2289,6 +2293,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the World 1 Seed.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2306,6 +2311,7 @@
       "kind": "doll",
       "rarity": "Legendary",
       "effect": "Breaks a layer instead of letting you die.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2321,6 +2327,7 @@
       "kind": "consumable",
       "rarity": "Common",
       "effect": "Brings you back to the world block.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2374,6 +2381,7 @@
       "kind": "consumable",
       "rarity": "Rare",
       "effect": "Rerolls the class of an item.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2443,6 +2451,7 @@
       "kind": "doll",
       "rarity": "",
       "effect": "Holds the access to a broken world.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2458,6 +2467,7 @@
       "kind": "page",
       "rarity": "",
       "effect": "A lost page of the Artisan's Journal.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2473,6 +2483,7 @@
       "kind": "resource",
       "rarity": "Common",
       "effect": "Used for cradles and threads.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2510,6 +2521,7 @@
       "kind": "resource",
       "rarity": "Epic",
       "effect": "Left by a fallen boss. Every class upgrade needs some.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2525,6 +2537,7 @@
       "kind": "gem",
       "rarity": "Epic",
       "effect": "Shed by a mutated boss. Rich in soul.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2540,6 +2553,7 @@
       "kind": "tool",
       "rarity": "Rare",
       "effect": "Strike a World Block of your group with it: the world inside quakes and loose blocks fall on those in it. Sneak and use the block with empty hands to help them instead.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2603,6 +2617,7 @@
       "kind": "soul",
       "rarity": "Common",
       "effect": "Holds 5 souls. Use it to free them (sneak: the whole stack).",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2618,6 +2633,7 @@
       "kind": "soul",
       "rarity": "Rare",
       "effect": "Holds 20 souls. Use it to free them (sneak: the whole stack).",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2633,6 +2649,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Hold it in your main hand and the next hidden doll in the other, then use it.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2648,6 +2665,7 @@
       "kind": "secret",
       "rarity": "Legendary",
       "effect": "Ten dolls, one inside the other. Open it once the Unfinished has fallen: World 0 sleeps inside.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2663,6 +2681,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Nothing is written on it. Nothing is left to finish.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2678,6 +2697,7 @@
       "kind": "trophy",
       "rarity": "Legendary",
       "effect": "Eleven dolls in one, won by finishing the Gauntlet.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3729,6 +3749,7 @@
       "kind": "resource",
       "rarity": "Common",
       "effect": "Base of antidotes.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3748,6 +3769,7 @@
       "kind": "resource",
       "rarity": "Common",
       "effect": "Living wood.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3766,6 +3788,7 @@
       "kind": "gem",
       "rarity": "Rare",
       "effect": "World 1 ore.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3783,6 +3806,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Armor of the world.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3800,6 +3824,12 @@
       "kind": "consumable",
       "rarity": "Common",
       "effect": "Reduces toxin by 50.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Toxin -50"
+       }
+      ],
       "station": "Spore Vat",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -3828,6 +3858,7 @@
       "kind": "mask",
       "rarity": "Rare",
       "effect": "Halves toxin gain.",
+      "stats": [],
       "station": "Spore Vat",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -3862,6 +3893,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "7"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "480"
+       }
+      ],
       "station": "Spore Vat",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -3890,6 +3935,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the way into World 2.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3907,6 +3953,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Plant on tilled World Soil 0, with water within four blocks, to grow World 1.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -3996,6 +4043,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Four notches are carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -4011,6 +4059,20 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Slows toxin for 5 minutes.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Lasts 5 min"
+       }
+      ],
       "station": "Spore Vat",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -4039,6 +4101,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -4054,6 +4117,12 @@
       "kind": "bow",
       "rarity": "Rare",
       "effect": "Its arrows burst into a cloud of toxic spores where they strike.",
+      "stats": [
+       {
+        "k": "Durability",
+        "v": "480"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -4069,6 +4138,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.25"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "2 %"
+       },
+       {
+        "k": "Durability",
+        "v": "286"
+       }
+      ],
       "station": "Spore Vat",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -4091,6 +4178,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "6"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.25"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "2 %"
+       },
+       {
+        "k": "Durability",
+        "v": "416"
+       }
+      ],
       "station": "Spore Vat",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -4113,6 +4218,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "4"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.25"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "2 %"
+       },
+       {
+        "k": "Durability",
+        "v": "390"
+       }
+      ],
       "station": "Spore Vat",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -4135,6 +4258,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.25"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "2 %"
+       },
+       {
+        "k": "Durability",
+        "v": "338"
+       }
+      ],
       "station": "Spore Vat",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -5148,6 +5289,7 @@
       "kind": "resource",
       "rarity": "Common",
       "effect": "Powerful fuel.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5167,6 +5309,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "A whole vein in one block.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5185,6 +5328,7 @@
       "kind": "ingot",
       "rarity": "Rare",
       "effect": "Base of World 2 gear.",
+      "stats": [],
       "station": "Ash Foundry",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5216,6 +5360,12 @@
       "kind": "consumable",
       "rarity": "Common",
       "effect": "Reduces heat by 50.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Heat -50"
+       }
+      ],
       "station": "Ash Foundry",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5244,6 +5394,28 @@
       "kind": "drill",
       "rarity": "Epic",
       "effect": "Mines 3x3, burns Blazing Rock.",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "2"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.2"
+       },
+       {
+        "k": "Mining speed",
+        "v": "8.2"
+       },
+       {
+        "k": "Mines",
+        "v": "up to iron-tier blocks"
+       },
+       {
+        "k": "Durability",
+        "v": "660"
+       }
+      ],
       "station": "Ash Foundry",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5278,6 +5450,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "9"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "660"
+       }
+      ],
       "station": "Ash Foundry",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5306,6 +5492,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the way into World 3.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5323,6 +5510,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Set it down within 3 blocks of lava, with at least 4 Ashrock around it: a portal of embers opens World 2.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -5412,6 +5600,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Seven notches are carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5427,6 +5616,20 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Slows heat for 5 minutes.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Lasts 5 min"
+       }
+      ],
       "station": "Ash Foundry",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5455,6 +5658,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5470,6 +5674,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "Sets foes ablaze; every third blow bursts into a ring of flame. Swinging it warms you in the Veins.",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "11"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1"
+       },
+       {
+        "k": "Durability",
+        "v": "660"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5485,6 +5703,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "Halves heat gain.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "4 %"
+       },
+       {
+        "k": "Durability",
+        "v": "352"
+       }
+      ],
       "station": "Ash Foundry",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5507,6 +5743,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "Halves heat gain.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "6"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "4 %"
+       },
+       {
+        "k": "Durability",
+        "v": "512"
+       }
+      ],
       "station": "Ash Foundry",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5529,6 +5783,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "Halves heat gain.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "5"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "4 %"
+       },
+       {
+        "k": "Durability",
+        "v": "480"
+       }
+      ],
       "station": "Ash Foundry",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5551,6 +5823,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "Halves heat gain.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "4 %"
+       },
+       {
+        "k": "Durability",
+        "v": "416"
+       }
+      ],
       "station": "Ash Foundry",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -6780,6 +7070,7 @@
       "kind": "key",
       "rarity": "Rare",
       "effect": "Opens a sealed door once.",
+      "stats": [],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6811,6 +7102,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Traps and gear.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -6831,6 +7123,12 @@
       "kind": "tool",
       "rarity": "Common",
       "effect": "Reveals nearby structures.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Cooldown 2 s"
+       }
+      ],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6859,6 +7157,7 @@
       "kind": "tool",
       "rarity": "Common",
       "effect": "Opens an ordinary lock.",
+      "stats": [],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6887,6 +7186,7 @@
       "kind": "consumable",
       "rarity": "Common",
       "effect": "Immobilizes a mob.",
+      "stats": [],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6915,6 +7215,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "11"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "840"
+       }
+      ],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6943,6 +7257,7 @@
       "kind": "doll",
       "rarity": "Legendary",
       "effect": "A pocket base for your group. Use it to enter, use it again to leave.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -7027,6 +7342,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the way into World 4.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -7044,6 +7360,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Set it against an iron door and give it a redstone signal (a lever, a button): the key turns and World 3 opens.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -7133,6 +7450,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Two notches are carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -7148,6 +7466,7 @@
       "kind": "offering",
       "rarity": "Epic",
       "effect": "Held at the arena altar, it wakes the Grand Jailer.",
+      "stats": [],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7182,6 +7501,20 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Long-lasting saturation.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Saturation for 2 s"
+       }
+      ],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7210,6 +7543,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -7225,6 +7559,24 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "Long reach. Every lash drags the foe toward you and slows it.",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "9"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.8"
+       },
+       {
+        "k": "Reach",
+        "v": "+2.5"
+       },
+       {
+        "k": "Durability",
+        "v": "840"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -7240,6 +7592,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.75"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "6 %"
+       },
+       {
+        "k": "Durability",
+        "v": "418"
+       }
+      ],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7262,6 +7632,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "7"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.75"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "6 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+1"
+       },
+       {
+        "k": "Durability",
+        "v": "608"
+       }
+      ],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7284,6 +7676,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "5"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.75"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "6 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+1"
+       },
+       {
+        "k": "Durability",
+        "v": "570"
+       }
+      ],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7306,6 +7720,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "0.75"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "6 %"
+       },
+       {
+        "k": "Durability",
+        "v": "494"
+       }
+      ],
       "station": "Jailer's Table",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -8379,6 +8811,7 @@
       "kind": "resource",
       "rarity": "Common",
       "effect": "Glider cloth.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8396,6 +8829,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Energy of the Lightning Forge.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8414,6 +8848,7 @@
       "kind": "gem",
       "rarity": "Rare",
       "effect": "Gear and the Black Lantern.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8433,6 +8868,7 @@
       "kind": "glider",
       "rarity": "Epic",
       "effect": "Glide between islands.",
+      "stats": [],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8467,6 +8903,12 @@
       "kind": "hook",
       "rarity": "Rare",
       "effect": "Pulls you toward a surface.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Cooldown 1.5 s"
+       }
+      ],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8501,6 +8943,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "13"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "1,020"
+       }
+      ],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8529,6 +8985,7 @@
       "kind": "layer",
       "rarity": "Rare",
       "effect": "Laid on armor at the Class Table. When the outer layer breaks, the next takes over.",
+      "stats": [],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8563,6 +9020,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the way into World 5.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8580,6 +9038,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Set it on top of a lightning rod under the open sky. A storm tears World 4 open; a Storm Essence fed to it does too.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -8669,6 +9128,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Nine notches are carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8684,6 +9144,7 @@
       "kind": "offering",
       "rarity": "Epic",
       "effect": "Held at the arena altar, it wakes the Storm King.",
+      "stats": [],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8718,6 +9179,20 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Slow falling for 3 minutes.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Slow Falling for 3 min"
+       }
+      ],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8746,6 +9221,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8761,6 +9237,24 @@
       "kind": "weapon",
       "rarity": "Epic",
       "effect": "Use it to throw: lightning falls where it strikes, then it flies back to your hand.",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "12"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.4"
+       },
+       {
+        "k": "Thrown",
+        "v": "yes"
+       },
+       {
+        "k": "Durability",
+        "v": "1,020"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8776,6 +9270,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "1"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "8 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+1"
+       },
+       {
+        "k": "Durability",
+        "v": "484"
+       }
+      ],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8798,6 +9314,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "7"
+       },
+       {
+        "k": "Toughness",
+        "v": "1"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "8 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+2"
+       },
+       {
+        "k": "Durability",
+        "v": "704"
+       }
+      ],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8820,6 +9358,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "6"
+       },
+       {
+        "k": "Toughness",
+        "v": "1"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "8 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+1"
+       },
+       {
+        "k": "Durability",
+        "v": "660"
+       }
+      ],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8842,6 +9402,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "1"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "8 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+1"
+       },
+       {
+        "k": "Durability",
+        "v": "572"
+       }
+      ],
       "station": "Lightning Forge",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -9886,6 +10468,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Base of World 5 gear.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -9905,6 +10488,7 @@
       "kind": "gem",
       "rarity": "Epic",
       "effect": "4 fragments make 1 diamond.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -9924,6 +10508,16 @@
       "kind": "lantern",
       "rarity": "Epic",
       "effect": "20 minutes of light.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Night Vision for 20 min"
+       },
+       {
+        "k": "Effect",
+        "v": "Cooldown 1 min"
+       }
+      ],
       "station": "Dark Altar",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -9958,6 +10552,16 @@
       "kind": "sonar",
       "rarity": "Rare",
       "effect": "Reveals nearby creatures.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Reveals creatures within 32 blocks for 8 s"
+       },
+       {
+        "k": "Effect",
+        "v": "Cooldown 10 s"
+       }
+      ],
       "station": "Dark Altar",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -9986,6 +10590,12 @@
       "kind": "consumable",
       "rarity": "Common",
       "effect": "Clears your noise.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Noise -100"
+       }
+      ],
       "station": "Dark Altar",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10014,6 +10624,20 @@
       "kind": "weapon",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "16"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "1,200"
+       }
+      ],
       "station": "Dark Altar",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10042,6 +10666,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the way into World 6.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -10059,6 +10684,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Light it in complete darkness, with at least 4 Spent Glow within 2 blocks: its black flame opens World 5.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -10148,6 +10774,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Five notches are carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -10163,6 +10790,20 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Noise reduced for 5 minutes.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Silent for 5 min"
+       }
+      ],
       "station": "Dark Altar",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10191,6 +10832,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -10206,6 +10848,16 @@
       "kind": "ward",
       "rarity": "Epic",
       "effect": "Blocks like a shield. Each blocked blow flares: the attacker is blinded, thrown back and marked.",
+      "stats": [
+       {
+        "k": "Blocks",
+        "v": "90 % of a hit"
+       },
+       {
+        "k": "Durability",
+        "v": "560"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -10221,6 +10873,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "4"
+       },
+       {
+        "k": "Toughness",
+        "v": "1.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "10 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+1"
+       },
+       {
+        "k": "Durability",
+        "v": "550"
+       }
+      ],
       "station": "Dark Altar",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10243,6 +10917,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "8"
+       },
+       {
+        "k": "Toughness",
+        "v": "1.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "10 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+2"
+       },
+       {
+        "k": "Durability",
+        "v": "800"
+       }
+      ],
       "station": "Dark Altar",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10265,6 +10961,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "5"
+       },
+       {
+        "k": "Toughness",
+        "v": "1.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "10 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+2"
+       },
+       {
+        "k": "Durability",
+        "v": "750"
+       }
+      ],
       "station": "Dark Altar",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10287,6 +11005,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "1.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "10 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+1"
+       },
+       {
+        "k": "Durability",
+        "v": "650"
+       }
+      ],
       "station": "Dark Altar",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -11297,6 +12037,7 @@
       "kind": "ingot",
       "rarity": "Rare",
       "effect": "Base of World 6 gear.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11316,6 +12057,7 @@
       "kind": "gem",
       "rarity": "Epic",
       "effect": "Inverter and the Abyssal Pearl.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11335,6 +12077,7 @@
       "kind": "boots",
       "rarity": "Epic",
       "effect": "Ignore gravity flips.",
+      "stats": [],
       "station": "Inverter",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11363,6 +12106,12 @@
       "kind": "consumable",
       "rarity": "Common",
       "effect": "Cancels an inversion.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Stable for 30 s"
+       }
+      ],
       "station": "Inverter",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11391,6 +12140,20 @@
       "kind": "weapon",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "19"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "1,380"
+       }
+      ],
       "station": "Inverter",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11419,6 +12182,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the way into World 7.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11436,6 +12200,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Set them between two glass blocks facing each other, two blocks away on either side: World 6 opens in the reflection.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -11525,6 +12290,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "One notch is carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11540,6 +12306,20 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Stability for 30 seconds.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Lasts 30 s"
+       }
+      ],
       "station": "Inverter",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11568,6 +12348,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11583,6 +12364,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "4"
+       },
+       {
+        "k": "Toughness",
+        "v": "2"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "12 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+1"
+       },
+       {
+        "k": "Durability",
+        "v": "616"
+       }
+      ],
       "station": "Inverter",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11605,6 +12408,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "8"
+       },
+       {
+        "k": "Toughness",
+        "v": "2"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "12 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+3"
+       },
+       {
+        "k": "Durability",
+        "v": "896"
+       }
+      ],
       "station": "Inverter",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11627,6 +12452,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "6"
+       },
+       {
+        "k": "Toughness",
+        "v": "2"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "12 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+2"
+       },
+       {
+        "k": "Durability",
+        "v": "840"
+       }
+      ],
       "station": "Inverter",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11649,6 +12496,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "4"
+       },
+       {
+        "k": "Toughness",
+        "v": "2"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "12 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+1"
+       },
+       {
+        "k": "Durability",
+        "v": "728"
+       }
+      ],
       "station": "Inverter",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -12688,6 +13557,7 @@
       "kind": "dust",
       "rarity": "Rare",
       "effect": "Salt Snorkel Helmet and the Sapling of the Four Seasons.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12707,6 +13577,7 @@
       "kind": "gem",
       "rarity": "Rare",
       "effect": "Mined from reef veins. Nacre Snorkel Helmet.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12724,6 +13595,7 @@
       "kind": "ingot",
       "rarity": "Rare",
       "effect": "Cobalt Snorkel Helmet and the diving suit.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12741,6 +13613,7 @@
       "kind": "gem",
       "rarity": "Epic",
       "effect": "Pearl Snorkel Helmet and the Sapling of the Four Seasons.",
+      "stats": [],
       "station": "Abyssal Press",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -12774,6 +13647,16 @@
       "kind": "consumable",
       "rarity": "Common",
       "effect": "Refills half of a snorkel helmet's tank, or your breath.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Fills half a snorkel helmet's tank"
+       },
+       {
+        "k": "Effect",
+        "v": "Without one: +60 breath"
+       }
+      ],
       "station": "Abyssal Press",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -12802,6 +13685,12 @@
       "kind": "thruster",
       "rarity": "Epic",
       "effect": "Speeds you up underwater.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Cooldown 0.75 s"
+       }
+      ],
       "station": "Abyssal Press",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -12830,6 +13719,20 @@
       "kind": "weapon",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "23"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "1,560"
+       }
+      ],
       "station": "Abyssal Press",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -12858,6 +13761,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the way into World 8.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12875,6 +13779,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Drop it into water at least 3 blocks deep: a whirlpool forms and opens World 7.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -12964,6 +13869,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Ten notches are carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12979,6 +13885,24 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Oxygen lasts twice as long for 5 minutes.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Lasts 5 min"
+       },
+       {
+        "k": "Effect",
+        "v": "+30 breath"
+       }
+      ],
       "station": "Abyssal Press",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -13007,6 +13931,20 @@
       "kind": "snorkel",
       "rarity": "Rare",
       "effect": "Breathe under water while its tank holds air (3 min). Fragile: hits wear it fast.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "2"
+       },
+       {
+        "k": "Air tank",
+        "v": "3 min"
+       },
+       {
+        "k": "Durability",
+        "v": "44"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13022,6 +13960,24 @@
       "kind": "snorkel",
       "rarity": "Rare",
       "effect": "Breathe under water while its tank holds air (5 min). Fragile: hits wear it fast.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "1"
+       },
+       {
+        "k": "Air tank",
+        "v": "5 min"
+       },
+       {
+        "k": "Durability",
+        "v": "66"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13037,6 +13993,24 @@
       "kind": "snorkel",
       "rarity": "Epic",
       "effect": "Breathe under water while its tank holds air (8 min). Fragile: hits wear it fast.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "3"
+       },
+       {
+        "k": "Toughness",
+        "v": "2"
+       },
+       {
+        "k": "Air tank",
+        "v": "8 min"
+       },
+       {
+        "k": "Durability",
+        "v": "110"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13052,6 +14026,24 @@
       "kind": "snorkel",
       "rarity": "Epic",
       "effect": "Breathe under water while its tank holds air (12 min). Fragile: hits wear it fast.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "4"
+       },
+       {
+        "k": "Toughness",
+        "v": "3"
+       },
+       {
+        "k": "Air tank",
+        "v": "12 min"
+       },
+       {
+        "k": "Durability",
+        "v": "154"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13067,6 +14059,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13082,6 +14075,24 @@
       "kind": "weapon",
       "rarity": "Epic",
       "effect": "Use it to throw: it drags what it hits back to you, farther under water. Its line brings it home.",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "21"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.4"
+       },
+       {
+        "k": "Thrown",
+        "v": "yes"
+       },
+       {
+        "k": "Durability",
+        "v": "1,560"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13097,6 +14108,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "Resists pressure. Wear it with a snorkel helmet.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "9"
+       },
+       {
+        "k": "Toughness",
+        "v": "2.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "14 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+5"
+       },
+       {
+        "k": "Durability",
+        "v": "992"
+       }
+      ],
       "station": "Abyssal Press",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -13119,6 +14152,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "Resists pressure. Wear it with a snorkel helmet.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "7"
+       },
+       {
+        "k": "Toughness",
+        "v": "2.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "14 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+4"
+       },
+       {
+        "k": "Durability",
+        "v": "930"
+       }
+      ],
       "station": "Abyssal Press",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -13141,6 +14196,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "Resists pressure. Wear it with a snorkel helmet.",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "4"
+       },
+       {
+        "k": "Toughness",
+        "v": "2.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "14 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+2"
+       },
+       {
+        "k": "Durability",
+        "v": "806"
+       }
+      ],
       "station": "Abyssal Press",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -14260,6 +15337,7 @@
       "kind": "dust",
       "rarity": "Rare",
       "effect": "Base of World 8 gear.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14279,6 +15357,7 @@
       "kind": "gem",
       "rarity": "Epic",
       "effect": "The Seismic Stake.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14298,6 +15377,16 @@
       "kind": "hourglass",
       "rarity": "Epic",
       "effect": "Slows the world cycle.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Lasts 90 s"
+       },
+       {
+        "k": "Effect",
+        "v": "Cooldown 5 min"
+       }
+      ],
       "station": "Time Workshop",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14332,6 +15421,12 @@
       "kind": "consumable",
       "rarity": "Common",
       "effect": "Protects from the current season.",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "The season holds for 2 min"
+       }
+      ],
       "station": "Time Workshop",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14360,6 +15455,20 @@
       "kind": "weapon",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "28"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "1,740"
+       }
+      ],
       "station": "Time Workshop",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14388,6 +15497,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the way into World 9.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14405,6 +15515,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Plant it on grass or dirt. It opens World 8 at dawn or at dusk.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -14494,6 +15605,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Six notches are carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14509,6 +15621,7 @@
       "kind": "offering",
       "rarity": "Epic",
       "effect": "Held at the arena altar, it wakes the Master of Seasons.",
+      "stats": [],
       "station": "Time Workshop",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14543,6 +15656,20 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Protection from the season for 3 minutes.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Lasts 3 min"
+       }
+      ],
       "station": "Time Workshop",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14571,6 +15698,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14586,6 +15714,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "5"
+       },
+       {
+        "k": "Toughness",
+        "v": "3"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "16 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+2"
+       },
+       {
+        "k": "Durability",
+        "v": "748"
+       }
+      ],
       "station": "Time Workshop",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14608,6 +15758,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "10"
+       },
+       {
+        "k": "Toughness",
+        "v": "3"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "16 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+6"
+       },
+       {
+        "k": "Durability",
+        "v": "1,088"
+       }
+      ],
       "station": "Time Workshop",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14630,6 +15802,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "7"
+       },
+       {
+        "k": "Toughness",
+        "v": "3"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "16 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+5"
+       },
+       {
+        "k": "Durability",
+        "v": "1,020"
+       }
+      ],
       "station": "Time Workshop",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14652,6 +15846,28 @@
       "kind": "armor",
       "rarity": "Epic",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "4"
+       },
+       {
+        "k": "Toughness",
+        "v": "3"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "16 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+2"
+       },
+       {
+        "k": "Durability",
+        "v": "884"
+       }
+      ],
       "station": "Time Workshop",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -15655,6 +16871,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Base of World 9 gear.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15677,6 +16894,7 @@
       "kind": "resource",
       "rarity": "Legendary",
       "effect": "The Traveller's Matryoshka.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15694,6 +16912,12 @@
       "kind": "anchor",
       "rarity": "Rare",
       "effect": "Calms the ground (radius 4).",
+      "stats": [
+       {
+        "k": "Effect",
+        "v": "Anchored for 10 min"
+       }
+      ],
       "station": "Terrain Anchor",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15722,6 +16946,7 @@
       "kind": "boots",
       "rarity": "Epic",
       "effect": "No falls from moving ground.",
+      "stats": [],
       "station": "Terrain Anchor",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15750,6 +16975,20 @@
       "kind": "weapon",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "33"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "1,920"
+       }
+      ],
       "station": "Terrain Anchor",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15778,6 +17017,7 @@
       "kind": "key",
       "rarity": "",
       "effect": "The Traveller's Matryoshka.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15793,6 +17033,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "Opens the way into World 10.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15810,6 +17051,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Drive it into stone or deepslate below y 40: the ground splits and World 9 opens.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -15899,6 +17141,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Three notches are carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15914,6 +17157,20 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Steady footing for 5 minutes.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Anchored for 5 min"
+       }
+      ],
       "station": "Terrain Anchor",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15942,6 +17199,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15957,6 +17215,28 @@
       "kind": "tool",
       "rarity": "Epic",
       "effect": "Mines a column of three. Use it on the ground: a tremor that staggers the creatures around you.",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "3"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.1"
+       },
+       {
+        "k": "Mining speed",
+        "v": "12.4"
+       },
+       {
+        "k": "Mines",
+        "v": "up to netherite blocks"
+       },
+       {
+        "k": "Durability",
+        "v": "1,920"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15972,6 +17252,28 @@
       "kind": "armor",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "5"
+       },
+       {
+        "k": "Toughness",
+        "v": "3.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "18 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+3"
+       },
+       {
+        "k": "Durability",
+        "v": "814"
+       }
+      ],
       "station": "Terrain Anchor",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15994,6 +17296,28 @@
       "kind": "armor",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "11"
+       },
+       {
+        "k": "Toughness",
+        "v": "3.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "18 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+8"
+       },
+       {
+        "k": "Durability",
+        "v": "1,184"
+       }
+      ],
       "station": "Terrain Anchor",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -16016,6 +17340,28 @@
       "kind": "armor",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "8"
+       },
+       {
+        "k": "Toughness",
+        "v": "3.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "18 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+6"
+       },
+       {
+        "k": "Durability",
+        "v": "1,110"
+       }
+      ],
       "station": "Terrain Anchor",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -16038,6 +17384,28 @@
       "kind": "armor",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "4"
+       },
+       {
+        "k": "Toughness",
+        "v": "3.5"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "18 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+3"
+       },
+       {
+        "k": "Durability",
+        "v": "962"
+       }
+      ],
       "station": "Terrain Anchor",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -17002,6 +18370,7 @@
       "kind": "thread",
       "rarity": "Rare",
       "effect": "Base of the final gear.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17023,6 +18392,7 @@
       "kind": "gem",
       "rarity": "Legendary",
       "effect": "Upgrades the final gear.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17040,6 +18410,20 @@
       "kind": "weapon",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Attack damage",
+        "v": "40"
+       },
+       {
+        "k": "Attack speed",
+        "v": "1.6"
+       },
+       {
+        "k": "Durability",
+        "v": "2,100"
+       }
+      ],
       "station": "Final Loom",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17074,6 +18458,7 @@
       "kind": "core",
       "rarity": "Legendary",
       "effect": "The heart of the creature.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17091,6 +18476,7 @@
       "kind": "seed",
       "rarity": "Epic",
       "effect": "Set it down anywhere and open it: you shrink into World 10.",
+      "stats": [],
       "station": "Matrix Workbench",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -17150,6 +18536,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Eight notches are carved under its base. Nest the ten dolls in order...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17165,6 +18552,7 @@
       "kind": "offering",
       "rarity": "Epic",
       "effect": "Held at the arena altar, it wakes the Unfinished.",
+      "stats": [],
       "station": "Final Loom",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17199,6 +18587,24 @@
       "kind": "food",
       "rarity": "Common",
       "effect": "Every dish's effect for 2 minutes.",
+      "stats": [
+       {
+        "k": "Food",
+        "v": "6 (3 shanks)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9.6"
+       },
+       {
+        "k": "Effect",
+        "v": "Every world dish's effect for 2 min"
+       },
+       {
+        "k": "Effect",
+        "v": "Slow Falling for 2 min"
+       }
+      ],
       "station": "Final Loom",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17239,6 +18645,7 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17254,6 +18661,28 @@
       "kind": "armor",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "5"
+       },
+       {
+        "k": "Toughness",
+        "v": "4"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "20 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+4"
+       },
+       {
+        "k": "Durability",
+        "v": "880"
+       }
+      ],
       "station": "Final Loom",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17282,6 +18711,28 @@
       "kind": "armor",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "11"
+       },
+       {
+        "k": "Toughness",
+        "v": "4"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "20 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+10"
+       },
+       {
+        "k": "Durability",
+        "v": "1,280"
+       }
+      ],
       "station": "Final Loom",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17310,6 +18761,28 @@
       "kind": "armor",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "9"
+       },
+       {
+        "k": "Toughness",
+        "v": "4"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "20 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+7"
+       },
+       {
+        "k": "Durability",
+        "v": "1,200"
+       }
+      ],
       "station": "Final Loom",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17338,6 +18811,28 @@
       "kind": "armor",
       "rarity": "Legendary",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armor",
+        "v": "5"
+       },
+       {
+        "k": "Toughness",
+        "v": "4"
+       },
+       {
+        "k": "Knockback resistance",
+        "v": "20 %"
+       },
+       {
+        "k": "Max health",
+        "v": "+4"
+       },
+       {
+        "k": "Durability",
+        "v": "1,040"
+       }
+      ],
       "station": "Final Loom",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -26084,6 +27579,7 @@
      "kind": "guide",
      "rarity": "",
      "effect": "Explains the mod. Becomes the Journal.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26131,6 +27627,7 @@
      "kind": "guide",
      "rarity": "",
      "effect": "Story, objectives, quests and karma.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26146,6 +27643,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the World 1 Seed.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26163,6 +27661,7 @@
      "kind": "doll",
      "rarity": "Legendary",
      "effect": "Breaks a layer instead of letting you die.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26178,6 +27677,7 @@
      "kind": "consumable",
      "rarity": "Common",
      "effect": "Brings you back to the world block.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26231,6 +27731,7 @@
      "kind": "consumable",
      "rarity": "Rare",
      "effect": "Rerolls the class of an item.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26300,6 +27801,7 @@
      "kind": "doll",
      "rarity": "",
      "effect": "Holds the access to a broken world.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26315,6 +27817,7 @@
      "kind": "page",
      "rarity": "",
      "effect": "A lost page of the Artisan's Journal.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26330,6 +27833,7 @@
      "kind": "resource",
      "rarity": "Common",
      "effect": "Used for cradles and threads.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26367,6 +27871,7 @@
      "kind": "resource",
      "rarity": "Epic",
      "effect": "Left by a fallen boss. Every class upgrade needs some.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26382,6 +27887,7 @@
      "kind": "gem",
      "rarity": "Epic",
      "effect": "Shed by a mutated boss. Rich in soul.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26397,6 +27903,7 @@
      "kind": "tool",
      "rarity": "Rare",
      "effect": "Strike a World Block of your group with it: the world inside quakes and loose blocks fall on those in it. Sneak and use the block with empty hands to help them instead.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26460,6 +27967,7 @@
      "kind": "soul",
      "rarity": "Common",
      "effect": "Holds 5 souls. Use it to free them (sneak: the whole stack).",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26475,6 +27983,7 @@
      "kind": "soul",
      "rarity": "Rare",
      "effect": "Holds 20 souls. Use it to free them (sneak: the whole stack).",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26490,6 +27999,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Hold it in your main hand and the next hidden doll in the other, then use it.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26505,6 +28015,7 @@
      "kind": "secret",
      "rarity": "Legendary",
      "effect": "Ten dolls, one inside the other. Open it once the Unfinished has fallen: World 0 sleeps inside.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26520,6 +28031,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Nothing is written on it. Nothing is left to finish.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26535,6 +28047,7 @@
      "kind": "trophy",
      "rarity": "Legendary",
      "effect": "Eleven dolls in one, won by finishing the Gauntlet.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27088,6 +28601,7 @@
      "kind": "resource",
      "rarity": "Common",
      "effect": "Base of antidotes.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27107,6 +28621,7 @@
      "kind": "resource",
      "rarity": "Common",
      "effect": "Living wood.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27125,6 +28640,7 @@
      "kind": "gem",
      "rarity": "Rare",
      "effect": "World 1 ore.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27142,6 +28658,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Armor of the world.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27159,6 +28676,12 @@
      "kind": "consumable",
      "rarity": "Common",
      "effect": "Reduces toxin by 50.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Toxin -50"
+      }
+     ],
      "station": "Spore Vat",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27187,6 +28710,7 @@
      "kind": "mask",
      "rarity": "Rare",
      "effect": "Halves toxin gain.",
+     "stats": [],
      "station": "Spore Vat",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27221,6 +28745,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "7"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "480"
+      }
+     ],
      "station": "Spore Vat",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27249,6 +28787,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the way into World 2.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27266,6 +28805,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Plant on tilled World Soil 0, with water within four blocks, to grow World 1.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -27355,6 +28895,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Four notches are carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27370,6 +28911,20 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Slows toxin for 5 minutes.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Lasts 5 min"
+      }
+     ],
      "station": "Spore Vat",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27398,6 +28953,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27413,6 +28969,12 @@
      "kind": "bow",
      "rarity": "Rare",
      "effect": "Its arrows burst into a cloud of toxic spores where they strike.",
+     "stats": [
+      {
+       "k": "Durability",
+       "v": "480"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27428,6 +28990,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.25"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "2 %"
+      },
+      {
+       "k": "Durability",
+       "v": "286"
+      }
+     ],
      "station": "Spore Vat",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27450,6 +29030,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "6"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.25"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "2 %"
+      },
+      {
+       "k": "Durability",
+       "v": "416"
+      }
+     ],
      "station": "Spore Vat",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27472,6 +29070,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "4"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.25"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "2 %"
+      },
+      {
+       "k": "Durability",
+       "v": "390"
+      }
+     ],
      "station": "Spore Vat",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27494,6 +29110,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.25"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "2 %"
+      },
+      {
+       "k": "Durability",
+       "v": "338"
+      }
+     ],
      "station": "Spore Vat",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27662,6 +29296,7 @@
      "kind": "resource",
      "rarity": "Common",
      "effect": "Powerful fuel.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27681,6 +29316,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "A whole vein in one block.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27699,6 +29335,7 @@
      "kind": "ingot",
      "rarity": "Rare",
      "effect": "Base of World 2 gear.",
+     "stats": [],
      "station": "Ash Foundry",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27730,6 +29367,12 @@
      "kind": "consumable",
      "rarity": "Common",
      "effect": "Reduces heat by 50.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Heat -50"
+      }
+     ],
      "station": "Ash Foundry",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27758,6 +29401,28 @@
      "kind": "drill",
      "rarity": "Epic",
      "effect": "Mines 3x3, burns Blazing Rock.",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "2"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.2"
+      },
+      {
+       "k": "Mining speed",
+       "v": "8.2"
+      },
+      {
+       "k": "Mines",
+       "v": "up to iron-tier blocks"
+      },
+      {
+       "k": "Durability",
+       "v": "660"
+      }
+     ],
      "station": "Ash Foundry",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27792,6 +29457,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "9"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "660"
+      }
+     ],
      "station": "Ash Foundry",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27820,6 +29499,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the way into World 3.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27837,6 +29517,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Set it down within 3 blocks of lava, with at least 4 Ashrock around it: a portal of embers opens World 2.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -27926,6 +29607,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Seven notches are carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27941,6 +29623,20 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Slows heat for 5 minutes.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Lasts 5 min"
+      }
+     ],
      "station": "Ash Foundry",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27969,6 +29665,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27984,6 +29681,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "Sets foes ablaze; every third blow bursts into a ring of flame. Swinging it warms you in the Veins.",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "11"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1"
+      },
+      {
+       "k": "Durability",
+       "v": "660"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27999,6 +29710,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "Halves heat gain.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "4 %"
+      },
+      {
+       "k": "Durability",
+       "v": "352"
+      }
+     ],
      "station": "Ash Foundry",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -28021,6 +29750,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "Halves heat gain.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "6"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "4 %"
+      },
+      {
+       "k": "Durability",
+       "v": "512"
+      }
+     ],
      "station": "Ash Foundry",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -28043,6 +29790,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "Halves heat gain.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "5"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "4 %"
+      },
+      {
+       "k": "Durability",
+       "v": "480"
+      }
+     ],
      "station": "Ash Foundry",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -28065,6 +29830,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "Halves heat gain.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "4 %"
+      },
+      {
+       "k": "Durability",
+       "v": "416"
+      }
+     ],
      "station": "Ash Foundry",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -28408,6 +30191,7 @@
      "kind": "key",
      "rarity": "Rare",
      "effect": "Opens a sealed door once.",
+     "stats": [],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28439,6 +30223,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Traps and gear.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28459,6 +30244,12 @@
      "kind": "tool",
      "rarity": "Common",
      "effect": "Reveals nearby structures.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Cooldown 2 s"
+      }
+     ],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28487,6 +30278,7 @@
      "kind": "tool",
      "rarity": "Common",
      "effect": "Opens an ordinary lock.",
+     "stats": [],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28515,6 +30307,7 @@
      "kind": "consumable",
      "rarity": "Common",
      "effect": "Immobilizes a mob.",
+     "stats": [],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28543,6 +30336,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "11"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "840"
+      }
+     ],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28571,6 +30378,7 @@
      "kind": "doll",
      "rarity": "Legendary",
      "effect": "A pocket base for your group. Use it to enter, use it again to leave.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -28655,6 +30463,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the way into World 4.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28672,6 +30481,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Set it against an iron door and give it a redstone signal (a lever, a button): the key turns and World 3 opens.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -28761,6 +30571,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Two notches are carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28776,6 +30587,7 @@
      "kind": "offering",
      "rarity": "Epic",
      "effect": "Held at the arena altar, it wakes the Grand Jailer.",
+     "stats": [],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28810,6 +30622,20 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Long-lasting saturation.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Saturation for 2 s"
+      }
+     ],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28838,6 +30664,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28853,6 +30680,24 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "Long reach. Every lash drags the foe toward you and slows it.",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "9"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.8"
+      },
+      {
+       "k": "Reach",
+       "v": "+2.5"
+      },
+      {
+       "k": "Durability",
+       "v": "840"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28868,6 +30713,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.75"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "6 %"
+      },
+      {
+       "k": "Durability",
+       "v": "418"
+      }
+     ],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28890,6 +30753,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "7"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.75"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "6 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+1"
+      },
+      {
+       "k": "Durability",
+       "v": "608"
+      }
+     ],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28912,6 +30797,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "5"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.75"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "6 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+1"
+      },
+      {
+       "k": "Durability",
+       "v": "570"
+      }
+     ],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28934,6 +30841,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "0.75"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "6 %"
+      },
+      {
+       "k": "Durability",
+       "v": "494"
+      }
+     ],
      "station": "Jailer's Table",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -29117,6 +31042,7 @@
      "kind": "resource",
      "rarity": "Common",
      "effect": "Glider cloth.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29134,6 +31060,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Energy of the Lightning Forge.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29152,6 +31079,7 @@
      "kind": "gem",
      "rarity": "Rare",
      "effect": "Gear and the Black Lantern.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29171,6 +31099,7 @@
      "kind": "glider",
      "rarity": "Epic",
      "effect": "Glide between islands.",
+     "stats": [],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29205,6 +31134,12 @@
      "kind": "hook",
      "rarity": "Rare",
      "effect": "Pulls you toward a surface.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Cooldown 1.5 s"
+      }
+     ],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29239,6 +31174,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "13"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "1,020"
+      }
+     ],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29267,6 +31216,7 @@
      "kind": "layer",
      "rarity": "Rare",
      "effect": "Laid on armor at the Class Table. When the outer layer breaks, the next takes over.",
+     "stats": [],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29301,6 +31251,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the way into World 5.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29318,6 +31269,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Set it on top of a lightning rod under the open sky. A storm tears World 4 open; a Storm Essence fed to it does too.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -29407,6 +31359,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Nine notches are carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29422,6 +31375,7 @@
      "kind": "offering",
      "rarity": "Epic",
      "effect": "Held at the arena altar, it wakes the Storm King.",
+     "stats": [],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29456,6 +31410,20 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Slow falling for 3 minutes.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Slow Falling for 3 min"
+      }
+     ],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29484,6 +31452,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29499,6 +31468,24 @@
      "kind": "weapon",
      "rarity": "Epic",
      "effect": "Use it to throw: lightning falls where it strikes, then it flies back to your hand.",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "12"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.4"
+      },
+      {
+       "k": "Thrown",
+       "v": "yes"
+      },
+      {
+       "k": "Durability",
+       "v": "1,020"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29514,6 +31501,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "1"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "8 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+1"
+      },
+      {
+       "k": "Durability",
+       "v": "484"
+      }
+     ],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29536,6 +31545,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "7"
+      },
+      {
+       "k": "Toughness",
+       "v": "1"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "8 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+2"
+      },
+      {
+       "k": "Durability",
+       "v": "704"
+      }
+     ],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29558,6 +31589,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "6"
+      },
+      {
+       "k": "Toughness",
+       "v": "1"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "8 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+1"
+      },
+      {
+       "k": "Durability",
+       "v": "660"
+      }
+     ],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29580,6 +31633,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "1"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "8 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+1"
+      },
+      {
+       "k": "Durability",
+       "v": "572"
+      }
+     ],
      "station": "Lightning Forge",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29769,6 +31844,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Base of World 5 gear.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29788,6 +31864,7 @@
      "kind": "gem",
      "rarity": "Epic",
      "effect": "4 fragments make 1 diamond.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29807,6 +31884,16 @@
      "kind": "lantern",
      "rarity": "Epic",
      "effect": "20 minutes of light.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Night Vision for 20 min"
+      },
+      {
+       "k": "Effect",
+       "v": "Cooldown 1 min"
+      }
+     ],
      "station": "Dark Altar",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -29841,6 +31928,16 @@
      "kind": "sonar",
      "rarity": "Rare",
      "effect": "Reveals nearby creatures.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Reveals creatures within 32 blocks for 8 s"
+      },
+      {
+       "k": "Effect",
+       "v": "Cooldown 10 s"
+      }
+     ],
      "station": "Dark Altar",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -29869,6 +31966,12 @@
      "kind": "consumable",
      "rarity": "Common",
      "effect": "Clears your noise.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Noise -100"
+      }
+     ],
      "station": "Dark Altar",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -29897,6 +32000,20 @@
      "kind": "weapon",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "16"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "1,200"
+      }
+     ],
      "station": "Dark Altar",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -29925,6 +32042,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the way into World 6.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29942,6 +32060,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Light it in complete darkness, with at least 4 Spent Glow within 2 blocks: its black flame opens World 5.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -30031,6 +32150,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Five notches are carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30046,6 +32166,20 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Noise reduced for 5 minutes.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Silent for 5 min"
+      }
+     ],
      "station": "Dark Altar",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30074,6 +32208,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30089,6 +32224,16 @@
      "kind": "ward",
      "rarity": "Epic",
      "effect": "Blocks like a shield. Each blocked blow flares: the attacker is blinded, thrown back and marked.",
+     "stats": [
+      {
+       "k": "Blocks",
+       "v": "90 % of a hit"
+      },
+      {
+       "k": "Durability",
+       "v": "560"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30104,6 +32249,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "4"
+      },
+      {
+       "k": "Toughness",
+       "v": "1.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "10 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+1"
+      },
+      {
+       "k": "Durability",
+       "v": "550"
+      }
+     ],
      "station": "Dark Altar",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30126,6 +32293,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "8"
+      },
+      {
+       "k": "Toughness",
+       "v": "1.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "10 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+2"
+      },
+      {
+       "k": "Durability",
+       "v": "800"
+      }
+     ],
      "station": "Dark Altar",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30148,6 +32337,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "5"
+      },
+      {
+       "k": "Toughness",
+       "v": "1.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "10 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+2"
+      },
+      {
+       "k": "Durability",
+       "v": "750"
+      }
+     ],
      "station": "Dark Altar",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30170,6 +32381,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "1.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "10 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+1"
+      },
+      {
+       "k": "Durability",
+       "v": "650"
+      }
+     ],
      "station": "Dark Altar",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30374,6 +32607,7 @@
      "kind": "ingot",
      "rarity": "Rare",
      "effect": "Base of World 6 gear.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30393,6 +32627,7 @@
      "kind": "gem",
      "rarity": "Epic",
      "effect": "Inverter and the Abyssal Pearl.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30412,6 +32647,7 @@
      "kind": "boots",
      "rarity": "Epic",
      "effect": "Ignore gravity flips.",
+     "stats": [],
      "station": "Inverter",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30440,6 +32676,12 @@
      "kind": "consumable",
      "rarity": "Common",
      "effect": "Cancels an inversion.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Stable for 30 s"
+      }
+     ],
      "station": "Inverter",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30468,6 +32710,20 @@
      "kind": "weapon",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "19"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "1,380"
+      }
+     ],
      "station": "Inverter",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30496,6 +32752,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the way into World 7.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30513,6 +32770,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Set them between two glass blocks facing each other, two blocks away on either side: World 6 opens in the reflection.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -30602,6 +32860,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "One notch is carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30617,6 +32876,20 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Stability for 30 seconds.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Lasts 30 s"
+      }
+     ],
      "station": "Inverter",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30645,6 +32918,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30660,6 +32934,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "4"
+      },
+      {
+       "k": "Toughness",
+       "v": "2"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "12 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+1"
+      },
+      {
+       "k": "Durability",
+       "v": "616"
+      }
+     ],
      "station": "Inverter",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30682,6 +32978,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "8"
+      },
+      {
+       "k": "Toughness",
+       "v": "2"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "12 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+3"
+      },
+      {
+       "k": "Durability",
+       "v": "896"
+      }
+     ],
      "station": "Inverter",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30704,6 +33022,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "6"
+      },
+      {
+       "k": "Toughness",
+       "v": "2"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "12 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+2"
+      },
+      {
+       "k": "Durability",
+       "v": "840"
+      }
+     ],
      "station": "Inverter",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30726,6 +33066,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "4"
+      },
+      {
+       "k": "Toughness",
+       "v": "2"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "12 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+1"
+      },
+      {
+       "k": "Durability",
+       "v": "728"
+      }
+     ],
      "station": "Inverter",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30909,6 +33271,7 @@
      "kind": "dust",
      "rarity": "Rare",
      "effect": "Salt Snorkel Helmet and the Sapling of the Four Seasons.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30928,6 +33291,7 @@
      "kind": "gem",
      "rarity": "Rare",
      "effect": "Mined from reef veins. Nacre Snorkel Helmet.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30945,6 +33309,7 @@
      "kind": "ingot",
      "rarity": "Rare",
      "effect": "Cobalt Snorkel Helmet and the diving suit.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30962,6 +33327,7 @@
      "kind": "gem",
      "rarity": "Epic",
      "effect": "Pearl Snorkel Helmet and the Sapling of the Four Seasons.",
+     "stats": [],
      "station": "Abyssal Press",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -30995,6 +33361,16 @@
      "kind": "consumable",
      "rarity": "Common",
      "effect": "Refills half of a snorkel helmet's tank, or your breath.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Fills half a snorkel helmet's tank"
+      },
+      {
+       "k": "Effect",
+       "v": "Without one: +60 breath"
+      }
+     ],
      "station": "Abyssal Press",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31023,6 +33399,12 @@
      "kind": "thruster",
      "rarity": "Epic",
      "effect": "Speeds you up underwater.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Cooldown 0.75 s"
+      }
+     ],
      "station": "Abyssal Press",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31051,6 +33433,20 @@
      "kind": "weapon",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "23"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "1,560"
+      }
+     ],
      "station": "Abyssal Press",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31079,6 +33475,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the way into World 8.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31096,6 +33493,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Drop it into water at least 3 blocks deep: a whirlpool forms and opens World 7.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -31185,6 +33583,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Ten notches are carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31200,6 +33599,24 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Oxygen lasts twice as long for 5 minutes.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Lasts 5 min"
+      },
+      {
+       "k": "Effect",
+       "v": "+30 breath"
+      }
+     ],
      "station": "Abyssal Press",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31228,6 +33645,20 @@
      "kind": "snorkel",
      "rarity": "Rare",
      "effect": "Breathe under water while its tank holds air (3 min). Fragile: hits wear it fast.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "2"
+      },
+      {
+       "k": "Air tank",
+       "v": "3 min"
+      },
+      {
+       "k": "Durability",
+       "v": "44"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31243,6 +33674,24 @@
      "kind": "snorkel",
      "rarity": "Rare",
      "effect": "Breathe under water while its tank holds air (5 min). Fragile: hits wear it fast.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "1"
+      },
+      {
+       "k": "Air tank",
+       "v": "5 min"
+      },
+      {
+       "k": "Durability",
+       "v": "66"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31258,6 +33707,24 @@
      "kind": "snorkel",
      "rarity": "Epic",
      "effect": "Breathe under water while its tank holds air (8 min). Fragile: hits wear it fast.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "3"
+      },
+      {
+       "k": "Toughness",
+       "v": "2"
+      },
+      {
+       "k": "Air tank",
+       "v": "8 min"
+      },
+      {
+       "k": "Durability",
+       "v": "110"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31273,6 +33740,24 @@
      "kind": "snorkel",
      "rarity": "Epic",
      "effect": "Breathe under water while its tank holds air (12 min). Fragile: hits wear it fast.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "4"
+      },
+      {
+       "k": "Toughness",
+       "v": "3"
+      },
+      {
+       "k": "Air tank",
+       "v": "12 min"
+      },
+      {
+       "k": "Durability",
+       "v": "154"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31288,6 +33773,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31303,6 +33789,24 @@
      "kind": "weapon",
      "rarity": "Epic",
      "effect": "Use it to throw: it drags what it hits back to you, farther under water. Its line brings it home.",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "21"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.4"
+      },
+      {
+       "k": "Thrown",
+       "v": "yes"
+      },
+      {
+       "k": "Durability",
+       "v": "1,560"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31318,6 +33822,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "Resists pressure. Wear it with a snorkel helmet.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "9"
+      },
+      {
+       "k": "Toughness",
+       "v": "2.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "14 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+5"
+      },
+      {
+       "k": "Durability",
+       "v": "992"
+      }
+     ],
      "station": "Abyssal Press",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31340,6 +33866,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "Resists pressure. Wear it with a snorkel helmet.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "7"
+      },
+      {
+       "k": "Toughness",
+       "v": "2.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "14 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+4"
+      },
+      {
+       "k": "Durability",
+       "v": "930"
+      }
+     ],
      "station": "Abyssal Press",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31362,6 +33910,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "Resists pressure. Wear it with a snorkel helmet.",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "4"
+      },
+      {
+       "k": "Toughness",
+       "v": "2.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "14 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+2"
+      },
+      {
+       "k": "Durability",
+       "v": "806"
+      }
+     ],
      "station": "Abyssal Press",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31616,6 +34186,7 @@
      "kind": "dust",
      "rarity": "Rare",
      "effect": "Base of World 8 gear.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31635,6 +34206,7 @@
      "kind": "gem",
      "rarity": "Epic",
      "effect": "The Seismic Stake.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31654,6 +34226,16 @@
      "kind": "hourglass",
      "rarity": "Epic",
      "effect": "Slows the world cycle.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Lasts 90 s"
+      },
+      {
+       "k": "Effect",
+       "v": "Cooldown 5 min"
+      }
+     ],
      "station": "Time Workshop",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31688,6 +34270,12 @@
      "kind": "consumable",
      "rarity": "Common",
      "effect": "Protects from the current season.",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "The season holds for 2 min"
+      }
+     ],
      "station": "Time Workshop",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31716,6 +34304,20 @@
      "kind": "weapon",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "28"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "1,740"
+      }
+     ],
      "station": "Time Workshop",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31744,6 +34346,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the way into World 9.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31761,6 +34364,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Plant it on grass or dirt. It opens World 8 at dawn or at dusk.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -31850,6 +34454,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Six notches are carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31865,6 +34470,7 @@
      "kind": "offering",
      "rarity": "Epic",
      "effect": "Held at the arena altar, it wakes the Master of Seasons.",
+     "stats": [],
      "station": "Time Workshop",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31899,6 +34505,20 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Protection from the season for 3 minutes.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Lasts 3 min"
+      }
+     ],
      "station": "Time Workshop",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31927,6 +34547,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31942,6 +34563,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "5"
+      },
+      {
+       "k": "Toughness",
+       "v": "3"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "16 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+2"
+      },
+      {
+       "k": "Durability",
+       "v": "748"
+      }
+     ],
      "station": "Time Workshop",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31964,6 +34607,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "10"
+      },
+      {
+       "k": "Toughness",
+       "v": "3"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "16 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+6"
+      },
+      {
+       "k": "Durability",
+       "v": "1,088"
+      }
+     ],
      "station": "Time Workshop",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31986,6 +34651,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "7"
+      },
+      {
+       "k": "Toughness",
+       "v": "3"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "16 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+5"
+      },
+      {
+       "k": "Durability",
+       "v": "1,020"
+      }
+     ],
      "station": "Time Workshop",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -32008,6 +34695,28 @@
      "kind": "armor",
      "rarity": "Epic",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "4"
+      },
+      {
+       "k": "Toughness",
+       "v": "3"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "16 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+2"
+      },
+      {
+       "k": "Durability",
+       "v": "884"
+      }
+     ],
      "station": "Time Workshop",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -32202,6 +34911,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Base of World 9 gear.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32224,6 +34934,7 @@
      "kind": "resource",
      "rarity": "Legendary",
      "effect": "The Traveller's Matryoshka.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32241,6 +34952,12 @@
      "kind": "anchor",
      "rarity": "Rare",
      "effect": "Calms the ground (radius 4).",
+     "stats": [
+      {
+       "k": "Effect",
+       "v": "Anchored for 10 min"
+      }
+     ],
      "station": "Terrain Anchor",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32269,6 +34986,7 @@
      "kind": "boots",
      "rarity": "Epic",
      "effect": "No falls from moving ground.",
+     "stats": [],
      "station": "Terrain Anchor",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32297,6 +35015,20 @@
      "kind": "weapon",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "33"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "1,920"
+      }
+     ],
      "station": "Terrain Anchor",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32325,6 +35057,7 @@
      "kind": "key",
      "rarity": "",
      "effect": "The Traveller's Matryoshka.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32340,6 +35073,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "Opens the way into World 10.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32357,6 +35091,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Drive it into stone or deepslate below y 40: the ground splits and World 9 opens.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -32446,6 +35181,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Three notches are carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32461,6 +35197,20 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Steady footing for 5 minutes.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Anchored for 5 min"
+      }
+     ],
      "station": "Terrain Anchor",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32489,6 +35239,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32504,6 +35255,28 @@
      "kind": "tool",
      "rarity": "Epic",
      "effect": "Mines a column of three. Use it on the ground: a tremor that staggers the creatures around you.",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "3"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.1"
+      },
+      {
+       "k": "Mining speed",
+       "v": "12.4"
+      },
+      {
+       "k": "Mines",
+       "v": "up to netherite blocks"
+      },
+      {
+       "k": "Durability",
+       "v": "1,920"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32519,6 +35292,28 @@
      "kind": "armor",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "5"
+      },
+      {
+       "k": "Toughness",
+       "v": "3.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "18 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+3"
+      },
+      {
+       "k": "Durability",
+       "v": "814"
+      }
+     ],
      "station": "Terrain Anchor",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32541,6 +35336,28 @@
      "kind": "armor",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "11"
+      },
+      {
+       "k": "Toughness",
+       "v": "3.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "18 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+8"
+      },
+      {
+       "k": "Durability",
+       "v": "1,184"
+      }
+     ],
      "station": "Terrain Anchor",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32563,6 +35380,28 @@
      "kind": "armor",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "8"
+      },
+      {
+       "k": "Toughness",
+       "v": "3.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "18 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+6"
+      },
+      {
+       "k": "Durability",
+       "v": "1,110"
+      }
+     ],
      "station": "Terrain Anchor",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32585,6 +35424,28 @@
      "kind": "armor",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "4"
+      },
+      {
+       "k": "Toughness",
+       "v": "3.5"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "18 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+3"
+      },
+      {
+       "k": "Durability",
+       "v": "962"
+      }
+     ],
      "station": "Terrain Anchor",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32764,6 +35625,7 @@
      "kind": "thread",
      "rarity": "Rare",
      "effect": "Base of the final gear.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32785,6 +35647,7 @@
      "kind": "gem",
      "rarity": "Legendary",
      "effect": "Upgrades the final gear.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32802,6 +35665,20 @@
      "kind": "weapon",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Attack damage",
+       "v": "40"
+      },
+      {
+       "k": "Attack speed",
+       "v": "1.6"
+      },
+      {
+       "k": "Durability",
+       "v": "2,100"
+      }
+     ],
      "station": "Final Loom",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -32836,6 +35713,7 @@
      "kind": "core",
      "rarity": "Legendary",
      "effect": "The heart of the creature.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32853,6 +35731,7 @@
      "kind": "seed",
      "rarity": "Epic",
      "effect": "Set it down anywhere and open it: you shrink into World 10.",
+     "stats": [],
      "station": "Matrix Workbench",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -32912,6 +35791,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Eight notches are carved under its base. Nest the ten dolls in order...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32927,6 +35807,7 @@
      "kind": "offering",
      "rarity": "Epic",
      "effect": "Held at the arena altar, it wakes the Unfinished.",
+     "stats": [],
      "station": "Final Loom",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -32961,6 +35842,24 @@
      "kind": "food",
      "rarity": "Common",
      "effect": "Every dish's effect for 2 minutes.",
+     "stats": [
+      {
+       "k": "Food",
+       "v": "6 (3 shanks)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9.6"
+      },
+      {
+       "k": "Effect",
+       "v": "Every world dish's effect for 2 min"
+      },
+      {
+       "k": "Effect",
+       "v": "Slow Falling for 2 min"
+      }
+     ],
      "station": "Final Loom",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -33001,6 +35900,7 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -33016,6 +35916,28 @@
      "kind": "armor",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "5"
+      },
+      {
+       "k": "Toughness",
+       "v": "4"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "20 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+4"
+      },
+      {
+       "k": "Durability",
+       "v": "880"
+      }
+     ],
      "station": "Final Loom",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -33044,6 +35966,28 @@
      "kind": "armor",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "11"
+      },
+      {
+       "k": "Toughness",
+       "v": "4"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "20 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+10"
+      },
+      {
+       "k": "Durability",
+       "v": "1,280"
+      }
+     ],
      "station": "Final Loom",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -33072,6 +36016,28 @@
      "kind": "armor",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "9"
+      },
+      {
+       "k": "Toughness",
+       "v": "4"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "20 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+7"
+      },
+      {
+       "k": "Durability",
+       "v": "1,200"
+      }
+     ],
      "station": "Final Loom",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -33100,6 +36066,28 @@
      "kind": "armor",
      "rarity": "Legendary",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armor",
+       "v": "5"
+      },
+      {
+       "k": "Toughness",
+       "v": "4"
+      },
+      {
+       "k": "Knockback resistance",
+       "v": "20 %"
+      },
+      {
+       "k": "Max health",
+       "v": "+4"
+      },
+      {
+       "k": "Durability",
+       "v": "1,040"
+      }
+     ],
      "station": "Final Loom",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",

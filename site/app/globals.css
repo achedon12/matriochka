@@ -858,3 +858,11 @@ tr.is-sel { background: rgba(23, 16, 13, 0.42); }
 @media (prefers-reduced-motion: reduce) {
   .ic-card { animation: none; } .ic-lid, .ic-doll, .ic-station img, .ic-slot .px { transition: none; }
 }
+
+/* an item's numbers in the game: label on the left, value in the game's pixel type */
+.ic-stats { margin: 10px 0 0; display: grid; grid-template-columns: 1fr; gap: 0; }
+.ic-stats > div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 5px 2px; border-bottom: 1px dashed var(--rule); }
+.ic-stats dt { font-size: 15px; color: var(--paper-dim); }
+.ic-stats dd { margin: 0; text-align: right; font-family: var(--font-pixel); font-size: 21px; line-height: 1; color: var(--gold-b); }
+.cx-stats { margin-top: 8px; }
+.cx-stats dd { font-size: 18px; }

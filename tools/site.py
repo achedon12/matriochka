@@ -1073,6 +1073,117 @@ def _sources_of(item_id):
 PIECES = ("helmet", "chestplate", "leggings", "boots")
 
 
+# ---------------------------------------------------------------- item stats (the game's own numbers)
+# Gear stats follow content/ModContent.java and item/ReplayGear.java from the GEAR table of tools/content.py:
+# a world's weapon deals GEAR[w][0] at 1.6 attacks a second; its armour splits GEAR[w][1] points 18/38/28/16 % over
+# helmet, chestplate, leggings and boots, with GEAR[w][2] / 4 toughness, 2 % knockback resistance per world and
+# GEAR[w][3] extra health split 15/40/30/15 %; tools and weapons last 300 + 180 w uses, armour (20 + 6 w) times
+# vanilla's per-piece base. The base stats are shown: a class rolled at crafting raises them.
+_ARMOR_BASE = {"helmet": 11, "chestplate": 16, "leggings": 15, "boots": 13}
+_HEALTH_SHARE = {"helmet": 0.15, "chestplate": 0.4, "leggings": 0.3, "boots": 0.15}
+# the replay gear's own numbers: (damage offset from the world's, attack speed, reach bonus, thrown)
+_REPLAY_WEAPON = {"magma_flail": (2, 1.0, 0, False), "key_chain_whip": (-2, 1.8, 2.5, False),
+                  "storm_javelin": (-1, 1.4, 0, True), "tide_harpoon": (-2, 1.4, 0, True)}
+# what using or eating an item does (item/MatrioItem.java): (EN, FR) lines
+_MIN = ("min", "min")
+EFFECTS = {
+    "antidote": [("Toxin -50", "Toxine -50")],
+    "cooling_water": [("Heat -50", "Chaleur -50")],
+    "silence_balm": [("Noise -100", "Bruit -100")],
+    "oxygen_capsule": [("Fills half a snorkel helmet's tank", "Remplit la moitié du réservoir d'un casque-tuba"), ("Without one: +60 breath", "Sans casque : +60 de souffle")],
+    "stabilizer": [("Stable for 30 s", "Stable pendant 30 s")],
+    "season_preserve": [("The season holds for 2 min", "La saison tient 2 min")],
+    "anchor": [("Anchored for 10 min", "Ancré pendant 10 min")],
+    "solar_lantern": [("Night Vision for 20 min", "Vision nocturne pendant 20 min"), ("Cooldown 1 min", "Recharge 1 min")],
+    "sonar": [("Reveals creatures within 32 blocks for 8 s", "Révèle les créatures à 32 blocs pendant 8 s"), ("Cooldown 10 s", "Recharge 10 s")],
+    "hourglass": [("Lasts 90 s", "Dure 90 s"), ("Cooldown 5 min", "Recharge 5 min")],
+    "grappling_hook": [("Cooldown 1.5 s", "Recharge 1,5 s")],
+    "thruster": [("Cooldown 0.75 s", "Recharge 0,75 s")],
+    "labyrinth_map": [("Cooldown 2 s", "Recharge 2 s")],
+    "root_broth": [("Lasts 5 min", "Dure 5 min")],
+    "ice_bread": [("Lasts 5 min", "Dure 5 min")],
+    "cell_ration": [("Saturation for 2 s", "Saturation pendant 2 s")],
+    "cloud_fruit": [("Slow Falling for 3 min", "Chute lente pendant 3 min")],
+    "mute_mushroom": [("Silent for 5 min", "Silencieux pendant 5 min")],
+    "flipped_apple": [("Lasts 30 s", "Dure 30 s")],
+    "apnea_kelp": [("Lasts 5 min", "Dure 5 min"), ("+30 breath", "+30 de souffle")],
+    "season_jam": [("Lasts 3 min", "Dure 3 min")],
+    "anchor_bread": [("Anchored for 5 min", "Ancré pendant 5 min")],
+    "workshop_feast": [("Every world dish's effect for 2 min", "L'effet de chaque plat des mondes pendant 2 min"), ("Slow Falling for 2 min", "Chute lente pendant 2 min")],
+}
+
+
+def _num(x):
+    return fmt(round(x, 2))
+
+
+def item_stats(iid, kind, w, piece=None):
+    """[{k, v}] of an item's numbers in the game, or []: gear, snorkels, food and what using an item does."""
+    out = []
+
+    def add(en, fr, v):
+        out.append(dict(k=t(en, fr), v=v))
+    g = C.GEAR.get(max(1, min(10, w))) if hasattr(C, "GEAR") else None
+    tool_dur = 300 + 180 * max(1, min(10, w))
+    if iid in _REPLAY_WEAPON and g:
+        d, spd, reach, thrown = _REPLAY_WEAPON[iid]
+        add("Attack damage", "Dégâts", _num(g[0] + d))
+        add("Attack speed", "Vitesse d'attaque", _num(spd))
+        if reach:
+            add("Reach", "Portée", "+" + _num(reach))
+        if thrown:
+            add("Thrown", "Se lance", t("yes", "oui"))
+        add("Durability", "Durabilité", _num(tool_dur))
+    elif iid == "quake_pick":
+        add("Attack damage", "Dégâts", "3")
+        add("Attack speed", "Vitesse d'attaque", "1,1" if LANG == "fr" else "1.1")
+        add("Mining speed", "Vitesse de minage", _num(7 + 9 * 0.6))
+        add("Mines", "Mine", t("up to netherite blocks", "jusqu'aux blocs de netherite"))
+        add("Durability", "Durabilité", _num(300 + 180 * 9))
+    elif iid == "drill":
+        add("Attack damage", "Dégâts", "2")
+        add("Attack speed", "Vitesse d'attaque", "1,2" if LANG == "fr" else "1.2")
+        add("Mining speed", "Vitesse de minage", _num(7 + 2 * 0.6))
+        add("Mines", "Mine", t("up to iron-tier blocks", "jusqu'aux blocs de niveau fer"))
+        add("Durability", "Durabilité", _num(300 + 180 * 2))
+    elif iid == "lantern_shield":
+        add("Blocks", "Bloque", t("90 % of a hit", "90 % d'un coup"))
+        add("Durability", "Durabilité", "560")
+    elif iid == "spore_bow":
+        add("Durability", "Durabilité", "480")
+    elif kind == "weapon" and g:
+        add("Attack damage", "Dégâts", _num(g[0]))
+        add("Attack speed", "Vitesse d'attaque", "1,6" if LANG == "fr" else "1.6")
+        add("Durability", "Durabilité", _num(tool_dur))
+    elif kind == "armor" and g and piece in _ARMOR_BASE:
+        total = int(g[1])
+        h, c, b = round(total * 0.18), round(total * 0.38), round(total * 0.16)
+        pts = {"helmet": h, "chestplate": c, "boots": b, "leggings": total - h - c - b}[piece]
+        add("Armor", "Armure", _num(pts))
+        add("Toughness", "Robustesse", _num(g[2] / 4))
+        if w > 0:
+            add("Knockback resistance", "Résistance au recul", f"{2 * w} %")
+        hp = round(g[3] * _HEALTH_SHARE[piece])
+        if hp > 0:
+            add("Max health", "Vie max", "+" + _num(hp))
+        add("Durability", "Durabilité", _num((20 + 6 * w) * _ARMOR_BASE[piece]))
+    elif kind == "snorkel":
+        sn = next((x for x in C.SNORKELS if x[0] == iid), None)
+        if sn:
+            _sid, _en, _fr, _ore, _tier, tank, dur, arm, tough, _wear, depth, *_ = sn
+            add("Armor", "Armure", _num(arm))
+            if tough:
+                add("Toughness", "Robustesse", _num(tough))
+            add("Air tank", "Réservoir d'air", t(f"{tank // 60} min", f"{tank // 60} min"))
+            add("Durability", "Durabilité", _num(dur * _ARMOR_BASE["helmet"]))
+    if kind == "food":
+        add("Food", "Nourriture", t("6 (3 shanks)", "6 (3 cuisses)"))
+        add("Saturation", "Saturation", _num(6 * 0.8 * 2))
+    for en, fr in EFFECTS.get(iid, []):
+        out.append(dict(k=t("Effect", "Effet"), v=t(en, fr)))
+    return out
+
+
 def codex(n):
     """Everything a world holds: every item and block, how you get it, its quests and its achievements."""
     items = []
@@ -1081,7 +1192,7 @@ def codex(n):
             continue
         st, r = recipe_for(it["id"])
         items.append(dict(id=it["id"], tex=tex(it["id"]), name=name(it["id"]), kind=it["kind"], rarity=t(*RARITY.get(it["rarity"], ("", ""))),
-                          effect=it.get("effect_" + LANG, ""), station=STATION_NAME(st), stationTex=tex(st) if st else None, stationId=st, grid=grid(it["id"], st), inputs=ing(r["inputs"]) if r else [],
+                          effect=it.get("effect_" + LANG, ""), stats=item_stats(it["id"], it["kind"], n), station=STATION_NAME(st), stationTex=tex(st) if st else None, stationId=st, grid=grid(it["id"], st), inputs=ing(r["inputs"]) if r else [],
                           count=r["count"] if r else 1, drops=_sources_of(it["id"])))
     armor = next((it for it in C.ITEMS if it["world"] == n and it["kind"] == "armorset"), None)
     if armor:
@@ -1089,12 +1200,12 @@ def codex(n):
             pid = f'{armor["id"]}_{p}'
             st, r = recipe_for(pid)
             items.append(dict(id=pid, tex=tex(pid), name=name(pid), kind="armor", rarity=t(*RARITY.get(armor["rarity"], ("", ""))),
-                              effect=armor.get("effect_" + LANG, ""), station=STATION_NAME(st), stationTex=tex(st) if st else None, stationId=st, grid=grid(pid, st), inputs=ing(r["inputs"]) if r else [],
+                              effect=armor.get("effect_" + LANG, ""), stats=item_stats(pid, "armor", n, p), station=STATION_NAME(st), stationTex=tex(st) if st else None, stationId=st, grid=grid(pid, st), inputs=ing(r["inputs"]) if r else [],
                               count=r["count"] if r else 1, drops=[]))
     for f in C.FOODS:
         if f[3] == n and all(x["id"] != f[0] for x in items):
             st, r = recipe_for(f[0])
-            items.append(dict(id=f[0], tex=tex(f[0]), name=name(f[0]), kind="food", rarity="", effect=f[4] if LANG == "en" else f[5],
+            items.append(dict(id=f[0], tex=tex(f[0]), name=name(f[0]), kind="food", rarity="", effect=f[4] if LANG == "en" else f[5], stats=item_stats(f[0], "food", n),
                               station=STATION_NAME(st), stationTex=tex(st) if st else None, stationId=st, grid=grid(f[0], st), inputs=ing(r["inputs"]) if r else [], count=r["count"] if r else 1, drops=[]))
     blocks = []
     for b in C.BLOCKS:
@@ -1715,6 +1826,8 @@ def build_copy():
         stationsP=t("Every world has its own. Pick one to see what it takes to build and what it makes.",
                     "Chaque monde a la sienne. Choisis-en une pour voir ce qu'il faut pour la construire et ce qu'elle fabrique."),
         aBlock=t("Block", "Bloc"), anItem=t("Item", "Objet"), world=t("World", "Monde"),
+        statsH=t("Stats", "Caractéristiques"),
+        statsNote=t("Base values: the class rolled when it is crafted raises them.", "Valeurs de base : la classe tirée à la fabrication les augmente."),
         recipeH=t("Recipe", "Recette"), usesH=t("Used to make", "Sert à fabriquer"), makesH=t("What it makes", "Ce qu'elle fabrique"),
         desc=t("Every item and block Matriochka adds, with its recipe drawn slot by slot and the station that makes it.",
                "Tous les objets et blocs qu'ajoute Matriochka, avec leur recette dessinée case par case et la station qui les fabrique."),

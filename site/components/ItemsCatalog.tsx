@@ -166,6 +166,15 @@ export default function ItemsCatalog({ worlds, c }: { worlds: World[]; c: Record
                 {ew && <button type="button" className="ic-wlink" onClick={() => setWorld(ew.n)}>{ew.n === 0 ? ew.name : `${c.world} ${ew.n}, ${ew.name}`}</button>}
               </p>
               {e.effect && <p className="ic-eff">{e.effect}</p>}
+              {e.stats && e.stats.length > 0 && (
+                <>
+                  <h3 className="ic-sh">{c.statsH}</h3>
+                  <dl className="ic-stats">
+                    {e.stats.map((x, k) => <div key={k}><dt>{x.k}</dt><dd>{x.v}</dd></div>)}
+                  </dl>
+                  {(e.kind === "weapon" || e.kind === "armor") && <p className="ic-note">{c.statsNote}</p>}
+                </>
+              )}
 
               <h3 className="ic-sh">{c.recipeH}</h3>
               {e.inputs.length > 0

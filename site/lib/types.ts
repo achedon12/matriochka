@@ -33,7 +33,7 @@ export interface World {
 }
 
 export interface CodexEntry {
-  id: string; tex: string | null; name: string; kind: string; rarity?: string; effect: string;
+  id: string; tex: string | null; name: string; kind: string; rarity?: string; effect: string; stats?: { k: string; v: string }[];
   station: string | null; stationTex?: string | null; stationId?: string | null; grid?: (Ing | null)[] | null; inputs: Ing[]; count: number; drops: string[]; yields?: string | null;
 }
 export interface Codex {

@@ -114,7 +114,7 @@
   "home": {
    "tagline": "Chaque bloc peut contenir un monde.",
    "intro": "Un mod Fabric pour Minecraft 26.3. Dix mondes, chacun scellé dans un seul bloc et emboîté dans le précédent. Chaque monde a sa règle, ses créatures, sa station, et un boss qui garde le noyau ouvrant le suivant.",
-   "facts": "Minecraft 26.3 sous Fabric, version 0.4.3. Solo et multijoueur.",
+   "facts": "Minecraft 26.3 sous Fabric, version 0.5.0. Solo et multijoueur.",
    "dollsTitle": "Un jeu de onze poupées gigognes qu'on vient d'ouvrir : la Surface, puis les mondes 1 à 10, de la plus grande à la plus petite",
    "dollsCaption": "La Surface, puis les dix mondes qu'elle contient. Choisis une poupée pour ouvrir son monde.",
    "trailerH": "La bande-annonce",
@@ -236,7 +236,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.4.3, journal des changements et code source",
+     "note": "Version 0.5.0, journal des changements et code source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -323,8 +323,8 @@
    "gallery": [],
    "ctaH": "Prêt à rétrécir ?",
    "ctaP": "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25. En anglais, français, espagnol, allemand et portugais du Brésil.",
-   "ctaBtn": "Obtenir la version 0.4.3",
-   "download": "Télécharger la 0.4.3",
+   "ctaBtn": "Obtenir la version 0.5.0",
+   "download": "Télécharger la 0.5.0",
    "desc": "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
   },
   "worlds": {
@@ -508,6 +508,8 @@
    "aBlock": "Bloc",
    "anItem": "Objet",
    "world": "Monde",
+   "statsH": "Caractéristiques",
+   "statsNote": "Valeurs de base : la classe tirée à la fabrication les augmente.",
    "recipeH": "Recette",
    "usesH": "Sert à fabriquer",
    "makesH": "Ce qu'elle fabrique",
@@ -1876,7 +1878,7 @@
   "download": {
    "h": "Télécharger",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.4.3 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
+   "lead": "Version 0.5.0 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
    "desc": "Télécharger Matriochka pour Minecraft 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur.",
    "sources": [
     {
@@ -1946,7 +1948,7 @@
    "installH": "Installation",
    "steps": [
     "Installe Fabric Loader pour Minecraft 26.3.",
-    "Télécharge matriochka-0.4.3+26.3.jar depuis les versions GitHub.",
+    "Télécharge matriochka-0.5.0+26.3.jar depuis les versions GitHub.",
     "Place-le dans ton dossier mods avec Fabric API et GeckoLib.",
     "Lance le profil Fabric et crée un nouveau monde. Le Parchemin de l'artisan t'attend dans l'inventaire."
    ],
@@ -2227,6 +2229,7 @@
       "kind": "guide",
       "rarity": "",
       "effect": "Explique le mod, puis devient le Journal.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2274,6 +2277,7 @@
       "kind": "guide",
       "rarity": "",
       "effect": "Histoire, objectifs, quêtes et karma.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2289,6 +2293,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre la Graine du monde 1.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2306,6 +2311,7 @@
       "kind": "doll",
       "rarity": "Légendaire",
       "effect": "Brise une couche au lieu de te laisser mourir.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2321,6 +2327,7 @@
       "kind": "consumable",
       "rarity": "Commun",
       "effect": "Te ramène au bloc-monde.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2374,6 +2381,7 @@
       "kind": "consumable",
       "rarity": "Rare",
       "effect": "Change aléatoirement la classe d'un objet.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2443,6 +2451,7 @@
       "kind": "doll",
       "rarity": "",
       "effect": "Conserve l'accès à un monde cassé.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2458,6 +2467,7 @@
       "kind": "page",
       "rarity": "",
       "effect": "Une page perdue du Journal de l'artisan.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2473,6 +2483,7 @@
       "kind": "resource",
       "rarity": "Commun",
       "effect": "Sert aux berceaux et aux fils.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2510,6 +2521,7 @@
       "kind": "resource",
       "rarity": "Épique",
       "effect": "Laissé par un boss vaincu. Chaque amélioration de classe en demande.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2525,6 +2537,7 @@
       "kind": "gem",
       "rarity": "Épique",
       "effect": "Perdue par un boss muté. Riche en âme.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2540,6 +2553,7 @@
       "kind": "tool",
       "rarity": "Rare",
       "effect": "Frappe un bloc-monde de ton groupe avec : le monde à l'intérieur tremble et des blocs se détachent sur ceux qui s'y trouvent. Accroupis-toi et utilise le bloc à mains nues pour plutôt les aider.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -2603,6 +2617,7 @@
       "kind": "soul",
       "rarity": "Commun",
       "effect": "Contient 5 âmes. Utilise-le pour les libérer (accroupi : toute la pile).",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2618,6 +2633,7 @@
       "kind": "soul",
       "rarity": "Rare",
       "effect": "Contient 20 âmes. Utilise-la pour les libérer (accroupi : toute la pile).",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2633,6 +2649,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Tiens-la en main principale et la poupée cachée suivante dans l'autre main, puis utilise-la.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2648,6 +2665,7 @@
       "kind": "secret",
       "rarity": "Légendaire",
       "effect": "Dix poupées, l'une dans l'autre. Ouvre-la une fois l'Inachevée tombée : le monde 0 dort dedans.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2663,6 +2681,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Rien n'y est écrit. Il ne reste rien à finir.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -2678,6 +2697,7 @@
       "kind": "trophy",
       "rarity": "Légendaire",
       "effect": "Onze poupées en une, gagnées au bout de l'Épreuve des onze.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3729,6 +3749,7 @@
       "kind": "resource",
       "rarity": "Commun",
       "effect": "Base des antidotes.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3748,6 +3769,7 @@
       "kind": "resource",
       "rarity": "Commun",
       "effect": "Bois vivant.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3766,6 +3788,7 @@
       "kind": "gem",
       "rarity": "Rare",
       "effect": "Minerai du monde 1.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3783,6 +3806,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Armure du monde.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3800,6 +3824,12 @@
       "kind": "consumable",
       "rarity": "Commun",
       "effect": "Réduit la toxine de 50.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Toxine -50"
+       }
+      ],
       "station": "Cuve de spores",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -3828,6 +3858,7 @@
       "kind": "mask",
       "rarity": "Rare",
       "effect": "Divise par 2 la montée de toxine.",
+      "stats": [],
       "station": "Cuve de spores",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -3862,6 +3893,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "7"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "480"
+       }
+      ],
       "station": "Cuve de spores",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -3890,6 +3935,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre le chemin du monde 2.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -3907,6 +3953,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Se plante sur la Terre de monde 0 bêchée, avec de l'eau à moins de quatre blocs, pour faire éclore le monde 1.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -3996,6 +4043,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Quatre encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -4011,6 +4059,20 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "Toxine ralentie pendant 5 minutes.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "Dure 5 min"
+       }
+      ],
       "station": "Cuve de spores",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -4039,6 +4101,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -4054,6 +4117,12 @@
       "kind": "bow",
       "rarity": "Rare",
       "effect": "Ses flèches éclatent en un nuage de spores toxiques là où elles frappent.",
+      "stats": [
+       {
+        "k": "Durabilité",
+        "v": "480"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -4069,6 +4138,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,25"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "2 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "286"
+       }
+      ],
       "station": "Cuve de spores",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -4091,6 +4178,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "6"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,25"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "2 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "416"
+       }
+      ],
       "station": "Cuve de spores",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -4113,6 +4218,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "4"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,25"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "2 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "390"
+       }
+      ],
       "station": "Cuve de spores",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -4135,6 +4258,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,25"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "2 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "338"
+       }
+      ],
       "station": "Cuve de spores",
       "stationTex": "stations/spore_vat.png",
       "stationId": "spore_vat",
@@ -5148,6 +5289,7 @@
       "kind": "resource",
       "rarity": "Commun",
       "effect": "Combustible puissant.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5167,6 +5309,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Un filon entier en un bloc.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5185,6 +5328,7 @@
       "kind": "ingot",
       "rarity": "Rare",
       "effect": "Base de l'équipement du monde 2.",
+      "stats": [],
       "station": "Fonderie de cendre",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5216,6 +5360,12 @@
       "kind": "consumable",
       "rarity": "Commun",
       "effect": "Réduit la chaleur de 50.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Chaleur -50"
+       }
+      ],
       "station": "Fonderie de cendre",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5244,6 +5394,28 @@
       "kind": "drill",
       "rarity": "Épique",
       "effect": "Mine en 3x3 et brûle de la Roche ardente.",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "2"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,2"
+       },
+       {
+        "k": "Vitesse de minage",
+        "v": "8,2"
+       },
+       {
+        "k": "Mine",
+        "v": "jusqu'aux blocs de niveau fer"
+       },
+       {
+        "k": "Durabilité",
+        "v": "660"
+       }
+      ],
       "station": "Fonderie de cendre",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5278,6 +5450,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "9"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "660"
+       }
+      ],
       "station": "Fonderie de cendre",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5306,6 +5492,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre le chemin du monde 3.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5323,6 +5510,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Pose-le à moins de 3 blocs d'une lave, avec au moins 4 blocs de Roche de cendre autour : un portail de braises ouvre le monde 2.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -5412,6 +5600,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Sept encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5427,6 +5616,20 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "Chaleur ralentie pendant 5 minutes.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "Dure 5 min"
+       }
+      ],
       "station": "Fonderie de cendre",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5455,6 +5658,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5470,6 +5674,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "Embrase l'ennemi ; un coup sur trois éclate en un cercle de flammes. Le manier te réchauffe dans les Filons.",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "11"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "660"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -5485,6 +5703,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "Divise par 2 la chaleur.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "4 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "352"
+       }
+      ],
       "station": "Fonderie de cendre",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5507,6 +5743,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "Divise par 2 la chaleur.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "6"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "4 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "512"
+       }
+      ],
       "station": "Fonderie de cendre",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5529,6 +5783,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "Divise par 2 la chaleur.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "5"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "4 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "480"
+       }
+      ],
       "station": "Fonderie de cendre",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -5551,6 +5823,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "Divise par 2 la chaleur.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "4 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "416"
+       }
+      ],
       "station": "Fonderie de cendre",
       "stationTex": "stations/ash_foundry.png",
       "stationId": "ash_foundry",
@@ -6780,6 +7070,7 @@
       "kind": "key",
       "rarity": "Rare",
       "effect": "Ouvre une porte scellée, une fois.",
+      "stats": [],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6811,6 +7102,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Pièges et équipement.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -6831,6 +7123,12 @@
       "kind": "tool",
       "rarity": "Commun",
       "effect": "Révèle les structures proches.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Recharge 2 s"
+       }
+      ],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6859,6 +7157,7 @@
       "kind": "tool",
       "rarity": "Commun",
       "effect": "Ouvre une serrure ordinaire.",
+      "stats": [],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6887,6 +7186,7 @@
       "kind": "consumable",
       "rarity": "Commun",
       "effect": "Immobilise un mob.",
+      "stats": [],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6915,6 +7215,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "11"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "840"
+       }
+      ],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -6943,6 +7257,7 @@
       "kind": "doll",
       "rarity": "Légendaire",
       "effect": "Une base de poche pour ton groupe. Utilise-la pour entrer, puis de nouveau pour sortir.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -7027,6 +7342,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre le chemin du monde 4.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -7044,6 +7360,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Pose-la contre une porte en fer et donne-lui un signal de redstone (levier, bouton) : la clé tourne et le monde 3 s'ouvre.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -7133,6 +7450,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Deux encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -7148,6 +7466,7 @@
       "kind": "offering",
       "rarity": "Épique",
       "effect": "Tenue à l'autel d'arène, elle réveille le Grand Geôlier.",
+      "stats": [],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7182,6 +7501,20 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "Satiété durable.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "Saturation pendant 2 s"
+       }
+      ],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7210,6 +7543,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -7225,6 +7559,24 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "Longue portée. Chaque coup tire l'ennemi vers toi et le ralentit.",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "9"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,8"
+       },
+       {
+        "k": "Portée",
+        "v": "+2,5"
+       },
+       {
+        "k": "Durabilité",
+        "v": "840"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -7240,6 +7592,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,75"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "6 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "418"
+       }
+      ],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7262,6 +7632,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "7"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,75"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "6 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "608"
+       }
+      ],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7284,6 +7676,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "5"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,75"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "6 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "570"
+       }
+      ],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -7306,6 +7720,24 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "0,75"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "6 %"
+       },
+       {
+        "k": "Durabilité",
+        "v": "494"
+       }
+      ],
       "station": "Table du Geôlier",
       "stationTex": "stations/jailer_table.png",
       "stationId": "jailer_table",
@@ -8379,6 +8811,7 @@
       "kind": "resource",
       "rarity": "Commun",
       "effect": "Toile du planeur.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8396,6 +8829,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Énergie de la Forge à foudre.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8414,6 +8848,7 @@
       "kind": "gem",
       "rarity": "Rare",
       "effect": "Équipement et Lanterne noire.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8433,6 +8868,7 @@
       "kind": "glider",
       "rarity": "Épique",
       "effect": "Plane entre les îles.",
+      "stats": [],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8467,6 +8903,12 @@
       "kind": "hook",
       "rarity": "Rare",
       "effect": "Te tire vers une surface.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Recharge 1,5 s"
+       }
+      ],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8501,6 +8943,20 @@
       "kind": "weapon",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "13"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 020"
+       }
+      ],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8529,6 +8985,7 @@
       "kind": "layer",
       "rarity": "Rare",
       "effect": "Se pose sur une armure à la Table de classe. Quand la couche extérieure casse, la suivante prend le relais.",
+      "stats": [],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8563,6 +9020,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre le chemin du monde 5.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8580,6 +9038,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Pose-le au sommet d'un paratonnerre, sous le ciel ouvert. Un orage déchire le monde 4 ; une Essence d'orage qu'on lui donne aussi.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -8669,6 +9128,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Neuf encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8684,6 +9144,7 @@
       "kind": "offering",
       "rarity": "Épique",
       "effect": "Tenu à l'autel d'arène, il réveille le Roi des tempêtes.",
+      "stats": [],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8718,6 +9179,20 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "Chutes réduites pendant 3 minutes.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "Chute lente pendant 3 min"
+       }
+      ],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8746,6 +9221,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8761,6 +9237,24 @@
       "kind": "weapon",
       "rarity": "Épique",
       "effect": "Utilise-le pour le lancer : la foudre tombe où il frappe, puis il revient dans ta main.",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "12"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,4"
+       },
+       {
+        "k": "Se lance",
+        "v": "oui"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 020"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8776,6 +9270,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "1"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "8 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "484"
+       }
+      ],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8798,6 +9314,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "7"
+       },
+       {
+        "k": "Robustesse",
+        "v": "1"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "8 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+2"
+       },
+       {
+        "k": "Durabilité",
+        "v": "704"
+       }
+      ],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8820,6 +9358,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "6"
+       },
+       {
+        "k": "Robustesse",
+        "v": "1"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "8 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "660"
+       }
+      ],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -8842,6 +9402,28 @@
       "kind": "armor",
       "rarity": "Rare",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "1"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "8 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "572"
+       }
+      ],
       "station": "Forge à foudre",
       "stationTex": "stations/lightning_forge.png",
       "stationId": "lightning_forge",
@@ -9886,6 +10468,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Base de l'équipement du monde 5.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -9905,6 +10488,7 @@
       "kind": "gem",
       "rarity": "Épique",
       "effect": "4 fragments donnent 1 diamant.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -9924,6 +10508,16 @@
       "kind": "lantern",
       "rarity": "Épique",
       "effect": "20 minutes de lumière.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Vision nocturne pendant 20 min"
+       },
+       {
+        "k": "Effet",
+        "v": "Recharge 1 min"
+       }
+      ],
       "station": "Autel obscur",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -9958,6 +10552,16 @@
       "kind": "sonar",
       "rarity": "Rare",
       "effect": "Révèle les créatures proches.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Révèle les créatures à 32 blocs pendant 8 s"
+       },
+       {
+        "k": "Effet",
+        "v": "Recharge 10 s"
+       }
+      ],
       "station": "Autel obscur",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -9986,6 +10590,12 @@
       "kind": "consumable",
       "rarity": "Commun",
       "effect": "Efface ton bruit.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Bruit -100"
+       }
+      ],
       "station": "Autel obscur",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10014,6 +10624,20 @@
       "kind": "weapon",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "16"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 200"
+       }
+      ],
       "station": "Autel obscur",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10042,6 +10666,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre le chemin du monde 6.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -10059,6 +10684,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Allume-la dans le noir complet, avec au moins 4 blocs de Lueur éteinte à moins de 2 blocs : sa flamme noire ouvre le monde 5.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -10148,6 +10774,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Cinq encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -10163,6 +10790,20 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "Bruit réduit pendant 5 minutes.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "Silencieux pendant 5 min"
+       }
+      ],
       "station": "Autel obscur",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10191,6 +10832,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -10206,6 +10848,16 @@
       "kind": "ward",
       "rarity": "Épique",
       "effect": "Pare comme un bouclier. Chaque coup paré jette un éclair : l'attaquant est aveuglé, repoussé et marqué.",
+      "stats": [
+       {
+        "k": "Bloque",
+        "v": "90 % d'un coup"
+       },
+       {
+        "k": "Durabilité",
+        "v": "560"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -10221,6 +10873,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "4"
+       },
+       {
+        "k": "Robustesse",
+        "v": "1,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "10 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "550"
+       }
+      ],
       "station": "Autel obscur",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10243,6 +10917,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "8"
+       },
+       {
+        "k": "Robustesse",
+        "v": "1,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "10 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+2"
+       },
+       {
+        "k": "Durabilité",
+        "v": "800"
+       }
+      ],
       "station": "Autel obscur",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10265,6 +10961,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "5"
+       },
+       {
+        "k": "Robustesse",
+        "v": "1,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "10 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+2"
+       },
+       {
+        "k": "Durabilité",
+        "v": "750"
+       }
+      ],
       "station": "Autel obscur",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -10287,6 +11005,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "1,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "10 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "650"
+       }
+      ],
       "station": "Autel obscur",
       "stationTex": "stations/dark_altar.png",
       "stationId": "dark_altar",
@@ -11297,6 +12037,7 @@
       "kind": "ingot",
       "rarity": "Rare",
       "effect": "Base de l'équipement du monde 6.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11316,6 +12057,7 @@
       "kind": "gem",
       "rarity": "Épique",
       "effect": "Inverseur et Perle abyssale.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11335,6 +12077,7 @@
       "kind": "boots",
       "rarity": "Épique",
       "effect": "Ignorent les inversions de gravité.",
+      "stats": [],
       "station": "Inverseur",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11363,6 +12106,12 @@
       "kind": "consumable",
       "rarity": "Commun",
       "effect": "Annule une inversion.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Stable pendant 30 s"
+       }
+      ],
       "station": "Inverseur",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11391,6 +12140,20 @@
       "kind": "weapon",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "19"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 380"
+       }
+      ],
       "station": "Inverseur",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11419,6 +12182,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre le chemin du monde 7.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11436,6 +12200,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Pose-les entre deux blocs de verre face à face, à deux blocs de chaque côté : le monde 6 s'ouvre dans le reflet.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -11525,6 +12290,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Une encoche est gravée sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11540,6 +12306,20 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "Stabilité pendant 30 secondes.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "Dure 30 s"
+       }
+      ],
       "station": "Inverseur",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11568,6 +12348,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11583,6 +12364,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "4"
+       },
+       {
+        "k": "Robustesse",
+        "v": "2"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "12 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "616"
+       }
+      ],
       "station": "Inverseur",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11605,6 +12408,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "8"
+       },
+       {
+        "k": "Robustesse",
+        "v": "2"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "12 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+3"
+       },
+       {
+        "k": "Durabilité",
+        "v": "896"
+       }
+      ],
       "station": "Inverseur",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11627,6 +12452,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "6"
+       },
+       {
+        "k": "Robustesse",
+        "v": "2"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "12 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+2"
+       },
+       {
+        "k": "Durabilité",
+        "v": "840"
+       }
+      ],
       "station": "Inverseur",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -11649,6 +12496,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "4"
+       },
+       {
+        "k": "Robustesse",
+        "v": "2"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "12 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+1"
+       },
+       {
+        "k": "Durabilité",
+        "v": "728"
+       }
+      ],
       "station": "Inverseur",
       "stationTex": "stations/inverter.png",
       "stationId": "inverter",
@@ -12688,6 +13557,7 @@
       "kind": "dust",
       "rarity": "Rare",
       "effect": "Casque-tuba de sel et Arbrisseau des quatre saisons.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12707,6 +13577,7 @@
       "kind": "gem",
       "rarity": "Rare",
       "effect": "Extraite des filons des récifs. Casque-tuba de nacre.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12724,6 +13595,7 @@
       "kind": "ingot",
       "rarity": "Rare",
       "effect": "Casque-tuba de cobalt et scaphandre.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12741,6 +13613,7 @@
       "kind": "gem",
       "rarity": "Épique",
       "effect": "Casque-tuba de perle et Arbrisseau des quatre saisons.",
+      "stats": [],
       "station": "Presse abyssale",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -12774,6 +13647,16 @@
       "kind": "consumable",
       "rarity": "Commun",
       "effect": "Remplit à moitié la réserve d'un casque-tuba, ou ton souffle.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Remplit la moitié du réservoir d'un casque-tuba"
+       },
+       {
+        "k": "Effet",
+        "v": "Sans casque : +60 de souffle"
+       }
+      ],
       "station": "Presse abyssale",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -12802,6 +13685,12 @@
       "kind": "thruster",
       "rarity": "Épique",
       "effect": "Accélère sous l'eau.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Recharge 0,75 s"
+       }
+      ],
       "station": "Presse abyssale",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -12830,6 +13719,20 @@
       "kind": "weapon",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "23"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 560"
+       }
+      ],
       "station": "Presse abyssale",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -12858,6 +13761,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre le chemin du monde 8.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12875,6 +13779,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Lâche-la dans une eau d'au moins 3 blocs de profondeur : un tourbillon se forme et ouvre le monde 7.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -12964,6 +13869,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Dix encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -12979,6 +13885,24 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "L'oxygène dure deux fois plus longtemps pendant 5 minutes.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "Dure 5 min"
+       },
+       {
+        "k": "Effet",
+        "v": "+30 de souffle"
+       }
+      ],
       "station": "Presse abyssale",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -13007,6 +13931,20 @@
       "kind": "snorkel",
       "rarity": "Rare",
       "effect": "Permet de respirer sous l'eau tant que sa réserve tient (3 min). Fragile : les coups l'usent vite.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "2"
+       },
+       {
+        "k": "Réservoir d'air",
+        "v": "3 min"
+       },
+       {
+        "k": "Durabilité",
+        "v": "44"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13022,6 +13960,24 @@
       "kind": "snorkel",
       "rarity": "Rare",
       "effect": "Permet de respirer sous l'eau tant que sa réserve tient (5 min). Fragile : les coups l'usent vite.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "1"
+       },
+       {
+        "k": "Réservoir d'air",
+        "v": "5 min"
+       },
+       {
+        "k": "Durabilité",
+        "v": "66"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13037,6 +13993,24 @@
       "kind": "snorkel",
       "rarity": "Épique",
       "effect": "Permet de respirer sous l'eau tant que sa réserve tient (8 min). Fragile : les coups l'usent vite.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "3"
+       },
+       {
+        "k": "Robustesse",
+        "v": "2"
+       },
+       {
+        "k": "Réservoir d'air",
+        "v": "8 min"
+       },
+       {
+        "k": "Durabilité",
+        "v": "110"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13052,6 +14026,24 @@
       "kind": "snorkel",
       "rarity": "Épique",
       "effect": "Permet de respirer sous l'eau tant que sa réserve tient (12 min). Fragile : les coups l'usent vite.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "4"
+       },
+       {
+        "k": "Robustesse",
+        "v": "3"
+       },
+       {
+        "k": "Réservoir d'air",
+        "v": "12 min"
+       },
+       {
+        "k": "Durabilité",
+        "v": "154"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13067,6 +14059,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13082,6 +14075,24 @@
       "kind": "weapon",
       "rarity": "Épique",
       "effect": "Utilise-le pour le lancer : il ramène à toi ce qu'il touche, plus loin sous l'eau. Sa ligne le ramène.",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "21"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,4"
+       },
+       {
+        "k": "Se lance",
+        "v": "oui"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 560"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -13097,6 +14108,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "Résiste à la pression. Se porte avec un casque-tuba.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "9"
+       },
+       {
+        "k": "Robustesse",
+        "v": "2,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "14 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+5"
+       },
+       {
+        "k": "Durabilité",
+        "v": "992"
+       }
+      ],
       "station": "Presse abyssale",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -13119,6 +14152,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "Résiste à la pression. Se porte avec un casque-tuba.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "7"
+       },
+       {
+        "k": "Robustesse",
+        "v": "2,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "14 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+4"
+       },
+       {
+        "k": "Durabilité",
+        "v": "930"
+       }
+      ],
       "station": "Presse abyssale",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -13141,6 +14196,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "Résiste à la pression. Se porte avec un casque-tuba.",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "4"
+       },
+       {
+        "k": "Robustesse",
+        "v": "2,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "14 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+2"
+       },
+       {
+        "k": "Durabilité",
+        "v": "806"
+       }
+      ],
       "station": "Presse abyssale",
       "stationTex": "stations/abyssal_press.png",
       "stationId": "abyssal_press",
@@ -14260,6 +15337,7 @@
       "kind": "dust",
       "rarity": "Rare",
       "effect": "Base de l'équipement du monde 8.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14279,6 +15357,7 @@
       "kind": "gem",
       "rarity": "Épique",
       "effect": "Pieu sismique.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14298,6 +15377,16 @@
       "kind": "hourglass",
       "rarity": "Épique",
       "effect": "Ralentit le cycle du monde.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Dure 90 s"
+       },
+       {
+        "k": "Effet",
+        "v": "Recharge 5 min"
+       }
+      ],
       "station": "Atelier du temps",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14332,6 +15421,12 @@
       "kind": "consumable",
       "rarity": "Commun",
       "effect": "Protège de la saison en cours.",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "La saison tient 2 min"
+       }
+      ],
       "station": "Atelier du temps",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14360,6 +15455,20 @@
       "kind": "weapon",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "28"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 740"
+       }
+      ],
       "station": "Atelier du temps",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14388,6 +15497,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre le chemin du monde 9.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14405,6 +15515,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Plante-le sur de l'herbe ou de la terre. Il ouvre le monde 8 à l'aube ou au crépuscule.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -14494,6 +15605,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Six encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14509,6 +15621,7 @@
       "kind": "offering",
       "rarity": "Épique",
       "effect": "Tenue à l'autel d'arène, elle réveille le Maître des saisons.",
+      "stats": [],
       "station": "Atelier du temps",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14543,6 +15656,20 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "Protège de la saison pendant 3 minutes.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "Dure 3 min"
+       }
+      ],
       "station": "Atelier du temps",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14571,6 +15698,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14586,6 +15714,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "5"
+       },
+       {
+        "k": "Robustesse",
+        "v": "3"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "16 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+2"
+       },
+       {
+        "k": "Durabilité",
+        "v": "748"
+       }
+      ],
       "station": "Atelier du temps",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14608,6 +15758,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "10"
+       },
+       {
+        "k": "Robustesse",
+        "v": "3"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "16 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 088"
+       }
+      ],
       "station": "Atelier du temps",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14630,6 +15802,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "7"
+       },
+       {
+        "k": "Robustesse",
+        "v": "3"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "16 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+5"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 020"
+       }
+      ],
       "station": "Atelier du temps",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -14652,6 +15846,28 @@
       "kind": "armor",
       "rarity": "Épique",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "4"
+       },
+       {
+        "k": "Robustesse",
+        "v": "3"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "16 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+2"
+       },
+       {
+        "k": "Durabilité",
+        "v": "884"
+       }
+      ],
       "station": "Atelier du temps",
       "stationTex": "stations/time_workshop.png",
       "stationId": "time_workshop",
@@ -15655,6 +16871,7 @@
       "kind": "resource",
       "rarity": "Rare",
       "effect": "Base de l'équipement du monde 9.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15677,6 +16894,7 @@
       "kind": "resource",
       "rarity": "Légendaire",
       "effect": "Matriochka du voyageur.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15694,6 +16912,12 @@
       "kind": "anchor",
       "rarity": "Rare",
       "effect": "Calme le sol (rayon 4).",
+      "stats": [
+       {
+        "k": "Effet",
+        "v": "Ancré pendant 10 min"
+       }
+      ],
       "station": "Ancre de terrain",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15722,6 +16946,7 @@
       "kind": "boots",
       "rarity": "Épique",
       "effect": "Plus de chutes dues au sol.",
+      "stats": [],
       "station": "Ancre de terrain",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15750,6 +16975,20 @@
       "kind": "weapon",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "33"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 920"
+       }
+      ],
       "station": "Ancre de terrain",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15778,6 +17017,7 @@
       "kind": "key",
       "rarity": "",
       "effect": "Matriochka du voyageur.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15793,6 +17033,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Ouvre le chemin du monde 10.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15810,6 +17051,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Enfonce-le dans la pierre ou l'ardoise des abîmes sous y 40 : le sol se fend et le monde 9 s'ouvre.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -15899,6 +17141,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Trois encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15914,6 +17157,20 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "Pied ferme pendant 5 minutes.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "Ancré pendant 5 min"
+       }
+      ],
       "station": "Ancre de terrain",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15942,6 +17199,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15957,6 +17215,28 @@
       "kind": "tool",
       "rarity": "Épique",
       "effect": "Mine une colonne de trois. Utilise-la sur le sol : une secousse qui ébranle les créatures autour de toi.",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "3"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,1"
+       },
+       {
+        "k": "Vitesse de minage",
+        "v": "12,4"
+       },
+       {
+        "k": "Mine",
+        "v": "jusqu'aux blocs de netherite"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 920"
+       }
+      ],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -15972,6 +17252,28 @@
       "kind": "armor",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "5"
+       },
+       {
+        "k": "Robustesse",
+        "v": "3,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "18 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+3"
+       },
+       {
+        "k": "Durabilité",
+        "v": "814"
+       }
+      ],
       "station": "Ancre de terrain",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -15994,6 +17296,28 @@
       "kind": "armor",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "11"
+       },
+       {
+        "k": "Robustesse",
+        "v": "3,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "18 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+8"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 184"
+       }
+      ],
       "station": "Ancre de terrain",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -16016,6 +17340,28 @@
       "kind": "armor",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "8"
+       },
+       {
+        "k": "Robustesse",
+        "v": "3,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "18 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 110"
+       }
+      ],
       "station": "Ancre de terrain",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -16038,6 +17384,28 @@
       "kind": "armor",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "4"
+       },
+       {
+        "k": "Robustesse",
+        "v": "3,5"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "18 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+3"
+       },
+       {
+        "k": "Durabilité",
+        "v": "962"
+       }
+      ],
       "station": "Ancre de terrain",
       "stationTex": "stations/terrain_anchor.png",
       "stationId": "terrain_anchor",
@@ -17002,6 +18370,7 @@
       "kind": "thread",
       "rarity": "Rare",
       "effect": "Base de l'équipement final.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17023,6 +18392,7 @@
       "kind": "gem",
       "rarity": "Légendaire",
       "effect": "Améliore l'équipement final.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17040,6 +18410,20 @@
       "kind": "weapon",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Dégâts",
+        "v": "40"
+       },
+       {
+        "k": "Vitesse d'attaque",
+        "v": "1,6"
+       },
+       {
+        "k": "Durabilité",
+        "v": "2 100"
+       }
+      ],
       "station": "Métier final",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17074,6 +18458,7 @@
       "kind": "core",
       "rarity": "Légendaire",
       "effect": "Le cœur de la créature.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17091,6 +18476,7 @@
       "kind": "seed",
       "rarity": "Épique",
       "effect": "Pose-la n'importe où et ouvre-la : tu rapetisses et tu entres dans le monde 10.",
+      "stats": [],
       "station": "Établi matriciel",
       "stationTex": "stations/matrix_workbench.png",
       "stationId": "matrix_workbench",
@@ -17150,6 +18536,7 @@
       "kind": "secret",
       "rarity": "",
       "effect": "Huit encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17165,6 +18552,7 @@
       "kind": "offering",
       "rarity": "Épique",
       "effect": "Tenue à l'autel d'arène, elle réveille l'Inachevée.",
+      "stats": [],
       "station": "Métier final",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17199,6 +18587,24 @@
       "kind": "food",
       "rarity": "Commun",
       "effect": "Les effets de tous les plats pendant 2 minutes.",
+      "stats": [
+       {
+        "k": "Nourriture",
+        "v": "6 (3 cuisses)"
+       },
+       {
+        "k": "Saturation",
+        "v": "9,6"
+       },
+       {
+        "k": "Effet",
+        "v": "L'effet de chaque plat des mondes pendant 2 min"
+       },
+       {
+        "k": "Effet",
+        "v": "Chute lente pendant 2 min"
+       }
+      ],
       "station": "Métier final",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17239,6 +18645,7 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17254,6 +18661,28 @@
       "kind": "armor",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "5"
+       },
+       {
+        "k": "Robustesse",
+        "v": "4"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "20 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+4"
+       },
+       {
+        "k": "Durabilité",
+        "v": "880"
+       }
+      ],
       "station": "Métier final",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17282,6 +18711,28 @@
       "kind": "armor",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "11"
+       },
+       {
+        "k": "Robustesse",
+        "v": "4"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "20 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+10"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 280"
+       }
+      ],
       "station": "Métier final",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17310,6 +18761,28 @@
       "kind": "armor",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "9"
+       },
+       {
+        "k": "Robustesse",
+        "v": "4"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "20 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+7"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 200"
+       }
+      ],
       "station": "Métier final",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -17338,6 +18811,28 @@
       "kind": "armor",
       "rarity": "Légendaire",
       "effect": "",
+      "stats": [
+       {
+        "k": "Armure",
+        "v": "5"
+       },
+       {
+        "k": "Robustesse",
+        "v": "4"
+       },
+       {
+        "k": "Résistance au recul",
+        "v": "20 %"
+       },
+       {
+        "k": "Vie max",
+        "v": "+4"
+       },
+       {
+        "k": "Durabilité",
+        "v": "1 040"
+       }
+      ],
       "station": "Métier final",
       "stationTex": "stations/final_loom.png",
       "stationId": "final_loom",
@@ -26084,6 +27579,7 @@
      "kind": "guide",
      "rarity": "",
      "effect": "Explique le mod, puis devient le Journal.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26131,6 +27627,7 @@
      "kind": "guide",
      "rarity": "",
      "effect": "Histoire, objectifs, quêtes et karma.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26146,6 +27643,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre la Graine du monde 1.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26163,6 +27661,7 @@
      "kind": "doll",
      "rarity": "Légendaire",
      "effect": "Brise une couche au lieu de te laisser mourir.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26178,6 +27677,7 @@
      "kind": "consumable",
      "rarity": "Commun",
      "effect": "Te ramène au bloc-monde.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26231,6 +27731,7 @@
      "kind": "consumable",
      "rarity": "Rare",
      "effect": "Change aléatoirement la classe d'un objet.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26300,6 +27801,7 @@
      "kind": "doll",
      "rarity": "",
      "effect": "Conserve l'accès à un monde cassé.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26315,6 +27817,7 @@
      "kind": "page",
      "rarity": "",
      "effect": "Une page perdue du Journal de l'artisan.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26330,6 +27833,7 @@
      "kind": "resource",
      "rarity": "Commun",
      "effect": "Sert aux berceaux et aux fils.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26367,6 +27871,7 @@
      "kind": "resource",
      "rarity": "Épique",
      "effect": "Laissé par un boss vaincu. Chaque amélioration de classe en demande.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26382,6 +27887,7 @@
      "kind": "gem",
      "rarity": "Épique",
      "effect": "Perdue par un boss muté. Riche en âme.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26397,6 +27903,7 @@
      "kind": "tool",
      "rarity": "Rare",
      "effect": "Frappe un bloc-monde de ton groupe avec : le monde à l'intérieur tremble et des blocs se détachent sur ceux qui s'y trouvent. Accroupis-toi et utilise le bloc à mains nues pour plutôt les aider.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -26460,6 +27967,7 @@
      "kind": "soul",
      "rarity": "Commun",
      "effect": "Contient 5 âmes. Utilise-le pour les libérer (accroupi : toute la pile).",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26475,6 +27983,7 @@
      "kind": "soul",
      "rarity": "Rare",
      "effect": "Contient 20 âmes. Utilise-la pour les libérer (accroupi : toute la pile).",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26490,6 +27999,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Tiens-la en main principale et la poupée cachée suivante dans l'autre main, puis utilise-la.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26505,6 +28015,7 @@
      "kind": "secret",
      "rarity": "Légendaire",
      "effect": "Dix poupées, l'une dans l'autre. Ouvre-la une fois l'Inachevée tombée : le monde 0 dort dedans.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26520,6 +28031,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Rien n'y est écrit. Il ne reste rien à finir.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -26535,6 +28047,7 @@
      "kind": "trophy",
      "rarity": "Légendaire",
      "effect": "Onze poupées en une, gagnées au bout de l'Épreuve des onze.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27088,6 +28601,7 @@
      "kind": "resource",
      "rarity": "Commun",
      "effect": "Base des antidotes.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27107,6 +28621,7 @@
      "kind": "resource",
      "rarity": "Commun",
      "effect": "Bois vivant.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27125,6 +28640,7 @@
      "kind": "gem",
      "rarity": "Rare",
      "effect": "Minerai du monde 1.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27142,6 +28658,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Armure du monde.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27159,6 +28676,12 @@
      "kind": "consumable",
      "rarity": "Commun",
      "effect": "Réduit la toxine de 50.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Toxine -50"
+      }
+     ],
      "station": "Cuve de spores",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27187,6 +28710,7 @@
      "kind": "mask",
      "rarity": "Rare",
      "effect": "Divise par 2 la montée de toxine.",
+     "stats": [],
      "station": "Cuve de spores",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27221,6 +28745,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "7"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "480"
+      }
+     ],
      "station": "Cuve de spores",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27249,6 +28787,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre le chemin du monde 2.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27266,6 +28805,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Se plante sur la Terre de monde 0 bêchée, avec de l'eau à moins de quatre blocs, pour faire éclore le monde 1.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -27355,6 +28895,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Quatre encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27370,6 +28911,20 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "Toxine ralentie pendant 5 minutes.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "Dure 5 min"
+      }
+     ],
      "station": "Cuve de spores",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27398,6 +28953,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27413,6 +28969,12 @@
      "kind": "bow",
      "rarity": "Rare",
      "effect": "Ses flèches éclatent en un nuage de spores toxiques là où elles frappent.",
+     "stats": [
+      {
+       "k": "Durabilité",
+       "v": "480"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27428,6 +28990,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,25"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "2 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "286"
+      }
+     ],
      "station": "Cuve de spores",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27450,6 +29030,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "6"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,25"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "2 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "416"
+      }
+     ],
      "station": "Cuve de spores",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27472,6 +29070,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "4"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,25"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "2 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "390"
+      }
+     ],
      "station": "Cuve de spores",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27494,6 +29110,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,25"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "2 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "338"
+      }
+     ],
      "station": "Cuve de spores",
      "stationTex": "stations/spore_vat.png",
      "stationId": "spore_vat",
@@ -27662,6 +29296,7 @@
      "kind": "resource",
      "rarity": "Commun",
      "effect": "Combustible puissant.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27681,6 +29316,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Un filon entier en un bloc.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27699,6 +29335,7 @@
      "kind": "ingot",
      "rarity": "Rare",
      "effect": "Base de l'équipement du monde 2.",
+     "stats": [],
      "station": "Fonderie de cendre",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27730,6 +29367,12 @@
      "kind": "consumable",
      "rarity": "Commun",
      "effect": "Réduit la chaleur de 50.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Chaleur -50"
+      }
+     ],
      "station": "Fonderie de cendre",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27758,6 +29401,28 @@
      "kind": "drill",
      "rarity": "Épique",
      "effect": "Mine en 3x3 et brûle de la Roche ardente.",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "2"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,2"
+      },
+      {
+       "k": "Vitesse de minage",
+       "v": "8,2"
+      },
+      {
+       "k": "Mine",
+       "v": "jusqu'aux blocs de niveau fer"
+      },
+      {
+       "k": "Durabilité",
+       "v": "660"
+      }
+     ],
      "station": "Fonderie de cendre",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27792,6 +29457,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "9"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "660"
+      }
+     ],
      "station": "Fonderie de cendre",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27820,6 +29499,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre le chemin du monde 3.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27837,6 +29517,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Pose-le à moins de 3 blocs d'une lave, avec au moins 4 blocs de Roche de cendre autour : un portail de braises ouvre le monde 2.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -27926,6 +29607,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Sept encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27941,6 +29623,20 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "Chaleur ralentie pendant 5 minutes.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "Dure 5 min"
+      }
+     ],
      "station": "Fonderie de cendre",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -27969,6 +29665,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27984,6 +29681,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "Embrase l'ennemi ; un coup sur trois éclate en un cercle de flammes. Le manier te réchauffe dans les Filons.",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "11"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "660"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -27999,6 +29710,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "Divise par 2 la chaleur.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "4 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "352"
+      }
+     ],
      "station": "Fonderie de cendre",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -28021,6 +29750,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "Divise par 2 la chaleur.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "6"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "4 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "512"
+      }
+     ],
      "station": "Fonderie de cendre",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -28043,6 +29790,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "Divise par 2 la chaleur.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "5"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "4 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "480"
+      }
+     ],
      "station": "Fonderie de cendre",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -28065,6 +29830,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "Divise par 2 la chaleur.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "4 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "416"
+      }
+     ],
      "station": "Fonderie de cendre",
      "stationTex": "stations/ash_foundry.png",
      "stationId": "ash_foundry",
@@ -28408,6 +30191,7 @@
      "kind": "key",
      "rarity": "Rare",
      "effect": "Ouvre une porte scellée, une fois.",
+     "stats": [],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28439,6 +30223,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Pièges et équipement.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28459,6 +30244,12 @@
      "kind": "tool",
      "rarity": "Commun",
      "effect": "Révèle les structures proches.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Recharge 2 s"
+      }
+     ],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28487,6 +30278,7 @@
      "kind": "tool",
      "rarity": "Commun",
      "effect": "Ouvre une serrure ordinaire.",
+     "stats": [],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28515,6 +30307,7 @@
      "kind": "consumable",
      "rarity": "Commun",
      "effect": "Immobilise un mob.",
+     "stats": [],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28543,6 +30336,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "11"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "840"
+      }
+     ],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28571,6 +30378,7 @@
      "kind": "doll",
      "rarity": "Légendaire",
      "effect": "Une base de poche pour ton groupe. Utilise-la pour entrer, puis de nouveau pour sortir.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -28655,6 +30463,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre le chemin du monde 4.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28672,6 +30481,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Pose-la contre une porte en fer et donne-lui un signal de redstone (levier, bouton) : la clé tourne et le monde 3 s'ouvre.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -28761,6 +30571,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Deux encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28776,6 +30587,7 @@
      "kind": "offering",
      "rarity": "Épique",
      "effect": "Tenue à l'autel d'arène, elle réveille le Grand Geôlier.",
+     "stats": [],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28810,6 +30622,20 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "Satiété durable.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "Saturation pendant 2 s"
+      }
+     ],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28838,6 +30664,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28853,6 +30680,24 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "Longue portée. Chaque coup tire l'ennemi vers toi et le ralentit.",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "9"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,8"
+      },
+      {
+       "k": "Portée",
+       "v": "+2,5"
+      },
+      {
+       "k": "Durabilité",
+       "v": "840"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -28868,6 +30713,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,75"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "6 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "418"
+      }
+     ],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28890,6 +30753,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "7"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,75"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "6 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "608"
+      }
+     ],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28912,6 +30797,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "5"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,75"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "6 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "570"
+      }
+     ],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -28934,6 +30841,24 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "0,75"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "6 %"
+      },
+      {
+       "k": "Durabilité",
+       "v": "494"
+      }
+     ],
      "station": "Table du Geôlier",
      "stationTex": "stations/jailer_table.png",
      "stationId": "jailer_table",
@@ -29117,6 +31042,7 @@
      "kind": "resource",
      "rarity": "Commun",
      "effect": "Toile du planeur.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29134,6 +31060,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Énergie de la Forge à foudre.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29152,6 +31079,7 @@
      "kind": "gem",
      "rarity": "Rare",
      "effect": "Équipement et Lanterne noire.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29171,6 +31099,7 @@
      "kind": "glider",
      "rarity": "Épique",
      "effect": "Plane entre les îles.",
+     "stats": [],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29205,6 +31134,12 @@
      "kind": "hook",
      "rarity": "Rare",
      "effect": "Te tire vers une surface.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Recharge 1,5 s"
+      }
+     ],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29239,6 +31174,20 @@
      "kind": "weapon",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "13"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 020"
+      }
+     ],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29267,6 +31216,7 @@
      "kind": "layer",
      "rarity": "Rare",
      "effect": "Se pose sur une armure à la Table de classe. Quand la couche extérieure casse, la suivante prend le relais.",
+     "stats": [],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29301,6 +31251,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre le chemin du monde 5.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29318,6 +31269,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Pose-le au sommet d'un paratonnerre, sous le ciel ouvert. Un orage déchire le monde 4 ; une Essence d'orage qu'on lui donne aussi.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -29407,6 +31359,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Neuf encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29422,6 +31375,7 @@
      "kind": "offering",
      "rarity": "Épique",
      "effect": "Tenu à l'autel d'arène, il réveille le Roi des tempêtes.",
+     "stats": [],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29456,6 +31410,20 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "Chutes réduites pendant 3 minutes.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "Chute lente pendant 3 min"
+      }
+     ],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29484,6 +31452,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29499,6 +31468,24 @@
      "kind": "weapon",
      "rarity": "Épique",
      "effect": "Utilise-le pour le lancer : la foudre tombe où il frappe, puis il revient dans ta main.",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "12"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,4"
+      },
+      {
+       "k": "Se lance",
+       "v": "oui"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 020"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29514,6 +31501,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "1"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "8 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "484"
+      }
+     ],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29536,6 +31545,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "7"
+      },
+      {
+       "k": "Robustesse",
+       "v": "1"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "8 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+2"
+      },
+      {
+       "k": "Durabilité",
+       "v": "704"
+      }
+     ],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29558,6 +31589,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "6"
+      },
+      {
+       "k": "Robustesse",
+       "v": "1"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "8 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "660"
+      }
+     ],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29580,6 +31633,28 @@
      "kind": "armor",
      "rarity": "Rare",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "1"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "8 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "572"
+      }
+     ],
      "station": "Forge à foudre",
      "stationTex": "stations/lightning_forge.png",
      "stationId": "lightning_forge",
@@ -29769,6 +31844,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Base de l'équipement du monde 5.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29788,6 +31864,7 @@
      "kind": "gem",
      "rarity": "Épique",
      "effect": "4 fragments donnent 1 diamant.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29807,6 +31884,16 @@
      "kind": "lantern",
      "rarity": "Épique",
      "effect": "20 minutes de lumière.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Vision nocturne pendant 20 min"
+      },
+      {
+       "k": "Effet",
+       "v": "Recharge 1 min"
+      }
+     ],
      "station": "Autel obscur",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -29841,6 +31928,16 @@
      "kind": "sonar",
      "rarity": "Rare",
      "effect": "Révèle les créatures proches.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Révèle les créatures à 32 blocs pendant 8 s"
+      },
+      {
+       "k": "Effet",
+       "v": "Recharge 10 s"
+      }
+     ],
      "station": "Autel obscur",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -29869,6 +31966,12 @@
      "kind": "consumable",
      "rarity": "Commun",
      "effect": "Efface ton bruit.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Bruit -100"
+      }
+     ],
      "station": "Autel obscur",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -29897,6 +32000,20 @@
      "kind": "weapon",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "16"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 200"
+      }
+     ],
      "station": "Autel obscur",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -29925,6 +32042,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre le chemin du monde 6.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29942,6 +32060,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Allume-la dans le noir complet, avec au moins 4 blocs de Lueur éteinte à moins de 2 blocs : sa flamme noire ouvre le monde 5.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -30031,6 +32150,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Cinq encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30046,6 +32166,20 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "Bruit réduit pendant 5 minutes.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "Silencieux pendant 5 min"
+      }
+     ],
      "station": "Autel obscur",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30074,6 +32208,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30089,6 +32224,16 @@
      "kind": "ward",
      "rarity": "Épique",
      "effect": "Pare comme un bouclier. Chaque coup paré jette un éclair : l'attaquant est aveuglé, repoussé et marqué.",
+     "stats": [
+      {
+       "k": "Bloque",
+       "v": "90 % d'un coup"
+      },
+      {
+       "k": "Durabilité",
+       "v": "560"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30104,6 +32249,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "4"
+      },
+      {
+       "k": "Robustesse",
+       "v": "1,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "10 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "550"
+      }
+     ],
      "station": "Autel obscur",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30126,6 +32293,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "8"
+      },
+      {
+       "k": "Robustesse",
+       "v": "1,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "10 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+2"
+      },
+      {
+       "k": "Durabilité",
+       "v": "800"
+      }
+     ],
      "station": "Autel obscur",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30148,6 +32337,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "5"
+      },
+      {
+       "k": "Robustesse",
+       "v": "1,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "10 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+2"
+      },
+      {
+       "k": "Durabilité",
+       "v": "750"
+      }
+     ],
      "station": "Autel obscur",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30170,6 +32381,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "1,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "10 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "650"
+      }
+     ],
      "station": "Autel obscur",
      "stationTex": "stations/dark_altar.png",
      "stationId": "dark_altar",
@@ -30374,6 +32607,7 @@
      "kind": "ingot",
      "rarity": "Rare",
      "effect": "Base de l'équipement du monde 6.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30393,6 +32627,7 @@
      "kind": "gem",
      "rarity": "Épique",
      "effect": "Inverseur et Perle abyssale.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30412,6 +32647,7 @@
      "kind": "boots",
      "rarity": "Épique",
      "effect": "Ignorent les inversions de gravité.",
+     "stats": [],
      "station": "Inverseur",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30440,6 +32676,12 @@
      "kind": "consumable",
      "rarity": "Commun",
      "effect": "Annule une inversion.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Stable pendant 30 s"
+      }
+     ],
      "station": "Inverseur",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30468,6 +32710,20 @@
      "kind": "weapon",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "19"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 380"
+      }
+     ],
      "station": "Inverseur",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30496,6 +32752,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre le chemin du monde 7.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30513,6 +32770,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Pose-les entre deux blocs de verre face à face, à deux blocs de chaque côté : le monde 6 s'ouvre dans le reflet.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -30602,6 +32860,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Une encoche est gravée sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30617,6 +32876,20 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "Stabilité pendant 30 secondes.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "Dure 30 s"
+      }
+     ],
      "station": "Inverseur",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30645,6 +32918,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30660,6 +32934,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "4"
+      },
+      {
+       "k": "Robustesse",
+       "v": "2"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "12 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "616"
+      }
+     ],
      "station": "Inverseur",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30682,6 +32978,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "8"
+      },
+      {
+       "k": "Robustesse",
+       "v": "2"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "12 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+3"
+      },
+      {
+       "k": "Durabilité",
+       "v": "896"
+      }
+     ],
      "station": "Inverseur",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30704,6 +33022,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "6"
+      },
+      {
+       "k": "Robustesse",
+       "v": "2"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "12 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+2"
+      },
+      {
+       "k": "Durabilité",
+       "v": "840"
+      }
+     ],
      "station": "Inverseur",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30726,6 +33066,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "4"
+      },
+      {
+       "k": "Robustesse",
+       "v": "2"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "12 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+1"
+      },
+      {
+       "k": "Durabilité",
+       "v": "728"
+      }
+     ],
      "station": "Inverseur",
      "stationTex": "stations/inverter.png",
      "stationId": "inverter",
@@ -30909,6 +33271,7 @@
      "kind": "dust",
      "rarity": "Rare",
      "effect": "Casque-tuba de sel et Arbrisseau des quatre saisons.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30928,6 +33291,7 @@
      "kind": "gem",
      "rarity": "Rare",
      "effect": "Extraite des filons des récifs. Casque-tuba de nacre.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30945,6 +33309,7 @@
      "kind": "ingot",
      "rarity": "Rare",
      "effect": "Casque-tuba de cobalt et scaphandre.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30962,6 +33327,7 @@
      "kind": "gem",
      "rarity": "Épique",
      "effect": "Casque-tuba de perle et Arbrisseau des quatre saisons.",
+     "stats": [],
      "station": "Presse abyssale",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -30995,6 +33361,16 @@
      "kind": "consumable",
      "rarity": "Commun",
      "effect": "Remplit à moitié la réserve d'un casque-tuba, ou ton souffle.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Remplit la moitié du réservoir d'un casque-tuba"
+      },
+      {
+       "k": "Effet",
+       "v": "Sans casque : +60 de souffle"
+      }
+     ],
      "station": "Presse abyssale",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31023,6 +33399,12 @@
      "kind": "thruster",
      "rarity": "Épique",
      "effect": "Accélère sous l'eau.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Recharge 0,75 s"
+      }
+     ],
      "station": "Presse abyssale",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31051,6 +33433,20 @@
      "kind": "weapon",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "23"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 560"
+      }
+     ],
      "station": "Presse abyssale",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31079,6 +33475,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre le chemin du monde 8.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31096,6 +33493,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Lâche-la dans une eau d'au moins 3 blocs de profondeur : un tourbillon se forme et ouvre le monde 7.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -31185,6 +33583,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Dix encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31200,6 +33599,24 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "L'oxygène dure deux fois plus longtemps pendant 5 minutes.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "Dure 5 min"
+      },
+      {
+       "k": "Effet",
+       "v": "+30 de souffle"
+      }
+     ],
      "station": "Presse abyssale",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31228,6 +33645,20 @@
      "kind": "snorkel",
      "rarity": "Rare",
      "effect": "Permet de respirer sous l'eau tant que sa réserve tient (3 min). Fragile : les coups l'usent vite.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "2"
+      },
+      {
+       "k": "Réservoir d'air",
+       "v": "3 min"
+      },
+      {
+       "k": "Durabilité",
+       "v": "44"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31243,6 +33674,24 @@
      "kind": "snorkel",
      "rarity": "Rare",
      "effect": "Permet de respirer sous l'eau tant que sa réserve tient (5 min). Fragile : les coups l'usent vite.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "1"
+      },
+      {
+       "k": "Réservoir d'air",
+       "v": "5 min"
+      },
+      {
+       "k": "Durabilité",
+       "v": "66"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31258,6 +33707,24 @@
      "kind": "snorkel",
      "rarity": "Épique",
      "effect": "Permet de respirer sous l'eau tant que sa réserve tient (8 min). Fragile : les coups l'usent vite.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "3"
+      },
+      {
+       "k": "Robustesse",
+       "v": "2"
+      },
+      {
+       "k": "Réservoir d'air",
+       "v": "8 min"
+      },
+      {
+       "k": "Durabilité",
+       "v": "110"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31273,6 +33740,24 @@
      "kind": "snorkel",
      "rarity": "Épique",
      "effect": "Permet de respirer sous l'eau tant que sa réserve tient (12 min). Fragile : les coups l'usent vite.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "4"
+      },
+      {
+       "k": "Robustesse",
+       "v": "3"
+      },
+      {
+       "k": "Réservoir d'air",
+       "v": "12 min"
+      },
+      {
+       "k": "Durabilité",
+       "v": "154"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31288,6 +33773,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31303,6 +33789,24 @@
      "kind": "weapon",
      "rarity": "Épique",
      "effect": "Utilise-le pour le lancer : il ramène à toi ce qu'il touche, plus loin sous l'eau. Sa ligne le ramène.",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "21"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,4"
+      },
+      {
+       "k": "Se lance",
+       "v": "oui"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 560"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31318,6 +33822,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "Résiste à la pression. Se porte avec un casque-tuba.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "9"
+      },
+      {
+       "k": "Robustesse",
+       "v": "2,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "14 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+5"
+      },
+      {
+       "k": "Durabilité",
+       "v": "992"
+      }
+     ],
      "station": "Presse abyssale",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31340,6 +33866,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "Résiste à la pression. Se porte avec un casque-tuba.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "7"
+      },
+      {
+       "k": "Robustesse",
+       "v": "2,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "14 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+4"
+      },
+      {
+       "k": "Durabilité",
+       "v": "930"
+      }
+     ],
      "station": "Presse abyssale",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31362,6 +33910,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "Résiste à la pression. Se porte avec un casque-tuba.",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "4"
+      },
+      {
+       "k": "Robustesse",
+       "v": "2,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "14 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+2"
+      },
+      {
+       "k": "Durabilité",
+       "v": "806"
+      }
+     ],
      "station": "Presse abyssale",
      "stationTex": "stations/abyssal_press.png",
      "stationId": "abyssal_press",
@@ -31616,6 +34186,7 @@
      "kind": "dust",
      "rarity": "Rare",
      "effect": "Base de l'équipement du monde 8.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31635,6 +34206,7 @@
      "kind": "gem",
      "rarity": "Épique",
      "effect": "Pieu sismique.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31654,6 +34226,16 @@
      "kind": "hourglass",
      "rarity": "Épique",
      "effect": "Ralentit le cycle du monde.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Dure 90 s"
+      },
+      {
+       "k": "Effet",
+       "v": "Recharge 5 min"
+      }
+     ],
      "station": "Atelier du temps",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31688,6 +34270,12 @@
      "kind": "consumable",
      "rarity": "Commun",
      "effect": "Protège de la saison en cours.",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "La saison tient 2 min"
+      }
+     ],
      "station": "Atelier du temps",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31716,6 +34304,20 @@
      "kind": "weapon",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "28"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 740"
+      }
+     ],
      "station": "Atelier du temps",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31744,6 +34346,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre le chemin du monde 9.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31761,6 +34364,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Plante-le sur de l'herbe ou de la terre. Il ouvre le monde 8 à l'aube ou au crépuscule.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -31850,6 +34454,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Six encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31865,6 +34470,7 @@
      "kind": "offering",
      "rarity": "Épique",
      "effect": "Tenue à l'autel d'arène, elle réveille le Maître des saisons.",
+     "stats": [],
      "station": "Atelier du temps",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31899,6 +34505,20 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "Protège de la saison pendant 3 minutes.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "Dure 3 min"
+      }
+     ],
      "station": "Atelier du temps",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31927,6 +34547,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -31942,6 +34563,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "5"
+      },
+      {
+       "k": "Robustesse",
+       "v": "3"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "16 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+2"
+      },
+      {
+       "k": "Durabilité",
+       "v": "748"
+      }
+     ],
      "station": "Atelier du temps",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31964,6 +34607,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "10"
+      },
+      {
+       "k": "Robustesse",
+       "v": "3"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "16 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 088"
+      }
+     ],
      "station": "Atelier du temps",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -31986,6 +34651,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "7"
+      },
+      {
+       "k": "Robustesse",
+       "v": "3"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "16 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+5"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 020"
+      }
+     ],
      "station": "Atelier du temps",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -32008,6 +34695,28 @@
      "kind": "armor",
      "rarity": "Épique",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "4"
+      },
+      {
+       "k": "Robustesse",
+       "v": "3"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "16 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+2"
+      },
+      {
+       "k": "Durabilité",
+       "v": "884"
+      }
+     ],
      "station": "Atelier du temps",
      "stationTex": "stations/time_workshop.png",
      "stationId": "time_workshop",
@@ -32202,6 +34911,7 @@
      "kind": "resource",
      "rarity": "Rare",
      "effect": "Base de l'équipement du monde 9.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32224,6 +34934,7 @@
      "kind": "resource",
      "rarity": "Légendaire",
      "effect": "Matriochka du voyageur.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32241,6 +34952,12 @@
      "kind": "anchor",
      "rarity": "Rare",
      "effect": "Calme le sol (rayon 4).",
+     "stats": [
+      {
+       "k": "Effet",
+       "v": "Ancré pendant 10 min"
+      }
+     ],
      "station": "Ancre de terrain",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32269,6 +34986,7 @@
      "kind": "boots",
      "rarity": "Épique",
      "effect": "Plus de chutes dues au sol.",
+     "stats": [],
      "station": "Ancre de terrain",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32297,6 +35015,20 @@
      "kind": "weapon",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "33"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 920"
+      }
+     ],
      "station": "Ancre de terrain",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32325,6 +35057,7 @@
      "kind": "key",
      "rarity": "",
      "effect": "Matriochka du voyageur.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32340,6 +35073,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Ouvre le chemin du monde 10.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32357,6 +35091,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Enfonce-le dans la pierre ou l'ardoise des abîmes sous y 40 : le sol se fend et le monde 9 s'ouvre.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -32446,6 +35181,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Trois encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32461,6 +35197,20 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "Pied ferme pendant 5 minutes.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "Ancré pendant 5 min"
+      }
+     ],
      "station": "Ancre de terrain",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32489,6 +35239,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32504,6 +35255,28 @@
      "kind": "tool",
      "rarity": "Épique",
      "effect": "Mine une colonne de trois. Utilise-la sur le sol : une secousse qui ébranle les créatures autour de toi.",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "3"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,1"
+      },
+      {
+       "k": "Vitesse de minage",
+       "v": "12,4"
+      },
+      {
+       "k": "Mine",
+       "v": "jusqu'aux blocs de netherite"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 920"
+      }
+     ],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32519,6 +35292,28 @@
      "kind": "armor",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "5"
+      },
+      {
+       "k": "Robustesse",
+       "v": "3,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "18 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+3"
+      },
+      {
+       "k": "Durabilité",
+       "v": "814"
+      }
+     ],
      "station": "Ancre de terrain",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32541,6 +35336,28 @@
      "kind": "armor",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "11"
+      },
+      {
+       "k": "Robustesse",
+       "v": "3,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "18 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+8"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 184"
+      }
+     ],
      "station": "Ancre de terrain",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32563,6 +35380,28 @@
      "kind": "armor",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "8"
+      },
+      {
+       "k": "Robustesse",
+       "v": "3,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "18 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 110"
+      }
+     ],
      "station": "Ancre de terrain",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32585,6 +35424,28 @@
      "kind": "armor",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "4"
+      },
+      {
+       "k": "Robustesse",
+       "v": "3,5"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "18 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+3"
+      },
+      {
+       "k": "Durabilité",
+       "v": "962"
+      }
+     ],
      "station": "Ancre de terrain",
      "stationTex": "stations/terrain_anchor.png",
      "stationId": "terrain_anchor",
@@ -32764,6 +35625,7 @@
      "kind": "thread",
      "rarity": "Rare",
      "effect": "Base de l'équipement final.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32785,6 +35647,7 @@
      "kind": "gem",
      "rarity": "Légendaire",
      "effect": "Améliore l'équipement final.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32802,6 +35665,20 @@
      "kind": "weapon",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Dégâts",
+       "v": "40"
+      },
+      {
+       "k": "Vitesse d'attaque",
+       "v": "1,6"
+      },
+      {
+       "k": "Durabilité",
+       "v": "2 100"
+      }
+     ],
      "station": "Métier final",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -32836,6 +35713,7 @@
      "kind": "core",
      "rarity": "Légendaire",
      "effect": "Le cœur de la créature.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32853,6 +35731,7 @@
      "kind": "seed",
      "rarity": "Épique",
      "effect": "Pose-la n'importe où et ouvre-la : tu rapetisses et tu entres dans le monde 10.",
+     "stats": [],
      "station": "Établi matriciel",
      "stationTex": "stations/matrix_workbench.png",
      "stationId": "matrix_workbench",
@@ -32912,6 +35791,7 @@
      "kind": "secret",
      "rarity": "",
      "effect": "Huit encoches sont gravées sous sa base. Emboîte les dix poupées dans l'ordre...",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -32927,6 +35807,7 @@
      "kind": "offering",
      "rarity": "Épique",
      "effect": "Tenue à l'autel d'arène, elle réveille l'Inachevée.",
+     "stats": [],
      "station": "Métier final",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -32961,6 +35842,24 @@
      "kind": "food",
      "rarity": "Commun",
      "effect": "Les effets de tous les plats pendant 2 minutes.",
+     "stats": [
+      {
+       "k": "Nourriture",
+       "v": "6 (3 cuisses)"
+      },
+      {
+       "k": "Saturation",
+       "v": "9,6"
+      },
+      {
+       "k": "Effet",
+       "v": "L'effet de chaque plat des mondes pendant 2 min"
+      },
+      {
+       "k": "Effet",
+       "v": "Chute lente pendant 2 min"
+      }
+     ],
      "station": "Métier final",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -33001,6 +35900,7 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -33016,6 +35916,28 @@
      "kind": "armor",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "5"
+      },
+      {
+       "k": "Robustesse",
+       "v": "4"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "20 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+4"
+      },
+      {
+       "k": "Durabilité",
+       "v": "880"
+      }
+     ],
      "station": "Métier final",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -33044,6 +35966,28 @@
      "kind": "armor",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "11"
+      },
+      {
+       "k": "Robustesse",
+       "v": "4"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "20 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+10"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 280"
+      }
+     ],
      "station": "Métier final",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -33072,6 +36016,28 @@
      "kind": "armor",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "9"
+      },
+      {
+       "k": "Robustesse",
+       "v": "4"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "20 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+7"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 200"
+      }
+     ],
      "station": "Métier final",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
@@ -33100,6 +36066,28 @@
      "kind": "armor",
      "rarity": "Légendaire",
      "effect": "",
+     "stats": [
+      {
+       "k": "Armure",
+       "v": "5"
+      },
+      {
+       "k": "Robustesse",
+       "v": "4"
+      },
+      {
+       "k": "Résistance au recul",
+       "v": "20 %"
+      },
+      {
+       "k": "Vie max",
+       "v": "+4"
+      },
+      {
+       "k": "Durabilité",
+       "v": "1 040"
+      }
+     ],
      "station": "Métier final",
      "stationTex": "stations/final_loom.png",
      "stationId": "final_loom",
