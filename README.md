@@ -17,7 +17,7 @@
   <a href="https://github.com/achedon12/matriochka/releases"><img src="https://img.shields.io/github/downloads/achedon12/matriochka/total?label=GitHub&logo=github&color=a8231a" alt="GitHub downloads"></a>
 </p>
 
-Matriochka is a progression mod for Minecraft Java 26.3 (Fabric). Ten worlds are nested inside blocks, one inside the other, like the dolls it is named after. You craft a Seed, plant it on tilled World Soil, and the block that hatches holds a whole world with its own rule, creatures, machine and boss. Beat the boss, take its core, and the next Seed becomes possible.
+Matriochka is a progression mod for Minecraft Java 26.1.2, 26.2 and 26.3 (Fabric). Ten worlds are nested inside blocks, one inside the other, like the dolls it is named after. You craft a Seed, plant it on tilled World Soil, and the block that hatches holds a whole world with its own rule, creatures, machine and boss. Beat the boss, take its core, and the next Seed becomes possible.
 
 ## What is inside
 
@@ -40,10 +40,10 @@ Matriochka is a progression mod for Minecraft Java 26.3 (Fabric). Ten worlds are
 
 ## Requirements
 
-- Minecraft Java Edition 26.3
+- Minecraft Java Edition 26.3, 26.2 or 26.1.2 (one jar for each)
 - Fabric Loader 0.20.0 or newer
 - [Fabric API](https://modrinth.com/mod/fabric-api)
-- [GeckoLib](https://modrinth.com/mod/geckolib) 5.5.7 or newer
+- [GeckoLib](https://modrinth.com/mod/geckolib) for your Minecraft version (5.5.7+ on 26.3, 5.5.5+ on 26.2, 5.5.2+ on 26.1.2)
 - Java 25
 
 The mod must be installed on the server and on every client. It works in singleplayer, on servers and on Lunar Client (Fabric profile).

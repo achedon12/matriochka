@@ -1,5 +1,50 @@
 # Changelog
 
+## Unreleased
+
+The mod now runs on Minecraft 26.1.2, 26.2 and 26.3, every world has two lesser biomes, every boss fights to its own theme, and the dolls have a body when they are held.
+
+### Minecraft versions
+
+- One jar for each of Minecraft 26.3, 26.2 and 26.1.2, built from the same code: what differs between the versions lives in `versions/<mc>/` (the dependencies, the few renamed calls, and the world generation in each version's own format, written by `tools/versions.py`).
+- On 26.3, worlds 1 to 6 and 8 to 10 wore vanilla grass, dirt and netherrack on their surface instead of their own moss, ash, brick and felt: their surface rules are now written out with the mod's blocks, as on the older versions.
+
+### Worlds
+
+- Every world has two lesser biomes beside its own, each with its own floor, colours and name: the Bloom Hollow and the Rot Marsh in the Toxic Jungle, the Ember Fields and the Ash Drifts in the Giant Veins, the Mossy Cells and the Crumbling Wing in the Endless Dungeon, the Hail Meadows and the Thunder Heights in the Storm Archipelago, the Hushed Hollow and the Bare Dark in the Lightless Deep, the Crystal Fields and the Mirror Flats in the Upside Realm, the Coral Shelf and the Black Trench in the Pressure Ocean, the Hourglass Dunes and the Rust Grove in the Hastened Seasons, the Flesh Mire and the Bare Rock in the Restless Ground, the Plank Floor and the Lacquer Tray in the Giant Workshop. The world's creatures, people and structures live in all three.
+- The Abyssal Pearl can no longer be washed away by the water it lies in.
+
+### Bosses
+
+- Every boss fights to its own theme: the lullaby at a fighting tempo, in its world's key and mode, led by its world's instrument. The last third of a fight keeps the shared final theme.
+- In a New Cycle every boss wakes mutated, even before World 6, and the mutation changes from one cycle to the next.
+
+### Items
+
+- The dolls (trophies, hidden dolls, the Doll of Life, the Refuge, Chance and Cracked Dolls, the Nested Dolls) are turned in 3D wherever they are held, worn, framed, dropped or carried on a shoulder; the inventory keeps their sprite.
+
+### Comfort and settings
+
+- Gauge patterns also show a boss's health in figures on its bar.
+- Mod Menu's configure button opens the comfort settings.
+- `/matriochka difficulty` shows the difficulty, `/matriochka difficulty <story|normal|nightmare|hardcore>` (operators) changes it for the whole server and saves it.
+
+### Compatibility
+
+- Roughly Enough Items shows every station's recipes, as Just Enough Items does.
+- Jade names the world inside a World Block, its variant and its cycle, and the world a planted Seed or a rite will open.
+
+### Languages
+
+- Italian, Russian, Polish and Simplified Chinese, beside English, French, Spanish, German and Brazilian Portuguese.
+
+### Checks
+
+- A test run ends at once, with the error, when the game breaks where the test cannot see it (a chunk that fails to generate, a data file that does not load), instead of waiting forever.
+- `python3 tools/check_refs.py` checks, without starting the game, that every reference in the data of every Minecraft version points at something that exists.
+- `tools/server_smoke.sh [mc]` starts the mod on a dedicated server and generates every world.
+- The CI runs the dedicated server and the first steps for every Minecraft version, and the whole game on every push to main.
+
 ## 0.5.2 (alpha)
 
 The fights close in and hit harder, the bosses break as they weaken, the worlds' people speak, and the interface wears the mod's colours from the title screen to the tooltips.
