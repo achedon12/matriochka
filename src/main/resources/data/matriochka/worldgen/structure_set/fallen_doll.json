@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 7320003,
+    "spacing": 40,
+    "separation": 16
+  },
+  "structures": [
+    {
+      "structure": "matriochka:fallen_doll",
+      "weight": 1
+    }
+  ]
+}

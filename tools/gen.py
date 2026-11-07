@@ -15,6 +15,7 @@ from content import *  # noqa
 from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx, paint_snorkel_item, paint_snorkel_layer
 import atmosphere
 import held3d
+import blocks_art
 import craft
 import particles
 import models
@@ -266,7 +267,8 @@ def gen_blocks():
             lang(f"block.{NS}.{bid}.desc", b["note_en"], b["note_fr"])
         p = ORE_PAL.get(b["id"]) or pal(b["world"])
         tpath = mk(os.path.join(A, f"textures/block/{bid}.png"))
-        hand = craft.crafted_block(bid)
+        # World Soil is painted as a block of the new terrain set (tools/blocks_art.py), its tilled face too
+        hand = None if bid.startswith("world_soil_") else craft.crafted_block(bid)
         glows = {}
         if hand is not None:
             for suffix, spr in hand.items():
@@ -274,7 +276,7 @@ def gen_blocks():
                 if spr.glow:
                     spr.glow_image().save(os.path.join(A, f"textures/block/{bid}{suffix}_glow.png"))
                     glows[suffix] = f"{NS}:block/{bid}{suffix}_glow"
-        else:
+        elif not blocks_art.paint(b["style"], p, bid, tpath):
             paint_block(b["style"], p, bid, tpath)
         if b["kind"] == "station":
             if hand is None:
@@ -283,7 +285,8 @@ def gen_blocks():
             model = stations3d.model(bid)
         elif b["kind"] == "soil":
             if hand is None:
-                paint_block("soil", p, bid + "f", os.path.join(A, f"textures/block/{bid}_tilled.png"))
+                if not blocks_art.paint("soil", p, bid, os.path.join(A, f"textures/block/{bid}_tilled.png"), tilled=True):
+                    paint_block("soil", p, bid + "f", os.path.join(A, f"textures/block/{bid}_tilled.png"))
             model = {"parent": "minecraft:block/cube_all", "textures": {"all": f"{NS}:block/{bid}"}}
             w(os.path.join(A, f"models/block/{bid}_tilled.json"),
               {"parent": "minecraft:block/template_cube_bottom_top_indented", "textures": {"bottom": f"{NS}:block/{bid}", "side": f"{NS}:block/{bid}", "top": f"{NS}:block/{bid}_tilled"}})
@@ -915,6 +918,33 @@ def gen_worldgen():
     w(os.path.join(D, "worldgen/structure_set/guardian_sanctuary.json"), {
         "placement": {"type": "minecraft:random_spread", "salt": 7310001, "spacing": 24, "separation": 10},
         "structures": [{"structure": f"{NS}:guardian_sanctuary", "weight": 1}]})
+    # the Surface's own places before the first boss: the Artisan's workshop, the Peddler's stall, a fallen doll
+    for i, (sid, en, fr, role, size, arch, spacing, sep) in enumerate(SURFACE_PLACES):
+        lang(f"structure.{NS}.{sid}", en, fr)
+        w(os.path.join(D, f"worldgen/structure/{sid}.json"), {
+            "type": f"{NS}:procedural", "biomes": "#minecraft:has_structure/pillager_outpost", "spawn_overrides": {}, "step": "surface_structures",
+            "terrain_adaptation": "beard_thin", "world": 0, "archetype": arch, "role": role, "size": size, "structure_id": sid})
+        w(os.path.join(D, f"worldgen/structure_set/{sid}.json"), {
+            "placement": {"type": "minecraft:random_spread", "salt": 7320001 + i, "spacing": spacing, "separation": sep},
+            "structures": [{"structure": f"{NS}:{sid}", "weight": 1}]})
+    for k2, (en, fr) in SURFACE_NOTES.items():
+        lang(k2, en, fr)
+
+
+SURFACE_PLACES = [
+    ("artisan_cabin", "Artisan's Old Cabin", "Vieille cabane de l'Artisan", "story", "medium", "artisan_cabin", 28, 10),
+    ("peddler_stall", "Peddler's Stall", "Étal du Colporteur", "utility", "small", "peddler_stall", 32, 12),
+    ("fallen_doll", "Fallen Doll", "Poupée tombée", "exploration", "large", "fallen_doll", 40, 16),
+]
+SURFACE_NOTES = {
+    "item.matriochka.artisan_note": ("Artisan's Note", "Note de l'Artisan"),
+    "item.matriochka.artisan_note.0": ("\"I set the Guardian to sleep in a ring of eight pillars, a few hundred steps from here. Wake it only when you mean to go down.\"",
+                                       "« J'ai couché le Gardien dans un cercle de huit piliers, à quelques centaines de pas d'ici. Ne le réveille que si tu comptes descendre. »"),
+    "item.matriochka.artisan_note.1": ("\"Every doll holds a world, and every world holds the next. I carved ten. The eleventh I never finished.\"",
+                                       "« Chaque poupée contient un monde, et chaque monde le suivant. J'en ai sculpté dix. La onzième, je ne l'ai jamais finie. »"),
+    "item.matriochka.artisan_note.2": ("\"Soil from the Guardian, a seed from its core, water close by. That is how the first one opens.\"",
+                                       "« De la terre du Gardien, une graine de son noyau, de l'eau tout près. C'est ainsi que s'ouvre la première. »"),
+}
 
 
 # ------------------------------------------------------------------ World 0

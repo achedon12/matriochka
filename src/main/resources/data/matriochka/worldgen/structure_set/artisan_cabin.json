@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 7320001,
+    "spacing": 28,
+    "separation": 10
+  },
+  "structures": [
+    {
+      "structure": "matriochka:artisan_cabin",
+      "weight": 1
+    }
+  ]
+}

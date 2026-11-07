@@ -114,6 +114,33 @@ final class PolishTest {
 			McTest.waitForChunks(sp);
 			ctx.waitTicks(20);
 			shot(ctx, "sky_6_noon");
+			// the Surface's new places, set down in a row on the overworld and seen from above, three quarters
+			s.runCommand("execute in minecraft:overworld run tp @a 200 120 200");
+			ctx.waitTicks(40);
+			String[] places = {"artisan_cabin", "peddler_stall", "fallen_doll"};
+			for (int i = 0; i < places.length; i++) {
+				int x = 200 + i * 60;
+				s.runCommand("execute in minecraft:overworld positioned " + x + " 0 200 run place structure matriochka:" + places[i] + " ~ ~ ~");
+				s.runCommand("execute in minecraft:overworld positioned " + x + " 0 200 run tp @a ~ ~ ~");
+				s.runCommand("execute in minecraft:overworld at @a run tp @a ~-14 ~ ~-14 -45 35");
+				ctx.waitTicks(30);
+				McTest.waitForChunks(sp);
+				s.runCommand("execute in minecraft:overworld positioned " + x + " 0 200 positioned over world_surface run tp @a ~-14 ~14 ~-14 -45 35");
+				ctx.waitTicks(40);
+				McTest.waitForChunks(sp);
+				ctx.waitTicks(20);
+				shot(ctx, "surface_" + places[i]);
+			}
+			// a world card in the Journal: World 1's items and how each is had
+			s.runCommand("gamemode survival @a");
+			ctx.setScreen(() -> {
+				JournalScreen j = new JournalScreen(false).tab(3);
+				j.openCard(1);
+				return j;
+			});
+			ctx.waitTicks(30);
+			shot(ctx, "journal_card_1");
+			ctx.setScreen(() -> null);
 			Matriochka.LOG.info("[polish] ok");
 		}
 	}

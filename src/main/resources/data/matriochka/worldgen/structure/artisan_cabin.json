@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "#minecraft:has_structure/pillager_outpost",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 0,
+  "archetype": "artisan_cabin",
+  "role": "story",
+  "size": "medium",
+  "structure_id": "artisan_cabin"
+}

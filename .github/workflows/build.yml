@@ -43,7 +43,7 @@ jobs:
   play:
     needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     strategy:
       fail-fast: false
       matrix:
@@ -59,12 +59,14 @@ jobs:
       - name: Dedicated server
         run: tools/server_smoke.sh ${{ matrix.mc }}
       - name: First steps
+        timeout-minutes: 25
         run: xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTest -Pmc=${{ matrix.mc }} -Ponboarding
       - name: The whole game
         if: github.event_name == 'push'
+        timeout-minutes: 60
         run: xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTest -Pmc=${{ matrix.mc }} -Pplaythrough
       - uses: actions/upload-artifact@v4
-        if: failure()
+        if: always()
         with:
           name: logs-${{ matrix.mc }}
           path: |
