@@ -74,7 +74,31 @@ When a boss dies, every player within 64 blocks:
 - gets 3 Shell Shards, the material of class upgrades;
 - reads the boss's revelation line in chat.
 
-The boss drops its core, which opens the way into the next world (the World 10 core is a trophy); the bosses of Worlds 1 to 9 drop no World Soil. The Block Guardian also drops a Matrix Workbench and 4 World Soil 0, the soil the World 1 Seed is planted on, and turns every Artisan's Scroll it finds in nearby inventories into the Journal. The World 9 boss also drops the Key of the Last Doll. Each boss gives 200 experience.
+Once it has folded into its doll, the boss drops its core, which opens the way into the next world (the World 10 core is a trophy); the bosses of Worlds 1 to 9 drop no World Soil. The Block Guardian also drops a Matrix Workbench and 4 World Soil 0, the soil the World 1 Seed is planted on, and turns every Artisan's Scroll it finds in nearby inventories into the Journal. The World 9 boss also drops the Key of the Last Doll. Each boss gives 200 experience.
+
+## The boss bar
+
+Every boss has a bar of its own, drawn for what it is and the world it rules, in place of vanilla's:
+
+| Boss | Its bar | Its gauge |
+| --- | --- | --- |
+| Block Guardian | mossy stone, runed pillars with floating cubes | stone blocks filling one by one |
+| Spore Queen | ribbed chitin, mushroom clusters, a toxin pod | a bubbling toxic sludge |
+| Ash Titan | riveted black iron, furnaces and a smoking stack | molten metal under a bright crust |
+| Grand Jailer | dark iron, padlocks, chains, bars across the gauge | blue soul fire |
+| Storm King | a copper conduit in storm clouds, lightning rods | a lightning arc |
+| Light Eater | smoke and tendrils, a violet eye at each end | a dark that swallows motes of light |
+| Your Double | a mirror, mint above and pink below | a mirrored gauge that empties from both ends |
+| Pressure Leviathan | a brass diving pipe, a porthole and a pressure dial | deep water |
+| Master of Seasons | clockwork brass, a gear and a clock | the four seasons along its quarters |
+| Heart of the Terrain | layered rock with red veins, a heart crystal | a heartbeat running along it |
+| The Unfinished | a doll painted at one end and sketched at the other | red lacquer over pencil hatching, ten shells |
+
+The damage just taken lingers as a pale trail, each phase is a notch on the gauge, the name flashes when the boss is hit, and the ends of the bar come alive (the clock turns, the heart beats, the furnaces flicker).
+
+## Defeat
+
+A fallen boss folds back into its doll while its death animation plays: two rings of gold, one rising from its feet and one coming down from above its head, close on it. Its name is sealed on a card ("Sealed back in its doll"), and its relics fall from a column of light once the doll has closed, about two seconds after the last blow. A boss removed before that (its chunk unloaded) still leaves its relics where it stood.
 
 ## Multiplayer scaling
 

@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.5.1 (alpha)
+
+Every boss now has a bar of its own and a proper end, and diving into a world is a moment of its own.
+
+### Bosses
+
+- Every boss bar is drawn for its boss and its world, in pixel art on Minecraft's grid: runed stone pillars for the Block Guardian, mushroom clusters for the Spore Queen, furnaces for the Ash Titan, padlocks and bars for the Grand Jailer, lightning rods in storm clouds for the Storm King, violet eyes in smoke for the Light Eater, mirror crystals for Your Double, a porthole and a pressure dial for the Pressure Leviathan, a gear and a clock for the Master of Seasons, a heart crystal for the Heart of the Terrain, and a doll painted at one end and sketched at the other for the Unfinished.
+- Each gauge is the boss's own matter, animated: stone blocks, toxic sludge, molten metal, soul fire, a lightning arc, a dark that swallows light, a mirrored gauge emptying from both ends, deep water, the four seasons, a heartbeat, red lacquer. The damage just taken lingers as a pale trail, each phase is a notch, the name flashes on a hit, and the ends of the bar come alive.
+- Every boss comes out of its shell when summoned: folded and small, it swells, rears up and roars, with a burst of its world's particles.
+- A fallen boss folds back into its doll: two rings of gold close on it, its name is sealed on a card, and its relics fall from a column of light once the doll has closed. A boss unloaded before that still leaves its relics.
+
+### Worlds
+
+- Using a World Block closes the screen on a doll-shaped iris in the world's colour while the camera plunges, and the iris opens again on the other side; the Threshold runs it the other way. With cinematics off (comfort options), a plain fade.
+
+### Stations
+
+- The Matrix Workbench's grid taps when a piece is set on it, rattles when a drawer lays a pattern out and chimes when a recipe forms.
+
+### Checks
+
+- `./gradlew runClientGameTest -Ptransition` dives into World 1 and climbs back out; `-Pawaken` summons every boss and photographs its awakening, its bar and its defeat.
+
 ## 0.5.0 (alpha)
 
 Every world now has its own way in, the stations are sculpted 3D pieces with screens of their own, and the Matrix Workbench is a real crafting table.

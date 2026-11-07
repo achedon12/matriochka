@@ -23,7 +23,7 @@ Matriochka does not touch chunk rendering, so Sodium's renderer has nothing to c
 - **Creatures and bosses** are GeckoLib entity renderers; the bosses' and creatures' glowing parts use GeckoLib's own glow layer. GeckoLib supports Sodium and Iris.
 - **The World Block's miniature world** (a block entity renderer) submits small cubes through vanilla's `entitySolid`, `entityTranslucent` and `entityTranslucentEmissive` render types, which Iris maps to its entity programs. The little sun is drawn full-bright, so it still glows under shaders.
 - **The HUD, the Journal and the station screens** are drawn through the GUI only.
-- The two client mixins (the boss bar and the music) do not touch rendering.
+- The client mixins stay out of world rendering: one draws the Matriochka bosses' own bars in place of vanilla's (other mods' and vanilla's bars keep their look), the others set the music, the camera's field of view and shake, the trader screen and the particle budget.
 
 To try them in a dev client: `./gradlew runClient -Pcompat` adds Sodium, Iris and Mod Menu (versions in `gradle.properties`). Worth a look under a shader pack: the World Block's island and sun, the boss glow layers, and World 5 (darkness) and World 7 (underwater fog).
 
