@@ -23,6 +23,45 @@ import net.minecraft.world.phys.Vec3;
 public final class Travel {
 	private Travel() {}
 
+	/** A trip waiting for its iris to close: the player, the server tick it leaves on, what it does. */
+	private record Pending(java.util.UUID player, long at, java.util.function.Consumer<ServerPlayer> go) {}
+
+	private static final java.util.List<Pending> PENDING = new java.util.ArrayList<>();
+
+	public static void init() {
+		net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(server -> {
+			if (PENDING.isEmpty()) return;
+			long now = server.overworld().getGameTime();
+			var due = PENDING.stream().filter(p -> p.at() <= now).toList();
+			PENDING.removeAll(due);
+			for (Pending p : due) {
+				ServerPlayer sp = server.getPlayerList().getPlayer(p.player());
+				// gone, or dead while the screen closed: the trip is off
+				if (sp != null && sp.isAlive()) p.go().accept(sp);
+			}
+		});
+	}
+
+	/**
+	 * Dives into a World Block: the player's screen closes on its doll-shaped iris (net/Cues.dive), then the teleport
+	 * follows when it has closed. A second use while a trip waits does nothing.
+	 */
+	public static void diveInto(ServerPlayer player, int world, BlockPos worldBlock) {
+		if (PENDING.stream().anyMatch(p -> p.player().equals(player.getUUID()))) return;
+		fr.achedon12.matriochka.net.Cues.dive(player, world, true);
+		player.level().playSound(null, worldBlock, fr.achedon12.matriochka.content.Sounds.DOLL_OPEN, SoundSource.PLAYERS, 1f, 0.8f);
+		PENDING.add(new Pending(player.getUUID(), player.level().getServer().overworld().getGameTime() + fr.achedon12.matriochka.net.Cues.DIVE_TICKS,
+			sp -> enter(sp, world, worldBlock)));
+	}
+
+	/** Climbs back out through a Threshold, with the same iris, run the other way. */
+	public static void climbOut(ServerPlayer player, java.util.function.Consumer<ServerPlayer> leave) {
+		if (PENDING.stream().anyMatch(p -> p.player().equals(player.getUUID()))) return;
+		fr.achedon12.matriochka.net.Cues.dive(player, Worlds.number(player.level()), false);
+		player.level().playSound(null, player.blockPosition(), fr.achedon12.matriochka.content.Sounds.DOLL_CLOSE, SoundSource.PLAYERS, 1f, 0.9f);
+		PENDING.add(new Pending(player.getUUID(), player.level().getServer().overworld().getGameTime() + fr.achedon12.matriochka.net.Cues.DIVE_TICKS, leave));
+	}
+
 	public static void enter(ServerPlayer player, int world, BlockPos worldBlock) {
 		MatrioData data = MatrioData.get(player.level().getServer());
 		String group = data.groupOf(player.getUUID());

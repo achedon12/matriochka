@@ -616,6 +616,26 @@ def boss_presence(rng, world):
     return S.reverb(S.tail(x, 0.5), 2.0, 0.32, bright=0.35)
 
 
+# ------------------------------------------------------------------ the workbench grid
+def grid_place(rng):
+    """A piece set down on the workbench's lacquered grid: a short wooden tap with a little ring."""
+    x = S.place([(0, wood_clack(rng, 0.55 + 0.15 * rng.random())), (0.01, S.wood_block(0.35, rng, pitch=1300 + 300 * rng.random()))])
+    return S.reverb(S.tail(x, 0.15), 0.8, 0.15)
+
+
+def grid_fill(rng):
+    """A drawer lays a whole pattern out: quick taps running across the grid, then the drawer sliding home."""
+    taps = [(i * 0.045, S.wood_block(0.45 + 0.04 * i, rng, pitch=1000 + 90 * i)) for i in range(7)]
+    x = S.place(taps + [(0.36, doll_click(rng))])
+    return S.reverb(S.tail(x, 0.25), 1.0, 0.18)
+
+
+def grid_ready(rng):
+    """The grid spells a recipe: a soft rising pair of music-box notes in the Surface's key."""
+    run = [(i * 0.07, S.music_box(f, vel=0.4 + 0.1 * i, rng=rng)) for i, f in enumerate(notes(0, [4, 7, 11]))]
+    return S.reverb(S.tail(S.place(run), 0.5), 1.6, 0.3)
+
+
 RECIPES = {name: fn for name, fn in globals().items() if callable(fn)}
 PEAK = {"sfx": 0.89, "music": 0.8}
 QUALITY = {"sfx": 3, "loop": 1, "music": 2}

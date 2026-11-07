@@ -89,6 +89,12 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('screens')) {
 				vmArgs '-Dmatriochka.capture=screens'
 			}
+			if (name == 'clientGameTest' && project.hasProperty('awaken')) {
+				vmArgs '-Dmatriochka.capture=awaken', '-Dmatriochka.bosses=' + (project.findProperty('bosses') ?: '')
+			}
+			if (name == 'clientGameTest' && project.hasProperty('transition')) {
+				vmArgs '-Dmatriochka.capture=transition'
+			}
 			if (name == 'clientGameTest' && project.hasProperty('rites')) {
 				vmArgs '-Dmatriochka.capture=rites'
 			}

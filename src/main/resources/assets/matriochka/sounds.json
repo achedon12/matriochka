@@ -417,6 +417,36 @@
     ],
     "subtitle": "subtitles.matriochka.station.soul_altar.devour"
   },
+  "station.grid.place": {
+    "sounds": [
+      {
+        "name": "matriochka:station/grid_place_1"
+      },
+      {
+        "name": "matriochka:station/grid_place_2"
+      },
+      {
+        "name": "matriochka:station/grid_place_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.grid.place"
+  },
+  "station.grid.fill": {
+    "sounds": [
+      {
+        "name": "matriochka:station/grid_fill"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.grid.fill"
+  },
+  "station.grid.ready": {
+    "sounds": [
+      {
+        "name": "matriochka:station/grid_ready"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.station.grid.ready"
+  },
   "station.jailer_table.pin": {
     "sounds": [
       {

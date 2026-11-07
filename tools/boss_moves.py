@@ -8,7 +8,7 @@ bones of its rig:
   attack.<boss>.<slug>.strike   the release itself
   attack.<boss>.<slug>.recover  the way back to rest, sized to fill the boss's opening (the vulnerable window)
 
-plus misc.<boss>.phase (the phase change) and misc.<boss>.death (the fall). The moves live in
+plus misc.<boss>.phase (the phase change), misc.<boss>.death (the fall) and misc.<boss>.awaken (out of its shell). The moves live in
 tools/boss_moves_a.py and tools/boss_moves_b.py; this file holds the kit they are written with, the timing
 read from Defs.java and the generated BossAnims.java that MatrioBoss uses to trigger them.
 
@@ -303,6 +303,40 @@ def tiers_of(boss_id):
     return out
 
 
+AWAKEN_SECONDS = 2.6
+
+
+def awaken_clip(kit):
+    """misc.<boss>.awaken: the boss comes out of its shell. Folded small and low, it swells past its size as it
+    rises and rears back, throws its head up and roars with its arms and wings flung out, then settles into its
+    stance. Built from the rig's own bones, so every boss wakes in its own shape; played as its introduction starts."""
+    c = kit.clip(AWAKEN_SECONDS - BLEND)
+    roots = [b["name"] for b in kit.rig.bones if not b.get("parent")]
+    for r in roots:
+        c.scl(r, (0, 0.35), (0.4, 1.1, "cout"), (0.58, 0.96, "sine"), (0.74, 1.0, "sine"))
+        c.pos(r, (0, 0, -10, 0), (0.4, 0, 2.5, 0, "cout"), (0.6, 0, 0, 0, "sine"))
+    body = kit.role("body") or roots
+    for b in body[:1]:
+        c.rot(b, (0, 38, 0, 0), (0.42, -14, 0, 0, "cout"), (0.7, -6, 0, 0, "sine"), (1, 0, 0, 0, "sine"))
+    for h in kit.role("head"):
+        c.rot(h, (0, 34, 0, 0), (0.45, 0, 0, 0, "sine"), (0.55, -30, 0, 0, "cout"), (0.84, -24, 0, 0, "sine"), (1, 0, 0, 0, "sine"))
+        c.tremble(h, "rotation", 0.56, 0.82, 2.5, n=8, axis=(0, 1, 0))
+    for j in kit.role("jaw"):
+        c.rot(j, (0, 0, 0, 0), (0.5, 0, 0, 0), (0.58, 32, 0, 0, "cout"), (0.84, 26, 0, 0, "sine"), (1, 0, 0, 0, "sine"))
+    for side, sign in (("arm_l", 1), ("arm_r", -1)):
+        for a in kit.role(side):
+            c.rot(a, (0, 20, 0, -sign * 10), (0.5, -24, 0, sign * 55, "cout"), (0.84, -18, 0, sign * 44, "sine"), (1, 0, 0, 0, "sine"))
+    for side, sign in (("wing_l", 1), ("wing_r", -1)):
+        for wg in kit.role(side):
+            c.rot(wg, (0, 0, 0, -sign * 30), (0.45, 0, 0, sign * 62, "cout"), (0.6, 0, 0, -sign * 8, "sine"),
+                  (0.76, 0, 0, sign * 50, "cout"), (1, 0, 0, 0, "sine"))
+    for o in kit.role("orbit"):
+        c.scl(o, (0, 0.0), (0.5, 0.0), (0.7, 1.15, "cout"), (0.85, 1.0, "sine"))
+    for t in kit.role("tail"):
+        c.rot(t, (0, 0, 0, 0), (0.5, 0, 28, 0, "cout"), (0.7, 0, -20, 0, "sine"), (1, 0, 0, 0, "sine"))
+    return c
+
+
 def build(rig):
     """The boss's own animations, ready to merge into its animation file ({} for a rig without moves)."""
     _load()
@@ -324,6 +358,7 @@ def build(rig):
             else:
                 out[name + suffix] = clip.json()
     MOVES_SLUGS[rig.name] = slugs
+    out[f"misc.{rig.name}.awaken"] = awaken_clip(Kit(rig, world)).json()
     return out
 
 

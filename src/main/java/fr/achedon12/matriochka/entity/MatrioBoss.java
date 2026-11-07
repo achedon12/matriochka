@@ -78,6 +78,8 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	private Vec3 aim = Vec3.ZERO;
 	private int nodes;
 	private int calmUntil;
+	/** Set when the boss is summoned: its awakening animation is sent on its third tick. */
+	private boolean awakening;
 	/** Attack pace from the number of players in the fight (see Defs.bossAttackSpeedPlayers). */
 	private float pace = 1f;
 	/** The mutation it woke with ("" for none), see {@link #mutationTick} and world/Variants. */
@@ -106,6 +108,29 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			case 8 -> BossEvent.BossBarColor.YELLOW;
 			default -> BossEvent.BossBarColor.PURPLE;
 		};
+	}
+
+	/** The burst a boss wakes in: a column of its world's particles round it, and a ring on the ground. */
+	private static void awakenBurst(ServerLevel level, MatrioBoss boss) {
+		var particle = switch (boss.def.world()) {
+			case 1 -> ParticleTypes.SPORE_BLOSSOM_AIR;
+			case 2 -> ParticleTypes.LAVA;
+			case 3 -> ParticleTypes.SOUL;
+			case 4 -> ParticleTypes.ELECTRIC_SPARK;
+			case 5 -> ParticleTypes.SCULK_SOUL;
+			case 6 -> ParticleTypes.REVERSE_PORTAL;
+			case 7 -> ParticleTypes.BUBBLE_COLUMN_UP;
+			case 8 -> ParticleTypes.WAX_ON;
+			case 9 -> ParticleTypes.ASH;
+			case 10 -> ParticleTypes.TOTEM_OF_UNDYING;
+			default -> ParticleTypes.ENCHANT;
+		};
+		double w = boss.getBbWidth(), h = boss.getBbHeight();
+		level.sendParticles(particle, boss.getX(), boss.getY() + h * 0.5, boss.getZ(), 90, w * 0.6, h * 0.5, w * 0.6, 0.15);
+		for (int i = 0; i < 32; i++) {
+			double a = i * Math.PI * 2 / 32;
+			level.sendParticles(ParticleTypes.POOF, boss.getX() + Math.cos(a) * (w + 1), boss.getY() + 0.1, boss.getZ() + Math.sin(a) * (w + 1), 1, 0, 0, 0, 0.02);
+		}
 	}
 
 	/** A boss is heard before it is seen: a breath, a growl or a hum in its world's colour, every few seconds. */
@@ -166,7 +191,12 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		boss.setTarget(by);
 		level.addFreshEntity(boss);
 		level.playSound(null, at, fr.achedon12.matriochka.content.Sounds.BOSS_AWAKEN, SoundSource.HOSTILE, 2f, 1f);
-		boss.triggerAnim("action", "phase");
+		// it comes out of its shell (misc.<boss>.awaken) in a burst of its world's particles
+		// triggered a couple of ticks later (see tick), once the clients track the new entity: an animation sent in
+		// the tick it is added would be lost; it stands still while it comes out of its shell
+		boss.awakening = true;
+		boss.calm(56);
+		awakenBurst(level, boss);
 		if (intro) fr.achedon12.matriochka.net.Cues.bossIntro(level, boss, id);
 		if (!boss.mutation.isEmpty()) {
 			Component desc = Component.translatable("mutation.matriochka." + boss.mutation + ".desc");
@@ -407,6 +437,10 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		// a fight inside shakes the World Block on the Surface
 		if (target != null && tickCount % 20 == 0) fr.achedon12.matriochka.world.ScaleLinks.bossFighting(level, blockPosition());
 		stateTicks++;
+		if (awakening && tickCount >= 3) {
+			awakening = false;
+			triggerAnim("action", BossAnims.SLUGS.containsKey(def.id()) ? "awaken" : "phase");
+		}
 		if (tickCount < calmUntil) {
 			getNavigation().stop();
 			state = State.CHASE;
@@ -943,6 +977,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			}
 			action.triggerableAnim("phase", RawAnimation.begin().thenPlay("misc." + d.id() + ".phase"));
 			action.triggerableAnim("death", RawAnimation.begin().thenPlayAndHold("misc." + d.id() + ".death"));
+			action.triggerableAnim("awaken", RawAnimation.begin().thenPlay("misc." + d.id() + ".awaken"));
 		}
 		controllers.add(action);
 	}

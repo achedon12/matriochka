@@ -33,6 +33,12 @@ public final class Cinematics implements HudElement {
 	public static int intros;
 	// world title card: waits for the loading screen to go
 	private static int pendingWorld = -1, cardWorld = -1;
+	// the dive into a World Block (or the climb out of one): a doll-shaped iris closes, then opens on the other side
+	private static final int DIVE_MS = 800, OPEN_MS = 1000, DIVE_HOLD_MS = 5000;
+	private static long diveAt = -1, openAt = -1;
+	private static int diveWorld, openWorld;
+	private static boolean diveDown;
+	private static Object lastDim;
 	private static long cardAt = -1;
 	public static int worldCards;
 	// phase break
@@ -68,6 +74,13 @@ public final class Cinematics implements HudElement {
 				tintUntil = Math.max(tintUntil, Ui.now() + p.ticks() * 50L);
 			}
 			case "danger" -> danger = (int) p.strength();
+			case "dive" -> {
+				int w = (int) p.strength();
+				diveWorld = validWorld(w) ? w : 0;
+				diveDown = "down".equals(p.text());
+				diveAt = Ui.now();
+				openAt = -1;
+			}
 			case "world" -> {
 				// never trust the number: a bad one would index past the world table
 				int w = (int) p.strength();
@@ -159,6 +172,8 @@ public final class Cinematics implements HudElement {
 
 	/** Forgets everything on leaving a world (the check run uses it between cases). */
 	public static void reset() {
+		diveAt = -1;
+		openAt = -1;
 		introAt = cardAt = phaseAt = teleAt = teleUntil = tintUntil = shakeUntil = -1;
 		pendingWorld = cardWorld = -1;
 		danger = 0;
@@ -198,12 +213,34 @@ public final class Cinematics implements HudElement {
 			float t = (now - phaseAt) / (float) PHASE_MS;
 			f *= 1 - 0.07f * (1 - Ui.easeOut(t)) * Math.min(1, t * 8);
 		}
+		// the dive: the camera plunges toward the doll as it closes, and settles back as the new world opens
+		if (Comfort.cinematics()) {
+			if (diveAt >= 0) f *= 1 - 0.35f * Ui.easeIn(Ui.since(diveAt, DIVE_MS));
+			else if (openAt >= 0 && now - openAt < OPEN_MS) f *= 1 + 0.18f * (1 - Ui.easeOut(Ui.since(openAt, OPEN_MS)));
+		}
 		return f;
 	}
 
 	/** Client tick: the camera turns toward the waking boss during the first part of its introduction. */
 	public static void tick(Minecraft mc) {
 		if (mc.player == null || mc.level == null) return;
+		// arriving in another dimension after a dive: the iris opens on the new world once the loading screen is gone
+		if (lastDim != mc.level.dimension()) {
+			lastDim = mc.level.dimension();
+			if (diveAt >= 0 && Ui.now() - diveAt < DIVE_HOLD_MS) {
+				openWorld = diveDown ? diveWorld : 0;
+				openAt = -2;
+			}
+		}
+		if (openAt == -2 && mc.gui.screen() == null) {
+			openAt = Ui.now();
+			diveAt = -1;
+		}
+		// a dive that never led anywhere (refused, or the player left): let the screen open again
+		if (diveAt >= 0 && Ui.now() - diveAt > DIVE_HOLD_MS) {
+			diveAt = -1;
+			openAt = Ui.now();
+		}
 		if (pendingWorld > 0 && mc.gui.screen() == null) startWorldCard(pendingWorld);
 		if (!introPlaying() || Ui.now() - introAt > 1800) return;
 		Entity boss = mc.level.getEntity(introEntity);
@@ -230,6 +267,46 @@ public final class Cinematics implements HudElement {
 		if (introPlaying()) intro(g, font, w, h, now);
 		else if (cardPlaying()) worldCard(g, font, w, h, now);
 		if (teleUntil > now && Comfort.get().subtitles && !introPlaying()) subtitle(g, font, w, h, now);
+		if (diveAt >= 0) iris(g, w, h, 1 - Ui.easeOut(Ui.since(diveAt, DIVE_MS)), diveDown ? diveWorld : 0);
+		else if (openAt == -2) g.fill(0, 0, w, h, 0xFF000000);
+		else if (openAt >= 0 && now - openAt < OPEN_MS) iris(g, w, h, Ui.easeOut(Ui.since(openAt, OPEN_MS)), openWorld);
+	}
+
+	/**
+	 * The doll-shaped iris of a dive: black everywhere but a matryoshka silhouette in the middle of the screen, with a
+	 * gilt rim in the world's colour. open = 1 shows the whole screen, 0 closes it. Without cinematics (comfort), a
+	 * plain fade instead.
+	 */
+	private static void iris(GuiGraphicsExtractor g, int w, int h, float open, int world) {
+		open = Ui.clamp01(open);
+		if (!Comfort.cinematics()) {
+			g.fill(0, 0, w, h, Ui.alpha(0xFF000000, 1 - open));
+			return;
+		}
+		// the doll's size: large enough at 1 to clear the corners, none at 0
+		float r = open * (float) Math.hypot(w, h) * 0.9f;
+		float cx = w / 2f, cy = h / 2f;
+		float headR = r * 0.42f, headY = cy - r * 0.48f;
+		float bodyRx = r * 0.62f, bodyRy = r * 0.74f, bodyY = cy + r * 0.22f;
+		int rim = Ui.worldColor(world);
+		for (int y = 0; y < h; y++) {
+			float py = y + 0.5f;
+			float half = -1;
+			float dh = (py - headY) / headR;
+			if (Math.abs(dh) < 1) half = Math.max(half, headR * (float) Math.sqrt(1 - dh * dh));
+			float db = (py - bodyY) / bodyRy;
+			if (Math.abs(db) < 1) half = Math.max(half, bodyRx * (float) Math.sqrt(1 - db * db));
+			if (half <= 0) {
+				g.fill(0, y, w, y + 1, 0xFF000000);
+				continue;
+			}
+			int x0 = Math.max(0, Math.round(cx - half)), x1 = Math.min(w, Math.round(cx + half));
+			if (x0 > 0) g.fill(0, y, x0, y + 1, 0xFF000000);
+			if (x1 < w) g.fill(x1, y, w, y + 1, 0xFF000000);
+			// the gilt edge of the doll, in its world's colour
+			if (x0 > 0) g.fill(Math.max(0, x0 - 2), y, x0, y + 1, Ui.alpha(rim, 0.85f));
+			if (x1 < w) g.fill(x1, y, Math.min(w, x1 + 2), y + 1, Ui.alpha(rim, 0.85f));
+		}
 	}
 
 	/** Bars that slide in from the top and bottom, with a thin gold rule on their inner edge. */

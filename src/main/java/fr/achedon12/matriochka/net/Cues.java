@@ -119,6 +119,17 @@ public final class Cues {
 	}
 
 	/** A player arrives in a world: the title card plays the first time only. */
+	/**
+	 * The player dives into a World Block ("down", the world it opens) or climbs back out through a Threshold ("up"):
+	 * the screen closes on a doll-shaped iris before the teleport and opens again on the other side.
+	 */
+	public static void dive(ServerPlayer player, int world, boolean down) {
+		send(player, new CuePayload("dive", 0, world, DIVE_TICKS, down ? "down" : "up"));
+	}
+
+	/** How long the iris takes to close before the teleport. */
+	public static final int DIVE_TICKS = 16;
+
 	public static void worldEntered(ServerPlayer player, int world) {
 		PlayerState ps = PlayerState.of(player);
 		String key = "card_" + world;

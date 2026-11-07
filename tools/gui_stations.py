@@ -15,6 +15,7 @@ def build(ns):
     station_gauges()
     tile_sprites()
     decor_sprites()
+    boss_bars()
 
 
 IRONS = [(22, 24, 30), (44, 48, 58), (72, 78, 90), (108, 114, 128), (150, 156, 170), (196, 202, 214)]
@@ -565,3 +566,64 @@ def decor_sprites():
                 cv.rect(x0, 0, x0 + 8, H, WOOD[2])
         inner_shadow(cv, 0, 0, W, H, 8, 0.6)
         save("decor_" + sid, cv)
+
+
+# =================================================================== boss bars
+# Each boss's bar is its own lacquered cartouche (bossbar_<boss>, 240 x 28): its world's enamel under a gold rim, a
+# medallion on the left that the screen numbers, a painted finial on the right in the world's motif, and a recess
+# (x 34..228, y 11..19) where BossBars draws the health, its trail and the phase rivets.
+BAR_W, BAR_H = 240, 28
+BAR_IN = (34, 11, 228, 19)
+
+
+def boss_bars():
+    from content import BOSSES
+    W, H = BAR_W * S, BAR_H * S
+    for b in BOSSES:
+        w = b["world"]
+        st = world_style(w)
+        en = st["enamel"]
+        cv = Cv(W, H)
+        # the cartouche: a lacquer band with rounded ends
+        def inside(x, y):
+            r = H * 0.36
+            if x < 26 * S:
+                return False
+            if x > W - r:
+                return (x - (W - r)) ** 2 + (y - H / 2) ** 2 <= r * r
+            return 4 <= y < H - 4
+        shape(cv, inside, (0, 0, W, H), lambda x, y: mix(scale_c(en, 1.35), scale_c(en, 0.55), clamp(y / H)), OUTLINE)
+        for x in range(26 * S, W - 8):
+            if cv.alpha(x, 5):
+                cv.put(x, 5, GOLD[4])
+                cv.put(x, 6, GOLD[2])
+            if cv.alpha(x, H - 6):
+                cv.put(x, H - 6, GOLD[1])
+                cv.put(x, H - 7, GOLD[3])
+        # the world's motif along the band, faint
+        world_motif(cv, 40 * S, 6, W - 30, 10 * S, w, False, 5)
+        # the recess the health runs in
+        x0, y0, x1, y1 = (v * S for v in BAR_IN)
+        cv.rect(x0 - 2, y0 - 2, x1 + 2, y1 + 2, OUTLINE)
+        cv.rect(x0 - 1, y0 - 1, x1 + 1, y1 + 1, GOLD[2])
+        cv.rect(x0, y0, x1, y1, (12, 8, 6))
+        for x in range(x0, x1):
+            cv.put(x, y0, (0, 0, 0))
+        # the finial on the right: a gold bead and a berry of the world's accent
+        rivet(cv, W - 12, H / 2, 4.6)
+        berry(cv, W - 12, H / 2, 2.6, st["berry"])
+        # the medallion: a gold disc on the left, enamel inside, the world's number written over it by the screen
+        cx, cy = 15 * S, H / 2
+        cv.disc(cx, cy, 14 * S / 1.05, OUTLINE)
+        for y in range(int(cy - 14 * S), int(cy + 14 * S)):
+            for x in range(int(cx - 14 * S), int(cx + 14 * S)):
+                d = math.hypot(x + .5 - cx, y + .5 - cy)
+                if d <= 12.6 * S:
+                    if d > 10.4 * S:
+                        cv.put(x, y, gold_tone(x, y, 0.85 - (y - cy) / (14 * S) * 0.4, 9, False))
+                    else:
+                        cv.put(x, y, mix(scale_c(en, 1.5), scale_c(en, 0.6), clamp((y - cy + 10 * S) / (20 * S))))
+        for k in range(12):
+            a = k * math.pi / 6
+            cv.disc(cx + math.cos(a) * 11.5 * S, cy + math.sin(a) * 11.5 * S, 1.2, GOLD[5])
+        save("bossbar_" + b["id"], cv)

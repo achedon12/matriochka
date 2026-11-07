@@ -136,7 +136,12 @@ final class OnboardingTest {
 				ServerPlayer p = player(s);
 				ServerLevel level = (ServerLevel) p.level();
 				// gather what it dropped: stand on each item in turn
-				for (ItemEntity e : level.getEntitiesOfClass(ItemEntity.class, new net.minecraft.world.phys.AABB(drop).inflate(12))) e.setPos(p.getX(), p.getY(), p.getZ());
+				// (still and with no pickup delay, or a drop still flying would sail past the player)
+				for (ItemEntity e : level.getEntitiesOfClass(ItemEntity.class, new net.minecraft.world.phys.AABB(drop).inflate(12))) {
+					e.setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO);
+					e.setNoPickUpDelay();
+					e.setPos(p.getX(), p.getY(), p.getZ());
+				}
 			});
 			ctx.waitTicks(60);
 			check(step(server) >= 4, "defeating the Guardian completes step 4 (" + step(server) + ")");

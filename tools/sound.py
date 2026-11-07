@@ -93,6 +93,9 @@ def _sounds():
         en, fr = STATION_SUB[st]
         s(f"station.{st}", "sfx", "station_" + st, 2, en, fr)
     s("station.soul_altar.devour", "sfx", "station_devour", 1, "Soul Altar devours", "L'Autel des âmes dévore")
+    s("station.grid.place", "sfx", "grid_place", 3, "Piece set on the grid", "Une pièce se pose sur la grille")
+    s("station.grid.fill", "sfx", "grid_fill", 1, "The grid is laid out", "La grille se garnit")
+    s("station.grid.ready", "sfx", "grid_ready", 1, "A recipe forms", "Une recette se forme")
     s("station.jailer_table.pin", "sfx", "jailer_pin", 3, "Lock pin clicks", "Une goupille cède")
     # bosses
     s("boss.awaken", "sfx", "boss_awaken", 1, "Boss awakens", "Un boss s'éveille")

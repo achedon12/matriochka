@@ -66,7 +66,7 @@ public class StationMenu extends AbstractContainerMenu {
 			addSlot(new Slot(slot, 1, INVERTER_B_X, INVERTER_Y));
 		}
 		if (workbench()) {
-			for (int i = 0; i < 9; i++) addSlot(new Slot(grid, i, GRID_X + (i % 3) * 18, GRID_Y + (i / 3) * 18));
+			for (int i = 0; i < 9; i++) addSlot(new GridSlot(i));
 			resultSlot = slots.size();
 			addSlot(new ResultSlot());
 		}
@@ -92,7 +92,10 @@ public class StationMenu extends AbstractContainerMenu {
 		super.slotsChanged(c);
 		if (c == grid && !player.level().isClientSide()) {
 			var r = gridRecipe();
+			boolean had = !result.getItem(0).isEmpty();
 			result.setItem(0, r == null ? ItemStack.EMPTY : new ItemStack(Stations.resolve(r.output()), r.count()));
+			// the moment the grid spells a recipe, it chimes
+			if (r != null && !had) sound(fr.achedon12.matriochka.content.Sounds.STATION_GRID_READY, 0.8f, 1f);
 		}
 	}
 
@@ -113,6 +116,25 @@ public class StationMenu extends AbstractContainerMenu {
 		ps.progress("station", data.station(), 1);
 		grid.setChanged();
 		slotsChanged(grid);
+	}
+
+	/** A cell of the workbench grid: a wooden tap when the player sets something down on it. */
+	private class GridSlot extends Slot {
+		GridSlot(int i) {
+			super(grid, i, GRID_X + (i % 3) * 18, GRID_Y + (i / 3) * 18);
+		}
+
+		@Override
+		public void setByPlayer(ItemStack stack, ItemStack old) {
+			super.setByPlayer(stack, old);
+			boolean added = !stack.isEmpty() && (!ItemStack.isSameItemSameComponents(stack, old) || stack.getCount() > old.getCount());
+			if (added) sound(fr.achedon12.matriochka.content.Sounds.STATION_GRID_PLACE, 0.7f, 0.9f + player.getRandom().nextFloat() * 0.2f);
+		}
+	}
+
+	/** A sound at the workbench, heard by everyone nearby (the server plays it). */
+	private void sound(net.minecraft.sounds.SoundEvent e, float vol, float pitch) {
+		if (player instanceof ServerPlayer sp) sp.level().playSound(null, data.pos(), e, net.minecraft.sounds.SoundSource.BLOCKS, vol, pitch);
 	}
 
 	/** The workbench's result: shown while the grid spells a recipe, taken like a crafted item. */
@@ -162,6 +184,7 @@ public class StationMenu extends AbstractContainerMenu {
 		}
 		grid.setChanged();
 		slotsChanged(grid);
+		sound(fr.achedon12.matriochka.content.Sounds.STATION_GRID_FILL, 0.9f, 1f);
 		return null;
 	}
 

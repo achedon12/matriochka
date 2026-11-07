@@ -24,6 +24,9 @@ import net.minecraft.world.level.Level;
  */
 public class TutorialCard implements HudElement {
 	private static final int W = 152;
+	/** The card's rectangle on the last frame it was drawn (x0, y0, x1, y1), and when. */
+	static int[] drawn = {0, 0, 0, 0};
+	static long drawnAt = -1;
 	private static final long FAREWELL_MS = 9000;
 	private int lastStep = -1;
 	private long changedAt = Ui.now(), doneAt = -1;
@@ -122,6 +125,9 @@ public class TutorialCard implements HudElement {
 		int baseX = right ? (plaque ? Hud.plaqueRight : g.guiWidth() - 6) - W : plaque ? Hud.plaqueX : 6;
 		int y = bottom ? (plaque ? Hud.plaqueTop - 4 : g.guiHeight() - 6 - (right ? 0 : 40)) - h : plaque ? Hud.plaqueBottom + 4 : 6;
 		int x = Math.round(baseX + (right ? 1 : -1) * ((1 - in) + out) * (W + 10));
+		// where the card stands this frame, for the boss bars to keep clear of it (client/BossBars)
+		drawn = new int[]{x, y, x + W, y + h};
+		drawnAt = now;
 		Ui.sprite(g, "hud_plaque", x, y, W, h);
 		// a gilt slot with the step's item; it bobs a little while the step waits
 		int sx = x + 7, sy = y + 8;

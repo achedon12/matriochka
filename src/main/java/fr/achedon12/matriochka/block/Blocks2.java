@@ -322,7 +322,8 @@ public final class Blocks2 {
 					sp.sendSystemMessage(Component.translatable("message.matriochka.cycle.old_block"));
 					return InteractionResult.SUCCESS;
 				}
-				Travel.enter(sp, world, pos);
+				// the screen closes on the doll before the dive (world/Travel.diveInto)
+				Travel.diveInto(sp, world, pos);
 				Achievements.grantId(sp, "world_" + world + "/a0");
 			}
 			return InteractionResult.SUCCESS;
@@ -390,8 +391,8 @@ public final class Blocks2 {
 		@Override
 		protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
 			if (player instanceof ServerPlayer sp) {
-				if (fr.achedon12.matriochka.world.Refuge.inRefuge(level)) fr.achedon12.matriochka.world.Refuge.leave(sp);
-				else Travel.leave(sp);
+				if (fr.achedon12.matriochka.world.Refuge.inRefuge(level)) Travel.climbOut(sp, fr.achedon12.matriochka.world.Refuge::leave);
+				else Travel.climbOut(sp, p -> Travel.leave(p));
 			}
 			return InteractionResult.SUCCESS;
 		}

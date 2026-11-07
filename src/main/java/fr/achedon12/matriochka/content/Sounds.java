@@ -50,6 +50,9 @@ public final class Sounds {
 	public static final SoundEvent STATION_TERRAIN_ANCHOR = register("station.terrain_anchor");
 	public static final SoundEvent STATION_FINAL_LOOM = register("station.final_loom");
 	public static final SoundEvent STATION_SOUL_ALTAR_DEVOUR = register("station.soul_altar.devour");
+	public static final SoundEvent STATION_GRID_PLACE = register("station.grid.place");
+	public static final SoundEvent STATION_GRID_FILL = register("station.grid.fill");
+	public static final SoundEvent STATION_GRID_READY = register("station.grid.ready");
 	public static final SoundEvent STATION_JAILER_TABLE_PIN = register("station.jailer_table.pin");
 	public static final SoundEvent BOSS_AWAKEN = register("boss.awaken");
 	public static final SoundEvent BOSS_PHASE = register("boss.phase");
