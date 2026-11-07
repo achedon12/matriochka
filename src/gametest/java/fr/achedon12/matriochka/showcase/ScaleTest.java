@@ -45,7 +45,7 @@ final class ScaleTest {
 	static void run(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamemode survival @a");

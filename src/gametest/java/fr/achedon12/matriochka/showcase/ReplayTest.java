@@ -54,7 +54,7 @@ final class ReplayTest {
 	static void run(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule advance_weather false");
 			// rain puts out the fire the javelin's lightning lights, which the check reads once the bolt is gone
@@ -162,7 +162,7 @@ final class ReplayTest {
 	 */
 	private static Husk dummy(ServerPlayer p, double dx, double dz) {
 		ServerLevel level = (ServerLevel) p.level();
-		Husk z = net.minecraft.world.entity.EntityTypes.HUSK.create(level, EntitySpawnReason.COMMAND);
+		Husk z = fr.achedon12.matriochka.mc.McEntities.HUSK.create(level, EntitySpawnReason.COMMAND);
 		BlockPos at = BlockPos.containing(p.getX() + dx, p.getY(), p.getZ() + dz);
 		while (!level.getBlockState(at).isAir() && at.getY() < level.getMaxY()) at = at.above();
 		while (level.getBlockState(at.below()).isAir() && at.getY() > level.getMinY()) at = at.below();

@@ -33,7 +33,7 @@ public class EpicCapture {
 
 	private static void chunks(ClientGameTestContext ctx, TestSingleplayerContext sp) {
 		try {
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 		} catch (AssertionError e) {
 			ctx.waitTicks(40);
 		}
@@ -112,7 +112,7 @@ public class EpicCapture {
 			chunks(ctx, sp);
 			ctx.setScreen(() -> null);
 			ctx.runOnClient(mc -> {
-				if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle();
+				if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc);
 				var o = mc.options;
 				o.renderDistance().set(14);
 				o.simulationDistance().set(10);

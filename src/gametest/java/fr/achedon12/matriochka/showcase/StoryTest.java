@@ -42,7 +42,7 @@ final class StoryTest {
 	static void run(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamemode survival @a");
@@ -192,7 +192,7 @@ final class StoryTest {
 		ServerLevel z = (ServerLevel) p.level();
 		check(out, z.getBlockState(o.offset(0, 0, 1)).is(ModContent.block("threshold")), "the entry hall holds the Threshold");
 		check(out, z.getBlockState(WorldZero.gateCenter(o, 0)).is(ModContent.block("sealed_brick")), "the first chamber is shut by its gate");
-		check(out, z.getBlockState(WorldZero.kneelSpot(o)).is(net.minecraft.world.level.block.Blocks.CARPET.red()), "the kneeling carpet lies before the bench");
+		check(out, z.getBlockState(WorldZero.kneelSpot(o)).is(fr.achedon12.matriochka.mc.McBlocks.CARPET.red()), "the kneeling carpet lies before the bench");
 		check(out, achieved(p, "endings/world_zero"), "The Smallest Doll is granted on entering");
 	}
 

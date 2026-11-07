@@ -80,7 +80,7 @@ final class PlaythroughTest {
 		OUT.clear();
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			TestServerContext server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			for (String c : new String[]{"gamerule advance_time false", "gamerule advance_weather false", "gamerule spawn_monsters false",
 				"gamerule announce_advancements false", "gamerule keep_inventory true", "time set 6000", "weather clear", "difficulty normal",
 				"gamemode survival @a", "effect give @a resistance infinite 4 true", "effect give @a regeneration infinite 2 true",
@@ -186,7 +186,16 @@ final class PlaythroughTest {
 
 	private static void give(ServerPlayer p, String id, int n) {
 		ItemStack s = new ItemStack(item(id), n);
-		if (!p.getInventory().add(s)) throw new Abort("inventory full while giving " + id);
+		if (!p.getInventory().add(s)) {
+			// what fills it, to tell a leftover from a stack that would not merge
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < p.getInventory().getContainerSize(); i++) {
+				ItemStack it = p.getInventory().getItem(i);
+				if (!it.isEmpty()) sb.append(' ').append(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(it.getItem()).getPath()).append('x').append(it.getCount());
+			}
+			Matriochka.LOG.info("[playthrough] info inventory:{}", sb);
+			throw new Abort("inventory full while giving " + id);
+		}
 	}
 
 	/** Puts a stack of that item in the main hand (the hand's stack goes where it was), as a player picking it in the hotbar. */
@@ -457,6 +466,16 @@ final class PlaythroughTest {
 			return server.computeOnServer(s -> {
 				ServerPlayer p = player(s);
 				boolean tracked = MatrioData.get(s).hasWorldBlock(s, group(p), w);
+				if (!f) {
+					// what the Seed sees, to tell a rite that waits from one that broke
+					var lv = p.level();
+					BlockPos at = plotSeed(w);
+					StringBuilder sb = new StringBuilder("W" + w + " seed site: " + lv.getBlockState(at));
+					if (lv.getBlockEntity(at) instanceof fr.achedon12.matriochka.block.DataBlockEntity be) sb.append(" data=").append(be.data());
+					for (int dy = -1; dy <= 3; dy++) sb.append(" | y+").append(dy).append(' ').append(lv.getBlockState(at.above(dy)));
+					for (Direction d : Direction.Plane.HORIZONTAL) sb.append(" | ").append(d).append(' ').append(lv.getBlockState(at.relative(d)));
+					Matriochka.LOG.info("[playthrough] info {}", sb);
+				}
 				unblock(s, w);
 				return checks(f, "the Seed hatches into the World " + w + " Block", tracked, "the group's World Block is tracked");
 			});
@@ -713,6 +732,14 @@ final class PlaythroughTest {
 			ServerPlayer p = player(s);
 			emptyHand(p);
 			int[] order = Content.NEST_ORDER;
+			// what the run picked up on its way and never uses again (leaf litter on the Surface of 26.2, fish, shells)
+			// makes room for the dolls, as a player would empty their pockets
+			java.util.Set<String> clutter = java.util.Set.of("leaf_litter", "wheat_seeds", "cooked_cod", "sea_pickle", "string", "ladder",
+				"dark_oak_door", "prismarine_shard", "prismarine_crystals", "kelp", "seagrass", "short_grass", "dirt", "cobblestone");
+			for (int i = 0; i < p.getInventory().getContainerSize(); i++) {
+				ItemStack it = p.getInventory().getItem(i);
+				if (!it.isEmpty() && clutter.contains(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(it.getItem()).getPath())) p.getInventory().setItem(i, ItemStack.EMPTY);
+			}
 			// found in the worlds' structures: given here
 			for (int w = 1; w <= 10; w++) give(p, "hidden_doll_" + w, 1);
 			hold(p, "hidden_doll_" + order[0]);

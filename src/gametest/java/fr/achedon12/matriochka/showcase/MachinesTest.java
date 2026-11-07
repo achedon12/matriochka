@@ -32,10 +32,10 @@ final class MachinesTest {
 	}
 
 	private static void shot(ClientGameTestContext ctx, String name) {
-		ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		ctx.runOnClient(mc -> { if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 		ctx.waitTicks(2);
 		ctx.takeScreenshot(TestScreenshotOptions.of("machines_" + name).withSize(1600, 900).disableCounterPrefix());
-		ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		ctx.runOnClient(mc -> { if (fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 	}
 
 	static void run(ClientGameTestContext ctx) {
@@ -43,7 +43,7 @@ final class MachinesTest {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
 			ctx.getInput().resizeWindow(1600, 900);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			for (String c : List.of("gamerule advance_time false", "gamerule advance_weather false", "weather clear", "gamerule spawn_monsters false",
 				"time set 1000", "gamemode creative @a")) s.runCommand(c);
 			ctx.setScreen(() -> null);
@@ -59,7 +59,7 @@ final class MachinesTest {
 					lvl.setBlock(new BlockPos(i * 3, y, 0), ModContent.block(STATIONS.get(i)).defaultBlockState(), 3);
 			});
 			ctx.waitTicks(60);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			for (int i = 0; i < STATIONS.size(); i++) {
 				String id = STATIONS.get(i);
 				if (!only.isEmpty() && !only.contains(id)) continue;

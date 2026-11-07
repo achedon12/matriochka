@@ -39,16 +39,16 @@ final class VisualsTest {
 	}
 
 	private static void shot(ClientGameTestContext ctx, String name) {
-		ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		ctx.runOnClient(mc -> { if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 		ctx.waitTick();
 		ctx.takeScreenshot(TestScreenshotOptions.of(name).withSize(1920, 1080).disableCounterPrefix());
-		ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		ctx.runOnClient(mc -> { if (fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 	}
 
 	static void run(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.setScreen(() -> null);
 			s.runCommand("gamerule advance_time false");
 			s.runCommand("gamerule spawn_monsters false");
@@ -80,7 +80,7 @@ final class VisualsTest {
 			s.runCommand("execute as @p run matriochka world enter " + w);
 			ctx.setScreen(() -> null);
 			ctx.waitTicks(120);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			s.runCommand("gamemode spectator @a");
 			if (w == 5) {
 				// the Deep has no light of its own: show it the way a player sees it, around a few lanterns they set down
@@ -109,14 +109,14 @@ final class VisualsTest {
 		s.runCommand("execute as @p run matriochka world zero");
 		ctx.setScreen(() -> null);
 		ctx.waitTicks(120);
-		sp.getConnection().waitForChunksRender();
+		McTest.waitForChunks(sp);
 		s.runCommand("gamemode spectator @a");
 		s.runCommand("execute as @p at @s run tp @s ~ ~2.2 ~-3.5 0 10");
 		ctx.waitTicks(60);
 		shot(ctx, "vis_world_0");
 		s.runCommand("execute in matriochka:world_zero run tp @p 0 70 0 45 15");
 		ctx.waitTicks(120);
-		sp.getConnection().waitForChunksRender();
+		McTest.waitForChunks(sp);
 		shot(ctx, "vis_world_0_cavern");
 		s.runCommand("execute in minecraft:overworld run tp @p 0 120 0");
 		ctx.waitTicks(60);
@@ -168,7 +168,7 @@ final class VisualsTest {
 		s.runCommand("setblock 3 200 -2 matriochka:world_soil_3");
 		s.runCommand("tp @p 0 205 -9 0 30");
 		ctx.waitTicks(60);
-		sp.getConnection().waitForChunksRender();
+		McTest.waitForChunks(sp);
 		shot(ctx, "vis_stations");
 		s.runCommand("time set 18000");
 		ctx.waitTicks(40);
@@ -188,7 +188,7 @@ final class VisualsTest {
 		}
 		s.runCommand("tp @p 0 213.5 12 180 0");
 		ctx.waitTicks(60);
-		sp.getConnection().waitForChunksRender();
+		McTest.waitForChunks(sp);
 		shot(ctx, "vis_frames");
 	}
 
@@ -228,7 +228,7 @@ final class VisualsTest {
 		s.runCommand("fill 0 218 5 6 230 5 minecraft:white_concrete");
 		s.runCommand("tp @p 0.5 223.4 1.0 0 0");
 		ctx.waitTicks(40);
-		sp.getConnection().waitForChunksRender();
+		McTest.waitForChunks(sp);
 		for (var entry : Particles.STYLES.entrySet()) {
 			var type = entry.getKey();
 			int life = entry.getValue().lifeMin();

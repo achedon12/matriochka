@@ -29,10 +29,10 @@ final class ComfortTest {
 	private ComfortTest() {}
 
 	private static void shot(ClientGameTestContext ctx, String name, boolean hud) {
-		if (!hud) ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		if (!hud) ctx.runOnClient(mc -> { if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 		ctx.waitTick();
 		ctx.takeScreenshot(TestScreenshotOptions.of(name).withSize(1920, 1080).disableCounterPrefix());
-		if (!hud) ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		if (!hud) ctx.runOnClient(mc -> { if (fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 	}
 
 	private static void check(List<String> out, boolean ok, String what) {
@@ -73,7 +73,7 @@ final class ComfortTest {
 
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamerule announce_advancements false");

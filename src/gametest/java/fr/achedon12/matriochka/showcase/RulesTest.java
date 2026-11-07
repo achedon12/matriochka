@@ -42,7 +42,7 @@ final class RulesTest {
 	static void run(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamerule announce_advancements false");
@@ -245,7 +245,7 @@ final class RulesTest {
 		for (int i = 0; i < 205; i++) GravityZones.tickPlayer(level, p, t);
 		check(out, achieved(p, "fall_up"), "world 6: Vertigo granted after 10 seconds of falling up");
 		// a creature in the zone rises
-		Zombie zombie = net.minecraft.world.entity.EntityTypes.ZOMBIE.create(level, EntitySpawnReason.COMMAND);
+		Zombie zombie = fr.achedon12.matriochka.mc.McEntities.ZOMBIE.create(level, EntitySpawnReason.COMMAND);
 		zombie.setPos(x + 2.5, ground + 3, z + 2.5);
 		level.addFreshEntity(zombie);
 		GravityZones.tickMob(level, zombie, t);

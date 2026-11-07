@@ -57,10 +57,10 @@ final class ScreensTest {
 	private static int window = 1920, windowH = 1080;
 
 	private static void shot(ClientGameTestContext ctx, String name) {
-		ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		ctx.runOnClient(mc -> { if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 		ctx.waitTick();
 		ctx.takeScreenshot(TestScreenshotOptions.of("screens_" + name).withSize(window, windowH).disableCounterPrefix());
-		ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		ctx.runOnClient(mc -> { if (fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 	}
 
 	private static void cursor(ClientGameTestContext ctx, double gx, double gy) {
@@ -106,7 +106,7 @@ final class ScreensTest {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
 			resize(ctx, 1920, 1080);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			s.runCommand("gamerule advance_time false");
 			s.runCommand("gamerule advance_weather false");
 			s.runCommand("weather clear");
@@ -165,7 +165,7 @@ final class ScreensTest {
 	}
 
 	private static boolean stallOpen(ClientGameTestContext ctx) {
-		return ctx.computeOnClient(mc -> mc.gui.screen() instanceof StallScreen);
+		return ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof StallScreen);
 	}
 
 	private static int count(MinecraftServer srv, net.minecraft.world.item.Item item) {
@@ -186,47 +186,47 @@ final class ScreensTest {
 		// ---- the Peddler, karma 40: a discount on every price
 		openTrades(ctx, sp);
 		check(stallOpen(ctx), "the Doll Peddler opens the Matriochka stall, not the villager screen");
-		String kind = ctx.computeOnClient(mc -> mc.gui.screen() instanceof StallScreen st ? st.info().kind() : "");
+		String kind = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof StallScreen st ? st.info().kind() : "");
 		check(kind.equals("peddler"), "the stall knows it is the Peddler (" + kind + ")");
 		ctx.waitTicks(20);
 		cursor(ctx, 2, 2);
 		shot(ctx, "stall_peddler");
-		int price = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).getMenu().getOffers().get(0).getCostA().getCount());
+		int price = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).getMenu().getOffers().get(0).getCostA().getCount());
 		check(price == 5, "karma 40 takes the Chance Doll from 6 to 5 emeralds (" + price + ")");
 		// the tooltip of a line
-		int[] row1 = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).rowCenter(1));
+		int[] row1 = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).rowCenter(1));
 		cursor(ctx, row1[0] + 30, row1[1]);
 		ctx.waitTicks(6);
 		shot(ctx, "stall_peddler_tooltip");
 		// ---- a trade through the stall: pick the line, take the doll, drop it in the inventory
-		int[] row0 = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).rowCenter(0));
+		int[] row0 = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).rowCenter(0));
 		click(ctx, row0);
-		int sel = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).selected());
+		int sel = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).selected());
 		check(sel == 0, "clicking a line selects its trade (" + sel + ")");
 		ctx.waitTicks(6);
-		boolean filled = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).getMenu().getSlot(0).getItem().is(Items.EMERALD)
-			&& ((StallScreen) mc.gui.screen()).getMenu().getSlot(2).getItem().is(ModContent.item("chance_doll")));
+		boolean filled = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).getMenu().getSlot(0).getItem().is(Items.EMERALD)
+			&& ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).getMenu().getSlot(2).getItem().is(ModContent.item("chance_doll")));
 		check(filled, "the selection moves the emeralds onto the counter and shows the Chance Doll");
 		cursor(ctx, 2, 2);
 		shot(ctx, "stall_peddler_selected");
-		click(ctx, ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).slotCenter(2)));
+		click(ctx, ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).slotCenter(2)));
 		int empty = ctx.computeOnClient(mc -> {
-			var menu = ((StallScreen) mc.gui.screen()).getMenu();
+			var menu = ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).getMenu();
 			for (int i = 3; i < menu.slots.size(); i++) if (!menu.getSlot(i).hasItem()) return i;
 			return -1;
 		});
-		click(ctx, ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).slotCenter(empty)));
+		click(ctx, ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).slotCenter(empty)));
 		ctx.waitTicks(6);
 		// ---- shift-click: the Wool Thread (2 emeralds, 1 with the discount) as long as the stock lasts
-		int[] row2 = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).rowCenter(2));
+		int[] row2 = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).rowCenter(2));
 		click(ctx, row2);
 		ctx.waitTicks(4);
-		int[] result = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).slotCenter(2));
+		int[] result = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).slotCenter(2));
 		cursor(ctx, result[0], result[1]);
 		ctx.waitTicks(2);
 		// the test input cannot hold a modifier through a click in this version: send the shift-click the screen sends
 		ctx.runOnClient(mc -> {
-			var menu = ((StallScreen) mc.gui.screen()).getMenu();
+			var menu = ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).getMenu();
 			mc.gameMode.handleContainerInput(menu.containerId, 2, 0, net.minecraft.world.inventory.ContainerInput.QUICK_MOVE, mc.player);
 		});
 		ctx.waitTicks(10);
@@ -242,7 +242,7 @@ final class ScreensTest {
 		// ---- the same trader, reopened: the sold-out line
 		openTrades(ctx, sp);
 		ctx.waitTicks(16);
-		int[] row2b = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).rowCenter(2));
+		int[] row2b = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).rowCenter(2));
 		click(ctx, row2b);
 		cursor(ctx, 2, 2);
 		ctx.waitTicks(6);
@@ -269,14 +269,14 @@ final class ScreensTest {
 		check(stallOpen(ctx), "a world's people opens the stall too");
 		ctx.waitTicks(16);
 		shot(ctx, "stall_people_many");
-		int[] mid = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).rowCenter(0));
+		int[] mid = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).rowCenter(0));
 		cursor(ctx, mid[0], mid[1] + 40);
 		for (int i = 0; i < 12; i++) {
 			ctx.getInput().scroll(-1);
 			ctx.waitTicks(1);
 		}
 		ctx.waitTicks(12);
-		int scrolled = ctx.computeOnClient(mc -> ((StallScreen) mc.gui.screen()).scrolled());
+		int scrolled = ctx.computeOnClient(mc -> ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).scrolled());
 		check(scrolled > 0, "the wheel scrolls the ledger (" + scrolled + " lines)");
 		cursor(ctx, 2, 2);
 		shot(ctx, "stall_people_scrolled");
@@ -289,13 +289,13 @@ final class ScreensTest {
 		s.runCommand("give @p matriochka:sealed_fragment 20");
 		ctx.waitTicks(5);
 		openTrades(ctx, sp);
-		int under = ctx.computeOnClient(mc -> mc.gui.screen() instanceof StallScreen st ? st.info().contraband() : -1);
+		int under = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof StallScreen st ? st.info().contraband() : -1);
 		check(under > 0, "karma -40 opens the black market at the stall (" + under + " goods under the counter)");
 		ctx.waitTicks(16);
 		cursor(ctx, 2, 2);
 		shot(ctx, "stall_black_market");
 		int markup = ctx.computeOnClient(mc -> {
-			var o = ((StallScreen) mc.gui.screen()).getMenu().getOffers().get(0);
+			var o = ((StallScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).getMenu().getOffers().get(0);
 			return o.getCostA().getCount() - o.getBaseCostA().getCount();
 		});
 		check(markup > 0, "dark karma raises the prices (+" + markup + ")");
@@ -305,7 +305,7 @@ final class ScreensTest {
 		scale(ctx, 0);
 		openTrades(ctx, sp);
 		ctx.waitTicks(16);
-		check(ctx.computeOnClient(mc -> mc.gui.screen().width >= StallScreen.MW && mc.gui.screen().height >= StallScreen.MH), "the stall fits a 640x480 window");
+		check(ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc).width >= StallScreen.MW && fr.achedon12.matriochka.client.mc.McClient.screen(mc).height >= StallScreen.MH), "the stall fits a 640x480 window");
 		shot(ctx, "stall_narrow");
 		closeTrades(ctx);
 		resize(ctx, 1920, 1080);
@@ -315,7 +315,7 @@ final class ScreensTest {
 		s.runCommand("execute as @p run matriochka world enter 1");
 		ctx.setScreen(() -> null);
 		ctx.waitTicks(160);
-		sp.getConnection().waitForChunksRender();
+		McTest.waitForChunks(sp);
 		boolean started = s.computeOnServer(srv -> WorldEvents.start(player(srv), WorldEvents.MERCHANT));
 		ctx.waitTicks(30);
 		boolean found = s.computeOnServer(srv -> {
@@ -334,7 +334,7 @@ final class ScreensTest {
 			s.runCommand("execute as @p at @s run tp @s ~ ~ ~ 270 10");
 			ctx.waitTicks(10);
 			openTrades(ctx, sp);
-			String k = ctx.computeOnClient(mc -> mc.gui.screen() instanceof StallScreen st ? st.info().kind() + ":" + st.info().ticksLeft() : "");
+			String k = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof StallScreen st ? st.info().kind() + ":" + st.info().ticksLeft() : "");
 			check(k.startsWith("travelling:") && !k.endsWith(":-1"), "the stall shows a travelling merchant and its time left (" + k + ")");
 			ctx.waitTicks(16);
 			cursor(ctx, 2, 2);
@@ -358,7 +358,7 @@ final class ScreensTest {
 			}
 		});
 		ctx.waitTicks(14);
-		boolean vanilla = ctx.computeOnClient(mc -> mc.gui.screen() instanceof net.minecraft.client.gui.screens.inventory.MerchantScreen);
+		boolean vanilla = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof net.minecraft.client.gui.screens.inventory.MerchantScreen);
 		check(vanilla, "a vanilla villager still opens the vanilla merchant screen");
 		closeTrades(ctx);
 		s.runCommand("kill @e[type=minecraft:villager]");
@@ -404,10 +404,10 @@ final class ScreensTest {
 		ctx.waitTicks(4);
 		s.runOnServer(srv -> Endings.play(player(srv), Endings.SEAL));
 		ctx.waitTicks(20);
-		check(ctx.computeOnClient(mc -> mc.gui.screen() instanceof EndingScreen), "the ending's crawl plays");
-		ctx.runOnClient(mc -> mc.gui.screen().onClose());
+		check(ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof EndingScreen), "the ending's crawl plays");
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc).onClose());
 		ctx.waitTicks(1);
-		check(ctx.computeOnClient(mc -> mc.gui.screen() instanceof RecapScreen), "leaving the crawl opens the recap");
+		check(ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof RecapScreen), "leaving the crawl opens the recap");
 		ctx.waitTicks(10);
 		shot(ctx, "recap_opening");
 		ctx.waitTicks(60);
@@ -416,15 +416,15 @@ final class ScreensTest {
 			&& last.getIntOr("karma", 0) == 30 && last.getIntOr("cycle", -1) == 0, "the recap reaches the client with the cycle's numbers: " + last);
 		cursor(ctx, 2, 2);
 		shot(ctx, "recap_seal_first");
-		int[] core = ctx.computeOnClient(mc -> new int[]{mc.gui.screen().width / 2 - (11 * 22 - 4) / 2 + 22 + 9,
-			Math.max(RecapScreen.ABOVE, (mc.gui.screen().height - (RecapScreen.RH + RecapScreen.ABOVE + RecapScreen.BELOW)) / 2 + RecapScreen.ABOVE) + 70 + 9});
+		int[] core = ctx.computeOnClient(mc -> new int[]{fr.achedon12.matriochka.client.mc.McClient.screen(mc).width / 2 - (11 * 22 - 4) / 2 + 22 + 9,
+			Math.max(RecapScreen.ABOVE, (fr.achedon12.matriochka.client.mc.McClient.screen(mc).height - (RecapScreen.RH + RecapScreen.ABOVE + RecapScreen.BELOW)) / 2 + RecapScreen.ABOVE) + 70 + 9});
 		cursor(ctx, core[0], core[1]);
 		ctx.waitTicks(6);
 		shot(ctx, "recap_seal_boss_tooltip");
 		cursor(ctx, 2, 2);
 		ctx.getInput().pressKey(com.mojang.blaze3d.platform.InputConstants.KEY_F1);
 		ctx.waitTicks(4);
-		check(ctx.computeOnClient(mc -> mc.gui.screen() instanceof RecapScreen r && r.clean()), "F1 hides the buttons for a clean picture");
+		check(ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof RecapScreen r && r.clean()), "F1 hides the buttons for a clean picture");
 		shot(ctx, "recap_seal_clean");
 		ctx.getInput().pressKey(com.mojang.blaze3d.platform.InputConstants.KEY_F1);
 		ctx.waitTicks(4);
@@ -441,15 +441,15 @@ final class ScreensTest {
 		ctx.waitTicks(14);
 		shot(ctx, "journal_last_cycle");
 		int[] button = ctx.computeOnClient(mc -> {
-			int l = (mc.gui.screen().width - 340) / 2, t = Math.max(0, Math.min((mc.gui.screen().height - 214) / 2 + 12, mc.gui.screen().height - 214 - 1));
+			int l = (fr.achedon12.matriochka.client.mc.McClient.screen(mc).width - 340) / 2, t = Math.max(0, Math.min((fr.achedon12.matriochka.client.mc.McClient.screen(mc).height - 214) / 2 + 12, fr.achedon12.matriochka.client.mc.McClient.screen(mc).height - 214 - 1));
 			return new int[]{l + 20 + (155 - 18) / 2, t + 46 + 8};
 		});
 		click(ctx, button);
-		check(ctx.computeOnClient(mc -> mc.gui.screen() instanceof RecapScreen), "the Journal's Last cycle button reopens the recap");
+		check(ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof RecapScreen), "the Journal's Last cycle button reopens the recap");
 		ctx.waitTicks(10);
 		ctx.getInput().pressKey(com.mojang.blaze3d.platform.InputConstants.KEY_ESCAPE);
 		ctx.waitTicks(10);
-		String back = ctx.computeOnClient(mc -> mc.gui.screen() == null ? "none" : mc.gui.screen().getClass().getSimpleName());
+		String back = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) == null ? "none" : fr.achedon12.matriochka.client.mc.McClient.screen(mc).getClass().getSimpleName());
 		check(back.equals("JournalScreen"), "closing a recap opened from the Journal goes back to it (" + back + ")");
 		ctx.setScreen(() -> null);
 		// ---- a New Cycle: the counters start again, the recap stays
@@ -474,7 +474,7 @@ final class ScreensTest {
 			Endings.play(player(srv), Endings.ABSORB);
 		});
 		ctx.waitTicks(20);
-		ctx.runOnClient(mc -> mc.gui.screen().onClose());
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc).onClose());
 		ctx.waitTicks(70);
 		CompoundTag second = ctx.computeOnClient(mc -> MatrioClient.state.getCompoundOrEmpty("last_cycle").copy());
 		check(second.getStringOr("ending", "").equals("absorb") && second.getIntOr("cycle", 0) == 1 && second.getIntOr("deaths", 0) == 1 && second.getIntOr("karma", 0) == -60,
@@ -556,7 +556,7 @@ final class ScreensTest {
 		scale(ctx, 0);
 		ctx.setScreen(() -> new RecapScreen(null));
 		ctx.waitTicks(70);
-		check(ctx.computeOnClient(mc -> mc.gui.screen().height >= RecapScreen.RH + RecapScreen.ABOVE + RecapScreen.BELOW && mc.gui.screen().width >= RecapScreen.RW), "the recap fits a 640x480 window");
+		check(ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc).height >= RecapScreen.RH + RecapScreen.ABOVE + RecapScreen.BELOW && fr.achedon12.matriochka.client.mc.McClient.screen(mc).width >= RecapScreen.RW), "the recap fits a 640x480 window");
 		shot(ctx, "recap_narrow");
 		resize(ctx, 1920, 1080);
 		scale(ctx, 3);

@@ -40,7 +40,7 @@ final class FixesTest {
 	static void run(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamemode survival @a");
@@ -103,7 +103,7 @@ final class FixesTest {
 				Math.max(from.getX(), to.getX()) + 1, from.getY() + 1, Math.max(from.getZ(), to.getZ()) + 1)) {
 				level.setBlock(q, Blocks.AIR.defaultBlockState(), 3);
 			}
-			var zombie = net.minecraft.world.entity.EntityTypes.ZOMBIE.create(level, EntitySpawnReason.COMMAND);
+			var zombie = fr.achedon12.matriochka.mc.McEntities.ZOMBIE.create(level, EntitySpawnReason.COMMAND);
 			zombie.setNoAi(true);
 			zombie.setPos(front.x, p.getEyeY() - 1.0, front.z);
 			level.addFreshEntity(zombie);

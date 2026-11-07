@@ -49,7 +49,7 @@ final class SystemsTest {
 	static void run(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamemode survival @a");
@@ -235,7 +235,7 @@ final class SystemsTest {
 			check(out, kind < base, "karma +30 lowers a price (" + base + " -> " + kind + ")");
 			ps.addKarma(-ps.karma());
 
-			var villager = net.minecraft.world.entity.EntityTypes.VILLAGER.create(level, EntitySpawnReason.COMMAND);
+			var villager = fr.achedon12.matriochka.mc.McEntities.VILLAGER.create(level, EntitySpawnReason.COMMAND);
 			villager.setPos(p.getX() - 2, p.getY(), p.getZ());
 			level.addFreshEntity(villager);
 			villager.getOffers().add(new MerchantOffer(new ItemCost(Items.EMERALD, 10), new ItemStack(Items.DIAMOND), 12, 1, 0.05f));
@@ -264,7 +264,7 @@ final class SystemsTest {
 				GearClasses.apply(it, new GearClasses.Gear("prowler", 5, 0));
 				p.setItemSlot(s, it);
 			}
-			var zombie = net.minecraft.world.entity.EntityTypes.ZOMBIE.create(level, EntitySpawnReason.COMMAND);
+			var zombie = fr.achedon12.matriochka.mc.McEntities.ZOMBIE.create(level, EntitySpawnReason.COMMAND);
 			zombie.setPos(p.getX(), p.getY(), p.getZ() + 2);
 			int dodged = 0;
 			for (int i = 0; i < 200; i++) {

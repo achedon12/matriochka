@@ -43,7 +43,7 @@ public class TrailerCapture implements FabricClientGameTest {
 	/** Waits for the chunks around the camera, but never longer than a few seconds: a far view may keep loading. */
 	private static void chunks(ClientGameTestContext ctx, net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext sp) {
 		try {
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 		} catch (AssertionError e) {
 			ctx.waitTicks(40);
 		}
@@ -64,7 +64,7 @@ public class TrailerCapture implements FabricClientGameTest {
 			var s = sp.getServer();
 			chunks(ctx, sp);
 			ctx.setScreen(() -> null);
-			ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+			ctx.runOnClient(mc -> { if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 			// the best picture the game can give: far view, smooth biome blends, no bobbing
 			ctx.runOnClient(mc -> {
 				var o = mc.options;
@@ -231,7 +231,7 @@ public class TrailerCapture implements FabricClientGameTest {
 			}
 			if (!takes.contains("g")) return;
 			// G: the interfaces, with the HUD back on
-			ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+			ctx.runOnClient(mc -> { if (fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 			s.runCommand("execute as @p run matriochka karma soul @p 420");
 			ctx.waitTicks(20);
 			ctx.setScreen(() -> new fr.achedon12.matriochka.client.JournalScreen(true));

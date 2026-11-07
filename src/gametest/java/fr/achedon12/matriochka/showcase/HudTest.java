@@ -107,7 +107,7 @@ final class HudTest {
 		ctx.getInput().resizeWindow(1920, 1080);
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamerule announce_advancements false");
@@ -148,7 +148,7 @@ final class HudTest {
 				else server.runCommand("execute as @p run matriochka world enter " + w);
 				ctx.setScreen(() -> null);
 				ctx.waitTicks(100);
-				sp.getConnection().waitForChunksRender();
+				McTest.waitForChunks(sp);
 				int here = server.computeOnServer(s -> Worlds.number(player(s).level()));
 				check(here == w, "the player is in world " + w + " (" + here + ")");
 				freeze(ctx, server);
@@ -223,9 +223,9 @@ final class HudTest {
 		server.runCommand("kill @e[type=minecraft:horse]");
 		ctx.waitTicks(5);
 		// hidden with F1, in creative and in spectator
-		ctx.runOnClient(mc -> mc.gui.hud.toggle());
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc));
 		shot(ctx, "hud_w1_f1_s3");
-		ctx.runOnClient(mc -> mc.gui.hud.toggle());
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc));
 		server.runCommand("gamemode creative @a");
 		ctx.waitTicks(5);
 		check(!shown(ctx), "no meter in creative");

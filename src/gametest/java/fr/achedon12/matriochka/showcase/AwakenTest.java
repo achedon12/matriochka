@@ -24,7 +24,7 @@ final class AwakenTest {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
 			ctx.getInput().resizeWindow(1600, 900);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			for (String c : List.of("gamerule advance_time false", "time set 6000", "gamerule spawn_monsters false", "gamemode creative @a",
 				"gamerule show_death_messages false")) s.runCommand(c);
 			ctx.setScreen(() -> null);

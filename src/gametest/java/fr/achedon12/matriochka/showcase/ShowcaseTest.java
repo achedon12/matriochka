@@ -17,10 +17,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 		// HUD shots wait for the toasts and the chat to fade
 		boolean hud = name.startsWith("gui_hud");
 		if (hud) ctx.waitTicks(220);
-		else ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		else ctx.runOnClient(mc -> { if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 		ctx.waitTick();
 		ctx.takeScreenshot(TestScreenshotOptions.of(name).withSize(1920, 1080).disableCounterPrefix());
-		if (!hud) ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		if (!hud) ctx.runOnClient(mc -> { if (fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 	}
 
 	/** Places every structure of every world and photographs it from above, three quarters. Shots: struct_<id>.png */
@@ -28,9 +28,9 @@ public class ShowcaseTest implements FabricClientGameTest {
 		String only = System.getProperty("matriochka.worlds", "");
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.setScreen(() -> null);
-			ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+			ctx.runOnClient(mc -> { if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 			s.runCommand("gamerule advance_time false");
 			s.runCommand("gamerule spawn_monsters false");
 			s.runCommand("time set 6000");
@@ -55,7 +55,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 					// fly there first so the chunks load, then place it through the server's own command and aim the camera at it
 					s.runCommand("execute at @e[tag=st,limit=1] run tp @p ~" + dx + " ~30 ~" + (dz - back));
 					ctx.waitTicks(40);
-					sp.getConnection().waitForChunksRender();
+					McTest.waitForChunks(sp);
 					int[] cam = sp.getServer().computeOnServer(server -> {
 						var p = server.getPlayerList().getPlayers().get(0);
 						var lvl = (net.minecraft.server.level.ServerLevel) p.level();
@@ -75,7 +75,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 					});
 					s.runCommand("execute as @p at @s run tp @s " + (cam[0] + back / 2) + " " + (cam[1] + back * 4 / 10) + " " + (cam[2] - back * 9 / 10) + " facing " + cam[0] + " " + (cam[1] + 3) + " " + cam[2]);
 					ctx.waitTicks(60);
-					sp.getConnection().waitForChunksRender();
+					McTest.waitForChunks(sp);
 					ctx.waitTicks(10);
 					ctx.takeScreenshot(TestScreenshotOptions.of("struct_" + d.id()).withSize(1600, 900).disableCounterPrefix());
 				}
@@ -100,7 +100,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 	private static void gui(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule announce_advancements false");
 			server.runCommand("time set 6000");
@@ -141,7 +141,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 			shot(ctx, "gui_ending");
 			ctx.setScreen(() -> new fr.achedon12.matriochka.client.JournalScreen(false).tab(0));
 			ctx.waitTicks(12);
-			ctx.runOnClient(mc -> ((fr.achedon12.matriochka.client.JournalScreen) mc.gui.screen()).turnTo(2));
+			ctx.runOnClient(mc -> ((fr.achedon12.matriochka.client.JournalScreen) fr.achedon12.matriochka.client.mc.McClient.screen(mc)).turnTo(2));
 			ctx.waitTicks(3);
 			shot(ctx, "gui_journal_turn");
 			ctx.setScreen(() -> null);
@@ -158,7 +158,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 				ctx.waitTicks(16);
 				shot(ctx, "gui_station_" + st);
 				if (st.equals("matrix_workbench")) {
-					int[] pos = ctx.computeOnClient(mc -> new int[]{mc.gui.screen().width / 2 - 70, mc.gui.screen().height / 2 - 111 + 22 + 10});
+					int[] pos = ctx.computeOnClient(mc -> new int[]{fr.achedon12.matriochka.client.mc.McClient.screen(mc).width / 2 - 70, fr.achedon12.matriochka.client.mc.McClient.screen(mc).height / 2 - 111 + 22 + 10});
 					cursor(ctx, pos[0], pos[1]);
 					ctx.waitTicks(8);
 					shot(ctx, "gui_station_hover");
@@ -180,6 +180,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 
 	@Override
 	public void runTest(ClientGameTestContext ctx) {
+		Watchdog.start();
 		if ("gui".equals(System.getProperty("matriochka.capture"))) {
 			gui(ctx);
 			return;
@@ -282,7 +283,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 		}
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule announce_advancements false");
 			server.runCommand("time set 6000");
@@ -317,7 +318,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 				server.runCommand("execute as @p run matriochka world enter " + w);
 				ctx.setScreen(() -> null);
 				ctx.waitTicks(120);
-				sp.getConnection().waitForChunksRender();
+				McTest.waitForChunks(sp);
 				server.runCommand("execute as @p at @s run tp @s ~ ~1 ~ 180 15");
 				ctx.waitTicks(60);
 				shot(ctx, String.format("w%02d_threshold", w));
@@ -326,7 +327,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 				shot(ctx, String.format("w%02d_view", w));
 				server.runCommand("execute as @p at @s run tp @s ~ ~ ~" + 150 + " 0 10");
 				ctx.waitTicks(80);
-				sp.getConnection().waitForChunksRender();
+				McTest.waitForChunks(sp);
 				server.runCommand("execute as @p at @s run summon matriochka:" + bosses[w - 1] + " ~ ~ ~-10 {NoAI:1b}");
 				server.runCommand("execute as @p at @s run tp @s ~ ~3 ~ 180 12");
 				ctx.waitTicks(40);

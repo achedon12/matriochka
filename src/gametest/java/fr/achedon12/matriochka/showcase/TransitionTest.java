@@ -32,7 +32,7 @@ final class TransitionTest {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
 			ctx.getInput().resizeWindow(1600, 900);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			for (String c : List.of("gamerule advance_time false", "time set 6000", "gamerule spawn_monsters false", "gamemode creative @a")) s.runCommand(c);
 			ctx.setScreen(() -> null);
 			BlockPos block = s.computeOnServer(srv -> {
@@ -61,7 +61,7 @@ final class TransitionTest {
 			ctx.waitTicks(4);
 			shot(ctx, "dive_closed");
 			ctx.waitTicks(40);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.waitTicks(4);
 			shot(ctx, "arrive_opening");
 			ctx.waitTicks(12);
@@ -78,7 +78,7 @@ final class TransitionTest {
 			ctx.waitTicks(8);
 			shot(ctx, "climb_closing");
 			ctx.waitTicks(50);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.waitTicks(6);
 			shot(ctx, "climb_opening");
 			int back = s.computeOnServer(srv -> Worlds.number(srv.getPlayerList().getPlayers().get(0).level()));

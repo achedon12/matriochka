@@ -20,14 +20,54 @@ jobs:
       - name: Generated files are up to date
         run: |
           python3 tools/gen.py
-          git diff --stat --exit-code -- src || (echo "Run python3 tools/gen.py and commit the result." && exit 1)
+          python3 tools/versions.py
+          git diff --stat --exit-code -- src versions || (echo "Run python3 tools/gen.py and python3 tools/versions.py and commit the result." && exit 1)
+      - name: Every reference in the data resolves, for every Minecraft version
+        run: python3 tools/check_refs.py
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "25"
       - uses: gradle/actions/setup-gradle@v4
-      - run: ./gradlew build
+      # one jar per Minecraft version (versions/<mc>/): 26.3 into build/libs, the others into build/mc-<mc>/libs
+      - run: for mc in $(ls versions); do ./gradlew build -Pmc=$mc || exit 1; done
       - uses: actions/upload-artifact@v4
         with:
           name: matriochka-jar
-          path: build/libs/*.jar
+          path: |
+            build/libs/*.jar
+            build/mc-*/libs/*.jar
+
+  # the game itself, for every Minecraft version: a dedicated server that generates every world, then the client
+  # tests (the first steps and the whole game, World 0 to the end) in a virtual screen with software rendering
+  play:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        mc: ["26.3", "26.2", "26.1.2"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: gradle/actions/setup-gradle@v4
+      - run: sudo apt-get update && sudo apt-get install -y xvfb mesa-utils libgl1-mesa-dri
+      - name: Dedicated server
+        run: tools/server_smoke.sh ${{ matrix.mc }}
+      - name: First steps
+        run: xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTest -Pmc=${{ matrix.mc }} -Ponboarding
+      - name: The whole game
+        if: github.event_name == 'push'
+        run: xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTest -Pmc=${{ matrix.mc }} -Pplaythrough
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: logs-${{ matrix.mc }}
+          path: |
+            run/server/logs/
+            build/**/run/clientGameTest/logs/
+            run/clientGameTest/logs/

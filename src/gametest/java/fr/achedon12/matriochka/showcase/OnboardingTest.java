@@ -60,7 +60,7 @@ final class OnboardingTest {
 		REPORT.clear();
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamerule announce_advancements false");
@@ -79,7 +79,7 @@ final class OnboardingTest {
 			ctx.setScreen(() -> new JournalScreen(true));
 			ctx.waitTicks(30);
 			ctx.runOnClient(mc -> {
-				var screen = mc.gui.screen();
+				var screen = fr.achedon12.matriochka.client.mc.McClient.screen(mc);
 				int bw = 340, bh = 214;
 				int l = (screen.width - bw) / 2, t = Math.max(0, Math.min((screen.height - bh) / 2 + 12, screen.height - bh - 1));
 				screen.mouseClicked(new MouseButtonEvent(l + bw / 2 + 30 + 20, t + bh - 30 + 8, new MouseButtonInfo(0, 0)), false);

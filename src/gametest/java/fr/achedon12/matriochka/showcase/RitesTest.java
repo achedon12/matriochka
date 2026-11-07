@@ -99,7 +99,7 @@ final class RitesTest {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
 			ctx.getInput().resizeWindow(1600, 900);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			for (String c : List.of("gamerule advance_weather false", "weather clear", "gamerule spawn_monsters false", "gamerule advance_time false",
 				"time set 23000", "gamemode creative @a")) s.runCommand(c);
 			ctx.setScreen(() -> null);
@@ -143,9 +143,9 @@ final class RitesTest {
 				ctx.waitTicks(60);
 				s.runCommand(String.format(java.util.Locale.ROOT, "tp @a %.2f %.2f %.2f 0 25", at.getX() + 0.5, at.getY() + 1.6, at.getZ() - 2.6));
 				ctx.waitTicks(20);
-				ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+				ctx.runOnClient(mc -> { if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 				ctx.takeScreenshot(TestScreenshotOptions.of("rites_" + w).withSize(1600, 900).disableCounterPrefix());
-				ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+				ctx.runOnClient(mc -> { if (fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 				ctx.waitTicks(200);
 				String opened = s.computeOnServer(srv -> {
 					var st = srv.overworld().getBlockState(at);

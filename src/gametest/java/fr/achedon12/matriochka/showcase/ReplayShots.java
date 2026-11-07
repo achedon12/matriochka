@@ -54,10 +54,10 @@ final class ReplayShots {
 	}
 
 	private static void shot(ClientGameTestContext ctx, String name, boolean hud) {
-		ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden() == hud) mc.gui.hud.toggle(); });
+		ctx.runOnClient(mc -> { if (fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc) == hud) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 		ctx.waitTick();
 		ctx.takeScreenshot(TestScreenshotOptions.of(name).withSize(1920, 1080).disableCounterPrefix());
-		ctx.runOnClient(mc -> { if (mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+		ctx.runOnClient(mc -> { if (fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 	}
 
 	private static ServerPlayer player(MinecraftServer s) {
@@ -83,7 +83,7 @@ final class ReplayShots {
 			// the window at the shot's size: otherwise the interface is laid out for the small test window
 			ctx.getInput().resizeWindow(1920, 1080);
 			ctx.waitTicks(5);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.setScreen(() -> null);
 			s.runCommand("gamerule advance_time false");
 			s.runCommand("gamerule advance_weather false");
@@ -128,7 +128,7 @@ final class ReplayShots {
 	private static void dummy(MinecraftServer srv, double dx, double dz, boolean ai) {
 		ServerPlayer p = player(srv);
 		ServerLevel level = (ServerLevel) p.level();
-		Husk z = net.minecraft.world.entity.EntityTypes.HUSK.create(level, EntitySpawnReason.COMMAND);
+		Husk z = fr.achedon12.matriochka.mc.McEntities.HUSK.create(level, EntitySpawnReason.COMMAND);
 		z.setPos(p.getX() + dx, p.getY(), p.getZ() + dz);
 		z.setNoAi(!ai);
 		z.setYRot(180);
@@ -163,7 +163,7 @@ final class ReplayShots {
 		double[] at = s.computeOnServer(srv -> new double[]{Math.floor(player(srv).getX()) + 0.5, player(srv).getY(), Math.floor(player(srv).getZ()) + 0.5});
 		face(s, at[0], at[1], at[2], 180, 10);
 		ctx.waitTicks(30);
-		sp.getConnection().waitForChunksRender();
+		McTest.waitForChunks(sp);
 		// every item at rest, first person, with its icon in the hotbar
 		for (String id : GEAR) {
 			hold(s, id);
@@ -399,12 +399,12 @@ final class ReplayShots {
 				TrialStage.build(level, c, w);
 			});
 			ctx.waitTicks(30);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.waitTicks(10);
 			shot(ctx, "rs_stage_w" + w + "_wide", false);
 			s.runCommand("execute in matriochka:refuge run tp @p " + (cx + 9) + " " + (cy + 2.6) + " " + (cz - 13) + " facing " + cx + " " + (cy + 3) + " " + (cz + 6));
 			ctx.waitTicks(20);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.waitTicks(6);
 			shot(ctx, "rs_stage_w" + w + "_floor", false);
 		}
@@ -528,7 +528,7 @@ final class ReplayShots {
 			s.runCommand("execute as @p run matriochka world enter " + w);
 			ctx.setScreen(() -> null);
 			ctx.waitTicks(160);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			// a little room around the player, on the land
 			s.runOnServer(srv -> {
 				ServerPlayer p = player(srv);
@@ -644,14 +644,14 @@ final class ReplayShots {
 			// a site 200 blocks south: fly there so its chunks load, then place it with the server's own command
 			s.runCommand("execute as @p at @s run tp @s ~ ~30 ~200");
 			ctx.waitTicks(60);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			int[] site = null;
 			// the land camps refuse a site under water: the next site back toward the spawn's land, flown to first so its chunks load
 			for (int attempt = 0; attempt < 8 && site == null; attempt++) {
 			if (attempt > 0) {
 				s.runCommand("execute as @p at @s run tp @s ~" + (attempt % 2 == 0 ? 48 : -48) + " ~ ~-40");
 				ctx.waitTicks(50);
-				sp.getConnection().waitForChunksRender();
+				McTest.waitForChunks(sp);
 			}
 			site = s.computeOnServer(srv -> {
 				ServerPlayer p = player(srv);
@@ -691,13 +691,13 @@ final class ReplayShots {
 			// three quarters from above
 			s.runCommand("execute as @p at @s run tp @s " + (x + back / 2) + " " + (lookY + back * 4 / 10) + " " + (z - back * 9 / 10) + " facing " + x + " " + lookY + " " + z);
 			ctx.waitTicks(40);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.waitTicks(10);
 			shot(ctx, "rs_struct_" + d.id() + "_above", false);
 			// at eye height, from where a traveller would come
 			s.runCommand("execute as @p at @s run tp @s " + (x - back * 3 / 4) + " " + (y + 2) + " " + (z - back * 3 / 4) + " facing " + x + " " + (y + 2) + " " + z);
 			ctx.waitTicks(30);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.waitTicks(6);
 			shot(ctx, "rs_struct_" + d.id() + "_ground", false);
 			// inside, before its chest
@@ -707,7 +707,7 @@ final class ReplayShots {
 				double ex = chx + 0.5 + dx / len * 3, ez = chz + 0.5 + dz / len * 3;
 				s.runCommand(String.format(java.util.Locale.ROOT, "execute as @p at @s run tp @s %.2f %.2f %.2f facing %.2f %.2f %.2f", ex, chy + 1.0, ez, chx + 0.5, chy + 0.3, chz + 0.5));
 				ctx.waitTicks(30);
-				sp.getConnection().waitForChunksRender();
+				McTest.waitForChunks(sp);
 				ctx.waitTicks(6);
 				shot(ctx, "rs_struct_" + d.id() + "_chest", false);
 			}

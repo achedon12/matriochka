@@ -60,7 +60,7 @@ final class MovesTest {
 	static void run(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.setScreen(() -> null);
 			s.runCommand("gamerule advance_time false");
 			s.runCommand("gamerule advance_weather false");
@@ -74,7 +74,7 @@ final class MovesTest {
 			// the invisible target
 			s.runCommand("gamemode creative @a");
 			fly(s);
-			ctx.runOnClient(mc -> { if (!mc.gui.hud.isHidden()) mc.gui.hud.toggle(); });
+			ctx.runOnClient(mc -> { if (!fr.achedon12.matriochka.client.mc.McClient.hudHidden(mc)) fr.achedon12.matriochka.client.mc.McClient.toggleHud(mc); });
 			int played = 0, missing = 0;
 			int b = 0;
 			for (Defs.BossDef def : Content.BOSSES) {
@@ -88,7 +88,7 @@ final class MovesTest {
 				ctx.waitTicks(30);
 				clear(s, cx, cz);
 				ctx.waitTicks(10);
-				sp.getConnection().waitForChunksRender();
+				McTest.waitForChunks(sp);
 				final String id = def.id();
 				// the boss, facing south, and an invisible target in front of it
 				double[] box = s.computeOnServer(server -> {
@@ -237,7 +237,7 @@ final class MovesTest {
 		var box = new net.minecraft.world.phys.AABB(cx - 40, FLOOR - 10, cz - 40, cx + 40, FLOOR + 40, cz + 40);
 		var found = lvl.getEntitiesOfClass(IronGolem.class, box, e -> e.isAlive() && e.entityTags().contains("mv_decoy"));
 		if (!found.isEmpty()) return found.getFirst();
-		IronGolem decoy = net.minecraft.world.entity.EntityTypes.IRON_GOLEM.create(lvl, EntitySpawnReason.COMMAND);
+		IronGolem decoy = fr.achedon12.matriochka.mc.McEntities.IRON_GOLEM.create(lvl, EntitySpawnReason.COMMAND);
 		decoy.snapTo(cx + 0.5, FLOOR + 1, cz + 0.5 + target(def), 180, 0);
 		decoy.setNoAi(true);
 		decoy.setSilent(true);

@@ -62,7 +62,7 @@ final class AutomationTest {
 	static void run(ClientGameTestContext ctx) {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var server = sp.getServer();
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			server.runCommand("gamerule advance_time false");
 			server.runCommand("gamerule spawn_monsters false");
 			server.runCommand("gamemode survival @a");
@@ -377,7 +377,7 @@ final class AutomationTest {
 			check(out, data.sameGroup(p.getUUID().toString(), member) && !data.sameGroup(p.getUUID().toString(), stranger), "one shaker of the group, one of another group");
 			// a creature next to the player, a boss a little further
 			p.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 20 * 60, 4));
-			zombie = net.minecraft.world.entity.EntityTypes.ZOMBIE.create(inner, EntitySpawnReason.COMMAND);
+			zombie = fr.achedon12.matriochka.mc.McEntities.ZOMBIE.create(inner, EntitySpawnReason.COMMAND);
 			zombie.setPos(p.getX() + 3, p.getY(), p.getZ());
 			zombie.setPersistenceRequired();
 			inner.addFreshEntity(zombie);

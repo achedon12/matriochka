@@ -32,7 +32,7 @@ final class PolishTest {
 		try (TestSingleplayerContext sp = ctx.worldBuilder().setUseConsistentSettings(false).adjustSettings(c -> c.setSeed("matriochka")).create()) {
 			var s = sp.getServer();
 			ctx.getInput().resizeWindow(1600, 900);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			for (String c : List.of("gamerule advance_time false", "time set 6000", "gamerule spawn_monsters false", "gamemode survival @a")) s.runCommand(c);
 			ctx.setScreen(() -> null);
 			// a few worlds beaten, so the Journal's map shows painted, open and bare dolls
@@ -100,12 +100,18 @@ final class PolishTest {
 			ctx.setScreen(() -> new JournalScreen(false).tab(3));
 			ctx.waitTicks(30);
 			shot(ctx, "journal_worlds");
+			// the objective page after a long time stuck on it: both hints are out
+			ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Hints.setTicks(40 * 60 * 20));
+			ctx.setScreen(() -> new JournalScreen(false).tab(0));
+			ctx.waitTicks(30);
+			shot(ctx, "journal_hints");
+			ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Hints.setTicks(0));
 			ctx.setScreen(() -> null);
 			// World 6's sky at noon, looking up: the sun has gone under, the stars are out
 			s.runCommand("execute in matriochka:world_6 run tp @a 0 200 0 0 -70");
 			s.runCommand("gamemode spectator @a");
 			ctx.waitTicks(60);
-			sp.getConnection().waitForChunksRender();
+			McTest.waitForChunks(sp);
 			ctx.waitTicks(20);
 			shot(ctx, "sky_6_noon");
 			Matriochka.LOG.info("[polish] ok");
