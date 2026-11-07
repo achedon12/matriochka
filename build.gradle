@@ -203,3 +203,6 @@ java {
 }
 
 jar { from('LICENSE') { rename { "${it}_${project.base.archivesName.get()}" } } }
+
+// the sources jar holds both resource trees too: the version's file wins, as in the mod jar
+tasks.named('sourcesJar') { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }
