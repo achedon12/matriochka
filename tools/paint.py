@@ -37,15 +37,31 @@ class Canvas:
         return self.px.get((x, y))
 
     def fill_mask(self, mask, base, light_dir=(-1, -1), seed="", noise=0.12):
-        """mask: set of (x,y). Shades by distance to the lit edge + noise, then outlines."""
+        """mask: set of (x,y). Painted the vanilla way: a lit rim on the top and left edges, a shaded rim on the
+        bottom and right, two flat tones inside split along the light, a few hard glints; then a dark outline in the
+        material's own hue. `noise` only adds rare darker pores to rough materials."""
         r = rng(seed)
+        if not mask:
+            return
+        xs = [x for x, _ in mask]
+        ys = [y for _, y in mask]
+        cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
+        hi, lit, mid, low, deep = shade(base, 1.32), shade(base, 1.1), shade(base, 0.92), shade(base, 0.74), shade(base, 0.55)
         for (x, y) in mask:
-            nx = (x - self.w / 2) / self.w
-            ny = (y - self.h / 2) / self.h
-            lit = 1.0 - (nx * light_dir[0] + ny * light_dir[1]) * 0.9
-            f = 0.75 + 0.35 * lit + (r.random() - 0.5) * noise
-            self.set(x, y, shade(base, f))
-        self.outline(mask, shade(base, 0.35))
+            up = (x, y - 1) not in mask or (x - 1, y) not in mask
+            down = (x, y + 1) not in mask or (x + 1, y) not in mask
+            side = (x - cx) * -light_dir[0] + (y - cy) * -light_dir[1]
+            if up and not down:
+                col = hi if (x + y) % 3 else lit
+            elif down and not up:
+                col = deep if ((x + y) % 4 == 0) else low
+            else:
+                col = lit if side < -0.5 else mid if side < 1.5 else low
+            if noise > 0.25 and r.random() < noise * 0.25:
+                col = low
+            self.set(x, y, col)
+        out = tuple(int(v) for v in mix(shade(base, 0.32), (24, 14, 30), 0.35))
+        self.outline(mask, out)
 
     def outline(self, mask, col):
         for (x, y) in list(mask):
@@ -446,11 +462,58 @@ def paint_item(shape, pal, seed, path, rarity="common"):
     else:
         m = disc(8, 8, 5)
         c.fill_mask(m, a, seed=seed)
+    relight(c)
     if rarity == "legendary":
         for (x, y) in ((1, 1), (14, 2), (2, 14)):
             if not c.get(x, y):
                 c.set(x, y, GOLD)
     c.save(path)
+
+
+_RAMPS = {}
+
+
+def relight(c):
+    """Gives a procedural item the volume of the hand-crafted ones (tools/craft.py): the silhouette is lit as a
+    pillow from the top left, every pixel keeps its hue but takes its tone from a hue-shifted ramp of its own
+    colour, quantized to four levels; bright details (glints, eyes, sparks) are kept; the outline is redrawn in the
+    darkest tone of the colour it touches."""
+    import craft
+    m = {p for p, col in c.px.items() if col[3] > 0}
+    if not m:
+        return
+    rim = {p for p in m if any((p[0] + a, p[1] + b) not in m for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))}
+    inner = m - rim
+    spr = craft.Spr(16)
+    normal = craft.n_bevel(spr, inner or m, depth=2.2, flat=0.35)
+    L = craft.LIGHT
+
+    def ramp(col):
+        key = col[:3]
+        if key not in _RAMPS:
+            _RAMPS[key] = craft.hramp(key, n=6, at=3, hs=0.012, sat=0.03)
+        return _RAMPS[key]
+
+    out = {}
+    for (x, y) in inner:
+        col = c.px[(x, y)]
+        if sum(col[:3]) > 640 or col[3] < 255:
+            continue
+        n = normal(x + 0.5, y + 0.5)
+        d = n[0] * L[0] + n[1] * L[1] + n[2] * L[2]
+        t = max(0.0, min(1.0, (d + 0.35) / 1.25))
+        lvl = round(t * 3) / 3
+        rp = ramp(col)
+        out[(x, y)] = rp[1 + int(round(lvl * 3))] + (255,)
+    c.px.update(out)
+    for (x, y) in rim:
+        col = c.px[(x, y)]
+        if col[3] < 255:
+            continue
+        # the outline takes the darkest tone of its brightest inner neighbour, so a red gem gets a deep red line
+        nb = [c.px[q] for q in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)) if q in inner]
+        src = max(nb, key=lambda v: sum(v[:3])) if nb else col
+        c.px[(x, y)] = ramp(src)[0] + (255,)
 
 
 def paint_armor_item(piece, pal, seed, path):
@@ -469,37 +532,115 @@ def paint_armor_item(piece, pal, seed, path):
     for (x, y) in list(m):
         if (x * 3 + y) % 7 == 0:
             c.set(x, y, shade(s, 1.1))
+    relight(c)
     c.save(path)
 
 
 def paint_armor_layer(pal, seed, path, legs=False):
-    """64x32 humanoid armor layer with a painted-doll motif."""
+    """64x32 humanoid armor layer drawn as real armour: riveted plates with a lit top edge and a shaded bottom,
+    a trim of the world's second colour, gold rivets, a helmet with a visor slit and a crest, a chest with a belt,
+    a buckle and a little gold doll, banded pauldrons, knee plates and dark soles. Box UVs as vanilla's."""
+    import craft
     p, s, a, d = [hx(x) for x in pal]
     img = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
-    r = rng(seed)
+    metal = craft.hramp(a, n=6, at=3, hs=0.012, sat=0.03)
+    trim = craft.hramp(s, n=5, at=2, hs=0.012, sat=0.03)
+    gold = craft.GOLD
 
-    def box(u, v, w, h, dd, col):
-        # standard box UV
-        for (x0, y0, ww, hh) in ((u + dd, v, w, dd), (u + dd + w, v, w, dd), (u, v + dd, dd, h), (u + dd, v + dd, w, h),
-                                 (u + dd + w, v + dd, dd, h), (u + dd + w + dd, v + dd, w, h)):
-            for x in range(x0, x0 + ww):
-                for y in range(y0, y0 + hh):
-                    if 0 <= x < 64 and 0 <= y < 32:
-                        f = 0.8 + 0.3 * r.random()
-                        edge = x in (x0, x0 + ww - 1) or y in (y0, y0 + hh - 1)
-                        cc = shade(col, 0.5 if edge else f)
-                        if not edge and (x + y) % 6 == 0:
-                            cc = shade(s, 1.1)
-                        img.putpixel((x, y), cc + (255,))
+    def put(x, y, c):
+        if 0 <= x < 64 and 0 <= y < 32:
+            img.putpixel((x, y), tuple(c[:3]) + (255,))
+
+    def face(x0, y0, w, h, kind):
+        """One face of a box: plates of `metal`, seams every four rows, lit on top, shaded at the bottom."""
+        for y in range(y0, y0 + h):
+            for x in range(x0, x0 + w):
+                ly, lx = y - y0, x - x0
+                c = metal[3]
+                # hammered metal: a sparse dither of a darker and a lighter tone
+                if (lx * 3 + ly * 5) % 7 == 0:
+                    c = metal[2]
+                elif (lx + ly * 3) % 11 == 0:
+                    c = metal[4]
+                if ly % 4 == 0 and kind in ("front", "side", "back") and h > 6:
+                    c = metal[4] if ly else metal[5]
+                elif ly % 4 == 3 and kind in ("front", "side", "back") and h > 6:
+                    c = metal[2]
+                if lx == w - 1:
+                    c = metal[1]
+                if ly == 0:
+                    c = metal[5] if kind != "bottom" else metal[2]
+                if ly == h - 1:
+                    c = metal[0]
+                put(x, y, c)
+
+    def box(u, v, w, h, dd, part):
+        face(u + dd, v, w, dd, "top")
+        face(u + dd + w, v, w, dd, "bottom")
+        face(u, v + dd, dd, h, "side")
+        face(u + dd, v + dd, w, h, "front")
+        face(u + dd + w, v + dd, dd, h, "side")
+        face(u + dd + w + dd, v + dd, w, h, "back")
+        fx, fy = u + dd, v + dd      # front face origin
+        if part == "head":
+            # visor slit with two glints, a crest down the top, cheek plates of trim
+            for x in range(fx + 1, fx + w - 1):
+                put(x, fy + 4, metal[0])
+            put(fx + 2, fy + 4, trim[4])
+            put(fx + w - 3, fy + 4, trim[4])
+            for x in range(u + dd, u + dd + w):
+                put(x, v + dd // 2, trim[3])
+            for y in range(fy + 5, fy + h - 1):
+                put(fx + 1, y, trim[2])
+                put(fx + w - 2, y, trim[2])
+            for (rx, ry) in ((fx + 1, fy + 1), (fx + w - 2, fy + 1)):
+                put(rx, ry, gold[4])
+        elif part == "body":
+            # belt and buckle, the little gold doll on the chest, rivets at the shoulders
+            by = fy + h - 4
+            for face_x, face_w in ((fx, w), (u + dd + w + dd, w)):
+                for x in range(face_x, face_x + face_w):
+                    put(x, by, trim[1])
+                    put(x, by + 1, trim[3])
+            put(fx + w // 2 - 1, by, gold[3]); put(fx + w // 2, by, gold[3])
+            put(fx + w // 2 - 1, by + 1, gold[4]); put(fx + w // 2, by + 1, gold[2])
+            cx, cy = fx + w // 2, fy + 3
+            for (x, y, c) in ((cx - 1, cy, gold[4]), (cx, cy, gold[4]), (cx - 1, cy + 1, gold[3]), (cx, cy + 1, gold[3]),
+                              (cx - 2, cy + 2, gold[3]), (cx + 1, cy + 2, gold[2]), (cx - 2, cy + 3, gold[2]), (cx + 1, cy + 3, gold[1]),
+                              (cx - 1, cy + 2, craft.RED[3]), (cx, cy + 2, craft.RED[3]), (cx - 1, cy + 3, craft.RED[2]), (cx, cy + 3, craft.RED[2])):
+                put(x, y, c)
+            for (rx, ry) in ((fx + 1, fy + 1), (fx + w - 2, fy + 1)):
+                put(rx, ry, gold[4])
+        elif part == "arm":
+            # pauldron bands of trim at the top, a gold rivet
+            for face_x, face_w in ((u, dd), (fx, w), (u + dd + w, dd), (u + dd + w + dd, w)):
+                for x in range(face_x, face_x + face_w):
+                    put(x, fy + 1, trim[3])
+                    put(x, fy + 2, trim[1])
+            put(fx + 1, fy, gold[4])
+        elif part == "legs":
+            # knee plates, and for boots a dark sole and a trim cuff
+            for face_x, face_w in ((u, dd), (fx, w), (u + dd + w, dd), (u + dd + w + dd, w)):
+                for x in range(face_x, face_x + face_w):
+                    put(x, fy + 5, trim[3])
+                    put(x, fy + 6, trim[1])
+            put(fx + 1, fy + 5, gold[4])
+        elif part == "boots":
+            for face_x, face_w in ((u, dd), (fx, w), (u + dd + w, dd), (u + dd + w + dd, w)):
+                for x in range(face_x, face_x + face_w):
+                    put(x, fy + 8, trim[3])
+                    put(x, fy + h - 1, craft.WOOD[0])
+                    put(x, fy + h - 2, craft.WOOD[1])
+            put(fx + 1, fy + 8, gold[4])
 
     if not legs:
-        box(0, 0, 8, 8, 8, a)        # head
-        box(16, 16, 8, 12, 4, a)     # body
-        box(40, 16, 4, 12, 4, mix(a, s, 0.3))  # arms
-        box(0, 16, 4, 12, 4, mix(a, d, 0.3))   # legs (boots)
+        box(0, 0, 8, 8, 8, "head")
+        box(16, 16, 8, 12, 4, "body")
+        box(40, 16, 4, 12, 4, "arm")
+        box(0, 16, 4, 12, 4, "boots")
     else:
-        box(16, 16, 8, 12, 4, mix(a, p, 0.3))
-        box(0, 16, 4, 12, 4, mix(a, p, 0.3))
+        box(16, 16, 8, 12, 4, "body")
+        box(0, 16, 4, 12, 4, "legs")
     img.save(path)
 
 
