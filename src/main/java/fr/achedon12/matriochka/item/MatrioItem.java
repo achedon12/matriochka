@@ -61,6 +61,7 @@ public class MatrioItem extends Item {
 		// its world, rarity and souls are drawn as icons under the name (getTooltipImage)
 		fr.achedon12.matriochka.rules.Snorkel.appendTooltip(stack, out);
 		if (def.id().equals("drill")) Drill.appendTooltip(stack, out);
+		if ("trophy".equals(def.kind())) out.accept(Component.translatable("tooltip.matriochka.trophy_shoulder").withStyle(ChatFormatting.DARK_AQUA));
 		GearClasses.appendTooltip(stack, out);
 	}
 
@@ -96,7 +97,12 @@ public class MatrioItem extends Item {
 	@Override
 	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (!(player instanceof ServerPlayer sp)) return special(def.id()) ? InteractionResult.SUCCESS : InteractionResult.PASS;
+		if (!(player instanceof ServerPlayer sp)) return special(def.id()) || "trophy".equals(def.kind()) ? InteractionResult.SUCCESS : InteractionResult.PASS;
+		// a trophy doll rides on its owner's shoulder (world/Shoulder)
+		if ("trophy".equals(def.kind())) {
+			fr.achedon12.matriochka.world.Shoulder.toggle(sp, stack);
+			return InteractionResult.SUCCESS;
+		}
 		ServerLevel sl = (ServerLevel) level;
 		PlayerState ps = PlayerState.of(sp);
 		boolean consume = false;

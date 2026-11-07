@@ -218,6 +218,7 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 		if (line == null) return false;
 		sp.sendSystemMessage(getDisplayName().copy().withStyle(net.minecraft.ChatFormatting.GOLD).append(": ")
 			.append(Component.translatable(line).withStyle(net.minecraft.ChatFormatting.ITALIC, net.minecraft.ChatFormatting.GRAY)));
+		say(Component.translatable(line), 160);
 		playSound(net.minecraft.sounds.SoundEvents.VILLAGER_AMBIENT, 0.8f, 0.9f);
 		return !remembers;
 	}
@@ -240,6 +241,74 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 		super.tick();
 		// a wandering Peddler moves on after two days
 		if (!level().isClientSide() && tickCount > 48000 && entityTags().contains("wanderer")) discard();
+		if (level() instanceof ServerLevel sl) {
+			bubbleTick();
+			if (tickCount % 20 == 0) greet(sl);
+		}
+	}
+
+	// ---------------------------------------------------------------- speech bubbles
+	private static final String BUBBLE = "matriochka.bubble";
+	private int bubbleLeft;
+	/** When each player was last greeted (game time), so a person does not repeat itself. */
+	private final java.util.Map<java.util.UUID, Long> greeted = new java.util.HashMap<>();
+
+	/**
+	 * A line in a bubble over its head for a few seconds: a text display riding it, dark lacquer behind light text,
+	 * always facing the viewer. A new line replaces the last.
+	 */
+	public void say(Component text, int ticks) {
+		if (!(level() instanceof ServerLevel sl)) return;
+		clearBubble();
+		var d = net.minecraft.world.entity.EntityTypes.TEXT_DISPLAY.create(sl, net.minecraft.world.entity.EntitySpawnReason.EVENT);
+		if (d == null) return;
+		((fr.achedon12.matriochka.mixin.TextDisplayAccess) d).matriochka$setText(text.copy().withStyle(net.minecraft.ChatFormatting.WHITE));
+		((fr.achedon12.matriochka.mixin.TextDisplayAccess) d).matriochka$setBackgroundColor(0xD0140A06);
+		((fr.achedon12.matriochka.mixin.TextDisplayAccess) d).matriochka$setLineWidth(150);
+		((fr.achedon12.matriochka.mixin.DisplayAccess) d).matriochka$setBillboard(net.minecraft.world.entity.Display.BillboardConstraints.CENTER);
+		((fr.achedon12.matriochka.mixin.DisplayAccess) d).matriochka$setTransformation(new com.mojang.math.Transformation(
+			new org.joml.Vector3f(0, 0.55f, 0), null, new org.joml.Vector3f(0.55f, 0.55f, 0.55f), null));
+		d.addTag(BUBBLE);
+		d.setPos(getX(), getY() + getBbHeight(), getZ());
+		sl.addFreshEntity(d);
+		d.startRiding(this, true, false);
+		bubbleLeft = ticks;
+	}
+
+	private void clearBubble() {
+		for (net.minecraft.world.entity.Entity e : java.util.List.copyOf(getPassengers())) if (e.entityTags().contains(BUBBLE)) e.discard();
+	}
+
+	/** The bubble fades out when its time is up; one left over from a save (nobody counting it) goes at once. */
+	private void bubbleTick() {
+		if (bubbleLeft > 0) {
+			if (--bubbleLeft == 0) clearBubble();
+		} else if (tickCount % 20 == 1) clearBubble();
+	}
+
+	/**
+	 * A player comes near: the person greets them with what it knows of their progress, the boss of its world beaten
+	 * or not (the Peddler: how far down the group has gone). Each player is greeted at most every five minutes.
+	 */
+	private void greet(ServerLevel level) {
+		if (bubbleLeft > 0 || isTrading() || isBaby()) return;
+		ServerPlayer p = level.getNearestPlayer(this, 4.5) instanceof ServerPlayer sp && !sp.isSpectator() ? sp : null;
+		if (p == null) return;
+		long now = level.getGameTime();
+		Long last = greeted.get(p.getUUID());
+		if (last != null && now - last < 6000) return;
+		greeted.put(p.getUUID(), now);
+		fr.achedon12.matriochka.world.MatrioData data = fr.achedon12.matriochka.world.MatrioData.get(level.getServer());
+		String group = data.groupOf(p.getUUID());
+		String key;
+		if (def.world() == 0) {
+			int stage = data.defeated(group, 9) ? 3 : data.defeated(group, 5) ? 2 : data.defeated(group, 0) ? 1 : 0;
+			key = "npc.matriochka." + def.id() + "." + stage;
+		} else key = "npc.matriochka." + def.id() + (data.defeated(group, def.world()) ? ".after" : ".before");
+		if (!net.minecraft.locale.Language.getInstance().has(key)) return;
+		say(Component.translatable(key), 140);
+		getLookControl().setLookAt(p, 30, 30);
+		playSound(net.minecraft.sounds.SoundEvents.VILLAGER_AMBIENT, 0.6f, 0.95f + random.nextFloat() * 0.1f);
 	}
 
 	@Override

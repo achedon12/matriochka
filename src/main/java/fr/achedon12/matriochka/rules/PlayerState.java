@@ -36,7 +36,7 @@ public final class PlayerState {
 		return tag;
 	}
 
-	private void save() {
+	public void save() {
 		player.setAttached(TYPE, tag);
 	}
 

@@ -542,6 +542,13 @@ def gen_worldgen():
             w(os.path.join(D, "world_clock/seasons.json"), {})
             w(os.path.join(D, "timeline/seasons.json"), atmosphere.season_timeline())
             w(os.path.join(D, "tags/timeline/in_hastened.json"), {"values": ["#minecraft:universal", f"{NS}:hastened_day", f"{NS}:hastened_moon", f"{NS}:seasons"]})
+        if n in atmosphere.SKY and n != 8:
+            # the world's own sky (tools/atmosphere.py): its day and moon timelines in place of vanilla's
+            day, moon = atmosphere.sky_timelines(n, jl("timeline/day.json"), jl("timeline/moon.json"))
+            w(os.path.join(D, f"timeline/sky_{n}_day.json"), day)
+            w(os.path.join(D, f"timeline/sky_{n}_moon.json"), moon)
+            w(os.path.join(D, f"tags/timeline/in_world_{n}.json"), {"values": ["#minecraft:universal", f"{NS}:sky_{n}_day", f"{NS}:sky_{n}_moon", "minecraft:early_game"]})
+            dt["timelines"] = f"#{NS}:in_world_{n}"
         w(os.path.join(D, f"dimension_type/{key}.json"), dt)
 
         # biome

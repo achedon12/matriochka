@@ -73,6 +73,20 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	private int stateTicks;
 	private int attack;
 	private int phase;
+	/** The shell the client draws: 0 whole, 1 cracked, 2 breaking (client/BossCracksLayer). */
+	private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> SHELL = net.minecraft.network.syncher.SynchedEntityData.defineId(
+		MatrioBoss.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
+
+	@Override
+	protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder b) {
+		super.defineSynchedData(b);
+		b.define(SHELL, 0);
+	}
+
+	/** How broken its shell looks: 0, 1 after its first phase change, 2 after its second (or a later shell). */
+	public int shell() {
+		return entityData.get(SHELL);
+	}
 	private final BossFeats feats = new BossFeats();
 	private final long[] lastUse = new long[3];
 	private Vec3 aim = Vec3.ZERO;
@@ -840,6 +854,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		float[] ph = def.phases();
 		if (phase < ph.length && f <= ph[phase] && isAlive()) {
 			phase++;
+			entityData.set(SHELL, Math.min(2, phase));
 			state = State.PHASE;
 			stateTicks = 0;
 			triggerAnim("action", "phase");

@@ -81,6 +81,7 @@ public class MatrioClient implements ClientModInitializer {
 				}
 			} : new GeoEntityRenderer(ctx, model)).withScale(scale);
 			r.withRenderLayer(new AutoGlowingGeoLayer(r));
+			if (boss) r.withRenderLayer(new BossCracksLayer(r, id));
 			return r;
 		});
 	}

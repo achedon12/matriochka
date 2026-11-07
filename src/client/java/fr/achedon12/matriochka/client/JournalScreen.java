@@ -417,6 +417,9 @@ public class JournalScreen extends Screen {
 		}
 		// the heart of the last doll: a gold seed
 		g.fill(cx - 1, cy + 4, cx + 2, cy + 7, Ui.GOLD);
+		// how much of the worlds has been gathered
+		Component col = Component.translatable("journal.matriochka.collection", collection() * 100 / 80);
+		g.text(font, col, cx - font.width(col) / 2, cy + 64, Ui.INK_SOFT, false);
 	}
 
 	private static int mixInk(int c, float t) {
@@ -640,6 +643,16 @@ public class JournalScreen extends Screen {
 			Ui.sprite(g, beaten ? "doll_small_full" : "doll_small_empty", x, ry - 1, 8, 11);
 			if (i > 0) g.fill(x + w - 4, ry + 2, x + w, ry + 6, open ? Ui.worldColor(i) : 0x60605048);
 			g.text(font, i == 0 ? name : Component.literal(i + "  ").append(name), x + 12, ry + 1, beaten ? Ui.GREEN : open ? Ui.INK : 0xFF9A8A6E, false);
+			if (i > 0) {
+				// what has been gathered of this world: five pips for its Journal pages, a doll, a rite
+				int pages = MatrioClient.state.getIntOr("pages_" + i, 0);
+				int px = x + 12 + font.width(i + "  ");
+				for (int k = 0; k < 5; k++) g.fill(px + k * 3, ry + 10, px + k * 3 + 2, ry + 11, (pages & (1 << k)) != 0 ? Ui.GOLD_DARK : 0x30603A20);
+				g.fill(px + 17, ry + 10, px + 19, ry + 11, found(i) ? Ui.RED_INK : 0x30603A20);
+				g.fill(px + 21, ry + 10, px + 23, ry + 11, rite(i) ? 0xFF000000 | Ui.worldColor(i) : 0x30603A20);
+				if (mx >= x - 3 && mx < x + w + 2 && my >= ry - 2 && my < ry + 12 && variant(i).isEmpty())
+					g.setTooltipForNextFrame(font, font.split(collectionTip(i), 170), mx, my);
+			}
 			String variant = i == 0 ? "" : MatrioClient.state.getCompoundOrEmpty("variants").getStringOr(Integer.toString(i), "");
 			if (!variant.isEmpty()) {
 				// a little wax seal before the colour chip: green for the gentler variants, red lacquer for the harsher
@@ -650,11 +663,48 @@ public class JournalScreen extends Screen {
 				g.fill(sx + 1, sy + 2, sx + 2, sy + 3, Ui.GOLD);
 				if (mx >= x - 3 && mx < x + w + 2 && my >= ry - 2 && my < ry + 12) {
 					Component tip = Component.translatable("journal.matriochka.variant", Component.translatable(variantKey(variant, i)))
-						.append("\n").append(Component.translatable("variant.matriochka." + variant + ".desc"));
+						.append("\n").append(Component.translatable("variant.matriochka." + variant + ".desc"))
+						.append("\n\n").append(collectionTip(i));
 					g.setTooltipForNextFrame(font, font.split(tip, 170), mx, my);
 				}
 			}
 		}
+	}
+
+	/** What has been gathered of a world, line by line. */
+	private static Component collectionTip(int world) {
+		boolean beaten = (MatrioClient.state.getIntOr("done", 0) & (1 << world)) != 0;
+		int pages = Integer.bitCount(MatrioClient.state.getIntOr("pages_" + world, 0) & 31);
+		return Component.translatable("journal.matriochka.col.boss." + (beaten ? "beaten" : "standing"))
+			.append("\n").append(Component.translatable("journal.matriochka.col.pages", pages))
+			.append("\n").append(Component.translatable("journal.matriochka.col.doll." + (found(world) ? "found" : "missing")))
+			.append("\n").append(Component.translatable("journal.matriochka.col.rite." + (rite(world) ? "done" : "unknown")));
+	}
+
+	private static String variant(int world) {
+		return MatrioClient.state.getCompoundOrEmpty("variants").getStringOr(Integer.toString(world), "");
+	}
+
+	private static boolean found(int world) {
+		return MatrioClient.state.getBooleanOr("f_found_doll_" + world, false);
+	}
+
+	/** The way into a world known: its rite performed (World 1's Seed: the world opened). */
+	private static boolean rite(int world) {
+		if (world == 1) return (MatrioClient.state.getIntOr("done", 0) & 1) != 0;
+		return MatrioClient.state.getBooleanOr("f_rite_" + world, false);
+	}
+
+	/** How much of the worlds has been gathered: per world its boss, five pages, its hidden doll and its rite. */
+	private static int collection() {
+		int done = MatrioClient.state.getIntOr("done", 0), n = 0;
+		for (int w = 1; w <= 10; w++) {
+			if ((done & (1 << w)) != 0) n++;
+			n += Integer.bitCount(MatrioClient.state.getIntOr("pages_" + w, 0) & 31);
+			if (found(w)) n++;
+			if (rite(w)) n++;
+		}
+		return n;
 	}
 
 	/** The name of a variant in a world: calm and wild have their own name in every world (as in world/Variants). */

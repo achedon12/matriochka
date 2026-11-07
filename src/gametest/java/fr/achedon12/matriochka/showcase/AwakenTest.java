@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 /**
  * The bosses coming out of their shells: ./gradlew runClientGameTest -Pawaken. On a quartz stage in the sky, summons
  * each boss in front of the player and photographs its awakening (misc.<boss>.awaken) folded, swelling and roaring.
- * Shots: awaken_<boss>_<0|1|2|bar|fold|sealed>.png. -Pbosses=a,b limits the run.
+ * Shots: awaken_<boss>_<0|1|2|bar|cracked|fold|sealed>.png. -Pbosses=a,b limits the run.
  */
 final class AwakenTest {
 	private AwakenTest() {}
@@ -55,6 +55,17 @@ final class AwakenTest {
 				s.runCommand("damage @e[type=matriochka:" + id + ",limit=1] 60 minecraft:player_attack by @p");
 				ctx.waitTicks(4);
 				ctx.takeScreenshot(TestScreenshotOptions.of("awaken_" + id + "_bar").withSize(1600, 900).disableCounterPrefix());
+				// broken through its phases: the cracks of its later shells
+				for (float at : new float[]{0.5f, 0.2f}) {
+					s.runOnServer(srv -> {
+						var l = srv.overworld();
+						for (var b : l.getEntitiesOfClass(fr.achedon12.matriochka.entity.MatrioBoss.class, new net.minecraft.world.phys.AABB(new BlockPos(0, y, 0)).inflate(48)))
+							b.setHealth(b.getMaxHealth() * at + 2);
+					});
+					s.runCommand("damage @e[type=matriochka:" + id + ",limit=1] 2 minecraft:player_attack by @p");
+					ctx.waitTicks(50);
+				}
+				ctx.takeScreenshot(TestScreenshotOptions.of("awaken_" + id + "_cracked").withSize(1600, 900).disableCounterPrefix());
 				// its defeat: it folds back into its doll, its name is sealed on a card, its relics fall
 				s.runCommand("kill @e[type=matriochka:" + id + "]");
 				ctx.waitTicks(20);

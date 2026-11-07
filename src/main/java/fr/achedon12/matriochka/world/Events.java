@@ -306,7 +306,11 @@ public final class Events {
 			}
 		}
 		int dolls = 0;
-		for (int w = 1; w <= 10; w++) if (fr.achedon12.matriochka.block.Stations.count(inv, ModContent.item("hidden_doll_" + w)) > 0) dolls++;
+		for (int w = 1; w <= 10; w++) if (fr.achedon12.matriochka.block.Stations.count(inv, ModContent.item("hidden_doll_" + w)) > 0) {
+			dolls++;
+			// the Journal's collection remembers every hidden doll this player has held
+			if (!ps.has("found_doll_" + w)) ps.set("found_doll_" + w, true);
+		}
 		// dolls already nested count too
 		for (int i = 0; i < inv.getContainerSize(); i++) {
 			ItemStack s = inv.getItem(i);

@@ -342,6 +342,35 @@ public final class Cinematics implements HudElement {
 		}
 	}
 
+	/**
+	 * Over the loading screen of a dive: the screen stays black, as the iris left it, and the doll's outline glows
+	 * faintly in the middle in the colour of the world being entered, breathing until the world is ready. True when
+	 * it drew (a normal world load keeps vanilla's screen).
+	 */
+	public static boolean loadingVeil(GuiGraphicsExtractor g, int w, int h) {
+		if (!(diveAt >= 0 || openAt == -2) || !Comfort.cinematics()) return false;
+		int world = diveDown ? diveWorld : 0;
+		g.fill(0, 0, w, h, 0xFF000000);
+		float breath = 0.5f + 0.5f * (float) Math.sin(Ui.now() / 380.0);
+		float r = Math.min(w, h) * 0.16f;
+		float cx = w / 2f, cy = h / 2f;
+		float headR = r * 0.42f, headY = cy - r * 0.48f, bodyRx = r * 0.62f, bodyRy = r * 0.74f, bodyY = cy + r * 0.22f;
+		int rim = 0xFF000000 | Ui.worldColor(world);
+		for (int y = Math.round(headY - headR); y < Math.round(bodyY + bodyRy); y++) {
+			float py = y + 0.5f, half = -1;
+			float dh = (py - headY) / headR;
+			if (Math.abs(dh) < 1) half = Math.max(half, headR * (float) Math.sqrt(1 - dh * dh));
+			float db = (py - bodyY) / bodyRy;
+			if (Math.abs(db) < 1) half = Math.max(half, bodyRx * (float) Math.sqrt(1 - db * db));
+			if (half <= 0) continue;
+			int x0 = Math.round(cx - half), x1 = Math.round(cx + half);
+			g.fill(x0, y, x1, y + 1, Ui.alpha(rim, 0.08f + 0.06f * breath));
+			g.fill(x0 - 1, y, x0 + 1, y + 1, Ui.alpha(rim, 0.55f + 0.35f * breath));
+			g.fill(x1 - 1, y, x1 + 1, y + 1, Ui.alpha(rim, 0.55f + 0.35f * breath));
+		}
+		return true;
+	}
+
 	/** Bars that slide in from the top and bottom, with a thin gold rule on their inner edge. */
 	static void letterbox(GuiGraphicsExtractor g, int w, int h, float shown) {
 		int bar = Math.round(h * 0.11f * shown);

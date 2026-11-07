@@ -96,3 +96,39 @@ def season_timeline():
         V + "fog_color": {"modifier": "multiply", "keyframes": tracks[V + "fog_color"]},
         V + "ambient_particles": {"keyframes": tracks[V + "ambient_particles"]},
     }}
+
+
+# The sky of the worlds open to it, as their own day and moon timelines (copies of vanilla's, changed): the phase
+# the moon keeps, how bright the stars shine (a factor on vanilla's), and World 6's upside-down sky, where the sun
+# and the moon trade places and the stars come out by day.
+SKY = {
+    1: dict(moon="new_moon", stars=0.35),     # the spores veil the stars, the moon is always dark
+    4: dict(moon="full_moon", stars=0.0),     # no star through the storm, a full moon the lightning crosses
+    6: dict(invert=True),                     # the sky upside down
+    7: dict(moon="full_moon", stars=1.8),     # a bright, starry sky over the sea
+    10: dict(stars=0.0),                      # the workshop's ceiling: lamplight, no stars
+}
+
+
+def sky_timelines(n, day, moon):
+    """World n's own day and moon timelines, from vanilla's day and moon."""
+    import copy
+    spec = SKY[n]
+    day, moon = copy.deepcopy(day), copy.deepcopy(moon)
+    # vanilla's day already names the clock's time markers (waking up...): a second timeline on the same clock may not
+    day.pop("time_markers", None)
+    tr = day["tracks"]
+    star = tr.get("minecraft:visual/star_brightness")
+    if star and "stars" in spec:
+        for k in star["keyframes"]:
+            k["value"] = round(min(1.0, k["value"] * spec["stars"]), 4)
+    if spec.get("invert"):
+        for key in ("minecraft:visual/sun_angle", "minecraft:visual/moon_angle"):
+            for k in tr[key]["keyframes"]:
+                k["value"] = k["value"] + 180.0
+        if star:
+            period = day.get("period_ticks", 24000)
+            star["keyframes"] = sorted(({"ticks": (k["ticks"] + period // 2) % period, "value": k["value"]} for k in star["keyframes"]), key=lambda k: k["ticks"])
+    if "moon" in spec:
+        moon["tracks"]["minecraft:visual/moon_phase"] = {"keyframes": [{"ticks": 0, "value": spec["moon"]}]}
+    return day, moon

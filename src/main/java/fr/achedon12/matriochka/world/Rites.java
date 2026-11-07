@@ -91,6 +91,12 @@ public final class Rites {
 			be.changed();
 		}
 		stack.consume(1, sp);
+		// the Journal's collection remembers the rites this player has performed
+		PlayerState ps = PlayerState.of(sp);
+		if (!ps.has("rite_" + world)) {
+			ps.set("rite_" + world, true);
+			ps.sync();
+		}
 		level.playSound(null, at, fr.achedon12.matriochka.content.Sounds.SEED_PULSE, SoundSource.BLOCKS, 0.8f, 0.7f);
 		sp.sendSystemMessage(Component.translatable("item.matriochka.seed_" + world + ".desc"));
 		return InteractionResult.SUCCESS;
