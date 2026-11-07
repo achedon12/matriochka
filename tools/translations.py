@@ -20,7 +20,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "i18n")
 # Minecraft language codes, in the order they are listed in the docs
-LANGS = ["es_es", "de_de", "pt_br"]
+LANGS = ["es_es", "de_de", "pt_br", "it_it", "ru_ru", "pl_pl", "zh_cn"]
 _PH = re.compile(r"%(?:(\d+)\$)?([sd])")
 
 

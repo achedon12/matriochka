@@ -1619,4 +1619,9 @@ STORY_UI = {
     "ending.matriochka.cycle_hint": ("The Journal can begin a New Cycle.", "Le Journal peut commencer un Nouveau Cycle."),
     "command.matriochka.ending.done": ("Ending played: %s", "Fin jouée : %s"),
     "command.matriochka.cycle.show": ("Cycle %s", "Cycle %s"),
+    "jade.matriochka.world": ("World %s — %s", "Monde %s — %s"),
+    "jade.matriochka.opens": ("Opens %s", "Ouvre %s"),
+    "command.matriochka.difficulty.show": ("Matriochka difficulty: %s (story, normal, nightmare, hardcore)", "Difficulté de Matriochka : %s (story, normal, nightmare, hardcore)"),
+    "command.matriochka.difficulty.set": ("Matriochka difficulty set to %s for the whole server", "Difficulté de Matriochka réglée sur %s pour tout le serveur"),
+    "command.matriochka.difficulty.unknown": ("Unknown difficulty: %s (story, normal, nightmare, hardcore)", "Difficulté inconnue : %s (story, normal, nightmare, hardcore)"),
 }
