@@ -24,6 +24,8 @@ Every boss is heard before it is seen: while it is near and idle, it has a prese
 
 ## Summoning
 
+The stage closes round the fight: in a lair, a portcullis drops over the chamber's doorway when the boss wakes; in an altar arena, the entrance arch is barred and the rim burns with the world's light. Both open again when the boss falls, or after 20 seconds with nobody inside (to let fallen players back in), and close again behind the first one back.
+
 - Use the altar: the Guardian's Altar on the Surface, or the Arena Altar in the arena 160 blocks south of a world's Threshold. The boss appears 2 blocks above the altar and targets you.
 - Only one boss can be awake within 48 blocks of you.
 - Bosses can be summoned again after they are beaten. For the Block Guardian the altar prints a reminder but still wakes it.
@@ -60,7 +62,7 @@ The Unfinished borrows the attacks of the world its current shell copies but alw
 ## Phases
 
 - Most bosses change phase at **66%** and **33%** of their health. The Block Guardian has one change at **50%**. The Unfinished breaks a shell at every 10%.
-- On a phase change the boss roars, becomes **invulnerable for 2 seconds**, gets 10% faster, adds a numeral to its boss bar and shows the name of its final-phase move.
+- On a phase change the boss roars, becomes **invulnerable for 2 seconds**, gets 10% faster, adds a numeral to its boss bar and shows the name of its final-phase move. Its body cracks: glowing cracks of its world's colour after the first change, many more after the second.
 - Cooldowns shrink with each phase (see the table above) and the signature attack is always used when ready after phase 1.
 - Special phase effects: the Guardian heals 10% at 50%; the Spore Queen becomes invulnerable behind three Chitin Guard nodes at 33%; the Ash Titan takes 30% more damage from 33%.
 

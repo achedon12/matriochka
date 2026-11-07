@@ -9,7 +9,7 @@ The Artisan's Scroll you wake up with becomes the Journal once the Block Guardia
 | Objective | What to do next, your Doll of Life, your group, the pages found, your title, the cycle and the endings you have seen. After an ending, the **New Cycle** button (click twice to confirm). |
 | Quests | The quests of each world, with the karma choices. |
 | Karma | Your karma, your souls and what your karma changes. |
-| Worlds | The bosses beaten and the worlds open. |
+| Worlds | The worlds nested as dolls (painted when beaten, pulsing when open, bare wood when locked, yours ringed in gold) and, for each world, what you have gathered: its five Journal pages, its hidden doll, its rite and its boss, with the share of it all. |
 | Scroll | The five pages of the original Scroll. |
 | Pages | The Journal pages you found, and their text. |
 

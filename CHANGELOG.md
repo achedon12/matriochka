@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.5.2 (alpha)
+
+The fights close in and hit harder, the bosses break as they weaken, the worlds' people speak, and the interface wears the mod's colours from the title screen to the tooltips.
+
+### Fights
+
+- A lair's portcullis drops row by row over the chamber's doorway when its boss wakes, and an altar arena's arch is barred while its rim burns with the world's light. Both open when the boss falls, or after 20 seconds with nobody inside, and close again behind the first one back.
+- A boss breaking into its later phases shows glowing cracks of its world's colour, more after the second.
+- A heavy or critical blow jolts the attacker's camera a little (comfort slider); the worlds' weapons spray their world's matter where they land and ring with the world's sound on a heavy hit.
+- A boss's relics fall where it fell and stay there, or at the nearest fighter's feet when it fell over the void.
+
+### People and worlds
+
+- The worlds' people greet a player who comes near in a speech bubble over their head, with a line that knows whether the boss of their world has fallen (the Peddler: how far down the group has gone).
+- The open worlds have skies of their own: a dark moon behind the spores, a full moon in the storm, an upside-down sky with stars by day in World 6, a starry sky over the sea, no stars in the Workshop.
+- A trophy doll won in the Trials rides on its owner's shoulder.
+
+### Interface
+
+- Matriochka items show their world, rarity and souls as pixel icons under their name.
+- Matriochka advancements are announced on the mod's own lacquer card.
+- The Journal's Worlds page shows the worlds nested as dolls and what has been gathered of each: pages, hidden doll, rite and boss.
+- The title screen shows a row of nesting dolls and the mod's version; a dive's loading screen stays dark under the doll's outline.
+
+### Checks
+
+- `./gradlew runClientGameTest -Ppolish` photographs the title screen, a tooltip, a toast, a greeting, a trophy on a shoulder, the Journal's map and World 6's sky; the playthrough checks every stage closes and opens again.
+
 ## 0.5.1 (alpha)
 
 Every boss now has a bar of its own and a proper end, and diving into a world is a moment of its own.

@@ -32,7 +32,7 @@ Falling in a trial does not kill you: the doll carries you out, at full health, 
 
 - **Your best time** per trial, **your group's best time** per trial, and a **server-wide board** of the ten best groups per trial (one line per group, with the names of who fought). The board is in the Trials book and in chat with `/matriochka trials top <trial>`.
 - Every win pays souls: 25 per world number (the Gauntlet, 300).
-- **The first win** of a trial gives its **Trophy Doll** (a painted doll of the boss on a gilded plinth; the Gauntlet's has eleven in one) and its title:
+- **The first win** of a trial gives its **Trophy Doll** (use it to set it on your shoulder, as a parrot would; use it again to take it down) (a painted doll of the boss on a gilded plinth; the Gauntlet's has eleven in one) and its title:
 
 | Trial | Title |
 | --- | --- |

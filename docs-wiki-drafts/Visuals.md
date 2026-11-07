@@ -58,6 +58,10 @@ Every world sets its own fog, sky, clouds, light tint and floating particles (`t
 | 10 | Warm workshop light, honey haze, wool fluff and thread scraps floating down |
 | 0 | Lantern light on red lacquer, gold dust in the air |
 
+## Skies
+
+The open worlds have skies of their own, as their own day and moon timelines (`tools/atmosphere.py`, `SKY`): a moon that stays dark behind the spores (World 1), a full moon and no stars through the storm (World 4), an upside-down sky where the sun and moon trade places and the stars come out by day (World 6), a bright starry sky over the sea (World 7), no stars under the Workshop's ceiling (World 10).
+
 ## Particles
 
 Eighteen particles of the mod's own, painted like the textures: spores, embers, cold dust, chain glints, lightning sparks, shadow wisps, deep motes, mirror shards, bubbles, petals, pollen, autumn leaves, snowflakes, grit, rust motes, thread scraps, fluff and gold dust. The glowing ones are drawn at full brightness.
