@@ -23,7 +23,8 @@ def mul(a, b):
     return [[sum(a[i][k] * b[k][j] for k in range(3)) for j in range(3)] for i in range(3)]
 
 
-def render(geo, tex, glow, yaw=35, pitch=-18, size=1024):
+def render(geo, tex, glow, yaw=35, pitch=-18, size=1024, only=None):
+    """only: keep that bone and the bones hanging from it (the head and its jaw, horns, crown)."""
     g = geo["minecraft:geometry"][0]
     bones = {b["name"]: b for b in g["bones"]}
 
@@ -37,6 +38,8 @@ def render(geo, tex, glow, yaw=35, pitch=-18, size=1024):
     cam = mul(rot_m(pitch, 0, 0), rot_m(0, yaw, 0))
     polys = []
     for b in g["bones"]:
+        if only and only not in [x["name"] for x in chain(b["name"])]:
+            continue
         for c in b.get("cubes", []):
             for corners, uv, n in faces_of(c):
                 pts, nn = list(corners), n
@@ -104,6 +107,22 @@ def render(geo, tex, glow, yaw=35, pitch=-18, size=1024):
         pad = 6
         out = out.crop((max(0, box[0] - pad), max(0, box[1] - pad), min(out.width, box[2] + pad), min(out.height, box[3] + 2)))
     return out
+
+
+def _load(eid):
+    geo = json.load(open(os.path.join(A, f"geckolib/models/entity/{eid}.geo.json")))
+    tex = Image.open(os.path.join(A, f"textures/entity/{eid}.png")).convert("RGBA")
+    gp = os.path.join(A, f"textures/entity/{eid}_glowmask.png")
+    glow = Image.open(gp).convert("RGBA") if os.path.exists(gp) else None
+    if glow is not None and glow.getbbox() is None:
+        glow = None
+    return geo, tex, glow
+
+
+def head(eid, size=512):
+    """The boss's head alone, nearly face on: what its boss bar's cameo shows."""
+    geo, tex, glow = _load(eid)
+    return render(geo, tex, glow, yaw=22, pitch=-8, size=size, only="head")
 
 
 def portrait(eid):
