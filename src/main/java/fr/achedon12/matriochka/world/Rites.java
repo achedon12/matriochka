@@ -68,6 +68,8 @@ public final class Rites {
 		}
 		BlockPos clicked = hit.getBlockPos();
 		BlockPos at = clicked.relative(hit.getDirection());
+		// a rite site is placed like a block: spawn protection, adventure mode and claims apply
+		if (!sp.mayBuild() || !level.mayInteract(sp, at) || !sp.mayUseItemAt(at, hit.getDirection(), stack)) return InteractionResult.FAIL;
 		// the pearl sinks: clicked on the sea floor or a block beside water, it goes into the water there
 		boolean water = level.getFluidState(at).is(FluidTags.WATER) && level.getFluidState(at).isSource();
 		if (!(level.getBlockState(at).isAir() || (world == 7 && water))) {
