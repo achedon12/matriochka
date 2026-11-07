@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.0 (alpha)
 
 Every world now has its own way in, the stations are sculpted 3D pieces with screens of their own, and the Matrix Workbench is a real crafting table.
 
