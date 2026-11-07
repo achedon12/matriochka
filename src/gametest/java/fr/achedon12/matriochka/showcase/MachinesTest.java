@@ -72,6 +72,13 @@ final class MachinesTest {
 				s.runCommand(String.format(java.util.Locale.ROOT, "tp @a %.2f %.2f %.2f 0 24", STATIONS.size() * 1.5 - 1.0, y + 4.5, -13.0));
 				ctx.waitTicks(30);
 				shot(ctx, "row");
+				// the same row at night: the lit parts of every station glow
+				s.runCommand("time set 18000");
+				s.runCommand(String.format(java.util.Locale.ROOT, "tp @a %.2f %.2f %.2f 0 30", STATIONS.size() * 1.5 - 1.0, y + 3.2, -7.5));
+				ctx.waitTicks(40);
+				shot(ctx, "night");
+				s.runCommand("time set 1000");
+				ctx.waitTicks(10);
 			}
 			for (int i = 0; i < STATIONS.size(); i++) {
 				String id = STATIONS.get(i);
@@ -87,6 +94,19 @@ final class MachinesTest {
 				ctx.waitTicks(30);
 				boolean open = s.computeOnServer(srv -> player(srv).containerMenu instanceof StationMenu);
 				if (!open) throw new AssertionError("the " + id + " screen did not open");
+				if (id.equals("matrix_workbench")) {
+					// the World 1 Seed's drawer lays its pattern on the grid; the result must show
+					String err = s.computeOnServer(srv -> {
+						ServerPlayer p = player(srv);
+						StationMenu m = (StationMenu) p.containerMenu;
+						var list = fr.achedon12.matriochka.content.Recipes.of("matrix_workbench");
+						int idx = -1;
+						for (int k = 0; k < list.size(); k++) if (list.get(k).output().equals("seed_1")) idx = k;
+						m.clickMenuButton(p, idx);
+						return m.slots.get(m.resultSlot).getItem().is(ModContent.item("seed_1")) ? "" : "no Seed in the result slot";
+					});
+					if (!err.isEmpty()) throw new AssertionError(err);
+				}
 				ctx.waitTicks(20);
 				ctx.getInput().setCursorPos(0, 0);
 				shot(ctx, "screen_" + id);

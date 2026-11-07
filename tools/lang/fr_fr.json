@@ -31,6 +31,8 @@
  "journal.matriochka.karma.neutral": "Ni saint ni dévoreur. Chaque choix compte encore.",
  "journal.matriochka.karma.dark1": "Les prix montent de 10 %, mais le premier marché clandestin s'ouvre à toi.",
  "journal.matriochka.karma.dark2": "Certains villages deviennent hostiles. Quêtes de pacte et butins interdits t'attendent.",
+ "station.matriochka.grid.fill": "Choisis un tiroir ou pose les objets",
+ "station.matriochka.grid.take": "Prends-le",
  "station.matriochka.ready": "Prête",
  "station.matriochka.not_ready": "Pas prête",
  "station.matriochka.purify": "Purifier (+karma)",

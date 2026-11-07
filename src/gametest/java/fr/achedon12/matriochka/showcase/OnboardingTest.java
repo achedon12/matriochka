@@ -175,7 +175,9 @@ final class OnboardingTest {
 				int index = -1;
 				var list = Recipes.of("matrix_workbench");
 				for (int i = 0; i < list.size(); i++) if (list.get(i).output().equals("seed_1")) index = i;
+				// the drawer lays the Seed's pattern on the grid, then the result is taken like a crafted item
 				menu.clickMenuButton(p, index);
+				menu.quickMoveStack(p, menu.resultSlot);
 				p.closeContainer();
 				return count(p, ModContent.item("seed_1")) > 0 ? "" : "no Seed after the craft";
 			});

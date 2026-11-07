@@ -28,6 +28,8 @@ U = {
  "journal.matriochka.karma.neutral": ("Neither saint nor devourer. Every choice still counts.", "Ni saint ni dévoreur. Chaque choix compte encore."),
  "journal.matriochka.karma.dark1": ("Prices are 10% higher, but the first black market opens to you.", "Les prix montent de 10 %, mais le premier marché clandestin s'ouvre à toi."),
  "journal.matriochka.karma.dark2": ("Some villages turn hostile. Pact quests and forbidden loot await.", "Certains villages deviennent hostiles. Quêtes de pacte et butins interdits t'attendent."),
+ "station.matriochka.grid.fill": ("Pick a drawer, or lay it out", "Choisis un tiroir ou pose les objets"),
+ "station.matriochka.grid.take": ("Take it", "Prends-le"),
  "station.matriochka.ready": ("Ready", "Prête"), "station.matriochka.not_ready": ("Not ready", "Pas prête"),
  "station.matriochka.purify": ("Purify (+karma)", "Purifier (+karma)"), "station.matriochka.devour": ("Devour (-karma)", "Dévorer (-karma)"),
  "station.matriochka.recharge": ("Rebuild a layer", "Refaire une couche"),

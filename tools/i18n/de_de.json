@@ -1697,6 +1697,8 @@
  "station.matriochka.ferment.aged": "Gealtert",
  "station.matriochka.ferment.fresh": "Frisch",
  "station.matriochka.ferment.ripe": "Reif",
+ "station.matriochka.grid.fill": "Wähle eine Schublade oder lege die Gegenstände",
+ "station.matriochka.grid.take": "Nimm es",
  "station.matriochka.invert": "Umkehren",
  "station.matriochka.inverter.help": "Zwei Teile derselben Art tauschen Klasse, Stufe und Verzauberungen. Jedes verliert ein Viertel seiner Haltbarkeit.",
  "station.matriochka.layer": "Beschichten",

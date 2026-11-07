@@ -17,7 +17,7 @@ final class StationInstruments {
 
 	static boolean has(String station) {
 		return switch (station) {
-			case "soul_altar", "class_table", "inverter" -> false;
+			case "soul_altar", "class_table", "inverter", "matrix_workbench" -> false;
 			default -> true;
 		};
 	}

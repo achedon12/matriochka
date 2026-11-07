@@ -17,6 +17,7 @@ import craft
 import particles
 import models
 import stations3d
+import patterns
 import bosses_hd
 import attacks
 import sound
@@ -163,6 +164,7 @@ def gen_station_materials():
 
 def gen_blocks():
     gen_station_materials()
+    patterns.build()
     for b in BLOCKS:
         bid = b["id"]
         lang(f"block.{NS}.{bid}", b["en"], b["fr"])

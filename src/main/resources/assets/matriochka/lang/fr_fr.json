@@ -1697,6 +1697,8 @@
   "station.matriochka.ferment.aged": "Vieillie",
   "station.matriochka.ferment.fresh": "Jeune",
   "station.matriochka.ferment.ripe": "Mûre",
+  "station.matriochka.grid.fill": "Choisis un tiroir ou pose les objets",
+  "station.matriochka.grid.take": "Prends-le",
   "station.matriochka.invert": "Inverser",
   "station.matriochka.inverter.help": "Deux pièces du même type échangent classe, niveau et enchantements. Chacune perd un quart de sa durabilité.",
   "station.matriochka.layer": "Ajouter une couche",

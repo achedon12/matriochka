@@ -1697,6 +1697,8 @@
   "station.matriochka.ferment.aged": "Aged",
   "station.matriochka.ferment.fresh": "Fresh",
   "station.matriochka.ferment.ripe": "Ripe",
+  "station.matriochka.grid.fill": "Pick a drawer, or lay it out",
+  "station.matriochka.grid.take": "Take it",
   "station.matriochka.invert": "Invert",
   "station.matriochka.inverter.help": "Two pieces of the same kind trade class, level and enchantments. Each loses a quarter of its durability.",
   "station.matriochka.layer": "Add a layer",

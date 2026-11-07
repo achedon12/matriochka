@@ -42,6 +42,11 @@ public final class Stations {
 		return n;
 	}
 
+	/** Takes n of an item from an inventory, wherever they are. */
+	public static void takeFrom(Inventory inv, Item item, int n) {
+		take(inv, item, n);
+	}
+
 	private static void take(Inventory inv, Item item, int n) {
 		for (int i = 0; i < inv.getContainerSize() && n > 0; i++) {
 			ItemStack s = inv.getItem(i);

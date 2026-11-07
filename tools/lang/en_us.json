@@ -31,6 +31,8 @@
  "journal.matriochka.karma.neutral": "Neither saint nor devourer. Every choice still counts.",
  "journal.matriochka.karma.dark1": "Prices are 10% higher, but the first black market opens to you.",
  "journal.matriochka.karma.dark2": "Some villages turn hostile. Pact quests and forbidden loot await.",
+ "station.matriochka.grid.fill": "Pick a drawer, or lay it out",
+ "station.matriochka.grid.take": "Take it",
  "station.matriochka.ready": "Ready",
  "station.matriochka.not_ready": "Not ready",
  "station.matriochka.purify": "Purify (+karma)",

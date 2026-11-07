@@ -1697,6 +1697,8 @@
  "station.matriochka.ferment.aged": "Envelhecida",
  "station.matriochka.ferment.fresh": "Nova",
  "station.matriochka.ferment.ripe": "Madura",
+ "station.matriochka.grid.fill": "Escolha uma gaveta ou coloque os itens",
+ "station.matriochka.grid.take": "Pegue",
  "station.matriochka.invert": "Inverter",
  "station.matriochka.inverter.help": "Duas peças do mesmo tipo trocam classe, nível e encantamentos. Cada uma perde um quarto da durabilidade.",
  "station.matriochka.layer": "Adicionar camada",

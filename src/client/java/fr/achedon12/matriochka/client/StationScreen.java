@@ -470,7 +470,32 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		if (lines.size() > 6 && mx >= l + 195 && mx < l + 248 && my >= t + 70 && my < t + 133) g.setTooltipForNextFrame(font, desc, mx, my);
 	}
 
+	/**
+	 * The workbench's niche is its crafting grid: a lacquered plate under the nine slots, a gilded arrow down to the
+	 * result, which glows while the grid spells a recipe. The drawers fill the grid; the result is taken by hand.
+	 */
+	private void gridNiche(GuiGraphicsExtractor g, int l, int t) {
+		int gx = l + StationMenu.GRID_X - 2, gy = t + StationMenu.GRID_Y - 2;
+		g.fill(gx - 1, gy - 1, gx + 57, gy + 57, 0xFF2A0E0A);
+		g.outline(gx - 2, gy - 2, 60, 60, 0xFFC8963C);
+		boolean has = menu.slots.get(menu.resultSlot).hasItem();
+		int ax = l + StationMenu.RESULT_X + 8, ay = t + StationMenu.GRID_Y + 56;
+		int gold = has ? 0xFFF4D27A : 0x80C8963C;
+		g.fill(ax - 1, ay, ax + 1, ay + 6, gold);
+		for (int k = 0; k < 4; k++) g.fill(ax - 4 + k, ay + 6 + k, ax + 4 - k, ay + 7 + k, gold);
+		int rx = l + StationMenu.RESULT_X, ry = t + StationMenu.RESULT_Y;
+		if (has) Ui.sprite(g, "glow", rx - 8, ry - 8, 32, 32, Ui.white(0.45f + 0.2f * (float) Math.sin(Ui.now() / 420.0)));
+		g.outline(rx - 2, ry - 2, 20, 20, has ? 0xFFF4D27A : 0xFF96682A);
+		Component hint = Component.translatable(has ? "station.matriochka.grid.take" : "station.matriochka.grid.fill");
+		var lines = font.split(hint, 52);
+		for (int i = 0; i < Math.min(2, lines.size()); i++) g.text(font, lines.get(i), l + 222 - font.width(lines.get(i)) / 2, t + 112 + i * 9, has ? Ui.OK : Ui.MUTED, false);
+	}
+
 	private void niche(GuiGraphicsExtractor g, int l, int t, boolean ready, float dt, int mx, int my) {
+		if (menu.workbench()) {
+			gridNiche(g, l, t);
+			return;
+		}
 		if (menu.data.station().equals("inverter")) {
 			inverterNiche(g, l, t, mx, my);
 			return;
