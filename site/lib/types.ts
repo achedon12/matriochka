@@ -20,8 +20,8 @@ export interface World {
   boss: { id: string; name: string; hp: string; core: string; coreTex: string | null; coreName: string };
   mobs: { id: string; name: string; elite: boolean; tex: string | null }[];
   rule: string | null; tier: string; bossNote: string;
-  seed: { id: string; tex: string | null; name: string; soil: string; cond: string; inputs: Ing[] } | null;
-  station: { id: string; tex: string | null; name: string; note: string; shot?: string | null; make: Ing[]; recipes: Recipe[] } | null;
+  seed: { id: string; tex: string | null; name: string; soil: string; cond: string; inputs: Ing[]; grid?: (Ing | null)[] | null } | null;
+  station: { id: string; tex: string | null; img?: string | null; name: string; note: string; shot?: string | null; make: Ing[]; makeGrid?: (Ing | null)[] | null; recipes: Recipe[] } | null;
   surface?: Recipe[];
   items: Item[];
   armor: { pieces: { tex: string | null; name: string }[]; text: string } | null;
@@ -34,7 +34,7 @@ export interface World {
 
 export interface CodexEntry {
   id: string; tex: string | null; name: string; kind: string; rarity?: string; effect: string;
-  station: string | null; inputs: Ing[]; count: number; drops: string[]; yields?: string | null;
+  station: string | null; stationTex?: string | null; stationId?: string | null; grid?: (Ing | null)[] | null; inputs: Ing[]; count: number; drops: string[]; yields?: string | null;
 }
 export interface Codex {
   items: CodexEntry[]; blocks: CodexEntry[]; quests: { name: string; desc: string }[];
@@ -69,8 +69,9 @@ export interface SiteData {
   copy: {
     ui: Record<string, string>;
     nav: Record<string, string>;
-    home: any; worlds: any; bestiary: any; bosses: any; systems: any; download: any;
+    home: any; worlds: any; bestiary: any; bosses: any; items: any; systems: any; download: any;
   };
+  catalog: { n: number; name: string; items: CodexEntry[]; blocks: CodexEntry[] }[];
   worlds: World[];
   mobs: Mob[];
   bosses: Boss[];

@@ -17,7 +17,8 @@ export function Shell({ lang, path, section, children }: { lang: Lang; path: str
     { p: "worlds", h: 34, c: ["#a8231a", "#d9a441", "#f3e2c2"] },
     { p: "bestiary", h: 31, c: ["#3f6b2f", "#c9d36a", "#f3e2c2"] },
     { p: "bosses", h: 28, c: ["#17100d", "#d9a441", "#a8231a"] },
-    { p: "systems", h: 25, c: ["#2f4f7a", "#9fc3e8", "#f3e2c2"] },
+    { p: "items", h: 26, c: ["#6a3a1c", "#e0b050", "#f3e2c2"] },
+    { p: "systems", h: 24, c: ["#2f4f7a", "#9fc3e8", "#f3e2c2"] },
   ] as const;
   const doll = (c: readonly string[], h: number, open: boolean) => (
     <svg viewBox="-4 -30 108 204" aria-hidden="true" style={{ height: `calc(${h + 10}px * var(--navdoll, 1))`, width: "auto" }}

@@ -24,7 +24,7 @@ export function meta(lang: Lang, path: string, title: string | null, description
   };
 }
 
-export function metaFor(lang: Lang, page: "worlds" | "bestiary" | "bosses" | "systems" | "download") {
+export function metaFor(lang: Lang, page: "worlds" | "bestiary" | "bosses" | "items" | "systems" | "download") {
   const c = getData(lang).copy;
   const t = page === "worlds" ? c.worlds.h : c[page].h;
   return meta(lang, `${page}/`, page === "worlds" ? c.nav.worlds : t, c[page].desc);

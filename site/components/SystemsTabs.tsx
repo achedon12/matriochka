@@ -4,16 +4,19 @@ import { useEffect, useState } from "react";
 import { asset } from "@/lib/data";
 import type { Ing } from "@/lib/types";
 import { Icon, Ingredients, Inlay } from "./Bits";
+import { Craft } from "./Craft";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type S = Record<string, any>;
 
-function Feature({ f }: { f: { tex: string | null; h: string; p: string; inputs?: Ing[] } }) {
+function Feature({ f }: { f: { tex: string | null; h: string; p: string; inputs?: Ing[]; station?: { tex: string | null; name: string } | null; count?: number; grid?: (Ing | null)[] | null } }) {
   return (
     <div className="border border-rule bg-ink/60 p-4">
       <h4 className="m-0 mb-1.5 flex items-center gap-2 font-body text-lg font-bold text-paper"><Inlay src={f.tex} size={32} />{f.h}</h4>
       <p className="m-0 mb-2 text-[15px] leading-snug text-paper-dim">{f.p}</p>
-      {f.inputs && f.inputs.length > 0 && <Ingredients inputs={f.inputs} />}
+      {f.inputs && f.inputs.length > 0 && (f.station
+        ? <Craft inputs={f.inputs} grid={f.grid} out={{ tex: f.tex, name: f.h, count: f.count ?? 1 }} station={f.station} />
+        : <Ingredients inputs={f.inputs} />)}
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { asset, creature, getData, href } from "@/lib/data";
 import type { Boss, CodexEntry, Lang, Mob, World } from "@/lib/types";
-import { Ingredients, Inlay, Recipes, Shot } from "../Bits";
+import { Inlay, Shot } from "../Bits";
+import { Craft } from "../Craft";
 import WorldBestiary, { type BestiaryEntry } from "../WorldBestiary";
 import { viewerLabels } from "./CreaturesPages";
 import { DollRow, DollWindow } from "../Dolls";
@@ -34,7 +35,7 @@ export function WorldSummary({ w, lang }: { w: World; lang: Lang }) {
         <div className="w-block">
           <h3><Inlay src={w.seed.tex} size={32} />{w.seed.name}</h3>
           <p className="small">{w.seed.soil} {w.seed.cond}</p>
-          <Ingredients inputs={w.seed.inputs} />
+          <Craft inputs={w.seed.inputs} grid={w.seed.grid} out={{ tex: w.seed.tex, name: w.seed.name, count: 1 }} station={{ tex: "stations/matrix_workbench.png", name: ui.workbench }} />
         </div>
       )}
       <div className="w-block">
@@ -120,7 +121,7 @@ function CodexCard({ e, c }: { e: CodexEntry; c: Record<string, string> }) {
       </div>
       {e.effect && <p className="cx-eff">{e.effect}</p>}
       {e.station && e.inputs.length > 0 && (
-        <div className="cx-how"><p className="small">{c.cMade} <strong>{e.station}</strong></p><Ingredients inputs={e.inputs} /></div>
+        <div className="cx-how"><Craft inputs={e.inputs} grid={e.grid} out={{ tex: e.tex, name: e.name, count: e.count }} station={{ tex: e.stationTex ?? null, name: e.station }} label={`${c.cMade} ${e.station}`} /></div>
       )}
       {e.drops.length > 0 && <p className="small cx-how">{c.cFound} {e.drops.join(", ")}</p>}
       {e.yields && <p className="small cx-how">{c.cGives} <strong>{e.yields}</strong></p>}
@@ -263,10 +264,16 @@ export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
             <Lacquer className="world-more">
               <section className="col">
                 <h2 className="h-plate"><Inlay src={w.station.tex} />{w.station.name}</h2>
-                <p>{w.station.note}</p>
+                <div className="st-intro">
+                  {w.station.img && <img className="st-model" src={asset(w.station.img)} alt={w.station.name} loading="lazy" width={256} height={256} />}
+                  <p>{w.station.note}</p>
+                </div>
                 {w.station.shot && <div className="my-4 border-2 border-gold bg-black shadow-frame"><img className="block h-auto w-full [image-rendering:pixelated]" src={asset(w.station.shot)} alt={w.station.name} loading="lazy" width={1708} height={960} /></div>}
-                {w.station.make.length > 0 && <div className="st-make"><p className="small">{ui.builtFrom}</p><Ingredients inputs={w.station.make} /></div>}
-                <Recipes recipes={w.station.recipes} />
+                {w.station.make.length > 0 && <div className="st-make"><p className="small">{ui.builtFrom}</p>
+                  <Craft inputs={w.station.make} grid={w.station.makeGrid} out={{ tex: w.station.tex, name: w.station.name, count: 1 }} station={{ tex: "stations/matrix_workbench.png", name: ui.workbench }} /></div>}
+                {w.station.recipes.map((r) => (
+                  <Craft key={r.out} inputs={r.inputs} out={{ tex: r.tex, name: r.name, count: r.count }} station={{ tex: w.station!.tex, name: w.station!.name }} />
+                ))}
               </section>
               <section className="col">
                 <h2 className="h-plate">{ui.carry}</h2>
