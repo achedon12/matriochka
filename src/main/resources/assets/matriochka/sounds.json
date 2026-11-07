@@ -1205,6 +1205,94 @@
       }
     ]
   },
+  "music.boss_w0": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w0",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w1": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w1",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w2": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w2",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w3": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w3",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w4": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w4",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w5": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w5",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w6": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w6",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w7": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w7",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w8": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w8",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w9": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w9",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss_w10": {
+    "sounds": [
+      {
+        "name": "matriochka:music/boss_w10",
+        "stream": true
+      }
+    ]
+  },
   "music.layer_heartbeat": {
     "sounds": [
       {

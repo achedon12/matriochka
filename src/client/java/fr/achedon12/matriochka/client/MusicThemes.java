@@ -76,10 +76,25 @@ public final class MusicThemes {
 	public static float bossLowest(Minecraft mc) {
 		if (mc.player == null || mc.player.level().dimension() == Level.END) return 2f;
 		float lowest = 2f;
-		for (LerpingBossEvent e : ((BossHealthOverlayAccess) mc.gui.hud.getBossOverlay()).matriochka$events().values()) {
+		for (LerpingBossEvent e : ((BossHealthOverlayAccess) fr.achedon12.matriochka.client.mc.McClient.bossOverlay(mc)).matriochka$events().values()) {
 			if (e.shouldPlayBossMusic() && isOurs(e)) lowest = Math.min(lowest, e.getProgress());
 		}
 		return lowest;
+	}
+
+	/** The world of the weakest Matriochka boss whose bar is shown, -1 when none is known. */
+	static int bossWorld(Minecraft mc) {
+		int world = -1;
+		float lowest = 2f;
+		for (LerpingBossEvent e : ((BossHealthOverlayAccess) fr.achedon12.matriochka.client.mc.McClient.bossOverlay(mc)).matriochka$events().values()) {
+			if (!e.shouldPlayBossMusic() || !isOurs(e) || e.getProgress() >= lowest) continue;
+			fr.achedon12.matriochka.content.Defs.BossDef d = BossBars.bossOf(e.getName());
+			if (d != null) {
+				world = d.world();
+				lowest = e.getProgress();
+			}
+		}
+		return world;
 	}
 
 	public static boolean bossFight(Minecraft mc) {
@@ -106,7 +121,7 @@ public final class MusicThemes {
 		}
 		long now = Ui.now();
 		if (Cinematics.danger() > 0) lastDangerAt = now;
-		boolean screenMusic = mc.gui.screen() != null && mc.gui.screen().getBackgroundMusic() != null;
+		boolean screenMusic = fr.achedon12.matriochka.client.mc.McClient.screen(mc) != null && fr.achedon12.matriochka.client.mc.McClient.screen(mc).getBackgroundMusic() != null;
 		state = choose(screenMusic, bossLowest(mc), lastDangerAt >= 0 && now - lastDangerAt < DANGER_HOLD_MS);
 		stings(mc, now);
 		layers(mc);
@@ -153,7 +168,7 @@ public final class MusicThemes {
 			theme = new Track(switch (state) {
 				case DANGER -> Sounds.MUSIC_DANGER;
 				case BOSS_FINAL -> Sounds.MUSIC_BOSS_FINAL;
-				default -> Sounds.MUSIC_BOSS;
+				default -> Sounds.bossMusic(bossWorld(mc));
 			}, state, true);
 			mc.getSoundManager().play(theme);
 			played = true;

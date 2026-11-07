@@ -163,6 +163,13 @@ public final class BossBars {
 		g.text(font, name, nx + 12, ny + 5, light ? Ui.alpha(0xFFFFFFFF, 0.35f) : Ui.alpha(0xFF000000, 0.55f), false);
 		g.text(font, name, nx + 11, ny + 4, st.name, false);
 		if (hit > 0) g.fill(nx + 2, ny + 2, nx + nw - 2, ny + 14, Ui.alpha(0xFFFFFFFF, 0.18f * hit));
+		// readable without the colours (Comfort patterns): the health in figures, centred on the gauge
+		if (Comfort.get().patterns) {
+			String pct = Math.max(p > 0 ? 1 : 0, Math.round(p * 100)) + "%";
+			int pw = font.width(pct), px = x0 + TW / 2 - pw / 2, py = y0 + TH / 2 - 4;
+			g.text(font, pct, px + 1, py + 1, 0xFF000000, false);
+			g.text(font, pct, px, py, 0xFFFFFFFF, false);
+		}
 	}
 
 	private static final Map<UUID, Float> LAST_P = new HashMap<>();

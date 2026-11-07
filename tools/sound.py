@@ -60,6 +60,16 @@ PIECES = {
     "danger": dict(seed=3300, motif_seed=LULLABY, tonic=57, mode="phrygian", bpm=104, beats=4, prog=[0, 1, 0, 6], prog_b=[5, 1, 6, 0],
                    lead="tremolo", bass="pluck", drum="march", drone=True, reverb=(2.2, 0.3), passes=2, lowpass=3400, lead_vel=0.75),
 }
+# each boss fights to its own theme: the boss piece (the lullaby at a fighting tempo, driven by the drum) in its
+# world's key and mode, led by its world's instrument; boss_final (below a third of its health) stays shared
+_FIGHT_LEAD = {"box": "tremolo", "box_rev": "tremolo", "flute": "reed", "pluck_soft": "pluck"}
+for _w, _t in WORLD_THEMES.items():
+    PIECES[f"boss_w{_w}"] = dict(PIECES["boss"], seed=3000 + _w * 11, tonic=_t["tonic"] if _t["tonic"] >= 55 else _t["tonic"] + 12,
+                                 mode=_t["mode"], bpm=max(124, min(150, int(_t["bpm"] * 1.45))),
+                                 lead=_FIGHT_LEAD.get(_t["lead"], _t["lead"]),
+                                 counter="bell" if _t["lead"] == "bell" else "box",
+                                 pad=bool(_t.get("pad")), lowpass=_t.get("lowpass"),
+                                 reverb=(max(1.2, _t.get("reverb", (1.6, 0.25))[0] * 0.6), 0.2))
 # the adaptive music's layers and stings, rendered by tools/cues.py: (id, recipe)
 CUES = [("music.layer_heartbeat", "layer_heartbeat"), ("music.sting_discovery", "sting_discovery"), ("music.sting_quest", "sting_quest")]
 
@@ -325,6 +335,12 @@ def java(package):
     for w in range(2, 11):
         L.append(f"\t\t\tcase {w} -> RITE_OPEN_W{w};")
     L += ["\t\t\tdefault -> WORLD_BLOCK_FORM;", "\t\t};", "\t}", "",
+          "\t/** The fight theme of a world's boss (0 to 10); the shared boss theme for anything else. */",
+          "\tpublic static SoundEvent bossMusic(int world) {",
+          "\t\treturn switch (world) {"]
+    for w in range(0, 11):
+        L.append(f"\t\t\tcase {w} -> MUSIC_BOSS_W{w};")
+    L += ["\t\t\tdefault -> MUSIC_BOSS;", "\t\t};", "\t}", "",
           "\t/** Loads the class, which registers every sound. */",
           "\tpublic static void init() {}", "}"]
     return "\n".join(L) + "\n"

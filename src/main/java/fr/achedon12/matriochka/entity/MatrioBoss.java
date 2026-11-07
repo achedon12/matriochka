@@ -200,7 +200,11 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		boss.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(boss.getAttributeBaseValue(Attributes.ATTACK_DAMAGE) * variant.danger());
 		boss.setHealth(hp);
 		boss.pace = Defs.bossAttackSpeedPlayers(players);
-		boss.mutate(fr.achedon12.matriochka.world.Variants.mutation(variant.id(), boss.def.world()));
+		String mutation = fr.achedon12.matriochka.world.Variants.mutation(variant.id(), boss.def.world());
+		// a New Cycle wakes every boss mutated, even before World 6: which mutation turns with the cycle, so a boss
+		// fought again is not the one already learnt
+		if (mutation.isEmpty() && cycle > 0) mutation = cycleMutation(cycle, boss.def.world());
+		boss.mutate(mutation);
 		boss.setPos(Vec3.atBottomCenterOf(at));
 		boss.setTarget(by);
 		level.addFreshEntity(boss);
@@ -222,6 +226,12 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	}
 
 	// ---------------------------------------------------------------- mutations
+	/** The mutation a boss of a world wakes with in a New Cycle: a different one each cycle and each world. */
+	public static String cycleMutation(int cycle, int world) {
+		var all = fr.achedon12.matriochka.content.Content.MUTATIONS;
+		return all.get(Math.floorMod(cycle * 3 + world * 2 - 1, all.size()));
+	}
+
 	public String mutation() {
 		return mutation;
 	}
@@ -776,7 +786,7 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	}
 
 	private void lightning(ServerLevel level, Vec3 at) {
-		LightningBolt bolt = net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+		LightningBolt bolt = fr.achedon12.matriochka.mc.McEntities.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
 		if (bolt != null) {
 			bolt.setPos(at);
 			bolt.addTag(OWN_BOLT);

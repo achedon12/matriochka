@@ -126,6 +126,17 @@ public final class Sounds {
 	public static final SoundEvent MUSIC_BOSS_FINAL = register("music.boss_final");
 	public static final SoundEvent MUSIC_ENDINGS = register("music.endings");
 	public static final SoundEvent MUSIC_DANGER = register("music.danger");
+	public static final SoundEvent MUSIC_BOSS_W0 = register("music.boss_w0");
+	public static final SoundEvent MUSIC_BOSS_W1 = register("music.boss_w1");
+	public static final SoundEvent MUSIC_BOSS_W2 = register("music.boss_w2");
+	public static final SoundEvent MUSIC_BOSS_W3 = register("music.boss_w3");
+	public static final SoundEvent MUSIC_BOSS_W4 = register("music.boss_w4");
+	public static final SoundEvent MUSIC_BOSS_W5 = register("music.boss_w5");
+	public static final SoundEvent MUSIC_BOSS_W6 = register("music.boss_w6");
+	public static final SoundEvent MUSIC_BOSS_W7 = register("music.boss_w7");
+	public static final SoundEvent MUSIC_BOSS_W8 = register("music.boss_w8");
+	public static final SoundEvent MUSIC_BOSS_W9 = register("music.boss_w9");
+	public static final SoundEvent MUSIC_BOSS_W10 = register("music.boss_w10");
 	public static final SoundEvent MUSIC_LAYER_HEARTBEAT = register("music.layer_heartbeat");
 	public static final SoundEvent MUSIC_STING_DISCOVERY = register("music.sting_discovery");
 	public static final SoundEvent MUSIC_STING_QUEST = register("music.sting_quest");
@@ -218,6 +229,24 @@ public final class Sounds {
 			case 9 -> RITE_OPEN_W9;
 			case 10 -> RITE_OPEN_W10;
 			default -> WORLD_BLOCK_FORM;
+		};
+	}
+
+	/** The fight theme of a world's boss (0 to 10); the shared boss theme for anything else. */
+	public static SoundEvent bossMusic(int world) {
+		return switch (world) {
+			case 0 -> MUSIC_BOSS_W0;
+			case 1 -> MUSIC_BOSS_W1;
+			case 2 -> MUSIC_BOSS_W2;
+			case 3 -> MUSIC_BOSS_W3;
+			case 4 -> MUSIC_BOSS_W4;
+			case 5 -> MUSIC_BOSS_W5;
+			case 6 -> MUSIC_BOSS_W6;
+			case 7 -> MUSIC_BOSS_W7;
+			case 8 -> MUSIC_BOSS_W8;
+			case 9 -> MUSIC_BOSS_W9;
+			case 10 -> MUSIC_BOSS_W10;
+			default -> MUSIC_BOSS;
 		};
 	}
 
