@@ -2097,6 +2097,8 @@ def build():
     drawers()
     import gui_stations
     gui_stations.build(globals())
+    import tooltips
+    tooltips.build(globals())
     thumb()
     divider()
     vessel()

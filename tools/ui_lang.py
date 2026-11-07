@@ -6,7 +6,6 @@ U = {
  "journal.matriochka.previous": ("Back", "Retour"),
  "journal.matriochka.next": ("Next", "Suite"),
  "journal.matriochka.doll_short": ("Doll of Life", "Poupée de vie"),
- "tooltip.matriochka.soul": ("%s · %s souls", "%s · %s âmes"),
  "tooltip.matriochka.world": ("World %s", "Monde %s"),
  "tooltip.matriochka.class": ("Class: %s (level %s)", "Classe : %s (niveau %s)"),
  "item.matriochka.journal_page.n": ("Journal Page — World %s, page %s", "Page du Journal — monde %s, page %s"),
@@ -68,6 +67,7 @@ U = {
  "message.matriochka.lair.wake": ("%s awakens in its lair.", "%s s'éveille dans son antre."),
  "message.matriochka.lair.quiet": ("The lair is quiet. It stirs again in %s min.", "L'antre est calme. Il s'éveillera de nouveau dans %s min."),
  "message.matriochka.lair.treasure": ("The seal of the treasure alcove breaks open.", "Le sceau de l'alcôve au trésor se brise."),
+ "message.matriochka.lair.sealed": ("The portcullis falls behind you.", "La herse tombe derrière toi."),
  "message.matriochka.lair.rearmed": ("Something stirs again in the lair.", "Quelque chose remue de nouveau dans l'antre."),
  "command.matriochka.lair.rearmed": ("Lair heart re-armed at %s %s %s.", "Cœur d'antre réarmé en %s %s %s."),
  "command.matriochka.lair.none": ("No lair in this parcel.", "Aucun antre dans cette parcelle."),
@@ -240,7 +240,6 @@ U = {
  # Doll of Life rebuilt at the Soul Altar
  "station.matriochka.recharge.tip": ("Rebuilds one Doll of Life layer for %s souls and %s rare resources of %s, in any mix:", "Refait une couche de la Poupée de vie pour %s âmes et %s ressources rares de %s, dans n'importe quel mélange :"),
  "station.matriochka.recharge.have": ("You carry %s of them and %s souls.", "Tu en portes %s et %s âmes."),
- "tooltip.matriochka.holds_souls": ("%s · holds %s souls", "%s · contient %s âmes"),
  "message.matriochka.souls_freed": ("%s souls freed (%s in all).", "%s âmes libérées (%s en tout)."),
  "message.matriochka.altar.soul_item": ("Use it instead: its souls are freed without moving your karma.", "Utilise-le plutôt : ses âmes se libèrent sans toucher à ton karma."),
  "message.matriochka.altar.no_rares": ("A layer also costs %s rare resources of %s.", "Une couche coûte aussi %s ressources rares de %s."),

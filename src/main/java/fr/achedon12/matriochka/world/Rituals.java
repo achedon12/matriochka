@@ -117,6 +117,11 @@ public final class Rituals {
 		if (!level.getEntitiesOfClass(MatrioBoss.class, new net.minecraft.world.phys.AABB(r.altar).inflate(48)).isEmpty()) return;
 		ServerPlayer by = level.getServer().getPlayerList().getPlayer(r.player);
 		if (by != null && by.level() != level) by = null;
-		MatrioBoss.summon(level, r.boss.id(), r.altar.above(2), by);
+		MatrioBoss boss = MatrioBoss.summon(level, r.boss.id(), r.altar.above(2), by);
+		// the parcel's arena closes round the fight (Arenas.seal), and opens again when it ends
+		if (boss != null && level.getBlockState(r.altar).is(fr.achedon12.matriochka.content.ModContent.block("arena_altar"))) {
+			boss.addTag(Arenas.TAG + r.altar.below().asLong());
+			Arenas.seal(level, r.altar.below(), true);
+		}
 	}
 }

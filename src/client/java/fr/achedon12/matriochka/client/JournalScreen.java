@@ -383,7 +383,61 @@ public class JournalScreen extends Screen {
 			pageIndex(g, lx, t, cw);
 			return;
 		}
+		if (TABS[forTab].equals("worlds")) {
+			worldMap(g, lx + cw / 2, t + 112);
+			return;
+		}
 		drawDolls(g, lx + cw / 2, t + 176, forTab == 4 ? forPage : Math.max(0, Math.min(4, highest() + 1)), cw - 4);
+	}
+
+	/**
+	 * The worlds as they nest: eleven dolls one inside the other, the Surface outside and World 10 at the heart. A
+	 * beaten world is painted in its colour, the next one open pulses in its colour, the locked ones are bare wood;
+	 * the world the player stands in is ringed in gold.
+	 */
+	private void worldMap(GuiGraphicsExtractor g, int cx, int cy) {
+		int done = MatrioClient.state.getIntOr("done", 0);
+		int here = minecraft != null && minecraft.level != null ? fr.achedon12.matriochka.world.Worlds.number(minecraft.level) : -1;
+		boolean pulse = (Ui.now() / 450) % 2 == 0;
+		float big = 132;
+		for (int k = 0; k <= 10; k++) {
+			float h = big * (1 - k * 0.083f);
+			// k = 0 is the Surface (beaten = the Guardian, bit 0); k = 1..10 the worlds
+			boolean beaten = k == 0 ? (done & 1) != 0 : (done & (1 << k)) != 0;
+			boolean open = k == 0 || (done & (1 << (k - 1))) != 0;
+			int fill;
+			if (k == 0) fill = 0xFFB3261E;
+			else if (beaten) fill = 0xFF000000 | Ui.worldColor(k);
+			else if (open) fill = pulse ? 0xFF000000 | Ui.worldColor(k) : mixInk(0xFF000000 | Ui.worldColor(k), 0.45f);
+			else fill = 0xFFD8BC8C;
+			// the locked shells are bare wood with a faint edge, so they read as one unpainted doll
+			int rim = k == here || (k == 0 && here == 0) ? Ui.GOLD : open || beaten ? 0xFF3A2416 : 0xFFBC9E70;
+			doll(g, cx, cy, h, rim);
+			doll(g, cx, cy, h - 3, fill);
+		}
+		// the heart of the last doll: a gold seed
+		g.fill(cx - 1, cy + 4, cx + 2, cy + 7, Ui.GOLD);
+	}
+
+	private static int mixInk(int c, float t) {
+		int r = c >> 16 & 255, gg = c >> 8 & 255, b = c & 255;
+		return 0xFF000000 | Math.round(r * (1 - t) + 0x3A * t) << 16 | Math.round(gg * (1 - t) + 0x24 * t) << 8 | Math.round(b * (1 - t) + 0x16 * t);
+	}
+
+	/** One matryoshka silhouette h pixels tall centred on (cx, cy), filled row by row. */
+	private static void doll(GuiGraphicsExtractor g, int cx, int cy, float h, int color) {
+		if (h < 4) return;
+		float headY = cy - h * 0.27f, headR = h * 0.2f, bodyY = cy + h * 0.13f, bodyRx = h * 0.31f, bodyRy = h * 0.37f;
+		int top = Math.round(headY - headR), bottom = Math.round(Math.min(bodyY + bodyRy, cy + h * 0.46f));
+		for (int y = top; y < bottom; y++) {
+			float yy = y + 0.5f, hw = 0;
+			float dh = (yy - headY) / headR;
+			if (Math.abs(dh) < 1) hw = headR * (float) Math.sqrt(1 - dh * dh);
+			float db = (yy - bodyY) / bodyRy;
+			if (Math.abs(db) < 1) hw = Math.max(hw, bodyRx * (float) Math.sqrt(1 - db * db));
+			int w = Math.round(hw);
+			if (w > 0) g.fill(cx - w, y, cx + w, y + 1, color);
+		}
 	}
 
 	// ---------------------------------------------------------------- the Pages tab

@@ -482,14 +482,18 @@ final class PlaythroughTest {
 			ctx.waitTicks(80);
 			String how2 = server.computeOnServer(s -> boss.lair() ? how : offer(s, w, boss));
 			boolean up = awaitBoss(ctx, server, boss.id(), 400);
-			return checks(up, how2);
+			ctx.waitTicks(30);
+			boolean shut = server.computeOnServer(s -> s.getLevel(player(s).level().dimension()).getBlockState(gate(s, w, boss)).is(Blocks.IRON_BARS));
+			return checks(up, how2, shut, "the " + (boss.lair() ? "lair's portcullis" : "arena's arch") + " closes behind the fight");
 		});
 		step(ctx, server, "W" + w + " defeat " + boss.id(), () -> {
 			defeat(ctx, server, boss);
 			ctx.setScreen(() -> null);
 			return server.computeOnServer(s -> {
 				ServerPlayer p = player(s);
+				boolean open = !p.level().getBlockState(gate(s, w, boss)).is(Blocks.IRON_BARS);
 				List<String> out = checks(MatrioData.get(s).defeated(group(p), w), "the group has beaten " + boss.id(),
+					open, "the " + (boss.lair() ? "portcullis" : "arch") + " opens again once it has fallen",
 					PlayerState.of(p).has("boss_" + w), "the player took part (boss_" + w + ")",
 					count(p, boss.core()) >= 1, "the " + boss.core() + " is picked up");
 				String adv = killAdvancement(boss.id());
@@ -660,6 +664,23 @@ final class PlaythroughTest {
 		}
 		tp(p, center.above(2));
 		return "the arena of " + boss.id();
+	}
+
+	/** A block of the bars that close the boss's stage: the lair's portcullis (top row) or the arena's arch. */
+	private static BlockPos gate(MinecraftServer s, int w, Defs.BossDef boss) {
+		ServerPlayer p = player(s);
+		CompoundTag e = MatrioData.get(s).worldEntry(group(p), w);
+		BlockPos center = new BlockPos(e.getIntOr("seuil_x", 0), e.getIntOr("seuil_y", 64), e.getIntOr("seuil_z", 0)).offset(0, 0, Worlds.ARENA_OFFSET);
+		if (boss.lair()) return Lairs.heart(w, center).offset(0, 8, -(Lairs.R - 1));
+		BlockPos altar = null;
+		for (BlockPos q : BlockPos.betweenClosed(center.offset(-20, -12, -20), center.offset(20, 12, 20))) {
+			if (p.level().getBlockState(q).getBlock() instanceof Blocks3.BossAltar) {
+				altar = q.immutable();
+				break;
+			}
+		}
+		BlockPos c = altar == null ? center : altar.below();
+		return c.offset(0, 4, -fr.achedon12.matriochka.world.Arenas.RADIUS - 1);
 	}
 
 	/** At an arena altar: holds the offering and uses the altar, which starts the ritual. */

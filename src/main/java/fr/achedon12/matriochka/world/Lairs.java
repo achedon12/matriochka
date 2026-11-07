@@ -58,6 +58,8 @@ public final class Lairs {
 	private static final String TAG = "matriochka.lair:";
 
 	private static final int ARMED = 0, WAKING = 1, AWAKE = 2, BEATEN = 3;
+	/** The portcullis over the chamber's doorway, where the entrance hall meets the round wall. */
+	private static final int DOOR_Z = -(R - 1), DOOR_W = 4, DOOR_H = 9;
 
 	private Lairs() {}
 
@@ -889,6 +891,7 @@ public final class Lairs {
 			if (now >= until) summon(level, pos, boss, be);
 			return;
 		}
+		portcullis(level, pos, be, world, now);
 		if (Math.floorMod(now + pos.hashCode(), 10) != 0) return;
 		List<ServerPlayer> close = level.getEntitiesOfClass(ServerPlayer.class, new AABB(pos).inflate(WAKE_RADIUS),
 			p -> !p.isSpectator() && p.isAlive() && p.distanceToSqr(Vec3.atCenterOf(pos)) <= WAKE_RADIUS * WAKE_RADIUS);
@@ -914,8 +917,17 @@ public final class Lairs {
 				}
 				if (alive) {
 					be.data().putInt("lost", 0);
+					// nobody left in the chamber (all fallen, or fled): lift the portcullis so they can come back
+					boolean inside = !level.getEntitiesOfClass(ServerPlayer.class, new AABB(pos).inflate(R + 2, 16, R + 2),
+						p -> !p.isSpectator() && p.isAlive()).isEmpty();
+					int was = be.data().getIntOr("empty", 0), empty = inside ? 0 : was + 1;
+					be.data().putInt("empty", empty);
+					if (empty == 40) gate(level, pos, be, false);
+					// back in with the boss still standing: the portcullis comes down again
+					else if (inside && was >= 40) gate(level, pos, be, true);
 					return;
 				}
+				gate(level, pos, be, false);
 				// the boss left without dying (unloaded, removed): re-arm after 30 s without it
 				int lost = be.data().getIntOr("lost", 0) + 1;
 				be.data().putInt("lost", lost);
@@ -997,7 +1009,9 @@ public final class Lairs {
 		b.addTag(TAG + pos.asLong());
 		be.data().putString("boss", b.getUUID().toString());
 		be.data().putInt("lost", 0);
+		be.data().putInt("empty", 0);
 		setState(be, AWAKE, 0);
+		gate(level, pos, be, true);
 	}
 
 	/** Called when a boss dies: if it came from a lair heart, open the alcove and fill its chests. */
@@ -1012,6 +1026,7 @@ public final class Lairs {
 			}
 			if (!(level.getBlockEntity(pos) instanceof DataBlockEntity be)) return;
 			setState(be, BEATEN, level.getGameTime() + REARM_TICKS);
+			gate(level, pos, be, false);
 			int world = Worlds.number(level);
 			openAlcove(level, pos, world);
 			level.playSound(null, pos.offset(0, 2, R), SoundEvents.VAULT_OPEN_SHUTTER, SoundSource.BLOCKS, 2f, 0.6f);
@@ -1021,6 +1036,53 @@ public final class Lairs {
 			}
 			return;
 		}
+	}
+
+	/** Drops (true) or lifts (false) the chamber's portcullis; it moves a row at a time (portcullis()). */
+	private static void gate(ServerLevel level, BlockPos heart, DataBlockEntity be, boolean shut) {
+		if ((be.data().getIntOr("gate_want", 0) == 1) == shut) return;
+		be.data().putInt("gate_want", shut ? 1 : 0);
+		be.setChanged();
+		BlockPos door = heart.offset(0, 4, DOOR_Z);
+		level.playSound(null, door, shut ? SoundEvents.IRON_DOOR_CLOSE : SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS, 2f, 0.5f);
+		level.playSound(null, door, SoundEvents.CHAIN_PLACE, SoundSource.BLOCKS, 2f, 0.6f);
+		if (shut) for (ServerPlayer p : level.getEntitiesOfClass(ServerPlayer.class, new AABB(heart).inflate(48)))
+			p.sendOverlayMessage(Component.translatable("message.matriochka.lair.sealed").withStyle(ChatFormatting.DARK_RED));
+	}
+
+	/**
+	 * The portcullis moving toward where it is wanted: every other tick, one row of bars comes down from the top,
+	 * or the lowest goes back up. A row never comes down on anyone standing in the doorway; it waits for them.
+	 */
+	private static void portcullis(ServerLevel level, BlockPos heart, DataBlockEntity be, int world, long now) {
+		int want = be.data().getIntOr("gate_want", 0) * DOOR_H, rows = be.data().getIntOr("gate_rows", 0);
+		if (rows == want || now % 2 != 0) return;
+		boolean water = world == Ocean.WORLD;
+		BlockState bars = Blocks.IRON_BARS.defaultBlockState();
+		if (water) bars = bars.setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED, true);
+		BlockState open = water ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
+		if (rows < want) {
+			int y = DOOR_H - 1 - rows;
+			AABB row = new AABB(Vec3.atLowerCornerOf(heart.offset(-DOOR_W, y, DOOR_Z)), Vec3.atLowerCornerOf(heart.offset(DOOR_W + 1, y + 1, DOOR_Z + 1)));
+			if (!level.getEntitiesOfClass(net.minecraft.world.entity.LivingEntity.class, row).isEmpty()) return;
+			for (int x = -DOOR_W; x <= DOOR_W; x++) {
+				BlockPos p = heart.offset(x, y, DOOR_Z);
+				BlockState was = level.getBlockState(p);
+				if (was.isAir() || was.is(Blocks.WATER)) level.setBlock(p, bars, 3);
+			}
+			rows++;
+			if (rows == DOOR_H) level.playSound(null, heart.offset(0, 0, DOOR_Z), SoundEvents.ANVIL_LAND, SoundSource.BLOCKS, 1.4f, 0.5f);
+		} else {
+			int y = DOOR_H - rows;
+			for (int x = -DOOR_W; x <= DOOR_W; x++) {
+				BlockPos p = heart.offset(x, y, DOOR_Z);
+				if (level.getBlockState(p).is(Blocks.IRON_BARS)) level.setBlock(p, open, 3);
+			}
+			rows--;
+		}
+		if (rows % 3 == 0) level.playSound(null, heart.offset(0, 4, DOOR_Z), SoundEvents.CHAIN_STEP, SoundSource.BLOCKS, 1.6f, 0.7f);
+		be.data().putInt("gate_rows", rows);
+		be.setChanged();
 	}
 
 	/** Re-arms the heart of a lair now (testing command). */

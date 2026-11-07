@@ -428,6 +428,21 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	// ---------------------------------------------------------------- the attack state machine
 	@Override
 	protected void customServerAiStep(ServerLevel level) {
+		// the parcel's arena burns round the fight
+		if (tickCount % 10 == 0) {
+			BlockPos arena = fr.achedon12.matriochka.world.Arenas.centerOf(this);
+			if (arena != null) {
+				fr.achedon12.matriochka.world.Arenas.ward(level, arena, def.world(), level.getGameTime());
+				// nobody left in the arena (all fallen, or fled): the arch opens so they can come back, and closes
+				// again behind the first one back in
+				boolean inside = !level.getEntitiesOfClass(ServerPlayer.class, new net.minecraft.world.phys.AABB(arena).inflate(fr.achedon12.matriochka.world.Arenas.RADIUS, 12, fr.achedon12.matriochka.world.Arenas.RADIUS),
+					p -> !p.isSpectator() && p.isAlive()).isEmpty();
+				int was = arenaEmpty;
+				arenaEmpty = inside ? 0 : arenaEmpty + 1;
+				if (arenaEmpty == 40) fr.achedon12.matriochka.world.Arenas.seal(level, arena, false);
+				else if (inside && was >= 40) fr.achedon12.matriochka.world.Arenas.seal(level, arena, true);
+			}
+		}
 		super.customServerAiStep(level);
 		bar.setProgress(getHealth() / getMaxHealth());
 		if (tickCount % 10 == 0) feats.watch(this, level);
@@ -903,35 +918,61 @@ public class MatrioBoss extends Monster implements GeoEntity {
 			// the Unfinished has fallen: karma decides between sealing it and absorbing it
 			if (w == 10) fr.achedon12.matriochka.world.Endings.afterUnfinished(p);
 		}
-		// its relics fall once it has folded back into its doll (tickDeath)
+		// its relics fall once it has folded back into its doll (tickDeath), where it fell
 		relicsPending = true;
+		relicsAt = position();
 		fr.achedon12.matriochka.world.Lairs.onBossDeath(level, this);
 		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, getX(), getY() + 2, getZ(), 40, 1.5, 2, 1.5, 0.3);
 		level.playSound(null, blockPosition(), fr.achedon12.matriochka.content.Sounds.BOSS_DEFEAT, SoundSource.HOSTILE, 2f, 1f);
 		data.changed();
 	}
 
+	/** Half-seconds without a player in its arena (see customServerAiStep). */
+	private int arenaEmpty;
+
 	/** The relics of a story boss, held back until it has folded into its doll. */
 	private boolean relicsPending;
+	/** Where it fell: a flying boss drifts while it folds, its relics must not drift with it. */
+	private Vec3 relicsAt;
+
+	/**
+	 * One relic, laid where the boss fell and still; over the void (a flying boss above a sky island's edge), at the
+	 * feet of the nearest fighter instead.
+	 */
+	private void relic(ServerLevel level, ItemStack stack, List<ServerPlayer> present) {
+		Vec3 at = relicsAt != null ? relicsAt : position();
+		BlockPos below = BlockPos.containing(at);
+		boolean ground = false;
+		for (int k = 0; k < 40 && !ground; k++) ground = !level.getBlockState(below.below(k)).getCollisionShape(level, below.below(k)).isEmpty() || !level.getFluidState(below.below(k)).isEmpty();
+		if (!ground && !present.isEmpty()) {
+			Vec3 fell = at;
+			ServerPlayer near = present.stream().min(java.util.Comparator.comparingDouble(pl -> pl.position().distanceToSqr(fell))).orElseThrow();
+			at = near.position();
+		}
+		net.minecraft.world.entity.item.ItemEntity item = new net.minecraft.world.entity.item.ItemEntity(level, at.x, at.y + 0.5, at.z, stack);
+		item.setDeltaMovement(Vec3.ZERO);
+		item.setDefaultPickUpDelay();
+		level.addFreshEntity(item);
+	}
 
 	/** The core, the mutated scales and the keys, dropped from a column of light where the doll closed. */
 	private void dropRelics(ServerLevel level) {
 		relicsPending = false;
 		int w = def.world();
 		List<ServerPlayer> present = level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(64));
-		spawnAtLocation(level, new ItemStack(ModContent.item(def.core())));
+		relic(level, new ItemStack(ModContent.item(def.core())), present);
 		// a mutated boss sheds a bonus
 		if (!mutation.isEmpty()) {
-			spawnAtLocation(level, new ItemStack(ModContent.item("mutated_scale"), 1 + random.nextInt(2)));
-			spawnAtLocation(level, new ItemStack(ModContent.item("shell_shard"), 2));
+			relic(level, new ItemStack(ModContent.item("mutated_scale"), 1 + random.nextInt(2)), present);
+			relic(level, new ItemStack(ModContent.item("shell_shard"), 2), present);
 			for (ServerPlayer p : present) p.sendSystemMessage(Component.translatable("message.matriochka.mutation.bonus").withStyle(ChatFormatting.LIGHT_PURPLE));
 		}
 		if (w == 0) {
-			spawnAtLocation(level, new ItemStack(ModContent.item("matrix_workbench")));
-			spawnAtLocation(level, new ItemStack(ModContent.item("world_soil_0"), 4));
+			relic(level, new ItemStack(ModContent.item("matrix_workbench")), present);
+			relic(level, new ItemStack(ModContent.item("world_soil_0"), 4), present);
 		} else if (w == 9) {
 			// only World 1 grows from soil now (world/Rites.java): the other bosses leave no World Soil
-			spawnAtLocation(level, new ItemStack(ModContent.item("last_doll_key")));
+			relic(level, new ItemStack(ModContent.item("last_doll_key")), present);
 		}
 		double cy = getY() + getBbHeight() * 0.5;
 		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, getX(), cy, getZ(), 90, 0.6, 0.6, 0.6, 0.45);
@@ -962,6 +1003,12 @@ public class MatrioBoss extends Monster implements GeoEntity {
 	@Override
 	public void remove(Entity.RemovalReason reason) {
 		if (relicsPending && level() instanceof ServerLevel sl) dropRelics(sl);
+		// the fight is over (fallen, or gone): the arena's arch opens again
+		if (!reason.equals(Entity.RemovalReason.UNLOADED_TO_CHUNK) && !reason.equals(Entity.RemovalReason.UNLOADED_WITH_PLAYER)
+			&& level() instanceof ServerLevel sl2) {
+			BlockPos arena = fr.achedon12.matriochka.world.Arenas.centerOf(this);
+			if (arena != null) fr.achedon12.matriochka.world.Arenas.seal(sl2, arena, false);
+		}
 		super.remove(reason);
 	}
 

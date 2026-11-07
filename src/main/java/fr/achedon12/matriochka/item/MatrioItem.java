@@ -45,28 +45,21 @@ public class MatrioItem extends Item {
 		appendInfo(def, stack, out);
 	}
 
+	/** Its world, rarity and souls, as icons under its name (client/ItemTipClient). */
+	@Override
+	public java.util.Optional<net.minecraft.world.inventory.tooltip.TooltipComponent> getTooltipImage(ItemStack stack) {
+		boolean holds = "soul".equals(def.kind());
+		int souls = holds ? SoulVessels.souls(stack) : "core".equals(def.kind()) ? 0 : Defs.soulValue(def.rarity());
+		return java.util.Optional.of(new ItemTip(def.world(), def.rarity(), souls, holds));
+	}
+
 	public static void appendInfo(Defs.ItemDef def, ItemStack stack, Consumer<Component> out) {
 		String key = "item.matriochka." + def.id() + ".desc";
 		if (net.minecraft.locale.Language.getInstance().has(key)) {
 			out.accept(Component.translatable(key).withStyle(ChatFormatting.GRAY));
 		}
-		int soul = Defs.soulValue(def.rarity());
-		ChatFormatting color = switch (def.rarity()) {
-			case "rare" -> ChatFormatting.AQUA;
-			case "epic" -> ChatFormatting.LIGHT_PURPLE;
-			case "legendary" -> ChatFormatting.GOLD;
-			default -> ChatFormatting.WHITE;
-		};
-		Component rarity = Component.translatable("rarity.matriochka." + def.rarity()).withStyle(color);
-		if ("soul".equals(def.kind())) {
-			out.accept(Component.translatable("tooltip.matriochka.holds_souls", rarity, SoulVessels.souls(stack)).withStyle(ChatFormatting.DARK_GRAY));
-		} else if (soul > 0 && !"core".equals(def.kind())) {
-			out.accept(Component.translatable("tooltip.matriochka.soul", rarity, soul).withStyle(ChatFormatting.DARK_GRAY));
-		} else {
-			out.accept(rarity);
-		}
+		// its world, rarity and souls are drawn as icons under the name (getTooltipImage)
 		fr.achedon12.matriochka.rules.Snorkel.appendTooltip(stack, out);
-		if (def.world() > 0) out.accept(Component.translatable("tooltip.matriochka.world", def.world()).withStyle(ChatFormatting.DARK_GRAY));
 		if (def.id().equals("drill")) Drill.appendTooltip(stack, out);
 		GearClasses.appendTooltip(stack, out);
 	}

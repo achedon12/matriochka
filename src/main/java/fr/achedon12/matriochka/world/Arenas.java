@@ -97,6 +97,53 @@ public final class Arenas {
 		for (int dx : new int[]{-2, 2}) level.setBlock(center.offset(dx, 8, az), lantern.setValue(LanternBlock.HANGING, true), 2);
 	}
 
+	/** The tag of a boss fought in a parcel's arena, followed by the arena centre (BlockPos.asLong). */
+	public static final String TAG = "matriochka.arena:";
+
+	/** The arena centre a boss is fought round, or null. */
+	public static BlockPos centerOf(net.minecraft.world.entity.Entity boss) {
+		for (String t : boss.entityTags()) {
+			if (!t.startsWith(TAG)) continue;
+			try {
+				return BlockPos.of(Long.parseLong(t.substring(TAG.length())));
+			} catch (NumberFormatException e) {
+				return null;
+			}
+		}
+		return null;
+	}
+
+	/** Bars down across the entrance arch while the boss stands (shut), lifted again when it is gone. */
+	public static void seal(ServerLevel level, BlockPos center, boolean shut) {
+		boolean water = Worlds.number(level) == 7;
+		BlockState bars = Blocks.IRON_BARS.defaultBlockState();
+		if (water) bars = bars.setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED, true);
+		BlockState open = water && center.getY() < Ocean.SEA_LEVEL ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
+		int az = -RADIUS - 1;
+		for (int dx = -2; dx <= 2; dx++)
+			for (int dy = 0; dy <= 7; dy++) {
+				BlockPos p = center.offset(dx, dy, az);
+				BlockState was = level.getBlockState(p);
+				if (shut && (was.isAir() || was.is(Blocks.WATER))) level.setBlock(p, bars, 3);
+				else if (!shut && was.is(Blocks.IRON_BARS)) level.setBlock(p, open, 3);
+			}
+		BlockPos arch = center.offset(0, 4, az);
+		level.playSound(null, arch, shut ? net.minecraft.sounds.SoundEvents.IRON_DOOR_CLOSE : net.minecraft.sounds.SoundEvents.IRON_DOOR_OPEN, net.minecraft.sounds.SoundSource.BLOCKS, 2f, 0.5f);
+		level.playSound(null, arch, net.minecraft.sounds.SoundEvents.CHAIN_PLACE, net.minecraft.sounds.SoundSource.BLOCKS, 2f, 0.6f);
+	}
+
+	/** While its boss stands, the arena's rim burns with a ring of its world's light. */
+	public static void ward(ServerLevel level, BlockPos center, int world, long now) {
+		int n = 48;
+		var dust = new net.minecraft.core.particles.DustParticleOptions(fr.achedon12.matriochka.content.Content.WORLDS.get(Math.max(1, world) - 1).accent(), 1.6f);
+		for (int i = 0; i < n; i++) {
+			double a = (i + now * 0.05) * Math.PI * 2 / n;
+			double x = center.getX() + 0.5 + Math.cos(a) * (RADIUS + 0.5), z = center.getZ() + 0.5 + Math.sin(a) * (RADIUS + 0.5);
+			level.sendParticles(dust, x, center.getY() + 0.4 + (i % 3) * 0.5, z, 1, 0.05, 0.25, 0.05, 0);
+			if (i % 6 == 0) level.sendParticles(net.minecraft.core.particles.ParticleTypes.SOUL_FIRE_FLAME, x, center.getY() + 1.6, z, 0, 0, 0.05, 0, 1);
+		}
+	}
+
 	private static boolean spoke(double a, double d) {
 		for (int k = 0; k < 8; k++) if (Math.abs(Math.sin(a - k * Math.PI / 4)) * d < 0.6 && Math.cos(a - k * Math.PI / 4) > 0) return true;
 		return false;

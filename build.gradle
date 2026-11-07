@@ -92,6 +92,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('awaken')) {
 				vmArgs '-Dmatriochka.capture=awaken', '-Dmatriochka.bosses=' + (project.findProperty('bosses') ?: '')
 			}
+			if (name == 'clientGameTest' && project.hasProperty('polish')) {
+				vmArgs '-Dmatriochka.capture=polish'
+			}
 			if (name == 'clientGameTest' && project.hasProperty('transition')) {
 				vmArgs '-Dmatriochka.capture=transition'
 			}

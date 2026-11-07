@@ -192,6 +192,7 @@ public final class Events {
 			if (source.getEntity() instanceof ServerPlayer p) {
 				float steal = GearClasses.lifeSteal(p);
 				if (steal > 0) p.heal(taken * steal);
+				if (source.getDirectEntity() == p && taken > 0) impact(p, entity, taken);
 			}
 		});
 
@@ -318,5 +319,49 @@ public final class Events {
 			ps.progress("enter", "world_10", 1);
 		}
 		if (Player.class.isInstance(p)) ps.sync();
+	}
+
+	/**
+	 * The weight of the player's own blows: a heavy hit or a critical one jolts the attacker's camera a little (scaled
+	 * by the comfort slider), a weapon of the worlds sprays its world's matter where it lands, and a heavy blow rings
+	 * with its world's sound.
+	 */
+	private static void impact(ServerPlayer p, net.minecraft.world.entity.LivingEntity target, float taken) {
+		if (!(p.level() instanceof ServerLevel level)) return;
+		boolean crit = p.fallDistance > 0 && !p.onGround() && !p.onClimbable() && !p.isInWater() && !p.isPassenger();
+		boolean heavy = crit || taken >= 7;
+		if (heavy) fr.achedon12.matriochka.net.Cues.shake(p, Math.min(0.45f, 0.15f + taken / 40f), crit ? 5 : 4);
+		ItemStack held = p.getMainHandItem();
+		fr.achedon12.matriochka.content.Defs.ItemDef def = ModContent.def(ModContent.idOf(held.getItem()));
+		if (def == null || def.world() < 1 || def.world() > 10 || !(def.kind().equals("weapon") || def.kind().equals("tool"))) return;
+		int w = def.world();
+		var at = target.position().add(0, target.getBbHeight() * 0.6, 0);
+		net.minecraft.core.particles.SimpleParticleType matter = switch (w) {
+			case 1 -> fr.achedon12.matriochka.content.Particles.SPORE;
+			case 2 -> fr.achedon12.matriochka.content.Particles.EMBER;
+			case 3 -> fr.achedon12.matriochka.content.Particles.COLD_DUST;
+			case 4 -> fr.achedon12.matriochka.content.Particles.STORM_SPARK;
+			case 5 -> fr.achedon12.matriochka.content.Particles.SHADOW_WISP;
+			case 6 -> fr.achedon12.matriochka.content.Particles.MIRROR_SHARD;
+			case 7 -> fr.achedon12.matriochka.content.Particles.BUBBLE;
+			case 8 -> fr.achedon12.matriochka.content.Particles.PETAL;
+			case 9 -> fr.achedon12.matriochka.content.Particles.GRIT;
+			default -> fr.achedon12.matriochka.content.Particles.THREAD_SCRAP;
+		};
+		level.sendParticles(matter, at.x, at.y, at.z, heavy ? 14 : 6, 0.3, 0.35, 0.3, heavy ? 0.12 : 0.05);
+		if (!heavy) return;
+		net.minecraft.sounds.SoundEvent ring = switch (w) {
+			case 1 -> SoundEvents.SLIME_ATTACK;
+			case 2 -> SoundEvents.FIRECHARGE_USE;
+			case 3 -> SoundEvents.CHAIN_BREAK;
+			case 4 -> SoundEvents.TRIDENT_HIT;
+			case 5 -> SoundEvents.SCULK_CLICKING;
+			case 6 -> SoundEvents.AMETHYST_BLOCK_HIT;
+			case 7 -> SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE;
+			case 8 -> SoundEvents.AZALEA_LEAVES_BREAK;
+			case 9 -> SoundEvents.DEEPSLATE_BREAK;
+			default -> SoundEvents.WOOL_BREAK;
+		};
+		level.playSound(null, target.blockPosition(), ring, SoundSource.PLAYERS, 0.7f, 0.9f + p.getRandom().nextFloat() * 0.3f);
 	}
 }

@@ -44,6 +44,8 @@ public class MatrioClient implements ClientModInitializer {
 		HudElementRegistry.addLast(Matriochka.id("first_steps"), new TutorialCard());
 		fr.achedon12.matriochka.compat.MapCompatClient.init();
 		ClientPlayNetworking.registerGlobalReceiver(Net.StatePayload.TYPE, (p, ctx) -> state = p.tag());
+		// the strip of icons under a Matriochka item's name
+		net.fabricmc.fabric.api.client.rendering.v1.ClientTooltipComponentCallback.EVENT.register(data -> data instanceof fr.achedon12.matriochka.item.ItemTip t ? new ItemTipClient(t) : null);
 		// class and armor layers on gear from outside the mod (Matriochka items write their own tooltip)
 		net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback.EVENT.register((stack, ctx, flag, lines) -> {
 			if (!(stack.getItem() instanceof fr.achedon12.matriochka.item.MatrioItem)) fr.achedon12.matriochka.gear.GearClasses.appendTooltip(stack, lines::add);

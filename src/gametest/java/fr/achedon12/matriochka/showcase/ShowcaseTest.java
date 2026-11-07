@@ -260,6 +260,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 			AwakenTest.run(ctx);
 			return;
 		}
+		if ("polish".equals(System.getProperty("matriochka.capture"))) {
+			PolishTest.run(ctx);
+			return;
+		}
 		if ("transition".equals(System.getProperty("matriochka.capture"))) {
 			TransitionTest.run(ctx);
 			return;
