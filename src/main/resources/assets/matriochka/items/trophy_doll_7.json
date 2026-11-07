@@ -1,6 +1,21 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "matriochka:item/trophy_doll_7"
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "gui"
+        ],
+        "model": {
+          "type": "minecraft:model",
+          "model": "matriochka:item/trophy_doll_7"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "matriochka:item/trophy_doll_7_3d"
+    }
   }
 }
