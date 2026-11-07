@@ -54,6 +54,7 @@ public class MatrioClient implements ClientModInitializer {
 		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(mc -> {
 			MusicThemes.tick(mc);
 			Cinematics.tick(mc);
+			Hints.tick(mc);
 		});
 		net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.DISCONNECT.register((h, mc) -> Cinematics.reset());
 		// the mod's peoples trade at their own stall (the mixin on MenuScreens opens it)

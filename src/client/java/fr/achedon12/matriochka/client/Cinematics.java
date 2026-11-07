@@ -262,7 +262,7 @@ public final class Cinematics implements HudElement {
 				openAt = -2;
 			}
 		}
-		if (openAt == -2 && mc.gui.screen() == null) {
+		if (openAt == -2 && fr.achedon12.matriochka.client.mc.McClient.screen(mc) == null) {
 			openAt = Ui.now();
 			diveAt = -1;
 		}
@@ -271,7 +271,7 @@ public final class Cinematics implements HudElement {
 			diveAt = -1;
 			openAt = Ui.now();
 		}
-		if (pendingWorld > 0 && mc.gui.screen() == null) startWorldCard(pendingWorld);
+		if (pendingWorld > 0 && fr.achedon12.matriochka.client.mc.McClient.screen(mc) == null) startWorldCard(pendingWorld);
 		boolean intro = introPlaying() && Ui.now() - introAt <= 1800;
 		boolean defeat = defeatPlaying() && Ui.now() - defeatAt <= 1600;
 		if (!intro && !defeat) return;
@@ -305,10 +305,36 @@ public final class Cinematics implements HudElement {
 		else if (openAt >= 0 && now - openAt < OPEN_MS) iris(g, w, h, Ui.easeOut(Ui.since(openAt, OPEN_MS)), openWorld);
 	}
 
+	// ---------------------------------------------------------------- the doll iris
+	/** Rows of the doll's pixel silhouette, top to bottom. */
+	private static final int DOLL_ROWS = 40, WAIST = 15;
+	/** Half the doll's width on each row, in its pixels: a turned matryoshka (head, pinched neck, full belly, flat base). */
+	private static final float[] DOLL = doll();
+
+	private static float[] doll() {
+		float[] hw = new float[DOLL_ROWS];
+		for (int y = 0; y < DOLL_ROWS; y++) {
+			float row = y + 0.5f, half = 0;
+			// the head: a round narrower than the belly
+			float dh = (row - 7.5f) / 7.6f;
+			if (Math.abs(dh) < 1) half = 6.3f * (float) Math.sqrt(1 - dh * dh);
+			// the body: from the neck it swells to the belly, then draws in a little to its flat foot
+			if (row >= 13) {
+				float t = Math.min(1, (row - 13) / 24f);
+				float body = 6.2f + 5.4f * (float) Math.sin(Math.PI * 0.78 * t);
+				if (row >= 37) body = Math.min(body, 9.6f);
+				half = Math.max(half, body);
+			}
+			hw[y] = Math.round(half);
+		}
+		return hw;
+	}
+
 	/**
-	 * The doll-shaped iris of a dive: black everywhere but a matryoshka silhouette in the middle of the screen, with a
-	 * gilt rim in the world's colour. open = 1 shows the whole screen, 0 closes it. Without cinematics (comfort), a
-	 * plain fade instead.
+	 * The doll-shaped iris of a dive: black everywhere but a matryoshka in the middle of the screen, drawn on its own
+	 * pixel grid like a Minecraft sprite, framed by a gilt rim in the world's colour, a band of red lacquer dotted
+	 * with gold, and the gold seam where a matryoshka opens. open = 1 shows the whole screen, 0 closes it. Without
+	 * cinematics (comfort), a plain fade instead.
 	 */
 	private static void iris(GuiGraphicsExtractor g, int w, int h, float open, int world) {
 		open = Ui.clamp01(open);
@@ -316,58 +342,107 @@ public final class Cinematics implements HudElement {
 			g.fill(0, 0, w, h, Ui.alpha(0xFF000000, 1 - open));
 			return;
 		}
-		// the doll's size: large enough at 1 to clear the corners, none at 0
-		float r = open * (float) Math.hypot(w, h) * 0.9f;
-		float cx = w / 2f, cy = h / 2f;
-		float headR = r * 0.42f, headY = cy - r * 0.48f;
-		float bodyRx = r * 0.62f, bodyRy = r * 0.74f, bodyY = cy + r * 0.22f;
-		int rim = Ui.worldColor(world);
-		for (int y = 0; y < h; y++) {
-			float py = y + 0.5f;
-			float half = -1;
-			float dh = (py - headY) / headR;
-			if (Math.abs(dh) < 1) half = Math.max(half, headR * (float) Math.sqrt(1 - dh * dh));
-			float db = (py - bodyY) / bodyRy;
-			if (Math.abs(db) < 1) half = Math.max(half, bodyRx * (float) Math.sqrt(1 - db * db));
-			if (half <= 0) {
-				g.fill(0, y, w, y + 1, 0xFF000000);
-				continue;
+		// large enough at 1 for the doll's head and belly to clear the screen
+		float height = open * Math.max(h * 2.4f, w * 2.1f);
+		if (height < 2) {
+			g.fill(0, 0, w, h, 0xFF000000);
+			return;
+		}
+		float unit = height / DOLL_ROWS;
+		float cx = w / 2f, top = h / 2f - height * 0.47f;
+		int gilt = 0xFF000000 | mixRgb(0xE8B850, Ui.worldColor(world), 0.3f);
+		int lacquer = 0xFF8A1A12, night = 0xFF050302;
+		int band = Math.max(1, Math.round(unit * 1.3f)), rim = Math.max(1, Math.round(unit * 0.45f)), edge = Math.max(1, Math.round(unit * 0.25f));
+		int lastBottom = 0;
+		for (int r = 0; r < DOLL_ROWS; r++) {
+			int y0 = Math.round(top + r * unit), y1 = Math.round(top + (r + 1) * unit);
+			if (y1 <= 0 || y0 >= h || y1 <= y0) continue;
+			y0 = Math.max(0, y0);
+			y1 = Math.min(h, y1);
+			if (r == 0 || lastBottom < y0) g.fill(0, lastBottom, w, y0, night);
+			lastBottom = y1;
+			int half = Math.round(DOLL[r] * unit);
+			int x0 = Math.round(cx) - half, x1 = Math.round(cx) + half;
+			// the dark round the doll
+			if (x0 - rim - band - edge > 0) g.fill(0, y0, x0 - rim - band - edge, y1, night);
+			if (x1 + rim + band + edge < w) g.fill(x1 + rim + band + edge, y0, w, y1, night);
+			// a thin gold line outside the lacquer frames it
+			g.fill(x0 - rim - band - edge, y0, x0 - rim - band, y1, gilt);
+			g.fill(x1 + rim + band, y0, x1 + rim + band + edge, y1, gilt);
+			// the lacquer band, a gold dot every fourth row of the doll
+			int lac = r % 4 == 1 ? gilt : lacquer;
+			g.fill(x0 - rim - band, y0, x0 - rim, y1, lac);
+			g.fill(x1 + rim, y0, x1 + rim + band, y1, lac);
+			// the gilt rim against the world inside
+			g.fill(x0 - rim, y0, x0, y1, gilt);
+			g.fill(x1, y0, x1 + rim, y1, gilt);
+			// where the step from the row above is wider, the rim closes the step so the outline stays whole
+			if (r > 0 && DOLL[r] != DOLL[r - 1]) {
+				int prev = Math.round(DOLL[r - 1] * unit);
+				int a = Math.min(half, prev), b = Math.max(half, prev);
+				g.fill(Math.round(cx) - b - rim, y0, Math.round(cx) - a, Math.min(y1, y0 + rim), gilt);
+				g.fill(Math.round(cx) + a, y0, Math.round(cx) + b + rim, Math.min(y1, y0 + rim), gilt);
 			}
-			int x0 = Math.max(0, Math.round(cx - half)), x1 = Math.min(w, Math.round(cx + half));
-			if (x0 > 0) g.fill(0, y, x0, y + 1, 0xFF000000);
-			if (x1 < w) g.fill(x1, y, w, y + 1, 0xFF000000);
-			// the gilt edge of the doll, in its world's colour
-			if (x0 > 0) g.fill(Math.max(0, x0 - 2), y, x0, y + 1, Ui.alpha(rim, 0.85f));
-			if (x1 < w) g.fill(x1, y, Math.min(w, x1 + 2), y + 1, Ui.alpha(rim, 0.85f));
+			// the seam at the waist, where the doll opens
+			if (r == WAIST) g.fill(x0, y0, x1, Math.min(y1, y0 + Math.max(1, rim / 2)), Ui.alpha(gilt, 0.7f));
+		}
+		// the crown of the head and the foot close the outline
+		int headTop = Math.round(top), foot = Math.round(top + height);
+		if (headTop > 0) {
+			int half = Math.round(DOLL[0] * unit);
+			g.fill(Math.round(cx) - half, Math.max(0, headTop - rim), Math.round(cx) + half, headTop, gilt);
+			g.fill(Math.round(cx) - half, Math.max(0, headTop - rim - band), Math.round(cx) + half, Math.max(0, headTop - rim), lacquer);
+		}
+		if (foot < h) {
+			int half = Math.round(DOLL[DOLL_ROWS - 1] * unit);
+			g.fill(0, foot, w, h, night);
+			g.fill(Math.round(cx) - half - rim, foot, Math.round(cx) + half + rim, Math.min(h, foot + rim), gilt);
+			g.fill(Math.round(cx) - half - rim - band, Math.min(h, foot + rim), Math.round(cx) + half + rim + band, Math.min(h, foot + rim + band), lacquer);
+		}
+		if (headTop > 0) g.fill(0, 0, w, Math.max(0, headTop - rim - band), night);
+		if (headTop > 0) {
+			int half = Math.round(DOLL[0] * unit);
+			g.fill(0, Math.max(0, headTop - rim - band), Math.round(cx) - half, headTop, night);
+			g.fill(Math.round(cx) + half, Math.max(0, headTop - rim - band), w, headTop, night);
 		}
 	}
 
+	private static int mixRgb(int a, int b, float t) {
+		int r = Math.round(((a >> 16) & 255) * (1 - t) + ((b >> 16) & 255) * t);
+		int gg = Math.round(((a >> 8) & 255) * (1 - t) + ((b >> 8) & 255) * t);
+		int bb = Math.round((a & 255) * (1 - t) + (b & 255) * t);
+		return (r << 16) | (gg << 8) | bb;
+	}
+
 	/**
-	 * Over the loading screen of a dive: the screen stays black, as the iris left it, and the doll's outline glows
-	 * faintly in the middle in the colour of the world being entered, breathing until the world is ready. True when
-	 * it drew (a normal world load keeps vanilla's screen).
+	 * Over the loading screen of a dive: the screen stays black, as the iris left it, and the same pixel doll glows
+	 * small in the middle, its gilt outline in the colour of the world being entered, breathing until the world is
+	 * ready. True when it drew (a normal world load keeps vanilla's screen).
 	 */
 	public static boolean loadingVeil(GuiGraphicsExtractor g, int w, int h) {
 		if (!(diveAt >= 0 || openAt == -2) || !Comfort.cinematics()) return false;
 		int world = diveDown ? diveWorld : 0;
-		g.fill(0, 0, w, h, 0xFF000000);
+		g.fill(0, 0, w, h, 0xFF050302);
 		float breath = 0.5f + 0.5f * (float) Math.sin(Ui.now() / 380.0);
-		float r = Math.min(w, h) * 0.16f;
-		float cx = w / 2f, cy = h / 2f;
-		float headR = r * 0.42f, headY = cy - r * 0.48f, bodyRx = r * 0.62f, bodyRy = r * 0.74f, bodyY = cy + r * 0.22f;
-		int rim = 0xFF000000 | Ui.worldColor(world);
-		for (int y = Math.round(headY - headR); y < Math.round(bodyY + bodyRy); y++) {
-			float py = y + 0.5f, half = -1;
-			float dh = (py - headY) / headR;
-			if (Math.abs(dh) < 1) half = Math.max(half, headR * (float) Math.sqrt(1 - dh * dh));
-			float db = (py - bodyY) / bodyRy;
-			if (Math.abs(db) < 1) half = Math.max(half, bodyRx * (float) Math.sqrt(1 - db * db));
-			if (half <= 0) continue;
-			int x0 = Math.round(cx - half), x1 = Math.round(cx + half);
-			g.fill(x0, y, x1, y + 1, Ui.alpha(rim, 0.08f + 0.06f * breath));
-			g.fill(x0 - 1, y, x0 + 1, y + 1, Ui.alpha(rim, 0.55f + 0.35f * breath));
-			g.fill(x1 - 1, y, x1 + 1, y + 1, Ui.alpha(rim, 0.55f + 0.35f * breath));
+		int unit = Math.max(1, Math.round(Math.min(w, h) * 0.32f / DOLL_ROWS));
+		int cx = w / 2, top = h / 2 - DOLL_ROWS * unit / 2;
+		int gilt = 0xFF000000 | mixRgb(0xE0B050, Ui.worldColor(world), 0.45f);
+		for (int r = 0; r < DOLL_ROWS; r++) {
+			int y0 = top + r * unit, half = Math.round(DOLL[r]) * unit;
+			// the lacquer inside, faint, and the gilt outline, breathing
+			g.fill(cx - half, y0, cx + half, y0 + unit, Ui.alpha(0xFF8A1A12, 0.18f + 0.1f * breath));
+			g.fill(cx - half - unit, y0, cx - half, y0 + unit, Ui.alpha(gilt, 0.55f + 0.4f * breath));
+			g.fill(cx + half, y0, cx + half + unit, y0 + unit, Ui.alpha(gilt, 0.55f + 0.4f * breath));
+			if (r > 0 && DOLL[r] != DOLL[r - 1]) {
+				int prev = Math.round(DOLL[r - 1]) * unit, a = Math.min(half, prev), b = Math.max(half, prev);
+				g.fill(cx - b - unit, y0, cx - a, y0 + unit, Ui.alpha(gilt, 0.55f + 0.4f * breath));
+				g.fill(cx + a, y0, cx + b + unit, y0 + unit, Ui.alpha(gilt, 0.55f + 0.4f * breath));
+			}
+			if (r == WAIST) g.fill(cx - half, y0, cx + half, y0 + Math.max(1, unit / 2), Ui.alpha(gilt, 0.45f + 0.3f * breath));
 		}
+		int crown = Math.round(DOLL[0]) * unit, foot = Math.round(DOLL[DOLL_ROWS - 1]) * unit;
+		g.fill(cx - crown, top - unit, cx + crown, top, Ui.alpha(gilt, 0.55f + 0.4f * breath));
+		g.fill(cx - foot - unit, top + DOLL_ROWS * unit, cx + foot + unit, top + (DOLL_ROWS + 1) * unit, Ui.alpha(gilt, 0.55f + 0.4f * breath));
 		return true;
 	}
 

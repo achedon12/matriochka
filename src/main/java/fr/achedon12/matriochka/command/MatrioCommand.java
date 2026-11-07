@@ -263,6 +263,15 @@ public final class MatrioCommand {
 					fr.achedon12.matriochka.world.Cycles.begin(c.getSource().getPlayerOrException());
 					return 1;
 				})))
+			.then(Commands.literal("difficulty")
+				.executes(c -> msg(c.getSource(), "command.matriochka.difficulty.show", fr.achedon12.matriochka.world.Config.difficulty()))
+				.then(Commands.argument("mode", StringArgumentType.word()).requires(op)
+					.suggests((c, b) -> net.minecraft.commands.SharedSuggestionProvider.suggest(fr.achedon12.matriochka.world.Config.DIFFICULTIES, b))
+					.executes(c -> {
+						String m = StringArgumentType.getString(c, "mode");
+						if (!fr.achedon12.matriochka.world.Config.setDifficulty(m)) return msg(c.getSource(), "command.matriochka.difficulty.unknown", m);
+						return msg(c.getSource(), "command.matriochka.difficulty.set", fr.achedon12.matriochka.world.Config.difficulty());
+					})))
 			.then(Commands.literal("debug").requires(op).executes(c -> {
 				ServerPlayer p = c.getSource().getPlayerOrException();
 				PlayerState ps = PlayerState.of(p);

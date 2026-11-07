@@ -52,6 +52,26 @@ public final class Config {
 		}
 	}
 
+	public static final java.util.List<String> DIFFICULTIES = java.util.List.of("story", "normal", "nightmare", "hardcore");
+
+	public static String difficulty() {
+		return mode();
+	}
+
+	/** Sets the difficulty for the whole server and writes it to config/matriochka.json (/matriochka difficulty). */
+	public static boolean setDifficulty(String mode) {
+		String m = mode.toLowerCase(java.util.Locale.ROOT);
+		if (!DIFFICULTIES.contains(m)) return false;
+		values.difficulty = m;
+		try {
+			Path p = FabricLoader.getInstance().getConfigDir().resolve("matriochka.json");
+			Files.writeString(p, new GsonBuilder().setPrettyPrinting().create().toJson(values));
+		} catch (Exception e) {
+			Matriochka.LOG.warn("Could not write config/matriochka.json", e);
+		}
+		return true;
+	}
+
 	public static boolean gates() {
 		return values.progressionGates;
 	}

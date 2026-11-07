@@ -83,7 +83,7 @@ public class JournalScreen extends Screen {
 		if (!scroll) {
 			// the comfort options, at the foot of the left page on every tab
 			buttons.add(l + 24, t + BH - 30, 64, 16, Component.translatable("comfort.matriochka.open"),
-				() -> minecraft.gui.setScreen(new ComfortScreen(this)));
+				() -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new ComfortScreen(this)));
 		}
 		if (guide()) {
 			int[] at = guideAt();
@@ -110,11 +110,11 @@ public class JournalScreen extends Screen {
 		// the Trials open once an ending is seen, from the Objective page, next to the Comfort button (and clear of the
 		// Guide toggle and the New Cycle on the right page)
 		if (!scroll && tab == 0 && JournalPages.endingsSeen() > 0) {
-			buttons.add(l + 94, t + BH - 30, 76, 16, Component.translatable("trials.matriochka.title"), () -> minecraft.gui.setScreen(new TrialsScreen(this)));
+			buttons.add(l + 94, t + BH - 30, 76, 16, Component.translatable("trials.matriochka.title"), () -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new TrialsScreen(this)));
 		}
 		// the recap of the last cycle an ending closed, under the chapter's heading on the left page
 		if (!scroll && tab == 0 && RecapScreen.available()) {
-			buttons.add(l + 20 + (PW - 18) / 2 - 40, t + 46, 80, 16, Component.translatable("journal.matriochka.last_cycle"), () -> minecraft.gui.setScreen(new RecapScreen(this)));
+			buttons.add(l + 20 + (PW - 18) / 2 - 40, t + 46, 80, 16, Component.translatable("journal.matriochka.last_cycle"), () -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new RecapScreen(this)));
 		}
 		if (!scroll && tab == 1) {
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> { questWorld = Math.max(0, questWorld - 1); pageAt = Ui.now(); turnDir = -1; rebuild(); }, () -> questWorld > 0);
@@ -227,6 +227,11 @@ public class JournalScreen extends Screen {
 
 	private static boolean unlocked(int world) {
 		return world == 0 || (MatrioClient.state.getIntOr("done", 0) & (1 << (world - 1))) != 0;
+	}
+
+	/** The objective a player is on: the highest boss beaten (-1 for none), 11 once World 0 is done. */
+	static int stage() {
+		return highest();
 	}
 
 	private static int highest() {
@@ -385,6 +390,12 @@ public class JournalScreen extends Screen {
 		}
 		if (TABS[forTab].equals("worlds")) {
 			worldMap(g, lx + cw / 2, t + 112);
+			return;
+		}
+		// on the objective, after a long time stuck on it, the hints take the dolls' place (client/Hints)
+		if (forTab == 0 && !Hints.lines(highest()).isEmpty()) {
+			int yy = t + 46;
+			for (Component hint : Hints.lines(highest())) yy += Ui.wrap(g, font, hint, lx + 4, yy, cw - 8, Ui.RED_INK) + 8;
 			return;
 		}
 		drawDolls(g, lx + cw / 2, t + 176, forTab == 4 ? forPage : Math.max(0, Math.min(4, highest() + 1)), cw - 4);
@@ -708,7 +719,7 @@ public class JournalScreen extends Screen {
 	}
 
 	/** The name of a variant in a world: calm and wild have their own name in every world (as in world/Variants). */
-	private static String variantKey(String variant, int world) {
+	public static String variantKey(String variant, int world) {
 		if (variant.equals("calm") || variant.equals("wild")) return "variant.matriochka." + world + "." + variant;
 		return "variant.matriochka." + variant;
 	}
