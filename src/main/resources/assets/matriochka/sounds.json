@@ -95,6 +95,177 @@
     ],
     "subtitle": "subtitles.matriochka.seed.pulse"
   },
+  "rite.w2": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/w2_1"
+      },
+      {
+        "name": "matriochka:rite/w2_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.w2"
+  },
+  "rite.open.w2": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/open_w2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.open.w2"
+  },
+  "rite.w3": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/w3_1"
+      },
+      {
+        "name": "matriochka:rite/w3_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.w3"
+  },
+  "rite.open.w3": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/open_w3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.open.w3"
+  },
+  "rite.w4": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/w4_1"
+      },
+      {
+        "name": "matriochka:rite/w4_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.w4"
+  },
+  "rite.open.w4": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/open_w4"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.open.w4"
+  },
+  "rite.w5": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/w5_1"
+      },
+      {
+        "name": "matriochka:rite/w5_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.w5"
+  },
+  "rite.open.w5": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/open_w5"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.open.w5"
+  },
+  "rite.w6": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/w6_1"
+      },
+      {
+        "name": "matriochka:rite/w6_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.w6"
+  },
+  "rite.open.w6": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/open_w6"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.open.w6"
+  },
+  "rite.w7": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/w7_1"
+      },
+      {
+        "name": "matriochka:rite/w7_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.w7"
+  },
+  "rite.open.w7": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/open_w7"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.open.w7"
+  },
+  "rite.w8": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/w8_1"
+      },
+      {
+        "name": "matriochka:rite/w8_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.w8"
+  },
+  "rite.open.w8": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/open_w8"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.open.w8"
+  },
+  "rite.w9": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/w9_1"
+      },
+      {
+        "name": "matriochka:rite/w9_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.w9"
+  },
+  "rite.open.w9": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/open_w9"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.open.w9"
+  },
+  "rite.w10": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/w10_1"
+      },
+      {
+        "name": "matriochka:rite/w10_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.w10"
+  },
+  "rite.open.w10": {
+    "sounds": [
+      {
+        "name": "matriochka:rite/open_w10"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.rite.open.w10"
+  },
   "station.matrix_workbench": {
     "sounds": [
       {
@@ -295,6 +466,20 @@
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w0"
   },
+  "boss.presence.w0": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w0_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w0_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w0_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w0"
+  },
   "boss.telegraph.w1": {
     "sounds": [
       {
@@ -305,6 +490,20 @@
       }
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w1"
+  },
+  "boss.presence.w1": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w1_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w1_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w1_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w1"
   },
   "boss.telegraph.w2": {
     "sounds": [
@@ -317,6 +516,20 @@
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w2"
   },
+  "boss.presence.w2": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w2_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w2_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w2_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w2"
+  },
   "boss.telegraph.w3": {
     "sounds": [
       {
@@ -327,6 +540,20 @@
       }
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w3"
+  },
+  "boss.presence.w3": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w3_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w3_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w3_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w3"
   },
   "boss.telegraph.w4": {
     "sounds": [
@@ -339,6 +566,20 @@
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w4"
   },
+  "boss.presence.w4": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w4_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w4_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w4_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w4"
+  },
   "boss.telegraph.w5": {
     "sounds": [
       {
@@ -349,6 +590,20 @@
       }
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w5"
+  },
+  "boss.presence.w5": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w5_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w5_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w5_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w5"
   },
   "boss.telegraph.w6": {
     "sounds": [
@@ -361,6 +616,20 @@
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w6"
   },
+  "boss.presence.w6": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w6_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w6_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w6_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w6"
+  },
   "boss.telegraph.w7": {
     "sounds": [
       {
@@ -371,6 +640,20 @@
       }
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w7"
+  },
+  "boss.presence.w7": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w7_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w7_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w7_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w7"
   },
   "boss.telegraph.w8": {
     "sounds": [
@@ -383,6 +666,20 @@
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w8"
   },
+  "boss.presence.w8": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w8_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w8_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w8_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w8"
+  },
   "boss.telegraph.w9": {
     "sounds": [
       {
@@ -394,6 +691,20 @@
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w9"
   },
+  "boss.presence.w9": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w9_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w9_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w9_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w9"
+  },
   "boss.telegraph.w10": {
     "sounds": [
       {
@@ -404,6 +715,20 @@
       }
     ],
     "subtitle": "subtitles.matriochka.boss.telegraph.w10"
+  },
+  "boss.presence.w10": {
+    "sounds": [
+      {
+        "name": "matriochka:boss/presence_w10_1"
+      },
+      {
+        "name": "matriochka:boss/presence_w10_2"
+      },
+      {
+        "name": "matriochka:boss/presence_w10_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.boss.presence.w10"
   },
   "world.gust": {
     "sounds": [

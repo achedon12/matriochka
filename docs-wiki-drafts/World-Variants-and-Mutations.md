@@ -2,15 +2,15 @@
 
 ## Choosing a variant
 
-A Seed hatches into a variant of its world. The variant is decided at the moment the Seed becomes a World Block, from three things:
+A Seed or a rite site (see [The way into each world](The-Way-Into-Each-World)) hatches into a variant of its world. The variant is decided at the moment it becomes a World Block, from three things:
 
 1. **The planter's karma.** At +100 the world is **Hallowed**, at -100 it is **Cursed**. Karma overrides everything else.
-2. **What the Seed was fed.** Use an item on the planted Seed while it waits or hatches. Each offering moves its lean by one (the action bar shows it):
+2. **What it was fed.** Use an item on the planted Seed or the rite site while it waits or hatches. Each offering moves its lean by one (the action bar shows it):
    - calm: any flower, Honey Bottle, Sweet Berries, Glow Berries, Moss Block
    - wild: Gunpowder, Blaze Powder, Rotten Flesh, Bone, Spider Eye, Magma Cream
 3. **What lies within 3 blocks of it.** Flowers, leaves, moss and water lean it calm (up to 3 points); fire, soul fire, soul sand or soil, wither roses and lava lean it wild (up to 3 points).
 
-A total lean of 2 or more towards one side gives the **Calm** or **Wild** variant; anything less leaves the world **Plain**. Only the planter's group can feed its Seed.
+A total lean of 2 or more towards one side gives the **Calm** or **Wild** variant; anything less leaves the world **Plain**. Only the planter's group can feed its Seed or rite site. A Storm Essence given to the Storm Rod opens World 4 rather than counting as an offering.
 
 ## What a variant changes
 

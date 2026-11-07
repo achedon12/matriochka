@@ -89,6 +89,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('screens')) {
 				vmArgs '-Dmatriochka.capture=screens'
 			}
+			if (name == 'clientGameTest' && project.hasProperty('rites')) {
+				vmArgs '-Dmatriochka.capture=rites'
+			}
 			if (name == 'clientGameTest' && project.hasProperty('machines')) {
 				vmArgs '-Dmatriochka.capture=machines', '-Dmatriochka.only=' + (project.findProperty('only') ?: '')
 			}

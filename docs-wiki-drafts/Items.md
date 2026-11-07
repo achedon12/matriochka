@@ -32,36 +32,36 @@ Weapons need 8 of the world's base resource and a stick; a full armor set needs 
 
 | Core | From | Rarity | Use |
 | --- | --- | --- | --- |
-| Guardian Core | Surface | legendary | Ingredient of the World 1 Seed |
-| Queen Core | World 1 | legendary | Ingredient of the World 2 Seed |
-| Titan Core | World 2 | legendary | Ingredient of the World 3 Seed |
-| Jailer Core | World 3 | legendary | Ingredient of the World 4 Seed |
-| Storm King Core | World 4 | legendary | Ingredient of the World 5 Seed |
-| Light Eater Core | World 5 | legendary | Ingredient of the World 6 Seed |
-| Double Core | World 6 | legendary | Ingredient of the World 7 Seed |
-| Leviathan Core | World 7 | legendary | Ingredient of the World 8 Seed |
-| Seasons Core | World 8 | legendary | Ingredient of the World 9 Seed |
-| Terrain Core | World 9 | legendary | Ingredient of the World 10 Seed |
+| Guardian Core | Surface | legendary | Opens the way into World 1 (World 1 Seed) |
+| Queen Core | World 1 | legendary | Opens the way into World 2 (Ember Heart) |
+| Titan Core | World 2 | legendary | Opens the way into World 3 (Jailer's Key) |
+| Jailer Core | World 3 | legendary | Opens the way into World 4 (Storm Rod) |
+| Storm King Core | World 4 | legendary | Opens the way into World 5 (Black Lantern) |
+| Light Eater Core | World 5 | legendary | Opens the way into World 6 (Twin Mirrors) |
+| Double Core | World 6 | legendary | Opens the way into World 7 (Abyssal Pearl) |
+| Leviathan Core | World 7 | legendary | Opens the way into World 8 (Sapling of the Four Seasons) |
+| Seasons Core | World 8 | legendary | Opens the way into World 9 (Seismic Stake) |
+| Terrain Core | World 9 | legendary | Opens the way into World 10 (Traveller's Matryoshka) |
 | Unfinished Core | World 10 | legendary | Trophy |
 
 Cores glow, are fire resistant and stack to 1. The Soul Altar refuses them.
 
-## Seeds
+## The way into each world
 
-| Seed | Plant on | Hatching condition |
-| --- | --- | --- |
-| World 1 Seed | Tilled World Soil 0 | Water (any water block) within 4 blocks horizontally and 1 block vertically of the seed. |
-| World 2 Seed | Tilled World Soil 1 | Lava, a magma block or a campfire within 3 blocks horizontally and 1 block vertically. |
-| World 3 Seed | Tilled World Soil 2 | A redstone signal powering the seed or the World Soil under it. |
-| World 4 Seed | Tilled World Soil 3 | The open sky directly above the seed. |
-| World 5 Seed | Tilled World Soil 4 | Darkness: the light level at the seed must be 3 or lower. |
-| World 6 Seed | Tilled World Soil 5 | Height: the seed must be at y 100 or higher. |
-| World 7 Seed | Tilled World Soil 6 | Water within 4 blocks horizontally and 1 block vertically, as for World 1. |
-| World 8 Seed | Tilled World Soil 7 | Dawn or dusk on the overworld clock: time 22500 to 1500, or 11500 to 13500. |
-| World 9 Seed | Tilled World Soil 8 | A redstone signal powering the seed or the World Soil under it, as for World 3. |
-| World 10 Seed | Tilled World Soil 9 | No condition. The seed hatches on its own. |
+| Object | Item id | Where it goes | What it waits for |
+| --- | --- | --- | --- |
+| World 1 Seed | `seed_1` | Planted on tilled World Soil 0 | Water (any water block) within 4 blocks horizontally and 1 block vertically of the seed. |
+| Ember Heart (World 2) | `seed_2` | Set down within 3 blocks of lava | At least 4 Ashrock around it. |
+| Jailer's Key (World 3) | `seed_3` | Set against an iron door | A redstone signal (a lever, a button). |
+| Storm Rod (World 4) | `seed_4` | On top of a lightning rod, under the open sky | A storm, or a Storm Essence fed to it. |
+| Black Lantern (World 5) | `seed_5` | Set down in complete darkness | At least 4 Spent Glow within 2 blocks. |
+| Twin Mirrors (World 6) | `seed_6` | Between two glass blocks facing each other, two blocks away on either side | Nothing more. |
+| Abyssal Pearl (World 7) | `seed_7` | Dropped into water | Water at least 3 blocks deep. |
+| Sapling of the Four Seasons (World 8) | `seed_8` | Planted on grass or dirt | Dawn or dusk on the overworld clock: time 22500 to 1500, or 11500 to 13500. |
+| Seismic Stake (World 9) | `seed_9` | Driven into stone or deepslate below y 40 | Nothing more. |
+| Traveller's Matryoshka (World 10) | `seed_10` | Anywhere | Nothing: it is ready at once. |
 
-Seeds stack to 16 and are fire resistant. Recipes: [Core loop](Core-Loop#seeds).
+All ten stack to 16 and are fire resistant. Recipes: [Core loop](Core-Loop#the-way-into-each-world). Rites, waiting and feeding: [The way into each world](The-Way-Into-Each-World).
 
 ## Hidden Dolls
 
@@ -146,7 +146,7 @@ There are ten Hidden Dolls, one in the vault chest of each world's secret struct
 | --- | --- | --- | --- |
 | Ray Membrane | resource | common (1) | Glider cloth. |
 | Storm Essence | resource | rare (10) | Energy of the Lightning Forge. |
-| Celestial Crystal | gem | rare (10) | Gear and World 5 Seed. |
+| Celestial Crystal | gem | rare (10) | Gear and the Black Lantern (World 5). |
 | Glider | glider | epic (30) | Glide between islands. In code: Hold it while falling: you glide forward at a capped fall speed and take no fall damage. |
 | Grappling Hook | hook | rare (10) | Pulls you toward a surface. In code: Right-click a block up to 32 blocks away to be pulled toward it. Resets fall distance. 1 s cooldown. |
 | Lightning Lance | weapon | rare (10) | Sword-type weapon, about 13 attack damage. Gets a random class when crafted. |
@@ -177,7 +177,7 @@ There are ten Hidden Dolls, one in the vault chest of each world's secret struct
 | Item | Kind | Rarity (souls) | Effect |
 | --- | --- | --- | --- |
 | Unstable Alloy | ingot | rare (10) | Base of World 6 gear. |
-| Inverted Crystal | gem | epic (30) | Inverter and World 7 Seed. |
+| Inverted Crystal | gem | epic (30) | Inverter and the Abyssal Pearl (World 7). |
 | Gravity Boots | boots | epic (30) | Ignore gravity flips. In code: Feet slot. Your gravity never flips in a flipped column. |
 | Stabilizer | consumable | common (1) | Cancels an inversion. In code: Right-click: 30 s of normal gravity, even in a flipped column. |
 | Mirror Blade | weapon | epic (30) | Sword-type weapon, about 19 attack damage. Gets a random class when crafted. |
@@ -190,10 +190,10 @@ There are ten Hidden Dolls, one in the vault chest of each world's secret struct
 
 | Item | Kind | Rarity (souls) | Effect |
 | --- | --- | --- | --- |
-| Abyssal Salt | dust | rare (10) | Salt Snorkel Helmet and World 8 Seed. |
+| Abyssal Salt | dust | rare (10) | Salt Snorkel Helmet and the Sapling of the Four Seasons (World 8). |
 | Nacre | gem | rare (10) | Nacre Snorkel Helmet. |
 | Abyssal Cobalt | ingot | rare (10) | Cobalt Snorkel Helmet and the Diving suit. |
-| Pressure Pearl | gem | epic (30) | Pearl Snorkel Helmet and World 8 Seed. |
+| Pressure Pearl | gem | epic (30) | Pearl Snorkel Helmet and the Sapling of the Four Seasons (World 8). |
 | Oxygen Capsule | consumable | common (1) | Right-click: fills half of a worn snorkel helmet's tank, or +60 breath. |
 | Thruster | thruster | epic (30) | Right-click underwater: dash in the direction you look. 0.75 s cooldown. |
 | Trench Trident | weapon | epic (30) | Sword-type weapon, about 23 attack damage. Gets a random class when crafted. |
@@ -210,7 +210,7 @@ The Diving suit has no helmet any more: the snorkel helmet takes the head slot.
 | Item | Kind | Rarity (souls) | Effect |
 | --- | --- | --- | --- |
 | Temporal Sand | dust | rare (10) | Base of World 8 gear. |
-| Season Fragment | gem | epic (30) | World 9 Seed. |
+| Season Fragment | gem | epic (30) | The Seismic Stake (World 9). |
 | Hourglass | hourglass | epic (30) | Slows the world cycle. In code: Right-click: pauses the World 8 fast clock for 90 s. 5 min cooldown. |
 | Season Preserve | consumable | common (1) | Protects from the current season. In code: Right-click: immune to season effects for 2 minutes. |
 | Scythe of Seasons | weapon | epic (30) | Sword-type weapon, about 28 attack damage. Gets a random class when crafted. |
@@ -225,7 +225,7 @@ The Diving suit has no helmet any more: the snorkel helmet takes the head slot.
 | Item | Kind | Rarity (souls) | Effect |
 | --- | --- | --- | --- |
 | Terrain Fragment | resource | rare (10) | Base of World 9 gear. |
-| Terrain Heart | resource | legendary (100) | World 10 Seed. |
+| Terrain Heart | resource | legendary (100) | The Traveller's Matryoshka (World 10). |
 | Anchor | anchor | rare (10) | Calms the ground (radius 4). In code: Right-click: for 10 minutes the ground zone under you and any zone within 4 blocks of you stay still. Consumed. |
 | Grip Boots | boots | epic (30) | No falls from moving ground. In code: Feet slot. The ground zone under you stays still while you wear them. |
 | Seismic Mace | weapon | legendary (100) | Sword-type weapon, about 33 attack damage. Gets a random class when crafted. |
@@ -233,7 +233,7 @@ The Diving suit has no helmet any more: the snorkel helmet takes the head slot.
 | Living Rock Chestplate | armor | legendary (100) | 11 armor, 3.5 toughness, +8 max health |
 | Living Rock Leggings | armor | legendary (100) | 8 armor, 3.5 toughness, +6 max health |
 | Living Rock Boots | armor | legendary (100) | 4 armor, 3.5 toughness, +3 max health |
-| Key of the Last Doll | key | - | World 10 Seed. In code: Dropped by the Heart of the Terrain. Ingredient of the World 10 Seed. |
+| Key of the Last Doll | key | - | The Traveller's Matryoshka (World 10). In code: Dropped by the Heart of the Terrain. Ingredient of the Traveller's Matryoshka. |
 | Anchor Bread | food | common (1) | Steady footing for 5 minutes. Food: 6 hunger, 0.8 saturation, always edible. |
 ## World 10: The Giant Workshop
 

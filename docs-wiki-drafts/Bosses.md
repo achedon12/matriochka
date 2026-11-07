@@ -20,6 +20,8 @@ Every world ends with a boss, and the Surface has the Block Guardian. All eleven
 
 Health and damage values already include the world multipliers (see [Difficulty formulas](Difficulty-Formulas)). Every boss also has 8 armor, full knockback resistance, a 48-block follow range, fire immunity and no fall damage.
 
+Every boss is heard before it is seen: while it is near and idle, it has a presence sound of its own, a breath, a growl or a hum in its world's colour (see [Sounds](Sounds)).
+
 ## Summoning
 
 - Use the altar: the Guardian's Altar on the Surface, or the Arena Altar in the arena 160 blocks south of a world's Threshold. The boss appears 2 blocks above the altar and targets you.
@@ -66,13 +68,13 @@ The Unfinished borrows the attacks of the world its current shell copies but alw
 
 When a boss dies, every player within 64 blocks:
 
-- marks the boss as defeated for their group (this unlocks the next Seed, recipes and gates);
+- marks the boss as defeated for their group (this unlocks the way into the next world, recipes and gates);
 - gets 100 souls and the kill for quests;
 - gets one Doll of Life layer back, and one extra maximum layer after the bosses of worlds 1, 5 and 8 (see [Doll of Life and death](Doll-of-Life-and-Death));
 - gets 3 Shell Shards, the material of class upgrades;
 - reads the boss's revelation line in chat.
 
-The boss drops its core and 4 World Soil of its world (World 10 drops no soil). The Block Guardian drops a Matrix Workbench and 4 World Soil 0 instead, and turns every Artisan's Scroll it finds in nearby inventories into the Journal. The World 9 boss also drops the Key of the Last Doll. Each boss gives 200 experience.
+The boss drops its core, which opens the way into the next world (the World 10 core is a trophy); the bosses of Worlds 1 to 9 drop no World Soil. The Block Guardian also drops a Matrix Workbench and 4 World Soil 0, the soil the World 1 Seed is planted on, and turns every Artisan's Scroll it finds in nearby inventories into the Journal. The World 9 boss also drops the Key of the Last Doll. Each boss gives 200 experience.
 
 ## Multiplayer scaling
 

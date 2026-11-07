@@ -141,7 +141,7 @@ item("refuge_doll", "Refuge Doll", "Poupée-refuge", 3, "doll", "legendary", "do
 # World 4
 item("ray_membrane", "Ray Membrane", "Membrane de raie", 4, "resource", "common", "membrane", "Glider cloth.", "Toile du planeur.")
 item("storm_essence", "Storm Essence", "Essence de tempête", 4, "resource", "rare", "orb", "Energy of the Lightning Forge.", "Énergie de la Forge à foudre.")
-item("celestial_crystal", "Celestial Crystal", "Cristal céleste", 4, "gem", "rare", "crystal", "Gear and World 5 Seed.", "Équipement et Graine du monde 5.")
+item("celestial_crystal", "Celestial Crystal", "Cristal céleste", 4, "gem", "rare", "crystal", "Gear and the Black Lantern.", "Équipement et Lanterne noire.")
 item("glider", "Glider", "Planeur", 4, "glider", "epic", "glider", "Glide between islands.", "Plane entre les îles.")
 item("grappling_hook", "Grappling Hook", "Grappin", 4, "hook", "rare", "hook", "Pulls you toward a surface.", "Te tire vers une surface.")
 item("lightning_lance", "Lightning Lance", "Lance de foudre", 4, "weapon", "rare", "spear")
@@ -159,18 +159,18 @@ item("shadow_blade", "Shadow Blade", "Lame d'ombre", 5, "weapon", "epic", "sword
 item("nocturnal", "", "", 5, "armorset", "epic", "armor", set_en="Nocturnal", set_fr="nocturne")
 # World 6
 item("unstable_alloy", "Unstable Alloy", "Alliage instable", 6, "ingot", "rare", "ingot", "Base of World 6 gear.", "Base de l'équipement du monde 6.")
-item("inverted_crystal", "Inverted Crystal", "Cristal inversé", 6, "gem", "epic", "crystal", "Inverter and World 7 Seed.", "Inverseur et Graine du monde 7.")
+item("inverted_crystal", "Inverted Crystal", "Cristal inversé", 6, "gem", "epic", "crystal", "Inverter and the Abyssal Pearl.", "Inverseur et Perle abyssale.")
 item("gravity_boots", "Gravity Boots", "Bottes de gravité", 6, "boots", "epic", "boots", "Ignore gravity flips.", "Ignorent les inversions de gravité.")
 item("stabilizer", "Stabilizer", "Stabilisateur", 6, "consumable", "common", "orb_small", "Cancels an inversion.", "Annule une inversion.")
 item("mirror_blade", "Mirror Blade", "Lame miroir", 6, "weapon", "epic", "sword")
 item("mirror", "", "", 6, "armorset", "epic", "armor", set_en="Mirror", set_fr="miroir")
 # World 7: everything happens under water. The four ores each give one tier of snorkel helmet (see SNORKELS).
-item("abyssal_salt", "Abyssal Salt", "Sel des profondeurs", 7, "dust", "rare", "dust", "Salt Snorkel Helmet and World 8 Seed.", "Casque-tuba de sel et Graine du monde 8.")
+item("abyssal_salt", "Abyssal Salt", "Sel des profondeurs", 7, "dust", "rare", "dust", "Salt Snorkel Helmet and the Sapling of the Four Seasons.", "Casque-tuba de sel et Arbrisseau des quatre saisons.")
 item("nacre", "Nacre", "Nacre", 7, "gem", "rare", "shard", "Mined from reef veins. Nacre Snorkel Helmet.", "Extraite des filons des récifs. Casque-tuba de nacre.",
      pal=("e8d0e0", "a8e0e0", "f4e4ee", "6a5a70"))
 item("abyssal_cobalt", "Abyssal Cobalt", "Cobalt abyssal", 7, "ingot", "rare", "ingot", "Cobalt Snorkel Helmet and the diving suit.", "Casque-tuba de cobalt et scaphandre.",
      pal=("1a3a8a", "3a7ae0", "4a7ae8", "0a1438"))
-item("pressure_pearl", "Pressure Pearl", "Perle de pression", 7, "gem", "epic", "pearl", "Pearl Snorkel Helmet and World 8 Seed.", "Casque-tuba de perle et Graine du monde 8.")
+item("pressure_pearl", "Pressure Pearl", "Perle de pression", 7, "gem", "epic", "pearl", "Pearl Snorkel Helmet and the Sapling of the Four Seasons.", "Casque-tuba de perle et Arbrisseau des quatre saisons.")
 item("oxygen_capsule", "Oxygen Capsule", "Capsule d'oxygène", 7, "consumable", "common", "capsule", "Refills half of a snorkel helmet's tank, or your breath.", "Remplit à moitié la réserve d'un casque-tuba, ou ton souffle.")
 item("thruster", "Thruster", "Propulseur", 7, "thruster", "epic", "thruster", "Speeds you up underwater.", "Accélère sous l'eau.")
 item("trench_trident", "Trench Trident", "Trident des fosses", 7, "weapon", "epic", "trident")
@@ -178,19 +178,19 @@ item("diving", "", "", 7, "armorset", "epic", "armor", set_en="Diving", set_fr="
      effect_en="Resists pressure. Wear it with a snorkel helmet.", effect_fr="Résiste à la pression. Se porte avec un casque-tuba.")
 # World 8
 item("temporal_sand", "Temporal Sand", "Sable temporel", 8, "dust", "rare", "dust", "Base of World 8 gear.", "Base de l'équipement du monde 8.")
-item("season_fragment", "Season Fragment", "Fragment de saison", 8, "gem", "epic", "leaf", "World 9 Seed.", "Graine du monde 9.")
+item("season_fragment", "Season Fragment", "Fragment de saison", 8, "gem", "epic", "leaf", "The Seismic Stake.", "Pieu sismique.")
 item("hourglass", "Hourglass", "Sablier", 8, "hourglass", "epic", "hourglass", "Slows the world cycle.", "Ralentit le cycle du monde.")
 item("season_preserve", "Season Preserve", "Conserve de saison", 8, "consumable", "common", "jar", "Protects from the current season.", "Protège de la saison en cours.")
 item("season_scythe", "Scythe of Seasons", "Faux des saisons", 8, "weapon", "epic", "scythe")
 item("seasonal", "", "", 8, "armorset", "epic", "armor", set_en="Seasonal", set_fr="saisonnière")
 # World 9
 item("terrain_fragment", "Terrain Fragment", "Fragment de terrain", 9, "resource", "rare", "rock", "Base of World 9 gear.", "Base de l'équipement du monde 9.")
-item("terrain_heart", "Terrain Heart", "Cœur de terrain", 9, "resource", "legendary", "heart", "World 10 Seed.", "Graine du monde 10.")
+item("terrain_heart", "Terrain Heart", "Cœur de terrain", 9, "resource", "legendary", "heart", "The Traveller's Matryoshka.", "Matriochka du voyageur.")
 item("anchor", "Anchor", "Ancre", 9, "anchor", "rare", "anchor", "Calms the ground (radius 4).", "Calme le sol (rayon 4).")
 item("grip_boots", "Grip Boots", "Bottes d'accroche", 9, "boots", "epic", "boots", "No falls from moving ground.", "Plus de chutes dues au sol.")
 item("seismic_mace", "Seismic Mace", "Masse sismique", 9, "weapon", "legendary", "mace")
 item("living_rock", "", "", 9, "armorset", "legendary", "armor", set_en="Living Rock", set_fr="de roche vivante")
-item("last_doll_key", "Key of the Last Doll", "Clé de la dernière poupée", 9, "key", "none", "key_gold", "World 10 Seed.", "Graine du monde 10.")
+item("last_doll_key", "Key of the Last Doll", "Clé de la dernière poupée", 9, "key", "none", "key_gold", "The Traveller's Matryoshka.", "Matriochka du voyageur.")
 # World 10
 item("artisan_thread", "Artisan's Thread", "Fil d'Artisan", 10, "thread", "rare", "thread", "Base of the final gear.", "Base de l'équipement final.")
 item("artisan_shard", "Artisan's Shard", "Éclat d'Artisan", 10, "gem", "legendary", "shard", "Upgrades the final gear.", "Améliore l'équipement final.")
@@ -213,14 +213,66 @@ CORES = [
 for cid, en, fr, w in CORES:
     nxt = w + 1
     item(cid, en, fr, w, "core", "legendary", "core",
-         f"Opens the World {nxt} Seed." if nxt <= 10 else "The heart of the creature.",
-         f"Ouvre la Graine du monde {nxt}." if nxt <= 10 else "Le cœur de la créature.")
+         (f"Opens the way into World {nxt}." if nxt <= 10 else "The heart of the creature."),
+         (f"Ouvre le chemin du monde {nxt}." if nxt <= 10 else "Le cœur de la créature."))
 
-# Seeds
-for w in range(1, 11):
-    item(f"seed_{w}", f"World {w} Seed", f"Graine du monde {w}", w, "seed", "epic", "seed",
-         f"Plant on tilled World Soil {w - 1} to grow World {w}.",
-         f"Se plante sur la Terre de monde {w - 1} bêchée pour faire éclore le monde {w}.")
+# The way into each world. World 1 opens with its Seed, planted on tilled World Soil; every other world has its own
+# object and its own rite (world/Rites.java). The ids stay seed_<world> so saves, recipes and quests keep working.
+# (world, en, fr, how en, how fr, waiting en, waiting fr)
+RITES = [
+    (2, "Ember Heart", "Cœur de braise",
+     "Set it down within 3 blocks of lava, with at least 4 Ashrock around it: a portal of embers opens World 2.",
+     "Pose-le à moins de 3 blocs d'une lave, avec au moins 4 blocs de Roche de cendre autour : un portail de braises ouvre le monde 2.",
+     "The Ember Heart wants lava within 3 blocks and 4 Ashrock around it.",
+     "Le Cœur de braise veut une lave à moins de 3 blocs et 4 Roches de cendre autour."),
+    (3, "Jailer's Key", "Clé du Geôlier",
+     "Set it against an iron door and give it a redstone signal (a lever, a button): the key turns and World 3 opens.",
+     "Pose-la contre une porte en fer et donne-lui un signal de redstone (levier, bouton) : la clé tourne et le monde 3 s'ouvre.",
+     "The Jailer's Key wants an iron door beside it and a redstone signal.",
+     "La Clé du Geôlier veut une porte en fer contre elle et un signal de redstone."),
+    (4, "Storm Rod", "Paratonnerre d'orage",
+     "Set it on top of a lightning rod under the open sky. A storm tears World 4 open; a Storm Essence fed to it does too.",
+     "Pose-le au sommet d'un paratonnerre, sous le ciel ouvert. Un orage déchire le monde 4 ; une Essence d'orage qu'on lui donne aussi.",
+     "The Storm Rod waits for a storm, or a Storm Essence.",
+     "Le Paratonnerre d'orage attend un orage, ou une Essence d'orage."),
+    (5, "Black Lantern", "Lanterne noire",
+     "Light it in complete darkness, with at least 4 Spent Glow within 2 blocks: its black flame opens World 5.",
+     "Allume-la dans le noir complet, avec au moins 4 blocs de Lueur éteinte à moins de 2 blocs : sa flamme noire ouvre le monde 5.",
+     "The Black Lantern wants complete darkness and 4 Spent Glow around it.",
+     "La Lanterne noire veut le noir complet et 4 Lueurs éteintes autour d'elle."),
+    (6, "Twin Mirrors", "Miroirs jumeaux",
+     "Set them between two glass blocks facing each other, two blocks away on either side: World 6 opens in the reflection.",
+     "Pose-les entre deux blocs de verre face à face, à deux blocs de chaque côté : le monde 6 s'ouvre dans le reflet.",
+     "The Twin Mirrors want glass two blocks away on both sides.",
+     "Les Miroirs jumeaux veulent du verre à deux blocs, des deux côtés."),
+    (7, "Abyssal Pearl", "Perle abyssale",
+     "Drop it into water at least 3 blocks deep: a whirlpool forms and opens World 7.",
+     "Lâche-la dans une eau d'au moins 3 blocs de profondeur : un tourbillon se forme et ouvre le monde 7.",
+     "The Abyssal Pearl wants water 3 blocks deep.",
+     "La Perle abyssale veut une eau de 3 blocs de profondeur."),
+    (8, "Sapling of the Four Seasons", "Arbrisseau des quatre saisons",
+     "Plant it on grass or dirt. It opens World 8 at dawn or at dusk.",
+     "Plante-le sur de l'herbe ou de la terre. Il ouvre le monde 8 à l'aube ou au crépuscule.",
+     "The Sapling of the Four Seasons opens at dawn or at dusk.",
+     "L'Arbrisseau des quatre saisons s'ouvre à l'aube ou au crépuscule."),
+    (9, "Seismic Stake", "Pieu sismique",
+     "Drive it into stone or deepslate below y 40: the ground splits and World 9 opens.",
+     "Enfonce-le dans la pierre ou l'ardoise des abîmes sous y 40 : le sol se fend et le monde 9 s'ouvre.",
+     "The Seismic Stake must be driven into stone below y 40.",
+     "Le Pieu sismique doit être enfoncé dans la pierre sous y 40."),
+    (10, "Traveller's Matryoshka", "Matriochka du voyageur",
+     "Set it down anywhere and open it: you shrink into World 10.",
+     "Pose-la n'importe où et ouvre-la : tu rapetisses et tu entres dans le monde 10.",
+     "The Traveller's Matryoshka is ready. It only waits for you.",
+     "La Matriochka du voyageur est prête. Elle n'attend que toi."),
+]
+RITE = {r[0]: r for r in RITES}
+
+item("seed_1", "World 1 Seed", "Graine du monde 1", 1, "seed", "epic", "seed",
+     "Plant on tilled World Soil 0, with water within four blocks, to grow World 1.",
+     "Se plante sur la Terre de monde 0 bêchée, avec de l'eau à moins de quatre blocs, pour faire éclore le monde 1.")
+for w, en, fr, how_en, how_fr, _we, _wf in RITES:
+    item(f"seed_{w}", en, fr, w, "seed", "epic", "seed", how_en, how_fr)
 
 # Hidden dolls. They nest in the order the Artisan carved them, which is not the order the worlds open in:
 # NEST_ORDER lists the worlds of the dolls from the smallest (innermost) to the largest (outermost). Three hints
@@ -308,7 +360,8 @@ def block(id, en, fr, world, kind, style, **kw):
 
 for w in range(0, 10):
     block(f"world_soil_{w}", f"World Soil {w}", f"Terre de monde {w}", w, "soil", "soil",
-          note_en=f"Till it to plant the World {w + 1} Seed.", note_fr=f"Se bêche pour planter la Graine du monde {w + 1}.")
+          note_en=("Till it to plant the World 1 Seed." if w == 0 else f"The soil of World {w}."),
+          note_fr=("Se bêche pour planter la Graine du monde 1." if w == 0 else f"La terre du monde {w}."))
 block("world_block", "World Block", "Bloc-monde", 0, "world_block", "lacquer")
 block("planted_seed", "Planted Seed", "Graine plantée", 0, "planted_seed", "special")
 block("threshold", "Threshold", "Seuil", 0, "threshold", "lacquer")
@@ -334,7 +387,7 @@ block("spent_glow", "Spent Glow", "Lueur éteinte", 5, "deco", "stone",
 
 # stations
 STATIONS = [
-    ("matrix_workbench", "Matrix Workbench", "Établi matriciel", 0, "Crafts Seeds; recipes unlock with cores.", "Fabrique les Graines ; recettes débloquées par les noyaux."),
+    ("matrix_workbench", "Matrix Workbench", "Établi matriciel", 0, "A 3 x 3 crafting table: the way into each world, the stations and more. Recipes unlock with cores.", "Une table de craft 3 x 3 : de quoi ouvrir chaque monde, les stations et plus encore. Recettes débloquées par les noyaux."),
     ("class_table", "Class Table", "Table de classe", 0, "Upgrades an item's class.", "Améliore la classe d'un objet."),
     ("soul_altar", "Soul Altar", "Autel des âmes", 0, "Purify or devour an item. Rebuilds a Doll of Life layer for 50 souls and 4 rare resources of the current world.",
      "Purifie ou dévore un objet. Refait une couche de Poupée de vie pour 50 âmes et 4 ressources rares du monde en cours."),

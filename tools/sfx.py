@@ -551,6 +551,71 @@ def loop(rng, world):
 
 
 # ------------------------------------------------------------------ entry point
+
+# ------------------------------------------------------------------ rites (the way into Worlds 2 to 10)
+def rite_layer(rng, world):
+    """The sound of a world's rite under way: its own material, then a note in the world's key."""
+    w = world
+    if w == 2:
+        body = S.add(embers(rng), 0.6 * S.crackle(rng, 0.6, density=60, lo=600, hi=3000))
+    elif w == 3:
+        body = S.place([(0, S.click(rng, 1.0, tone=2200, body=600, length=0.08)), (0.12, chains(rng) * 0.5), (0.3, S.click(rng, 0.8, tone=1800, body=500))])
+    elif w == 4:
+        body = S.add(S.wind(rng, 0.9, 300, 2400, gust=0.4, whistle=0.2) * 0.6, S.crackle(rng, 0.5, density=90, lo=2500, hi=9000, vel=0.7))
+    elif w == 5:
+        body = breath(rng, 0.9) * 0.8
+    elif w == 6:
+        body = reverse_chime(rng)
+    elif w == 7:
+        body = S.add(S.place([(i * 0.09, S.drip(rng, 0.6)) for i in range(6)]), 0.5 * S.colored(rng, 0.8, 150, 900))
+    elif w == 8:
+        body = S.add(S.wind(rng, 0.8, 600, 3200, gust=0.2) * 0.4, S.place([(i * 0.12, S.tick(rng, 0.5, pitch=3000 + 300 * i)) for i in range(4)]))
+    elif w == 9:
+        body = S.add(rock_grind(rng) * 0.7, S.thump(0.7, 42, 0.6))
+    else:
+        body = S.place([(0, doll_twist(rng, 0.3, True)), (0.3, hollow_pop(rng, 330, 0.7))])
+    f = notes(w, [0])[0]
+    x = S.place([(0, body), (0.05, S.music_box(f, vel=0.45, rng=rng))])
+    return S.reverb(S.tail(x, 0.3), 1.5, 0.3)
+
+
+def rite_open(rng, world):
+    """A rite completes: the world's material swells, then the World Block's arpeggio in the world's own key."""
+    run = [(0.25 + i * 0.08, S.music_box(f, vel=0.4 + i * 0.03, rng=rng)) for i, f in enumerate(notes(world, [0, 2, 4, 7, 9, 11, 14]))]
+    swell = rite_layer(rng, world)
+    x = S.place([(0, swell * 0.9)] + run + [(0.9, doll_close(rng)), (0.92, S.bell(notes(world, [0], 0)[0] * 2, 2.2, 0.5))])
+    return S.reverb(S.tail(x, 0.6), 2.2, 0.3)
+
+
+# ------------------------------------------------------------------ boss presence
+def boss_presence(rng, world):
+    """What a boss sounds like while it is near and idle: a low breath or growl coloured by its world."""
+    w = world
+    f = notes(w, [0], 0)[0] / 2
+    if w in (0, 10):
+        body = S.place([(0, doll_twist(rng, 0.5, False) * 0.6), (0.2, S.groan(rng, 1.4, pitch=40, vel=0.7))])
+    elif w == 1:
+        body = S.add(insects(rng) * 0.5, S.groan(rng, 1.4, pitch=45, vel=0.6))
+    elif w == 2:
+        body = S.add(S.thump(0.9, 38, 1.0), embers(rng) * 0.6, S.groan(rng, 1.4, pitch=36, vel=0.6))
+    elif w == 3:
+        body = S.add(chains(rng) * 0.7, S.groan(rng, 1.2, pitch=43, vel=0.6))
+    elif w == 4:
+        body = S.add(S.wind(rng, 1.4, 120, 900, gust=0.5) * 0.7, far_thunder(rng) * 0.4)
+    elif w == 5:
+        body = breath(rng, 1.6) * 0.9
+    elif w == 6:
+        body = S.add(reverse_chime(rng) * 0.5, S.groan(rng, 1.2, pitch=47, vel=0.5))
+    elif w == 7:
+        body = S.add(pressure_groan(rng), S.colored(rng, 1.4, 60, 400) * 0.4)
+    elif w == 8:
+        body = S.add(clock_chime(rng) * 0.4, S.groan(rng, 1.3, pitch=44, vel=0.5))
+    else:
+        body = S.add(ground_beat(rng), rock_grind(rng) * 0.5)
+    x = S.add(body, 0.25 * S.pad(f, 1.4, 0.5, rng, a=0.3, r=0.8))
+    return S.reverb(S.tail(x, 0.5), 2.0, 0.32, bright=0.35)
+
+
 RECIPES = {name: fn for name, fn in globals().items() if callable(fn)}
 PEAK = {"sfx": 0.89, "music": 0.8}
 QUALITY = {"sfx": 3, "loop": 1, "music": 2}

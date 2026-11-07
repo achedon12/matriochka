@@ -63,8 +63,8 @@ public final class Blocks2 {
 				return InteractionResult.SUCCESS;
 			}
 			String id = ModContent.idOf(stack.getItem());
-			if (id.startsWith("seed_") && state.getValue(TILLED) && level.getBlockState(pos.above()).isAir()) {
-				int world = Integer.parseInt(id.substring(5));
+			if (id.equals("seed_1") && state.getValue(TILLED) && level.getBlockState(pos.above()).isAir()) {
+				int world = 1;
 				if (world != index + 1) {
 					if (!level.isClientSide()) player.sendSystemMessage(Component.translatable("message.matriochka.wrong_soil", world - 1));
 					return InteractionResult.FAIL;
@@ -114,9 +114,18 @@ public final class Blocks2 {
 	// ---------------------------------------------------------------- Planted Seed (hatching)
 	public static class PlantedSeed extends Block implements EntityBlock {
 		private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 10, 12);
+		/** The world this Seed or rite opens; it picks the model (the Seed for World 1, the rite object after). */
+		public static final net.minecraft.world.level.block.state.properties.IntegerProperty WORLD =
+			net.minecraft.world.level.block.state.properties.IntegerProperty.create("world", 1, 10);
 
 		public PlantedSeed(BlockBehaviour.Properties p) {
 			super(p);
+			registerDefaultState(stateDefinition.any().setValue(WORLD, 1));
+		}
+
+		@Override
+		protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> b) {
+			b.add(WORLD);
 		}
 
 		@Override
@@ -143,6 +152,15 @@ public final class Blocks2 {
 					sp.sendOverlayMessage(Component.translatable("message.matriochka.not_yours"));
 					return InteractionResult.FAIL;
 				}
+				// a Storm Essence opens the Storm Rod without waiting for a storm
+				if (be.data().getIntOr("world", 1) == 4 && be.data().getBooleanOr("rite", false) && stack.is(ModContent.item("storm_essence"))
+					&& !be.data().getBooleanOr("charged", false)) {
+					be.data().putBoolean("charged", true);
+					be.setChanged();
+					stack.consume(1, sp);
+					sl.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, 30, 0.3, 0.4, 0.3, 0.3);
+					return InteractionResult.SUCCESS;
+				}
 				if (fr.achedon12.matriochka.world.Variants.feed(sl, pos, be.data(), stack, sp)) {
 					be.setChanged();
 					return InteractionResult.SUCCESS;
@@ -155,14 +173,25 @@ public final class Blocks2 {
 		/** A seed needs its world's condition (water, heat, redstone...) nearby, then hatches after a short ritual. */
 		static void tickSeed(ServerLevel level, BlockPos pos, DataBlockEntity be) {
 			int world = be.data().getIntOr("world", 1);
+			boolean rite = be.data().getBooleanOr("rite", false);
 			BlockState soil = level.getBlockState(pos.below());
-			if (!(soil.getBlock() instanceof WorldSoil) || !soil.getValue(WorldSoil.TILLED)) {
+			// a Seed lives on its tilled soil; a rite site on the spot its rite asks for (world/Rites.java)
+			boolean standing = rite ? fr.achedon12.matriochka.world.Rites.stillFits(level, pos, world)
+				: soil.getBlock() instanceof WorldSoil && soil.getValue(WorldSoil.TILLED);
+			if (!standing) {
 				level.removeBlock(pos, false);
 				Block.popResource(level, pos, new ItemStack(ModContent.item("seed_" + world)));
 				return;
 			}
-			if (!conditionMet(level, pos, world)) {
+			boolean met = rite ? fr.achedon12.matriochka.world.Rites.ready(level, pos, world, be) : conditionMet(level, pos, world);
+			if (!met) {
 				if (level.getGameTime() % 40 == 0) level.sendParticles(ParticleTypes.SMOKE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3, 0.2, 0.2, 0.2, 0.01);
+				// the planter reads what the rite still waits for
+				if (rite && level.getGameTime() % 100 == 0) {
+					String owner = be.data().getStringOr("owner", "");
+					var op = owner.isEmpty() ? null : level.getServer().getPlayerList().getPlayer(java.util.UUID.fromString(owner));
+					if (op != null && op.blockPosition().closerThan(pos, 24)) op.sendOverlayMessage(Component.translatable("message.matriochka.rite.wait." + world));
+				}
 				return;
 			}
 			int t = be.data().getIntOr("t", 0) + 1;
@@ -170,6 +199,8 @@ public final class Blocks2 {
 			if (t % 10 == 0) {
 				level.sendParticles(ParticleTypes.ENCHANT, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, 12, 0.4, 0.4, 0.4, 0.3);
 				level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.SEED_PULSE, SoundSource.BLOCKS, 0.5f, 0.6f + t / 250f);
+				// a rite under way sounds like its world: embers, a turning key, a storm, a breath, glass, water, leaves, rock
+				if (rite && t % 30 == 0) level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.rite(world), SoundSource.BLOCKS, 0.9f, 0.85f + t / 600f);
 			}
 			if (t >= 200) {
 				String seedOwner = be.data().getStringOr("owner", "");
@@ -195,7 +226,7 @@ public final class Blocks2 {
 					}
 					return;
 				}
-				level.setBlock(pos.below(), soil.setValue(WorldSoil.TILLED, false), 3);
+				if (!rite) level.setBlock(pos.below(), soil.setValue(WorldSoil.TILLED, false), 3);
 				level.setBlock(pos, ModContent.block("world_block").defaultBlockState(), 3);
 				if (level.getBlockEntity(pos) instanceof DataBlockEntity wb) {
 					wb.data().putInt("world", world);
@@ -210,6 +241,7 @@ public final class Blocks2 {
 				}
 				level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 60, 0.5, 0.5, 0.5, 0.4);
 				level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.WORLD_BLOCK_FORM, SoundSource.BLOCKS, 1.5f, 1f);
+				if (rite) level.playSound(null, pos, fr.achedon12.matriochka.content.Sounds.riteOpen(world), SoundSource.BLOCKS, 1.6f, 1f);
 			} else {
 				be.setChanged();
 			}

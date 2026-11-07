@@ -74,9 +74,11 @@ Each world has a seamless 24-second loop and one-shot sounds that play at random
 | Doll rattles | A hidden doll that does not fit, rerolling a class with a Chance Doll | A doll shaken: quick wooden clicks. |
 | Doll of Life breaks | It saves you from death | The shell cracks and a bell and a music box arpeggio bloom. |
 | World Block opens | Entering a world | The doll opens, a whoosh falls and a music box runs down two octaves. |
-| World Block forms | A Seed becomes a World Block | A rising music box arpeggio, a bell and the doll closing. |
+| World Block forms | A Seed or a rite site becomes a World Block | A rising music box arpeggio, a bell and the doll closing. |
 | World Block cracks | Breaking a World Block | Wood and lacquer splitting with a low knock. |
-| Seed hums | A planted Seed growing | One music box note that rises in pitch as the Seed grows. |
+| Seed hums | A planted Seed or a rite site growing | One music box note that rises in pitch as it grows. |
+| A rite stirs | A rite of Worlds 2 to 10 under way | Each rite sounds like its world: embers, a turning key, a storm, a breath, glass, water, leaves, grinding rock, wooden doll halves. |
+| A world opens | A rite opens its world | A swell in the world's own key, over the World Block forming. |
 
 ## Stations
 
@@ -100,6 +102,7 @@ Each world has a seamless 24-second loop and one-shot sounds that play at random
 
 | Sound | What you hear |
 | --- | --- |
+| A boss breathes nearby | Every boss is heard before it is seen: while it is near and idle, a breath, a growl or a hum in its world's colour. |
 | Boss awakens | A low drone swells, a bell tolls and the doll shell creaks open. |
 | Boss prepares an attack | Each world's own warning: its lead instrument climbs a tense figure over the world's texture (wooden knocks, spores, anvils, chains, wind, an inhale, a reversed note, drips, fast ticks, a heartbeat, clashing bells). |
 | Boss shell cracks | A new phase: a crack, a boom and a falling minor figure on bells. |

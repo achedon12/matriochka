@@ -199,6 +199,12 @@ def gen_blocks():
         elif b["kind"] == "planted_seed":
             model = {"parent": "minecraft:block/cross", "textures": {"cross": f"{NS}:block/planted_seed_cross"}}
             paint_item("seed", p, "seed_block", os.path.join(A, "textures/block/planted_seed_cross.png"))
+            # a rite site shows its object (tools/rites_art.py): one cross model per world after the first
+            import rites_art
+            for rw, art in rites_art.RITE_ART.items():
+                art(16).image().save(os.path.join(A, f"textures/block/rite_{rw}.png"))
+                w(os.path.join(A, f"models/block/planted_seed_{rw}.json"),
+                  {"parent": "minecraft:block/cross", "textures": {"cross": f"{NS}:block/rite_{rw}"}})
         elif b.get("inset"):
             # the smaller nesting chests: a smaller box standing on the floor
             a = b["inset"]
@@ -217,6 +223,9 @@ def gen_blocks():
                                                                         "tilled=true": {"model": f"{NS}:block/{bid}_tilled"}}})
         elif b["kind"] == "station":
             w(os.path.join(A, f"blockstates/{bid}.json"), stations3d.blockstate(bid))
+        elif b["kind"] == "planted_seed":
+            w(os.path.join(A, f"blockstates/{bid}.json"), {"variants": {
+                f"world={rw}": {"model": f"{NS}:block/{bid}" + ("" if rw == 1 else f"_{rw}")} for rw in range(1, 11)}})
         else:
             w(os.path.join(A, f"blockstates/{bid}.json"), {"variants": {"": {"model": f"{NS}:block/{bid}"}}})
         if b["kind"] != "planted_seed":

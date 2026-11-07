@@ -33,6 +33,6 @@ The earlier commands (`progression set`, `world enter`/`leave`, `boss <id>`, `la
 
 World events have their own keys (`worldEvents`, `worldEventChance`, `worldEventCooldown` and the event weights): see [World events](World-Events).
 
-A group that already holds a parcel is never stopped. When a new group would go over a limit, its Seed stays unhatched and tells its planter every few seconds that the server is full; it hatches on its own once room is made (a group disbanded, a limit raised).
+A group that already holds a parcel is never stopped. When a new group would go over a limit, its Seed or rite site stays unhatched and tells whoever set it down every few seconds that the server is full; it hatches on its own once room is made (a group disbanded, a limit raised).
 
 Comfort options (screen shake, flashes, soft effects, subtitles, HUD, music volumes) are per player, on the client: see [Accessibility](Accessibility).

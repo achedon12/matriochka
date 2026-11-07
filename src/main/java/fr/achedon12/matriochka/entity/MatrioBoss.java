@@ -108,6 +108,22 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		};
 	}
 
+	/** A boss is heard before it is seen: a breath, a growl or a hum in its world's colour, every few seconds. */
+	@Override
+	protected net.minecraft.sounds.SoundEvent getAmbientSound() {
+		return fr.achedon12.matriochka.content.Sounds.presence(def.world());
+	}
+
+	@Override
+	public int getAmbientSoundInterval() {
+		return 140;
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 2.0f;
+	}
+
 	public static AttributeSupplier.Builder attributes(Defs.BossDef def) {
 		return Monster.createMonsterAttributes()
 			.add(Attributes.MAX_HEALTH, def.hp())
@@ -862,9 +878,9 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		if (w == 0) {
 			spawnAtLocation(level, new ItemStack(ModContent.item("matrix_workbench")));
 			spawnAtLocation(level, new ItemStack(ModContent.item("world_soil_0"), 4));
-		} else if (w < 10) {
-			spawnAtLocation(level, new ItemStack(ModContent.item("world_soil_" + w), 4));
-			if (w == 9) spawnAtLocation(level, new ItemStack(ModContent.item("last_doll_key")));
+		} else if (w == 9) {
+			// only World 1 grows from soil now (world/Rites.java): the other bosses leave no World Soil
+			spawnAtLocation(level, new ItemStack(ModContent.item("last_doll_key")));
 		}
 		fr.achedon12.matriochka.world.Lairs.onBossDeath(level, this);
 		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, getX(), getY() + 2, getZ(), 120, 1.5, 2, 1.5, 0.5);

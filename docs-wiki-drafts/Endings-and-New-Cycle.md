@@ -21,7 +21,7 @@ Once you have reached an ending and your group has beaten the Unfinished, the Ob
 | Souls and karma | The group's progression: every boss, the Guardian included |
 | Journal pages, quests, achievements, titles | The worlds: the group gets fresh ones, new and whole |
 | Endings and their lasting consequences | World Blocks of the old cycle crumble when used |
-| Gear and its classes, the hidden dolls | Cores, Seeds, World Soils, offerings, the Key of the Last Doll and Cracked Dolls are taken back |
+| Gear and its classes, the hidden dolls | Cores, Seeds and rite objects, World Soils, offerings, the Key of the Last Doll and Cracked Dolls are taken back |
 | | The layers of the Doll of Life |
 
 Members who are away catch up with the cycle at their next login.

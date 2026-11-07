@@ -523,7 +523,11 @@ final class PlaythroughTest {
 	}
 
 	private static BlockPos plotSeed(int w) {
-		return w == 6 ? plot(w).atY(101) : plot(w).above();
+		// the Seismic Stake is driven into stone below y 40
+		if (w == 1) return plot(w).above();
+		// the rites of Worlds 2 to 10 are built in their own row, well away from the workbench and the World 1 plot
+		BlockPos r = base.offset(40 + (w - 2) * 14, 2, 40);
+		return w == 9 ? r.atY(30) : r;
 	}
 
 	private static List<String> craftSeed(MinecraftServer s, int w) {
@@ -546,13 +550,13 @@ final class PlaythroughTest {
 				if (missing > 0) give(p, ing.id(), missing);
 			}
 		}
-		if (w > 1 && count(p, "world_soil_" + (w - 1)) == 0) {
+		if (w == 1 && count(p, "world_soil_0") == 0) {
 			// the soil fell where it could not be picked up: craft it (dirt and a pinch of spores)
 			for (int i = 0; i < list.size(); i++) {
-				if (!list.get(i).output().equals("world_soil_" + (w - 1))) continue;
+				if (!list.get(i).output().equals("world_soil_0")) continue;
 				for (Recipes.Ing ing : list.get(i).inputs()) give(p, ing.id(), ing.count());
 				String err = Stations.craft(p, level, bench, "matrix_workbench", (DataBlockEntity) level.getBlockEntity(bench), i);
-				out.addAll(checks(err == null, "World Soil " + (w - 1) + " is crafted at the workbench (" + err + ")"));
+				out.addAll(checks(err == null, "World Soil 0 is crafted at the workbench (" + err + ")"));
 			}
 		}
 		int before = count(p, "seed_" + w);
@@ -561,8 +565,12 @@ final class PlaythroughTest {
 		return out;
 	}
 
-	/** Lays the soil, tills it, gives it what the Seed needs and plants. */
+	/**
+	 * Opens the way into a world: World 1's Seed on tilled World Soil, every other world through its own rite, built
+	 * as the player would (RitesTest.scene) and performed with the player's right click.
+	 */
 	private static List<String> plant(MinecraftServer s, int w) {
+		if (w >= 2) return rite(s, w);
 		ServerPlayer p = player(s);
 		ServerLevel level = (ServerLevel) p.level();
 		BlockPos seed = plotSeed(w), soil = seed.below();
@@ -600,6 +608,29 @@ final class PlaythroughTest {
 		}
 		return checks(achieved(p, "world_" + w + "/root"), "holding the Seed opens the World " + w + " advancement tab",
 			held && laid, "World Soil " + (w - 1) + " is laid", tilled, "the hoe tills it", planted, "the World " + w + " Seed is planted");
+	}
+
+	private static List<String> rite(MinecraftServer s, int w) {
+		ServerPlayer p = player(s);
+		ServerLevel level = (ServerLevel) p.level();
+		BlockPos seed = plotSeed(w);
+		// the Storm Rod sits on a lightning rod, so its site is one block above the rod
+		BlockPos click = RitesTest.scene(level, w, w == 4 ? seed.below() : seed);
+		// the Storm Rod needs the open sky over it: clear the column up to the sky
+		if (w == 4) for (int y = seed.getY() + 1; y <= seed.getY() + 120; y++) level.setBlock(new BlockPos(seed.getX(), y, seed.getZ()), Blocks.AIR.defaultBlockState(), 3);
+		tp(p, seed.north(2));
+		boolean held = hold(p, "seed_" + w);
+		useOn(p, click, Direction.UP);
+		boolean placed = level.getBlockState(seed).is(ModContent.block("planted_seed"));
+		if (w == 4 && placed) {
+			// no storm on call: a Storm Essence opens it
+			give(p, "storm_essence", 1);
+			hold(p, "storm_essence");
+			useOn(p, seed, Direction.NORTH);
+		}
+		if (w == 8) s.getCommands().performPrefixedCommand(s.createCommandSourceStack().withSuppressedOutput(), "time set 23000");
+		return checks(achieved(p, "world_" + w + "/root"), "holding the World " + w + " object opens its advancement tab",
+			held, "the World " + w + " object is at hand", placed, "the World " + w + " rite is set down");
 	}
 
 	/** After hatching: opens what walled the Seed in and sets the time back. */

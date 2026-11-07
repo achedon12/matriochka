@@ -69,6 +69,8 @@ final class MachinesTest {
 				shot(ctx, id);
 			}
 			if (only.isEmpty()) {
+				// the overviews hover beside the floor: a spectator does not fall
+				s.runCommand("gamemode spectator @a");
 				s.runCommand(String.format(java.util.Locale.ROOT, "tp @a %.2f %.2f %.2f 0 24", STATIONS.size() * 1.5 - 1.0, y + 4.5, -13.0));
 				ctx.waitTicks(30);
 				shot(ctx, "row");
@@ -78,6 +80,7 @@ final class MachinesTest {
 				ctx.waitTicks(40);
 				shot(ctx, "night");
 				s.runCommand("time set 1000");
+				s.runCommand("gamemode creative @a");
 				ctx.waitTicks(10);
 			}
 			for (int i = 0; i < STATIONS.size(); i++) {

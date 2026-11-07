@@ -1,6 +1,6 @@
 # World 7: Pressure Ocean
 
-Pressure Ocean is world 7 of 10, in the expertise tier. Its rule is **Oxygen**. You open it with the World 7 Seed, made from the core of the World 6 boss (Your Double).
+Pressure Ocean is world 7 of 10, in the expertise tier. Its rule is **Oxygen**. You open it with the Abyssal Pearl, made from the core of the World 6 boss (Your Double).
 
 The whole world is sea. There is no dry land: you live, fight and mine under water, and the only way to breathe for long is a **snorkel helmet**.
 
@@ -14,13 +14,12 @@ The whole world is sea. There is no dry land: you live, fight and mine under wat
 | Boss | Pressure Leviathan (3027 health, 35.8 damage) |
 | Core | Leviathan Core |
 | People | Diver |
-| Seed | 1 Double Core, 8 Unstable Alloy, 4 Inverted Crystal |
+| Way in | Abyssal Pearl: 1 Double Core, 8 Unstable Alloy, 4 Inverted Crystal |
 
 ## Opening the world
 
-- **Seed recipe** (Matrix Workbench, after the World 6 boss (Your Double) is defeated): 1 Double Core, 8 Unstable Alloy, 4 Inverted Crystal.
-- **Soil:** tilled World Soil 6.
-- **Hatching condition:** Water within 4 blocks horizontally and 1 block vertically, as for World 1.
+- **Recipe of the Abyssal Pearl** (Matrix Workbench, after the World 6 boss (Your Double) is defeated): 1 Double Core, 8 Unstable Alloy, 4 Inverted Crystal.
+- **Rite:** Drop it into water at least 3 blocks deep. See [The way into each world](The-Way-Into-Each-World).
 - **Arrival:** a **diving chamber** on the sea floor at the centre of your group's parcel: a glass dome full of air around the Threshold, with lanterns, a chest of supplies (4 Oxygen Capsules, 3 Apnea Kelp, an iron pickaxe) and a door facing south. Doors hold water back, so the chamber stays dry when you open it. An Air Vent bubbles on the floor a few strides outside. The boss lair is 160 blocks south (positive Z); glowing coral posts on the sea floor lead the way.
 
 ## Terrain
@@ -91,10 +90,10 @@ Harmless creatures fill the sea. They never attack.
 
 | Item | Kind | Rarity (souls) | Effect |
 | --- | --- | --- | --- |
-| Abyssal Salt | dust | rare (10) | Salt Snorkel Helmet and World 8 Seed. |
+| Abyssal Salt | dust | rare (10) | Salt Snorkel Helmet and the Sapling of the Four Seasons (World 8). |
 | Nacre | gem | rare (10) | Nacre Snorkel Helmet. |
 | Abyssal Cobalt | ingot | rare (10) | Cobalt Snorkel Helmet and the Diving suit. |
-| Pressure Pearl | gem | epic (30) | Pearl Snorkel Helmet and World 8 Seed. |
+| Pressure Pearl | gem | epic (30) | Pearl Snorkel Helmet and the Sapling of the Four Seasons (World 8). |
 | Oxygen Capsule | consumable | common (1) | Right-click: fills half of a worn snorkel helmet's tank, or +60 breath. |
 | Thruster | thruster | epic (30) | Right-click underwater: dash in the direction you look. 0.75 s cooldown. |
 | Trench Trident | weapon | epic (30) | Sword-type weapon, about 23 attack damage. Gets a random class when crafted. |

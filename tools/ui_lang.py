@@ -14,7 +14,7 @@ U = {
  "journal.matriochka.tab.objective": ("Objective", "Objectif"), "journal.matriochka.tab.quests": ("Quests", "Quêtes"),
  "journal.matriochka.tab.karma": ("Karma", "Karma"), "journal.matriochka.tab.worlds": ("Worlds", "Mondes"), "journal.matriochka.tab.scroll": ("Scroll", "Parchemin"),
  "journal.matriochka.objective.guardian": ("Follow the sketch: the Guardian's Sanctuary lies a few hundred blocks from where you woke. Use its altar.", "Suis le croquis : le Sanctuaire du Gardien se trouve à quelques centaines de blocs de ton réveil. Active son autel."),
- "journal.matriochka.objective.next": ("Craft the World %s Seed at the Matrix Workbench, plant it on tilled World Soil and feed its condition.", "Fabrique la Graine du monde %s à l'Établi matriciel, plante-la sur une Terre de monde bêchée et nourris sa condition."),
+ "journal.matriochka.objective.next": ("Craft the way into World %s at the Matrix Workbench and perform its rite: its description says where it goes and what it waits for.", "Fabrique de quoi ouvrir le monde %s à l'Établi matriciel et accomplis son rite : sa description dit où le poser et ce qu'il attend."),
  "journal.matriochka.objective.end": ("The ten prisons are open. The Unfinished is gone, or is it you?", "Les dix prisons sont ouvertes. L'Inachevée a disparu, ou est-ce toi ?"),
  "journal.matriochka.doll": ("Doll of Life: %s / %s layers", "Poupée de vie : %s / %s couches"),
  "journal.matriochka.group": ("Group: %s player(s)", "Groupe : %s joueur(s)"),
@@ -173,10 +173,10 @@ U = {
  'command.matriochka.world.repaired': ('World %s: Threshold and boss stage rebuilt.', 'Monde %s : Seuil et scène du boss reconstruits.'),
  'command.matriochka.world.unknown': ('That group has never entered world %s.', "Ce groupe n'est jamais entré dans le monde %s."),
  'command.matriochka.world.moved': ('World %s: its World Block now stands at %s %s %s.', 'Monde %s : son Bloc-monde se trouve désormais en %s %s %s.'),
- 'command.matriochka.world.reset': ('World %s reset: a new parcel waits for the next Seed.', 'Monde %s réinitialisé : une nouvelle parcelle attend la prochaine Graine.'),
+ 'command.matriochka.world.reset': ('World %s reset: a new parcel waits for the next opening.', 'Monde %s réinitialisé : une nouvelle parcelle attend la prochaine ouverture.'),
  'command.matriochka.boss.reset': ('The boss of world %s can be fought again.', 'Le boss du monde %s peut de nouveau être combattu.'),
  'message.matriochka.hardcore_dead': ('Hardcore: your death is final. You watch the worlds as a spectator now.', 'Hardcore : ta mort est définitive. Tu observes désormais les mondes en spectateur.'),
- 'message.matriochka.world_deleted': ('Hardcore: World %s broke with its block. It is gone for your group; its Seed would open a new one.', "Hardcore : le monde %s s'est brisé avec son bloc. Il est perdu pour ton groupe ; sa Graine en ouvrirait un nouveau."),
+ 'message.matriochka.world_deleted': ('Hardcore: World %s broke with its block. It is gone for your group; its rite would open a new one.', "Hardcore : le monde %s s'est brisé avec son bloc. Il est perdu pour ton groupe ; son rite en ouvrirait un nouveau."),
  "command.matriochka.group.info": ("Group: %s member(s), defeated bosses: %s", "Groupe : %s membre(s), boss vaincus : %s"),
  "command.matriochka.group.invited": ("%s invites you to their group. /matriochka group join", "%s t'invite dans son groupe. /matriochka group join"),
  "command.matriochka.group.invite_sent": ("Invitation sent to %s.", "Invitation envoyée à %s."),
@@ -189,9 +189,9 @@ U = {
  "command.matriochka.karma.show": ("Karma %s, souls %s.", "Karma %s, âmes %s."),
  "command.matriochka.debug": ("World %s, parcel %s, gauges %s, doll layers %s", "Monde %s, parcelle %s, jauges %s, couches %s"),
  # world variants, boss mutations
- "message.matriochka.variant.lean_calm": ("The Seed leans calm (%s).", "La Graine penche vers le calme (%s)."),
- "message.matriochka.variant.lean_wild": ("The Seed leans wild (%s).", "La Graine penche vers la sauvagerie (%s)."),
- "message.matriochka.variant.lean_none": ("The Seed hesitates.", "La Graine hésite."),
+ "message.matriochka.variant.lean_calm": ("The world leans calm (%s).", "Le monde penche vers le calme (%s)."),
+ "message.matriochka.variant.lean_wild": ("The world leans wild (%s).", "Le monde penche vers la sauvagerie (%s)."),
+ "message.matriochka.variant.lean_none": ("The world hesitates.", "Le monde hésite."),
  "message.matriochka.variant.hatched": ("%s hatched as: %s.", "%s a éclos en : %s."),
  "journal.matriochka.variant": ("Variant: %s", "Variante : %s"),
  "boss.matriochka.mutated": ("%s — %s", "%s — %s"),
@@ -285,8 +285,8 @@ pages = [
   ("Chaque bloc peut contenir un monde", "Regarde de près un bloc de terre. À l'intérieur, il peut y avoir une forêt, une forge, une prison. J'en ai construit dix, l'un dans l'autre.")),
  (("Your objective", "Find the Guardian's Sanctuary, wake it at its altar and take its core. With it, the first world can open."),
   ("Ton objectif", "Trouve le Sanctuaire du Gardien, réveille-le à son autel et prends son noyau. Grâce à lui, le premier monde pourra s'ouvrir.")),
- (("The way down", "Craft a Seed at the Matrix Workbench. Till World Soil, plant the Seed, feed its condition. Enter the block, defeat its boss, take its core. Again."),
-  ("Le chemin vers le bas", "Fabrique une Graine à l'Établi matriciel. Bêche une Terre de monde, plante la Graine, nourris sa condition. Entre dans le bloc, bats son boss, prends son noyau. Recommence.")),
+ (("The way down", "The first world grows from a Seed planted on World Soil. Each world after it opens its own way: a heart thrown near lava, a key in a door, a rod in a storm. Enter the block, defeat its boss, take its core. Again."),
+  ("Le chemin vers le bas", "Le premier monde pousse d'une Graine plantée sur une Terre de monde. Chaque monde suivant s'ouvre à sa façon : un cœur près de la lave, une clé dans une porte, un paratonnerre sous l'orage. Entre dans le bloc, bats son boss, prends son noyau. Recommence.")),
  (("Surviving", "Death sends you back outside. A Doll of Life breaks a layer instead. A Soul Cradle lets you wake inside a world. A death chest keeps what you carried."),
   ("Survivre", "La mort te renvoie dehors. Une Poupée de vie brise une couche à sa place. Un Berceau d'âme te permet de te réveiller dans un monde. Un coffre de mort garde ce que tu portais.")),
  (("Choices", "Every item holds a soul. Purify it, or devour it. Every piece of gear gets a class when it is made. I will not tell you more. I wrote this for you."),
@@ -302,8 +302,8 @@ titles = {"painted_cape": ("Painted Cape", "Cape peinte"), "iron_lungs": ("Iron 
 for k, v in titles.items():
     U[f"title.matriochka.{k}"] = v
 # ------------------------------------------------------------------ server limits, comfort, cinematics, adaptive music
-U["message.matriochka.server_full"] = ("The server holds as many worlds as it allows. This Seed waits until another group frees its parcel.",
-                                       "Le serveur contient autant de mondes qu'il le permet. Cette Graine attend qu'un autre groupe libère sa parcelle.")
+U["message.matriochka.server_full"] = ("The server holds as many worlds as it allows. This opening waits until another group frees its parcel.",
+                                       "Le serveur contient autant de mondes qu'il le permet. Cette ouverture attend qu'un autre groupe libère sa parcelle.")
 comfort = {
     "title": ("Comfort", "Confort"),
     "open": ("Comfort", "Confort"),
@@ -563,6 +563,15 @@ U.update({
  "recap.matriochka.trial_value": ("%s · %s", "%s · %s"),
  "journal.matriochka.last_cycle": ("Last cycle", "Dernier cycle"),
 })
+# the rites that open Worlds 2 to 10 (tools/content.py RITES): what each one still waits for, and where it goes
+from content import RITES  # noqa: E402
+for _w, _en, _fr, _he, _hf, _we, _wf in RITES:
+    U[f"message.matriochka.rite.wait.{_w}"] = (_we, _wf)
+U["message.matriochka.rite.no_room"] = ("There is no room for it here.", "Il n'y a pas la place ici.")
+U["message.matriochka.rite.place.4"] = ("The Storm Rod goes on top of a lightning rod.", "Le Paratonnerre d'orage se pose au sommet d'un paratonnerre.")
+U["message.matriochka.rite.place.7"] = ("The Abyssal Pearl must go into the water.", "La Perle abyssale doit aller dans l'eau.")
+U["message.matriochka.rite.place.8"] = ("The Sapling of the Four Seasons is planted on grass or dirt.", "L'Arbrisseau des quatre saisons se plante sur de l'herbe ou de la terre.")
+U["message.matriochka.rite.place.9"] = ("The Seismic Stake is driven into stone, below y 40.", "Le Pieu sismique s'enfonce dans la pierre, sous y 40.")
 en = {k: v[0] for k, v in U.items()}
 fr = {k: v[1] for k, v in U.items()}
 d = os.path.join(os.path.dirname(__file__), "lang")

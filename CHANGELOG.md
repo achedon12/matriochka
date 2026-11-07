@@ -1,5 +1,44 @@
 # Changelog
 
+## Unreleased
+
+Every world now has its own way in, the stations are sculpted 3D pieces with screens of their own, and the Matrix Workbench is a real crafting table.
+
+### The way into each world
+
+- Only World 1 still grows from a Seed planted on tilled World Soil 0. Every other world opens with its own object and its own rite, made at the Matrix Workbench from the core of the boss before it:
+  - World 2, Ember Heart: within 3 blocks of lava, with 4 Ashrock around it.
+  - World 3, Jailer's Key: against an iron door, with a redstone signal.
+  - World 4, Storm Rod: on top of a lightning rod under the open sky, opened by a storm or a Storm Essence.
+  - World 5, Black Lantern: in complete darkness, with 4 Spent Glow within 2 blocks.
+  - World 6, Twin Mirrors: between two glass blocks, two blocks away on either side.
+  - World 7, Abyssal Pearl: dropped into water 3 blocks deep.
+  - World 8, Sapling of the Four Seasons: planted on grass or dirt, opens at dawn or dusk.
+  - World 9, Seismic Stake: driven into stone or deepslate below y 40.
+  - World 10, Traveller's Matryoshka: anywhere.
+- A rite site shows its object, puffs smoke while it waits and tells the player nearby what it still lacks. Feeding it still leans its world calm or wild. Each object keeps its item id (seed_2 to seed_10), so saves, recipes and quests carry over.
+- The bosses of Worlds 1 to 9 no longer drop World Soil; the Guardian still leaves the four soils World 1 needs.
+
+### Stations
+
+- The thirteen stations are sculpted 3D models that face the player who places them, with fitted shapes and moving parts: the matrix over the workbench, the rank medal, the soul wisps, the vat's bubbles, the jailer's key, the forge's arc, the dark crystal, the inverter's ring, the press ram, the pendulum and clock hands, the anchor's stones, the loom shuttle. Their lit parts glow in the dark; the HD pack has 32 x 32 materials.
+- Every station screen has its own layout and material: jars on two shelves (Spore Vat), crucibles (Ash Foundry), key tags on chains (Jailer's Table), plates in two arcs over an anvil (Lightning Forge), rune circles (Dark Altar), mirrored rows (Inverter), a honeycomb of portholes (Abyssal Press), medallions round a gear (Time Workshop), strata (Terrain Anchor), banners (Final Loom). A bar under the pieces shows the recipe under the cursor, and the niche holds a live instrument per station: thermometer, capacitor cells, an eye that opens in the dark, a depth gauge, a clock, a seismograph.
+- The Matrix Workbench is a 3 x 3 crafting table: every recipe made there has a pattern built from its exact cost, the result is taken like a crafted item, and its drawers fill the grid from the inventory like a recipe book.
+
+### Sound
+
+- Every boss is heard before it is seen: a breath, a growl or a hum in its world's colour.
+- Each rite sounds like its world while it works (embers, a turning key, a storm, a breath, glass, water, leaves, grinding rock, wooden doll halves) and opens its world with a swell in the world's own key.
+
+### Site
+
+- An Items page lists every item and block as an inventory, with nested dolls to pick a world, a search, and a sheet for each one: its recipe drawn slot by slot (the workbench's as a real 3 x 3 grid), the station that makes it, where it comes from, what it is used for and, for a station, everything it makes. Every ingredient and use opens its own sheet.
+- Recipes across the site are drawn the same way, with the stations' 3D renders and vanilla ingredient icons.
+
+### Checks
+
+- `./gradlew runClientGameTest -Pmachines` photographs every station model, the row by day and night, and every station screen; `-Prites` performs the nine rites and checks each opens its world.
+
 ## 0.4.3 (alpha)
 
 Each world's rule meter now reads like the vanilla HUD: a row of ten icons above the hunger bar.

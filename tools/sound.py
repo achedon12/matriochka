@@ -83,6 +83,10 @@ def _sounds():
     s("world_block.form", "sfx", "world_form", 1, "World Block forms", "Un bloc-monde se forme")
     s("world_block.crack", "sfx", "world_crack", 2, "World Block cracks", "Le bloc-monde se fend")
     s("seed.pulse", "sfx", "seed_pulse", 1, "Seed hums", "La Graine vibre")
+    # the rites that open Worlds 2 to 10: one sound while the rite is under way, one when it opens its world
+    for w in range(2, 11):
+        s(f"rite.w{w}", "sfx", "rite_layer", 2, "A rite stirs", "Un rite s'éveille", world=w)
+        s(f"rite.open.w{w}", "sfx", "rite_open", 1, "A world opens", "Un monde s'ouvre", world=w)
     # stations
     for st in ("matrix_workbench", "class_table", "soul_altar", "spore_vat", "ash_foundry", "jailer_table", "lightning_forge",
                "dark_altar", "inverter", "abyssal_press", "time_workshop", "terrain_anchor", "final_loom"):
@@ -96,6 +100,7 @@ def _sounds():
     s("boss.defeat", "sfx", "boss_defeat", 1, "Boss defeated", "Boss vaincu")
     for w in range(0, 11):
         s(f"boss.telegraph.w{w}", "sfx", "telegraph", 2, "Boss prepares an attack", "Le boss prépare une attaque", world=w)
+        s(f"boss.presence.w{w}", "sfx", "boss_presence", 3, "A boss breathes nearby", "Un boss respire tout près", world=w)
     # world rules
     s("world.gust", "sfx", "gust", 2, "Gust of wind", "Bourrasque")
     s("world.gravity_shift", "sfx", "gravity_shift", 1, "Gravity wavers", "La gravité vacille")
@@ -299,6 +304,24 @@ def java(package):
     for w in range(1, 11):
         L.append(f"\t\t\tcase {w} -> BOSS_TELEGRAPH_W{w};")
     L += ["\t\t\tdefault -> BOSS_TELEGRAPH_W0;", "\t\t};", "\t}", "",
+          "\t/** What a boss sounds like while it is near and idle, by world (0 to 10). */",
+          "\tpublic static SoundEvent presence(int world) {",
+          "\t\treturn switch (world) {"]
+    for w in range(1, 11):
+        L.append(f"\t\t\tcase {w} -> BOSS_PRESENCE_W{w};")
+    L += ["\t\t\tdefault -> BOSS_PRESENCE_W0;", "\t\t};", "\t}", "",
+          "\t/** The sound of a world's rite under way (2 to 10), or the Seed's hum for World 1. */",
+          "\tpublic static SoundEvent rite(int world) {",
+          "\t\treturn switch (world) {"]
+    for w in range(2, 11):
+        L.append(f"\t\t\tcase {w} -> RITE_W{w};")
+    L += ["\t\t\tdefault -> SEED_PULSE;", "\t\t};", "\t}", "",
+          "\t/** The sound of a world opening when its rite completes (2 to 10), or the World Block forming for World 1. */",
+          "\tpublic static SoundEvent riteOpen(int world) {",
+          "\t\treturn switch (world) {"]
+    for w in range(2, 11):
+        L.append(f"\t\t\tcase {w} -> RITE_OPEN_W{w};")
+    L += ["\t\t\tdefault -> WORLD_BLOCK_FORM;", "\t\t};", "\t}", "",
           "\t/** Loads the class, which registers every sound. */",
           "\tpublic static void init() {}", "}"]
     return "\n".join(L) + "\n"

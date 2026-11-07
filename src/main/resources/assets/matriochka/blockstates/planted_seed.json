@@ -1,7 +1,34 @@
 {
   "variants": {
-    "": {
+    "world=1": {
       "model": "matriochka:block/planted_seed"
+    },
+    "world=2": {
+      "model": "matriochka:block/planted_seed_2"
+    },
+    "world=3": {
+      "model": "matriochka:block/planted_seed_3"
+    },
+    "world=4": {
+      "model": "matriochka:block/planted_seed_4"
+    },
+    "world=5": {
+      "model": "matriochka:block/planted_seed_5"
+    },
+    "world=6": {
+      "model": "matriochka:block/planted_seed_6"
+    },
+    "world=7": {
+      "model": "matriochka:block/planted_seed_7"
+    },
+    "world=8": {
+      "model": "matriochka:block/planted_seed_8"
+    },
+    "world=9": {
+      "model": "matriochka:block/planted_seed_9"
+    },
+    "world=10": {
+      "model": "matriochka:block/planted_seed_10"
     }
   }
 }

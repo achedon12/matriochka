@@ -1,6 +1,6 @@
 # Souls and karma
 
-Souls are the mod's currency: they pay for class upgrades, rerolls, doll layers and cradle charges. Karma is a value from -100 to +100 that changes how the peoples of the worlds and the Surface villagers treat you, which quests open, the variant of the worlds you plant and your ending. Both are stored on the player and survive death.
+Souls are the mod's currency: they pay for class upgrades, rerolls, doll layers and cradle charges. Karma is a value from -100 to +100 that changes how the peoples of the worlds and the Surface villagers treat you, which quests open, the variant of the worlds you open and your ending. Both are stored on the player and survive death.
 
 ## Soul values
 
@@ -80,7 +80,7 @@ Completing a help quest adds 3 karma, a pact quest takes 3.
 
 ## Karma at the extremes
 
-- **World variants:** a Seed planted at karma +100 hatches into a Hallowed world, at -100 into a Cursed one. See [World variants and mutations](World-Variants-and-Mutations).
+- **World variants:** a Seed planted or a rite performed at karma +100 hatches into a Hallowed world, at -100 into a Cursed one. See [World variants and mutations](World-Variants-and-Mutations).
 - **Endings:** beating the Unfinished with a karma of 0 or more seals it away; with a negative karma you absorb it, and your karma falls to -100 for good. See [Endings and the New Cycle](Endings-and-New-Cycle).
 - Karma is kept through a New Cycle.
 

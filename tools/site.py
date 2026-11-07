@@ -213,6 +213,9 @@ except ImportError:  # the site still builds; screenshots and icons already in s
     Image = None
 
 ITEM_TEX = set()
+VANILLA_TEX = set()
+STATION_IMG = set()
+CUBE_TEX = set()
 ENTITY_TEX = set()
 BLOCK_TEX = set()
 SHOTS = {}
@@ -234,6 +237,13 @@ def copy_assets():
     BLOCK_TEX.update(_copy_dir(os.path.join(TEX, "block"), os.path.join(PUBLIC, "blocks"), ".png"))
     _copy_dir(GEO, os.path.join(PUBLIC, "models"), ".geo.json")
     _copy_dir(ANIM, os.path.join(PUBLIC, "animations"), ".animation.json")
+    # recipe cards: vanilla ingredient icons, block cubes and the sculpted stations
+    import site_visuals
+    vanilla = {i for st in RECIPES.values() for r in st for i, _n in r["inputs"] if i.startswith("minecraft:")}
+    VANILLA_TEX.update(site_visuals.vanilla_icons(PUBLIC, vanilla))
+    station_ids = [s[0] for s in C.STATIONS]
+    STATION_IMG.update(site_visuals.station_renders(PUBLIC, station_ids))
+    CUBE_TEX.update(site_visuals.block_icons(PUBLIC, os.path.join(TEX, "block"), [b["id"] for b in C.BLOCKS], set(station_ids)))
     process_shots(os.path.join(PUBLIC, "shots"))
     process_moves(os.path.join(PUBLIC, "shots", "moves"))
     process_frames(os.path.join(PUBLIC, "shots"))
@@ -563,9 +573,14 @@ def shot(key):
 
 
 def tex(id_):
-    """Public path of the texture of an item or block id, or None for vanilla ingredients."""
+    """Public path of the picture of an item or block id: its item texture, the cube of a block, the render of a
+    station, or the icon of a vanilla ingredient (None when there is none)."""
     if id_.startswith("minecraft:"):
-        return None
+        return f"vanilla/{id_[10:]}.png" if id_ in VANILLA_TEX else None
+    if id_ in STATION_IMG:
+        return f"stations/{id_}.png"
+    if id_ in CUBE_TEX and id_ not in ITEM_TEX:
+        return f"cubes/{id_}.png"
     if id_ in ITEM_TEX:
         return f"items/{id_}.png"
     if id_ in BLOCK_TEX:
@@ -592,6 +607,18 @@ def secs(x):
 
 def ing(inputs):
     return [dict(id=i, tex=tex(i), n=n, name=name(i)) for i, n in inputs]
+
+
+# the Matrix Workbench's grids, read from the file the game reads (tools/patterns.py writes it)
+_PATTERNS = os.path.join(ROOT, "src/main/resources/data/matriochka/workbench_patterns.json")
+PATTERNS = json.load(open(_PATTERNS)) if os.path.exists(_PATTERNS) else {}
+
+
+def grid(out_id, station):
+    """The nine cells of a workbench recipe ({id, tex, name, n} or None), or None for the other stations."""
+    if station != "matrix_workbench" or out_id not in PATTERNS:
+        return None
+    return [dict(id=c[0], tex=tex(c[0]), name=name(c[0]), n=c[1]) if c else None for c in PATTERNS[out_id]]
 
 
 def rec(r):
@@ -727,7 +754,7 @@ for _m in C.MOBS:
 
 PAGES = ["index", "worlds", "bestiary", "bosses", "systems", "download"]
 NAV = {"index": ("Home", "Accueil"), "worlds": ("Worlds", "Mondes"), "bestiary": ("Bestiary", "Bestiaire"),
-       "bosses": ("Bosses", "Boss"), "systems": ("Systems", "Systèmes"), "download": ("Download", "Télécharger")}
+       "bosses": ("Bosses", "Boss"), "items": ("Items", "Objets"), "systems": ("Systems", "Systèmes"), "download": ("Download", "Télécharger")}
 
 
 
@@ -1001,12 +1028,14 @@ def build_worlds():
         for (sid, en, fr, role, size, rarity, arch) in C.STRUCTURES[n]:
             structs.setdefault(role, []).append(en if LANG == "en" else fr)
         d.update(rule=C.RULES[w["rule"]][LANG], tier=t(*TIER[w["tier"]]),
-                 seed=dict(id=f"seed_{n}", tex=tex(f"seed_{n}"), name=name(f"seed_{n}"),
-                           soil=t(f"Plant on tilled World Soil {n - 1}.", f"Se plante sur une Terre de monde {n - 1} bêchée."),
-                           cond=LANGS[LANG].get(f"message.matriochka.seed_planted.{n}", ""),
+                 seed=dict(id=f"seed_{n}", tex=tex(f"seed_{n}"), name=name(f"seed_{n}"), grid=grid(f"seed_{n}", "matrix_workbench"),
+                           # World 1 grows from its Seed on World Soil; every other world opens with its own rite
+                           soil=(t("Plant on tilled World Soil 0.", "Se plante sur une Terre de monde 0 bêchée.") if n == 1
+                                 else LANGS[LANG].get(f"item.matriochka.seed_{n}.desc", "")),
+                           cond=(LANGS[LANG].get("message.matriochka.seed_planted.1", "") if n == 1 else ""),
                            inputs=ing(seed["inputs"]) if seed else []),
-                 station=dict(id=station, tex=tex(station), name=name(station), note=t(*STATION_NOTE[station]), shot=shot(f"gui_station_{station}"),
-                              make=ing(st_make["inputs"]) if st_make else [],
+                 station=dict(id=station, tex=tex(station), img=f"stations/{station}.png" if station in STATION_IMG else None, name=name(station), note=t(*STATION_NOTE[station]), shot=shot(f"gui_station_{station}"),
+                              make=ing(st_make["inputs"]) if st_make else [], makeGrid=grid(station, "matrix_workbench"),
                               recipes=[rec(r) for r in RECIPES.get(station, [])]),
                  items=item_list, armor=armor_d,
                  structures=[dict(role=t(*ROLE[r]), names=structs[r]) for r in ROLE if r in structs],
@@ -1032,6 +1061,11 @@ def _sources_of(item_id):
     for blk, drop in C.ORE_DROPS.items():
         if drop == item_id:
             out.append(name(blk))
+    # what a boss leaves besides its core (entity/MatrioBoss.java): the Guardian the Matrix Workbench, every boss
+    # but the last four soils of its world
+    for b in C.BOSSES:
+        if (item_id == "matrix_workbench" and b["world"] == 0) or (item_id == "world_soil_0" and b["world"] == 0):
+            out.append(name(b["id"]))
     return out
 
 
@@ -1047,7 +1081,7 @@ def codex(n):
             continue
         st, r = recipe_for(it["id"])
         items.append(dict(id=it["id"], tex=tex(it["id"]), name=name(it["id"]), kind=it["kind"], rarity=t(*RARITY.get(it["rarity"], ("", ""))),
-                          effect=it.get("effect_" + LANG, ""), station=STATION_NAME(st), inputs=ing(r["inputs"]) if r else [],
+                          effect=it.get("effect_" + LANG, ""), station=STATION_NAME(st), stationTex=tex(st) if st else None, stationId=st, grid=grid(it["id"], st), inputs=ing(r["inputs"]) if r else [],
                           count=r["count"] if r else 1, drops=_sources_of(it["id"])))
     armor = next((it for it in C.ITEMS if it["world"] == n and it["kind"] == "armorset"), None)
     if armor:
@@ -1055,21 +1089,22 @@ def codex(n):
             pid = f'{armor["id"]}_{p}'
             st, r = recipe_for(pid)
             items.append(dict(id=pid, tex=tex(pid), name=name(pid), kind="armor", rarity=t(*RARITY.get(armor["rarity"], ("", ""))),
-                              effect=armor.get("effect_" + LANG, ""), station=STATION_NAME(st), inputs=ing(r["inputs"]) if r else [],
+                              effect=armor.get("effect_" + LANG, ""), station=STATION_NAME(st), stationTex=tex(st) if st else None, stationId=st, grid=grid(pid, st), inputs=ing(r["inputs"]) if r else [],
                               count=r["count"] if r else 1, drops=[]))
     for f in C.FOODS:
         if f[3] == n and all(x["id"] != f[0] for x in items):
             st, r = recipe_for(f[0])
             items.append(dict(id=f[0], tex=tex(f[0]), name=name(f[0]), kind="food", rarity="", effect=f[4] if LANG == "en" else f[5],
-                              station=STATION_NAME(st), inputs=ing(r["inputs"]) if r else [], count=r["count"] if r else 1, drops=[]))
+                              station=STATION_NAME(st), stationTex=tex(st) if st else None, stationId=st, grid=grid(f[0], st), inputs=ing(r["inputs"]) if r else [], count=r["count"] if r else 1, drops=[]))
     blocks = []
     for b in C.BLOCKS:
         if b["world"] != n:
             continue
         st, r = recipe_for(b["id"])
-        blocks.append(dict(id=b["id"], tex=f"blocks/{b['id']}.png", name=name(b["id"]), kind=b["kind"], effect=b.get("note_" + LANG, ""),
+        blocks.append(dict(id=b["id"], tex=tex(b["id"]) or f"blocks/{b['id']}.png", name=name(b["id"]), kind=b["kind"], effect=b.get("note_" + LANG, ""),
+                           stationTex=tex(st) if st else None, stationId=st, grid=grid(b["id"], st),
                            station=STATION_NAME(st), inputs=ing(r["inputs"]) if r else [], count=r["count"] if r else 1,
-                           drops=[], yields=name(C.ORE_DROPS[b["id"]]) if b["id"] in C.ORE_DROPS else None))
+                           drops=_sources_of(b["id"]), yields=name(C.ORE_DROPS[b["id"]]) if b["id"] in C.ORE_DROPS else None))
     quests = [dict(name=q[4] if LANG == "en" else q[5], desc=q[6] if LANG == "en" else q[7]) for q in C.QUESTS if q[1] == n]
     ach = ach_list(lambda a, n=n: False) if False else [
         dict(cat={"progress": t("Progress", "Progression"), "explore": t("Exploration", "Exploration"), "combat": t("Combat", "Combat"),
@@ -1396,7 +1431,7 @@ def build_bosses():
                 drops.append(dict(id="last_doll_key", tex=tex("last_doll_key"), name=name("last_doll_key"), note="1"))
         unlocks = []
         if w < 10:
-            unlocks.append(t(f"Its core is the key ingredient of the World {w + 1} Seed.", f"Son noyau est l'ingrédient clé de la Graine du monde {w + 1}."))
+            unlocks.append(t(f"Its core opens the way into World {w + 1}.", f"Son noyau ouvre le chemin du monde {w + 1}."))
         if w == 0:
             unlocks.append(t("Your Scroll becomes the Artisan's Journal.", "Ton Parchemin devient le Journal de l'artisan."))
         if w in (1, 5, 8):
@@ -1446,7 +1481,7 @@ def build_copy():
         releases=t("Releases", "Versions"), wiki="Wiki", bug=t("Report a bug", "Signaler un bug"),
         world=t("World", "Monde"), health=t("Health", "Vie"), damage=t("Damage", "Dégâts"), boss=t("Boss", "Boss"),
         creatures=t("Creatures", "Créatures"), rule=t("Rule", "Règle"), stage=t("Stage", "Palier"),
-        seed=t("Opening it", "L'ouvrir"), station=t("Station", "Station"), builtFrom=t("Built at the Matrix Workbench from", "Se fabrique à l'Établi matriciel avec"),
+        seed=t("Opening it", "L'ouvrir"), station=t("Station", "Station"), workbench=name("matrix_workbench"), builtFrom=t("Built at the Matrix Workbench from", "Se fabrique à l'Établi matriciel avec"),
         carry=t("What you'll carry", "Ce que tu emporteras"), structures=t("Eleven structures", "Onze structures"), armour=t("Armour set", "Armure"),
         madeAt=t("Made at the Matrix Workbench", "Fabriqué à l'Établi matriciel"), moreAbout=t("Everything about this world", "Tout sur ce monde"),
         allWorlds=t("All worlds", "Tous les mondes"), back=t("Back to the bestiary", "Retour au bestiaire"), backBosses=t("Back to the bosses", "Retour aux boss"),
@@ -1497,8 +1532,8 @@ def build_copy():
              t("At the Matrix Workbench: the last boss's core plus resources from its world. The World 1 Seed asks for the Guardian Core, 16 iron ingots and 16 oak logs.",
                "À l'Établi matriciel : le noyau du dernier boss et des ressources de son monde. La Graine du monde 1 demande le Noyau du Gardien, 16 lingots de fer et 16 bûches de chêne.")),
             ("world_soil_0_tilled", t("Plant it on World Soil", "Plante-la sur une Terre de monde"),
-             t("Till World Soil with a hoe and plant the Seed. Each Seed wants the soil of the world before it, and one condition: water, heat, redstone, open sky, darkness, height. What you feed it decides whether its world hatches calm or wild.",
-               "Bêche une Terre de monde à la houe et plantes-y la Graine. Chaque Graine veut la terre du monde précédent, et une condition : eau, chaleur, redstone, ciel ouvert, obscurité, hauteur. Ce que tu lui donnes décide si son monde éclot apaisé ou sauvage.")),
+             t("Till World Soil with a hoe and plant the Seed, with water within four blocks. What you feed it decides whether its world hatches calm or wild.",
+               "Bêche une Terre de monde à la houe et plantes-y la Graine, avec de l'eau à moins de quatre blocs. Ce que tu lui donnes décide si son monde éclot apaisé ou sauvage.")),
             ("world_block", t("Enter the block", "Entre dans le bloc"),
              t("The Seed hatches into a World Block. Use it and you shrink inside, onto a Threshold that brings you back out.",
                "La Graine éclot en Bloc-monde. Utilise-le et tu rétrécis à l'intérieur, sur un Seuil qui te ramène dehors.")),
@@ -1509,8 +1544,8 @@ def build_copy():
              t("Every attack is announced, then leaves an opening. Read the pattern, punish the opening, take the core.",
                "Chaque attaque est annoncée, puis laisse une ouverture. Lis le schéma, punis l'ouverture, prends le noyau.")),
             ("seed_2", t("Go deeper", "Descends encore"),
-             t("The core is the key ingredient of the next Seed. Ten times, until the last block opens onto something much larger.",
-               "Le noyau est l'ingrédient clé de la Graine suivante. Dix fois, jusqu'à ce que le dernier bloc s'ouvre sur quelque chose de bien plus grand."))]],
+             t("The core opens the way into the next world, and every world has its own rite: an Ember Heart near lava, a key in an iron door, a rod in a storm, a lantern in the dark. Ten times, until the last block opens onto something much larger.",
+               "Le noyau ouvre le chemin du monde suivant, et chaque monde a son rite : un Cœur de braise près de la lave, une clé dans une porte en fer, un paratonnerre sous l'orage, une lanterne dans le noir. Dix fois, jusqu'à ce que le dernier bloc s'ouvre sur quelque chose de bien plus grand."))]],
         worldsH=t("Ten worlds, ten rules", "Dix mondes, dix règles"),
         worldsP=t("Learning, then mastery, then expertise. World 10 tests everything at once.", "Apprentissage, puis maîtrise, puis expertise. Le monde 10 vérifie tout à la fois."),
         sysH=t("Built to be survived", "Pensé pour qu'on y survive"),
@@ -1545,8 +1580,8 @@ def build_copy():
         openWorld=t("Open", "Ouvrir"),
         verbsH=t("What you do in Matriochka", "Ce que tu fais dans Matriochka"),
         verbsP=t("Four things, over and over, ten worlds deep.", "Quatre choses, encore et encore, sur dix mondes de profondeur."),
-        verbs=[dict(verb=t("Grow a world", "Fais pousser un monde"), p=t("Craft a Seed, plant it on World Soil, meet its condition. The block that hatches holds a world.",
-                                                                      "Fabrique une Graine, plante-la sur une Terre de monde, remplis sa condition. Le bloc qui éclot contient un monde."),
+        verbs=[dict(verb=t("Open a world", "Ouvre un monde"), p=t("Plant the first Seed, then perform each world's own rite: fire, a key, a storm, darkness, mirrors, the deep. The block that appears holds a world.",
+                                                                      "Plante la première Graine, puis accomplis le rite de chaque monde : le feu, une clé, l'orage, le noir, des miroirs, les abysses. Le bloc qui apparaît contient un monde."),
                     img=shot("gui_station_matrix_workbench"), href="systems/"),
                dict(verb=t("Survive its rule", "Survis à sa règle"), p=t("Toxic air, rising heat, total darkness, upside-down gravity: each world bends one rule.",
                                                                          "Air toxique, chaleur, obscurité totale, gravité inversée : chaque monde tord une règle."),
@@ -1571,9 +1606,9 @@ def build_copy():
         faq=[dict(q=t("Where do I start?", "Par où commencer ?"),
                   a=t("Read the Artisan's Scroll you spawn with, then find the Guardian's Sanctuary on the Surface and wake the Block Guardian.",
                       "Lis le Parchemin de l'artisan reçu au départ, puis trouve le Sanctuaire du Gardien sur la Surface et réveille le Gardien du bloc.")),
-             dict(q=t("My Seed does not hatch.", "Ma Graine n'éclot pas."),
-                  a=t("Check that it sits on tilled World Soil of the previous world and that its condition is met: smoke puffs mean it is still waiting.",
-                      "Vérifie qu'elle est sur une Terre de monde du monde précédent, bêchée, et que sa condition est remplie : des volutes de fumée veulent dire qu'elle attend encore.")),
+             dict(q=t("My world does not open.", "Mon monde ne s'ouvre pas."),
+                  a=t("Smoke puffs mean the rite is still waiting: stand close and it tells you what it lacks. The World 1 Seed wants tilled World Soil 0 and water; each other object's description says where it goes and what it waits for.",
+                      "Des volutes de fumée veulent dire que le rite attend encore : approche-toi, il te dit ce qui lui manque. La Graine du monde 1 veut une Terre de monde 0 bêchée et de l'eau ; la description de chaque autre objet dit où le poser et ce qu'il attend.")),
              dict(q=t("I died inside a world. Are my things gone?", "Je suis mort dans un monde. Mes affaires sont perdues ?"),
                   a=t("No. A death chest keeps them where you fell, and a Soul Cradle placed beforehand lets you wake up inside the world.",
                       "Non. Un coffre de mort les garde là où tu es tombé, et un Berceau d'âmes posé avant te fait renaître dans le monde.")),
@@ -1630,8 +1665,8 @@ def build_copy():
         h=t("The ten worlds", "Les dix mondes"),
         lead=t("Each world is planted inside the one before it, and each one bends a rule you thought you knew. Numbers below come straight from the mod's code.",
                "Chaque monde est planté dans le précédent, et chacun tord une règle que tu croyais connaître. Les chiffres ci-dessous viennent directement du code du mod."),
-        desc=t("The ten worlds of Matriochka: rules, Seeds, stations, recipes, creatures, bosses and structures.",
-               "Les dix mondes de Matriochka : règles, Graines, stations, recettes, créatures, boss et structures."),
+        desc=t("The ten worlds of Matriochka: rules, the way into each, stations, recipes, creatures, bosses and structures.",
+               "Les dix mondes de Matriochka : règles, l'accès à chacun, stations, recettes, créatures, boss et structures."),
         noShot=t("No clear capture of this world yet: its signature block stands in.", "Pas encore de capture nette de ce monde : son bloc emblématique la remplace."),
         inGame=t("in game", "en jeu"),
     )
@@ -1665,7 +1700,26 @@ def build_copy():
         rewardNote=t(f"plus 100 souls and {SHELL_SHARDS} Shell Shards for every player in the fight", f"et 100 âmes et {SHELL_SHARDS} Éclats d'enveloppe pour chaque joueur présent au combat"),
         desc=t("The eleven bosses of Matriochka: health, attacks, phases, timings and rewards.", "Les onze boss de Matriochka : vie, attaques, phases, timings et récompenses."),
     )
-    return dict(ui=ui, nav=nav, home=home, worlds=worlds, bestiary=bestiary, bosses=bosses, systems=build_systems(d), download=build_download())
+    items = dict(
+        h=t("Items and blocks", "Objets et blocs"),
+        lead=t("Everything Matriochka adds, world by world: what it does, the station that makes it and the exact recipe, or the creature that drops it.",
+               "Tout ce qu'ajoute Matriochka, monde par monde : ce que ça fait, la station qui le fabrique et la recette exacte, ou la créature qui le laisse."),
+        search=t("Search an item or a block", "Chercher un objet ou un bloc"),
+        all=t("Everything", "Tout"), onlyItems=t("Items", "Objets"), onlyBlocks=t("Blocks", "Blocs"), allWorlds=t("All worlds", "Tous les mondes"),
+        none=t("Nothing matches that search.", "Rien ne correspond à cette recherche."),
+        count=t("{n} shown", "{n} affichés"),
+        made=t("Made at", "Fabriqué à"), found=t("Dropped by", "Laissé par"), gives=t("Mined, it gives", "Miné, il donne"),
+        noRecipe=t("Not crafted at a station.", "Ne se fabrique pas à une station."),
+        noCraft=t("No recipe: you find it.", "Pas de recette : il se trouve."),
+        stationsH=t("The thirteen stations", "Les treize stations"),
+        stationsP=t("Every world has its own. Pick one to see what it takes to build and what it makes.",
+                    "Chaque monde a la sienne. Choisis-en une pour voir ce qu'il faut pour la construire et ce qu'elle fabrique."),
+        aBlock=t("Block", "Bloc"), anItem=t("Item", "Objet"), world=t("World", "Monde"),
+        recipeH=t("Recipe", "Recette"), usesH=t("Used to make", "Sert à fabriquer"), makesH=t("What it makes", "Ce qu'elle fabrique"),
+        desc=t("Every item and block Matriochka adds, with its recipe drawn slot by slot and the station that makes it.",
+               "Tous les objets et blocs qu'ajoute Matriochka, avec leur recette dessinée case par case et la station qui les fabrique."),
+    )
+    return dict(ui=ui, nav=nav, home=home, worlds=worlds, bestiary=bestiary, bosses=bosses, items=items, systems=build_systems(d), download=build_download())
 
 
 def slot_label(slot):
@@ -1704,8 +1758,8 @@ def build_gear():
     out = []
     for (gid, en, fr, w, kind, rarity, shape, een, efr, st, inputs) in C.REPLAY_GEAR:
         out.append(dict(tex=tex(gid), h=en if LANG == "en" else fr,
-                        p=(een if LANG == "en" else efr) + " " + t(f"World {w}, made at the {name(st)}.", f"Monde {w}, fabriqué à : {name(st)}."),
-                        inputs=ing(inputs)))
+                        p=(een if LANG == "en" else efr) + " " + t(f"World {w}.", f"Monde {w}."),
+                        inputs=ing(inputs), station=dict(tex=tex(st), name=name(st)), grid=grid(gid, st)))
     return out
 
 
@@ -1798,8 +1852,8 @@ def build_systems(d):
                    f"{len(C.REPLAY_GEAR)} armes et outils qui se comportent comme le monde d'où ils viennent, chacun fabriqué à la station de son monde et dessiné à la main. Ils naissent avec une classe comme tout autre équipement."),
         gear=build_gear(),
         autoH=t("Stations on hoppers", "Des stations sur entonnoirs"),
-        auto=[t("Every station with recipes works with hoppers. It keeps one recipe: the last one crafted there by hand, or the one picked with the small gilded funnel on its drawer.",
-                "Chaque station à recettes fonctionne avec des entonnoirs. Elle garde une recette : la dernière fabriquée à la main, ou celle choisie avec le petit entonnoir doré de son tiroir."),
+        auto=[t("Every station with recipes works with hoppers. It keeps one recipe: the last one crafted there by hand, or the one picked with the small gilded funnel that shows on a recipe under the cursor.",
+                "Chaque station à recettes fonctionne avec des entonnoirs. Elle garde une recette : la dernière fabriquée à la main, ou celle choisie avec le petit entonnoir doré qui apparaît sur une recette au survol."),
               t("Ingredients go in from the top and the sides, each into its own slots; anything else is refused. The result comes out from below, and a comparator reads how full the station is.",
                 "Les ingrédients entrent par le dessus et les côtés, chacun dans ses cases ; tout le reste est refusé. Le résultat sort par le dessous, et un comparateur lit le remplissage de la station."),
               t("Each station keeps its condition: heat for the Ash Foundry, a charge for the Lightning Forge (lightning, or Storm Essence in its fuel slot), darkness, deep water, dawn and dusk. The Spore Vat waits for a ripe brew, and the Jailer's Table makes one batch per lock pattern entered.",
@@ -1977,7 +2031,10 @@ def main():
                   hasReel=os.path.exists(os.path.join(PUBLIC, "reel.mp4")))
     for lang in ("en", "fr"):
         LANG = lang
-        data = dict(lang=lang, copy=build_copy(), worlds=build_worlds(), mobs=build_mobs(), bosses=build_bosses())
+        worlds = build_worlds()
+        # the catalogue: every world's items and blocks, in world order
+        catalog = [dict(n=w["n"], name=w["name"], items=w["codex"]["items"], blocks=w["codex"]["blocks"]) for w in worlds]
+        data = dict(lang=lang, copy=build_copy(), worlds=worlds, mobs=build_mobs(), bosses=build_bosses(), catalog=catalog)
         with open(os.path.join(DATA, f"{lang}.json"), "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=1)
     with open(os.path.join(DATA, "shared.json"), "w", encoding="utf-8") as f:

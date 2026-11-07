@@ -1,6 +1,6 @@
 # Effects Between the Scales
 
-A World Block is not a simple portal: it stays linked to what surrounds it, within 8 blocks. Where you plant a Seed matters. Effects only run while the block's chunk is loaded; what the surroundings send inside is stored, so it keeps working while you play in the world.
+A World Block is not a simple portal: it stays linked to what surrounds it, within 8 blocks. Where you plant a Seed or perform a rite matters. Effects only run while the block's chunk is loaded; what the surroundings send inside is stored, so it keeps working while you play in the world.
 
 ## From the inside to the outside
 

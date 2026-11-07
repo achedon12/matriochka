@@ -24,9 +24,9 @@ This page lists the structural blocks of the mod, the thirteen crafting stations
 
 | Block | What it does |
 | --- | --- |
-| World Soil 0 to 9 | Tilled with a hoe, it accepts the next world's Seed. See [Core loop](Core-Loop#world-soil). |
-| Planted Seed | The growing seed. Not obtainable as an item. |
-| World Block | Holds a world. Use it to enter. Only its group can break it; breaking it drops a Cracked Doll and leaves the world unstable for 20 minutes (half as many creatures again). A group has one World Block per world: a second Seed of the same world waits until the first block is broken. Light level 9, immovable by pistons, huge blast resistance. A small turning island of its world floats above it, and it stays linked to its surroundings within 8 blocks (see [Effects between the scales](Effects-Between-the-Scales)). In the hardcore mode, breaking it deletes its world for the group. |
+| World Soil 0 to 9 | The soil of each world. Tilled with a hoe, World Soil 0 accepts the World 1 Seed; Soils 1 to 9 are decorative. See [Core loop](Core-Loop#world-soil). |
+| Planted Seed | The growing World 1 Seed, or a rite site drawn as the object set down for Worlds 2 to 10 (see [The way into each world](The-Way-Into-Each-World)). Not obtainable as an item. |
+| World Block | Holds a world. Use it to enter. Only its group can break it; breaking it drops a Cracked Doll and leaves the world unstable for 20 minutes (half as many creatures again). A group has one World Block per world: a second Seed or rite of the same world waits until the first block is broken. Light level 9, immovable by pistons, huge blast resistance. A small turning island of its world floats above it, and it stays linked to its surroundings within 8 blocks (see [Effects between the scales](Effects-Between-the-Scales)). In the hardcore mode, breaking it deletes its world for the group. |
 | Threshold | The exit platform inside each world. Use it to leave. Unbreakable, light level 12. |
 | Soul Cradle | Respawn point inside a world, 3 charges. See [Doll of Life and death](Doll-of-Life-and-Death#soul-cradle). |
 | Death Chest | Holds your items after a death inside a world. Unbreakable; using it gives everything back and removes it. |
@@ -42,11 +42,11 @@ This page lists the structural blocks of the mod, the thirteen crafting stations
 
 ## Stations
 
-All stations share one screen: the recipe list on the left (only the recipes you have unlocked), the station's condition (Ready / Not ready) and a craft button. Ingredients are taken from your inventory; creative players craft for free and ignore conditions. Every station works with a sound of its own (see [Sounds](Sounds)). With Just Enough Items installed, every station has a recipe page with the station as catalyst, and recipes that open with a boss say which one.
+Each station is a sculpted 3D model that faces the player who places it, with moving parts, and each has a screen of its own (see [Station screens](#station-screens)). Every screen lists only the recipes you have unlocked, shows the station's condition (Ready / Not ready) and, in a bar, the recipe under the cursor. At every station but the Matrix Workbench you craft by clicking a recipe, and its ingredients are taken from your inventory; the Workbench is a 3 x 3 crafting table (see [Matrix Workbench](#matrix-workbench)). Creative players craft for free and ignore conditions. Every station works with a sound of its own (see [Sounds](Sounds)). With Just Enough Items installed, every station has a recipe page with the station as catalyst, and recipes that open with a boss say which one.
 
 | Station | World | Mechanic | How to get it |
 | --- | --- | --- | --- |
-| Matrix Workbench | Surface | Crafts Seeds; recipes unlock with cores. | Dropped by the Block Guardian |
+| Matrix Workbench | Surface | 3 x 3 crafting table for the way into each world; recipes unlock with cores. | Dropped by the Block Guardian |
 | Class Table | Surface | Upgrades an item's class. | 1 Smithing Table (vanilla), 6 Iron Ingot (vanilla) (Block Guardian defeated) |
 | Soul Altar | Surface | Purify or devour an item. | 4 Crying Obsidian (vanilla), 4 Gold Ingot (vanilla) (Block Guardian defeated) |
 | Spore Vat | World 1 | Result depends on fermentation time. | 1 Cauldron (vanilla), 4 Iron Ingot (vanilla) (Block Guardian defeated) |
@@ -60,11 +60,29 @@ All stations share one screen: the recipe list on the left (only the recipes you
 | Terrain Anchor | World 9 | Stabilizes the ground (radius 16). | 1 Anvil (vanilla), 8 Temporal Sand, 1 Season Fragment (World 8 boss defeated) |
 | Final Loom | World 10 | Weaves materials from every world. | 1 Loom (vanilla), 8 Terrain Fragment, 1 Terrain Heart (World 9 boss defeated) |
 
+### Station screens
+
+Every screen has its own layout and a live instrument in its niche.
+
+| Station | Layout | Instrument |
+| --- | --- | --- |
+| Matrix Workbench | 3 x 3 grid, result slot and recipe drawers | - |
+| Spore Vat | Jars on two shelves | A porthole into the vat |
+| Ash Foundry | Crucibles | A thermometer |
+| Jailer's Table | Key tags on chains | - |
+| Lightning Forge | Plates in two arcs over an anvil | Charge cells |
+| Dark Altar | Rune circles | An eye that opens in darkness |
+| Inverter | Mirrored rows | - |
+| Abyssal Press | A honeycomb of portholes | A depth gauge |
+| Time Workshop | Medallions round a gear | A clock |
+| Terrain Anchor | Strata | A seismograph |
+| Final Loom | Banners | - |
+
 ### Automation
 
 Every station with recipes (all but the Soul Altar and the Class Table, which work on your own souls and gear) can run by itself from hoppers, droppers or any mod that moves items through vanilla containers.
 
-- **The kept recipe.** A station keeps one recipe: the last one you crafted there by hand, or the one you pick with the small gilded funnel at the right end of its drawer (lit when chosen; click it again to stop). Picking a recipe asks the same as crafting it: it must be unlocked, and the newest world's gear needs you to have taken part in its last boss.
+- **The kept recipe.** A station keeps one recipe: the last one you crafted there by hand, or the one you pick with the small gilded funnel that shows on a recipe under the cursor (lit when chosen; click it again to stop). Picking a recipe asks the same as crafting it: it must be unlocked, and the newest world's gear needs you to have taken part in its last boss.
 - **In and out.** Ingredients go in from the top and the sides; each ingredient has its own two slots, so one never crowds out another, and anything the recipe does not use is refused. The result comes out from below. Below also gives back the ingredients of a recipe you no longer keep. A comparator reads how full the station is.
 - **Crafting.** Once a second, when every ingredient is there, the output has room and the station's condition holds, it makes the recipe once, with the same yields and side effects as by hand.
 - **Conditions.** They are those of crafting by hand: the Ash Foundry needs its heat in the green (and can still blow up when overheated), the Lightning Forge spends a charge per craft (lightning, or Storm Essence fed by a hopper into its fuel slot), the Dark Altar needs complete darkness, the Abyssal Press deep water, the Time Workshop dawn or dusk. The Spore Vat waits until its brew is ripe (one minute), then brews. The Jailer's Table makes one batch each time its lock pattern is entered.
@@ -72,20 +90,22 @@ Every station with recipes (all but the Soul Altar and the Class Table, which wo
 
 ### Matrix Workbench
 
-The base crafting station. It makes Seeds, the other stations and the utility items.
+The base crafting station. It makes the way into each world (the World 1 Seed and the nine rite objects), the other stations and the utility items.
+
+It is a real 3 x 3 crafting table. Each recipe has a fixed pattern on the grid, built from its exact cost: each ingredient fills a symmetric group of cells, and the rarest one (a core, for example) takes the centre. The result shows in the result slot; take it, or shift-click it, like a crafted item. Its recipe drawers act as a recipe book: pressing one lays that recipe's pattern out on the grid from your inventory.
 
 | Output | Ingredients | Unlocked |
 | --- | --- | --- |
 | World 1 Seed | 1 Guardian Core, 16 Iron Ingot (vanilla), 16 Oak Log (vanilla) | Block Guardian defeated |
-| World 2 Seed | 1 Queen Core, 8 Sporite, 16 Spores | World 1 boss defeated |
-| World 3 Seed | 1 Titan Core, 8 Ash Ingot, 16 Blazing Rock | World 2 boss defeated |
-| World 4 Seed | 1 Jailer Core, 8 Dungeon Key, 8 Sealed Fragment | World 3 boss defeated |
-| World 5 Seed | 1 Storm King Core, 8 Storm Essence, 8 Celestial Crystal | World 4 boss defeated |
-| World 6 Seed | 1 Light Eater Core, 8 Shadow Shard, 4 Diamond Fragment | World 5 boss defeated |
-| World 7 Seed | 1 Double Core, 8 Unstable Alloy, 4 Inverted Crystal | World 6 boss defeated |
-| World 8 Seed | 1 Leviathan Core, 4 Pressure Pearl, 8 Abyssal Salt | World 7 boss defeated |
-| World 9 Seed | 1 Seasons Core, 8 Temporal Sand, 4 Season Fragment | World 8 boss defeated |
-| World 10 Seed | 1 Terrain Core, 1 Terrain Heart, 1 Key of the Last Doll | World 9 boss defeated |
+| Ember Heart (World 2) | 1 Queen Core, 8 Sporite, 16 Spores | World 1 boss defeated |
+| Jailer's Key (World 3) | 1 Titan Core, 8 Ash Ingot, 16 Blazing Rock | World 2 boss defeated |
+| Storm Rod (World 4) | 1 Jailer Core, 8 Dungeon Key, 8 Sealed Fragment | World 3 boss defeated |
+| Black Lantern (World 5) | 1 Storm King Core, 8 Storm Essence, 8 Celestial Crystal | World 4 boss defeated |
+| Twin Mirrors (World 6) | 1 Light Eater Core, 8 Shadow Shard, 4 Diamond Fragment | World 5 boss defeated |
+| Abyssal Pearl (World 7) | 1 Double Core, 8 Unstable Alloy, 4 Inverted Crystal | World 6 boss defeated |
+| Sapling of the Four Seasons (World 8) | 1 Leviathan Core, 4 Pressure Pearl, 8 Abyssal Salt | World 7 boss defeated |
+| Seismic Stake (World 9) | 1 Seasons Core, 8 Temporal Sand, 4 Season Fragment | World 8 boss defeated |
+| Traveller's Matryoshka (World 10) | 1 Terrain Core, 1 Terrain Heart, 1 Key of the Last Doll | World 9 boss defeated |
 | Soul Cradle | 4 Oak Planks (vanilla), 1 Wool Thread, 2 Roots | Always |
 | Wool Thread x4 | 1 White Wool (vanilla) | Always |
 | Return Thread x2 | 2 Wool Thread, 1 Ender Pearl (vanilla) | Always |

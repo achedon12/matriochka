@@ -1417,7 +1417,12 @@ def crafted_item(it, res=16):
     if iid in CORE_WORLD:
         return it_core(res, CORE_WORLD[iid])
     if iid.startswith("seed_"):
-        return it_seed(res, int(iid[5:]))
+        w = int(iid[5:])
+        if w >= 2:
+            # Worlds 2 to 10 open with their own object, not a Seed (tools/rites_art.py)
+            import rites_art
+            return rites_art.RITE_ART[w](res)
+        return it_seed(res, w)
     if iid in SNORKEL_STYLE:
         return it_snorkel(res, iid)
     if it.get("kind") == "armor" and it.get("set") in ARMOR_STYLE:

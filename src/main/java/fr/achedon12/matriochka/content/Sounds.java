@@ -18,6 +18,24 @@ public final class Sounds {
 	public static final SoundEvent WORLD_BLOCK_FORM = register("world_block.form");
 	public static final SoundEvent WORLD_BLOCK_CRACK = register("world_block.crack");
 	public static final SoundEvent SEED_PULSE = register("seed.pulse");
+	public static final SoundEvent RITE_W2 = register("rite.w2");
+	public static final SoundEvent RITE_OPEN_W2 = register("rite.open.w2");
+	public static final SoundEvent RITE_W3 = register("rite.w3");
+	public static final SoundEvent RITE_OPEN_W3 = register("rite.open.w3");
+	public static final SoundEvent RITE_W4 = register("rite.w4");
+	public static final SoundEvent RITE_OPEN_W4 = register("rite.open.w4");
+	public static final SoundEvent RITE_W5 = register("rite.w5");
+	public static final SoundEvent RITE_OPEN_W5 = register("rite.open.w5");
+	public static final SoundEvent RITE_W6 = register("rite.w6");
+	public static final SoundEvent RITE_OPEN_W6 = register("rite.open.w6");
+	public static final SoundEvent RITE_W7 = register("rite.w7");
+	public static final SoundEvent RITE_OPEN_W7 = register("rite.open.w7");
+	public static final SoundEvent RITE_W8 = register("rite.w8");
+	public static final SoundEvent RITE_OPEN_W8 = register("rite.open.w8");
+	public static final SoundEvent RITE_W9 = register("rite.w9");
+	public static final SoundEvent RITE_OPEN_W9 = register("rite.open.w9");
+	public static final SoundEvent RITE_W10 = register("rite.w10");
+	public static final SoundEvent RITE_OPEN_W10 = register("rite.open.w10");
 	public static final SoundEvent STATION_MATRIX_WORKBENCH = register("station.matrix_workbench");
 	public static final SoundEvent STATION_CLASS_TABLE = register("station.class_table");
 	public static final SoundEvent STATION_SOUL_ALTAR = register("station.soul_altar");
@@ -37,16 +55,27 @@ public final class Sounds {
 	public static final SoundEvent BOSS_PHASE = register("boss.phase");
 	public static final SoundEvent BOSS_DEFEAT = register("boss.defeat");
 	public static final SoundEvent BOSS_TELEGRAPH_W0 = register("boss.telegraph.w0");
+	public static final SoundEvent BOSS_PRESENCE_W0 = register("boss.presence.w0");
 	public static final SoundEvent BOSS_TELEGRAPH_W1 = register("boss.telegraph.w1");
+	public static final SoundEvent BOSS_PRESENCE_W1 = register("boss.presence.w1");
 	public static final SoundEvent BOSS_TELEGRAPH_W2 = register("boss.telegraph.w2");
+	public static final SoundEvent BOSS_PRESENCE_W2 = register("boss.presence.w2");
 	public static final SoundEvent BOSS_TELEGRAPH_W3 = register("boss.telegraph.w3");
+	public static final SoundEvent BOSS_PRESENCE_W3 = register("boss.presence.w3");
 	public static final SoundEvent BOSS_TELEGRAPH_W4 = register("boss.telegraph.w4");
+	public static final SoundEvent BOSS_PRESENCE_W4 = register("boss.presence.w4");
 	public static final SoundEvent BOSS_TELEGRAPH_W5 = register("boss.telegraph.w5");
+	public static final SoundEvent BOSS_PRESENCE_W5 = register("boss.presence.w5");
 	public static final SoundEvent BOSS_TELEGRAPH_W6 = register("boss.telegraph.w6");
+	public static final SoundEvent BOSS_PRESENCE_W6 = register("boss.presence.w6");
 	public static final SoundEvent BOSS_TELEGRAPH_W7 = register("boss.telegraph.w7");
+	public static final SoundEvent BOSS_PRESENCE_W7 = register("boss.presence.w7");
 	public static final SoundEvent BOSS_TELEGRAPH_W8 = register("boss.telegraph.w8");
+	public static final SoundEvent BOSS_PRESENCE_W8 = register("boss.presence.w8");
 	public static final SoundEvent BOSS_TELEGRAPH_W9 = register("boss.telegraph.w9");
+	public static final SoundEvent BOSS_PRESENCE_W9 = register("boss.presence.w9");
 	public static final SoundEvent BOSS_TELEGRAPH_W10 = register("boss.telegraph.w10");
+	public static final SoundEvent BOSS_PRESENCE_W10 = register("boss.presence.w10");
 	public static final SoundEvent WORLD_GUST = register("world.gust");
 	public static final SoundEvent WORLD_GRAVITY_SHIFT = register("world.gravity_shift");
 	public static final SoundEvent WORLD_QUAKE = register("world.quake");
@@ -137,6 +166,55 @@ public final class Sounds {
 			case 9 -> BOSS_TELEGRAPH_W9;
 			case 10 -> BOSS_TELEGRAPH_W10;
 			default -> BOSS_TELEGRAPH_W0;
+		};
+	}
+
+	/** What a boss sounds like while it is near and idle, by world (0 to 10). */
+	public static SoundEvent presence(int world) {
+		return switch (world) {
+			case 1 -> BOSS_PRESENCE_W1;
+			case 2 -> BOSS_PRESENCE_W2;
+			case 3 -> BOSS_PRESENCE_W3;
+			case 4 -> BOSS_PRESENCE_W4;
+			case 5 -> BOSS_PRESENCE_W5;
+			case 6 -> BOSS_PRESENCE_W6;
+			case 7 -> BOSS_PRESENCE_W7;
+			case 8 -> BOSS_PRESENCE_W8;
+			case 9 -> BOSS_PRESENCE_W9;
+			case 10 -> BOSS_PRESENCE_W10;
+			default -> BOSS_PRESENCE_W0;
+		};
+	}
+
+	/** The sound of a world's rite under way (2 to 10), or the Seed's hum for World 1. */
+	public static SoundEvent rite(int world) {
+		return switch (world) {
+			case 2 -> RITE_W2;
+			case 3 -> RITE_W3;
+			case 4 -> RITE_W4;
+			case 5 -> RITE_W5;
+			case 6 -> RITE_W6;
+			case 7 -> RITE_W7;
+			case 8 -> RITE_W8;
+			case 9 -> RITE_W9;
+			case 10 -> RITE_W10;
+			default -> SEED_PULSE;
+		};
+	}
+
+	/** The sound of a world opening when its rite completes (2 to 10), or the World Block forming for World 1. */
+	public static SoundEvent riteOpen(int world) {
+		return switch (world) {
+			case 2 -> RITE_OPEN_W2;
+			case 3 -> RITE_OPEN_W3;
+			case 4 -> RITE_OPEN_W4;
+			case 5 -> RITE_OPEN_W5;
+			case 6 -> RITE_OPEN_W6;
+			case 7 -> RITE_OPEN_W7;
+			case 8 -> RITE_OPEN_W8;
+			case 9 -> RITE_OPEN_W9;
+			case 10 -> RITE_OPEN_W10;
+			default -> WORLD_BLOCK_FORM;
 		};
 	}
 

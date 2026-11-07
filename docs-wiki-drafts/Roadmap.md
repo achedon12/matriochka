@@ -9,7 +9,7 @@ Matriochka is an alpha. The whole story can be played from the Surface to the th
 - [World 0](World-0), opened by the ten [hidden dolls](Hidden-Dolls) nested in order, with its Obsession rule and the Artisan's Shadow.
 - The three [endings](Endings-and-New-Cycle) (Sealed, Absorbed, Set Down the Tools), each with a crawl on the Scroll, the credits and an advancement, and the New Cycle with stronger worlds.
 - The fifty Journal pages, in English and French, with the coded pages in the Artisan's cipher (see [The Artisan's Journal](Artisans-Journal)).
-- [World variants](World-Variants-and-Mutations) chosen while a Seed hatches, the karma variants at +100 and -100, and boss mutations from World 6.
+- [World variants](World-Variants-and-Mutations) chosen while a Seed or rite site hatches, the karma variants at +100 and -100, and boss mutations from World 6.
 
 **Worlds**
 

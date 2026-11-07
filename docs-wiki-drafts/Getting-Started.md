@@ -47,4 +47,4 @@ Until you enter World 1, a small lacquered card under the HUD plaque (top left) 
 
 ## After World 1
 
-From here the Journal's Objective page always names the next Seed. See [The Artisan's Journal](Artisans-Journal) for its tabs, and the world pages for each world's rules.
+Only World 1 grows from a Seed. Every later world opens with its own object, crafted at the Matrix Workbench from the core of the boss before it, and its own rite: see [The way into each world](The-Way-Into-Each-World). From here the Journal's Objective page always names the next way in. See [The Artisan's Journal](Artisans-Journal) for its tabs, and the world pages for each world's rules.

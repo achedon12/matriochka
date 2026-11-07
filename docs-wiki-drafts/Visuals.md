@@ -27,11 +27,12 @@ What is hand-painted:
 
 - **The dolls**: the ten hidden dolls (each in its world's lacquer and glyph, and taller the further out it sits in the nest), the Nested Dolls (an opened doll with the next one inside), the Whole Matryoshka, the Life, Chance, Cracked and Refuge Dolls.
 - **The eleven cores**: a lacquered shell in the world's colour, caged in gold, its heart glowing through a window.
-- **The ten Seeds**: a lacquered kernel with the world's painted bands, set in a gold cup, sprouting.
+- **The ways into the worlds**: the World 1 Seed, a lacquered kernel with the world's painted bands, set in a gold cup, sprouting; and the nine rite objects in their worlds' palettes (an ember heart, the Jailer's key, a storm rod, a black lantern, twin mirrors, an abyssal pearl, a sapling of the four seasons, a seismic stake and a traveller's matryoshka). A rite site set down in the world is drawn as its object.
 - **The gear**: every armor piece of the ten sets, with its own detail (chitin plates, glowing thermal seams, jailer rivets, a celestial star, nocturnal glints, a mirror band, diving portholes, season leaves, living rock cracks, artisan gold), and the ten world weapons.
 - **The four snorkel helmets**: salt, nacre, cobalt and pearl.
 - **Writings and offerings**: the Artisan's Scroll, the Blank Scroll, the Journal, the Journal Page, the Sealed Shackle, the Storm Censer, the Wreath of Seasons and the Unfinished Effigy.
-- **Blocks**: the ten World Soils and their tilled tops, the World Block, the Threshold, and every face of the thirteen stations (a painted wooden frame with a gold fillet around the world's enamel, the station's emblem on the sides and its work surface on top).
+- **Blocks**: the ten World Soils and their tilled tops, the World Block and the Threshold.
+- **The thirteen stations** are sculpted 3D models with fitted shapes, not cubes: they face the player who places them and have moving parts (the matrix over the workbench, the rank medal, the soul wisps, the vat's bubbles, the jailer's key, the forge's arc, the dark crystal, the inverter's ring, the press ram, the pendulum and clock hands, the anchor's stones, the loom shuttle). The HD pack gives them 32 x 32 materials.
 
 Preview sheets, upscaled with a vanilla item for scale, are in [`docs-wiki-drafts/textures/`](textures/): `python3 tools/texsheets.py` rebuilds them.
 

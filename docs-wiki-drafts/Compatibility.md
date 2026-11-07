@@ -39,12 +39,12 @@ To try them in a dev client: `./gradlew runClient -Pcompat` adds Sodium, Iris an
 
 Traveler's Backpack was checked against every progression gate. None of them looks at what you carry, so a backpack cannot get around them:
 
-- **Seeds:** planting a Seed checks on the server that your group beat the previous boss, so a Seed (or a core) brought in a backpack, or given by a friend, does not open a world early.
+- **Seeds and rite objects:** planting a Seed or setting down a rite object checks on the server that your group beat the previous boss, so one (or a core) brought in a backpack, or given by a friend, does not open a world early.
 - **Bosses and altars:** altars only work in their own world, and an offering in a backpack still has to be held.
 - **Enchanting, the Nether and the End** are gated by your group's progression, not by items.
 - **Diamonds** do not exist before World 5: they are removed from the Surface's ores and from vanilla chests, wherever they would be stored.
 - **The Refuge Doll** stays shut near an awake boss whatever you carry; a backpack is only storage, it does not teleport.
-- **The New Cycle** takes back the old cycle's cores, Seeds, World Soils, offerings and keys from your inventory only; one kept in a backpack (or a shulker box) cannot be used anyway, because the new cycle's worlds check the new cycle's progress.
+- **The New Cycle** takes back the old cycle's cores, Seeds and rite objects, World Soils, offerings and keys from your inventory only; one kept in a backpack (or a shulker box) cannot be used anyway, because the new cycle's worlds check the new cycle's progress.
 - **Death in a world** puts your inventory, backpack items included, in the death chest. A backpack worn on the back follows Traveler's Backpack's own death rules.
 
 ## Mod Menu
