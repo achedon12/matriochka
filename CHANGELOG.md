@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.0 (alpha)
 
 The mod now runs on Minecraft 26.1.2, 26.2 and 26.3, every world has two lesser biomes, every boss fights to its own theme, and the dolls have a body when they are held.
 
