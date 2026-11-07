@@ -1,0 +1,138 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#b07a62",
+    "minecraft:visual/fog_color": "#8a4a3a",
+    "minecraft:visual/water_fog_color": "#6a4a3a",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "matriochka:crawling_block",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:mimic",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:foundation_eater",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:earth_hand",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:walking_column",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 10
+            }
+          ],
+          "creature": [
+            {
+              "type": "matriochka:anchored",
+              "count": 1,
+              "weight": 2
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w9.heartbeat",
+          "tick_chance": 0.004
+        },
+        {
+          "sound": "matriochka:ambient.w9.grind",
+          "tick_chance": 0.004
+        }
+      ],
+      "loop": "matriochka:ambient.w9.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_9",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 6.0,
+    "minecraft:visual/fog_end_distance": 110.0,
+    "minecraft:visual/cloud_color": "#ccc09080",
+    "minecraft:visual/sky_light_color": "#ffd8c0",
+    "minecraft:visual/sunrise_sunset_color": "#99ff7040",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:rust_mote"
+        },
+        "probability": 0.005
+      },
+      {
+        "particle": {
+          "type": "matriochka:grit"
+        },
+        "probability": 0.0008
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#6a4a3a",
+    "grass_color": "#8a3a2a",
+    "foliage_color": "#8a3a2a"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:terrain_ore",
+      "matriochka:pulse_vein_patch"
+    ],
+    [],
+    [],
+    [
+      "minecraft:patch_dead_bush_badlands"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.8
+}

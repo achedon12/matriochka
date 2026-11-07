@@ -59,7 +59,7 @@ public final class Blocks2 {
 		protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 			if (stack.is(net.minecraft.tags.ItemTags.HOES) && !state.getValue(TILLED)) {
 				level.setBlock(pos, state.setValue(TILLED, true), 3);
-				level.playSound(player, pos, SoundEvents.HOE_TILL.value(), SoundSource.BLOCKS, 1f, 1f);
+				level.playSound(player, pos, fr.achedon12.matriochka.mc.Mc.hoeTill(), SoundSource.BLOCKS, 1f, 1f);
 				return InteractionResult.SUCCESS;
 			}
 			String id = ModContent.idOf(stack.getItem());
@@ -112,7 +112,7 @@ public final class Blocks2 {
 	}
 
 	// ---------------------------------------------------------------- Planted Seed (hatching)
-	public static class PlantedSeed extends Block implements EntityBlock {
+	public static class PlantedSeed extends Block implements EntityBlock, net.minecraft.world.level.block.LiquidBlockContainer {
 		private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 10, 12);
 		/** The world this Seed or rite opens; it picks the model (the Seed for World 1, the rite object after). */
 		public static final net.minecraft.world.level.block.state.properties.IntegerProperty WORLD =
@@ -121,6 +121,18 @@ public final class Blocks2 {
 		public PlantedSeed(BlockBehaviour.Properties p) {
 			super(p);
 			registerDefaultState(stateDefinition.any().setValue(WORLD, 1));
+		}
+
+		/** Water never washes a Seed or a rite site away: the Abyssal Pearl lies under water (26.2's water broke it). */
+		@Override
+		public boolean canPlaceLiquid(net.minecraft.world.entity.@Nullable LivingEntity user, net.minecraft.world.level.BlockGetter level, BlockPos pos,
+				BlockState state, net.minecraft.world.level.material.Fluid type) {
+			return false;
+		}
+
+		@Override
+		public boolean placeLiquid(net.minecraft.world.level.LevelAccessor level, BlockPos pos, BlockState state, net.minecraft.world.level.material.FluidState fluid) {
+			return false;
 		}
 
 		@Override

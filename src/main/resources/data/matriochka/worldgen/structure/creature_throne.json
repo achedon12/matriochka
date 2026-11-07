@@ -1,6 +1,6 @@
 {
   "type": "matriochka:procedural",
-  "biomes": "matriochka:world_10",
+  "biomes": "#matriochka:in_world_10",
   "spawn_overrides": {},
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin",

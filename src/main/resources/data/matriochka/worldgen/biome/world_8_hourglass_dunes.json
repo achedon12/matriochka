@@ -1,0 +1,125 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#90b8e8",
+    "minecraft:visual/fog_color": "#e0d0a0",
+    "minecraft:visual/water_fog_color": "#5a8ab8",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "matriochka:seasonal_creature",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:hourglass_elder",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:dusk_shade",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:minute_child",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:hour_keeper",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 10
+            }
+          ],
+          "creature": [
+            {
+              "type": "matriochka:ephemeral",
+              "count": 1,
+              "weight": 2
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w8.chime",
+          "tick_chance": 0.002
+        },
+        {
+          "sound": "matriochka:ambient.w8.cuckoo",
+          "tick_chance": 0.0008
+        }
+      ],
+      "loop": "matriochka:ambient.w8.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_8",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 12.0,
+    "minecraft:visual/fog_end_distance": 160.0,
+    "minecraft:visual/sky_light_color": "#fff4dc"
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#5a8ab8",
+    "grass_color": "#d8b860",
+    "foliage_color": "#d8b860"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:season_ore",
+      "matriochka:temporal_sand_block_patch"
+    ],
+    [],
+    [],
+    [
+      "minecraft:trees_birch_and_oak_leaf_litter",
+      "minecraft:flower_forest_flowers",
+      "minecraft:patch_grass_forest",
+      "minecraft:patch_pumpkin"
+    ],
+    []
+  ],
+  "has_precipitation": true,
+  "temperature": 0.8
+}

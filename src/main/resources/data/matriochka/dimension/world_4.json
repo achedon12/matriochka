@@ -3,8 +3,45 @@
   "generator": {
     "type": "minecraft:noise",
     "biome_source": {
-      "type": "minecraft:fixed",
-      "biome": "matriochka:world_4"
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "matriochka:world_4",
+          "parameters": {
+            "temperature": -0.15,
+            "humidity": -0.15,
+            "continentalness": 0.0,
+            "erosion": 0.0,
+            "weirdness": 0.0,
+            "depth": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "matriochka:world_4_hail_meadows",
+          "parameters": {
+            "temperature": -0.1,
+            "humidity": 0.5,
+            "continentalness": 0.0,
+            "erosion": 0.0,
+            "weirdness": 0.0,
+            "depth": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "matriochka:world_4_thunder_heights",
+          "parameters": {
+            "temperature": 0.5,
+            "humidity": -0.1,
+            "continentalness": 0.0,
+            "erosion": 0.0,
+            "weirdness": 0.0,
+            "depth": 0.0,
+            "offset": 0.0
+          }
+        }
+      ]
     },
     "settings": "matriochka:world_4"
   }

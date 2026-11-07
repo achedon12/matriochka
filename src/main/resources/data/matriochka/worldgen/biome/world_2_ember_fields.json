@@ -1,0 +1,137 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#8a3a1a",
+    "minecraft:visual/fog_color": "#6a2a10",
+    "minecraft:visual/water_fog_color": "#7a4a2a",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "matriochka:ash_miner",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:living_vein",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:rock_salamander",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:dead_smith",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:slag_golem",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 10
+            }
+          ],
+          "creature": [
+            {
+              "type": "matriochka:free_miner",
+              "count": 1,
+              "weight": 2
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w2.hammer",
+          "tick_chance": 0.004
+        },
+        {
+          "sound": "matriochka:ambient.w2.crackle",
+          "tick_chance": 0.008
+        }
+      ],
+      "loop": "matriochka:ambient.w2.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_2",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 2.0,
+    "minecraft:visual/fog_end_distance": 64.0,
+    "minecraft:visual/sky_light_color": "#ffc89a",
+    "minecraft:visual/block_light_tint": "#ffa050",
+    "minecraft:visual/ambient_light_color": "#2a1006",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:ember"
+        },
+        "probability": 0.004
+      },
+      {
+        "particle": {
+          "type": "minecraft:ash"
+        },
+        "probability": 0.006
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#7a4a2a",
+    "grass_color": "#6a2a14",
+    "foliage_color": "#6a2a14"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:giant_ore_block",
+      "matriochka:blazing_rock_ore",
+      "matriochka:ember_stone_patch"
+    ],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 2.0
+}

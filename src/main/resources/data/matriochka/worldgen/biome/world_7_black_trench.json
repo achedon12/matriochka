@@ -1,0 +1,168 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#1a5a8a",
+    "minecraft:visual/fog_color": "#051a2a",
+    "minecraft:visual/water_fog_color": "#0a2c5e",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "matriochka:abyssal_hunter",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:blade_school",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:pressure_jelly",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:bell_crab",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:trench_eel",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 10
+            }
+          ],
+          "creature": [
+            {
+              "type": "matriochka:diver",
+              "count": 1,
+              "weight": 2
+            }
+          ],
+          "water_ambient": [
+            {
+              "type": "matriochka:lantern_shoal",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 5
+              },
+              "weight": 30
+            },
+            {
+              "type": "matriochka:glow_jelly",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 20
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w7.drip",
+          "tick_chance": 0.012
+        },
+        {
+          "sound": "matriochka:ambient.w7.groan",
+          "tick_chance": 0.003
+        }
+      ],
+      "loop": "matriochka:ambient.w7.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_7",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/water_fog_start_distance": -6.0,
+    "minecraft:visual/water_fog_end_distance": 40.0,
+    "minecraft:visual/sky_light_color": "#a8d8ff",
+    "minecraft:visual/block_light_tint": "#a8f0ff",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:bubble"
+        },
+        "probability": 0.004
+      },
+      {
+        "particle": {
+          "type": "minecraft:underwater"
+        },
+        "probability": 0.004
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#0a3a6a",
+    "grass_color": "#0a2a3a",
+    "foliage_color": "#0a2a3a"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:abyssal_salt_ore",
+      "matriochka:nacre_ore",
+      "matriochka:abyssal_cobalt_ore",
+      "matriochka:pearl_bed",
+      "matriochka:pressure_coral_patch"
+    ],
+    [
+      "matriochka:pressure_coral_bed"
+    ],
+    [],
+    [
+      "minecraft:warm_ocean_vegetation",
+      "minecraft:seagrass_deep_warm",
+      "minecraft:kelp_warm",
+      "minecraft:kelp_cold",
+      "minecraft:sea_pickle",
+      "matriochka:pressure_coral_spire",
+      "matriochka:air_vent"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.5
+}

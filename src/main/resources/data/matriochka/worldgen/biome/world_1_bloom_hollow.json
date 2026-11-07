@@ -1,0 +1,143 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#7a9a56",
+    "minecraft:visual/fog_color": "#4f6a32",
+    "minecraft:visual/water_fog_color": "#3f6b4a",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "matriochka:sporeling",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 4
+              },
+              "weight": 60
+            },
+            {
+              "type": "matriochka:root_creeper",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:snare_flower",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:spore_bearer",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:chitin_guard",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 10
+            }
+          ],
+          "creature": [
+            {
+              "type": "matriochka:gatherer",
+              "count": 1,
+              "weight": 2
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w1.insects",
+          "tick_chance": 0.006
+        },
+        {
+          "sound": "matriochka:ambient.w1.spore",
+          "tick_chance": 0.004
+        }
+      ],
+      "loop": "matriochka:ambient.w1.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_1",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 0.0,
+    "minecraft:visual/fog_end_distance": 90.0,
+    "minecraft:visual/sky_fog_end_distance": 120.0,
+    "minecraft:visual/cloud_color": "#cc9ab870",
+    "minecraft:visual/sky_light_color": "#e4f4c0",
+    "minecraft:visual/block_light_tint": "#f0e8a0",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:spore"
+        },
+        "probability": 0.006
+      },
+      {
+        "particle": {
+          "type": "minecraft:spore_blossom_air"
+        },
+        "probability": 0.0015
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.9,
+  "effects": {
+    "water_color": "#3f6b4a",
+    "grass_color": "#5f8a2a",
+    "foliage_color": "#5f8a2a"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:sporite_ore",
+      "matriochka:spore_bloom_patch"
+    ],
+    [],
+    [],
+    [
+      "minecraft:trees_jungle",
+      "minecraft:bamboo_vegetation",
+      "minecraft:patch_grass_jungle",
+      "minecraft:vines",
+      "minecraft:patch_melon"
+    ],
+    []
+  ],
+  "has_precipitation": true,
+  "temperature": 0.95
+}

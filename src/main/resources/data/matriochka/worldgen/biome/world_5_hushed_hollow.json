@@ -1,0 +1,134 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/fog_color": "#020208",
+    "minecraft:visual/water_fog_color": "#0a0f2a",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "matriochka:blind_prowler",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:glow_devourer",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:echo",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:eyeless_watcher",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:shadow_mother",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 10
+            }
+          ],
+          "creature": [
+            {
+              "type": "matriochka:silent_one",
+              "count": 1,
+              "weight": 2
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w5.breath",
+          "tick_chance": 0.003
+        },
+        {
+          "sound": "matriochka:ambient.w5.steps",
+          "tick_chance": 0.002
+        }
+      ],
+      "loop": "matriochka:ambient.w5.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_5",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 4.0,
+    "minecraft:visual/fog_end_distance": 30.0,
+    "minecraft:visual/block_light_tint": "#b4c0ff",
+    "minecraft:visual/ambient_light_color": "#000000",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:deep_mote"
+        },
+        "probability": 0.001
+      },
+      {
+        "particle": {
+          "type": "matriochka:shadow_wisp"
+        },
+        "probability": 0.0005
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:nether_cave"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#0a0f2a",
+    "grass_color": "#10202a",
+    "foliage_color": "#10202a"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:diamond_fragment_ore",
+      "matriochka:faint_glow_patch"
+    ],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.8
+}

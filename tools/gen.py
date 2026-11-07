@@ -7,12 +7,14 @@ Vanilla worldgen templates are read from $MC_DATA (extracted 26.3 data folder).
 import copy
 import json
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from content import *  # noqa
 from paint import paint_item, paint_armor_item, paint_armor_layer, paint_block, paint_station_top, hx, paint_snorkel_item, paint_snorkel_layer
 import atmosphere
+import held3d
 import craft
 import particles
 import models
@@ -27,13 +29,16 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "mob
 import registry as mobs_registry  # noqa: E402
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-RES = os.path.join(ROOT, "src/main/resources")
+# the Minecraft version the data is written for: 26.3 by default; MATRIO_MC=26.2 (tools/versions.py) writes the world
+# generation in 26.2's formats, from 26.2's vanilla templates, into MATRIO_RES
+TARGET = os.environ.get("MATRIO_MC", "26.3")
+RES = os.environ.get("MATRIO_RES", os.path.join(ROOT, "src/main/resources"))
 A = os.path.join(RES, "assets/matriochka")
 D = os.path.join(RES, "data/matriochka")
 JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Content.java")
 SOUNDS_JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Sounds.java")
 PARTICLES_JAVA = os.path.join(ROOT, "src/main/java/fr/achedon12/matriochka/content/Particles.java")
-MC = os.environ.get("MC_DATA", os.path.join(os.path.dirname(os.path.abspath(__file__)), "vanilla"))
+MC = os.environ.get("MC_DATA", os.path.join(os.path.dirname(os.path.abspath(__file__)), "vanilla" if TARGET == "26.3" else "vanilla_" + TARGET))
 NS = "matriochka"
 
 EN, FR = {}, {}
@@ -42,12 +47,101 @@ ALL_BOSSES = BOSSES + [WORLD_ZERO_BOSS]
 
 
 def w(path, obj):
+    if TARGET != "26.3" and not isinstance(obj, str):
+        obj = older_format(path, obj)
+        # 26.2 keeps the configured features under their older folder name
+        path = path.replace(os.sep + "worldgen" + os.sep + "feature" + os.sep, os.sep + "worldgen" + os.sep + "configured_feature" + os.sep)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         if isinstance(obj, str):
             f.write(obj)
         else:
             json.dump(obj, f, indent=2, ensure_ascii=False)
+
+
+# ------------------------------------------------------------------ older formats (TARGET 26.2)
+def to262_density(o):
+    """A density function written in 26.3's form, rewritten in 26.2's: argument/argument1/argument2 instead of
+    input/left/right, y_clamped_gradient for gradient, cache_once for cache, shifted_noise for a shifted noise, sub
+    and lerp spelled out with add and mul, and no beardifier (26.2 adds it on its own)."""
+    if isinstance(o, list):
+        return [to262_density(x) for x in o]
+    if not isinstance(o, dict) or not isinstance(o.get("type"), str):
+        return {k: to262_density(v) for k, v in o.items()} if isinstance(o, dict) else o
+    t = o["type"].removeprefix("minecraft:")
+    c = {k: to262_density(v) for k, v in o.items()}
+    neg = lambda x: {"type": "minecraft:mul", "argument1": -1.0, "argument2": x}
+    if t in ("add", "mul", "min", "max"):
+        a, b = c.get("left", c.get("argument1")), c.get("right", c.get("argument2"))
+        if t == "add" and isinstance(b, dict) and b.get("type") == "minecraft:beardifier":
+            return a
+        if t == "add" and isinstance(a, dict) and a.get("type") == "minecraft:beardifier":
+            return b
+        return {"type": "minecraft:" + t, "argument1": a, "argument2": b}
+    if t == "beardifier":
+        return 0.0
+    if t == "sub":
+        return {"type": "minecraft:add", "argument1": c["left"], "argument2": neg(c["right"])}
+    if t == "lerp":
+        first, second, alpha = c["first"], c["second"], c["alpha"]
+        return {"type": "minecraft:add", "argument1": first,
+                "argument2": {"type": "minecraft:mul", "argument1": alpha, "argument2": {"type": "minecraft:add", "argument1": second, "argument2": neg(first)}}}
+    if t == "gradient":
+        return {"type": "minecraft:y_clamped_gradient", "from_y": int(c["from_coordinate"]), "to_y": int(c["to_coordinate"]),
+                "from_value": c["from_value"], "to_value": c["to_value"]}
+    if t == "cache":
+        return {"type": "minecraft:cache_once", "argument": c.get("input", c.get("argument"))}
+    if t in ("abs", "square", "cube", "half_negative", "quarter_negative", "squeeze", "blend_density", "interpolated", "invert",
+             "cache_2d", "cache_once", "flat_cache", "cache_all_in_cell"):
+        return {"type": "minecraft:" + t, "argument": c.get("input", c.get("argument"))}
+    if t == "noise" and "shift_x" in c:
+        return {"type": "minecraft:shifted_noise", "noise": c["noise"], "shift_x": c["shift_x"], "shift_y": 0.0, "shift_z": c["shift_z"],
+                "xz_scale": c["xz_scale"], "y_scale": c["y_scale"]}
+    return c
+
+
+def older_format(path, obj):
+    """What a file written in 26.3's format becomes for TARGET (26.2)."""
+    p = path.replace(os.sep, "/")
+    if "/worldgen/noise/" in p and "base_octave" in obj:
+        # 26.2: the first octave and one amplitude per octave
+        mods = obj.get("amplitude_modifiers", [1.0] * obj["octave_count"])
+        return {"firstOctave": obj["base_octave"], "amplitudes": [obj.get("base_amplitude", 1.0) * m for m in mods][:obj["octave_count"]]}
+    if "/worldgen/biome/" in p:
+        obj = copy.deepcopy(obj)
+        ns = obj.get("attributes", {}).pop("minecraft:gameplay/natural_mob_spawns", None)
+        arg = (ns or {}).get("argument", ns or {})
+        cats = {k: [] for k in ("monster", "creature", "ambient", "axolotls", "underground_water_creature", "water_creature", "water_ambient", "misc")}
+        for cat, entries in arg.get("spawns_by_category", {}).items():
+            for e in entries:
+                cnt = e.get("count", 1)
+                lo, hi = (cnt["min_inclusive"], cnt["max_inclusive"]) if isinstance(cnt, dict) else (cnt, cnt)
+                cats.setdefault(cat, []).append({"type": e["type"], "weight": e.get("weight", 1), "minCount": lo, "maxCount": hi})
+        obj["spawners"] = cats
+        obj["spawn_costs"] = arg.get("spawn_costs", {})
+        return obj
+    if "/worldgen/noise_settings/" in p:
+        obj = to262_density(obj)
+        # 26.2: the default block and fluid are block states
+        for k in ("default_block", "default_fluid"):
+            v = obj.get(k)
+            if isinstance(v, str):
+                obj[k] = {"Name": v, "Properties": {"level": "0"}} if v in ("minecraft:water", "minecraft:lava") else {"Name": v}
+        return obj
+    if "/worldgen/density_function/" in p:
+        return to262_density(obj)
+    if "/worldgen/feature/" in p:
+        # 26.2: the feature's settings under "config", blocks as states, providers spelled out
+        def state(o):
+            if isinstance(o, list):
+                return [state(x) for x in o]
+            if isinstance(o, dict):
+                if set(o) == {"id"} and isinstance(o["id"], str):
+                    return {"type": "minecraft:simple_state_provider", "state": {"Name": o["id"]}}
+                return {k: ({"Name": v} if k == "state" and isinstance(v, str) else state(v)) for k, v in o.items()}
+            return o
+        return {"type": obj["type"], "config": state({k: v for k, v in obj.items() if k != "type"})}
+    return obj
 
 
 def mk(path):
@@ -312,6 +406,65 @@ SURF = {1: ("spore_moss", "rootstone", "rootstone"), 2: ("ashrock", "ashrock", "
         4: ("skygrass", "cloudstone", "cloudstone"), 5: ("umbral_moss", "umbral_stone", "umbral_stone"), 6: ("prism_moss", "inverted_stone", "inverted_stone"),
         7: ("abyssal_sand", "trench_rock", "trench_rock"), 8: ("chrono_grass", "hourstone", "hourstone"), 9: ("flesh_stone", "living_rock", "living_rock"),
         10: ("workshop_felt", "giant_plank", "giant_plank")}
+# Each world's two lesser biomes beside its own: (suffix, English, French, surface block, grass and foliage, fog).
+# The world's biome keeps the middle of the climate; the lesser ones take its wet and its warm edges
+# (biome_source below), with their own floor, colours and name. Spawns, features and structures are the world's.
+SUB_BIOMES = {
+    1: [("bloom_hollow", "Bloom Hollow", "Creux des floraisons", "minecraft:moss_block", "5f8a2a", "4f6a32"),
+        ("rot_marsh", "Rot Marsh", "Marais pourri", "minecraft:mud", "3a4a22", "3e4a30")],
+    2: [("ember_fields", "Ember Fields", "Champs de braises", "matriochka:ember_stone", "6a2a14", "6a2a10"),
+        ("ash_drifts", "Ash Drifts", "Congères de cendre", "minecraft:smooth_basalt", "4a3a34", "4a3430")],
+    3: [("mossy_cells", "Mossy Cells", "Cellules moussues", "minecraft:mossy_stone_bricks", "5a6a4a", "2a332a"),
+        ("crumbling_wing", "Crumbling Wing", "Aile effondrée", "minecraft:cracked_stone_bricks", "5a5a62", "33302a")],
+    4: [("hail_meadows", "Hail Meadows", "Prés de grêle", "minecraft:calcite", "c8d8e8", "c8d8f0"),
+        ("thunder_heights", "Thunder Heights", "Hauteurs du tonnerre", "matriochka:cloudstone", "8aa0c0", "9ab0d0")],
+    5: [("hushed_hollow", "Hushed Hollow", "Creux du silence", "minecraft:sculk", "10202a", "020208"),
+        ("bare_dark", "Bare Dark", "Noir nu", "matriochka:umbral_stone", "15151f", "050508")],
+    6: [("crystal_fields", "Crystal Fields", "Champs de cristal", "minecraft:amethyst_block", "b84ad8", "c0a0e8"),
+        ("mirror_flats", "Mirror Flats", "Plaines miroirs", "minecraft:smooth_quartz", "e0e0f0", "e0d0f0")],
+    7: [("coral_shelf", "Coral Shelf", "Plateau de corail", "minecraft:sand", "1a8a8a", "0a3a5a"),
+        ("black_trench", "Black Trench", "Fosse noire", "matriochka:trench_rock", "0a2a3a", "051a2a")],
+    8: [("hourglass_dunes", "Hourglass Dunes", "Dunes du sablier", "matriochka:temporal_sand_block", "d8b860", "e0d0a0"),
+        ("rust_grove", "Rust Grove", "Bosquet de rouille", "minecraft:podzol", "c86a2a", "d8b080")],
+    9: [("flesh_mire", "Flesh Mire", "Bourbier de chair", "minecraft:mud", "8a3a2a", "8a4a3a"),
+        ("bare_rock", "Bare Rock", "Roc nu", "matriochka:living_rock", "6a4a3a", "7a5a4a")],
+    10: [("plank_floor", "Plank Floor", "Plancher", "matriochka:giant_plank", "c8a060", "d0b080"),
+         ("lacquer_tray", "Lacquer Tray", "Plateau laqué", "matriochka:lacquer_block", "b0402a", "d0a080")],
+}
+
+
+def with_sub_surfaces(ns, n):
+    """The world's noise settings with the floor of each lesser biome, right after the bedrock: its surface block on
+    the top layer (26.3: material_rule, block ids as strings; 26.2: surface_rule, block states)."""
+    key = "material_rule" if "material_rule" in ns else "surface_rule"
+    rule = ns[key]
+    if not (isinstance(rule, dict) and isinstance(rule.get("sequence"), list)):
+        return ns
+    state = (lambda b: b) if key == "material_rule" else (lambda b: {"Name": b})
+    floor = {"type": "minecraft:stone_depth", "add_surface_depth": False, "offset": 0, "secondary_depth_range": 0, "surface_type": "floor"}
+    rules = [{"type": "minecraft:condition", "if_true": {"type": "minecraft:biome", "biome_is": [f"{NS}:world_{n}_{sub[0]}"]},
+              "then_run": {"type": "minecraft:condition", "if_true": floor, "then_run": {"type": "minecraft:block", "result_state": state(sub[3])}}}
+             for sub in SUB_BIOMES.get(n, [])]
+    rule = dict(rule)
+    rule["sequence"] = rule["sequence"][:1] + rules + rule["sequence"][1:]
+    ns[key] = rule
+    return ns
+
+
+def biome_source(n):
+    """The world's own biome in the middle of the climate, its two lesser biomes on the wet and the warm side."""
+    def point(biome, t, h):
+        return {"biome": biome, "parameters": {"temperature": t, "humidity": h, "continentalness": 0.0, "erosion": 0.0,
+                                               "weirdness": 0.0, "depth": 0.0, "offset": 0.0}}
+    subs = SUB_BIOMES.get(n, [])
+    if not subs:
+        return {"type": "minecraft:fixed", "biome": f"{NS}:world_{n}"}
+    pts = [point(f"{NS}:world_{n}", -0.15, -0.15)]
+    for (sub, *_), (t, h) in zip(subs, ((-0.1, 0.5), (0.5, -0.1))):
+        pts.append(point(f"{NS}:world_{n}_{sub}", t, h))
+    return {"type": "minecraft:multi_noise", "biomes": pts}
+
+
 TEMPLATE = {"overworld": "overworld", "caves": "caves", "ceiling": "nether", "floating": "floating_islands", "amplified": "amplified",
             "ocean": "overworld", "giant": "large_biomes"}
 
@@ -401,6 +554,8 @@ def ocean_settings(ns, n):
     r = ns["noise_router"]
     r["depth"] = f"{base}/depth"
     r["final_density"] = f"{base}/final_density"
+    if TARGET != "26.3":
+        return ocean_settings_262(ns, n, sand, rock, base)
     r["chunk_surface_level"] = _df("interpolated", cell_size_xz=16, cell_size_y=1, input=f"{base}/preliminary_surface_level")
     aq = ns["aquifers"]
     aq["surface_level"] = f"{base}/preliminary_surface_level"
@@ -427,6 +582,33 @@ def ocean_settings(ns, n):
                 block(sand)])),
         ])),
     ])
+    return ns
+
+
+def ocean_settings_262(ns, n, sand, rock, base):
+    """The ocean's noise settings in 26.2's form: the surface level in the router, aquifers on, and the sea floor's
+    surface rule written with 26.2's stone depth conditions and block states."""
+    r = ns["noise_router"]
+    r["preliminary_surface_level"] = f"{base}/preliminary_surface_level"
+    ns["noise"] = dict(ns["noise"], height=OCEAN_HEIGHT, min_y=OCEAN_MIN_Y)
+    ns["sea_level"] = OCEAN_SEA
+    ns["default_block"] = {"Name": rock}
+    ns["default_fluid"] = {"Name": "minecraft:water", "Properties": {"level": "0"}}
+    bedrock = ns["surface_rule"]["sequence"][0]
+    block = lambda b: {"type": "minecraft:block", "result_state": {"Name": b}}
+    cond = lambda c, then: {"type": "minecraft:condition", "if_true": c, "then_run": then}
+    depth = lambda add: {"type": "minecraft:stone_depth", "offset": 0, "surface_type": "floor", "add_surface_depth": add, "secondary_depth_range": 0}
+    steep = {"type": "minecraft:steep"}
+    ns["surface_rule"] = {"type": "minecraft:sequence", "sequence": [
+        bedrock,
+        cond({"type": "minecraft:above_preliminary_surface"}, {"type": "minecraft:sequence", "sequence": [
+            cond(depth(False), {"type": "minecraft:sequence", "sequence": [
+                cond(steep, block(rock)),
+                cond({"type": "minecraft:noise_threshold", "noise": "minecraft:surface", "min_threshold": 0.45, "max_threshold": 10.0}, block(rock)),
+                block(sand)]}),
+            cond(depth(True), {"type": "minecraft:sequence", "sequence": [cond(steep, block(rock)), block(sand)]}),
+        ]}),
+    ]}
     return ns
 
 
@@ -461,6 +643,40 @@ def ocean_features(n, feats):
     return feats
 
 
+def inline_material_rule(rule):
+    """A 26.3 material rule with every reference to another rule (minecraft:overworld, minecraft:bedrock_floor...)
+    replaced by its content from the vanilla templates, so the block swaps below reach the surface blocks too.
+    Material conditions (minecraft:on_floor...) stay references: they name no block."""
+    if isinstance(rule, str):
+        path = os.path.join(MC, "worldgen/material_rule", rule.split(":", 1)[1] + ".json")
+        if not os.path.exists(path):
+            return rule
+        return inline_material_rule(json.load(open(path)))
+    if isinstance(rule, dict):
+        out = dict(rule)
+        if "then_run" in out:
+            out["then_run"] = inline_material_rule(out["then_run"])
+        if isinstance(out.get("sequence"), list):
+            out["sequence"] = [inline_material_rule(x) for x in out["sequence"]]
+        return out
+    return rule
+
+
+def template_noise_settings(name):
+    """A vanilla noise settings template as text, its material rule inlined (26.3; 26.2 writes it inline already)."""
+    txt = open(os.path.join(MC, f"worldgen/noise_settings/{name}.json")).read()
+    ns = json.loads(txt)
+    if "material_rule" in ns:
+        ns["material_rule"] = inline_material_rule(ns["material_rule"])
+        txt = json.dumps(ns, indent=2)
+    return txt
+
+
+def swap_block(txt, old, new):
+    """Swaps a block id in a template, never a noise of the same name (26.2 has minecraft:netherrack, minecraft:gravel noises)."""
+    return re.sub(r'(?<!"noise": )(?<!"noise":)"' + re.escape(old) + '"', f'"{new}"', txt)
+
+
 def gen_worldgen():
     for wd in WORLDS:
         n = wd["n"]
@@ -470,11 +686,11 @@ def gen_worldgen():
         lang(f"dimension.{NS}.{key}", f"World {n} — {wd['en']}", f"Monde {n} — {wd['fr']}")
         # noise settings from template, with block substitutions
         tpl = TEMPLATE[wd["gen"]]
-        txt = open(os.path.join(MC, f"worldgen/noise_settings/{tpl}.json")).read()
+        txt = template_noise_settings(tpl)
         for old, new in (("minecraft:grass_block", top), ("minecraft:deepslate", deep), ("minecraft:stone", stone),
                          ("minecraft:netherrack", stone), ("minecraft:soul_sand", top), ("minecraft:soul_soil", top),
                          ("minecraft:end_stone", stone), ("minecraft:podzol", top), ("minecraft:mycelium", top)):
-            txt = txt.replace(f'"{old}"', f'"{new}"')
+            txt = swap_block(txt, old, new)
         ns = json.loads(txt)
         ns["disable_mob_generation"] = False
         if wd["gen"] == "ocean":
@@ -487,6 +703,13 @@ def gen_worldgen():
         if n == 2:
             ns["default_fluid"] = "minecraft:lava"
             ns["sea_level"] = -40
+        # the lesser biomes need a climate: a world whose template has none takes the overworld's
+        router = ns["noise_router"]
+        ow = json.loads(open(os.path.join(MC, "worldgen/noise_settings/overworld.json")).read())["noise_router"]
+        for k in ("temperature", "vegetation"):
+            if isinstance(router.get(k), (int, float)):
+                router[k] = ow[k]
+        ns = with_sub_surfaces(ns, n)
         w(os.path.join(D, f"worldgen/noise_settings/{key}.json"), ns)
 
         # dimension type
@@ -575,7 +798,7 @@ def gen_worldgen():
                                                 "weight": 30 if c["behavior"] == "shoal" else 20})
         bio["attributes"]["minecraft:gameplay/natural_mob_spawns"] = {"argument": {"spawn_costs": {}, "spawns_by_category": {k: v for k, v in spawns.items() if v}}} if False else None
         bio["attributes"].pop("minecraft:gameplay/natural_mob_spawns")
-        pl = jl("worldgen/biome/plains.json")["attributes"]["minecraft:gameplay/natural_mob_spawns"]
+        pl = {"argument": {"spawn_costs": {}, "spawns_by_category": {}}, "modifier": "overlay"}
         pl = copy.deepcopy(pl)
         if isinstance(pl, dict) and "argument" in pl:
             pl["argument"]["spawns_by_category"] = {k: v for k, v in spawns.items() if v}
@@ -627,16 +850,26 @@ def gen_worldgen():
         bio["attributes"].update(atmosphere.biome(n))
         w(os.path.join(D, f"worldgen/biome/{key}.json"), bio)
         lang(f"biome.{NS}.{key}", f"World {n}", f"Monde {n}")
+        in_world = [f"{NS}:{key}"]
+        for (sub, en, fr, top, grass, fog) in SUB_BIOMES.get(n, []):
+            sb = copy.deepcopy(bio)
+            sb["effects"]["grass_color"] = "#" + grass
+            sb["effects"]["foliage_color"] = "#" + grass
+            sb["attributes"]["minecraft:visual/fog_color"] = "#" + fog
+            w(os.path.join(D, f"worldgen/biome/{key}_{sub}.json"), sb)
+            lang(f"biome.{NS}.{key}_{sub}", f"{en} (World {n})", f"{fr} (Monde {n})")
+            in_world.append(f"{NS}:{key}_{sub}")
+        w(os.path.join(D, f"tags/worldgen/biome/in_{key}.json"), {"values": in_world})
 
         # dimension
         w(os.path.join(D, f"dimension/{key}.json"), {"type": f"{NS}:{key}", "generator": {
-            "type": "minecraft:noise", "biome_source": {"type": "minecraft:fixed", "biome": f"{NS}:{key}"}, "settings": f"{NS}:{key}"}})
+            "type": "minecraft:noise", "biome_source": biome_source(n), "settings": f"{NS}:{key}"}})
 
         # structures
         for i, (sid, en, fr, role, size, rarity, arch) in enumerate(STRUCTURES[n]):
             lang(f"structure.{NS}.{sid}", en, fr)
             w(os.path.join(D, f"worldgen/structure/{sid}.json"), {
-                "type": f"{NS}:procedural", "biomes": f"{NS}:{key}", "spawn_overrides": {}, "step": "surface_structures",
+                "type": f"{NS}:procedural", "biomes": f"#{NS}:in_{key}", "spawn_overrides": {}, "step": "surface_structures",
                 "terrain_adaptation": "beard_thin" if not wd["ceiling"] else "none",
                 "world": n, "archetype": arch, "role": role, "size": size, "structure_id": sid})
             spacing = {"common": 18, "rare": 34, "unique": 64}[rarity] + (8 if size == "large" else 0)
@@ -648,7 +881,7 @@ def gen_worldgen():
             for i, (sid, en, fr, arch, spacing, sep) in enumerate(WORKSHOP_PROPS):
                 lang(f"structure.{NS}.{sid}", en, fr)
                 w(os.path.join(D, f"worldgen/structure/{sid}.json"), {
-                    "type": f"{NS}:procedural", "biomes": f"{NS}:{key}", "spawn_overrides": {}, "step": "surface_structures",
+                    "type": f"{NS}:procedural", "biomes": f"#{NS}:in_{key}", "spawn_overrides": {}, "step": "surface_structures",
                     "terrain_adaptation": "beard_thin", "world": n, "archetype": arch, "role": "decor", "size": "large", "structure_id": sid})
                 w(os.path.join(D, f"worldgen/structure_set/{sid}.json"), {
                     "placement": {"type": "minecraft:random_spread", "salt": 741000 + i, "separation": sep, "spacing": spacing},
@@ -668,7 +901,7 @@ def gen_worldgen():
     rb["carvers"] = []
     rb["attributes"] = {"minecraft:visual/sky_color": "#c8342a"}
     rb["attributes"]["minecraft:audio/background_music"] = sound.biome_audio(0)["minecraft:audio/background_music"]
-    pl = copy.deepcopy(jl("worldgen/biome/plains.json")["attributes"]["minecraft:gameplay/natural_mob_spawns"])
+    pl = copy.deepcopy({"argument": {"spawn_costs": {}, "spawns_by_category": {}}, "modifier": "overlay"})
     if isinstance(pl, dict) and "argument" in pl:
         pl["argument"]["spawns_by_category"] = {}
     rb["attributes"]["minecraft:gameplay/natural_mob_spawns"] = pl
@@ -694,12 +927,12 @@ def gen_world_zero():
     lang(f"dimension.{NS}.{key}", f"World 0 — {wd['en']}", f"Monde 0 — {wd['fr']}")
     lang(f"biome.{NS}.{key}", "World 0", "Monde 0")
     top, stone, deep = f"{NS}:workshop_felt", f"{NS}:painted_wood", f"{NS}:lacquer_block"
-    txt = open(os.path.join(MC, "worldgen/noise_settings/nether.json")).read()
+    txt = template_noise_settings("nether")
     for old, new in (("minecraft:netherrack", stone), ("minecraft:soul_sand", top), ("minecraft:soul_soil", top),
                      ("minecraft:gravel", top), ("minecraft:basalt", deep), ("minecraft:blackstone", deep),
                      ("minecraft:crimson_nylium", top), ("minecraft:warped_nylium", top),
                      ("minecraft:warped_wart_block", deep), ("minecraft:nether_wart_block", deep), ("minecraft:lava", "minecraft:air")):
-        txt = txt.replace(f'"{old}"', f'"{new}"')
+        txt = swap_block(txt, old, new)
     ns = json.loads(txt)
     ns["default_fluid"] = "minecraft:air"
     ns["sea_level"] = 0
@@ -730,7 +963,7 @@ def gen_world_zero():
     dt["min_y"], dt["height"], dt["logical_height"] = noise["min_y"], noise["height"], noise["height"]
     w(os.path.join(D, f"dimension_type/{key}.json"), dt)
     bio = jl("worldgen/biome/plains.json")
-    pl = copy.deepcopy(bio["attributes"]["minecraft:gameplay/natural_mob_spawns"])
+    pl = copy.deepcopy(bio["attributes"].get("minecraft:gameplay/natural_mob_spawns", {"argument": {"spawn_costs": {}, "spawns_by_category": {}}, "modifier": "overlay"}))
     if isinstance(pl, dict) and "argument" in pl:
         pl["argument"]["spawns_by_category"] = {}
         pl["argument"]["spawn_costs"] = {}
@@ -984,8 +1217,16 @@ def gen_java():
 
 
 def main():
+    if TARGET != "26.3":
+        # only the world generation differs between versions (tools/versions.py keeps what differs)
+        expand_items()
+        gen_worldgen()
+        gen_world_zero()
+        print("worldgen for", TARGET, "in", RES)
+        return
     expand_items()
     gen_items()
+    print("held dolls in 3D:", held3d.gen(A, NS, [it["id"] if isinstance(it, dict) else it[0] for it in ALL_ITEMS], w))
     gen_blocks()
     gen_entities()
     gen_worldgen()

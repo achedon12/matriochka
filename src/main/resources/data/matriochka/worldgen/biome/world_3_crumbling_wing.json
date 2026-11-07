@@ -1,0 +1,134 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#2a2a33",
+    "minecraft:visual/fog_color": "#33302a",
+    "minecraft:visual/water_fog_color": "#3a4a5a",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "matriochka:jailer_mob",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:sentinel",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:living_lock",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 40
+            },
+            {
+              "type": "matriochka:dungeon_rat",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 4
+              },
+              "weight": 60
+            },
+            {
+              "type": "matriochka:executioner",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 1
+              },
+              "weight": 10
+            }
+          ],
+          "creature": [
+            {
+              "type": "matriochka:prisoner",
+              "count": 1,
+              "weight": 2
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w3.chains",
+          "tick_chance": 0.004
+        },
+        {
+          "sound": "matriochka:ambient.w3.door",
+          "tick_chance": 0.002
+        }
+      ],
+      "loop": "matriochka:ambient.w3.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_3",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 12.0,
+    "minecraft:visual/fog_end_distance": 110.0,
+    "minecraft:visual/block_light_tint": "#c4dcff",
+    "minecraft:visual/ambient_light_color": "#4a5468",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:cold_dust"
+        },
+        "probability": 0.004
+      },
+      {
+        "particle": {
+          "type": "matriochka:chain_glint"
+        },
+        "probability": 0.0003
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:nether_cave"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#3a4a5a",
+    "grass_color": "#5a5a62",
+    "foliage_color": "#5a5a62"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:sealed_fragment_ore",
+      "matriochka:cold_lamp_patch"
+    ],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.8
+}
