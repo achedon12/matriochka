@@ -33,7 +33,7 @@ public class InfoScreen extends Screen {
 		int l = left(), t = top(), y = t + H - 28;
 		buttons.add(l + 16, y, 58, 16, Component.translatable("screen.matriochka.info.wiki"), () -> ConfirmLinkScreen.confirmLinkNow(this, java.net.URI.create(WIKI)));
 		buttons.add(l + 86, y, 58, 16, Component.translatable("screen.matriochka.info.site"), () -> ConfirmLinkScreen.confirmLinkNow(this, java.net.URI.create(SITE)));
-		buttons.add(l + 156, y, 58, 16, Component.translatable("comfort.matriochka.open"), () -> minecraft.gui.setScreen(new ComfortScreen(this)));
+		buttons.add(l + 156, y, 58, 16, Component.translatable("comfort.matriochka.open"), () -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new ComfortScreen(this)));
 		buttons.add(l + W - 74, y, 58, 16, Component.translatable("screen.matriochka.info.done"), this::onClose);
 	}
 

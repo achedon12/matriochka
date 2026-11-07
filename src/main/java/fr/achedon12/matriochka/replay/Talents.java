@@ -324,7 +324,7 @@ public final class Talents {
 
 	/** An ore: a vanilla one or a Matriochka ore block. */
 	private static boolean ore(BlockState state) {
-		if (state.is(BlockTags.ORES)) return true;
+		if (state.is(net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags.ORES)) return true;
 		String id = ModContent.idOf(state.getBlock().asItem());
 		var def = fr.achedon12.matriochka.content.Content.BLOCKS.stream().filter(b -> b.id().equals(id)).findFirst();
 		return def.isPresent() && def.get().style().startsWith("ore");
@@ -335,7 +335,7 @@ public final class Talents {
 		if (amount <= 0.01f) return;
 		striking = true;
 		try {
-			to.setInvulnerableTime(0);
+			fr.achedon12.matriochka.mc.Mc.clearInvulnerable(to);
 			to.hurtServer(level, level.damageSources().playerAttack(from), amount);
 		} finally {
 			striking = false;

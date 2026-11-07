@@ -24,11 +24,11 @@ final class Workshop {
 	private static final BlockState GOLD = Blocks.GOLD_BLOCK.defaultBlockState();
 
 	static BlockState wool(DyeColor c) {
-		return Blocks.WOOL.pick(c).defaultBlockState();
+		return fr.achedon12.matriochka.mc.McBlocks.WOOL.pick(c).defaultBlockState();
 	}
 
 	static BlockState concrete(DyeColor c) {
-		return Blocks.CONCRETE.pick(c).defaultBlockState();
+		return fr.achedon12.matriochka.mc.McBlocks.CONCRETE.pick(c).defaultBlockState();
 	}
 
 	static void prop(Kit k) {
@@ -133,7 +133,7 @@ final class Workshop {
 	/** A sewing button lying flat: a rim, four holes and sometimes the thread still through them. */
 	static void button(Kit k) {
 		DyeColor c = k.pick(THREAD);
-		BlockState body = concrete(c), rim = Blocks.DYED_TERRACOTTA.pick(c).defaultBlockState();
+		BlockState body = concrete(c), rim = fr.achedon12.matriochka.mc.McBlocks.DYED_TERRACOTTA.pick(c).defaultBlockState();
 		double r = k.ri(6, 8) + 0.5;
 		k.site((int) r + 1, 8);
 		plate(k, 'y', 0, 1, 0, r, 2, body, 0);
@@ -194,7 +194,7 @@ final class Workshop {
 		DyeColor[] felt = {DyeColor.RED, DyeColor.YELLOW, DyeColor.GREEN};
 		for (int i = 0; i < 3; i++) {
 			int cx = k.ri(-8, 8), cz = k.ri(-8, 8);
-			BlockState scrap = Blocks.CARPET.pick(felt[i]).defaultBlockState();
+			BlockState scrap = fr.achedon12.matriochka.mc.McBlocks.CARPET.pick(felt[i]).defaultBlockState();
 			for (int x = cx - 2; x <= cx + 2; x++) for (int z = cz - 2; z <= cz + 2; z++) {
 				for (int y = 12; y >= 1; y--) {
 					if (k.solidAt(x, y - 1, z) && k.emptyAt(x, y, z)) {
@@ -276,7 +276,7 @@ final class Workshop {
 		}
 		k.box(12, top, 6, 14, top + 1, 9, p.plank);
 		// a folding rule along the south edge
-		for (int x = -14; x <= 14; x++) k.set(x, top, 13, (x & 1) == 0 ? Blocks.CONCRETE.pick(DyeColor.YELLOW).defaultBlockState() : Blocks.CONCRETE.pick(DyeColor.BLACK).defaultBlockState());
+		for (int x = -14; x <= 14; x++) k.set(x, top, 13, (x & 1) == 0 ? fr.achedon12.matriochka.mc.McBlocks.CONCRETE.pick(DyeColor.YELLOW).defaultBlockState() : fr.achedon12.matriochka.mc.McBlocks.CONCRETE.pick(DyeColor.BLACK).defaultBlockState());
 		// a spool of the Artisan's own thread
 		for (int y = top; y <= top + 4; y++)
 			for (int a = -2; a <= 2; a++) for (int b = -2; b <= 2; b++) {

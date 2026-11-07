@@ -1,0 +1,109 @@
+{
+  "type": "minecraft:cache_once",
+  "argument": {
+    "type": "minecraft:add",
+    "argument1": 0.34375,
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": 0.22,
+        "argument2": {
+          "type": "minecraft:shifted_noise",
+          "noise": "matriochka:w7_hills",
+          "shift_x": "minecraft:shift_x",
+          "shift_y": 0.0,
+          "shift_z": "minecraft:shift_z",
+          "xz_scale": 1.0,
+          "y_scale": 0.0
+        }
+      },
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:mul",
+          "argument1": 0.3,
+          "argument2": {
+            "type": "minecraft:clamp",
+            "input": {
+              "type": "minecraft:mul",
+              "argument1": 4.0,
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": {
+                  "type": "minecraft:shifted_noise",
+                  "noise": "matriochka:w7_reef",
+                  "shift_x": "minecraft:shift_x",
+                  "shift_y": 0.0,
+                  "shift_z": "minecraft:shift_z",
+                  "xz_scale": 1.0,
+                  "y_scale": 0.0
+                },
+                "argument2": -0.55
+              }
+            },
+            "min": 0.0,
+            "max": 1.0
+          }
+        },
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": -0.9,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:square",
+              "argument": {
+                "type": "minecraft:clamp",
+                "input": {
+                  "type": "minecraft:add",
+                  "argument1": 1.0,
+                  "argument2": {
+                    "type": "minecraft:mul",
+                    "argument1": -6.0,
+                    "argument2": {
+                      "type": "minecraft:abs",
+                      "argument": {
+                        "type": "minecraft:shifted_noise",
+                        "noise": "matriochka:w7_trench",
+                        "shift_x": "minecraft:shift_x",
+                        "shift_y": 0.0,
+                        "shift_z": "minecraft:shift_z",
+                        "xz_scale": 0.6,
+                        "y_scale": 0.0
+                      }
+                    }
+                  }
+                },
+                "min": 0.0,
+                "max": 1.0
+              }
+            },
+            "argument2": {
+              "type": "minecraft:clamp",
+              "input": {
+                "type": "minecraft:add",
+                "argument1": {
+                  "type": "minecraft:mul",
+                  "argument1": 2.5,
+                  "argument2": {
+                    "type": "minecraft:shifted_noise",
+                    "noise": "matriochka:w7_trench_mask",
+                    "shift_x": "minecraft:shift_x",
+                    "shift_y": 0.0,
+                    "shift_z": "minecraft:shift_z",
+                    "xz_scale": 1.0,
+                    "y_scale": 0.0
+                  }
+                },
+                "argument2": 0.4
+              },
+              "min": 0.0,
+              "max": 1.0
+            }
+          }
+        }
+      }
+    }
+  }
+}

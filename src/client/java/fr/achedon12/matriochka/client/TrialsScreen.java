@@ -123,7 +123,7 @@ public class TrialsScreen extends Screen {
 	public void onClose() {
 		if (motion.closing()) return;
 		Ui.sound(SoundEvents.BOOK_PUT, 1.1f, 0.8f);
-		motion.close(() -> minecraft.gui.setScreen(parent instanceof JournalScreen ? parent : null));
+		motion.close(() -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, parent instanceof JournalScreen ? parent : null));
 	}
 
 	@Override

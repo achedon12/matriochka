@@ -18,14 +18,14 @@ public abstract class MusicMixin {
 	private void matriochka$adaptiveMusic(CallbackInfoReturnable<Music> cir) {
 		Minecraft mc = (Minecraft) (Object) this;
 		// a screen's own music (the endings' crawl) wins
-		if (mc.gui.screen() != null && mc.gui.screen().getBackgroundMusic() != null) return;
+		if (fr.achedon12.matriochka.client.mc.McClient.screen(mc) != null && fr.achedon12.matriochka.client.mc.McClient.screen(mc).getBackgroundMusic() != null) return;
 		if (MusicThemes.holding()) cir.setReturnValue(null);
 	}
 
 	@Inject(method = "getMusicVolume", at = @At("RETURN"), cancellable = true)
 	private void matriochka$exploreVolume(CallbackInfoReturnable<Float> cir) {
 		Minecraft mc = (Minecraft) (Object) this;
-		if (mc.gui.screen() != null && mc.gui.screen().getBackgroundMusic() != null) return;
+		if (fr.achedon12.matriochka.client.mc.McClient.screen(mc) != null && fr.achedon12.matriochka.client.mc.McClient.screen(mc).getBackgroundMusic() != null) return;
 		cir.setReturnValue(cir.getReturnValue() * MusicThemes.exploreGain());
 	}
 }

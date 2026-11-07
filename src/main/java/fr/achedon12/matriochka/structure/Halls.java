@@ -149,7 +149,7 @@ final class Halls {
 		k.box(-7, ay + 1, -8, 7, ay + 1, 8, p.plank);
 		int ridge = k.gable(-e, -e, e, e, ay + 2, false, p.alt);
 		k.set(0, ridge, -e - 1, p.cap);
-		k.set(0, ridge + 1, -e - 1, k.world == 4 ? Blocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState() : p.accent);
+		k.set(0, ridge + 1, -e - 1, k.world == 4 ? fr.achedon12.matriochka.mc.McBlocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState() : p.accent);
 		k.set(0, ridge, e + 1, p.cap);
 		for (int z = -6; z <= 6; z += 3) {
 			k.pillar(-4, 4, z, 10, false);
@@ -267,7 +267,7 @@ final class Halls {
 					boolean end = x == -5 || x == -1;
 					if (end) k.set(x, 9 + b, a, Blocks.SPRUCE_PLANKS.defaultBlockState());
 					else if (d <= 1.5) k.set(x, 9 + b, a, ModContent.block("artisan_thread_ore").defaultBlockState());
-					else k.set(x, 9 + b, a, Blocks.WOOL.red().defaultBlockState());
+					else k.set(x, 9 + b, a, fr.achedon12.matriochka.mc.McBlocks.WOOL.red().defaultBlockState());
 				}
 		// open scissors
 		for (int i = 0; i <= 5; i++) {
@@ -301,7 +301,7 @@ final class Halls {
 	/** A painted nesting doll: an egg of lacquer with painted bands and a face. */
 	static void doll(Kit k, int cx, int cz, int size, int salt) {
 		DyeColor[] cols = {DyeColor.RED, DyeColor.YELLOW, DyeColor.BLUE, DyeColor.GREEN, DyeColor.ORANGE};
-		BlockState band = Blocks.WOOL.pick(cols[Math.floorMod(salt, cols.length)]).defaultBlockState();
+		BlockState band = fr.achedon12.matriochka.mc.McBlocks.WOOL.pick(cols[Math.floorMod(salt, cols.length)]).defaultBlockState();
 		double rx = size * 0.6 + 0.5, ry = size + 0.5;
 		k.ellipsoid(cx, size + 1, cz, rx, ry, rx, k.p.trim, 0);
 		for (int a = -size; a <= size; a++)
@@ -310,7 +310,7 @@ final class Halls {
 				if (d <= 1.0) k.set(cx + a, size + 1, cz + b, band);
 			}
 		int hy = size + 1 + (int) (ry * 0.55);
-		k.set(cx, hy, cz - (int) Math.round(rx), Blocks.WOOL.white().defaultBlockState());
+		k.set(cx, hy, cz - (int) Math.round(rx), fr.achedon12.matriochka.mc.McBlocks.WOOL.white().defaultBlockState());
 		k.set(cx, hy + 1, cz - (int) Math.round(rx), Blocks.GOLD_BLOCK.defaultBlockState());
 	}
 
@@ -572,9 +572,9 @@ final class Halls {
 			for (int x = -5; x <= 5; x++)
 				for (int z = hl - 7; z <= hl - 3; z++) {
 					int yy = 1 + Math.abs(x) / 3;
-					k.set(x, yy, z, x == 0 ? p.trim : Blocks.WOOL.white().defaultBlockState());
+					k.set(x, yy, z, x == 0 ? p.trim : fr.achedon12.matriochka.mc.McBlocks.WOOL.white().defaultBlockState());
 				}
-			for (int y = 1; y <= 7; y++) k.tube(hw - 4, hl - 4, 1, y, y, Blocks.WOOL.white().defaultBlockState());
+			for (int y = 1; y <= 7; y++) k.tube(hw - 4, hl - 4, 1, y, y, fr.achedon12.matriochka.mc.McBlocks.WOOL.white().defaultBlockState());
 			k.set(hw - 4, 8, hl - 4, p.light);
 		}
 		k.mark("reading", 0, 1, hl - 1, Direction.NORTH);
@@ -593,8 +593,8 @@ final class Halls {
 
 	/** Fresco panel: framed mosaic of the world colours, drawn as a column of the wall. */
 	private static void fresco(Kit k, int x, int z, int y0, int h, int s) {
-		BlockState a = Blocks.CONCRETE.pick(k.p.colA).defaultBlockState(), b = Blocks.CONCRETE.pick(k.p.colB).defaultBlockState();
-		BlockState w = Blocks.CONCRETE.white().defaultBlockState(), g = Blocks.CONCRETE.yellow().defaultBlockState();
+		BlockState a = fr.achedon12.matriochka.mc.McBlocks.CONCRETE.pick(k.p.colA).defaultBlockState(), b = fr.achedon12.matriochka.mc.McBlocks.CONCRETE.pick(k.p.colB).defaultBlockState();
+		BlockState w = fr.achedon12.matriochka.mc.McBlocks.CONCRETE.white().defaultBlockState(), g = fr.achedon12.matriochka.mc.McBlocks.CONCRETE.yellow().defaultBlockState();
 		for (int y = y0; y < y0 + h; y++) {
 			int u = Math.floorMod(z, 8), v = y - y0;
 			BlockState c;
@@ -613,7 +613,7 @@ final class Halls {
 		DyeColor[] cols = {DyeColor.RED, DyeColor.BLUE, DyeColor.GREEN, DyeColor.BROWN, DyeColor.PURPLE, DyeColor.ORANGE};
 		DyeColor c = cols[k.hi(x, y0, z, 223, cols.length)];
 		int bh = h - k.hi(x, y0, z, 227, 2);
-		for (int y = y0; y < y0 + h; y++) k.set(x, y, z, y < y0 + bh ? Blocks.WOOL.pick(c).defaultBlockState() : k.p.fill);
+		for (int y = y0; y < y0 + h; y++) k.set(x, y, z, y < y0 + bh ? fr.achedon12.matriochka.mc.McBlocks.WOOL.pick(c).defaultBlockState() : k.p.fill);
 		if (bh > 2) k.set(x, y0 + bh / 2, z, Blocks.GOLD_BLOCK.defaultBlockState());
 	}
 
@@ -708,7 +708,7 @@ final class Halls {
 		int roofTop = k.hip(-hw, -hd, hw, hd, 13, 1);
 		k.set(0, roofTop + 1, 0, p.glass);
 		k.set(0, roofTop + 2, 0, p.light);
-		k.set(0, roofTop + 3, 0, Blocks.LIGHTNING_ROD.waxed().unaffected().defaultBlockState());
+		k.set(0, roofTop + 3, 0, fr.achedon12.matriochka.mc.McBlocks.LIGHTNING_ROD.waxed().unaffected().defaultBlockState());
 		k.box(-hw + 1, 12, -hd + 1, hw - 1, 12, hd - 1, p.alt);
 		k.doorway(0, 1, -hd, Direction.NORTH, 3, 3);
 		for (int y = 1; y <= 6; y++) k.set(hw - 1, y, hd - 1, Kit.ladderFacing(Direction.WEST));

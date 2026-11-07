@@ -172,7 +172,7 @@ public class EndingScreen extends Screen {
 	/** Leaving the crawl (once it is over, or skipped) opens the recap of the cycle the ending closed. */
 	@Override
 	public void onClose() {
-		if (RecapScreen.available()) minecraft.gui.setScreen(new RecapScreen(null));
+		if (RecapScreen.available()) fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new RecapScreen(null));
 		else super.onClose();
 	}
 

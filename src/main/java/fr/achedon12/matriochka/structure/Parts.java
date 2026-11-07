@@ -174,7 +174,7 @@ final class Parts {
 	/** A-frame tent of wool in the world colours, with a bedroll and a lantern. */
 	static void tent(Kit k, int cx, int y, int cz, Direction open, DyeColor c) {
 		Direction side = open.getClockWise();
-		BlockState wool = Blocks.WOOL.pick(c).defaultBlockState();
+		BlockState wool = fr.achedon12.matriochka.mc.McBlocks.WOOL.pick(c).defaultBlockState();
 		for (int l = -2; l <= 2; l++) {
 			int bx = cx + open.getStepX() * l, bz = cz + open.getStepZ() * l;
 			for (int s = -2; s <= 2; s++) {
@@ -205,7 +205,7 @@ final class Parts {
 			for (int d = 0; d <= 3; d++) {
 				int ax = x - front.getStepX() * d, az = z - front.getStepZ() * d;
 				DyeColor c = (s & 1) == 0 ? p.colA : DyeColor.WHITE;
-				k.set(ax, y + 4 + (d == 0 || d == 3 ? 0 : 1), az, Blocks.WOOL.pick(c).defaultBlockState());
+				k.set(ax, y + 4 + (d == 0 || d == 3 ? 0 : 1), az, fr.achedon12.matriochka.mc.McBlocks.WOOL.pick(c).defaultBlockState());
 			}
 			if (Math.abs(s) == 2) {
 				for (int yy = y + 1; yy <= y + 3; yy++) {

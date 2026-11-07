@@ -23,7 +23,7 @@ public final class ReplayClient {
 		ClientPlayNetworking.registerGlobalReceiver(ReplayNet.TrialBoard.TYPE, (p, ctx) -> {
 			board = p.board();
 			Minecraft mc = Minecraft.getInstance();
-			if (mc.gui.screen() instanceof TrialsScreen ts) ts.refresh();
+			if (fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof TrialsScreen ts) ts.refresh();
 			else if (p.open()) mc.setScreenAndShow(new TrialsScreen(null));
 		});
 	}

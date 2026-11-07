@@ -62,7 +62,7 @@ public class ReplayHud implements HudElement {
 			else top = pb + 4;
 		}
 		// under the boss bars (12 pixels down, then 19 a bar), never over them
-		int bars = ((fr.achedon12.matriochka.mixin.client.BossHealthOverlayAccess) mc.gui.hud.getBossOverlay()).matriochka$events().size();
+		int bars = ((fr.achedon12.matriochka.mixin.client.BossHealthOverlayAccess) fr.achedon12.matriochka.client.mc.McClient.bossOverlay(mc)).matriochka$events().size();
 		if (bars > 0) top = Math.max(top, Math.round((19 * Math.min(bars, 4) + 2) / sc));
 		int y = Math.round(top - (1 - slide) * (h + 8 + top));
 		bottom = Math.round((y + h) * sc);

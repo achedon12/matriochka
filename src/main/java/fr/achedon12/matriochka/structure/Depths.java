@@ -152,8 +152,8 @@ final class Depths {
 			}
 		// lock plate and keyhole
 		k.box(-2, h - 4, -hd - 1, 2, h, -hd - 1, gold);
-		k.set(0, h - 2, -hd - 1, Blocks.WOOL.black().defaultBlockState());
-		k.set(0, h - 3, -hd - 1, Blocks.WOOL.black().defaultBlockState());
+		k.set(0, h - 2, -hd - 1, fr.achedon12.matriochka.mc.McBlocks.WOOL.black().defaultBlockState());
+		k.set(0, h - 3, -hd - 1, fr.achedon12.matriochka.mc.McBlocks.WOOL.black().defaultBlockState());
 		// crates stacked as steps up to the gap under the lid
 		for (int i = 0; i < h; i++) {
 			int z = -hd - 1 - (h - i) / 2;
@@ -849,7 +849,7 @@ final class Depths {
 				} else {
 					k.set(x, -1, z, lining);
 					k.air(x, 0, z);
-					if (k.hc(x, 0, z, 635, feathers ? 0.25 : 0.08)) k.set(x, 0, z, feathers ? b(Blocks.WOOL.white()) : b(Blocks.BONE_BLOCK));
+					if (k.hc(x, 0, z, 635, feathers ? 0.25 : 0.08)) k.set(x, 0, z, feathers ? b(fr.achedon12.matriochka.mc.McBlocks.WOOL.white()) : b(Blocks.BONE_BLOCK));
 				}
 			}
 		// eggs
@@ -980,7 +980,7 @@ final class Depths {
 			k.set(x, y, 0, p.log);
 			k.set(x, y, 1, p.log);
 		}
-		BlockState wool = b(Blocks.WOOL.white());
+		BlockState wool = b(fr.achedon12.matriochka.mc.McBlocks.WOOL.white());
 		for (int x = -5; x <= 5; x++)
 			for (int y = -8; y <= 8; y++)
 				for (int z = -5; z <= 5; z++) {
@@ -1134,17 +1134,17 @@ final class Depths {
 					if (d > 0.86) {
 						BlockState s = p.trim;
 						int bnd = Math.floorMod(x + 15, 8);
-						if (bnd == 3 || bnd == 4) s = b(Blocks.WOOL.pick(bands[Math.floorMod((x + 15) / 8, 4)]));
-						if (x > 11 && z < -2) s = b(Blocks.WOOL.white());
+						if (bnd == 3 || bnd == 4) s = b(fr.achedon12.matriochka.mc.McBlocks.WOOL.pick(bands[Math.floorMod((x + 15) / 8, 4)]));
+						if (x > 11 && z < -2) s = b(fr.achedon12.matriochka.mc.McBlocks.WOOL.white());
 						k.set(x, wy, z, s);
 					} else k.air(x, wy, z);
 				}
 		// face at the head end
-		k.set(13, 9, -5, b(Blocks.WOOL.black()));
-		k.set(13, 6, -5, b(Blocks.WOOL.black()));
-		k.set(12, 5, -6, b(Blocks.WOOL.pink()));
-		k.set(12, 10, -6, b(Blocks.WOOL.pink()));
-		k.set(14, 7, -4, b(Blocks.WOOL.red()));
+		k.set(13, 9, -5, b(fr.achedon12.matriochka.mc.McBlocks.WOOL.black()));
+		k.set(13, 6, -5, b(fr.achedon12.matriochka.mc.McBlocks.WOOL.black()));
+		k.set(12, 5, -6, b(fr.achedon12.matriochka.mc.McBlocks.WOOL.pink()));
+		k.set(12, 10, -6, b(fr.achedon12.matriochka.mc.McBlocks.WOOL.pink()));
+		k.set(14, 7, -4, b(fr.achedon12.matriochka.mc.McBlocks.WOOL.red()));
 		// the halves drift apart: a crack opens, the inner doll shows
 		k.air(-2, 1, -7, 2, 13, 7);
 		k.floor(-6, -3, 6, 3, 0, 1);
@@ -1227,13 +1227,13 @@ final class Depths {
 				for (int z = -4; z <= 4; z++) k.set(mx, yy, z, Kit.axis(p.log, Direction.Axis.Z));
 			}
 			for (int y = mh - 5; y <= mh - 3; y++)
-				for (int z = -3; z <= 3; z++) if (!k.hc(mx, y, z, 703, 0.2)) k.set(mx + 1, y, z, b(Blocks.WOOL.pick((z & 1) == 0 ? p.colA : DyeColor.WHITE)));
+				for (int z = -3; z <= 3; z++) if (!k.hc(mx, y, z, 703, 0.2)) k.set(mx + 1, y, z, b(fr.achedon12.matriochka.mc.McBlocks.WOOL.pick((z & 1) == 0 ? p.colA : DyeColor.WHITE)));
 			k.lanternOn(mx, mh + 1, 0);
 		}
 		if (air) {
 			// the airship's balloon, its ropes slack
-			k.ellipsoid(1, 26, 0, R - 4, 4, 5, b(Blocks.WOOL.white()), 0);
-			for (int x = -R + 5; x <= R - 5; x += 3) k.set(x, 23, 0, b(Blocks.WOOL.pick(p.colB)));
+			k.ellipsoid(1, 26, 0, R - 4, 4, 5, b(fr.achedon12.matriochka.mc.McBlocks.WOOL.white()), 0);
+			for (int x = -R + 5; x <= R - 5; x += 3) k.set(x, 23, 0, b(fr.achedon12.matriochka.mc.McBlocks.WOOL.pick(p.colB)));
 			for (int[] c : new int[][] {{-8, -3}, {8, -3}, {-8, 3}, {8, 3}}) for (int y = deck + 2; y <= 22; y++) k.set(c[0], y, c[1], p.fence);
 			for (int z = -2; z <= 2; z++) k.set(-L - 1, deck + 2, z, p.fence);
 		} else {
@@ -1247,7 +1247,7 @@ final class Depths {
 		Palette p = k.p;
 		int R = k.R;
 		k.site(R, 34);
-		BlockState cu = b(Blocks.COPPER_BLOCK.waxed().weathered()), cut = b(Blocks.CUT_COPPER.waxed().oxidized());
+		BlockState cu = b(fr.achedon12.matriochka.mc.McBlocks.COPPER_BLOCK.waxed().weathered()), cut = b(fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().oxidized());
 		int[] radii = {4, 4, 4, 4, 3, 3, 2, 1};
 		for (int[] c : new int[][] {{-3, -3}, {3, -3}, {-3, 3}, {3, 3}}) k.set(c[0], 0, c[1], p.pillar);
 		for (int i = 0; i < radii.length; i++) {

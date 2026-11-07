@@ -21,7 +21,7 @@ public final class HastenedClock {
 		if (level.getGameTime() % 100 == 0 && level.clockManager() instanceof ServerClockManager clocks) {
 			level.registryAccess().lookupOrThrow(Registries.WORLD_CLOCK).get(SEASONS).ifPresent(h -> {
 				long want = level.getGameTime() % 9600;
-				if (Math.abs(clocks.getInstance(h).totalTicks() % 9600 - want) > 40) clocks.setTotalTicks(h, want);
+				if (Math.abs(fr.achedon12.matriochka.mc.Mc.clockTicks(clocks, h) % 9600 - want) > 40) clocks.setTotalTicks(h, want);
 			});
 		}
 		var holder = level.registryAccess().lookupOrThrow(Registries.WORLD_CLOCK).get(KEY);

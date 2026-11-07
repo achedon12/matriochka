@@ -1,0 +1,124 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#8a3a1a",
+    "minecraft:visual/fog_color": "#6a2a10",
+    "minecraft:visual/water_fog_color": "#7a4a2a",
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w2.hammer",
+          "tick_chance": 0.004
+        },
+        {
+          "sound": "matriochka:ambient.w2.crackle",
+          "tick_chance": 0.008
+        }
+      ],
+      "loop": "matriochka:ambient.w2.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_2",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 2.0,
+    "minecraft:visual/fog_end_distance": 64.0,
+    "minecraft:visual/sky_light_color": "#ffc89a",
+    "minecraft:visual/block_light_tint": "#ffa050",
+    "minecraft:visual/ambient_light_color": "#2a1006",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:ember"
+        },
+        "probability": 0.004
+      },
+      {
+        "particle": {
+          "type": "minecraft:ash"
+        },
+        "probability": 0.006
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#7a4a2a",
+    "grass_color": "#6a2a14",
+    "foliage_color": "#6a2a14"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:giant_ore_block",
+      "matriochka:blazing_rock_ore",
+      "matriochka:ember_stone_patch"
+    ],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "monster": [
+      {
+        "type": "matriochka:ash_miner",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:living_vein",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:rock_salamander",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:dead_smith",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:slag_golem",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "creature": [
+      {
+        "type": "matriochka:free_miner",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "temperature": 2.0
+}

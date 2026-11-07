@@ -109,7 +109,7 @@ public final class BaseModel {
 		if (s.isAir()) return null;
 		if (s.is(ModContent.block("world_block"))) return Blocks.GOLD_BLOCK;
 		if (!s.getFluidState().isEmpty() && s.getFluidState().isSource()) {
-			return s.getFluidState().is(net.minecraft.tags.FluidTags.LAVA) ? Blocks.STAINED_GLASS.orange() : Blocks.STAINED_GLASS.lightBlue();
+			return s.getFluidState().is(net.minecraft.tags.FluidTags.LAVA) ? fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS.orange() : fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS.lightBlue();
 		}
 		if (s.getBlock() instanceof FallingBlock) {
 			if (s.is(Blocks.GRAVEL)) return Blocks.COBBLESTONE;

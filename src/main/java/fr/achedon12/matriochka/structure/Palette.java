@@ -72,7 +72,7 @@ public final class Palette {
 				p.stair = b(Blocks.MOSSY_STONE_BRICK_STAIRS); p.slab = b(Blocks.MOSSY_STONE_BRICK_SLAB); p.wall = b(Blocks.MOSSY_STONE_BRICK_WALL);
 				wood(p, Blocks.JUNGLE_FENCE, Blocks.JUNGLE_PLANKS, Blocks.JUNGLE_LOG, Blocks.JUNGLE_STAIRS, Blocks.JUNGLE_SLAB, Blocks.JUNGLE_TRAPDOOR, Blocks.JUNGLE_DOOR, Blocks.JUNGLE_PRESSURE_PLATE);
 				p.light = m("spore_bloom"); p.accent = b(Blocks.VERDANT_FROGLIGHT);
-				p.pane = b(Blocks.STAINED_GLASS_PANE.green()); p.glass = b(Blocks.STAINED_GLASS.lime());
+				p.pane = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS_PANE.green()); p.glass = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS.lime());
 				p.cracked = b(Blocks.CRACKED_STONE_BRICKS); p.mossy = b(Blocks.MOSS_BLOCK); p.growth = b(Blocks.VINE);
 				p.soil = b(Blocks.ROOTED_DIRT); p.leaves = leaves(Blocks.JUNGLE_LEAVES);
 				p.plants = new BlockState[] {b(Blocks.FERN), b(Blocks.AZALEA), b(Blocks.SHORT_GRASS), b(Blocks.FLOWERING_AZALEA), b(Blocks.RED_MUSHROOM)};
@@ -86,7 +86,7 @@ public final class Palette {
 				p.stair = b(Blocks.POLISHED_BLACKSTONE_BRICK_STAIRS); p.slab = b(Blocks.POLISHED_BLACKSTONE_BRICK_SLAB); p.wall = b(Blocks.POLISHED_BLACKSTONE_BRICK_WALL);
 				wood(p, Blocks.DARK_OAK_FENCE, Blocks.DARK_OAK_PLANKS, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_STAIRS, Blocks.DARK_OAK_SLAB, Blocks.DARK_OAK_TRAPDOOR, Blocks.DARK_OAK_DOOR, Blocks.DARK_OAK_PRESSURE_PLATE);
 				p.light = m("ember_stone"); p.accent = b(Blocks.MAGMA_BLOCK);
-				p.pane = b(Blocks.STAINED_GLASS_PANE.orange()); p.glass = b(Blocks.STAINED_GLASS.orange());
+				p.pane = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS_PANE.orange()); p.glass = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS.orange());
 				p.cracked = b(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS); p.mossy = b(Blocks.BLACKSTONE);
 				p.soil = b(Blocks.BLACKSTONE); p.leaves = b(Blocks.BASALT);
 				p.plants = new BlockState[] {b(Blocks.DEAD_BUSH), b(Blocks.POINTED_DRIPSTONE)};
@@ -110,13 +110,13 @@ public final class Palette {
 			case 4 -> {
 				p.base = m("cloudstone"); p.alt = b(Blocks.QUARTZ_BRICKS); p.trim = b(Blocks.SMOOTH_QUARTZ);
 				p.pillar = up(Blocks.QUARTZ_PILLAR); p.cap = b(Blocks.CHISELED_QUARTZ_BLOCK);
-				p.floor = m("cloudstone"); p.inlay = b(Blocks.POLISHED_DIORITE); p.inlay2 = b(Blocks.CUT_COPPER.waxed().exposed()); p.found = m("cloudstone");
-				p.roof = b(Blocks.CUT_COPPER.waxed().weathered()); p.roofStair = b(Blocks.CUT_COPPER_STAIRS.waxed().weathered()); p.roofSlab = b(Blocks.CUT_COPPER_SLAB.waxed().weathered());
+				p.floor = m("cloudstone"); p.inlay = b(Blocks.POLISHED_DIORITE); p.inlay2 = b(fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().exposed()); p.found = m("cloudstone");
+				p.roof = b(fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().weathered()); p.roofStair = b(fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER_STAIRS.waxed().weathered()); p.roofSlab = b(fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER_SLAB.waxed().weathered());
 				p.stair = b(Blocks.SMOOTH_QUARTZ_STAIRS); p.slab = b(Blocks.SMOOTH_QUARTZ_SLAB); p.wall = b(Blocks.DIORITE_WALL);
-				wood(p, Blocks.BIRCH_FENCE, Blocks.BIRCH_PLANKS, Blocks.BIRCH_LOG, Blocks.BIRCH_STAIRS, Blocks.BIRCH_SLAB, Blocks.COPPER_TRAPDOOR.waxed().exposed(), Blocks.COPPER_DOOR.waxed().exposed(), Blocks.BIRCH_PRESSURE_PLATE);
+				wood(p, Blocks.BIRCH_FENCE, Blocks.BIRCH_PLANKS, Blocks.BIRCH_LOG, Blocks.BIRCH_STAIRS, Blocks.BIRCH_SLAB, fr.achedon12.matriochka.mc.McBlocks.COPPER_TRAPDOOR.waxed().exposed(), fr.achedon12.matriochka.mc.McBlocks.COPPER_DOOR.waxed().exposed(), Blocks.BIRCH_PRESSURE_PLATE);
 				p.light = m("storm_glass"); p.accent = m("storm_glass");
-				p.lantern = b(Blocks.COPPER_LANTERN.waxed().unaffected()); p.chain = b(Blocks.COPPER_CHAIN.waxed().exposed());
-				p.pane = b(Blocks.STAINED_GLASS_PANE.lightBlue()); p.bars = b(Blocks.COPPER_BARS.waxed().exposed()); p.glass = b(Blocks.STAINED_GLASS.white());
+				p.lantern = b(fr.achedon12.matriochka.mc.McBlocks.COPPER_LANTERN.waxed().unaffected()); p.chain = b(fr.achedon12.matriochka.mc.McBlocks.COPPER_CHAIN.waxed().exposed());
+				p.pane = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS_PANE.lightBlue()); p.bars = b(fr.achedon12.matriochka.mc.McBlocks.COPPER_BARS.waxed().exposed()); p.glass = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS.white());
 				p.cracked = b(Blocks.CALCITE); p.mossy = m("skygrass"); p.growth = b(Blocks.AIR);
 				p.soil = m("skygrass"); p.leaves = leaves(Blocks.BIRCH_LEAVES);
 				p.plants = new BlockState[] {b(Blocks.SHORT_GRASS), b(Blocks.OXEYE_DAISY), b(Blocks.CORNFLOWER), b(Blocks.LILY_OF_THE_VALLEY)};
@@ -130,7 +130,7 @@ public final class Palette {
 				p.stair = b(Blocks.DEEPSLATE_BRICK_STAIRS); p.slab = b(Blocks.DEEPSLATE_BRICK_SLAB); p.wall = b(Blocks.DEEPSLATE_BRICK_WALL);
 				wood(p, Blocks.DARK_OAK_FENCE, Blocks.DARK_OAK_PLANKS, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_STAIRS, Blocks.DARK_OAK_SLAB, Blocks.DARK_OAK_TRAPDOOR, Blocks.DARK_OAK_DOOR, Blocks.DARK_OAK_PRESSURE_PLATE);
 				p.light = m("faint_glow"); p.accent = m("faint_glow"); p.lantern = b(Blocks.SOUL_LANTERN);
-				p.pane = b(Blocks.STAINED_GLASS_PANE.black()); p.glass = b(Blocks.TINTED_GLASS);
+				p.pane = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS_PANE.black()); p.glass = b(Blocks.TINTED_GLASS);
 				p.cracked = b(Blocks.CRACKED_DEEPSLATE_BRICKS); p.mossy = m("umbral_moss"); p.growth = b(Blocks.SCULK_VEIN);
 				p.soil = m("umbral_moss"); p.leaves = b(Blocks.SCULK);
 				p.plants = new BlockState[] {b(Blocks.SCULK_VEIN), b(Blocks.SHORT_GRASS)};
@@ -144,7 +144,7 @@ public final class Palette {
 				p.stair = b(Blocks.END_STONE_BRICK_STAIRS); p.slab = b(Blocks.END_STONE_BRICK_SLAB); p.wall = b(Blocks.END_STONE_BRICK_WALL);
 				wood(p, Blocks.CHERRY_FENCE, Blocks.CHERRY_PLANKS, Blocks.CHERRY_LOG, Blocks.CHERRY_STAIRS, Blocks.CHERRY_SLAB, Blocks.CHERRY_TRAPDOOR, Blocks.CHERRY_DOOR, Blocks.CHERRY_PRESSURE_PLATE);
 				p.light = b(Blocks.PEARLESCENT_FROGLIGHT); p.accent = m("mirror_glass"); p.lantern = b(Blocks.SOUL_LANTERN);
-				p.pane = b(Blocks.STAINED_GLASS_PANE.magenta()); p.glass = m("mirror_glass");
+				p.pane = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS_PANE.magenta()); p.glass = m("mirror_glass");
 				p.cracked = b(Blocks.END_STONE); p.mossy = m("prism_moss"); p.growth = b(Blocks.AMETHYST_CLUSTER);
 				p.soil = m("prism_moss"); p.leaves = leaves(Blocks.CHERRY_LEAVES);
 				p.plants = new BlockState[] {b(Blocks.SMALL_AMETHYST_BUD), b(Blocks.MEDIUM_AMETHYST_BUD), b(Blocks.ALLIUM)};
@@ -158,7 +158,7 @@ public final class Palette {
 				p.stair = b(Blocks.PRISMARINE_BRICK_STAIRS); p.slab = b(Blocks.PRISMARINE_BRICK_SLAB); p.wall = b(Blocks.PRISMARINE_WALL);
 				wood(p, Blocks.DARK_OAK_FENCE, Blocks.DARK_OAK_PLANKS, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_STAIRS, Blocks.DARK_OAK_SLAB, Blocks.DARK_OAK_TRAPDOOR, Blocks.DARK_OAK_DOOR, Blocks.DARK_OAK_PRESSURE_PLATE);
 				p.light = b(Blocks.SEA_LANTERN); p.accent = m("pressure_coral");
-				p.pane = b(Blocks.STAINED_GLASS_PANE.cyan()); p.glass = b(Blocks.GLASS);
+				p.pane = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS_PANE.cyan()); p.glass = b(Blocks.GLASS);
 				p.cracked = b(Blocks.PRISMARINE); p.mossy = b(Blocks.DEAD_BRAIN_CORAL_BLOCK); p.growth = b(Blocks.TUBE_CORAL_FAN);
 				p.soil = m("abyssal_sand"); p.leaves = b(Blocks.HORN_CORAL_BLOCK);
 				p.plants = new BlockState[] {b(Blocks.SEAGRASS), b(Blocks.TUBE_CORAL), b(Blocks.BRAIN_CORAL), b(Blocks.HORN_CORAL), b(Blocks.SEA_PICKLE), b(Blocks.FIRE_CORAL)};
@@ -169,14 +169,14 @@ public final class Palette {
 			case 8 -> {
 				p.base = m("hourstone"); p.alt = b(Blocks.TUFF_BRICKS); p.trim = b(Blocks.POLISHED_TUFF);
 				p.pillar = up(Blocks.STRIPPED_CHERRY_LOG); p.cap = b(Blocks.CHISELED_TUFF_BRICKS);
-				p.floor = m("hourstone"); p.inlay = m("temporal_sand_block"); p.inlay2 = b(Blocks.CUT_COPPER.waxed().exposed()); p.found = b(Blocks.TUFF);
+				p.floor = m("hourstone"); p.inlay = m("temporal_sand_block"); p.inlay2 = b(fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().exposed()); p.found = b(Blocks.TUFF);
 				p.roof = b(Blocks.CHERRY_PLANKS); p.roofStair = b(Blocks.CHERRY_STAIRS); p.roofSlab = b(Blocks.CHERRY_SLAB);
 				p.stair = b(Blocks.TUFF_BRICK_STAIRS); p.slab = b(Blocks.TUFF_BRICK_SLAB); p.wall = b(Blocks.TUFF_BRICK_WALL);
-				wood(p, Blocks.OAK_FENCE, Blocks.OAK_PLANKS, Blocks.OAK_LOG, Blocks.OAK_STAIRS, Blocks.OAK_SLAB, Blocks.COPPER_TRAPDOOR.waxed().weathered(), Blocks.OAK_DOOR, Blocks.OAK_PRESSURE_PLATE);
+				wood(p, Blocks.OAK_FENCE, Blocks.OAK_PLANKS, Blocks.OAK_LOG, Blocks.OAK_STAIRS, Blocks.OAK_SLAB, fr.achedon12.matriochka.mc.McBlocks.COPPER_TRAPDOOR.waxed().weathered(), Blocks.OAK_DOOR, Blocks.OAK_PRESSURE_PLATE);
 				p.light = b(Blocks.OCHRE_FROGLIGHT);
-				p.accent = b(Blocks.COPPER_BULB.waxed().exposed()).setValue(CopperBulbBlock.LIT, true);
-				p.lantern = b(Blocks.COPPER_LANTERN.waxed().exposed()); p.chain = b(Blocks.COPPER_CHAIN.waxed().exposed());
-				p.pane = b(Blocks.STAINED_GLASS_PANE.yellow()); p.bars = b(Blocks.COPPER_BARS.waxed().weathered()); p.glass = b(Blocks.STAINED_GLASS.orange());
+				p.accent = b(fr.achedon12.matriochka.mc.McBlocks.COPPER_BULB.waxed().exposed()).setValue(CopperBulbBlock.LIT, true);
+				p.lantern = b(fr.achedon12.matriochka.mc.McBlocks.COPPER_LANTERN.waxed().exposed()); p.chain = b(fr.achedon12.matriochka.mc.McBlocks.COPPER_CHAIN.waxed().exposed());
+				p.pane = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS_PANE.yellow()); p.bars = b(fr.achedon12.matriochka.mc.McBlocks.COPPER_BARS.waxed().weathered()); p.glass = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS.orange());
 				p.cracked = b(Blocks.TUFF); p.mossy = b(Blocks.MOSSY_COBBLESTONE); p.growth = b(Blocks.VINE);
 				p.soil = m("chrono_grass"); p.leaves = leaves(Blocks.CHERRY_LEAVES);
 				p.plants = new BlockState[] {b(Blocks.PINK_PETALS), b(Blocks.POPPY), b(Blocks.DANDELION), b(Blocks.LEAF_LITTER), b(Blocks.SNOW), b(Blocks.SHORT_GRASS)};
@@ -190,7 +190,7 @@ public final class Palette {
 				p.stair = b(Blocks.MUD_BRICK_STAIRS); p.slab = b(Blocks.MUD_BRICK_SLAB); p.wall = b(Blocks.MUD_BRICK_WALL);
 				wood(p, Blocks.MANGROVE_FENCE, Blocks.MANGROVE_PLANKS, Blocks.MANGROVE_LOG, Blocks.MANGROVE_STAIRS, Blocks.MANGROVE_SLAB, Blocks.MANGROVE_TRAPDOOR, Blocks.MANGROVE_DOOR, Blocks.MANGROVE_PRESSURE_PLATE);
 				p.light = m("pulse_vein"); p.accent = m("pulse_vein");
-				p.pane = b(Blocks.STAINED_GLASS_PANE.red()); p.glass = b(Blocks.STAINED_GLASS.brown());
+				p.pane = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS_PANE.red()); p.glass = b(fr.achedon12.matriochka.mc.McBlocks.STAINED_GLASS.brown());
 				p.cracked = b(Blocks.PACKED_MUD); p.mossy = b(Blocks.ROOTED_DIRT); p.growth = b(Blocks.HANGING_ROOTS);
 				p.soil = b(Blocks.ROOTED_DIRT); p.leaves = b(Blocks.MANGROVE_ROOTS);
 				p.plants = new BlockState[] {b(Blocks.DEAD_BUSH), b(Blocks.SHORT_GRASS), b(Blocks.BROWN_MUSHROOM)};
@@ -206,8 +206,8 @@ public final class Palette {
 				p.light = m("lacquer_glow"); p.accent = b(Blocks.GOLD_BLOCK);
 				p.pane = b(Blocks.GLASS_PANE); p.glass = b(Blocks.GLASS);
 				p.cracked = m("giant_plank"); p.mossy = m("workshop_felt");
-				p.soil = m("workshop_felt"); p.leaves = b(Blocks.WOOL.red());
-				p.plants = new BlockState[] {b(Blocks.CARPET.red()), b(Blocks.CARPET.yellow()), b(Blocks.CARPET.white())};
+				p.soil = m("workshop_felt"); p.leaves = b(fr.achedon12.matriochka.mc.McBlocks.WOOL.red());
+				p.plants = new BlockState[] {b(fr.achedon12.matriochka.mc.McBlocks.CARPET.red()), b(fr.achedon12.matriochka.mc.McBlocks.CARPET.yellow()), b(fr.achedon12.matriochka.mc.McBlocks.CARPET.white())};
 				p.colA = DyeColor.RED; p.colB = DyeColor.YELLOW;
 			}
 			default -> {

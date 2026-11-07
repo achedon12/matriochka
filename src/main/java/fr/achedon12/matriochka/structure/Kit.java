@@ -664,7 +664,7 @@ public final class Kit {
 			set(x, y, z, b(Blocks.SEA_PICKLE).setValue(SeaPickleBlock.PICKLES, n));
 			return;
 		}
-		BlockState c = world == 5 ? b(Blocks.DYED_CANDLE.black()) : world == 3 ? b(Blocks.DYED_CANDLE.lightBlue()) : b(Blocks.DYED_CANDLE.pick(p.colA));
+		BlockState c = world == 5 ? b(fr.achedon12.matriochka.mc.McBlocks.DYED_CANDLE.black()) : world == 3 ? b(fr.achedon12.matriochka.mc.McBlocks.DYED_CANDLE.lightBlue()) : b(fr.achedon12.matriochka.mc.McBlocks.DYED_CANDLE.pick(p.colA));
 		if (world == 0 || world == 10) c = b(Blocks.CANDLE);
 		set(x, y, z, c.setValue(CandleBlock.CANDLES, n).setValue(CandleBlock.LIT, true));
 	}
@@ -725,7 +725,7 @@ public final class Kit {
 
 	/** Bed with its foot at (x, z) and its head towards {@code head}. */
 	public void bed(int x, int y, int z, Direction head, DyeColor color) {
-		BlockState s = facing(b(Blocks.BED.pick(color)), head);
+		BlockState s = facing(b(fr.achedon12.matriochka.mc.McBlocks.BED.pick(color)), head);
 		set(x, y, z, s.setValue(BedBlock.PART, BedPart.FOOT));
 		set(x + head.getStepX(), y, z + head.getStepZ(), s.setValue(BedBlock.PART, BedPart.HEAD));
 	}
@@ -739,17 +739,17 @@ public final class Kit {
 
 	public void banner(int x, int y, int z, Direction facing, DyeColor c) {
 		if (p.underwater) return;
-		set(x, y, z, facing(b(Blocks.WALL_BANNER.pick(c)), facing));
+		set(x, y, z, facing(b(fr.achedon12.matriochka.mc.McBlocks.WALL_BANNER.pick(c)), facing));
 	}
 
 	public void standingBanner(int x, int y, int z, DyeColor c) {
 		if (p.underwater) return;
-		set(x, y, z, b(Blocks.BANNER.pick(c)));
+		set(x, y, z, b(fr.achedon12.matriochka.mc.McBlocks.BANNER.pick(c)));
 	}
 
 	public void carpet(int x, int y, int z, DyeColor c) {
 		if (p.underwater) return;
-		set(x, y, z, b(Blocks.CARPET.pick(c)));
+		set(x, y, z, b(fr.achedon12.matriochka.mc.McBlocks.CARPET.pick(c)));
 	}
 
 	/** Carpet runner with a border, from (x0,z0) to (x1,z1). */

@@ -109,7 +109,7 @@ public final class NestingChests {
 		NonNullList<ItemStack> items = NonNullList.withSize(size, ItemStack.EMPTY);
 		ItemContainerContents c = stack.get(DataComponents.CONTAINER);
 		if (c != null) {
-			NonNullList<ItemStack> all = NonNullList.withSize(Math.max(size, c.size()), ItemStack.EMPTY);
+			NonNullList<ItemStack> all = NonNullList.withSize(Math.max(size, fr.achedon12.matriochka.mc.Mc.slots(c)), ItemStack.EMPTY);
 			c.copyInto(all);
 			for (int i = 0; i < size; i++) items.set(i, all.get(i));
 		}

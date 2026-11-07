@@ -1,0 +1,35 @@
+{
+  "parent": "matriochka:world_9/a1",
+  "display": {
+    "icon": {
+      "id": "matriochka:seed_9"
+    },
+    "title": {
+      "translate": "advancement.matriochka.w9.a2.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.w9.a2.desc"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "entity": "this",
+            "predicate": {
+              "minecraft:entity_type": "matriochka:terrain_heart_boss"
+            },
+            "condition": "minecraft:entity_properties"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "matriochka:reward/progress"
+  }
+}

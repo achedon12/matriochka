@@ -242,7 +242,7 @@ public final class Refuge {
 	private static void furnish(ServerLevel level, BlockPos c, int tier) {
 		int r = radius(tier);
 		level.setBlock(spawn(c).below(), ModContent.block("threshold").defaultBlockState(), 3);
-		BlockState carpet = Blocks.CARPET.red().defaultBlockState();
+		BlockState carpet = fr.achedon12.matriochka.mc.McBlocks.CARPET.red().defaultBlockState();
 		for (int dx = -1; dx <= 1; dx++) for (int dz = -1; dz <= 1; dz++) level.setBlock(c.offset(dx, 0, dz), carpet, 3);
 		level.setBlock(c.offset(-2, 0, -r), Blocks.CRAFTING_TABLE.defaultBlockState(), 3);
 		level.setBlock(c.offset(0, 0, -r), ModContent.block("nesting_chest").defaultBlockState(), 3);

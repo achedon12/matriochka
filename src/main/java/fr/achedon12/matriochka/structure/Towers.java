@@ -151,13 +151,13 @@ final class Towers {
 			return;
 		}
 		if (k.id.equals("giant_lightning_rod")) {
-			BlockState cu = Blocks.COPPER_BLOCK.waxed().exposed().defaultBlockState();
+			BlockState cu = fr.achedon12.matriochka.mc.McBlocks.COPPER_BLOCK.waxed().exposed().defaultBlockState();
 			for (int yy = y; yy < y + 6; yy++) {
 				k.set(0, yy, 0, cu);
-				if (yy < y + 3) for (Direction d : Direction.Plane.HORIZONTAL) k.set(d.getStepX(), yy, d.getStepZ(), Blocks.CUT_COPPER.waxed().weathered().defaultBlockState());
+				if (yy < y + 3) for (Direction d : Direction.Plane.HORIZONTAL) k.set(d.getStepX(), yy, d.getStepZ(), fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().weathered().defaultBlockState());
 			}
-			for (int yy = y + 6; yy < y + 11; yy++) k.set(0, yy, 0, Blocks.LIGHTNING_ROD.waxed().unaffected().defaultBlockState());
-			for (int x = -tr - 1; x <= tr + 1; x += 2) k.set(x, h + 2, -tr - 1 + Math.abs(x) / 3, Blocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState());
+			for (int yy = y + 6; yy < y + 11; yy++) k.set(0, yy, 0, fr.achedon12.matriochka.mc.McBlocks.LIGHTNING_ROD.waxed().unaffected().defaultBlockState());
+			for (int x = -tr - 1; x <= tr + 1; x += 2) k.set(x, h + 2, -tr - 1 + Math.abs(x) / 3, fr.achedon12.matriochka.mc.McBlocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState());
 			for (int i = 0; i < 4; i++) {
 				Direction d = Direction.from2DDataValue(i);
 				for (int s = 1; s <= tr; s++) k.set(d.getStepX() * s, y + 5 - s / 2, d.getStepZ() * s, Kit.axis(p.chain, d.getAxis()));
@@ -170,11 +170,11 @@ final class Towers {
 			k.ring(0, h + 1, 0, tr, p.trim);
 			// telescope on its mount
 			k.set(0, h + 1, 0, Blocks.LODESTONE.defaultBlockState());
-			BlockState tube = Blocks.CUT_COPPER.waxed().exposed().defaultBlockState();
+			BlockState tube = fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().exposed().defaultBlockState();
 			k.set(1, h + 2, 0, tube);
 			k.set(2, h + 3, 0, tube);
 			k.set(0, h + 2, 0, tube);
-			k.stair(3, h + 4, 0, Blocks.CUT_COPPER_STAIRS.waxed().exposed().defaultBlockState(), Direction.WEST, false);
+			k.stair(3, h + 4, 0, fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER_STAIRS.waxed().exposed().defaultBlockState(), Direction.WEST, false);
 			k.set(-1, h + 1, 0, p.fence);
 			k.set(-1, h + 2, 0, Kit.slabOf(p.woodSlab, false));
 			if (k.world == 8) {
@@ -198,7 +198,7 @@ final class Towers {
 			k.set(0, y + 8, 0, Blocks.END_ROD.defaultBlockState());
 			k.set(0, y + 9, 0, Blocks.END_ROD.defaultBlockState());
 			// red thread wound around the tower and through the eye
-			BlockState thread = Blocks.WOOL.red().defaultBlockState();
+			BlockState thread = fr.achedon12.matriochka.mc.McBlocks.WOOL.red().defaultBlockState();
 			for (int yy = 2; yy < h; yy++) {
 				double t = yy * 0.45;
 				k.set((int) Math.round(Math.cos(t) * (tr + 1)), yy, (int) Math.round(Math.sin(t) * (tr + 1)), thread);
@@ -265,7 +265,7 @@ final class Towers {
 		if (sunk) { k.sink = 2; k.shear = 0.06; }
 		int tr = 5, h = Math.min(k.H, 24);
 		k.site(k.R, h + 12);
-		BlockState stripe = Blocks.CONCRETE.pick(p.colB).defaultBlockState();
+		BlockState stripe = fr.achedon12.matriochka.mc.McBlocks.CONCRETE.pick(p.colB).defaultBlockState();
 		k.disc(0, 0, 0, tr + 2, p.trim);
 		for (int y = 1; y <= h; y++) {
 			double rad = tr + 1 - 2.0 * y / h;
@@ -313,7 +313,7 @@ final class Towers {
 		k.set(1, h + 2, 0, p.light); k.set(-1, h + 2, 0, p.light); k.set(0, h + 2, 1, p.light); k.set(0, h + 2, -1, p.light);
 		k.disc(0, h + 5, 0, lr + 1, p.trim);
 		int tip = k.cone(0, h + 6, 0, lr, 1.2);
-		k.set(0, tip + 1, 0, Blocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState());
+		k.set(0, tip + 1, 0, fr.achedon12.matriochka.mc.McBlocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState());
 		// keeper's cottage
 		Parts.house(k, tr + 2, -3, Math.min(k.R - 1, tr + 7), 3, 0, 1, Direction.NORTH, 2);
 		// rooms
@@ -400,13 +400,13 @@ final class Towers {
 		k.set(0, by + 4, 0, p.plank);
 		k.set(0, by + 3, 0, Kit.facing(Blocks.BELL.defaultBlockState(), Direction.NORTH).setValue(BellBlock.ATTACHMENT, BellAttachType.CEILING));
 		int top = k.hip(-hw, -hw, hw, hw, by + 6, 1);
-		k.set(0, top + 1, 0, Blocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState());
+		k.set(0, top + 1, 0, fr.achedon12.matriochka.mc.McBlocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState());
 		// clockwork chamber at the top floor
 		int cy = 8 + (floors - 1) * 6;
 		for (int z = -hw + 1; z <= hw - 1; z += hw * 2 - 2) for (int a = 0; a < 16; a++) {
 			double t = a * Math.PI / 8;
 			int gx = (int) Math.round(Math.cos(t) * 2.5), gy = (int) Math.round(Math.sin(t) * 2.5);
-			k.set(gx, cy + 3 + gy, z, Blocks.COPPER_GRATE.waxed().exposed().defaultBlockState());
+			k.set(gx, cy + 3 + gy, z, fr.achedon12.matriochka.mc.McBlocks.COPPER_GRATE.waxed().exposed().defaultBlockState());
 		}
 		k.set(-hw + 1, cy + 1, 0, p.accent);
 		k.set(hw - 1, cy + 1, 0, p.accent);
@@ -434,7 +434,7 @@ final class Towers {
 	}
 
 	private static void gear(Kit k, int cx, int y, int cz, int rad) {
-		BlockState cu = Blocks.CUT_COPPER.waxed().exposed().defaultBlockState();
+		BlockState cu = fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().exposed().defaultBlockState();
 		k.ring(cx, y, cz, rad, cu);
 		for (int i = 0; i < 8; i++) {
 			double a = i * Math.PI / 4;
@@ -450,7 +450,7 @@ final class Towers {
 		Direction right = side.getClockWise();
 		int ox = side.getStepX() * (hw + 1), oz = side.getStepZ() * (hw + 1);
 		BlockState dial = Blocks.SMOOTH_QUARTZ.defaultBlockState();
-		BlockState rim = Blocks.CUT_COPPER.waxed().weathered().defaultBlockState();
+		BlockState rim = fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().weathered().defaultBlockState();
 		for (int a = -4; a <= 4; a++)
 			for (int b = -4; b <= 4; b++) {
 				double d = Math.sqrt(a * a + b * b);

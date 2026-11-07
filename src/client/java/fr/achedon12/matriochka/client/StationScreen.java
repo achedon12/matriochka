@@ -76,7 +76,7 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 				// the talent trees open in their own cabinet
 				buttons.add(l + 150, t + 117, 92, 16, Component.translatable("talents.matriochka.open"), () -> {
 					minecraft.player.closeContainer();
-					minecraft.gui.setScreen(new TalentScreen());
+					fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new TalentScreen());
 				});
 			}
 			case "abyssal_press" -> buttons.add(l + 199, t + 113, 46, 16, Component.translatable("station.matriochka.refill"), () -> click(220));

@@ -264,11 +264,11 @@ final class Settlements {
 		k.crates(-8, 1, hz1 - 1);
 		k.crates(7, 1, hz1 - 1);
 		// clock pole in the middle of the avenue
-		BlockState cu = Blocks.CUT_COPPER.waxed().exposed().defaultBlockState();
-		for (int y = 1; y <= 7; y++) k.set(0, y, -2, y == 1 ? p.trim : Blocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP));
+		BlockState cu = fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().exposed().defaultBlockState();
+		for (int y = 1; y <= 7; y++) k.set(0, y, -2, y == 1 ? p.trim : fr.achedon12.matriochka.mc.McBlocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP));
 		k.box(-1, 8, -3, 1, 8, -1, cu);
-		k.set(0, 8, -2, Blocks.COPPER_BULB.waxed().exposed().defaultBlockState().setValue(BlockStateProperties.LIT, true));
-		k.set(0, 9, -2, Blocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState());
+		k.set(0, 8, -2, fr.achedon12.matriochka.mc.McBlocks.COPPER_BULB.waxed().exposed().defaultBlockState().setValue(BlockStateProperties.LIT, true));
+		k.set(0, 9, -2, fr.achedon12.matriochka.mc.McBlocks.LIGHTNING_ROD.waxed().exposed().defaultBlockState());
 		// entrance arch
 		for (int s : new int[] {-3, 3}) for (int y = 1; y <= 5; y++) k.set(s, y, -R + 1, p.pillar);
 		k.arch(-3, 3, 4, -R + 1, true, 1);
@@ -659,7 +659,7 @@ final class Settlements {
 		k.set(-hw + 1, 1, hl - 2, Blocks.COMPOSTER.defaultBlockState());
 		k.workbench(hw - 2, 1, hl - 1, Direction.NORTH);
 		if (seasons) {
-			for (int y = 1; y <= 5; y++) k.set(0, y, hl - 2, y == 5 ? Blocks.COPPER_BULB.waxed().exposed().defaultBlockState().setValue(BlockStateProperties.LIT, true) : Blocks.CUT_COPPER.waxed().exposed().defaultBlockState());
+			for (int y = 1; y <= 5; y++) k.set(0, y, hl - 2, y == 5 ? fr.achedon12.matriochka.mc.McBlocks.COPPER_BULB.waxed().exposed().defaultBlockState().setValue(BlockStateProperties.LIT, true) : fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().exposed().defaultBlockState());
 		}
 		k.mark("hidden", -hw + 1, 1, -hl + 1, Direction.EAST);
 		k.mark("hidden", hw - 1, 1, hl - 3, Direction.WEST);
@@ -716,7 +716,7 @@ final class Settlements {
 		for (int i = 0; i < 5; i++) {
 			double a = i * 1.3;
 			int cx = (int) Math.round(Math.cos(a) * (R - 1)), cz = (int) Math.round(Math.sin(a) * (R - 1));
-			k.ellipsoid(cx, y0 + 7 + i % 3, cz, 1.6, 0.8, 1.2, k.world == 6 ? p.leaves : Blocks.WOOL.white().defaultBlockState(), 0);
+			k.ellipsoid(cx, y0 + 7 + i % 3, cz, 1.6, 0.8, 1.2, k.world == 6 ? p.leaves : fr.achedon12.matriochka.mc.McBlocks.WOOL.white().defaultBlockState(), 0);
 		}
 		// the puzzle: one moss tile in the gazebo floor sits over a ladder to the hidden cellar
 		int cy = y0 - 6;

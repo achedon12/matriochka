@@ -1,0 +1,130 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#7a9a56",
+    "minecraft:visual/fog_color": "#6a8a44",
+    "minecraft:visual/water_fog_color": "#3f6b4a",
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w1.insects",
+          "tick_chance": 0.006
+        },
+        {
+          "sound": "matriochka:ambient.w1.spore",
+          "tick_chance": 0.004
+        }
+      ],
+      "loop": "matriochka:ambient.w1.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_1",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 0.0,
+    "minecraft:visual/fog_end_distance": 90.0,
+    "minecraft:visual/sky_fog_end_distance": 120.0,
+    "minecraft:visual/cloud_color": "#cc9ab870",
+    "minecraft:visual/sky_light_color": "#e4f4c0",
+    "minecraft:visual/block_light_tint": "#f0e8a0",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:spore"
+        },
+        "probability": 0.006
+      },
+      {
+        "particle": {
+          "type": "minecraft:spore_blossom_air"
+        },
+        "probability": 0.0015
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.9,
+  "effects": {
+    "water_color": "#3f6b4a",
+    "grass_color": "#3f6b2a",
+    "foliage_color": "#3f6b2a"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:sporite_ore",
+      "matriochka:spore_bloom_patch"
+    ],
+    [],
+    [],
+    [
+      "minecraft:trees_jungle",
+      "minecraft:bamboo_vegetation",
+      "minecraft:patch_grass_jungle",
+      "minecraft:vines",
+      "minecraft:patch_melon"
+    ],
+    []
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "monster": [
+      {
+        "type": "matriochka:sporeling",
+        "weight": 60,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "matriochka:root_creeper",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:snare_flower",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:spore_bearer",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:chitin_guard",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "creature": [
+      {
+        "type": "matriochka:gatherer",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "temperature": 0.95
+}

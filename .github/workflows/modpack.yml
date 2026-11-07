@@ -51,6 +51,8 @@ jobs:
           git rev-parse --verify --quiet "refs/tags/$TAG" >/dev/null || { echo "::error::no tag $TAG"; exit 1; }
           # the tools come from this branch, the versions from the tag
           git show "$TAG:gradle.properties" > tag.properties
+          # the Minecraft version and its dependencies moved to versions/<mc>/ (the pack follows the default, 26.3)
+          git show "$TAG:versions/26.3/gradle.properties" >> tag.properties 2>/dev/null || true
           version=$(grep '^mod_version=' tag.properties | cut -d= -f2)
           mc=$(grep '^minecraft_version=' tag.properties | cut -d= -f2)
           [ "v$version" = "$TAG" ] || { echo "::error::$TAG declares mod_version $version"; exit 1; }

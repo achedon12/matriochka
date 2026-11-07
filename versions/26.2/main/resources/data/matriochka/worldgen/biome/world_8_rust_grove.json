@@ -1,0 +1,112 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#90b8e8",
+    "minecraft:visual/fog_color": "#d8b080",
+    "minecraft:visual/water_fog_color": "#5a8ab8",
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w8.chime",
+          "tick_chance": 0.002
+        },
+        {
+          "sound": "matriochka:ambient.w8.cuckoo",
+          "tick_chance": 0.0008
+        }
+      ],
+      "loop": "matriochka:ambient.w8.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_8",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 12.0,
+    "minecraft:visual/fog_end_distance": 160.0,
+    "minecraft:visual/sky_light_color": "#fff4dc"
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#5a8ab8",
+    "grass_color": "#c86a2a",
+    "foliage_color": "#c86a2a"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:season_ore",
+      "matriochka:temporal_sand_block_patch"
+    ],
+    [],
+    [],
+    [
+      "minecraft:trees_birch_and_oak_leaf_litter",
+      "minecraft:flower_forest_flowers",
+      "minecraft:patch_grass_forest",
+      "minecraft:patch_pumpkin"
+    ],
+    []
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "monster": [
+      {
+        "type": "matriochka:seasonal_creature",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:hourglass_elder",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:dusk_shade",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:minute_child",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:hour_keeper",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "creature": [
+      {
+        "type": "matriochka:ephemeral",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "temperature": 0.8
+}

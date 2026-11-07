@@ -1,0 +1,18 @@
+{
+  "values": [
+    "matriochka:world_7",
+    "matriochka:world_7_coral_shelf",
+    "matriochka:world_7_black_trench"
+  ],
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {}
+}

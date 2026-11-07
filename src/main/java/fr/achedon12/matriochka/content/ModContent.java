@@ -121,7 +121,7 @@ public final class ModContent {
 		return switch (d.kind()) {
 			case "soil" -> new Blocks2.WorldSoil(Integer.parseInt(d.id().substring("world_soil_".length())), p.strength(0.6f).sound(SoundType.GRAVEL).randomTicks());
 			case "planted_seed" -> new Blocks2.PlantedSeed(p.strength(0.2f).noOcclusion().noCollision().sound(SoundType.CROP));
-			case "world_block" -> new Blocks2.WorldBlock(p.strength(3f, 3600000f).sound(SoundType.WOOD).lightLevel(s -> 9).pushReaction(net.minecraft.world.level.material.PushReaction.IMMOVEABLE));
+			case "world_block" -> new Blocks2.WorldBlock(p.strength(3f, 3600000f).sound(SoundType.WOOD).lightLevel(s -> 9).pushReaction(fr.achedon12.matriochka.mc.Mc.immovable()));
 			case "threshold" -> new Blocks2.Threshold(p.strength(-1f, 3600000f).lightLevel(s -> 12).noLootTable());
 			case "cradle" -> new Blocks3.SoulCradle(p.strength(1.5f).sound(SoundType.WOOD).noOcclusion());
 			case "death_chest" -> new Blocks3.DeathChest(p.strength(-1f, 3600000f).sound(SoundType.WOOD).noLootTable());

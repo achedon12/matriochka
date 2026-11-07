@@ -1,0 +1,18 @@
+{
+  "values": [
+    "matriochka:world_1",
+    "matriochka:world_1_bloom_hollow",
+    "matriochka:world_1_rot_marsh"
+  ],
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {}
+}

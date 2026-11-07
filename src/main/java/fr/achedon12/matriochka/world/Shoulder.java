@@ -16,7 +16,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -79,7 +78,7 @@ public final class Shoulder {
 		double x = p.getX() - Math.cos(yaw) * 0.52 - Math.sin(yaw) * 0.18, z = p.getZ() - Math.sin(yaw) * 0.52 + Math.cos(yaw) * 0.18;
 		double y = p.getY() + (p.isCrouching() ? 1.2 : 1.5);
 		if (doll == null) {
-			doll = EntityTypes.ITEM_DISPLAY.create(level, EntitySpawnReason.EVENT);
+			doll = fr.achedon12.matriochka.mc.McEntities.ITEM_DISPLAY.create(level, EntitySpawnReason.EVENT);
 			if (doll == null) return;
 			((ItemDisplayAccess) doll).matriochka$setItem(new ItemStack(ModContent.item(id)));
 			((DisplayAccess) doll).matriochka$setTransformation(new com.mojang.math.Transformation(

@@ -278,12 +278,12 @@ public final class WorldZero {
 				set(level, o, ROOM_X, y, z, Blocks.BOOKSHELF.defaultBlockState());
 			}
 		// his bed
-		BlockState bed = Blocks.BED.red().defaultBlockState().setValue(BedBlock.FACING, Direction.SOUTH);
+		BlockState bed = fr.achedon12.matriochka.mc.McBlocks.BED.red().defaultBlockState().setValue(BedBlock.FACING, Direction.SOUTH);
 		set(level, o, 9, 0, ROOM_Z0 + 2, bed.setValue(BedBlock.PART, BedPart.FOOT));
 		set(level, o, 9, 0, ROOM_Z0 + 3, bed.setValue(BedBlock.PART, BedPart.HEAD));
 		set(level, o, 10, 0, ROOM_Z0 + 3, Blocks.CANDLE.defaultBlockState().setValue(CandleBlock.LIT, true));
 		// the kneeling carpet before the bench
-		for (int x = -1; x <= 1; x++) for (int z = KNEEL_Z - 1; z <= KNEEL_Z; z++) set(level, o, x, 0, z, Blocks.CARPET.red().defaultBlockState());
+		for (int x = -1; x <= 1; x++) for (int z = KNEEL_Z - 1; z <= KNEEL_Z; z++) set(level, o, x, 0, z, fr.achedon12.matriochka.mc.McBlocks.CARPET.red().defaultBlockState());
 		// the bench, the first Scroll on its lectern, candles at both ends
 		for (int x = -4; x <= 4; x++) for (int z = KNEEL_Z + 2; z <= KNEEL_Z + 3; z++) set(level, o, x, 0, z, b("giant_plank"));
 		set(level, o, 0, 1, KNEEL_Z + 2, Blocks.LECTERN.defaultBlockState().setValue(LecternBlock.FACING, Direction.NORTH));

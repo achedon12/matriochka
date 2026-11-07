@@ -487,7 +487,7 @@ public final class WorldEvents {
 					level.playSound(null, p.blockPosition(), fr.achedon12.matriochka.content.Sounds.WORLD_GUST, SoundSource.WEATHER, 1f, 0.8f);
 				}
 				if (r.nextFloat() < 0.15f) {
-					LightningBolt bolt = net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+					LightningBolt bolt = fr.achedon12.matriochka.mc.McEntities.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
 					if (bolt != null) {
 						bolt.setVisualOnly(true);
 						bolt.setPos(p.getX() + r.nextGaussian() * 8, p.getY(), p.getZ() + r.nextGaussian() * 8);

@@ -1,0 +1,129 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#5a6a8c",
+    "minecraft:visual/fog_color": "#c8d8f0",
+    "minecraft:visual/water_fog_color": "#4a8ad8",
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w4.whistle",
+          "tick_chance": 0.006
+        },
+        {
+          "sound": "matriochka:ambient.w4.thunder",
+          "tick_chance": 0.0015
+        }
+      ],
+      "loop": "matriochka:ambient.w4.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_4",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 8.0,
+    "minecraft:visual/fog_end_distance": 150.0,
+    "minecraft:visual/cloud_color": "#f04a5268",
+    "minecraft:visual/cloud_height": 150.0,
+    "minecraft:visual/sky_light_color": "#c0cce4",
+    "minecraft:visual/sky_light_factor": 0.85,
+    "minecraft:visual/sunrise_sunset_color": "#66ffe14a",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:storm_spark"
+        },
+        "probability": 0.0006
+      },
+      {
+        "particle": {
+          "type": "minecraft:white_ash"
+        },
+        "probability": 0.002
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.9,
+  "effects": {
+    "water_color": "#4a8ad8",
+    "grass_color": "#c8d8e8",
+    "foliage_color": "#c8d8e8"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:celestial_crystal_ore",
+      "matriochka:storm_glass_patch"
+    ],
+    [],
+    [],
+    [
+      "minecraft:trees_meadow",
+      "minecraft:patch_grass_plain",
+      "minecraft:flower_meadow"
+    ],
+    []
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "monster": [
+      {
+        "type": "matriochka:wind_ray",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:storm_bird",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:island_warden",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:cloud_mine",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:sky_harpooner",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "creature": [
+      {
+        "type": "matriochka:lighthouse_keeper",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "temperature": 0.5
+}

@@ -1,0 +1,139 @@
+{
+  "attributes": {
+    "minecraft:visual/sky_color": "#ecd4a4",
+    "minecraft:visual/fog_color": "#d0b080",
+    "minecraft:visual/water_fog_color": "#4a7ab8",
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "matriochka:ambient.w1.insects",
+          "tick_chance": 0.002
+        },
+        {
+          "sound": "matriochka:ambient.w4.whistle",
+          "tick_chance": 0.002
+        },
+        {
+          "sound": "matriochka:ambient.w7.drip",
+          "tick_chance": 0.003
+        },
+        {
+          "sound": "matriochka:ambient.w8.chime",
+          "tick_chance": 0.001
+        },
+        {
+          "sound": "matriochka:ambient.w9.grind",
+          "tick_chance": 0.002
+        }
+      ],
+      "loop": "matriochka:ambient.w10.loop"
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "matriochka:music.world_10",
+        "min_delay": 3600,
+        "max_delay": 12000
+      }
+    },
+    "minecraft:visual/fog_start_distance": 16.0,
+    "minecraft:visual/fog_end_distance": 170.0,
+    "minecraft:visual/cloud_color": "#ccfff0d0",
+    "minecraft:visual/sky_light_color": "#fff0d0",
+    "minecraft:visual/block_light_tint": "#ffc070",
+    "minecraft:visual/ambient_light_color": "#1a1008",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "matriochka:fluff"
+        },
+        "probability": 0.004
+      },
+      {
+        "particle": {
+          "type": "matriochka:thread_scrap"
+        },
+        "probability": 0.0006
+      }
+    ]
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.3,
+  "effects": {
+    "water_color": "#4a7ab8",
+    "grass_color": "#c8a060",
+    "foliage_color": "#c8a060"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "matriochka:artisan_thread_ore",
+      "matriochka:lacquer_glow_patch"
+    ],
+    [],
+    [],
+    [
+      "minecraft:trees_plains",
+      "minecraft:patch_grass_plain"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "monster": [
+      {
+        "type": "matriochka:giant_sporeling",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:ash_titanid",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:colossal_jailer",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:titan_ray",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "matriochka:colossus_prowler",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "creature": [
+      {
+        "type": "matriochka:old_apprentice",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "temperature": 0.8
+}

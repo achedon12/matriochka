@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.LightCoordsUtil;
 
 /**
  * The moving parts of the sculpted stations, drawn over their block models: the matrix spinning over the workbench,
@@ -49,19 +48,19 @@ final class StationParts {
 	static void submit(String station, int world, Direction facing, float t, int value, PoseStack pose, SubmitNodeCollector out, int light) {
 		pose.pushPose();
 		pose.translate(0.5f, 0, 0.5f);
-		pose.rotateDegrees(Axis.YP, -facing.toYRot() + 180f);
+		fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.YP, -facing.toYRot() + 180f);
 		pose.translate(-0.5f, 0, -0.5f);
 		pose.scale(1 / 16f, 1 / 16f, 1 / 16f);
-		int full = LightCoordsUtil.FULL_BRIGHT;
+		int full = fr.achedon12.matriochka.client.mc.McClient.FULL_LIGHT;
 		String glow = "glow_" + world;
 		switch (station) {
 			case "matrix_workbench" -> {
 				// a gilded frame cube with a lit heart, spinning and bobbing over the dais
 				pose.pushPose();
 				pose.translate(8, 16.2f + (float) Math.sin(t / 14.0) * 0.6f, 8);
-				pose.rotateDegrees(Axis.YP, t * 2.2f);
-				pose.rotateDegrees(Axis.XP, 35.26f);
-				pose.rotateDegrees(Axis.ZP, 45f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.YP, t * 2.2f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.XP, 35.26f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.ZP, 45f);
 				frameCube(pose, out, solid("gold"), 2.2f, 0.45f, light);
 				box(pose, out, lit(glow), -1.1f, -1.1f, -1.1f, 1.1f, 1.1f, 1.1f, 0xFFFFFFFF, full);
 				pose.popPose();
@@ -70,7 +69,7 @@ final class StationParts {
 				// the rank medal turns over the open book
 				pose.pushPose();
 				pose.translate(8, 16.5f + (float) Math.sin(t / 18.0) * 0.4f, 9);
-				pose.rotateDegrees(Axis.YP, t * 1.6f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.YP, t * 1.6f);
 				box(pose, out, solid("gold"), -1.6f, -1.6f, -0.25f, 1.6f, 1.6f, 0.25f, 0xFFFFFFFF, light);
 				box(pose, out, lit(glow), -0.8f, -0.8f, -0.4f, 0.8f, 0.8f, 0.4f, 0xFFFFFFFF, full);
 				pose.popPose();
@@ -99,7 +98,7 @@ final class StationParts {
 				// the key in the lock plate turns back and forth
 				pose.pushPose();
 				pose.translate(8, 16f, 8);
-				pose.rotateDegrees(Axis.YP, (float) Math.sin(t / 16.0) * 70f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.YP, (float) Math.sin(t / 16.0) * 70f);
 				box(pose, out, solid("iron"), -0.4f, 0, -0.4f, 0.4f, 2.4f, 0.4f, 0xFFFFFFFF, light);
 				box(pose, out, solid("gold"), -1.4f, 2.4f, -0.35f, 1.4f, 3.6f, 0.35f, 0xFFFFFFFF, light);
 				pose.popPose();
@@ -122,9 +121,9 @@ final class StationParts {
 				// the dark crystal hangs over the slab, turning, its heart lit
 				pose.pushPose();
 				pose.translate(8, 13.5f + (float) Math.sin(t / 20.0) * 0.8f, 8);
-				pose.rotateDegrees(Axis.YP, t * 0.9f);
-				pose.rotateDegrees(Axis.XP, 45f);
-				pose.rotateDegrees(Axis.ZP, 45f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.YP, t * 0.9f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.XP, 45f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.ZP, 45f);
 				box(pose, out, solid("obsidian"), -1.8f, -1.8f, -1.8f, 1.8f, 1.8f, 1.8f, 0xFFFFFFFF, light);
 				box(pose, out, lit(glow), -1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 0xFFFFFFFF, full);
 				pose.popPose();
@@ -133,9 +132,9 @@ final class StationParts {
 				// a gilded ring turns round the waist of the hourglass, flipping over every few seconds
 				pose.pushPose();
 				pose.translate(8, 8, 8);
-				pose.rotateDegrees(Axis.YP, t * 1.2f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.YP, t * 1.2f);
 				float flip = (float) Math.max(0, Math.sin(t / 40.0)) * 180f;
-				pose.rotateDegrees(Axis.XP, flip);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.XP, flip);
 				ring(pose, out, solid("gold"), 5.2f, 0.45f, light);
 				pose.popPose();
 			}
@@ -152,7 +151,7 @@ final class StationParts {
 				// the pendulum behind the glass, and the hands on the face
 				pose.pushPose();
 				pose.translate(8, 7.2f, 4.4f);
-				pose.rotateDegrees(Axis.ZP, (float) Math.sin(t / 10.0) * 22f);
+				fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.ZP, (float) Math.sin(t / 10.0) * 22f);
 				box(pose, out, solid("gold"), -0.2f, -4f, -0.15f, 0.2f, 0, 0.15f, 0xFFFFFFFF, light);
 				box(pose, out, solid("gold"), -0.9f, -4.9f, -0.3f, 0.9f, -3.6f, 0.3f, 0xFFFFFFFF, light);
 				pose.popPose();
@@ -190,7 +189,7 @@ final class StationParts {
 	private static void hand(PoseStack pose, SubmitNodeCollector out, float deg, float len, float w, int light) {
 		pose.pushPose();
 		pose.translate(8, 11, 3.35f);
-		pose.rotateDegrees(Axis.ZP, -deg);
+		fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.ZP, -deg);
 		box(pose, out, solid("iron"), -w, 0, -0.1f, w, len, 0.1f, 0xFF202020, light);
 		pose.popPose();
 	}
@@ -201,7 +200,7 @@ final class StationParts {
 		float len = (float) Math.sqrt(dx * dx + dy * dy);
 		pose.pushPose();
 		pose.translate(x0, y0, z);
-		pose.rotateDegrees(Axis.ZP, (float) Math.toDegrees(Math.atan2(dy, dx)));
+		fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.ZP, (float) Math.toDegrees(Math.atan2(dy, dx)));
 		box(pose, out, rt, 0, -0.18f, -0.18f, len, 0.18f, 0.18f, 0xFFFFFFFF, light);
 		pose.popPose();
 	}
@@ -220,7 +219,7 @@ final class StationParts {
 	private static void ring(PoseStack pose, SubmitNodeCollector out, RenderType rt, float r, float b, int light) {
 		for (int k = 0; k < 16; k++) {
 			pose.pushPose();
-			pose.rotateDegrees(Axis.YP, k * 22.5f);
+			fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.YP, k * 22.5f);
 			float half = (float) (r * Math.tan(Math.PI / 16)) + 0.05f;
 			box(pose, out, rt, -half, -b, r - b, half, b, r + b, 0xFFFFFFFF, light);
 			pose.popPose();

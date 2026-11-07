@@ -38,7 +38,7 @@ public class MatrioCritter extends WaterAnimal implements GeoEntity {
 	public MatrioCritter(EntityType<? extends WaterAnimal> type, Level level) {
 		super(type, level);
 		boolean drift = drift();
-		this.moveControl = new SmoothSwimmingMoveControl<>(this, drift ? 20 : 85, drift ? 4 : 10, drift ? 0.02f : 0.06f, 0.1f, false);
+		this.moveControl = fr.achedon12.matriochka.mc.Mc.smoothSwim(this, drift ? 20 : 85, drift ? 4 : 10, drift ? 0.02f : 0.06f, 0.1f, false);
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
 	}
 

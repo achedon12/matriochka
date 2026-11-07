@@ -260,7 +260,7 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 	public void say(Component text, int ticks) {
 		if (!(level() instanceof ServerLevel sl)) return;
 		clearBubble();
-		var d = net.minecraft.world.entity.EntityTypes.TEXT_DISPLAY.create(sl, net.minecraft.world.entity.EntitySpawnReason.EVENT);
+		var d = fr.achedon12.matriochka.mc.McEntities.TEXT_DISPLAY.create(sl, net.minecraft.world.entity.EntitySpawnReason.EVENT);
 		if (d == null) return;
 		((fr.achedon12.matriochka.mixin.TextDisplayAccess) d).matriochka$setText(text.copy().withStyle(net.minecraft.ChatFormatting.WHITE));
 		((fr.achedon12.matriochka.mixin.TextDisplayAccess) d).matriochka$setBackgroundColor(0xD0140A06);

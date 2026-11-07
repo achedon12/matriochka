@@ -215,7 +215,7 @@ final class Outposts {
 							continue;
 						}
 						boolean dimple = ((x + 2 * y) % 3 == 0) && ((z + y) % 3 == 0);
-						k.set(x, y, z, dimple ? Blocks.IRON_BLOCK.defaultBlockState() : Blocks.CUT_COPPER.waxed().unaffected().defaultBlockState());
+						k.set(x, y, z, dimple ? Blocks.IRON_BLOCK.defaultBlockState() : fr.achedon12.matriochka.mc.McBlocks.CUT_COPPER.waxed().unaffected().defaultBlockState());
 					}
 			}
 			k.doorway(0, 1, -tr, Direction.NORTH, 3, 3);
@@ -259,7 +259,7 @@ final class Outposts {
 		k.standingBanner(-4, deck + 1, -4, p.colB);
 		k.standingBanner(4, deck + 1, 4, p.colA);
 		switch (k.world) {
-			case 4 -> k.set(0, ridge + 1, 1, Blocks.LIGHTNING_ROD.waxed().unaffected().defaultBlockState());
+			case 4 -> k.set(0, ridge + 1, 1, fr.achedon12.matriochka.mc.McBlocks.LIGHTNING_ROD.waxed().unaffected().defaultBlockState());
 			case 6 -> {
 				// chains dangle from the hanging deck, crystals caught in them
 				for (int[] c : new int[][]{{-5, -3}, {5, 3}, {-3, 5}, {3, -5}}) {
@@ -270,7 +270,7 @@ final class Outposts {
 			case 10 -> {
 				// a giant pin stuck through the eave of the hut, as if the thimble lay in a sewing box
 				for (int y = deck + 1; y <= ridge + 5; y++) k.set(-4, y, 3, Blocks.IRON_BARS.defaultBlockState());
-				k.set(-4, ridge + 6, 3, Blocks.WOOL.pick(DyeColor.RED).defaultBlockState());
+				k.set(-4, ridge + 6, 3, fr.achedon12.matriochka.mc.McBlocks.WOOL.pick(DyeColor.RED).defaultBlockState());
 			}
 			default -> {}
 		}
@@ -321,7 +321,7 @@ final class Outposts {
 	private static void wagon(Kit k, int cx, int cz, Direction along, DyeColor cover) {
 		Palette p = k.p;
 		Direction side = along.getClockWise();
-		BlockState wool = Blocks.WOOL.pick(cover).defaultBlockState();
+		BlockState wool = fr.achedon12.matriochka.mc.McBlocks.WOOL.pick(cover).defaultBlockState();
 		for (int l = -2; l <= 2; l++) {
 			int x = cx + along.getStepX() * l, z = cz + along.getStepZ() * l;
 			for (int s = -1; s <= 1; s++) {

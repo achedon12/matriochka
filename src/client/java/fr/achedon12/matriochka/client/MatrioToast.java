@@ -47,21 +47,21 @@ public final class MatrioToast implements Toast {
 
 	@Override
 	public SoundEvent getSoundEvent() {
-		return display.type() == AdvancementType.CHALLENGE ? SoundEvents.UI_TOAST_CHALLENGE_COMPLETE : null;
+		return fr.achedon12.matriochka.client.mc.McClient.type(display) == AdvancementType.CHALLENGE ? SoundEvents.UI_TOAST_CHALLENGE_COMPLETE : null;
 	}
 
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor g, Font font, long visibleMs) {
-		boolean challenge = display.type() == AdvancementType.CHALLENGE;
+		boolean challenge = fr.achedon12.matriochka.client.mc.McClient.type(display) == AdvancementType.CHALLENGE;
 		int w = width(), h = height();
 		Ui.sprite(g, "frame", 0, 0, w, h);
 		// the world's plate behind the icon
 		Ui.sprite(g, "plate_" + world, 5, 6, 22, 20);
 		if (world > 0) Ui.sprite(g, "rule_" + Content.WORLDS.get(world - 1).rule(), 8, 8, 16, 16);
 		else Ui.sprite(g, "doll_small_full", 10, 7, 12, 18);
-		Component kind = display.type().getDisplayName();
+		Component kind = fr.achedon12.matriochka.client.mc.McClient.type(display).getDisplayName();
 		g.text(font, kind, 32, 7, challenge ? 0xFFFF8C6E : Ui.GOLD, false);
-		String title = font.plainSubstrByWidth(display.title().getString(), w - 40);
+		String title = font.plainSubstrByWidth(fr.achedon12.matriochka.client.mc.McClient.title(display).getString(), w - 40);
 		g.text(font, Component.literal(title), 32, 18, 0xFFF4E8D0, false);
 		if (challenge) {
 			// a glint running round the gilt rim

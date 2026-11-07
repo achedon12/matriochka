@@ -77,7 +77,7 @@ public class MatrioMob extends Monster implements GeoEntity {
 		if (def.flying() || def.aquatic()) setNoGravity(def.flying());
 		if (def.aquatic()) {
 			// a sea creature steers in three dimensions like a dolphin, and looks where it swims
-			this.moveControl = new SmoothSwimmingMoveControl<>(this, 85, 10, 0.08f, 0.1f, false);
+			this.moveControl = fr.achedon12.matriochka.mc.Mc.smoothSwim(this, 85, 10, 0.08f, 0.1f, false);
 			this.lookControl = new SmoothSwimmingLookControl(this, 10);
 		}
 		if (behavior("mimic") || behavior("ambush_root")) revealed = false; else revealed = true;

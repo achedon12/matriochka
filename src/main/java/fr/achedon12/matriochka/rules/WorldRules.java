@@ -182,7 +182,7 @@ public final class WorldRules {
 					p.sendOverlayMessage(Component.translatable("message.matriochka.rule.lightning").withStyle(ChatFormatting.YELLOW));
 				}
 				if (t % 900 == 0 && ps.tag().contains("bolt")) {
-					LightningBolt bolt = net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+					LightningBolt bolt = fr.achedon12.matriochka.mc.McEntities.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
 					if (bolt != null) {
 						bolt.setPos(Vec3.atBottomCenterOf(BlockPos.of(ps.tag().getLongOr("bolt", 0))));
 						level.addFreshEntity(bolt);

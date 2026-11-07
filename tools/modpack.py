@@ -121,6 +121,8 @@ def api(path, query=None):
 
 
 def properties(path):
+    """gradle.properties, with the pack's Minecraft version and its dependencies (versions/26.3/gradle.properties,
+    the default version) when the file itself names none."""
     props = {}
     with open(path, encoding="utf-8") as f:
         for line in f:
@@ -128,6 +130,10 @@ def properties(path):
             if line and not line.startswith("#") and "=" in line:
                 k, v = line.split("=", 1)
                 props[k.strip()] = v.strip()
+    default = os.path.join(ROOT, "versions", "26.3", "gradle.properties")
+    if "minecraft_version" not in props and os.path.exists(default) and os.path.abspath(path) == os.path.join(ROOT, "gradle.properties"):
+        for k, v in properties(default).items():
+            props.setdefault(k, v)
     return props
 
 

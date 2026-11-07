@@ -13,12 +13,14 @@
     "main": ["fr.achedon12.matriochka.Matriochka"],
     "client": ["fr.achedon12.matriochka.client.MatrioClient"],
     "jei_mod_plugin": ["fr.achedon12.matriochka.compat.jei.MatrioJeiPlugin"],
+    "rei_client": ["fr.achedon12.matriochka.compat.rei.MatrioReiPlugin"],
+    "jade": ["fr.achedon12.matriochka.compat.jade.MatrioJadePlugin"],
     "modmenu": ["fr.achedon12.matriochka.compat.modmenu.MatrioModMenu"]
   },
   "mixins": ["matriochka.mixins.json", { "config": "matriochka.client.mixins.json", "environment": "client" }],
   "accessWidener": "matriochka.classtweaker",
-  "depends": { "fabricloader": ">=0.20.0", "minecraft": "~26.3", "java": ">=25", "fabric-api": "*", "geckolib": ">=5.5" },
-  "suggests": { "jei": "*", "modmenu": "*" },
+  "depends": { "fabricloader": ">=0.20.0", "minecraft": "${minecraft_dep}", "java": ">=25", "fabric-api": "*", "geckolib": ">=5.5" },
+  "suggests": { "jei": "*", "roughlyenoughitems": "*", "jade": "*", "modmenu": "*" },
   "custom": {
     "modmenu": {
       "links": {

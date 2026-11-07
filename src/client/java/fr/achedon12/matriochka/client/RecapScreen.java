@@ -93,7 +93,7 @@ public class RecapScreen extends Screen {
 		super.tick();
 		if (closing >= 0 && Ui.now() - closing > 260) {
 			closing = -1;
-			minecraft.gui.setScreen(parent);
+			fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, parent);
 		}
 	}
 

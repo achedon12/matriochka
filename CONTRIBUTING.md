@@ -31,6 +31,16 @@ python3 tools/gen.py
 
 generates the textures, GeckoLib models and animations, lang files, worldgen and loot data, and `content/Content.java`. Never edit generated files by hand: change the table or the generator, then regenerate. Generation is deterministic, so a regenerated tree with no table change produces no diff.
 
+## Minecraft versions
+
+The mod is built for several Minecraft versions from the same sources: 26.3 by default, 26.2 with `-Pmc=26.2` (`./gradlew build -Pmc=26.2`, `./gradlew runClientGameTest -Pmc=26.2 -Ponboarding`). Each version has a folder in `versions/<mc>/`:
+
+- `gradle.properties`: its Minecraft, Fabric API, GeckoLib, JEI and Mod Menu versions;
+- `main/java`, `client/java`: the few calls that differ between versions (`mc/Mc.java`, `client/mc/McClient.java`, and the mixins whose target changed), with the same class names in every version;
+- `main/resources`: the data that differs, laid over `src/main/resources`. It is generated: after `tools/gen.py`, run `python3 tools/versions.py`, which writes the world generation in each older version's formats (from `tools/vanilla_<mc>/`) and keeps only the files that differ.
+
+A version other than 26.3 builds into `build/mc-<mc>/`. CI builds every version, and a release publishes one jar per version.
+
 | Tool | What it produces |
 | --- | --- |
 | `tools/content.py` | the data table everything reads |
@@ -59,7 +69,7 @@ Lang files are generated. English and French live in `tools/content.py` (content
 
 1. Fork, then branch from `main` (`fix/toxin-gauge`, `feat/new-mob`...).
 2. Keep each PR focused on one change. Small commits with clear messages in the imperative ("Fix toxin gauge reset on death").
-3. Run `python3 tools/gen.py` and `./gradlew build` before pushing. CI runs the same checks.
+3. Run `python3 tools/gen.py`, `python3 tools/versions.py` and `./gradlew build` before pushing. CI runs the same checks.
 4. For visual changes (models, textures, GUI), add a screenshot or a short clip to the PR.
 5. Fill in the PR template; link the issue it closes.
 

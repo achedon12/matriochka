@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "matriochka:whole_matryoshka"
+    },
+    "title": {
+      "translate": "advancement.matriochka.endings.title"
+    },
+    "description": {
+      "translate": "advancement.matriochka.endings.desc"
+    },
+    "background": "matriochka:block/lacquer_glow",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "entity": "this",
+            "predicate": {
+              "minecraft:entity_type": "matriochka:the_unfinished"
+            },
+            "condition": "minecraft:entity_properties"
+          }
+        ]
+      }
+    }
+  }
+}

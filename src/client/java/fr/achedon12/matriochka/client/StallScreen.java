@@ -73,7 +73,7 @@ public class StallScreen extends AbstractContainerScreen<MerchantMenu> {
 		MerchantMenu menu = MenuType.MERCHANT.create(containerId, mc.player.getInventory());
 		StallScreen screen = new StallScreen(menu, mc.player.getInventory(), title, info);
 		mc.player.containerMenu = menu;
-		mc.gui.setScreen(screen);
+		fr.achedon12.matriochka.client.mc.McClient.setScreen(mc, screen);
 		return true;
 	}
 

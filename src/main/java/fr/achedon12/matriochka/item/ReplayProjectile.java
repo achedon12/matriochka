@@ -119,7 +119,7 @@ public class ReplayProjectile extends ThrowableItemProjectile {
 	}
 
 	private void bolt(ServerLevel level, Vec3 at) {
-		LightningBolt bolt = net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+		LightningBolt bolt = fr.achedon12.matriochka.mc.McEntities.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
 		if (bolt == null) return;
 		bolt.setPos(at);
 		if (getOwner() instanceof ServerPlayer sp) bolt.setCause(sp);

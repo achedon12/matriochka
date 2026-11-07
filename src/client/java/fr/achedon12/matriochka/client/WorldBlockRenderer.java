@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -66,7 +65,7 @@ public class WorldBlockRenderer implements BlockEntityRenderer<DataBlockEntity, 
 				case "spore_vat" -> be.data().getIntOr("ferment", 0);
 				default -> 0;
 			};
-			st.lightCoords = LightCoordsUtil.getLightCoords(be.getLevel(), be.getBlockPos());
+			st.lightCoords = fr.achedon12.matriochka.client.mc.McClient.lightAt(be.getLevel(), be.getBlockPos());
 			return;
 		}
 		st.show = be.getLevel() != null && be.getBlockState().is(ModContent.block("world_block"));
@@ -79,7 +78,7 @@ public class WorldBlockRenderer implements BlockEntityRenderer<DataBlockEntity, 
 		// standing by a World Block whose world quakes or holds a boss fight, the ground trembles under you too
 		if (st.shaking) Cinematics.tremor(1f - (float) Math.min(1, Vec3.atCenterOf(be.getBlockPos()).distanceTo(camera) / 16.0));
 		// the block itself is opaque: light the island with the air above it
-		st.lightCoords = LightCoordsUtil.getLightCoords(be.getLevel(), be.getBlockPos().above());
+		st.lightCoords = fr.achedon12.matriochka.client.mc.McClient.lightAt(be.getLevel(), be.getBlockPos().above());
 	}
 
 	@Override
@@ -110,7 +109,7 @@ public class WorldBlockRenderer implements BlockEntityRenderer<DataBlockEntity, 
 			jz = (float) Math.cos(st.time * 2.7) * 0.02f;
 		}
 		pose.translate(0.5f + jx, 1.06f + bob, 0.5f + jz);
-		pose.rotateDegrees(Axis.YP, st.time * 0.6f);
+		fr.achedon12.matriochka.client.mc.McClient.rotate(pose, Axis.YP, st.time * 0.6f);
 		float half = N * CELL / 2f;
 		int world = st.world;
 		// the island: one column per cell, its height from the world number, lower at the rim
@@ -140,7 +139,7 @@ public class WorldBlockRenderer implements BlockEntityRenderer<DataBlockEntity, 
 		int sky = 0xFF000000 | w.sky();
 		if (w.sky() == 0) sky = 0xFF6A8AFF;
 		final int sun = sky;
-		out.submitCustomGeometry(pose, RenderTypes.entityTranslucentEmissive(tex(w.glow())), (p, vc) -> cube(vc, p, sx - 0.04f, 0.32f, sz - 0.04f, 0.08f, sun, LightCoordsUtil.FULL_BRIGHT));
+		out.submitCustomGeometry(pose, RenderTypes.entityTranslucentEmissive(tex(w.glow())), (p, vc) -> cube(vc, p, sx - 0.04f, 0.32f, sz - 0.04f, 0.08f, sun, fr.achedon12.matriochka.client.mc.McClient.FULL_LIGHT));
 		if (world == 7) {
 			// the Pressure Ocean: a sheet of water over everything
 			out.submitCustomGeometry(pose, RenderTypes.entityTranslucent(Identifier.withDefaultNamespace("textures/block/water_still.png")),

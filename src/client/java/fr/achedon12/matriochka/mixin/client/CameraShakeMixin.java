@@ -17,8 +17,8 @@ public abstract class CameraShakeMixin {
 	private void matriochka$shake(CameraRenderState cameraState, PoseStack poseStack, CallbackInfo ci) {
 		float[] a = Cinematics.shakeAngles();
 		if (a == null) return;
-		poseStack.rotateDegrees(Axis.YP, a[0]);
-		poseStack.rotateDegrees(Axis.XP, a[1]);
-		poseStack.rotateDegrees(Axis.ZP, a[2]);
+		fr.achedon12.matriochka.client.mc.McClient.rotate(poseStack, Axis.YP, a[0]);
+		fr.achedon12.matriochka.client.mc.McClient.rotate(poseStack, Axis.XP, a[1]);
+		fr.achedon12.matriochka.client.mc.McClient.rotate(poseStack, Axis.ZP, a[2]);
 	}
 }

@@ -116,7 +116,7 @@ public class ComfortScreen extends Screen {
 		if (motion.closing()) return;
 		Comfort.changed();
 		Ui.pageTurn();
-		motion.close(() -> minecraft.gui.setScreen(parent));
+		motion.close(() -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, parent));
 	}
 
 	@Override

@@ -3,6 +3,17 @@ plugins {
 	id 'maven-publish'
 }
 
+// The Minecraft version to build for: -Pmc=26.2, 26.3 by default. Its dependencies come from
+// versions/<mc>/gradle.properties, the calls that differ from versions/<mc>/{main,client}/java and the data that
+// differs (world generation, made by tools/gen.py --mc) from versions/<mc>/main/resources, laid over src/main/resources.
+def mc = (project.findProperty('mc') ?: '26.3').toString()
+def versionProps = new Properties()
+file("versions/${mc}/gradle.properties").withInputStream { versionProps.load(it) }
+versionProps.each { k, v -> project.ext.set(k.toString(), v.toString()) }
+project.ext.set('mc', mc)
+// the default version builds into build/, the others into build/mc-<mc>/ so switching does not rebuild everything
+if (mc != '26.3') layout.buildDirectory = file("build/mc-${mc}")
+
 version = "${project.mod_version}+${project.minecraft_version}"
 group = project.maven_group
 
@@ -18,6 +29,11 @@ repositories {
 		forRepository { maven { name = 'BlameJared'; url = 'https://maven.blamejared.com' } }
 		filter { includeGroup 'mezz.jei' }
 	}
+	// Roughly Enough Items: optional, only compiled against (the plugin loads only when REI is installed)
+	exclusiveContent {
+		forRepository { maven { name = 'Shedaniel'; url = 'https://maven.shedaniel.me' } }
+		filter { includeGroup 'me.shedaniel'; includeGroup 'me.shedaniel.cloth'; includeGroup 'dev.architectury' }
+	}
 }
 
 loom {
@@ -27,6 +43,12 @@ loom {
 		client {
 			programArgs '--quickPlaySingleplayer', 'matrio_test'
 			vmArgs '-Xmx3G'
+		}
+		// a dedicated server of its own (tools/server_smoke.sh): no client class may load there
+		server {
+			runDir 'run/server'
+			programArgs 'nogui'
+			vmArgs '-Xmx2G'
 		}
 		configureEach {
 			// no sound reaches the speakers during runs and captures: OpenAL Soft plays to its null output, the game's
@@ -136,6 +158,14 @@ dependencies {
 	clientCompileOnly "mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}"
 	// ./gradlew runClient -Pjei to try the recipe pages in a dev client
 	if (project.hasProperty('jei')) localRuntime "mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}"
+	// REI and Jade: optional, only compiled against (their entrypoints load only when they are installed)
+	clientCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}") { transitive = false }
+	clientCompileOnly("me.shedaniel.cloth:basic-math:0.6.1") { transitive = false }
+	clientCompileOnly("dev.architectury:architectury-fabric:${project.architectury_version}") { transitive = false }
+	clientCompileOnly("maven.modrinth:jade:${project.jade_version}") { transitive = false }
+	// ./gradlew runClient -Prei / -Pjade to try them in a dev client
+	if (project.hasProperty('rei')) localRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+	if (project.hasProperty('jade')) localRuntime("maven.modrinth:jade:${project.jade_version}") { transitive = false }
 	// Mod Menu: optional, only compiled against (its entrypoint loads only when Mod Menu is installed)
 	clientCompileOnly("maven.modrinth:modmenu:${project.modmenu_version}") { transitive = false }
 	// ./gradlew runClient -Pcompat to try the mod with Sodium, Iris and Mod Menu in a dev client (see docs-wiki-drafts/Compatibility.md)
@@ -147,9 +177,21 @@ dependencies {
 	}
 }
 
+sourceSets {
+	main {
+		java.srcDir "versions/${mc}/main/java"
+		resources.srcDirs = ["versions/${mc}/main/resources", 'src/main/resources']
+	}
+	client { java.srcDir "versions/${mc}/client/java" }
+	gametest { java.srcDir "versions/${mc}/gametest/java" }
+}
+
 processResources {
 	inputs.property 'version', project.version
-	filesMatching('fabric.mod.json') { expand 'version': project.version }
+	inputs.property 'minecraft_dep', project.minecraft_dep
+	// a file of versions/<mc>/main/resources replaces the one of the same path in src/main/resources
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	filesMatching('fabric.mod.json') { expand 'version': project.version, 'minecraft_dep': project.minecraft_dep }
 }
 
 tasks.withType(JavaCompile).configureEach { it.options.release = 25; it.options.encoding = 'UTF-8' }
