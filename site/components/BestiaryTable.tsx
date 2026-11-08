@@ -53,7 +53,7 @@ export default function BestiaryTable({ mobs, worlds, ui, base, marks = {} }: {
             {list.map((m) => (
               <li key={m.id} className="reveal">
                 <Link className="bx-card" href={`${base}creatures/${m.id}/`} style={{ "--cb": m.bg } as React.CSSProperties}>
-                  <span className="bx-art"><img src={asset(`portraits/${m.id}.png`)} alt="" loading="lazy" decoding="async" width={512} height={512} /></span>
+                  <span className="bx-art"><img src={asset(`portraits/${m.id}.webp`)} alt="" loading="lazy" decoding="async" width={512} height={512} /></span>
                   <span className="bx-name">{m.name}{m.elite && <em className="bx-elite">{ui.elite}</em>}{marks[m.id] && <span className={`vb vb-${marks[m.id].kind}`}>{marks[m.id].text}</span>}</span>
                   <span className="bx-desc">{m.desc}</span>
                   <span className="bx-stats"><span><small>{ui.health}</small><b className="num">{m.hp}</b></span><span><small>{ui.damage}</small><b className="num">{m.dmg}</b></span></span>

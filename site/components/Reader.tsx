@@ -105,7 +105,7 @@ export default function Reader({ lang, labels }: { lang: Lang; labels: ReaderLab
     <main id="main" className="grid min-h-svh place-items-center p-6">
       <div className="grid justify-items-center gap-5 text-center" role="status" aria-live="polite">
         <span className={`grid size-[86px] place-items-center rounded-full bg-ink shadow-[0_0_0_2px_#d9a441,0_0_0_6px_#17100d,0_0_0_7px_rgba(240,201,96,.35)] ${st.kind === "loading" ? "motion-safe:animate-pulse" : ""}`}>
-          <img src={asset("logo-128.png")} width="72" height="72" alt="" />
+          <img src={asset("logo-128.webp")} width="72" height="72" alt="" />
         </span>
         <p className="m-0 max-w-[40ch] text-lg text-paper">{st.kind === "loading" ? labels.loading : st.text}</p>
         {st.kind === "error" && <p className="m-0"><a className="quiet" href={asset(href(lang).slice(1))}>{labels.seeLatest}</a></p>}

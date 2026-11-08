@@ -1,5 +1,5 @@
 """Portraits of every creature and boss for the website: a z-buffered render of the real model,
-front three-quarter, transparent background, glow mask lit. Writes site/public/portraits/<id>.png.
+front three-quarter, transparent background, glow mask lit. Writes site/public/portraits/<id>.webp.
 
   python3 tools/portraits.py [id ...]
 """
@@ -132,10 +132,12 @@ def portrait(eid):
 def main():
     sys.path.insert(0, HERE)
     import content as C
+    import webp
     ids = sys.argv[1:] or [m["id"] for m in C.MOBS] + [b["id"] for b in C.BOSSES]
     os.makedirs(OUT, exist_ok=True)
     for eid in ids:
-        portrait(eid).save(os.path.join(OUT, f"{eid}.png"), optimize=True)
+        # a render, not pixel art: lossy WebP (tools/webp.py), as the site shows it
+        webp.save(portrait(eid), os.path.join(OUT, f"{eid}.png"), lossless=False)
     print(len(ids), "portraits")
 
 

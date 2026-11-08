@@ -68,7 +68,7 @@ export function Shell({ lang, path, section, v, children }: { lang: Lang; path: 
           <Link href={href(lang, "", v)} aria-current={path === "" ? "page" : undefined}
             className="group flex shrink-0 items-center gap-3 self-center text-gold-b no-underline hover:text-[#ffdd80]">
             <span className="grid size-[58px] place-items-center rounded-full bg-ink shadow-[0_0_0_2px_#d9a441,0_0_0_5px_#17100d,0_0_0_6px_rgba(240,201,96,.35)] transition-[width,height] duration-200 [.is-scrolled_&]:size-[42px]">
-              <img src={asset("logo-128.png")} width="50" height="50" alt="" className="size-[84%]" />
+              <img src={asset("logo-128.webp")} width="50" height="50" alt="" className="size-[84%]" />
             </span>
             <span className="font-display text-[clamp(20px,2.2vw,28px)] leading-none tracking-[0.06em] [text-shadow:0_2px_0_rgba(0,0,0,.6)] max-[420px]:hidden">Matriochka</span>
           </Link>
@@ -117,7 +117,7 @@ export function Shell({ lang, path, section, v, children }: { lang: Lang; path: 
         <Vine kind="black" />
         <div className="wrap foot-in">
           <div className="foot-brand">
-            <img src={asset("logo-128.png")} width="64" height="64" alt="" />
+            <img src={asset("logo-128.webp")} width="64" height="64" alt="" />
             <div>
               <p className="foot-name">Matriochka</p>
               <p>{ui.footer}</p>

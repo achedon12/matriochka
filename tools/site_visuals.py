@@ -12,6 +12,7 @@ import zipfile
 from PIL import Image
 
 import model_preview
+import webp
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 JAR_GLOB = os.path.expanduser("~/.gradle/caches/fabric-loom/*/minecraft-client*.jar")
@@ -113,8 +114,8 @@ def vanilla_icons(public, ids):
                     if im:
                         im = im.resize((64, 64), Image.NEAREST)
                 if im:
-                    im.save(os.path.join(dst, n + ".png"), optimize=True)
-    return {"minecraft:" + f[:-4] for f in os.listdir(dst) if f.endswith(".png")}
+                    webp.save(im, os.path.join(dst, n + ".png"), lossless=True)
+    return {"minecraft:" + f.rsplit(".", 1)[0] for f in os.listdir(dst) if f.endswith((".png", ".webp"))}
 
 
 def station_renders(public, stations):
@@ -134,7 +135,7 @@ def station_renders(public, stations):
             side = max(im.width, im.height) + 16
             sq = Image.new("RGBA", (side, side), (0, 0, 0, 0))
             sq.paste(im, ((side - im.width) // 2, (side - im.height) // 2))
-            sq.resize((256, 256), Image.LANCZOS).save(os.path.join(dst, sid + ".png"), optimize=True)
+            webp.save(sq.resize((256, 256), Image.LANCZOS), os.path.join(dst, sid + ".png"), lossless=True)
             out.add(sid)
     return out
 
@@ -156,6 +157,6 @@ def block_icons(public, tex_dir, blocks, stations):
         b = Image.open(side).convert("RGBA")
         a = a.crop((0, 0, a.width, a.width))
         b = b.crop((0, 0, b.width, b.width))
-        _cube(a, b).save(os.path.join(dst, bid + ".png"), optimize=True)
+        webp.save(_cube(a, b), os.path.join(dst, bid + ".png"), lossless=True)
         out.add(bid)
     return out

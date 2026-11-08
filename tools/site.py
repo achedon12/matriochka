@@ -19,6 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
 sys.path.insert(0, HERE)
 import content as C  # noqa: E402
+import webp  # noqa: E402
 import attacks as ATK  # noqa: E402
 
 RES = os.path.join(ROOT, "src/main/resources/assets/matriochka")
@@ -224,11 +225,20 @@ SHOTS = {}
 
 
 def _copy_dir(src, dst, suffix):
+    """Copies the files of a folder; textures (.png) become lossless WebP when Pillow can write it."""
     os.makedirs(dst, exist_ok=True)
     out = set()
     for f in sorted(os.listdir(src)):
         if f.endswith(suffix):
-            shutil.copy2(os.path.join(src, f), os.path.join(dst, f))
+            s, d = os.path.join(src, f), os.path.join(dst, f)
+            if suffix == ".png" and webp.HAS_WEBP:
+                d = d[:-4] + ".webp"
+                if not os.path.exists(d) or os.path.getmtime(d) < os.path.getmtime(s):
+                    webp.save(Image.open(s), d, lossless=True)
+                if os.path.exists(os.path.join(dst, f)):
+                    os.remove(os.path.join(dst, f))
+            else:
+                shutil.copy2(s, d)
             out.add(f[: -len(suffix)])
     return out
 
@@ -253,12 +263,20 @@ def copy_assets():
         shutil.copy2(TRAILER_SRC, os.path.join(PUBLIC, "trailer.mp4"))
         poster = os.path.join(ROOT, "media/trailer/poster.jpg")
         if Image is not None and os.path.exists(poster):
-            Image.open(poster).convert("RGB").resize((1280, 720), Image.LANCZOS).save(
-                os.path.join(PUBLIC, "trailer.jpg"), quality=84, optimize=True, progressive=True)
+            webp.save(Image.open(poster).convert("RGB").resize((1280, 720), Image.LANCZOS), os.path.join(PUBLIC, "trailer.jpg"), lossless=False)
     if os.path.exists(REEL_SRC):
         shutil.copy2(REEL_SRC, os.path.join(PUBLIC, "reel.mp4"))
         shutil.copy2(REEL_SRC.replace(".mp4", ".jpg"), os.path.join(PUBLIC, "reel.jpg"))
     branding()
+    # what earlier runs left as PNG or JPEG (CI has none of the sources): WebP, pixel art lossless
+    for sub in ("items", "blocks", "entities", "cubes", "stations", "vanilla"):
+        webp.convert_dir(PUBLIC, sub, lossless=True)
+    for sub in ("portraits", "shots"):
+        webp.convert_dir(PUBLIC, sub)  # renders and screenshots lossy, interface captures lossless
+    for f in ("trailer.jpg", "reel.jpg", "logo-128.png", "logo-256.png", "logo-512.png"):
+        if webp.HAS_WEBP and os.path.exists(os.path.join(PUBLIC, f)):
+            webp.save(Image.open(os.path.join(PUBLIC, f)), os.path.join(PUBLIC, f), lossless=f.endswith(".png"))
+            os.remove(os.path.join(PUBLIC, f))
 
 
 def branding():
@@ -269,7 +287,10 @@ def branding():
     for size in (128, 256, 512):
         src = os.path.join(BRANDING, f"logo-{size}.png")
         if os.path.exists(src):
-            shutil.copy2(src, os.path.join(PUBLIC, f"logo-{size}.png"))
+            if webp.HAS_WEBP:
+                webp.save(Image.open(src), os.path.join(PUBLIC, f"logo-{size}.png"), lossless=True)
+            else:
+                shutil.copy2(src, os.path.join(PUBLIC, f"logo-{size}.png"))
     if Image is None:
         return
     im = Image.open(logo).convert("RGBA")
@@ -364,20 +385,17 @@ def process_shots(dst):
             box = (0, 0, 290, 105) if key.startswith("gui_hud") else (0, 0, min(854, img.width), min(480, img.height))
             g = img.crop(box).convert("RGB")
             g = g.resize((g.width * (3 if key.startswith("gui_hud") else 2), g.height * (3 if key.startswith("gui_hud") else 2)), Image.NEAREST)
-            g.save(os.path.join(dst, key + ".png"), optimize=True)
-            SHOTS[key] = key + ".png"
+            SHOTS[key] = webp.save(g, os.path.join(dst, key + ".png"), lossless=True)
+            if webp.KEEP.match(f"shots/{key}.png"):
+                g.save(os.path.join(dst, key + ".png"), optimize=True)
             continue
         rgb = img.convert("RGB")
         W, H = rgb.size
         tall = (W // 2 - H // 3, 0, W // 2 + H // 3, H) if clean else CROP_TALL
         wide = (W // 2 - H * 2 // 3, 0, W // 2 + H * 2 // 3, H) if clean else CROP_WIDE
         if key.endswith("_view") or key == "00_surface":
-            rgb.crop(tall).resize((480, 720), Image.LANCZOS).save(
-                os.path.join(dst, key + "_tall.jpg"), quality=82, optimize=True, progressive=True)
-            SHOTS[key + "_tall"] = key + "_tall.jpg"
-        rgb.crop(wide).resize((960, 720), Image.LANCZOS).save(
-            os.path.join(dst, key + ".jpg"), quality=82, optimize=True, progressive=True)
-        SHOTS[key] = key + ".jpg"
+            SHOTS[key + "_tall"] = webp.save(rgb.crop(tall).resize((480, 720), Image.LANCZOS), os.path.join(dst, key + "_tall.jpg"), lossless=False)
+        SHOTS[key] = webp.save(rgb.crop(wide).resize((960, 720), Image.LANCZOS), os.path.join(dst, key + ".jpg"), lossless=False)
 
 
 # ---------------------------------------------------------------- boss attack stills
@@ -514,14 +532,11 @@ def _views(img, key, dst):
     """A 21:9 banner, a 4:3 card and a tall doll-window crop of one picture."""
     W, H = img.size
     bh = int(W * 9 / 21)
-    img.crop((0, (H - bh) // 2, W, (H + bh) // 2)).resize((1920, 823), Image.LANCZOS).save(os.path.join(dst, key + "_banner.jpg"), quality=80, optimize=True, progressive=True)
-    SHOTS[key + "_banner"] = key + "_banner.jpg"
+    SHOTS[key + "_banner"] = webp.save(img.crop((0, (H - bh) // 2, W, (H + bh) // 2)).resize((1920, 823), Image.LANCZOS), os.path.join(dst, key + "_banner.jpg"), lossless=False)
     cw = H * 4 // 3
-    img.crop(((W - cw) // 2, 0, (W + cw) // 2, H)).resize((960, 720), Image.LANCZOS).save(os.path.join(dst, key + ".jpg"), quality=82, optimize=True, progressive=True)
-    SHOTS[key] = key + ".jpg"
+    SHOTS[key] = webp.save(img.crop(((W - cw) // 2, 0, (W + cw) // 2, H)).resize((960, 720), Image.LANCZOS), os.path.join(dst, key + ".jpg"), lossless=False)
     tw = H * 2 // 3
-    img.crop(((W - tw) // 2, 0, (W + tw) // 2, H)).resize((480, 720), Image.LANCZOS).save(os.path.join(dst, key + "_tall.jpg"), quality=82, optimize=True, progressive=True)
-    SHOTS[key + "_tall"] = key + "_tall.jpg"
+    SHOTS[key + "_tall"] = webp.save(img.crop(((W - tw) // 2, 0, (W + tw) // 2, H)).resize((480, 720), Image.LANCZOS), os.path.join(dst, key + "_tall.jpg"), lossless=False)
 
 
 def process_frames(dst):
@@ -547,9 +562,7 @@ def process_frames(dst):
         for f in sorted(os.listdir(st_dir)):
             if f.startswith("struct_") and f.endswith(".png"):
                 key = "st_" + f[7:-4]
-                Image.open(os.path.join(st_dir, f)).convert("RGB").resize((800, 450), Image.LANCZOS).save(
-                    os.path.join(dst, key + ".jpg"), quality=80, optimize=True, progressive=True)
-                SHOTS[key] = key + ".jpg"
+                SHOTS[key] = webp.save(Image.open(os.path.join(st_dir, f)).convert("RGB").resize((800, 450), Image.LANCZOS), os.path.join(dst, key + ".jpg"), lossless=False)
     if Image is None or not os.path.isdir(FRAMES):
         return
     # worlds whose structure photos failed (caves and ceilings): ten different frames of that world instead
@@ -562,9 +575,7 @@ def process_frames(dst):
             n = lo + (k // len(takes)) * 25 + 10
             src = os.path.join(FRAMES, f"seq_w{w:02d}_{seq}_{min(n, hi):04d}.png")
             if os.path.exists(src):
-                Image.open(src).convert("RGB").resize((800, 450), Image.LANCZOS).save(
-                    os.path.join(dst, f"st_{sid}.jpg"), quality=80, optimize=True, progressive=True)
-                SHOTS[f"st_{sid}"] = f"st_{sid}.jpg"
+                SHOTS[f"st_{sid}"] = webp.save(Image.open(src).convert("RGB").resize((800, 450), Image.LANCZOS), os.path.join(dst, f"st_{sid}.jpg"), lossless=False)
     for key, (seq, n) in FRAME_PICKS.items():
         src = os.path.join(FRAMES, f"seq_{seq}_{n:04d}.png")
         if os.path.exists(src):
@@ -2189,6 +2200,7 @@ def main():
         # the catalogue: every world's items and blocks, in world order
         catalog = [dict(n=w["n"], name=w["name"], items=w["codex"]["items"], blocks=w["codex"]["blocks"]) for w in worlds]
         data = dict(lang=lang, copy=build_copy(), worlds=worlds, mobs=build_mobs(), bosses=build_bosses(), catalog=catalog)
+        data = webp.paths(data, PUBLIC)
         with open(os.path.join(DATA, f"{lang}.json"), "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=1)
     with open(os.path.join(DATA, "shared.json"), "w", encoding="utf-8") as f:

@@ -70,7 +70,7 @@ export default function HomePage({ lang, v }: { lang: Lang; v?: string }) {
       {/* hero: the game named, over its own world */}
       <section className="relative isolate grid h-[720px] min-h-[560px] items-end overflow-hidden bg-black max-md:h-auto md:min-h-[min(calc(100svh-150px),880px)]" aria-labelledby="hero-h">
         {SHARED.hasReel ? (
-          <video className="absolute inset-0 -z-20 size-full object-cover motion-reduce:hidden" autoPlay muted loop playsInline preload="auto" poster={asset("reel.jpg")} aria-hidden="true">
+          <video className="absolute inset-0 -z-20 size-full object-cover motion-reduce:hidden" autoPlay muted loop playsInline preload="auto" poster={asset("reel.webp")} aria-hidden="true">
             <source src={asset("reel.mp4")} type="video/mp4" />
           </video>
         ) : (
@@ -117,7 +117,7 @@ export default function HomePage({ lang, v }: { lang: Lang; v?: string }) {
                   <Link href={href(lang, `creatures/${m.id}/`, v)} tabIndex={i >= row.length ? -1 : undefined}
                     className="group grid w-36 justify-items-center gap-1 rounded-[3px] border border-rule p-2 text-center text-paper no-underline transition-colors hover:border-gold-b hover:text-gold-b"
                     style={{ background: `radial-gradient(circle at 50% 40%, ${m.light}33, ${m.bg} 70%)` }}>
-                    <img className="h-24 w-auto transition-transform duration-200 group-hover:scale-110" src={asset(`portraits/${m.id}.png`)} alt="" width={128} height={128} loading="lazy" />
+                    <img className="h-24 w-auto transition-transform duration-200 group-hover:scale-110" src={asset(`portraits/${m.id}.webp`)} alt="" width={128} height={128} loading="lazy" />
                     <span className="text-[13px] leading-tight">{m.name}</span>
                   </Link>
                 </li>
@@ -132,7 +132,7 @@ export default function HomePage({ lang, v }: { lang: Lang; v?: string }) {
           <div className={wrap}>
             <h2 id="trailer-h" className={h2}>{h.trailerH}</h2>
             <div className={frame}>
-              <video className="block aspect-video h-auto w-full bg-black" controls preload="none" playsInline poster={asset("trailer.jpg")} width={1920} height={1080}>
+              <video className="block aspect-video h-auto w-full bg-black" controls preload="none" playsInline poster={asset("trailer.webp")} width={1920} height={1080}>
                 <source src={asset("trailer.mp4")} type="video/mp4" />
                 <a href={asset("trailer.mp4")}>{h.trailerFallback}</a>
               </video>
@@ -184,7 +184,7 @@ export default function HomePage({ lang, v }: { lang: Lang; v?: string }) {
                   style={{ background: `radial-gradient(circle at 60% 40%, ${b.light}55 0%, ${b.bg} 55%, #0e0806 100%)` }}>
                   {b.shot && <img className="absolute inset-0 size-full object-cover opacity-45 saturate-[.8]" src={asset(b.shot)} alt="" loading="lazy" decoding="async" width={960} height={720} />}
                   <img className="bob absolute right-0 bottom-8 z-10 h-auto w-[64%] origin-bottom-right drop-shadow-[0_12px_18px_rgba(0,0,0,.7)] transition-transform duration-300 group-hover:scale-105"
-                    src={asset(`portraits/${b.id}.png`)} alt="" loading="lazy" decoding="async" width={512} height={512} />
+                    src={asset(`portraits/${b.id}.webp`)} alt="" loading="lazy" decoding="async" width={512} height={512} />
                   <span className="absolute inset-0 z-10 bg-[linear-gradient(180deg,transparent_45%,rgba(0,0,0,.88))]" />
                   <span className="absolute right-3.5 bottom-11 left-3.5 z-20 text-[13px] text-gold-b">{b.worldName}</span>
                   <span className="absolute right-3.5 bottom-3 left-3.5 z-20 font-display text-2xl leading-none text-paper">{b.name}</span>

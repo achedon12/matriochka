@@ -37,7 +37,7 @@ export function WorldSummary({ w, lang, v }: { w: World; lang: Lang; v?: string 
         <div className="w-block">
           <h3><Inlay src={w.seed.tex} size={32} />{w.seed.name}</h3>
           <p className="small">{w.seed.soil} {w.seed.cond}</p>
-          <Craft inputs={w.seed.inputs} grid={w.seed.grid} out={{ tex: w.seed.tex, name: w.seed.name, count: 1 }} station={{ tex: "stations/matrix_workbench.png", name: ui.workbench }} />
+          <Craft inputs={w.seed.inputs} grid={w.seed.grid} out={{ tex: w.seed.tex, name: w.seed.name, count: 1 }} station={{ tex: "stations/matrix_workbench.webp", name: ui.workbench }} />
         </div>
       )}
       <div className="w-block">
@@ -278,7 +278,7 @@ export function WorldPage({ lang, n, v }: { lang: Lang; n: number; v?: string })
                 </div>
                 {w.station.shot && <div className="my-4 border-2 border-gold bg-black shadow-frame"><img className="block h-auto w-full [image-rendering:pixelated]" src={asset(w.station.shot)} alt={w.station.name} loading="lazy" width={1708} height={960} /></div>}
                 {w.station.make.length > 0 && <div className="st-make"><p className="small">{ui.builtFrom}</p>
-                  <Craft inputs={w.station.make} grid={w.station.makeGrid} out={{ tex: w.station.tex, name: w.station.name, count: 1 }} station={{ tex: "stations/matrix_workbench.png", name: ui.workbench }} /></div>}
+                  <Craft inputs={w.station.make} grid={w.station.makeGrid} out={{ tex: w.station.tex, name: w.station.name, count: 1 }} station={{ tex: "stations/matrix_workbench.webp", name: ui.workbench }} /></div>}
                 {w.station.recipes.map((r) => (
                   <Craft key={r.out} inputs={r.inputs} out={{ tex: r.tex, name: r.name, count: r.count }} station={{ tex: w.station!.tex, name: w.station!.name }} />
                 ))}

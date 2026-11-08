@@ -30,6 +30,9 @@ import subprocess
 import sys
 import tempfile
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import webp  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
 DATA = os.path.join(ROOT, "site", "data")
@@ -99,8 +102,10 @@ def run_tree(tree):
     spec.loader.exec_module(S)
 
     def names(sub, suffix):
+        # the site's pictures may be WebP now: an older site.py still builds ".png" paths, set right in publish()
         d = os.path.join(PUBLIC, sub)
-        return {f[: -len(suffix)] for f in os.listdir(d) if f.endswith(suffix)} if os.path.isdir(d) else set()
+        sufs = (suffix, ".webp") if suffix in (".png", ".jpg") else (suffix,)
+        return {f.rsplit(".", 1)[0] for f in os.listdir(d) if f.endswith(sufs)} if os.path.isdir(d) else set()
 
     def listed_assets():
         for attr, sub, suffix in (("ITEM_TEX", "items", ".png"), ("ENTITY_TEX", "entities", ".png"),
@@ -131,8 +136,8 @@ def _pictures(x):
     if isinstance(x, dict):
         for k, v in x.items():
             if k in PICTURE_KEYS and isinstance(v, str) and re.search(r"\.(png|jpe?g|webp)$", v):
-                if not os.path.exists(os.path.join(PUBLIC, v)):
-                    x[k] = None
+                w = webp.paths(v, PUBLIC)
+                x[k] = w if os.path.exists(os.path.join(PUBLIC, w)) else None
             else:
                 _pictures(v)
     elif isinstance(x, list):
@@ -448,7 +453,7 @@ def publish(d, cur):
             "items": {**k["items"], **c.get("items", {})}, "versions": k["versions"]}
     out = {key: v for key, v in d.items() if key != "catalog"}
     out["copy"] = copy
-    return out
+    return webp.paths(out, PUBLIC)  # the pictures as the site now has them (WebP)
 
 
 def write_gz(path, obj):

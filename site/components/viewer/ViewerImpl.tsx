@@ -206,7 +206,7 @@ export default function ViewerImpl({ id, play, rotate, still, onEnd, onReady, on
           fetch(asset(`models/${id}.geo.json`)).then((r) => r.json() as Promise<GeoFile>),
           fetch(asset(`animations/${id}.animation.json`)).then((r) => (r.ok ? (r.json() as Promise<AnimFile>) : { animations: {} })),
         ]);
-        texture = await new THREE.TextureLoader().loadAsync(asset(`entities/${id}.png`));
+        texture = await new THREE.TextureLoader().loadAsync(asset(`entities/${id}.webp`));
         if (disposed) return;
         texture.magFilter = THREE.NearestFilter;
         texture.minFilter = THREE.NearestFilter;
@@ -214,7 +214,7 @@ export default function ViewerImpl({ id, play, rotate, still, onEnd, onReady, on
         texture.colorSpace = THREE.SRGBColorSpace;
         let glow: THREE.Texture | undefined;
         try {
-          glow = await new THREE.TextureLoader().loadAsync(asset(`entities/${id}_glowmask.png`));
+          glow = await new THREE.TextureLoader().loadAsync(asset(`entities/${id}_glowmask.webp`));
           glow.magFilter = THREE.NearestFilter;
           glow.minFilter = THREE.NearestFilter;
           glow.generateMipmaps = false;

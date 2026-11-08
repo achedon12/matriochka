@@ -78,7 +78,7 @@ export function DollWindow({ world, alt, id }: { world: World; alt: string; id: 
           <>
             <rect x="0" y="0" width="100" height="170" fill={world.bg} />
             <rect x="0" y="0" width="100" height="170" fill={world.light} opacity=".18" />
-            <image href={asset(`portraits/${world.boss.id}.png`)} x="-6" y="30" width="112" height="112" preserveAspectRatio="xMidYMid meet" />
+            <image href={asset(`portraits/${world.boss.id}.webp`)} x="-6" y="30" width="112" height="112" preserveAspectRatio="xMidYMid meet" />
           </>
         )}
         <path d="M2,96 Q50,106 98,96" fill="none" stroke={BLACK} strokeOpacity=".55" strokeWidth="2.4" />
