@@ -1,4 +1,4 @@
-**Matriochka, set up and ready to play.** This pack is the [Matriochka](https://www.curseforge.com/minecraft/mc-mods/matriochka) mod for Minecraft 26.3 on Fabric, with its required libraries and a set of client performance mods. Nothing else changes the game: no extra content, no tweaks to vanilla, only the mod and what makes it run well.
+**Matriochka, set up and ready to play.** This pack is the [Matriochka](https://www.curseforge.com/minecraft/mc-mods/matriochka) mod for Minecraft 26.3, 26.2 or 26.1.2 on Fabric (one file for each), with its required libraries and a set of client performance mods. Nothing else changes the game: no extra content, no tweaks to vanilla, only the mod and what makes it run well.
 
 Matriochka is a progression mod. Ten worlds are nested inside blocks, one inside the other, like the dolls it is named after. You craft a Seed, plant it on tilled World Soil, and the block that hatches holds a whole world with its own rule, creatures, station and boss. Beat the boss, take its core, and the next Seed becomes possible.
 
@@ -44,7 +44,7 @@ You need Java 25; the CurseForge app downloads it for you.
 
 ## Running a server
 
-Matriochka has to be on the server and on every client. On a Fabric 26.3 server (Fabric Loader 0.20.0 or newer, Java 25), put these in `mods/`:
+Matriochka has to be on the server and on every client. On a Fabric server of the same Minecraft version (Fabric Loader 0.20.0 or newer, Java 25), put these in `mods/`:
 
 - **Required:** Matriochka, Fabric API, GeckoLib
 - **Recommended:** Lithium, FerriteCore, Krypton (server side only)
