@@ -112,6 +112,7 @@ final class NestingTest {
 			cradle(ctx, s, origin);
 			armour(ctx, s, origin);
 			journal(ctx, s);
+			hud(ctx, sp, s);
 			if (!FAILED.isEmpty()) throw new AssertionError("nesting: " + FAILED);
 			Matriochka.LOG.info("[nesting] ok");
 		}
@@ -467,6 +468,50 @@ final class NestingTest {
 		ctx.waitTicks(6);
 		shot(ctx, "armour_tooltip");
 		ctx.setScreen(() -> null);
+	}
+
+	// ---------------------------------------------------------------- where you are, and your souls, without a corner plaque
+	private static void hud(ClientGameTestContext ctx, TestSingleplayerContext sp, net.fabricmc.fabric.api.client.gametest.v1.context.TestServerContext s) {
+		// into World 4, its first framed card already seen, so the great title plays
+		s.runOnServer(server -> {
+			ServerPlayer p = player(server);
+			for (EquipmentSlot e : new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}) p.setItemSlot(e, ItemStack.EMPTY);
+			PlayerState.of(p).set("card_4", true);
+		});
+		int before = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.WorldTitle.titles);
+		s.runCommand("execute as @p run matriochka world enter 4");
+		ctx.waitTicks(30);
+		McTest.waitForChunks(sp);
+		ctx.waitTicks(5);
+		shot(ctx, "world_title");
+		ctx.waitTicks(40);
+		int after = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.WorldTitle.titles);
+		String debug = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.WorldTitle.debugLine());
+		check(after == before + 1, "entering World 4 shows its title (" + before + " -> " + after + ")");
+		check(debug.contains("4") && debug.startsWith("Matriochka"), "the F3 screen names the world: " + debug);
+		// the souls: the bar over the experience bar, the count when it changes
+		s.runOnServer(server -> {
+			ServerPlayer p = player(server);
+			p.giveExperienceLevels(12);
+			PlayerState ps = PlayerState.of(p);
+			ps.addSouls(137);
+			ps.sync();
+		});
+		ctx.waitTicks(10);
+		boolean bar = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.Hud.soulsShown(mc));
+		check(bar, "the souls' bar shows inside a world");
+		shot(ctx, "souls_bar");
+		// the permanent label, from the comfort settings
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Comfort.get().worldLabel = "top_right");
+		ctx.waitTicks(5);
+		shot(ctx, "world_label");
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Comfort.get().worldLabel = "off");
+		ctx.setScreen(() -> new fr.achedon12.matriochka.client.ComfortScreen(null));
+		ctx.waitTicks(15);
+		shot(ctx, "comfort_world_label");
+		ctx.setScreen(() -> null);
+		s.runCommand("execute as @p run matriochka world leave");
+		ctx.waitTicks(40);
 	}
 
 	// ---------------------------------------------------------------- the Journal's card of a world, with its ore
