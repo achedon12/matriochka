@@ -46,8 +46,8 @@ BEADS = 30
 NEST_H = [18.0 * 0.89 ** k for k in range(10)]   # the ten nested dolls, the largest first
 FAN_R = 15.0
 NEST_UP = 22.0            # how high the nest rises out of the bowl
-OPEN = 112.0              # the upper half thrown open (leaning back on its hinge, away from its face)
-AJAR = 9.0                # and at rest
+OPEN = 72.0               # the upper half thrown open, swung out beside the doll on its hinge at the side
+AJAR = 8.0                # and at rest
 
 
 def ring_world(i):
@@ -110,7 +110,7 @@ def build():
     glow = B("glow", "body", [0, WAIST_Y - 2, 0])
     glow.cubes.append(Cube([-5, WAIST_Y - 1.4, -5], [10, 0.8, 10], "light", glow=True))
     # the upper half, hinged at the back of the waist
-    upper = B("upper", "body", [0, WAIST_Y, 5.5 * SCALE])
+    upper = B("upper", "body", [5.5 * SCALE, WAIST_Y, 0])
     doll(upper, FOOT, 16 * SCALE, 10, half="upper")
     # the nest of ten dolls inside the bowl: each on an arm turned to its place in the fan
     nest = B("nest", "body", [0, FOOT + 2, 0])
@@ -189,9 +189,11 @@ def paint(bones, texel_fn=None, start=128):
             for yy in range(fh):
                 for xx in range(fw):
                     col, lit = texel_fn(mat, f, xx, yy, fw, fh, c, i)
-                    img.putpixel((x0 + xx, y0 + yy), col + (255,))
-                    if lit or c.glow:
-                        glow.putpixel((x0 + xx, y0 + yy), col + (255,))
+                    # a texel may be left clear (an armour's open face): col then carries its alpha
+                    px = tuple(col) if len(col) == 4 else tuple(col) + (255,)
+                    img.putpixel((x0 + xx, y0 + yy), px)
+                    if (lit or c.glow) and px[3]:
+                        glow.putpixel((x0 + xx, y0 + yy), px)
     return img, glow, tw
 
 
@@ -348,7 +350,7 @@ def idle():
     t = Track(20.0, True)
     t.keys("ring", "rotation", [(0, S0), (20.0, [0, 360, 0])])
     for s in range(0, 21, 2):
-        t.key("upper", "rotation", s, [AJAR + (2.0 if s % 4 else 0), 0, 0], "easeInOutSine")
+        t.key("upper", "rotation", s, [0, 0, AJAR + (2.0 if s % 4 else 0)], "easeInOutSine")
         t.key("glow", "scale", s, [1.0 + (0.18 if s % 4 else 0), 1, 1.0 + (0.18 if s % 4 else 0)], "easeInOutSine")
     t.keys("nest", "scale", [(0, HIDE, "step")])
     t.keys("ingot", "scale", [(0, HIDE, "step")])
@@ -387,10 +389,11 @@ def ritual():
         # drawn in along its arm (its socket lies at -Z of its arm)
         t.keys(f"sock{w}", "position", [(0, S0), (s("tighten"), [0, 0, RING_R - RING_IN], "easeInOutCubic"), (L, [0, 0, RING_R - RING_IN])])
     # ---- the upper half thrown open, slammed shut, opened a last time on the ingot, ajar again at the end
-    t.keys("upper", "rotation", [(0, [AJAR, 0, 0]), (s("open") - 0.3, [AJAR - 6, 0, 0], "easeInOutSine"), (s("open") + 0.5, [OPEN, 0, 0], "easeOutBack"),
-                                 (s("descend") + 0.2, [OPEN, 0, 0]), (s("slam"), [0, 0, 0], "easeInExpo"),
-                                 (s("reveal"), [0, 0, 0]), (s("reveal") + 0.4, [OPEN * 0.72, 0, 0], "easeOutBack"),
-                                 (L - 0.35, [OPEN * 0.72, 0, 0]), (L, [AJAR, 0, 0], "easeInOutSine")])
+    z = lambda a: [0, 0, a]  # noqa: E731
+    t.keys("upper", "rotation", [(0, z(AJAR)), (s("open") - 0.3, z(AJAR - 6), "easeInOutSine"), (s("open") + 0.5, z(OPEN), "easeOutBack"),
+                                 (s("descend") + 0.2, z(OPEN)), (s("slam"), z(0), "easeInExpo"),
+                                 (s("reveal"), z(0)), (s("reveal") + 0.4, z(OPEN * 0.72), "easeOutBack"),
+                                 (L - 0.35, z(OPEN * 0.72)), (L, z(AJAR), "easeInOutSine")])
     # ---- the glow inside: brighter while the doll is open, flaring when it shuts
     t.keys("glow", "scale", [(0, ONE), (s("open"), [1.5, 2, 1.5], "easeOutQuad"), (s("slam"), [1.1, 1, 1.1]),
                              (s("slam") + 0.15, [2.2, 3, 2.2], "easeOutExpo"), (s("reveal"), ONE, "easeInQuad"), (L, ONE)])

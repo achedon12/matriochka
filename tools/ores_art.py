@@ -98,31 +98,28 @@ def it_living_ember(res):
 
 
 def it_golden_ward(res):
-    """A lock's golden bolt, cut with the teeth of a ward: a heavy bar with a ring knob and a keyhole of cold light."""
+    """The ward of a great lock: a round gold escutcheon, its rim beaded, cut through with the notched rings a key
+    must pass, and at its heart a keyhole of cold light."""
     s = Spr(res)
-    gold = GOLD
     blue = hramp("7fd3ff", dl=0.08)
-    a = -math.pi / 4
-
-    def rot(x, y):
-        cx, cy = 8.0, 8.0
-        dx, dy = x - cx, y - cy
-        return cx + dx * math.cos(a) - dy * math.sin(a), cy + dx * math.sin(a) + dy * math.cos(a)
-    bar = s.poly([rot(x, y) for x, y in ((1.6, 6.6), (13.0, 6.6), (14.4, 8.0), (13.0, 9.4), (1.6, 9.4))])
-    s.shade(bar, gold, n_flat(0.0, -0.5), lo=2, hi=4)
-    teeth = set()
-    for x0 in (3.0, 6.0, 9.4):
-        teeth |= s.poly([rot(x, y) for x, y in ((x0, 9.2), (x0 + 1.6, 9.2), (x0 + 1.6, 11.6), (x0, 11.6))])
-    s.shade(teeth, gold, n_flat(0.2, 0.4), lo=1, hi=3)
-    rx, ry = rot(1.8, 8.0)
-    ring = s.ring(rx, ry, 1.5, 2.9)
-    s.shade(ring, gold, n_sphere(rx - 0.8, ry - 0.8, 3.4), lo=1, hi=5)
-    hole = s.disc(*rot(10.6, 8.0), 1.0)
-    s.fill(hole, blue[4])
-    s.dot(*rot(10.0, 7.2), blue[5])
-    for x0 in (3.6, 7.4):
-        s.dot(*rot(x0, 7.2), gold[5])
+    plate = s.disc(8, 8, 6.6)
+    s.shade(plate, GOLD, n_sphere(6.4, 6.0, 7.4), lo=1, hi=4, spec=0.06)
+    # the beaded rim
+    for k in range(14):
+        a = k * math.pi / 7
+        s.dot(8 + math.sin(a) * 5.9 - 0.5, 8 - math.cos(a) * 5.9 - 0.5, GOLD[5] if math.sin(a) + math.cos(a) < 0 else GOLD[2])
+    # the wards: two notched rings cut through the plate
+    for (r, gap) in ((4.2, 0.9), (2.7, 2.2)):
+        ring = s.ring(8, 8, r - 0.45, r + 0.35)
+        cut = {p for p in ring if not abs(math.atan2((p[1] + 0.5) / s.k - 8, (p[0] + 0.5) / s.k - 8) - gap) < 0.45}
+        s.fill(cut, GOLD[0])
+        s.fill({p for p in cut if (p[1] + 0.5) / s.k > 8.4}, GOLD[1])
+    # the keyhole of light
+    hole = s.disc(8, 7.2, 1.1) | s.poly([(7.3, 7.6), (8.7, 7.6), (9.1, 10.4), (6.9, 10.4)])
+    s.fill(hole, blue[3])
+    s.fill(s.disc(7.7, 6.9, 0.45), blue[5])
     s.outline()
+    s.dot(3.2, 2.6, GOLD[5])
     return s
 
 
@@ -360,65 +357,87 @@ def bl_matriochkite_block(res):
 
 
 # =================================================================== the Matriarch Armour (items)
-HELMET_ROWS = ["......##.......", "....######.....", "...########....", "..##########...", "..##########...",
-               "..##########...", "..####..####...", "..###....###...", "..###....###...", "..###....###..."]
+def _khokhloma(s, m, k, seed=0):
+    """Red lacquer over the mask with khokhloma painted on it: gold berries with red hearts, black stems, a leaf."""
+    xs = sorted({p[0] for p in m})
+    ys = sorted({p[1] for p in m})
+    for (x, y) in [(xx, yy) for xx in range(0, 16, 4) for yy in range(0, 16, 4)]:
+        ox, oy = x + ((y // 4) % 2) * 2 + 1.0, y + 1.5
+        if (int(ox * k), int(oy * k)) in m and (int((ox + 1) * k), int((oy + 1) * k)) in m:
+            s.dot(ox, oy, LEAF[4])
+            s.dot(ox + 1, oy, FLOWER[1])
+            s.dot(ox + 1, oy + 1, LEAF[3])
+            s.dot(ox - 1 + ((x + seed) % 3 == 0) * 3, oy + 1, hramp("5a8a34")[3])
 
 
 def it_matriarch(res, piece):
-    """Red lacquer under heavy gold: the helmet a kokoshnik crowned with pearls, the chest a painted doll in a gold
-    medallion, the legs and boots banded with gold leaf and little flowers."""
+    """The Matriarch Armour's icons, in the manner of the worn set: a lacquered doll-head helmet with its gold rim and
+    a crest painted with a doll's face; a breastplate of khokhloma with a gold filigree matryoshka round a gem; skirt
+    plates of red and black lacquer painted with flowers; boots with gold toe caps. Every edge gilded and lit."""
     s = Spr(res)
     k = s.k
-    if piece == "helmet":
-        m = s.mask(lambda x, y: (y >= 1.2 + 0.18 * (x - 8) ** 2 and y < 11.0 and 2.0 <= x < 14.0) and not (5.0 <= x < 11.0 and y >= 7.2))
-    elif piece == "boots":
-        m = s.mask(lambda x, y: (2.0 <= x < 7.0 or 9.0 <= x < 14.0) and 7.0 <= y < 14.0 and not ((x < 4.0 or 9.0 <= x < 11.0) and y < 10.0))
-    else:
-        m = _rows_mask(s, ARMOR_ROWS[piece])
-    s.shade(m, LACQUER, n_bevel(s, m, 2.2, flat=0.35), lo=1, hi=4, spec=0.0)
-    ys = sorted({p[1] for p in m})
-    xs = sorted({p[0] for p in m})
     u = lambda p: ((p[0] + 0.5) / k, (p[1] + 0.5) / k)  # noqa: E731
-    # a gold rim all round, lit on top
-    rim = s.edge(m, LEAF[2], sides=("r", "b", "l", "t"))
-    s.fill({p for p in rim if u(p)[1] < 7}, LEAF[4])
     if piece == "helmet":
-        # the kokoshnik's arch: a band of gold under its edge, pearls along it, a jewel at its crown
-        band = {p for p in m if any((p[0] + a, p[1] - b) not in m for a in (-1, 0, 1) for b in (1, 2)) and u(p)[1] < 7.2}
-        s.fill(band, LEAF[3])
-        for x in (4.0, 6.0, 10.0, 12.0):
-            y = 1.2 + 0.18 * (x - 8) ** 2 + 1.3
-            s.dot(x - 0.5, y - 0.5, CREAM[4])
-        s.fill(s.disc(8.0, 4.4, 1.2), FLOWER[1])
-        s.dot(7.5, 3.6, CREAM[4])
-        s.fill({p for p in m if 6.6 <= u(p)[1] < 7.4}, LEAF[4])
-    elif piece == "chestplate":
-        s.fill({p for p in m if u(p)[1] < ys[0] / k + 1.6}, LEAF[3])
-        s.fill({p for p in m if abs(u(p)[1] - 12.2) < 0.5}, LEAF[3])
-        med = s.disc(8.0, 7.8, 2.6)
-        s.fill(med, LEAF[4], rim=LEAF[1])
-        s.edge(med, LEAF[1], sides=("r", "b"))
-        # the painted doll inside the medallion
-        s.fill(s.disc(8.0, 6.9, 0.95), CREAM[3])
-        s.fill(s.ell(8.0, 8.9, 1.5, 1.0), LACQUER[3])
-        s.dot(7.5, 8.4, CREAM[4])
-        for (x, y) in ((4.0, 9.6), (11.0, 9.6), (4.0, 5.0), (11.0, 5.0)):
-            s.dot(x, y, FLOWER[2])
-            s.dot(x, y + 1, LEAF[4])
+        dome = s.mask(lambda x, y: ((x - 8) / 6.2) ** 2 + ((y - 9.0) / 6.8) ** 2 <= 1 and y < 12.6 and not (4.2 <= x < 11.8 and y >= 9.4))
+        s.shade(dome, LACQUER, n_sphere(6.4, 5.4, 7.2, 7.6), lo=1, hi=5, spec=0.04)
+        s.fill({p for p in dome if abs(u(p)[1] - 8.8) < 0.6}, LEAF[4])
+        s.fill({p for p in dome if abs(u(p)[1] - 9.4) < 0.3}, LEAF[2])
+        # the knob, the crest and its painted face, pearls along it
+        s.shade(s.ell(8, 2.0, 1.4, 1.0), LEAF, n_sphere(7.4, 1.6, 1.6), lo=2, hi=5)
+        crest = s.rect(4.8, 2.6, 11.2, 9.0)
+        s.fill(crest, LEAF[3], rim=LEAF[0])
+        s.fill(s.rect(5.6, 3.4, 10.4, 8.4), LACQUER[2])
+        s.fill(s.ell(8.0, 6.0, 1.9, 2.1), SKIN[3])
+        s.fill({p for p in s.ell(8.0, 6.0, 1.9, 2.1) if (p[1] + 0.5) / s.k < 5.0}, (92, 50, 30))
+        s.dot(7.0, 5.8, INK)
+        s.dot(8.6, 5.8, INK)
+        s.dot(6.6, 6.8, CHEEK)
+        s.dot(9.0, 6.8, CHEEK)
+        for x in (5.2, 6.8, 8.4, 10.0):
+            s.dot(x, 2.0, CREAM[4])
+        s.outline()
+        s.dot(5.0, 5.4, LEAF[5])
+        return s
+    m = _rows_mask(s, ARMOR_ROWS[piece])
+    if piece == "boots":
+        m = s.mask(lambda x, y: (2.0 <= x < 7.0 or 9.0 <= x < 14.0) and 7.0 <= y < 14.0 and not ((x < 4.0 or 9.0 <= x < 11.0) and y < 10.0))
+    s.shade(m, LACQUER, n_bevel(s, m, 2.2, flat=0.35), lo=1, hi=4)
+    ys = sorted({p[1] for p in m})
+    top, bottom = ys[0] / k, ys[-1] / k
+    if piece == "chestplate":
+        _khokhloma(s, m, k, 1)
+        s.fill({p for p in m if u(p)[1] < top + 1.6}, LEAF[4])
+        s.fill({p for p in m if abs(u(p)[1] - (top + 1.6)) < 0.4}, LEAF[2])
+        s.fill({p for p in m if u(p)[1] > bottom - 0.8}, LEAF[3])
+        # the filigree matryoshka round the gem
+        for (cx, cy, rx, ry) in ((8.0, 6.6, 1.5, 1.3), (8.0, 9.6, 2.5, 2.3)):
+            ring = s.mask(lambda x, y, cx=cx, cy=cy, rx=rx, ry=ry: abs(((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 - 1) < 0.5)
+            s.fill({p for p in ring if p in m}, LEAF[4])
+        s.fill(s.ell(8.0, 9.7, 1.6, 1.4), BLACK_LAC)
+        s.fill(s.disc(8.0, 9.6, 0.9), (214, 32, 52))
+        s.dot(7.5, 9.0, (255, 170, 180))
+        s.fill(s.ell(8.0, 6.6, 0.8, 0.7), CREAM[3])
     elif piece == "leggings":
-        s.fill({p for p in m if u(p)[1] < ys[0] / k + 1.4}, LEAF[3])
-        for x0 in (4.0, 10.0):
-            s.fill({p for p in m if abs(u(p)[0] - x0 - 0.5) < 0.5 and u(p)[1] > 5}, LEAF[3])
-        for (x, y) in ((4.5, 8.0), (10.5, 8.0), (4.5, 11.5), (10.5, 11.5)):
-            s.dot(x - 0.5, y - 0.5, FLOWER[2])
-        s.fill({p for p in m if (p[1] + 0.5) / k > ys[-1] / k - 0.5}, LEAF[2])
+        lower = {p for p in m if u(p)[1] > 9.0}
+        s.shade(lower, [(14, 8, 10), (24, 14, 16), (40, 24, 24), (58, 36, 34), (80, 52, 46), (110, 74, 60)], n_bevel(s, lower, 1.6, flat=0.4), lo=1, hi=4)
+        _khokhloma(s, m, k, 2)
+        s.fill({p for p in m if u(p)[1] < top + 1.4}, LEAF[4])
+        s.fill({p for p in m if abs(u(p)[1] - 9.0) < 0.5}, LEAF[3])
+        s.fill({p for p in m if u(p)[1] > bottom - 0.8}, LEAF[2])
     else:
         s.fill({p for p in m if u(p)[1] < 8.6}, LEAF[4])
-        s.fill({p for p in m if u(p)[1] > 12.6}, LEAF[3])
-        for x in (4.0, 10.5):
-            s.dot(x, 10.0, FLOWER[2])
+        s.fill({p for p in m if abs(u(p)[1] - 8.9) < 0.3}, LEAF[2])
+        toes = {p for p in m if u(p)[1] > 11.8 and (u(p)[0] < 4.6 or 9.0 <= u(p)[0] < 11.6)}
+        s.shade(toes, LEAF, n_bevel(s, toes, 1.0, flat=0.4), lo=2, hi=5)
+        for x in (4.6, 11.2):
+            s.dot(x, 10.2, FLOWER[2])
+    s.edge(m, LEAF[2], sides=("r", "b"))
     s.outline()
+    s.dot(3.0, (top + 0.5), LEAF[5])
     return s
+
+
+BLACK_LAC = (30, 18, 20)
 
 
 # =================================================================== the Matriarch Armour (worn)

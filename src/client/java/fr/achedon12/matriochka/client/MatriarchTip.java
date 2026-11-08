@@ -90,7 +90,8 @@ public final class MatriarchTip implements HudElement {
 		Minecraft mc = Minecraft.getInstance();
 		Player p = mc.player;
 		if (p == null || mc.gameMode == null || !mc.gameMode.canHurtPlayer() || worn(p) < 4) return;
-		float scale = Math.max(0.75f, Math.min(1.5f, Comfort.get().hudScale));
+		// a little larger than a heart, so it reads beside them
+		float scale = 1.35f * Math.max(0.75f, Math.min(1.5f, Comfort.get().hudScale));
 		int w = Math.round(ICON_W * scale), h = Math.round(ICON_H * scale);
 		// left of the hearts, its foot on their row
 		int x = g.guiWidth() / 2 - 91 - w - 3, y = g.guiHeight() - 39 + 9 - h;

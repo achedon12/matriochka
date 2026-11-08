@@ -304,7 +304,7 @@ final class NestingTest {
 		});
 		// the camera: a spectator a little above and in front, the cradle and the whole height of the shells in frame
 		s.runCommand("gamemode spectator @a");
-		s.runOnServer(server -> player(server).connection.teleport(at.getX() + 0.5, at.getY() + 0.55, at.getZ() + 4.3, 180, 4));
+		s.runOnServer(server -> player(server).connection.teleport(at.getX() + 0.5, at.getY() - 0.45, at.getZ() + 3.8, 180, -10));
 		ctx.runOnClient(mc -> mc.options.fov().set(55));
 		// at dusk, so the gold and the worlds' lights glow against the sky
 		s.runCommand("time set 11900");
@@ -395,7 +395,7 @@ final class NestingTest {
 		check(stats.equals("armour 30 (pieces 32), toughness 18, knockback 0.90, health 53, gauge x0.5 (without 1.0), toxin +5"), "Matriarch: " + stats);
 		// worn, third person on the stage: front, back, side, the crown and the chest up close
 		Film.hud(ctx, false);
-		String[][] views = {{"armour_front", "front", "0", "0", "44"}, {"armour_back", "back", "0", "0", "44"}, {"armour_side", "front", "90", "0", "44"},
+		String[][] views = {{"armour_front", "front", "0", "6", "42"}, {"armour_back", "back", "0", "6", "42"}, {"armour_side", "front", "90", "6", "42"},
 			{"armour_crown", "front", "0", "-8", "30"}, {"armour_chest", "front", "0", "26", "30"}};
 		for (String[] v : views) {
 			float yaw = Float.parseFloat(v[2]), pitch = Float.parseFloat(v[3]);

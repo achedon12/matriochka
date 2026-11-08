@@ -5,7 +5,6 @@ import fr.achedon12.matriochka.content.ModContent;
 import fr.achedon12.matriochka.content.Sounds;
 import fr.achedon12.matriochka.rules.PlayerState;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -15,7 +14,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.level.block.Blocks;
 
 /**
  * The Matriarch Armour's set bonus, the Nested Shell (tools/content.py MATRIARCH): worn whole, every world's gauge
@@ -62,12 +60,13 @@ public final class Matriarch {
 		fr.achedon12.matriochka.net.Cues.tint(p, "matriarch", 24);
 		p.setHealth(Math.min(p.getMaxHealth(), Content.MATRIARCH_SAVE_HEALTH));
 		p.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 2));
-		// gold shards and splinters of red lacquer burst from the outer doll
-		double x = p.getX(), y = p.getY() + 1.1, z = p.getZ();
-		level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.GOLD_BLOCK.defaultBlockState()), x, y, z, 70, 0.45, 0.6, 0.45, 0.25);
-		level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, ModContent.block("lacquer_block").defaultBlockState()), x, y, z, 30, 0.4, 0.5, 0.4, 0.2);
-		level.sendParticles(fr.achedon12.matriochka.content.Particles.GOLD_MOTE, x, y, z, 40, 0.6, 0.7, 0.6, 0.08);
-		level.sendParticles(ParticleTypes.END_ROD, x, y, z, 16, 0.3, 0.5, 0.3, 0.12);
+		// gold dust and a few sparks burst from the outer doll, round the body and below the eyes
+		double x = p.getX(), y = p.getY() + 0.7, z = p.getZ();
+		for (int k = 0; k < 24; k++) {
+			double ang = k * Math.PI * 2 / 24;
+			level.sendParticles(fr.achedon12.matriochka.content.Particles.GOLD_MOTE, x + Math.cos(ang) * 0.9, y + (k % 3) * 0.3, z + Math.sin(ang) * 0.9, 1, 0, 0, 0, 0);
+		}
+		level.sendParticles(ParticleTypes.END_ROD, x, y, z, 10, 0.6, 0.3, 0.6, 0.06);
 		level.playSound(null, p.blockPosition(), Sounds.MATRIARCH_CRACK, SoundSource.PLAYERS, 1.4f, 1f);
 		p.sendOverlayMessage(Component.translatable("message.matriochka.matriarch.cracked").withStyle(ChatFormatting.GOLD));
 		return true;
