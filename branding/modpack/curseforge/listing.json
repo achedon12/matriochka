@@ -22,11 +22,11 @@
     "website": "https://achedon12.github.io/matriochka/"
   },
   "files": {
-    "how": "uploaded by the release workflow (tools/modpack_publish.sh curseforge) once the repository variable CURSEFORGE_PACK_PROJECT_ID and the secret CURSEFORGE_API_KEY are set; for 0.4.0 run the modpack workflow with tag v0.4.0",
-    "normal": {"display_name": "Matriochka Pack 0.4.0", "file": "matriochka-pack-0.4.0+26.3-curseforge.zip"},
-    "hard": {"display_name": "Matriochka Pack 0.4.0 (Hard)", "file": "matriochka-pack-0.4.0-hard+26.3-curseforge.zip"},
-    "release_type": "alpha",
-    "game_versions": ["26.3"]
+    "how": "uploaded by the release workflow (tools/modpack_publish.sh curseforge) once the repository variable CURSEFORGE_PACK_PROJECT_ID and the secret CURSEFORGE_API_KEY are set; one normal and one hard file per Minecraft version",
+    "normal": {"display_name": "Matriochka Pack 0.9.0", "file": "matriochka-pack-0.9.0+26.3-curseforge.zip"},
+    "hard": {"display_name": "Matriochka Pack 0.9.0 (Hard)", "file": "matriochka-pack-0.9.0-hard+26.3-curseforge.zip"},
+    "release_type": "beta",
+    "game_versions": ["26.3", "26.2", "26.1.2"]
   },
   "gallery": "same images, titles and descriptions as ../listing.json (gallery/*.jpg, 1920x1080)",
   "categories_source": "https://api.curse.tools/v1/categories?gameId=432&classId=4471 (CurseForge modpack categories, November 2026)"

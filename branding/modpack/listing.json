@@ -10,7 +10,7 @@
   "client_side": "required",
   "server_side": "optional",
   "license": {"id": "MIT", "url": "https://github.com/achedon12/matriochka/blob/main/LICENSE"},
-  "game_versions": ["26.3"],
+  "game_versions": ["26.3", "26.2", "26.1.2"],
   "loaders": ["fabric"],
   "links": {
     "source": "https://github.com/achedon12/matriochka",
@@ -20,10 +20,10 @@
     "website": "https://achedon12.github.io/matriochka/"
   },
   "versions": {
-    "how": "uploaded by the release workflow (tools/modpack_publish.sh) once the repository variable MODRINTH_PACK_PROJECT_ID is set; for 0.4.0 run the modpack workflow with tag v0.4.0",
-    "normal": {"version_number": "0.4.0", "name": "Matriochka Pack 0.4.0", "file": "matriochka-pack-0.4.0+26.3.mrpack"},
-    "hard": {"version_number": "0.4.0-hard", "name": "Matriochka Pack 0.4.0 (Hard)", "file": "matriochka-pack-0.4.0-hard+26.3.mrpack"},
-    "version_type": "alpha"
+    "how": "uploaded by the release workflow (tools/modpack_publish.sh) once the repository variable MODRINTH_PACK_PROJECT_ID is set; one normal and one hard version per Minecraft version (0.9.0+26.2, 0.9.0-hard+26.2...)",
+    "normal": {"version_number": "0.9.0", "name": "Matriochka Pack 0.9.0", "file": "matriochka-pack-0.9.0+26.3.mrpack"},
+    "hard": {"version_number": "0.9.0-hard", "name": "Matriochka Pack 0.9.0 (Hard)", "file": "matriochka-pack-0.9.0-hard+26.3.mrpack"},
+    "version_type": "beta"
   },
   "gallery": [
     {
@@ -49,13 +49,23 @@
     },
     {
       "file": "gallery/05-hud.jpg",
-      "title": "The world plaque",
-      "description": "The HUD shows the world you are in, its rule gauge (toxin in World 1) and your souls. Its size is a comfort option, in Options > Matriochka...."
+      "title": "The souls bar",
+      "description": "Your souls have their own bar above the experience bar, and the world's gauge sits with your hearts. Entering a world shows its name and rule. All of it is in Options > Matriochka...."
     },
     {
       "file": "gallery/06-journal.jpg",
       "title": "The Artisan's Journal",
       "description": "Objective, quests, karma, worlds, the Scroll and the pages you found, in one book."
+    },
+    {
+      "file": "gallery/07-nesting-cradle.jpg",
+      "title": "The Nesting Cradle",
+      "description": "The ten world ores set in the Cradle, and the ritual of ten nesting dolls that turns them into Matriochkite."
+    },
+    {
+      "file": "gallery/08-matriarch-armour.jpg",
+      "title": "The Matriarch Armour",
+      "description": "Forged from Matriochkite, the metal of the ten worlds, with its Nested Shell."
     }
   ],
   "gallery_sources": {
@@ -64,6 +74,8 @@
     "03-light-eater.jpg": "shots2/plain/w05_boss.png",
     "04-giant-veins.jpg": "shots2/plain/w02_view.png",
     "05-hud.jpg": "build/run/clientGameTest/screenshots/nesting_souls_bar.png (-Ppolish capture, 1600x900, scaled to 1920x1080)",
-    "06-journal.jpg": "build/run/clientGameTest/screenshots/gui_journal_1.png (-Pgui capture), its 854x480 GUI area scaled to 1920x1080"
+    "06-journal.jpg": "build/run/clientGameTest/screenshots/gui_journal_1.png (-Pgui capture), its 854x480 GUI area scaled to 1920x1080",
+    "07-nesting-cradle.jpg": "wiki/images/matriarch/ritual_nest.webp (1280x720), scaled to 1920x1080 (Lanczos)",
+    "08-matriarch-armour.jpg": "wiki/images/matriarch/armour_front.webp (1280x720), scaled to 1920x1080 (Lanczos)"
   }
 }

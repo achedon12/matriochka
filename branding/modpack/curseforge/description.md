@@ -2,6 +2,10 @@
 
 Matriochka is a progression mod. Ten worlds are nested inside blocks, one inside the other, like the dolls it is named after. You craft a Seed, plant it on tilled World Soil, and the block that hatches holds a whole world with its own rule, creatures, station and boss. Beat the boss, take its core, and the next Seed becomes possible.
 
+**New in 0.9.0, Nesting:** every world has an ore of its own, each obtained its own way. Set the ten in the Nesting Cradle and a ritual of ten nesting dolls turns them into Matriochkite, the metal of the Matriarch Armour and its Nested Shell. Matriochka is now in beta. Full notes in the [changelog](https://github.com/achedon12/matriochka/blob/main/CHANGELOG.md).
+
+![Matriochka, the nesting doll and the ten worlds](https://raw.githubusercontent.com/achedon12/matriochka/main/branding/store/img/poster.jpg)
+
 ## Two versions
 
 - **Matriochka Pack**: difficulty `normal`, the mod's defaults. Pick it to play the game as designed.
@@ -13,7 +17,7 @@ Both have the same mods; only `config/matriochka.json` differs, and a server ope
 
 - **[Matriochka](https://www.curseforge.com/minecraft/mc-mods/matriochka)** (client and server): the mod itself.
 - **[Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)** (client and server): required by Matriochka.
-- **[GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib)** (client and server): required, the models and animations of the 61 creatures and bosses.
+- **[GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib)** (client and server): required, the models and animations of the 50 creatures and 12 bosses.
 - **[Just Enough Items](https://www.curseforge.com/minecraft/mc-mods/jei)** and **[MezzConfig](https://www.curseforge.com/minecraft/mc-mods/mezzconfig)** (client, optional): a recipe page for each of the thirteen stations. Included in the versions where CurseForge has approved the matching JEI file.
 - **[Sodium](https://www.curseforge.com/minecraft/mc-mods/sodium)** (client): a much higher frame rate, mostly in the dense worlds.
 - **[Lithium](https://www.curseforge.com/minecraft/mc-mods/lithium)** (client and server): faster game logic, mob AI, physics and chunk ticking. Every world is a separate dimension, so this adds up.
@@ -32,7 +36,7 @@ Every mod is the CurseForge copy of the exact file the Modrinth version of the p
 
 - **LambDynamicLights.** A torch in your hand would light the Lightless Deep, and the whole point of World 5 is that it is dark: its rule is noise, its creatures hunt what they hear, and light is something you place. Dynamic lights would defeat that rule.
 - **Minimaps.** A personal choice, and a map is not needed. They work with Matriochka if you add them; Xaero's cave view and radar are turned off inside World 5 (see [Compatibility](https://github.com/achedon12/matriochka/wiki/Compatibility)).
-- **C2ME and ScalableLux** (alpha builds only), **ModernFix, MemoryLeakFix and Noisium** (no build for these versions).
+- **C2ME and ScalableLux** (both rewrite chunk generation and lighting; alpha builds only for C2ME, and for ScalableLux on 26.3), **ModernFix, MemoryLeakFix and Noisium** (no Fabric build for these versions).
 - Content mods of any kind. The pack is Matriochka and nothing else, so a bug report is a Matriochka bug report.
 
 ## Install
