@@ -33,7 +33,9 @@ Matriochka is a progression mod for Minecraft Java 26.1.2, 26.2 and 26.3 (Fabric
 | Doll of Life | Each layer saves you from one death. Soul Cradles let you respawn inside a world, death chests keep your items |
 | 110 structures | 11 types per world, generated procedurally, with journal pages and one hidden doll per world |
 | 10 wonders | One great place per world, pointed at by its people, with a reliquary that only another world's cross key opens and a relic that gives a heart and its world's gift |
-| 10 world ores | One per world, each had its own way: grown on blooms by the water, mined with a burning hand or in silence, fused by lightning, falling upwards, ripened from a seed. Set in the Nesting Cradle, the ten give the Matriochkite of the Matriarch Armour |
+| 10 world ores | One per world, each had its own way: grown on blooms by the water, mined with a burning hand or in silence, fused by lightning, falling upwards, ripened from a seed |
+| The Nesting Cradle | A great animated matryoshka that takes the ten ores and, in an eight-second ritual of ten nesting dolls, turns them into Matriochkite |
+| Matriarch Armour | The finest set, a 3D lacquer-and-gold armour whose Nested Shell halves every world's gauge and turns one deadly blow every five minutes; its state on the tooltip and beside the hearts |
 | The Artisan's Journal | Quests, karma, every world's items and how to get them, and a map of every world inked as you walk it |
 | 64 quests, 100 achievements | Optional quest book in the Artisan's Journal and one advancement tab per world |
 
