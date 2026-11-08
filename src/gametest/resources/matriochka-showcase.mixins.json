@@ -1,0 +1,1 @@
+{ "required": true, "package": "fr.achedon12.matriochka.showcase.mixin", "compatibilityLevel": "JAVA_25", "client": ["HeroPoseMixin"], "injectors": { "defaultRequire": 1 } }

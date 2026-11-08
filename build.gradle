@@ -66,6 +66,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('epic')) {
 				vmArgs '-Dmatriochka.capture=epic', '-Xmx6G', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: ''), '-Dmatriochka.takes=' + (project.findProperty('takes') ?: 'atkor')
 			}
+			if (name == 'clientGameTest' && project.hasProperty('poster')) {
+				vmArgs '-Dmatriochka.capture=poster', '-Xmx4G', '-Dmatriochka.shots=' + (project.findProperty('shots') ?: ''), '-Dmatriochka.preview=' + (project.findProperty('preview') ?: '')
+			}
 			if (name == 'clientGameTest' && project.hasProperty('automation')) {
 				vmArgs '-Dmatriochka.capture=automation'
 			}

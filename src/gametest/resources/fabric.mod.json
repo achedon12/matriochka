@@ -5,5 +5,6 @@
   "name": "Matriochka Showcase",
   "environment": "*",
   "entrypoints": { "fabric-client-gametest": ["fr.achedon12.matriochka.showcase.ShowcaseTest"] },
+  "mixins": [{ "config": "matriochka-showcase.mixins.json", "environment": "client" }],
   "depends": { "matriochka": "*" }
 }

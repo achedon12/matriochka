@@ -215,6 +215,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 			EpicCapture.run(ctx);
 			return;
 		}
+		if ("poster".equals(System.getProperty("matriochka.capture"))) {
+			PosterCapture.run(ctx);
+			return;
+		}
 		if ("automation".equals(System.getProperty("matriochka.capture"))) {
 			AutomationTest.run(ctx);
 			return;
