@@ -113,6 +113,7 @@ final class NestingTest {
 			armour(ctx, s, origin);
 			journal(ctx, s);
 			hud(ctx, sp, s);
+			options(ctx);
 			if (!FAILED.isEmpty()) throw new AssertionError("nesting: " + FAILED);
 			Matriochka.LOG.info("[nesting] ok");
 		}
@@ -498,8 +499,10 @@ final class NestingTest {
 			ps.sync();
 		});
 		ctx.waitTicks(10);
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.clearChat(mc));
 		boolean bar = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.Hud.soulsShown(mc));
-		check(bar, "the souls' bar shows inside a world");
+		int lift = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.Hud.lift());
+		check(bar && lift > 0, "the souls' bar shows, the status rows raised by " + lift);
 		shot(ctx, "souls_bar");
 		// two rows of hearts (24), then the HUD at twice its size: the count stays clear of both
 		s.runOnServer(server -> {
@@ -521,6 +524,14 @@ final class NestingTest {
 		ctx.waitTicks(10);
 		shot(ctx, "souls_bar_x2");
 		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Comfort.get().hudScale = 1f);
+		// turned off in the comfort settings: no bar, the rows back in their vanilla place
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Comfort.get().soulsBar = false);
+		ctx.waitTicks(5);
+		int offLift = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.Hud.lift());
+		boolean offShown = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.Hud.soulsShown(mc));
+		check(offLift == 0 && !offShown, "the Souls bar option off hides it and puts the rows back (" + offLift + ")");
+		shot(ctx, "souls_bar_off");
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Comfort.get().soulsBar = true);
 		s.runOnServer(server -> {
 			ServerPlayer p = player(server);
 			p.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
@@ -537,6 +548,30 @@ final class NestingTest {
 		ctx.setScreen(() -> null);
 		s.runCommand("execute as @p run matriochka world leave");
 		ctx.waitTicks(40);
+	}
+
+	// ---------------------------------------------------------------- the comfort settings, from the game's Options
+	private static void options(ClientGameTestContext ctx) {
+		ctx.getInput().pressKey(com.mojang.blaze3d.platform.InputConstants.KEY_ESCAPE);
+		ctx.waitTicks(10);
+		ctx.clickScreenButton("menu.options");
+		ctx.waitTicks(10);
+		boolean placed = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof net.minecraft.client.gui.screens.options.OptionsScreen
+			&& fr.achedon12.matriochka.client.OptionsButton.last != null && net.fabricmc.fabric.api.client.screen.v1.Screens.getWidgets(fr.achedon12.matriochka.client.mc.McClient.screen(mc)).contains(fr.achedon12.matriochka.client.OptionsButton.last));
+		check(placed, "the Options screen has the Matriochka... button");
+		ctx.getInput().setCursorPos(4, 4);
+		shot(ctx, "options");
+		ctx.clickScreenButton("options.matriochka.button");
+		ctx.waitTicks(15);
+		boolean opened = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof fr.achedon12.matriochka.client.ComfortScreen);
+		check(opened, "the Matriochka... button opens the comfort settings");
+		shot(ctx, "options_comfort");
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc).onClose());
+		ctx.waitTicks(20);
+		boolean back = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.mc.McClient.screen(mc) instanceof net.minecraft.client.gui.screens.options.OptionsScreen);
+		check(back, "Back returns to the Options screen");
+		ctx.setScreen(() -> null);
+		ctx.waitTicks(5);
 	}
 
 	// ---------------------------------------------------------------- the Journal's card of a world, with its ore
