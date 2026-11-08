@@ -354,9 +354,12 @@ comfort = {
     "patterns": ("Gauge patterns", "Motifs des jauges"),
     "patterns.desc": ("The rule's icons above the hunger bar carry stripes past half and crosshatching in danger, and the boss bars show the health in figures, so you can read them without the colours.",
                       "Les icônes de la règle au-dessus de la faim portent des rayures passé la moitié et des hachures en danger, et les barres de boss affichent la vie en chiffres : tout se lit sans les couleurs."),
-    "hud_scale": ("Plaque size", "Taille du cartouche"),
-    "hud_scale.desc": ("Size of the plaque with the world's rule, the Doll of Life and the souls.",
-                       "Taille du cartouche de la règle du monde, de la Poupée de vie et des âmes."),
+    "hud_scale": ("HUD size", "Taille de l'interface"),
+    "hud_scale.desc": ("Size of the souls' count and of the armour's doll beside the hearts.",
+                       "Taille du compte des âmes et de la poupée de l'armure près des cœurs."),
+    "world_label": ("World name on screen", "Nom du monde à l'écran"),
+    "world_label.desc": ("A small label with the world you are in, kept in a corner of the screen.",
+                         "Une petite étiquette du monde où tu es, gardée dans un coin de l'écran."),
     "hud_corner": ("Plaque corner", "Coin du cartouche"),
     "hud_corner.desc": ("The corner of the screen the plaque sits in.", "Le coin de l'écran où se place le cartouche."),
     "corner.top_left": ("Top left", "Haut gauche"), "corner.top_right": ("Top right", "Haut droite"),
@@ -695,6 +698,10 @@ U["tooltip.matriochka.matriarch.mending"] = ("Nested Shell: mending, %s", "Coqui
 U["tooltip.matriochka.matriarch.idle"] = ("Nested Shell: wear the whole set", "Coquille gigogne : porte toute l'armure")
 U["tooltip.matriochka.chain"] = ("Ten ores \u2192 Nesting Cradle \u2192 Matriochkite \u2192 Matriarch Armour", "Dix minerais \u2192 Berceau gigogne \u2192 Matriochkite \u2192 Armure de la Matriarche")
 U["journal.matriochka.card.chain"] = ("Ten ores, one of each world \u2192 the Nesting Cradle \u2192 a Matriochkite Ingot \u2192 the Matriarch Armour", "Dix minerais, un par monde \u2192 le Berceau gigogne \u2192 un Lingot de matriochkite \u2192 l'Armure de la Matriarche")
+# where you are, without a corner plaque (client/WorldTitle)
+U["hud.matriochka.world_rule"] = ("Rule: %s", "Règle : %s")
+U["hud.matriochka.world_label"] = ("World %s \u00b7 %s", "Monde %s \u00b7 %s")
+U["debug.matriochka.world"] = ("Matriochka: World %s - %s", "Matriochka : monde %s - %s")
 en = {k: v[0] for k, v in U.items()}
 fr = {k: v[1] for k, v in U.items()}
 d = os.path.join(os.path.dirname(__file__), "lang")

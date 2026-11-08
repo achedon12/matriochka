@@ -339,8 +339,10 @@
  "comfort.matriochka.particles.desc": "Skips two particles out of three inside the worlds and during boss fights.",
  "comfort.matriochka.patterns": "Gauge patterns",
  "comfort.matriochka.patterns.desc": "The rule's icons above the hunger bar carry stripes past half and crosshatching in danger, and the boss bars show the health in figures, so you can read them without the colours.",
- "comfort.matriochka.hud_scale": "Plaque size",
- "comfort.matriochka.hud_scale.desc": "Size of the plaque with the world's rule, the Doll of Life and the souls.",
+ "comfort.matriochka.hud_scale": "HUD size",
+ "comfort.matriochka.hud_scale.desc": "Size of the souls' count and of the armour's doll beside the hearts.",
+ "comfort.matriochka.world_label": "World name on screen",
+ "comfort.matriochka.world_label.desc": "A small label with the world you are in, kept in a corner of the screen.",
  "comfort.matriochka.hud_corner": "Plaque corner",
  "comfort.matriochka.hud_corner.desc": "The corner of the screen the plaque sits in.",
  "comfort.matriochka.corner.top_left": "Top left",
@@ -661,5 +663,8 @@
  "tooltip.matriochka.matriarch.mending": "Nested Shell: mending, %s",
  "tooltip.matriochka.matriarch.idle": "Nested Shell: wear the whole set",
  "tooltip.matriochka.chain": "Ten ores → Nesting Cradle → Matriochkite → Matriarch Armour",
- "journal.matriochka.card.chain": "Ten ores, one of each world → the Nesting Cradle → a Matriochkite Ingot → the Matriarch Armour"
+ "journal.matriochka.card.chain": "Ten ores, one of each world → the Nesting Cradle → a Matriochkite Ingot → the Matriarch Armour",
+ "hud.matriochka.world_rule": "Rule: %s",
+ "hud.matriochka.world_label": "World %s · %s",
+ "debug.matriochka.world": "Matriochka: World %s - %s"
 }
