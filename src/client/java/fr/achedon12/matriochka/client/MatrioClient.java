@@ -40,7 +40,10 @@ public class MatrioClient implements ClientModInitializer {
 			r.withRenderLayer(new AutoGlowingGeoLayer(r));
 			return r;
 		});
-		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
+		// the souls under the hearts and the hunger, drawn before them so their rows stay where they are
+		HudElementRegistry.attachElementBefore(net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements.HEALTH_BAR, Matriochka.id("souls"), new Hud(false));
+		HudElementRegistry.attachElementAfter(net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements.HEALTH_BAR, Matriochka.id("souls_count"), new Hud(true));
+		WorldTitle.init();
 		// the world's rule meter: a vanilla status row above the hunger bar
 		MeterHud.register();
 		MatriarchTip.init();

@@ -55,8 +55,8 @@ public class ComfortScreen extends Screen {
 		left.add(toggle("patterns", () -> v.patterns, b -> v.patterns = b));
 		right.add(new Row("hud_scale", Kind.SLIDER, () -> (v.hudScale - 0.5f) / 1.5f, f -> v.hudScale = Math.round((0.5f + f * 1.5f) * 4) / 4f,
 			() -> Component.literal("x" + trim(v.hudScale))));
-		right.add(new Row("hud_corner", Kind.CYCLE, () -> (float) cornerIndex(), f -> v.hudCorner = Comfort.CORNERS[(cornerIndex() + 1) % Comfort.CORNERS.length],
-			() -> Component.translatable("comfort.matriochka.corner." + v.hudCorner)));
+		right.add(new Row("world_label", Kind.CYCLE, () -> (float) labelIndex(), f -> v.worldLabel = LABELS[(labelIndex() + 1) % LABELS.length],
+			() -> Component.translatable(v.worldLabel.equals("off") ? "comfort.matriochka.off" : "comfort.matriochka.corner." + v.worldLabel)));
 		right.add(slider("music_explore", () -> v.musicExplore / 100f, f -> v.musicExplore = Math.round(f * 100)));
 		right.add(slider("music_danger", () -> v.musicDanger / 100f, f -> v.musicDanger = Math.round(f * 100)));
 		right.add(slider("music_boss", () -> v.musicBoss / 100f, f -> v.musicBoss = Math.round(f * 100)));
@@ -66,6 +66,14 @@ public class ComfortScreen extends Screen {
 
 	private static String trim(float f) {
 		return f == Math.floor(f) ? Integer.toString((int) f) : Float.toString(f);
+	}
+
+	/** Where the world's name can stay on screen: nowhere, or a corner. */
+	private static final String[] LABELS = {"off", "top_left", "top_right", "bottom_left", "bottom_right"};
+
+	private static int labelIndex() {
+		for (int i = 0; i < LABELS.length; i++) if (LABELS[i].equals(Comfort.get().worldLabel)) return i;
+		return 0;
 	}
 
 	private static int cornerIndex() {
@@ -101,6 +109,7 @@ public class ComfortScreen extends Screen {
 			v.patterns = d.patterns;
 			v.hudScale = d.hudScale;
 			v.hudCorner = d.hudCorner;
+			v.worldLabel = d.worldLabel;
 			v.musicExplore = d.musicExplore;
 			v.musicDanger = d.musicDanger;
 			v.musicBoss = d.musicBoss;

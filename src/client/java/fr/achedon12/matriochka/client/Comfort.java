@@ -37,6 +37,10 @@ public final class Comfort {
 		public float hudScale = 1f;
 		/** HUD plaque corner: top_left, top_right, bottom_left, bottom_right. */
 		public String hudCorner = "top_left";
+		/** A small permanent label of the world you are in: off, or one of the corners (client/WorldTitle). */
+		public String worldLabel = "off";
+		/** Whether the Matriochka line has been put on the F3 screen once (it can be turned off there afterwards). */
+		public boolean debugLineSet = false;
 		/** Music volume per situation, 0 to 100 (percent of the game's music slider). */
 		public int musicExplore = 100, musicDanger = 100, musicBoss = 100, musicLayers = 100, musicStings = 100;
 	}
@@ -105,6 +109,9 @@ public final class Comfort {
 		boolean known = false;
 		for (String c : CORNERS) known |= c.equals(v.hudCorner);
 		if (!known) v.hudCorner = "top_left";
+		boolean label = "off".equals(v.worldLabel);
+		for (String c : CORNERS) label |= c.equals(v.worldLabel);
+		if (!label) v.worldLabel = "off";
 	}
 
 	private static int clamp(int pct) {
