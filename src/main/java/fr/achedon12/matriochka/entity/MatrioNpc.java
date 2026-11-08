@@ -300,6 +300,18 @@ public class MatrioNpc extends AbstractVillager implements GeoEntity {
 		greeted.put(p.getUUID(), now);
 		fr.achedon12.matriochka.world.MatrioData data = fr.achedon12.matriochka.world.MatrioData.get(level.getServer());
 		String group = data.groupOf(p.getUUID());
+		// one greeting in two, while the relic of its world is still to be found, the person tells where the wonder stands
+		if (def.world() >= 1 && def.world() <= 10 && random.nextBoolean()) {
+			Component rumor = fr.achedon12.matriochka.world.Rumors.tell(level, p, blockPosition(), def.world());
+			if (rumor != null) {
+				say(rumor, 180);
+				p.sendSystemMessage(getDisplayName().copy().withStyle(net.minecraft.ChatFormatting.GOLD).append(": ")
+					.append(rumor.copy().withStyle(net.minecraft.ChatFormatting.ITALIC, net.minecraft.ChatFormatting.GRAY)));
+				getLookControl().setLookAt(p, 30, 30);
+				playSound(net.minecraft.sounds.SoundEvents.VILLAGER_AMBIENT, 0.6f, 0.95f + random.nextFloat() * 0.1f);
+				return;
+			}
+		}
 		String key;
 		if (def.world() == 0) {
 			int stage = data.defeated(group, 9) ? 3 : data.defeated(group, 5) ? 2 : data.defeated(group, 0) ? 1 : 0;

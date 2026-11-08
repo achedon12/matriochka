@@ -118,7 +118,7 @@ public final class WorldRules {
 				if (gain > 0 && ps.flagActive("root_broth", t)) gain *= 0.5f;
 				// water around the World Block soaks the jungle
 				if (gain > 0 && ScaleLinks.active(p, "damp")) gain *= 0.5f;
-				if (gain > 0) gain *= strength;
+				if (gain > 0) gain *= strength * fr.achedon12.matriochka.world.Relics.ease(ps, 1);
 				ps.addGauge("toxin", gain * resist);
 				float v = ps.gauge("toxin");
 				if (v >= 50) p.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 0, true, false));
@@ -139,7 +139,7 @@ public final class WorldRules {
 				if (gain > 0 && ps.flagActive("ice_bread", t)) gain *= 0.5f;
 				// ice around the World Block cools the veins
 				if (gain > 0 && ScaleLinks.active(p, "cool")) gain *= 0.5f;
-				if (gain > 0) gain *= strength;
+				if (gain > 0) gain *= strength * fr.achedon12.matriochka.world.Relics.ease(ps, 2);
 				ps.addGauge("heat", gain * resist);
 				float v = ps.gauge("heat");
 				if (v >= 50) p.addEffect(new MobEffectInstance(MobEffects.HUNGER, 40, 1, true, false));
@@ -193,7 +193,7 @@ public final class WorldRules {
 			case 5 -> {
 				float gain = p.isSprinting() ? 4f : (p.isShiftKeyDown() ? -3f : (p.getDeltaMovement().horizontalDistanceSqr() > 0.001 ? 0.6f : -1.5f));
 				if (ps.flagActive("mute", t)) gain = Math.min(gain, 0);
-				if (gain > 0) gain *= strength;
+				if (gain > 0) gain *= strength * fr.achedon12.matriochka.world.Relics.ease(ps, 5);
 				ps.addGauge("noise", gain * resist);
 				if (ps.gauge("noise") >= 50) {
 					for (MatrioMob m : level.getEntitiesOfClass(MatrioMob.class, p.getBoundingBox().inflate(28))) if (m.getTarget() == null) m.setTarget(p);
@@ -222,7 +222,7 @@ public final class WorldRules {
 					if (Snorkel.breathe(p, ps, helmet, mult, t)) {
 						Achievements.grant(p, "snorkel");
 					} else {
-						ps.addGauge("oxygen", -Snorkel.HOLD_DRAIN * mult);
+						ps.addGauge("oxygen", -Snorkel.HOLD_DRAIN * mult * fr.achedon12.matriochka.world.Relics.ease(ps, 7));
 					}
 					p.setAirSupply(p.getMaxAirSupply());
 					if (ps.gauge("oxygen") <= 0) p.hurtServer(level, level.damageSources().drown(), 2f);

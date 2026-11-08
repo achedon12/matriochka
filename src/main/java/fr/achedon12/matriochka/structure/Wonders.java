@@ -185,38 +185,43 @@ final class Wonders {
 		heart(k, 0, cloud, b(Blocks.GOLD_BLOCK));
 	}
 
-	// ---------------------------------------------------------------- World 5: a dark dome round one great candle
+	// ---------------------------------------------------------------- World 5: the last great candle, in a ring of arches
 	static void lastCandle(Kit k) {
-		k.site(13, 18);
-		BlockState stone = mod("umbral_stone");
-		k.ellipsoid(0, 0, 0, 12, 14, 12, stone, 1.2);
-		k.box(-12, 0, -12, 12, 0, 12, mod("umbral_moss"));
-		for (int i = 0; i < 4; i++) {
-			Direction d = Direction.from2DDataValue(i);
-			for (int y = 1; y <= 7; y++)
-				for (int w = -3; w <= 3; w++) {
-					if (y > 5 && Math.abs(w) > 7 - y) continue;
-					for (int s = 8; s <= 13; s++)
-						k.air(d.getStepX() * s + d.getClockWise().getStepX() * w, y, d.getStepZ() * s + d.getClockWise().getStepZ() * w);
-				}
+		k.site(15, 26);
+		BlockState stone = mod("umbral_stone"), moss = mod("umbral_moss");
+		BlockState wax = fr.achedon12.matriochka.mc.McBlocks.CONCRETE.white().defaultBlockState();
+		BlockState drip = fr.achedon12.matriochka.mc.McBlocks.WOOL.white().defaultBlockState();
+		BlockState gold = b(Blocks.GOLD_BLOCK);
+		// a round floor of moss, a stepped stone rim
+		k.disc(0, 0, 0, 14, moss);
+		k.ring(0, 0, 0, 13.5, stone);
+		k.ring(0, 1, 0, 13.5, stone);
+		// eight pillars carrying a ring of arches, open to the dark all round
+		for (int i = 0; i < 8; i++) {
+			// off the axes: the way to the heart and the view of the candle stay open
+			double a = i * Math.PI / 4 + Math.PI / 8;
+			int x = (int) Math.round(Math.cos(a) * 12), z = (int) Math.round(Math.sin(a) * 12);
+			k.box(x - 1, 1, z - 1, x + 1, 11, z + 1, stone);
+			k.set(x, 12, z, gold);
 		}
-		k.cyl(0, 0, 3.5, 10, 15, b(Blocks.AIR));
-		k.ring(0, 12, 0, 4, b(Blocks.GOLD_BLOCK));
-		// outside, a ring of tall dead candles, their wicks cold
-		for (int i = 0; i < 10; i++) {
-			double a = i * Math.PI / 5 + 0.3;
-			int x = (int) Math.round(Math.cos(a) * 16), z = (int) Math.round(Math.sin(a) * 16);
-			int h = 3 + (i % 3) * 2;
-			for (int y = 0; y <= h; y++) k.set(x, y, z, fr.achedon12.matriochka.mc.McBlocks.WOOL.white().defaultBlockState());
-			k.set(x, h + 1, z, b(Blocks.CANDLE));
-		}
-		// the candle: a pillar of white wax with a single flame on top, wax pooled at its foot
-		for (int y = 1; y <= 9; y++) k.set(0, y, -6, fr.achedon12.matriochka.mc.McBlocks.WOOL.white().defaultBlockState());
-		k.set(0, 10, -6, b(Blocks.CANDLE).setValue(net.minecraft.world.level.block.CandleBlock.LIT, true));
-		k.disc(0, 1, -6, 2.2, fr.achedon12.matriochka.mc.McBlocks.CARPET.white().defaultBlockState());
-		// spent glow everywhere else: the Deep drank every other light
-		for (int i = 0; i < 14; i++) k.set(k.hi(i, 0, 3, 41, 18) - 9, 1, k.hi(i, 0, 4, 42, 18) - 9, mod("spent_glow"));
-		heart(k, 0, stone, b(Blocks.GOLD_BLOCK));
+		for (int y = 11; y <= 12; y++) k.ring(0, y, 0, 12, stone);
+		// the candle: a pillar of wax three wide and fourteen high, drips running down, one great flame on top
+		k.box(-1, 1, -1, 1, 14, 1, wax);
+		for (int[] d : new int[][]{{2, 0, 9}, {-2, 0, 6}, {0, 2, 11}, {0, -2, 4}, {2, 1, 3}, {-2, -1, 8}, {1, -2, 12}, {-1, 2, 5}})
+			for (int y = d[2]; y <= 14; y++) k.set(d[0], y, d[1], drip);
+		k.disc(0, 1, 0, 3.6, drip);
+		k.set(0, 15, 0, b(Blocks.SHROOMLIGHT));
+		k.set(0, 16, 0, b(Blocks.CANDLE).setValue(net.minecraft.world.level.block.CandleBlock.LIT, true));
+		// round its foot, the spent lights of everything else the Deep drank
+		for (int i = 0; i < 16; i++) k.set(k.hi(i, 0, 3, 41, 20) - 10, 1, k.hi(i, 0, 4, 42, 20) - 10, mod("spent_glow"));
+		// the heart in front of the candle, on the south side
+		k.disc(0, 0, 6, 3.2, stone);
+		k.ring(0, 0, 6, 3, gold);
+		for (int[] c : new int[][]{{3, 6}, {-3, 6}, {0, 9}}) k.candles(c[0], 1, c[1], 3);
+		k.mark("secret", 0, 1, 6, Direction.NORTH);
+		k.mark("guard", 2, 1, 7, Direction.WEST);
+		k.mark("hidden", -2, 1, 5, Direction.EAST);
+		k.decay(-14, 1, -14, 14, 12, 14, 0.04);
 	}
 
 	// ---------------------------------------------------------------- World 6: a spire hanging point down from a floating rock
@@ -287,30 +292,46 @@ final class Wonders {
 		heart(k, 0, stone, b(Blocks.GOLD_BLOCK));
 	}
 
-	// ---------------------------------------------------------------- World 9: a giant asleep under the ground, its face showing
+	// ---------------------------------------------------------------- World 9: a giant asleep on its back, half sunk in the ground
 	static void sleepingGiant(Kit k) {
-		k.site(16, 18);
-		BlockState rock = mod("living_rock"), flesh = mod("flesh_stone");
-		// the body: a long mound, a head at the north end, a hand on the east
-		k.ellipsoid(0, 0, 4, 9, 6, 14, rock, 0);
-		k.ellipsoid(0, 3, -11, 6, 6, 5, rock, 0);
-		k.ellipsoid(10, 1, 2, 3, 2, 5, flesh, 0);
-		// the face: closed eyes of pulse vein, a mouth that breathes
-		k.set(-2, 5, -16, mod("pulse_vein"));
-		k.set(-3, 5, -16, mod("pulse_vein"));
-		k.set(2, 5, -16, mod("pulse_vein"));
-		k.set(3, 5, -16, mod("pulse_vein"));
-		for (int x = -2; x <= 2; x++) k.set(x, 2, -16, fr.achedon12.matriochka.mc.McBlocks.CONCRETE.black().defaultBlockState());
-		// the way into its chest, the heart inside
-		k.ellipsoid(0, 3, 2, 4.5, 3, 4.5, b(Blocks.AIR), 0);
-		for (int y = 1; y <= 3; y++) for (int x = -1; x <= 1; x++) for (int z = 6; z <= 18; z++) k.air(x, y, z);
-		k.disc(0, 0, 2, 4.5, flesh);
-		k.mark("secret", 0, 1, 2, Direction.SOUTH);
-		k.mark("guard", 2, 1, 3, Direction.WEST);
-		k.mark("hidden", -2, 1, 1, Direction.EAST);
-		k.candles(3, 1, 2, 2);
-		k.candles(-3, 1, 2, 2);
-		k.decay(-16, 0, -16, 16, 12, 18, 0.05);
+		k.site(17, 16);
+		BlockState rock = mod("living_rock"), flesh = mod("flesh_stone"), vein = mod("pulse_vein");
+		BlockState moss = b(Blocks.MOSS_BLOCK), dark = fr.achedon12.matriochka.mc.McBlocks.CONCRETE.black().defaultBlockState();
+		// lying along north to south: the head at the north, the feet sticking up at the south
+		k.ellipsoid(0, 4, -12, 4.5, 4, 4.2, rock, 0);              // head
+		k.ellipsoid(0, 2, -7, 2.5, 2, 1.5, rock, 0);               // neck
+		k.ellipsoid(0, 3, -1, 7, 4.5, 6.5, rock, 0);               // chest and belly
+		k.ellipsoid(0, 2, 6, 5.5, 3, 3, rock, 0);                  // hips
+		for (int sx : new int[]{-1, 1}) {
+			k.ellipsoid(sx * 8, 1, -2, 2.3, 2, 6, rock, 0);        // arm along its side
+			k.ellipsoid(sx * 8, 1, 5, 2.2, 1.6, 2.2, flesh, 0);    // the hand, open on the ground
+			k.ellipsoid(sx * 3, 1, 11, 2.6, 2.2, 5, rock, 0);      // leg
+			k.ellipsoid(sx * 3, 4, 15, 1.8, 3.2, 1.5, flesh, 0);   // the foot, toes to the sky
+		}
+		// the face looking up: closed eyes of pulse vein, a nose, a slack mouth
+		for (int x : new int[]{-3, -2, 2, 3}) k.set(x, 8, -13, vein);
+		k.set(0, 9, -12, rock);
+		k.set(0, 8, -12, rock);
+		for (int x = -1; x <= 1; x++) k.set(x, 7, -9, dark);
+		// moss grown over it: it has slept a long time
+		for (int x = -9; x <= 9; x++)
+			for (int z = -16; z <= 17; z++)
+				for (int y = 9; y >= 1; y--) {
+					if (!k.solidAt(x, y, z)) continue;
+					if (k.emptyAt(x, y + 1, z) && k.hc(x, y, z, 61, 0.35)) k.set(x, y, z, moss);
+					break;
+				}
+		// the veins of its chest beat: the way in between two ribs on the east
+		for (int z = -4; z <= 2; z += 3) for (int y = 2; y <= 6; y++) k.set(7, y, z, vein);
+		k.ellipsoid(0, 3, -1, 4.5, 3, 4.5, b(Blocks.AIR), 0);
+		for (int y = 1; y <= 3; y++) for (int z = -2; z <= 0; z++) for (int x = 3; x <= 9; x++) k.air(x, y, z);
+		k.disc(0, 0, -1, 4.5, flesh);
+		k.mark("secret", 0, 1, -1, Direction.EAST);
+		k.mark("guard", -2, 1, 0, Direction.EAST);
+		k.mark("hidden", -2, 1, -3, Direction.EAST);
+		k.candles(2, 1, 1, 2);
+		k.candles(2, 1, -3, 2);
+		k.decay(-17, 0, -17, 17, 10, 18, 0.03);
 	}
 
 	// ---------------------------------------------------------------- World 10: the Artisan's own desk at doll scale

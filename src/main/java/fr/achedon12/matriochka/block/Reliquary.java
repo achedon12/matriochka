@@ -25,12 +25,16 @@ import org.jspecify.annotations.Nullable;
 /**
  * The sealed reliquary at the heart of a world's wonder. Only the cross key found in another world's wonder opens it:
  * the key of World n opens the reliquary of World opens(n). Opened, it gives the world's relic, once per player.
- * Its world is stored in its block data by the wonder that set it down (structure/Rewards).
+ * Its world is stored in its block data by the wonder that set it down (structure/Rewards). Opened, it also gives a
+ * relic to every member of the opener's group standing near, so one key found together serves the whole group.
  */
 public class Reliquary extends Block implements EntityBlock {
 	public Reliquary(BlockBehaviour.Properties p) {
 		super(p);
 	}
+
+	/** How near a group member must stand to share the opening. */
+	private static final double SHARE_RANGE = 24;
 
 	/** The world whose reliquary the cross key of World n opens. */
 	public static int opens(int n) {
@@ -67,8 +71,18 @@ public class Reliquary extends Block implements EntityBlock {
 		}
 		if (!sp.isCreative()) stack.shrink(1);
 		be.data().putBoolean(opened, true);
-		be.changed();
 		Block.popResource(sl, pos.above(), new ItemStack(ModContent.item("relic_" + world)));
+		// one key opens it for the whole group: every member close by who has not opened it gets a relic too
+		var data = fr.achedon12.matriochka.world.MatrioData.get(sl.getServer());
+		for (java.util.UUID id : data.members(data.groupOf(sp.getUUID()))) {
+			if (id.equals(sp.getUUID()) || be.data().getBooleanOr("opened_" + id, false)) continue;
+			if (!(sl.getServer().getPlayerList().getPlayer(id) instanceof ServerPlayer mate) || mate.level() != sl || mate.blockPosition().distSqr(pos) > SHARE_RANGE * SHARE_RANGE) continue;
+			be.data().putBoolean("opened_" + id, true);
+			ItemStack relic = new ItemStack(ModContent.item("relic_" + world));
+			if (!mate.getInventory().add(relic)) mate.spawnAtLocation(sl, relic);
+			mate.sendSystemMessage(Component.translatable("message.matriochka.reliquary.shared", sp.getDisplayName(), Component.translatable("item.matriochka.relic_" + world)).withStyle(ChatFormatting.GOLD));
+		}
+		be.changed();
 		sl.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, 60, 0.4, 0.6, 0.4, 0.3);
 		sl.playSound(null, pos, SoundEvents.VAULT_OPEN_SHUTTER, SoundSource.BLOCKS, 1.4f, 0.9f);
 		sl.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.BLOCKS, 1.2f, 1.2f);

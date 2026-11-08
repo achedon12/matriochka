@@ -1646,6 +1646,21 @@ WONDERS = {
 }
 
 
+# what each relic gives besides its heart (world/Relics.java); all ten together add 4 armour
+RELIC_GIFTS = {
+    1: ("Toxin a quarter slower to build", "une Toxine qui monte un quart moins vite"),
+    2: ("Heat a quarter slower to build", "une Chaleur qui monte un quart moins vite"),
+    3: ("a little more luck in chests", "un peu plus de chance dans les coffres"),
+    4: ("10% faster attacks", "des attaques 10 % plus rapides"),
+    5: ("Noise a quarter slower to build", "un Bruit qui monte un quart moins vite"),
+    6: ("4 more blocks of safe fall", "4 blocs de chute sans dégâts en plus"),
+    7: ("breath that lasts a quarter longer", "un souffle qui dure un quart plus longtemps"),
+    8: ("5% more speed", "5 % de vitesse en plus"),
+    9: ("a fifth less knockback", "un cinquième de recul en moins"),
+    10: ("15% faster mining", "un minage 15 % plus rapide"),
+}
+
+
 def WONDER_OPENS(n):
     return (n + 3) % 10 + 1
 
@@ -1656,9 +1671,10 @@ for _n, (_sid, _en, _fr, _ren, _rfr) in WONDERS.items():
     item(f"cross_key_{_n}", f"Cross Key of World {_n}", f"Clé croisée du monde {_n}", _n, "secret", "epic", "key",
          f"Found in {_en.replace('The ', 'the ', 1)}. Opens the reliquary of {WONDERS[_to][1].replace('The ', 'the ', 1)} in World {_to}.",
          f"Trouvée dans {_fr[0].lower() + _fr[1:]}. Ouvre le reliquaire de {WONDERS[_to][2][0].lower() + WONDERS[_to][2][1:]}, au monde {_to}.")
+    _gen, _gfr = RELIC_GIFTS[_n]
     item(f"relic_{_n}", _ren, _rfr, _n, "secret", "legendary", "gem",
-         f"The relic of {_en.replace('The ', 'the ', 1)}. Use it: one more heart of health, for good.",
-         f"La relique de {_fr[0].lower() + _fr[1:]}. Utilise-la : un cœur de vie en plus, pour toujours.")
+         f"The relic of {_en.replace('The ', 'the ', 1)}. Use it: one more heart of health and {_gen}, for good.",
+         f"La relique de {_fr[0].lower() + _fr[1:]}. Utilise-la : un cœur de vie en plus et {_gfr}, pour toujours.")
 block("reliquary", "Reliquary", "Reliquaire", 0, "reliquary", "lacquer",
       note_en="Sealed. The cross key of another world's wonder opens it.",
       note_fr="Scellé. La clé croisée de la merveille d'un autre monde l'ouvre.")

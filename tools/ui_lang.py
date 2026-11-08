@@ -35,8 +35,8 @@ U = {
  "message.matriochka.reliquary.empty": ("You have already taken this reliquary's relic.", "Tu as déjà pris la relique de ce reliquaire."),
  "message.matriochka.reliquary.opened": ("The reliquary opens: %s.", "Le reliquaire s'ouvre : %s."),
  "message.matriochka.relic.known": ("You already carry this relic's strength.", "Tu portes déjà la force de cette relique."),
- "message.matriochka.relic.taken": ("One more heart, for good. Relics taken in: %s / 10.", "Un cœur de plus, pour toujours. Reliques intégrées : %s / 10."),
- "message.matriochka.relic.all": ("The ten relics are yours: every wonder has given up its secret.", "Les dix reliques sont à toi : chaque merveille a livré son secret."),
+ "message.matriochka.relic.taken": ("One more heart and the gift of its world, for good. Relics taken in: %s / 10.", "Un cœur de plus et le don de son monde, pour toujours. Reliques intégrées : %s / 10."),
+ "message.matriochka.relic.all": ("The ten relics are yours: every wonder has given up its secret, and together they guard you (+4 armour).", "Les dix reliques sont à toi : chaque merveille a livré son secret, et ensemble elles te protègent (+4 armure)."),
  "journal.matriochka.objective.end": ("The ten prisons are open. The Unfinished is gone, or is it you?", "Les dix prisons sont ouvertes. L'Inachevée a disparu, ou est-ce toi ?"),
  "journal.matriochka.doll": ("Doll of Life: %s / %s layers", "Poupée de vie : %s / %s couches"),
  "journal.matriochka.group": ("Group: %s player(s)", "Groupe : %s joueur(s)"),
@@ -633,6 +633,31 @@ U["message.matriochka.rite.place.4"] = ("The Storm Rod goes on top of a lightnin
 U["message.matriochka.rite.place.7"] = ("The Abyssal Pearl must go into the water.", "La Perle abyssale doit aller dans l'eau.")
 U["message.matriochka.rite.place.8"] = ("The Sapling of the Four Seasons is planted on grass or dirt.", "L'Arbrisseau des quatre saisons se plante sur de l'herbe ou de la terre.")
 U["message.matriochka.rite.place.9"] = ("The Seismic Stake is driven into stone, below y 40.", "Le Pieu sismique s'enfonce dans la pierre, sous y 40.")
+# ---------------------------------------------------------------- the wonders' rumours (world/Rumors.java)
+U["rumor.matriochka.dir.north"] = ("north", "au nord")
+U["rumor.matriochka.dir.north_east"] = ("north-east", "au nord-est")
+U["rumor.matriochka.dir.east"] = ("east", "à l'est")
+U["rumor.matriochka.dir.south_east"] = ("south-east", "au sud-est")
+U["rumor.matriochka.dir.south"] = ("south", "au sud")
+U["rumor.matriochka.dir.south_west"] = ("south-west", "au sud-ouest")
+U["rumor.matriochka.dir.west"] = ("west", "à l'ouest")
+U["rumor.matriochka.dir.north_west"] = ("north-west", "au nord-ouest")
+U["rumor.matriochka.dist.near"] = ("Not far at all", "Pas loin du tout")
+U["rumor.matriochka.dist.far"] = ("A good walk", "Une bonne marche")
+U["rumor.matriochka.dist.very_far"] = ("A long way", "Très loin")
+U["npc.matriochka.rumor.1"] = ("Go %s and look up: a tree taller than the spores, hollow at its foot. %s.", "Va %s et lève les yeux : un arbre plus haut que les spores, creux à son pied. %s.")
+U["npc.matriochka.rumor.2"] = ("The rock beats somewhere %s, like a heart in the lava. %s.", "La roche bat quelque part %s, comme un cœur dans la lave. %s.")
+U["npc.matriochka.rumor.3"] = ("There is a hall to the %s where they hang the keys nobody came back for. %s.", "Il y a une salle %s où l'on pend les clés que personne n'est revenu chercher. %s.")
+U["npc.matriochka.rumor.4"] = ("Somewhere %s the wind goes quiet, inside a ring of pillars that stand on nothing. %s.", "Quelque part %s, le vent se tait, dans un cercle de piliers posés sur rien. %s.")
+U["npc.matriochka.rumor.5"] = ("One candle still burns to the %s. The Deep has not drunk it yet. %s.", "Une bougie brûle encore, %s. Les Profondeurs ne l'ont pas encore bue. %s.")
+U["npc.matriochka.rumor.6"] = ("Look %s: a spire hangs point down from a rock in the sky. %s.", "Regarde %s : une flèche pend la pointe en bas d'un rocher dans le ciel. %s.")
+U["npc.matriochka.rumor.7"] = ("Under the water to the %s, a bell rings that nobody rings. %s.", "Sous l'eau, %s, une cloche sonne sans que personne ne la sonne. %s.")
+U["npc.matriochka.rumor.8"] = ("Out %s stands a clock that stopped when the seasons started running. %s.", "Là-bas, %s, se dresse une horloge arrêtée quand les saisons se sont mises à courir. %s.")
+U["npc.matriochka.rumor.9"] = ("The ground sleeps out %s. Something huge breathes under it. %s.", "Le sol dort, là-bas %s. Quelque chose d'énorme respire dessous. %s.")
+U["npc.matriochka.rumor.10"] = ("The Artisan's own desk stands to the %s, as big as a hill. %s.", "Le bureau de l'Artisan lui-même se dresse %s, grand comme une colline. %s.")
+U["journal.matriochka.card.rumor"] = ("Its people say the wonder stands near %s, %s.", "Ses habitants disent que la merveille se dresse vers %s, %s.")
+U["journal.matriochka.card.rumor_none"] = ("Ask the world's people where its wonder stands.", "Demande aux habitants du monde où se dresse sa merveille.")
+U["message.matriochka.reliquary.shared"] = ("%s opened the reliquary for the group: %s is yours too.", "%s a ouvert le reliquaire pour le groupe : %s est à toi aussi.")
 en = {k: v[0] for k, v in U.items()}
 fr = {k: v[1] for k, v in U.items()}
 d = os.path.join(os.path.dirname(__file__), "lang")

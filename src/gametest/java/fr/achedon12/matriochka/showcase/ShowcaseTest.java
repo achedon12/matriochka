@@ -82,7 +82,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 						return new int[]{x, top, z};
 					});
 					// World 5's fog is short: come in closer there
-					final int cb = world == 5 ? back * 11 / 20 : back;
+					final int cb = world == 5 ? back * 11 / 20 : d.role().equals("wonder") ? back * 3 / 4 : back;
 					s.runCommand("execute as @p at @s run tp @s " + (cam[0] + cb / 2) + " " + (cam[1] + cb * 4 / 10) + " " + (cam[2] - cb * 9 / 10) + " facing " + cam[0] + " " + (cam[1] + 3) + " " + cam[2]);
 					ctx.waitTicks(60);
 					McTest.waitForChunks(sp);

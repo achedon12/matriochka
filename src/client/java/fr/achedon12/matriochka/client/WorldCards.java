@@ -75,6 +75,15 @@ public final class WorldCards {
 	public static Component tooltip(Entry e) {
 		MutableComponent c = Component.empty().append(name(e.item().id()).copy().withStyle(net.minecraft.ChatFormatting.GOLD));
 		for (Component w : e.ways()) c.append("\n").append(w);
+		// what the world's people told of its wonder (world/Rumors): where it stands
+		if (e.item().id().startsWith("cross_key_") || e.item().id().startsWith("relic_")) {
+			int w = e.item().world();
+			var st = MatrioClient.state;
+			if (st.getBooleanOr("f_rumor_" + w, false))
+				c.append("\n").append(Component.translatable("journal.matriochka.card.rumor", st.getIntOr("rumor_" + w + "_x", 0), st.getIntOr("rumor_" + w + "_z", 0))
+					.withStyle(net.minecraft.ChatFormatting.DARK_AQUA));
+			else c.append("\n").append(Component.translatable("journal.matriochka.card.rumor_none").withStyle(net.minecraft.ChatFormatting.GRAY));
+		}
 		return c;
 	}
 }
