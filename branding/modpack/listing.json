@@ -50,12 +50,12 @@
     {
       "file": "gallery/05-hud.jpg",
       "title": "The world plaque",
-      "description": "The HUD shows the world you are in, its rule gauge (toxin in World 1) and your souls. Its size and corner are comfort options."
+      "description": "The HUD shows the world you are in, its rule gauge (toxin in World 1) and your souls. Its size is a comfort option, in Options > Matriochka...."
     },
     {
       "file": "gallery/06-journal.jpg",
       "title": "The Artisan's Journal",
-      "description": "Objective, quests, karma, worlds, the Scroll and the pages you found, in one book. Its Comfort button holds the accessibility options."
+      "description": "Objective, quests, karma, worlds, the Scroll and the pages you found, in one book."
     }
   ],
   "gallery_sources": {
