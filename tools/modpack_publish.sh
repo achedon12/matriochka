@@ -69,7 +69,7 @@ modrinth() {
 		data=$(jq -n \
 			--arg project "$PROJECT" --arg name "$name" --arg number "$number" --arg mc "$PMC" --arg changelog "$notes" --argjson featured "$featured" \
 			'{project_id: $project, name: $name, version_number: $number, changelog: $changelog,
-			  game_versions: [$mc], loaders: ["fabric"], version_type: "alpha", featured: $featured, environment: "client_only_server_optional",
+			  game_versions: [$mc], loaders: ["fabric"], version_type: "beta", featured: $featured, environment: "client_only_server_optional",
 			  dependencies: [], file_parts: ["file"], primary_file: "file"}')
 		if [ "$DRY_RUN" = 1 ]; then
 			echo "dry run: POST $api/version with $(basename "$file") ($(stat -c %s "$file") bytes)"
@@ -121,7 +121,7 @@ curseforge() {
 			return 1
 		fi
 		metadata=$(jq -n --arg changelog "$notes" --arg name "$name" --argjson versions "$ids" \
-			'{changelog: $changelog, changelogType: "markdown", displayName: $name, releaseType: "alpha", gameVersions: $versions}')
+			'{changelog: $changelog, changelogType: "markdown", displayName: $name, releaseType: "beta", gameVersions: $versions}')
 		if [ "$DRY_RUN" = 1 ]; then
 			echo "dry run: POST $api/projects/$PROJECT/upload-file with $(basename "$file") ($(stat -c %s "$file") bytes)"
 			echo "$metadata" | jq 'del(.changelog)'

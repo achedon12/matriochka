@@ -161,7 +161,7 @@ jobs:
             --arg changelog "$(cat release-notes.md)" \
             --arg name "Matriochka $VERSION for $MC" \
             --argjson versions "$ids" \
-            '{changelog: $changelog, changelogType: "markdown", displayName: $name, releaseType: "alpha", gameVersions: $versions,
+            '{changelog: $changelog, changelogType: "markdown", displayName: $name, releaseType: "beta", gameVersions: $versions,
               relations: {projects: [{slug: "fabric-api", type: "requiredDependency"}, {slug: "geckolib", type: "requiredDependency"}]}}')
           curl -sS --fail-with-body -H "X-Api-Token: $TOKEN" \
             --form-string "metadata=$metadata" \
@@ -192,7 +192,7 @@ jobs:
             --arg project "$PROJECT" --arg name "Matriochka $VERSION for $MC" --arg number "$VERSION+$MC" --arg mc "$MC" \
             --arg changelog "$(cat release-notes.md)" --argjson featured $featured \
             '{project_id: $project, name: $name, version_number: $number, changelog: $changelog,
-              game_versions: [$mc], loaders: ["fabric"], version_type: "alpha", featured: $featured,
+              game_versions: [$mc], loaders: ["fabric"], version_type: "beta", featured: $featured,
               dependencies: [{project_id: "P7dR8mSH", dependency_type: "required"}, {project_id: "8BmcQJ2H", dependency_type: "required"}],
               file_parts: ["file"], primary_file: "file"}')
           curl -sS --fail-with-body -H "Authorization: $TOKEN" -H "User-Agent: achedon12/matriochka release workflow" \
