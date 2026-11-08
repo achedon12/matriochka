@@ -52,48 +52,244 @@ def pebble(s, cx, cy, rx, ry, ramp, spec=0.05):
 
 
 # =================================================================== the ten ores
+def gem_column(s, cx, base, top, w, ramp, lean=0.0, down=False, glow=False):
+    """A cut crystal column in four facets: a bright lit face, a mid face, a deep shaded face and a pale ridge; a dark
+    core line, a glint at the tip. `down` hangs it from its base."""
+    d = 1 if not down else -1
+    shoulder = top + d * w * 1.3
+    tipx = cx + lean
+    pts = [(cx - w, base), (cx - w + lean * 0.75, shoulder), (tipx, top), (cx + w + lean * 0.75, shoulder), (cx + w, base)]
+    m = s.poly(pts)
+    k = s.k
+
+    def rx(y):
+        return cx + lean * ((y - base) / (top - base))
+    for p in m:
+        x, y = (p[0] + 0.5) / k, (p[1] + 0.5) / k
+        r = x - rx(y)
+        tone = 5 if abs(r) < 0.35 else 4 if r < -w * 0.45 else 3 if r < 0 else 2 if r < w * 0.5 else 1
+        if (y - shoulder) * d < 0:
+            tone = min(5, tone + 1)
+        s.put(p, ramp[tone])
+        s.rim[p] = ramp[0]
+        if glow:
+            s.glow.add(p)
+    s.dot(tipx - 0.5, top + d * 0.6 - 0.5, (255, 255, 255))
+    return m
+
+
 def it_spore_crystal(res):
-    """Three green crystals of spore growing out of a violet bloom, the bloom's spots glowing."""
+    """A fan of five spore crystals, lime to deep green, rising out of a violet bloom whose spots glow; spores drift."""
     s = Spr(res)
-    green = hramp("5ab83a", dl=0.11)
-    violet = hramp("7c4a9c")
-    lime = hramp("d8ff6a", dl=0.07)
-    facet_crystal(s, 4.6, 12.0, 5.0, 1.6, green, lean=-1.4)
-    facet_crystal(s, 11.6, 12.0, 6.0, 1.5, green, lean=1.4)
+    lime = hramp("9ee03a", dl=0.1)
+    deep = hramp("4a9a32", dl=0.1)
+    violet = hramp("7c4a9c", dl=0.1)
+    glowr = hramp("e4ff7a", dl=0.06)
+    for (cx, top, w, lean, ramp) in ((3.6, 6.0, 1.3, -1.6, deep), (12.4, 6.6, 1.3, 1.6, deep), (5.8, 3.0, 1.6, -0.8, lime),
+                                     (10.4, 3.6, 1.6, 0.8, lime), (8.0, 0.8, 2.0, 0.0, hramp("c4f04a", dl=0.1))):
+        gem_column(s, cx, 12.2, top, w, ramp, lean)
+        s.outline()
+    cap = s.ell(8, 13.2, 6.4, 2.3)
+    s.shade(cap, violet, n_sphere(6.6, 12.0, 6.8, 3.2), lo=1, hi=5, spec=0.06)
+    for (x, y) in ((3.2, 13.0), (5.8, 12.2), (8.6, 12.0), (11.0, 12.6), (13.0, 13.4), (7.2, 14.2), (10.0, 14.0)):
+        s.dot(x, y, glowr[4])
     s.outline()
-    facet_crystal(s, 8.1, 12.4, 1.4, 2.3, hramp("b0e83a", dl=0.1))
-    cap = s.ell(8, 13.3, 5.8, 2.3)
-    s.shade(cap, violet, n_sphere(7.0, 12.2, 6.0, 3.0), spec=0.05)
-    for (x, y) in ((3.6, 12.8), (6.6, 12.2), (10.2, 12.6), (12.4, 13.4), (8.4, 14.0)):
-        s.dot(x, y, lime[4])
-    s.outline()
-    for (x, y) in ((2.0, 3.0), (13.6, 2.4)):
-        s.dot(x, y, lime[5])
+    for (x, y, c) in ((1.4, 4.0, glowr[5]), (14.4, 2.4, glowr[4]), (13.0, 9.2, glowr[3]), (1.8, 10.0, glowr[3])):
+        s.dot(x, y, c)
     return s
 
 
 def it_living_ember(res):
-    """A lump of coal that still burns: a black crust split by fissures of fire, flames licking its top."""
+    """A coal still burning: a black crust bevelled in the light, split by fissures that run from red to white heat,
+    flames in three tongues of red, orange and yellow over it, sparks flying up."""
     s = Spr(res)
-    crust = [(18, 10, 10), (34, 20, 18), (54, 32, 26), (78, 48, 36), (104, 66, 46), (130, 90, 62)]
-    fire = hramp("ff8a1a", dl=0.08)
-    yellow = hramp("ffd84a", dl=0.06)
-    body = s.poly([(3.0, 10.0), (4.6, 6.6), (7.6, 5.4), (11.2, 6.2), (13.4, 9.0), (12.8, 12.8), (9.4, 14.6), (5.0, 14.0)])
-    s.shade(body, crust, n_bevel(s, body, 2.4, flat=0.3), lo=1, hi=4)
-    for path in ([(4.4, 9.6), (6.6, 10.4), (8.0, 9.0), (10.4, 10.6), (12.4, 10.0)],
-                 [(8.0, 9.0), (7.6, 12.0), (9.2, 13.6)],
-                 [(6.0, 7.0), (7.2, 8.2)], [(10.4, 10.6), (11.6, 12.4)]):
-        s.line(path, fire[3], r=0.42)
-    for (x, y) in ((6.4, 10.0), (8.0, 9.0), (10.4, 10.4), (7.6, 12.0)):
-        s.dot(x, y, yellow[4])
-    # flames
-    for (x0, h, w) in ((5.6, 3.6, 1.3), (8.4, 5.4, 1.6), (11.0, 3.2, 1.2)):
-        f = s.poly([(x0 - w, 7.2), (x0 - w * 0.4, 7.2 - h * 0.55), (x0 + 0.2, 7.2 - h), (x0 + w * 0.6, 7.2 - h * 0.45), (x0 + w, 7.2)])
-        s.fill(f, fire[3], rim=fire[1])
-        s.fill(s.poly([(x0 - w * 0.45, 7.2), (x0, 7.2 - h * 0.62), (x0 + w * 0.45, 7.2)]), yellow[4])
+    crust = [(14, 8, 8), (28, 16, 14), (46, 28, 22), (70, 44, 32), (98, 64, 44), (128, 90, 60)]
+    fire = [(96, 14, 6), (176, 36, 10), (232, 86, 16), (255, 150, 30), (255, 210, 80), (255, 250, 210)]
+    body = s.poly([(2.6, 10.6), (4.2, 7.2), (7.4, 6.0), (11.4, 6.6), (13.6, 9.4), (13.0, 13.0), (9.6, 14.8), (4.6, 14.2)])
+    s.shade(body, crust, n_bevel(s, body, 2.6, flat=0.3), lo=1, hi=5)
+    cracks = [[(3.8, 10.2), (6.4, 10.8), (8.0, 9.4), (10.4, 11.0), (12.6, 10.2)], [(8.0, 9.4), (7.4, 12.2), (9.2, 13.8)],
+              [(5.6, 7.6), (7.0, 8.6)], [(10.4, 11.0), (11.4, 12.8)], [(6.4, 10.8), (5.4, 12.8)]]
+    for path in cracks:
+        s.line(path, fire[1], r=0.55)
+    for path in cracks:
+        s.line(path, fire[3], r=0.28)
+    for (x, y) in ((8.0, 9.4), (6.4, 10.8), (10.4, 11.0)):
+        s.dot(x - 0.5, y - 0.5, fire[5])
+    for (x0, h, w, col) in ((5.4, 3.4, 1.4, 1), (11.0, 3.0, 1.2, 1), (8.4, 5.6, 1.9, 2)):
+        outer = s.poly([(x0 - w, 7.0), (x0 - w * 0.5, 7.0 - h * 0.5), (x0 + 0.2, 7.0 - h), (x0 + w * 0.6, 7.0 - h * 0.45), (x0 + w, 7.0)])
+        s.fill(outer, fire[col + 1], rim=fire[0])
+        s.fill(s.poly([(x0 - w * 0.55, 7.0), (x0, 7.0 - h * 0.7), (x0 + w * 0.55, 7.0)]), fire[col + 2])
+        s.fill(s.poly([(x0 - w * 0.25, 7.0), (x0 + 0.1, 7.0 - h * 0.4), (x0 + w * 0.25, 7.0)]), fire[5])
     s.outline()
-    for (x, y) in ((2.4, 4.0), (13.8, 3.0), (10.6, 0.8)):
-        s.dot(x, y, yellow[5])
+    for (x, y) in ((3.0, 3.2), (13.4, 2.0), (10.4, 0.6), (6.4, 0.8)):
+        s.dot(x, y, fire[4])
+    return s
+
+
+def it_fulgurite(res):
+    """Fused glass in the shape of the bolt that made it: pale blue tubes, round and shaded, sand grains stuck to their
+    roots, a thread of caught lightning down every core, sparks at the tips."""
+    s = Spr(res)
+    glass = [(46, 70, 112), (86, 118, 168), (134, 166, 210), (178, 204, 236), (214, 230, 248), (246, 252, 255)]
+    core = [(170, 120, 20), (240, 196, 40), (255, 228, 90), (255, 250, 200)]
+    sand = [(150, 124, 82), (198, 170, 118), (228, 206, 156)]
+    trunk = [(4.0, 14.8), (5.2, 11.4), (7.2, 9.4), (8.0, 6.4), (10.4, 4.0), (12.6, 1.4)]
+    forks = [[(7.2, 9.4), (10.2, 9.8), (13.2, 7.8)], [(8.0, 6.4), (6.6, 3.6), (5.0, 1.6)], [(5.2, 11.4), (2.2, 9.8)]]
+    m = s.path(trunk, 1.5)
+    for f in forks:
+        m |= s.path(f, 1.05)
+    s.shade(m, glass, n_bevel(s, m, 1.3, flat=0.35), lo=1, hi=5, spec=0.08)
+    s.line(trunk, core[1], r=0.42)
+    for f in forks:
+        s.line(f, core[1], r=0.3)
+    s.line(trunk, core[3], r=0.18)
+    for (x, y) in ((3.4, 14.0), (4.8, 13.4), (2.8, 12.6), (5.6, 14.4)):
+        s.dot(x, y, sand[(int(x * 3) % 3)])
+    s.outline()
+    for (x, y) in ((13.6, 0.4), (14.0, 7.0), (4.4, 0.6), (1.2, 9.2)):
+        s.dot(x, y, core[3])
+    return s
+
+
+def it_silent_stone(res):
+    """A river pebble from the dark: deep indigo, round and glossy, ringed with pale bands like the circles a sound
+    leaves in still water, a sleeping eye painted at its heart."""
+    s = Spr(res)
+    ink = [(8, 8, 20), (18, 20, 44), (32, 38, 78), (52, 62, 116), (86, 98, 156), (150, 160, 214)]
+    pale = hramp("c8ccf0", dl=0.07)
+    m = s.ell(8.0, 9.0, 6.6, 5.0)
+    s.shade(m, ink, n_sphere(6.4, 7.0, 7.2, 5.8), lo=1, hi=4, spec=0.0)
+    for rr, t in ((2.6, 4), (4.3, 2)):
+        ring = s.mask(lambda x, y, rr=rr: abs(math.hypot((x - 8.0) / 1.3, (y - 9.0)) - rr) < 0.45)
+        s.fill({p for p in ring if p in m}, pale[t])
+    # the sleeping eye: a closed lid and three lashes
+    s.line([(6.0, 9.0), (7.2, 9.8), (8.8, 9.8), (10.0, 9.0)], pale[5], r=0.3)
+    for x in (6.8, 8.0, 9.2):
+        s.dot(x - 0.4, 10.4, pale[4])
+    # a soft gloss on the top left
+    s.fill(s.ell(5.6, 6.6, 1.6, 0.8), ink[5])
+    s.dot(5.0, 6.2, (230, 234, 255))
+    s.outline()
+    return s
+
+
+def it_inverted_ore(res):
+    """A shard of the Upside Realm's rock with its crystals hanging from it, points down and lit at the tips, and drops
+    of their light falling upwards."""
+    s = Spr(res)
+    rock = hramp("8a3a9a", dl=0.1)
+    teal = hramp("3ad0c0", dl=0.1)
+    pale = hramp("8af0e4", dl=0.08)
+    pink = hramp("ff7ae8", dl=0.08)
+    for (cx, tip, w, lean, ramp) in ((4.2, 12.4, 1.4, -0.8, teal), (11.8, 11.8, 1.4, 0.8, teal), (8.0, 15.2, 2.0, 0.0, pale), (6.0, 13.0, 1.2, -0.3, teal)):
+        gem_column(s, cx, 6.4, tip, w, ramp, lean, down=True, glow=True)
+        s.outline()
+    top = s.poly([(1.6, 6.6), (3.0, 3.6), (6.6, 2.2), (11.6, 2.8), (14.4, 5.4), (13.2, 7.6), (3.2, 7.6)])
+    s.shade(top, rock, n_bevel(s, top, 1.8, flat=0.3), lo=1, hi=5, spec=0.04)
+    for (x, y) in ((4.6, 4.2), (9.0, 3.4), (12.0, 5.0)):
+        s.dot(x, y, pink[4])
+    s.outline()
+    for (x, y, c) in ((2.4, 1.0, pale[5]), (8.0, 0.2, pale[4]), (13.6, 1.2, pink[5]), (5.6, 0.6, pink[3])):
+        s.dot(x, y, c)
+    return s
+
+
+def it_brine_crystal(res):
+    """A hopper crystal of sea salt: a cube whose faces sink in square terraces, lit on top, shaded on the right, salt
+    grains about it and a bead of brine catching the light."""
+    s = Spr(res)
+    salt = [(60, 110, 124), (108, 168, 182), (160, 212, 222), (200, 238, 244), (228, 250, 252), (255, 255, 255)]
+    sea = hramp("1ab0b0")
+    faces = {"top": [(8.0, 2.4), (14.2, 5.6), (8.0, 8.8), (1.8, 5.6)], "left": [(1.8, 5.6), (8.0, 8.8), (8.0, 15.2), (1.8, 12.0)],
+             "right": [(8.0, 8.8), (14.2, 5.6), (14.2, 12.0), (8.0, 15.2)]}
+    tone = {"top": 4, "left": 3, "right": 1}
+    for name, pts in faces.items():
+        s.fill(s.poly(pts), salt[tone[name]], rim=sea[0])
+        cx = sum(p[0] for p in pts) / 4
+        cy = sum(p[1] for p in pts) / 4
+        for k, sc in enumerate((0.66, 0.4, 0.16)):
+            inner = s.poly([(cx + (x - cx) * sc, cy + (y - cy) * sc) for x, y in pts])
+            s.fill(inner, salt[max(0, tone[name] - 1 - (k % 2))])
+            s.edge(inner, salt[min(5, tone[name] + 1)], sides=("l", "t"))
+    s.fill(s.rect(7.6, 8.8, 8.4, 15.2), salt[5])
+    drop = s.disc(11.6, 9.4, 1.3)
+    s.shade(drop, sea, n_sphere(11.0, 8.8, 1.6), lo=1, hi=5)
+    s.dot(10.8, 8.6, (255, 255, 255))
+    s.outline()
+    for (x, y) in ((1.0, 2.0), (14.6, 14.0), (2.0, 14.6)):
+        s.dot(x, y, salt[4])
+    return s
+
+
+def it_time_seed(res):
+    """A teardrop seed of amber husk, round and shaded, an hourglass of glowing sand inlaid in gold on it, a green shoot
+    with two leaves at its tip."""
+    s = Spr(res)
+    husk = [(58, 30, 12), (100, 56, 22), (146, 88, 36), (186, 122, 52), (220, 160, 78), (244, 200, 120)]
+    sand = hramp("f0d070", dl=0.07)
+    leaf = hramp("6aa040", dl=0.1)
+    m = s.mask(lambda x, y: ((x - 8.0) / 4.6) ** 2 + ((y - 10.4) / 4.4) ** 2 <= 1 or (4.0 < y < 10.4 and abs(x - 8.0) <= (y - 4.0) * 0.74))
+    s.shade(m, husk, n_sphere(6.6, 8.6, 5.8, 6.4), lo=1, hi=5, spec=0.05)
+    s.fill(s.rect(5.8, 6.8, 10.2, 7.4), GOLD[4])
+    s.fill(s.rect(5.6, 13.4, 10.4, 14.0), GOLD[3])
+    s.fill(s.poly([(6.3, 7.4), (9.7, 7.4), (8.0, 10.2)]), sand[4])
+    s.fill(s.poly([(8.0, 10.6), (10.0, 13.4), (6.0, 13.4)]), sand[3])
+    s.fill(s.poly([(7.2, 12.4), (8.8, 12.4), (8.0, 11.2)]), sand[5])
+    s.line([(8.0, 10.2), (8.0, 10.6)], sand[5], r=0.2)
+    s.line([(8.0, 4.2), (8.6, 2.6), (9.8, 1.6)], leaf[2], r=0.45)
+    s.shade(s.ell(11.2, 2.2, 1.7, 0.9), leaf, n_sphere(10.8, 1.8, 2.0), lo=2, hi=5)
+    s.shade(s.ell(7.0, 2.6, 1.2, 0.7), leaf, n_sphere(6.8, 2.2, 1.4), lo=1, hi=4)
+    s.outline()
+    return s
+
+
+def it_chrono_shard(res):
+    """The ripe Chrono Shard: a faceted amber crystal with a clock's face caught inside it, gold hands at a quarter
+    to, a glint and a mote of the season's light."""
+    s = Spr(res)
+    amber = [(96, 48, 10), (156, 88, 18), (206, 132, 34), (236, 172, 60), (252, 210, 110), (255, 242, 196)]
+    gem_column(s, 8.0, 15.2, 0.8, 4.8, amber)
+    face = s.disc(7.8, 9.6, 2.7)
+    s.fill(face, PAPER[4])
+    s.fill(s.ring(7.8, 9.6, 2.3, 2.75), GOLD[3])
+    for k in range(4):
+        a = k * math.pi / 2
+        s.dot(7.8 + math.sin(a) * 1.7 - 0.3, 9.6 - math.cos(a) * 1.7 - 0.3, INK)
+    s.line([(7.8, 9.6), (7.8, 7.8)], GOLD[1], r=0.28)
+    s.line([(7.8, 9.6), (6.4, 10.2)], GOLD[1], r=0.28)
+    s.outline()
+    for (x, y) in ((12.8, 3.0), (2.4, 9.4)):
+        s.dot(x, y, hramp("f0f0ff")[4])
+    return s
+
+
+def it_heartstone(res):
+    """A heart cut from the beating rock: a ruby with lit and shaded lobes, facet lines, a vein of light pulsing down
+    its keel, set in a collar of living rock."""
+    s = Spr(res)
+    ruby = [(58, 6, 16), (110, 14, 30), (164, 24, 44), (206, 40, 58), (238, 88, 96), (255, 184, 186)]
+    rock = hramp("7a5040", dl=0.1)
+
+    def heart(x, y):
+        X, Y = (x - 8.0) / 6.4, (9.2 - y) / 6.0
+        return (X * X + Y * Y - 1) ** 3 - X * X * Y ** 3 <= 0
+    m = s.mask(heart)
+    s.shade(m, ruby, n_sphere(6.2, 6.6, 7.4, 6.6), lo=1, hi=4, spec=0.0)
+    # facets: lobe crowns lit, the keel dark, two facet lines
+    s.fill({p for p in m if (p[0] + 0.5) / s.k < 7.6 and (p[1] + 0.5) / s.k < 6.4}, ruby[4])
+    s.fill({p for p in m if (p[0] + 0.5) / s.k > 8.6 and (p[1] + 0.5) / s.k < 5.8}, ruby[3])
+    for (a, b) in (((3.2, 6.6), (8.0, 9.6)), ((12.8, 6.6), (8.0, 9.6))):
+        s.fill({p for p in s.path([a, b], 0.22) if p in m}, ruby[2])
+    s.fill({p for p in m if abs((p[0] + 0.5) / s.k - 8.0) < 0.45 and (p[1] + 0.5) / s.k > 6.2}, ruby[1])
+    s.line([(8.0, 7.4), (8.0, 11.6)], hramp("ffa860", dl=0.06)[5], r=0.22)
+    s.dot(4.4, 4.4, ruby[5])
+    s.dot(5.4, 3.6, (255, 230, 230))
+    s.outline()
+    # chips of the living rock it was cut from, beside its tip
+    for pts in ([(1.2, 13.6), (3.0, 12.4), (4.2, 14.0), (2.6, 15.2)], [(12.0, 14.2), (13.6, 12.8), (14.8, 14.4), (13.2, 15.4)]):
+        chip = s.poly(pts)
+        s.shade(chip, rock, n_flat(-0.3, -0.4), lo=1, hi=4)
+    s.outline()
     return s
 
 
@@ -120,149 +316,6 @@ def it_golden_ward(res):
     s.fill(s.disc(7.7, 6.9, 0.45), blue[5])
     s.outline()
     s.dot(3.2, 2.6, GOLD[5])
-    return s
-
-
-def it_fulgurite(res):
-    """Fused glass branching like the bolt that made it: pale tubes with a core of caught lightning."""
-    s = Spr(res)
-    glass = hramp("c4d6ee", dl=0.09)
-    core = hramp("ffe14a", dl=0.06)
-    trunk = [(4.0, 14.6), (5.4, 11.2), (7.2, 9.4), (8.2, 6.4), (10.6, 4.0), (12.6, 1.6)]
-    forks = [[(7.2, 9.4), (10.0, 9.6), (12.8, 7.8)], [(8.2, 6.4), (6.8, 3.6), (5.4, 1.8)], [(5.4, 11.2), (2.6, 9.6)]]
-    m = s.path(trunk, 1.35)
-    for f in forks:
-        m |= s.path(f, 0.95)
-    s.shade(m, glass, n_bevel(s, m, 1.2, flat=0.4), lo=1, hi=4, spec=0.05)
-    s.line(trunk, core[3], r=0.36)
-    for f in forks:
-        s.line(f, core[2], r=0.28)
-    for (x, y) in ((8.2, 6.4), (5.4, 11.2), (10.6, 4.0)):
-        s.dot(x - 0.5, y - 0.5, core[5])
-    s.outline()
-    for (x, y) in ((13.6, 4.8), (2.0, 6.0), (11.4, 12.0)):
-        s.dot(x, y, hramp("8ad8ff")[4])
-    return s
-
-
-def it_silent_stone(res):
-    """A smooth river pebble from the dark, ringed with pale bands like the circles a sound leaves, quite still."""
-    s = Spr(res)
-    ink = hramp("2c3462", dl=0.08, bottom=0.04)
-    pale = hramp("c8ccf0", dl=0.07)
-    m = pebble(s, 8.0, 9.0, 6.4, 4.8, ink, spec=0.04)
-    for rr, t in ((1.9, 4), (3.5, 3), (5.0, 2)):
-        ring = s.mask(lambda x, y, rr=rr: abs(math.hypot((x - 7.4) / 1.25, (y - 8.6)) - rr) < 0.32)
-        s.fill({p for p in ring if p in m}, pale[t])
-    s.fill(s.disc(7.4, 8.6, 0.7), pale[5])
-    s.outline()
-    return s
-
-
-def it_inverted_ore(res):
-    """A shard of the Upside Realm's rock with its crystals hanging from it, points down, and motes falling up."""
-    s = Spr(res)
-    rock = hramp("8a3a9a")
-    teal = hramp("4ad8c8", dl=0.1)
-    pink = hramp("ff7ae8", dl=0.08)
-    facet_crystal(s, 5.0, 6.0, 12.6, 1.6, teal, lean=-0.6, down=True)
-    facet_crystal(s, 11.2, 6.0, 12.0, 1.5, teal, lean=0.6, down=True)
-    facet_crystal(s, 8.2, 6.2, 15.0, 2.0, hramp("6ae8d8", dl=0.1), down=True)
-    top = s.poly([(2.0, 6.4), (3.4, 3.6), (7.0, 2.4), (11.6, 3.0), (14.2, 5.6), (13.0, 7.4), (3.4, 7.4)])
-    s.shade(top, rock, n_bevel(s, top, 1.8, flat=0.3), lo=1, hi=4)
-    for (x, y) in ((5.0, 4.4), (10.4, 4.0)):
-        s.dot(x, y, pink[4])
-    s.outline()
-    for (x, y) in ((2.2, 1.2), (8.0, 0.4), (13.4, 1.4)):
-        s.dot(x, y, pink[5])
-    return s
-
-
-def it_brine_crystal(res):
-    """A hopper crystal of sea salt: a stepped cube, its faces sunk in square terraces, a bead of brine on it."""
-    s = Spr(res)
-    salt = hramp("bfeef4", dl=0.08)
-    sea = hramp("1ab0b0")
-    top = s.poly([(8.0, 2.6), (14.0, 5.6), (8.0, 8.6), (2.0, 5.6)])
-    left = s.poly([(2.0, 5.6), (8.0, 8.6), (8.0, 15.0), (2.0, 12.0)])
-    right = s.poly([(8.0, 8.6), (14.0, 5.6), (14.0, 12.0), (8.0, 15.0)])
-    s.fill(top, salt[4], rim=sea[0])
-    s.fill(left, salt[3], rim=sea[0])
-    s.fill(right, salt[1], rim=sea[0])
-    # the terraces of a hopper crystal
-    for k, sc in enumerate((0.62, 0.32)):
-        c = (8.0, 5.6)
-        s.edge(s.poly([(c[0] + (x - c[0]) * sc, c[1] + (y - c[1]) * sc) for x, y in ((8.0, 2.6), (14.0, 5.6), (8.0, 8.6), (2.0, 5.6))]),
-               salt[2 + k], sides=("r", "b", "l", "t"))
-        cl = (5.0, 10.3)
-        s.edge(s.poly([(cl[0] + (x - cl[0]) * sc, cl[1] + (y - cl[1]) * sc) for x, y in ((2.0, 5.6), (8.0, 8.6), (8.0, 15.0), (2.0, 12.0))]),
-               salt[2], sides=("r", "b"))
-    s.fill(s.rect(7.6, 8.6, 8.4, 15.0), salt[5])
-    s.fill(s.disc(11.4, 8.8, 1.2), sea[3])
-    s.dot(10.8, 8.0, salt[5])
-    s.outline()
-    return s
-
-
-def it_time_seed(res):
-    """A teardrop seed of amber husk with an hourglass of sand painted in it, a green shoot waiting at its tip."""
-    s = Spr(res)
-    husk = hramp("a8682a")
-    sand = hramp("f0d070", dl=0.07)
-    leaf = hramp("6aa040")
-    m = s.mask(lambda x, y: ((x - 8.0) / 4.4) ** 2 + ((y - 10.4) / 4.4) ** 2 <= 1 or (y < 10.4 and y > 4.2 and abs(x - 8.0) <= (y - 4.2) * 0.72))
-    s.shade(m, husk, n_sphere(6.8, 9.0, 5.6, 6.0), lo=1, hi=4, spec=0.05)
-    # the hourglass inside: two sand triangles, a gold waist
-    s.fill(s.poly([(6.2, 7.6), (9.8, 7.6), (8.0, 10.2)]), sand[3])
-    s.fill(s.poly([(8.0, 10.6), (10.2, 13.2), (5.8, 13.2)]), sand[4])
-    s.fill(s.rect(5.6, 13.2, 10.4, 13.9), GOLD[4])
-    s.fill(s.rect(5.6, 7.0, 10.4, 7.6), GOLD[4])
-    s.line([(8.0, 4.4), (8.6, 2.6), (9.8, 1.6)], leaf[2], r=0.45)
-    s.fill(s.ell(11.0, 2.2, 1.6, 0.9), leaf[3], rim=leaf[0])
-    s.outline()
-    return s
-
-
-def it_chrono_shard(res):
-    """An amber crystal ripened from a Time Seed, a clock's face caught inside it."""
-    s = Spr(res)
-    amber = hramp("e0a030", dl=0.1)
-    m = facet_crystal(s, 8.0, 15.0, 1.0, 4.6, amber)
-    face = s.disc(7.6, 9.4, 2.6)
-    s.fill(face, PAPER[4])
-    s.edge(face, amber[1], sides=("r", "b", "l", "t"))
-    s.line([(7.6, 9.4), (7.6, 7.6)], INK, r=0.3)
-    s.line([(7.6, 9.4), (8.9, 10.2)], INK, r=0.3)
-    s.dot(4.6, 4.6, amber[5])
-    s.outline()
-    for (x, y) in ((12.6, 3.0), (2.4, 9.6)):
-        s.dot(x, y, hramp("f0f0ff")[4])
-    return s
-
-
-def it_heartstone(res):
-    """A ruby heart cut from the beating rock, its facets lit, a vein of light pulsing down its middle."""
-    s = Spr(res)
-    ruby = hramp("c42436", dl=0.1)
-    rock = hramp("7a5040")
-
-    def heart(x, y):
-        X, Y = (x - 8.0) / 6.2, (9.0 - y) / 5.6
-        return (X * X + Y * Y - 1) ** 3 - X * X * Y ** 3 <= 0
-    m = s.mask(heart)
-    left = {p for p in m if (p[0] + 0.5) / s.k < 8.0}
-    s.fill(left, ruby[3], rim=ruby[0])
-    s.fill(m - left, ruby[2], rim=ruby[0])
-    # the facets: a lit crown on each lobe, a dark keel down the middle
-    s.fill({p for p in left if (p[1] + 0.5) / s.k < 7.0}, ruby[4])
-    s.fill({p for p in m - left if (p[1] + 0.5) / s.k < 6.4}, ruby[3])
-    s.fill({p for p in m if abs((p[0] + 0.5) / s.k - 8.0) < 0.5 and (p[1] + 0.5) / s.k > 6.0}, ruby[1])
-    s.dot(4.6, 4.8, ruby[5])
-    s.dot(5.6, 4.0, ruby[5])
-    s.line([(8.0, 7.2), (8.0, 11.4)], hramp("ffa860")[4], r=0.3)
-    chips = s.poly([(1.6, 13.4), (3.6, 12.0), (5.0, 13.6), (3.0, 15.0)])
-    s.shade(chips, rock, n_flat(-0.3, -0.4), lo=1, hi=3)
-    s.outline()
     return s
 
 
@@ -610,93 +663,121 @@ def _host(s, ramp, seed):
     tile(s, f)
 
 
+def _clustered(s, ramp, seed, blobs=7):
+    """A stone of clustered bumps lit on the top left, like the mod's terrain (tools/blocks_art.py)."""
+    pts = [(pnoise(i * 3.1, 1.7, 4, seed) * 16, pnoise(2.3, i * 2.7, 4, seed + 5) * 16) for i in range(blobs)]
+
+    def f(x, y, i, j):
+        g = pnoise(x, y, 4, seed) * 0.6 + pnoise(x, y, 8, seed + 1) * 0.4
+        t = 1 if g < 0.32 else 2 if g < 0.64 else 3
+        for (bx, by) in pts:
+            dx = min(abs(x - bx), 16 - abs(x - bx))
+            dy = min(abs(y - by), 16 - abs(y - by))
+            d = math.hypot(dx, dy)
+            if d < 2.2:
+                t = 4 if (x - bx) + (y - by) < -0.6 else 3 if d < 1.6 else 1
+        return ramp[t]
+    tile(s, f)
+
+
 def bl_living_ember_ore(res):
-    """Ashrock split by veins of living fire, a few coals glowing in them."""
+    """Ashrock split by veins of living fire: the veins run red to white heat, coals lie in them with lit crowns, the
+    fire glows (an emissive layer)."""
     s = Spr(res)
-    _host(s, hramp("3e2c26", dl=0.08), 611)
-    fire, yellow = hramp("ff6a1a", dl=0.07), hramp("ffd84a", dl=0.06)
-    for path in ([(0.0, 5.0), (3.6, 6.4), (6.0, 4.4), (9.4, 6.0), (12.4, 4.8), (16.0, 5.0)],
-                 [(6.0, 4.4), (5.4, 9.6), (7.8, 12.0), (7.2, 16.0)], [(9.4, 6.0), (11.6, 10.4), (16.0, 11.6)],
-                 [(0.0, 11.6), (2.8, 12.8), (5.4, 9.6)], [(7.2, 0.0), (6.0, 4.4)]):
-        s.line(path, fire[2], r=0.45, glow=True)
-    for (x, y, r) in ((3.0, 2.6, 1.3), (11.4, 12.4, 1.5), (13.0, 2.4, 1.0), (2.4, 9.2, 1.1)):
+    _clustered(s, [(16, 10, 10), (34, 24, 20), (52, 38, 32), (70, 54, 46), (92, 74, 64)], 611)
+    fire = [(110, 18, 6), (190, 44, 10), (240, 100, 18), (255, 168, 40), (255, 224, 110), (255, 250, 214)]
+    veins = [[(0.0, 5.0), (3.6, 6.4), (6.0, 4.4), (9.4, 6.0), (12.4, 4.8), (16.0, 5.0)], [(6.0, 4.4), (5.4, 9.6), (7.8, 12.0), (7.2, 16.0)],
+             [(9.4, 6.0), (11.6, 10.4), (16.0, 11.6)], [(0.0, 11.6), (2.8, 12.8), (5.4, 9.6)], [(7.2, 0.0), (6.0, 4.4)]]
+    for v in veins:
+        s.line(v, fire[1], r=0.6, glow=True)
+    for v in veins:
+        s.line(v, fire[3], r=0.3, glow=True)
+    for (x, y, r) in ((3.0, 2.6, 1.5), (11.4, 12.6, 1.7), (13.2, 2.2, 1.1), (2.4, 9.0, 1.2)):
         c = s.disc(x, y, r)
-        s.fill(c, fire[3], glow=True)
-        s.dot(x - 0.6, y - 0.6, yellow[4], glow=True)
+        s.shade(c, fire, n_sphere(x - 0.4, y - 0.4, r * 1.2), lo=2, hi=5, rim=False, glow=True)
     for (x, y) in ((6.0, 4.4), (9.4, 6.0), (5.4, 9.6)):
-        s.dot(x - 0.5, y - 0.5, yellow[5], glow=True)
+        s.dot(x - 0.5, y - 0.5, fire[5], glow=True)
     return s
 
 
 def bl_fulgurite_ore(res):
-    """Cloudstone fused by a bolt: glassy forks of fulgurite in the pale stone, caught lightning down their cores."""
+    """Cloudstone fused by a bolt: forks of pale glass tubes in the white stone, shaded round, scorched at their
+    edges, caught lightning down their cores (it glows)."""
     s = Spr(res)
-    _host(s, hramp("c8d8ec", dl=0.06), 621)
-    glass, core = hramp("8ab4e4", dl=0.08), hramp("ffe14a", dl=0.06)
+    _clustered(s, [(150, 166, 188), (178, 194, 214), (204, 218, 234), (226, 236, 246), (244, 250, 255)], 621)
+    glass = [(46, 70, 112), (86, 118, 168), (134, 166, 210), (178, 204, 236), (214, 230, 248), (246, 252, 255)]
+    core = [(200, 150, 30), (255, 216, 60), (255, 246, 180)]
     forks = [[(8.0, 0.0), (7.0, 4.0), (9.0, 7.0), (7.4, 11.0), (8.6, 16.0)], [(9.0, 7.0), (12.6, 8.4), (16.0, 7.6)],
              [(7.0, 4.0), (3.0, 3.0), (0.0, 4.4)], [(7.4, 11.0), (3.4, 12.6), (1.0, 16.0)]]
     for f in forks:
-        s.line(f, glass[2], r=0.9)
+        s.line(f, (110, 104, 112), r=1.25)
+    m = set()
     for f in forks:
-        s.line(f, core[3], r=0.35, glow=True)
+        m |= s.path(f, 0.95)
+    s.shade(m, glass, n_bevel(s, m, 0.9, flat=0.4), lo=1, hi=5, rim=False)
+    for f in forks:
+        s.line(f, core[1], r=0.32, glow=True)
     for (x, y) in ((9.0, 7.0), (7.0, 4.0), (7.4, 11.0)):
-        s.dot(x - 0.5, y - 0.5, core[5], glow=True)
+        s.dot(x - 0.5, y - 0.5, core[2], glow=True)
     return s
 
 
 def bl_silent_stone_ore(res):
-    """The Deep's black stone with pale pebbles set in it, each ringed like a still pool."""
+    """The Deep's black stone with pale pebbles set in it: each pebble round and glossy, ringed like a still pool,
+    with a faint light in its rings (it glows a little)."""
     s = Spr(res)
-    _host(s, hramp("1a1a2c", dl=0.06, bottom=0.03), 631)
+    _clustered(s, [(6, 6, 12), (14, 14, 24), (24, 24, 38), (34, 34, 52), (48, 48, 70)], 631)
+    ink = [(10, 10, 24), (24, 28, 58), (40, 48, 96), (62, 74, 140), (98, 110, 180), (170, 178, 230)]
     pale = hramp("c8ccf0", dl=0.07)
-    for (x, y, rx, ry) in ((4.0, 4.4, 2.6, 1.9), (11.6, 7.4, 2.4, 1.8), (5.6, 12.2, 2.2, 1.6), (13.4, 13.6, 1.6, 1.2)):
+    for (x, y, rx, ry) in ((4.0, 4.4, 2.8, 2.0), (11.6, 7.4, 2.6, 1.9), (5.6, 12.2, 2.4, 1.7), (13.4, 13.6, 1.8, 1.3)):
         m = s.ell(x, y, rx, ry)
-        s.shade(m, hramp("3a4478", dl=0.08), n_sphere(x - 0.6, y - 0.6, rx * 1.2, ry * 1.2), lo=1, hi=4)
-        s.fill({p for p in m if abs(math.hypot(((p[0] + 0.5) / s.k - x) / rx, ((p[1] + 0.5) / s.k - y) / ry) - 0.62) < 0.18}, pale[3])
-        s.dot(x - 0.8, y - 0.8, pale[5])
+        s.shade(m, ink, n_sphere(x - 0.7, y - 0.7, rx * 1.2, ry * 1.2), lo=1, hi=4)
+        ring = {p for p in m if abs(math.hypot(((p[0] + 0.5) / s.k - x) / rx, ((p[1] + 0.5) / s.k - y) / ry) - 0.6) < 0.16}
+        s.fill(ring, pale[3], glow=True)
+        s.dot(x - rx * 0.5, y - ry * 0.6, pale[5])
+        s.edge(m, (2, 2, 6), sides=("r", "b"))
     return s
 
 
 def bl_hanging_ore(res):
-    """The Upside Realm's stone with crystals hanging in it, points down, their glow dripping upwards."""
+    """The Upside Realm's stone with crystals hanging in it, points down, faceted and lit, their glow dripping
+    upwards as drops of light (it glows)."""
     s = Spr(res)
-    _host(s, hramp("b44ccc", dl=0.07), 641)
-    teal, pink = hramp("4ad8c8", dl=0.09), hramp("ff9aee", dl=0.07)
-    for (x, y, w, h) in ((3.6, 2.0, 1.4, 6.0), (10.6, 5.0, 1.6, 7.4), (6.6, 9.6, 1.2, 5.0), (13.6, 0.0, 1.0, 4.0)):
-        m = s.poly([(x - w, y), (x + w, y), (x, y + h)])
-        left = {p for p in m if (p[0] + 0.5) / s.k < x}
-        s.fill(left, teal[4], glow=True)
-        s.fill(m - left, teal[2], glow=True)
-        s.dot(x - 0.5, y, teal[5], glow=True)
-    for (x, y) in ((2.0, 12.4), (12.0, 14.0), (8.4, 3.0)):
+    _clustered(s, [(92, 32, 104), (128, 50, 142), (164, 70, 178), (196, 98, 208), (222, 132, 230)], 641)
+    teal = hramp("3ad0c0", dl=0.1)
+    pink = hramp("ff9aee", dl=0.07)
+    for (x, y, w, h) in ((3.6, 1.6, 1.5, 6.4), (10.6, 4.6, 1.7, 7.8), (6.6, 9.4, 1.3, 5.4), (13.6, 0.0, 1.1, 4.2)):
+        gem_column(s, x, y, y + h, w, teal, down=True, glow=True)
+    for (x, y) in ((2.0, 12.4), (12.0, 14.0), (8.4, 3.0), (5.0, 9.0)):
         s.dot(x, y, pink[4], glow=True)
     return s
 
 
 def bl_sprout(res, stage):
-    """The Time Sprout, cross-shaped: a shoot, a seedling, a bud of amber, then the ripe Chrono Shard on its stem."""
+    """The Time Sprout, cross-shaped: a curled shoot; a seedling of two shaded leaves; a bud of amber in its leaves;
+    then the ripe Chrono Shard on its stem, lit, a clock's face in it."""
     s = Spr(res)
-    stem, leaf = hramp("4a7a2a"), hramp("6aa040")
-    amber = hramp("e0a030", dl=0.1)
-    h = (4.0, 7.0, 10.0, 11.0)[stage]
-    s.line([(8.0, 16.0), (8.0, 16.0 - h)], stem[2], r=0.5)
-    if stage >= 1:
-        for sx in (-1, 1):
-            m = s.ell(8 + sx * 2.4, 16.0 - h * 0.55, 2.2, 1.0)
-            s.fill(m, leaf[3], rim=leaf[0])
+    stem, leaf = hramp("3e6e26", dl=0.1), hramp("6aa040", dl=0.1)
+    amber = [(96, 48, 10), (156, 88, 18), (206, 132, 34), (236, 172, 60), (252, 210, 110), (255, 242, 196)]
+    h = (5.0, 8.0, 10.5, 11.5)[stage]
+    s.line([(8.0, 16.0), (8.2, 16.0 - h * 0.6), (7.8, 16.0 - h)], stem[2], r=0.55)
+    if stage == 0:
+        s.line([(7.8, 16.0 - h), (6.8, 16.0 - h - 0.8), (6.6, 16.0 - h + 0.4)], leaf[3], r=0.45)
+    for (k, sx) in ((0, -1), (1, 1)) if stage >= 1 else ():
+        m = s.ell(8 + sx * 2.6, 16.0 - h * 0.5 - k * 0.4, 2.4, 1.1)
+        s.shade(m, leaf, n_sphere(8 + sx * 2.6 - 0.6, 16.0 - h * 0.5 - 0.6, 2.6), lo=1, hi=5)
     if stage >= 2:
         for sx in (-1, 1):
-            m = s.ell(8 + sx * 2.0, 16.0 - h * 0.85, 1.8, 0.8)
-            s.fill(m, leaf[4], rim=leaf[0])
+            m = s.ell(8 + sx * 2.0, 16.0 - h * 0.85, 1.9, 0.9)
+            s.shade(m, leaf, n_sphere(8 + sx * 2.0 - 0.5, 16.0 - h * 0.85 - 0.4, 2.0), lo=2, hi=5)
     if stage == 2:
-        bud = s.ell(8.0, 16.0 - h - 0.8, 1.4, 1.8)
-        s.fill(bud, amber[3], rim=amber[0])
-        s.dot(7.4, 16.0 - h - 1.6, amber[5])
+        bud = s.ell(7.8, 16.0 - h - 1.0, 1.5, 2.0)
+        s.shade(bud, amber, n_sphere(7.2, 16.0 - h - 1.6, 1.8), lo=1, hi=5)
     if stage == 3:
-        facet_crystal(s, 8.0, 16.0 - h + 1.0, 1.2, 2.4, amber, glow=True)
-        face = s.disc(7.8, 16.0 - h - 3.4, 1.2)
+        gem_column(s, 7.8, 16.0 - h + 1.0, 0.6, 2.6, amber, glow=True)
+        face = s.disc(7.6, 16.0 - h - 2.6, 1.3)
         s.fill(face, PAPER[4], glow=True)
-        s.dot(7.4, 16.0 - h - 4.0, INK)
+        s.dot(7.2, 16.0 - h - 3.2, INK)
     s.outline()
     return s
 
