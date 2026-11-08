@@ -45,12 +45,12 @@ jobs:
               "description": body or "A new version is out.",
               "color": 0xD9A441,
               "fields": fields,
-              "thumbnail": {"url": f"https://raw.githubusercontent.com/{os.environ['REPO']}/main/branding/logo-256.png"},
+              "thumbnail": {"url": f"https://raw.githubusercontent.com/{os.environ['REPO']}/main/branding/discord-avatar-256.png"},
               "footer": {"text": "Full notes and files on GitHub"},
               "timestamp": r.get("published_at"),
           }
           data = json.dumps({"username": "Matriochka Releases",
-                             "avatar_url": f"https://raw.githubusercontent.com/{os.environ['REPO']}/main/branding/logo-256.png",
+                             "avatar_url": f"https://raw.githubusercontent.com/{os.environ['REPO']}/main/branding/discord-avatar-256.png",
                              "embeds": [embed], "allowed_mentions": {"parse": []}}).encode()
           req = urllib.request.Request(os.environ["WEBHOOK"], data=data, headers={"Content-Type": "application/json", "User-Agent": "matriochka-release-bot"})
           print(urllib.request.urlopen(req).status)

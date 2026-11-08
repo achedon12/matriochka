@@ -280,7 +280,7 @@ def copy_assets():
 
 
 def branding():
-    """The official logo: site mark, favicons and the Open Graph card."""
+    """The official logo (made by tools/logo_v2.py): site mark, favicons and the Open Graph card."""
     logo = os.path.join(BRANDING, "logo-256.png")
     if not os.path.exists(logo):
         return
@@ -293,17 +293,24 @@ def branding():
                 shutil.copy2(src, os.path.join(PUBLIC, f"logo-{size}.png"))
     if Image is None:
         return
-    im = Image.open(logo).convert("RGBA")
-    for s in (16, 32, 48, 192):
-        im.resize((s, s), Image.LANCZOS).save(os.path.join(PUBLIC, f"favicon-{s}.png"), optimize=True)
-    im.save(os.path.join(PUBLIC, "favicon.ico"), sizes=[(16, 16), (32, 32), (48, 48)])
-    sq = Image.open(os.path.join(BRANDING, "icon-square-1024.png")).convert("RGB")
-    sq.resize((180, 180), Image.LANCZOS).save(os.path.join(PUBLIC, "apple-touch-icon.png"), optimize=True)
-    og = Image.new("RGB", (1200, 630), (0x17, 0x10, 0x0D))
-    band = Image.new("RGB", (1200, 470), (0xA8, 0x23, 0x1A))
-    og.paste(band, (0, 80))
-    big = Image.open(os.path.join(BRANDING, "logo-512.png")).convert("RGBA").resize((520, 520), Image.LANCZOS)
-    og.paste(big, (340, 55), big)
+    # favicons: the hand-tuned pixel icons for 16, 32 and 48 (tools/logo_v2.py), the 1024 logo brought down for 192
+    smalls = []
+    for s in (16, 32, 48):
+        src = os.path.join(BRANDING, f"icon-{s}.png")
+        ic = Image.open(src).convert("RGBA") if os.path.exists(src) else Image.open(logo).convert("RGBA").resize((s, s), Image.LANCZOS)
+        ic.save(os.path.join(PUBLIC, f"favicon-{s}.png"), optimize=True)
+        smalls.append(ic)
+    Image.open(os.path.join(BRANDING, "logo-1024.png")).convert("RGBA").resize((192, 192), Image.LANCZOS).save(
+        os.path.join(PUBLIC, "favicon-192.png"), optimize=True)
+    smalls[2].save(os.path.join(PUBLIC, "favicon.ico"), sizes=[(16, 16), (32, 32), (48, 48)], append_images=smalls[:2])
+    sq = Image.open(os.path.join(BRANDING, "icon-square-1024.png")).convert("RGBA")
+    flat = Image.new("RGBA", sq.size, (0x17, 0x10, 0x0D, 255))
+    flat.alpha_composite(sq)
+    flat.convert("RGB").resize((180, 180), Image.LANCZOS).save(os.path.join(PUBLIC, "apple-touch-icon.png"), optimize=True)
+    # Open Graph card: the square icon on the site's dark lacquer
+    og = Image.new("RGBA", (1200, 630), (0x17, 0x10, 0x0D, 255))
+    og.alpha_composite(sq.resize((570, 570), Image.LANCZOS), (315, 30))
+    og = og.convert("RGB")
     og.save(os.path.join(PUBLIC, "og.png"), optimize=True)
 
 

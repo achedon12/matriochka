@@ -57,7 +57,8 @@ A version other than 26.3 builds into `build/mc-<mc>/`. CI builds every version,
 | `tools/sound.py` | the sound table: ids, subtitles, biome music and ambience |
 | `tools/sfx.py`, `tools/music.py`, `tools/synth.py` | sound recipes, the folk composer and the synthesizer |
 | `tools/site.py` | data and images for the website in `site/` |
-| `tools/modpack.py`, `tools/modpack_publish.sh`, `tools/pack_icon.py` | the Matriochka Pack for Modrinth and CurseForge, its upload and its icon (see the wiki's Modpack page) |
+| `tools/modpack.py`, `tools/modpack_publish.sh` | the Matriochka Pack for Modrinth and CurseForge and its upload (see the wiki's Modpack page) |
+| `tools/logo_v2.py` | the icons and logo, voxel pixel art: the mod's icon (`branding/logo-*.png`, `icon.png`, hand-tuned 16/32/48 px), the pack and Discord icon, the illustration |
 
 Hand-written Java lives in `src/main/java` (game logic) and `src/client/java` (screens, HUD, renderers).
 
