@@ -80,7 +80,7 @@
     },
     "minecraft:audio/background_music": {
       "default": {
-        "sound": "matriochka:music.world_4",
+        "sound": "matriochka:music.world_4_thunder_heights",
         "min_delay": 3600,
         "max_delay": 12000
       }

@@ -798,6 +798,47 @@
     ],
     "subtitle": "subtitles.matriochka.world.rumble"
   },
+  "reliquary.open": {
+    "sounds": [
+      {
+        "name": "matriochka:reliquary/open"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.reliquary.open"
+  },
+  "reliquary.locked": {
+    "sounds": [
+      {
+        "name": "matriochka:reliquary/locked_1"
+      },
+      {
+        "name": "matriochka:reliquary/locked_2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.reliquary.locked"
+  },
+  "relic.use": {
+    "sounds": [
+      {
+        "name": "matriochka:relic/use"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.relic.use"
+  },
+  "wonder.ambient": {
+    "sounds": [
+      {
+        "name": "matriochka:wonder/ambient_1"
+      },
+      {
+        "name": "matriochka:wonder/ambient_2"
+      },
+      {
+        "name": "matriochka:wonder/ambient_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.wonder.ambient"
+  },
   "ambient.w1.loop": {
     "sounds": [
       {
@@ -1289,6 +1330,166 @@
     "sounds": [
       {
         "name": "matriochka:music/boss_w10",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_1_bloom_hollow": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_1_bloom_hollow",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_1_rot_marsh": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_1_rot_marsh",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_2_ember_fields": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_2_ember_fields",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_2_ash_drifts": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_2_ash_drifts",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_3_mossy_cells": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_3_mossy_cells",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_3_crumbling_wing": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_3_crumbling_wing",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_4_hail_meadows": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_4_hail_meadows",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_4_thunder_heights": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_4_thunder_heights",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_5_hushed_hollow": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_5_hushed_hollow",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_5_bare_dark": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_5_bare_dark",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_6_crystal_fields": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_6_crystal_fields",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_6_mirror_flats": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_6_mirror_flats",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_7_coral_shelf": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_7_coral_shelf",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_7_black_trench": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_7_black_trench",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_8_hourglass_dunes": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_8_hourglass_dunes",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_8_rust_grove": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_8_rust_grove",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_9_flesh_mire": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_9_flesh_mire",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_9_bare_rock": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_9_bare_rock",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_10_plank_floor": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_10_plank_floor",
+        "stream": true
+      }
+    ]
+  },
+  "music.world_10_lacquer_tray": {
+    "sounds": [
+      {
+        "name": "matriochka:music/world_10_lacquer_tray",
         "stream": true
       }
     ]

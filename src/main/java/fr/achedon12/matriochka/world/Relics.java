@@ -7,7 +7,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -61,7 +60,7 @@ public final class Relics {
 		int n = count(ps);
 		ServerLevel sl = (ServerLevel) sp.level();
 		sl.sendParticles(ParticleTypes.HEART, sp.getX(), sp.getY() + 1.6, sp.getZ(), 8, 0.4, 0.3, 0.4, 0.05);
-		sl.playSound(null, sp.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 0.8f, 1.4f);
+		sl.playSound(null, sp.blockPosition(), fr.achedon12.matriochka.content.Sounds.RELIC_USE, SoundSource.PLAYERS, 1f, 1f);
 		sp.sendSystemMessage(Component.translatable("message.matriochka.relic.taken", n).withStyle(ChatFormatting.GOLD));
 		if (n == 10) sp.sendSystemMessage(Component.translatable("message.matriochka.relic.all").withStyle(ChatFormatting.LIGHT_PURPLE));
 		return true;
