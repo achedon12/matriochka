@@ -1,17 +1,41 @@
-import Link from "next/link";
+import Link from "./PageLink";
 import type { CSSProperties, ReactNode } from "react";
 import { asset, getData, href, otherLang, SHARED } from "@/lib/data";
+import { BASE, VERSION_KEY } from "@/lib/config";
+import { isBoss, LATEST, OLDER, pageIn, VERSIONS } from "@/lib/versions";
 import type { Lang } from "@/lib/types";
 import { Icon } from "./Bits";
-import { Sprite, Vine } from "./Ornament";
+import { Vine } from "./Ornament";
+import Sprite from "./Sprite";
 import { StickyHeader } from "./Islands";
+import VersionPicker, { LatestLink, type PickerVersion } from "./VersionPicker";
 
+/** Where the version picker leads from a page: the same page in that version, or its section when the page is
+ * not in it (a creature added later), or the version's home. */
+function target(path: string, v: string): string {
+  if (pageIn(path, v) || (v === LATEST && path === "download/")) return path;
+  const c = path.match(/^creatures\/([\w-]+)\//);
+  if (c) return isBoss(c[1]) ? "bosses/" : "bestiary/";
+  if (path.startsWith("worlds/")) return "worlds/";
+  return "";
+}
 
-/** Header, ornament and footer around every page. `path` is the page path without language, e.g. "worlds/3/". */
-export function Shell({ lang, path, section, children }: { lang: Lang; path: string; section?: string; children: ReactNode }) {
-  const { copy } = getData(lang);
+/** On the latest pages, before anything is drawn: a reader who picked an older version is taken back to it. */
+function returnScript(lang: Lang, path: string): string {
+  const to: Record<string, string> = {};
+  for (const v of OLDER) to[v] = BASE + href(lang, target(path, v), v);
+  return `try{var v=localStorage.getItem(${JSON.stringify(VERSION_KEY)}),t=${JSON.stringify(to)};if(v&&t[v])location.replace(t[v]+location.hash)}catch(e){}`;
+}
+
+/** Header, ornament and footer around every page. `path` is the page path without language or version, e.g.
+ * "worlds/3/"; `v` is the version shown when it is not the latest. */
+export function Shell({ lang, path, section, v, children }: { lang: Lang; path: string; section?: string; v?: string; children: ReactNode }) {
+  const { copy } = getData(lang, v);
   const ui = copy.ui;
+  const vl = copy.versions;
   const other = otherLang(lang);
+  const shown = v ?? LATEST;
+  const picker: PickerVersion[] = VERSIONS.map((x) => ({ v: x.v, mc: x.mc, date: x.date, latest: x.latest, href: href(lang, target(path, x.v), x.v) }));
   // the nav nests: four painted dolls, each a size smaller, in the colours of the worlds they lead to
   const NAV = [
     { p: "worlds", h: 34, c: ["#a8231a", "#d9a441", "#f3e2c2"] },
@@ -33,6 +57,7 @@ export function Shell({ lang, path, section, children }: { lang: Lang; path: str
   );
   return (
     <>
+      {!v && OLDER.length > 0 && path !== "download/" && <script dangerouslySetInnerHTML={{ __html: returnScript(lang, path) }} />}
       <Sprite />
       <a className="skip" href="#main">{ui.skip}</a>
       <StickyHeader />
@@ -40,10 +65,10 @@ export function Shell({ lang, path, section, children }: { lang: Lang; path: str
         {/* a thin gold bead along the top edge, the rim of a lacquered box */}
         <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[5px] bg-[radial-gradient(circle,#f0c960_1.3px,transparent_1.7px)] bg-[length:12px_5px] opacity-80" />
         <div className="wrap flex items-end gap-x-5 gap-y-2 pt-3 pb-2 transition-[padding] duration-200 max-[1060px]:flex-wrap max-[1060px]:justify-between [.is-scrolled_&]:pt-1.5 [.is-scrolled_&]:pb-1">
-          <Link href={href(lang)} aria-current={path === "" ? "page" : undefined}
+          <Link href={href(lang, "", v)} aria-current={path === "" ? "page" : undefined}
             className="group flex shrink-0 items-center gap-3 self-center text-gold-b no-underline hover:text-[#ffdd80]">
             <span className="grid size-[58px] place-items-center rounded-full bg-ink shadow-[0_0_0_2px_#d9a441,0_0_0_5px_#17100d,0_0_0_6px_rgba(240,201,96,.35)] transition-[width,height] duration-200 [.is-scrolled_&]:size-[42px]">
-              <img src={asset("logo-128.png")} width="50" height="50" alt="" className="size-[84%]" />
+              <img src={asset("logo-128.webp")} width="50" height="50" alt="" className="size-[84%]" />
             </span>
             <span className="font-display text-[clamp(20px,2.2vw,28px)] leading-none tracking-[0.06em] [text-shadow:0_2px_0_rgba(0,0,0,.6)] max-[420px]:hidden">Matriochka</span>
           </Link>
@@ -53,7 +78,7 @@ export function Shell({ lang, path, section, children }: { lang: Lang; path: str
                 const here = section === p;
                 return (
                   <li key={p}>
-                    <Link href={href(lang, `${p}/`)} aria-current={here ? (path === `${p}/` ? "page" : "true") : undefined}
+                    <Link href={href(lang, `${p}/`, v)} aria-current={here ? (path === `${p}/` ? "page" : "true") : undefined}
                       className={`group flex items-end gap-2 rounded-sm px-1 pb-1 font-body text-[17px] font-bold no-underline max-[480px]:flex-col max-[480px]:items-center max-[480px]:gap-0.5 max-[480px]:text-[13px] ${here ? "text-gold-b" : "text-paper hover:text-gold-b"}`}>
                       {doll(c, h, here)}
                       <span className={`pb-[3px] ${here ? "border-b-2 border-gold-b" : "border-b-2 border-transparent group-hover:border-gold/60"}`}>{copy.nav[p]}</span>
@@ -64,7 +89,11 @@ export function Shell({ lang, path, section, children }: { lang: Lang; path: str
             </ul>
           </nav>
           <div className="flex shrink-0 items-center gap-3 self-center">
-            <a href={asset((other === "fr" ? "fr/" : "") + path)} hrefLang={other} lang={other}
+            {VERSIONS.length > 1 && (
+              <VersionPicker current={shown} versions={picker} labels={{ label: vl.label, pick: vl.pick, latest: vl.latest, mc: vl.mc }}
+                changes={{ href: href(lang, "changes/", v), label: vl.changesNav.replace("{v}", shown) }} />
+            )}
+            <a href={asset(href(other, path, path === "download/" ? null : v).slice(1))} hrefLang={other} lang={other}
               className="rounded-sm border border-gold/50 px-2 py-1 text-[14px] text-paper-dim no-underline hover:border-gold-b hover:text-gold-b">{ui.other}</a>
             <a href={SHARED.repo} aria-label={ui.github} className="inline-flex text-paper-dim hover:text-gold-b"><Icon name="github" /></a>
             <Link href={href(lang, "download/")} aria-current={section === "download" ? "page" : undefined}
@@ -75,12 +104,20 @@ export function Shell({ lang, path, section, children }: { lang: Lang; path: str
           </div>
         </div>
       </header>
+      {v && (
+        <div className="vp-older">
+          <p className="wrap">
+            <span>{vl.older} <strong className="font-pixel text-[21px] font-normal leading-none text-gold-b">{v}</strong></span>
+            <LatestLink href={href(lang, target(path, LATEST))}>{vl.toLatest} {LATEST}</LatestLink>
+          </p>
+        </div>
+      )}
       <main id="main">{children}</main>
       <footer className="foot">
         <Vine kind="black" />
         <div className="wrap foot-in">
           <div className="foot-brand">
-            <img src={asset("logo-128.png")} width="64" height="64" alt="" />
+            <img src={asset("logo-128.webp")} width="64" height="64" alt="" />
             <div>
               <p className="foot-name">Matriochka</p>
               <p>{ui.footer}</p>

@@ -19,6 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
 sys.path.insert(0, HERE)
 import content as C  # noqa: E402
+import webp  # noqa: E402
 import attacks as ATK  # noqa: E402
 
 RES = os.path.join(ROOT, "src/main/resources/assets/matriochka")
@@ -43,6 +44,8 @@ ICONS = {
     'book-open': '<path d="M12 7v14"/> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
     'bug': '<path d="m8 2 1.88 1.88"/> <path d="M14.12 3.88 16 2"/> <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/> <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/> <path d="M12 20v-9"/> <path d="M6.53 9C4.6 8.8 3 7.1 3 5"/> <path d="M6 13H2"/> <path d="M3 21c0-2.1 1.7-3.9 3.8-4"/> <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/> <path d="M22 13h-4"/> <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/>',
     'check': '<path d="M20 6 9 17l-5-5"/>',
+    'chevron-down': '<path d="m6 9 6 6 6-6"/>',
+    'history': '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/> <path d="M3 3v5h5"/> <path d="M12 7v5l4 2"/>',
     'circle-alert': '<circle cx="12" cy="12" r="10"/> <line x1="12" x2="12" y1="8" y2="12"/> <line x1="12" x2="12.01" y1="16" y2="16"/>',
     'clock': '<circle cx="12" cy="12" r="10"/> <polyline points="12 6 12 12 16 14"/>',
     'cpu': '<rect width="16" height="16" x="4" y="4" rx="2"/> <rect width="6" height="6" x="9" y="9" rx="1"/> <path d="M15 2v2"/> <path d="M15 20v2"/> <path d="M2 15h2"/> <path d="M2 9h2"/> <path d="M20 15h2"/> <path d="M20 9h2"/> <path d="M9 2v2"/> <path d="M9 20v2"/>',
@@ -222,11 +225,20 @@ SHOTS = {}
 
 
 def _copy_dir(src, dst, suffix):
+    """Copies the files of a folder; textures (.png) become lossless WebP when Pillow can write it."""
     os.makedirs(dst, exist_ok=True)
     out = set()
     for f in sorted(os.listdir(src)):
         if f.endswith(suffix):
-            shutil.copy2(os.path.join(src, f), os.path.join(dst, f))
+            s, d = os.path.join(src, f), os.path.join(dst, f)
+            if suffix == ".png" and webp.HAS_WEBP:
+                d = d[:-4] + ".webp"
+                if not os.path.exists(d) or os.path.getmtime(d) < os.path.getmtime(s):
+                    webp.save(Image.open(s), d, lossless=True)
+                if os.path.exists(os.path.join(dst, f)):
+                    os.remove(os.path.join(dst, f))
+            else:
+                shutil.copy2(s, d)
             out.add(f[: -len(suffix)])
     return out
 
@@ -251,12 +263,20 @@ def copy_assets():
         shutil.copy2(TRAILER_SRC, os.path.join(PUBLIC, "trailer.mp4"))
         poster = os.path.join(ROOT, "media/trailer/poster.jpg")
         if Image is not None and os.path.exists(poster):
-            Image.open(poster).convert("RGB").resize((1280, 720), Image.LANCZOS).save(
-                os.path.join(PUBLIC, "trailer.jpg"), quality=84, optimize=True, progressive=True)
+            webp.save(Image.open(poster).convert("RGB").resize((1280, 720), Image.LANCZOS), os.path.join(PUBLIC, "trailer.jpg"), lossless=False)
     if os.path.exists(REEL_SRC):
         shutil.copy2(REEL_SRC, os.path.join(PUBLIC, "reel.mp4"))
         shutil.copy2(REEL_SRC.replace(".mp4", ".jpg"), os.path.join(PUBLIC, "reel.jpg"))
     branding()
+    # what earlier runs left as PNG or JPEG (CI has none of the sources): WebP, pixel art lossless
+    for sub in ("items", "blocks", "entities", "cubes", "stations", "vanilla"):
+        webp.convert_dir(PUBLIC, sub, lossless=True)
+    for sub in ("portraits", "shots"):
+        webp.convert_dir(PUBLIC, sub)  # renders and screenshots lossy, interface captures lossless
+    for f in ("trailer.jpg", "reel.jpg", "logo-128.png", "logo-256.png", "logo-512.png"):
+        if webp.HAS_WEBP and os.path.exists(os.path.join(PUBLIC, f)):
+            webp.save(Image.open(os.path.join(PUBLIC, f)), os.path.join(PUBLIC, f), lossless=f.endswith(".png"))
+            os.remove(os.path.join(PUBLIC, f))
 
 
 def branding():
@@ -267,7 +287,10 @@ def branding():
     for size in (128, 256, 512):
         src = os.path.join(BRANDING, f"logo-{size}.png")
         if os.path.exists(src):
-            shutil.copy2(src, os.path.join(PUBLIC, f"logo-{size}.png"))
+            if webp.HAS_WEBP:
+                webp.save(Image.open(src), os.path.join(PUBLIC, f"logo-{size}.png"), lossless=True)
+            else:
+                shutil.copy2(src, os.path.join(PUBLIC, f"logo-{size}.png"))
     if Image is None:
         return
     im = Image.open(logo).convert("RGBA")
@@ -362,20 +385,17 @@ def process_shots(dst):
             box = (0, 0, 290, 105) if key.startswith("gui_hud") else (0, 0, min(854, img.width), min(480, img.height))
             g = img.crop(box).convert("RGB")
             g = g.resize((g.width * (3 if key.startswith("gui_hud") else 2), g.height * (3 if key.startswith("gui_hud") else 2)), Image.NEAREST)
-            g.save(os.path.join(dst, key + ".png"), optimize=True)
-            SHOTS[key] = key + ".png"
+            SHOTS[key] = webp.save(g, os.path.join(dst, key + ".png"), lossless=True)
+            if webp.KEEP.match(f"shots/{key}.png"):
+                g.save(os.path.join(dst, key + ".png"), optimize=True)
             continue
         rgb = img.convert("RGB")
         W, H = rgb.size
         tall = (W // 2 - H // 3, 0, W // 2 + H // 3, H) if clean else CROP_TALL
         wide = (W // 2 - H * 2 // 3, 0, W // 2 + H * 2 // 3, H) if clean else CROP_WIDE
         if key.endswith("_view") or key == "00_surface":
-            rgb.crop(tall).resize((480, 720), Image.LANCZOS).save(
-                os.path.join(dst, key + "_tall.jpg"), quality=82, optimize=True, progressive=True)
-            SHOTS[key + "_tall"] = key + "_tall.jpg"
-        rgb.crop(wide).resize((960, 720), Image.LANCZOS).save(
-            os.path.join(dst, key + ".jpg"), quality=82, optimize=True, progressive=True)
-        SHOTS[key] = key + ".jpg"
+            SHOTS[key + "_tall"] = webp.save(rgb.crop(tall).resize((480, 720), Image.LANCZOS), os.path.join(dst, key + "_tall.jpg"), lossless=False)
+        SHOTS[key] = webp.save(rgb.crop(wide).resize((960, 720), Image.LANCZOS), os.path.join(dst, key + ".jpg"), lossless=False)
 
 
 # ---------------------------------------------------------------- boss attack stills
@@ -512,14 +532,11 @@ def _views(img, key, dst):
     """A 21:9 banner, a 4:3 card and a tall doll-window crop of one picture."""
     W, H = img.size
     bh = int(W * 9 / 21)
-    img.crop((0, (H - bh) // 2, W, (H + bh) // 2)).resize((1920, 823), Image.LANCZOS).save(os.path.join(dst, key + "_banner.jpg"), quality=80, optimize=True, progressive=True)
-    SHOTS[key + "_banner"] = key + "_banner.jpg"
+    SHOTS[key + "_banner"] = webp.save(img.crop((0, (H - bh) // 2, W, (H + bh) // 2)).resize((1920, 823), Image.LANCZOS), os.path.join(dst, key + "_banner.jpg"), lossless=False)
     cw = H * 4 // 3
-    img.crop(((W - cw) // 2, 0, (W + cw) // 2, H)).resize((960, 720), Image.LANCZOS).save(os.path.join(dst, key + ".jpg"), quality=82, optimize=True, progressive=True)
-    SHOTS[key] = key + ".jpg"
+    SHOTS[key] = webp.save(img.crop(((W - cw) // 2, 0, (W + cw) // 2, H)).resize((960, 720), Image.LANCZOS), os.path.join(dst, key + ".jpg"), lossless=False)
     tw = H * 2 // 3
-    img.crop(((W - tw) // 2, 0, (W + tw) // 2, H)).resize((480, 720), Image.LANCZOS).save(os.path.join(dst, key + "_tall.jpg"), quality=82, optimize=True, progressive=True)
-    SHOTS[key + "_tall"] = key + "_tall.jpg"
+    SHOTS[key + "_tall"] = webp.save(img.crop(((W - tw) // 2, 0, (W + tw) // 2, H)).resize((480, 720), Image.LANCZOS), os.path.join(dst, key + "_tall.jpg"), lossless=False)
 
 
 def process_frames(dst):
@@ -545,9 +562,7 @@ def process_frames(dst):
         for f in sorted(os.listdir(st_dir)):
             if f.startswith("struct_") and f.endswith(".png"):
                 key = "st_" + f[7:-4]
-                Image.open(os.path.join(st_dir, f)).convert("RGB").resize((800, 450), Image.LANCZOS).save(
-                    os.path.join(dst, key + ".jpg"), quality=80, optimize=True, progressive=True)
-                SHOTS[key] = key + ".jpg"
+                SHOTS[key] = webp.save(Image.open(os.path.join(st_dir, f)).convert("RGB").resize((800, 450), Image.LANCZOS), os.path.join(dst, key + ".jpg"), lossless=False)
     if Image is None or not os.path.isdir(FRAMES):
         return
     # worlds whose structure photos failed (caves and ceilings): ten different frames of that world instead
@@ -560,9 +575,7 @@ def process_frames(dst):
             n = lo + (k // len(takes)) * 25 + 10
             src = os.path.join(FRAMES, f"seq_w{w:02d}_{seq}_{min(n, hi):04d}.png")
             if os.path.exists(src):
-                Image.open(src).convert("RGB").resize((800, 450), Image.LANCZOS).save(
-                    os.path.join(dst, f"st_{sid}.jpg"), quality=80, optimize=True, progressive=True)
-                SHOTS[f"st_{sid}"] = f"st_{sid}.jpg"
+                SHOTS[f"st_{sid}"] = webp.save(Image.open(src).convert("RGB").resize((800, 450), Image.LANCZOS), os.path.join(dst, f"st_{sid}.jpg"), lossless=False)
     for key, (seq, n) in FRAME_PICKS.items():
         src = os.path.join(FRAMES, f"seq_{seq}_{n:04d}.png")
         if os.path.exists(src):
@@ -1836,7 +1849,41 @@ def build_copy():
         desc=t("Every item and block Matriochka adds, with its recipe drawn slot by slot and the station that makes it.",
                "Tous les objets et blocs qu'ajoute Matriochka, avec leur recette dessinée case par case et la station qui les fabrique."),
     )
-    return dict(ui=ui, nav=nav, home=home, worlds=worlds, bestiary=bestiary, bosses=bosses, items=items, systems=build_systems(d), download=build_download())
+    # the version picker, the badges and the Changes pages (data by tools/site_versions.py)
+    versions = dict(
+        label=t("Mod version", "Version du mod"), pick=t("Show the site for another version", "Voir le site d'une autre version"),
+        latest=t("Latest", "Dernière"), mc=t("Minecraft", "Minecraft"),
+        older=t("You are reading an older version of the mod.", "Tu lis une ancienne version du mod."), toLatest=t("See the latest", "Voir la dernière"),
+        new=t("New in {v}", "Nouveau en {v}"), changed=t("Changed in {v}", "Modifié en {v}"),
+        historyH=t("History", "Historique"), since=t("In the mod since {v}.", "Dans le mod depuis la {v}."),
+        sinceFirst=t("In the mod since the first versions.", "Dans le mod depuis les premières versions."),
+        changedIn=t("{v}: {f} changed.", "{v} : modifié ({f})."),
+        changesH=t("Changes in {v}", "Nouveautés de la {v}"), changesNav=t("What changed in {v}", "Ce qui change en {v}"),
+        changesLead=t("What this version adds and changes, from the mod's changelog. Names link to their page as they are in this version.",
+                      "Ce que cette version ajoute et change, d'après le journal des modifications du mod. Les noms mènent à leur page, telle qu'elle est dans cette version."),
+        inEnglish=t("", "Le journal des modifications est rédigé en anglais."),
+        released=t("Released on {d}", "Publiée le {d}"), unreleased=t("Not tagged yet", "Pas encore publiée"),
+        supports=t("Runs on Minecraft {mc}", "Pour Minecraft {mc}"),
+        allH=t("Every version", "Toutes les versions"),
+        notHere=dict(static=t("Not on this site: its own site was still a set of static pages, without the data this one reads.", "Absente de ce site : son propre site était encore fait de pages statiques, sans les données que lit celui-ci."),
+                     failed=t("Not on this site: its data could not be rebuilt.", "Absente de ce site : ses données n'ont pas pu être reconstruites.")),
+        noSection=t("The changelog has no section for this version.", "Le journal des modifications n'a pas de section pour cette version."),
+        loading=t("Opening this version of the mod", "Ouverture de cette version du mod"),
+        notIn=t("Not in {v}", "Absent de la {v}"),
+        notInP=t("This page has no counterpart in version {v} of the mod: what it shows came later.", "Cette page n'a pas d'équivalent dans la version {v} du mod : ce qu'elle montre est venu plus tard."),
+        notInItem=t("This item or block is not in version {v} of the mod.", "Cet objet ou ce bloc n'existe pas dans la version {v} du mod."),
+        seeLatest=t("See it in the latest version", "Le voir dans la dernière version"),
+        unknown=t("This version of the mod is not on the site.", "Cette version du mod n'est pas sur le site."),
+        failed=t("This version could not be opened. Check your connection and reload the page.", "Cette version n'a pas pu être ouverte. Vérifie ta connexion et recharge la page."),
+        f=dict(effect=t("effect text", "texte de l'effet"), rarity=t("rarity", "rareté"), recipe=t("recipe", "recette"),
+               source=t("where it comes from", "provenance"), stats=t("stats", "caractéristiques"), health=t("health", "vie"),
+               damage=t("damage", "dégâts"), speed=t("speed", "vitesse"), moves=t("attacks", "attaques"), attacks=t("attacks", "attaques"),
+               drops=t("drops", "butin"), spawn=t("spawning", "apparition"), phases=t("phases", "phases"), rule=t("rule", "règle"),
+               creatures=t("creatures", "créatures"), boss=t("boss", "boss"), structures=t("structures", "structures"),
+               desc=t("description", "description"), inside=t("what is inside", "contenu"), size=t("size", "taille")),
+        desc=t("What each version of Matriochka adds and changes.", "Ce que chaque version de Matriochka ajoute et change."),
+    )
+    return dict(ui=ui, nav=nav, home=home, worlds=worlds, bestiary=bestiary, bosses=bosses, items=items, systems=build_systems(d), download=build_download(), versions=versions)
 
 
 def slot_label(slot):
@@ -2153,6 +2200,7 @@ def main():
         # the catalogue: every world's items and blocks, in world order
         catalog = [dict(n=w["n"], name=w["name"], items=w["codex"]["items"], blocks=w["codex"]["blocks"]) for w in worlds]
         data = dict(lang=lang, copy=build_copy(), worlds=worlds, mobs=build_mobs(), bosses=build_bosses(), catalog=catalog)
+        data = webp.paths(data, PUBLIC)
         with open(os.path.join(DATA, f"{lang}.json"), "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=1)
     with open(os.path.join(DATA, "shared.json"), "w", encoding="utf-8") as f:

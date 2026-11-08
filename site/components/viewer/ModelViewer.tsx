@@ -4,7 +4,7 @@
 // A link to #anim-<slug> (the bosses page does this for each attack) opens the stage and plays that animation.
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import type { Anim } from "@/lib/types";
 
 const ViewerImpl = dynamic(() => import("./ViewerImpl"), { ssr: false });
@@ -82,7 +82,7 @@ export default function ModelViewer({ id, name, anims, labels, tex, auto = true,
       <div className={`stage${ready ? " is-ready" : ""}${failed ? " is-failed" : ""}`} ref={stage}>
         {(!ready || failed) && (
           <div className="stage-fallback">
-            <img className="stage-portrait" src={asset(`portraits/${id}.png`)} alt="" width="512" height="512" loading="lazy" />
+            <img className="stage-portrait" src={asset(`portraits/${id}.webp`)} alt="" width="512" height="512" loading="lazy" />
             {failed ? <p>{labels.no3d}</p> : mounted ? <p className="stage-wait">{labels.loading3d}</p> : (
               <button type="button" className="btn btn-small" onClick={() => setMounted(true)}>{labels.view3d}</button>
             )}

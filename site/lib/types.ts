@@ -69,7 +69,7 @@ export interface SiteData {
   copy: {
     ui: Record<string, string>;
     nav: Record<string, string>;
-    home: any; worlds: any; bestiary: any; bosses: any; items: any; systems: any; download: any;
+    home: any; worlds: any; bestiary: any; bosses: any; items: any; systems: any; download: any; versions: any;
   };
   catalog: { n: number; name: string; items: CodexEntry[]; blocks: CodexEntry[] }[];
   worlds: World[];

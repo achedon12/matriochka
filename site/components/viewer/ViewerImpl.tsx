@@ -4,7 +4,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import { buildRig, parseAnimations, pose, type AnimFile, type Clip, type GeoFile, type Rig } from "./geo";
 
 /** What to play: one clip, or (`seq`) several chained the way the game chains a boss attack. */
@@ -206,7 +206,7 @@ export default function ViewerImpl({ id, play, rotate, still, onEnd, onReady, on
           fetch(asset(`models/${id}.geo.json`)).then((r) => r.json() as Promise<GeoFile>),
           fetch(asset(`animations/${id}.animation.json`)).then((r) => (r.ok ? (r.json() as Promise<AnimFile>) : { animations: {} })),
         ]);
-        texture = await new THREE.TextureLoader().loadAsync(asset(`entities/${id}.png`));
+        texture = await new THREE.TextureLoader().loadAsync(asset(`entities/${id}.webp`));
         if (disposed) return;
         texture.magFilter = THREE.NearestFilter;
         texture.minFilter = THREE.NearestFilter;
@@ -214,7 +214,7 @@ export default function ViewerImpl({ id, play, rotate, still, onEnd, onReady, on
         texture.colorSpace = THREE.SRGBColorSpace;
         let glow: THREE.Texture | undefined;
         try {
-          glow = await new THREE.TextureLoader().loadAsync(asset(`entities/${id}_glowmask.png`));
+          glow = await new THREE.TextureLoader().loadAsync(asset(`entities/${id}_glowmask.webp`));
           glow.magFilter = THREE.NearestFilter;
           glow.minFilter = THREE.NearestFilter;
           glow.generateMipmaps = false;

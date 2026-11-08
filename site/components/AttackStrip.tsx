@@ -2,7 +2,7 @@
 // The attacks of one boss on its poster: for each, the in-game wind-up and strike, swapped on hover and focus,
 // and played once when the strip first scrolls into view. Each card opens the 3D viewer on that attack.
 import { useEffect, useRef, useState } from "react";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import type { BossMove } from "@/lib/types";
 import { Icon } from "./Bits";
 

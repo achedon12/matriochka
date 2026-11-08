@@ -3,7 +3,9 @@ name: Website
 on:
   push:
     branches: [main]
-    paths: ["site/**", "tools/**", "src/main/resources/**", "src/main/java/**/Recipes.java", "branding/**", ".github/workflows/pages.yml"]
+    # a release tag adds its version to the site (tools/site_versions.py); paths are not checked for tags
+    tags: ["v*"]
+    paths: ["site/**", "tools/**", "src/main/resources/**", "src/main/java/**/Recipes.java", "branding/**", "CHANGELOG.md", "gradle.properties", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
 permissions:
@@ -23,6 +25,12 @@ jobs:
         working-directory: site
     steps:
       - uses: actions/checkout@v7
+        with:
+          # a tag push builds the site from the default branch, which now knows that tag
+          ref: ${{ startsWith(github.ref, 'refs/tags/') && github.event.repository.default_branch || github.ref }}
+          # every release tag, for the data of each version
+          fetch-depth: 0
+          fetch-tags: true
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
@@ -33,7 +41,8 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - run: npm ci
-      # prebuild runs tools/site.py (data + assets), then next build writes the static site to site/out
+      # prebuild runs tools/site.py (data + assets) and tools/site_versions.py (each release tag's data), then
+      # next build writes the static site to site/out (the older versions are drawn by one reader page, /v/)
       - run: npm run build
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v5

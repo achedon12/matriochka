@@ -1,20 +1,23 @@
 "use client";
 // The bestiary as a field guide of portraits: filter by world, show elites only, or search by name.
 // Every card opens the creature's technical sheet.
-import Link from "next/link";
+import Link from "./PageLink";
 import { useMemo, useState } from "react";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import type { Lang, Mob } from "@/lib/types";
 import type { ViewerLabels } from "./viewer/ModelViewer";
 
-export default function BestiaryTable({ lang, mobs, worlds, ui }: {
-  lang: Lang; mobs: Mob[]; worlds: { n: number; name: string; rule: string | null; light: string }[];
+export default function BestiaryTable({ mobs, worlds, ui, base, marks = {} }: {
+  lang: Lang; mobs: (Pick<Mob, "id" | "name" | "desc" | "world" | "bg" | "elite" | "hp" | "dmg"> & { moves: { name: string }[] })[]; worlds: { n: number; name: string; rule: string | null; light: string }[];
   ui: Record<string, string>; viewer?: ViewerLabels;
+  /** the start of the pages of the language and version shown, e.g. "/fr/v/0.6.0/" */
+  base: string;
+  /** "New in 0.7.0" and "Changed in 0.7.0", by creature */
+  marks?: Record<string, { kind: string; text: string }>;
 }) {
   const [world, setWorld] = useState<number | null>(null);
   const [elite, setElite] = useState(false);
   const [q, setQ] = useState("");
-  const prefix = lang === "fr" ? "/fr" : "";
   const shown = useMemo(() => {
     const s = q.trim().toLowerCase();
     return mobs.filter((m) => (world === null || m.world === world) && (!elite || m.elite)
@@ -49,9 +52,9 @@ export default function BestiaryTable({ lang, mobs, worlds, ui }: {
           <ul className="bx-grid">
             {list.map((m) => (
               <li key={m.id} className="reveal">
-                <Link className="bx-card" href={`${prefix}/creatures/${m.id}/`} style={{ "--cb": m.bg } as React.CSSProperties}>
-                  <span className="bx-art"><img src={asset(`portraits/${m.id}.png`)} alt="" loading="lazy" decoding="async" width={512} height={512} /></span>
-                  <span className="bx-name">{m.name}{m.elite && <em className="bx-elite">{ui.elite}</em>}</span>
+                <Link className="bx-card" href={`${base}creatures/${m.id}/`} style={{ "--cb": m.bg } as React.CSSProperties}>
+                  <span className="bx-art"><img src={asset(`portraits/${m.id}.webp`)} alt="" loading="lazy" decoding="async" width={512} height={512} /></span>
+                  <span className="bx-name">{m.name}{m.elite && <em className="bx-elite">{ui.elite}</em>}{marks[m.id] && <span className={`vb vb-${marks[m.id].kind}`}>{marks[m.id].text}</span>}</span>
                   <span className="bx-desc">{m.desc}</span>
                   <span className="bx-stats"><span><small>{ui.health}</small><b className="num">{m.hp}</b></span><span><small>{ui.damage}</small><b className="num">{m.dmg}</b></span></span>
                   <span className="bx-moves">{m.moves.map((x) => x.name).join(", ")}</span>

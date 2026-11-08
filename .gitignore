@@ -10,3 +10,6 @@ wiki/
 site/node_modules/
 site/.next/
 site/out/
+# built from the release tags by tools/site_versions.py
+site/data/versions/
+site/public/versions/

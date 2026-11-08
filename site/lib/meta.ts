@@ -1,15 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import { BASE, SITE_ORIGIN } from "./config";
-import { getData } from "./data";
+import "./latest";
+import { getData, href } from "./data";
 import type { Lang } from "./types";
 
 export const viewport: Viewport = { themeColor: "#17100D", width: "device-width", initialScale: 1 };
 
-/** Title, description, language alternates and the Open Graph card of a page. */
-export function meta(lang: Lang, path: string, title: string | null, description: string): Metadata {
-  const full = title ? `${title} | Matriochka` : "Matriochka";
-  const en = `${BASE}/${path}`;
-  const fr = `${BASE}/fr/${path}`;
+/** Title, description, language alternates and the Open Graph card of a page. `v` is the version shown when it
+ * is not the latest: its pages say so in their title. */
+export function meta(lang: Lang, path: string, title: string | null, description: string, v?: string): Metadata {
+  const site = v ? `Matriochka ${v}` : "Matriochka";
+  const full = title ? `${title} | ${site}` : site;
+  const en = `${BASE}${href("en", path, v)}`;
+  const fr = `${BASE}${href("fr", path, v)}`;
   return {
     metadataBase: new URL(SITE_ORIGIN),
     title: full,
@@ -24,8 +27,8 @@ export function meta(lang: Lang, path: string, title: string | null, description
   };
 }
 
-export function metaFor(lang: Lang, page: "worlds" | "bestiary" | "bosses" | "items" | "systems" | "download") {
-  const c = getData(lang).copy;
+export function metaFor(lang: Lang, page: "worlds" | "bestiary" | "bosses" | "items" | "systems" | "download", v?: string) {
+  const c = getData(lang, v).copy;
   const t = page === "worlds" ? c.worlds.h : c[page].h;
-  return meta(lang, `${page}/`, page === "worlds" ? c.nav.worlds : t, c[page].desc);
+  return meta(lang, `${page}/`, page === "worlds" ? c.nav.worlds : t, c[page].desc, v);
 }

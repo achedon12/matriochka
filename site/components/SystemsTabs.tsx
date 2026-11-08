@@ -1,7 +1,7 @@
 "use client";
 // The systems as tiles; one panel open at a time, so the page stays short. The open panel follows the URL hash.
 import { useEffect, useState } from "react";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import type { Ing } from "@/lib/types";
 import { Icon, Ingredients, Inlay } from "./Bits";
 import { Craft } from "./Craft";
@@ -146,7 +146,8 @@ function Classes({ s }: { s: S }) {
           <div className="mt-4"><Feature f={s.chance} /></div>
         </div>
       </div>
-      <div>
+      {/* talents came in 0.4.0: the older versions shown by the site have no tree */}
+      {s.talentTree && <div>
         <h3 className={h3}>{s.talentsH}</h3>
         <p className="m-0 mb-4 max-w-[70ch] text-paper">{s.talentsLead}</p>
         <div className="tbl mb-4"><table>
@@ -171,7 +172,7 @@ function Classes({ s }: { s: S }) {
           ))}
         </ul>
         <p className="mt-3 text-[14px] text-paper-dim">{s.talentNote}</p>
-      </div>
+      </div>}
     </div>
   );
 }
@@ -326,7 +327,7 @@ function Journal({ s }: { s: S }) {
           <div key={j.src} className="border-2 border-gold bg-black shadow-frame"><img className="block h-auto w-full [image-rendering:pixelated]" src={asset(j.src)} alt={j.caption} loading="lazy" /></div>
         ))}
       </div>
-      <Feature f={s.firstSteps} />
+      {s.firstSteps && <Feature f={s.firstSteps} />}
       <div>
         <h3 className={h3}>{s.titlesH}</h3>
         <ul className="m-0 flex list-none flex-wrap gap-2 p-0">

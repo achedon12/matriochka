@@ -1,26 +1,35 @@
-import en from "@/data/en.json";
-import fr from "@/data/fr.json";
-import shared from "@/data/shared.json";
-import { BASE } from "./config";
-import type { Creature, Lang, Shared, SiteData } from "./types";
+// The data of the pages, by language and version. Safe for client components: nothing is imported here.
+// The latest version's data is handed in on the server by lib/latest.ts (prerendered pages); an older
+// version's by the reader page once it has fetched it (components/Reader.tsx).
+import { LATEST, pageIn } from "./versions";
+import type { Creature, Lang, SiteData } from "./types";
 
-const DATA: Record<Lang, SiteData> = { en: en as unknown as SiteData, fr: fr as unknown as SiteData };
+export { asset, SHARED } from "./asset";
+export { pageIn };
 
-export const SHARED = shared as Shared;
+const DATA = new Map<string, SiteData>();
 
-export function getData(lang: Lang): SiteData {
-  return DATA[lang];
+export function provide(lang: Lang, v: string, d: SiteData) {
+  // the catalogue is every world's items and blocks in world order; an older version's file leaves it out
+  if (!d.catalog) d.catalog = d.worlds.map((w) => ({ n: w.n, name: w.name, items: w.codex.items, blocks: w.codex.blocks }));
+  DATA.set(`${v}/${lang}`, d);
 }
 
-/** A file in site/public, with the base path the site is served from. */
-export function asset(p: string): string {
-  return `${BASE}/${p}`;
+/** The data of a language, in a version (the latest when none is given). */
+export function getData(lang: Lang, v?: string | null): SiteData {
+  const d = DATA.get(`${v ?? LATEST}/${lang}`);
+  if (!d) throw new Error(`no data for ${v ?? LATEST}/${lang}`);
+  return d;
 }
 
-/** A page path in a language, as given to next/link (which adds the base path). */
-export function href(lang: Lang, path = ""): string {
+/** A page path in a language and a version, as given to next/link (which adds the base path). The latest
+ * version keeps the plain addresses; an older one is drawn by the reader page: /v/?v=<version>&p=<path>. */
+export function href(lang: Lang, path = "", v?: string | null): string {
   const p = path.replace(/^\//, "");
-  return (lang === "fr" ? "/fr/" : "/") + p;
+  const root = lang === "fr" ? "/fr/" : "/";
+  if (!v || v === LATEST) return root + p;
+  const [page, hash] = p.split("#");
+  return `${root}v/?v=${v}${page ? `&p=${page}` : ""}${hash !== undefined ? `#${hash}` : ""}`;
 }
 
 /** The same page in the other language. */
@@ -28,12 +37,12 @@ export function otherLang(lang: Lang): Lang {
   return lang === "en" ? "fr" : "en";
 }
 
-export function creature(lang: Lang, id: string): Creature | undefined {
-  const d = getData(lang);
+export function creature(lang: Lang, id: string, v?: string | null): Creature | undefined {
+  const d = getData(lang, v);
   return d.mobs.find((m) => m.id === id) ?? d.bosses.find((b) => b.id === id);
 }
 
-export function allCreatureIds(): string[] {
-  const d = getData("en");
+export function allCreatureIds(v?: string | null): string[] {
+  const d = getData("en", v);
   return [...d.mobs.map((m) => m.id), ...d.bosses.map((b) => b.id)];
 }

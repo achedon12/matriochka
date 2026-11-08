@@ -1,6 +1,6 @@
 "use client";
 // A world's creatures and its boss on one stage: pick one, watch it move and attack, read what its attacks do.
-import Link from "next/link";
+import Link from "./PageLink";
 import { useState } from "react";
 import type { Anim } from "@/lib/types";
 import ModelViewer, { type ViewerLabels } from "./viewer/ModelViewer";

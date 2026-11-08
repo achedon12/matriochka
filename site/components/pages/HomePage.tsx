@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "../PageLink";
 import { asset, creature, getData, href, SHARED } from "@/lib/data";
 import type { Lang, Mob } from "@/lib/types";
 import { Icon, Inlay } from "../Bits";
@@ -9,11 +9,11 @@ import WorldBestiary, { type BestiaryEntry } from "../WorldBestiary";
 import WorldPicker, { type PickerWorld } from "../WorldPicker";
 import { viewerLabels } from "./CreaturesPages";
 
-function picks(lang: Lang, ids: string[]): BestiaryEntry[] {
-  const ui = getData(lang).copy.ui;
-  return ids.map((id) => creature(lang, id) as Mob | undefined).filter((c): c is Mob => !!c).map((c) => ({
+function picks(lang: Lang, ids: string[], v?: string): BestiaryEntry[] {
+  const ui = getData(lang, v).copy.ui;
+  return ids.map((id) => creature(lang, id, v) as Mob | undefined).filter((c): c is Mob => !!c).map((c) => ({
     id: c.id, name: c.name, tex: c.tex, anims: c.anims, badge: c.worldName, line: c.desc,
-    moves: c.moves.map((x) => ({ name: x.name, desc: x.desc })), href: href(lang, `creatures/${c.id}/`),
+    moves: c.moves.map((x) => ({ name: x.name, desc: x.desc })), href: href(lang, `creatures/${c.id}/`, v),
     stats: [{ l: ui.health, v: c.hp }, { l: ui.damage, v: c.dmg }],
   }));
 }
@@ -56,21 +56,21 @@ function Loop({ steps, title }: { steps: { tex: string; h: string; p: string }[]
   );
 }
 
-export default function HomePage({ lang }: { lang: Lang }) {
-  const d = getData(lang);
+export default function HomePage({ lang, v }: { lang: Lang; v?: string }) {
+  const d = getData(lang, v);
   const h = d.copy.home;
   const ui = d.copy.ui;
   const pw: PickerWorld[] = d.worlds.map((w) => ({
     n: w.n, name: w.name, short: w.short, long: w.long, img: w.banner ?? w.wide ?? w.tall, tex: w.block, doll: w.doll, light: w.light, bg: w.bg,
     boss: w.boss.id, mobs: w.mobs.map((m) => m.id),
-    href: href(lang, `worlds/${w.n}/`), label: w.n === 0 ? h.surfaceLabel : `${ui.world} ${w.n}`,
+    href: href(lang, `worlds/${w.n}/`, v), label: w.n === 0 ? h.surfaceLabel : `${ui.world} ${w.n}`,
   }));
   return (
-    <Shell lang={lang} path="">
+    <Shell lang={lang} path="" v={v}>
       {/* hero: the game named, over its own world */}
       <section className="relative isolate grid h-[720px] min-h-[560px] items-end overflow-hidden bg-black max-md:h-auto md:min-h-[min(calc(100svh-150px),880px)]" aria-labelledby="hero-h">
         {SHARED.hasReel ? (
-          <video className="absolute inset-0 -z-20 size-full object-cover motion-reduce:hidden" autoPlay muted loop playsInline preload="auto" poster={asset("reel.jpg")} aria-hidden="true">
+          <video className="absolute inset-0 -z-20 size-full object-cover motion-reduce:hidden" autoPlay muted loop playsInline preload="auto" poster={asset("reel.webp")} aria-hidden="true">
             <source src={asset("reel.mp4")} type="video/mp4" />
           </video>
         ) : (
@@ -114,10 +114,10 @@ export default function HomePage({ lang }: { lang: Lang }) {
             <ul className={`marquee m-0 flex list-none gap-3 p-0 pr-3 ${r ? "marquee-rev" : ""}`} style={{ "--t": `${70 + r * 12}s` } as React.CSSProperties}>
               {[...row, ...row].map((m, i) => (
                 <li key={`${m.id}-${i}`} aria-hidden={i >= row.length}>
-                  <Link href={href(lang, `creatures/${m.id}/`)} tabIndex={i >= row.length ? -1 : undefined}
+                  <Link href={href(lang, `creatures/${m.id}/`, v)} tabIndex={i >= row.length ? -1 : undefined}
                     className="group grid w-36 justify-items-center gap-1 rounded-[3px] border border-rule p-2 text-center text-paper no-underline transition-colors hover:border-gold-b hover:text-gold-b"
                     style={{ background: `radial-gradient(circle at 50% 40%, ${m.light}33, ${m.bg} 70%)` }}>
-                    <img className="h-24 w-auto transition-transform duration-200 group-hover:scale-110" src={asset(`portraits/${m.id}.png`)} alt="" width={128} height={128} loading="lazy" />
+                    <img className="h-24 w-auto transition-transform duration-200 group-hover:scale-110" src={asset(`portraits/${m.id}.webp`)} alt="" width={128} height={128} loading="lazy" />
                     <span className="text-[13px] leading-tight">{m.name}</span>
                   </Link>
                 </li>
@@ -132,7 +132,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
           <div className={wrap}>
             <h2 id="trailer-h" className={h2}>{h.trailerH}</h2>
             <div className={frame}>
-              <video className="block aspect-video h-auto w-full bg-black" controls preload="none" playsInline poster={asset("trailer.jpg")} width={1920} height={1080}>
+              <video className="block aspect-video h-auto w-full bg-black" controls preload="none" playsInline poster={asset("trailer.webp")} width={1920} height={1080}>
                 <source src={asset("trailer.mp4")} type="video/mp4" />
                 <a href={asset("trailer.mp4")}>{h.trailerFallback}</a>
               </video>
@@ -147,14 +147,14 @@ export default function HomePage({ lang }: { lang: Lang }) {
           <h2 id="verbs-h" className={`reveal ${h2}`}>{h.verbsH}</h2>
           <p className={lead}>{h.verbsP}</p>
           <ul className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
-            {h.verbs.map((v: { verb: string; p: string; img: string | null; href: string }) => (
-              <li key={v.verb} className="reveal">
-                <Link className="group grid gap-2 text-paper no-underline transition-transform duration-200 hover:-translate-y-0.5 hover:text-paper" href={href(lang, v.href)}>
+            {h.verbs.map((vb: { verb: string; p: string; img: string | null; href: string }) => (
+              <li key={vb.verb} className="reveal">
+                <Link className="group grid gap-2 text-paper no-underline transition-transform duration-200 hover:-translate-y-0.5 hover:text-paper" href={href(lang, vb.href, v)}>
                   <span className="block aspect-[4/3] overflow-hidden border-2 border-gold bg-ink">
-                    {v.img && <img className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" src={asset(v.img)} alt="" loading="lazy" decoding="async" width={960} height={720} />}
+                    {vb.img && <img className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" src={asset(vb.img)} alt="" loading="lazy" decoding="async" width={960} height={720} />}
                   </span>
-                  <span className="mt-1.5 font-display text-[clamp(24px,2.2vw,30px)] leading-none text-gold-b">{v.verb}</span>
-                  <span className="text-base leading-normal text-paper-dim">{v.p}</span>
+                  <span className="mt-1.5 font-display text-[clamp(24px,2.2vw,30px)] leading-none text-gold-b">{vb.verb}</span>
+                  <span className="text-base leading-normal text-paper-dim">{vb.p}</span>
                 </Link>
               </li>
             ))}
@@ -179,12 +179,12 @@ export default function HomePage({ lang }: { lang: Lang }) {
           <ol className="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(min(100%,230px),1fr))] gap-3.5 p-0">
             {d.bosses.map((b) => (
               <li key={b.id} className="reveal">
-                <Link href={href(lang, `creatures/${b.id}/`)}
+                <Link href={href(lang, `creatures/${b.id}/`, v)}
                   className="group relative block aspect-[4/3] overflow-hidden border border-rule bg-black no-underline transition-colors hover:border-gold-b"
                   style={{ background: `radial-gradient(circle at 60% 40%, ${b.light}55 0%, ${b.bg} 55%, #0e0806 100%)` }}>
                   {b.shot && <img className="absolute inset-0 size-full object-cover opacity-45 saturate-[.8]" src={asset(b.shot)} alt="" loading="lazy" decoding="async" width={960} height={720} />}
                   <img className="bob absolute right-0 bottom-8 z-10 h-auto w-[64%] origin-bottom-right drop-shadow-[0_12px_18px_rgba(0,0,0,.7)] transition-transform duration-300 group-hover:scale-105"
-                    src={asset(`portraits/${b.id}.png`)} alt="" loading="lazy" decoding="async" width={512} height={512} />
+                    src={asset(`portraits/${b.id}.webp`)} alt="" loading="lazy" decoding="async" width={512} height={512} />
                   <span className="absolute inset-0 z-10 bg-[linear-gradient(180deg,transparent_45%,rgba(0,0,0,.88))]" />
                   <span className="absolute right-3.5 bottom-11 left-3.5 z-20 text-[13px] text-gold-b">{b.worldName}</span>
                   <span className="absolute right-3.5 bottom-3 left-3.5 z-20 font-display text-2xl leading-none text-paper">{b.name}</span>
@@ -199,8 +199,8 @@ export default function HomePage({ lang }: { lang: Lang }) {
         <div className={wrap}>
           <h2 id="life-h" className={`reveal ${h2}`}>{h.lifeH}</h2>
           <p className={lead}>{h.lifeP}</p>
-          <WorldBestiary entries={picks(lang, h.lifePicks)} labels={viewerLabels(ui)} sheet={ui.openSheet} movesH={ui.moves} />
-          <p className="mt-6"><Link className={quiet} href={href(lang, "bestiary/")}>{h.allCreatures}</Link></p>
+          <WorldBestiary entries={picks(lang, h.lifePicks, v)} labels={viewerLabels(ui)} sheet={ui.openSheet} movesH={ui.moves} />
+          <p className="mt-6"><Link className={quiet} href={href(lang, "bestiary/", v)}>{h.allCreatures}</Link></p>
         </div>
       </section>
 
@@ -218,7 +218,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
                 </li>
               ))}
             </ul>
-            <p><Link className={quiet} href={href(lang, "systems/")}>{h.sysLink}</Link></p>
+            <p><Link className={quiet} href={href(lang, "systems/", v)}>{h.sysLink}</Link></p>
           </div>
           {h.sysImg && <div className={frame}><img className="block h-auto w-full [image-rendering:pixelated]" src={asset(h.sysImg)} alt="" loading="lazy" decoding="async" width={960} height={720} /></div>}
         </div>

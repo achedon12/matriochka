@@ -3,9 +3,9 @@
 // the world's name set huge behind them. Below, the dolls on their shelf: the chosen one lifts its lid.
 // The stage turns to the next world every 7 seconds until the visitor picks one or pauses.
 // Arrow keys move along the shelf, Home and End jump to the ends.
-import Link from "next/link";
+import Link from "./PageLink";
 import { useEffect, useRef, useState } from "react";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import { btn } from "./ui";
 import { StageCast, StageCorners, StageGround, StageTitle } from "./WorldStage";
 

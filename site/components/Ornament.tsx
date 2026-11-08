@@ -111,7 +111,8 @@ function dollSymbol() {
   );
 }
 
-const SPRITE =
+/** All symbols and patterns, drawn once per page by components/Sprite.tsx. */
+export const SPRITE =
   vinePattern("vine-black", GOLD, GOLD, BLACK, RED_B, BLACK, BLACK) +
   vinePattern("vine-red", GOLD, BLACK, GOLD, RED_B, BLACK) +
   vinePattern("vine-gold", BLACK, RED, GOLD_B, RED_B, BLACK, GOLD) +
@@ -123,14 +124,6 @@ const SPRITE =
   `<clipPath id="doll-top"><rect x="-10" y="-10" width="120" height="109"/></clipPath>` +
   `<clipPath id="doll-bottom"><rect x="-10" y="98" width="120" height="90"/></clipPath>`;
 
-/** All symbols and patterns, once per page (kept out of layout so patterns render in every browser). */
-export function Sprite() {
-  return (
-    <svg className="sprite" aria-hidden="true" focusable="false" width="0" height="0">
-      <defs dangerouslySetInnerHTML={{ __html: SPRITE }} />
-    </svg>
-  );
-}
 
 /** A horizontal border of running vine on a red, black or gold ground. */
 export function Vine({ kind = "red", className = "" }: { kind?: "red" | "black" | "gold"; className?: string }) {

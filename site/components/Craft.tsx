@@ -1,4 +1,4 @@
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import type { Ing } from "@/lib/types";
 
 /**
