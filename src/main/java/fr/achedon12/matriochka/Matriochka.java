@@ -47,6 +47,7 @@ public class Matriochka implements ModInitializer {
 		fr.achedon12.matriochka.world.Rites.init();
 		fr.achedon12.matriochka.world.Travel.init();
 		fr.achedon12.matriochka.world.Shoulder.init();
+		fr.achedon12.matriochka.world.WorldOres.init();
 		fr.achedon12.matriochka.compat.MapCompat.init();
 		fr.achedon12.matriochka.replay.Replay.init();
 		LOG.info("Matriochka loaded: 10 worlds, {} creatures, {} bosses.", fr.achedon12.matriochka.content.Content.MOBS.size(), fr.achedon12.matriochka.content.Content.BOSSES.size());

@@ -138,6 +138,8 @@ public final class Events {
 
 		// Doll of life, then death chest.
 		ServerPlayerEvents.ALLOW_DEATH.register((player, source, amount) -> {
+			// the Matriarch Armour's Nested Shell takes the blow first: the Doll of Life is then not spent
+			if (!Config.hardcore() && fr.achedon12.matriochka.gear.Matriarch.save(player, source)) return false;
 			PlayerState ps = PlayerState.of(player);
 			long now = player.level().getGameTime();
 			if (!Config.hardcore() && ps.dollLayers() > 0 && now - ps.tag().getLongOr("last_revive", -10000) >= 1200) {

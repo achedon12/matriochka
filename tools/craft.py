@@ -1406,6 +1406,10 @@ CORE_WORLD = {"guardian_core": 0, "queen_core": 1, "titan_core": 2, "jailer_core
 
 def crafted_item(it, res=16):
     """The hand-crafted sprite of an item (an ALL_ITEMS entry of gen.py), or None to keep the procedural painter."""
+    import ores_art
+    spr = ores_art.crafted_item(it, res)
+    if spr is not None:
+        return spr
     iid = it["id"]
     if iid.startswith("hidden_doll_"):
         w = int(iid.rsplit("_", 1)[1])
@@ -1434,6 +1438,9 @@ def crafted_item(it, res=16):
 
 def crafted_block(bid, res=16):
     """{texture suffix: sprite} of a hand-crafted block ('' is the main face), or None."""
+    import ores_art
+    if ores_art.crafted_block(bid, res) is not None:
+        return ores_art.crafted_block(bid, res)
     if bid.startswith("world_soil_"):
         w = int(bid.rsplit("_", 1)[1])
         return {"": bl_soil(res, w), "_tilled": bl_soil(res, w, tilled=True)}

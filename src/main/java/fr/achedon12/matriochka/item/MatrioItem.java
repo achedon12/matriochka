@@ -56,13 +56,43 @@ public class MatrioItem extends Item {
 	public static void appendInfo(Defs.ItemDef def, ItemStack stack, Consumer<Component> out) {
 		String key = "item.matriochka." + def.id() + ".desc";
 		if (net.minecraft.locale.Language.getInstance().has(key)) {
-			out.accept(Component.translatable(key).withStyle(ChatFormatting.GRAY));
+			// a long description is laid on several lines, so the tooltip stays on the screen
+			for (String line : wrap(net.minecraft.locale.Language.getInstance().getOrDefault(key), WRAP))
+				out.accept(Component.literal(line).withStyle(ChatFormatting.GRAY));
 		}
+		// the material chain of the Matriarch Armour, on every link of it
+		if ("world_ore".equals(def.kind()) || "nested".equals(def.kind()) || def.id().equals("artisan_thread"))
+			out.accept(Component.translatable("tooltip.matriochka.chain").withStyle(ChatFormatting.DARK_AQUA));
 		// its world, rarity and souls are drawn as icons under the name (getTooltipImage)
 		fr.achedon12.matriochka.rules.Snorkel.appendTooltip(stack, out);
 		if (def.id().equals("drill")) Drill.appendTooltip(stack, out);
 		if ("trophy".equals(def.kind())) out.accept(Component.translatable("tooltip.matriochka.trophy_shoulder").withStyle(ChatFormatting.DARK_AQUA));
 		GearClasses.appendTooltip(stack, out);
+	}
+
+	/** The longest line of a description in a tooltip, in characters. */
+	public static final int WRAP = 52;
+
+	/** Cuts a text into lines of at most `width` characters, between words (or anywhere, for a text without spaces). */
+	public static java.util.List<String> wrap(String text, int width) {
+		java.util.List<String> lines = new java.util.ArrayList<>();
+		boolean spaced = text.indexOf(' ') >= 0;
+		int cut = spaced ? width : Math.max(8, width / 2);
+		StringBuilder line = new StringBuilder();
+		if (!spaced) {
+			for (int i = 0; i < text.length(); i += cut) lines.add(text.substring(i, Math.min(text.length(), i + cut)));
+			return lines;
+		}
+		for (String word : text.split(" ")) {
+			if (line.length() > 0 && line.length() + 1 + word.length() > cut) {
+				lines.add(line.toString());
+				line.setLength(0);
+			}
+			if (line.length() > 0) line.append(' ');
+			line.append(word);
+		}
+		if (line.length() > 0) lines.add(line.toString());
+		return lines;
 	}
 
 	/** The world dishes: each one eases its world's rule for a while. */
@@ -92,6 +122,15 @@ public class MatrioItem extends Item {
 			default -> {}
 		}
 		ps.sync();
+	}
+
+	/** A Time Seed is planted on grass or dirt, in World 8 only (world/WorldOres). */
+	@Override
+	public InteractionResult useOn(net.minecraft.world.item.context.UseOnContext ctx) {
+		if (!"time_seed".equals(def.id())) return super.useOn(ctx);
+		if (!(ctx.getLevel() instanceof ServerLevel sl) || !(ctx.getPlayer() instanceof ServerPlayer sp)) return InteractionResult.SUCCESS;
+		fr.achedon12.matriochka.world.WorldOres.plant(sl, sp, ctx.getClickedPos(), ctx.getItemInHand());
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override

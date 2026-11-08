@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "matriochka:block/nesting_cradle"
+    },
+    "facing=east": {
+      "model": "matriochka:block/nesting_cradle",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "matriochka:block/nesting_cradle",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "matriochka:block/nesting_cradle",
+      "y": 270
+    }
+  }
+}

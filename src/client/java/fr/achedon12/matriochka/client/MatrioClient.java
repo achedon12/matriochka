@@ -34,9 +34,16 @@ public class MatrioClient implements ClientModInitializer {
 		MatrioParticle.register();
 		// the miniature world over every World Block (the renderer skips the other blocks sharing this entity type)
 		net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry.register(ModContent.BE_DATA, WorldBlockRenderer::new);
+		// the Nesting Cradle: its animated model (tools/cradle_geo.py), its sockets, glow and ingot lit
+		net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry.register(ModContent.BE_CRADLE, ctx -> {
+			com.geckolib.renderer.GeoBlockRenderer r = new com.geckolib.renderer.GeoBlockRenderer(ctx, ModContent.BE_CRADLE);
+			r.withRenderLayer(new AutoGlowingGeoLayer(r));
+			return r;
+		});
 		HudElementRegistry.addLast(Matriochka.id("gauges"), new Hud());
 		// the world's rule meter: a vanilla status row above the hunger bar
 		MeterHud.register();
+		MatriarchTip.init();
 		// comfort options, then the cinematics over the HUD (title cards, letterbox, subtitles, tints)
 		Comfort.init();
 		Cinematics.init();

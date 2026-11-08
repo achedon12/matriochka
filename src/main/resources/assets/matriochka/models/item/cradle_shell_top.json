@@ -1,0 +1,486 @@
+{
+  "textures": {
+    "particle": "matriochka:block/cradle/shell_gold",
+    "shell_gold": "matriochka:block/cradle/shell_gold",
+    "shell_face": "matriochka:block/cradle/shell_face",
+    "gold": "matriochka:block/cradle/gold"
+  },
+  "elements": [
+    {
+      "from": [
+        2.5,
+        7.4,
+        2.5
+      ],
+      "to": [
+        13.5,
+        8.4,
+        13.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2.5,
+            7.6,
+            13.5,
+            8.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "south": {
+          "uv": [
+            2.5,
+            7.6,
+            13.5,
+            8.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "east": {
+          "uv": [
+            2.5,
+            7.6,
+            13.5,
+            8.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "west": {
+          "uv": [
+            2.5,
+            7.6,
+            13.5,
+            8.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "up": {
+          "uv": [
+            2.5,
+            2.5,
+            13.5,
+            13.5
+          ],
+          "texture": "#shell_gold"
+        },
+        "down": {
+          "uv": [
+            2.5,
+            2.5,
+            13.5,
+            13.5
+          ],
+          "texture": "#shell_gold"
+        }
+      }
+    },
+    {
+      "from": [
+        3.2,
+        8.4,
+        3.2
+      ],
+      "to": [
+        12.8,
+        9.4,
+        12.8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3.2,
+            6.6,
+            12.8,
+            7.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "south": {
+          "uv": [
+            3.2,
+            6.6,
+            12.8,
+            7.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "east": {
+          "uv": [
+            3.2,
+            6.6,
+            12.8,
+            7.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "west": {
+          "uv": [
+            3.2,
+            6.6,
+            12.8,
+            7.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "up": {
+          "uv": [
+            3.2,
+            3.2,
+            12.8,
+            12.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "down": {
+          "uv": [
+            3.2,
+            3.2,
+            12.8,
+            12.8
+          ],
+          "texture": "#shell_gold"
+        }
+      }
+    },
+    {
+      "from": [
+        3.9,
+        9.4,
+        3.9
+      ],
+      "to": [
+        12.1,
+        10.2,
+        12.1
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3.9,
+            5.8,
+            12.1,
+            6.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "south": {
+          "uv": [
+            3.9,
+            5.8,
+            12.1,
+            6.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "east": {
+          "uv": [
+            3.9,
+            5.8,
+            12.1,
+            6.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "west": {
+          "uv": [
+            3.9,
+            5.8,
+            12.1,
+            6.6
+          ],
+          "texture": "#shell_gold"
+        },
+        "up": {
+          "uv": [
+            3.9,
+            3.9,
+            12.1,
+            12.1
+          ],
+          "texture": "#shell_gold"
+        },
+        "down": {
+          "uv": [
+            3.9,
+            3.9,
+            12.1,
+            12.1
+          ],
+          "texture": "#shell_gold"
+        }
+      }
+    },
+    {
+      "from": [
+        4.1,
+        10.2,
+        4.1
+      ],
+      "to": [
+        11.9,
+        14.2,
+        11.9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4.1,
+            1.8,
+            11.9,
+            5.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#shell_face"
+        },
+        "east": {
+          "uv": [
+            4.1,
+            1.8,
+            11.9,
+            5.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "west": {
+          "uv": [
+            4.1,
+            1.8,
+            11.9,
+            5.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "up": {
+          "uv": [
+            4.1,
+            4.1,
+            11.9,
+            11.9
+          ],
+          "texture": "#shell_gold"
+        },
+        "down": {
+          "uv": [
+            4.1,
+            4.1,
+            11.9,
+            11.9
+          ],
+          "texture": "#shell_gold"
+        }
+      }
+    },
+    {
+      "from": [
+        5.0,
+        14.2,
+        5.0
+      ],
+      "to": [
+        11.0,
+        15.2,
+        11.0
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            0.8,
+            11.0,
+            1.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "south": {
+          "uv": [
+            5.0,
+            0.8,
+            11.0,
+            1.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "east": {
+          "uv": [
+            5.0,
+            0.8,
+            11.0,
+            1.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "west": {
+          "uv": [
+            5.0,
+            0.8,
+            11.0,
+            1.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "up": {
+          "uv": [
+            5.0,
+            5.0,
+            11.0,
+            11.0
+          ],
+          "texture": "#shell_gold"
+        },
+        "down": {
+          "uv": [
+            5.0,
+            5.0,
+            11.0,
+            11.0
+          ],
+          "texture": "#shell_gold"
+        }
+      }
+    },
+    {
+      "from": [
+        6.2,
+        15.2,
+        6.2
+      ],
+      "to": [
+        9.8,
+        16.0,
+        9.8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6.2,
+            0.0,
+            9.8,
+            0.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "south": {
+          "uv": [
+            6.2,
+            0.0,
+            9.8,
+            0.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "east": {
+          "uv": [
+            6.2,
+            0.0,
+            9.8,
+            0.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "west": {
+          "uv": [
+            6.2,
+            0.0,
+            9.8,
+            0.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "up": {
+          "uv": [
+            6.2,
+            6.2,
+            9.8,
+            9.8
+          ],
+          "texture": "#shell_gold"
+        },
+        "down": {
+          "uv": [
+            6.2,
+            6.2,
+            9.8,
+            9.8
+          ],
+          "texture": "#shell_gold"
+        }
+      }
+    },
+    {
+      "from": [
+        2.2,
+        7.4,
+        2.2
+      ],
+      "to": [
+        13.8,
+        7.9,
+        13.8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2.2,
+            8.1,
+            13.8,
+            8.6
+          ],
+          "texture": "#gold"
+        },
+        "south": {
+          "uv": [
+            2.2,
+            8.1,
+            13.8,
+            8.6
+          ],
+          "texture": "#gold"
+        },
+        "east": {
+          "uv": [
+            2.2,
+            8.1,
+            13.8,
+            8.6
+          ],
+          "texture": "#gold"
+        },
+        "west": {
+          "uv": [
+            2.2,
+            8.1,
+            13.8,
+            8.6
+          ],
+          "texture": "#gold"
+        },
+        "up": {
+          "uv": [
+            2.2,
+            2.2,
+            13.8,
+            13.8
+          ],
+          "texture": "#gold"
+        },
+        "down": {
+          "uv": [
+            2.2,
+            2.2,
+            13.8,
+            13.8
+          ],
+          "texture": "#gold"
+        }
+      }
+    }
+  ]
+}

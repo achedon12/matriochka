@@ -16,4 +16,7 @@ public interface DisplayAccess {
 
 	@Invoker("setPosRotInterpolationDuration")
 	void matriochka$setPosRotInterpolation(int ticks);
+
+	@Invoker("setBrightnessOverride")
+	void matriochka$setBrightness(net.minecraft.util.Brightness brightness);
 }

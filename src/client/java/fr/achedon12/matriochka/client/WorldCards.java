@@ -40,9 +40,17 @@ public final class WorldCards {
 			for (Recipes.Recipe r : Recipes.of(b.id())) crafted.computeIfAbsent(r.output(), k -> new ArrayList<>()).add(b.id());
 		}
 		List<Entry> out = new ArrayList<>();
+		// World 10 opens on the chain the Matriarch Armour is made by: the ten ores, the cradle, the ingot, the armour
+		if (world == 10) {
+			Defs.ItemDef cradle = new Defs.ItemDef("nesting_cradle", 10, "block", "legendary", "", "");
+			out.add(new Entry(cradle, List.of(Component.translatable("journal.matriochka.card.chain"), Component.translatable("journal.matriochka.card.craft", name("final_loom")))));
+		}
 		for (Defs.ItemDef it : Content.ITEMS) {
 			if (it.world() != world) continue;
 			List<Component> ways = new ArrayList<>();
+			// a world ore says first how it is had: each one its own way (world/WorldOres)
+			String how = "journal.matriochka.card.how." + it.id();
+			if (net.minecraft.locale.Language.getInstance().has(how)) ways.add(Component.translatable(how));
 			for (String st : crafted.getOrDefault(it.id(), List.of()).stream().distinct().toList())
 				ways.add(Component.translatable("journal.matriochka.card.craft", name(st)));
 			for (Defs.MobDef m : Content.MOBS) {

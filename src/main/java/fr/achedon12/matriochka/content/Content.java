@@ -39,6 +39,26 @@ public final class Content {
 	public static final List<String> MUTATIONS = List.of("searing", "frenzied", "echoing", "radiant", "hollow");
 	/** Mutation of a wild world's boss, by world number (empty: none). */
 	public static final String[] WILD_MUTATION = {"", "", "", "", "", "", "echoing", "frenzied", "searing", "echoing", "frenzied", ""};
+	/** The ore of each world, by world number (1 to 10): the ten the Nesting Cradle takes. */
+	public static final String[] WORLD_ORES = {"", "spore_crystal", "living_ember", "golden_ward", "fulgurite", "silent_stone", "inverted_ore", "brine_crystal", "chrono_shard", "heartstone", "artisan_thread"};
+	public static final float ORE_SPORE_CHANCE = 0.15f;
+	public static final int ORE_SPORE_WATER = 4;
+	public static final int ORE_EMBER_HEAT = 70;
+	public static final float ORE_BRINE_CHANCE = 0.04f;
+	public static final int[] ORE_HEARTSTONES = {2, 3};
+	public static final int ORE_SPROUT_STAGE_TICKS = 600;
+	public static final int ORE_INVERTED_RISE_TICKS = 100;
+	public static final float ORE_WARD_VAULT_CHANCE = 0.6f;
+	public static final float ORE_SEED_CHEST_CHANCE = 0.35f;
+	public static final int MATRIARCH_ARMOR = 32, MATRIARCH_DURABILITY = 96, MATRIARCH_ENCHANT = 15, MATRIARCH_SAVE_COOLDOWN = 6000;
+	public static final float MATRIARCH_TOUGHNESS = 18f, MATRIARCH_KNOCKBACK = 0.225f, MATRIARCH_EXTRA_HEALTH = 2f, MATRIARCH_GAUGE = 0.5f, MATRIARCH_SAVE_HEALTH = 6.0f;
+	/** Matriochkite Ingots per Matriarch piece: helmet, chestplate, leggings, boots. */
+	public static final int[] MATRIARCH_INGOTS = {2, 3, 2, 1};
+	/** The cradle's ritual, in ticks from its start (tools/content.py CRADLE_TIMELINE, its animation in tools/cradle_geo.py). */
+	public static final int CRADLE_TIGHTEN = 40, CRADLE_OPEN = 36, CRADLE_RISE = 44, CRADLE_CLOSE = 76, CRADLE_CLACK_EVERY = 4, CRADLE_DESCEND = 114, CRADLE_SLAM = 128, CRADLE_REVEAL = 138, CRADLE_END = 160;
+	/** The Nesting Cradle's recipe at its station: ids and counts, in turn. */
+	public static final String CRADLE_STATION = "final_loom";
+	public static final Object[] CRADLE_INPUTS = {"lacquer_block", 4, "minecraft:gold_block", 1, "artisan_thread", 6, "artisan_shard", 1};
 	public static final List<Defs.ItemDef> ITEMS = List.of(
 		new Defs.ItemDef("artisan_scroll", 0, "guide", "none", "", ""),
 		new Defs.ItemDef("artisan_journal", 0, "guide", "none", "", ""),
@@ -65,6 +85,7 @@ public final class Content {
 		new Defs.ItemDef("chitin_chestplate", 1, "armor", "rare", "chestplate", "chitin"),
 		new Defs.ItemDef("chitin_leggings", 1, "armor", "rare", "leggings", "chitin"),
 		new Defs.ItemDef("chitin_boots", 1, "armor", "rare", "boots", "chitin"),
+		new Defs.ItemDef("spore_crystal", 1, "world_ore", "epic", "", ""),
 		new Defs.ItemDef("blazing_rock", 2, "resource", "common", "", ""),
 		new Defs.ItemDef("giant_ore", 2, "resource", "rare", "", ""),
 		new Defs.ItemDef("ash_ingot", 2, "ingot", "rare", "", ""),
@@ -75,6 +96,7 @@ public final class Content {
 		new Defs.ItemDef("thermal_chestplate", 2, "armor", "rare", "chestplate", "thermal"),
 		new Defs.ItemDef("thermal_leggings", 2, "armor", "rare", "leggings", "thermal"),
 		new Defs.ItemDef("thermal_boots", 2, "armor", "rare", "boots", "thermal"),
+		new Defs.ItemDef("living_ember", 2, "world_ore", "epic", "", ""),
 		new Defs.ItemDef("dungeon_key", 3, "key", "rare", "", ""),
 		new Defs.ItemDef("sealed_fragment", 3, "resource", "rare", "", ""),
 		new Defs.ItemDef("labyrinth_map", 3, "tool", "common", "", ""),
@@ -85,6 +107,7 @@ public final class Content {
 		new Defs.ItemDef("jailer_chestplate", 3, "armor", "rare", "chestplate", "jailer"),
 		new Defs.ItemDef("jailer_leggings", 3, "armor", "rare", "leggings", "jailer"),
 		new Defs.ItemDef("jailer_boots", 3, "armor", "rare", "boots", "jailer"),
+		new Defs.ItemDef("golden_ward", 3, "world_ore", "epic", "", ""),
 		new Defs.ItemDef("refuge_doll", 3, "doll", "legendary", "", ""),
 		new Defs.ItemDef("ray_membrane", 4, "resource", "common", "", ""),
 		new Defs.ItemDef("storm_essence", 4, "resource", "rare", "", ""),
@@ -96,6 +119,7 @@ public final class Content {
 		new Defs.ItemDef("celestial_chestplate", 4, "armor", "rare", "chestplate", "celestial"),
 		new Defs.ItemDef("celestial_leggings", 4, "armor", "rare", "leggings", "celestial"),
 		new Defs.ItemDef("celestial_boots", 4, "armor", "rare", "boots", "celestial"),
+		new Defs.ItemDef("fulgurite", 4, "world_ore", "epic", "", ""),
 		new Defs.ItemDef("armor_layer", 4, "layer", "rare", "", ""),
 		new Defs.ItemDef("shadow_shard", 5, "resource", "rare", "", ""),
 		new Defs.ItemDef("diamond_fragment", 5, "gem", "epic", "", ""),
@@ -107,6 +131,7 @@ public final class Content {
 		new Defs.ItemDef("nocturnal_chestplate", 5, "armor", "epic", "chestplate", "nocturnal"),
 		new Defs.ItemDef("nocturnal_leggings", 5, "armor", "epic", "leggings", "nocturnal"),
 		new Defs.ItemDef("nocturnal_boots", 5, "armor", "epic", "boots", "nocturnal"),
+		new Defs.ItemDef("silent_stone", 5, "world_ore", "epic", "", ""),
 		new Defs.ItemDef("unstable_alloy", 6, "ingot", "rare", "", ""),
 		new Defs.ItemDef("inverted_crystal", 6, "gem", "epic", "", ""),
 		new Defs.ItemDef("gravity_boots", 6, "boots", "epic", "", ""),
@@ -116,6 +141,7 @@ public final class Content {
 		new Defs.ItemDef("mirror_chestplate", 6, "armor", "epic", "chestplate", "mirror"),
 		new Defs.ItemDef("mirror_leggings", 6, "armor", "epic", "leggings", "mirror"),
 		new Defs.ItemDef("mirror_boots", 6, "armor", "epic", "boots", "mirror"),
+		new Defs.ItemDef("inverted_ore", 6, "world_ore", "epic", "", ""),
 		new Defs.ItemDef("abyssal_salt", 7, "dust", "rare", "", ""),
 		new Defs.ItemDef("nacre", 7, "gem", "rare", "", ""),
 		new Defs.ItemDef("abyssal_cobalt", 7, "ingot", "rare", "", ""),
@@ -126,6 +152,7 @@ public final class Content {
 		new Defs.ItemDef("diving_chestplate", 7, "armor", "epic", "chestplate", "diving"),
 		new Defs.ItemDef("diving_leggings", 7, "armor", "epic", "leggings", "diving"),
 		new Defs.ItemDef("diving_boots", 7, "armor", "epic", "boots", "diving"),
+		new Defs.ItemDef("brine_crystal", 7, "world_ore", "epic", "", ""),
 		new Defs.ItemDef("temporal_sand", 8, "dust", "rare", "", ""),
 		new Defs.ItemDef("season_fragment", 8, "gem", "epic", "", ""),
 		new Defs.ItemDef("hourglass", 8, "hourglass", "epic", "", ""),
@@ -135,6 +162,8 @@ public final class Content {
 		new Defs.ItemDef("seasonal_chestplate", 8, "armor", "epic", "chestplate", "seasonal"),
 		new Defs.ItemDef("seasonal_leggings", 8, "armor", "epic", "leggings", "seasonal"),
 		new Defs.ItemDef("seasonal_boots", 8, "armor", "epic", "boots", "seasonal"),
+		new Defs.ItemDef("time_seed", 8, "world_ore", "rare", "", ""),
+		new Defs.ItemDef("chrono_shard", 8, "world_ore", "epic", "", ""),
 		new Defs.ItemDef("terrain_fragment", 9, "resource", "rare", "", ""),
 		new Defs.ItemDef("terrain_heart", 9, "resource", "legendary", "", ""),
 		new Defs.ItemDef("anchor", 9, "anchor", "rare", "", ""),
@@ -144,6 +173,7 @@ public final class Content {
 		new Defs.ItemDef("living_rock_chestplate", 9, "armor", "legendary", "chestplate", "living_rock"),
 		new Defs.ItemDef("living_rock_leggings", 9, "armor", "legendary", "leggings", "living_rock"),
 		new Defs.ItemDef("living_rock_boots", 9, "armor", "legendary", "boots", "living_rock"),
+		new Defs.ItemDef("heartstone", 9, "world_ore", "epic", "", ""),
 		new Defs.ItemDef("last_doll_key", 9, "key", "none", "", ""),
 		new Defs.ItemDef("artisan_thread", 10, "thread", "rare", "", ""),
 		new Defs.ItemDef("artisan_shard", 10, "gem", "legendary", "", ""),
@@ -152,6 +182,12 @@ public final class Content {
 		new Defs.ItemDef("artisan_chestplate", 10, "armor", "legendary", "chestplate", "artisan"),
 		new Defs.ItemDef("artisan_leggings", 10, "armor", "legendary", "leggings", "artisan"),
 		new Defs.ItemDef("artisan_boots", 10, "armor", "legendary", "boots", "artisan"),
+		new Defs.ItemDef("matriochkite_ingot", 10, "nested", "legendary", "", ""),
+		new Defs.ItemDef("matriochkite_nugget", 10, "nested", "epic", "", ""),
+		new Defs.ItemDef("matriarch_helmet", 10, "armor", "legendary", "helmet", "matriarch"),
+		new Defs.ItemDef("matriarch_chestplate", 10, "armor", "legendary", "chestplate", "matriarch"),
+		new Defs.ItemDef("matriarch_leggings", 10, "armor", "legendary", "leggings", "matriarch"),
+		new Defs.ItemDef("matriarch_boots", 10, "armor", "legendary", "boots", "matriarch"),
 		new Defs.ItemDef("queen_core", 1, "core", "legendary", "", ""),
 		new Defs.ItemDef("titan_core", 2, "core", "legendary", "", ""),
 		new Defs.ItemDef("jailer_core", 3, "core", "legendary", "", ""),
@@ -326,7 +362,14 @@ public final class Content {
 		new Defs.BlockDef("artisan_thread_ore", 10, "terrain", "ore", "artisan_thread"),
 		new Defs.BlockDef("air_vent", 7, "vent", "vent", ""),
 		new Defs.BlockDef("trial_altar", 0, "trial_altar", "stone_rune", ""),
-		new Defs.BlockDef("reliquary", 0, "reliquary", "lacquer", "")
+		new Defs.BlockDef("reliquary", 0, "reliquary", "lacquer", ""),
+		new Defs.BlockDef("living_ember_ore", 2, "world_ore", "ore", ""),
+		new Defs.BlockDef("fulgurite_ore", 4, "world_ore", "ore", "fulgurite"),
+		new Defs.BlockDef("silent_stone_ore", 5, "world_ore", "ore", ""),
+		new Defs.BlockDef("hanging_ore", 6, "world_ore", "ore", ""),
+		new Defs.BlockDef("time_sprout", 8, "time_sprout", "special", ""),
+		new Defs.BlockDef("nesting_cradle", 10, "nesting_cradle", "lacquer", ""),
+		new Defs.BlockDef("matriochkite_block", 10, "matriochkite_block", "special", "")
 	);
 	public static final List<Defs.MobDef> MOBS = List.of(
 		new Defs.MobDef("sporeling", 1, 16f, 3f, "swarm_toxin", 0.6f, 0.47f, 1.44f, "spores", "", false, false, false, false, List.of(new Defs.AttackDef("nip", "melee", 0.6f, 3.0f, 2, 4, 0f, 0f, 8, 14, 80, 0f, 3.2f, 40, 100, 0, 0f, 1, "", "", "toxin:3", "", "matriochka:spore", "entity.fox.bite"), new Defs.AttackDef("pop", "ring", 0.6f, 2.5f, 1, 4, 0f, 0.2f, 10, 16, 110, 0f, 4f, 40, 100, 0, 0f, 1, "", "", "toxin:8", "", "falling_spore_blossom", "entity.puffer_fish.blow_up"), new Defs.AttackDef("scatter", "leap", 0.9f, 0f, 1, 4, 0f, 0.55f, 9, 24, 90, 2f, 7f, 40, 100, 0, 0f, 1, "", "", "", "", "matriochka:spore", "entity.slime.jump"))),

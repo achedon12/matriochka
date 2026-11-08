@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:ore",
+  "discard_chance_on_air_exposure": 0.0,
+  "size": 4,
+  "targets": [
+    {
+      "state": "matriochka:silent_stone_ore",
+      "target": {
+        "predicate_type": "minecraft:block_match",
+        "block": "matriochka:umbral_stone"
+      }
+    },
+    {
+      "state": "matriochka:silent_stone_ore",
+      "target": {
+        "predicate_type": "minecraft:block_match",
+        "block": "matriochka:umbral_stone"
+      }
+    }
+  ]
+}

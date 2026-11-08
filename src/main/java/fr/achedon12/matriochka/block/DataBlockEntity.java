@@ -39,6 +39,8 @@ public class DataBlockEntity extends BlockEntity {
 	public void preRemoveSideEffects(BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
 		super.preRemoveSideEffects(pos, state);
 		if (level != null && hasItems()) net.minecraft.world.Containers.dropContents(level, pos, items);
+		// a Nesting Cradle broken mid-way gives its ores back
+		if (level instanceof net.minecraft.server.level.ServerLevel sl && state.getBlock() instanceof NestingCradle) NestingCradle.spill(sl, pos, this);
 	}
 
 	public void changed() {

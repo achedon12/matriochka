@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "matriochka:matriochkite_ingot"
+  ],
+  "result": {
+    "id": "matriochka:matriochkite_nugget",
+    "count": 9
+  }
+}

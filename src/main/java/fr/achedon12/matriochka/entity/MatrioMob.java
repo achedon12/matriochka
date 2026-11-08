@@ -536,6 +536,8 @@ public class MatrioMob extends Monster implements GeoEntity {
 			if (item != null) spawnAtLocation(level, new ItemStack(item));
 		}
 		if (def().world() == 1 && random.nextFloat() < 0.25f) spawnAtLocation(level, new ItemStack(ModContent.item("roots")));
+		// the creatures of the Pressure Ocean carry the world's ore (world/WorldOres)
+		if (fr.achedon12.matriochka.world.WorldOres.brine(def().world(), random.nextFloat())) spawnAtLocation(level, new ItemStack(ModContent.item("brine_crystal")));
 		// wild, hallowed and cursed worlds drop more: a second roll of the common drop, and a better chance at the rare one
 		float loot = fr.achedon12.matriochka.world.Variants.at(level, blockPosition()).loot();
 		if (loot > 0 && killedByPlayer) {

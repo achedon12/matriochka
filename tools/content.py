@@ -119,6 +119,9 @@ item("antidote", "Antidote", "Antidote", 1, "consumable", "common", "potion", "R
 item("filter_mask", "Filter Mask", "Masque filtrant", 1, "mask", "rare", "mask", "Halves toxin gain.", "Divise par 2 la montée de toxine.")
 item("sporite_sword", "Sporite Sword", "Épée de sporite", 1, "weapon", "rare", "sword", "", "")
 item("chitin", "", "", 1, "armorset", "rare", "armor", set_en="Chitin", set_fr="de chitine")
+item("spore_crystal", "Spore Crystal", "Cristal de spores", 1, "world_ore", "epic", "spore_crystal",
+     "World 1's ore. It grows on the Spore Blooms that stand near water: break a bloom with water within 4 blocks, about one in seven gives one.",
+     "Le minerai du monde 1. Il pousse sur les Floraisons de spores proches de l'eau : casse une floraison à moins de 4 blocs d'une eau, environ une sur sept en donne un.")
 # World 2
 item("blazing_rock", "Blazing Rock", "Roche ardente", 2, "resource", "common", "rock", "Powerful fuel.", "Combustible puissant.")
 item("giant_ore", "Giant Ore", "Minerai géant", 2, "resource", "rare", "chunk", "A whole vein in one block.", "Un filon entier en un bloc.")
@@ -127,6 +130,9 @@ item("cooling_water", "Cooling Water", "Eau de refroidissement", 2, "consumable"
 item("drill", "Drill", "Foreuse", 2, "drill", "epic", "drill", "Mines 3x3, burns Blazing Rock.", "Mine en 3x3 et brûle de la Roche ardente.")
 item("ash_hammer", "Ash Hammer", "Marteau de cendre", 2, "weapon", "rare", "hammer")
 item("thermal", "", "", 2, "armorset", "rare", "armor", set_en="Thermal", set_fr="thermique", effect_en="Halves heat gain.", effect_fr="Divise par 2 la chaleur.")
+item("living_ember", "Living Ember", "Braise vive", 2, "world_ore", "epic", "living_ember",
+     "World 2's ore, mined from a Living Ember Vein. It only stays alight in a burning hand: mine it with your Heat at 70 or more, or it goes out into ash.",
+     "Le minerai du monde 2, extrait d'un Filon de braise vive. Il ne reste allumé que dans une main brûlante : mine-le avec ta Chaleur à 70 ou plus, sinon il s'éteint en cendre.")
 # World 3
 item("dungeon_key", "Dungeon Key", "Clé de donjon", 3, "key", "rare", "key", "Opens a sealed door once.", "Ouvre une porte scellée, une fois.")
 item("sealed_fragment", "Sealed Fragment", "Fragment scellé", 3, "resource", "rare", "shard", "Traps and gear.", "Pièges et équipement.")
@@ -135,6 +141,9 @@ item("lockpick_kit", "Lockpick Kit", "Kit de crochetage", 3, "tool", "common", "
 item("portable_trap", "Portable Trap", "Piège portatif", 3, "consumable", "common", "trap", "Immobilizes a mob.", "Immobilise un mob.")
 item("jailer_blade", "Jailer's Blade", "Lame du Geôlier", 3, "weapon", "rare", "sword")
 item("jailer", "", "", 3, "armorset", "rare", "armor", set_en="Jailer", set_fr="de Geôlier")
+item("golden_ward", "Golden Ward", "Pêne d'or", 3, "world_ore", "epic", "golden_ward",
+     "World 3's ore, never mined: it lies only in the vault chests of the Endless Dungeon.",
+     "Le minerai du monde 3, qu'on n'extrait jamais : il ne se trouve que dans les coffres au trésor du Donjon sans fin.")
 item("refuge_doll", "Refuge Doll", "Poupée-refuge", 3, "doll", "legendary", "doll",
      "A pocket base for your group. Use it to enter, use it again to leave.",
      "Une base de poche pour ton groupe. Utilise-la pour entrer, puis de nouveau pour sortir.")
@@ -146,6 +155,9 @@ item("glider", "Glider", "Planeur", 4, "glider", "epic", "glider", "Glide betwee
 item("grappling_hook", "Grappling Hook", "Grappin", 4, "hook", "rare", "hook", "Pulls you toward a surface.", "Te tire vers une surface.")
 item("lightning_lance", "Lightning Lance", "Lance de foudre", 4, "weapon", "rare", "spear")
 item("celestial", "", "", 4, "armorset", "rare", "armor", set_en="Celestial", set_fr="céleste")
+item("fulgurite", "Fulgurite", "Fulgurite", 4, "world_ore", "epic", "fulgurite",
+     "World 4's ore. Lightning that strikes cloudstone or sand fuses it into a Fulgurite Crust: mine the crust.",
+     "Le minerai du monde 4. La foudre qui frappe la pierre de nuage ou le sable la fond en Croûte de fulgurite : mine la croûte.")
 item("armor_layer", "Lacquer Layer", "Couche laquée", 4, "layer", "rare", "plate",
      "Laid on armor at the Class Table. When the outer layer breaks, the next takes over.",
      "Se pose sur une armure à la Table de classe. Quand la couche extérieure casse, la suivante prend le relais.")
@@ -157,6 +169,9 @@ item("sonar", "Sonar", "Sonar", 5, "sonar", "rare", "sonar", "Reveals nearby cre
 item("silence_balm", "Silence Balm", "Baume de silence", 5, "consumable", "common", "jar", "Clears your noise.", "Efface ton bruit.")
 item("shadow_blade", "Shadow Blade", "Lame d'ombre", 5, "weapon", "epic", "sword")
 item("nocturnal", "", "", 5, "armorset", "epic", "armor", set_en="Nocturnal", set_fr="nocturne")
+item("silent_stone", "Silent Stone", "Pierre muette", 5, "world_ore", "epic", "silent_stone",
+     "World 5's ore. It shatters at the slightest sound: mine its vein with your Noise at 0 (sneak), or nothing is left.",
+     "Le minerai du monde 5. Il se brise au moindre bruit : mine son filon avec ton Bruit à 0 (accroupi), sinon il n'en reste rien.")
 # World 6
 item("unstable_alloy", "Unstable Alloy", "Alliage instable", 6, "ingot", "rare", "ingot", "Base of World 6 gear.", "Base de l'équipement du monde 6.")
 item("inverted_crystal", "Inverted Crystal", "Cristal inversé", 6, "gem", "epic", "crystal", "Inverter and the Abyssal Pearl.", "Inverseur et Perle abyssale.")
@@ -164,6 +179,9 @@ item("gravity_boots", "Gravity Boots", "Bottes de gravité", 6, "boots", "epic",
 item("stabilizer", "Stabilizer", "Stabilisateur", 6, "consumable", "common", "orb_small", "Cancels an inversion.", "Annule une inversion.")
 item("mirror_blade", "Mirror Blade", "Lame miroir", 6, "weapon", "epic", "sword")
 item("mirror", "", "", 6, "armorset", "epic", "armor", set_en="Mirror", set_fr="miroir")
+item("inverted_ore", "Inverted Ore", "Minerai inversé", 6, "world_ore", "epic", "inverted_ore",
+     "World 6's ore. Its veins hang under the overhangs and the vaults of the Upside Realm; mined, it falls upwards: catch it before it is gone.",
+     "Le minerai du monde 6. Ses filons pendent sous les surplombs et les voûtes du Royaume inversé ; extrait, il tombe vers le haut : attrape-le avant qu'il ne file.")
 # World 7: everything happens under water. The four ores each give one tier of snorkel helmet (see SNORKELS).
 item("abyssal_salt", "Abyssal Salt", "Sel des profondeurs", 7, "dust", "rare", "dust", "Salt Snorkel Helmet and the Sapling of the Four Seasons.", "Casque-tuba de sel et Arbrisseau des quatre saisons.")
 item("nacre", "Nacre", "Nacre", 7, "gem", "rare", "shard", "Mined from reef veins. Nacre Snorkel Helmet.", "Extraite des filons des récifs. Casque-tuba de nacre.",
@@ -176,6 +194,9 @@ item("thruster", "Thruster", "Propulseur", 7, "thruster", "epic", "thruster", "S
 item("trench_trident", "Trench Trident", "Trident des fosses", 7, "weapon", "epic", "trident")
 item("diving", "", "", 7, "armorset", "epic", "armor", set_en="Diving", set_fr="de plongée", pieces=("chestplate", "leggings", "boots"),
      effect_en="Resists pressure. Wear it with a snorkel helmet.", effect_fr="Résiste à la pression. Se porte avec un casque-tuba.")
+item("brine_crystal", "Brine Crystal", "Cristal de saumure", 7, "world_ore", "epic", "brine_crystal",
+     "World 7's ore, grown inside the creatures of the Pressure Ocean: any of them may leave one, about one in twenty-five.",
+     "Le minerai du monde 7, qui pousse dans les créatures de l'Océan sous pression : chacune peut en laisser un, environ une sur vingt-cinq.")
 # World 8
 item("temporal_sand", "Temporal Sand", "Sable temporel", 8, "dust", "rare", "dust", "Base of World 8 gear.", "Base de l'équipement du monde 8.")
 item("season_fragment", "Season Fragment", "Fragment de saison", 8, "gem", "epic", "leaf", "The Seismic Stake.", "Pieu sismique.")
@@ -183,6 +204,12 @@ item("hourglass", "Hourglass", "Sablier", 8, "hourglass", "epic", "hourglass", "
 item("season_preserve", "Season Preserve", "Conserve de saison", 8, "consumable", "common", "jar", "Protects from the current season.", "Protège de la saison en cours.")
 item("season_scythe", "Scythe of Seasons", "Faux des saisons", 8, "weapon", "epic", "scythe")
 item("seasonal", "", "", 8, "armorset", "epic", "armor", set_en="Seasonal", set_fr="saisonnière")
+item("time_seed", "Time Seed", "Graine du temps", 8, "world_ore", "rare", "time_seed",
+     "Found in World 8's chests. Plant it on grass or dirt in World 8: in two minutes it ripens into a Chrono Shard.",
+     "Se trouve dans les coffres du monde 8. Plante-la sur de l'herbe ou de la terre au monde 8 : en deux minutes, elle mûrit en Éclat chronique.")
+item("chrono_shard", "Chrono Shard", "Éclat chronique", 8, "world_ore", "epic", "chrono_shard",
+     "World 8's ore, ripened from a Time Seed planted in World 8.",
+     "Le minerai du monde 8, mûri d'une Graine du temps plantée au monde 8.")
 # World 9
 item("terrain_fragment", "Terrain Fragment", "Fragment de terrain", 9, "resource", "rare", "rock", "Base of World 9 gear.", "Base de l'équipement du monde 9.")
 item("terrain_heart", "Terrain Heart", "Cœur de terrain", 9, "resource", "legendary", "heart", "The Traveller's Matryoshka.", "Matriochka du voyageur.")
@@ -190,12 +217,23 @@ item("anchor", "Anchor", "Ancre", 9, "anchor", "rare", "anchor", "Calms the grou
 item("grip_boots", "Grip Boots", "Bottes d'accroche", 9, "boots", "epic", "boots", "No falls from moving ground.", "Plus de chutes dues au sol.")
 item("seismic_mace", "Seismic Mace", "Masse sismique", 9, "weapon", "legendary", "mace")
 item("living_rock", "", "", 9, "armorset", "legendary", "armor", set_en="Living Rock", set_fr="de roche vivante")
+item("heartstone", "Heartstone", "Cœur de pierre", 9, "world_ore", "epic", "heartstone",
+     "World 9's ore: the Heart of the Terrain leaves two or three of them when it falls.",
+     "Le minerai du monde 9 : le Cœur du terrain en laisse deux ou trois quand il tombe.")
 item("last_doll_key", "Key of the Last Doll", "Clé de la dernière poupée", 9, "key", "none", "key_gold", "The Traveller's Matryoshka.", "Matriochka du voyageur.")
 # World 10
-item("artisan_thread", "Artisan's Thread", "Fil d'Artisan", 10, "thread", "rare", "thread", "Base of the final gear.", "Base de l'équipement final.")
+item("artisan_thread", "Artisan's Thread", "Fil d'Artisan", 10, "thread", "rare", "thread", "World 10's ore, mined from Thread Spools. Base of the final gear.",
+     "Le minerai du monde 10, extrait des Bobines de fil. Base de l'équipement final.")
 item("artisan_shard", "Artisan's Shard", "Éclat d'Artisan", 10, "gem", "legendary", "shard", "Upgrades the final gear.", "Améliore l'équipement final.")
 item("artisan_blade", "Artisan's Blade", "Lame de l'Artisan", 10, "weapon", "legendary", "sword")
 item("artisan", "", "", 10, "armorset", "legendary", "armor", set_en="Artisan", set_fr="de l'Artisan")
+item("matriochkite_ingot", "Matriochkite Ingot", "Lingot de matriochkite", 10, "nested", "legendary", "matriochkite_ingot",
+     "Born of the ten worlds' ores in the Nesting Cradle. The Matriarch Armour is made of it.",
+     "Né des minerais des dix mondes dans le Berceau gigogne. L'Armure de la Matriarche en est faite.")
+item("matriochkite_nugget", "Matriochkite Nugget", "Pépite de matriochkite", 10, "nested", "epic", "matriochkite_nugget",
+     "A ninth of a Matriochkite Ingot. Nine make an ingot again.", "Un neuvième de Lingot de matriochkite. Neuf refont un lingot.")
+# its tooltip (the set as a checklist, the Nested Shell and its state) is drawn by client/MatriarchTip
+item("matriarch", "", "", 10, "armorset", "legendary", "armor", set_en="Matriarch", set_fr="de la Matriarche")
 
 # Cores
 CORES = [
@@ -1678,3 +1716,67 @@ for _n, (_sid, _en, _fr, _ren, _rfr) in WONDERS.items():
 block("reliquary", "Reliquary", "Reliquaire", 0, "reliquary", "lacquer",
       note_en="Sealed. The cross key of another world's wonder opens it.",
       note_fr="Scellé. La clé croisée de la merveille d'un autre monde l'ouvre.")
+
+# ---------------------------------------------------------------- the ten world ores and the Nesting Cradle
+# One ore per world, each had its own way (world/WorldOres.java). Set one of each in the Nesting Cradle
+# (block/NestingCradle.java): ten golden doll shells close round them and leave a Matriochkite Ingot, the metal of
+# the Matriarch Armour. The ore of each world, from World 1 to World 10:
+WORLD_ORES = {1: "spore_crystal", 2: "living_ember", 3: "golden_ward", 4: "fulgurite", 5: "silent_stone",
+              6: "inverted_ore", 7: "brine_crystal", 8: "chrono_shard", 9: "heartstone", 10: "artisan_thread"}
+# the rules of the ores, read by world/WorldOres.java (through Content.java)
+ORE_RULES = dict(spore_chance=0.15, spore_water=4, ember_heat=70, brine_chance=0.04, heartstones=(2, 3),
+                 sprout_stage_ticks=600, inverted_rise_ticks=100, ward_vault_chance=0.6, seed_chest_chance=0.35)
+# what the Journal's world card says of each ore (client/WorldCards.java), before any other way of having it
+ORE_HOW = {
+    "spore_crystal": ("Grows on Spore Blooms near water: break one with water within 4 blocks", "Pousse sur les Floraisons de spores près de l'eau : casse-en une à moins de 4 blocs d'une eau"),
+    "living_ember": ("Mined from a Living Ember Vein with your Heat at 70 or more", "Extraite d'un Filon de braise vive avec ta Chaleur à 70 ou plus"),
+    "golden_ward": ("Only in the world's vault chests, never mined", "Seulement dans les coffres au trésor du monde, jamais extrait"),
+    "fulgurite": ("Lightning fuses cloudstone or sand into a Fulgurite Crust: mine it", "La foudre fond la pierre de nuage ou le sable en Croûte de fulgurite : mine-la"),
+    "silent_stone": ("Mined from a Silent Stone Vein with your Noise at 0 (sneak)", "Extraite d'un Filon de pierre muette avec ton Bruit à 0 (accroupi)"),
+    "inverted_ore": ("Mined from a Hanging Vein under an overhang; it falls upwards", "Extrait d'un Filon suspendu sous un surplomb ; il tombe vers le haut"),
+    "brine_crystal": ("Left now and then by any creature of the world", "Laissé de temps en temps par n'importe quelle créature du monde"),
+    "time_seed": ("Found in the world's chests; plant it here on grass or dirt", "Trouvée dans les coffres du monde ; plante-la ici sur de l'herbe ou de la terre"),
+    "chrono_shard": ("Ripens in two minutes from a Time Seed planted in this world", "Mûrit en deux minutes d'une Graine du temps plantée dans ce monde"),
+    "heartstone": ("Left by the Heart of the Terrain, two or three at a time", "Laissés par le Cœur du terrain, deux ou trois à la fois"),
+    "matriochkite_ingot": ("The ten ores, nested in the Nesting Cradle, give one", "Les dix minerais, emboîtés dans le Berceau gigogne, en donnent un"),
+    "matriochkite_nugget": ("A ninth of an ingot, at the crafting table", "Un neuvième de lingot, à l'établi"),
+}
+# the ore blocks they come from (their drops are ruled in world/WorldOres.java, not by a loot table)
+block("living_ember_ore", "Living Ember Vein", "Filon de braise vive", 2, "world_ore", "ore",
+      note_en="Mine it with your Heat at 70 or more, or the ember goes out.", note_fr="Mine-le avec ta Chaleur à 70 ou plus, sinon la braise s'éteint.")
+block("fulgurite_ore", "Fulgurite Crust", "Croûte de fulgurite", 4, "world_ore", "ore",
+      note_en="Cloudstone or sand fused by lightning.", note_fr="De la pierre de nuage ou du sable fondus par la foudre.")
+block("silent_stone_ore", "Silent Stone Vein", "Filon de pierre muette", 5, "world_ore", "ore",
+      note_en="Mine it in silence: with any Noise, it shatters.", note_fr="Mine-le en silence : au moindre Bruit, il se brise.")
+block("hanging_ore", "Hanging Vein", "Filon suspendu", 6, "world_ore", "ore",
+      note_en="Hangs under the rock. What it gives falls upwards.", note_fr="Pend sous la roche. Ce qu'il donne tombe vers le haut.")
+block("time_sprout", "Time Sprout", "Pousse du temps", 8, "time_sprout", "special")
+ORE_GEN["living_ember_ore"] = (5, 6, -60, 40, ())
+ORE_DROPS["fulgurite_ore"] = "fulgurite"
+ORE_GEN["silent_stone_ore"] = (4, 7, 0, 200, ())
+ORE_PAL["living_ember_ore"] = ("2b2220", "e0661c", "ff6a1a", "120c0a")
+ORE_PAL["fulgurite_ore"] = ("d8e8f8", "3a7ac8", "8ad8ff", "2a3a5a")
+ORE_PAL["silent_stone_ore"] = ("15151f", "1f2a4a", "c8d0e8", "05050a")
+ORE_PAL["hanging_ore"] = ("c84ad8", "4ad8c8", "ff7ae8", "2a0a3a")
+# World 6's Hanging Veins: a feature that looks up from the air for the underside of the rock (gen.py)
+HANGING_GEN = dict(count=48, lo=40, hi=250, scan=24)
+block("nesting_cradle", "Nesting Cradle", "Berceau gigogne", 10, "nesting_cradle", "lacquer",
+      note_en="Set the ten worlds' ores in it, one of each: ten golden dolls close round them and leave a Matriochkite Ingot. An empty hand takes the last ore back.",
+      note_fr="Poses-y les minerais des dix mondes, un de chaque : dix poupées d'or se referment sur eux et laissent un Lingot de matriochkite. Une main vide reprend le dernier minerai.")
+# The ritual's timeline, in ticks from its start, shared by its animation (tools/cradle_geo.py) and the server's
+# particles and sounds (block/NestingCradle.java): the ring draws in; the doll opens; the nest of ten dolls rises;
+# they close one over the next, the smallest first, a clack every clack_every ticks; the last sinks into the bowl;
+# the doll slams shut, jumps and glows (the flash); it opens on the ingot, which pops out at the end.
+CRADLE_TIMELINE = dict(tighten=40, open=36, rise=44, close=76, clack_every=4, descend=114, slam=128, reveal=138, end=160)
+block("matriochkite_block", "Block of Matriochkite", "Bloc de matriochkite", 10, "matriochkite_block", "special",
+      note_en="Nine Matriochkite Ingots in red lacquer and gold. It can stand under a beacon.",
+      note_fr="Neuf Lingots de matriochkite en laque rouge et or. Il peut porter une balise.")
+# the crafting table's recipes of the Matriochkite: nuggets, ingot and block, back and forth
+MATRIOCHKITE_CRAFTS = [("matriochkite_ingot", 9, "matriochkite_nugget", 1), ("matriochkite_block", 9, "matriochkite_ingot", 1)]
+# made at the Final Loom: (station, ingredients)
+CRADLE_RECIPE = ("final_loom", [("lacquer_block", 4), ("minecraft:gold_block", 1), ("artisan_thread", 6), ("artisan_shard", 1)])
+# The Matriarch Armour: just above the Artisan's set (GEAR[10]), and one more heart per piece than it. Made of
+# Matriochkite Ingots at the Final Loom, each piece over the Artisan's own.
+MATRIARCH = dict(armor=32, toughness=18, knockback=0.225, extra_health=2, durability=96, enchant=15,
+                 ingots={"helmet": 2, "chestplate": 3, "leggings": 2, "boots": 1},
+                 gauge=0.5, save_health=6.0, save_cooldown=6000)

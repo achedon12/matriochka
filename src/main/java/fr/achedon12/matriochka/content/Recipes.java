@@ -139,6 +139,11 @@ public final class Recipes {
 		r("final_loom", "artisan_boots", 1, -1, "artisan_thread", 4, "gravity_boots", 1);
 		r("final_loom", "unfinished_effigy", 1, -1, "artisan_thread", 6, "artisan_shard", 1, "wool_thread", 4);
 		r("final_loom", "workshop_feast", 1, -1, "root_broth", 1, "ice_bread", 1, "cloud_fruit", 1, "season_jam", 1);
+		// the Nesting Cradle, and the Matriarch Armour of Matriochkite laid over the Artisan's (tools/content.py MATRIARCH)
+		r(Content.CRADLE_STATION, "nesting_cradle", 1, -1, Content.CRADLE_INPUTS);
+		String[] pieces = {"helmet", "chestplate", "leggings", "boots"};
+		for (int i = 0; i < pieces.length; i++)
+			r("final_loom", "matriarch_" + pieces[i], 1, -1, "matriochkite_ingot", Content.MATRIARCH_INGOTS[i], "artisan_" + pieces[i], 1);
 		// the replay gear and the Trial Altar (tools/content.py REPLAY_GEAR)
 		for (ReplayContent.GearRecipe g : ReplayContent.RECIPES) {
 			Object[] in = new Object[g.inputs().size() * 2];

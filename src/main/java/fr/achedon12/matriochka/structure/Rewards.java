@@ -361,6 +361,9 @@ public final class Rewards {
 				if (w >= 7 && r.nextFloat() < 0.08f) add(c, r, new ItemStack(Items.ENCHANTED_GOLDEN_APPLE));
 			}
 		}
+		// the world ores kept in chests (world/WorldOres): the Golden Ward in World 3's vaults, the Time Seed in World 8's chests
+		if (w == 3 && tier == VAULT && r.nextFloat() < Content.ORE_WARD_VAULT_CHANCE) add(c, r, new ItemStack(ModContent.item("golden_ward")));
+		if (w == 8 && tier != VAULT && r.nextFloat() < Content.ORE_SEED_CHEST_CHANCE) add(c, r, new ItemStack(ModContent.item("time_seed"), between(r, 1, 2)));
 		// the souls the design budgets for structure chests, about 100 per world (see SoulVessels)
 		for (ItemStack souls : fr.achedon12.matriochka.item.SoulVessels.loot(w, tier, r)) add(c, r, souls);
 	}

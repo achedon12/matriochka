@@ -26,6 +26,9 @@ import attacks
 import sound
 import translations
 import gen_replay
+import ores_art
+import cradle_geo
+import matriarch_geo
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "mobs_hd"))
 import registry as mobs_registry  # noqa: E402
 
@@ -215,8 +218,14 @@ def gen_items():
         if it["kind"] == "armorset":
             sid = it["id"]
             p = pal(it["world"])
-            paint_armor_layer(p, sid, mk(os.path.join(A, f"textures/entity/equipment/humanoid/{sid}.png")))
-            paint_armor_layer(p, sid + "l", mk(os.path.join(A, f"textures/entity/equipment/humanoid_leggings/{sid}.png")), legs=True)
+            if sid == "matriarch":
+                # the Matriarch's red lacquer and gold leaf (tools/ores_art.py)
+                ores_art.paint_matriarch_layer(mk(os.path.join(A, f"textures/entity/equipment/humanoid/{sid}.png")))
+                ores_art.paint_matriarch_layer(mk(os.path.join(A, f"textures/entity/equipment/humanoid_leggings/{sid}.png")), legs=True)
+                w(os.path.join(D, f"tags/item/repairs/{sid}.json"), {"values": [f"{NS}:matriochkite_ingot"]})
+            else:
+                paint_armor_layer(p, sid, mk(os.path.join(A, f"textures/entity/equipment/humanoid/{sid}.png")))
+                paint_armor_layer(p, sid + "l", mk(os.path.join(A, f"textures/entity/equipment/humanoid_leggings/{sid}.png")), legs=True)
             w(os.path.join(A, f"equipment/{sid}.json"), {"layers": {"humanoid": [{"texture": f"{NS}:{sid}"}],
                                                                    "humanoid_leggings": [{"texture": f"{NS}:{sid}"}]}})
     for eq, wd in (("filter_mask", 1), ("gravity_boots", 6), ("grip_boots", 9)):
@@ -267,6 +276,19 @@ def gen_blocks():
             lang(f"block.{NS}.{bid}.desc", b["note_en"], b["note_fr"])
         p = ORE_PAL.get(b["id"]) or pal(b["world"])
         tpath = mk(os.path.join(A, f"textures/block/{bid}.png"))
+        if b["kind"] in ("nesting_cradle", "time_sprout"):
+            # sculpted and staged blocks: their textures, models and blockstates come from tools/ores_art.py
+            if b["kind"] == "nesting_cradle":
+                w(os.path.join(A, f"items/{bid}.json"), {"model": {"type": "minecraft:model", "model": f"{NS}:block/{bid}"}})
+                w(os.path.join(D, f"loot_table/blocks/{bid}.json"), {"type": "minecraft:block", "pools": [
+                    {"rolls": 1, "entries": [{"type": "minecraft:item", "name": f"{NS}:{bid}"}], "conditions": [{"condition": "minecraft:survives_explosion"}]}]})
+            else:
+                ripe = {"condition": "minecraft:block_state_property", "block": f"{NS}:{bid}", "properties": {"age": "3"}}
+                w(os.path.join(D, f"loot_table/blocks/{bid}.json"), {"type": "minecraft:block", "pools": [{"rolls": 1, "entries": [
+                    {"type": "minecraft:alternatives", "children": [
+                        {"type": "minecraft:item", "name": f"{NS}:chrono_shard", "conditions": [ripe]},
+                        {"type": "minecraft:item", "name": f"{NS}:time_seed"}]}]}]})
+            continue
         # World Soil is painted as a block of the new terrain set (tools/blocks_art.py), its tilled face too
         hand = None if bid.startswith("world_soil_") else craft.crafted_block(bid)
         glows = {}
@@ -331,6 +353,9 @@ def gen_blocks():
         drop = ORE_DROPS.get(bid)
         if b["kind"] in ("world_block", "planted_seed", "death_chest", "boss_altar", "sealed_door", "threshold", "lair_heart"):
             continue
+        # a world ore's drops are ruled in world/WorldOres.java, unless it drops like any ore
+        if b["kind"] == "world_ore" and not drop:
+            continue
         if drop:
             pool = {"rolls": 1, "entries": [{"type": "minecraft:alternatives", "children": [
                 {"type": "minecraft:item", "name": f"{NS}:{bid}", "condition": "minecraft:tool/can_silk_touch"},
@@ -341,12 +366,19 @@ def gen_blocks():
             pool = {"rolls": 1, "entries": [{"type": "minecraft:item", "name": f"{NS}:{bid}"}], "conditions": [{"condition": "minecraft:survives_explosion"}]}
         w(os.path.join(D, f"loot_table/blocks/{bid}.json"), {"type": "minecraft:block", "pools": [pool]})
     # tags
-    pick = [f"{NS}:{b['id']}" for b in BLOCKS if b["kind"] in ("terrain", "station", "deco", "sealed_door", "vent") and b["style"] not in ("moss", "sand", "wood")]
+    pick = [f"{NS}:{b['id']}" for b in BLOCKS if b["kind"] in ("terrain", "station", "deco", "sealed_door", "vent", "world_ore", "matriochkite_block") and b["style"] not in ("moss", "sand", "wood")]
     shovel = [f"{NS}:{b['id']}" for b in BLOCKS if b["kind"] == "soil" or b["style"] in ("moss", "sand")]
-    axe = [f"{NS}:{b['id']}" for b in BLOCKS if b["style"] == "wood"] + [f"{NS}:soul_cradle", f"{NS}:nesting_chest"]
+    axe = [f"{NS}:{b['id']}" for b in BLOCKS if b["style"] == "wood"] + [f"{NS}:soul_cradle", f"{NS}:nesting_chest", f"{NS}:nesting_cradle"]
     w(os.path.join(RES, "data/minecraft/tags/block/mineable/pickaxe.json"), {"values": pick})
     w(os.path.join(RES, "data/minecraft/tags/block/mineable/shovel.json"), {"values": shovel})
     w(os.path.join(RES, "data/minecraft/tags/block/mineable/axe.json"), {"values": axe})
+    # the Matriochkite at the crafting table: nine nuggets an ingot, nine ingots a block, and back
+    for big, n, small, _ in MATRIOCHKITE_CRAFTS:
+        w(os.path.join(D, f"recipe/{big}.json"), {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["###", "###", "###"],
+                                                  "key": {"#": f"{NS}:{small}"}, "result": {"id": f"{NS}:{big}", "count": 1}})
+        w(os.path.join(D, f"recipe/{small}_from_{big}.json"), {"type": "minecraft:crafting_shapeless", "category": "misc",
+                                                               "ingredients": [f"{NS}:{big}"], "result": {"id": f"{NS}:{small}", "count": n}})
+    w(os.path.join(RES, "data/minecraft/tags/block/beacon_base_blocks.json"), {"replace": False, "values": [f"{NS}:matriochkite_block"]})
     w(os.path.join(D, "tags/block/world_soil.json"), {"values": [f"{NS}:world_soil_{i}" for i in range(10)]})
     w(os.path.join(D, "tags/block/stone_like.json"), {"values": [f"{NS}:{b['id']}" for b in BLOCKS if b["kind"] == "terrain" and b["style"] == "stone"]})
 
@@ -815,6 +847,8 @@ def gen_worldgen():
         for (bid, en, fr, style) in TERRAIN[n]:
             if style.startswith("ore"):
                 ores.append(bid)
+        # the world ores that lie in the rock like any other (tools/content.py WORLD_ORES)
+        ores += [b["id"] for b in BLOCKS if b["kind"] == "world_ore" and b["world"] == n and b["id"] in ORE_GEN]
         for bid in ores:
             big = bid == "giant_ore_block"
             if bid in ORE_GEN:
@@ -832,6 +866,19 @@ def gen_worldgen():
                                                         {"type": "minecraft:height_range", "height": rng},
                                                         {"type": "minecraft:biome"}]})
             feats[6].append(f"{NS}:{bid}")
+        if n == 6:
+            # World 6's Hanging Veins: from the air, look up for the underside of the rock and turn it to ore
+            hg = HANGING_GEN
+            w(os.path.join(D, "worldgen/feature/hanging_ore.json"), {"type": "minecraft:simple_block", "to_place": {"id": f"{NS}:hanging_ore"}})
+            w(os.path.join(D, "worldgen/placed_feature/hanging_ore.json"), {
+                "feature": f"{NS}:hanging_ore", "placement": [
+                    {"type": "minecraft:count", "count": hg["count"]}, {"type": "minecraft:in_square"},
+                    {"type": "minecraft:height_range", "height": {"type": "minecraft:uniform", "min_inclusive": {"absolute": hg["lo"]}, "max_inclusive": {"absolute": hg["hi"]}}},
+                    {"type": "minecraft:environment_scan", "direction_of_search": "up", "max_steps": hg["scan"],
+                     "allowed_search_condition": {"type": "minecraft:matching_blocks", "blocks": "minecraft:air"},
+                     "target_condition": {"type": "minecraft:matching_blocks", "blocks": stone}},
+                    {"type": "minecraft:biome"}]})
+            feats[6].append(f"{NS}:hanging_ore")
         glow = ([b for (b, e, f, s) in TERRAIN[n] if s in ("glow", "glass")] or [TERRAIN[n][2][0]])[0]
         w(os.path.join(D, f"worldgen/feature/{glow}_patch.json"), {
             "type": "minecraft:ore", "discard_chance_on_air_exposure": 0.0, "size": 6,
@@ -1186,6 +1233,28 @@ def gen_java():
     L.append("\tpublic static final List<String> MUTATIONS = List.of(" + ", ".join(jstr(m[0]) for m in MUTATIONS) + ");")
     L.append("\t/** Mutation of a wild world's boss, by world number (empty: none). */")
     L.append("\tpublic static final String[] WILD_MUTATION = {" + ", ".join(jstr(WILD_MUTATION.get(i, "")) for i in range(12)) + "};")
+    # the ten world ores, the Nesting Cradle and the Matriarch Armour (tools/content.py WORLD_ORES, ORE_RULES, MATRIARCH)
+    L.append("\t/** The ore of each world, by world number (1 to 10): the ten the Nesting Cradle takes. */")
+    L.append("\tpublic static final String[] WORLD_ORES = {\"\", " + ", ".join(jstr(WORLD_ORES[n]) for n in range(1, 11)) + "};")
+    for k, v in ORE_RULES.items():
+        name = "ORE_" + k.upper()
+        if isinstance(v, tuple):
+            L.append(f"\tpublic static final int[] {name} = {{{', '.join(str(x) for x in v)}}};")
+        elif isinstance(v, float):
+            L.append(f"\tpublic static final float {name} = {v}f;")
+        else:
+            L.append(f"\tpublic static final int {name} = {v};")
+    mt = MATRIARCH
+    L.append(f"\tpublic static final int MATRIARCH_ARMOR = {mt['armor']}, MATRIARCH_DURABILITY = {mt['durability']}, MATRIARCH_ENCHANT = {mt['enchant']}, MATRIARCH_SAVE_COOLDOWN = {mt['save_cooldown']};")
+    L.append(f"\tpublic static final float MATRIARCH_TOUGHNESS = {mt['toughness']}f, MATRIARCH_KNOCKBACK = {mt['knockback']}f, MATRIARCH_EXTRA_HEALTH = {mt['extra_health']}f, "
+             f"MATRIARCH_GAUGE = {mt['gauge']}f, MATRIARCH_SAVE_HEALTH = {mt['save_health']}f;")
+    L.append("\t/** Matriochkite Ingots per Matriarch piece: helmet, chestplate, leggings, boots. */")
+    L.append("\tpublic static final int[] MATRIARCH_INGOTS = {" + ", ".join(str(mt['ingots'][p]) for p in ("helmet", "chestplate", "leggings", "boots")) + "};")
+    L.append("\t/** The cradle's ritual, in ticks from its start (tools/content.py CRADLE_TIMELINE, its animation in tools/cradle_geo.py). */")
+    L.append("\tpublic static final int " + ", ".join(f"CRADLE_{k.upper()} = {v}" for k, v in CRADLE_TIMELINE.items()) + ";")
+    L.append("\t/** The Nesting Cradle's recipe at its station: ids and counts, in turn. */")
+    L.append(f"\tpublic static final String CRADLE_STATION = {jstr(CRADLE_RECIPE[0])};")
+    L.append("\tpublic static final Object[] CRADLE_INPUTS = {" + ", ".join(f"{jstr(i)}, {n}" for i, n in CRADLE_RECIPE[1]) + "};")
     L.append("\tpublic static final List<Defs.ItemDef> ITEMS = List.of(")
     rows = []
     for it in ALL_ITEMS:
@@ -1260,6 +1329,9 @@ def main():
     gen_items()
     print("held dolls in 3D:", held3d.gen(A, NS, [it["id"] if isinstance(it, dict) else it[0] for it in ALL_ITEMS], w))
     gen_blocks()
+    ores_art.gen(w, A, lang, ORE_HOW)
+    cradle_geo.gen(w, A)
+    matriarch_geo.gen(w, A)
     gen_entities()
     gen_worldgen()
     gen_world_zero()

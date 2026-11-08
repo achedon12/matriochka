@@ -757,6 +757,17 @@ public class JournalScreen extends Screen {
 		mapView = false;
 	}
 
+	/** Turns the open world card to the page that lists an item; returns its row on that page (-1: not on the card). */
+	public int cardShow(String itemId) {
+		java.util.List<WorldCards.Entry> all = WorldCards.of(cardWorld);
+		for (int i = 0; i < all.size(); i++) {
+			if (!all.get(i).item().id().equals(itemId)) continue;
+			cardPage = i / CARD_ROWS;
+			return i % CARD_ROWS;
+		}
+		return -1;
+	}
+
 	/** The middle of row i of the open world card, in GUI coordinates (the showcase hovers it). */
 	public int[] cardRowCenter(int i) {
 		return new int[]{left() + 28 + PW + (PW - 18) / 2, top() + 24 + 14 + i * 19 + 8};

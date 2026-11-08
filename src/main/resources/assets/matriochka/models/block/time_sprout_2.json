@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "matriochka:block/time_sprout_2"
+  }
+}

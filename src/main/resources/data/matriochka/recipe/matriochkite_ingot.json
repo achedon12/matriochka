@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": "matriochka:matriochkite_nugget"
+  },
+  "result": {
+    "id": "matriochka:matriochkite_ingot",
+    "count": 1
+  }
+}

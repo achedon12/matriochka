@@ -618,6 +618,10 @@ public final class Cinematics implements HudElement {
 	/** Stands in for Nausea (a slow green-violet haze at the edges) and Darkness (a steady dimming, no pulses). */
 	private static void tint(GuiGraphicsExtractor g, int w, int h, long now) {
 		float fade = Ui.clamp01((tintUntil - now) / 600f);
+		if (tintKind.equals("matriarch")) {
+			nestedShell(g, w, h, now);
+			return;
+		}
 		if (tintKind.equals("darkness")) {
 			g.fill(0, 0, w, h, Ui.alpha(0xFF05050A, 0.28f * fade));
 			edgeGlow(g, w, h, 0xFF05050A, 0.9f * fade);
@@ -625,6 +629,44 @@ public final class Cinematics implements HudElement {
 			float breathe = 0.5f + 0.5f * (float) Math.sin(now / 1400.0);
 			edgeGlow(g, w, h, 0xFF6A8A3A, (0.35f + 0.15f * breathe) * fade);
 			edgeGlow(g, w, h, 0xFF8A4A9A, (0.2f + 0.1f * (1 - breathe)) * fade);
+		}
+	}
+
+	/**
+	 * The Matriarch's Nested Shell took a deadly blow: a gold vignette flares at the edges and the outer doll's cracks
+	 * run in from the corners, fading over a second (with flashes off, only a soft gold edge).
+	 */
+	private static void nestedShell(GuiGraphicsExtractor g, int w, int h, long now) {
+		float fade = Ui.clamp01((tintUntil - now) / 1200f);
+		edgeGlow(g, w, h, 0xFFE8B850, (Comfort.flashes() ? 0.75f : 0.35f) * fade);
+		if (!Comfort.flashes()) return;
+		edgeGlow(g, w, h, 0xFF8A1C14, 0.3f * fade);
+		int col = Ui.alpha(0xFFFFE6A0, 0.85f * fade), dark = Ui.alpha(0xFF3A1008, 0.6f * fade);
+		// each crack a jagged run of short strokes from a corner toward the middle, with a dark lip beside it
+		int[][] cracks = {{0, 0, 1, 1}, {w, 0, -1, 1}, {0, h, 1, -1}, {w, h, -1, -1}, {w / 2, 0, 0, 1}, {w / 2, h, 0, -1}};
+		java.util.Random r = new java.util.Random(42);
+		float reach = 0.32f + 0.12f * (1 - fade);
+		for (int[] c : cracks) {
+			double x = c[0], y = c[1];
+			int steps = 14;
+			for (int i = 0; i < steps; i++) {
+				double dx = (c[2] == 0 ? (r.nextDouble() - 0.5) * 2 : c[2] * (0.6 + r.nextDouble())) * w * reach / steps;
+				double dy = c[3] * (0.6 + r.nextDouble()) * h * reach / steps;
+				int x0 = (int) x, y0 = (int) y, x1 = (int) (x + dx), y1 = (int) (y + dy);
+				int n = Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0));
+				for (int k = 0; k <= n; k++) {
+					int px = x0 + (x1 - x0) * k / Math.max(1, n), py = y0 + (y1 - y0) * k / Math.max(1, n);
+					g.fill(px, py, px + 2, py + 2, col);
+					g.fill(px + 2, py + 1, px + 3, py + 3, dark);
+				}
+				if (r.nextInt(3) == 0) {
+					// a short branch
+					int bx = x1 + (r.nextBoolean() ? 6 : -6), by = y1 + c[3] * 5;
+					g.fill(Math.min(x1, bx), Math.min(y1, by), Math.max(x1, bx) + 1, Math.min(y1, by) + 1, col);
+				}
+				x += dx;
+				y += dy;
+			}
 		}
 	}
 

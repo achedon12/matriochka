@@ -49,6 +49,11 @@
     "matriochka:terrain_ore",
     "matriochka:lacquer_glow",
     "matriochka:artisan_thread_ore",
-    "matriochka:air_vent"
+    "matriochka:air_vent",
+    "matriochka:living_ember_ore",
+    "matriochka:fulgurite_ore",
+    "matriochka:silent_stone_ore",
+    "matriochka:hanging_ore",
+    "matriochka:matriochkite_block"
   ]
 }

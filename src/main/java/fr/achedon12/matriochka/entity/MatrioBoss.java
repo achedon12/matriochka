@@ -998,6 +998,8 @@ public class MatrioBoss extends Monster implements GeoEntity {
 		} else if (w == 9) {
 			// only World 1 grows from soil now (world/Rites.java): the other bosses leave no World Soil
 			relic(level, new ItemStack(ModContent.item("last_doll_key")), present);
+			// the world's ore: the Heartstones it beat with
+			relic(level, new ItemStack(ModContent.item("heartstone"), fr.achedon12.matriochka.world.WorldOres.heartstones(random)), present);
 		}
 		double cy = getY() + getBbHeight() * 0.5;
 		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, getX(), cy, getZ(), 90, 0.6, 0.6, 0.6, 0.45);

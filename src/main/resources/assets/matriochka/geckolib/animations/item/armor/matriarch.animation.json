@@ -1,0 +1,179 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "idle": {
+      "loop": true,
+      "animation_length": 3.0,
+      "bones": {
+        "gem_lit": {
+          "scale": {
+            "0.000": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "linear"
+            },
+            "1.500": {
+              "post": [
+                1.25,
+                1.25,
+                1
+              ],
+              "easing": "easeInOutSine"
+            },
+            "3.000": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "easing": "easeInOutSine"
+            }
+          }
+        },
+        "glint_body": {
+          "position": {
+            "0.000": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "linear"
+            },
+            "0.800": {
+              "post": [
+                8.6,
+                0,
+                0
+              ],
+              "easing": "easeInOutSine"
+            },
+            "3.000": {
+              "post": [
+                8.6,
+                0,
+                0
+              ],
+              "lerp_mode": "linear"
+            }
+          },
+          "scale": {
+            "0.000": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "step"
+            },
+            "0.050": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "step"
+            },
+            "0.800": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "linear"
+            },
+            "0.850": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "step"
+            },
+            "3.000": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "step"
+            }
+          }
+        },
+        "glint_head": {
+          "position": {
+            "0.000": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "linear"
+            },
+            "0.800": {
+              "post": [
+                8.6,
+                0,
+                0
+              ],
+              "easing": "easeInOutSine"
+            },
+            "3.000": {
+              "post": [
+                8.6,
+                0,
+                0
+              ],
+              "lerp_mode": "linear"
+            }
+          },
+          "scale": {
+            "0.000": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "step"
+            },
+            "0.050": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "step"
+            },
+            "0.800": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "linear"
+            },
+            "0.850": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "step"
+            },
+            "3.000": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "step"
+            }
+          }
+        }
+      }
+    }
+  }
+}
