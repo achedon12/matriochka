@@ -1,0 +1,1 @@
+Matriochka: a Fabric mod for Minecraft 26.1.2 to 26.3. Ten worlds nested inside blocks, each with its own rule, creatures, station and boss. Plant a world, beat it, go deeper. Help, bug reports, balance feedback, screenshots and update news for the mod and its modpack.
