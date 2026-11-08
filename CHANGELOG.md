@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.8.0 (alpha)
+
+The wonders can be found and are worth finding: the worlds' people point at them, every relic gives its world's gift, a group shares the reliquary, and the Journal draws a map of every world.
+
+### Wonders and relics
+
+- The people of every world speak of its wonder: one greeting in two, while its relic is still to be found, they say in which direction it stands and how far. The Journal's world card keeps what they said.
+- Every relic gives, besides its heart, a gift of its world: the relics of Worlds 1, 2, 5 and 7 make Toxin, Heat, Noise and the loss of breath a quarter slower (World 10 has all four rules); the others give luck in chests, faster attacks, safe falls, speed, less knockback or faster mining. The ten together add 4 armour.
+- A reliquary opened by one member of a group gives its relic to every member standing within 24 blocks, straight into their inventory.
+- The Last Candle is rebuilt as a great wax candle in a ring of open arches, and the Sleeping Giant as a giant lying on its back, face to the sky, moss grown over it.
+
+### Journal
+
+- A map of every world, from the world's card: the ground walked through inked in the world's colour, the places found drawn by role (people, combat, exploration, story, secret, wonder), the player as a small doll, and a legend of what has been found.
+
+### Music and sounds
+
+- Each of the twenty lesser biomes has its own variation of its world's theme, in the same mode, with its own tempo and lead instrument.
+- New sounds for the reliquary opening and refusing a key, for a relic taken in, and a quiet air near a wonder.
+
+### Checks
+
+- The game tests check that every world raises its wonder inside the group's parcel and that a relic eases its world's rule.
+- The CI's game runs on Minecraft 26.3 start at last: it gets a software Vulkan device beside Mesa's OpenGL.
+
 ## 0.7.0 (alpha)
 
 Every world hides a wonder with a sealed reliquary that only a key from another world opens, the Journal gives every world a card of its items, the Surface has more to find before the first boss, and every block, item, tool and armour piece is repainted.
