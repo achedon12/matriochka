@@ -1,6 +1,5 @@
-// next/link for the latest pages, a plain link for an older version's (/v/<version>/): those pages load whole,
-// so their navigation payloads are not published (scripts/trim-versions.mjs), which keeps the site small
-// however many versions it shows.
+// next/link for the prerendered pages, a plain link for the reader page of the older versions (/v/?v=...):
+// the reader reads its version and page from the address once, when it loads, so it is always loaded whole.
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import { BASE } from "@/lib/config";

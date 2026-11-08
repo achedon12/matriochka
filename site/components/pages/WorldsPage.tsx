@@ -71,7 +71,7 @@ export default function WorldsPage({ lang, v }: { lang: Lang; v?: string }) {
     <Shell lang={lang} path="worlds/" section="worlds" v={v}>
       <PageHead title={c.h} lead={c.lead} img={c.headImg} />
       <div className={`${wrap} grid gap-8 py-10 lg:grid-cols-[200px_minmax(0,1fr)]`}>
-        <DepthRail worlds={d.worlds} label={c.h} />
+        <DepthRail worlds={d.worlds.map((w) => ({ n: w.n, name: w.name, doll: w.doll }))} label={c.h} />
         <div className="grid gap-[clamp(28px,4vw,56px)]">
           {d.worlds.map((w) => {
             const sw = { n: w.n, name: w.name, img: w.banner ?? w.wide ?? null, light: w.light, bg: w.bg, boss: w.boss.id, mobs: w.mobs.map((m) => m.id) };

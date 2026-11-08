@@ -1,7 +1,8 @@
 // Prebuild step: runs tools/site.py, which reads the mod's sources (content table, lang files, recipes,
 // biome spawn tables, GeckoLib models and animations, branding, screenshots) and writes site/data/*.json
 // plus the files the pages show into site/public. Then tools/site_versions.py adds the data of every
-// released version (site/data/versions/), built once per git tag; without it the site shows the latest only.
+// released version (site/data/versions.json, history.json, changes.json and site/public/versions/, built
+// once per git tag); without it the site shows the latest only.
 import { spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";

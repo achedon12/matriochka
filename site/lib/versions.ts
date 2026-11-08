@@ -1,13 +1,14 @@
-// The versions of the mod the site shows, written by tools/site_versions.py into site/data/versions/:
-// index.json (the versions, newest first), history.json (when each thing appeared and changed),
-// changes.json (each version's changelog section) and <version>/{en,fr}.json (an older version's data).
-// Read at build time only: the pages are static.
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
-import shared from "@/data/shared.json";
-import type { Lang, SiteData } from "./types";
+// The versions of the mod the site shows, from site/data/versions.json (tools/site_versions.py): the latest
+// is the current tree, prerendered at the plain addresses; the older ones are drawn by the reader page
+// (/v/?v=<version>&p=<page>) from the data it fetches. Safe for client components: the history and the
+// changelog sections are handed in (lib/latest.ts on the server, the reader in the browser).
+import index from "@/data/versions.json";
 
-export interface VersionInfo { v: string; mc: string[]; date: string | null; released: boolean; latest: boolean }
+export interface VersionInfo {
+  v: string; mc: string[]; date: string | null; released: boolean; latest: boolean;
+  /** what has a page of its own in that version */
+  creatures: string[]; bosses: string[]; worlds: number[];
+}
 export interface Skipped { v: string; mc: string[]; date: string | null; reason: "static" | "failed"; note: string }
 export interface Hist { since: string | null; changes: { v: string; f: string[] }[] }
 /** A run of a changelog line: plain text, code, bold, a link out [a, text, url] or a page of the site [r, text, path]. */
@@ -17,35 +18,12 @@ export interface ChangeSection { title: string; lead: Seg[][]; blocks: ChangeBlo
 /** What a badge says about one thing in the version shown. */
 export type Mark = { kind: "new" | "changed"; v: string } | null;
 
-const DIR = join(process.cwd(), "data", "versions");
-
-function read<T>(name: string, fallback: T): T {
-  const p = join(DIR, name);
-  if (!existsSync(p)) return fallback;
-  try {
-    return JSON.parse(readFileSync(p, "utf-8")) as T;
-  } catch {
-    return fallback;
-  }
-}
-
-// without tools/site_versions.py (no git tags, a bare copy of site/), the site shows the current version only
-const INDEX = read<{ latest: string; versions: VersionInfo[]; skipped: Skipped[] }>("index.json", {
-  latest: (shared as { version: string }).version,
-  versions: [{ v: (shared as { version: string }).version, mc: [], date: null, released: false, latest: true }],
-  skipped: [],
-});
-const HISTORY = read<Record<string, Hist>>("history.json", {});
-const CHANGES = read<Record<string, ChangeSection>>("changes.json", {});
+const INDEX = index as unknown as { latest: string; versions: VersionInfo[]; skipped: Skipped[] };
 
 export const LATEST = INDEX.latest;
 export const VERSIONS: VersionInfo[] = INDEX.versions;
 export const SKIPPED: Skipped[] = INDEX.skipped;
-/** The older versions, each with its own pages under /v/<version>/. */
 export const OLDER: string[] = VERSIONS.filter((x) => !x.latest).map((x) => x.v);
-/** The versions the /v/[ver]/ routes are built for. A static export needs at least one: without older versions
- * the latest is built there too (nothing links to it). */
-export const VERSION_PARAMS: string[] = OLDER.length ? OLDER : [LATEST];
 
 export function vkey(v: string): number[] {
   return v.split(".").map(Number);
@@ -61,22 +39,37 @@ export function info(v: string): VersionInfo | undefined {
   return VERSIONS.find((x) => x.v === v);
 }
 
-/** The version a page shows: the one in its address, or the latest. */
+/** The version a page shows: the one it was given, or the latest. */
 export function shown(v?: string | null): string {
   return v ?? LATEST;
 }
 
-const loaded = new Map<string, SiteData>();
+/** Whether a page (a path without language or version, e.g. "creatures/sporeling/") exists in a version. */
+export function pageIn(path: string, v?: string | null): boolean {
+  const p = path.split("#")[0];
+  const x = info(shown(v));
+  if (!x) return false;
+  let m = p.match(/^creatures\/([\w-]+)\/$/);
+  if (m) return x.creatures.includes(m[1]) || x.bosses.includes(m[1]);
+  m = p.match(/^worlds\/(\d+)\/$/);
+  if (m) return x.worlds.includes(Number(m[1]));
+  return ["", "worlds/", "bestiary/", "bosses/", "items/", "systems/", "changes/"].includes(p);
+}
 
-/** An older version's data as tools/site_versions.py stored it (null when it is not there). */
-export function olderData(lang: Lang, v: string): SiteData | null {
-  const key = `${v}/${lang}`;
-  if (!loaded.has(key)) {
-    const d = read<SiteData | null>(`${v}/${lang}.json`, null);
-    if (!d) return null;
-    loaded.set(key, d);
-  }
-  return loaded.get(key)!;
+/** Whether a creature id is a boss (in any version). */
+export function isBoss(id: string): boolean {
+  return VERSIONS.some((x) => x.bosses.includes(id));
+}
+
+let HISTORY: Record<string, Hist> = {};
+let CHANGES: Record<string, ChangeSection> = {};
+
+export function provideHistory(h: Record<string, Hist>) {
+  HISTORY = h;
+}
+
+export function provideChanges(c: Record<string, ChangeSection>) {
+  CHANGES = c;
 }
 
 /** The history of one thing ("item:<id>", "mob:<id>", "world:<n>", "site:<id>") up to the version shown. */

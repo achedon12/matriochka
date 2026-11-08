@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { BASE, SITE_ORIGIN } from "./config";
+import "./latest";
 import { getData, href } from "./data";
 import type { Lang } from "./types";
 

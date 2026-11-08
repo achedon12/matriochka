@@ -13,10 +13,14 @@ a note and left out of the site; the build goes on.
 
 Then, every run, from those versions and the current tree (site/data/{en,fr}.json, the version in
 gradle.properties), it writes:
-  site/data/versions/index.json    the versions (newest first), the Minecraft versions each supports
-  site/data/versions/history.json  when every item, block, creature, world and place appeared and changed
-  site/data/versions/changes.json  each version's section of CHANGELOG.md, with links to what it names
+  site/data/versions.json   the versions (newest first), the Minecraft versions each runs on, what has a page in each
+  site/data/history.json    when every item, block, creature, world and place appeared and changed
+  site/data/changes.json    each version's section of CHANGELOG.md, with links to what it names
+  site/public/versions/<version>/{en,fr}.json.gz, history.json.gz, changes.json.gz
+                            what the reader page of the older versions (/v/?v=<version>) fetches: gzip, about
+                            75 KB a language, unpacked in the browser
 """
+import gzip
 import importlib.util
 import json
 import os
@@ -30,7 +34,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
 DATA = os.path.join(ROOT, "site", "data")
 PUBLIC = os.path.join(ROOT, "site", "public")
-OUT = os.path.join(DATA, "versions")
+OUT = os.path.join(DATA, "versions")  # the store of built versions (not in git)
+PUBLISHED = os.path.join(PUBLIC, "versions")  # what the reader page fetches (not in git)
 # bump when the stored files change shape, so every version is built again
 SCHEMA = 2
 # what a tag's site.py reads; the sounds are left out, they are most of the weight and never read
@@ -217,12 +222,14 @@ def lang_ids(tree):
     return sorted(out)
 
 
-def stored(dest):
+def stored(dest, ok=False):
     p = os.path.join(dest, "meta.json")
     if not os.path.exists(p):
         return None
     meta = json.load(open(p, encoding="utf-8"))
-    return meta if meta.get("schema") == SCHEMA else None
+    if meta.get("schema") != SCHEMA or (ok and not meta.get("ok")):
+        return None
+    return meta
 
 
 # ---------------------------------------------------------------- what appeared and changed, version by version
@@ -427,37 +434,80 @@ def main(argv):
     print(f"site_versions.py: {sum(m['ok'] for m in metas)} older versions, {sum(not m['ok'] for m in metas)} left out")
 
 
+def pages_of(d):
+    """What has its own page in one version: the creatures (bosses apart) and the worlds."""
+    return dict(creatures=[m["id"] for m in d["mobs"]], bosses=[b["id"] for b in d["bosses"]], worlds=[w["n"] for w in d["worlds"]])
+
+
+def publish(d, cur):
+    """An older version's data as the reader page fetches it: the words it lacks (pages and labels added since)
+    taken from the current data, its own words winning wherever it has them, and no catalogue (the reader
+    rebuilds it from the worlds)."""
+    c, k = d["copy"], cur["copy"]
+    copy = {**k, **c, "ui": {**k["ui"], **c["ui"]}, "nav": {**k["nav"], **c["nav"]},
+            "items": {**k["items"], **c.get("items", {})}, "versions": k["versions"]}
+    out = {key: v for key, v in d.items() if key != "catalog"}
+    out["copy"] = copy
+    return out
+
+
+def write_gz(path, obj):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    raw = json.dumps(obj, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    # mtime 0: the same data gives the same file, run after run
+    with open(path, "wb") as f:
+        f.write(gzip.compress(raw, 9, mtime=0))
+
+
 def write_indexes(cur, metas):
-    """index.json, history.json and changes.json, from the stored versions and the current tree's data."""
-    latest_en = os.path.join(DATA, "en.json")
-    if not os.path.exists(latest_en):
-        raise SystemExit("site_versions.py: run tools/site.py first (no site/data/en.json)")
-    latest = json.load(open(latest_en, encoding="utf-8"))
+    """versions.json, history.json and changes.json (site/data, read by the latest pages), and what the reader
+    page fetches (site/public/versions), from the stored versions and the current tree's data."""
+    latest = {}
+    for lang in ("en", "fr"):
+        p = os.path.join(DATA, lang + ".json")
+        if not os.path.exists(p):
+            raise SystemExit("site_versions.py: run tools/site.py first (no site/data/%s.json)" % lang)
+        latest[lang] = json.load(open(p, encoding="utf-8"))
     cur_tag = "v" + cur if "v" + cur in tags() else None
-    entries = [dict(v=cur, mc=mc_versions(ROOT), date=tag_date(cur_tag) if cur_tag else None, released=bool(cur_tag), latest=True)]
-    loaded = {cur: latest}
+    entries = [dict(v=cur, mc=mc_versions(ROOT), date=tag_date(cur_tag) if cur_tag else None, released=bool(cur_tag),
+                    latest=True, **pages_of(latest["en"]))]
+    loaded = {cur: latest["en"]}
+
+    def data_of(v, lang="en"):
+        key = v if lang == "en" else v + "/" + lang
+        if key not in loaded:
+            p = os.path.join(OUT, v, lang + ".json")
+            loaded[key] = json.load(open(p, encoding="utf-8")) if os.path.exists(p) and stored(os.path.join(OUT, v), ok=True) else None
+        return loaded[key]
+
+    published = set()
     for m in sorted(metas, key=lambda m: vkey(m["version"]), reverse=True):
-        if m["ok"]:
-            entries.append(dict(v=m["version"], mc=m["mc"], date=m["date"], released=True, latest=False))
+        if m["ok"] and data_of(m["version"]) is not None:
+            v = m["version"]
+            entries.append(dict(v=v, mc=m["mc"], date=m["date"], released=True, latest=False, **pages_of(data_of(v))))
+            for lang in ("en", "fr"):
+                write_gz(os.path.join(PUBLISHED, v, lang + ".json.gz"), publish(data_of(v, lang), latest[lang]))
+            published.add(v)
+    # versions no longer shown (a tag moved, or the current tree reached it) leave the published files
+    if os.path.isdir(PUBLISHED):
+        for f in os.listdir(PUBLISHED):
+            if os.path.isdir(os.path.join(PUBLISHED, f)) and f not in published:
+                shutil.rmtree(os.path.join(PUBLISHED, f))
     index = dict(latest=cur, versions=entries,
                  skipped=[dict(v=m["version"], mc=m["mc"], date=m["date"], reason=m.get("reason", "failed"), note=m["note"]) for m in metas if not m["ok"]])
-
-    def data_of(v):
-        if v not in loaded:
-            p = os.path.join(OUT, v, "en.json")
-            loaded[v] = json.load(open(p, encoding="utf-8")) if any(e["v"] == v for e in entries) and os.path.exists(p) else None
-        return loaded[v]
 
     series = []
     for m in sorted(metas, key=lambda m: vkey(m["version"])):
         d = data_of(m["version"]) if m["ok"] else None
         series.append((m["version"], facets(d) if d else None, None if d else m.get("ids")))
-    series.append((cur, facets(latest), None))
+    series.append((cur, facets(latest["en"]), None))
     hist = {k: h for k, h in history(series).items() if h["since"] or h["changes"]}
     changes = changelog(os.path.join(ROOT, "CHANGELOG.md"), data_of)
-    for name, obj in (("index", index), ("history", hist), ("changes", changes)):
-        with open(os.path.join(OUT, name + ".json"), "w", encoding="utf-8") as f:
+    for name, obj in (("versions", index), ("history", hist), ("changes", changes)):
+        with open(os.path.join(DATA, name + ".json"), "w", encoding="utf-8") as f:
             json.dump(obj, f, ensure_ascii=False, separators=(",", ":"))
+    write_gz(os.path.join(PUBLISHED, "history.json.gz"), hist)
+    write_gz(os.path.join(PUBLISHED, "changes.json.gz"), changes)
 
 
 

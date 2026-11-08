@@ -29,7 +29,7 @@ export function BestiaryPage({ lang, v }: { lang: Lang; v?: string }) {
       <PageHead title={c.h} lead={c.lead} img={c.headImg}><p className="lead-note">{c.nesting}</p></PageHead>
       <Vine className="vine-sep" />
       <div className="wrap">
-        <BestiaryTable lang={lang} mobs={d.mobs} worlds={worlds} ui={ui} viewer={viewerLabels(ui)} base={href(lang, "", v)} marks={marks} />
+        <BestiaryTable lang={lang} mobs={d.mobs.map((m) => ({ id: m.id, name: m.name, desc: m.desc, world: m.world, bg: m.bg, elite: m.elite, hp: m.hp, dmg: m.dmg, moves: m.moves.map((x) => ({ name: x.name })) }))} worlds={worlds} ui={ui} viewer={viewerLabels(ui)} base={href(lang, "", v)} marks={marks} />
       </div>
       <Vine className="vine-sep" />
       <section className="band" aria-labelledby="peoples-h">

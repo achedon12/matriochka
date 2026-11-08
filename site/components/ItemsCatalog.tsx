@@ -30,7 +30,11 @@ function Doll({ c, open, h }: { c: DollColours; open: boolean; h: number }) {
   );
 }
 
-export default function ItemsCatalog({ worlds, c, vl }: { worlds: World[]; c: Record<string, string>; vl: VersionLabels }) {
+export default function ItemsCatalog({ worlds, c, vl, missing }: {
+  worlds: World[]; c: Record<string, string>; vl: VersionLabels;
+  /** in an older version: what to say when the address names an item it does not have, and the latest items page */
+  missing?: { text: string; latest: string };
+}) {
   const all = useMemo<Entry[]>(() => worlds.flatMap((w) => [
     ...w.items.map((e) => ({ ...e, world: w.n, block: false })),
     ...w.blocks.map((e) => ({ ...e, world: w.n, block: true })),
@@ -48,12 +52,14 @@ export default function ItemsCatalog({ worlds, c, vl }: { worlds: World[]; c: Re
   const [world, setWorld] = useState<number | null>(null);
   const [sel, setSel] = useState<string>(stations[0]?.id ?? all[0]?.id);
   const sheet = useRef<HTMLElement>(null);
+  const [lost, setLost] = useState<string | null>(null);
 
   // the sheet follows the address, so a shared link opens it
   useEffect(() => {
     const read = () => {
       const id = decodeURIComponent(location.hash.slice(1));
       if (byId.has(id)) setSel(id);
+      setLost(id && !byId.has(id) ? id : null);
     };
     read();
     window.addEventListener("hashchange", read);
@@ -63,6 +69,7 @@ export default function ItemsCatalog({ worlds, c, vl }: { worlds: World[]; c: Re
   const open = useCallback((id: string, scroll = true) => {
     if (!byId.has(id)) return;
     setSel(id);
+    setLost(null);
     history.replaceState(null, "", `#${id}`);
     // on a narrow screen the sheet sits under the shelf: bring it into view
     if (scroll && sheet.current && window.matchMedia("(max-width: 979px)").matches) {
@@ -158,7 +165,12 @@ export default function ItemsCatalog({ worlds, c, vl }: { worlds: World[]; c: Re
         </div>
 
         <aside className="ic-sheet" ref={sheet} aria-live="polite" style={{ "--wl": ew?.light } as React.CSSProperties}>
-          {e && (
+          {lost && missing ? (
+            <article className="ic-card">
+              <p className="ic-eff">{missing.text}</p>
+              <p className="ic-src"><a href={`${missing.latest}#${lost}`}>{vl.seeLatest}</a></p>
+            </article>
+          ) : e && (
             <article key={e.id} className="ic-card">
               <div className="ic-plinth">
                 <span className="ic-halo" aria-hidden="true" />

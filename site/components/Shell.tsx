@@ -1,11 +1,12 @@
 import Link from "./PageLink";
 import type { CSSProperties, ReactNode } from "react";
-import { asset, creature, getData, href, otherLang, pageIn, SHARED } from "@/lib/data";
+import { asset, getData, href, otherLang, SHARED } from "@/lib/data";
 import { BASE, VERSION_KEY } from "@/lib/config";
-import { LATEST, OLDER, VERSIONS } from "@/lib/versions";
+import { isBoss, LATEST, OLDER, pageIn, VERSIONS } from "@/lib/versions";
 import type { Lang } from "@/lib/types";
 import { Icon } from "./Bits";
-import { Sprite, Vine } from "./Ornament";
+import { Vine } from "./Ornament";
+import Sprite from "./Sprite";
 import { StickyHeader } from "./Islands";
 import VersionPicker, { LatestLink, type PickerVersion } from "./VersionPicker";
 
@@ -14,7 +15,7 @@ import VersionPicker, { LatestLink, type PickerVersion } from "./VersionPicker";
 function target(path: string, v: string): string {
   if (pageIn(path, v) || (v === LATEST && path === "download/")) return path;
   const c = path.match(/^creatures\/([\w-]+)\//);
-  if (c) return creature("en", c[1])?.kind === "boss" ? "bosses/" : "bestiary/";
+  if (c) return isBoss(c[1]) ? "bosses/" : "bestiary/";
   if (path.startsWith("worlds/")) return "worlds/";
   return "";
 }

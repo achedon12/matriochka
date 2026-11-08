@@ -2071,6 +2071,13 @@
     "failed": "Not on this site: its data could not be rebuilt."
    },
    "noSection": "The changelog has no section for this version.",
+   "loading": "Opening this version of the mod",
+   "notIn": "Not in {v}",
+   "notInP": "This page has no counterpart in version {v} of the mod: what it shows came later.",
+   "notInItem": "This item or block is not in version {v} of the mod.",
+   "seeLatest": "See it in the latest version",
+   "unknown": "This version of the mod is not on the site.",
+   "failed": "This version could not be opened. Check your connection and reload the page.",
    "f": {
     "effect": "effect text",
     "rarity": "rarity",

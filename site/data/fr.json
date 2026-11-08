@@ -2071,6 +2071,13 @@
     "failed": "Absente de ce site : ses données n'ont pas pu être reconstruites."
    },
    "noSection": "Le journal des modifications n'a pas de section pour cette version.",
+   "loading": "Ouverture de cette version du mod",
+   "notIn": "Absent de la {v}",
+   "notInP": "Cette page n'a pas d'équivalent dans la version {v} du mod : ce qu'elle montre est venu plus tard.",
+   "notInItem": "Cet objet ou ce bloc n'existe pas dans la version {v} du mod.",
+   "seeLatest": "Le voir dans la dernière version",
+   "unknown": "Cette version du mod n'est pas sur le site.",
+   "failed": "Cette version n'a pas pu être ouverte. Vérifie ta connexion et recharge la page.",
    "f": {
     "effect": "texte de l'effet",
     "rarity": "rareté",

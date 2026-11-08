@@ -42,7 +42,7 @@ jobs:
           cache-dependency-path: site/package-lock.json
       - run: npm ci
       # prebuild runs tools/site.py (data + assets) and tools/site_versions.py (each release tag's data), then
-      # next build writes the static site to site/out and postbuild trims the older versions' payloads
+      # next build writes the static site to site/out (the older versions are drawn by one reader page, /v/)
       - run: npm run build
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v5

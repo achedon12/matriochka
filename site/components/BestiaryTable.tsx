@@ -8,7 +8,7 @@ import type { Lang, Mob } from "@/lib/types";
 import type { ViewerLabels } from "./viewer/ModelViewer";
 
 export default function BestiaryTable({ mobs, worlds, ui, base, marks = {} }: {
-  lang: Lang; mobs: Mob[]; worlds: { n: number; name: string; rule: string | null; light: string }[];
+  lang: Lang; mobs: (Pick<Mob, "id" | "name" | "desc" | "world" | "bg" | "elite" | "hp" | "dmg"> & { moves: { name: string }[] })[]; worlds: { n: number; name: string; rule: string | null; light: string }[];
   ui: Record<string, string>; viewer?: ViewerLabels;
   /** the start of the pages of the language and version shown, e.g. "/fr/v/0.6.0/" */
   base: string;
