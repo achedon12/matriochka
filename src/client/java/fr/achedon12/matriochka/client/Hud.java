@@ -13,8 +13,8 @@ import net.minecraft.world.item.ItemStack;
  *
  * The souls are a thin blue bar laid along the top edge of the vanilla experience bar, as wide as it, under the
  * hearts and the hunger (drawn before them, so their rows and every mod that leans on their places stay where they
- * are). It fills toward the next hundred souls; their count shows in blue over it when it changes, beside the
- * experience level, never on it, and fades after three seconds. The bar is there inside the worlds, or while holding
+ * are). It fills toward the next hundred souls; their count shows in blue left of its end when it changes, away
+ * from the hearts and the level, and fades after three seconds. The bar is there inside the worlds, or while holding
  * something that holds souls; it hides with the status bars (F1, creative, spectator). The Doll of Life's layers are
  * three small dolls at the bar's left end.
  */
@@ -82,22 +82,23 @@ public class Hud implements HudElement {
 	}
 
 	private static void count(GuiGraphicsExtractor g, Minecraft mc, int souls, long now) {
-		// the count, in blue, when it changes: beside the experience level, never over it
+		// the count, in blue, when it changes, fading out after three seconds
 		float shown = 1f - Ui.clamp01((now - changedAt - (SHOW_MS - 600)) / 600f);
 		if (now - changedAt >= SHOW_MS || shown <= 0) return;
 		String text = Integer.toString(souls);
 		float scale = Math.max(0.75f, Math.min(1.5f, Comfort.get().hudScale));
-		int level = mc.player.experienceLevel;
-		int xpw = level > 0 ? mc.font.width(Integer.toString(level)) : 0;
 		int tw = Math.round(mc.font.width(text) * scale);
-		// the experience level sits in the middle; the count goes just left of it (in the middle when there is none)
-		int tx = level > 0 ? g.guiWidth() / 2 - xpw / 2 - 3 - tw : g.guiWidth() / 2 - tw / 2;
-		int ty = g.guiHeight() - 35 - Math.round(8 * (scale - 1));
+		// left of the experience bar's left end, centred on the souls bar: empty space in vanilla, away from the hearts
+		// and the level (the Doll of Life's dolls sit there too, so the count goes left of them when they show)
+		int barLeft = g.guiWidth() / 2 - BAR_W / 2, dolls = Math.min(3, MatrioClient.state.getIntOr("doll_max", 0));
+		int left = barLeft - (dolls > 0 ? 4 + dolls * 7 : 0);
+		int tx = left - tw - 3;
+		float ty = g.guiHeight() - 32 + 1.5f - 4 * scale;
 		g.pose().pushMatrix();
 		g.pose().translate(tx, ty);
 		g.pose().scale(scale, scale);
 		int a = Math.round(255 * shown) << 24;
-		for (int[] o : new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}) g.text(mc.font, text, o[0], o[1], a | 0x0A1430, false);
+		g.text(mc.font, text, 1, 1, a | 0x0A1430, false);
 		g.text(mc.font, text, 0, 0, a | 0x9ED6FF, false);
 		g.pose().popMatrix();
 	}
