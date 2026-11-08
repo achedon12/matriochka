@@ -53,12 +53,22 @@ public final class WorldCards {
 				if (it.id().equals(b.core())) ways.add(Component.translatable("journal.matriochka.card.boss", Component.translatable("entity.matriochka." + b.id())));
 			for (Defs.BlockDef b : Content.BLOCKS)
 				if (it.id().equals(b.drop()) && !it.id().equals(b.id())) ways.add(Component.translatable("journal.matriochka.card.ore", name(b.id())));
+			// the wonders: a cross key lies in this world's wonder, a relic in its reliquary
+			if (it.id().startsWith("cross_key_")) ways.add(Component.translatable("journal.matriochka.card.wonder_key", Component.translatable("structure.matriochka." + wonder(world))));
+			if (it.id().startsWith("relic_")) ways.add(Component.translatable("journal.matriochka.card.reliquary", Component.translatable("structure.matriochka." + wonder(world)),
+				fr.achedon12.matriochka.block.Reliquary.keyFor(world)));
 			String chest = Rewards.chestTier(it);
 			if (chest != null) ways.add(Component.translatable("journal.matriochka.card.chest." + chest));
 			if (ways.isEmpty()) ways.add(Component.translatable("journal.matriochka.card.other"));
 			out.add(new Entry(it, ways));
 		}
 		return out;
+	}
+
+	/** The id of a world's wonder (the structure of role "wonder"). */
+	private static String wonder(int world) {
+		for (Defs.StructureDef st : Content.STRUCTURES) if (st.world() == world && st.role().equals("wonder")) return st.id();
+		return "";
 	}
 
 	/** Every way of an entry, one per line, for its tooltip. */

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731811,
+    "separation": 29,
+    "spacing": 88
+  },
+  "structures": [
+    {
+      "structure": "matriochka:stopped_clock",
+      "weight": 1
+    }
+  ]
+}

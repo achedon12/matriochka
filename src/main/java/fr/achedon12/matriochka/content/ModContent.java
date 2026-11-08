@@ -130,6 +130,7 @@ public final class ModContent {
 				yield new Blocks3.NestingChest(rows == 3 ? p.strength(2f).sound(SoundType.WOOD) : p.strength(1.5f).sound(SoundType.WOOD).noOcclusion(), rows);
 			}
 			case "boss_altar" -> new Blocks3.BossAltar(p.strength(-1f, 3600000f).lightLevel(s -> 10).noLootTable());
+			case "reliquary" -> new fr.achedon12.matriochka.block.Reliquary(p.strength(-1f, 3600000f).sound(SoundType.WOOD).lightLevel(s -> 7).noLootTable());
 			case "lair_heart" -> new Blocks3.LairHeart(p.strength(-1f, 3600000f).sound(SoundType.SCULK_CATALYST).lightLevel(s -> 5).noLootTable());
 			case "sealed_door" -> new Blocks3.SealedDoor(p.strength(-1f, 3600000f).sound(SoundType.STONE));
 			case "station" -> new StationBlock(d.id(), p.strength(2.5f).sound(SoundType.WOOD).lightLevel(s -> 4).noOcclusion());

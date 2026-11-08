@@ -141,6 +141,32 @@ final class PolishTest {
 			ctx.waitTicks(30);
 			shot(ctx, "journal_card_1");
 			ctx.setScreen(() -> null);
+			// a wonder's reliquary: the wrong key leaves it shut, the right one gives the relic, the relic one heart
+			String reliq = s.computeOnServer(server -> {
+				var p = server.getPlayerList().getPlayers().get(0);
+				var lvl = (net.minecraft.server.level.ServerLevel) p.level();
+				net.minecraft.core.BlockPos at = p.blockPosition().offset(2, 0, 0);
+				lvl.setBlock(at, fr.achedon12.matriochka.content.ModContent.block("reliquary").defaultBlockState(), 3);
+				if (lvl.getBlockEntity(at) instanceof fr.achedon12.matriochka.block.DataBlockEntity be) be.data().putInt("world", 1);
+				int need = fr.achedon12.matriochka.block.Reliquary.keyFor(1);
+				var hit = new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(at), net.minecraft.core.Direction.UP, at, false);
+				var state = lvl.getBlockState(at);
+				p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new net.minecraft.world.item.ItemStack(fr.achedon12.matriochka.content.ModContent.item("cross_key_" + (need % 10 + 1))));
+				state.useItemOn(p.getMainHandItem(), lvl, p, net.minecraft.world.InteractionHand.MAIN_HAND, hit);
+				boolean wrongShut = lvl.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, new net.minecraft.world.phys.AABB(at).inflate(2)).isEmpty();
+				p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new net.minecraft.world.item.ItemStack(fr.achedon12.matriochka.content.ModContent.item("cross_key_" + need)));
+				state.useItemOn(p.getMainHandItem(), lvl, p, net.minecraft.world.InteractionHand.MAIN_HAND, hit);
+				boolean relic = !lvl.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, new net.minecraft.world.phys.AABB(at).inflate(2),
+					e -> e.getItem().is(fr.achedon12.matriochka.content.ModContent.item("relic_1"))).isEmpty();
+				double before = p.getMaxHealth();
+				p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new net.minecraft.world.item.ItemStack(fr.achedon12.matriochka.content.ModContent.item("relic_1")));
+				p.getMainHandItem().use(lvl, p, net.minecraft.world.InteractionHand.MAIN_HAND);
+				double after = p.getMaxHealth();
+				return "wrong key keeps it shut " + wrongShut + ", right key gives the relic " + relic + ", the relic adds " + (after - before) + " health";
+			});
+			Matriochka.LOG.info("[polish] reliquary: {}", reliq);
+			if (!reliq.equals("wrong key keeps it shut true, right key gives the relic true, the relic adds 2.0 health"))
+				throw new AssertionError("reliquary: " + reliq);
 			Matriochka.LOG.info("[polish] ok");
 		}
 	}

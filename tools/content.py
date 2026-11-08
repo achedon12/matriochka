@@ -1627,3 +1627,38 @@ STORY_UI = {
     "command.matriochka.difficulty.set": ("Matriochka difficulty set to %s for the whole server", "Difficulté de Matriochka réglée sur %s pour tout le serveur"),
     "command.matriochka.difficulty.unknown": ("Unknown difficulty: %s (story, normal, nightmare, hardcore)", "Difficulté inconnue : %s (story, normal, nightmare, hardcore)"),
 }
+
+# ---------------------------------------------------------------- wonders and the keys between the worlds
+# One wonder per world: a unique, spectacular place, rarer than any structure. At its heart a sealed reliquary that
+# only the cross key found in another world's wonder opens: the key of World n opens the reliquary of World
+# WONDER_OPENS(n). The reliquary gives the world's relic; using a relic gives one heart of health for good.
+WONDERS = {
+    1: ("mother_tree", "The Mother Tree", "L'Arbre-mère", "Spore Pearl", "Perle de spores"),
+    2: ("molten_heart", "The Molten Heart", "Le Cœur en fusion", "Heart Ember", "Braise du cœur"),
+    3: ("hall_of_keys", "The Hall of Keys", "La Salle des clés", "Master Ward", "Panneton maître"),
+    4: ("eye_of_the_storm", "The Eye of the Storm", "L'Œil de la tempête", "Bottled Thunder", "Tonnerre en bouteille"),
+    5: ("last_candle", "The Last Candle", "La Dernière Bougie", "Undying Wick", "Mèche éternelle"),
+    6: ("upside_spire", "The Upside Spire", "La Flèche inversée", "Reversed Prism", "Prisme inversé"),
+    7: ("sunken_bell", "The Sunken Bell", "La Cloche engloutie", "Bell Pearl", "Perle de cloche"),
+    8: ("stopped_clock", "The Stopped Clock", "L'Horloge arrêtée", "Still Hand", "Aiguille figée"),
+    9: ("sleeping_giant", "The Sleeping Giant", "Le Géant endormi", "Giant's Tooth", "Dent du géant"),
+    10: ("artisans_desk", "The Artisan's Desk", "Le Bureau de l'Artisan", "First Chisel", "Premier ciseau"),
+}
+
+
+def WONDER_OPENS(n):
+    return (n + 3) % 10 + 1
+
+
+for _n, (_sid, _en, _fr, _ren, _rfr) in WONDERS.items():
+    STRUCTURES[_n].append((_sid, _en, _fr, "wonder", "large", "wonder", "wonder"))
+    _to = WONDER_OPENS(_n)
+    item(f"cross_key_{_n}", f"Cross Key of World {_n}", f"Clé croisée du monde {_n}", _n, "secret", "epic", "key",
+         f"Found in {_en}. Opens the reliquary of {WONDERS[_to][1]} in World {_to}.",
+         f"Trouvée dans {_fr[0].lower() + _fr[1:]}. Ouvre le reliquaire de {WONDERS[_to][2][0].lower() + WONDERS[_to][2][1:]}, au monde {_to}.")
+    item(f"relic_{_n}", _ren, _rfr, _n, "secret", "legendary", "gem",
+         f"The relic of {_en}. Use it: one more heart of health, for good.",
+         f"La relique de {_fr[0].lower() + _fr[1:]}. Utilise-la : un cœur de vie en plus, pour toujours.")
+block("reliquary", "Reliquary", "Reliquaire", 0, "reliquary", "lacquer",
+      note_en="Sealed. The cross key of another world's wonder opens it.",
+      note_fr="Scellé. La clé croisée de la merveille d'un autre monde l'ouvre.")

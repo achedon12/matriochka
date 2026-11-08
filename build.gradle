@@ -58,7 +58,7 @@ loom {
 				vmArgs '-Dmatriochka.capture=trailer', '-Xmx6G', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: ''), '-Dmatriochka.takes=' + (project.findProperty('takes') ?: 'adbfcg')
 			}
 			if (name == 'clientGameTest' && project.hasProperty('structures')) {
-				vmArgs '-Dmatriochka.capture=structures', '-Xmx4G', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: '')
+				vmArgs '-Dmatriochka.capture=structures', '-Xmx4G', '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: ''), '-Dmatriochka.role=' + (project.findProperty('role') ?: '')
 			}
 			if (name == 'clientGameTest' && project.hasProperty('gui')) {
 				vmArgs '-Dmatriochka.capture=gui'

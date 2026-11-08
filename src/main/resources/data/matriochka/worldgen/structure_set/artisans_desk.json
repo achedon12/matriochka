@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 732011,
+    "separation": 29,
+    "spacing": 88
+  },
+  "structures": [
+    {
+      "structure": "matriochka:artisans_desk",
+      "weight": 1
+    }
+  ]
+}

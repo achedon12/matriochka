@@ -20,6 +20,8 @@ public final class StructureTracker {
 	private StructureTracker() {}
 
 	public static void tick(ServerPlayer player) {
+		// the relics' hearts survive deaths and reconnections (world/Relics)
+		if (player.tickCount % 40 == 0) fr.achedon12.matriochka.world.Relics.apply(player);
 		ServerLevel level = (ServerLevel) player.level();
 		int world = Worlds.number(level);
 		if (world == 0) return;

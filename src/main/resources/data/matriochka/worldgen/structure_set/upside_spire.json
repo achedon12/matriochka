@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731611,
+    "separation": 29,
+    "spacing": 88
+  },
+  "structures": [
+    {
+      "structure": "matriochka:upside_spire",
+      "weight": 1
+    }
+  ]
+}

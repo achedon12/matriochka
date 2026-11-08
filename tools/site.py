@@ -743,7 +743,7 @@ TIER = {"learning": ("Learning", "Apprentissage"), "mastery": ("Mastery", "Maît
         "expertise": ("Expertise", "Expertise"), "final": ("Final exam", "Examen final")}
 
 ROLE = {"combat": ("Combat", "Combat"), "exploration": ("Exploration and loot", "Exploration et butin"),
-        "story": ("Story", "Histoire"), "utility": ("Utility", "Utilité"), "secret": ("Secret", "Secret")}
+        "story": ("Story", "Histoire"), "utility": ("Utility", "Utilité"), "secret": ("Secret", "Secret"), "wonder": ("Wonder", "Merveille")}
 
 STATION_OF = {w: sid for (sid, en, fr, w, nen, nfr) in C.STATIONS if w > 0}
 STATION_NOTE = {sid: (nen, nfr) for (sid, en, fr, w, nen, nfr) in C.STATIONS}
@@ -1273,11 +1273,13 @@ INSIDE = {
               "Un coin lecture avec lutrin et bougies autour d'un coffre rare qui contient une page du Journal."),
     "utility": ("The people of the world live here and trade with you, beside a common chest.",
                 "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun."),
+    "wonder": ("The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+               "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre."),
     "secret": ("A puzzle or hidden passage leads to a vault chest with the world's hidden doll and a Journal page.",
                "Une énigme ou un passage caché mène à un coffre au trésor avec la poupée cachée du monde et une page du Journal."),
 }
 ROLE_LABEL = {"combat": ("Combat", "Combat"), "exploration": ("Exploration", "Exploration"), "story": ("Story", "Histoire"),
-              "utility": ("People", "Peuple"), "secret": ("Secret", "Secret")}
+              "utility": ("People", "Peuple"), "secret": ("Secret", "Secret"), "wonder": ("Wonder", "Merveille")}
 SIZE_LABEL = {"small": ("Small", "Petite"), "medium": ("Medium", "Moyenne"), "large": ("Large", "Grande")}
 RARITY_S = {"common": ("Common", "Courante"), "rare": ("Rare", "Rare"), "epic": ("Very rare", "Très rare"), "legendary": ("Unique", "Unique")}
 VAN_FOOD = {1: "glow_berries", 2: "baked_potato", 3: "bread", 4: "apple", 5: "mushroom_stew", 6: "chorus_fruit", 7: "cooked_cod", 8: "pumpkin_pie", 9: "cooked_beef", 10: "cookie", 0: "bread"}

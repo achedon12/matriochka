@@ -1,0 +1,12 @@
+{
+  "type": "matriochka:procedural",
+  "biomes": "#matriochka:in_world_6",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "world": 6,
+  "archetype": "wonder",
+  "role": "wonder",
+  "size": "large",
+  "structure_id": "upside_spire"
+}

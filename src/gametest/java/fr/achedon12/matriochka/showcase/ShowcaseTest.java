@@ -47,8 +47,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 				s.runCommand("execute as @p at @s run summon marker ~ ~ ~ {Tags:[\"st\"]}");
 				int k = 0;
 				final int world = w;
+				String role = System.getProperty("matriochka.role", "");
 				for (Defs.StructureDef d : Content.STRUCTURES) {
 					if (d.world() != w) continue;
+					if (!role.isEmpty() && !d.role().equals(role)) continue;
 					final int dx = (k % 5) * 110 - 220, dz = 260 + (k / 5) * 140;
 					k++;
 					final int back = d.size().equals("large") ? 46 : d.size().equals("small") ? 22 : 32;
@@ -71,9 +73,17 @@ public class ShowcaseTest implements FabricClientGameTest {
 							org.slf4j.LoggerFactory.getLogger("matriochka").info("[shoot] {} failed: {}", d.id(), e.getMessage());
 						}
 						int top = ceiling ? y : lvl.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+						if (d.role().equals("wonder")) {
+							// a wonder may sit in a cave, under the sea or in the dark: aim at its reliquary, wherever it is
+							var rel = fr.achedon12.matriochka.content.ModContent.block("reliquary");
+							for (var bp : net.minecraft.core.BlockPos.betweenClosed(x - 40, lvl.getMinY(), z - 40, x + 40, lvl.getMaxY(), z + 40))
+								if (lvl.getBlockState(bp).is(rel)) return new int[]{bp.getX(), bp.getY(), bp.getZ()};
+						}
 						return new int[]{x, top, z};
 					});
-					s.runCommand("execute as @p at @s run tp @s " + (cam[0] + back / 2) + " " + (cam[1] + back * 4 / 10) + " " + (cam[2] - back * 9 / 10) + " facing " + cam[0] + " " + (cam[1] + 3) + " " + cam[2]);
+					// World 5's fog is short: come in closer there
+					final int cb = world == 5 ? back * 11 / 20 : back;
+					s.runCommand("execute as @p at @s run tp @s " + (cam[0] + cb / 2) + " " + (cam[1] + cb * 4 / 10) + " " + (cam[2] - cb * 9 / 10) + " facing " + cam[0] + " " + (cam[1] + 3) + " " + cam[2]);
 					ctx.waitTicks(60);
 					McTest.waitForChunks(sp);
 					ctx.waitTicks(10);

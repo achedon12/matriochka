@@ -875,7 +875,7 @@ def gen_worldgen():
                 "type": f"{NS}:procedural", "biomes": f"#{NS}:in_{key}", "spawn_overrides": {}, "step": "surface_structures",
                 "terrain_adaptation": "beard_thin" if not wd["ceiling"] else "none",
                 "world": n, "archetype": arch, "role": role, "size": size, "structure_id": sid})
-            spacing = {"common": 18, "rare": 34, "unique": 64}[rarity] + (8 if size == "large" else 0)
+            spacing = {"common": 18, "rare": 34, "unique": 64, "wonder": 80}[rarity] + (8 if size == "large" else 0)
             w(os.path.join(D, f"worldgen/structure_set/{sid}.json"), {
                 "placement": {"type": "minecraft:random_spread", "salt": 731000 + n * 100 + i, "separation": max(4, spacing // 3), "spacing": spacing},
                 "structures": [{"structure": f"{NS}:{sid}", "weight": 1}]})

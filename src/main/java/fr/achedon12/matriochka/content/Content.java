@@ -220,7 +220,27 @@ public final class Content {
 		new Defs.ItemDef("storm_javelin", 4, "weapon", "epic", "", ""),
 		new Defs.ItemDef("lantern_shield", 5, "ward", "epic", "", ""),
 		new Defs.ItemDef("tide_harpoon", 7, "weapon", "epic", "", ""),
-		new Defs.ItemDef("quake_pick", 9, "tool", "epic", "", "")
+		new Defs.ItemDef("quake_pick", 9, "tool", "epic", "", ""),
+		new Defs.ItemDef("cross_key_1", 1, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_1", 1, "secret", "legendary", "", ""),
+		new Defs.ItemDef("cross_key_2", 2, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_2", 2, "secret", "legendary", "", ""),
+		new Defs.ItemDef("cross_key_3", 3, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_3", 3, "secret", "legendary", "", ""),
+		new Defs.ItemDef("cross_key_4", 4, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_4", 4, "secret", "legendary", "", ""),
+		new Defs.ItemDef("cross_key_5", 5, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_5", 5, "secret", "legendary", "", ""),
+		new Defs.ItemDef("cross_key_6", 6, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_6", 6, "secret", "legendary", "", ""),
+		new Defs.ItemDef("cross_key_7", 7, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_7", 7, "secret", "legendary", "", ""),
+		new Defs.ItemDef("cross_key_8", 8, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_8", 8, "secret", "legendary", "", ""),
+		new Defs.ItemDef("cross_key_9", 9, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_9", 9, "secret", "legendary", "", ""),
+		new Defs.ItemDef("cross_key_10", 10, "secret", "epic", "", ""),
+		new Defs.ItemDef("relic_10", 10, "secret", "legendary", "", "")
 	);
 	public static final List<Defs.BlockDef> BLOCKS = List.of(
 		new Defs.BlockDef("world_soil_0", 0, "soil", "soil", ""),
@@ -305,7 +325,8 @@ public final class Content {
 		new Defs.BlockDef("lacquer_glow", 10, "terrain", "glow", ""),
 		new Defs.BlockDef("artisan_thread_ore", 10, "terrain", "ore", "artisan_thread"),
 		new Defs.BlockDef("air_vent", 7, "vent", "vent", ""),
-		new Defs.BlockDef("trial_altar", 0, "trial_altar", "stone_rune", "")
+		new Defs.BlockDef("trial_altar", 0, "trial_altar", "stone_rune", ""),
+		new Defs.BlockDef("reliquary", 0, "reliquary", "lacquer", "")
 	);
 	public static final List<Defs.MobDef> MOBS = List.of(
 		new Defs.MobDef("sporeling", 1, 16f, 3f, "swarm_toxin", 0.6f, 0.47f, 1.44f, "spores", "", false, false, false, false, List.of(new Defs.AttackDef("nip", "melee", 0.6f, 3.0f, 2, 4, 0f, 0f, 8, 14, 80, 0f, 3.2f, 40, 100, 0, 0f, 1, "", "", "toxin:3", "", "matriochka:spore", "entity.fox.bite"), new Defs.AttackDef("pop", "ring", 0.6f, 2.5f, 1, 4, 0f, 0.2f, 10, 16, 110, 0f, 4f, 40, 100, 0, 0f, 1, "", "", "toxin:8", "", "falling_spore_blossom", "entity.puffer_fish.blow_up"), new Defs.AttackDef("scatter", "leap", 0.9f, 0f, 1, 4, 0f, 0.55f, 9, 24, 90, 2f, 7f, 40, 100, 0, 0f, 1, "", "", "", "", "matriochka:spore", "entity.slime.jump"))),
@@ -408,6 +429,7 @@ public final class Content {
 		new Defs.StructureDef("gatherer_village", 1, "utility", "large", "rare", "village"),
 		new Defs.StructureDef("artisan_sanctuary", 1, "secret", "small", "unique", "vault"),
 		new Defs.StructureDef("gatherer_caravan", 1, "utility", "medium", "rare", "caravan"),
+		new Defs.StructureDef("mother_tree", 1, "wonder", "large", "wonder", "wonder"),
 		new Defs.StructureDef("salamander_cavern", 2, "combat", "medium", "common", "nest"),
 		new Defs.StructureDef("giant_furnace", 2, "combat", "large", "rare", "forge"),
 		new Defs.StructureDef("lava_well", 2, "combat", "medium", "common", "well"),
@@ -419,6 +441,7 @@ public final class Content {
 		new Defs.StructureDef("miner_camp", 2, "utility", "medium", "rare", "camp"),
 		new Defs.StructureDef("artisan_workshop", 2, "secret", "small", "unique", "vault"),
 		new Defs.StructureDef("ember_circle", 2, "combat", "medium", "common", "circle"),
+		new Defs.StructureDef("molten_heart", 2, "wonder", "large", "wonder", "wonder"),
 		new Defs.StructureDef("arena", 3, "combat", "medium", "common", "arena"),
 		new Defs.StructureDef("jailer_court", 3, "combat", "medium", "common", "arena"),
 		new Defs.StructureDef("moving_hall", 3, "combat", "medium", "common", "maze"),
@@ -430,6 +453,7 @@ public final class Content {
 		new Defs.StructureDef("prison", 3, "utility", "large", "rare", "cell"),
 		new Defs.StructureDef("artisan_cell", 3, "secret", "small", "unique", "vault"),
 		new Defs.StructureDef("gaolers_gatehouse", 3, "combat", "medium", "rare", "bastion"),
+		new Defs.StructureDef("hall_of_keys", 3, "wonder", "large", "wonder", "wonder"),
 		new Defs.StructureDef("ray_nest", 4, "combat", "medium", "common", "nest"),
 		new Defs.StructureDef("giant_lightning_rod", 4, "combat", "large", "rare", "tower"),
 		new Defs.StructureDef("flying_wreck", 4, "combat", "medium", "rare", "wreck"),
@@ -441,6 +465,7 @@ public final class Content {
 		new Defs.StructureDef("floating_village", 4, "utility", "large", "rare", "village"),
 		new Defs.StructureDef("cloud_garden", 4, "secret", "small", "unique", "garden"),
 		new Defs.StructureDef("sky_outpost", 4, "combat", "medium", "common", "outpost"),
+		new Defs.StructureDef("eye_of_the_storm", 4, "wonder", "large", "wonder", "wonder"),
 		new Defs.StructureDef("prowler_nest", 5, "combat", "medium", "common", "nest"),
 		new Defs.StructureDef("echo_cemetery", 5, "combat", "medium", "common", "crypt"),
 		new Defs.StructureDef("black_cathedral", 5, "combat", "large", "rare", "cathedral"),
@@ -452,6 +477,7 @@ public final class Content {
 		new Defs.StructureDef("silent_village", 5, "utility", "large", "rare", "village"),
 		new Defs.StructureDef("artisan_shelter", 5, "secret", "small", "unique", "vault"),
 		new Defs.StructureDef("hushed_circle", 5, "combat", "medium", "common", "circle"),
+		new Defs.StructureDef("last_candle", 5, "wonder", "large", "wonder", "wonder"),
 		new Defs.StructureDef("mirror_hall", 6, "combat", "medium", "common", "arena"),
 		new Defs.StructureDef("hanging_cage", 6, "combat", "small", "common", "cell"),
 		new Defs.StructureDef("unstable_core", 6, "combat", "large", "rare", "cocoon"),
@@ -463,6 +489,7 @@ public final class Content {
 		new Defs.StructureDef("reflection_refuge", 6, "utility", "medium", "rare", "village"),
 		new Defs.StructureDef("floating_garden", 6, "secret", "small", "unique", "garden"),
 		new Defs.StructureDef("hanging_outpost", 6, "combat", "medium", "rare", "outpost"),
+		new Defs.StructureDef("upside_spire", 6, "wonder", "large", "wonder", "wonder"),
 		new Defs.StructureDef("hunter_trench", 7, "combat", "large", "common", "chasm"),
 		new Defs.StructureDef("dead_reef", 7, "combat", "medium", "common", "ruin"),
 		new Defs.StructureDef("sunken_city", 7, "combat", "large", "rare", "city"),
@@ -474,6 +501,7 @@ public final class Content {
 		new Defs.StructureDef("pressure_station", 7, "utility", "large", "rare", "lab"),
 		new Defs.StructureDef("deep_vault", 7, "secret", "small", "unique", "vault"),
 		new Defs.StructureDef("drowned_bastion", 7, "combat", "large", "rare", "bastion"),
+		new Defs.StructureDef("sunken_bell", 7, "wonder", "large", "wonder", "wonder"),
 		new Defs.StructureDef("hastened_town", 8, "combat", "large", "rare", "city"),
 		new Defs.StructureDef("aging_ruin", 8, "combat", "medium", "common", "ruin"),
 		new Defs.StructureDef("giant_clock", 8, "combat", "large", "rare", "clock"),
@@ -485,6 +513,7 @@ public final class Content {
 		new Defs.StructureDef("dusk_market", 8, "utility", "large", "rare", "market"),
 		new Defs.StructureDef("time_tomb", 8, "secret", "small", "unique", "vault"),
 		new Defs.StructureDef("ephemeral_caravan", 8, "utility", "medium", "rare", "caravan"),
+		new Defs.StructureDef("stopped_clock", 8, "wonder", "large", "wonder", "wonder"),
 		new Defs.StructureDef("walking_tower", 9, "combat", "large", "rare", "tower"),
 		new Defs.StructureDef("mobile_fortress", 9, "combat", "large", "rare", "fort"),
 		new Defs.StructureDef("terrain_arena", 9, "combat", "medium", "common", "arena"),
@@ -496,6 +525,7 @@ public final class Content {
 		new Defs.StructureDef("anchored_fort", 9, "utility", "large", "rare", "fort"),
 		new Defs.StructureDef("stable_sanctuary", 9, "secret", "small", "unique", "vault"),
 		new Defs.StructureDef("restless_circle", 9, "combat", "medium", "common", "circle"),
+		new Defs.StructureDef("sleeping_giant", 9, "wonder", "large", "wonder", "wonder"),
 		new Defs.StructureDef("needle_tower", 10, "combat", "large", "rare", "tower"),
 		new Defs.StructureDef("colossal_forge", 10, "combat", "large", "rare", "forge"),
 		new Defs.StructureDef("collapsed_doll", 10, "combat", "large", "rare", "cocoon"),
@@ -506,7 +536,8 @@ public final class Content {
 		new Defs.StructureDef("block_gate", 10, "story", "medium", "unique", "shrine"),
 		new Defs.StructureDef("city_of_giants", 10, "utility", "large", "rare", "city"),
 		new Defs.StructureDef("creature_throne", 10, "secret", "medium", "unique", "throne"),
-		new Defs.StructureDef("thimble_outpost", 10, "combat", "large", "rare", "outpost")
+		new Defs.StructureDef("thimble_outpost", 10, "combat", "large", "rare", "outpost"),
+		new Defs.StructureDef("artisans_desk", 10, "wonder", "large", "wonder", "wonder")
 	);
 	public static final List<Defs.QuestDef> QUESTS = List.of(
 		new Defs.QuestDef("read_between_lines", 0, "guide", "read", "artisan_scroll", 5, "item", "return_thread", 5),

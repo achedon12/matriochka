@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731211,
+    "separation": 29,
+    "spacing": 88
+  },
+  "structures": [
+    {
+      "structure": "matriochka:molten_heart",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731411,
+    "separation": 29,
+    "spacing": 88
+  },
+  "structures": [
+    {
+      "structure": "matriochka:eye_of_the_storm",
+      "weight": 1
+    }
+  ]
+}

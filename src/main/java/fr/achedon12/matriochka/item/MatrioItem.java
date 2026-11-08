@@ -107,6 +107,11 @@ public class MatrioItem extends Item {
 		PlayerState ps = PlayerState.of(sp);
 		boolean consume = false;
 		fr.achedon12.matriochka.world.QuestHooks.toolUsed(sp, stack);
+		// a wonder's relic: one more heart for good (world/Relics)
+		if (def.id().startsWith("relic_")) {
+			if (fr.achedon12.matriochka.world.Relics.use(sp, Integer.parseInt(def.id().substring(6))) && !sp.isCreative()) stack.shrink(1);
+			return InteractionResult.SUCCESS;
+		}
 		switch (def.id()) {
 			case "antidote" -> { ps.addGauge("toxin", -50); consume = true; }
 			case "cooling_water" -> { ps.addGauge("heat", -50); consume = true; }
@@ -228,7 +233,7 @@ public class MatrioItem extends Item {
 			case "antidote", "cooling_water", "silence_balm", "oxygen_capsule", "stabilizer", "season_preserve", "anchor", "return_thread", "refuge_doll",
 				 "solar_lantern", "sonar", "hourglass", "grappling_hook", "thruster", "labyrinth_map", "artisan_scroll", "artisan_journal",
 				 "nested_dolls", "whole_matryoshka", "blank_scroll", "soul_shard", "soul_vessel" -> true;
-			default -> id.startsWith("hidden_doll_");
+			default -> id.startsWith("hidden_doll_") || id.startsWith("relic_");
 		};
 	}
 

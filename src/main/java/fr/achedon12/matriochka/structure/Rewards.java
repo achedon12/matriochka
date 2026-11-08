@@ -80,6 +80,21 @@ public final class Rewards {
 				npc(k, m.pos());
 				if (!chosen.isEmpty()) chest(k, chosen.get(0).pos(), chosen.get(0).facing(), chosen.get(0).flipped(), COMMON, false, false);
 			}
+			case "wonder" -> {
+				// the reliquary at the heart, sealed for another world's key; the vault chest keeps this world's key
+				Kit.Mark heart = k.secret != null ? k.secret : new Kit.Mark(k.o.above(), Direction.SOUTH, false);
+				if (k.inside(heart.pos())) {
+					k.put(heart.pos(), ModContent.block("reliquary").defaultBlockState());
+					if (k.lvl.getBlockEntity(heart.pos()) instanceof fr.achedon12.matriochka.block.DataBlockEntity be) {
+						be.data().putInt("world", k.world);
+						be.setChanged();
+					}
+				}
+				Kit.Mark g = k.guard != null ? k.guard : new Kit.Mark(k.o.offset(2, 1, 0), Direction.SOUTH, false);
+				chest(k, g.pos(), g.facing(), g.flipped(), VAULT, true, false);
+				if (k.lvl.getBlockEntity(g.pos()) instanceof ChestBlockEntity c) c.setItem(4, new ItemStack(ModContent.item("cross_key_" + k.world)));
+				for (Kit.Mark m : chosen) chest(k, m.pos(), m.facing(), m.flipped(), RARE, false, false);
+			}
 			case "secret" -> {
 				Kit.Mark m = k.secret;
 				if (m == null) m = hiddenCellar(k, k.o);

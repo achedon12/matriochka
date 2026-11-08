@@ -106,6 +106,7 @@ public class ProceduralPiece extends StructurePiece {
 			case "artisan_cabin" -> Surface.workshop(k);
 			case "peddler_stall" -> Surface.stall(k);
 			case "fallen_doll" -> Surface.fallenDoll(k);
+			case "wonder" -> Wonders.build(k);
 			case "village" -> Settlements.village(k);
 			case "camp" -> Settlements.camp(k);
 			case "market" -> Settlements.market(k);
