@@ -141,6 +141,39 @@ final class PolishTest {
 			ctx.waitTicks(30);
 			shot(ctx, "journal_card_1");
 			ctx.setScreen(() -> null);
+			// the Journal's map: World 1 inked by hand (a winding walk and one place of every role), then the Surface
+			// round the player, with the doll where they stand
+			s.runOnServer(srv -> {
+				var p = srv.getPlayerList().getPlayers().get(0);
+				java.util.Random r = new java.util.Random(7);
+				int x = 0, z = 0;
+				for (int i = 0; i < 420; i++) {
+					fr.achedon12.matriochka.world.Atlas.mark(p, 1, x * 64, z * 64);
+					if (r.nextInt(3) == 0) fr.achedon12.matriochka.world.Atlas.mark(p, 1, (x + 1) * 64, z * 64);
+					if (r.nextInt(3) == 0) fr.achedon12.matriochka.world.Atlas.mark(p, 1, x * 64, (z + 1) * 64);
+					switch (r.nextInt(5)) {
+						case 0 -> x++; case 1 -> x--; case 2 -> z++; case 3 -> z--; default -> x += Integer.signum(-x);
+					}
+					x = Math.max(-14, Math.min(14, x));
+					z = Math.max(-14, Math.min(14, z));
+				}
+				String[] ids = {"gatherer_village", "spore_hive", "hollow_tree", "root_temple", "artisan_sanctuary", ""};
+				for (var st : fr.achedon12.matriochka.content.Content.STRUCTURES) if (st.world() == 1 && st.role().equals("wonder")) ids[5] = st.id();
+				int[][] at = {{-200, -180}, {260, 40}, {-60, 300}, {120, -260}, {-320, 120}, {40, 60}};
+				for (int i = 0; i < ids.length; i++) if (!ids[i].isEmpty()) fr.achedon12.matriochka.world.Atlas.markFound(p, 1, ids[i], at[i][0], at[i][1]);
+				int px = p.getBlockX(), pz = p.getBlockZ();
+				for (int dx = -5; dx <= 4; dx++)
+					for (int dz = -4; dz <= 5; dz++)
+						if (dx * dx + dz * dz < 22 || dx == dz) fr.achedon12.matriochka.world.Atlas.mark(p, 0, px + dx * 64, pz + dz * 64);
+				fr.achedon12.matriochka.world.Atlas.markFound(p, 0, "guardian_sanctuary", px + 150, pz - 120);
+			});
+			ctx.setScreen(() -> new JournalScreen(false).tab(3).openMap(1));
+			ctx.waitTicks(30);
+			shot(ctx, "journal_map_1");
+			ctx.setScreen(() -> new JournalScreen(false).tab(3).openMap(0));
+			ctx.waitTicks(30);
+			shot(ctx, "journal_map_0");
+			ctx.setScreen(() -> null);
 			// a wonder's reliquary: the wrong key leaves it shut, the right one gives the relic, the relic one heart
 			String reliq = s.computeOnServer(server -> {
 				var p = server.getPlayerList().getPlayers().get(0);

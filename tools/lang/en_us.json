@@ -602,5 +602,19 @@
  "message.matriochka.rite.place.4": "The Storm Rod goes on top of a lightning rod.",
  "message.matriochka.rite.place.7": "The Abyssal Pearl must go into the water.",
  "message.matriochka.rite.place.8": "The Sapling of the Four Seasons is planted on grass or dirt.",
- "message.matriochka.rite.place.9": "The Seismic Stake is driven into stone, below y 40."
+ "message.matriochka.rite.place.9": "The Seismic Stake is driven into stone, below y 40.",
+ "journal.matriochka.map.open": "Map",
+ "journal.matriochka.map.items": "Items",
+ "journal.matriochka.map.title": "Map of %s",
+ "journal.matriochka.map.empty": "Not a step taken here yet. Walk this world and the Journal inks in the ground you cross.",
+ "journal.matriochka.map.you": "You are here",
+ "journal.matriochka.map.explored": "%s regions inked",
+ "journal.matriochka.map.legend": "Places found",
+ "journal.matriochka.map.elsewhere": "You are in another world: this map waits for your return.",
+ "journal.matriochka.map.role.utility": "People",
+ "journal.matriochka.map.role.combat": "Combat",
+ "journal.matriochka.map.role.exploration": "Exploration",
+ "journal.matriochka.map.role.story": "Story",
+ "journal.matriochka.map.role.secret": "Secret",
+ "journal.matriochka.map.role.wonder": "Wonder"
 }

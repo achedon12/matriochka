@@ -44,6 +44,7 @@ public class MatrioClient implements ClientModInitializer {
 		HudElementRegistry.addLast(Matriochka.id("first_steps"), new TutorialCard());
 		fr.achedon12.matriochka.compat.MapCompatClient.init();
 		ClientPlayNetworking.registerGlobalReceiver(Net.StatePayload.TYPE, (p, ctx) -> state = p.tag());
+		ClientPlayNetworking.registerGlobalReceiver(Net.MapPayload.TYPE, (p, ctx) -> JournalMap.receive(p.tag()));
 		// the strip of icons under a Matriochka item's name
 		net.fabricmc.fabric.api.client.rendering.v1.ClientTooltipComponentCallback.EVENT.register(data -> data instanceof fr.achedon12.matriochka.item.ItemTip t ? new ItemTipClient(t) : null);
 		// class and armor layers on gear from outside the mod (Matriochka items write their own tooltip)
@@ -56,7 +57,10 @@ public class MatrioClient implements ClientModInitializer {
 			Cinematics.tick(mc);
 			Hints.tick(mc);
 		});
-		net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.DISCONNECT.register((h, mc) -> Cinematics.reset());
+		net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.DISCONNECT.register((h, mc) -> {
+			Cinematics.reset();
+			JournalMap.clear();
+		});
 		// the mod's peoples trade at their own stall (the mixin on MenuScreens opens it)
 		ClientPlayNetworking.registerGlobalReceiver(Net.MerchantInfoPayload.TYPE, (p, ctx) -> StallScreen.receive(p));
 		ClientPlayNetworking.registerGlobalReceiver(Net.EndingPayload.TYPE, (p, ctx) -> Minecraft.getInstance().setScreenAndShow(new EndingScreen(p.kind())));
