@@ -28,6 +28,9 @@ public class JournalScreen extends Screen {
 	private int tab, page, questWorld;
 	/** The world card open on the Worlds tab (-1: the list), and its page. */
 	private int cardWorld = -1, cardPage;
+	/** The card's world shown as its map (client/JournalMap) instead of its items. */
+	private boolean mapView;
+	private int mapTicks;
 	private static final int CARD_ROWS = 7;
 	// the Pages tab: the selected Journal page (world 1..10, index 0..4)
 	private int pageWorld = 1, pageIndex = 0;
@@ -119,7 +122,15 @@ public class JournalScreen extends Screen {
 		if (!scroll && tab == 0 && RecapScreen.available()) {
 			buttons.add(l + 20 + (PW - 18) / 2 - 40, t + 46, 80, 16, Component.translatable("journal.matriochka.last_cycle"), () -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new RecapScreen(this)));
 		}
-		if (!scroll && tab == 3 && cardWorld >= 0) {
+		if (!scroll && tab == 3 && cardWorld >= 0 && mapView) {
+			// the map: the arrows walk the worlds, the middle buttons go back to the list or to the world's items
+			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> showMap(cardWorld - 1, -1), () -> cardWorld > 0);
+			buttons.add(l + BW / 2 + 40, t + BH - 30, 46, 16, Component.translatable("journal.matriochka.card.back"), () -> { cardWorld = -1; mapView = false; pageAt = Ui.now(); turnDir = -1; rebuild(); });
+			buttons.add(l + BW / 2 + 89, t + BH - 30, 38, 16, Component.translatable("journal.matriochka.map.items"), () -> { mapView = false; cardPage = 0; pageAt = Ui.now(); turnDir = -1; rebuild(); });
+			buttons.add(l + BW - 40, t + BH - 30, 18, 16, Component.literal(">"), () -> showMap(cardWorld + 1, 1), () -> cardWorld < 10);
+		}
+		if (!scroll && tab == 3 && cardWorld >= 0 && !mapView) {
+			buttons.add(l + BW / 2 + 89, t + BH - 30, 38, 16, Component.translatable("journal.matriochka.map.open"), () -> showMap(cardWorld, 1));
 			int cardPages = Math.max(1, (WorldCards.of(cardWorld).size() + CARD_ROWS - 1) / CARD_ROWS);
 			buttons.add(l + BW / 2 + 18, t + BH - 30, 18, 16, Component.literal("<"), () -> { cardPage--; pageAt = Ui.now(); turnDir = -1; rebuild(); }, () -> cardPage > 0);
 			buttons.add(l + BW / 2 + 40, t + BH - 30, 46, 16, Component.translatable("journal.matriochka.card.back"), () -> { cardWorld = -1; pageAt = Ui.now(); turnDir = -1; rebuild(); });
@@ -203,6 +214,7 @@ public class JournalScreen extends Screen {
 		tab = i;
 		page = 0;
 		cardWorld = -1;
+		mapView = false;
 		cycleConfirm = false;
 		turnAt = Ui.now();
 		Ui.pageTurn();
@@ -261,6 +273,40 @@ public class JournalScreen extends Screen {
 	public void tick() {
 		super.tick();
 		motion.tick();
+		// the map of the world the player walks in fills in as they go: ask again every three seconds
+		if (mapView && cardWorld >= 0 && cardWorld == JournalMap.here() && ++mapTicks % 60 == 0) JournalMap.request(cardWorld);
+	}
+
+	/** Shows a world's map on the Worlds tab, turning to it as a page. */
+	private void showMap(int world, int dir) {
+		if (world < 0 || world > 10) return;
+		boolean turn = mapView;
+		cardWorld = world;
+		mapView = true;
+		mapTicks = 0;
+		JournalMap.request(world);
+		pageAt = Ui.now();
+		turnDir = dir;
+		if (turn) Ui.pageTurn();
+		rebuild();
+	}
+
+	/** Opens a world's map (the Worlds tab, from the showcase). */
+	public JournalScreen openMap(int world) {
+		cardWorld = world;
+		cardPage = 0;
+		mapView = true;
+		JournalMap.request(world);
+		return this;
+	}
+
+	/** A world's map: its name, then the sheet; a word instead while nothing of it has been walked. */
+	private void mapPage(GuiGraphicsExtractor g, int x, int y, int w, int mx, int my) {
+		Component name = cardWorld == 0 ? Component.translatable("journal.matriochka.surface") : Component.translatable("world.matriochka." + cardWorld);
+		Ui.fitted(g, font, Component.translatable("journal.matriochka.map.title", name), x + (w - 8) / 2f, y, w - 10, Ui.RED_INK, false);
+		g.fill(x + w - 4, y + 2, x + w, y + 6, Ui.worldColor(cardWorld));
+		if (!JournalMap.draw(g, font, cardWorld, x, y + 13, w, 143, mx, my))
+			Ui.wrap(g, font, Component.translatable("journal.matriochka.map.empty"), x + 4, y + 50, w - 8, Ui.INK_SOFT);
 	}
 
 	/** 0..1, how far the scroll is unrolled. */
@@ -396,6 +442,10 @@ public class JournalScreen extends Screen {
 		Ui.sprite(g, "divider", lx + cw / 2 - 60, t + 31, 120, 10);
 		if (forTab == PAGES_TAB) {
 			pageIndex(g, lx, t, cw);
+			return;
+		}
+		if (TABS[forTab].equals("worlds") && forTab == tab && mapView && cardWorld >= 0) {
+			JournalMap.legend(g, font, cardWorld, lx + 4, t + 46, cw - 8);
 			return;
 		}
 		if (TABS[forTab].equals("worlds")) {
@@ -652,6 +702,10 @@ public class JournalScreen extends Screen {
 	}
 
 	private void worlds(GuiGraphicsExtractor g, int x, int y, int w, int mx, int my) {
+		if (cardWorld >= 0 && mapView) {
+			mapPage(g, x, y, w, mx, my);
+			return;
+		}
 		if (cardWorld >= 0) {
 			worldCard(g, x, y, w, mx, my);
 			return;
@@ -700,6 +754,7 @@ public class JournalScreen extends Screen {
 	public void openCard(int world) {
 		cardWorld = world;
 		cardPage = 0;
+		mapView = false;
 	}
 
 	private int rightX() {

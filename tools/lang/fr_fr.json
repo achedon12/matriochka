@@ -626,5 +626,19 @@
  "npc.matriochka.rumor.10": "Le bureau de l'Artisan lui-même se dresse %s, grand comme une colline. %s.",
  "journal.matriochka.card.rumor": "Ses habitants disent que la merveille se dresse vers %s, %s.",
  "journal.matriochka.card.rumor_none": "Demande aux habitants du monde où se dresse sa merveille.",
- "message.matriochka.reliquary.shared": "%s a ouvert le reliquaire pour le groupe : %s est à toi aussi."
+ "message.matriochka.reliquary.shared": "%s a ouvert le reliquaire pour le groupe : %s est à toi aussi.",
+ "journal.matriochka.map.open": "Carte",
+ "journal.matriochka.map.items": "Objets",
+ "journal.matriochka.map.title": "Carte : %s",
+ "journal.matriochka.map.empty": "Pas encore un pas ici. Parcours ce monde et le Journal encre le terrain que tu traverses.",
+ "journal.matriochka.map.you": "Tu es ici",
+ "journal.matriochka.map.explored": "%s régions encrées",
+ "journal.matriochka.map.legend": "Lieux trouvés",
+ "journal.matriochka.map.elsewhere": "Tu es dans un autre monde : cette carte attend ton retour.",
+ "journal.matriochka.map.role.utility": "Peuples",
+ "journal.matriochka.map.role.combat": "Combat",
+ "journal.matriochka.map.role.exploration": "Exploration",
+ "journal.matriochka.map.role.story": "Histoire",
+ "journal.matriochka.map.role.secret": "Secret",
+ "journal.matriochka.map.role.wonder": "Merveille"
 }

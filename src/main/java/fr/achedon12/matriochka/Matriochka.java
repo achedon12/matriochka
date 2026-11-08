@@ -30,6 +30,7 @@ public class Matriochka implements ModInitializer {
 		GearClasses.init();
 		fr.achedon12.matriochka.rules.Snorkel.init();
 		PlayerState.init();
+		fr.achedon12.matriochka.world.Atlas.init();
 		ModContent.register();
 		ProceduralStructure.init();
 		Net.init();

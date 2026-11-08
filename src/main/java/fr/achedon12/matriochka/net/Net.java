@@ -114,6 +114,28 @@ public final class Net {
 		}
 	}
 
+	/** One world's map for the Journal (world/Atlas): its cells and the structures found there. */
+	public record MapPayload(CompoundTag tag) implements CustomPacketPayload {
+		public static final Type<MapPayload> TYPE = new Type<>(Matriochka.id("map"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, MapPayload> CODEC = StreamCodec.composite(ByteBufCodecs.COMPOUND_TAG, MapPayload::tag, MapPayload::new);
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
+	/** The Journal asks for the map of the world it shows. */
+	public record MapRequestPayload(int world) implements CustomPacketPayload {
+		public static final Type<MapRequestPayload> TYPE = new Type<>(Matriochka.id("map_request"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, MapRequestPayload> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, MapRequestPayload::world, MapRequestPayload::new);
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
 	private Net() {}
 
 	public static void init() {
@@ -121,6 +143,9 @@ public final class Net {
 		PayloadTypeRegistry.clientboundPlay().register(OpenJournalPayload.TYPE, OpenJournalPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(EndingPayload.TYPE, EndingPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(MerchantInfoPayload.TYPE, MerchantInfoPayload.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(MapPayload.TYPE, MapPayload.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(MapRequestPayload.TYPE, MapRequestPayload.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(MapRequestPayload.TYPE, (payload, ctx) -> fr.achedon12.matriochka.world.Atlas.send(ctx.player(), payload.world()));
 		PayloadTypeRegistry.serverboundPlay().register(ChoicePayload.TYPE, ChoicePayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(CyclePayload.TYPE, CyclePayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(ReadPayload.TYPE, ReadPayload.CODEC);

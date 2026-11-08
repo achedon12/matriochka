@@ -45,6 +45,8 @@ public final class WorldRules {
 			if (p.isSpectator()) continue;
 			int world = Worlds.number(p.level());
 			PlayerState ps = PlayerState.of(p);
+			// the Journal's map: the ground walked through and the structures found, every three seconds
+			if (t % 60 == 0) fr.achedon12.matriochka.world.Atlas.sample(p);
 			if (world > 0) {
 				border(p);
 				int rule = world == 10 ? synthesisZone(p) : world;
