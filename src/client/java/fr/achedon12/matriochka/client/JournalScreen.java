@@ -718,7 +718,15 @@ public class JournalScreen extends Screen {
 			Component nm = new net.minecraft.world.item.ItemStack(fr.achedon12.matriochka.content.ModContent.item(e.item().id())).getHoverName();
 			g.text(font, font.plainSubstrByWidth(nm.getString(), w - 20), x + 19, yy, Ui.INK, false);
 			String way = e.ways().getFirst().getString() + (e.ways().size() > 1 ? " +" + (e.ways().size() - 1) : "");
-			g.text(font, font.plainSubstrByWidth(way, w - 20), x + 19, yy + 9, Ui.INK_SOFT, false);
+			// the way shrinks to fit the page (down to two thirds), only then is it cut with an ellipsis
+			int avail = w - 20, ww = font.width(way);
+			float sc = ww <= avail ? 1f : Math.max(0.67f, avail / (float) ww);
+			if (ww * sc > avail) way = font.plainSubstrByWidth(way, (int) (avail / sc) - font.width("...")) + "...";
+			g.pose().pushMatrix();
+			g.pose().translate(x + 19, yy + 9 + (sc < 1f ? 1 : 0));
+			g.pose().scale(sc, sc);
+			g.text(font, way, 0, 0, Ui.INK_SOFT, false);
+			g.pose().popMatrix();
 			if (mx >= x - 2 && mx < x + w && my >= yy - 1 && my < yy + 18) {
 				g.fill(x - 3, yy - 1, x - 2, yy + 17, 0xFFB0782A);
 				g.setTooltipForNextFrame(font, font.split(WorldCards.tooltip(e), 190), mx, my);

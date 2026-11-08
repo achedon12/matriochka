@@ -6,7 +6,7 @@
    "main": "Main",
    "other": "Français",
    "github": "Source code on GitHub",
-   "footer": "A Fabric mod by achedon12, for Minecraft 26.3. Released under the MIT licence.",
+   "footer": "A Fabric mod by achedon12, for Minecraft 26.1.2, 26.2 and 26.3. Released under the MIT licence.",
    "notOfficial": "Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.",
    "releases": "Releases",
    "wiki": "Wiki",
@@ -113,8 +113,8 @@
   },
   "home": {
    "tagline": "Every block can hold a world.",
-   "intro": "A Fabric mod for Minecraft 26.3. Ten worlds, each sealed inside a single block and nested in the one before it. Every world has its own rule, its own creatures, its own station, and a boss guarding the core that opens the next.",
-   "facts": "Minecraft 26.3 on Fabric, version 0.5.0. Solo and multiplayer.",
+   "intro": "A Fabric mod for Minecraft 26.1.2, 26.2 and 26.3. Ten worlds, each sealed inside a single block and nested in the one before it. Every world has its own rule, its own creatures, its own station, and a boss guarding the core that opens the next.",
+   "facts": "Minecraft 26.1.2, 26.2 and 26.3 on Fabric, version 0.7.0. Solo and multiplayer.",
    "dollsTitle": "A set of eleven nesting dolls, just opened: the Surface, then worlds 1 to 10, from the largest to the smallest",
    "dollsCaption": "The Surface, then the ten worlds it holds. Pick a doll to open its world.",
    "trailerH": "The trailer",
@@ -197,7 +197,7 @@
    ],
    "reelWatch": "Watch the trailer",
    "heroGenre": "A Minecraft mod of ten worlds, each sealed inside a block of the one before.",
-   "heroStatus": "alpha, out now for Minecraft 26.3 on Fabric. Free and open source.",
+   "heroStatus": "alpha, out now for Minecraft 26.1.2, 26.2 and 26.3 on Fabric. Free and open source.",
    "heroImg": "shots/hero_banner.jpg",
    "surfaceLabel": "The Surface",
    "openWorld": "Open",
@@ -236,7 +236,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.5.0, changelog and source",
+     "note": "Version 0.7.0, changelog and source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -285,7 +285,7 @@
     },
     {
      "q": "Does it work on Lunar Client?",
-     "a": "Through Lunar Client's Fabric profile for 26.3, with Fabric API and GeckoLib."
+     "a": "Through Lunar Client's Fabric profile for your version (26.3, 26.2 or 26.1.2), with Fabric API and GeckoLib."
     },
     {
      "q": "Does it work with Sodium, Iris and minimaps?",
@@ -322,10 +322,10 @@
    "galleryP": "Captures from the mod running in Minecraft 26.3.",
    "gallery": [],
    "ctaH": "Ready to shrink?",
-   "ctaP": "Minecraft 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib 5.5.7 and Java 25. In English, French, Spanish, German and Brazilian Portuguese.",
-   "ctaBtn": "Get version 0.5.0",
-   "download": "Download 0.5.0",
-   "desc": "Matriochka, a Fabric mod for Minecraft 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss."
+   "ctaP": "Minecraft 26.1.2, 26.2 or 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib and Java 25. In English, French, Spanish, German, Brazilian Portuguese, Italian, Russian, Polish and Simplified Chinese.",
+   "ctaBtn": "Get version 0.7.0",
+   "download": "Download 0.7.0",
+   "desc": "Matriochka, a Fabric mod for Minecraft 26.1.2, 26.2 and 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss."
   },
   "worlds": {
    "headImg": "shots/head_worlds_banner.jpg",
@@ -1878,8 +1878,8 @@
   "download": {
    "h": "Download",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.5.0 for Minecraft 26.3 on Fabric. Install it on the client to play solo, and on both server and clients to play together.",
-   "desc": "Download Matriochka for Minecraft 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
+   "lead": "Version 0.7.0 for Minecraft 26.1.2, 26.2 and 26.3 on Fabric, one file for each. Install it on the client to play solo, and on both server and clients to play together.",
+   "desc": "Download Matriochka for Minecraft 26.1.2, 26.2 and 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
    "sources": [
     {
      "name": "GitHub",
@@ -1911,18 +1911,18 @@
    "reqs": [
     {
      "n": "Minecraft",
-     "v": "26.3",
+     "v": "26.1.2, 26.2, 26.3",
      "s": "Java Edition"
     },
     {
      "n": "Fabric Loader",
      "v": "0.20+",
-     "s": "Install it for 26.3 with the Fabric installer"
+     "s": "Install it for your Minecraft version with the Fabric installer"
     },
     {
      "n": "Fabric API",
-     "v": "0.165.2+",
-     "s": "Built for 26.3, goes in the mods folder"
+     "v": "your version",
+     "s": "The build for your Minecraft version, in the mods folder"
     },
     {
      "n": "GeckoLib",
@@ -1935,9 +1935,14 @@
      "s": "Bundled with the official launcher"
     },
     {
-     "n": "Just Enough Items",
+     "n": "Just Enough Items / REI",
      "v": "optional",
      "s": "Recipe pages for every station"
+    },
+    {
+     "n": "Jade",
+     "v": "optional",
+     "s": "Names the world inside a World Block"
     },
     {
      "n": "Mod Menu",
@@ -1947,17 +1952,17 @@
    ],
    "installH": "Installing",
    "steps": [
-    "Install Fabric Loader for Minecraft 26.3.",
-    "Download matriochka-0.5.0+26.3.jar from the GitHub releases.",
+    "Install Fabric Loader for your Minecraft version (26.3, 26.2 or 26.1.2).",
+    "Download the file for your version from the GitHub releases: matriochka-0.7.0+26.3.jar, +26.2.jar or +26.1.2.jar.",
     "Put it in your mods folder with Fabric API and GeckoLib.",
     "Launch the Fabric profile and create a new world. The Artisan's Scroll is waiting in your inventory."
    ],
    "lunarH": "Lunar Client",
-   "lunar": "Matriochka is built on Fabric so that it can run on Lunar Client, whose mod loading relies on Fabric. Support for Minecraft 26.3 together with GeckoLib is still being confirmed there: if the mod does not load, play it with the official launcher or Prism Launcher on a Fabric profile in the meantime.",
+   "lunar": "Matriochka is built on Fabric so that it can run on Lunar Client, whose mod loading relies on Fabric. Support for Minecraft 26.x together with GeckoLib is still being confirmed there: if the mod does not load, play it with the official launcher or Prism Launcher on a Fabric profile in the meantime.",
    "packH": "The Matriochka Pack",
    "pack": "Rather not gather the mods yourself? Every GitHub release carries a Modrinth modpack (.mrpack) for Prism Launcher, the Modrinth App or any launcher that reads the format: the mod, Fabric API, GeckoLib, Just Enough Items (optional) and client performance mods (Sodium, Lithium, FerriteCore, Entity Culling, ImmediatelyFast, Dynamic FPS, Krypton, Mod Menu, Iris as an option), in a normal and a hard (nightmare) version.",
    "compatH": "Works with",
-   "compat": "Checked with Sodium, Iris (through vanilla light: emissive faces, full-bright particles), Xaero's Minimap and World Map, JourneyMap, VoxelMap and Traveler's Backpack for 26.3: no conflict found, and no backpack way around the progression. Xaero's cave view and entity radar switch off in the Lightless Deep, where they would show what the darkness hides, and come back when you leave.",
+   "compat": "Checked with Sodium, Iris (through vanilla light: emissive faces, full-bright particles), Xaero's Minimap and World Map, JourneyMap, VoxelMap and Traveler's Backpack: no conflict found, and no backpack way around the progression. Xaero's cave view and entity radar switch off in the Lightless Deep, where they would show what the darkness hides, and come back when you leave.",
    "langsH": "Languages",
    "langs": "English, French, Spanish, German and Brazilian Portuguese, following the game's language setting.",
    "wikiH": "Wiki",
@@ -3237,6 +3242,21 @@
       "count": 1,
       "drops": [],
       "yields": null
+     },
+     {
+      "id": "reliquary",
+      "tex": "cubes/reliquary.png",
+      "name": "Reliquary",
+      "kind": "reliquary",
+      "effect": "Sealed. The cross key of another world's wonder opens it.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -3737,6 +3757,12 @@
      "names": [
       "Artisan's Sanctuary"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Mother Tree"
+     ]
     }
    ],
    "bossNote": "It drops the Queen Core.",
@@ -4123,6 +4149,38 @@
         "v": "480"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_1",
+      "tex": "items/cross_key_1.png",
+      "name": "Cross Key of World 1",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Mother Tree. Opens the reliquary of the Last Candle in World 5.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_1",
+      "tex": "items/relic_1.png",
+      "name": "Spore Pearl",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Mother Tree. Use it: one more heart of health, for good.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -4642,6 +4700,17 @@
      "desc": "Covered wagons drawn up around a fire, with a stall and a hitching rail.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
      "img": null
+    },
+    {
+     "id": "mother_tree",
+     "name": "The Mother Tree",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_mother_tree.jpg"
     }
    ],
    "loot": [
@@ -5277,6 +5346,12 @@
      "names": [
       "Artisan's Workshop"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Molten Heart"
+     ]
     }
    ],
    "bossNote": "It drops the Titan Core.",
@@ -5688,6 +5763,38 @@
         "v": "660"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_2",
+      "tex": "items/cross_key_2.png",
+      "name": "Cross Key of World 2",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Molten Heart. Opens the reliquary of the Upside Spire in World 6.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_2",
+      "tex": "items/relic_2.png",
+      "name": "Heart Ember",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Molten Heart. Use it: one more heart of health, for good.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -6382,6 +6489,17 @@
      "desc": "A ring of standing stones and lintels around a sunken altar where the guarded chest waits.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
      "img": "shots/st_ember_circle.jpg"
+    },
+    {
+     "id": "molten_heart",
+     "name": "The Molten Heart",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_molten_heart.jpg"
     }
    ],
    "loot": [
@@ -7058,6 +7176,12 @@
      "names": [
       "Artisan's Cell"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Hall of Keys"
+     ]
     }
    ],
    "bossNote": "It drops the Jailer Core.",
@@ -7577,6 +7701,38 @@
         "v": "840"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_3",
+      "tex": "items/cross_key_3.png",
+      "name": "Cross Key of World 3",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Hall of Keys. Opens the reliquary of the Sunken Bell in World 7.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_3",
+      "tex": "items/relic_3.png",
+      "name": "Master Ward",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Hall of Keys. Use it: one more heart of health, for good.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8119,6 +8275,17 @@
      "desc": "A walled courtyard with corner towers, a gatehouse with its portcullis and a keep at the back.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
      "img": "shots/st_gaolers_gatehouse.jpg"
+    },
+    {
+     "id": "hall_of_keys",
+     "name": "The Hall of Keys",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_hall_of_keys.jpg"
     }
    ],
    "loot": [
@@ -8799,6 +8966,12 @@
      "names": [
       "Cloud Garden"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Eye of the Storm"
+     ]
     }
    ],
    "bossNote": "It drops the Storm King Core.",
@@ -9255,6 +9428,38 @@
         "v": "1,020"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_4",
+      "tex": "items/cross_key_4.png",
+      "name": "Cross Key of World 4",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Eye of the Storm. Opens the reliquary of the Stopped Clock in World 8.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_4",
+      "tex": "items/relic_4.png",
+      "name": "Bottled Thunder",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Eye of the Storm. Use it: one more heart of health, for good.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -9811,6 +10016,17 @@
      "desc": "A lookout hut on stilts over a supply yard, with a signal fire on its deck.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
      "img": null
+    },
+    {
+     "id": "eye_of_the_storm",
+     "name": "The Eye of the Storm",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_eye_of_the_storm.jpg"
     }
    ],
    "loot": [
@@ -10456,6 +10672,12 @@
      "names": [
       "Artisan's Shelter"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Last Candle"
+     ]
     }
    ],
    "bossNote": "It drops the Light Eater Core.",
@@ -10858,6 +11080,38 @@
         "v": "560"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_5",
+      "tex": "items/cross_key_5.png",
+      "name": "Cross Key of World 5",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Last Candle. Opens the reliquary of the Sleeping Giant in World 9.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_5",
+      "tex": "items/relic_5.png",
+      "name": "Undying Wick",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Last Candle. Use it: one more heart of health, for good.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11429,6 +11683,17 @@
      "desc": "A ring of standing stones and lintels around a sunken altar where the guarded chest waits.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
      "img": "shots/st_hushed_circle.jpg"
+    },
+    {
+     "id": "last_candle",
+     "name": "The Last Candle",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_last_candle.jpg"
     }
    ],
    "loot": [
@@ -12025,6 +12290,12 @@
      "names": [
       "Floating Garden"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Upside Spire"
+     ]
     }
    ],
    "bossNote": "It drops the Double Core.",
@@ -12348,6 +12619,38 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_6",
+      "tex": "items/cross_key_6.png",
+      "name": "Cross Key of World 6",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Upside Spire. Opens the reliquary of the Artisan's Desk in World 10.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_6",
+      "tex": "items/relic_6.png",
+      "name": "Reversed Prism",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Upside Spire. Use it: one more heart of health, for good.",
       "stats": [],
       "station": null,
       "stationTex": null,
@@ -12899,6 +13202,17 @@
      "desc": "A lookout hut on stilts over a supply yard, with a signal fire on its deck.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
      "img": null
+    },
+    {
+     "id": "upside_spire",
+     "name": "The Upside Spire",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_upside_spire.jpg"
     }
    ],
    "loot": [
@@ -13545,6 +13859,12 @@
      "names": [
       "Vault of the Deep"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Sunken Bell"
+     ]
     }
    ],
    "bossNote": "It drops the Leviathan Core.",
@@ -14093,6 +14413,38 @@
         "v": "1,560"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_7",
+      "tex": "items/cross_key_7.png",
+      "name": "Cross Key of World 7",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Sunken Bell. Opens the reliquary of the Mother Tree in World 1.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_7",
+      "tex": "items/relic_7.png",
+      "name": "Bell Pearl",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Sunken Bell. Use it: one more heart of health, for good.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14670,6 +15022,17 @@
      "desc": "A walled courtyard with corner towers, a gatehouse with its portcullis and a keep at the back.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
      "img": null
+    },
+    {
+     "id": "sunken_bell",
+     "name": "The Sunken Bell",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_sunken_bell.jpg"
     }
    ],
    "loot": [
@@ -15325,6 +15688,12 @@
      "names": [
       "Time Tomb"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Stopped Clock"
+     ]
     }
    ],
    "bossNote": "It drops the Seasons Core.",
@@ -15698,6 +16067,38 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_8",
+      "tex": "items/cross_key_8.png",
+      "name": "Cross Key of World 8",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Stopped Clock. Opens the reliquary of the Molten Heart in World 2.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_8",
+      "tex": "items/relic_8.png",
+      "name": "Still Hand",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Stopped Clock. Use it: one more heart of health, for good.",
       "stats": [],
       "station": null,
       "stationTex": null,
@@ -16260,6 +16661,17 @@
      "desc": "Covered wagons drawn up around a fire, with a stall and a hitching rail.",
      "inside": "The people of the world live here and trade with you, beside a common chest.",
      "img": null
+    },
+    {
+     "id": "stopped_clock",
+     "name": "The Stopped Clock",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_stopped_clock.jpg"
     }
    ],
    "loot": [
@@ -16859,6 +17271,12 @@
      "names": [
       "Stable Sanctuary"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Sleeping Giant"
+     ]
     }
    ],
    "bossNote": "It drops the Terrain Core.",
@@ -17237,6 +17655,38 @@
         "v": "1,920"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_9",
+      "tex": "items/cross_key_9.png",
+      "name": "Cross Key of World 9",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Sleeping Giant. Opens the reliquary of the Hall of Keys in World 3.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_9",
+      "tex": "items/relic_9.png",
+      "name": "Giant's Tooth",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Sleeping Giant. Use it: one more heart of health, for good.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17783,6 +18233,17 @@
      "desc": "A ring of standing stones and lintels around a sunken altar where the guarded chest waits.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
      "img": null
+    },
+    {
+     "id": "sleeping_giant",
+     "name": "The Sleeping Giant",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_sleeping_giant.jpg"
     }
    ],
    "loot": [
@@ -18358,6 +18819,12 @@
      "names": [
       "Throne of the Creature"
      ]
+    },
+    {
+     "role": "Wonder",
+     "names": [
+      "The Artisan's Desk"
+     ]
     }
    ],
    "bossNote": "It drops the Unfinished Core.",
@@ -18645,6 +19112,38 @@
       "kind": "trophy",
       "rarity": "Epic",
       "effect": "A painted doll of the boss, won in its trial.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_10",
+      "tex": "items/cross_key_10.png",
+      "name": "Cross Key of World 10",
+      "kind": "secret",
+      "rarity": "Epic",
+      "effect": "Found in the Artisan's Desk. Opens the reliquary of the Eye of the Storm in World 4.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_10",
+      "tex": "items/relic_10.png",
+      "name": "First Chisel",
+      "kind": "secret",
+      "rarity": "Legendary",
+      "effect": "The relic of the Artisan's Desk. Use it: one more heart of health, for good.",
       "stats": [],
       "station": null,
       "stationTex": null,
@@ -19201,6 +19700,17 @@
      "desc": "A lookout hut on stilts over a supply yard, with a signal fire on its deck.",
      "inside": "A guarded loot room: spawners of the world's creatures around a rare chest (a vault chest in large ones), plus common chests.",
      "img": null
+    },
+    {
+     "id": "artisans_desk",
+     "name": "The Artisan's Desk",
+     "role": "Wonder",
+     "roleKey": "wonder",
+     "size": "Large",
+     "rarity": "",
+     "desc": "",
+     "inside": "The world's one wonder: a vault chest with a cross key for another world, and a sealed reliquary that only another world's key opens.",
+     "img": "shots/st_artisans_desk.jpg"
     }
    ],
    "loot": [
@@ -28587,6 +29097,21 @@
      "count": 1,
      "drops": [],
      "yields": null
+    },
+    {
+     "id": "reliquary",
+     "tex": "cubes/reliquary.png",
+     "name": "Reliquary",
+     "kind": "reliquary",
+     "effect": "Sealed. The cross key of another world's wonder opens it.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -28975,6 +29500,38 @@
        "v": "480"
       }
      ],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "cross_key_1",
+     "tex": "items/cross_key_1.png",
+     "name": "Cross Key of World 1",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Mother Tree. Opens the reliquary of the Last Candle in World 5.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_1",
+     "tex": "items/relic_1.png",
+     "name": "Spore Pearl",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Mother Tree. Use it: one more heart of health, for good.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29695,6 +30252,38 @@
        "v": "660"
       }
      ],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "cross_key_2",
+     "tex": "items/cross_key_2.png",
+     "name": "Cross Key of World 2",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Molten Heart. Opens the reliquary of the Upside Spire in World 6.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_2",
+     "tex": "items/relic_2.png",
+     "name": "Heart Ember",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Molten Heart. Use it: one more heart of health, for good.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30707,6 +31296,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_3",
+     "tex": "items/cross_key_3.png",
+     "name": "Cross Key of World 3",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Hall of Keys. Opens the reliquary of the Sunken Bell in World 7.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_3",
+     "tex": "items/relic_3.png",
+     "name": "Master Ward",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Hall of Keys. Use it: one more heart of health, for good.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "jailer_helmet",
      "tex": "items/jailer_helmet.png",
      "name": "Jailer Helmet",
@@ -31495,6 +32116,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_4",
+     "tex": "items/cross_key_4.png",
+     "name": "Cross Key of World 4",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Eye of the Storm. Opens the reliquary of the Stopped Clock in World 8.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_4",
+     "tex": "items/relic_4.png",
+     "name": "Bottled Thunder",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Eye of the Storm. Use it: one more heart of health, for good.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "celestial_helmet",
      "tex": "items/celestial_helmet.png",
      "name": "Celestial Helmet",
@@ -32243,6 +32896,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_5",
+     "tex": "items/cross_key_5.png",
+     "name": "Cross Key of World 5",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Last Candle. Opens the reliquary of the Sleeping Giant in World 9.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_5",
+     "tex": "items/relic_5.png",
+     "name": "Undying Wick",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Last Candle. Use it: one more heart of health, for good.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "nocturnal_helmet",
      "tex": "items/nocturnal_helmet.png",
      "name": "Nocturnal Helmet",
@@ -32918,6 +33603,38 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "cross_key_6",
+     "tex": "items/cross_key_6.png",
+     "name": "Cross Key of World 6",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Upside Spire. Opens the reliquary of the Artisan's Desk in World 10.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_6",
+     "tex": "items/relic_6.png",
+     "name": "Reversed Prism",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Upside Spire. Use it: one more heart of health, for good.",
      "stats": [],
      "station": null,
      "stationTex": null,
@@ -33816,6 +34533,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_7",
+     "tex": "items/cross_key_7.png",
+     "name": "Cross Key of World 7",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Sunken Bell. Opens the reliquary of the Mother Tree in World 1.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_7",
+     "tex": "items/relic_7.png",
+     "name": "Bell Pearl",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Sunken Bell. Use it: one more heart of health, for good.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "diving_chestplate",
      "tex": "items/diving_chestplate.png",
      "name": "Diving Chestplate",
@@ -34557,6 +35306,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_8",
+     "tex": "items/cross_key_8.png",
+     "name": "Cross Key of World 8",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Stopped Clock. Opens the reliquary of the Molten Heart in World 2.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_8",
+     "tex": "items/relic_8.png",
+     "name": "Still Hand",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Stopped Clock. Use it: one more heart of health, for good.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "seasonal_helmet",
      "tex": "items/seasonal_helmet.png",
      "name": "Seasonal Helmet",
@@ -35286,6 +36067,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_9",
+     "tex": "items/cross_key_9.png",
+     "name": "Cross Key of World 9",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Sleeping Giant. Opens the reliquary of the Hall of Keys in World 3.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_9",
+     "tex": "items/relic_9.png",
+     "name": "Giant's Tooth",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Sleeping Giant. Use it: one more heart of health, for good.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "living_rock_helmet",
      "tex": "items/living_rock_helmet.png",
      "name": "Living Rock Helmet",
@@ -35900,6 +36713,38 @@
      "kind": "trophy",
      "rarity": "Epic",
      "effect": "A painted doll of the boss, won in its trial.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "cross_key_10",
+     "tex": "items/cross_key_10.png",
+     "name": "Cross Key of World 10",
+     "kind": "secret",
+     "rarity": "Epic",
+     "effect": "Found in the Artisan's Desk. Opens the reliquary of the Eye of the Storm in World 4.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_10",
+     "tex": "items/relic_10.png",
+     "name": "First Chisel",
+     "kind": "secret",
+     "rarity": "Legendary",
+     "effect": "The relic of the Artisan's Desk. Use it: one more heart of health, for good.",
      "stats": [],
      "station": null,
      "stationTex": null,

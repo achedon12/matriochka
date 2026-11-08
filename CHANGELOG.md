@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.7.0 (alpha)
+
+Every world hides a wonder with a sealed reliquary that only a key from another world opens, the Journal gives every world a card of its items, the Surface has more to find before the first boss, and every block, item, tool and armour piece is repainted.
+
+### Wonders and the keys between the worlds
+
+- One wonder per world, rarer than any structure and seen from afar: the Mother Tree, the Molten Heart, the Hall of Keys, the Eye of the Storm, the Last Candle, the Upside Spire, the Sunken Bell, the Stopped Clock, the Sleeping Giant and the Artisan's Desk.
+- At its heart a sealed reliquary, and beside it a vault chest with the world's cross key. A cross key never opens its own world's reliquary: the key of World n opens the reliquary of World (n + 3) mod 10 + 1, so the worlds have to be travelled back and forth. The wrong key leaves it shut and says which key it waits for.
+- Opened, a reliquary gives its world's relic, once per player. Each relic used adds one heart of health for good, ten relics ten hearts.
+
+### Journal
+
+- Every world has a card: its items and how each one is made (at which station), dropped (by which creature or boss), mined or found (in which chests). Open it by clicking the world on the Worlds page.
+
+### Surface
+
+- The Artisan's old cabin, with notes of his in the chests; the Peddler's stall; a giant doll fallen from somewhere higher. They are found above ground, before the first boss.
+
+### Textures
+
+- Every block, item, tool and armour piece is repainted in Minecraft's own manner: hard tones, clustered materials, lit edges and a shape of its own for every material.
+
+### Checks
+
+- The CI's first steps and whole-game runs are bounded in time, and their logs are kept even when they fail.
+
 ## 0.6.0 (alpha)
 
 The mod now runs on Minecraft 26.1.2, 26.2 and 26.3, every world has two lesser biomes, every boss fights to its own theme, and the dolls have a body when they are held.

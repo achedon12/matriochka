@@ -554,6 +554,8 @@ def process_frames(dst):
     for w in (2, 3, 5):
         takes = ([("d", 0, 71), ("b", 0, 71), ("c", 0, 20)] if w == 2 else [("a", 0, 119), ("d", 0, 71), ("b", 0, 71), ("c", 0, 20)])
         for k, (sid, *_rest) in enumerate(C.STRUCTURES[w]):
+            if _rest and _rest[2] == "wonder" and os.path.exists(os.path.join(st_dir, f"struct_{sid}.png")):
+                continue  # the wonders are photographed aimed at their reliquary, wherever it lies
             seq, lo, hi = takes[k % len(takes)]
             n = lo + (k // len(takes)) * 25 + 10
             src = os.path.join(FRAMES, f"seq_w{w:02d}_{seq}_{min(n, hi):04d}.png")

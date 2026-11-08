@@ -1654,10 +1654,10 @@ for _n, (_sid, _en, _fr, _ren, _rfr) in WONDERS.items():
     STRUCTURES[_n].append((_sid, _en, _fr, "wonder", "large", "wonder", "wonder"))
     _to = WONDER_OPENS(_n)
     item(f"cross_key_{_n}", f"Cross Key of World {_n}", f"Clé croisée du monde {_n}", _n, "secret", "epic", "key",
-         f"Found in {_en}. Opens the reliquary of {WONDERS[_to][1]} in World {_to}.",
+         f"Found in {_en.replace('The ', 'the ', 1)}. Opens the reliquary of {WONDERS[_to][1].replace('The ', 'the ', 1)} in World {_to}.",
          f"Trouvée dans {_fr[0].lower() + _fr[1:]}. Ouvre le reliquaire de {WONDERS[_to][2][0].lower() + WONDERS[_to][2][1:]}, au monde {_to}.")
     item(f"relic_{_n}", _ren, _rfr, _n, "secret", "legendary", "gem",
-         f"The relic of {_en}. Use it: one more heart of health, for good.",
+         f"The relic of {_en.replace('The ', 'the ', 1)}. Use it: one more heart of health, for good.",
          f"La relique de {_fr[0].lower() + _fr[1:]}. Utilise-la : un cœur de vie en plus, pour toujours.")
 block("reliquary", "Reliquary", "Reliquaire", 0, "reliquary", "lacquer",
       note_en="Sealed. The cross key of another world's wonder opens it.",

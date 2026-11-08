@@ -31,7 +31,8 @@ Matriochka is a progression mod for Minecraft Java 26.1.2, 26.2 and 26.3 (Fabric
 | Equipment classes | Gear gets a random class when crafted: Guardian, Berserker, Prowler, Reaper, Survivor or Prospector, upgradable to level 5 |
 | Souls and karma | Every item holds a soul. Purify it or devour it at the Soul Altar. Karma changes prices, quests and people |
 | Doll of Life | Each layer saves you from one death. Soul Cradles let you respawn inside a world, death chests keep your items |
-| 100 structures | 10 types per world, generated procedurally, with journal pages and one hidden doll per world |
+| 110 structures | 11 types per world, generated procedurally, with journal pages and one hidden doll per world |
+| 10 wonders | One great place per world, with a reliquary that only another world's cross key opens and a relic that adds a heart for good |
 | 64 quests, 100 achievements | Optional quest book in the Artisan's Journal and one advancement tab per world |
 
 <!-- gui -->

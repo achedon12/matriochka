@@ -6,7 +6,7 @@
    "main": "Principale",
    "other": "English",
    "github": "Code source sur GitHub",
-   "footer": "Un mod Fabric d'achedon12 pour Minecraft 26.3, publié sous licence MIT.",
+   "footer": "Un mod Fabric d'achedon12 pour Minecraft 26.1.2, 26.2 et 26.3, publié sous licence MIT.",
    "notOfficial": "Ce n'est pas un produit officiel Minecraft. Non approuvé par Mojang ou Microsoft, et sans lien avec eux.",
    "releases": "Versions",
    "wiki": "Wiki",
@@ -113,8 +113,8 @@
   },
   "home": {
    "tagline": "Chaque bloc peut contenir un monde.",
-   "intro": "Un mod Fabric pour Minecraft 26.3. Dix mondes, chacun scellé dans un seul bloc et emboîté dans le précédent. Chaque monde a sa règle, ses créatures, sa station, et un boss qui garde le noyau ouvrant le suivant.",
-   "facts": "Minecraft 26.3 sous Fabric, version 0.5.0. Solo et multijoueur.",
+   "intro": "Un mod Fabric pour Minecraft 26.1.2, 26.2 et 26.3. Dix mondes, chacun scellé dans un seul bloc et emboîté dans le précédent. Chaque monde a sa règle, ses créatures, sa station, et un boss qui garde le noyau ouvrant le suivant.",
+   "facts": "Minecraft 26.1.2, 26.2 et 26.3 sous Fabric, version 0.7.0. Solo et multijoueur.",
    "dollsTitle": "Un jeu de onze poupées gigognes qu'on vient d'ouvrir : la Surface, puis les mondes 1 à 10, de la plus grande à la plus petite",
    "dollsCaption": "La Surface, puis les dix mondes qu'elle contient. Choisis une poupée pour ouvrir son monde.",
    "trailerH": "La bande-annonce",
@@ -197,7 +197,7 @@
    ],
    "reelWatch": "Voir la bande-annonce",
    "heroGenre": "Un mod Minecraft de dix mondes, chacun scellé dans un bloc du précédent.",
-   "heroStatus": "alpha, disponible pour Minecraft 26.3 sur Fabric. Gratuit et open source.",
+   "heroStatus": "alpha, disponible pour Minecraft 26.1.2, 26.2 et 26.3 sur Fabric. Gratuit et open source.",
    "heroImg": "shots/hero_banner.jpg",
    "surfaceLabel": "La Surface",
    "openWorld": "Ouvrir",
@@ -236,7 +236,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.5.0, journal des changements et code source",
+     "note": "Version 0.7.0, journal des changements et code source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -285,7 +285,7 @@
     },
     {
      "q": "Ça marche sur Lunar Client ?",
-     "a": "Via le profil Fabric de Lunar Client pour la 26.3, avec Fabric API et GeckoLib."
+     "a": "Via le profil Fabric de Lunar Client pour ta version (26.3, 26.2 ou 26.1.2), avec Fabric API et GeckoLib."
     },
     {
      "q": "Ça marche avec Sodium, Iris et les minicartes ?",
@@ -322,10 +322,10 @@
    "galleryP": "Captures du mod en jeu, sous Minecraft 26.3.",
    "gallery": [],
    "ctaH": "Prêt à rétrécir ?",
-   "ctaP": "Minecraft 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib 5.5.7 et Java 25. En anglais, français, espagnol, allemand et portugais du Brésil.",
-   "ctaBtn": "Obtenir la version 0.5.0",
-   "download": "Télécharger la 0.5.0",
-   "desc": "Matriochka, un mod Fabric pour Minecraft 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
+   "ctaP": "Minecraft 26.1.2, 26.2 ou 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib et Java 25. En anglais, français, espagnol, allemand, portugais du Brésil, italien, russe, polonais et chinois simplifié.",
+   "ctaBtn": "Obtenir la version 0.7.0",
+   "download": "Télécharger la 0.7.0",
+   "desc": "Matriochka, un mod Fabric pour Minecraft 26.1.2, 26.2 et 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
   },
   "worlds": {
    "headImg": "shots/head_worlds_banner.jpg",
@@ -1878,8 +1878,8 @@
   "download": {
    "h": "Télécharger",
    "headImg": "shots/head_download_banner.jpg",
-   "lead": "Version 0.5.0 pour Minecraft 26.3 sous Fabric. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
-   "desc": "Télécharger Matriochka pour Minecraft 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur.",
+   "lead": "Version 0.7.0 pour Minecraft 26.1.2, 26.2 et 26.3 sous Fabric, un fichier pour chacune. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
+   "desc": "Télécharger Matriochka pour Minecraft 26.1.2, 26.2 et 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur.",
    "sources": [
     {
      "name": "GitHub",
@@ -1911,18 +1911,18 @@
    "reqs": [
     {
      "n": "Minecraft",
-     "v": "26.3",
+     "v": "26.1.2, 26.2, 26.3",
      "s": "Édition Java"
     },
     {
      "n": "Fabric Loader",
      "v": "0.20+",
-     "s": "À installer pour la 26.3 avec l'installeur Fabric"
+     "s": "À installer pour ta version de Minecraft avec l'installeur Fabric"
     },
     {
      "n": "Fabric API",
-     "v": "0.165.2+",
-     "s": "Pour la 26.3, dans le dossier mods"
+     "v": "ta version",
+     "s": "La version pour ta version de Minecraft, dans le dossier mods"
     },
     {
      "n": "GeckoLib",
@@ -1935,9 +1935,14 @@
      "s": "Fourni avec le launcher officiel"
     },
     {
-     "n": "Just Enough Items",
+     "n": "Just Enough Items / REI",
      "v": "facultatif",
      "s": "Pages de recettes pour chaque station"
+    },
+    {
+     "n": "Jade",
+     "v": "facultatif",
+     "s": "Nomme le monde dans un bloc-monde"
     },
     {
      "n": "Mod Menu",
@@ -1947,17 +1952,17 @@
    ],
    "installH": "Installation",
    "steps": [
-    "Installe Fabric Loader pour Minecraft 26.3.",
-    "Télécharge matriochka-0.5.0+26.3.jar depuis les versions GitHub.",
+    "Installe Fabric Loader pour ta version de Minecraft (26.3, 26.2 ou 26.1.2).",
+    "Télécharge le fichier de ta version depuis les versions GitHub : matriochka-0.7.0+26.3.jar, +26.2.jar ou +26.1.2.jar.",
     "Place-le dans ton dossier mods avec Fabric API et GeckoLib.",
     "Lance le profil Fabric et crée un nouveau monde. Le Parchemin de l'artisan t'attend dans l'inventaire."
    ],
    "lunarH": "Lunar Client",
-   "lunar": "Matriochka repose sur Fabric pour pouvoir tourner sur Lunar Client, dont le chargement de mods s'appuie sur Fabric. La prise en charge de Minecraft 26.3 avec GeckoLib y est encore en cours de vérification : si le mod ne se charge pas, joue en attendant avec le launcher officiel ou Prism Launcher sur un profil Fabric.",
+   "lunar": "Matriochka repose sur Fabric pour pouvoir tourner sur Lunar Client, dont le chargement de mods s'appuie sur Fabric. La prise en charge de Minecraft 26.x avec GeckoLib y est encore en cours de vérification : si le mod ne se charge pas, joue en attendant avec le launcher officiel ou Prism Launcher sur un profil Fabric.",
    "packH": "Le Matriochka Pack",
    "pack": "Pas envie de rassembler les mods toi-même ? Chaque version GitHub contient un modpack Modrinth (.mrpack) pour Prism Launcher, l'application Modrinth ou tout launcher qui lit ce format : le mod, Fabric API, GeckoLib, Just Enough Items (facultatif) et des mods de performance (Sodium, Lithium, FerriteCore, Entity Culling, ImmediatelyFast, Dynamic FPS, Krypton, Mod Menu, Iris en option), en version normale et difficile (nightmare).",
    "compatH": "Compatible avec",
-   "compat": "Vérifié avec Sodium, Iris (par la lumière vanilla : faces émissives, particules pleinement lumineuses), Xaero's Minimap et World Map, JourneyMap, VoxelMap et Traveler's Backpack pour la 26.3 : aucun conflit, et aucun moyen de contourner la progression avec un sac à dos. La vue des grottes et le radar de Xaero s'éteignent dans la Profondeur sans lumière, où ils montreraient ce que l'obscurité cache, et reviennent quand tu en sors.",
+   "compat": "Vérifié avec Sodium, Iris (par la lumière vanilla : faces émissives, particules pleinement lumineuses), Xaero's Minimap et World Map, JourneyMap, VoxelMap et Traveler's Backpack : aucun conflit, et aucun moyen de contourner la progression avec un sac à dos. La vue des grottes et le radar de Xaero s'éteignent dans la Profondeur sans lumière, où ils montreraient ce que l'obscurité cache, et reviennent quand tu en sors.",
    "langsH": "Langues",
    "langs": "Anglais, français, espagnol, allemand et portugais du Brésil, selon la langue choisie dans le jeu.",
    "wikiH": "Wiki",
@@ -3237,6 +3242,21 @@
       "count": 1,
       "drops": [],
       "yields": null
+     },
+     {
+      "id": "reliquary",
+      "tex": "cubes/reliquary.png",
+      "name": "Reliquaire",
+      "kind": "reliquary",
+      "effect": "Scellé. La clé croisée de la merveille d'un autre monde l'ouvre.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -3737,6 +3757,12 @@
      "names": [
       "Sanctuaire de l'artisan"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "L'Arbre-mère"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau de la Reine.",
@@ -4123,6 +4149,38 @@
         "v": "480"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_1",
+      "tex": "items/cross_key_1.png",
+      "name": "Clé croisée du monde 1",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans l'Arbre-mère. Ouvre le reliquaire de la Dernière Bougie, au monde 5.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_1",
+      "tex": "items/relic_1.png",
+      "name": "Perle de spores",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de l'Arbre-mère. Utilise-la : un cœur de vie en plus, pour toujours.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -4642,6 +4700,17 @@
      "desc": "Des chariots bâchés en cercle autour d'un feu, avec un étal et une barre d'attache.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
      "img": null
+    },
+    {
+     "id": "mother_tree",
+     "name": "L'Arbre-mère",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_mother_tree.jpg"
     }
    ],
    "loot": [
@@ -5277,6 +5346,12 @@
      "names": [
       "Atelier de l'artisan"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "Le Cœur en fusion"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau du Titan.",
@@ -5688,6 +5763,38 @@
         "v": "660"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_2",
+      "tex": "items/cross_key_2.png",
+      "name": "Clé croisée du monde 2",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans le Cœur en fusion. Ouvre le reliquaire de la Flèche inversée, au monde 6.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_2",
+      "tex": "items/relic_2.png",
+      "name": "Braise du cœur",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de le Cœur en fusion. Utilise-la : un cœur de vie en plus, pour toujours.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -6382,6 +6489,17 @@
      "desc": "Un cercle de pierres levées et de linteaux autour d'un autel enfoncé où attend le coffre gardé.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
      "img": "shots/st_ember_circle.jpg"
+    },
+    {
+     "id": "molten_heart",
+     "name": "Le Cœur en fusion",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_molten_heart.jpg"
     }
    ],
    "loot": [
@@ -7058,6 +7176,12 @@
      "names": [
       "Cellule de l'artisan"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "La Salle des clés"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau du Geôlier.",
@@ -7577,6 +7701,38 @@
         "v": "840"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_3",
+      "tex": "items/cross_key_3.png",
+      "name": "Clé croisée du monde 3",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans la Salle des clés. Ouvre le reliquaire de la Cloche engloutie, au monde 7.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_3",
+      "tex": "items/relic_3.png",
+      "name": "Panneton maître",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de la Salle des clés. Utilise-la : un cœur de vie en plus, pour toujours.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -8119,6 +8275,17 @@
      "desc": "Une cour fortifiée avec tours d'angle, un châtelet à herse et un donjon au fond.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
      "img": "shots/st_gaolers_gatehouse.jpg"
+    },
+    {
+     "id": "hall_of_keys",
+     "name": "La Salle des clés",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_hall_of_keys.jpg"
     }
    ],
    "loot": [
@@ -8799,6 +8966,12 @@
      "names": [
       "Jardin des nuages"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "L'Œil de la tempête"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau du Roi.",
@@ -9255,6 +9428,38 @@
         "v": "1 020"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_4",
+      "tex": "items/cross_key_4.png",
+      "name": "Clé croisée du monde 4",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans l'Œil de la tempête. Ouvre le reliquaire de l'Horloge arrêtée, au monde 8.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_4",
+      "tex": "items/relic_4.png",
+      "name": "Tonnerre en bouteille",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de l'Œil de la tempête. Utilise-la : un cœur de vie en plus, pour toujours.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -9811,6 +10016,17 @@
      "desc": "Une cabane de guet sur pilotis au-dessus d'une cour de ravitaillement, un feu de signal sur sa plateforme.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
      "img": null
+    },
+    {
+     "id": "eye_of_the_storm",
+     "name": "L'Œil de la tempête",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_eye_of_the_storm.jpg"
     }
    ],
    "loot": [
@@ -10456,6 +10672,12 @@
      "names": [
       "Abri de l'artisan"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "La Dernière Bougie"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau du Mangeur.",
@@ -10858,6 +11080,38 @@
         "v": "560"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_5",
+      "tex": "items/cross_key_5.png",
+      "name": "Clé croisée du monde 5",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans la Dernière Bougie. Ouvre le reliquaire de le Géant endormi, au monde 9.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_5",
+      "tex": "items/relic_5.png",
+      "name": "Mèche éternelle",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de la Dernière Bougie. Utilise-la : un cœur de vie en plus, pour toujours.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -11429,6 +11683,17 @@
      "desc": "Un cercle de pierres levées et de linteaux autour d'un autel enfoncé où attend le coffre gardé.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
      "img": "shots/st_hushed_circle.jpg"
+    },
+    {
+     "id": "last_candle",
+     "name": "La Dernière Bougie",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_last_candle.jpg"
     }
    ],
    "loot": [
@@ -12025,6 +12290,12 @@
      "names": [
       "Jardin flottant"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "La Flèche inversée"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau du Double.",
@@ -12348,6 +12619,38 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_6",
+      "tex": "items/cross_key_6.png",
+      "name": "Clé croisée du monde 6",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans la Flèche inversée. Ouvre le reliquaire de le Bureau de l'Artisan, au monde 10.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_6",
+      "tex": "items/relic_6.png",
+      "name": "Prisme inversé",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de la Flèche inversée. Utilise-la : un cœur de vie en plus, pour toujours.",
       "stats": [],
       "station": null,
       "stationTex": null,
@@ -12899,6 +13202,17 @@
      "desc": "Une cabane de guet sur pilotis au-dessus d'une cour de ravitaillement, un feu de signal sur sa plateforme.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
      "img": null
+    },
+    {
+     "id": "upside_spire",
+     "name": "La Flèche inversée",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_upside_spire.jpg"
     }
    ],
    "loot": [
@@ -13545,6 +13859,12 @@
      "names": [
       "Coffre-fort des profondeurs"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "La Cloche engloutie"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau du Léviathan.",
@@ -14093,6 +14413,38 @@
         "v": "1 560"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_7",
+      "tex": "items/cross_key_7.png",
+      "name": "Clé croisée du monde 7",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans la Cloche engloutie. Ouvre le reliquaire de l'Arbre-mère, au monde 1.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_7",
+      "tex": "items/relic_7.png",
+      "name": "Perle de cloche",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de la Cloche engloutie. Utilise-la : un cœur de vie en plus, pour toujours.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -14670,6 +15022,17 @@
      "desc": "Une cour fortifiée avec tours d'angle, un châtelet à herse et un donjon au fond.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
      "img": null
+    },
+    {
+     "id": "sunken_bell",
+     "name": "La Cloche engloutie",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_sunken_bell.jpg"
     }
    ],
    "loot": [
@@ -15325,6 +15688,12 @@
      "names": [
       "Tombeau temporel"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "L'Horloge arrêtée"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau du Maître.",
@@ -15698,6 +16067,38 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_8",
+      "tex": "items/cross_key_8.png",
+      "name": "Clé croisée du monde 8",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans l'Horloge arrêtée. Ouvre le reliquaire de le Cœur en fusion, au monde 2.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_8",
+      "tex": "items/relic_8.png",
+      "name": "Aiguille figée",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de l'Horloge arrêtée. Utilise-la : un cœur de vie en plus, pour toujours.",
       "stats": [],
       "station": null,
       "stationTex": null,
@@ -16260,6 +16661,17 @@
      "desc": "Des chariots bâchés en cercle autour d'un feu, avec un étal et une barre d'attache.",
      "inside": "Le peuple du monde vit ici et commerce avec toi, près d'un coffre commun.",
      "img": null
+    },
+    {
+     "id": "stopped_clock",
+     "name": "L'Horloge arrêtée",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_stopped_clock.jpg"
     }
    ],
    "loot": [
@@ -16859,6 +17271,12 @@
      "names": [
       "Sanctuaire stable"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "Le Géant endormi"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau du Terrain.",
@@ -17237,6 +17655,38 @@
         "v": "1 920"
        }
       ],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_9",
+      "tex": "items/cross_key_9.png",
+      "name": "Clé croisée du monde 9",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans le Géant endormi. Ouvre le reliquaire de la Salle des clés, au monde 3.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_9",
+      "tex": "items/relic_9.png",
+      "name": "Dent du géant",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de le Géant endormi. Utilise-la : un cœur de vie en plus, pour toujours.",
+      "stats": [],
       "station": null,
       "stationTex": null,
       "stationId": null,
@@ -17783,6 +18233,17 @@
      "desc": "Un cercle de pierres levées et de linteaux autour d'un autel enfoncé où attend le coffre gardé.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
      "img": null
+    },
+    {
+     "id": "sleeping_giant",
+     "name": "Le Géant endormi",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_sleeping_giant.jpg"
     }
    ],
    "loot": [
@@ -18358,6 +18819,12 @@
      "names": [
       "Trône de la créature"
      ]
+    },
+    {
+     "role": "Merveille",
+     "names": [
+      "Le Bureau de l'Artisan"
+     ]
     }
    ],
    "bossNote": "Il laisse le Noyau de l'Inachevée.",
@@ -18645,6 +19112,38 @@
       "kind": "trophy",
       "rarity": "Épique",
       "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "cross_key_10",
+      "tex": "items/cross_key_10.png",
+      "name": "Clé croisée du monde 10",
+      "kind": "secret",
+      "rarity": "Épique",
+      "effect": "Trouvée dans le Bureau de l'Artisan. Ouvre le reliquaire de l'Œil de la tempête, au monde 4.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "relic_10",
+      "tex": "items/relic_10.png",
+      "name": "Premier ciseau",
+      "kind": "secret",
+      "rarity": "Légendaire",
+      "effect": "La relique de le Bureau de l'Artisan. Utilise-la : un cœur de vie en plus, pour toujours.",
       "stats": [],
       "station": null,
       "stationTex": null,
@@ -19201,6 +19700,17 @@
      "desc": "Une cabane de guet sur pilotis au-dessus d'une cour de ravitaillement, un feu de signal sur sa plateforme.",
      "inside": "Une salle au butin gardée : des générateurs de créatures du monde autour d'un coffre rare (un coffre au trésor dans les grandes), plus des coffres communs.",
      "img": null
+    },
+    {
+     "id": "artisans_desk",
+     "name": "Le Bureau de l'Artisan",
+     "role": "Merveille",
+     "roleKey": "wonder",
+     "size": "Grande",
+     "rarity": "",
+     "desc": "",
+     "inside": "La merveille unique du monde : un coffre au trésor avec une clé croisée pour un autre monde, et un reliquaire scellé que seule la clé d'un autre monde ouvre.",
+     "img": "shots/st_artisans_desk.jpg"
     }
    ],
    "loot": [
@@ -28587,6 +29097,21 @@
      "count": 1,
      "drops": [],
      "yields": null
+    },
+    {
+     "id": "reliquary",
+     "tex": "cubes/reliquary.png",
+     "name": "Reliquaire",
+     "kind": "reliquary",
+     "effect": "Scellé. La clé croisée de la merveille d'un autre monde l'ouvre.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -28975,6 +29500,38 @@
        "v": "480"
       }
      ],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "cross_key_1",
+     "tex": "items/cross_key_1.png",
+     "name": "Clé croisée du monde 1",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans l'Arbre-mère. Ouvre le reliquaire de la Dernière Bougie, au monde 5.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_1",
+     "tex": "items/relic_1.png",
+     "name": "Perle de spores",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de l'Arbre-mère. Utilise-la : un cœur de vie en plus, pour toujours.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -29695,6 +30252,38 @@
        "v": "660"
       }
      ],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "cross_key_2",
+     "tex": "items/cross_key_2.png",
+     "name": "Clé croisée du monde 2",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans le Cœur en fusion. Ouvre le reliquaire de la Flèche inversée, au monde 6.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_2",
+     "tex": "items/relic_2.png",
+     "name": "Braise du cœur",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de le Cœur en fusion. Utilise-la : un cœur de vie en plus, pour toujours.",
+     "stats": [],
      "station": null,
      "stationTex": null,
      "stationId": null,
@@ -30707,6 +31296,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_3",
+     "tex": "items/cross_key_3.png",
+     "name": "Clé croisée du monde 3",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans la Salle des clés. Ouvre le reliquaire de la Cloche engloutie, au monde 7.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_3",
+     "tex": "items/relic_3.png",
+     "name": "Panneton maître",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de la Salle des clés. Utilise-la : un cœur de vie en plus, pour toujours.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "jailer_helmet",
      "tex": "items/jailer_helmet.png",
      "name": "Casque de Geôlier",
@@ -31495,6 +32116,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_4",
+     "tex": "items/cross_key_4.png",
+     "name": "Clé croisée du monde 4",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans l'Œil de la tempête. Ouvre le reliquaire de l'Horloge arrêtée, au monde 8.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_4",
+     "tex": "items/relic_4.png",
+     "name": "Tonnerre en bouteille",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de l'Œil de la tempête. Utilise-la : un cœur de vie en plus, pour toujours.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "celestial_helmet",
      "tex": "items/celestial_helmet.png",
      "name": "Casque céleste",
@@ -32243,6 +32896,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_5",
+     "tex": "items/cross_key_5.png",
+     "name": "Clé croisée du monde 5",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans la Dernière Bougie. Ouvre le reliquaire de le Géant endormi, au monde 9.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_5",
+     "tex": "items/relic_5.png",
+     "name": "Mèche éternelle",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de la Dernière Bougie. Utilise-la : un cœur de vie en plus, pour toujours.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "nocturnal_helmet",
      "tex": "items/nocturnal_helmet.png",
      "name": "Casque nocturne",
@@ -32918,6 +33603,38 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "cross_key_6",
+     "tex": "items/cross_key_6.png",
+     "name": "Clé croisée du monde 6",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans la Flèche inversée. Ouvre le reliquaire de le Bureau de l'Artisan, au monde 10.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_6",
+     "tex": "items/relic_6.png",
+     "name": "Prisme inversé",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de la Flèche inversée. Utilise-la : un cœur de vie en plus, pour toujours.",
      "stats": [],
      "station": null,
      "stationTex": null,
@@ -33816,6 +34533,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_7",
+     "tex": "items/cross_key_7.png",
+     "name": "Clé croisée du monde 7",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans la Cloche engloutie. Ouvre le reliquaire de l'Arbre-mère, au monde 1.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_7",
+     "tex": "items/relic_7.png",
+     "name": "Perle de cloche",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de la Cloche engloutie. Utilise-la : un cœur de vie en plus, pour toujours.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "diving_chestplate",
      "tex": "items/diving_chestplate.png",
      "name": "Plastron de plongée",
@@ -34557,6 +35306,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_8",
+     "tex": "items/cross_key_8.png",
+     "name": "Clé croisée du monde 8",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans l'Horloge arrêtée. Ouvre le reliquaire de le Cœur en fusion, au monde 2.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_8",
+     "tex": "items/relic_8.png",
+     "name": "Aiguille figée",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de l'Horloge arrêtée. Utilise-la : un cœur de vie en plus, pour toujours.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "seasonal_helmet",
      "tex": "items/seasonal_helmet.png",
      "name": "Casque saisonnière",
@@ -35286,6 +36067,38 @@
      "drops": []
     },
     {
+     "id": "cross_key_9",
+     "tex": "items/cross_key_9.png",
+     "name": "Clé croisée du monde 9",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans le Géant endormi. Ouvre le reliquaire de la Salle des clés, au monde 3.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_9",
+     "tex": "items/relic_9.png",
+     "name": "Dent du géant",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de le Géant endormi. Utilise-la : un cœur de vie en plus, pour toujours.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "living_rock_helmet",
      "tex": "items/living_rock_helmet.png",
      "name": "Casque de roche vivante",
@@ -35900,6 +36713,38 @@
      "kind": "trophy",
      "rarity": "Épique",
      "effect": "Une poupée peinte à l'effigie du boss, gagnée à son épreuve.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "cross_key_10",
+     "tex": "items/cross_key_10.png",
+     "name": "Clé croisée du monde 10",
+     "kind": "secret",
+     "rarity": "Épique",
+     "effect": "Trouvée dans le Bureau de l'Artisan. Ouvre le reliquaire de l'Œil de la tempête, au monde 4.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "relic_10",
+     "tex": "items/relic_10.png",
+     "name": "Premier ciseau",
+     "kind": "secret",
+     "rarity": "Légendaire",
+     "effect": "La relique de le Bureau de l'Artisan. Utilise-la : un cœur de vie en plus, pour toujours.",
      "stats": [],
      "station": null,
      "stationTex": null,
