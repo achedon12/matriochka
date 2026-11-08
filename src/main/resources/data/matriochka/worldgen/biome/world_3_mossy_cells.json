@@ -80,7 +80,7 @@
     },
     "minecraft:audio/background_music": {
       "default": {
-        "sound": "matriochka:music.world_3",
+        "sound": "matriochka:music.world_3_mossy_cells",
         "min_delay": 3600,
         "max_delay": 12000
       }

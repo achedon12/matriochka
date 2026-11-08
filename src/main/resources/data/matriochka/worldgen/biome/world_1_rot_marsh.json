@@ -80,7 +80,7 @@
     },
     "minecraft:audio/background_music": {
       "default": {
-        "sound": "matriochka:music.world_1",
+        "sound": "matriochka:music.world_1_rot_marsh",
         "min_delay": 3600,
         "max_delay": 12000
       }

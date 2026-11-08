@@ -859,6 +859,8 @@ def gen_worldgen():
             sb["effects"]["grass_color"] = "#" + grass
             sb["effects"]["foliage_color"] = "#" + grass
             sb["attributes"]["minecraft:visual/fog_color"] = "#" + fog
+            # its own variation of the world's theme
+            sb["attributes"]["minecraft:audio/background_music"] = sound.biome_audio(n, sub)["minecraft:audio/background_music"]
             w(os.path.join(D, f"worldgen/biome/{key}_{sub}.json"), sb)
             lang(f"biome.{NS}.{key}_{sub}", f"{en} (World {n})", f"{fr} (Monde {n})")
             in_world.append(f"{NS}:{key}_{sub}")

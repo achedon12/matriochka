@@ -48,6 +48,31 @@ WORLD_THEMES = {
     10: dict(seed=2000, motif_seed=LULLABY, tonic=62, mode="harmonic", bpm=92, beats=3, prog=[0, 3, 4, 0], prog_b=[5, 3, 4, 4],
              lead="tremolo", counter="box", bass="pluck", pad=True, drum="march", reverb=(2.6, 0.3)),
 }
+# Each world's two lesser biomes (tools/gen.py SUB_BIOMES) play a variation of the world's theme: the same key,
+# mode and opening motif (the world's A phrase), with another seed for the rest and their own tempo, lead or colour.
+# The first lesser biome sits on the world's wet edge, the second on its warm one.
+SUB_THEMES = {
+    1: {"bloom_hollow": dict(bpm=106, lead="box", counter="flute", reverb=(1.4, 0.22)),
+        "rot_marsh": dict(bpm=76, lead="reed", counter=None, octave=0, swing=0.0, lowpass=2400, reverb=(2.6, 0.35))},
+    2: {"ember_fields": dict(bpm=128, lead="pluck", counter="box"),
+        "ash_drifts": dict(bpm=84, lead="reed", drum=None, drone=True, lowpass=3000, reverb=(2.4, 0.32))},
+    3: {"mossy_cells": dict(bpm=62, lead="box", reverb=(3.8, 0.42)),
+        "crumbling_wing": dict(bpm=78, lead="tremolo", octave=0, bass="pluck_soft", lowpass=3200)},
+    4: {"hail_meadows": dict(bpm=96, lead="box", counter="flute", reverb=(2.8, 0.34)),
+        "thunder_heights": dict(bpm=100, lead="reed", counter="box", drum="march")},
+    5: {"hushed_hollow": dict(bpm=52, lead="bell", pad=True, lowpass=2200),
+        "bare_dark": dict(bpm=64, lead="pluck_soft", octave=0, reverb=(4.6, 0.5))},
+    6: {"crystal_fields": dict(bpm=72, lead="bell", counter="box"),
+        "mirror_flats": dict(bpm=84, lead="box", counter="box_rev")},
+    7: {"coral_shelf": dict(bpm=72, lead="box", counter="pluck_soft", octave=24, lowpass=4200, reverb=(3.0, 0.35)),
+        "black_trench": dict(bpm=52, lead="reed", lowpass=1800, reverb=(4.6, 0.5))},
+    8: {"hourglass_dunes": dict(bpm=104, lead="pluck", swing=0.1),
+        "rust_grove": dict(bpm=92, lead="reed", counter="box", ticks=False)},
+    9: {"flesh_mire": dict(bpm=60, lead="reed", lowpass=2400),
+        "bare_rock": dict(bpm=84, lead="tremolo", drum="march", heartbeat=False)},
+    10: {"plank_floor": dict(bpm=84, lead="box", counter="pluck_soft", drum=None),
+         "lacquer_tray": dict(bpm=100, lead="bell", counter="box", drum="dance")},
+}
 # special pieces
 PIECES = {
     "boss": dict(seed=3000, motif_seed=LULLABY, tonic=57, mode="harmonic", bpm=138, beats=2, prog=[0, 3, 4, 0], prog_b=[5, 3, 4, 4],
@@ -70,7 +95,14 @@ for _w, _t in WORLD_THEMES.items():
                                  counter="bell" if _t["lead"] == "bell" else "box",
                                  pad=bool(_t.get("pad")), lowpass=_t.get("lowpass"),
                                  reverb=(max(1.2, _t.get("reverb", (1.6, 0.25))[0] * 0.6), 0.2))
+# the lesser biomes' variations, played as music.world_<n>_<biome>
+for _w, _subs in SUB_THEMES.items():
+    _t = WORLD_THEMES[_w]
+    for _i, (_sub, _over) in enumerate(_subs.items()):
+        PIECES[f"world_{_w}_{_sub}"] = dict(_t, motif_seed=_t.get("motif_seed", _t["seed"]), seed=_t["seed"] + 37 + _i * 23, **_over)
 # the adaptive music's layers and stings, rendered by tools/cues.py: (id, recipe)
+# the wonders' recipes, rendered by tools/relic_sfx.py (hashed with that file, like the cues)
+RELIC_RECIPES = ("reliquary_open", "reliquary_locked", "relic_use", "wonder_ambient")
 CUES = [("music.layer_heartbeat", "layer_heartbeat"), ("music.sting_discovery", "sting_discovery"), ("music.sting_quest", "sting_quest")]
 
 # ------------------------------------------------------------------ the table
@@ -119,6 +151,11 @@ def _sounds():
     s("world.gravity_shift", "sfx", "gravity_shift", 1, "Gravity wavers", "La gravité vacille")
     s("world.quake", "sfx", "quake", 1, "Ground heaves", "Le sol se soulève")
     s("world.rumble", "sfx", "rumble", 2, "Ground rumbles", "Le sol gronde")
+    # the wonders: the sealed reliquary, its relics and the hum around it (recipes in tools/relic_sfx.py)
+    s("reliquary.open", "sfx", "reliquary_open", 1, "Reliquary unlocks", "Le reliquaire se déverrouille")
+    s("reliquary.locked", "sfx", "reliquary_locked", 2, "Reliquary stays sealed", "Le reliquaire reste scellé")
+    s("relic.use", "sfx", "relic_use", 1, "Relic taken in", "Une relique est absorbée")
+    s("wonder.ambient", "sfx", "wonder_ambient", 3, "A wonder hums", "Une merveille fredonne")
     # ambience: loops and one-shots per world
     for w in range(1, 11):
         s(f"ambient.w{w}.loop", "loop", "loop", 1, None, None, world=w)
@@ -197,14 +234,18 @@ def path_of(sid):
 
 
 # ------------------------------------------------------------------ biome attributes
-def biome_audio(n):
-    """The biome attributes that give world n its music and ambience."""
+def biome_audio(n, sub=None):
+    """The biome attributes that give world n its music and ambience; sub: one of its lesser biomes, which plays its
+    own variation of the world's theme (SUB_THEMES)."""
     loop, adds = WORLD_AMBIENT[n]
     amb = {"additions": [{"sound": f"{NS}:ambient.{a}", "tick_chance": c} for a, c in adds]}
     if loop:
         amb["loop"] = f"{NS}:ambient.{loop}.loop"
     # under water and in creative mode the default track plays too
-    music = {"default": {"sound": f"{NS}:music.world_{n}", "min_delay": 3600, "max_delay": 12000}}
+    track = f"world_{n}_{sub}" if sub else f"world_{n}"
+    if sub and track not in PIECES:
+        raise KeyError(f"no theme for the lesser biome {track} (SUB_THEMES)")
+    music = {"default": {"sound": f"{NS}:music.{track}", "min_delay": 3600, "max_delay": 12000}}
     return {"minecraft:audio/ambient_sounds": amb, "minecraft:audio/background_music": music}
 
 
@@ -214,6 +255,8 @@ def _hash(entry):
     spec = json.dumps({k: entry[k] for k in ("id", "kind", "recipe", "variants", "args")}, sort_keys=True)
     if entry["recipe"] in dict(CUES).values():
         src += open(os.path.join(HERE, "cues.py"), "rb").read()
+    elif entry["recipe"] in RELIC_RECIPES:
+        src += open(os.path.join(HERE, "relic_sfx.py"), "rb").read()
     elif entry["kind"] == "music":
         spec += json.dumps(WORLD_THEMES.get(entry["args"].get("world"), PIECES.get(entry["args"].get("piece"))), sort_keys=True)
     return hashlib.sha256(src + spec.encode()).hexdigest()[:16]
@@ -251,10 +294,11 @@ def render_all(sound_dir, force=False):
         print(f"sound: {len(todo)} sounds out of date, but numpy is missing; keeping the committed files")
         return 0
     import cues
+    import relic_sfx
     import sfx
     for e in todo:
         for i, f in enumerate(_files(e)):
-            x, q = (cues if e["recipe"] in cues.RECIPES else sfx).render(e, i)
+            x, q = (cues if e["recipe"] in cues.RECIPES else relic_sfx if e["recipe"] in relic_sfx.RECIPES else sfx).render(e, i)
             _encode(x, os.path.join(sound_dir, f + ".ogg"), q)
         lock[e["id"]] = _hash(e)
         print(f"sound: rendered {e['id']}")

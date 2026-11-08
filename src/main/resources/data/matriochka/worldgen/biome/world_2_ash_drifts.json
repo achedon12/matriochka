@@ -80,7 +80,7 @@
     },
     "minecraft:audio/background_music": {
       "default": {
-        "sound": "matriochka:music.world_2",
+        "sound": "matriochka:music.world_2_ash_drifts",
         "min_delay": 3600,
         "max_delay": 12000
       }
