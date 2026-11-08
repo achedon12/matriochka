@@ -210,8 +210,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.v.outputs.tag }}
         run: |
-          python3 tools/modpack.py --jar "$JAR" --out build/modpack
-          python3 tools/modpack.py --jar "$JAR" --out build/modpack --hard
+          # one pack per Minecraft version, each with that version's jar and dependencies
+          for J in $JARS; do
+            M=$(basename "$J" .jar | sed 's/.*+//')
+            python3 tools/modpack.py --mc "$M" --jar "$J" --out build/modpack
+            python3 tools/modpack.py --mc "$M" --jar "$J" --out build/modpack --hard
+          done
           gh release upload "$TAG" build/modpack/*.mrpack --clobber
 
       - name: Modpack on Modrinth
@@ -221,6 +225,7 @@ jobs:
           TOKEN: ${{ secrets.MODRINTH_TOKEN }}
           PROJECT: ${{ vars.MODRINTH_PACK_PROJECT_ID }}
           MC: ${{ steps.v.outputs.mc }}
+          MCS: ${{ steps.v.outputs.mcs }}
           VERSION: ${{ steps.v.outputs.version }}
         run: tools/modpack_publish.sh modrinth
 
@@ -232,13 +237,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.v.outputs.tag }}
-          CF_FILE: ${{ steps.cf.outputs.file_id }}
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         run: |
-          file=()
-          if [ -n "$CF_FILE" ] && [ "$CF_FILE" != null ]; then file=(--cf-mod-file "$CF_FILE"); fi
-          python3 tools/modpack.py --jar "$JAR" --out build/modpack --curseforge "${file[@]}"
-          python3 tools/modpack.py --jar "$JAR" --out build/modpack --curseforge --hard "${file[@]}"
+          for J in $JARS; do
+            M=$(basename "$J" .jar | sed 's/.*+//')
+            # each pack points at the CurseForge file of its own jar, uploaded above
+            CF_FILE=$(jq -r .id "cf-upload-$M.json" 2>/dev/null || true)
+            file=()
+            if [ -n "$CF_FILE" ] && [ "$CF_FILE" != null ]; then file=(--cf-mod-file "$CF_FILE"); fi
+            python3 tools/modpack.py --mc "$M" --jar "$J" --out build/modpack --curseforge "${file[@]}"
+            python3 tools/modpack.py --mc "$M" --jar "$J" --out build/modpack --curseforge --hard "${file[@]}"
+          done
           gh release upload "$TAG" build/modpack/*-curseforge.zip --clobber
 
       - name: Modpack on CurseForge
@@ -248,6 +257,7 @@ jobs:
           TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
           PROJECT: ${{ vars.CURSEFORGE_PACK_PROJECT_ID }}
           MC: ${{ steps.v.outputs.mc }}
+          MCS: ${{ steps.v.outputs.mcs }}
           VERSION: ${{ steps.v.outputs.version }}
         run: tools/modpack_publish.sh curseforge
 

@@ -51,13 +51,23 @@ jobs:
           git rev-parse --verify --quiet "refs/tags/$TAG" >/dev/null || { echo "::error::no tag $TAG"; exit 1; }
           # the tools come from this branch, the versions from the tag
           git show "$TAG:gradle.properties" > tag.properties
-          # the Minecraft version and its dependencies moved to versions/<mc>/ (the pack follows the default, 26.3)
-          git show "$TAG:versions/26.3/gradle.properties" >> tag.properties 2>/dev/null || true
+          # the Minecraft versions and their dependencies live in versions/<mc>/ (0.6.0 on): one pack per version,
+          # the default (26.3) first; an older tag names its one version in gradle.properties
+          mcs=$(git ls-tree --name-only "$TAG:versions" 2>/dev/null | sort -rV | tr '\n' ' ')
+          mcs="$(echo $mcs | tr ' ' '\n' | grep -x 26.3) $(echo $mcs | tr ' ' '\n' | grep -vx 26.3 | tr '\n' ' ')"
+          for m in $mcs; do
+            { cat tag.properties; git show "$TAG:versions/$m/gradle.properties"; } > "tag-$m.properties"
+          done
           version=$(grep '^mod_version=' tag.properties | cut -d= -f2)
-          mc=$(grep '^minecraft_version=' tag.properties | cut -d= -f2)
+          if [ -z "$(echo $mcs)" ]; then
+            mc=$(grep '^minecraft_version=' tag.properties | cut -d= -f2); mcs=$mc; cp tag.properties "tag-$mc.properties"
+          else
+            mc=$(echo $mcs | cut -d' ' -f1)
+          fi
           [ "v$version" = "$TAG" ] || { echo "::error::$TAG declares mod_version $version"; exit 1; }
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "mc=$mc" >> "$GITHUB_OUTPUT"
+          echo "mcs=$(echo $mcs)" >> "$GITHUB_OUTPUT"
           git show "$TAG:CHANGELOG.md" | awk -v v="$version" '
             index($0, "## " v) == 1 || index($0, "## [" v "]") == 1 {on=1; next}
             on && /^## / {exit}
@@ -65,13 +75,13 @@ jobs:
           ' > notes.md
           [ -s notes.md ] || echo "::warning::CHANGELOG.md has no section for $version at $TAG"
 
-      - name: Download the mod jar
+      - name: Download the mod jars
         env:
           VERSION: ${{ steps.v.outputs.version }}
-          MC: ${{ steps.v.outputs.mc }}
+          MCS: ${{ steps.v.outputs.mcs }}
         run: |
-          gh release download "$TAG" --pattern "matriochka-$VERSION+$MC.jar" --dir dl
-          echo "JAR=dl/matriochka-$VERSION+$MC.jar" >> "$GITHUB_ENV"
+          for m in $MCS; do gh release download "$TAG" --pattern "matriochka-$VERSION+$m.jar" --dir dl; done
+          echo "MCS=$MCS" >> "$GITHUB_ENV"
 
       - uses: actions/setup-python@v7
         with:
@@ -81,8 +91,11 @@ jobs:
         id: pack
         continue-on-error: true
         run: |
-          python3 tools/modpack.py --properties tag.properties --jar "$JAR" --out build/modpack
-          python3 tools/modpack.py --properties tag.properties --jar "$JAR" --out build/modpack --hard
+          for m in $MCS; do
+            J=$(ls dl/matriochka-*+$m.jar)
+            python3 tools/modpack.py --properties "tag-$m.properties" --jar "$J" --out build/modpack
+            python3 tools/modpack.py --properties "tag-$m.properties" --jar "$J" --out build/modpack --hard
+          done
           gh release upload "$TAG" build/modpack/*.mrpack --clobber
 
       - name: CurseForge pack
@@ -98,8 +111,13 @@ jobs:
             *[!0-9]*) echo "::error::cf_file must be a number"; exit 1 ;;
             *) file=(--cf-mod-file "$CF_FILE") ;;
           esac
-          python3 tools/modpack.py --properties tag.properties --jar "$JAR" --out build/modpack --curseforge "${file[@]}"
-          python3 tools/modpack.py --properties tag.properties --jar "$JAR" --out build/modpack --curseforge --hard "${file[@]}"
+          for m in $MCS; do
+            J=$(ls dl/matriochka-*+$m.jar)
+            # cf_file names the default version's file; the others are found by fingerprint
+            f=(); [ "$m" = "${{ steps.v.outputs.mc }}" ] && f=("${file[@]}")
+            python3 tools/modpack.py --properties "tag-$m.properties" --jar "$J" --out build/modpack --curseforge "${f[@]}"
+            python3 tools/modpack.py --properties "tag-$m.properties" --jar "$J" --out build/modpack --curseforge --hard "${f[@]}"
+          done
           gh release upload "$TAG" build/modpack/*-curseforge.zip --clobber
 
       - name: Upload to Modrinth
@@ -108,6 +126,7 @@ jobs:
           TOKEN: ${{ secrets.MODRINTH_TOKEN }}
           PROJECT: ${{ vars.MODRINTH_PACK_PROJECT_ID }}
           MC: ${{ steps.v.outputs.mc }}
+          MCS: ${{ steps.v.outputs.mcs }}
           VERSION: ${{ steps.v.outputs.version }}
         run: tools/modpack_publish.sh modrinth
 
@@ -117,6 +136,7 @@ jobs:
           TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
           PROJECT: ${{ vars.CURSEFORGE_PACK_PROJECT_ID }}
           MC: ${{ steps.v.outputs.mc }}
+          MCS: ${{ steps.v.outputs.mcs }}
           VERSION: ${{ steps.v.outputs.version }}
         run: tools/modpack_publish.sh curseforge
 

@@ -518,8 +518,19 @@ def build_curseforge(args, props, mods):
 
 # --- Modrinth -----------------------------------------------------------------------------------------------------
 
+def properties_for(path, mc):
+    """The properties of the pack for Minecraft version mc: the given file, with versions/<mc>/gradle.properties over it."""
+    props = properties(path)
+    if mc:
+        over = os.path.join(ROOT, "versions", mc, "gradle.properties")
+        if not os.path.exists(over):
+            die(f"no Minecraft version {mc} (versions/{mc}/gradle.properties)")
+        props.update(properties(over))
+    return props
+
+
 def build(args):
-    props = properties(args.properties)
+    props = properties_for(args.properties, args.mc)
     version, mc, loader = props["mod_version"], props["minecraft_version"], props["loader_version"]
     args.jar = args.jar or find_jar()
     if not os.path.isfile(args.jar):
@@ -561,6 +572,7 @@ def main():
     p.add_argument("--curseforge", action="store_true", help="write the CurseForge modpack (.zip with manifest.json) instead")
     p.add_argument("--cf-mod-file", type=int, help="CurseForge file id of the mod jar (default: looked up by fingerprint)")
     p.add_argument("--properties", default=os.path.join(ROOT, "gradle.properties"), help="gradle.properties to read (default: the repository's)")
+    p.add_argument("--mc", help="the Minecraft version of the pack (26.3, 26.2, 26.1.2): its dependencies come from versions/<mc>/gradle.properties (default: 26.3)")
     build(p.parse_args())
 
 

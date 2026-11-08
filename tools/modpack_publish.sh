@@ -7,7 +7,9 @@
 # Environment:
 #   TOKEN     MODRINTH_TOKEN or CURSEFORGE_TOKEN (upload token of the owner)
 #   PROJECT   the pack's project id (MODRINTH_PACK_PROJECT_ID / CURSEFORGE_PACK_PROJECT_ID variable)
-#   VERSION   mod version (0.4.0), MC  Minecraft version (26.3)
+#   VERSION   mod version (0.4.0), MC  the default Minecraft version (26.3)
+#   MCS       every Minecraft version with a pack (default: MC alone); the default's pack keeps the plain version
+#             number (0.7.0, 0.7.0-hard) and is uploaded last, the others get +<mc> (0.7.0+26.2, 0.7.0-hard+26.2)
 #   NOTES     file with the "## <version>" section of CHANGELOG.md (default: notes.md)
 #   PACK_DIR  folder of the pack files (default: build/modpack)
 #   DRY_RUN   1: print each request instead of uploading (reads still happen)
@@ -21,10 +23,13 @@ target=${1:?usage: modpack_publish.sh modrinth|curseforge}
 NOTES=${NOTES:-notes.md}
 PACK_DIR=${PACK_DIR:-build/modpack}
 DRY_RUN=${DRY_RUN:-0}
+MCS=${MCS:-$MC}
+# the other versions first, the default last: its normal pack ends up the newest version, the one launchers pick
+ORDER="$(for m in $MCS; do [ "$m" = "$MC" ] || echo "$m"; done | tr '\n' ' ') $MC"
 UA="achedon12/matriochka release workflow"
 
 changelog() {
-	echo "Matriochka Pack for Matriochka $VERSION (Minecraft $MC, Fabric). The pack's mod list is on the project page; what changed in the mod:"
+	echo "Matriochka Pack for Matriochka $VERSION (Minecraft ${PMC:-$MC}, Fabric). The pack's mod list is on the project page; what changed in the mod:"
 	echo
 	if [ -s "$NOTES" ]; then cat "$NOTES"; else echo "See https://github.com/achedon12/matriochka/releases/tag/v$VERSION"; fi
 }
@@ -43,12 +48,16 @@ modrinth() {
 		echo "::error::Modrinth answered HTTP $code for project $PROJECT: $(head -c 300 mr-versions.json)"
 		return 1
 	fi
+	for PMC in $ORDER; do
 	notes=$(changelog)
 	for suffix in -hard ""; do
 		number="$VERSION$suffix"
-		file="$PACK_DIR/matriochka-pack-$number+$MC.mrpack"
+		[ "$PMC" = "$MC" ] || number="$number+$PMC"
+		file="$PACK_DIR/matriochka-pack-$VERSION$suffix+$PMC.mrpack"
 		name="Matriochka Pack $VERSION"
+		[ "$PMC" = "$MC" ] || name="$name for $PMC"
 		[ -n "$suffix" ] && name="$name (Hard)"
+		featured=false; [ "$PMC" = "$MC" ] && featured=true
 		if [ ! -f "$file" ]; then
 			echo "::error::$file is missing (run tools/modpack.py first)"
 			return 1
@@ -58,9 +67,9 @@ modrinth() {
 			continue
 		fi
 		data=$(jq -n \
-			--arg project "$PROJECT" --arg name "$name" --arg number "$number" --arg mc "$MC" --arg changelog "$notes" \
+			--arg project "$PROJECT" --arg name "$name" --arg number "$number" --arg mc "$PMC" --arg changelog "$notes" --argjson featured "$featured" \
 			'{project_id: $project, name: $name, version_number: $number, changelog: $changelog,
-			  game_versions: [$mc], loaders: ["fabric"], version_type: "alpha", featured: true, environment: "client_only_server_optional",
+			  game_versions: [$mc], loaders: ["fabric"], version_type: "alpha", featured: $featured, environment: "client_only_server_optional",
 			  dependencies: [], file_parts: ["file"], primary_file: "file"}')
 		if [ "$DRY_RUN" = 1 ]; then
 			echo "dry run: POST $api/version with $(basename "$file") ($(stat -c %s "$file") bytes)"
@@ -72,6 +81,7 @@ modrinth() {
 			"$api/version" -o mr-upload.json
 		echo "Modrinth: version $number uploaded ($(jq -r .id mr-upload.json))"
 	done
+	done
 }
 
 curseforge() {
@@ -81,10 +91,11 @@ curseforge() {
 	fi
 	api=https://minecraft.curseforge.com/api
 	# a modpack file is tagged with its Minecraft version only: the loader comes from its manifest.json
-	mcslug="minecraft-$(echo "$MC" | cut -d. -f1-2 | tr . -)"
+	for PMC in $ORDER; do
+	mcslug="minecraft-$(echo "$PMC" | cut -d. -f1-2 | tr . -)"
 	if curl -fsS -H "X-Api-Token: $TOKEN" "$api/game/version-types" -o cf-types.json 2>/dev/null &&
 		curl -fsS -H "X-Api-Token: $TOKEN" "$api/game/versions" -o cf-versions.json 2>/dev/null; then
-		ids=$(jq -nc --slurpfile t cf-types.json --slurpfile v cf-versions.json --arg mc "$MC" --arg mcslug "$mcslug" '
+		ids=$(jq -nc --slurpfile t cf-types.json --slurpfile v cf-versions.json --arg mc "$PMC" --arg mcslug "$mcslug" '
 			[$t[0][] | select(.slug == $mcslug) | .id][0] as $type
 			| [$v[0][] | select(.gameVersionTypeID == $type and .name == $mc) | .id] | unique')
 	elif [ "$DRY_RUN" = 1 ]; then
@@ -95,14 +106,15 @@ curseforge() {
 		return 1
 	fi
 	if [ "$ids" = "[]" ]; then
-		echo "::error::CurseForge has no game version $MC"
+		echo "::error::CurseForge has no game version $PMC"
 		return 1
 	fi
 	echo "CurseForge game version ids: $ids"
 	notes=$(changelog)
 	for suffix in -hard ""; do
-		file="$PACK_DIR/matriochka-pack-$VERSION$suffix+$MC-curseforge.zip"
+		file="$PACK_DIR/matriochka-pack-$VERSION$suffix+$PMC-curseforge.zip"
 		name="Matriochka Pack $VERSION"
+		[ "$PMC" = "$MC" ] || name="$name for $PMC"
 		[ -n "$suffix" ] && name="$name (Hard)"
 		if [ ! -f "$file" ]; then
 			echo "::error::$file is missing (run tools/modpack.py --curseforge first)"
@@ -119,6 +131,7 @@ curseforge() {
 			--form-string "metadata=$metadata" -F "file=@$file" \
 			"$api/projects/$PROJECT/upload-file" -o cf-upload.json
 		echo "CurseForge: $name uploaded (file $(jq -r .id cf-upload.json))"
+	done
 	done
 }
 
