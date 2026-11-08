@@ -16,7 +16,7 @@ import net.minecraft.network.chat.Component;
  * shows what it does. Changes are saved at once (config/matriochka-client.json).
  */
 public class ComfortScreen extends Screen {
-	private static final int BW = 340, BH = 214, PW = 155, ROW = 19, TOP = 42, CTRL = 58;
+	private static final int BW = 340, BH = 214, PW = 155, ROW = 17, TOP = 42, CTRL = 58;
 	/** A slider's track, leaving the value its own room on the right. */
 	private static final int TRACK = 34;
 	private final Screen parent;
@@ -59,6 +59,7 @@ public class ComfortScreen extends Screen {
 			() -> Component.literal("x" + trim(v.hudScale))));
 		right.add(new Row("world_label", Kind.CYCLE, () -> (float) labelIndex(), f -> v.worldLabel = LABELS[(labelIndex() + 1) % LABELS.length],
 			() -> Component.translatable(v.worldLabel.equals("off") ? "comfort.matriochka.off" : "comfort.matriochka.corner." + v.worldLabel)));
+		right.add(toggle("souls_bar", () -> v.soulsBar, b -> v.soulsBar = b));
 		right.add(slider("music_explore", () -> v.musicExplore / 100f, f -> v.musicExplore = Math.round(f * 100)));
 		right.add(slider("music_danger", () -> v.musicDanger / 100f, f -> v.musicDanger = Math.round(f * 100)));
 		right.add(slider("music_boss", () -> v.musicBoss / 100f, f -> v.musicBoss = Math.round(f * 100)));
@@ -112,6 +113,7 @@ public class ComfortScreen extends Screen {
 			v.hudScale = d.hudScale;
 			v.hudCorner = d.hudCorner;
 			v.worldLabel = d.worldLabel;
+			v.soulsBar = d.soulsBar;
 			v.musicExplore = d.musicExplore;
 			v.musicDanger = d.musicDanger;
 			v.musicBoss = d.musicBoss;

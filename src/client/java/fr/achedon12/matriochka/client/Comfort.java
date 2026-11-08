@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 
 /**
- * Accessibility and comfort options, kept per player in config/matriochka-client.json and edited from the Journal
+ * Accessibility and comfort options, kept per player in config/matriochka-client.json and edited from the game's Options
  * (ComfortScreen). Only "softEffects" concerns the server: it is sent on joining and whenever it changes, so the
  * server skips Nausea and Darkness for this player and sends a gentle tint instead.
  */
@@ -39,6 +39,8 @@ public final class Comfort {
 		public String hudCorner = "top_left";
 		/** A small permanent label of the world you are in: off, or one of the corners (client/WorldTitle). */
 		public String worldLabel = "off";
+		/** The souls bar over the experience bar, the status rows raised above it (client/Hud). */
+		public boolean soulsBar = true;
 		/** Whether the Matriochka line has been put on the F3 screen once (it can be turned off there afterwards). */
 		public boolean debugLineSet = false;
 		/** Music volume per situation, 0 to 100 (percent of the game's music slider). */

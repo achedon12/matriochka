@@ -42,7 +42,7 @@ public final class MatriarchTip implements HudElement {
 				return renderer;
 			}
 		};
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HEALTH_BAR, Matriochka.id("nested_shell"), new MatriarchTip());
+		HudElementRegistry.attachElementAfter(VanillaHudElements.HEALTH_BAR, Matriochka.id("nested_shell"), Hud.lifted(new MatriarchTip()));
 	}
 
 	/** Seconds before the player's own Nested Shell is whole again (0: ready). */

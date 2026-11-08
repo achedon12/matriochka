@@ -48,7 +48,7 @@ public class MeterHud implements HudElement {
 	private String lastIcons = "";
 
 	public static void register() {
-		HudElementRegistry.attachElementAfter(VanillaHudElements.AIR_BAR, ID, INSTANCE);
+		HudElementRegistry.attachElementAfter(VanillaHudElements.AIR_BAR, ID, Hud.lifted(INSTANCE));
 		HudStatusBarHeightRegistry.addRight(ID, p -> rows(p).size() * 10);
 	}
 

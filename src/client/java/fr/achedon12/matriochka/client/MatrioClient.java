@@ -13,6 +13,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.nbt.CompoundTag;
@@ -41,8 +42,10 @@ public class MatrioClient implements ClientModInitializer {
 			return r;
 		});
 		// the souls under the hearts and the hunger, drawn before them so their rows stay where they are
-		HudElementRegistry.attachElementBefore(net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements.HEALTH_BAR, Matriochka.id("souls"), new Hud(false));
-		HudElementRegistry.attachElementAfter(net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements.HEALTH_BAR, Matriochka.id("souls_count"), new Hud(true));
+		HudElementRegistry.attachElementBefore(VanillaHudElements.HEALTH_BAR, Matriochka.id("souls"), new Hud());
+		// the status rows go up over the souls bar while it shows (client/Hud)
+		for (var layer : new net.minecraft.resources.Identifier[]{VanillaHudElements.HEALTH_BAR, VanillaHudElements.FOOD_BAR, VanillaHudElements.AIR_BAR, VanillaHudElements.MOUNT_HEALTH})
+			HudElementRegistry.replaceElement(layer, Hud::lifted);
 		WorldTitle.init();
 		// the world's rule meter: a vanilla status row above the hunger bar
 		MeterHud.register();
