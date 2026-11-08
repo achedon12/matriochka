@@ -501,6 +501,31 @@ final class NestingTest {
 		boolean bar = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.Hud.soulsShown(mc));
 		check(bar, "the souls' bar shows inside a world");
 		shot(ctx, "souls_bar");
+		// two rows of hearts (24), then the HUD at twice its size: the count stays clear of both
+		s.runOnServer(server -> {
+			ServerPlayer p = player(server);
+			p.getAttribute(Attributes.MAX_HEALTH).setBaseValue(48);
+			p.setHealth(48);
+			PlayerState ps = PlayerState.of(p);
+			ps.addSouls(5);
+			ps.sync();
+		});
+		ctx.waitTicks(10);
+		shot(ctx, "souls_bar_hearts");
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Comfort.get().hudScale = 2f);
+		s.runOnServer(server -> {
+			PlayerState ps = PlayerState.of(player(server));
+			ps.addSouls(5);
+			ps.sync();
+		});
+		ctx.waitTicks(10);
+		shot(ctx, "souls_bar_x2");
+		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Comfort.get().hudScale = 1f);
+		s.runOnServer(server -> {
+			ServerPlayer p = player(server);
+			p.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
+			p.setHealth(20);
+		});
 		// the permanent label, from the comfort settings
 		ctx.runOnClient(mc -> fr.achedon12.matriochka.client.Comfort.get().worldLabel = "top_right");
 		ctx.waitTicks(5);
