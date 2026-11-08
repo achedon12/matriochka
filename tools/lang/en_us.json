@@ -342,6 +342,8 @@
  "comfort.matriochka.hud_scale": "HUD size",
  "comfort.matriochka.hud_scale.desc": "Size of the souls' count and of the armour's doll beside the hearts.",
  "comfort.matriochka.world_label": "World label",
+ "comfort.matriochka.souls_bar": "Souls bar",
+ "comfort.matriochka.souls_bar.desc": "The souls bar above the experience bar, with the hearts and the hunger raised over it. Off puts them back in their usual place.",
  "comfort.matriochka.world_label.desc": "A small label with the world you are in, kept in a corner of the screen.",
  "comfort.matriochka.hud_corner": "Plaque corner",
  "comfort.matriochka.hud_corner.desc": "The corner of the screen the plaque sits in.",
@@ -666,5 +668,6 @@
  "journal.matriochka.card.chain": "Ten ores, one of each world → the Nesting Cradle → a Matriochkite Ingot → the Matriarch Armour",
  "hud.matriochka.world_rule": "Rule: %s",
  "hud.matriochka.world_label": "World %s · %s",
+ "options.matriochka.button": "Matriochka...",
  "debug.matriochka.world": "Matriochka: World %s - %s"
 }

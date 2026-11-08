@@ -342,6 +342,8 @@
  "comfort.matriochka.hud_scale": "Taille de l'interface",
  "comfort.matriochka.hud_scale.desc": "Taille du compte des âmes et de la poupée de l'armure près des cœurs.",
  "comfort.matriochka.world_label": "Nom du monde",
+ "comfort.matriochka.souls_bar": "Barre d'âmes",
+ "comfort.matriochka.souls_bar.desc": "La barre d'âmes au-dessus de la barre d'expérience, les cœurs et la faim remontés au-dessus. Désactivée, ils retrouvent leur place habituelle.",
  "comfort.matriochka.world_label.desc": "Une petite étiquette du monde où tu es, gardée dans un coin de l'écran.",
  "comfort.matriochka.hud_corner": "Coin du cartouche",
  "comfort.matriochka.hud_corner.desc": "Le coin de l'écran où se place le cartouche.",
@@ -666,5 +668,6 @@
  "journal.matriochka.card.chain": "Dix minerais, un par monde → le Berceau gigogne → un Lingot de matriochkite → l'Armure de la Matriarche",
  "hud.matriochka.world_rule": "Règle : %s",
  "hud.matriochka.world_label": "Monde %s · %s",
+ "options.matriochka.button": "Matriochka...",
  "debug.matriochka.world": "Matriochka : monde %s - %s"
 }

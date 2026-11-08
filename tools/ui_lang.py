@@ -358,6 +358,9 @@ comfort = {
     "hud_scale.desc": ("Size of the souls' count and of the armour's doll beside the hearts.",
                        "Taille du compte des âmes et de la poupée de l'armure près des cœurs."),
     "world_label": ("World label", "Nom du monde"),
+    "souls_bar": ("Souls bar", "Barre d'âmes"),
+    "souls_bar.desc": ("The souls bar above the experience bar, with the hearts and the hunger raised over it. Off puts them back in their usual place.",
+                       "La barre d'âmes au-dessus de la barre d'expérience, les cœurs et la faim remontés au-dessus. Désactivée, ils retrouvent leur place habituelle."),
     "world_label.desc": ("A small label with the world you are in, kept in a corner of the screen.",
                          "Une petite étiquette du monde où tu es, gardée dans un coin de l'écran."),
     "hud_corner": ("Plaque corner", "Coin du cartouche"),
@@ -701,6 +704,7 @@ U["journal.matriochka.card.chain"] = ("Ten ores, one of each world \u2192 the Ne
 # where you are, without a corner plaque (client/WorldTitle)
 U["hud.matriochka.world_rule"] = ("Rule: %s", "Règle : %s")
 U["hud.matriochka.world_label"] = ("World %s \u00b7 %s", "Monde %s \u00b7 %s")
+U["options.matriochka.button"] = ("Matriochka...", "Matriochka...")
 U["debug.matriochka.world"] = ("Matriochka: World %s - %s", "Matriochka : monde %s - %s")
 en = {k: v[0] for k, v in U.items()}
 fr = {k: v[1] for k, v in U.items()}
