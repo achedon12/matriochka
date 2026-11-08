@@ -43,6 +43,8 @@ Every world has an ore of its own, each one had its own way; set together in the
 
 ### Interface
 
+- The corner plaque is gone, so the mod no longer fights other mods' and clients' HUDs for the top left. The souls are a thin blue bar along the top of the experience bar, under the hearts and the hunger (their rows do not move), filling toward the next hundred; their count shows in blue beside the experience level when it changes and fades after three seconds. The bar is there inside the worlds or while holding a soul shard or vessel, and hides with the status bars. The Doll of Life's layers are three small dolls at its left end.
+- Entering a world shows its name as a great title in the middle of the screen with its rule under it, with a soft chime (the first time, the framed card plays instead). The F3 screen has a "Matriochka: World N - name" line. A new comfort option, World name on screen, can keep a small label of the world in a corner (off by default); the HUD size option now sizes the souls' count and the shell's doll.
 - Long item descriptions are laid on several lines in their tooltips.
 
 ### Fixes
