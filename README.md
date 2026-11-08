@@ -33,6 +33,7 @@ Matriochka is a progression mod for Minecraft Java 26.1.2, 26.2 and 26.3 (Fabric
 | Doll of Life | Each layer saves you from one death. Soul Cradles let you respawn inside a world, death chests keep your items |
 | 110 structures | 11 types per world, generated procedurally, with journal pages and one hidden doll per world |
 | 10 wonders | One great place per world, pointed at by its people, with a reliquary that only another world's cross key opens and a relic that gives a heart and its world's gift |
+| 10 world ores | One per world, each had its own way: grown on blooms by the water, mined with a burning hand or in silence, fused by lightning, falling upwards, ripened from a seed. Set in the Nesting Cradle, the ten give the Matriochkite of the Matriarch Armour |
 | The Artisan's Journal | Quests, karma, every world's items and how to get them, and a map of every world inked as you walk it |
 | 64 quests, 100 achievements | Optional quest book in the Artisan's Journal and one advancement tab per world |
 
@@ -95,7 +96,7 @@ site/             website (Next.js, GitHub Pages)
 
 ## Status
 
-Matriochka is in alpha. All ten worlds, their rules, mobs, bosses, stations and progression are playable. Every creature and boss has its own hand-built GeckoLib model, animations and attacks. See the [roadmap](https://github.com/achedon12/matriochka/wiki/Roadmap) for what comes next.
+Matriochka is in beta: the whole game is there and is being polished. All ten worlds, their rules, mobs, bosses, stations and progression are playable. Every creature and boss has its own hand-built GeckoLib model, animations and attacks. See the [roadmap](https://github.com/achedon12/matriochka/wiki/Roadmap) for what comes next.
 
 ## Contributing
 

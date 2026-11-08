@@ -1,5 +1,62 @@
 # Changelog
 
+## 0.9.0 (beta)
+
+Every world has an ore of its own, each one had its own way; set together in the Nesting Cradle, the ten are nested by a nest of ten dolls into the Matriochkite Ingot, the metal of the Matriarch Armour. Matriochka leaves alpha for beta.
+
+### The ten world ores
+
+- World 1, the Spore Crystal: it grows on the Spore Blooms that stand near water. Break a bloom with water within 4 blocks, about one in seven gives one.
+- World 2, the Living Ember: mined from a Living Ember Vein deep in the Giant Veins, it only stays alight in a burning hand. With your Heat under 70 it goes out with a hiss and leaves ash.
+- World 3, the Golden Ward: never mined, it lies only in the vault chests of the Endless Dungeon.
+- World 4, the Fulgurite: the lightning of the Storm Archipelago fuses the cloudstone (under its grass too) or the sand it strikes into a Fulgurite Crust. Mine the crust.
+- World 5, the Silent Stone: its veins shatter at the slightest sound. Mine them with your Noise at 0, sneaking.
+- World 6, the Inverted Ore: its Hanging Veins grow on the underside of the Upside Realm's rock, under its overhangs and vaults. Mined, it falls upwards for a few seconds: catch it before it is gone.
+- World 7, the Brine Crystal: any creature of the Pressure Ocean may leave one, about one in twenty-five.
+- World 8, the Chrono Shard: the Time Seed lies in the chests of the Hastened Seasons. Planted on grass or dirt in World 8, it ripens in two minutes, far faster than any crop, into the shard.
+- World 9, the Heartstone: the Heart of the Terrain leaves two or three when it falls.
+- World 10, the Artisan's Thread, mined from the Thread Spools as before.
+- Each ore's tooltip and its world's card in the Journal say how it is had.
+
+### The Nesting Cradle
+
+- A great carved matryoshka of red lacquer and gold, some two blocks tall, made at the Final Loom: an animated model, its upper half breathing ajar on a hinge, a glow inside the bowl, a ring of gold beads with a socket for each world turning round its waist. Set one ore of each world in it: the ore rises into its world's socket, which lights in that world's colour, and sings its note of the lullaby. An empty hand takes the last one back.
+- The tenth starts the ritual, eight seconds keyed on the model: the ring spins up and draws in while light runs from every ore to the middle; the upper half is thrown open and a nest of ten smaller dolls, painted in the hidden dolls' worlds, rises out of it, fans out and spins; one by one they close over the next, the smallest first, each with a wooden clack; the last sinks into the bowl, the doll slams shut, jumps, shakes and glows in a golden flash, a pillar of light and a shockwave, the lullaby's chord; then it opens a last time on the Matriochkite Ingot, which rises, spins and pops out to the player.
+- It is all run by the server and played from its start tick by every client near. A cradle broken before the flash gives its ores back.
+
+### Matriochkite
+
+- The Matriochkite Ingot, and a Matriochkite Nugget and a Block of Matriochkite at the crafting table (nine of one make the next, and back). The block is red lacquer framed in gold, painted with a rosette of the ten worlds round a gold doll, its gold glowing; it can stand under a beacon.
+
+### The Matriarch Armour
+
+- Helmet, chestplate, leggings and boots of Matriochkite Ingots (2, 3, 2 and 1), laid over the Artisan's own pieces at the Final Loom.
+- Worn, it is a model of its own: a lacquered doll's-head crown with a gold rim, a kokoshnik crest with a small painted face and a row of pearls; pauldrons like little nested doll halves; a khokhloma breastplate (red, black and gold, a touch of green) with a matryoshka in gold filigree and a gem at its heart; layered skirt plates painted with folk flowers; boots with gold toe caps. A glint runs along its gold, and the gem is lit while the Nested Shell is ready.
+- Just above the Artisan's set: 32 armour (Minecraft counts at most 30), 18 toughness, a little more knockback resistance, and one more heart per piece.
+- The whole set's Nested Shell: every world's gauge builds half as fast (Toxin, Heat, Noise and the loss of breath), and once every five minutes a blow that would kill leaves you at three hearts instead, before the Doll of Life, which is then not spent. The screen flares gold and the outer doll's cracks run across it for a second.
+- Its tooltip lists the set as a checklist (the pieces worn lit), says the bonus in two lines and the shell's state, ready or mending with the time left; a small doll beside the hearts, while the whole set is worn, is full when the shell is ready and fills back up as it mends.
+- The Journal's card of World 10 opens on the chain: the ten ores, the Nesting Cradle, the ingot, the armour; every link's tooltip says it too.
+
+### Sounds
+
+- Ten music box notes of the lullaby, one per world's ore, the chord of the ten dolls, the clack of a golden shell and the crack of the Matriarch's outer doll.
+
+### Interface
+
+- Long item descriptions are laid on several lines in their tooltips.
+
+### Fixes
+
+- On Minecraft 26.3 the talents' extra blows were lost to the cooldown between two hits: they land again.
+
+### Beta
+
+- Releases on Modrinth and CurseForge, the mod and its packs, are published as beta.
+
+### Checks
+
+- `./gradlew runClientGameTest -Pnesting` (also run by `-Ppolish`) checks in game how each ore is had, runs the cradle's ritual from the ten ores to the ingot, crafts the Matriochkite, and wears the Matriarch Armour: its stats, its halved gauges, the Nested Shell's one save before the Doll of Life and its count on the HUD.
+
 ## 0.8.0 (alpha)
 
 The wonders can be found and are worth finding: the worlds' people point at them, every relic gives its world's gift, a group shares the reliquary, and the Journal draws a map of every world.
