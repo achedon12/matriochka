@@ -24,6 +24,8 @@ public final class Mc {
 
 	public static void clearInvulnerable(LivingEntity e) {
 		e.setInvulnerableTime(0);
+		// 26.3 keeps the cooldown between two blows apart from the invulnerable time
+		e.damageCooldownTime = 0;
 	}
 
 	/** Never pushed nor pulled by pistons. */
