@@ -87,6 +87,19 @@ public final class Sounds {
 	public static final SoundEvent RELIQUARY_LOCKED = register("reliquary.locked");
 	public static final SoundEvent RELIC_USE = register("relic.use");
 	public static final SoundEvent WONDER_AMBIENT = register("wonder.ambient");
+	public static final SoundEvent CRADLE_NOTE_W1 = register("cradle.note.w1");
+	public static final SoundEvent CRADLE_NOTE_W2 = register("cradle.note.w2");
+	public static final SoundEvent CRADLE_NOTE_W3 = register("cradle.note.w3");
+	public static final SoundEvent CRADLE_NOTE_W4 = register("cradle.note.w4");
+	public static final SoundEvent CRADLE_NOTE_W5 = register("cradle.note.w5");
+	public static final SoundEvent CRADLE_NOTE_W6 = register("cradle.note.w6");
+	public static final SoundEvent CRADLE_NOTE_W7 = register("cradle.note.w7");
+	public static final SoundEvent CRADLE_NOTE_W8 = register("cradle.note.w8");
+	public static final SoundEvent CRADLE_NOTE_W9 = register("cradle.note.w9");
+	public static final SoundEvent CRADLE_NOTE_W10 = register("cradle.note.w10");
+	public static final SoundEvent CRADLE_CLACK = register("cradle.clack");
+	public static final SoundEvent CRADLE_CHORD = register("cradle.chord");
+	public static final SoundEvent MATRIARCH_CRACK = register("matriarch.crack");
 	public static final SoundEvent AMBIENT_W1_LOOP = register("ambient.w1.loop");
 	public static final SoundEvent AMBIENT_W2_LOOP = register("ambient.w2.loop");
 	public static final SoundEvent AMBIENT_W3_LOOP = register("ambient.w3.loop");
@@ -271,6 +284,23 @@ public final class Sounds {
 			case 9 -> MUSIC_BOSS_W9;
 			case 10 -> MUSIC_BOSS_W10;
 			default -> MUSIC_BOSS;
+		};
+	}
+
+	/** The note of the lullaby the ore of World w sings in the Nesting Cradle (1 to 10). */
+	public static SoundEvent cradleNote(int world) {
+		return switch (world) {
+			case 1 -> CRADLE_NOTE_W1;
+			case 2 -> CRADLE_NOTE_W2;
+			case 3 -> CRADLE_NOTE_W3;
+			case 4 -> CRADLE_NOTE_W4;
+			case 5 -> CRADLE_NOTE_W5;
+			case 6 -> CRADLE_NOTE_W6;
+			case 7 -> CRADLE_NOTE_W7;
+			case 8 -> CRADLE_NOTE_W8;
+			case 9 -> CRADLE_NOTE_W9;
+			case 10 -> CRADLE_NOTE_W10;
+			default -> CRADLE_NOTE_W1;
 		};
 	}
 

@@ -103,6 +103,8 @@ for _w, _subs in SUB_THEMES.items():
 # the adaptive music's layers and stings, rendered by tools/cues.py: (id, recipe)
 # the wonders' recipes, rendered by tools/relic_sfx.py (hashed with that file, like the cues)
 RELIC_RECIPES = ("reliquary_open", "reliquary_locked", "relic_use", "wonder_ambient")
+# the Nesting Cradle's and the Matriarch Armour's recipes, rendered by tools/cradle_sfx.py (hashed with that file)
+CRADLE_RECIPES = ("cradle_note", "cradle_chord", "shell_clack", "matriarch_crack")
 CUES = [("music.layer_heartbeat", "layer_heartbeat"), ("music.sting_discovery", "sting_discovery"), ("music.sting_quest", "sting_quest")]
 
 # ------------------------------------------------------------------ the table
@@ -156,6 +158,13 @@ def _sounds():
     s("reliquary.locked", "sfx", "reliquary_locked", 2, "Reliquary stays sealed", "Le reliquaire reste scellé")
     s("relic.use", "sfx", "relic_use", 1, "Relic taken in", "Une relique est absorbée")
     s("wonder.ambient", "sfx", "wonder_ambient", 3, "A wonder hums", "Une merveille fredonne")
+    # the Nesting Cradle: a note of the lullaby per world's ore, the shells' clacks, the chord of the ten dolls; the
+    # Matriarch Armour's outer doll cracking (recipes in tools/cradle_sfx.py)
+    for w in range(1, 11):
+        s(f"cradle.note.w{w}", "sfx", "cradle_note", 1, "An ore sings in the cradle", "Un minerai chante dans le berceau", world=w)
+    s("cradle.clack", "sfx", "shell_clack", 3, "A golden doll closes", "Une poupée d'or se referme")
+    s("cradle.chord", "sfx", "cradle_chord", 1, "The ten dolls close", "Les dix poupées se referment")
+    s("matriarch.crack", "sfx", "matriarch_crack", 1, "The outer doll cracks", "La poupée extérieure se fend")
     # ambience: loops and one-shots per world
     for w in range(1, 11):
         s(f"ambient.w{w}.loop", "loop", "loop", 1, None, None, world=w)
@@ -257,6 +266,8 @@ def _hash(entry):
         src += open(os.path.join(HERE, "cues.py"), "rb").read()
     elif entry["recipe"] in RELIC_RECIPES:
         src += open(os.path.join(HERE, "relic_sfx.py"), "rb").read()
+    elif entry["recipe"] in CRADLE_RECIPES:
+        src += open(os.path.join(HERE, "cradle_sfx.py"), "rb").read()
     elif entry["kind"] == "music":
         spec += json.dumps(WORLD_THEMES.get(entry["args"].get("world"), PIECES.get(entry["args"].get("piece"))), sort_keys=True)
     return hashlib.sha256(src + spec.encode()).hexdigest()[:16]
@@ -293,12 +304,14 @@ def render_all(sound_dir, force=False):
     except ImportError:
         print(f"sound: {len(todo)} sounds out of date, but numpy is missing; keeping the committed files")
         return 0
+    import cradle_sfx
     import cues
     import relic_sfx
     import sfx
     for e in todo:
         for i, f in enumerate(_files(e)):
-            x, q = (cues if e["recipe"] in cues.RECIPES else relic_sfx if e["recipe"] in relic_sfx.RECIPES else sfx).render(e, i)
+            x, q = (cues if e["recipe"] in cues.RECIPES else relic_sfx if e["recipe"] in relic_sfx.RECIPES
+                    else cradle_sfx if e["recipe"] in cradle_sfx.RECIPES else sfx).render(e, i)
             _encode(x, os.path.join(sound_dir, f + ".ogg"), q)
         lock[e["id"]] = _hash(e)
         print(f"sound: rendered {e['id']}")
@@ -385,6 +398,12 @@ def java(package):
     for w in range(0, 11):
         L.append(f"\t\t\tcase {w} -> MUSIC_BOSS_W{w};")
     L += ["\t\t\tdefault -> MUSIC_BOSS;", "\t\t};", "\t}", "",
+          "\t/** The note of the lullaby the ore of World w sings in the Nesting Cradle (1 to 10). */",
+          "\tpublic static SoundEvent cradleNote(int world) {",
+          "\t\treturn switch (world) {"]
+    for w in range(1, 11):
+        L.append(f"\t\t\tcase {w} -> CRADLE_NOTE_W{w};")
+    L += ["\t\t\tdefault -> CRADLE_NOTE_W1;", "\t\t};", "\t}", "",
           "\t/** Loads the class, which registers every sound. */",
           "\tpublic static void init() {}", "}"]
     return "\n".join(L) + "\n"

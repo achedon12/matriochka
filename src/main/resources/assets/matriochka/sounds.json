@@ -839,6 +839,116 @@
     ],
     "subtitle": "subtitles.matriochka.wonder.ambient"
   },
+  "cradle.note.w1": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w1"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w1"
+  },
+  "cradle.note.w2": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w2"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w2"
+  },
+  "cradle.note.w3": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w3"
+  },
+  "cradle.note.w4": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w4"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w4"
+  },
+  "cradle.note.w5": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w5"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w5"
+  },
+  "cradle.note.w6": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w6"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w6"
+  },
+  "cradle.note.w7": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w7"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w7"
+  },
+  "cradle.note.w8": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w8"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w8"
+  },
+  "cradle.note.w9": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w9"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w9"
+  },
+  "cradle.note.w10": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/note_w10"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.note.w10"
+  },
+  "cradle.clack": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/clack_1"
+      },
+      {
+        "name": "matriochka:cradle/clack_2"
+      },
+      {
+        "name": "matriochka:cradle/clack_3"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.clack"
+  },
+  "cradle.chord": {
+    "sounds": [
+      {
+        "name": "matriochka:cradle/chord"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.cradle.chord"
+  },
+  "matriarch.crack": {
+    "sounds": [
+      {
+        "name": "matriochka:matriarch/crack"
+      }
+    ],
+    "subtitle": "subtitles.matriochka.matriarch.crack"
+  },
   "ambient.w1.loop": {
     "sounds": [
       {
