@@ -50,4 +50,12 @@ public final class McClient {
 	}
 
 	public static final int FULL_LIGHT = 0xF000F0;
+
+	public static void clearToasts(net.minecraft.client.Minecraft mc) {
+		mc.getToastManager().clear();
+	}
+
+	public static void clearChat(net.minecraft.client.Minecraft mc) {
+		mc.gui.getChat().clearMessages(true);
+	}
 }

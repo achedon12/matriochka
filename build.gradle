@@ -126,6 +126,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('machines')) {
 				vmArgs '-Dmatriochka.capture=machines', '-Dmatriochka.only=' + (project.findProperty('only') ?: '')
 			}
+			if (name == 'clientGameTest' && project.hasProperty('tiktok')) {
+				vmArgs '-Dmatriochka.capture=tiktok', '-Xmx5G', '-Dmatriochka.takes=' + (project.findProperty('takes') ?: ''), '-Dmatriochka.worlds=' + (project.findProperty('worlds') ?: ''), '-Dmatriochka.full=' + (project.findProperty('full') ?: '')
+			}
 			if (name == 'clientGameTest' && project.hasProperty('moves')) {
 				vmArgs '-Dmatriochka.capture=moves', '-Dmatriochka.debugMoves=true', '-Dmatriochka.bosses=' + (project.findProperty('bosses') ?: '')
 			}

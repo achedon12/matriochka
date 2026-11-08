@@ -50,4 +50,12 @@ public final class McClient {
 	}
 
 	public static final int FULL_LIGHT = net.minecraft.util.LightCoordsUtil.FULL_BRIGHT;
+
+	public static void clearToasts(net.minecraft.client.Minecraft mc) {
+		mc.gui.toastManager().clear();
+	}
+
+	public static void clearChat(net.minecraft.client.Minecraft mc) {
+		mc.gui.hud.getChat().clearMessages(true);
+	}
 }
