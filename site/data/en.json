@@ -114,7 +114,7 @@
   "home": {
    "tagline": "Every block can hold a world.",
    "intro": "A Fabric mod for Minecraft 26.1.2, 26.2 and 26.3. Ten worlds, each sealed inside a single block and nested in the one before it. Every world has its own rule, its own creatures, its own station, and a boss guarding the core that opens the next.",
-   "facts": "Minecraft 26.1.2, 26.2 and 26.3 on Fabric, version 0.8.0. Solo and multiplayer.",
+   "facts": "Minecraft 26.1.2, 26.2 and 26.3 on Fabric, version 0.9.0. Solo and multiplayer.",
    "dollsTitle": "A set of eleven nesting dolls, just opened: the Surface, then worlds 1 to 10, from the largest to the smallest",
    "dollsCaption": "The Surface, then the ten worlds it holds. Pick a doll to open its world.",
    "trailerH": "The trailer",
@@ -236,7 +236,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.8.0, changelog and source",
+     "note": "Version 0.9.0, changelog and source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -323,8 +323,8 @@
    "gallery": [],
    "ctaH": "Ready to shrink?",
    "ctaP": "Minecraft 26.1.2, 26.2 or 26.3, Fabric Loader 0.20 or newer, Fabric API, GeckoLib and Java 25. In English, French, Spanish, German, Brazilian Portuguese, Italian, Russian, Polish and Simplified Chinese.",
-   "ctaBtn": "Get version 0.8.0",
-   "download": "Download 0.8.0",
+   "ctaBtn": "Get version 0.9.0",
+   "download": "Download 0.9.0",
    "desc": "Matriochka, a Fabric mod for Minecraft 26.1.2, 26.2 and 26.3: ten nested worlds, each sealed in a block, each with its own rule and boss."
   },
   "worlds": {
@@ -1878,7 +1878,7 @@
   "download": {
    "h": "Download",
    "headImg": "shots/head_download_banner.webp",
-   "lead": "Version 0.8.0 for Minecraft 26.1.2, 26.2 and 26.3 on Fabric, one file for each. Install it on the client to play solo, and on both server and clients to play together.",
+   "lead": "Version 0.9.0 for Minecraft 26.1.2, 26.2 and 26.3 on Fabric, one file for each. Install it on the client to play solo, and on both server and clients to play together.",
    "desc": "Download Matriochka for Minecraft 26.1.2, 26.2 and 26.3 on Fabric: requirements, installation, Lunar Client and server configuration.",
    "sources": [
     {
@@ -1953,7 +1953,7 @@
    "installH": "Installing",
    "steps": [
     "Install Fabric Loader for your Minecraft version (26.3, 26.2 or 26.1.2).",
-    "Download the file for your version from the GitHub releases: matriochka-0.8.0+26.3.jar, +26.2.jar or +26.1.2.jar.",
+    "Download the file for your version from the GitHub releases: matriochka-0.9.0+26.3.jar, +26.2.jar or +26.1.2.jar.",
     "Put it in your mods folder with Fabric API and GeckoLib.",
     "Launch the Fabric profile and create a new world. The Artisan's Scroll is waiting in your inventory."
    ],
@@ -3739,6 +3739,12 @@
      "effect": ""
     },
     {
+     "id": "spore_crystal",
+     "tex": "items/spore_crystal.webp",
+     "name": "Spore Crystal",
+     "effect": "World 1's ore. It grows on the Spore Blooms that stand near water: break a bloom with water within 4 blocks, about one in seven gives one."
+    },
+    {
      "id": "trophy_doll_1",
      "tex": "items/trophy_doll_1.webp",
      "name": "Spore Queen Trophy",
@@ -4008,6 +4014,22 @@
         "name": "Roots"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "spore_crystal",
+      "tex": "items/spore_crystal.webp",
+      "name": "Spore Crystal",
+      "kind": "world_ore",
+      "rarity": "Epic",
+      "effect": "World 1's ore. It grows on the Spore Blooms that stand near water: break a bloom with water within 4 blocks, about one in seven gives one.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -5328,6 +5350,12 @@
      "effect": ""
     },
     {
+     "id": "living_ember",
+     "tex": "items/living_ember.webp",
+     "name": "Living Ember",
+     "effect": "World 2's ore, mined from a Living Ember Vein. It only stays alight in a burning hand: mine it with your Heat at 70 or more, or it goes out into ash."
+    },
+    {
      "id": "trophy_doll_2",
      "tex": "items/trophy_doll_2.webp",
      "name": "Ash Titan Trophy",
@@ -5614,6 +5642,22 @@
         "name": "Stick"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "living_ember",
+      "tex": "items/living_ember.webp",
+      "name": "Living Ember",
+      "kind": "world_ore",
+      "rarity": "Epic",
+      "effect": "World 2's ore, mined from a Living Ember Vein. It only stays alight in a burning hand: mine it with your Heat at 70 or more, or it goes out into ash.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -6334,6 +6378,21 @@
       "count": 1,
       "drops": [],
       "yields": "Blazing Rock"
+     },
+     {
+      "id": "living_ember_ore",
+      "tex": "cubes/living_ember_ore.webp",
+      "name": "Living Ember Vein",
+      "kind": "world_ore",
+      "effect": "Mine it with your Heat at 70 or more, or the ember goes out.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -7146,6 +7205,12 @@
      "effect": ""
     },
     {
+     "id": "golden_ward",
+     "tex": "items/golden_ward.webp",
+     "name": "Golden Ward",
+     "effect": "World 3's ore, never mined: it lies only in the vault chests of the Endless Dungeon."
+    },
+    {
      "id": "refuge_doll",
      "tex": "items/refuge_doll.webp",
      "name": "Refuge Doll",
@@ -7428,6 +7493,22 @@
         "name": "Stick"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "golden_ward",
+      "tex": "items/golden_ward.webp",
+      "name": "Golden Ward",
+      "kind": "world_ore",
+      "rarity": "Epic",
+      "effect": "World 3's ore, never mined: it lies only in the vault chests of the Endless Dungeon.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -8936,6 +9017,12 @@
      "effect": ""
     },
     {
+     "id": "fulgurite",
+     "tex": "items/fulgurite.webp",
+     "name": "Fulgurite",
+     "effect": "World 4's ore. Lightning that strikes cloudstone or sand fuses it into a Fulgurite Crust: mine the crust."
+    },
+    {
      "id": "armor_layer",
      "tex": "items/armor_layer.webp",
      "name": "Lacquer Layer",
@@ -9207,6 +9294,24 @@
       ],
       "count": 1,
       "drops": []
+     },
+     {
+      "id": "fulgurite",
+      "tex": "items/fulgurite.webp",
+      "name": "Fulgurite",
+      "kind": "world_ore",
+      "rarity": "Epic",
+      "effect": "World 4's ore. Lightning that strikes cloudstone or sand fuses it into a Fulgurite Crust: mine the crust.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Fulgurite Crust"
+      ]
      },
      {
       "id": "armor_layer",
@@ -9861,6 +9966,21 @@
       "count": 1,
       "drops": [],
       "yields": "Celestial Crystal"
+     },
+     {
+      "id": "fulgurite_ore",
+      "tex": "cubes/fulgurite_ore.webp",
+      "name": "Fulgurite Crust",
+      "kind": "world_ore",
+      "effect": "Cloudstone or sand fused by lightning.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Fulgurite"
      }
     ],
     "quests": [
@@ -10654,6 +10774,12 @@
      "effect": ""
     },
     {
+     "id": "silent_stone",
+     "tex": "items/silent_stone.webp",
+     "name": "Silent Stone",
+     "effect": "World 5's ore. It shatters at the slightest sound: mine its vein with your Noise at 0 (sneak), or nothing is left."
+    },
+    {
      "id": "trophy_doll_5",
      "tex": "items/trophy_doll_5.webp",
      "name": "Light Eater Trophy",
@@ -10935,6 +11061,22 @@
         "name": "Stick"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "silent_stone",
+      "tex": "items/silent_stone.webp",
+      "name": "Silent Stone",
+      "kind": "world_ore",
+      "rarity": "Epic",
+      "effect": "World 5's ore. It shatters at the slightest sound: mine its vein with your Noise at 0 (sneak), or nothing is left.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -11528,6 +11670,21 @@
       "count": 1,
       "drops": [],
       "yields": "Diamond Fragment"
+     },
+     {
+      "id": "silent_stone_ore",
+      "tex": "cubes/silent_stone_ore.webp",
+      "name": "Silent Stone Vein",
+      "kind": "world_ore",
+      "effect": "Mine it in silence: with any Noise, it shatters.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -12278,6 +12435,12 @@
      "effect": ""
     },
     {
+     "id": "inverted_ore",
+     "tex": "items/inverted_ore.webp",
+     "name": "Inverted Ore",
+     "effect": "World 6's ore. Its veins hang under the overhangs and the vaults of the Upside Realm; mined, it falls upwards: catch it before it is gone."
+    },
+    {
      "id": "trophy_doll_6",
      "tex": "items/trophy_doll_6.webp",
      "name": "Your Double Trophy",
@@ -12500,6 +12663,22 @@
         "name": "Stick"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "inverted_ore",
+      "tex": "items/inverted_ore.webp",
+      "name": "Inverted Ore",
+      "kind": "world_ore",
+      "rarity": "Epic",
+      "effect": "World 6's ore. Its veins hang under the overhangs and the vaults of the Upside Realm; mined, it falls upwards: catch it before it is gone.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -13047,6 +13226,21 @@
       "count": 1,
       "drops": [],
       "yields": "Unstable Alloy"
+     },
+     {
+      "id": "hanging_ore",
+      "tex": "cubes/hanging_ore.webp",
+      "name": "Hanging Vein",
+      "kind": "world_ore",
+      "effect": "Hangs under the rock. What it gives falls upwards.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -13821,6 +14015,12 @@
      "effect": ""
     },
     {
+     "id": "brine_crystal",
+     "tex": "items/brine_crystal.webp",
+     "name": "Brine Crystal",
+     "effect": "World 7's ore, grown inside the creatures of the Pressure Ocean: any of them may leave one, about one in twenty-five."
+    },
+    {
      "id": "salt_snorkel",
      "tex": "items/salt_snorkel.webp",
      "name": "Salt Snorkel Helmet",
@@ -14128,6 +14328,22 @@
         "name": "Stick"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "brine_crystal",
+      "tex": "items/brine_crystal.webp",
+      "name": "Brine Crystal",
+      "kind": "world_ore",
+      "rarity": "Epic",
+      "effect": "World 7's ore, grown inside the creatures of the Pressure Ocean: any of them may leave one, about one in twenty-five.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -15670,6 +15886,18 @@
      "effect": ""
     },
     {
+     "id": "time_seed",
+     "tex": "items/time_seed.webp",
+     "name": "Time Seed",
+     "effect": "Found in World 8's chests. Plant it on grass or dirt in World 8: in two minutes it ripens into a Chrono Shard."
+    },
+    {
+     "id": "chrono_shard",
+     "tex": "items/chrono_shard.webp",
+     "name": "Chrono Shard",
+     "effect": "World 8's ore, ripened from a Time Seed planted in World 8."
+    },
+    {
      "id": "wreath_of_seasons",
      "tex": "items/wreath_of_seasons.webp",
      "name": "Wreath of Seasons",
@@ -15913,6 +16141,38 @@
         "name": "Stick"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "time_seed",
+      "tex": "items/time_seed.webp",
+      "name": "Time Seed",
+      "kind": "world_ore",
+      "rarity": "Rare",
+      "effect": "Found in World 8's chests. Plant it on grass or dirt in World 8: in two minutes it ripens into a Chrono Shard.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "chrono_shard",
+      "tex": "items/chrono_shard.webp",
+      "name": "Chrono Shard",
+      "kind": "world_ore",
+      "rarity": "Epic",
+      "effect": "World 8's ore, ripened from a Time Seed planted in World 8.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -16506,6 +16766,21 @@
       "count": 1,
       "drops": [],
       "yields": "Season Fragment"
+     },
+     {
+      "id": "time_sprout",
+      "tex": "blocks/time_sprout.png",
+      "name": "Time Sprout",
+      "kind": "time_sprout",
+      "effect": "",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -17247,6 +17522,12 @@
      "effect": ""
     },
     {
+     "id": "heartstone",
+     "tex": "items/heartstone.webp",
+     "name": "Heartstone",
+     "effect": "World 9's ore: the Heart of the Terrain leaves two or three of them when it falls."
+    },
+    {
      "id": "last_doll_key",
      "tex": "items/last_doll_key.webp",
      "name": "Key of the Last Doll",
@@ -17482,6 +17763,22 @@
         "name": "Stick"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "heartstone",
+      "tex": "items/heartstone.webp",
+      "name": "Heartstone",
+      "kind": "world_ore",
+      "rarity": "Epic",
+      "effect": "World 9's ore: the Heart of the Terrain leaves two or three of them when it falls.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -18786,7 +19083,7 @@
      "id": "artisan_thread",
      "tex": "items/artisan_thread.webp",
      "name": "Artisan's Thread",
-     "effect": "Base of the final gear."
+     "effect": "World 10's ore, mined from Thread Spools. Base of the final gear."
     },
     {
      "id": "artisan_shard",
@@ -18799,6 +19096,18 @@
      "tex": "items/artisan_blade.webp",
      "name": "Artisan's Blade",
      "effect": ""
+    },
+    {
+     "id": "matriochkite_ingot",
+     "tex": "items/matriochkite_ingot.webp",
+     "name": "Matriochkite Ingot",
+     "effect": "Born of the ten worlds' ores in the Nesting Cradle. The Matriarch Armour is made of it."
+    },
+    {
+     "id": "matriochkite_nugget",
+     "tex": "items/matriochkite_nugget.webp",
+     "name": "Matriochkite Nugget",
+     "effect": "A ninth of a Matriochkite Ingot. Nine make an ingot again."
     },
     {
      "id": "unfinished_effigy",
@@ -18893,7 +19202,7 @@
       "name": "Artisan's Thread",
       "kind": "thread",
       "rarity": "Rare",
-      "effect": "Base of the final gear.",
+      "effect": "World 10's ore, mined from Thread Spools. Base of the final gear.",
       "stats": [],
       "station": null,
       "stationTex": null,
@@ -18972,6 +19281,38 @@
         "name": "Sporite Sword"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "matriochkite_ingot",
+      "tex": "items/matriochkite_ingot.webp",
+      "name": "Matriochkite Ingot",
+      "kind": "nested",
+      "rarity": "Legendary",
+      "effect": "Born of the ten worlds' ores in the Nesting Cradle. The Matriarch Armour is made of it.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "matriochkite_nugget",
+      "tex": "items/matriochkite_nugget.webp",
+      "name": "Matriochkite Nugget",
+      "kind": "nested",
+      "rarity": "Epic",
+      "effect": "A ninth of a Matriochkite Ingot. Nine make an ingot again.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -19545,6 +19886,36 @@
       "count": 1,
       "drops": [],
       "yields": "Artisan's Thread"
+     },
+     {
+      "id": "nesting_cradle",
+      "tex": "cubes/nesting_cradle.webp",
+      "name": "Nesting Cradle",
+      "kind": "nesting_cradle",
+      "effect": "Set the ten worlds' ores in it, one of each: ten golden dolls close round them and leave a Matriochkite Ingot. An empty hand takes the last ore back.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "matriochkite_block",
+      "tex": "cubes/matriochkite_block.webp",
+      "name": "Block of Matriochkite",
+      "kind": "matriochkite_block",
+      "effect": "Nine Matriochkite Ingots in red lacquer and gold. It can stand under a beacon.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -29363,6 +29734,22 @@
      "drops": []
     },
     {
+     "id": "spore_crystal",
+     "tex": "items/spore_crystal.webp",
+     "name": "Spore Crystal",
+     "kind": "world_ore",
+     "rarity": "Epic",
+     "effect": "World 1's ore. It grows on the Spore Blooms that stand near water: break a bloom with water within 4 blocks, about one in seven gives one.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "queen_core",
      "tex": "items/queen_core.webp",
      "name": "Queen Core",
@@ -30107,6 +30494,22 @@
      "drops": []
     },
     {
+     "id": "living_ember",
+     "tex": "items/living_ember.webp",
+     "name": "Living Ember",
+     "kind": "world_ore",
+     "rarity": "Epic",
+     "effect": "World 2's ore, mined from a Living Ember Vein. It only stays alight in a burning hand: mine it with your Heat at 70 or more, or it goes out into ash.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "titan_core",
      "tex": "items/titan_core.webp",
      "name": "Titan Core",
@@ -30823,6 +31226,21 @@
      "count": 1,
      "drops": [],
      "yields": "Blazing Rock"
+    },
+    {
+     "id": "living_ember_ore",
+     "tex": "cubes/living_ember_ore.webp",
+     "name": "Living Ember Vein",
+     "kind": "world_ore",
+     "effect": "Mine it with your Heat at 70 or more, or the ember goes out.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -31014,6 +31432,22 @@
        "name": "Stick"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "golden_ward",
+     "tex": "items/golden_ward.webp",
+     "name": "Golden Ward",
+     "kind": "world_ore",
+     "rarity": "Epic",
+     "effect": "World 3's ore, never mined: it lies only in the vault chests of the Endless Dungeon.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -31888,6 +32322,24 @@
      "drops": []
     },
     {
+     "id": "fulgurite",
+     "tex": "items/fulgurite.webp",
+     "name": "Fulgurite",
+     "kind": "world_ore",
+     "rarity": "Epic",
+     "effect": "World 4's ore. Lightning that strikes cloudstone or sand fuses it into a Fulgurite Crust: mine the crust.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [
+      "Fulgurite Crust"
+     ]
+    },
+    {
      "id": "armor_layer",
      "tex": "items/armor_layer.webp",
      "name": "Lacquer Layer",
@@ -32540,6 +32992,21 @@
      "count": 1,
      "drops": [],
      "yields": "Celestial Crystal"
+    },
+    {
+     "id": "fulgurite_ore",
+     "tex": "cubes/fulgurite_ore.webp",
+     "name": "Fulgurite Crust",
+     "kind": "world_ore",
+     "effect": "Cloudstone or sand fused by lightning.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": "Fulgurite"
     }
    ]
   },
@@ -32742,6 +33209,22 @@
        "name": "Stick"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "silent_stone",
+     "tex": "items/silent_stone.webp",
+     "name": "Silent Stone",
+     "kind": "world_ore",
+     "rarity": "Epic",
+     "effect": "World 5's ore. It shatters at the slightest sound: mine its vein with your Noise at 0 (sneak), or nothing is left.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -33335,6 +33818,21 @@
      "count": 1,
      "drops": [],
      "yields": "Diamond Fragment"
+    },
+    {
+     "id": "silent_stone_ore",
+     "tex": "cubes/silent_stone_ore.webp",
+     "name": "Silent Stone Vein",
+     "kind": "world_ore",
+     "effect": "Mine it in silence: with any Noise, it shatters.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -33484,6 +33982,22 @@
        "name": "Stick"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "inverted_ore",
+     "tex": "items/inverted_ore.webp",
+     "name": "Inverted Ore",
+     "kind": "world_ore",
+     "rarity": "Epic",
+     "effect": "World 6's ore. Its veins hang under the overhangs and the vaults of the Upside Realm; mined, it falls upwards: catch it before it is gone.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -34031,6 +34545,21 @@
      "count": 1,
      "drops": [],
      "yields": "Unstable Alloy"
+    },
+    {
+     "id": "hanging_ore",
+     "tex": "cubes/hanging_ore.webp",
+     "name": "Hanging Vein",
+     "kind": "world_ore",
+     "effect": "Hangs under the rock. What it gives falls upwards.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -34239,6 +34768,22 @@
        "name": "Stick"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "brine_crystal",
+     "tex": "items/brine_crystal.webp",
+     "name": "Brine Crystal",
+     "kind": "world_ore",
+     "rarity": "Epic",
+     "effect": "World 7's ore, grown inside the creatures of the Pressure Ocean: any of them may leave one, about one in twenty-five.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -35146,6 +35691,38 @@
      "drops": []
     },
     {
+     "id": "time_seed",
+     "tex": "items/time_seed.webp",
+     "name": "Time Seed",
+     "kind": "world_ore",
+     "rarity": "Rare",
+     "effect": "Found in World 8's chests. Plant it on grass or dirt in World 8: in two minutes it ripens into a Chrono Shard.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "chrono_shard",
+     "tex": "items/chrono_shard.webp",
+     "name": "Chrono Shard",
+     "kind": "world_ore",
+     "rarity": "Epic",
+     "effect": "World 8's ore, ripened from a Time Seed planted in World 8.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "seasons_core",
      "tex": "items/seasons_core.webp",
      "name": "Seasons Core",
@@ -35735,6 +36312,21 @@
      "count": 1,
      "drops": [],
      "yields": "Season Fragment"
+    },
+    {
+     "id": "time_sprout",
+     "tex": "blocks/time_sprout.png",
+     "name": "Time Sprout",
+     "kind": "time_sprout",
+     "effect": "",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -35885,6 +36477,22 @@
        "name": "Stick"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "heartstone",
+     "tex": "items/heartstone.webp",
+     "name": "Heartstone",
+     "kind": "world_ore",
+     "rarity": "Epic",
+     "effect": "World 9's ore: the Heart of the Terrain leaves two or three of them when it falls.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -36494,7 +37102,7 @@
      "name": "Artisan's Thread",
      "kind": "thread",
      "rarity": "Rare",
-     "effect": "Base of the final gear.",
+     "effect": "World 10's ore, mined from Thread Spools. Base of the final gear.",
      "stats": [],
      "station": null,
      "stationTex": null,
@@ -36573,6 +37181,38 @@
        "name": "Sporite Sword"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "matriochkite_ingot",
+     "tex": "items/matriochkite_ingot.webp",
+     "name": "Matriochkite Ingot",
+     "kind": "nested",
+     "rarity": "Legendary",
+     "effect": "Born of the ten worlds' ores in the Nesting Cradle. The Matriarch Armour is made of it.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "matriochkite_nugget",
+     "tex": "items/matriochkite_nugget.webp",
+     "name": "Matriochkite Nugget",
+     "kind": "nested",
+     "rarity": "Epic",
+     "effect": "A ninth of a Matriochkite Ingot. Nine make an ingot again.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -37146,6 +37786,36 @@
      "count": 1,
      "drops": [],
      "yields": "Artisan's Thread"
+    },
+    {
+     "id": "nesting_cradle",
+     "tex": "cubes/nesting_cradle.webp",
+     "name": "Nesting Cradle",
+     "kind": "nesting_cradle",
+     "effect": "Set the ten worlds' ores in it, one of each: ten golden dolls close round them and leave a Matriochkite Ingot. An empty hand takes the last ore back.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
+    },
+    {
+     "id": "matriochkite_block",
+     "tex": "cubes/matriochkite_block.webp",
+     "name": "Block of Matriochkite",
+     "kind": "matriochkite_block",
+     "effect": "Nine Matriochkite Ingots in red lacquer and gold. It can stand under a beacon.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   }

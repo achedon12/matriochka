@@ -114,7 +114,7 @@
   "home": {
    "tagline": "Chaque bloc peut contenir un monde.",
    "intro": "Un mod Fabric pour Minecraft 26.1.2, 26.2 et 26.3. Dix mondes, chacun scellé dans un seul bloc et emboîté dans le précédent. Chaque monde a sa règle, ses créatures, sa station, et un boss qui garde le noyau ouvrant le suivant.",
-   "facts": "Minecraft 26.1.2, 26.2 et 26.3 sous Fabric, version 0.8.0. Solo et multijoueur.",
+   "facts": "Minecraft 26.1.2, 26.2 et 26.3 sous Fabric, version 0.9.0. Solo et multijoueur.",
    "dollsTitle": "Un jeu de onze poupées gigognes qu'on vient d'ouvrir : la Surface, puis les mondes 1 à 10, de la plus grande à la plus petite",
    "dollsCaption": "La Surface, puis les dix mondes qu'elle contient. Choisis une poupée pour ouvrir son monde.",
    "trailerH": "La bande-annonce",
@@ -236,7 +236,7 @@
    "platforms": [
     {
      "name": "GitHub",
-     "note": "Version 0.8.0, journal des changements et code source",
+     "note": "Version 0.9.0, journal des changements et code source",
      "href": "https://github.com/achedon12/matriochka/releases",
      "icon": "github"
     },
@@ -323,8 +323,8 @@
    "gallery": [],
    "ctaH": "Prêt à rétrécir ?",
    "ctaP": "Minecraft 26.1.2, 26.2 ou 26.3, Fabric Loader 0.20 ou plus récent, Fabric API, GeckoLib et Java 25. En anglais, français, espagnol, allemand, portugais du Brésil, italien, russe, polonais et chinois simplifié.",
-   "ctaBtn": "Obtenir la version 0.8.0",
-   "download": "Télécharger la 0.8.0",
+   "ctaBtn": "Obtenir la version 0.9.0",
+   "download": "Télécharger la 0.9.0",
    "desc": "Matriochka, un mod Fabric pour Minecraft 26.1.2, 26.2 et 26.3 : dix mondes emboîtés, chacun scellé dans un bloc, avec sa règle et son boss."
   },
   "worlds": {
@@ -1878,7 +1878,7 @@
   "download": {
    "h": "Télécharger",
    "headImg": "shots/head_download_banner.webp",
-   "lead": "Version 0.8.0 pour Minecraft 26.1.2, 26.2 et 26.3 sous Fabric, un fichier pour chacune. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
+   "lead": "Version 0.9.0 pour Minecraft 26.1.2, 26.2 et 26.3 sous Fabric, un fichier pour chacune. Installe-la côté client pour jouer en solo, et sur le serveur et chaque client pour jouer ensemble.",
    "desc": "Télécharger Matriochka pour Minecraft 26.1.2, 26.2 et 26.3 sous Fabric : prérequis, installation, Lunar Client et configuration serveur.",
    "sources": [
     {
@@ -1953,7 +1953,7 @@
    "installH": "Installation",
    "steps": [
     "Installe Fabric Loader pour ta version de Minecraft (26.3, 26.2 ou 26.1.2).",
-    "Télécharge le fichier de ta version depuis les versions GitHub : matriochka-0.8.0+26.3.jar, +26.2.jar ou +26.1.2.jar.",
+    "Télécharge le fichier de ta version depuis les versions GitHub : matriochka-0.9.0+26.3.jar, +26.2.jar ou +26.1.2.jar.",
     "Place-le dans ton dossier mods avec Fabric API et GeckoLib.",
     "Lance le profil Fabric et crée un nouveau monde. Le Parchemin de l'artisan t'attend dans l'inventaire."
    ],
@@ -3739,6 +3739,12 @@
      "effect": ""
     },
     {
+     "id": "spore_crystal",
+     "tex": "items/spore_crystal.webp",
+     "name": "Cristal de spores",
+     "effect": "Le minerai du monde 1. Il pousse sur les Floraisons de spores proches de l'eau : casse une floraison à moins de 4 blocs d'une eau, environ une sur sept en donne un."
+    },
+    {
      "id": "trophy_doll_1",
      "tex": "items/trophy_doll_1.webp",
      "name": "Trophée : Reine des spores",
@@ -4008,6 +4014,22 @@
         "name": "Racines"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "spore_crystal",
+      "tex": "items/spore_crystal.webp",
+      "name": "Cristal de spores",
+      "kind": "world_ore",
+      "rarity": "Épique",
+      "effect": "Le minerai du monde 1. Il pousse sur les Floraisons de spores proches de l'eau : casse une floraison à moins de 4 blocs d'une eau, environ une sur sept en donne un.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -5328,6 +5350,12 @@
      "effect": ""
     },
     {
+     "id": "living_ember",
+     "tex": "items/living_ember.webp",
+     "name": "Braise vive",
+     "effect": "Le minerai du monde 2, extrait d'un Filon de braise vive. Il ne reste allumé que dans une main brûlante : mine-le avec ta Chaleur à 70 ou plus, sinon il s'éteint en cendre."
+    },
+    {
      "id": "trophy_doll_2",
      "tex": "items/trophy_doll_2.webp",
      "name": "Trophée : Titan de cendre",
@@ -5614,6 +5642,22 @@
         "name": "Bâton"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "living_ember",
+      "tex": "items/living_ember.webp",
+      "name": "Braise vive",
+      "kind": "world_ore",
+      "rarity": "Épique",
+      "effect": "Le minerai du monde 2, extrait d'un Filon de braise vive. Il ne reste allumé que dans une main brûlante : mine-le avec ta Chaleur à 70 ou plus, sinon il s'éteint en cendre.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -6334,6 +6378,21 @@
       "count": 1,
       "drops": [],
       "yields": "Roche ardente"
+     },
+     {
+      "id": "living_ember_ore",
+      "tex": "cubes/living_ember_ore.webp",
+      "name": "Filon de braise vive",
+      "kind": "world_ore",
+      "effect": "Mine-le avec ta Chaleur à 70 ou plus, sinon la braise s'éteint.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -7146,6 +7205,12 @@
      "effect": ""
     },
     {
+     "id": "golden_ward",
+     "tex": "items/golden_ward.webp",
+     "name": "Pêne d'or",
+     "effect": "Le minerai du monde 3, qu'on n'extrait jamais : il ne se trouve que dans les coffres au trésor du Donjon sans fin."
+    },
+    {
      "id": "refuge_doll",
      "tex": "items/refuge_doll.webp",
      "name": "Poupée-refuge",
@@ -7428,6 +7493,22 @@
         "name": "Bâton"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "golden_ward",
+      "tex": "items/golden_ward.webp",
+      "name": "Pêne d'or",
+      "kind": "world_ore",
+      "rarity": "Épique",
+      "effect": "Le minerai du monde 3, qu'on n'extrait jamais : il ne se trouve que dans les coffres au trésor du Donjon sans fin.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -8936,6 +9017,12 @@
      "effect": ""
     },
     {
+     "id": "fulgurite",
+     "tex": "items/fulgurite.webp",
+     "name": "Fulgurite",
+     "effect": "Le minerai du monde 4. La foudre qui frappe la pierre de nuage ou le sable la fond en Croûte de fulgurite : mine la croûte."
+    },
+    {
      "id": "armor_layer",
      "tex": "items/armor_layer.webp",
      "name": "Couche laquée",
@@ -9207,6 +9294,24 @@
       ],
       "count": 1,
       "drops": []
+     },
+     {
+      "id": "fulgurite",
+      "tex": "items/fulgurite.webp",
+      "name": "Fulgurite",
+      "kind": "world_ore",
+      "rarity": "Épique",
+      "effect": "Le minerai du monde 4. La foudre qui frappe la pierre de nuage ou le sable la fond en Croûte de fulgurite : mine la croûte.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [
+       "Croûte de fulgurite"
+      ]
      },
      {
       "id": "armor_layer",
@@ -9861,6 +9966,21 @@
       "count": 1,
       "drops": [],
       "yields": "Cristal céleste"
+     },
+     {
+      "id": "fulgurite_ore",
+      "tex": "cubes/fulgurite_ore.webp",
+      "name": "Croûte de fulgurite",
+      "kind": "world_ore",
+      "effect": "De la pierre de nuage ou du sable fondus par la foudre.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": "Fulgurite"
      }
     ],
     "quests": [
@@ -10654,6 +10774,12 @@
      "effect": ""
     },
     {
+     "id": "silent_stone",
+     "tex": "items/silent_stone.webp",
+     "name": "Pierre muette",
+     "effect": "Le minerai du monde 5. Il se brise au moindre bruit : mine son filon avec ton Bruit à 0 (accroupi), sinon il n'en reste rien."
+    },
+    {
      "id": "trophy_doll_5",
      "tex": "items/trophy_doll_5.webp",
      "name": "Trophée : Mangeur de lumière",
@@ -10935,6 +11061,22 @@
         "name": "Bâton"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "silent_stone",
+      "tex": "items/silent_stone.webp",
+      "name": "Pierre muette",
+      "kind": "world_ore",
+      "rarity": "Épique",
+      "effect": "Le minerai du monde 5. Il se brise au moindre bruit : mine son filon avec ton Bruit à 0 (accroupi), sinon il n'en reste rien.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -11528,6 +11670,21 @@
       "count": 1,
       "drops": [],
       "yields": "Fragment de diamant"
+     },
+     {
+      "id": "silent_stone_ore",
+      "tex": "cubes/silent_stone_ore.webp",
+      "name": "Filon de pierre muette",
+      "kind": "world_ore",
+      "effect": "Mine-le en silence : au moindre Bruit, il se brise.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -12278,6 +12435,12 @@
      "effect": ""
     },
     {
+     "id": "inverted_ore",
+     "tex": "items/inverted_ore.webp",
+     "name": "Minerai inversé",
+     "effect": "Le minerai du monde 6. Ses filons pendent sous les surplombs et les voûtes du Royaume inversé ; extrait, il tombe vers le haut : attrape-le avant qu'il ne file."
+    },
+    {
      "id": "trophy_doll_6",
      "tex": "items/trophy_doll_6.webp",
      "name": "Trophée : Ton Double",
@@ -12500,6 +12663,22 @@
         "name": "Bâton"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "inverted_ore",
+      "tex": "items/inverted_ore.webp",
+      "name": "Minerai inversé",
+      "kind": "world_ore",
+      "rarity": "Épique",
+      "effect": "Le minerai du monde 6. Ses filons pendent sous les surplombs et les voûtes du Royaume inversé ; extrait, il tombe vers le haut : attrape-le avant qu'il ne file.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -13047,6 +13226,21 @@
       "count": 1,
       "drops": [],
       "yields": "Alliage instable"
+     },
+     {
+      "id": "hanging_ore",
+      "tex": "cubes/hanging_ore.webp",
+      "name": "Filon suspendu",
+      "kind": "world_ore",
+      "effect": "Pend sous la roche. Ce qu'il donne tombe vers le haut.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -13821,6 +14015,12 @@
      "effect": ""
     },
     {
+     "id": "brine_crystal",
+     "tex": "items/brine_crystal.webp",
+     "name": "Cristal de saumure",
+     "effect": "Le minerai du monde 7, qui pousse dans les créatures de l'Océan sous pression : chacune peut en laisser un, environ une sur vingt-cinq."
+    },
+    {
      "id": "salt_snorkel",
      "tex": "items/salt_snorkel.webp",
      "name": "Casque-tuba de sel",
@@ -14128,6 +14328,22 @@
         "name": "Bâton"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "brine_crystal",
+      "tex": "items/brine_crystal.webp",
+      "name": "Cristal de saumure",
+      "kind": "world_ore",
+      "rarity": "Épique",
+      "effect": "Le minerai du monde 7, qui pousse dans les créatures de l'Océan sous pression : chacune peut en laisser un, environ une sur vingt-cinq.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -15670,6 +15886,18 @@
      "effect": ""
     },
     {
+     "id": "time_seed",
+     "tex": "items/time_seed.webp",
+     "name": "Graine du temps",
+     "effect": "Se trouve dans les coffres du monde 8. Plante-la sur de l'herbe ou de la terre au monde 8 : en deux minutes, elle mûrit en Éclat chronique."
+    },
+    {
+     "id": "chrono_shard",
+     "tex": "items/chrono_shard.webp",
+     "name": "Éclat chronique",
+     "effect": "Le minerai du monde 8, mûri d'une Graine du temps plantée au monde 8."
+    },
+    {
      "id": "wreath_of_seasons",
      "tex": "items/wreath_of_seasons.webp",
      "name": "Couronne des saisons",
@@ -15913,6 +16141,38 @@
         "name": "Bâton"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "time_seed",
+      "tex": "items/time_seed.webp",
+      "name": "Graine du temps",
+      "kind": "world_ore",
+      "rarity": "Rare",
+      "effect": "Se trouve dans les coffres du monde 8. Plante-la sur de l'herbe ou de la terre au monde 8 : en deux minutes, elle mûrit en Éclat chronique.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "chrono_shard",
+      "tex": "items/chrono_shard.webp",
+      "name": "Éclat chronique",
+      "kind": "world_ore",
+      "rarity": "Épique",
+      "effect": "Le minerai du monde 8, mûri d'une Graine du temps plantée au monde 8.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -16506,6 +16766,21 @@
       "count": 1,
       "drops": [],
       "yields": "Fragment de saison"
+     },
+     {
+      "id": "time_sprout",
+      "tex": "blocks/time_sprout.png",
+      "name": "Pousse du temps",
+      "kind": "time_sprout",
+      "effect": "",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -17247,6 +17522,12 @@
      "effect": ""
     },
     {
+     "id": "heartstone",
+     "tex": "items/heartstone.webp",
+     "name": "Cœur de pierre",
+     "effect": "Le minerai du monde 9 : le Cœur du terrain en laisse deux ou trois quand il tombe."
+    },
+    {
      "id": "last_doll_key",
      "tex": "items/last_doll_key.webp",
      "name": "Clé de la dernière poupée",
@@ -17482,6 +17763,22 @@
         "name": "Bâton"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "heartstone",
+      "tex": "items/heartstone.webp",
+      "name": "Cœur de pierre",
+      "kind": "world_ore",
+      "rarity": "Épique",
+      "effect": "Le minerai du monde 9 : le Cœur du terrain en laisse deux ou trois quand il tombe.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -18786,7 +19083,7 @@
      "id": "artisan_thread",
      "tex": "items/artisan_thread.webp",
      "name": "Fil d'Artisan",
-     "effect": "Base de l'équipement final."
+     "effect": "Le minerai du monde 10, extrait des Bobines de fil. Base de l'équipement final."
     },
     {
      "id": "artisan_shard",
@@ -18799,6 +19096,18 @@
      "tex": "items/artisan_blade.webp",
      "name": "Lame de l'Artisan",
      "effect": ""
+    },
+    {
+     "id": "matriochkite_ingot",
+     "tex": "items/matriochkite_ingot.webp",
+     "name": "Lingot de matriochkite",
+     "effect": "Né des minerais des dix mondes dans le Berceau gigogne. L'Armure de la Matriarche en est faite."
+    },
+    {
+     "id": "matriochkite_nugget",
+     "tex": "items/matriochkite_nugget.webp",
+     "name": "Pépite de matriochkite",
+     "effect": "Un neuvième de Lingot de matriochkite. Neuf refont un lingot."
     },
     {
      "id": "unfinished_effigy",
@@ -18893,7 +19202,7 @@
       "name": "Fil d'Artisan",
       "kind": "thread",
       "rarity": "Rare",
-      "effect": "Base de l'équipement final.",
+      "effect": "Le minerai du monde 10, extrait des Bobines de fil. Base de l'équipement final.",
       "stats": [],
       "station": null,
       "stationTex": null,
@@ -18972,6 +19281,38 @@
         "name": "Épée de sporite"
        }
       ],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "matriochkite_ingot",
+      "tex": "items/matriochkite_ingot.webp",
+      "name": "Lingot de matriochkite",
+      "kind": "nested",
+      "rarity": "Légendaire",
+      "effect": "Né des minerais des dix mondes dans le Berceau gigogne. L'Armure de la Matriarche en est faite.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
+      "count": 1,
+      "drops": []
+     },
+     {
+      "id": "matriochkite_nugget",
+      "tex": "items/matriochkite_nugget.webp",
+      "name": "Pépite de matriochkite",
+      "kind": "nested",
+      "rarity": "Épique",
+      "effect": "Un neuvième de Lingot de matriochkite. Neuf refont un lingot.",
+      "stats": [],
+      "station": null,
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "inputs": [],
       "count": 1,
       "drops": []
      },
@@ -19545,6 +19886,36 @@
       "count": 1,
       "drops": [],
       "yields": "Fil d'Artisan"
+     },
+     {
+      "id": "nesting_cradle",
+      "tex": "cubes/nesting_cradle.webp",
+      "name": "Berceau gigogne",
+      "kind": "nesting_cradle",
+      "effect": "Poses-y les minerais des dix mondes, un de chaque : dix poupées d'or se referment sur eux et laissent un Lingot de matriochkite. Une main vide reprend le dernier minerai.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
+     },
+     {
+      "id": "matriochkite_block",
+      "tex": "cubes/matriochkite_block.webp",
+      "name": "Bloc de matriochkite",
+      "kind": "matriochkite_block",
+      "effect": "Neuf Lingots de matriochkite en laque rouge et or. Il peut porter une balise.",
+      "stationTex": null,
+      "stationId": null,
+      "grid": null,
+      "station": null,
+      "inputs": [],
+      "count": 1,
+      "drops": [],
+      "yields": null
      }
     ],
     "quests": [
@@ -29363,6 +29734,22 @@
      "drops": []
     },
     {
+     "id": "spore_crystal",
+     "tex": "items/spore_crystal.webp",
+     "name": "Cristal de spores",
+     "kind": "world_ore",
+     "rarity": "Épique",
+     "effect": "Le minerai du monde 1. Il pousse sur les Floraisons de spores proches de l'eau : casse une floraison à moins de 4 blocs d'une eau, environ une sur sept en donne un.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "queen_core",
      "tex": "items/queen_core.webp",
      "name": "Noyau de la Reine",
@@ -30107,6 +30494,22 @@
      "drops": []
     },
     {
+     "id": "living_ember",
+     "tex": "items/living_ember.webp",
+     "name": "Braise vive",
+     "kind": "world_ore",
+     "rarity": "Épique",
+     "effect": "Le minerai du monde 2, extrait d'un Filon de braise vive. Il ne reste allumé que dans une main brûlante : mine-le avec ta Chaleur à 70 ou plus, sinon il s'éteint en cendre.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "titan_core",
      "tex": "items/titan_core.webp",
      "name": "Noyau du Titan",
@@ -30823,6 +31226,21 @@
      "count": 1,
      "drops": [],
      "yields": "Roche ardente"
+    },
+    {
+     "id": "living_ember_ore",
+     "tex": "cubes/living_ember_ore.webp",
+     "name": "Filon de braise vive",
+     "kind": "world_ore",
+     "effect": "Mine-le avec ta Chaleur à 70 ou plus, sinon la braise s'éteint.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -31014,6 +31432,22 @@
        "name": "Bâton"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "golden_ward",
+     "tex": "items/golden_ward.webp",
+     "name": "Pêne d'or",
+     "kind": "world_ore",
+     "rarity": "Épique",
+     "effect": "Le minerai du monde 3, qu'on n'extrait jamais : il ne se trouve que dans les coffres au trésor du Donjon sans fin.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -31888,6 +32322,24 @@
      "drops": []
     },
     {
+     "id": "fulgurite",
+     "tex": "items/fulgurite.webp",
+     "name": "Fulgurite",
+     "kind": "world_ore",
+     "rarity": "Épique",
+     "effect": "Le minerai du monde 4. La foudre qui frappe la pierre de nuage ou le sable la fond en Croûte de fulgurite : mine la croûte.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [
+      "Croûte de fulgurite"
+     ]
+    },
+    {
      "id": "armor_layer",
      "tex": "items/armor_layer.webp",
      "name": "Couche laquée",
@@ -32540,6 +32992,21 @@
      "count": 1,
      "drops": [],
      "yields": "Cristal céleste"
+    },
+    {
+     "id": "fulgurite_ore",
+     "tex": "cubes/fulgurite_ore.webp",
+     "name": "Croûte de fulgurite",
+     "kind": "world_ore",
+     "effect": "De la pierre de nuage ou du sable fondus par la foudre.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": "Fulgurite"
     }
    ]
   },
@@ -32742,6 +33209,22 @@
        "name": "Bâton"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "silent_stone",
+     "tex": "items/silent_stone.webp",
+     "name": "Pierre muette",
+     "kind": "world_ore",
+     "rarity": "Épique",
+     "effect": "Le minerai du monde 5. Il se brise au moindre bruit : mine son filon avec ton Bruit à 0 (accroupi), sinon il n'en reste rien.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -33335,6 +33818,21 @@
      "count": 1,
      "drops": [],
      "yields": "Fragment de diamant"
+    },
+    {
+     "id": "silent_stone_ore",
+     "tex": "cubes/silent_stone_ore.webp",
+     "name": "Filon de pierre muette",
+     "kind": "world_ore",
+     "effect": "Mine-le en silence : au moindre Bruit, il se brise.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -33484,6 +33982,22 @@
        "name": "Bâton"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "inverted_ore",
+     "tex": "items/inverted_ore.webp",
+     "name": "Minerai inversé",
+     "kind": "world_ore",
+     "rarity": "Épique",
+     "effect": "Le minerai du monde 6. Ses filons pendent sous les surplombs et les voûtes du Royaume inversé ; extrait, il tombe vers le haut : attrape-le avant qu'il ne file.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -34031,6 +34545,21 @@
      "count": 1,
      "drops": [],
      "yields": "Alliage instable"
+    },
+    {
+     "id": "hanging_ore",
+     "tex": "cubes/hanging_ore.webp",
+     "name": "Filon suspendu",
+     "kind": "world_ore",
+     "effect": "Pend sous la roche. Ce qu'il donne tombe vers le haut.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -34239,6 +34768,22 @@
        "name": "Bâton"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "brine_crystal",
+     "tex": "items/brine_crystal.webp",
+     "name": "Cristal de saumure",
+     "kind": "world_ore",
+     "rarity": "Épique",
+     "effect": "Le minerai du monde 7, qui pousse dans les créatures de l'Océan sous pression : chacune peut en laisser un, environ une sur vingt-cinq.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -35146,6 +35691,38 @@
      "drops": []
     },
     {
+     "id": "time_seed",
+     "tex": "items/time_seed.webp",
+     "name": "Graine du temps",
+     "kind": "world_ore",
+     "rarity": "Rare",
+     "effect": "Se trouve dans les coffres du monde 8. Plante-la sur de l'herbe ou de la terre au monde 8 : en deux minutes, elle mûrit en Éclat chronique.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "chrono_shard",
+     "tex": "items/chrono_shard.webp",
+     "name": "Éclat chronique",
+     "kind": "world_ore",
+     "rarity": "Épique",
+     "effect": "Le minerai du monde 8, mûri d'une Graine du temps plantée au monde 8.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
      "id": "seasons_core",
      "tex": "items/seasons_core.webp",
      "name": "Noyau du Maître",
@@ -35735,6 +36312,21 @@
      "count": 1,
      "drops": [],
      "yields": "Fragment de saison"
+    },
+    {
+     "id": "time_sprout",
+     "tex": "blocks/time_sprout.png",
+     "name": "Pousse du temps",
+     "kind": "time_sprout",
+     "effect": "",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   },
@@ -35885,6 +36477,22 @@
        "name": "Bâton"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "heartstone",
+     "tex": "items/heartstone.webp",
+     "name": "Cœur de pierre",
+     "kind": "world_ore",
+     "rarity": "Épique",
+     "effect": "Le minerai du monde 9 : le Cœur du terrain en laisse deux ou trois quand il tombe.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -36494,7 +37102,7 @@
      "name": "Fil d'Artisan",
      "kind": "thread",
      "rarity": "Rare",
-     "effect": "Base de l'équipement final.",
+     "effect": "Le minerai du monde 10, extrait des Bobines de fil. Base de l'équipement final.",
      "stats": [],
      "station": null,
      "stationTex": null,
@@ -36573,6 +37181,38 @@
        "name": "Épée de sporite"
       }
      ],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "matriochkite_ingot",
+     "tex": "items/matriochkite_ingot.webp",
+     "name": "Lingot de matriochkite",
+     "kind": "nested",
+     "rarity": "Légendaire",
+     "effect": "Né des minerais des dix mondes dans le Berceau gigogne. L'Armure de la Matriarche en est faite.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
+     "count": 1,
+     "drops": []
+    },
+    {
+     "id": "matriochkite_nugget",
+     "tex": "items/matriochkite_nugget.webp",
+     "name": "Pépite de matriochkite",
+     "kind": "nested",
+     "rarity": "Épique",
+     "effect": "Un neuvième de Lingot de matriochkite. Neuf refont un lingot.",
+     "stats": [],
+     "station": null,
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "inputs": [],
      "count": 1,
      "drops": []
     },
@@ -37146,6 +37786,36 @@
      "count": 1,
      "drops": [],
      "yields": "Fil d'Artisan"
+    },
+    {
+     "id": "nesting_cradle",
+     "tex": "cubes/nesting_cradle.webp",
+     "name": "Berceau gigogne",
+     "kind": "nesting_cradle",
+     "effect": "Poses-y les minerais des dix mondes, un de chaque : dix poupées d'or se referment sur eux et laissent un Lingot de matriochkite. Une main vide reprend le dernier minerai.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
+    },
+    {
+     "id": "matriochkite_block",
+     "tex": "cubes/matriochkite_block.webp",
+     "name": "Bloc de matriochkite",
+     "kind": "matriochkite_block",
+     "effect": "Neuf Lingots de matriochkite en laque rouge et or. Il peut porter une balise.",
+     "stationTex": null,
+     "stationId": null,
+     "grid": null,
+     "station": null,
+     "inputs": [],
+     "count": 1,
+     "drops": [],
+     "yields": null
     }
    ]
   }
