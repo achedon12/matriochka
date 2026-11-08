@@ -634,7 +634,7 @@
  "journal.matriochka.map.you": "You are here",
  "journal.matriochka.map.explored": "%s regions inked",
  "journal.matriochka.map.legend": "Places found",
- "journal.matriochka.map.elsewhere": "You are in another world: this map waits for your return.",
+ "journal.matriochka.map.elsewhere": "Another world: this map waits for you.",
  "journal.matriochka.map.role.utility": "People",
  "journal.matriochka.map.role.combat": "Combat",
  "journal.matriochka.map.role.exploration": "Exploration",

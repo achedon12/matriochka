@@ -1181,7 +1181,7 @@
   "journal.matriochka.locked": "Ouvre d'abord le monde précédent.",
   "journal.matriochka.locked_help": "S'ouvre à karma +50 : les peuples te demandent de l'aide.",
   "journal.matriochka.locked_pact": "S'ouvre à karma -50 : quelqu'un dans l'ombre te propose un pacte.",
-  "journal.matriochka.map.elsewhere": "Tu es dans un autre monde : cette carte attend ton retour.",
+  "journal.matriochka.map.elsewhere": "Autre monde : cette carte t'attend.",
   "journal.matriochka.map.empty": "Pas encore un pas ici. Parcours ce monde et le Journal encre le terrain que tu traverses.",
   "journal.matriochka.map.explored": "%s régions encrées",
   "journal.matriochka.map.items": "Objets",

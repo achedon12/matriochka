@@ -1181,7 +1181,7 @@
   "journal.matriochka.locked": "Open the previous world first.",
   "journal.matriochka.locked_help": "Opens at karma +50: the peoples ask for your help.",
   "journal.matriochka.locked_pact": "Opens at karma -50: someone in the dark offers a pact.",
-  "journal.matriochka.map.elsewhere": "You are in another world: this map waits for your return.",
+  "journal.matriochka.map.elsewhere": "Another world: this map waits for you.",
   "journal.matriochka.map.empty": "Not a step taken here yet. Walk this world and the Journal inks in the ground you cross.",
   "journal.matriochka.map.explored": "%s regions inked",
   "journal.matriochka.map.items": "Items",

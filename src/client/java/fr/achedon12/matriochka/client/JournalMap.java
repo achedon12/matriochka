@@ -341,7 +341,7 @@ public final class JournalMap {
 			g.text(font, Component.translatable("journal.matriochka.map.role." + role), x + 15, yy, have > 0 ? Ui.INK : 0xFF9A8A6E, false);
 			String count = have + "/" + total;
 			g.text(font, count, x + w - font.width(count), yy, have >= total ? Ui.GREEN : Ui.RED_INK, false);
-			yy += 14;
+			yy += 12;
 		}
 		yy += 4;
 		g.fill(x + w / 2 - 30, yy, x + w / 2 + 30, yy + 1, 0xFFB0782A);
@@ -349,7 +349,7 @@ public final class JournalMap {
 		Component inked = Component.translatable("journal.matriochka.map.explored", d == null ? 0 : d.cells().size());
 		g.text(font, inked, x + w / 2 - font.width(inked) / 2, yy, Ui.INK_SOFT, false);
 		if (here() != world) {
-			yy += 14;
+			yy += 12;
 			Ui.wrap(g, font, Component.translatable("journal.matriochka.map.elsewhere"), x + 2, yy, w - 4, 0xFF9A8A6E);
 		}
 	}

@@ -195,11 +195,26 @@ final class PolishTest {
 				p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new net.minecraft.world.item.ItemStack(fr.achedon12.matriochka.content.ModContent.item("relic_1")));
 				p.getMainHandItem().use(lvl, p, net.minecraft.world.InteractionHand.MAIN_HAND);
 				double after = p.getMaxHealth();
-				return "wrong key keeps it shut " + wrongShut + ", right key gives the relic " + relic + ", the relic adds " + (after - before) + " health";
+				boolean eased = fr.achedon12.matriochka.world.Relics.ease(fr.achedon12.matriochka.rules.PlayerState.of(p), 1) < 1f;
+				return "wrong key keeps it shut " + wrongShut + ", right key gives the relic " + relic + ", the relic adds " + (after - before) + " health, eases its rule " + eased;
 			});
 			Matriochka.LOG.info("[polish] reliquary: {}", reliq);
-			if (!reliq.equals("wrong key keeps it shut true, right key gives the relic true, the relic adds 2.0 health"))
+			if (!reliq.equals("wrong key keeps it shut true, right key gives the relic true, the relic adds 2.0 health, eases its rule true"))
 				throw new AssertionError("reliquary: " + reliq);
+			// every world raises its wonder inside the first group's parcel, where its people can point at it
+			String wonders = s.computeOnServer(server -> {
+				StringBuilder out = new StringBuilder();
+				var centre = fr.achedon12.matriochka.world.Worlds.parcelCenter(0);
+				for (int w = 1; w <= 10; w++) {
+					var lvl = server.getLevel(fr.achedon12.matriochka.world.Worlds.key(w));
+					var at = lvl == null ? null : fr.achedon12.matriochka.world.Rumors.locate(lvl, centre, w);
+					int d = at == null ? -1 : (int) Math.sqrt(at.distSqr(new net.minecraft.core.BlockPos(centre.getX(), at.getY(), centre.getZ())));
+					if (d < 0 || d > fr.achedon12.matriochka.world.Worlds.PARCEL_SIZE / 2) out.append(" ").append(w).append(":").append(d);
+				}
+				return out.toString().trim();
+			});
+			Matriochka.LOG.info("[polish] wonders out of their parcel: {}", wonders.isEmpty() ? "none" : wonders);
+			if (!wonders.isEmpty()) throw new AssertionError("wonders out of reach: " + wonders);
 			Matriochka.LOG.info("[polish] ok");
 		}
 	}
