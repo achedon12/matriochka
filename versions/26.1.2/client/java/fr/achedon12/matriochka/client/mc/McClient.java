@@ -58,4 +58,9 @@ public final class McClient {
 	public static void clearChat(net.minecraft.client.Minecraft mc) {
 		mc.gui.getChat().clearMessages(true);
 	}
+
+	/** Empties the action bar (the line over the hotbar). */
+	public static void clearOverlay(net.minecraft.client.Minecraft mc) {
+		mc.gui.setOverlayMessage(net.minecraft.network.chat.Component.empty(), false);
+	}
 }

@@ -45,6 +45,27 @@ public class StationScreen extends AbstractContainerScreen<StationMenu> {
 		java.util.Arrays.fill(pressed, -1);
 	}
 
+	/** How many recipes the station shows. */
+	public int recipeCount() {
+		return recipes.size();
+	}
+
+	/**
+	 * The middle of recipe i, its drawer or its piece, in GUI coordinates (the showcase glides the cursor there), or
+	 * null when it is scrolled out of the cabinet or the station has no recipes of its own (altar, class table).
+	 */
+	public int @org.jspecify.annotations.Nullable [] recipeCenter(int i) {
+		if (hasSlot() || i < 0 || i >= recipes.size()) return null;
+		String st = menu.data.station();
+		if (StationLayouts.has(st)) {
+			int[] p = StationLayouts.at(st, i, recipes.size()), sz = StationLayouts.size(st);
+			return new int[]{leftPos + p[0] + sz[0] / 2, topPos + p[1] + sz[1] / 2};
+		}
+		int row = i - scroll;
+		if (row < 0 || row >= ROWS) return null;
+		return new int[]{leftPos + CAB_X + 87, topPos + CAB_Y + row * ROW_H + 10};
+	}
+
 	private void click(int id) {
 		minecraft.gameMode.handleInventoryButtonClick(menu.containerId, id);
 	}

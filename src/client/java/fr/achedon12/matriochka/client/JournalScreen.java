@@ -757,6 +757,16 @@ public class JournalScreen extends Screen {
 		mapView = false;
 	}
 
+	/** The middle of row i of the open world card, in GUI coordinates (the showcase hovers it). */
+	public int[] cardRowCenter(int i) {
+		return new int[]{left() + 28 + PW + (PW - 18) / 2, top() + 24 + 14 + i * 19 + 8};
+	}
+
+	/** The middle of the card's button that opens its map, in GUI coordinates. */
+	public int[] mapButtonCenter() {
+		return new int[]{left() + BW / 2 + 89 + 19, top() + BH - 30 + 8};
+	}
+
 	private int rightX() {
 		return left() + 28 + PW;
 	}
