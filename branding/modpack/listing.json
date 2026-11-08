@@ -63,7 +63,7 @@
     "02-workshop-creatures.jpg": "build/run/clientGameTest/screenshots/seq_w10_t_0034.png (-Pepic capture)",
     "03-light-eater.jpg": "shots2/plain/w05_boss.png",
     "04-giant-veins.jpg": "shots2/plain/w02_view.png",
-    "05-hud.jpg": "shots2/comfort/comfort_hud.png (-Pcomfort capture)",
-    "06-journal.jpg": "shots2/plain/gui_journal_1.png, cropped to the Journal"
+    "05-hud.jpg": "build/run/clientGameTest/screenshots/nesting_souls_bar.png (-Ppolish capture, 1600x900, scaled to 1920x1080)",
+    "06-journal.jpg": "build/run/clientGameTest/screenshots/gui_journal_1.png (-Pgui capture), its 854x480 GUI area scaled to 1920x1080"
   }
 }
