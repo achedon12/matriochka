@@ -2044,6 +2044,56 @@
      "d": "Poids relatifs des trois événements"
     }
    ]
+  },
+  "versions": {
+   "label": "Version du mod",
+   "pick": "Voir le site d'une autre version",
+   "latest": "Dernière",
+   "mc": "Minecraft",
+   "older": "Tu lis une ancienne version du mod.",
+   "toLatest": "Voir la dernière",
+   "new": "Nouveau en {v}",
+   "changed": "Modifié en {v}",
+   "historyH": "Historique",
+   "since": "Dans le mod depuis la {v}.",
+   "sinceFirst": "Dans le mod depuis les premières versions.",
+   "changedIn": "{v} : modifié ({f}).",
+   "changesH": "Nouveautés de la {v}",
+   "changesNav": "Ce qui change en {v}",
+   "changesLead": "Ce que cette version ajoute et change, d'après le journal des modifications du mod. Les noms mènent à leur page, telle qu'elle est dans cette version.",
+   "inEnglish": "Le journal des modifications est rédigé en anglais.",
+   "released": "Publiée le {d}",
+   "unreleased": "Pas encore publiée",
+   "supports": "Pour Minecraft {mc}",
+   "allH": "Toutes les versions",
+   "notHere": {
+    "static": "Absente de ce site : son propre site était encore fait de pages statiques, sans les données que lit celui-ci.",
+    "failed": "Absente de ce site : ses données n'ont pas pu être reconstruites."
+   },
+   "noSection": "Le journal des modifications n'a pas de section pour cette version.",
+   "f": {
+    "effect": "texte de l'effet",
+    "rarity": "rareté",
+    "recipe": "recette",
+    "source": "provenance",
+    "stats": "caractéristiques",
+    "health": "vie",
+    "damage": "dégâts",
+    "speed": "vitesse",
+    "moves": "attaques",
+    "attacks": "attaques",
+    "drops": "butin",
+    "spawn": "apparition",
+    "phases": "phases",
+    "rule": "règle",
+    "creatures": "créatures",
+    "boss": "boss",
+    "structures": "structures",
+    "desc": "description",
+    "inside": "contenu",
+    "size": "taille"
+   },
+   "desc": "Ce que chaque version de Matriochka ajoute et change."
   }
  },
  "worlds": [

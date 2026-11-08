@@ -2044,6 +2044,56 @@
      "d": "Relative weights of the three events"
     }
    ]
+  },
+  "versions": {
+   "label": "Mod version",
+   "pick": "Show the site for another version",
+   "latest": "Latest",
+   "mc": "Minecraft",
+   "older": "You are reading an older version of the mod.",
+   "toLatest": "See the latest",
+   "new": "New in {v}",
+   "changed": "Changed in {v}",
+   "historyH": "History",
+   "since": "In the mod since {v}.",
+   "sinceFirst": "In the mod since the first versions.",
+   "changedIn": "{v}: {f} changed.",
+   "changesH": "Changes in {v}",
+   "changesNav": "What changed in {v}",
+   "changesLead": "What this version adds and changes, from the mod's changelog. Names link to their page as they are in this version.",
+   "inEnglish": "",
+   "released": "Released on {d}",
+   "unreleased": "Not tagged yet",
+   "supports": "Runs on Minecraft {mc}",
+   "allH": "Every version",
+   "notHere": {
+    "static": "Not on this site: its own site was still a set of static pages, without the data this one reads.",
+    "failed": "Not on this site: its data could not be rebuilt."
+   },
+   "noSection": "The changelog has no section for this version.",
+   "f": {
+    "effect": "effect text",
+    "rarity": "rarity",
+    "recipe": "recipe",
+    "source": "where it comes from",
+    "stats": "stats",
+    "health": "health",
+    "damage": "damage",
+    "speed": "speed",
+    "moves": "attacks",
+    "attacks": "attacks",
+    "drops": "drops",
+    "spawn": "spawning",
+    "phases": "phases",
+    "rule": "rule",
+    "creatures": "creatures",
+    "boss": "boss",
+    "structures": "structures",
+    "desc": "description",
+    "inside": "what is inside",
+    "size": "size"
+   },
+   "desc": "What each version of Matriochka adds and changes."
   }
  },
  "worlds": [

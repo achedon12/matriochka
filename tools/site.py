@@ -43,6 +43,8 @@ ICONS = {
     'book-open': '<path d="M12 7v14"/> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
     'bug': '<path d="m8 2 1.88 1.88"/> <path d="M14.12 3.88 16 2"/> <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/> <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/> <path d="M12 20v-9"/> <path d="M6.53 9C4.6 8.8 3 7.1 3 5"/> <path d="M6 13H2"/> <path d="M3 21c0-2.1 1.7-3.9 3.8-4"/> <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/> <path d="M22 13h-4"/> <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/>',
     'check': '<path d="M20 6 9 17l-5-5"/>',
+    'chevron-down': '<path d="m6 9 6 6 6-6"/>',
+    'history': '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/> <path d="M3 3v5h5"/> <path d="M12 7v5l4 2"/>',
     'circle-alert': '<circle cx="12" cy="12" r="10"/> <line x1="12" x2="12" y1="8" y2="12"/> <line x1="12" x2="12.01" y1="16" y2="16"/>',
     'clock': '<circle cx="12" cy="12" r="10"/> <polyline points="12 6 12 12 16 14"/>',
     'cpu': '<rect width="16" height="16" x="4" y="4" rx="2"/> <rect width="6" height="6" x="9" y="9" rx="1"/> <path d="M15 2v2"/> <path d="M15 20v2"/> <path d="M2 15h2"/> <path d="M2 9h2"/> <path d="M20 15h2"/> <path d="M20 9h2"/> <path d="M9 2v2"/> <path d="M9 20v2"/>',
@@ -1836,7 +1838,34 @@ def build_copy():
         desc=t("Every item and block Matriochka adds, with its recipe drawn slot by slot and the station that makes it.",
                "Tous les objets et blocs qu'ajoute Matriochka, avec leur recette dessinée case par case et la station qui les fabrique."),
     )
-    return dict(ui=ui, nav=nav, home=home, worlds=worlds, bestiary=bestiary, bosses=bosses, items=items, systems=build_systems(d), download=build_download())
+    # the version picker, the badges and the Changes pages (data by tools/site_versions.py)
+    versions = dict(
+        label=t("Mod version", "Version du mod"), pick=t("Show the site for another version", "Voir le site d'une autre version"),
+        latest=t("Latest", "Dernière"), mc=t("Minecraft", "Minecraft"),
+        older=t("You are reading an older version of the mod.", "Tu lis une ancienne version du mod."), toLatest=t("See the latest", "Voir la dernière"),
+        new=t("New in {v}", "Nouveau en {v}"), changed=t("Changed in {v}", "Modifié en {v}"),
+        historyH=t("History", "Historique"), since=t("In the mod since {v}.", "Dans le mod depuis la {v}."),
+        sinceFirst=t("In the mod since the first versions.", "Dans le mod depuis les premières versions."),
+        changedIn=t("{v}: {f} changed.", "{v} : modifié ({f})."),
+        changesH=t("Changes in {v}", "Nouveautés de la {v}"), changesNav=t("What changed in {v}", "Ce qui change en {v}"),
+        changesLead=t("What this version adds and changes, from the mod's changelog. Names link to their page as they are in this version.",
+                      "Ce que cette version ajoute et change, d'après le journal des modifications du mod. Les noms mènent à leur page, telle qu'elle est dans cette version."),
+        inEnglish=t("", "Le journal des modifications est rédigé en anglais."),
+        released=t("Released on {d}", "Publiée le {d}"), unreleased=t("Not tagged yet", "Pas encore publiée"),
+        supports=t("Runs on Minecraft {mc}", "Pour Minecraft {mc}"),
+        allH=t("Every version", "Toutes les versions"),
+        notHere=dict(static=t("Not on this site: its own site was still a set of static pages, without the data this one reads.", "Absente de ce site : son propre site était encore fait de pages statiques, sans les données que lit celui-ci."),
+                     failed=t("Not on this site: its data could not be rebuilt.", "Absente de ce site : ses données n'ont pas pu être reconstruites.")),
+        noSection=t("The changelog has no section for this version.", "Le journal des modifications n'a pas de section pour cette version."),
+        f=dict(effect=t("effect text", "texte de l'effet"), rarity=t("rarity", "rareté"), recipe=t("recipe", "recette"),
+               source=t("where it comes from", "provenance"), stats=t("stats", "caractéristiques"), health=t("health", "vie"),
+               damage=t("damage", "dégâts"), speed=t("speed", "vitesse"), moves=t("attacks", "attaques"), attacks=t("attacks", "attaques"),
+               drops=t("drops", "butin"), spawn=t("spawning", "apparition"), phases=t("phases", "phases"), rule=t("rule", "règle"),
+               creatures=t("creatures", "créatures"), boss=t("boss", "boss"), structures=t("structures", "structures"),
+               desc=t("description", "description"), inside=t("what is inside", "contenu"), size=t("size", "taille")),
+        desc=t("What each version of Matriochka adds and changes.", "Ce que chaque version de Matriochka ajoute et change."),
+    )
+    return dict(ui=ui, nav=nav, home=home, worlds=worlds, bestiary=bestiary, bosses=bosses, items=items, systems=build_systems(d), download=build_download(), versions=versions)
 
 
 def slot_label(slot):
