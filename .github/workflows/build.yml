@@ -55,16 +55,21 @@ jobs:
           distribution: temurin
           java-version: "25"
       - uses: gradle/actions/setup-gradle@v4
-      - run: sudo apt-get update && sudo apt-get install -y xvfb mesa-utils libgl1-mesa-dri
+      # 26.3 asks for its own GLX visual and falls back to Vulkan: the software Vulkan (lavapipe) is there for it
+      - run: sudo apt-get update && sudo apt-get install -y xvfb mesa-utils libgl1-mesa-dri mesa-vulkan-drivers libvulkan1 vulkan-tools
+      - name: Graphics available
+        run: |
+          xvfb-run -a -s "-screen 0 1920x1080x24 +extension GLX +render -noreset" sh -c 'glxinfo -B; glxinfo | grep -c "0x[0-9a-f]* 24 tc"' || true
+          vulkaninfo --summary 2>&1 | head -30 || true
       - name: Dedicated server
         run: tools/server_smoke.sh ${{ matrix.mc }}
       - name: First steps
         timeout-minutes: 25
-        run: xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTest -Pmc=${{ matrix.mc }} -Ponboarding
+        run: xvfb-run -a -s "-screen 0 1920x1080x24 +extension GLX +render -noreset" ./gradlew runClientGameTest -Pmc=${{ matrix.mc }} -Ponboarding
       - name: The whole game
         if: github.event_name == 'push'
         timeout-minutes: 60
-        run: xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTest -Pmc=${{ matrix.mc }} -Pplaythrough
+        run: xvfb-run -a -s "-screen 0 1920x1080x24 +extension GLX +render -noreset" ./gradlew runClientGameTest -Pmc=${{ matrix.mc }} -Pplaythrough
       - uses: actions/upload-artifact@v4
         if: always()
         with:
