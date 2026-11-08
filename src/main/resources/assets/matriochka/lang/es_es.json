@@ -515,7 +515,7 @@
   "comfort.matriochka.subtitles": "Subtítulos de ataque",
   "comfort.matriochka.subtitles.desc": "Muestra en letras grandes el ataque que prepara un jefe, con el tiempo que queda antes de que caiga.",
   "comfort.matriochka.title": "Confort",
-  "comfort.matriochka.world_label": "Nombre del mundo en pantalla",
+  "comfort.matriochka.world_label": "Nombre del mundo",
   "comfort.matriochka.world_label.desc": "Una pequeña etiqueta con el mundo en el que estás, fija en una esquina de la pantalla.",
   "command.matriochka.boss.reset": "El jefe del mundo %s se puede volver a combatir.",
   "command.matriochka.boss.unknown": "Jefe desconocido: %s",

@@ -515,7 +515,7 @@
  "comfort.matriochka.subtitles": "攻击字幕",
  "comfort.matriochka.subtitles.desc": "以大字标出首领正在蓄力的招式，并显示距落下的剩余时间。",
  "comfort.matriochka.title": "舒适设置",
- "comfort.matriochka.world_label": "屏幕上的世界名称",
+ "comfort.matriochka.world_label": "世界名称",
  "comfort.matriochka.world_label.desc": "在屏幕一角常驻显示你所在世界的小标签。",
  "command.matriochka.boss.reset": "世界%s的首领可以再次挑战了。",
  "command.matriochka.boss.unknown": "未知的首领：%s",

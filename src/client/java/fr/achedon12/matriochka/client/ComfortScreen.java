@@ -17,6 +17,8 @@ import net.minecraft.network.chat.Component;
  */
 public class ComfortScreen extends Screen {
 	private static final int BW = 340, BH = 214, PW = 155, ROW = 19, TOP = 42, CTRL = 58;
+	/** A slider's track, leaving the value its own room on the right. */
+	private static final int TRACK = 34;
 	private final Screen parent;
 	private final Ui.Motion motion = new Ui.Motion(300, 160);
 	private final Ui.Buttons buttons = new Ui.Buttons();
@@ -202,8 +204,15 @@ public class ComfortScreen extends Screen {
 			}
 			Component label = Component.translatable("comfort.matriochka." + r.key);
 			int lw = cx - x - 4;
-			String text = font.width(label) > lw ? font.substrByWidth(label, lw - font.width("...")).getString() + "..." : label.getString();
-			g.text(font, text, x, y + 2, Ui.INK, false);
+			// a long label shrinks first (down to 75%), and is only cut when even that does not fit
+			int fw = font.width(label);
+			float ls = fw > lw ? Math.max(0.75f, lw / (float) fw) : 1f;
+			String text = fw * ls > lw ? font.substrByWidth(label, Math.round(lw / ls) - font.width("...")).getString() + "..." : label.getString();
+			g.pose().pushMatrix();
+			g.pose().translate(x, y + 2 + (1 - ls) * 4);
+			g.pose().scale(ls, ls);
+			g.text(font, text, 0, 0, Ui.INK, false);
+			g.pose().popMatrix();
 			float v = r.get.get();
 			if (r.shown < 0) r.shown = v;
 			r.shown = Ui.approach(r.shown, v, 14, 0.016f);
@@ -223,11 +232,18 @@ public class ComfortScreen extends Screen {
 					Ui.embossed(g, font, val, cx + (CTRL - font.width(val)) / 2, y + 1, Ui.LIGHT);
 				}
 				case SLIDER -> {
-					Ui.vial(g, cx, y, CTRL - 18, 9, r.shown, 0xFFE8C060, 0);
-					int kx = cx + 5 + Math.round((CTRL - 28) * Ui.clamp01(r.shown));
+					Ui.vial(g, cx, y, TRACK, 9, r.shown, 0xFFE8C060, 0);
+					int kx = cx + 5 + Math.round((TRACK - 10) * Ui.clamp01(r.shown));
 					Ui.sprite(g, "doll_small_full", kx - 4, y - 2, 8, 11);
+					// the value right of the track, clear of the knob (shrunk a little when "100%" is too wide)
 					Component val = r.value.get();
-					g.text(font, val, cx + CTRL - font.width(val), y + 1, Ui.INK_SOFT, false);
+					int room = CTRL - TRACK - 5, vw = font.width(val);
+					float vs = vw > room ? Math.max(0.75f, room / (float) vw) : 1f;
+					g.pose().pushMatrix();
+					g.pose().translate(cx + CTRL - vw * vs, y + 1 + (1 - vs) * 4);
+					g.pose().scale(vs, vs);
+					g.text(font, val, 0, 0, Ui.INK_SOFT, false);
+					g.pose().popMatrix();
 				}
 			}
 		}
@@ -265,7 +281,7 @@ public class ComfortScreen extends Screen {
 
 	private void drag(Row r, boolean rightPage, double mx) {
 		int cx = ctrlX(rightPage);
-		r.set.accept(Ui.clamp01((float) (mx - cx - 5) / (CTRL - 28)));
+		r.set.accept(Ui.clamp01((float) (mx - cx - 5) / (TRACK - 10)));
 	}
 
 	@Override

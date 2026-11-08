@@ -357,7 +357,7 @@ comfort = {
     "hud_scale": ("HUD size", "Taille de l'interface"),
     "hud_scale.desc": ("Size of the souls' count and of the armour's doll beside the hearts.",
                        "Taille du compte des âmes et de la poupée de l'armure près des cœurs."),
-    "world_label": ("World name on screen", "Nom du monde à l'écran"),
+    "world_label": ("World label", "Nom du monde"),
     "world_label.desc": ("A small label with the world you are in, kept in a corner of the screen.",
                          "Une petite étiquette du monde où tu es, gardée dans un coin de l'écran."),
     "hud_corner": ("Plaque corner", "Coin du cartouche"),

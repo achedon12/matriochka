@@ -515,7 +515,7 @@
   "comfort.matriochka.subtitles": "Legendas de ataque",
   "comfort.matriochka.subtitles.desc": "Nomeia em letras grandes o ataque que um chefe prepara, com o tempo restante antes do impacto.",
   "comfort.matriochka.title": "Conforto",
-  "comfort.matriochka.world_label": "Nome do mundo na tela",
+  "comfort.matriochka.world_label": "Nome do mundo",
   "comfort.matriochka.world_label.desc": "Uma pequena etiqueta com o mundo em que você está, fixa num canto da tela.",
   "command.matriochka.boss.reset": "O chefe do mundo %s pode ser enfrentado de novo.",
   "command.matriochka.boss.unknown": "Chefe desconhecido: %s",

@@ -515,7 +515,7 @@
  "comfort.matriochka.subtitles": "Субтитры атак",
  "comfort.matriochka.subtitles.desc": "Крупными буквами называет атаку, к которой готовится босс, и время до удара.",
  "comfort.matriochka.title": "Комфорт",
- "comfort.matriochka.world_label": "Название мира на экране",
+ "comfort.matriochka.world_label": "Название мира",
  "comfort.matriochka.world_label.desc": "Небольшая подпись с миром, в котором ты находишься, в углу экрана.",
  "command.matriochka.boss.reset": "С боссом мира %s можно сразиться снова.",
  "command.matriochka.boss.unknown": "Неизвестный босс: %s",

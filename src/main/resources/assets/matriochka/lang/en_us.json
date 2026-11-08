@@ -515,7 +515,7 @@
   "comfort.matriochka.subtitles": "Attack subtitles",
   "comfort.matriochka.subtitles.desc": "Names the attack a boss winds up in large letters, with the time left before it lands.",
   "comfort.matriochka.title": "Comfort",
-  "comfort.matriochka.world_label": "World name on screen",
+  "comfort.matriochka.world_label": "World label",
   "comfort.matriochka.world_label.desc": "A small label with the world you are in, kept in a corner of the screen.",
   "command.matriochka.boss.reset": "The boss of world %s can be fought again.",
   "command.matriochka.boss.unknown": "Unknown boss: %s",

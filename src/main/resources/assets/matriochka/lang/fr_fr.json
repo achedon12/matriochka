@@ -515,7 +515,7 @@
   "comfort.matriochka.subtitles": "Sous-titres d'attaque",
   "comfort.matriochka.subtitles.desc": "Nomme en grandes lettres l'attaque qu'un boss prépare, avec le temps restant avant l'impact.",
   "comfort.matriochka.title": "Confort",
-  "comfort.matriochka.world_label": "Nom du monde à l'écran",
+  "comfort.matriochka.world_label": "Nom du monde",
   "comfort.matriochka.world_label.desc": "Une petite étiquette du monde où tu es, gardée dans un coin de l'écran.",
   "command.matriochka.boss.reset": "Le boss du monde %s peut de nouveau être combattu.",
   "command.matriochka.boss.unknown": "Boss inconnu : %s",

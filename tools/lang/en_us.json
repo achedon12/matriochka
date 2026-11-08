@@ -341,7 +341,7 @@
  "comfort.matriochka.patterns.desc": "The rule's icons above the hunger bar carry stripes past half and crosshatching in danger, and the boss bars show the health in figures, so you can read them without the colours.",
  "comfort.matriochka.hud_scale": "HUD size",
  "comfort.matriochka.hud_scale.desc": "Size of the souls' count and of the armour's doll beside the hearts.",
- "comfort.matriochka.world_label": "World name on screen",
+ "comfort.matriochka.world_label": "World label",
  "comfort.matriochka.world_label.desc": "A small label with the world you are in, kept in a corner of the screen.",
  "comfort.matriochka.hud_corner": "Plaque corner",
  "comfort.matriochka.hud_corner.desc": "The corner of the screen the plaque sits in.",

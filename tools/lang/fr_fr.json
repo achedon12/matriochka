@@ -341,7 +341,7 @@
  "comfort.matriochka.patterns.desc": "Les icônes de la règle au-dessus de la faim portent des rayures passé la moitié et des hachures en danger, et les barres de boss affichent la vie en chiffres : tout se lit sans les couleurs.",
  "comfort.matriochka.hud_scale": "Taille de l'interface",
  "comfort.matriochka.hud_scale.desc": "Taille du compte des âmes et de la poupée de l'armure près des cœurs.",
- "comfort.matriochka.world_label": "Nom du monde à l'écran",
+ "comfort.matriochka.world_label": "Nom du monde",
  "comfort.matriochka.world_label.desc": "Une petite étiquette du monde où tu es, gardée dans un coin de l'écran.",
  "comfort.matriochka.hud_corner": "Coin du cartouche",
  "comfort.matriochka.hud_corner.desc": "Le coin de l'écran où se place le cartouche.",
