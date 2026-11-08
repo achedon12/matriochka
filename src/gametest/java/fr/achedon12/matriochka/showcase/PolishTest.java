@@ -14,7 +14,8 @@ import net.minecraft.world.item.ItemStack;
 /**
  * The finish of the interface: ./gradlew runClientGameTest -Ppolish. Photographs an item's tooltip with its strip of
  * icons (world, rarity, souls), a Matriochka advancement on the mod's own card, and the nested worlds on the
- * Journal's Worlds page, and a person's greeting bubble. Shots: polish_*.png.
+ * Journal's Worlds page, and a person's greeting bubble; then the world ores, the cradle and the Matriarch Armour
+ * (NestingTest). Shots: polish_*.png, nesting_*.png.
  */
 final class PolishTest {
 	private PolishTest() {}
@@ -217,5 +218,7 @@ final class PolishTest {
 			if (!wonders.isEmpty()) throw new AssertionError("wonders out of reach: " + wonders);
 			Matriochka.LOG.info("[polish] ok");
 		}
+		// the world ores, the Nesting Cradle and the Matriarch Armour, in a world of their own
+		NestingTest.run(ctx);
 	}
 }

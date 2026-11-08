@@ -117,6 +117,9 @@ loom {
 			if (name == 'clientGameTest' && project.hasProperty('polish')) {
 				vmArgs '-Dmatriochka.capture=polish'
 			}
+			if (name == 'clientGameTest' && project.hasProperty('nesting')) {
+				vmArgs '-Dmatriochka.capture=nesting'
+			}
 			if (name == 'clientGameTest' && project.hasProperty('transition')) {
 				vmArgs '-Dmatriochka.capture=transition'
 			}
