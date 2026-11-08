@@ -1,4 +1,4 @@
-import { asset, SHARED } from "@/lib/data";
+import { asset, SHARED } from "@/lib/asset";
 import type { Ing, Recipe } from "@/lib/types";
 
 /** A Lucide icon (ISC licence), inner markup exported by tools/site.py. */

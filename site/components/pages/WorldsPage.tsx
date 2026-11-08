@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "../PageLink";
 import { asset, creature, getData, href } from "@/lib/data";
 import type { Boss, CodexEntry, Lang, Mob, World } from "@/lib/types";
 import { Inlay, Shot } from "../Bits";
@@ -12,6 +12,8 @@ import { btn, btnGhost, wrap } from "../ui";
 import DepthRail from "../DepthRail";
 import { StageCast, StageCorners, StageGround, StageTitle } from "../WorldStage";
 import MeetBoss from "../MeetBoss";
+import { mark } from "@/lib/versions";
+import { VBadge, type VersionLabels } from "../Version";
 
 function windowAlt(w: World, lang: Lang, noShot: string, inGame: string) {
   if (!w.tall) return noShot;
@@ -19,8 +21,8 @@ function windowAlt(w: World, lang: Lang, noShot: string, inGame: string) {
 }
 
 /** The rule figures, seed, boss and creatures of a world: shared by the Worlds page and a world's own page. */
-export function WorldSummary({ w, lang }: { w: World; lang: Lang }) {
-  const { copy } = getData(lang);
+export function WorldSummary({ w, lang, v }: { w: World; lang: Lang; v?: string }) {
+  const { copy } = getData(lang, v);
   const ui = copy.ui;
   return (
     <>
@@ -41,7 +43,7 @@ export function WorldSummary({ w, lang }: { w: World; lang: Lang }) {
       <div className="w-block">
         <h3>{ui.boss}</h3>
         <p>
-          <Link className="boss-link" href={href(lang, `creatures/${w.boss.id}/`)}>
+          <Link className="boss-link" href={href(lang, `creatures/${w.boss.id}/`, v)}>
             <Inlay src={w.boss.coreTex} size={32} /><span><strong>{w.boss.name}</strong> <span className="num">{w.boss.hp}</span> {ui.health.toLowerCase()}</span>
           </Link>
         </p>
@@ -52,7 +54,7 @@ export function WorldSummary({ w, lang }: { w: World; lang: Lang }) {
           <h3>{ui.creatures}</h3>
           <ul className="inline-list">
             {w.mobs.map((m) => (
-              <li key={m.id}><Link href={href(lang, `creatures/${m.id}/`)}>{m.name}</Link>{m.elite && <em> ({lang === "fr" ? "élite" : "elite"})</em>}</li>
+              <li key={m.id}><Link href={href(lang, `creatures/${m.id}/`, v)}>{m.name}</Link>{m.elite && <em> ({lang === "fr" ? "élite" : "elite"})</em>}<VBadge m={mark(`mob:${m.id}`, v)} l={copy.versions} className="ml-1.5" /></li>
             ))}
           </ul>
         </div>
@@ -61,12 +63,12 @@ export function WorldSummary({ w, lang }: { w: World; lang: Lang }) {
   );
 }
 
-export default function WorldsPage({ lang }: { lang: Lang }) {
-  const d = getData(lang);
+export default function WorldsPage({ lang, v }: { lang: Lang; v?: string }) {
+  const d = getData(lang, v);
   const c = d.copy.worlds;
   const ui = d.copy.ui;
   return (
-    <Shell lang={lang} path="worlds/" section="worlds">
+    <Shell lang={lang} path="worlds/" section="worlds" v={v}>
       <PageHead title={c.h} lead={c.lead} img={c.headImg} />
       <div className={`${wrap} grid gap-8 py-10 lg:grid-cols-[200px_minmax(0,1fr)]`}>
         <DepthRail worlds={d.worlds} label={c.h} />
@@ -89,6 +91,7 @@ export default function WorldsPage({ lang }: { lang: Lang }) {
                   <p className="m-0 font-pixel text-[clamp(72px,8vw,120px)] leading-[0.8]" style={{ color: w.light }}>{String(w.n).padStart(2, "0")}</p>
                   <p className="m-0 mb-1 text-[13px] tracking-[0.18em] text-paper-dim">{w.n === 0 ? ui.surface ?? "" : `${ui.world} ${w.n}`}{w.rule ? `, ${w.tier}` : ""}</p>
                   <h2 id={`wh-${w.n}`} className="m-0 mb-3 font-display text-[clamp(38px,4.6vw,64px)] leading-[0.95] font-normal text-paper [text-shadow:0_4px_0_rgba(0,0,0,.7)]">{w.name}</h2>
+                  <VBadge m={mark(`world:${w.n}`, v)} l={d.copy.versions} className="mb-3 self-start" />
                   {w.rule && <p className="m-0 mb-3 self-start rounded-[2px] bg-gold-b px-2.5 py-1 text-sm font-bold text-ink">{ui.rule}: {w.rule}</p>}
                   <p className="m-0 mb-4 font-body text-lg leading-snug font-bold text-gold-b">{w.short}</p>
                   {w.nums.length > 0 && (
@@ -99,8 +102,8 @@ export default function WorldsPage({ lang }: { lang: Lang }) {
                     </ul>
                   )}
                   <p className="m-0 flex flex-wrap gap-3">
-                    <Link className={btn} href={href(lang, `worlds/${w.n}/`)}>{w.n === 0 ? ui.moreAbout : `${ui.explore} ${w.name}`}</Link>
-                    <Link className={btnGhost} href={href(lang, `creatures/${w.boss.id}/`)}>{w.boss.name}</Link>
+                    <Link className={btn} href={href(lang, `worlds/${w.n}/`, v)}>{w.n === 0 ? ui.moreAbout : `${ui.explore} ${w.name}`}</Link>
+                    <Link className={btnGhost} href={href(lang, `creatures/${w.boss.id}/`, v)}>{w.boss.name}</Link>
                   </p>
                 </div>
               </section>
@@ -112,12 +115,12 @@ export default function WorldsPage({ lang }: { lang: Lang }) {
   );
 }
 
-function CodexCard({ e, c }: { e: CodexEntry; c: Record<string, string> }) {
+function CodexCard({ e, c, v, vl }: { e: CodexEntry; c: Record<string, string>; v?: string; vl: VersionLabels }) {
   return (
     <li className="cx-card">
       <div className="cx-head">
         <Inlay src={e.tex} size={32} />
-        <div><h4>{e.name}{e.count > 1 && <span className="num"> ×{e.count}</span>}</h4>{e.rarity && <span className={`cx-rar cx-${e.rarity.toLowerCase()}`}>{e.rarity}</span>}</div>
+        <div><h4>{e.name}{e.count > 1 && <span className="num"> ×{e.count}</span>}</h4>{e.rarity && <span className={`cx-rar cx-${e.rarity.toLowerCase()}`}>{e.rarity}</span>}<VBadge m={mark(`item:${e.id}`, v)} l={vl} className="ml-2" /></div>
       </div>
       {e.effect && <p className="cx-eff">{e.effect}</p>}
       {e.stats && e.stats.length > 0 && <dl className="ic-stats cx-stats">{e.stats.map((x, k) => <div key={k}><dt>{x.k}</dt><dd>{x.v}</dd></div>)}</dl>}
@@ -132,8 +135,9 @@ function CodexCard({ e, c }: { e: CodexEntry; c: Record<string, string> }) {
 
 const ROLE_TONE: Record<string, string> = { combat: "bg-berry text-paper", exploration: "bg-gold-b text-ink", story: "bg-paper text-ink", utility: "bg-[#4a7a3a] text-paper", secret: "bg-ink text-gold-b ring-1 ring-gold" };
 
-function Sites({ w, lang }: { w: World; lang: Lang }) {
-  const c = getData(lang).copy.worlds;
+function Sites({ w, lang, v }: { w: World; lang: Lang; v?: string }) {
+  const c = getData(lang, v).copy.worlds;
+  const vl = getData(lang, v).copy.versions;
   if (!w.sites?.length) return null;
   return (
     <section className={`${wrap} py-12`} aria-labelledby="sites-h">
@@ -141,7 +145,7 @@ function Sites({ w, lang }: { w: World; lang: Lang }) {
       <p className="m-0 mb-8 max-w-[62ch] text-paper-dim">{c.sitesP}</p>
       <ul className="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-4 p-0">
         {w.sites.map((st) => (
-          <li key={st.id} className="reveal flex flex-col overflow-hidden border border-rule bg-ink/70">
+          <li key={st.id} id={`site-${st.id}`} className="reveal flex scroll-mt-28 flex-col overflow-hidden border border-rule bg-ink/70">
             <div className="relative aspect-[16/9] bg-black">
               {st.img ? <img className="size-full object-cover" src={asset(st.img)} alt="" loading="lazy" width={800} height={450} />
                 : <span className="absolute inset-0 bg-[length:48px] opacity-40 [image-rendering:pixelated]" style={{ backgroundImage: `url(${asset(w.block)})` }} />}
@@ -149,6 +153,7 @@ function Sites({ w, lang }: { w: World; lang: Lang }) {
             </div>
             <div className="grid gap-2 p-4">
               <h3 className="m-0 font-display text-[22px] leading-tight font-normal text-gold-b">{st.name}</h3>
+              <VBadge m={mark(`site:${st.id}`, v)} l={vl} className="self-start" />
               <p className="m-0 text-[13px] text-paper-dim">{st.size}{st.rarity ? `, ${st.rarity.toLowerCase()}` : ""}</p>
               <p className="m-0 text-[15px] leading-snug text-paper">{st.desc}</p>
               <p className="m-0 border-t border-dotted border-rule pt-2 text-[14px] leading-snug text-paper-dim">{st.inside}</p>
@@ -178,15 +183,16 @@ function Sites({ w, lang }: { w: World; lang: Lang }) {
   );
 }
 
-function Codex({ w, lang }: { w: World; lang: Lang }) {
-  const c = getData(lang).copy.worlds;
+function Codex({ w, lang, v }: { w: World; lang: Lang; v?: string }) {
+  const c = getData(lang, v).copy.worlds;
+  const vl = getData(lang, v).copy.versions;
   const x = w.codex;
   return (
     <section className="wrap codex" aria-labelledby="cx-h">
       <h2 id="cx-h">{c.codexH}</h2>
       <p className="world-life-p">{c.codexP}</p>
-      {x.items.length > 0 && (<><h3 className="h-plate">{c.cItems}</h3><ul className="cx-grid">{x.items.map((e) => <CodexCard key={e.id} e={e} c={c} />)}</ul></>)}
-      {x.blocks.length > 0 && (<><h3 className="h-plate">{c.cBlocks}</h3><ul className="cx-grid">{x.blocks.map((e) => <CodexCard key={e.id} e={e} c={c} />)}</ul></>)}
+      {x.items.length > 0 && (<><h3 className="h-plate">{c.cItems}</h3><ul className="cx-grid">{x.items.map((e) => <CodexCard key={e.id} e={e} c={c} v={v} vl={vl} />)}</ul></>)}
+      {x.blocks.length > 0 && (<><h3 className="h-plate">{c.cBlocks}</h3><ul className="cx-grid">{x.blocks.map((e) => <CodexCard key={e.id} e={e} c={c} v={v} vl={vl} />)}</ul></>)}
       <div className="cx-cols">
         {x.quests.length > 0 && (
           <div><h3 className="h-plate">{c.cQuests}</h3><ul className="cx-list">{x.quests.map((q) => <li key={q.name}><strong>{q.name}</strong><span>{q.desc}</span></li>)}</ul></div>
@@ -201,25 +207,25 @@ function Codex({ w, lang }: { w: World; lang: Lang }) {
   );
 }
 
-function bestiary(lang: Lang, w: World): BestiaryEntry[] {
-  const ui = getData(lang).copy.ui;
+function bestiary(lang: Lang, w: World, v?: string): BestiaryEntry[] {
+  const ui = getData(lang, v).copy.ui;
   const out: BestiaryEntry[] = [];
   for (const m of w.mobs) {
-    const c = creature(lang, m.id) as Mob | undefined;
+    const c = creature(lang, m.id, v) as Mob | undefined;
     if (!c) continue;
     out.push({ id: c.id, name: c.name, tex: c.tex, anims: c.anims, badge: c.elite ? (lang === "fr" ? "élite" : "elite") : null, line: c.desc,
-      moves: c.moves.map((x) => ({ name: x.name, desc: x.desc })), href: href(lang, `creatures/${c.id}/`),
+      moves: c.moves.map((x) => ({ name: x.name, desc: x.desc })), href: href(lang, `creatures/${c.id}/`, v),
       stats: [{ l: ui.health, v: c.hp }, { l: ui.damage, v: c.dmg }] });
   }
-  const b = creature(lang, w.boss.id) as Boss | undefined;
+  const b = creature(lang, w.boss.id, v) as Boss | undefined;
   if (b) out.push({ id: b.id, name: b.name, tex: b.tex, anims: b.anims, badge: ui.boss, line: w.bossNote,
-    moves: b.atks.map((x) => ({ name: x.name, desc: x.label })), href: href(lang, `creatures/${b.id}/`),
+    moves: b.atks.map((x) => ({ name: x.name, desc: x.label })), href: href(lang, `creatures/${b.id}/`, v),
     stats: [{ l: ui.health, v: b.hp }, { l: ui.damage, v: b.dmg }] });
   return out;
 }
 
-export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
-  const d = getData(lang);
+export function WorldPage({ lang, n, v }: { lang: Lang; n: number; v?: string }) {
+  const d = getData(lang, v);
   const c = d.copy.worlds;
   const ui = d.copy.ui;
   const w = d.worlds[n];
@@ -227,7 +233,7 @@ export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
   const next = n < 10 ? d.worlds[n + 1] : null;
   const label = (x: World) => `${ui.world} ${x.n}, ${x.name}`;
   return (
-    <Shell lang={lang} path={`worlds/${n}/`} section="worlds">
+    <Shell lang={lang} path={`worlds/${n}/`} section="worlds" v={v}>
       <div className="world world-single" style={{ "--wb": w.bg, "--wp": w.bg, "--wl": w.light } as React.CSSProperties}>
         <div className="wrap world-grid">
           <figure className="world-window">
@@ -235,9 +241,10 @@ export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
             {!w.tall && <figcaption>{c.noShot}</figcaption>}
           </figure>
           <div className="world-copy">
-            <p className="crumbs"><Link href={href(lang, "worlds/")}>{ui.backWorlds}</Link></p>
+            <p className="crumbs"><Link href={href(lang, "worlds/", v)}>{ui.backWorlds}</Link></p>
             <h1><span className="w-n">{w.n}</span>{w.name}</h1>
-            <WorldSummary w={w} lang={lang} />
+            <VBadge m={mark(`world:${w.n}`, v)} l={d.copy.versions} className="mb-3 inline-block" />
+            <WorldSummary w={w} lang={lang} v={v} />
             {w.hud && <img className="mt-4 block h-auto w-full max-w-[435px] border border-rule [image-rendering:pixelated]" src={asset(w.hud)} alt="" loading="lazy" width={870} height={315} />}
           </div>
         </div>
@@ -250,15 +257,15 @@ export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
         <section className="wrap world-life" aria-labelledby="wl-h">
           <h2 id="wl-h">{c.lifeH}</h2>
           <p className="world-life-p">{c.lifeP}</p>
-          <WorldBestiary entries={bestiary(lang, w)} labels={viewerLabels(ui)} sheet={ui.openSheet} movesH={ui.moves} />
+          <WorldBestiary entries={bestiary(lang, w, v)} labels={viewerLabels(ui)} sheet={ui.openSheet} movesH={ui.moves} />
         </section>
-        {(() => { const b = creature(lang, w.boss.id) as Boss | undefined; return b ? (
+        {(() => { const b = creature(lang, w.boss.id, v) as Boss | undefined; return b ? (
           <section className={`${wrap} pb-10`}><MeetBoss meet={b.meet} title={`${ui.howMeet}: ${b.name}`} offeringLabel={ui.offering} /></section>
         ) : null; })()}
         <Vine className="vine-sep" />
-        <Sites w={w} lang={lang} />
+        <Sites w={w} lang={lang} v={v} />
         <Vine className="vine-sep" />
-        <Codex w={w} lang={lang} />
+        <Codex w={w} lang={lang} v={v} />
         <Vine className="vine-sep" />
         <div className="wrap">
           {w.station && (
@@ -299,8 +306,8 @@ export function WorldPage({ lang, n }: { lang: Lang; n: number }) {
             </Lacquer>
           )}
           <nav className="pager" aria-label={ui.worldsLink}>
-            {prev ? <Link className="pager-prev" href={href(lang, `worlds/${prev.n}/`)}><small>{ui.prev}</small>{label(prev)}</Link> : <span />}
-            {next ? <Link className="pager-next" href={href(lang, `worlds/${next.n}/`)}><small>{ui.next}</small>{label(next)}</Link> : <span />}
+            {prev ? <Link className="pager-prev" href={href(lang, `worlds/${prev.n}/`, v)}><small>{ui.prev}</small>{label(prev)}</Link> : <span />}
+            {next ? <Link className="pager-next" href={href(lang, `worlds/${next.n}/`, v)}><small>{ui.next}</small>{label(next)}</Link> : <span />}
           </nav>
         </div>
       </div>

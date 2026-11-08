@@ -9,6 +9,7 @@
     "dev": "next dev",
     "prebuild": "npm run data",
     "build": "next build",
+    "postbuild": "node scripts/trim-versions.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

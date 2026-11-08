@@ -4,7 +4,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import { buildRig, parseAnimations, pose, type AnimFile, type Clip, type GeoFile, type Rig } from "./geo";
 
 /** What to play: one clip, or (`seq`) several chained the way the game chains a boss attack. */

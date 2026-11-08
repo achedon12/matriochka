@@ -36,10 +36,10 @@ function Feature({ f }: { f: { tex: string; h: string; p: string; inputs?: any[]
   );
 }
 
-export function SystemsPage({ lang }: { lang: Lang }) {
-  const s = getData(lang).copy.systems;
+export function SystemsPage({ lang, v }: { lang: Lang; v?: string }) {
+  const s = getData(lang, v).copy.systems;
   return (
-    <Shell lang={lang} path="systems/" section="systems">
+    <Shell lang={lang} path="systems/" section="systems" v={v}>
       <PageHead title={s.h} lead={s.lead} img={s.headImg} />
       <div className="mx-auto w-full max-w-[1240px] px-4 py-12 md:px-8">
         <SystemsTabs s={s} />

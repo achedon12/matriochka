@@ -4,7 +4,7 @@
 // A link to #anim-<slug> (the bosses page does this for each attack) opens the stage and plays that animation.
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import type { Anim } from "@/lib/types";
 
 const ViewerImpl = dynamic(() => import("./ViewerImpl"), { ssr: false });

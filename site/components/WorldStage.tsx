@@ -1,6 +1,6 @@
 // A world on stage: its photo or its colours, its name set huge and hollow, a beam of its light on a gilded plinth,
 // the boss standing in it and its creatures in front. Used by the home page picker and the worlds page.
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 
 export interface StageWorld { n: number; name: string; img: string | null; light: string; bg: string; boss: string; mobs: string[] }
 

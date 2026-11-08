@@ -4,12 +4,16 @@
 // where it comes from and what it makes. Every ingredient, station and use opens its own sheet, and the address
 // follows the sheet (#id), so a link opens it.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import type { CodexEntry, DollColours } from "@/lib/types";
 import { Craft, Slot } from "./Craft";
+import { badgeText, HistoryList, VBadge, type VersionLabels } from "./Version";
+import type { Hist, Mark } from "@/lib/versions";
 
-type World = { n: number; name: string; doll: DollColours; light: string; items: CodexEntry[]; blocks: CodexEntry[] };
-type Entry = CodexEntry & { world: number; block: boolean };
+/** An entry with its badge and history in the version shown. */
+type Dated = CodexEntry & { mark?: Mark; hist?: Hist | null };
+type World = { n: number; name: string; doll: DollColours; light: string; items: Dated[]; blocks: Dated[] };
+type Entry = Dated & { world: number; block: boolean };
 
 const RARE: Record<string, string> = { rare: "rare", epic: "epic", "épique": "epic", legendary: "legendary", "légendaire": "legendary" };
 const rarity = (e: CodexEntry) => RARE[(e.rarity ?? "").toLowerCase()] ?? "common";
@@ -26,7 +30,7 @@ function Doll({ c, open, h }: { c: DollColours; open: boolean; h: number }) {
   );
 }
 
-export default function ItemsCatalog({ worlds, c }: { worlds: World[]; c: Record<string, string> }) {
+export default function ItemsCatalog({ worlds, c, vl }: { worlds: World[]; c: Record<string, string>; vl: VersionLabels }) {
   const all = useMemo<Entry[]>(() => worlds.flatMap((w) => [
     ...w.items.map((e) => ({ ...e, world: w.n, block: false })),
     ...w.blocks.map((e) => ({ ...e, world: w.n, block: true })),
@@ -143,7 +147,8 @@ export default function ItemsCatalog({ worlds, c }: { worlds: World[]; c: Record
                     <button type="button" className={`ic-slot ic-${rarity(x)}`} aria-pressed={x.id === sel} onClick={() => open(x.id)}>
                       {x.tex ? <img className="px" src={asset(x.tex)} alt="" loading="lazy" decoding="async" /> : <span className="mc-slot-blank">?</span>}
                       <span className="ic-tip" aria-hidden="true">{x.name}</span>
-                      <span className="sr-only">{x.name}</span>
+                      <span className="sr-only">{x.name}{x.mark && `, ${badgeText(x.mark, vl)}`}</span>
+                      {x.mark && <span className={`ic-pip ic-pip-${x.mark.kind}`} aria-hidden="true" />}
                     </button>
                   </li>
                 ))}
@@ -164,6 +169,7 @@ export default function ItemsCatalog({ worlds, c }: { worlds: World[]; c: Record
                 {e.rarity && <span className={`ic-r ic-r-${rarity(e)}`}>{e.rarity}</span>}
                 <span>{e.block ? c.aBlock : c.anItem}</span>
                 {ew && <button type="button" className="ic-wlink" onClick={() => setWorld(ew.n)}>{ew.n === 0 ? ew.name : `${c.world} ${ew.n}, ${ew.name}`}</button>}
+                <VBadge m={e.mark} l={vl} />
               </p>
               {e.effect && <p className="ic-eff">{e.effect}</p>}
               {e.stats && e.stats.length > 0 && (
@@ -198,6 +204,12 @@ export default function ItemsCatalog({ worlds, c }: { worlds: World[]; c: Record
                   <ul className="ic-uses">
                     {uses.map((u) => <li key={u.id}><Slot tex={u.tex} name={u.name} onPick={() => open(u.id)} /></li>)}
                   </ul>
+                </>
+              )}
+              {e.hist && (
+                <>
+                  <h3 className="ic-sh">{vl.historyH}</h3>
+                  <HistoryList h={e.hist} l={vl} />
                 </>
               )}
             </article>

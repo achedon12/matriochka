@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "../PageLink";
 import { asset, creature, getData, href } from "@/lib/data";
 import type { Boss, Creature, Lang, Mob } from "@/lib/types";
 import BestiaryTable from "../BestiaryTable";
@@ -10,23 +10,26 @@ import MeetBoss from "../MeetBoss";
 import AttackStrip from "../AttackStrip";
 import { BASE } from "@/lib/config";
 import ModelViewer, { type ViewerLabels } from "../viewer/ModelViewer";
+import { history, mark } from "@/lib/versions";
+import { badgeText, HistoryList, VBadge } from "../Version";
 
 export function viewerLabels(ui: Record<string, string>): ViewerLabels {
   return { view3d: ui.view3d, loading3d: ui.loading3d, no3d: ui.no3d, dragHint: ui.dragHint, animations: ui.animations, autoRotate: ui.autoRotate };
 }
 
 // ---------------------------------------------------------------- bestiary
-export function BestiaryPage({ lang }: { lang: Lang }) {
-  const d = getData(lang);
+export function BestiaryPage({ lang, v }: { lang: Lang; v?: string }) {
+  const d = getData(lang, v);
   const c = d.copy.bestiary;
   const ui = d.copy.ui;
   const worlds = d.worlds.slice(1).map((w) => ({ n: w.n, name: w.name, rule: w.rule, light: w.light }));
+  const marks = Object.fromEntries(d.mobs.flatMap((m) => { const k = mark(`mob:${m.id}`, v); return k ? [[m.id, { kind: k.kind, text: badgeText(k, d.copy.versions) }]] : []; }));
   return (
-    <Shell lang={lang} path="bestiary/" section="bestiary">
+    <Shell lang={lang} path="bestiary/" section="bestiary" v={v}>
       <PageHead title={c.h} lead={c.lead} img={c.headImg}><p className="lead-note">{c.nesting}</p></PageHead>
       <Vine className="vine-sep" />
       <div className="wrap">
-        <BestiaryTable lang={lang} mobs={d.mobs} worlds={worlds} ui={ui} viewer={viewerLabels(ui)} />
+        <BestiaryTable lang={lang} mobs={d.mobs} worlds={worlds} ui={ui} viewer={viewerLabels(ui)} base={href(lang, "", v)} marks={marks} />
       </div>
       <Vine className="vine-sep" />
       <section className="band" aria-labelledby="peoples-h">
@@ -44,13 +47,13 @@ export function BestiaryPage({ lang }: { lang: Lang }) {
 }
 
 // ---------------------------------------------------------------- bosses
-export function BossesPage({ lang }: { lang: Lang }) {
-  const d = getData(lang);
+export function BossesPage({ lang, v }: { lang: Lang; v?: string }) {
+  const d = getData(lang, v);
   const c = d.copy.bosses;
   const ui = d.copy.ui;
   const vl = viewerLabels(ui);
   return (
-    <Shell lang={lang} path="bosses/" section="bosses">
+    <Shell lang={lang} path="bosses/" section="bosses" v={v}>
       <PageHead title={c.h} lead={c.lead} img={c.headImg} />
       {/* the eleven, as a row of portraits that jump to each poster */}
       <nav className={`${wrap} pb-4`} aria-label={c.h}>
@@ -77,16 +80,18 @@ export function BossesPage({ lang }: { lang: Lang }) {
             <div>
               <p className="m-0 mb-1 font-pixel text-2xl" style={{ color: b.light }}>{b.world ? `${ui.world} ${b.world}` : b.worldName}<span className="font-body text-base text-paper-dim"> {b.world ? b.worldName : ""}</span></p>
               <h2 id={`bh-${b.id}`} className="m-0 mb-4 font-display text-[clamp(40px,5vw,72px)] leading-[0.95] font-normal text-gold-b [text-shadow:0_5px_0_#17100d]">{b.name}</h2>
+              <VBadge m={mark(`mob:${b.id}`, v)} l={d.copy.versions} className="-mt-2 mb-4 inline-block" />
               <dl className="m-0 mb-6 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
                 {[[ui.solo, b.hp], [ui.heavy, b.dmg], [c.tierCols[1], b.timings[1].v], [c.tierCols[3], b.timings[3].v]].map(([l, v]) => (
                   <div key={l} className="border-t-2 border-gold pt-2"><dt className="text-[13px] text-paper-dim">{l}</dt><dd className="m-0 font-pixel text-[28px] leading-none text-paper">{v}</dd></div>
                 ))}
               </dl>
               <h3 className="m-0 mb-3 font-body text-[13px] font-bold tracking-[0.14em] text-paper-dim uppercase">{ui.attacks}</h3>
-              <AttackStrip moves={b.moves} href={`${BASE}${href(lang, `creatures/${b.id}/`)}`}
-                labels={{ windup: ui.windup, strike: ui.strike, warning: ui.warning, see3d: ui.see3d }} />
+              {/* versions before the attack animations name the attacks only */}
+              {b.moves.length > 0 && <AttackStrip moves={b.moves} href={`${BASE}${href(lang, `creatures/${b.id}/`, v)}`}
+                labels={{ windup: ui.windup, strike: ui.strike, warning: ui.warning, see3d: ui.see3d }} />}
               <ul className="m-0 mt-4 mb-5 grid list-none gap-0 p-0">
-                {b.passive.map((a) => (
+                {(b.moves.length ? b.passive : b.atks).map((a) => (
                   <li key={a.label} className="grid grid-cols-[minmax(0,1fr)] gap-0.5 border-b border-rule py-2 min-[640px]:grid-cols-[150px_minmax(0,1fr)] min-[640px]:items-baseline min-[640px]:gap-3">
                     <small className="text-sm text-paper-dim">{a.label}</small>
                     {/* a long rule reads better in the body face than in the poster capitals */}
@@ -98,7 +103,7 @@ export function BossesPage({ lang }: { lang: Lang }) {
               <p className="m-0 mb-5 flex items-center gap-2 text-base text-paper"><Inlay src={b.coreTex} /><span><strong>{b.drops[0].name}</strong> {c.rewardNote}</span></p>
               <div className="mb-5"><MeetBoss meet={b.meet} title={ui.howMeet} offeringLabel={ui.offering} compact /></div>
               <p className="m-0 flex flex-wrap gap-3">
-                <Link className={btn} href={href(lang, `creatures/${b.id}/`)}>{ui.open}</Link>
+                <Link className={btn} href={href(lang, `creatures/${b.id}/`, v)}>{ui.open}</Link>
               </p>
             </div>
           </div>
@@ -136,11 +141,11 @@ export function BossesPage({ lang }: { lang: Lang }) {
 }
 
 // ---------------------------------------------------------------- technical sheet
-function Pager({ lang, c, ui }: { lang: Lang; c: Creature; ui: Record<string, string> }) {
+function Pager({ lang, c, ui, v }: { lang: Lang; c: Creature; ui: Record<string, string>; v?: string }) {
   return (
     <nav className="pager" aria-label={ui.sheet}>
-      {c.prev ? <Link className="pager-prev" href={href(lang, `creatures/${c.prev}/`)}><small>{ui.prev}</small>{c.prevName}</Link> : <span />}
-      {c.next ? <Link className="pager-next" href={href(lang, `creatures/${c.next}/`)}><small>{ui.next}</small>{c.nextName}</Link> : <span />}
+      {c.prev ? <Link className="pager-prev" href={href(lang, `creatures/${c.prev}/`, v)}><small>{ui.prev}</small>{c.prevName}</Link> : <span />}
+      {c.next ? <Link className="pager-next" href={href(lang, `creatures/${c.next}/`, v)}><small>{ui.next}</small>{c.nextName}</Link> : <span />}
     </nav>
   );
 }
@@ -164,8 +169,8 @@ function Related({ c, ui }: { c: Creature; ui: Record<string, string> }) {
   );
 }
 
-function MobSheet({ lang, m }: { lang: Lang; m: Mob }) {
-  const ui = getData(lang).copy.ui;
+function MobSheet({ lang, m, v }: { lang: Lang; m: Mob; v?: string }) {
+  const ui = getData(lang, v).copy.ui;
   return (
     <>
       <dl className="stats stats-wide">
@@ -212,15 +217,15 @@ function MobSheet({ lang, m }: { lang: Lang; m: Mob }) {
               <li><span className="num">{m.spawn.min === m.spawn.max ? m.spawn.min : `${m.spawn.min}–${m.spawn.max}`}</span> {ui.group}</li>
             </ul>
           ) : null}
-          <p><Link href={href(lang, `worlds/${m.world}/`)}>{ui.world} {m.world}, {m.worldName}</Link></p>
+          <p><Link href={href(lang, `worlds/${m.world}/`, v)}>{ui.world} {m.world}, {m.worldName}</Link></p>
         </section>
       </div>
     </>
   );
 }
 
-function BossSheet({ lang, b }: { lang: Lang; b: Boss }) {
-  const d = getData(lang);
+function BossSheet({ lang, b, v }: { lang: Lang; b: Boss; v?: string }) {
+  const d = getData(lang, v);
   const ui = d.copy.ui;
   return (
     <>
@@ -269,16 +274,16 @@ function BossSheet({ lang, b }: { lang: Lang; b: Boss }) {
   );
 }
 
-export function CreaturePage({ lang, id }: { lang: Lang; id: string }) {
-  const d = getData(lang);
+export function CreaturePage({ lang, id, v }: { lang: Lang; id: string; v?: string }) {
+  const d = getData(lang, v);
   const ui = d.copy.ui;
-  const c = creature(lang, id)!;
+  const c = creature(lang, id, v)!;
   const isBoss = c.kind === "boss";
-  const back = isBoss ? href(lang, `bosses/#boss-${c.id}`) : href(lang, `bestiary/#mob-${c.id}`);
+  const back = isBoss ? href(lang, `bosses/#boss-${c.id}`, v) : href(lang, `bestiary/#mob-${c.id}`, v);
   const otherName = lang === "en" ? c.fr : c.en;
   const tags = c.kind === "mob" ? c.tags : [ui.boss];
   return (
-    <Shell lang={lang} path={`creatures/${c.id}/`} section={isBoss ? "bosses" : "bestiary"}>
+    <Shell lang={lang} path={`creatures/${c.id}/`} section={isBoss ? "bosses" : "bestiary"} v={v}>
       <div className="sheet" style={{ "--wb": c.bg, "--wl": c.light } as React.CSSProperties}>
         <div className="wrap">
           <p className="crumbs"><Link href={back}>{isBoss ? ui.backBosses : ui.back}</Link></p>
@@ -289,8 +294,9 @@ export function CreaturePage({ lang, id }: { lang: Lang; id: string }) {
             <h1 style={{ "--longest": Math.max(...c.name.split(" ").map((w) => w.length)) } as React.CSSProperties}>{c.name}</h1>
             <p className="sheet-other" lang={lang === "en" ? "fr" : "en"}>{otherName}</p>
             <p className="sheet-meta">
-              <Link href={href(lang, c.world ? `worlds/${c.world}/` : "worlds/#world-0")}>{c.world ? `${ui.world} ${c.world}, ${c.worldName}` : c.worldName}</Link>
+              <Link href={href(lang, c.world ? `worlds/${c.world}/` : "worlds/#world-0", v)}>{c.world ? `${ui.world} ${c.world}, ${c.worldName}` : c.worldName}</Link>
               <span className="tags">{tags.map((t) => <span key={t} className="tag">{t}</span>)}</span>
+              <VBadge m={mark(`mob:${c.id}`, v)} l={d.copy.versions} />
             </p>
             {c.kind === "mob" && <p className="sheet-desc">{c.desc}</p>}
           </div>
@@ -299,10 +305,11 @@ export function CreaturePage({ lang, id }: { lang: Lang; id: string }) {
         <Vine className="vine-sep" />
         <div className="wrap">
           <Lacquer className="sheet-body">
-            {c.kind === "mob" ? <MobSheet lang={lang} m={c} /> : <BossSheet lang={lang} b={c} />}
+            {c.kind === "mob" ? <MobSheet lang={lang} m={c} v={v} /> : <BossSheet lang={lang} b={c} v={v} />}
             <Related c={c} ui={ui} />
+            {(() => { const h = history(`mob:${c.id}`, v); return h ? <section className="sheet-hist"><h2 className="h-plate">{d.copy.versions.historyH}</h2><HistoryList h={h} l={d.copy.versions} /></section> : null; })()}
           </Lacquer>
-          <Pager lang={lang} c={c} ui={ui} />
+          <Pager lang={lang} c={c} ui={ui} v={v} />
         </div>
       </div>
     </Shell>

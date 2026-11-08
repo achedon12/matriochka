@@ -1,6 +1,6 @@
 // The opened set of nesting dolls (hero, and the index of the Worlds page) and the doll-shaped window.
 import { BASE } from "@/lib/config";
-import { asset } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import type { Lang, World } from "@/lib/types";
 import { BLACK, DOLL } from "./Ornament";
 
