@@ -47,6 +47,7 @@ public class MatrioClient implements ClientModInitializer {
 		for (var layer : new net.minecraft.resources.Identifier[]{VanillaHudElements.HEALTH_BAR, VanillaHudElements.FOOD_BAR, VanillaHudElements.AIR_BAR, VanillaHudElements.MOUNT_HEALTH})
 			HudElementRegistry.replaceElement(layer, Hud::lifted);
 		WorldTitle.init();
+		OptionsButton.init();
 		// the world's rule meter: a vanilla status row above the hunger bar
 		MeterHud.register();
 		MatriarchTip.init();

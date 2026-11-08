@@ -86,11 +86,6 @@ public class JournalScreen extends Screen {
 			buttons.add(l + BW / 2 - 70, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.previous"), () -> turnPage(-1), () -> page > 0);
 			buttons.add(l + BW / 2 + 30, t + BH - 30, 40, 16, Component.translatable("journal.matriochka.next"), () -> turnPage(1), () -> page < 4);
 		}
-		if (!scroll) {
-			// the comfort options, at the foot of the left page on every tab
-			buttons.add(l + 24, t + BH - 30, 64, 16, Component.translatable("comfort.matriochka.open"),
-				() -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new ComfortScreen(this)));
-		}
 		if (guide()) {
 			int[] at = guideAt();
 			buttons.add(at[0], at[1], 54, 16, Component.translatable("tutorial.matriochka.toggle"), TutorialCard::toggle);
@@ -113,10 +108,10 @@ public class JournalScreen extends Screen {
 				onClose();
 			});
 		}
-		// the Trials open once an ending is seen, from the Objective page, next to the Comfort button (and clear of the
-		// Guide toggle and the New Cycle on the right page)
+		// the Trials open once an ending is seen, from the foot of the Objective page (clear of the Guide toggle and the
+		// New Cycle on the right page); the comfort settings are in the game's Options (OptionsButton)
 		if (!scroll && tab == 0 && JournalPages.endingsSeen() > 0) {
-			buttons.add(l + 94, t + BH - 30, 76, 16, Component.translatable("trials.matriochka.title"), () -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new TrialsScreen(this)));
+			buttons.add(l + 24, t + BH - 30, 76, 16, Component.translatable("trials.matriochka.title"), () -> fr.achedon12.matriochka.client.mc.McClient.setScreen(minecraft, new TrialsScreen(this)));
 		}
 		// the recap of the last cycle an ending closed, under the chapter's heading on the left page
 		if (!scroll && tab == 0 && RecapScreen.available()) {
