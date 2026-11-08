@@ -4,8 +4,8 @@ Matriochka is a progression mod. Ten worlds are nested inside blocks, one inside
 
 ## Two versions
 
-- **Matriochka Pack** (`0.4.0`): difficulty `normal`, the mod's defaults. Pick it to play the game as designed.
-- **Matriochka Pack (Hard)** (`0.4.0-hard`): difficulty `nightmare`. Creatures and bosses hit 30% harder and Soul Cradles hold one charge instead of three. For a second cycle, or a group that wants it tight.
+- **Matriochka Pack**: difficulty `normal`, the mod's defaults. Pick it to play the game as designed.
+- **Matriochka Pack (Hard)**: difficulty `nightmare`. Creatures and bosses hit 30% harder and Soul Cradles hold one charge instead of three. For a second cycle, or a group that wants it tight.
 
 Both have the same mods; only `config/matriochka.json` differs, and a server operator can change it at any time (`difficulty`: `story`, `normal`, `nightmare` or `hardcore`, see [Configuration](https://github.com/achedon12/matriochka/wiki/Configuration)). The normal version is uploaded last for each release, so it is the newest file; the hard one is in the *Files* tab.
 
@@ -26,13 +26,13 @@ Both have the same mods; only `config/matriochka.json` differs, and a server ope
 
 Every mod is the CurseForge copy of the exact file the Modrinth version of the pack uses. The pack also sets render distance 10 and simulation distance 8 in `options.txt`.
 
-**Not in the CurseForge version: Mod Menu.** It needs Placeholder API, which has no Minecraft 26.3 file on CurseForge, and CurseForge packs can only hold CurseForge files. Matriochka works the same without it; its comfort options are in the Journal (*Comfort* button). The Modrinth version of the pack has Mod Menu.
+**Not in the CurseForge version: Mod Menu.** It needs Placeholder API, which has no file on CurseForge for these Minecraft versions, and CurseForge packs can only hold CurseForge files. Matriochka works the same without it; its comfort options are in the Journal (*Comfort* button). The Modrinth version of the pack has Mod Menu.
 
 ## Left out on purpose
 
 - **LambDynamicLights.** A torch in your hand would light the Lightless Deep, and the whole point of World 5 is that it is dark: its rule is noise, its creatures hunt what they hear, and light is something you place. Dynamic lights would defeat that rule.
 - **Minimaps.** A personal choice, and a map is not needed. They work with Matriochka if you add them; Xaero's cave view and radar are turned off inside World 5 (see [Compatibility](https://github.com/achedon12/matriochka/wiki/Compatibility)).
-- **C2ME and ScalableLux** (alpha builds only for 26.3), **ModernFix, MemoryLeakFix and Noisium** (no 26.3 build).
+- **C2ME and ScalableLux** (alpha builds only), **ModernFix, MemoryLeakFix and Noisium** (no build for these versions).
 - Content mods of any kind. The pack is Matriochka and nothing else, so a bug report is a Matriochka bug report.
 
 ## Install
