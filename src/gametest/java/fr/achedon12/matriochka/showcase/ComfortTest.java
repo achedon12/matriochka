@@ -4,7 +4,6 @@ import fr.achedon12.matriochka.Matriochka;
 import fr.achedon12.matriochka.client.Cinematics;
 import fr.achedon12.matriochka.client.Comfort;
 import fr.achedon12.matriochka.client.ComfortScreen;
-import fr.achedon12.matriochka.client.JournalScreen;
 import fr.achedon12.matriochka.client.MusicThemes;
 import fr.achedon12.matriochka.client.MusicThemes.State;
 import java.nio.file.Files;
@@ -116,7 +115,7 @@ final class ComfortTest {
 			check(out, hard, "without the option, Nausea applies as before");
 
 			// ------------------------------------------------------------ the options screen
-			ctx.setScreen(() -> new ComfortScreen(new JournalScreen(false)));
+			ctx.setScreen(() -> new ComfortScreen(null));
 			ctx.waitTicks(12);
 			shot(ctx, "comfort_options", false);
 			ctx.setScreen(() -> null);
@@ -173,10 +172,10 @@ final class ComfortTest {
 			ctx.waitTicks(30);
 			shot(ctx, "comfort_world_card", true);
 			ctx.waitTicks(120);
-			// the HUD plaque bigger, in the top right corner, and the toxin row above the hunger bar patterned
+			// the HUD bigger, the world's label in the top right corner, and the toxin row above the hunger bar patterned
 			ctx.runOnClient(mc -> {
 				Comfort.get().hudScale = 1.5f;
-				Comfort.get().hudCorner = "top_right";
+				Comfort.get().worldLabel = "top_right";
 				Comfort.get().patterns = true;
 				Comfort.changed();
 			});
@@ -195,7 +194,7 @@ final class ComfortTest {
 			check(out, ctx.computeOnClient(mc -> Cinematics.worldCards) == cardsAgain, "the card does not play again on the next visit");
 			ctx.runOnClient(mc -> {
 				Comfort.get().hudScale = 1f;
-				Comfort.get().hudCorner = "top_left";
+				Comfort.get().worldLabel = "off";
 				Comfort.get().patterns = false;
 				Comfort.changed();
 			});

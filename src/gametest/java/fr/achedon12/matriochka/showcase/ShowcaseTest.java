@@ -115,6 +115,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 			server.runCommand("gamerule announce_advancements false");
 			server.runCommand("time set 6000");
 			server.runCommand("gamemode creative @a");
+			server.runCommand("effect clear @a");
 			server.runCommand("effect give @a night_vision infinite 0 true");
 			server.runCommand("execute as @p run matriochka progression set 3");
 			server.runCommand("execute as @p run matriochka karma soul @p 420");
@@ -177,6 +178,10 @@ public class ShowcaseTest implements FabricClientGameTest {
 				ctx.setScreen(() -> null);
 				ctx.waitTicks(5);
 			}
+			// the HUD in survival, where the status rows, the world's gauges and the souls bar show
+			server.runCommand("gamemode survival @a");
+			for (String e : new String[]{"resistance", "fire_resistance", "regeneration", "saturation", "water_breathing"})
+				server.runCommand("effect give @a minecraft:" + e + " infinite 4 true");
 			for (int w : new int[]{2, 7, 8, 4}) {
 				server.runCommand("execute as @p run matriochka world enter " + w);
 				ctx.setScreen(() -> null);
@@ -185,6 +190,7 @@ public class ShowcaseTest implements FabricClientGameTest {
 				server.runCommand("execute as @p run matriochka world leave");
 				ctx.waitTicks(40);
 			}
+			server.runCommand("gamemode creative @a");
 		}
 	}
 
