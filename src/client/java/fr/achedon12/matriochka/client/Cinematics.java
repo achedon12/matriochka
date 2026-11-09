@@ -584,6 +584,9 @@ public final class Cinematics implements HudElement {
 		int tw = font.width(teleText) * 2 + 36, th = 32;
 		// below the trial clock when one runs
 		int x = w / 2 - tw / 2, y = Math.max(Math.round(h * 0.2f), ReplayHud.bottom + 4);
+		// and below the first-steps card when they would meet (the Guardian's fight, on a narrow screen)
+		int[] card = TutorialCard.drawn;
+		if (now - TutorialCard.drawnAt < 250 && card[2] > x && card[0] < x + tw && card[3] > y && card[1] < y + th) y = card[3] + 4;
 		g.pose().pushMatrix();
 		g.pose().translate(w / 2f, y + th / 2f);
 		g.pose().scale(0.85f + 0.15f * in, 0.85f + 0.15f * in);

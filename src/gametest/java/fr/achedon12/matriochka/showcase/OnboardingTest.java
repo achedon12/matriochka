@@ -73,6 +73,9 @@ final class OnboardingTest {
 			ctx.setScreen(() -> null);
 			ctx.waitTicks(30);
 			check(step(server) == 0, "a new player starts the guide at step 0 (" + step(server) + ")");
+			// the card must show from the start, for a player who closed the Scroll without reading it
+			String keys = ctx.computeOnClient(mc -> fr.achedon12.matriochka.client.MatrioClient.state.contains("tut_step") ? "" : String.valueOf(fr.achedon12.matriochka.client.MatrioClient.state.keySet()));
+			check(keys.isEmpty(), "the client knows the guide's step at step 0, so the card shows " + keys);
 			shot(ctx, "onboarding_0_read");
 
 			// 1. read: the Scroll's Next button, clicked for real, turns to the objective page

@@ -420,8 +420,8 @@ for k, v in world_lines.items():
 tutorial = {
     "read": (("Read the Artisan's Scroll", "Use the Scroll and turn to the page \"Your objective\"."),
              ("Lis le Parchemin de l'artisan", "Utilise le Parchemin et tourne jusqu'à la page « Ton objectif ».")),
-    "sanctuary": (("Find the Guardian's Sanctuary", "Follow the needle to a temple of runed stone."),
-                  ("Trouve le Sanctuaire du Gardien", "Suis l'aiguille jusqu'à un temple de pierre runique.")),
+    "sanctuary": (("Find the Guardian's Sanctuary", "Follow the needle to a ring of great pillars round an altar."),
+                  ("Trouve le Sanctuaire du Gardien", "Suis l'aiguille jusqu'à un cercle de grands piliers autour d'un autel.")),
     "wake": (("Wake the Guardian", "Use the altar at the heart of the sanctuary."),
              ("Réveille le Gardien", "Active l'autel au cœur du sanctuaire.")),
     "defeat": (("Defeat the Guardian", "Its strong blows glow first: step aside, then strike."),

@@ -29,7 +29,8 @@ public class TutorialCard implements HudElement {
 	static long drawnAt = -1;
 	private static final long FAREWELL_MS = 9000;
 	private int lastStep = -1;
-	private long changedAt = Ui.now(), doneAt = -1;
+	// 0, not now(): the card is already in place when it first shows (a clock started at 0, as the test client's, never sees it waiting)
+	private long changedAt = 0, doneAt = -1;
 
 	private static boolean endingSeen() {
 		var s = MatrioClient.state;
@@ -102,6 +103,12 @@ public class TutorialCard implements HudElement {
 		if (done && (doneAt < 0 || now - doneAt > FAREWELL_MS)) return;
 		// never over a trial, whose clock owns the top of the screen
 		if (MatrioClient.state.getCompoundOrEmpty("trial").contains("key")) return;
+		// nor over the framed card of a first entry, which stands in the same top of the screen: the farewell waits
+		// for it to end
+		if (Cinematics.cardPlaying()) {
+			if (done) doneAt = now;
+			return;
+		}
 		draw(g, mc, step, done, now);
 	}
 
@@ -112,8 +119,12 @@ public class TutorialCard implements HudElement {
 		Component hint = Component.translatable(done ? "tutorial.matriochka.done.hint" : "tutorial.matriochka." + id + ".hint");
 		int textX = 30, textW = W - textX - 7;
 		var lines = font.split(hint, textW);
+		// a long step name (and most are, in German or Russian) wraps on a second line rather than losing its end
+		java.util.List<Component> titleLines = new java.util.ArrayList<>();
+		for (var part : font.getSplitter().splitLines(title, textW, net.minecraft.network.chat.Style.EMPTY)) titleLines.add(Component.literal(part.getString()));
+		if (titleLines.size() > 2) titleLines = java.util.List.of(titleLines.get(0), fit(font, Component.literal(titleLines.get(1).getString() + " " + titleLines.get(2).getString()), textW));
 		boolean compass = !done && id.equals("sanctuary");
-		int h = 7 + 10 + 11 + lines.size() * 9 + (compass ? 15 : 0) + 11;
+		int h = 7 + 10 + titleLines.size() * 11 + lines.size() * 9 + (compass ? 15 : 0) + 11;
 		float in = Ui.easeBack(Ui.since(changedAt, 480));
 		// the farewell card sinks away at the end
 		float out = done ? Ui.easeIn(Ui.since(doneAt + FAREWELL_MS - 500, 500)) : 0;
@@ -144,8 +155,10 @@ public class TutorialCard implements HudElement {
 		Component header = Component.translatable("tutorial.matriochka.header", Math.min(step + 1, Tutorial.DONE), Tutorial.DONE);
 		g.text(font, header, tx, ty, Ui.MUTED, false);
 		ty += 10;
-		Ui.embossed(g, font, fit(font, title, textW), tx, ty, Ui.GOLD);
-		ty += 11;
+		for (Component line : titleLines) {
+			Ui.embossed(g, font, line, tx, ty, Ui.GOLD);
+			ty += 11;
+		}
 		for (FormattedCharSequence line : lines) {
 			g.text(font, line, tx, ty, Ui.LIGHT, false);
 			ty += 9;
