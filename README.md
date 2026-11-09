@@ -15,6 +15,8 @@
   <a href="https://www.curseforge.com/minecraft/mc-mods/matriochka"><img src="https://img.shields.io/curseforge/dt/1785262?label=CurseForge&logo=curseforge&color=a8231a" alt="CurseForge downloads"></a>
   <a href="https://modrinth.com/mod/matriochka"><img src="https://img.shields.io/modrinth/dt/matriochka?label=Modrinth&logo=modrinth&color=a8231a" alt="Modrinth downloads"></a>
   <a href="https://github.com/achedon12/matriochka/releases"><img src="https://img.shields.io/github/downloads/achedon12/matriochka/total?label=GitHub&logo=github&color=a8231a" alt="GitHub downloads"></a>
+  <a href="https://github.com/achedon12/matriochka/releases/latest"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fachedon12.github.io%2Fmatriochka%2Fbadges%2Fsize.json" alt="Mod size"></a>
+  <a href="https://github.com/achedon12/matriochka/releases/latest"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fachedon12.github.io%2Fmatriochka%2Fbadges%2Fversions.json" alt="Supported Minecraft versions"></a>
 </p>
 
 <p align="center"><img src="branding/poster/poster_1920.jpg" alt="Matriochka key art" width="100%"></p>

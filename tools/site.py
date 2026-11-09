@@ -2192,10 +2192,50 @@ def build_download():
 
 
 # ---------------------------------------------------------------- main
+def _jar_size():
+    """Size of the newest released 26.3 jar in bytes (GitHub API), else of the newest local build, else None."""
+    import urllib.request
+    try:
+        req = urllib.request.Request("https://api.github.com/repos/achedon12/matriochka/releases?per_page=10",
+                                     headers={"Accept": "application/vnd.github+json", "User-Agent": "matriochka-site"})
+        if os.environ.get("GITHUB_TOKEN"):
+            req.add_header("Authorization", "Bearer " + os.environ["GITHUB_TOKEN"])
+        with urllib.request.urlopen(req, timeout=15) as r:
+            for rel in json.load(r):
+                for a in rel.get("assets", []):
+                    if re.fullmatch(r"matriochka-[\d.]+\+26\.3\.jar", a["name"]):
+                        return a["size"]
+    except Exception as ex:  # offline build: fall back to the local jar
+        print(f"badges: GitHub API unavailable ({ex})")
+    libs = os.path.join(ROOT, "build", "libs")
+    jars = [os.path.join(libs, f) for f in os.listdir(libs)] if os.path.isdir(libs) else []
+    jars = [j for j in jars if re.search(r"\+26\.3\.jar$", j)]
+    return os.path.getsize(max(jars, key=os.path.getmtime)) if jars else None
+
+
+def badges():
+    """shields.io endpoint badges for the README: supported Minecraft versions and the jar size (site/public/badges)."""
+    out = os.path.join(PUBLIC, "badges")
+    os.makedirs(out, exist_ok=True)
+
+    def key(v):
+        return [int(x) for x in v.split(".")]
+
+    mcs = sorted((d for d in os.listdir(os.path.join(ROOT, "versions")) if re.fullmatch(r"[\d.]+", d)), key=key)
+    files = {"versions.json": dict(label="Minecraft", message=" | ".join(mcs))}
+    size = _jar_size()
+    if size:
+        files["size.json"] = dict(label="Size", message=f"{size / 1_000_000:.1f} MB")
+    for name, b in files.items():
+        with open(os.path.join(out, name), "w", encoding="utf-8") as f:
+            json.dump(dict(schemaVersion=1, color="a8231a", **b), f)
+
+
 def main():
     global LANG
     os.makedirs(PUBLIC, exist_ok=True)
     os.makedirs(DATA, exist_ok=True)
+    badges()
     check_boss_anims()
     copy_assets()
     shared = dict(version=VERSION, discord=DISCORD, repo=REPO, releases=RELEASES, wiki=WIKI, site=SITE, icons=ICONS,
