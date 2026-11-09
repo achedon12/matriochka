@@ -30,7 +30,7 @@ Both have the same mods; only `config/matriochka.json` differs, and a server ope
 
 Every mod is the CurseForge copy of the exact file the Modrinth version of the pack uses. The pack also sets render distance 10 and simulation distance 8 in `options.txt`.
 
-**Not in the CurseForge version for 26.3: Mod Menu.** It needs Placeholder API, which has no 26.3 file on CurseForge, and CurseForge packs can only hold CurseForge files. The 26.2 and 26.1.2 versions have it. Matriochka works the same without it; its comfort options are in Options > Matriochka.... The Modrinth version of the pack has Mod Menu.
+**Not in the CurseForge version for 26.3: Mod Menu.** It needs Placeholder API, which has no 26.3 file on CurseForge, and CurseForge packs can only hold CurseForge files. The 26.2 and 26.1.2 versions have it. Matriochka works the same without it; its comfort options are in Options > Matriochka... The Modrinth version of the pack has Mod Menu.
 
 ## Left out on purpose
 
